@@ -1,0 +1,34 @@
+from urllib.parse import unquote_plus
+
+
+def parse_qs(qs):
+    """Parse a query string into a dictionary mapping keys to lists of values.
+
+    A plus sign in a value decodes to a space.
+    A key without an equals sign maps to an empty string.
+    Percent-decoding is applied.
+
+    Args:
+        qs (str): The query string to parse.
+
+    Returns:
+        dict: A dictionary mapping keys to lists of values.
+    """
+    result = {}
+    if not qs:
+        return result
+
+    pairs = qs.split('&')
+    for pair in pairs:
+        if '=' in pair:
+            key, value = pair.split('=', 1)
+            key = unquote_plus(key)
+            value = unquote_plus(value)
+        else:
+            key = unquote_plus(pair)
+            value = ''
+        if key in result:
+            result[key].append(value)
+        else:
+            result[key] = [value]
+    return result

@@ -1,0 +1,17 @@
+def chunk(data, size):
+    """Yield successive chunks from data of given size.
+
+    If the length of data is not a multiple of size, the final partial chunk is yielded.
+    If size is larger than the length of data, a single chunk containing all data is yielded.
+
+    Args:
+        data (bytes): The input data to chunk.
+        size (int): The chunk size.
+
+    Yields:
+        bytes: Chunks of data.
+    """
+    if size <= 0:
+        raise ValueError("Chunk size must be positive")
+    for i in range(0, len(data), size):
+        yield data[i:i + size]

@@ -147,6 +147,13 @@
     "pack_version": {
       "$ref": "common.schema.json#/$defs/identifier"
     },
+    "planner_mode": {
+      "enum": [
+        "model",
+        "reference"
+      ],
+      "type": "string"
+    },
     "provider_profile_ref": {
       "$ref": "common.schema.json#/$defs/artifact_ref"
     },
@@ -173,7 +180,8 @@
     "check_specs",
     "max_plan_versions",
     "max_repairs",
-    "owner_time_basis"
+    "owner_time_basis",
+    "planner_mode"
   ],
   "title": "task-binding",
   "type": "object"

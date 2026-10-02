@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-EUcH82K5ReI2gR0rFa3GOHkqFrgTP",
+  "object": "chat.completion",
+  "created": 1790965678,
+  "model": "gpt-4.1-mini-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"operations\": [{\"kind\": \"modify\", \"path\": \"src/calendarx.py\", \"expected_sha256\": \"8135221e9a6b6b707b52b180d1f0faf3fc974844be6b0b4b7b2e2238dbe1ba08\", \"content\": \"def is_leap(year):\\n    \\\"\\\"\\\"Return True if the given year is a leap year, False otherwise.\\n\\n    A year is a leap year if it is divisible by 4, except for years which are\\n    divisible by 100, unless they are also divisible by 400.\\n    \\\"\\\"\\\"\\n    if year % 400 == 0:\\n        return True\\n    if year % 100 == 0:\\n        return False\\n    if year % 4 == 0:\\n        return True\\n    return False\\n\\n\\ndef days_in_month(year, month):\\n    \\\"\\\"\\\"Return the number of days in the given month of the given year.\\\"\\\"\\\"\\n    if month == 2:\\n        return 29 if is_leap(year) else 28\\n    if month in (1, 3, 5, 7, 8, 10, 12):\\n        return 31\\n    if month in (4, 6, 9, 11):\\n        return 30\\n    raise ValueError(f\\\"Invalid month: {month}\\\")\\n\"}], \"rationale\": \"Corrected the is_leap function to properly implement leap year rules: years divisible by 100 are not leap years unless divisible by 400. The days_in_month function uses is_leap correctly and was left unchanged except for formatting.\"}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 448,
+    "completion_tokens": 370,
+    "total_tokens": 818,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_90cae43228"
+}

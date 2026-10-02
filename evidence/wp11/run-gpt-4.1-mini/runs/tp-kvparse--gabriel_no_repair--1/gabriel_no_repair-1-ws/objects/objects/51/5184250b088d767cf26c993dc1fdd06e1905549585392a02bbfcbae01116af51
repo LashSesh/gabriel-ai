@@ -1,0 +1,27 @@
+def parse_pairs(s):
+    """Parse a string of key=value pairs separated by commas into a dict.
+
+    Returns an empty dict for empty input.
+    Ignores blank items.
+
+    Example:
+    'a=1,b=2' -> {'a': '1', 'b': '2'}
+    """
+    if not s:
+        return {}
+    pairs = s.split(',')
+    result = {}
+    for pair in pairs:
+        pair = pair.strip()
+        if not pair:
+            continue
+        if '=' not in pair:
+            # Possibly raise error or ignore, but keep existing behavior
+            key = pair
+            value = ''
+        else:
+            key, value = pair.split('=', 1)
+            key = key.strip()
+            value = value.strip()
+        result[key] = value
+    return result

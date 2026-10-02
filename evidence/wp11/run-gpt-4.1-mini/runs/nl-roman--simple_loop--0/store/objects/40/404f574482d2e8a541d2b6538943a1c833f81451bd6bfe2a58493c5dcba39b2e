@@ -1,0 +1,98 @@
+You are the worker role of Gabriel, a repository repair agent.
+Goal (verbatim user request):
+Fix the reported defect in roman.to_int: subtractive notation (IV, IX, XL, XC, CD, CM) must be handled, so that 'IV' is 4 and 'MCMXCIV' is 1994. Keep the public API and the existing tests.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- unit [software/test_passed] argv=python3 -m unittest discover -s tests independent=False
+- oracle [software/test_passed] argv=python3 -m unittest oracle_roman independent=True
+
+Allowed paths (changes elsewhere are rejected): src/
+Base commit: 25d06befc94a4dd5ab6e2ec69b305179af9057aa
+
+Files (path sha256 bytes):
+  README.md 903fa096c50b237fd7342e046003c79d416ba2a0d2d6c576f58bafc6a1a41a61 62
+  src/roman.py bae42a9a22e5f6a83e56fa120257af5a8e34b5abfb5c1d9ef9e870c50df35de2 502
+  tests/test_roman.py f737f1d030360db12e12ea9b280fe28f1fd435dd5d249d923c6b4c6ab26237a9 407
+
+Source files in scope:
+=== src/roman.py (sha256 bae42a9a22e5f6a83e56fa120257af5a8e34b5abfb5c1d9ef9e870c50df35de2) ===
+class Roman:
+    _roman_numerals = {
+        'I': 1,
+        'V': 5,
+        'X': 10,
+        'L': 50,
+        'C': 100,
+        'D': 500,
+        'M': 1000
+    }
+
+    @staticmethod
+    def to_int(s: str) -> int:
+        total = 0
+        prev_value = 0
+        for char in reversed(s):
+            value = Roman._roman_numerals[char]
+            if value < prev_value:
+                total -= value
+            else:
+                total += value
+            prev_value = value
+        return total
+
+
+
+Previous attempt failed verification (round 3). Diagnostics:
+--- unit ---
+exit 1
+E
+======================================================================
+ERROR: test_roman (unittest.loader._FailedTest.test_roman)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_roman
+Traceback (most recent call last):
+  File "/usr/lib/python3.11/unittest/loader.py", line 419, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/unittest/loader.py", line 362, in _get_module_from_name
+    __import__(name)
+  File "/work/tests/test_roman.py", line 4, in <module>
+    from roman import to_int
+ImportError: cannot import name 'to_int' from 'roman' (/work/tests/../src/roman.py)
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)
+
+
+--- oracle ---
+exit 1
+E
+======================================================================
+ERROR: oracle_roman (unittest.loader._FailedTest.oracle_roman)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: oracle_roman
+Traceback (most recent call last):
+  File "/usr/lib/python3.11/unittest/loader.py", line 162, in loadTestsFromName
+    module = __import__(module_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/work/oracle_roman.py", line 4, in <module>
+    from roman import to_int
+ImportError: cannot import name 'to_int' from 'roman' (/work/src/roman.py)
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)
+
+
+
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<relative path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest.
+For create expected_sha256 is null. For delete content is null. Do not touch oracle or test command files.
+Do not claim completion; the independent checks decide.

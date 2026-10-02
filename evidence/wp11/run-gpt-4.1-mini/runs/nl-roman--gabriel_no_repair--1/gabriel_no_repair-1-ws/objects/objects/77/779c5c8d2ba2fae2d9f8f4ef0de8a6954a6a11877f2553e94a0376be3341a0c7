@@ -1,0 +1,36 @@
+diff --git a/src/roman.py b/src/roman.py
+index 30e64d2..1b8250a 100644
+--- a/src/roman.py
++++ b/src/roman.py
+@@ -1,9 +1,23 @@
+-"""roman: Roman numeral conversion."""
+-VALUES = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
++class Roman:
++    _roman_numerals = {
++        'I': 1,
++        'V': 5,
++        'X': 10,
++        'L': 50,
++        'C': 100,
++        'D': 500,
++        'M': 1000
++    }
+ 
+-
+-def to_int(text):
+-    total = 0
+-    for ch in text:
+-        total += VALUES[ch]
+-    return total
++    @staticmethod
++    def to_int(s: str) -> int:
++        total = 0
++        prev_value = 0
++        for char in reversed(s):
++            value = Roman._roman_numerals[char]
++            if value < prev_value:
++                total -= value
++            else:
++                total += value
++            prev_value = value
++        return total

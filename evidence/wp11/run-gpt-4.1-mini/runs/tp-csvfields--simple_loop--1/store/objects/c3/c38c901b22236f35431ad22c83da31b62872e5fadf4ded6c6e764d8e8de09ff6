@@ -1,0 +1,1 @@
+Fix the reported defect in csvfields.split_fields: a doubled double-quote inside a quoted field must be unescaped to a single double-quote character, and a quoted field may contain commas. Keep the public API and the existing tests.

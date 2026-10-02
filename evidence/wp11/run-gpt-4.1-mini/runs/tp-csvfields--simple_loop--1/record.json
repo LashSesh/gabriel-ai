@@ -1,0 +1,78 @@
+{
+  "task_id": "tp-csvfields",
+  "family": "text_parsing",
+  "system": "simple_loop",
+  "rep": 1,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp11/run-gpt-4.1-mini/runs/tp-csvfields--simple_loop--1",
+  "outcome": {
+    "system": "simple_loop",
+    "task_id": "tp-csvfields",
+    "family": "text_parsing",
+    "rep": 1,
+    "declared": true,
+    "declared_reason": "own check runs passed after 1 request(s)",
+    "model_requests": 1,
+    "model_tokens": 805,
+    "wall_ms": 3345,
+    "provider_statuses": [
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp11/run-gpt-4.1-mini/runs/tp-csvfields--simple_loop--1/worktrees/simple_loop-1",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "request 1: visible exit 0, oracle exit 0"
+    ],
+    "gabriel": null,
+    "repairs_used": 0,
+    "plan_versions": 0
+  },
+  "verification": {
+    "verified": true,
+    "changed_paths": [
+      "src/csvfields.py"
+    ],
+    "out_of_scope_paths": [],
+    "visible": {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "start_failure": null,
+      "stdout_tail": "",
+      "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+      "backend": "linux_namespace"
+    },
+    "oracle": {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "oracle_csvfields"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "start_failure": null,
+      "stdout_tail": "",
+      "stderr_tail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n",
+      "backend": "linux_namespace"
+    },
+    "patch_sha256": "46e750ebf5ad5f3028f2e9463513b9a9ee0dde7aa914a0497a5c20940e35eb6b",
+    "patch_bytes": 1691,
+    "patch": "diff --git a/src/csvfields.py b/src/csvfields.py\nindex 4538d40..b97c1f5 100644\n--- a/src/csvfields.py\n+++ b/src/csvfields.py\n@@ -1,23 +1,36 @@\n-\"\"\"csvfields: split one CSV line into fields (RFC 4180 subset).\"\"\"\n-\n-\n def split_fields(line):\n-    fields, current, quoted = [], [], False\n+    \"\"\"Split a CSV line into fields, handling quoted fields with commas and escaped quotes.\n+\n+    A doubled double-quote inside a quoted field is unescaped to a single double-quote.\n+    \"\"\"\n+    fields = []\n+    field = []\n+    in_quotes = False\n     i = 0\n-    while i < len(line):\n-        ch = line[i]\n-        if quoted:\n-            if ch == '\"':\n-                quoted = False\n+    length = len(line)\n+\n+    while i < length:\n+        c = line[i]\n+\n+        if in_quotes:\n+            if c == '\"':\n+                # Check if next char is also a double quote (escaped quote)\n+                if i + 1 < length and line[i + 1] == '\"':\n+                    field.append('\"')\n+                    i += 1  # Skip the escaped quote\n+                else:\n+                    in_quotes = False\n             else:\n-                current.append(ch)\n-        elif ch == '\"':\n-            quoted = True\n-        elif ch == \",\":\n-            fields.append(\"\".join(current))\n-            current = []\n+                field.append(c)\n         else:\n-            current.append(ch)\n+            if c == ',':\n+                fields.append(''.join(field))\n+                field = []\n+            elif c == '\"':\n+                in_quotes = True\n+            else:\n+                field.append(c)\n         i += 1\n-    fields.append(\"\".join(current))\n+\n+    fields.append(''.join(field))\n     return fields\n",
+    "head_is_base": true
+  },
+  "V": 1,
+  "D": 1,
+  "false_completion": 0,
+  "unit_wall_ms": 3953
+}

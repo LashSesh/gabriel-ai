@@ -1,0 +1,110 @@
+"""Coherent backup and restore of a workspace (WP12, AT18).
+
+A backup captures a coherent database snapshot through SQLite's online
+backup API, every artifact referenced by the journal (byte-verified), the
+workspace configuration, the independent anchor and a manifest. Restore
+rebuilds the layout elsewhere, re-verifies every referenced object, checks
+the restored journal against the independently retained anchor and replays
+it. The principal secret is never part of a backup.
+"""
+from __future__ import annotations
+
+import datetime
+import hashlib
+import json
+import shutil
+from pathlib import Path
+
+from .. import __version__
+from ..artifacts import ObjectStore
+from ..contracts.codec import canonical, loads
+from ..contracts.errors import Code, GabrielError
+from ..contracts.schemas import registry_digest, validate
+from ..state import Owner
+from ..state.reducer import reducer_identity
+
+
+def backup(workspace, destination) -> dict:
+    destination = Path(destination)
+    if destination.exists() and any(destination.iterdir()):
+        raise GabrielError(Code.STORAGE_FAULT, "backup destination is not empty: " + str(destination))
+    destination.mkdir(parents=True, exist_ok=True)
+    owner, store = workspace.owner, workspace.store
+    db = owner.backup(destination / "journal.sqlite")
+    anchor = db["anchor"]
+    referenced = sorted(owner.referenced_artifacts())
+    objects = destination / "objects"
+    objects.mkdir()
+    copied = {}
+    for sha in referenced:
+        src = store.path_for(sha)
+        if not src.is_file():
+            raise GabrielError(Code.STORAGE_FAULT, "referenced artifact missing from the store: " + sha, obj=sha)
+        raw = src.read_bytes()
+        if hashlib.sha256(raw).hexdigest() != sha:
+            raise GabrielError(Code.STORAGE_FAULT, "referenced artifact bytes changed: " + sha, obj=sha)
+        target = objects / sha[:2] / sha
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(raw)
+        copied[sha] = len(raw)
+    (destination / "config.json").write_bytes(canonical(workspace.config) + b"\n")
+    (destination / "anchor.json").write_bytes(canonical(anchor) + b"\n")
+    manifest = {"schema": "gabriel.backup-manifest/1", "version": __version__, "workspace_id": workspace.config["workspace_id"],
+                "created_at_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(), "anchor": anchor,
+                "database_sha256": hashlib.sha256((destination / "journal.sqlite").read_bytes()).hexdigest(),
+                "objects": copied, "object_count": len(copied), "object_bytes": sum(copied.values()),
+                "catalog_digest": owner.catalog_digest, "schema_registry_digest": registry_digest(), "reducer_identity": reducer_identity(),
+                "excluded": ["credentials/ (principal secret)", "worktrees/ (disposable; patches are exported separately)", "runs/ runtime notes"]}
+    (destination / "manifest.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
+    return manifest
+
+
+def restore(source, destination, *, catalog, clock=None) -> dict:
+    """Rebuild a workspace from a backup and verify it against the retained anchor."""
+    source, destination = Path(source), Path(destination)
+    manifest = json.loads((source / "manifest.json").read_text())
+    if manifest.get("schema") != "gabriel.backup-manifest/1":
+        raise GabrielError(Code.UNSUPPORTED, "not a Gabriel backup")
+    if destination.exists() and any(destination.iterdir()):
+        raise GabrielError(Code.STORAGE_FAULT, "restore destination is not empty: " + str(destination))
+    destination.mkdir(parents=True, exist_ok=True)
+    db_bytes = (source / "journal.sqlite").read_bytes()
+    if hashlib.sha256(db_bytes).hexdigest() != manifest["database_sha256"]:
+        raise GabrielError(Code.STORAGE_FAULT, "backup database bytes differ from the manifest")
+    (destination / "journal.sqlite").write_bytes(db_bytes)
+    shutil.copy(source / "config.json", destination / "config.json")
+    store = ObjectStore.create(destination / "objects")
+    verified, faults = 0, []
+    for sha, size in manifest["objects"].items():
+        path = source / "objects" / sha[:2] / sha
+        try:
+            raw = path.read_bytes()
+        except OSError:
+            faults.append({"sha256": sha, "fault": "missing"})
+            continue
+        if len(raw) != size or hashlib.sha256(raw).hexdigest() != sha:
+            faults.append({"sha256": sha, "fault": "corrupt"})
+            continue
+        store.put(raw, "application/octet-stream")
+        verified += 1
+    (destination / "credentials").mkdir(mode=0o700)
+    (destination / "worktrees").mkdir()
+    (destination / "runs").mkdir()
+    anchor = validate(loads((source / "anchor.json").read_bytes()), "anchor")
+    report = {"schema": "gabriel.restore-report/1", "destination": str(destination), "objects_verified": verified, "object_faults": faults,
+              "anchor": anchor, "anchor_check": None, "replay": None, "status": "storage_fault",
+              "note": "the principal secret is not restored; create a new credential before submitting commands"}
+    if faults:
+        (destination / "restore_report.json").write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
+        raise GabrielError(Code.STORAGE_FAULT, "restore verification failed: %d referenced object(s) missing or corrupt" % len(faults), details=report)
+    owner = Owner.open(destination / "journal.sqlite", store, catalog, clock=clock)
+    try:
+        report["anchor_check"] = owner.verify_anchor(anchor)
+        report["replay"] = owner.replay(expected_anchor=anchor)
+    finally:
+        owner.close()
+    report["status"] = "passed" if report["replay"]["status"] == "passed" else "storage_fault"
+    (destination / "restore_report.json").write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
+    if report["status"] != "passed":
+        raise GabrielError(Code.STORAGE_FAULT, "restore replay reported missing referenced artifacts", details=report)
+    return report

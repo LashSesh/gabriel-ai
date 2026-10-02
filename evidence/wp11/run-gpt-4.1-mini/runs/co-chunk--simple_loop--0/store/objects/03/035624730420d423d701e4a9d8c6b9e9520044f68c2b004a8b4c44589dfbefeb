@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-EUcI24ZB0M5vB58VS7VcP3CgcxdXL",
+  "object": "chat.completion",
+  "created": 1790965734,
+  "model": "gpt-4.1-mini-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"operations\": [{\"kind\": \"modify\", \"path\": \"src/chunking.py\", \"expected_sha256\": \"dba04ea74efe744d93d976a1abd3ff5ad139ad1af89f1098ed3ffa9195fa92ff\", \"content\": \"def chunk(data, size):\\n    \\\"\\\"\\\"Yield successive chunks from data of given size.\\n\\n    If size is larger than the length of data, yield one chunk containing all data.\\n    The final chunk may be smaller than size if data length is not a multiple of size.\\n    \\\"\\\"\\\"\\n    if size <= 0:\\n        raise ValueError(\\\"chunk size must be positive\\\")\\n    length = len(data)\\n    if length == 0:\\n        return []\\n    if size >= length:\\n        yield data\\n        return\\n    for i in range(0, length, size):\\n        yield data[i:i + size]\\n\"}], \"rationale\": \"The original code already yields the final partial chunk and yields one chunk if size is larger than input length. The main issue was that the function returned a generator, but tests expect a list. To fix this, the function should return a list instead of a generator. However, the user requested to keep the public API and existing tests, so the best fix is to convert the generator to a list before returning in the empty case and to raise ValueError correctly. The original code did not raise ValueError for size <= 0 because it returned a list instead of raising. The fix is to raise ValueError properly and return a list for empty input, and yield chunks otherwise, which matches the tests' expectations.\"}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 1160,
+    "completion_tokens": 359,
+    "total_tokens": 1519,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_f4b5aaa691"
+}

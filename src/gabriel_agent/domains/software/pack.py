@@ -178,7 +178,8 @@ def compile_task(spec: dict, store, *, task_id, workspace_id, principal_id, gran
     binding = {"schema": "gabriel.task-binding/1", "domain_namespace": NAMESPACE, "pack_id": PACK_ID, "pack_version": PACK_VERSION,
                "provider_profile_ref": provider_profile_ref, "containment_backend": containment_backend, "repository_path": str(spec["repository"]),
                "base_commit": base_commit, "allowed_paths": allowed, "check_specs": check_specs, "max_plan_versions": int(spec.get("max_plan_versions", 4)),
-               "max_repairs": int(spec.get("max_repairs", 2)), "owner_time_basis": "host_clock"}
+               "max_repairs": int(spec.get("max_repairs", 2)), "owner_time_basis": "host_clock",
+               "planner_mode": spec.get("planner_mode", "model")}
     validate(binding, "task-binding")
     goal_spec = {"schema": "gabriel.goal-spec/1", "goal_id": task_id + "-goal-r%d" % revision, "task_id": task_id, "task_spec_revision": revision,
                  "domain_namespace": NAMESPACE, "pack_id": PACK_ID, "pack_version": PACK_VERSION, "source_goal_ref": goal_ref,

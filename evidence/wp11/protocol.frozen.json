@@ -1,0 +1,105 @@
+{
+  "backend": "linux_namespace",
+  "bootstrap": {
+    "resamples": 2000,
+    "seed": 20261002
+  },
+  "budget_per_task": {
+    "max_input_tokens": 60000,
+    "max_output_tokens": 4000,
+    "model_requests": 6,
+    "model_tokens_total": 120000,
+    "tool_attempts": 64,
+    "wall_ms": 600000
+  },
+  "corpus_digest": "040fec6a036c5d44e0b02a9ee03b9de6cacaab54618d475f29db14033469472b",
+  "declared_success": {
+    "gabriel": "run state succeeded (every mandatory check passed with eligible evidence, artifacts verified, effects reconciled)",
+    "gabriel_no_repair": "as gabriel, with max_repairs=0 and max_plan_versions=1 (ablation of the repair cycle)",
+    "provider_only": "an admissible patch was applied (no verification)",
+    "simple_loop": "the system's own runs of the visible tests and the oracle both exited 0"
+  },
+  "families": [
+    "collections",
+    "numeric_logic",
+    "text_parsing"
+  ],
+  "frozen_at_utc": "2026-10-02T18:25:46.239110+00:00",
+  "frozen_digest": "b9f824a464c554d9405bd6b70689c83e8cff47b77cdc93652aa6f52cdc100f25",
+  "harness_identity": "d259341e9f66bc3d327830a01b758720c0579747c5feaab5a265d0ea2245c6dd",
+  "metrics": [
+    "p_success = mean(V)",
+    "p_false_completion = mean(D*(1-V))",
+    "conditional false completion = sum(D*(1-V))/sum(D)",
+    "model requests, model tokens and wall time per run",
+    "recovery: Gabriel runs that used repair cycles or extra plan versions",
+    "paired differences gabriel - baseline per task (mean over repetitions)",
+    "bootstrap percentile intervals, resampling task families with replacement (and tasks as a secondary view)"
+  ],
+  "provider": {
+    "credential_ref": "env:OPENAI_API_KEY",
+    "kind": "openai_compat",
+    "model": "gpt-4.1-mini",
+    "temperature_milli": 0,
+    "timeout_ms": 120000
+  },
+  "purpose": "Matched G1 coding comparison: increase independently verified task success or reduce resources at equal success, under a fixed task distribution and matched constraints. Not a benchmark of general capability.",
+  "repetitions": 2,
+  "sample_size_statement": "9 tasks in 3 families; the minimum relevant effect is not predeclared from a pilot, so intervals are reported as descriptive uncertainty, not as a powered test",
+  "schema": "gabriel.evaluation-protocol/1",
+  "systems": [
+    "provider_only",
+    "simple_loop",
+    "gabriel",
+    "gabriel_no_repair"
+  ],
+  "tasks": [
+    {
+      "digest": "1a9839ed35bd7423426682a75e1e092892d3628d3e1750811d26e98536f1b494",
+      "family": "text_parsing",
+      "task_id": "tp-kvparse"
+    },
+    {
+      "digest": "817e961b5a43576ce1a26ef12ee353f2d9ae4d3405767dd6e8ccdb06c7b85fcd",
+      "family": "text_parsing",
+      "task_id": "tp-csvfields"
+    },
+    {
+      "digest": "66c30d5fcd19ceee7792d16a7b18d169bbcd7c027cb17e5d43bc987adb9bb70a",
+      "family": "text_parsing",
+      "task_id": "tp-querystring"
+    },
+    {
+      "digest": "391ee2bcd60a47eea11afb0838ff032ed24f331480b0460307cbf663f9c33357",
+      "family": "numeric_logic",
+      "task_id": "nl-median"
+    },
+    {
+      "digest": "21fcb05930f4918822c99c75920f5a5006e633ff7558b8f4c91712b982708ebc",
+      "family": "numeric_logic",
+      "task_id": "nl-roman"
+    },
+    {
+      "digest": "05a1d7d3a9a39b9f1cb009d67875b508a5f4bf766155f4a33ca3673494e7b1e4",
+      "family": "numeric_logic",
+      "task_id": "nl-leapyear"
+    },
+    {
+      "digest": "2fcc839e38ade3e6c54789ba1e9e70c696cd5062a164005c9cb42e425aa65c6e",
+      "family": "collections",
+      "task_id": "co-dedupe"
+    },
+    {
+      "digest": "66b917b7bcf4ee4bb24613c665ba03c9ffba00315961971f5a12dae33bca7164",
+      "family": "collections",
+      "task_id": "co-slugify"
+    },
+    {
+      "digest": "c962bfa79017838d6f200a88fdf31cfc346688bff1381968861936abfad99132",
+      "family": "collections",
+      "task_id": "co-chunk"
+    }
+  ],
+  "time_limit_is_failure": true,
+  "verification": "fresh, system-independent: changed paths within allowed_paths; visible tests exit 0; oracle installed from the corpus text and exit 0; all executed in the containment backend on the final tree"
+}

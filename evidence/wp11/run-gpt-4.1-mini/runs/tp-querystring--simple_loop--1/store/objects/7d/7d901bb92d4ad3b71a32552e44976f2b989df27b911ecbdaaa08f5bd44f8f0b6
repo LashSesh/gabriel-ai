@@ -1,0 +1,138 @@
+You are the worker role of Gabriel, a repository repair agent.
+Goal (verbatim user request):
+Fix the reported defect in querystring.parse_qs: a plus sign in a value must decode to a space, and a key without an equals sign must map to an empty string. Keep percent-decoding, the public API and the existing tests.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- unit [software/test_passed] argv=python3 -m unittest discover -s tests independent=False
+- oracle [software/test_passed] argv=python3 -m unittest oracle_querystring independent=True
+
+Allowed paths (changes elsewhere are rejected): src/
+Base commit: 1c1f75d2fb425c6f8418685e3cd53513f64eaa28
+
+Files (path sha256 bytes):
+  README.md 711b556aadcc8a8296fa0c68739178fbdd2be8ed61ac7c8853ffe9ea593b4176 68
+  src/querystring.py 7441ed4a4b4007eb4319ef00c32094505a29e3c9d81f08cfe4b16bd50c36cce2 865
+  tests/test_querystring.py f193fd183f88ec2fcee6aec09a9d2c7ab588909fa995f0a7deeaa4e016ca9b3a 419
+
+Source files in scope:
+=== src/querystring.py (sha256 7441ed4a4b4007eb4319ef00c32094505a29e3c9d81f08cfe4b16bd50c36cce2) ===
+from urllib.parse import unquote_plus
+
+
+def parse_qs(qs):
+    """Parse a query string into a dictionary mapping keys to lists of values.
+
+    A plus sign in a value decodes to a space.
+    A key without an equals sign maps to an empty string.
+    Percent-decoding is applied.
+
+    Args:
+        qs (str): The query string to parse.
+
+    Returns:
+        dict: A dictionary mapping keys to lists of values.
+    """
+    result = {}
+    if not qs:
+        return result
+
+    pairs = qs.split('&')
+    for pair in pairs:
+        if '=' in pair:
+            key, value = pair.split('=', 1)
+            key = unquote_plus(key)
+            value = unquote_plus(value)
+        else:
+            key = unquote_plus(pair)
+            value = ''
+        if key in result:
+            result[key].append(value)
+        else:
+            result[key] = [value]
+    return result
+
+
+
+Previous attempt failed verification (round 1). Diagnostics:
+--- unit ---
+exit 1
+FF
+======================================================================
+FAIL: test_basic (test_querystring.ParseQsTests.test_basic)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/work/tests/test_querystring.py", line 9, in test_basic
+    self.assertEqual(parse_qs("a=1&b=2"), {"a": "1", "b": "2"})
+AssertionError: {'a': ['1'], 'b': ['2']} != {'a': '1', 'b': '2'}
+- {'a': ['1'], 'b': ['2']}
+?       -   -       -   -
+
++ {'a': '1', 'b': '2'}
+
+======================================================================
+FAIL: test_percent_decoding (test_querystring.ParseQsTests.test_percent_decoding)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/work/tests/test_querystring.py", line 12, in test_percent_decoding
+    self.assertEqual(parse_qs("q=a%20b"), {"q": "a b"})
+AssertionError: {'q': ['a b']} != {'q': 'a b'}
+- {'q': ['a b']}
+?       -     -
+
++ {'q': 'a b'}
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.002s
+
+FAILED (failures=2)
+
+
+--- oracle ---
+exit 1
+------------------
+Traceback (most recent call last):
+  File "/work/oracle_querystring.py", line 12, in test_key_without_value
+    self.assertEqual(parse_qs("flag&a=1"), {"flag": "", "a": "1"})
+AssertionError: {'flag': [''], 'a': ['1']} != {'flag': '', 'a': '1'}
+- {'a': ['1'], 'flag': ['']}
+?       -   -          -  -
+
++ {'a': '1', 'flag': ''}
+
+======================================================================
+FAIL: test_percent_still_works (oracle_querystring.OracleTests.test_percent_still_works)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/work/oracle_querystring.py", line 15, in test_percent_still_works
+    self.assertEqual(parse_qs("q=a%20b&x=%41"), {"q": "a b", "x": "A"})
+AssertionError: {'q': ['a b'], 'x': ['A']} != {'q': 'a b', 'x': 'A'}
+- {'q': ['a b'], 'x': ['A']}
+?       -     -       -   -
+
++ {'q': 'a b', 'x': 'A'}
+
+======================================================================
+FAIL: test_plus_is_space (oracle_querystring.OracleTests.test_plus_is_space)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/work/oracle_querystring.py", line 9, in test_plus_is_space
+    self.assertEqual(parse_qs("q=a+b"), {"q": "a b"})
+AssertionError: {'q': ['a b']} != {'q': 'a b'}
+- {'q': ['a b']}
+?       -     -
+
++ {'q': 'a b'}
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.002s
+
+FAILED (failures=3)
+
+
+
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<relative path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest.
+For create expected_sha256 is null. For delete content is null. Do not touch oracle or test command files.
+Do not claim completion; the independent checks decide.

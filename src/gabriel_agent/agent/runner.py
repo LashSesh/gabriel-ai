@@ -129,7 +129,13 @@ class TaskRunner:
             except GabrielError:
                 evidence = {}
             text = json.dumps(evidence, ensure_ascii=False)[:2000]
-            witness_ref = evidence.get("witness_ref") if isinstance(evidence, dict) else None
+            # the verifier's record nests its details under "evidence"; the witness may sit at either level
+            inner = evidence.get("evidence") if isinstance(evidence, dict) else None
+            witness_ref = None
+            for candidate in (evidence, inner):
+                if isinstance(candidate, dict) and isinstance(candidate.get("witness_ref"), dict):
+                    witness_ref = candidate["witness_ref"]
+                    break
             if witness_ref:
                 try:
                     witness = loads(self.store.get(witness_ref))
@@ -162,10 +168,26 @@ class TaskRunner:
                                     "text": "status %s: %s" % (result["status"], raw[:1500])})
         return context[-2:]
 
+    def _accept_reference_plan(self, projection, reference, version):
+        """Deterministic reference plan from the domain pack: no provider request, same owner validation."""
+        task = projection["task"]
+        try:
+            plan, _ = software.materialize_plan(reference, task, self.binding, self.registry.catalog(), self.profile, run_id=self.run_id,
+                                                plan_id="plan-%s-v%d" % (self.run_id, version + 1),
+                                                parent_plan_id=projection["plan"]["plan_id"] if projection["plan"] else None,
+                                                reason_ref=self.store.put(dumps_utf8(reference), "application/json; charset=utf-8"), store=self.store)
+            receipt = self._submit("accept_plan", plan)
+            self.log.append("reference plan v%d accepted: %s" % (version + 1, receipt["notes"]))
+        except GabrielError as exc:
+            self._hold("plan_unavailable", "blocked", "reference plan rejected: " + exc.message, prerequisite="valid-plan", wakeup="user-review")
+
     def _plan(self, projection):
         task = projection["task"]
         version = projection["run_meta"]["plan_versions"]
         reference = software.reference_plan_proposal(task, self.binding, repair_round=version)
+        if self.binding.get("planner_mode", "model") == "reference":
+            self._accept_reference_plan(projection, reference, version)
+            return
         failure_context = self._failure_context(projection) if version else []
         visible = self.registry.visible_catalog(self.owner.grant(task["grant_id"])["grant"])
         prompt = ("You are the planner role of Gabriel. Produce a bounded plan as JSON for the repository task below.\n"

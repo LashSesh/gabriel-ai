@@ -1,0 +1,1 @@
+Fixed chunk to raise ValueError on non-positive size, yield one chunk if size >= data length, and yield final partial chunk correctly. Also return empty for empty data. This matches the public API and passes all tests.

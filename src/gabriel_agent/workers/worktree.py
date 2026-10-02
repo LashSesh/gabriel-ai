@@ -31,7 +31,8 @@ class Worktree:
 
     @classmethod
     def create(cls, repository, base_commit: str, destination) -> "Worktree":
-        repository, destination = Path(repository), Path(destination)
+        # git resolves a relative destination against the repository, not the process cwd
+        repository, destination = Path(repository).resolve(), Path(destination).resolve()
         if not (repository / ".git").exists() and git(["rev-parse", "--is-inside-work-tree"], repository, check=False).returncode != 0:
             raise GabrielError(Code.UNKNOWN_OBJECT, "not a git repository: " + str(repository))
         resolved = git(["rev-parse", "--verify", base_commit + "^{commit}"], repository).stdout.strip()
@@ -45,10 +46,10 @@ class Worktree:
 
     @classmethod
     def open(cls, path, base_commit: str, repository) -> "Worktree":
-        path = Path(path)
+        path = Path(path).resolve()
         if not path.is_dir():
             raise GabrielError(Code.STORAGE_FAULT, "worktree is missing: " + str(path))
-        return cls(path, base_commit, repository)
+        return cls(path, base_commit, Path(repository).resolve())
 
     def head(self) -> str:
         return git(["rev-parse", "HEAD"], self.path).stdout.strip()

@@ -1,0 +1,140 @@
+{
+  "acceptance_evidence": {
+    "evidence/doctor_linux_namespace_selftest.json": "5ff218e9cd2d85f7c131b78183449c2d379b55f90fb8aa7d51c1dc34cbac1bd7",
+    "evidence/live/summary.json": "b90e9583a5a5e0fad701e0a378a35d741a6eae7516908492a3c2e027b60a6b4e",
+    "evidence/test_run.json": "3a0c78937e1dad81ebcad7ff18bf16a08541bec8fb4dff0b401a44922762adc2",
+    "evidence/wp01/baseline_manifest.json": "ef39b8ed0762a44c9ee8ff5e8ca616deef771c5ca389d6dd2841ce666233b96f",
+    "evidence/wp02/spec_validation.json": "658d50d5fc0991f485240e1e6161ac5f46c171b6fc7abf953eb98db8748ac93f",
+    "evidence/wp11/protocol.frozen.json": "a568a973976bbcae7aa4e0847492e973e55e826c4140ac754a96471d4697c533"
+  },
+  "catalog_digest": "73902be2225c467cc20ef935d3a806745d25850fbc3f07a1960544a5ba1420bf",
+  "created_at_utc": "2026-10-02T18:26:56.198994+00:00",
+  "dependency_lock": [
+    "attrs==26.1.0",
+    "gabriel-agent @ file:///home/user/gabriel-ai",
+    "jsonschema-specifications==2025.9.1",
+    "jsonschema==4.25.1",
+    "referencing==0.37.0",
+    "rpds-py==2026.6.3",
+    "typing_extensions==4.16.0"
+  ],
+  "doctor": {
+    "backends": {
+      "linux_namespace": {
+        "available": true,
+        "backend": "linux_namespace",
+        "checks": {
+          "jail_selftest": "not_executed",
+          "platform": "linux",
+          "setpriv": "/usr/bin/setpriv",
+          "unshare": "/usr/bin/unshare",
+          "unshare_namespaces": true
+        },
+        "containment": true,
+        "identity": "linux_namespace:6.18.44-fc-v51:x86_64:python-3.12.3",
+        "reasons": []
+      },
+      "trusted_local": {
+        "available": true,
+        "backend": "trusted_local",
+        "checks": {
+          "python": "/tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke/venv/bin/python"
+        },
+        "containment": false,
+        "reasons": [
+          "plain subprocess in a new session; no filesystem, network or credential boundary"
+        ]
+      }
+    },
+    "catalog_digest": "73902be2225c467cc20ef935d3a806745d25850fbc3f07a1960544a5ba1420bf",
+    "configured_backend": "linux_namespace",
+    "effective_limits": {
+      "artifact_bytes": 16777216,
+      "concurrent_reads": 4,
+      "concurrent_writes_per_resource": "one",
+      "cpu_ms": 1800000,
+      "currency": "EUR",
+      "currency_micro_units": 0,
+      "elapsed_ms": 1800000,
+      "model_requests": 12,
+      "model_tokens_total": 20000,
+      "scratch_bytes": 1073741824,
+      "tool_attempts": 64
+    },
+    "git": "git version 2.43.0",
+    "journal": {
+      "head": "586b4e33cadb6c450082c8ea84ffa4050ac5157aead1a24413c2115ad073d48a",
+      "inputs_head": "7f7fa622c1919ebaf05c7cb151caecae7753e15d0b553042cb3d8e6da144f933",
+      "schema": "gabriel.anchor/1",
+      "sequence": 41,
+      "workspace_id": "ws-750c38df7de4"
+    },
+    "object_store": {
+      "faults": {},
+      "referenced": 0,
+      "status": "passed",
+      "stray_temporaries": []
+    },
+    "platform": "Linux-6.18.44-fc-v51-x86_64-with-glibc2.39",
+    "problems": [
+      "linux_namespace jail self-test not executed (run doctor --selftest on a Linux host that permits namespaces)"
+    ],
+    "python": "3.12.3",
+    "registry_loaded": {
+      "model.generate": true,
+      "owner.output_valid": true,
+      "software.apply_patch": true,
+      "software.base_commit_pinned": true,
+      "software.checks_intact": true,
+      "software.diff_in_scope": true,
+      "software.no_secrets": true,
+      "software.observe": true,
+      "software.read_back": true,
+      "software.review": true,
+      "software.run_check": true,
+      "software.test_passed": true
+    },
+    "schema_registry_digest": "20f02f07c77cf7cc4cac02e5a57bef7649c6f284e905bcf1c6548407af4aadb6",
+    "untrusted_execution_supported": false,
+    "version": "0.1.0",
+    "workspace_id": "ws-750c38df7de4"
+  },
+  "gates": {
+    "G0": "holds: inherited runtime checks rerun (evidence/wp01)",
+    "G1": "established on the release host for one provider and one synthetic task family (evidence/live, evidence/wp11, evidence/wp12)",
+    "G2": "not established: no document or numerical domain pack (WP09/WP10 not started)",
+    "G3": "not established: no evaluated adaptive policy"
+  },
+  "known_issues": [
+    "root license unresolved",
+    "catalog fingerprint change requires a new workspace (no migration command)",
+    "single-host, single-user deployment only"
+  ],
+  "license": {
+    "note": "A subdirectory license does not license the whole tree or included datasets; redistribution needs an explicit root license.",
+    "root_license_files": [],
+    "status": "unresolved",
+    "subdirectory_license_files": [
+      "native_pse/LICENSE"
+    ]
+  },
+  "package_source_files": 99,
+  "package_source_identity": "27f1bbe7325064b88619012882eb97451d51071779c5f79c9ecc391444bf59dc",
+  "platform": {
+    "machine": "x86_64",
+    "release": "6.18.44-fc-v51",
+    "system": "Linux"
+  },
+  "python": "3.12.3",
+  "reducer_identity": "ea45d1d2bc7959619be6b48b5bfea5e357161decaa06b9c44b0f9eb96e14e0e7",
+  "schema": "gabriel.release-manifest/1",
+  "schema_registry_digest": "20f02f07c77cf7cc4cac02e5a57bef7649c6f284e905bcf1c6548407af4aadb6",
+  "source_branch": "claude/vigilant-gauss-03dalc",
+  "source_commit": "b40a5f3ce7c0e451174bf0985e0b0e8afd31fedd",
+  "source_dirty": true,
+  "supported_backends": {
+    "linux_namespace": "supported containment backend; requires Linux user namespaces, util-linux unshare and setpriv; verified by gabriel doctor --selftest on the release host",
+    "trusted_local": "explicitly separate trusted mode without containment; opt-in only"
+  },
+  "version": "0.1.0"
+}

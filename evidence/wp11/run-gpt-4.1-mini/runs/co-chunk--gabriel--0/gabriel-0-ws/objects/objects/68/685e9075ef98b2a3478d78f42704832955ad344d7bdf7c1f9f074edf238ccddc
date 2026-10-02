@@ -1,0 +1,1 @@
+Added explicit handling for the case when chunk size is larger than or equal to data length to yield one chunk of all data, ensuring the final partial chunk is kept when length is not a multiple of chunk size, as required.

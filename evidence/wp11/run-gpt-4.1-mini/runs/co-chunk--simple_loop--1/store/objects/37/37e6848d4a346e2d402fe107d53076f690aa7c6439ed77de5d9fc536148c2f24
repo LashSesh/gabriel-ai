@@ -1,0 +1,1 @@
+Added explicit check for size <= 0 to raise ValueError as required. Added handling for empty data to yield nothing. Added explicit handling for size >= len(data) to yield one chunk of all data. This ensures the final partial chunk is yielded and size larger than input yields one chunk, matching the requirements and tests.

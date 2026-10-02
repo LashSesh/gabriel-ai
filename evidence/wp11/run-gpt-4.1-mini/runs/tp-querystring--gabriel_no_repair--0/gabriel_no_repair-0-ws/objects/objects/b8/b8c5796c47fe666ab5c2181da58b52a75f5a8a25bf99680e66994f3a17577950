@@ -1,0 +1,41 @@
+FFF
+======================================================================
+FAIL: test_key_without_value (oracle_querystring.OracleTests.test_key_without_value)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/work/oracle_querystring.py", line 12, in test_key_without_value
+    self.assertEqual(parse_qs("flag&a=1"), {"flag": "", "a": "1"})
+AssertionError: {'flag': [''], 'a': ['1']} != {'flag': '', 'a': '1'}
+- {'a': ['1'], 'flag': ['']}
+?       -   -          -  -
+
++ {'a': '1', 'flag': ''}
+
+======================================================================
+FAIL: test_percent_still_works (oracle_querystring.OracleTests.test_percent_still_works)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/work/oracle_querystring.py", line 15, in test_percent_still_works
+    self.assertEqual(parse_qs("q=a%20b&x=%41"), {"q": "a b", "x": "A"})
+AssertionError: {'q': ['a b'], 'x': ['A']} != {'q': 'a b', 'x': 'A'}
+- {'q': ['a b'], 'x': ['A']}
+?       -     -       -   -
+
++ {'q': 'a b', 'x': 'A'}
+
+======================================================================
+FAIL: test_plus_is_space (oracle_querystring.OracleTests.test_plus_is_space)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/work/oracle_querystring.py", line 9, in test_plus_is_space
+    self.assertEqual(parse_qs("q=a+b"), {"q": "a b"})
+AssertionError: {'q': ['a b']} != {'q': 'a b'}
+- {'q': ['a b']}
+?       -     -
+
++ {'q': 'a b'}
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+FAILED (failures=3)

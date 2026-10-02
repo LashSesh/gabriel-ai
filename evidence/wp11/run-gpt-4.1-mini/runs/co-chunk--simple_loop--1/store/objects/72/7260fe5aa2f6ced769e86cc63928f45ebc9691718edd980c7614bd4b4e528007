@@ -1,0 +1,1 @@
+Removed the special case that yielded data once if size >= len(data) to ensure the final partial chunk is always yielded, including when size is larger than data length. Also added a check to raise ValueError for non-positive chunk sizes, and return immediately if data is empty, preserving the public API and fixing the test failures.

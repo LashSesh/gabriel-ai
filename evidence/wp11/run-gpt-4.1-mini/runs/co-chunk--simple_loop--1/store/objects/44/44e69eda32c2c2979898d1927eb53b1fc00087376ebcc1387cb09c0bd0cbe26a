@@ -1,0 +1,1 @@
+Changed chunk to return a list of chunks instead of a generator to match expected output in tests. Added explicit ValueError raise for non-positive size. Return empty list for empty data to satisfy tests expecting list, not generator. This preserves the public API (function signature) and satisfies all acceptance criteria.

@@ -1,0 +1,51 @@
+You are the worker role of Gabriel, a repository repair agent.
+Goal (verbatim user request):
+Fix the reported defect in chunking.chunk: the final partial chunk must be kept when the length is not a multiple of the chunk size, and a size larger than the input yields one chunk. Keep the public API and the existing tests.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- unit [software/test_passed] argv=python3 -m unittest discover -s tests independent=False
+- oracle [software/test_passed] argv=python3 -m unittest oracle_chunking independent=True
+
+Allowed paths (changes elsewhere are rejected): src/
+Base commit: 3fbe81cca423b61c435368b4538bdc31872b10bb
+
+Files (path sha256 bytes):
+  README.md 517a8ca89b6d85bcb33e47b7f3a51435c4bbc9c2f7ae7dd495cb3350b6d39059 65
+  src/chunking.py 6ab7b2d420b5fc09eb04208e1dece0eb0e7a89b1d561b0362f789ae0d4f8064e 599
+  tests/test_chunking.py f6e8032d9dff48b8f92ef55ff7ec34e05d407665761193f437a8000ccb288e64 425
+
+Source files in scope:
+=== src/chunking.py (sha256 6ab7b2d420b5fc09eb04208e1dece0eb0e7a89b1d561b0362f789ae0d4f8064e) ===
+def chunk(data, size):
+    """Yield successive chunks from data of given size.
+
+    If size is larger than the length of data, yield one chunk containing all data.
+    The final chunk may be smaller than size if data length is not a multiple of size.
+
+    Args:
+        data (bytes or str): The input data to chunk.
+        size (int): The chunk size.
+
+    Yields:
+        bytes or str: Chunks of the input data.
+    """
+    if size <= 0:
+        raise ValueError("chunk size must be positive")
+
+    length = len(data)
+    for start in range(0, length, size):
+        yield data[start:start + size]
+
+
+
+Previous attempt failed verification (round 2). Diagnostics:
+--- oracle ---
+{"check_id": "oracle", "evidence": {"argv": ["python3", "-m", "unittest", "oracle_chunking"], "backend": "linux_namespace", "containment": true, "exit_code": 1, "witness_ref": {"bytes": 1025, "media_type": "application/json", "sha256": "5ed53bc0db6bd42b57ac8f355d7b7ffdb7e478260e9381f741ded392ce23c658"}}, "node_id": "verify-oracle", "outcome": "failed"}
+
+
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<relative path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest.
+For create expected_sha256 is null. For delete content is null. Do not touch oracle or test command files.
+Do not claim completion; the independent checks decide.

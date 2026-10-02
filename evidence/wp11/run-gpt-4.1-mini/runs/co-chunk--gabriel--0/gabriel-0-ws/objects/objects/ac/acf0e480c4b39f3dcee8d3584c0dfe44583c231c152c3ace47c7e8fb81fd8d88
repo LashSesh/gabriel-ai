@@ -1,0 +1,29 @@
+FFF
+======================================================================
+FAIL: test_empty (oracle_chunking.OracleTests.test_empty)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/work/oracle_chunking.py", line 15, in test_empty
+    self.assertEqual(chunk([], 3), [])
+AssertionError: <generator object chunk at 0x7f1915e275b0> != []
+
+======================================================================
+FAIL: test_partial_last_chunk (oracle_chunking.OracleTests.test_partial_last_chunk)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/work/oracle_chunking.py", line 9, in test_partial_last_chunk
+    self.assertEqual(chunk([1, 2, 3, 4, 5], 2), [[1, 2], [3, 4], [5]])
+AssertionError: <generator object chunk at 0x7f1915e276a0> != [[1, 2], [3, 4], [5]]
+
+======================================================================
+FAIL: test_size_larger_than_input (oracle_chunking.OracleTests.test_size_larger_than_input)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/work/oracle_chunking.py", line 12, in test_size_larger_than_input
+    self.assertEqual(chunk([1, 2], 5), [[1, 2]])
+AssertionError: <generator object chunk at 0x7f1915e275b0> != [[1, 2]]
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+FAILED (failures=3)

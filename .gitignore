@@ -6,3 +6,11 @@ build/
 dist/
 .pytest_cache/
 /workspace-*/
+# evaluation runs: the materialized task repositories and worktrees are git repositories of their own
+# and are reproducible from the frozen corpus; the final diffs are retained under final_diffs/ instead
+evidence/wp11/*/runs/*/repo/
+evidence/wp11/*/runs/*/worktrees/
+evidence/wp11/*/runs/*/*-ws/worktrees/
+evidence/wp11/*/runs/*/store/tmp/
+# evaluation workspaces: per-workspace principal secrets are never evidence
+evidence/**/credentials/

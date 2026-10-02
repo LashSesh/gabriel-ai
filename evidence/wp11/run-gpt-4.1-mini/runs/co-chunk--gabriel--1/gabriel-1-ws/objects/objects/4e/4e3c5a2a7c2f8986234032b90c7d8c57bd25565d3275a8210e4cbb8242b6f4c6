@@ -1,0 +1,1 @@
+Added explicit handling for size larger than data length to yield one chunk of all data, ensuring the final partial chunk is kept when length is not a multiple of chunk size, preserving the public API and existing tests.

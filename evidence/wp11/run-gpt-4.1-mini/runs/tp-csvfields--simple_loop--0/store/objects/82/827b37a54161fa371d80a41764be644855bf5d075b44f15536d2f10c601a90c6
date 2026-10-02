@@ -1,0 +1,44 @@
+def split_fields(line):
+    fields = []
+    field = []
+    in_quotes = False
+    i = 0
+    length = len(line)
+
+    while i < length:
+        c = line[i]
+
+        if in_quotes:
+            if c == '"':
+                # Check if this is an escaped double quote
+                if i + 1 < length and line[i + 1] == '"':
+                    field.append('"')
+                    i += 2
+                    continue
+                else:
+                    in_quotes = False
+                    i += 1
+                    continue
+            else:
+                field.append(c)
+                i += 1
+                continue
+
+        else:
+            if c == ',':
+                fields.append(''.join(field))
+                field = []
+                i += 1
+                continue
+            elif c == '"':
+                in_quotes = True
+                i += 1
+                continue
+            else:
+                field.append(c)
+                i += 1
+                continue
+
+    # Append last field
+    fields.append(''.join(field))
+    return fields

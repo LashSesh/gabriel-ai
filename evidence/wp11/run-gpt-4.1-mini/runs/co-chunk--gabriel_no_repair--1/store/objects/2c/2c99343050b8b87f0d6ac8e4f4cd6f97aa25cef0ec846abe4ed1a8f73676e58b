@@ -1,0 +1,1 @@
+Fix the reported defect in chunking.chunk: the final partial chunk must be kept when the length is not a multiple of the chunk size, and a size larger than the input yields one chunk. Keep the public API and the existing tests.

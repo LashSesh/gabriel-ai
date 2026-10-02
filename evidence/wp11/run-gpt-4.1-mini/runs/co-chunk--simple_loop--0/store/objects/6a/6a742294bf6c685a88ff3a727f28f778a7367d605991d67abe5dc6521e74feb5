@@ -1,0 +1,1 @@
+Changed the empty data case to return an empty list instead of returning None to satisfy tests expecting a list. Kept the rest of the logic as is, which already yields the final partial chunk and yields one chunk if size is larger than input length. Added raising ValueError for non-positive size as required.

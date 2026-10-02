@@ -1,0 +1,36 @@
+def split_fields(line):
+    """Split a CSV line into fields, handling quoted fields with commas and escaped quotes.
+
+    A doubled double-quote inside a quoted field is unescaped to a single double-quote.
+    """
+    fields = []
+    field = []
+    in_quotes = False
+    i = 0
+    length = len(line)
+
+    while i < length:
+        c = line[i]
+
+        if in_quotes:
+            if c == '"':
+                # Check if next char is also a quote (escaped quote)
+                if i + 1 < length and line[i + 1] == '"':
+                    field.append('"')
+                    i += 1  # skip the escaped quote
+                else:
+                    in_quotes = False
+            else:
+                field.append(c)
+        else:
+            if c == ',':
+                fields.append(''.join(field))
+                field = []
+            elif c == '"':
+                in_quotes = True
+            else:
+                field.append(c)
+        i += 1
+
+    fields.append(''.join(field))
+    return fields
