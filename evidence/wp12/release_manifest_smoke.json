@@ -2,7 +2,7 @@
   "acceptance_evidence": {
     "evidence/doctor_linux_namespace_selftest.json": "5ff218e9cd2d85f7c131b78183449c2d379b55f90fb8aa7d51c1dc34cbac1bd7",
     "evidence/live/summary.json": "b90e9583a5a5e0fad701e0a378a35d741a6eae7516908492a3c2e027b60a6b4e",
-    "evidence/test_run.json": "d09829cf3f5d7ef9c458ec3935961ddd3f961281729a17f9415c88c3d3040b84",
+    "evidence/test_run.json": "cc765f9237f907c281e76208a9d6e573b57ef2818ee91358e3192ac5f9a78299",
     "evidence/wp01/baseline_manifest.json": "ef39b8ed0762a44c9ee8ff5e8ca616deef771c5ca389d6dd2841ce666233b96f",
     "evidence/wp02/spec_validation.json": "658d50d5fc0991f485240e1e6161ac5f46c171b6fc7abf953eb98db8748ac93f",
     "evidence/wp11/protocol.frozen.json": "a568a973976bbcae7aa4e0847492e973e55e826c4140ac754a96471d4697c533",
@@ -12,8 +12,8 @@
     "evidence/wp11/run2-gpt-4.1-mini/report.json": "5809dc384dc261060abf7ce2bf8aefbcacd04d3c67939a00c50565d071e05a29",
     "evidence/wp11/run3-gpt-4.1-mini/report.json": "4477efb9365669e3adb06bc57a9d1e2c6461dee9693bb4a1c3e3fe25efddcd80"
   },
-  "catalog_digest": "b444e1a7c50683e8f9e74c8813b20bc35a6c4e9bfc490fba309eaaf74543d67d",
-  "created_at_utc": "2026-10-02T18:58:20.745316+00:00",
+  "catalog_digest": "ff1616bea15411efb7672e388a0b85b7d725b585d4e01af71c962b6fd9c33972",
+  "created_at_utc": "2026-10-02T20:55:26.273273+00:00",
   "dependency_lock": [
     "attrs==26.1.0",
     "gabriel-agent @ file:///home/user/gabriel-ai",
@@ -47,7 +47,7 @@
         "available": true,
         "backend": "trusted_local",
         "checks": {
-          "python": "/tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke5/venv/bin/python"
+          "python": "/tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke6/venv/bin/python"
         },
         "containment": false,
         "reasons": [
@@ -55,7 +55,7 @@
         ]
       }
     },
-    "catalog_digest": "b444e1a7c50683e8f9e74c8813b20bc35a6c4e9bfc490fba309eaaf74543d67d",
+    "catalog_digest": "ff1616bea15411efb7672e388a0b85b7d725b585d4e01af71c962b6fd9c33972",
     "configured_backend": "linux_namespace",
     "effective_limits": {
       "artifact_bytes": 16777216,
@@ -72,11 +72,11 @@
     },
     "git": "git version 2.43.0",
     "journal": {
-      "head": "05aed810921beef4bc6d1711f5ef4120ce5bcd105e146b3d171532109d30f5c7",
-      "inputs_head": "107aab21bfc244207c51bb4cd2cfe78d2e0ae60ea0c38cccde33fa8731b65522",
+      "head": "c05ea13526ad8ff9ec87d115e522befb27079ef94337f1f705975e1718da0d1f",
+      "inputs_head": "49aba4315595585ab45a87d09b414b43e83ed1957467df67f682c2f88ab8654f",
       "schema": "gabriel.anchor/1",
       "sequence": 41,
-      "workspace_id": "ws-9014c127ef44"
+      "workspace_id": "ws-7506197894c7"
     },
     "object_store": {
       "faults": {},
@@ -88,7 +88,29 @@
     "problems": [],
     "python": "3.11.15",
     "registry_loaded": {
+      "document.apply_amendment": true,
+      "document.base_commit_pinned": true,
+      "document.checks_intact": true,
+      "document.citations_bound": true,
+      "document.diff_in_scope": true,
+      "document.no_secrets": true,
+      "document.observe": true,
+      "document.output_valid": true,
+      "document.read_back": true,
+      "document.required_claims": true,
+      "document.review": true,
       "model.generate": true,
+      "numerical.base_commit_pinned": true,
+      "numerical.checks_intact": true,
+      "numerical.diff_in_scope": true,
+      "numerical.no_secrets": true,
+      "numerical.observe": true,
+      "numerical.output_valid": true,
+      "numerical.read_back": true,
+      "numerical.reference_contract": true,
+      "numerical.review": true,
+      "numerical.run_job": true,
+      "numerical.verify": true,
       "owner.output_valid": true,
       "software.apply_patch": true,
       "software.base_commit_pinned": true,
@@ -101,33 +123,35 @@
       "software.run_check": true,
       "software.test_passed": true
     },
-    "schema_registry_digest": "e4aafc892311837c79dc31a49ffac8b06bfc5e5bce6160665acbd1a49a1880a8",
+    "schema_registry_digest": "a149fe0113badf61894b6eb29142e5c18baf94bdbaf0e8a6297cdf293fea1c9e",
     "untrusted_execution_supported": true,
     "version": "0.1.0",
-    "workspace_id": "ws-9014c127ef44"
+    "workspace_id": "ws-7506197894c7"
   },
   "gates": {
     "G0": "holds: inherited runtime checks rerun (evidence/wp01)",
     "G1": "established on the release host for one provider and fifteen synthetic repository-repair tasks in five families (evidence/live, evidence/wp11, evidence/wp12); advantage gate (AT17) executed under three frozen protocols and not passed",
-    "G2": "not established: no document or numerical domain pack (WP09/WP10 not started)",
+    "G2": "established on the release host for the three fixture task families: repository repair, source-grounded document amendment and numerical transformation run through one owner/scheduler/policy build with registered domain observers and independent oracles (AT23, evidence/wp10/at23); memory and analytical adapters per AT14-AT16 and AT25 (tests)",
     "G3": "not established: no evaluated adaptive policy"
   },
   "known_issues": [
-    "root license unresolved",
     "catalog fingerprint change requires a new workspace (no migration command)",
     "single-host, single-user deployment only",
     "advantage over a simple verification loop not shown; the evaluation corpus is saturated for gpt-4.1-mini"
   ],
   "license": {
-    "note": "A subdirectory license does not license the whole tree or included datasets; redistribution needs an explicit root license.",
-    "root_license_files": [],
-    "status": "unresolved",
+    "declared": "Apache-2.0",
+    "note": "The root license governs the original software and manuscript materials; bundled external datasets keep their own attribution and terms (data/ATTRIBUTION.md), and a subdirectory license covers only its subtree.",
+    "root_license_files": [
+      "LICENSE"
+    ],
+    "status": "resolved",
     "subdirectory_license_files": [
       "native_pse/LICENSE"
     ]
   },
-  "package_source_files": 99,
-  "package_source_identity": "38d05e79b5615c7b89f6a39b365adc3cb666f60ed6eefd39dae2e8009cf08c67",
+  "package_source_files": 123,
+  "package_source_identity": "765097c5323b86cccbd856069cc2726f05285887515ea9e8f5a1035d8e200911",
   "platform": {
     "machine": "x86_64",
     "release": "6.18.44-fc-v51",
@@ -136,9 +160,9 @@
   "python": "3.11.15",
   "reducer_identity": "ea45d1d2bc7959619be6b48b5bfea5e357161decaa06b9c44b0f9eb96e14e0e7",
   "schema": "gabriel.release-manifest/1",
-  "schema_registry_digest": "e4aafc892311837c79dc31a49ffac8b06bfc5e5bce6160665acbd1a49a1880a8",
+  "schema_registry_digest": "a149fe0113badf61894b6eb29142e5c18baf94bdbaf0e8a6297cdf293fea1c9e",
   "source_branch": "claude/vigilant-gauss-03dalc",
-  "source_commit": "d2fe4f0ebafee86052cde4898f47446eec014c94",
+  "source_commit": "cf2cf463c97181b93d2339d37d0a6fd606a14906",
   "source_dirty": false,
   "supported_backends": {
     "linux_namespace": "supported containment backend; requires Linux user namespaces, util-linux unshare and setpriv; verified by gabriel doctor --selftest on the release host",
