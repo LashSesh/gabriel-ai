@@ -1,0 +1,117 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/policy-candidate.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Content-addressed candidate policy with training manifest, code identity, configuration, metrics and the recorded promotion decision.",
+  "properties": {
+    "candidate_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "code_identity": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "config_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "held_out_families": {
+      "items": {
+        "$ref": "common.schema.json#/$defs/identifier"
+      },
+      "maxItems": 64,
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "metrics_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "policy_kind": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "promotion": {
+      "additionalProperties": false,
+      "properties": {
+        "decided_at_sequence": {
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/$defs/safe_uint"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "decision": {
+          "enum": [
+            "promoted",
+            "rejected",
+            "pending"
+          ],
+          "type": "string"
+        },
+        "evaluation_ref": {
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/$defs/artifact_ref"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reason": {
+          "maxLength": 512,
+          "type": "string"
+        }
+      },
+      "required": [
+        "decided_at_sequence",
+        "decision",
+        "evaluation_ref",
+        "reason"
+      ],
+      "type": "object"
+    },
+    "schema": {
+      "const": "gabriel.policy-candidate/1",
+      "type": "string"
+    },
+    "supersedes": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "training_families": {
+      "items": {
+        "$ref": "common.schema.json#/$defs/identifier"
+      },
+      "maxItems": 64,
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "training_manifest_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    }
+  },
+  "required": [
+    "candidate_id",
+    "code_identity",
+    "config_ref",
+    "held_out_families",
+    "metrics_ref",
+    "policy_kind",
+    "promotion",
+    "schema",
+    "supersedes",
+    "training_families",
+    "training_manifest_ref"
+  ],
+  "title": "policy-candidate",
+  "type": "object"
+}

@@ -1,0 +1,41 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/access-revocation.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Revocation of access to an observation: new retrieval is prevented while the bytes stay in the restricted audit archive.",
+  "properties": {
+    "observation_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "policy_revision": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "principal_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "reason_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "retained_for_audit": {
+      "type": "boolean"
+    },
+    "revocation_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "schema": {
+      "const": "gabriel.access-revocation/1",
+      "type": "string"
+    }
+  },
+  "required": [
+    "observation_id",
+    "policy_revision",
+    "principal_id",
+    "reason_ref",
+    "retained_for_audit",
+    "revocation_id",
+    "schema"
+  ],
+  "title": "access-revocation",
+  "type": "object"
+}

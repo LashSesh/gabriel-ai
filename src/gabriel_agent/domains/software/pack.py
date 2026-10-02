@@ -28,6 +28,7 @@ from ...tools import fs
 from ...tools.registry import ToolRegistry
 from ...workers.isolation import RunSpec
 from ...workers.supervisor import ToolOutcome
+from ..base import DomainPack
 
 NAMESPACE = "software"
 PACK_ID = "software-repair"
@@ -237,47 +238,8 @@ def reference_plan_proposal(task: dict, binding: dict, repair_round: int = 0) ->
 def materialize_plan(proposal: dict, task: dict, binding: dict, catalog: dict, profile: dict, *, run_id, plan_id, parent_plan_id, reason_ref, store) -> dict:
     """Turn a (model or reference) proposal into a gabriel.plan/1 record. Rejects unknown
     capabilities, unknown checks and any plan that omits a mandatory check."""
-    validate(proposal, "plan-proposal", ascii_only=False)
-    known_checks = {c["check_id"] for c in task["checks"]}
-    mandatory = {c["check_id"] for c in task["checks"] if c["mandatory"]}
-    covered, nodes, ids = set(), [], set()
-    for item in proposal["nodes"]:
-        cap = catalog["tools"].get(item["capability_id"])
-        if cap is None:
-            raise GabrielError(Code.POLICY_DENIED, "plan proposal names an unknown capability " + item["capability_id"])
-        if item["node_id"] in ids:
-            raise GabrielError(Code.INVALID_SCHEMA, "duplicate node id in proposal " + item["node_id"])
-        ids.add(item["node_id"])
-        if not set(item["check_ids"]) <= known_checks:
-            raise GabrielError(Code.INVALID_SCHEMA, "plan proposal names an unknown check in node " + item["node_id"])
-        covered |= set(item["check_ids"])
-        slots = OUTPUT_SLOTS.get(item["capability_id"], ["output"])
-        nodes.append({"node_id": item["node_id"], "depends_on": list(item["depends_on"]), "capability_id": item["capability_id"],
-                      "output_schema_digest": cap["output_schema_digest"], "check_ids": list(item["check_ids"]),
-                      "reservation": _reservation(item["capability_id"], profile), "retry_class": RETRY_CLASS.get(item["capability_id"], "never"),
-                      "effect_class": cap["effect_class"], "priority": 0, "max_repair_attempts": 2, "inputs": [],
-                      "outputs": [{"output_slot": s, "schema_digest": cap["output_schema_digest"]} for s in slots]})
-    missing = mandatory - covered
-    if missing:
-        raise GabrielError(Code.POLICY_DENIED, "plan omits mandatory check(s): " + ", ".join(sorted(missing)) + "; a plan may not weaken acceptance")
-    # priority: earlier topological levels first (deterministic)
-    depth = {}
-
-    def level(nid, seen=()):
-        if nid in depth:
-            return depth[nid]
-        node = next((n for n in nodes if n["node_id"] == nid), None)
-        if node is None or nid in seen:
-            return 0
-        depth[nid] = 1 + max((level(d, seen + (nid,)) for d in node["depends_on"]), default=0)
-        return depth[nid]
-    for node in nodes:
-        node["priority"] = max(0, 64 - level(node["node_id"]))
-    plan = {"schema": "gabriel.plan/1", "plan_id": plan_id, "task_id": task["task_id"], "run_id": run_id, "parent_plan_id": parent_plan_id,
-            "reason_ref": reason_ref, "nodes": nodes, "max_depth": 12}
-    validate(plan, "plan")
-    args_by_node = {item["node_id"]: item["args"] for item in proposal["nodes"]}
-    return plan, args_by_node
+    return SoftwarePack(None, None).materialize_plan(proposal, task, binding, catalog, profile, run_id=run_id, plan_id=plan_id,
+                                                     parent_plan_id=parent_plan_id, reason_ref=reason_ref, store=store)
 
 
 # ===================================================================== observation helpers
@@ -738,12 +700,46 @@ def normalize_patch_proposal(proposal: dict, snapshot: dict, manifest: dict, bin
 
 # ===================================================================== pack
 
-class SoftwarePack:
+class SoftwarePack(DomainPack):
     namespace, pack_id, pack_version = NAMESPACE, PACK_ID, PACK_VERSION
+    task_noun = "repository"
+    snapshot_schema, proposal_schema, candidate_schema = "software-snapshot", "software-patch-proposal", "software-patch"
+    normalization_profile_id = "software-patch-v1"
+    output_slots, retry_class, verifier_ids = OUTPUT_SLOTS, RETRY_CLASS, SUPPORTED_KINDS
 
     def __init__(self, provider_factory, backend_resolver):
         self.provider_factory = provider_factory
         self.backend_resolver = backend_resolver
+
+    # ---------------------------------------------------------------- DomainPack ports
+    def reservation(self, capability, profile):
+        return _reservation(capability, profile)
+
+    def compile_task(self, spec, store, **ids):
+        return compile_task(spec, store, **ids)
+
+    def reference_plan_proposal(self, task, binding, repair_round=0):
+        return reference_plan_proposal(task, binding, repair_round=repair_round)
+
+    def build_prompt(self, goal_text, binding, snapshot, manifest, store, *, failure_context, round_index, memory=None, principal_id=None):
+        prompt, entries = build_prompt(goal_text, binding, snapshot, manifest, store, failure_context=failure_context, round_index=round_index)
+        return prompt, entries, []
+
+    def normalize_proposal(self, proposal, snapshot, manifest, binding, store, *, task_id, run_id, proposal_ref, protected, goal_id, policy_digest):
+        return normalize_patch_proposal(proposal, snapshot, manifest, binding, store, task_id=task_id, run_id=run_id, proposal_ref=proposal_ref,
+                                        protected=protected, goal_id=goal_id, policy_digest=policy_digest)
+
+    def node_args(self, capability, declared, helper):
+        if capability == "software.run_check":
+            return {"check_id": declared["check_id"]}
+        if capability == "software.apply_patch":
+            patch_ref, problem = helper.candidate_for(declared["from_node"])
+            if patch_ref is None:
+                raise GabrielError(Code.STALE_EVIDENCE, "no admissible patch from %s: %s" % (declared["from_node"], problem))
+            return {"patch_ref": patch_ref}
+        if capability == "software.read_back":
+            return {"pre_snapshot_ref": helper.observed_snapshot_ref}
+        return {}
 
     def register(self, registry: ToolRegistry) -> None:
         def descriptor(tool_id, effect_class, reconciliation, concurrency_key, observation_slot=None, forms=("worktree",), approval=False):

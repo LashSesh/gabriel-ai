@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-EUeXNmB853bsoTTHmllbzkGw0Gcae",
+  "object": "chat.completion",
+  "created": 1790974373,
+  "model": "gpt-4.1-mini-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"nodes\": [{\"node_id\": \"observe\", \"capability_id\": \"document.observe\", \"depends_on\": [], \"check_ids\": [\"output-valid\"], \"purpose\": \"ingest the declared sources and pin the worktree\", \"args\": {}}, {\"node_id\": \"propose\", \"capability_id\": \"model.generate\", \"depends_on\": [\"observe\"], \"check_ids\": [\"output-valid\"], \"purpose\": \"propose the amendment with cited spans\", \"args\": {\"role\": \"worker\"}}, {\"node_id\": \"apply\", \"capability_id\": \"document.apply_amendment\", \"depends_on\": [\"propose\"], \"check_ids\": [\"output-valid\"], \"purpose\": \"apply the amendment\", \"args\": {\"from_node\": \"propose\"}}, {\"node_id\": \"read-back\", \"capability_id\": \"document.read_back\", \"depends_on\": [\"apply\"], \"check_ids\": [\"output-valid\"], \"purpose\": \"observe the changed tree\", \"args\": {}}, {\"node_id\": \"review\", \"capability_id\": \"document.review\", \"depends_on\": [\"read-back\"], \"check_ids\": [\"scope\", \"base-commit\", \"checks-intact\", \"no-secrets\", \"citations\", \"claims\"], \"purpose\": \"scope, identity, secret and citation review\", \"args\": {}}], \"rationale\": \"reference document plan (round 0)\"}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 502,
+    "completion_tokens": 294,
+    "total_tokens": 796,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_f4c2f2cb81"
+}

@@ -1,0 +1,13 @@
+diff --git a/src/kvparse.py b/src/kvparse.py
+index e5377f0..75d55ea 100644
+--- a/src/kvparse.py
++++ b/src/kvparse.py
+@@ -4,7 +4,7 @@
+ def parse_pairs(text):
+     """Return a dict of key -> value for ``"a=1,b=2"``."""
+     result = {}
+-    for item in text.split(","):
++    for item in text.strip().split(","):
+         key, _, value = item.partition("=")
+         result[key.strip()] = value.strip()
+     return result

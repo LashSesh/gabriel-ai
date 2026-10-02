@@ -1,0 +1,56 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/numerical-job-proposal.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Model output: one declared analytical operation bound to an observed input identity and an output path inside the admitted scope.",
+  "properties": {
+    "expected_sha256": {
+      "anyOf": [
+        {
+          "maxLength": 64,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "input_path": {
+      "maxLength": 512,
+      "type": "string"
+    },
+    "operation": {
+      "maxLength": 64,
+      "type": "string"
+    },
+    "output_path": {
+      "maxLength": 512,
+      "type": "string"
+    },
+    "parameters": {
+      "additionalProperties": {
+        "type": [
+          "string",
+          "integer",
+          "boolean"
+        ]
+      },
+      "maxProperties": 32,
+      "type": "object"
+    },
+    "rationale": {
+      "maxLength": 8000,
+      "type": "string"
+    }
+  },
+  "required": [
+    "expected_sha256",
+    "input_path",
+    "operation",
+    "output_path",
+    "parameters",
+    "rationale"
+  ],
+  "title": "numerical-job-proposal",
+  "type": "object"
+}

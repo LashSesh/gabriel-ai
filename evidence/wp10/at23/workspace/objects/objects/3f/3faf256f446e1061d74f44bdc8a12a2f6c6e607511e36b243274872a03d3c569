@@ -1,0 +1,25 @@
+.FF
+======================================================================
+FAIL: test_empty_string_is_empty_dict (oracle_kvparse.OracleTests.test_empty_string_is_empty_dict)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/work/oracle_kvparse.py", line 10, in test_empty_string_is_empty_dict
+    self.assertEqual(parse_pairs(""), {})
+AssertionError: {'': ''} != {}
+- {'': ''}
++ {}
+
+======================================================================
+FAIL: test_trailing_comma_is_ignored (oracle_kvparse.OracleTests.test_trailing_comma_is_ignored)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/work/oracle_kvparse.py", line 13, in test_trailing_comma_is_ignored
+    self.assertEqual(parse_pairs("a=1,"), {"a": "1"})
+AssertionError: {'a': '1', '': ''} != {'a': '1'}
+- {'': '', 'a': '1'}
++ {'a': '1'}
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+FAILED (failures=2)

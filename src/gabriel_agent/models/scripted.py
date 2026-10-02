@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import time
 
 from .port import ProviderResponse
@@ -68,6 +69,14 @@ class ScriptedProvider:
             decoded = prompt.decode("utf8", "replace")
             start, end = decoded.find("<<<REFERENCE_PLAN>>>"), decoded.find("<<<END_REFERENCE_PLAN>>>")
             text = decoded[start + len("<<<REFERENCE_PLAN>>>"):end].strip() if start != -1 and end != -1 else "{}"
+            kind = "text"
+        if kind == "template":
+            # Placeholders {{obs:<source_id>}} resolve to the observation id the prompt lists for
+            # that source ("=== source <id> revision <n> observation <obs> ..."): identities that
+            # only exist at run time can still be scripted deterministically.
+            decoded = prompt.decode("utf8", "replace")
+            ids = {m.group(1): m.group(2) for m in re.finditer(r"=== source (\S+) revision \d+ observation (\S+) ", decoded)}
+            text = re.sub(r"\{\{obs:([^}]+)\}\}", lambda m: ids.get(m.group(1), "obs-unresolved-" + m.group(1)), text or "")
             kind = "text"
         elapsed = int((time.monotonic() - started) * 1000)
         common = dict(input_tokens=usage.get("input_tokens", len(prompt) // 4), output_tokens=usage.get("output_tokens"),

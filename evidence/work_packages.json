@@ -1,6 +1,6 @@
 {
   "schema": "gabriel.evidence.work-packages/1",
-  "produced_at_utc": "2026-10-02T19:15:32.349511+00:00",
+  "produced_at_utc": "2026-10-02T20:54:32.646462+00:00",
   "rule": "A package counts as done only with actual code and recorded test output; privileged and paid runs are listed under not_executed.",
   "packages": {
     "WP01": {
@@ -857,10 +857,7 @@
         "evidence/wp11/*/final_diffs/index.json",
         "docs/EVALUATION_PROTOCOL.md"
       ],
-      "not_executed": [
-        "AT23 (domain portability; WP10 not started)",
-        "AT25 (procedure promotion; WP09 not started)"
-      ],
+      "not_executed": [],
       "test_results": {
         "tests/test_evaluation.py": [
           {
@@ -881,6 +878,101 @@
           },
           {
             "test": "test_protocol_freeze_and_metrics",
+            "result": "PASSED"
+          }
+        ]
+      }
+    },
+    "WP09": {
+      "status": "DONE",
+      "tests": [
+        "tests/test_memory.py"
+      ],
+      "acceptance": [
+        "AT14",
+        "AT15",
+        "AT22(memory)",
+        "AT25"
+      ],
+      "evidence": [
+        "evidence/test_results.txt",
+        "evidence/wp10/at23/summary.json (memory chain check)",
+        "docs/adr/ADR-14-memory-chain.md"
+      ],
+      "not_executed": [
+        "policy adaptation beyond the promotion rule (no trained router or retrieval policy)"
+      ],
+      "test_results": {
+        "tests/test_memory.py": [
+          {
+            "test": "test_issued_decision_keeps_its_frontier_and_correction_is_selected_once",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_contested_and_contradictory_revisions_are_not_silently_resolved",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_retrieval_conflict_provenance_revocation_and_unassessed_claims",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_unique_outcomes_corrections_and_held_out_promotion",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_compaction_keeps_required_bytes_and_missing_blob_is_a_storage_fault",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_workspace_backup_restores_memory_and_refuses_a_missing_memory_blob",
+            "result": "PASSED"
+          }
+        ]
+      }
+    },
+    "WP10": {
+      "status": "DONE",
+      "tests": [
+        "tests/test_domains.py"
+      ],
+      "acceptance": [
+        "AT16",
+        "AT23"
+      ],
+      "evidence": [
+        "evidence/wp10/at23/summary.json",
+        "evidence/wp10/at23/report.md",
+        "docs/adr/ADR-13-domain-pack-ports.md"
+      ],
+      "not_executed": [
+        "native PSE worker (optional; the analytical adapter is the stdlib worker)",
+        "recurrent routing feature experiment"
+      ],
+      "test_results": {
+        "tests/test_domains.py": [
+          {
+            "test": "test_direct_and_hosted_worker_agree_and_unsupported_inputs_abstain",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_signature_collision_cannot_authorize_cache_reuse",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_numerical_task_runs_through_the_core_and_rejects_bad_jobs",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_document_task_binds_citations_through_memory_and_rejects_unbound_claims",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_one_core_serves_three_domains_with_identical_registry",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_numerical_worker_runs_inside_the_namespace_jail",
             "result": "PASSED"
           }
         ]
@@ -936,5 +1028,14 @@
       "evidence/wp12/release_manifest_smoke.json"
     ],
     "scope": "single host (Linux 6.18 x86_64, uid 0, util-linux unshare/setpriv), one real provider (gpt-4.1-mini), fifteen synthetic repository-repair tasks in five families; AT17 executed under three frozen protocols without an established advantage over the simple verification loop; AT18 restore bundle executed; Apache-2.0 root license"
+  },
+  "release_scope_G2": {
+    "established_on_this_host": true,
+    "evidence": [
+      "evidence/wp10/at23/summary.json",
+      "evidence/wp10/at23/report.md",
+      "evidence/test_results.txt"
+    ],
+    "scope": "one owner/scheduler/policy build served repository repair, source-grounded document amendment and numerical transformation (fixture tasks, real provider for the valid tasks, scripted invalid and out-of-scope controls) with registered domain observers, independent oracles and recorded replay; the analytical worker is the standard-library adapter, native PSE remains optional and unbuilt"
   }
 }

@@ -20,6 +20,7 @@ from ..artifacts import ObjectStore
 from ..contracts.codec import canonical, loads
 from ..contracts.errors import Code, GabrielError
 from ..contracts.schemas import registry_digest, validate
+from ..memory import MemoryService
 from ..state import Owner
 from ..state.reducer import reducer_identity
 
@@ -32,7 +33,12 @@ def backup(workspace, destination) -> dict:
     owner, store = workspace.owner, workspace.store
     db = owner.backup(destination / "journal.sqlite")
     anchor = db["anchor"]
-    referenced = sorted(owner.referenced_artifacts())
+    referenced = set(owner.referenced_artifacts())
+    memory_anchor = None
+    if getattr(workspace, "memory", None) is not None:
+        memory_anchor = workspace.memory.backup(destination / "memory.sqlite")
+        referenced |= workspace.memory.referenced_artifacts()
+    referenced = sorted(referenced)
     objects = destination / "objects"
     objects.mkdir()
     copied = {}
@@ -49,9 +55,13 @@ def backup(workspace, destination) -> dict:
         copied[sha] = len(raw)
     (destination / "config.json").write_bytes(canonical(workspace.config) + b"\n")
     (destination / "anchor.json").write_bytes(canonical(anchor) + b"\n")
+    if memory_anchor is not None:
+        (destination / "memory_anchor.json").write_bytes(canonical(memory_anchor) + b"\n")
     manifest = {"schema": "gabriel.backup-manifest/1", "version": __version__, "workspace_id": workspace.config["workspace_id"],
                 "created_at_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(), "anchor": anchor,
                 "database_sha256": hashlib.sha256((destination / "journal.sqlite").read_bytes()).hexdigest(),
+                "memory_sha256": hashlib.sha256((destination / "memory.sqlite").read_bytes()).hexdigest() if memory_anchor is not None else None,
+                "memory_anchor": memory_anchor,
                 "objects": copied, "object_count": len(copied), "object_bytes": sum(copied.values()),
                 "catalog_digest": owner.catalog_digest, "schema_registry_digest": registry_digest(), "reducer_identity": reducer_identity(),
                 "excluded": ["credentials/ (principal secret)", "worktrees/ (disposable; patches are exported separately)", "runs/ runtime notes"]}
@@ -73,6 +83,11 @@ def restore(source, destination, *, catalog, clock=None) -> dict:
         raise GabrielError(Code.STORAGE_FAULT, "backup database bytes differ from the manifest")
     (destination / "journal.sqlite").write_bytes(db_bytes)
     shutil.copy(source / "config.json", destination / "config.json")
+    if manifest.get("memory_sha256"):
+        memory_bytes = (source / "memory.sqlite").read_bytes()
+        if hashlib.sha256(memory_bytes).hexdigest() != manifest["memory_sha256"]:
+            raise GabrielError(Code.STORAGE_FAULT, "backup memory index bytes differ from the manifest")
+        (destination / "memory.sqlite").write_bytes(memory_bytes)
     store = ObjectStore.create(destination / "objects")
     verified, faults = 0, []
     for sha, size in manifest["objects"].items():
@@ -101,10 +116,24 @@ def restore(source, destination, *, catalog, clock=None) -> dict:
     try:
         report["anchor_check"] = owner.verify_anchor(anchor)
         report["replay"] = owner.replay(expected_anchor=anchor)
+        report["memory"] = None
+        if manifest.get("memory_sha256"):
+            memory = MemoryService.open(destination / "memory.sqlite", store, lambda: owner.anchor()["sequence"])
+            try:
+                check = memory.verify()
+                retained = loads((source / "memory_anchor.json").read_bytes())
+                check["anchor_match"] = retained["head"] == check["head"] and retained["memory_sequence"] == check["entries"]
+                if not check["anchor_match"]:
+                    check["status"] = "storage_fault"
+                    check["faults"].append({"fault": "memory_anchor_mismatch"})
+                report["memory"] = check
+            finally:
+                memory.close()
     finally:
         owner.close()
-    report["status"] = "passed" if report["replay"]["status"] == "passed" else "storage_fault"
+    memory_ok = report["memory"] is None or report["memory"]["status"] == "passed"
+    report["status"] = "passed" if report["replay"]["status"] == "passed" and memory_ok else "storage_fault"
     (destination / "restore_report.json").write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
     if report["status"] != "passed":
-        raise GabrielError(Code.STORAGE_FAULT, "restore replay reported missing referenced artifacts", details=report)
+        raise GabrielError(Code.STORAGE_FAULT, "restore verification failed: replay or memory chain reported missing or changed bytes", details=report)
     return report

@@ -1,0 +1,205 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/document-snapshot.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Observed document worktree: file identities, declared sources as memory observations, the frontier at observation and the extraction coverage.",
+  "properties": {
+    "base_commit": {
+      "maxLength": 40,
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "coverage": {
+      "additionalProperties": false,
+      "properties": {
+        "does_not_observe": {
+          "items": {
+            "maxLength": 512,
+            "pattern": "^[ -~]*$",
+            "type": "string"
+          },
+          "maxItems": 16,
+          "minItems": 1,
+          "type": "array"
+        },
+        "observes": {
+          "items": {
+            "maxLength": 512,
+            "pattern": "^[ -~]*$",
+            "type": "string"
+          },
+          "maxItems": 16,
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "required": [
+        "does_not_observe",
+        "observes"
+      ],
+      "type": "object"
+    },
+    "extraction_profile": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "frontier": {
+      "additionalProperties": false,
+      "properties": {
+        "memory_sequence": {
+          "$ref": "common.schema.json#/$defs/safe_uint"
+        },
+        "owner_sequence": {
+          "$ref": "common.schema.json#/$defs/safe_uint"
+        }
+      },
+      "required": [
+        "memory_sequence",
+        "owner_sequence"
+      ],
+      "type": "object"
+    },
+    "head_commit": {
+      "maxLength": 40,
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "manifest_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "observed_frontier": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "retrieval_manifest_ref": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/artifact_ref"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "schema": {
+      "const": "gabriel.document-snapshot/1",
+      "type": "string"
+    },
+    "sources": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "bytes": {
+            "$ref": "common.schema.json#/$defs/safe_uint"
+          },
+          "event_end_unix_ms": {
+            "anyOf": [
+              {
+                "$ref": "common.schema.json#/$defs/safe_uint"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "event_kind": {
+            "enum": [
+              "completed_observation",
+              "future_claim",
+              "timeless_document"
+            ],
+            "type": "string"
+          },
+          "event_start_unix_ms": {
+            "anyOf": [
+              {
+                "$ref": "common.schema.json#/$defs/safe_uint"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "extraction": {
+            "enum": [
+              "text_utf8",
+              "unsupported"
+            ],
+            "type": "string"
+          },
+          "observation_id": {
+            "anyOf": [
+              {
+                "$ref": "common.schema.json#/$defs/identifier"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "path": {
+            "maxLength": 512,
+            "pattern": "^[ -~]*$",
+            "type": "string"
+          },
+          "sha256": {
+            "$ref": "common.schema.json#/$defs/sha256"
+          },
+          "source_id": {
+            "$ref": "common.schema.json#/$defs/identifier"
+          },
+          "source_revision": {
+            "$ref": "common.schema.json#/$defs/safe_uint"
+          }
+        },
+        "required": [
+          "bytes",
+          "event_end_unix_ms",
+          "event_kind",
+          "event_start_unix_ms",
+          "extraction",
+          "observation_id",
+          "path",
+          "sha256",
+          "source_id",
+          "source_revision"
+        ],
+        "type": "object"
+      },
+      "maxItems": 256,
+      "minItems": 0,
+      "type": "array"
+    },
+    "targets": {
+      "items": {
+        "maxLength": 512,
+        "pattern": "^[ -~]*$",
+        "type": "string"
+      },
+      "maxItems": 64,
+      "minItems": 0,
+      "type": "array"
+    },
+    "tree_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "worktree_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    }
+  },
+  "required": [
+    "base_commit",
+    "coverage",
+    "extraction_profile",
+    "frontier",
+    "head_commit",
+    "manifest_ref",
+    "observed_frontier",
+    "retrieval_manifest_ref",
+    "schema",
+    "sources",
+    "targets",
+    "tree_digest",
+    "worktree_id"
+  ],
+  "title": "document-snapshot",
+  "type": "object"
+}

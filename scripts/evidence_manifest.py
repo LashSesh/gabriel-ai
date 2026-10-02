@@ -44,11 +44,25 @@ PACKAGES = {
                           "evidence/wp11/protocol2.frozen.json", "evidence/wp11/run2-gpt-4.1-mini/report.md",
                           "evidence/wp11/protocol3.frozen.json", "evidence/wp11/run3-gpt-4.1-mini/report.md",
                           "evidence/wp11/*/final_diffs/index.json", "docs/EVALUATION_PROTOCOL.md"],
-             "not_executed": ["AT23 (domain portability; WP10 not started)", "AT25 (procedure promotion; WP09 not started)"]},
+             "not_executed": []},
+    "WP09": {"status": "DONE", "tests": ["tests/test_memory.py"], "acceptance": ["AT14", "AT15", "AT22(memory)", "AT25"],
+             "evidence": ["evidence/test_results.txt", "evidence/wp10/at23/summary.json (memory chain check)", "docs/adr/ADR-14-memory-chain.md"],
+             "not_executed": ["policy adaptation beyond the promotion rule (no trained router or retrieval policy)"]},
+    "WP10": {"status": "DONE", "tests": ["tests/test_domains.py"], "acceptance": ["AT16", "AT23"],
+             "evidence": ["evidence/wp10/at23/summary.json", "evidence/wp10/at23/report.md", "docs/adr/ADR-13-domain-pack-ports.md"],
+             "not_executed": ["native PSE worker (optional; the analytical adapter is the stdlib worker)", "recurrent routing feature experiment"]},
     "WP12": {"status": "DONE", "tests": ["tests/test_release.py"], "acceptance": ["AT18"],
              "evidence": ["evidence/wp12/smoke_linux_namespace.log", "evidence/wp12/release_manifest_smoke.json",
                           "evidence/wp12/smoke_restore_report.json", "LICENSE", "docs/RELEASE_G1.md"],
              "not_executed": []},
+}
+
+RELEASE_SCOPE_G2 = {
+    "established_on_this_host": True,
+    "evidence": ["evidence/wp10/at23/summary.json", "evidence/wp10/at23/report.md", "evidence/test_results.txt"],
+    "scope": "one owner/scheduler/policy build served repository repair, source-grounded document amendment and numerical transformation "
+             "(fixture tasks, real provider for the valid tasks, scripted invalid and out-of-scope controls) with registered domain observers, "
+             "independent oracles and recorded replay; the analytical worker is the standard-library adapter, native PSE remains optional and unbuilt",
 }
 
 RELEASE_SCOPE_G1 = {
@@ -100,7 +114,7 @@ def main() -> int:
         packages[wp] = entry
     work = {"schema": "gabriel.evidence.work-packages/1", "produced_at_utc": dt.datetime.now(dt.timezone.utc).isoformat(),
             "rule": "A package counts as done only with actual code and recorded test output; privileged and paid runs are listed under not_executed.",
-            "packages": packages, "release_scope_G1": RELEASE_SCOPE_G1}
+            "packages": packages, "release_scope_G1": RELEASE_SCOPE_G1, "release_scope_G2": RELEASE_SCOPE_G2}
     (ROOT / "evidence" / "work_packages.json").write_text(json.dumps(work, indent=2) + "\n")
     failed = [t for tests in by_module.values() for t in tests if t["result"] in ("FAILED", "ERROR")]
     print("test_run.json: %s; work_packages.json: %d packages; failed tests: %d" % (meta["summary_line"], len(packages), len(failed)))

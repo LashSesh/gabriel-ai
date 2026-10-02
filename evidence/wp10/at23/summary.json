@@ -1,0 +1,923 @@
+{
+  "all_valid_succeeded": true,
+  "at16": {
+    "collision_control": {
+      "cache_keys_differ": true,
+      "legacy_padded_signature_equal": true,
+      "retained_signatures_differ": true
+    },
+    "direct_hosted_comparison": {
+      "direct_output_sha256": "e950845f025790fadfe84021b04dc5fce0d9d2194bdab305c3856302cf63be95",
+      "equal": true,
+      "hosted_output_sha256": "e950845f025790fadfe84021b04dc5fce0d9d2194bdab305c3856302cf63be95",
+      "hosted_worker_build_matches": true
+    },
+    "inputs": {
+      "operation": "units.convert",
+      "parameters": {
+        "to_units": "K"
+      },
+      "series_sha256": "aaac92b13f586ffb71bd878f30413dcaf17e85d771c1063bfa6863ec5615b1f6"
+    },
+    "scope_controls": {
+      "dimension_mismatch": "out_of_scope",
+      "graph_too_large": "out_of_scope",
+      "unknown_operation": "invalid_input",
+      "unknown_unit": "invalid_input",
+      "wrong_input_kind": "out_of_scope"
+    },
+    "worker_identity": {
+      "direct_environment": {
+        "float_model": "ieee754-binary64",
+        "platform": "linux-x86_64",
+        "python": "3.12.3"
+      },
+      "hosted_backend": "linux_namespace",
+      "hosted_environment": {
+        "float_model": "ieee754-binary64",
+        "platform": "linux-x86_64",
+        "python": "3.11.15"
+      },
+      "hosted_exit_code": 0,
+      "worker_build": "2f88464762b6197337d16f7a99f2376dac284cd3ff07d518556155fc898f282b"
+    }
+  },
+  "backend": "linux_namespace",
+  "controls": {
+    "document": [
+      {
+        "citations_evidence": {
+          "frontier": {
+            "memory_sequence": 4,
+            "owner_sequence": 117
+          },
+          "problems": [
+            "doc/summary.md: citation of obs-00000000000000000000000000000000deadbeef not bound: unknown observation"
+          ],
+          "resolved": [
+            {
+              "path": "doc/summary.md",
+              "spans": [
+                {
+                  "observation_id": "obs-490651bd53223532b6caba4b30a234fddc4fab4f",
+                  "source_id": "memo",
+                  "span_end": 105,
+                  "span_start": 64
+                }
+              ]
+            }
+          ]
+        },
+        "domain": "document",
+        "eligible_assessments": {
+          "base-commit": "passed",
+          "checks-intact": "passed",
+          "citations": "failed",
+          "no-secrets": "passed",
+          "output-valid": "passed",
+          "scope": "passed"
+        },
+        "export": {
+          "established": [
+            "scope",
+            "base-commit",
+            "checks-intact",
+            "no-secrets",
+            "output-valid"
+          ],
+          "final_tree_digest": "8a88a66f255f42fedfb44a7703d7e7015fb41df901aa83476281f7a754025f22",
+          "run_state": "failed",
+          "unresolved_issues": [
+            "mandatory check citations: failed",
+            "mandatory check claims: not_run",
+            "retained failure: citations (assessment-run-fcedcd174391-1-138-6e04c9)"
+          ]
+        },
+        "final_diff_sha256": "93ae789671e3034e8b3d36d62ae344d14e3874eac2b9f08bef2ae9ed818ea640",
+        "hold": null,
+        "label": "control-fabricated",
+        "log_tail": [
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,citations,claims,no-secrets",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: citations,claims,no-secrets",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; not complete: mandatory checks without eligible passing evidence: citations,claims",
+          "assess review/citations -> failed: assessment failed recorded for citations; mandatory check failed; repair policy exhausted"
+        ],
+        "mandatory_failed": [
+          "citations"
+        ],
+        "model_revisions": [
+          "fixture-v1"
+        ],
+        "pack": {
+          "pack_id": "document-amendment",
+          "pack_version": "0.1.0"
+        },
+        "plan_versions": 1,
+        "provider_statuses": [
+          "completed",
+          "completed"
+        ],
+        "repair_count": 0,
+        "run_id": "run-fcedcd174391-1",
+        "spent": {
+          "model_requests": 2,
+          "model_tokens": 1575,
+          "tool_attempts": 4
+        },
+        "state": "failed",
+        "task_id": "task-fcedcd174391",
+        "variant": "fabricated",
+        "worktree": "/home/user/gabriel-ai/evidence/wp10/at23/workspace/worktrees/run-fcedcd174391-1"
+      },
+      {
+        "citations_evidence": {
+          "frontier": {
+            "memory_sequence": 6,
+            "owner_sequence": 147
+          },
+          "problems": [],
+          "resolved": [
+            {
+              "path": "doc/summary.md",
+              "spans": [
+                {
+                  "observation_id": "obs-6d57941ecbbaa0f1753495f39a7af8a2b5729b3a",
+                  "source_id": "memo",
+                  "span_end": 94,
+                  "span_start": 68
+                },
+                {
+                  "observation_id": "obs-6d57941ecbbaa0f1753495f39a7af8a2b5729b3a",
+                  "source_id": "memo",
+                  "span_end": 105,
+                  "span_start": 64
+                }
+              ]
+            }
+          ]
+        },
+        "domain": "document",
+        "eligible_assessments": {
+          "base-commit": "passed",
+          "checks-intact": "passed",
+          "citations": "passed",
+          "claims": "failed",
+          "no-secrets": "passed",
+          "output-valid": "passed",
+          "scope": "passed"
+        },
+        "export": {
+          "established": [
+            "citations",
+            "scope",
+            "base-commit",
+            "checks-intact",
+            "no-secrets",
+            "output-valid"
+          ],
+          "final_tree_digest": "b40c9fc9ec3cac4c66fba145822628220c07ad66aa955c314075f8445eee90ec",
+          "run_state": "failed",
+          "unresolved_issues": [
+            "mandatory check claims: failed",
+            "retained failure: claims (assessment-run-d64f2397f1ce-1-169-e2be31)"
+          ]
+        },
+        "final_diff_sha256": "73a70aba489afe3867dcd8bba03edd1e8a48debf4005b7cc3c39785e0d3f1072",
+        "hold": null,
+        "label": "control-wrong_source",
+        "log_tail": [
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,citations,claims,no-secrets",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: citations,claims,no-secrets",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; not complete: mandatory checks without eligible passing evidence: citations,claims",
+          "assess review/citations -> passed: assessment passed recorded for citations; not complete: mandatory checks without eligible passing evidence: claims",
+          "assess review/claims -> failed: assessment failed recorded for claims; mandatory check failed; repair policy exhausted"
+        ],
+        "mandatory_failed": [
+          "claims"
+        ],
+        "model_revisions": [
+          "fixture-v1"
+        ],
+        "pack": {
+          "pack_id": "document-amendment",
+          "pack_version": "0.1.0"
+        },
+        "plan_versions": 1,
+        "provider_statuses": [
+          "completed",
+          "completed"
+        ],
+        "repair_count": 0,
+        "run_id": "run-d64f2397f1ce-1",
+        "spent": {
+          "model_requests": 2,
+          "model_tokens": 1615,
+          "tool_attempts": 4
+        },
+        "state": "failed",
+        "task_id": "task-d64f2397f1ce",
+        "variant": "wrong_source",
+        "worktree": "/home/user/gabriel-ai/evidence/wp10/at23/workspace/worktrees/run-d64f2397f1ce-1"
+      },
+      {
+        "domain": "document",
+        "eligible_assessments": {
+          "output-valid": "failed"
+        },
+        "export": {
+          "established": [],
+          "final_tree_digest": "b8c37185eb90c6b967120b348ddfb8180f28125ed5c535b04f664723831cfb01",
+          "run_state": "failed",
+          "unresolved_issues": [
+            "mandatory check citations: not_run",
+            "mandatory check claims: not_run",
+            "mandatory check scope: not_run",
+            "mandatory check base-commit: not_run",
+            "mandatory check checks-intact: not_run",
+            "mandatory check no-secrets: not_run",
+            "retained failure: output-valid (assessment-run-d828c0e0e733-1-183-9c7be9)",
+            "hold: repair_exhausted"
+          ]
+        },
+        "final_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "hold": {
+          "from_state": "running",
+          "missing_prerequisite": null,
+          "reason_code": "repair_exhausted",
+          "ref": {
+            "bytes": 279,
+            "media_type": "application/json",
+            "sha256": "37354bc07e5d409acd37e5c9e209b7056dac54c1de1ac730ae2232e926a37d55"
+          },
+          "target_state": "failed",
+          "wakeup_condition": null
+        },
+        "label": "control-out_of_scope",
+        "log_tail": [
+          "plan v1 accepted: ['plan version 1 accepted with 5 nodes']",
+          "observe -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess observe/output-valid -> passed: assessment passed recorded for output-valid; node observe verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "propose -> completed (result accepted; checks pending)",
+          "assess propose/output-valid -> failed: assessment failed recorded for output-valid; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "hold repair_exhausted -> failed: failed nodes: propose(assessment_failed); plan version limit reached"
+        ],
+        "mandatory_failed": [],
+        "model_revisions": [
+          "fixture-v1"
+        ],
+        "pack": {
+          "pack_id": "document-amendment",
+          "pack_version": "0.1.0"
+        },
+        "plan_versions": 1,
+        "provider_statuses": [
+          "completed",
+          "completed"
+        ],
+        "repair_count": 0,
+        "run_id": "run-d828c0e0e733-1",
+        "spent": {
+          "model_requests": 2,
+          "model_tokens": 1657,
+          "tool_attempts": 1
+        },
+        "state": "failed",
+        "task_id": "task-d828c0e0e733",
+        "variant": "out_of_scope",
+        "worktree": "/home/user/gabriel-ai/evidence/wp10/at23/workspace/worktrees/run-d828c0e0e733-1"
+      }
+    ],
+    "numerical": [
+      {
+        "domain": "numerical",
+        "eligible_assessments": {
+          "base-commit": "passed",
+          "checks-intact": "passed",
+          "no-secrets": "passed",
+          "output-valid": "passed",
+          "reference": "failed",
+          "scope": "passed"
+        },
+        "export": {
+          "established": [
+            "scope",
+            "base-commit",
+            "checks-intact",
+            "no-secrets",
+            "output-valid"
+          ],
+          "final_tree_digest": "6954663c718eee5f319b92e255340e062cefe5df4c44f8d66d6cf8cbab536151",
+          "run_state": "failed",
+          "unresolved_issues": [
+            "mandatory check reference: failed",
+            "retained failure: reference (assessment-run-bf1b0a83f7a0-1-250-404a37)"
+          ]
+        },
+        "final_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "hold": null,
+        "job_result": {
+          "backend_kind": "linux_namespace",
+          "containment": true,
+          "output_units": null,
+          "status": "completed",
+          "verdict": "out_of_scope",
+          "worker_build": "2f88464762b6197337d16f7a99f2376dac284cd3ff07d518556155fc898f282b"
+        },
+        "label": "control-dimension_mismatch",
+        "log_tail": [
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,reference,scope",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,reference",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,reference",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,reference",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; node review verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: reference",
+          "verify-reference -> completed (result accepted; checks pending)",
+          "assess verify-reference/reference -> failed: assessment failed recorded for reference; mandatory check failed; repair policy exhausted"
+        ],
+        "mandatory_failed": [
+          "reference"
+        ],
+        "model_revisions": [
+          "fixture-v1"
+        ],
+        "pack": {
+          "pack_id": "numerical-transform",
+          "pack_version": "0.1.0"
+        },
+        "plan_versions": 1,
+        "provider_statuses": [
+          "completed",
+          "completed"
+        ],
+        "repair_count": 0,
+        "run_id": "run-bf1b0a83f7a0-1",
+        "spent": {
+          "model_requests": 2,
+          "model_tokens": 1442,
+          "tool_attempts": 5
+        },
+        "state": "failed",
+        "task_id": "task-bf1b0a83f7a0",
+        "variant": "dimension_mismatch",
+        "worktree": "/home/user/gabriel-ai/evidence/wp10/at23/workspace/worktrees/run-bf1b0a83f7a0-1"
+      },
+      {
+        "domain": "numerical",
+        "eligible_assessments": {
+          "output-valid": "failed"
+        },
+        "export": {
+          "established": [],
+          "final_tree_digest": "6954663c718eee5f319b92e255340e062cefe5df4c44f8d66d6cf8cbab536151",
+          "run_state": "failed",
+          "unresolved_issues": [
+            "mandatory check reference: not_run",
+            "mandatory check scope: not_run",
+            "mandatory check base-commit: not_run",
+            "mandatory check checks-intact: not_run",
+            "mandatory check no-secrets: not_run",
+            "retained failure: output-valid (assessment-run-affd429d192c-1-264-5c43e9)",
+            "hold: repair_exhausted"
+          ]
+        },
+        "final_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "hold": {
+          "from_state": "running",
+          "missing_prerequisite": null,
+          "reason_code": "repair_exhausted",
+          "ref": {
+            "bytes": 279,
+            "media_type": "application/json",
+            "sha256": "37354bc07e5d409acd37e5c9e209b7056dac54c1de1ac730ae2232e926a37d55"
+          },
+          "target_state": "failed",
+          "wakeup_condition": null
+        },
+        "label": "control-unknown_operation",
+        "log_tail": [
+          "plan v1 accepted: ['plan version 1 accepted with 6 nodes']",
+          "observe -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess observe/output-valid -> passed: assessment passed recorded for output-valid; node observe verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,reference,scope",
+          "propose -> completed (result accepted; checks pending)",
+          "assess propose/output-valid -> failed: assessment failed recorded for output-valid; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,reference,scope",
+          "hold repair_exhausted -> failed: failed nodes: propose(assessment_failed); plan version limit reached"
+        ],
+        "mandatory_failed": [],
+        "model_revisions": [
+          "fixture-v1"
+        ],
+        "pack": {
+          "pack_id": "numerical-transform",
+          "pack_version": "0.1.0"
+        },
+        "plan_versions": 1,
+        "provider_statuses": [
+          "completed",
+          "completed"
+        ],
+        "repair_count": 0,
+        "run_id": "run-affd429d192c-1",
+        "spent": {
+          "model_requests": 2,
+          "model_tokens": 1436,
+          "tool_attempts": 1
+        },
+        "state": "failed",
+        "task_id": "task-affd429d192c",
+        "variant": "unknown_operation",
+        "worktree": "/home/user/gabriel-ai/evidence/wp10/at23/workspace/worktrees/run-affd429d192c-1"
+      },
+      {
+        "domain": "numerical",
+        "eligible_assessments": {
+          "output-valid": "failed"
+        },
+        "export": {
+          "established": [],
+          "final_tree_digest": "6954663c718eee5f319b92e255340e062cefe5df4c44f8d66d6cf8cbab536151",
+          "run_state": "failed",
+          "unresolved_issues": [
+            "mandatory check reference: not_run",
+            "mandatory check scope: not_run",
+            "mandatory check base-commit: not_run",
+            "mandatory check checks-intact: not_run",
+            "mandatory check no-secrets: not_run",
+            "retained failure: output-valid (assessment-run-28d0ea62b148-1-279-48899b)",
+            "hold: repair_exhausted"
+          ]
+        },
+        "final_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "hold": {
+          "from_state": "running",
+          "missing_prerequisite": null,
+          "reason_code": "repair_exhausted",
+          "ref": {
+            "bytes": 279,
+            "media_type": "application/json",
+            "sha256": "37354bc07e5d409acd37e5c9e209b7056dac54c1de1ac730ae2232e926a37d55"
+          },
+          "target_state": "failed",
+          "wakeup_condition": null
+        },
+        "label": "control-out_of_scope_path",
+        "log_tail": [
+          "plan v1 accepted: ['plan version 1 accepted with 6 nodes']",
+          "observe -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess observe/output-valid -> passed: assessment passed recorded for output-valid; node observe verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,reference,scope",
+          "propose -> completed (result accepted; checks pending)",
+          "assess propose/output-valid -> failed: assessment failed recorded for output-valid; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,reference,scope",
+          "hold repair_exhausted -> failed: failed nodes: propose(assessment_failed); plan version limit reached"
+        ],
+        "mandatory_failed": [],
+        "model_revisions": [
+          "fixture-v1"
+        ],
+        "pack": {
+          "pack_id": "numerical-transform",
+          "pack_version": "0.1.0"
+        },
+        "plan_versions": 1,
+        "provider_statuses": [
+          "completed",
+          "completed"
+        ],
+        "repair_count": 0,
+        "run_id": "run-28d0ea62b148-1",
+        "spent": {
+          "model_requests": 2,
+          "model_tokens": 1439,
+          "tool_attempts": 1
+        },
+        "state": "failed",
+        "task_id": "task-28d0ea62b148",
+        "variant": "out_of_scope_path",
+        "worktree": "/home/user/gabriel-ai/evidence/wp10/at23/workspace/worktrees/run-28d0ea62b148-1"
+      }
+    ],
+    "software": [
+      {
+        "domain": "software",
+        "eligible_assessments": {
+          "base-commit": "passed",
+          "baseline:unit": "passed",
+          "checks-intact": "passed",
+          "no-secrets": "passed",
+          "oracle": "failed",
+          "output-valid": "passed",
+          "scope": "passed"
+        },
+        "export": {
+          "established": [
+            "scope",
+            "base-commit",
+            "checks-intact",
+            "no-secrets",
+            "output-valid"
+          ],
+          "final_tree_digest": "a5f9da1020d997060dacac180dcaec847187d5a45e92b27e1e37533516c8c745",
+          "run_state": "failed",
+          "unresolved_issues": [
+            "mandatory check unit: not_run",
+            "mandatory check oracle: failed",
+            "retained failure: oracle (assessment-run-36a4b714206f-1-77-acbfd7)"
+          ]
+        },
+        "final_diff_sha256": "13526e71429768061200fdaf0e4c99cc305e3c36ae2d5a8ded75e9ead312148e",
+        "hold": null,
+        "label": "control-wrong_then_weaken",
+        "log_tail": [
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,unit",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,oracle,unit",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,oracle,unit",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; node review verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: oracle,unit",
+          "verify-oracle -> completed (result accepted; checks pending)",
+          "assess verify-oracle/oracle -> failed: assessment failed recorded for oracle; mandatory check failed; repair policy exhausted"
+        ],
+        "mandatory_failed": [
+          "oracle"
+        ],
+        "model_revisions": [
+          "fixture-v1"
+        ],
+        "pack": {
+          "pack_id": "software-repair",
+          "pack_version": "0.1.0"
+        },
+        "plan_versions": 1,
+        "provider_statuses": [
+          "completed",
+          "completed"
+        ],
+        "repair_count": 0,
+        "run_id": "run-36a4b714206f-1",
+        "spent": {
+          "model_requests": 2,
+          "model_tokens": 1657,
+          "tool_attempts": 6
+        },
+        "state": "failed",
+        "task_id": "task-36a4b714206f",
+        "variant": "wrong_then_weaken",
+        "worktree": "/home/user/gabriel-ai/evidence/wp10/at23/workspace/worktrees/run-36a4b714206f-1"
+      }
+    ]
+  },
+  "doctor": {
+    "problems": [],
+    "untrusted_execution_supported": true
+  },
+  "memory": {
+    "anchor": {
+      "head": "06a4fd6eda9b6ec78d23d1a8a8d9ddfe42ea510400cb84e8e9a876dc201dcf4e",
+      "memory_sequence": 8,
+      "owner_sequence": 281,
+      "policy_revision": 0,
+      "schema": "gabriel.memory-anchor/1",
+      "workspace_id": "ws-e38597954e44"
+    },
+    "entries": 8,
+    "head": "06a4fd6eda9b6ec78d23d1a8a8d9ddfe42ea510400cb84e8e9a876dc201dcf4e",
+    "status": "passed"
+  },
+  "no_control_succeeded": true,
+  "produced_at_utc": "2026-10-02T20:52:43.911650+00:00",
+  "provider": {
+    "credential_ref": "env:OPENAI_API_KEY",
+    "kind": "openai_compat",
+    "max_input_tokens": 60000,
+    "max_output_tokens": 4000,
+    "model": "gpt-4.1-mini",
+    "temperature_milli": 0,
+    "timeout_ms": 120000
+  },
+  "registry": {
+    "catalog_digest": "ff1616bea15411efb7672e388a0b85b7d725b585d4e01af71c962b6fd9c33972",
+    "packs": {
+      "document": {
+        "manifest_kind": "implementation_release",
+        "manifest_sha256": "08a571fafe1ea0974ac0427e20f54fadd57098e4c7c91be9ce75cd4cd5ab7e86",
+        "namespace": "document",
+        "pack_id": "document-amendment",
+        "pack_version": "0.1.0",
+        "ports": {
+          "compile": "document.observe",
+          "evaluate": "document.review",
+          "execute": "document.apply_amendment",
+          "observe": "document.observe",
+          "propose": "model.generate",
+          "read_back": "document.read_back"
+        }
+      },
+      "numerical": {
+        "manifest_kind": "implementation_release",
+        "manifest_sha256": "03bce26401aeab89e6f01ad4c16903dff1d259ff7723165d976c925baa588444",
+        "namespace": "numerical",
+        "pack_id": "numerical-transform",
+        "pack_version": "0.1.0",
+        "ports": {
+          "compile": "numerical.observe",
+          "evaluate": "numerical.verify",
+          "execute": "numerical.run_job",
+          "observe": "numerical.observe",
+          "propose": "model.generate",
+          "read_back": "numerical.read_back"
+        }
+      },
+      "software": {
+        "manifest_kind": "implementation_release",
+        "manifest_sha256": "5ceb342f04a0cc6339d13ae1346f0afb3d1df7a4ecf7a727c238a98106c4775f",
+        "namespace": "software",
+        "pack_id": "software-repair",
+        "pack_version": "0.1.0",
+        "ports": {
+          "compile": "software.observe",
+          "evaluate": "software.run_check",
+          "execute": "software.apply_patch",
+          "observe": "software.observe",
+          "propose": "model.generate",
+          "read_back": "software.read_back"
+        }
+      }
+    },
+    "tools": [
+      "document.apply_amendment",
+      "document.observe",
+      "document.read_back",
+      "document.review",
+      "model.generate",
+      "numerical.observe",
+      "numerical.read_back",
+      "numerical.review",
+      "numerical.run_job",
+      "numerical.verify",
+      "software.apply_patch",
+      "software.observe",
+      "software.read_back",
+      "software.review",
+      "software.run_check"
+    ],
+    "verifiers": [
+      "document.base_commit_pinned",
+      "document.checks_intact",
+      "document.citations_bound",
+      "document.diff_in_scope",
+      "document.no_secrets",
+      "document.output_valid",
+      "document.required_claims",
+      "numerical.base_commit_pinned",
+      "numerical.checks_intact",
+      "numerical.diff_in_scope",
+      "numerical.no_secrets",
+      "numerical.output_valid",
+      "numerical.reference_contract",
+      "owner.output_valid",
+      "software.base_commit_pinned",
+      "software.checks_intact",
+      "software.diff_in_scope",
+      "software.no_secrets",
+      "software.test_passed"
+    ]
+  },
+  "replay": {
+    "anchor_checked": false,
+    "events": 281,
+    "external_calls": 0,
+    "head": "b7bf51efd1f603de3915014d664c8f7ffa1f6c2409d96a41642e5fdcf0a76c07",
+    "inputs_head": "529bcc3dfccf9d7e6022a9053a4ee0c19864f87f90ae28b6cc320a1fb3d749ab",
+    "missing_referenced_artifacts": [],
+    "payloads_verified": 281,
+    "runs": 10,
+    "status": "passed"
+  },
+  "schema": "gabriel.evidence.at23/1",
+  "valid_tasks": {
+    "document": {
+      "citations_evidence": {
+        "frontier": {
+          "memory_sequence": 2,
+          "owner_sequence": 86
+        },
+        "problems": [],
+        "resolved": [
+          {
+            "path": "doc/summary.md",
+            "spans": [
+              {
+                "observation_id": "obs-a00f6977c24d91b5069262ad6f513b91517cd75f",
+                "source_id": "policy",
+                "span_end": 204,
+                "span_start": 101
+              },
+              {
+                "observation_id": "obs-e24888d987bd9883461bed41aa2918eb10394f7e",
+                "source_id": "memo",
+                "span_end": 219,
+                "span_start": 32
+              }
+            ]
+          }
+        ]
+      },
+      "domain": "document",
+      "eligible_assessments": {
+        "base-commit": "passed",
+        "checks-intact": "passed",
+        "citations": "passed",
+        "claims": "passed",
+        "no-secrets": "passed",
+        "output-valid": "passed",
+        "scope": "passed"
+      },
+      "export": {
+        "established": [
+          "citations",
+          "claims",
+          "scope",
+          "base-commit",
+          "checks-intact",
+          "no-secrets",
+          "output-valid"
+        ],
+        "final_tree_digest": "217a885dd87151c53834bae532c75e1aed45622bc6fac858a6c26bfbdae418d9",
+        "run_state": "succeeded",
+        "unresolved_issues": []
+      },
+      "final_diff_sha256": "095d875800aad0b23ec93cd77e7bece1f4c7bbdb434f459abd584290fe8a3a3e",
+      "hold": null,
+      "label": "valid",
+      "log_tail": [
+        "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+        "review -> completed (result accepted; checks pending)",
+        "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets",
+        "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,citations,claims,no-secrets",
+        "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: citations,claims,no-secrets",
+        "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; not complete: mandatory checks without eligible passing evidence: citations,claims",
+        "assess review/citations -> passed: assessment passed recorded for citations; not complete: mandatory checks without eligible passing evidence: claims",
+        "assess review/claims -> passed: assessment passed recorded for claims; node review verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+      ],
+      "mandatory_failed": [],
+      "model_revisions": [
+        "gpt-4.1-mini-2025-04-14"
+      ],
+      "pack": {
+        "pack_id": "document-amendment",
+        "pack_version": "0.1.0"
+      },
+      "plan_versions": 1,
+      "provider_statuses": [
+        "completed",
+        "completed"
+      ],
+      "repair_count": 0,
+      "run_id": "run-6d04cadb0b12-1",
+      "spent": {
+        "model_requests": 2,
+        "model_tokens": 1681,
+        "tool_attempts": 4
+      },
+      "state": "succeeded",
+      "task_id": "task-6d04cadb0b12",
+      "worktree": "/home/user/gabriel-ai/evidence/wp10/at23/workspace/worktrees/run-6d04cadb0b12-1"
+    },
+    "numerical": {
+      "domain": "numerical",
+      "eligible_assessments": {
+        "base-commit": "passed",
+        "checks-intact": "passed",
+        "no-secrets": "passed",
+        "output-valid": "passed",
+        "reference": "passed",
+        "scope": "passed"
+      },
+      "export": {
+        "established": [
+          "reference",
+          "scope",
+          "base-commit",
+          "checks-intact",
+          "no-secrets",
+          "output-valid"
+        ],
+        "final_tree_digest": "4764ac3fe23a0cbe933cfca214e5559ad4f8422e02bbbfb57c54da753b14c1d5",
+        "run_state": "succeeded",
+        "unresolved_issues": []
+      },
+      "final_diff_sha256": "47e96bf7f8ee9c62ae3a2c1cb8a0dad9be7992803f88299333b7e38f6cbe98e6",
+      "hold": null,
+      "job_result": {
+        "backend_kind": "linux_namespace",
+        "containment": true,
+        "output_units": "K",
+        "status": "completed",
+        "verdict": "computed",
+        "worker_build": "2f88464762b6197337d16f7a99f2376dac284cd3ff07d518556155fc898f282b"
+      },
+      "label": "valid",
+      "log_tail": [
+        "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,reference,scope",
+        "review -> completed (result accepted; checks pending)",
+        "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,reference",
+        "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,reference",
+        "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,reference",
+        "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; node review verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: reference",
+        "verify-reference -> completed (result accepted; checks pending)",
+        "assess verify-reference/reference -> passed: assessment passed recorded for reference; node verify-reference verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+      ],
+      "mandatory_failed": [],
+      "model_revisions": [
+        "gpt-4.1-mini-2025-04-14"
+      ],
+      "pack": {
+        "pack_id": "numerical-transform",
+        "pack_version": "0.1.0"
+      },
+      "plan_versions": 1,
+      "provider_statuses": [
+        "completed",
+        "completed"
+      ],
+      "repair_count": 0,
+      "run_id": "run-1526010b2849-1",
+      "spent": {
+        "model_requests": 2,
+        "model_tokens": 1481,
+        "tool_attempts": 5
+      },
+      "state": "succeeded",
+      "task_id": "task-1526010b2849",
+      "worktree": "/home/user/gabriel-ai/evidence/wp10/at23/workspace/worktrees/run-1526010b2849-1"
+    },
+    "software": {
+      "domain": "software",
+      "eligible_assessments": {
+        "base-commit": "passed",
+        "baseline:unit": "passed",
+        "checks-intact": "passed",
+        "no-secrets": "passed",
+        "oracle": "passed",
+        "output-valid": "passed",
+        "scope": "passed",
+        "unit": "passed"
+      },
+      "export": {
+        "established": [
+          "unit",
+          "oracle",
+          "scope",
+          "base-commit",
+          "checks-intact",
+          "no-secrets",
+          "output-valid"
+        ],
+        "final_tree_digest": "ade5b78437afb195e084ed979bdffbb131299e2bc54cc5557a582c2bd85f1c26",
+        "run_state": "succeeded",
+        "unresolved_issues": []
+      },
+      "final_diff_sha256": "a1bc89ec52d153a05fc3eb5febff9d5ebe3d91ddb2b9744b834e14bcde0cbccf",
+      "hold": null,
+      "label": "valid",
+      "log_tail": [
+        "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,unit",
+        "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,oracle,unit",
+        "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,oracle,unit",
+        "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; node review verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: oracle,unit",
+        "verify-oracle -> completed (result accepted; checks pending)",
+        "assess verify-oracle/oracle -> passed: assessment passed recorded for oracle; node verify-oracle verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: unit",
+        "verify-unit -> completed (result accepted; checks pending)",
+        "assess verify-unit/unit -> passed: assessment passed recorded for unit; node verify-unit verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+      ],
+      "mandatory_failed": [],
+      "model_revisions": [
+        "gpt-4.1-mini-2025-04-14"
+      ],
+      "pack": {
+        "pack_id": "software-repair",
+        "pack_version": "0.1.0"
+      },
+      "plan_versions": 1,
+      "provider_statuses": [
+        "completed",
+        "completed"
+      ],
+      "repair_count": 0,
+      "run_id": "run-742d6231036a-1",
+      "spent": {
+        "model_requests": 2,
+        "model_tokens": 1922,
+        "tool_attempts": 7
+      },
+      "state": "succeeded",
+      "task_id": "task-742d6231036a",
+      "worktree": "/home/user/gabriel-ai/evidence/wp10/at23/workspace/worktrees/run-742d6231036a-1"
+    }
+  }
+}

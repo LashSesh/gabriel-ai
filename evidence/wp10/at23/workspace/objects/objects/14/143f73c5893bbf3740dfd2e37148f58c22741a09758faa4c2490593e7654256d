@@ -1,0 +1,12 @@
+You are the planner role of Gabriel. Produce a bounded plan as JSON for the numerical transformation task below.
+Goal:
+Convert the temperature series in data/series.json from degrees Celsius to kelvin using the declared units and write the converted series to out/series_kelvin.json. Keep the time stamps unchanged.
+
+Available capabilities (ids): document.apply_amendment, document.observe, document.read_back, document.review, model.generate, numerical.observe, numerical.read_back, numerical.review, numerical.run_job, numerical.verify, software.apply_patch, software.observe, software.read_back, software.review, software.run_check
+Task checks: reference*, scope*, base-commit*, checks-intact*, no-secrets*, output-valid
+Every mandatory check (*) must be covered by some node's check_ids; omitting one is rejected.
+Reference plan you may return verbatim:
+<<<REFERENCE_PLAN>>>
+{"nodes": [{"node_id": "observe", "capability_id": "numerical.observe", "depends_on": [], "check_ids": ["output-valid"], "purpose": "describe the datasets and pin the worktree", "args": {}}, {"node_id": "propose", "capability_id": "model.generate", "depends_on": ["observe"], "check_ids": ["output-valid"], "purpose": "bind one declared operation to an observed input", "args": {"role": "worker"}}, {"node_id": "run-job", "capability_id": "numerical.run_job", "depends_on": ["propose"], "check_ids": ["output-valid"], "purpose": "run the job in a fresh contained worker", "args": {"from_node": "propose"}}, {"node_id": "read-back", "capability_id": "numerical.read_back", "depends_on": ["run-job"], "check_ids": ["output-valid"], "purpose": "observe the changed tree", "args": {}}, {"node_id": "verify-reference", "capability_id": "numerical.verify", "depends_on": ["read-back"], "check_ids": ["reference"], "purpose": "bind the observed output to the job result and the independent reference", "args": {"from_node": "run-job"}}, {"node_id": "review", "capability_id": "numerical.review", "depends_on": ["read-back"], "check_ids": ["scope", "base-commit", "checks-intact", "no-secrets"], "purpose": "scope, identity and secret review of the diff", "args": {}}], "rationale": "reference numerical plan (round 0)"}
+<<<END_REFERENCE_PLAN>>>
+Respond with exactly one JSON object matching the reference's shape.

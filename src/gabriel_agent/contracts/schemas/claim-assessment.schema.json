@@ -1,0 +1,81 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/claim-assessment.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "A named verifier's scoped assessment of a claim at a frontier; a retraction supersedes it with a new unresolved assessment.",
+  "properties": {
+    "assessment_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "claim_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "evidence_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "frontier": {
+      "additionalProperties": false,
+      "properties": {
+        "memory_sequence": {
+          "$ref": "common.schema.json#/$defs/safe_uint"
+        },
+        "owner_sequence": {
+          "$ref": "common.schema.json#/$defs/safe_uint"
+        }
+      },
+      "required": [
+        "memory_sequence",
+        "owner_sequence"
+      ],
+      "type": "object"
+    },
+    "reason": {
+      "maxLength": 512,
+      "type": "string"
+    },
+    "schema": {
+      "const": "gabriel.claim-assessment/1",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "supported",
+        "contested",
+        "unresolved",
+        "out_of_scope",
+        "invalid"
+      ],
+      "type": "string"
+    },
+    "supersedes": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "verifier_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "verifier_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    }
+  },
+  "required": [
+    "assessment_id",
+    "claim_id",
+    "evidence_ref",
+    "frontier",
+    "reason",
+    "schema",
+    "status",
+    "supersedes",
+    "verifier_digest",
+    "verifier_id"
+  ],
+  "title": "claim-assessment",
+  "type": "object"
+}

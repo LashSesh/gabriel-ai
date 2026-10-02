@@ -4,6 +4,10 @@ Every transition goes through the owner. The runner is trusted local code
 that selects the next admissible action; models and tools never update
 authoritative state. It is re-entrant: a restart recovers leases and
 continues from the retained record.
+
+The runner is domain-neutral: the task binding names a DomainPack and every
+domain-specific step (observation schema, prompt, proposal normalization,
+tool argument binding, verifier selection) is delegated to it (R11).
 """
 from __future__ import annotations
 
@@ -14,7 +18,7 @@ import time
 from ..contracts.codec import canonical, dumps_utf8, loads, sha256_hex
 from ..contracts.errors import Code, GabrielError
 from ..contracts.schemas import validate, validate_bytes, schema_digest
-from ..domains.software import pack as software
+from ..domains.base import ArgsHelper
 from ..models import build_model_request
 from ..planning import ready_nodes
 from ..state.reducer import PLAN_REQUEST_STEP, TERMINAL_STATES
@@ -31,13 +35,16 @@ class TaskRunner:
         self.run_id, _ = workspace.resolve_task(task_id)
         projection = self.owner.projection(self.run_id)
         self.binding = validate_bytes(self.store.get(projection["binding_ref"]), "task-binding")
+        self.pack = workspace.pack_for(self.binding["domain_namespace"])
         self.profile = validate_bytes(self.store.get(self.binding["provider_profile_ref"]), "provider-profile")
         self.goal_text = self.store.get(projection["task"]["goal_ref"]).decode("utf8")
         self.notes = workspace.run_notes(self.run_id)
         self.worktree = workspace.worktree_for(self.run_id, self.binding)
         self.extras = dict({"protected_paths": self.notes.get("protected_paths", [])}, **(extras or {}))
         backend = workspace.backend
-        self.supervisor = Supervisor(self.owner, self.store, self.registry, workspace.credential, backend=backend, hooks=hooks, extras=self.extras)
+        self.supervisor = Supervisor(self.owner, self.store, self.registry, workspace.credential, backend=backend, hooks=hooks,
+                                     extras=dict(self.extras, memory=workspace.memory, principal_id=workspace.config["principal_id"],
+                                                 numerical_cache=str(workspace.path / "numerical_cache.json")))
         self.max_iterations = max_iterations
         self.log = []
         self._ids = 0
@@ -107,7 +114,7 @@ class TaskRunner:
                 "hold": projection["run_meta"]["hold"], "unresolved_effects": projection["run"]["unresolved_effect_ids"],
                 "assessments": [{"check_id": a["check_id"], "outcome": a["outcome"], "eligible": a["eligible"], "node_id": a["node_id"]}
                                 for a in projection["assessments"].values()],
-                "spent": projection["ledger"]["spent"], "port_calls": self.supervisor.port_calls, "log": self.log}
+                "spent": projection["ledger"]["spent"], "port_calls": self.supervisor.port_calls, "domain": self.pack.namespace, "log": self.log}
 
     @staticmethod
     def _active_targets(projection):
@@ -168,14 +175,17 @@ class TaskRunner:
                                     "text": "status %s: %s" % (result["status"], raw[:1500])})
         return context[-2:]
 
+    def _materialize(self, projection, proposal, version):
+        task = projection["task"]
+        return self.pack.materialize_plan(proposal, task, self.binding, self.registry.catalog(), self.profile, run_id=self.run_id,
+                                          plan_id="plan-%s-v%d" % (self.run_id, version + 1),
+                                          parent_plan_id=projection["plan"]["plan_id"] if projection["plan"] else None,
+                                          reason_ref=self.store.put(dumps_utf8(proposal), "application/json; charset=utf-8"), store=self.store)
+
     def _accept_reference_plan(self, projection, reference, version):
         """Deterministic reference plan from the domain pack: no provider request, same owner validation."""
-        task = projection["task"]
         try:
-            plan, _ = software.materialize_plan(reference, task, self.binding, self.registry.catalog(), self.profile, run_id=self.run_id,
-                                                plan_id="plan-%s-v%d" % (self.run_id, version + 1),
-                                                parent_plan_id=projection["plan"]["plan_id"] if projection["plan"] else None,
-                                                reason_ref=self.store.put(dumps_utf8(reference), "application/json; charset=utf-8"), store=self.store)
+            plan, _ = self._materialize(projection, reference, version)
             receipt = self._submit("accept_plan", plan)
             self.log.append("reference plan v%d accepted: %s" % (version + 1, receipt["notes"]))
         except GabrielError as exc:
@@ -184,13 +194,13 @@ class TaskRunner:
     def _plan(self, projection):
         task = projection["task"]
         version = projection["run_meta"]["plan_versions"]
-        reference = software.reference_plan_proposal(task, self.binding, repair_round=version)
+        reference = self.pack.reference_plan_proposal(task, self.binding, repair_round=version)
         if self.binding.get("planner_mode", "model") == "reference":
             self._accept_reference_plan(projection, reference, version)
             return
         failure_context = self._failure_context(projection) if version else []
         visible = self.registry.visible_catalog(self.owner.grant(task["grant_id"])["grant"])
-        prompt = ("You are the planner role of Gabriel. Produce a bounded plan as JSON for the repository task below.\n"
+        prompt = ("You are the planner role of Gabriel. Produce a bounded plan as JSON for the %s task below.\n" % self.pack.task_noun +
                   "Goal:\n" + self.goal_text + "\n\nAvailable capabilities (ids): " + ", ".join(t["tool_id"] for t in visible["tools"]) +
                   "\nTask checks: " + ", ".join(c["check_id"] + ("*" if c["mandatory"] else "") for c in task["checks"]) +
                   "\nEvery mandatory check (*) must be covered by some node's check_ids; omitting one is rejected.\n"
@@ -224,10 +234,7 @@ class TaskRunner:
             self._plan_retry_or_hold(projection, "planner returned no usable proposal (%s)" % result["status"])
             return
         try:
-            plan, args_by_node = software.materialize_plan(proposal, task, self.binding, self.registry.catalog(), self.profile, run_id=self.run_id,
-                                                           plan_id="plan-%s-v%d" % (self.run_id, version + 1),
-                                                           parent_plan_id=projection["plan"]["plan_id"] if projection["plan"] else None,
-                                                           reason_ref=self.store.put(dumps_utf8(proposal), "application/json; charset=utf-8"), store=self.store)
+            plan, args_by_node = self._materialize(projection, proposal, version)
             receipt = self._submit("accept_plan", plan)
             self.log.append("plan v%d accepted: %s" % (version + 1, receipt["notes"]))
         except GabrielError as exc:
@@ -261,33 +268,25 @@ class TaskRunner:
         proposal = loads(self.store.get(projection["plan"]["reason_ref"]), ascii_only=False)
         declared = next((n["args"] for n in proposal["nodes"] if n["node_id"] == node["node_id"]), {})
         capability = node["capability_id"]
-        if capability == "software.run_check":
-            return {"check_id": declared["check_id"]}
         if capability == "model.generate":
             return self._propose_args(projection, node)
-        if capability == "software.apply_patch":
-            patch_ref, problem = self._patch_for(projection, declared["from_node"])
-            if patch_ref is None:
-                raise GabrielError(Code.STALE_EVIDENCE, "no admissible patch from %s: %s" % (declared["from_node"], problem))
-            return {"patch_ref": patch_ref}
-        if capability == "software.read_back":
-            return {"pre_snapshot_ref": projection["run_meta"]["observed_snapshot_ref"]}
-        return {}
+        helper = ArgsHelper(projection, lambda propose_node_id: self._candidate_for(projection, propose_node_id))
+        return self.pack.node_args(capability, declared, helper)
 
     def _snapshot(self, projection):
         ref = projection["run_meta"]["observed_snapshot_ref"]
         if ref is None:
             raise GabrielError(Code.STALE_EVIDENCE, "no observed snapshot")
-        snapshot = validate(loads(self.store.get(ref)), "software-snapshot")
-        manifest = loads(self.store.get(snapshot["manifest_ref"]), ascii_only=False)
+        snapshot, manifest = self.pack.load_snapshot(self.store, ref)
         return ref, snapshot, manifest
 
     def _propose_args(self, projection, node):
         snapshot_ref, snapshot, manifest = self._snapshot(projection)
         failure_context = (self._failure_context(projection) if projection["run_meta"]["plan_versions"] > 1 else [])
         failure_context += self._attempt_diagnostics(projection, node["node_id"])
-        prompt, entries = software.build_prompt(self.goal_text, self.binding, snapshot, manifest, self.store, failure_context=failure_context,
-                                                round_index=projection["run_meta"]["plan_versions"])
+        prompt, entries, observation_ids = self.pack.build_prompt(self.goal_text, self.binding, snapshot, manifest, self.store,
+                                                                  failure_context=failure_context, round_index=projection["run_meta"]["plan_versions"],
+                                                                  memory=self.ws.memory, principal_id=self.ws.config["principal_id"])
         prompt_ref = self.store.put(prompt, "text/plain; charset=utf-8")
         task = projection["task"]
         visible = self.registry.visible_catalog(self.owner.grant(task["grant_id"])["grant"])
@@ -299,38 +298,39 @@ class TaskRunner:
         manifest_ref = self.store.put(canonical(manifest_record), "application/json")
         request = build_model_request(request_id=self._fresh("req"), task_id=self.task_id, run_id=self.run_id, provider_profile=self.profile, role="worker",
                                       prompt_ref=prompt_ref, evidence_refs=[snapshot_ref, manifest_ref] + [e["artifact_ref"] for e in entries][:62],
-                                      observation_ids=[], issue_frontier=manifest_record["issue_frontier"], output_schema_name="software-patch-proposal",
-                                      tool_schema_digest=manifest_record["catalog_digest"],
+                                      observation_ids=list(observation_ids)[:64], issue_frontier=manifest_record["issue_frontier"],
+                                      output_schema_name=self.pack.proposal_schema, tool_schema_digest=manifest_record["catalog_digest"],
                                       sampling_config_ref=self.store.put(canonical({"temperature_milli": self.profile["temperature_milli"]}), "application/json"),
                                       max_input_tokens=self.profile["max_input_tokens"], max_output_tokens=self.profile["max_output_tokens"])
         return {"request_ref": self.store.put(canonical(request), "application/json"), "provider_profile_ref": self.binding["provider_profile_ref"],
-                "output_schema": "software-patch-proposal", "step_key": node["node_id"], "role": "worker", "context_manifest_ref": manifest_ref}
+                "output_schema": self.pack.proposal_schema, "step_key": node["node_id"], "role": "worker", "context_manifest_ref": manifest_ref}
 
-    def _patch_for(self, projection, propose_node_id):
-        """Deterministically normalize the retained proposal of a completed propose node."""
+    def _candidate_for(self, projection, propose_node_id):
+        """Deterministically normalize the retained proposal of a completed propose node into
+        the pack's candidate record. Returns (candidate artifact ref, problem)."""
         state = projection["nodes"].get(propose_node_id)
         if not state or state["status"] not in ("completed", "verified") or "model_output" not in state["outputs"]:
             return None, "propose node has no retained output"
         proposal = loads(self.store.get(state["outputs"]["model_output"]), ascii_only=False)
         try:
-            validate(proposal, "software-patch-proposal", ascii_only=False)
+            validate(proposal, self.pack.proposal_schema, ascii_only=False)
         except GabrielError as exc:
             return None, exc.message
         snapshot_ref, snapshot, manifest = self._snapshot(projection)
-        patch, loss, problem = software.normalize_patch_proposal(proposal, snapshot, manifest, self.binding, self.store, task_id=self.task_id, run_id=self.run_id,
-                                                                 proposal_ref=state["outputs"]["model_output"], protected=set(self.extras.get("protected_paths", [])),
-                                                                 goal_id=projection["goal_spec_ref"]["sha256"], policy_digest=projection["task"]["policy_digest"])
+        candidate, loss, problem = self.pack.normalize_proposal(proposal, snapshot, manifest, self.binding, self.store, task_id=self.task_id, run_id=self.run_id,
+                                                                proposal_ref=state["outputs"]["model_output"], protected=set(self.extras.get("protected_paths", [])),
+                                                                goal_id=projection["goal_spec_ref"]["sha256"], policy_digest=projection["task"]["policy_digest"])
         envelope = {"schema": "gabriel.proposal-envelope/1", "proposal_id": "proposal-" + state["outputs"]["model_output"]["sha256"][:16], "task_id": self.task_id,
                     "run_id": self.run_id, "role": "worker", "context_manifest_ref": state["outputs"].get("request") or state["outputs"]["model_output"],
                     "request_ref": state["outputs"].get("request") or state["outputs"]["model_output"], "raw_response_ref": state["outputs"].get("raw_response"),
-                    "normalized_ref": state["outputs"]["model_output"], "normalization_profile_id": "software-patch-v1",
-                    "output_schema_digest": schema_digest("software-patch-proposal"), "candidate_ids": [patch["candidate_id"]] if patch else [],
-                    "loss": (loss + ([problem] if problem else []))[:64], "status": "normalized" if patch else "rejected"}
+                    "normalized_ref": state["outputs"]["model_output"], "normalization_profile_id": self.pack.normalization_profile_id,
+                    "output_schema_digest": schema_digest(self.pack.proposal_schema), "candidate_ids": [candidate["candidate_id"]] if candidate else [],
+                    "loss": (loss + ([problem] if problem else []))[:64], "status": "normalized" if candidate else "rejected"}
         validate(envelope, "proposal-envelope")
         self.store.put(canonical(envelope), "application/json")
-        if patch is None:
+        if candidate is None:
             return None, problem
-        return self.store.put(canonical(patch), "application/json"), None
+        return self.store.put(canonical(candidate), "application/json"), None
 
     def _dispatch(self, projection, node):
         try:
@@ -339,7 +339,7 @@ class TaskRunner:
             self.log.append("cannot build args for %s: %s" % (node["node_id"], exc.message))
             self._replan_or_hold(projection, "node %s cannot run: %s" % (node["node_id"], exc.message))
             return
-        target = "provider" if node["capability_id"] == "model.generate" else "worktree"
+        target = self.pack.target_for(node["capability_id"])
         intent = self._intent(projection, node["node_id"], node["capability_id"], target, args)
         try:
             self._submit("issue_intent", intent)
@@ -361,15 +361,15 @@ class TaskRunner:
             outputs = {slot: self.store.get(ref) for slot, ref in state["outputs"].items()}
             extras = dict(self.extras)
             if node["capability_id"] == "model.generate" and node_id != PLAN_REQUEST_STEP:
-                patch_ref, problem = self._patch_for(projection, node_id)
-                if patch_ref is None:
+                candidate_ref, problem = self._candidate_for(projection, node_id)
+                if candidate_ref is None:
                     extras["proposal_problem"] = "proposal normalization rejected: " + str(problem)
             for check_id in node["check_ids"]:
                 if check_id in state["assessments"]:
                     continue
                 spec = next(s for s in self.binding["check_specs"] if s["check_id"] == check_id)
-                record, impl = self.registry.verifier(software.SUPPORTED_KINDS[spec["predicate_kind"]])
-                ctx = _VerifierContext(self.store, self.binding, extras)
+                record, impl = self.registry.verifier(self.pack.verifier_id(spec["predicate_kind"]))
+                ctx = _VerifierContext(self.store, self.binding, extras, memory=self.ws.memory, principal_id=self.ws.config["principal_id"])
                 outcome, evidence = impl(spec, outputs, ctx)
                 evidence_ref = self.store.put(dumps_utf8({"check_id": check_id, "node_id": node_id, "outcome": outcome, "evidence": evidence}), "application/json; charset=utf-8")
                 input_refs = [projection["run_meta"]["observed_snapshot_ref"], state["result_ref"]] + list(state["outputs"].values())
@@ -415,12 +415,9 @@ class TaskRunner:
         if versions >= self.binding["max_plan_versions"]:
             self._hold("repair_exhausted", "failed", reason + "; plan version limit reached")
             return
-        task = projection["task"]
-        reference = software.reference_plan_proposal(task, self.binding, repair_round=versions)
+        reference = self.pack.reference_plan_proposal(projection["task"], self.binding, repair_round=versions)
         try:
-            plan, _ = software.materialize_plan(reference, task, self.binding, self.registry.catalog(), self.profile, run_id=self.run_id,
-                                                plan_id="plan-%s-v%d" % (self.run_id, versions + 1), parent_plan_id=projection["plan"]["plan_id"],
-                                                reason_ref=self.store.put(dumps_utf8(reference), "application/json; charset=utf-8"), store=self.store)
+            plan, _ = self._materialize(projection, reference, versions)
             receipt = self._submit("accept_plan", plan)
             self.log.append("replanned after failure (%s): %s" % (reason, "; ".join(receipt["notes"])))
         except GabrielError as exc:
@@ -428,5 +425,5 @@ class TaskRunner:
 
 
 class _VerifierContext:
-    def __init__(self, store, binding, extras):
-        self.store, self.binding, self.extras = store, binding, extras
+    def __init__(self, store, binding, extras, memory=None, principal_id=None):
+        self.store, self.binding, self.extras, self.memory, self.principal_id = store, binding, extras, memory, principal_id

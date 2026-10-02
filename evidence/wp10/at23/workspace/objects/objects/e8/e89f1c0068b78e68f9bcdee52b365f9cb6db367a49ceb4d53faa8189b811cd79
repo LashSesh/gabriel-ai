@@ -1,0 +1,12 @@
+You are the planner role of Gabriel. Produce a bounded plan as JSON for the document amendment task below.
+Goal:
+Amend doc/summary.md so that it states the notice period for members and the expense approval threshold. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.
+
+Available capabilities (ids): document.apply_amendment, document.observe, document.read_back, document.review, model.generate, numerical.observe, numerical.read_back, numerical.review, numerical.run_job, numerical.verify, software.apply_patch, software.observe, software.read_back, software.review, software.run_check
+Task checks: citations*, claims*, scope*, base-commit*, checks-intact*, no-secrets*, output-valid
+Every mandatory check (*) must be covered by some node's check_ids; omitting one is rejected.
+Reference plan you may return verbatim:
+<<<REFERENCE_PLAN>>>
+{"nodes": [{"node_id": "observe", "capability_id": "document.observe", "depends_on": [], "check_ids": ["output-valid"], "purpose": "ingest the declared sources and pin the worktree", "args": {}}, {"node_id": "propose", "capability_id": "model.generate", "depends_on": ["observe"], "check_ids": ["output-valid"], "purpose": "propose the amendment with cited spans", "args": {"role": "worker"}}, {"node_id": "apply", "capability_id": "document.apply_amendment", "depends_on": ["propose"], "check_ids": ["output-valid"], "purpose": "apply the amendment", "args": {"from_node": "propose"}}, {"node_id": "read-back", "capability_id": "document.read_back", "depends_on": ["apply"], "check_ids": ["output-valid"], "purpose": "observe the changed tree", "args": {}}, {"node_id": "review", "capability_id": "document.review", "depends_on": ["read-back"], "check_ids": ["scope", "base-commit", "checks-intact", "no-secrets", "citations", "claims"], "purpose": "scope, identity, secret and citation review", "args": {}}], "rationale": "reference document plan (round 0)"}
+<<<END_REFERENCE_PLAN>>>
+Respond with exactly one JSON object matching the reference's shape.

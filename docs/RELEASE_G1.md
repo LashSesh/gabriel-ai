@@ -61,4 +61,6 @@ re-license them. Python and LaTeX dependencies are not bundled.
 ## Known issues
 - A tool implementation change invalidates existing workspaces at open; no migration command.
 - Single-user, single-host deployment; no network identity or tenant isolation.
-- WP09 (memory), WP10 (numerical/native adapters) are not started; G2/G3 are not established.
+- G2 (domain portability) is reported separately in `docs/RELEASE_G2.md`; G3 (evaluated
+  adaptive policies) is not established: no trained router or retrieval policy exists, only
+  the promotion rule with its held-out requirement.

@@ -75,6 +75,9 @@ class ToolRegistry:
             raise GabrielError(Code.POLICY_DENIED, "unknown capability " + tool_id, obj=tool_id)
         return self._tools[tool_id]
 
+    def tool_or_none(self, tool_id: str):
+        return self._tools.get(tool_id)
+
     def verifier(self, verifier_id: str):
         if verifier_id not in self._verifiers:
             raise GabrielError(Code.POLICY_DENIED, "unregistered verifier " + verifier_id, obj=verifier_id)

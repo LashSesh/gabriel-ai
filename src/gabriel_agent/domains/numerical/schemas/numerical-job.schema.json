@@ -1,0 +1,129 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/numerical-job.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Normalized analytical job: complete input identity, operation profile, worker build, numerical environment and the cache key that binds all of them.",
+  "properties": {
+    "base_snapshot_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "base_tree_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "cache_key": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "candidate_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "declared_units": {
+      "anyOf": [
+        {
+          "maxLength": 32,
+          "pattern": "^[ -~]*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "input_path": {
+      "maxLength": 512,
+      "pattern": "^[ -~]*$",
+      "type": "string"
+    },
+    "input_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "job_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "numerical_environment": {
+      "additionalProperties": false,
+      "properties": {
+        "float_model": {
+          "maxLength": 32,
+          "pattern": "^[ -~]*$",
+          "type": "string"
+        },
+        "platform": {
+          "maxLength": 128,
+          "pattern": "^[ -~]*$",
+          "type": "string"
+        },
+        "python": {
+          "maxLength": 64,
+          "pattern": "^[ -~]*$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "float_model",
+        "platform",
+        "python"
+      ],
+      "type": "object"
+    },
+    "operation": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "output_path": {
+      "maxLength": 512,
+      "pattern": "^[ -~]*$",
+      "type": "string"
+    },
+    "parameters": {
+      "additionalProperties": {
+        "type": [
+          "string",
+          "integer",
+          "boolean"
+        ]
+      },
+      "maxProperties": 32,
+      "type": "object"
+    },
+    "profile_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "proposal_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "run_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "schema": {
+      "const": "gabriel.numerical-job/1",
+      "type": "string"
+    },
+    "task_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "worker_build": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    }
+  },
+  "required": [
+    "base_snapshot_ref",
+    "base_tree_digest",
+    "cache_key",
+    "candidate_id",
+    "declared_units",
+    "input_path",
+    "input_ref",
+    "job_id",
+    "numerical_environment",
+    "operation",
+    "output_path",
+    "parameters",
+    "profile_id",
+    "proposal_ref",
+    "run_id",
+    "schema",
+    "task_id",
+    "worker_build"
+  ],
+  "title": "numerical-job",
+  "type": "object"
+}

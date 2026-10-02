@@ -1,0 +1,136 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/compaction-manifest.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Working-memory compaction: only derived rows are removed; every required artifact byte is verified and the ordered anchors are retained.",
+  "properties": {
+    "anchors": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "head": {
+            "$ref": "common.schema.json#/$defs/sha256"
+          },
+          "memory_sequence": {
+            "$ref": "common.schema.json#/$defs/safe_uint"
+          }
+        },
+        "required": [
+          "head",
+          "memory_sequence"
+        ],
+        "type": "object"
+      },
+      "maxItems": 1024,
+      "minItems": 1,
+      "type": "array"
+    },
+    "compaction_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "faults": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "fault": {
+            "maxLength": 64,
+            "pattern": "^[ -~]*$",
+            "type": "string"
+          },
+          "seq": {
+            "$ref": "common.schema.json#/$defs/safe_uint"
+          },
+          "sha256": {
+            "$ref": "common.schema.json#/$defs/sha256"
+          }
+        },
+        "required": [
+          "fault"
+        ],
+        "type": "object"
+      },
+      "maxItems": 64,
+      "minItems": 0,
+      "type": "array"
+    },
+    "memory_head": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "memory_sequence": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "owner_sequence": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "removed_derived": {
+      "additionalProperties": false,
+      "properties": {
+        "cache_entries": {
+          "$ref": "common.schema.json#/$defs/safe_uint"
+        },
+        "summaries": {
+          "$ref": "common.schema.json#/$defs/safe_uint"
+        }
+      },
+      "required": [
+        "cache_entries",
+        "summaries"
+      ],
+      "type": "object"
+    },
+    "required_bytes_verified": {
+      "type": "boolean"
+    },
+    "retained_artifacts": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "bytes": {
+            "$ref": "common.schema.json#/$defs/safe_uint"
+          },
+          "sha256": {
+            "$ref": "common.schema.json#/$defs/sha256"
+          }
+        },
+        "required": [
+          "bytes",
+          "sha256"
+        ],
+        "type": "object"
+      },
+      "maxItems": 4096,
+      "minItems": 0,
+      "type": "array"
+    },
+    "schema": {
+      "const": "gabriel.compaction-manifest/1",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "compacted",
+        "storage_fault"
+      ],
+      "type": "string"
+    },
+    "workspace_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    }
+  },
+  "required": [
+    "anchors",
+    "compaction_id",
+    "faults",
+    "memory_head",
+    "memory_sequence",
+    "owner_sequence",
+    "removed_derived",
+    "required_bytes_verified",
+    "retained_artifacts",
+    "schema",
+    "status",
+    "workspace_id"
+  ],
+  "title": "compaction-manifest",
+  "type": "object"
+}

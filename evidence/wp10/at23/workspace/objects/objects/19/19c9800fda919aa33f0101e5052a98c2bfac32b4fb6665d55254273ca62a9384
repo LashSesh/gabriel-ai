@@ -1,0 +1,54 @@
+You are the worker role of Gabriel for a source-grounded document amendment.
+Goal (verbatim user request):
+Amend doc/summary.md so that it states the notice period for members and the expense approval threshold. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- citations [document/citations_bound] independent=True
+- claims [document/required_claims] independent=True
+
+Editable paths (changes elsewhere are rejected; sources are never editable): doc/
+Base commit: b34c28bce93f5aeae32269ebe7109cf088c9958d
+
+Target documents (path sha256 bytes):
+  doc/summary.md 0268b0bec2307479021852e9fa4468a841c899c151531ca17806e527d658b8f6 86
+=== doc/summary.md (sha256 0268b0bec2307479021852e9fa4468a841c899c151531ca17806e527d658b8f6) ===
+# Membership summary
+
+(to be completed: notice period and expense approval threshold)
+
+
+
+Sources available at the issue frontier (cite them by observation id; quotes must be exact substrings of the cited source):
+=== source policy revision 1 observation obs-2121cffbfc5f15e6787823a3c9dbae81c41a5183 (285 bytes) ===
+# Membership policy (revision 1)
+
+## Termination
+
+Members may terminate their membership in writing. The notice period for members is
+thirty (30) days, counted from the day the written notice is received.
+
+## Fees
+
+Annual fees are invoiced in January and are due within fourteen days.
+
+
+=== source memo revision 1 observation obs-6d57941ecbbaa0f1753495f39a7af8a2b5729b3a (220 bytes) ===
+# Finance memo, September 2026
+
+With effect from 1 October 2026 the expense approval threshold is 500 EUR per
+single expense. Expenses above the threshold need written approval by the treasurer
+before they are incurred.
+
+
+Observation obs-e24888d987bd9883461bed41aa2918eb10394f7e is not available: superseded
+Observation obs-490651bd53223532b6caba4b30a234fddc4fab4f is not available: superseded
+Observation obs-a00f6977c24d91b5069262ad6f513b91517cd75f is not available: superseded
+Observation obs-a1ec57ca0afe17ee2b206cdf3c5877ccd04a870f is not available: superseded
+
+Every statement you add must be followed by a citation marker of the form
+[[cite:<observation id> "exact quote from that source"]] where the quote is copied verbatim from the cited source.
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<target path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest. For create expected_sha256 is null.
+Do not touch sources or oracle files. Do not claim completion; the independent checks decide.

@@ -1,0 +1,179 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/retrieval-manifest.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Ordered manifest of artifact/span references selected at an issue frontier after authorization and temporal filtering; scores rank relevance and are not factual confidence.",
+  "properties": {
+    "access_policy_revision": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "allowed_source_kinds": {
+      "items": {
+        "maxLength": 64,
+        "pattern": "^[ -~]*$",
+        "type": "string"
+      },
+      "maxItems": 16,
+      "minItems": 0,
+      "type": "array"
+    },
+    "cache_key": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "cached": {
+      "type": "boolean"
+    },
+    "excluded": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "observation_id": {
+            "$ref": "common.schema.json#/$defs/identifier"
+          },
+          "reason": {
+            "enum": [
+              "contested",
+              "unresolved_revision",
+              "superseded",
+              "revoked",
+              "out_of_scope",
+              "kind_not_allowed",
+              "budget"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "observation_id",
+          "reason"
+        ],
+        "type": "object"
+      },
+      "maxItems": 1024,
+      "minItems": 0,
+      "type": "array"
+    },
+    "frontier": {
+      "additionalProperties": false,
+      "properties": {
+        "memory_sequence": {
+          "$ref": "common.schema.json#/$defs/safe_uint"
+        },
+        "owner_sequence": {
+          "$ref": "common.schema.json#/$defs/safe_uint"
+        }
+      },
+      "required": [
+        "memory_sequence",
+        "owner_sequence"
+      ],
+      "type": "object"
+    },
+    "items": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "artifact_ref": {
+            "$ref": "common.schema.json#/$defs/artifact_ref"
+          },
+          "observation_id": {
+            "$ref": "common.schema.json#/$defs/identifier"
+          },
+          "score_milli": {
+            "$ref": "common.schema.json#/$defs/safe_uint"
+          },
+          "source_id": {
+            "$ref": "common.schema.json#/$defs/identifier"
+          },
+          "source_kind": {
+            "maxLength": 64,
+            "pattern": "^[ -~]*$",
+            "type": "string"
+          },
+          "source_revision": {
+            "$ref": "common.schema.json#/$defs/safe_uint"
+          },
+          "span_end": {
+            "$ref": "common.schema.json#/$defs/safe_uint"
+          },
+          "span_start": {
+            "$ref": "common.schema.json#/$defs/safe_uint"
+          }
+        },
+        "required": [
+          "artifact_ref",
+          "observation_id",
+          "score_milli",
+          "source_id",
+          "source_kind",
+          "source_revision",
+          "span_end",
+          "span_start"
+        ],
+        "type": "object"
+      },
+      "maxItems": 256,
+      "minItems": 0,
+      "type": "array"
+    },
+    "manifest_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "max_bytes": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "max_items": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "principal_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "query_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "schema": {
+      "const": "gabriel.retrieval-manifest/1",
+      "type": "string"
+    },
+    "task_id": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "version_policy": {
+      "enum": [
+        "highest_revision",
+        "earliest_ingested"
+      ],
+      "type": "string"
+    },
+    "workspace_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    }
+  },
+  "required": [
+    "access_policy_revision",
+    "allowed_source_kinds",
+    "cache_key",
+    "cached",
+    "excluded",
+    "frontier",
+    "items",
+    "manifest_id",
+    "max_bytes",
+    "max_items",
+    "principal_id",
+    "query_ref",
+    "schema",
+    "task_id",
+    "version_policy",
+    "workspace_id"
+  ],
+  "title": "retrieval-manifest",
+  "type": "object"
+}

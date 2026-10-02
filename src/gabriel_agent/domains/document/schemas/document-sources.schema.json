@@ -1,0 +1,96 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/document-sources.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Declared document sources of a task (base input identity): path, source identity and revision, event kind and interval, time basis; and the target documents.",
+  "properties": {
+    "schema": {
+      "const": "gabriel.document-sources/1",
+      "type": "string"
+    },
+    "sources": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "event_end_unix_ms": {
+            "anyOf": [
+              {
+                "$ref": "common.schema.json#/$defs/safe_uint"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "event_kind": {
+            "enum": [
+              "completed_observation",
+              "future_claim",
+              "timeless_document"
+            ],
+            "type": "string"
+          },
+          "event_start_unix_ms": {
+            "anyOf": [
+              {
+                "$ref": "common.schema.json#/$defs/safe_uint"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "path": {
+            "maxLength": 512,
+            "pattern": "^[ -~]*$",
+            "type": "string"
+          },
+          "source_id": {
+            "$ref": "common.schema.json#/$defs/identifier"
+          },
+          "source_revision": {
+            "$ref": "common.schema.json#/$defs/safe_uint"
+          },
+          "source_time_basis": {
+            "enum": [
+              "source_declared",
+              "owner_observed",
+              "unknown"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "event_end_unix_ms",
+          "event_kind",
+          "event_start_unix_ms",
+          "path",
+          "source_id",
+          "source_revision",
+          "source_time_basis"
+        ],
+        "type": "object"
+      },
+      "maxItems": 256,
+      "minItems": 1,
+      "type": "array"
+    },
+    "targets": {
+      "items": {
+        "maxLength": 512,
+        "pattern": "^[ -~]*$",
+        "type": "string"
+      },
+      "maxItems": 64,
+      "minItems": 1,
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema",
+    "sources",
+    "targets"
+  ],
+  "title": "document-sources",
+  "type": "object"
+}

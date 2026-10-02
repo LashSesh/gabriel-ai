@@ -38,6 +38,9 @@ def main(argv=None) -> int:
     rs = sub.add_parser("restore", help="restore a backup elsewhere and verify anchor, objects and replay"); rs.add_argument("--from", dest="source", required=True); rs.add_argument("--workspace", required=True)
     rm = sub.add_parser("release-manifest"); rm.add_argument("--workspace", required=False); rm.add_argument("--out", required=True); rm.add_argument("--root", default=".")
     rm.add_argument("--selftest", action="store_true", help="run the containment self-test so the recorded doctor report carries its result")
+    mem = sub.add_parser("memory", help="evidence index (WP09)"); msub = mem.add_subparsers(dest="action", required=True)
+    for name in ("status", "verify", "compact"):
+        p = msub.add_parser(name); p.add_argument("--workspace", required=True)
     ev = sub.add_parser("eval", help="frozen matched evaluation (WP11)"); esub = ev.add_subparsers(dest="action", required=True)
     esub.add_parser("corpus-check")
     freeze = esub.add_parser("freeze"); freeze.add_argument("--provider", required=True, help="JSON provider spec (file or inline)")
@@ -96,6 +99,13 @@ def main(argv=None) -> int:
                 _emit(ws.owner.replay(expected_anchor=anchor)); return 0
             if args.command == "replay":
                 _emit(dict(ws.owner.replay(), run=ws.owner.run_record(args.run_id))); return 0
+            if args.command == "memory":
+                if args.action == "status":
+                    _emit({"anchor": ws.memory.anchor(), "entries": len(ws.memory.entries()), "work_items": ws.memory.work_items()}); return 0
+                if args.action == "verify":
+                    report = ws.memory.verify(); _emit(report); return 0 if report["status"] == "passed" else 3
+                if args.action == "compact":
+                    _emit(ws.memory.compact()); return 0
             if args.action == "create":
                 spec = json.loads(Path(args.spec).read_text())
                 result = ws.create_task(spec)

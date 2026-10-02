@@ -1,0 +1,37 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/memory-anchor.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Independent anchor of the memory chain: sequence, head and the owner sequence observed at that point.",
+  "properties": {
+    "head": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "memory_sequence": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "owner_sequence": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "policy_revision": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "schema": {
+      "const": "gabriel.memory-anchor/1",
+      "type": "string"
+    },
+    "workspace_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    }
+  },
+  "required": [
+    "head",
+    "memory_sequence",
+    "owner_sequence",
+    "policy_revision",
+    "schema",
+    "workspace_id"
+  ],
+  "title": "memory-anchor",
+  "type": "object"
+}

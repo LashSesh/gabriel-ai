@@ -1,0 +1,68 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/document-amendment-proposal.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Model output (UTF-8 allowed): file operations on the target document whose statements carry [[cite:<observation_id> \"quote\"]] markers.",
+  "properties": {
+    "claims_done": {
+      "type": "boolean"
+    },
+    "operations": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "content": {
+            "anyOf": [
+              {
+                "maxLength": 1048576,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "expected_sha256": {
+            "anyOf": [
+              {
+                "maxLength": 64,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "kind": {
+            "maxLength": 32,
+            "type": "string"
+          },
+          "path": {
+            "maxLength": 512,
+            "type": "string"
+          }
+        },
+        "required": [
+          "content",
+          "expected_sha256",
+          "kind",
+          "path"
+        ],
+        "type": "object"
+      },
+      "maxItems": 256,
+      "minItems": 0,
+      "type": "array"
+    },
+    "rationale": {
+      "maxLength": 8000,
+      "type": "string"
+    }
+  },
+  "required": [
+    "operations",
+    "rationale"
+  ],
+  "title": "document-amendment-proposal",
+  "type": "object"
+}

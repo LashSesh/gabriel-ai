@@ -1,0 +1,162 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/numerical-job-result.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Result of one contained analytical job: execution status, scoped domain verdict (a mathematical unknown is not a failed transport), bindings and resource facts.",
+  "properties": {
+    "backend_kind": {
+      "maxLength": 32,
+      "pattern": "^[ -~]*$",
+      "type": "string"
+    },
+    "cache": {
+      "additionalProperties": false,
+      "properties": {
+        "hit": {
+          "type": "boolean"
+        },
+        "key": {
+          "$ref": "common.schema.json#/$defs/sha256"
+        }
+      },
+      "required": [
+        "hit",
+        "key"
+      ],
+      "type": "object"
+    },
+    "containment": {
+      "type": "boolean"
+    },
+    "diagnostics_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "elapsed_ms": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "job_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "numerical_environment": {
+      "additionalProperties": false,
+      "properties": {
+        "float_model": {
+          "maxLength": 32,
+          "pattern": "^[ -~]*$",
+          "type": "string"
+        },
+        "platform": {
+          "maxLength": 128,
+          "pattern": "^[ -~]*$",
+          "type": "string"
+        },
+        "python": {
+          "maxLength": 64,
+          "pattern": "^[ -~]*$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "float_model",
+        "platform",
+        "python"
+      ],
+      "type": "object"
+    },
+    "output_ref": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/artifact_ref"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "output_sha256": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/sha256"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "output_units": {
+      "anyOf": [
+        {
+          "maxLength": 32,
+          "pattern": "^[ -~]*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "rows": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/safe_uint"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "schema": {
+      "const": "gabriel.numerical-job-result/1",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "completed",
+        "failed"
+      ],
+      "type": "string"
+    },
+    "verdict": {
+      "enum": [
+        "computed",
+        "out_of_scope",
+        "invalid_input",
+        "unknown"
+      ],
+      "type": "string"
+    },
+    "witness_ref": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/artifact_ref"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "worker_build": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    }
+  },
+  "required": [
+    "backend_kind",
+    "cache",
+    "containment",
+    "diagnostics_ref",
+    "elapsed_ms",
+    "job_ref",
+    "numerical_environment",
+    "output_ref",
+    "output_sha256",
+    "output_units",
+    "rows",
+    "schema",
+    "status",
+    "verdict",
+    "witness_ref",
+    "worker_build"
+  ],
+  "title": "numerical-job-result",
+  "type": "object"
+}

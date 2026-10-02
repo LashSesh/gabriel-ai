@@ -50,6 +50,42 @@ Providers: `scripted` (`"script": {...}` or a file path), `openai_compat` (`endp
 `$ANTHROPIC_BASE_URL` or `https://api.anthropic.com`). Credentials are always `env:NAME`
 references resolved by the supervisor right before a request.
 
+## Document and numerical tasks (WP10)
+A task spec names its domain; the same `task create` / `task run` lifecycle applies. A document
+task declares its sources (never editable) and targets; the model must cite every statement
+as `[[cite:<observation_id> "exact quote"]]`, and the independent oracle lists the required
+claims with the source each must be cited from:
+```json
+{"domain": "document", "goal": "Amend doc/summary.md ...", "repository": "/path/to/repo", "base_commit": "<40-hex>",
+ "allowed_paths": ["doc/"], "targets": ["doc/summary.md"],
+ "sources": [{"path": "sources/policy.md", "source_id": "policy", "revision": 1, "event_kind": "timeless_document"}],
+ "checks": [{"check_id": "citations", "kind": "document/citations_bound", "independent": true},
+            {"check_id": "claims", "kind": "document/required_claims", "independent": true,
+             "oracle_files": [{"path": "oracle/required_claims.json", "source": "/outside/required_claims.json"}]}]}
+```
+A numerical task binds one declared operation of `gabriel_agent.adapters.analytical`
+(`units.convert`, `series.resample_mean`, `graph.small_signature`) to an observed dataset; the
+job runs in a fresh contained worker and the oracle is the expected output with units and
+tolerance:
+```json
+{"domain": "numerical", "goal": "Convert data/series.json to kelvin ...", "repository": "/path/to/repo", "base_commit": "<40-hex>",
+ "allowed_paths": ["out/"],
+ "checks": [{"check_id": "reference", "kind": "numerical/reference_contract", "independent": true,
+             "oracle_files": [{"path": "oracle/expected.json", "source": "/outside/expected.json"}]}]}
+```
+Verdicts `out_of_scope`, `invalid_input` and `unknown` are retained domain verdicts; only a
+`computed` result that meets the reference contract can pass. Fixtures for both domains:
+`src/gabriel_agent/evaluation/fixtures/document_amendment.py`, `numerical_series.py`;
+`scripts/at23_three_domains.py` runs all three domains through one workspace.
+
+## Memory (WP09)
+Every workspace keeps `memory.sqlite`, an append-only evidence index with its own hash chain
+(`docs/adr/ADR-14-memory-chain.md`). The document pack ingests declared sources as versioned
+observations and retrieves them as of the run's frontier; `backup`/`restore` include the index
+and verify every referenced byte. The Python API (`workspace.memory`) offers `ingest`,
+`effective`, `retrieve`, `assert_claim`/`assess`, `revoke`/`retract`, `record_outcome`,
+`effective_support`, `promote`, `compact` and `verify`.
+
 ## Lifecycle
 ```bash
 gabriel task create --workspace ./workspace --spec task.json      # compiles, grants, admits, pins a worktree

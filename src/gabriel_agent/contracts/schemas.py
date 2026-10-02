@@ -64,6 +64,9 @@ _SCHEMA_CONST = {
     "gabriel.task-binding/1": "task-binding", "gabriel.provider-profile/1": "provider-profile",
     "gabriel.workspace-config/1": "workspace-config", "gabriel.run-witness/1": "run-witness",
     "gabriel.export-manifest/1": "export-manifest",
+    "gabriel.retrieval-manifest/1": "retrieval-manifest", "gabriel.claim-assessment/1": "claim-assessment",
+    "gabriel.access-revocation/1": "access-revocation", "gabriel.policy-candidate/1": "policy-candidate",
+    "gabriel.compaction-manifest/1": "compaction-manifest", "gabriel.memory-anchor/1": "memory-anchor",
 }
 
 

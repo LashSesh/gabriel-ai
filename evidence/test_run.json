@@ -2,9 +2,9 @@
  "schema": "gabriel.evidence.tests/1",
  "command": "GABRIEL_CONTAINMENT_TESTS=1 .venv/bin/python -m pytest tests -vv -rs",
  "log": "evidence/test_results.txt",
- "summary_line": "======================= 126 passed, 1 skipped in 33.10s ========================",
+ "summary_line": "======================= 138 passed, 1 skipped in 45.92s ========================",
  "counts": {
-  "passed": 126,
+  "passed": 138,
   "skipped": 1
  },
  "skipped": [
@@ -17,9 +17,11 @@
   "tests/harness.py": "2997c0530ad66bda92f75436423ae4adebf28d9e7ea8885f72bde36ae7b88a88",
   "tests/test_artifacts.py": "38e1144d9be2e9be9d7988fa8f44137cf50a3762a8a110b7261e9f9c7eecdd82",
   "tests/test_contracts.py": "7f4dec6fe89d809a6b936736e0ec649614469493e374405b4c7b6a86160e89de",
+  "tests/test_domains.py": "d8ba3cfede25db040fb286d07c25f299c09ff978cf8e3bd8474d39fa198fd74e",
   "tests/test_evaluation.py": "f1413d2bd774273b838c40e4f924ed8692071abcbb0e76f79ef9bf924fdcddc9",
   "tests/test_kernel.py": "ba6c0c8cc4964704fd1e6c74d5ea9ed7d4672ee9787fbdd0ff26b36fdd84a7c7",
   "tests/test_live_provider.py": "4380358f73608e27ad6b5748e19eff89b5b8d41a41a187e1e089e03044153d39",
+  "tests/test_memory.py": "ee973d5278d957f82b53d1166522c421dac2a4256f1e41b1718a5fecc9553829",
   "tests/test_models.py": "e6d890b33fb984845502f0635df3e109bf3249d968630ad85229fa536c24c631",
   "tests/test_owner.py": "20c13feb5069c88960a6e6edc90aaa92eeb4e0008ea5fdcfb85151d545b1650f",
   "tests/test_policy.py": "6e907d85544324466fa96674a6b6b84d9e12ec35093f29e4444a8818e8d823f0",
@@ -90,6 +92,32 @@
    },
    {
     "test": "test_approval_digest_binds_exact_intent_fields",
+    "result": "PASSED"
+   }
+  ],
+  "tests/test_domains.py": [
+   {
+    "test": "test_direct_and_hosted_worker_agree_and_unsupported_inputs_abstain",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_signature_collision_cannot_authorize_cache_reuse",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_numerical_task_runs_through_the_core_and_rejects_bad_jobs",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_document_task_binds_citations_through_memory_and_rejects_unbound_claims",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_one_core_serves_three_domains_with_identical_registry",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_numerical_worker_runs_inside_the_namespace_jail",
     "result": "PASSED"
    }
   ],
@@ -317,6 +345,32 @@
    {
     "test": "test_real_provider_repairs_seeded_bug",
     "result": "SKIPPED"
+   }
+  ],
+  "tests/test_memory.py": [
+   {
+    "test": "test_issued_decision_keeps_its_frontier_and_correction_is_selected_once",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_contested_and_contradictory_revisions_are_not_silently_resolved",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_retrieval_conflict_provenance_revocation_and_unassessed_claims",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_unique_outcomes_corrections_and_held_out_promotion",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_compaction_keeps_required_bytes_and_missing_blob_is_a_storage_fault",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_workspace_backup_restores_memory_and_refuses_a_missing_memory_blob",
+    "result": "PASSED"
    }
   ],
   "tests/test_models.py": [
@@ -564,37 +618,48 @@
  },
  "source_sha256": {
   "src/gabriel_agent/__init__.py": "d81f3fb7a7b3f8cf8e0f00c381d30a261d2fb4924fd534f87c0c1fd204e04099",
+  "src/gabriel_agent/adapters/__init__.py": "eed428fca9097c8b5a673306fb06499799dfadb1cd65914fe0f42a21032b0f7d",
+  "src/gabriel_agent/adapters/analytical.py": "2f88464762b6197337d16f7a99f2376dac284cd3ff07d518556155fc898f282b",
   "src/gabriel_agent/agent/__init__.py": "d4fd6a68ba0ebc257d605efb3556be8fef1e059058543c409ab69205870c7f1c",
-  "src/gabriel_agent/agent/backup.py": "3e1f1fdccaf73a218878fec9c607efa813b3f661c14444ccf7c54cdac921e730",
+  "src/gabriel_agent/agent/backup.py": "0d9e56341fb7ae5b91cb278081001d76b49d213d505b286c8a680cfa7c2cf65e",
   "src/gabriel_agent/agent/export.py": "967e9670330d8846166968910b5ed0845ba34f6639eec6805b76cdabd06995ea",
-  "src/gabriel_agent/agent/release.py": "187c7ec09117564a029bf0729c1bbdfb0f16b6826a1cdecf832e0645c053bfa9",
-  "src/gabriel_agent/agent/runner.py": "06ef6b4dec3b50ce48fc3381b4ca02ab4bdc225eb3566848ac89b6d98785a2af",
-  "src/gabriel_agent/agent/workspace.py": "b7fb02fb8baedcc223ce4d496dd72af776de376024e50031e6ecc5f0618f5323",
+  "src/gabriel_agent/agent/release.py": "7fd27d31bc4d738f681a675866e19892de99abac2f55e2535efe5874e0280c45",
+  "src/gabriel_agent/agent/runner.py": "915edea3c8207595cea1dfc0bbaf4603e85962ea88ae0611cbdb707c80ddeb64",
+  "src/gabriel_agent/agent/workspace.py": "354155fe19bb1ef8f107d45bebb1a57ddd39d3eaed56a2029c48c84f87ecde12",
   "src/gabriel_agent/artifacts/__init__.py": "96c8ba41c0fd264134b1fa638a826b5f47dff0c3445108f5168eaf5d511842b5",
   "src/gabriel_agent/artifacts/store.py": "2108ec4a7bc1acdcf28974613dd30920ea4b92db576e7788b1e6c3e3ce890e55",
   "src/gabriel_agent/contracts/__init__.py": "acaeb2344335f8c2455b17e226d1b921612eeb722893ff4cfbf6f39a030eb184",
   "src/gabriel_agent/contracts/codec.py": "3306522ffc63580983085502fc68dcbad8804e8861f30015b8e04e83eebe2b5f",
   "src/gabriel_agent/contracts/errors.py": "30ca3db3bfb5f7c8333cea2c6f071000c9ffe86ee10483358cef9047d6cf42e9",
   "src/gabriel_agent/contracts/rules.py": "707337997efaada27608df40f2ad8c2295e63025a22dce52012f0261373b2bce",
-  "src/gabriel_agent/contracts/schemas.py": "e003296ca44fde57ca82e70e5f6bd361692c9f8328cb6e930363151240fdc98f",
+  "src/gabriel_agent/contracts/schemas.py": "bbe2ce0a3b308e84a9f542cc6a9929bbae6297a2dcc4166f373643be1d393d78",
   "src/gabriel_agent/domains/__init__.py": "106901ce8fe25842e7809477e30a9d049c75e8ffadc723d4e2edf6152e77da89",
+  "src/gabriel_agent/domains/base.py": "1054b254630a3f34e7003c6a9765850947f35d4477b35958529564152c863622",
+  "src/gabriel_agent/domains/document/__init__.py": "7e5265b557fa7dd34b813eb10de0c4eaae521d49df51483474bbac4a845d3627",
+  "src/gabriel_agent/domains/document/pack.py": "2774f3f8d2cf07da280a40e97923a70f71810dd9e57e4ce40cf9d74de7c9b752",
+  "src/gabriel_agent/domains/numerical/__init__.py": "c1d6d9d52424ee6ebc139f37ef45ab503a26bf54886af0e670107c0bcf6a1ed9",
+  "src/gabriel_agent/domains/numerical/pack.py": "d52d0bab63dfe9caacc9ab426fc92a93b0826e47fb390a15566b84de18f5d2ee",
   "src/gabriel_agent/domains/software/__init__.py": "0fd732b035722113a3ff6c316a0706de8550e3899b40bbf815ed0b04ad7330cd",
-  "src/gabriel_agent/domains/software/pack.py": "0ff5c2c7ff0f08b92101d580c2634fe07dcc14a0677fde58d4d0b1beb3c22f45",
+  "src/gabriel_agent/domains/software/pack.py": "d8c58c6a6a5a0edc3988e7bf046f5478e74b32676066cf96fdc8afc0acd415c2",
   "src/gabriel_agent/evaluation/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
   "src/gabriel_agent/evaluation/comparators.py": "f86603f558cd76dd89155db69cdb711f6c50b31710a9428b8b2b068cfb20c741",
   "src/gabriel_agent/evaluation/corpus.py": "008f8f4a547fcd852c86467c2c7d6a008c47b105b3b8e5bda000d95baa5933b7",
   "src/gabriel_agent/evaluation/fixtures/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "src/gabriel_agent/evaluation/fixtures/document_amendment.py": "6136a350a18bccd545b44e348bf5185b23014703cf4b832b0269b4e1c6c0fef4",
+  "src/gabriel_agent/evaluation/fixtures/numerical_series.py": "a055441ba9d94c588782bd0fd122495be694efe6b6458d6fecb94a087343c98e",
   "src/gabriel_agent/evaluation/fixtures/parser_bug.py": "7b84a8a375129eae8d652d90984b93d1e4ad95933cc974e02bd4c7ed759e2361",
   "src/gabriel_agent/evaluation/harness.py": "53a0d809bd7fa249e289d89a57bd9f5920b151c2828c9a79a5b59af9cd3a3ed6",
   "src/gabriel_agent/interfaces/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-  "src/gabriel_agent/interfaces/cli.py": "a0f780d4b35ef9a80ce0096a7988164e35e1236cfa4f09b62a58e230a32be31d",
+  "src/gabriel_agent/interfaces/cli.py": "a0aa70e5e0a7bf80e61bac7238ea0e33b2beece2b3389db5db26e83250d75324",
   "src/gabriel_agent/kernel/__init__.py": "d8dcb524a0fd13396c6e9cfe5c0098e9001daecdea89f3526a9f9a2ddefc2a1f",
   "src/gabriel_agent/kernel/kernel.py": "1384bc387f6d48f7c8551822a26daf287019542c8f861d37f79d0821b865c760",
+  "src/gabriel_agent/memory/__init__.py": "33c2e1dfa88d07613f5476ee196d296052f8d69e04057cd300b0f494643e79ee",
+  "src/gabriel_agent/memory/service.py": "8e3e0015bbcdeedd445e9161d16d9111b19f25b1b9a3840641d22afe7d863cc4",
   "src/gabriel_agent/models/__init__.py": "f8303a60e53efd26eb08ade3756f82a4f01a208bc0ec77dc27b198fcdf2ec634",
   "src/gabriel_agent/models/gateway.py": "42ce64336741dafd3664ecba379d9ac95bf5a2c124b038e9050a8d03ca5af519",
   "src/gabriel_agent/models/http_providers.py": "c4efb1dde708cf06fd7fd98e5166d31c211042c3ba1cad87959989b95d2bf124",
   "src/gabriel_agent/models/port.py": "97c150b73da4c11291b14f0920335ce9ff246ff0c6c1427294328d38bf56bc1e",
-  "src/gabriel_agent/models/scripted.py": "a99dfe0761cd14d232b801e02b15104ba47e976a3b090bf6cc4fb6fb3f036c2b",
+  "src/gabriel_agent/models/scripted.py": "11240d70b7c459ce77c9e39d8452c5ad6d4c79cb8a425378ffdb40dccdf46613",
   "src/gabriel_agent/planning/__init__.py": "3db562cfa71af116fe0511199744d12652ef26e45c9542388c22c669a806d4a4",
   "src/gabriel_agent/planning/scheduler.py": "46c94af7e74b6ace8728b8e9ca60da1ba30dfb80e174c4d382e31a5780867028",
   "src/gabriel_agent/policy/__init__.py": "e87adf576bf00e1ec0364de35137d45c36cb1dc3108e6f34a8d29e77efd1dd8c",
@@ -606,7 +671,7 @@
   "src/gabriel_agent/state/reducer.py": "ea45d1d2bc7959619be6b48b5bfea5e357161decaa06b9c44b0f9eb96e14e0e7",
   "src/gabriel_agent/tools/__init__.py": "0e94e9cb0cc1ee0ff86ee60022fe5e22e8e27908c6f70e4ca3ade791e38cb978",
   "src/gabriel_agent/tools/fs.py": "ca8a28fb6295052be62d7f61ec5723fad287f021b907db9987b854c1a2102f14",
-  "src/gabriel_agent/tools/registry.py": "01369f707eb847e26af0d18c7c57f0b0077617b1d9b8c3dabe557d2efb3b289b",
+  "src/gabriel_agent/tools/registry.py": "8070b66c82c16cd701a333c3267fcf173a50e9ef6b62172f4d6df66e649808aa",
   "src/gabriel_agent/workers/__init__.py": "98f2dcf7b6e8dd26c316c17585c2d8042637904bb67f5fe6a9fa54a3f4b74c07",
   "src/gabriel_agent/workers/isolation.py": "4b1780fc486fe89afad97e89fd669143ffd3bea95837965c098342a6360fe475",
   "src/gabriel_agent/workers/jail_init.py": "6240139555875245b39d8054f2c9831d8ae173416e53d1d5182815436d4b6aeb",

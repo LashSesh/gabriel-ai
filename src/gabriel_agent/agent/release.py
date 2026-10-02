@@ -88,7 +88,9 @@ def release_manifest(root: Path, *, evidence: dict | None = None, python: str = 
         "gates": {"G0": "holds: inherited runtime checks rerun (evidence/wp01)",
                   "G1": "established on the release host for one provider and fifteen synthetic repository-repair tasks in five families "
                         "(evidence/live, evidence/wp11, evidence/wp12); advantage gate (AT17) executed under three frozen protocols and not passed",
-                  "G2": "not established: no document or numerical domain pack (WP09/WP10 not started)",
+                  "G2": "established on the release host for the three fixture task families: repository repair, source-grounded document "
+                        "amendment and numerical transformation run through one owner/scheduler/policy build with registered domain observers "
+                        "and independent oracles (AT23, evidence/wp10/at23); memory and analytical adapters per AT14-AT16 and AT25 (tests)",
                   "G3": "not established: no evaluated adaptive policy"},
         "known_issues": ([] if _license_status(root)["status"] == "resolved" else ["root license unresolved"]) +
                         ["catalog fingerprint change requires a new workspace (no migration command)",

@@ -2,7 +2,7 @@
 
 The agent application described in `Gabriel_AI_Blueprint.zip` now lives beside the recovered
 research runtime: `src/gabriel_agent/` (install with `pip install -e ".[dev]"`, entry point
-`gabriel`). It implements work packages WP01–WP08, WP11 and WP12 of the blueprint: exact contracts, a
+`gabriel`). It implements work packages WP01–WP12 of the blueprint: exact contracts, a
 content-addressed object store, a single SQLite journal owner with a pure reducer and recorded
 replay, scoped grants and vector reservations, a Linux-namespace tool sandbox with a
 dispatch-marker supervisor, a model gateway (scripted, OpenAI-compatible, Anthropic), the
@@ -15,7 +15,10 @@ in an isolated worktree with independent acceptance checks.
 - Frozen matched evaluation (WP11): three executed protocols with gpt-4.1-mini, failure analyses
   and the advantage-gate assessment (not passed): `docs/EVALUATION_PROTOCOL.md`, `evidence/wp11/`
 - G1 release report, backup/restore and license (Apache-2.0, `LICENSE`) (WP12): `docs/RELEASE_G1.md`
-- Contract extensions: `docs/adr/ADR-10-hold-records.md`, `ADR-11`, `ADR-12`
+- G2 domain portability (WP09 memory, WP10 document and numerical packs, AT23 evidence):
+  `docs/RELEASE_G2.md`, `evidence/wp10/`
+- Contract extensions: `docs/adr/ADR-10-hold-records.md`, `ADR-11`, `ADR-12`, `ADR-13` (DomainPack
+  ports), `ADR-14` (memory chain)
 - Evidence (test log, environment, baseline rerun, spec validation): `evidence/`
 - The blueprint's own machine-readable contracts and validator: `contracts/`, `tools/validate_spec.py`
 

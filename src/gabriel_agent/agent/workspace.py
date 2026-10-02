@@ -20,8 +20,10 @@ from ..artifacts import ObjectStore
 from ..contracts.codec import canonical, digest, loads
 from ..contracts.errors import Code, GabrielError
 from ..contracts.schemas import registry_digest, validate, validate_bytes
+from ..domains.document import DocumentPack
+from ..domains.numerical import NumericalPack
 from ..domains.software import SoftwarePack
-from ..domains.software.pack import compile_task
+from ..memory import MemoryService
 from ..models import provider_for_profile
 from ..policy.principals import Credential, new_secret, secret_digest
 from ..state import Owner
@@ -37,16 +39,33 @@ GRANTED_EFFECTS = ["read", "local_reversible_write", "external_idempotent_effect
 POLICY_ID = "gabriel.local-single-user/1"
 
 
+def build_packs(backend_resolver) -> dict:
+    """Every registered DomainPack, keyed by namespace. One registry serves all of them: the
+    catalog digest a workspace pins covers the software, document and numerical packs alike."""
+    packs = [SoftwarePack(provider_for_profile, backend_resolver), DocumentPack(provider_for_profile, backend_resolver),
+             NumericalPack(provider_for_profile, backend_resolver)]
+    return {pack.namespace: pack for pack in packs}
+
+
 def build_registry(backend_resolver) -> ToolRegistry:
     registry = ToolRegistry()
-    SoftwarePack(provider_for_profile, backend_resolver).register(registry)
+    for pack in build_packs(backend_resolver).values():
+        pack.register(registry)
     return registry
 
 
 class Workspace:
-    def __init__(self, path: Path, config: dict, owner: Owner, store: ObjectStore, registry: ToolRegistry, credential: Credential):
+    def __init__(self, path: Path, config: dict, owner: Owner, store: ObjectStore, registry: ToolRegistry, credential: Credential, memory=None, packs=None):
         self.path, self.config, self.owner, self.store, self.registry, self.credential = Path(path), config, owner, store, registry, credential
+        self.memory = memory
+        self.packs = packs or build_packs(lambda: None)
         self._backend = None
+
+    def pack_for(self, namespace: str):
+        try:
+            return self.packs[namespace]
+        except KeyError:
+            raise GabrielError(Code.UNSUPPORTED, "no registered domain pack for namespace " + str(namespace))
 
     # ------------------------------------------------------------ lifecycle
     @classmethod
@@ -74,7 +93,8 @@ class Workspace:
                              principals={principal_id: secret_digest(secret)}, clock=clock)
         (path / "worktrees").mkdir()
         (path / "runs").mkdir()
-        return cls(path, config, owner, store, registry, Credential(principal_id, secret))
+        memory = MemoryService.create(path / "memory.sqlite", store, workspace_id, lambda: owner.anchor()["sequence"])
+        return cls(path, config, owner, store, registry, Credential(principal_id, secret), memory=memory)
 
     @classmethod
     def open(cls, path, *, clock=None):
@@ -88,12 +108,19 @@ class Workspace:
         owner = Owner.open(path / config["database"], store, registry.catalog(), clock=clock)
         secret_path = path / "credentials" / (config["principal_id"] + ".secret")
         secret = secret_path.read_text().strip()
-        ws = cls(path, config, owner, store, registry, Credential(config["principal_id"], secret))
+        memory_path = path / "memory.sqlite"
+        if memory_path.is_file():
+            memory = MemoryService.open(memory_path, store, lambda: owner.anchor()["sequence"])
+        else:  # a restored workspace without a memory index starts an empty one
+            memory = MemoryService.create(memory_path, store, config["workspace_id"], lambda: owner.anchor()["sequence"])
+        ws = cls(path, config, owner, store, registry, Credential(config["principal_id"], secret), memory=memory)
         # the registry's backend resolver is bound after construction
         return ws
 
     def close(self):
         self.owner.close()
+        if self.memory is not None:
+            self.memory.close()
 
     @property
     def backend(self):
@@ -157,9 +184,10 @@ class Workspace:
         profile_ref = self.store.put(canonical(self.provider_profile(spec.get("provider", {"kind": "scripted", "script": {}}))), "application/json")
         budget = dict(DEFAULT_BUDGET, **(spec.get("budget") or {}))
         policy = self._grant_policy_digest()
-        compiled = compile_task(dict(spec, repository=str(repository)), self.store, task_id=task_id, workspace_id=self.config["workspace_id"],
-                                principal_id=self.config["principal_id"], grant_id=grant_id, policy_digest=policy, provider_profile_ref=profile_ref,
-                                containment_backend=self.config["containment_backend"], base_commit=base_commit, budget=budget)
+        pack = self.pack_for(spec.get("domain", "software"))
+        compiled = pack.compile_task(dict(spec, repository=str(repository)), self.store, task_id=task_id, workspace_id=self.config["workspace_id"],
+                                     principal_id=self.config["principal_id"], grant_id=grant_id, policy_digest=policy, provider_profile_ref=profile_ref,
+                                     containment_backend=self.config["containment_backend"], base_commit=base_commit, budget=budget)
         if not compiled.admissible:
             unresolved = [c for c in compiled.report["clauses"] if c["mandatory"] and c["status"] != "mapped"]
             raise GabrielError(Code.POLICY_DENIED, "task is not admissible: " + "; ".join("%s: %s" % (c["clause_id"], c["reason"]) for c in unresolved),
