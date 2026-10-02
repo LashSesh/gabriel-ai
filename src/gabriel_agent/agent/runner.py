@@ -141,6 +141,27 @@ class TaskRunner:
             context.append({"check_id": entry["check_id"], "text": text})
         return context[-4:]
 
+    def _attempt_diagnostics(self, projection, step_id) -> list:
+        """Diagnostics of earlier failed attempts of the same node (invalid or truncated
+        provider output, tool errors), so a retry does not repeat the same mistake."""
+        context = []
+        for attempt in projection["attempts"].values():
+            if attempt["step_id"] != step_id or attempt["status"] in ("issued", "marked", "completed", "cancelled") or not attempt["result_ref"]:
+                continue
+            try:
+                result = loads(self.store.get(attempt["result_ref"]))
+            except GabrielError:
+                continue
+            for output in result["outputs"]:
+                if output["output_slot"] in ("envelope", "error"):
+                    try:
+                        raw = self.store.get(output["artifact_ref"]).decode("utf8", "replace")
+                    except GabrielError:
+                        continue
+                    context.append({"check_id": "previous-attempt:" + attempt["attempt_id"],
+                                    "text": "status %s: %s" % (result["status"], raw[:1500])})
+        return context[-2:]
+
     def _plan(self, projection):
         task = projection["task"]
         version = projection["run_meta"]["plan_versions"]
@@ -241,7 +262,8 @@ class TaskRunner:
 
     def _propose_args(self, projection, node):
         snapshot_ref, snapshot, manifest = self._snapshot(projection)
-        failure_context = self._failure_context(projection) if projection["run_meta"]["plan_versions"] > 1 else []
+        failure_context = (self._failure_context(projection) if projection["run_meta"]["plan_versions"] > 1 else [])
+        failure_context += self._attempt_diagnostics(projection, node["node_id"])
         prompt, entries = software.build_prompt(self.goal_text, self.binding, snapshot, manifest, self.store, failure_context=failure_context,
                                                 round_index=projection["run_meta"]["plan_versions"])
         prompt_ref = self.store.put(prompt, "text/plain; charset=utf-8")

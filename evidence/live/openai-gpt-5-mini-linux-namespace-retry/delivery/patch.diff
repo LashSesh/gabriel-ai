@@ -1,0 +1,85 @@
+diff --git a/src/kvparse.py b/src/kvparse.py
+index e5377f0..05f2b19 100644
+--- a/src/kvparse.py
++++ b/src/kvparse.py
+@@ -1,10 +1,73 @@
+-"""kvparse: parse comma-separated key=value pairs."""
++"""Simple key/value parser utilities.
+ 
++Public API (do not change):
++- parse_pairs(text) -> dict
++- parse_pair(item) -> (key, value)
+ 
+-def parse_pairs(text):
+-    """Return a dict of key -> value for ``"a=1,b=2"``."""
+-    result = {}
+-    for item in text.split(","):
+-        key, _, value = item.partition("=")
+-        result[key.strip()] = value.strip()
++Behavior notes implemented to satisfy tests and edge-cases:
++- parse_pairs("") and parse_pairs(None) -> {} (empty dict)
++- Blank/empty items (e.g. consecutive separators) are ignored
++- Key/value separator is '=' by default; if absent value is empty string
++- Pair separator is ';' by default; also accepts ',' as an alternative
++"""
++from typing import Dict, Tuple, Optional
++
++__all__ = ["parse_pairs", "parse_pair"]
++
++
++def parse_pair(item: str) -> Tuple[str, str]:
++    """Parse a single key/value item and return (key, value).
++
++    - Splits on the first '='. If '=' not present, returns (item, "").
++    - Trims surrounding whitespace from key and value.
++    """
++    if item is None:
++        return "", ""
++    item = item.strip()
++    if item == "":
++        return "", ""
++    if "=" in item:
++        key, val = item.split("=", 1)
++        return key.strip(), val.strip()
++    # Fallback: no '=' present -> treat whole item as key with empty value
++    return item, ""
++
++
++def parse_pairs(text: Optional[str]) -> Dict[str, str]:
++    """Parse a sequence of key/value pairs and return a dict.
++
++    - Empty or None input returns an empty dict.
++    - Blank items are ignored (e.g. consecutive separators or leading/trailing separators).
++    - Pair separators supported: ';' (primary) and ',' (also accepted).
++    - For items without '=', the value is the empty string.
++    """
++    if text is None:
++        return {}
++    # Normalize to str and trim
++    text_str = str(text).strip()
++    if text_str == "":
++        return {}
++
++    # Prefer ';' as separator; if none present but ',' present, use ','; otherwise use ';'
++    if ";" in text_str:
++        raw_items = text_str.split(";")
++    elif "," in text_str:
++        raw_items = text_str.split(",")
++    else:
++        # Single item (no separators)
++        raw_items = [text_str]
++
++    result: Dict[str, str] = {}
++    for raw in raw_items:
++        if raw is None:
++            continue
++        item = raw.strip()
++        if item == "":
++            # Ignore blank items
++            continue
++        key, val = parse_pair(item)
++        if key == "":
++            # Ignore items that resulted in empty key (safety)
++            continue
++        result[key] = val
+     return result

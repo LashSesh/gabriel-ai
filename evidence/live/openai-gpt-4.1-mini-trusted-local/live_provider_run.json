@@ -1,0 +1,169 @@
+{
+  "summary": {
+    "task_id": "task-04123420a93c",
+    "run_id": "run-04123420a93c-1",
+    "state": "succeeded",
+    "run_revision": 40,
+    "plan_versions": 1,
+    "repair_count": 0,
+    "hold": null,
+    "unresolved_effects": [],
+    "assessments": [
+      {
+        "check_id": "baseline:unit",
+        "outcome": "passed",
+        "eligible": true,
+        "node_id": "baseline-unit"
+      },
+      {
+        "check_id": "output-valid",
+        "outcome": "passed",
+        "eligible": true,
+        "node_id": "propose"
+      },
+      {
+        "check_id": "output-valid",
+        "outcome": "passed",
+        "eligible": true,
+        "node_id": "apply"
+      },
+      {
+        "check_id": "output-valid",
+        "outcome": "passed",
+        "eligible": true,
+        "node_id": "read-back"
+      },
+      {
+        "check_id": "scope",
+        "outcome": "passed",
+        "eligible": true,
+        "node_id": "review"
+      },
+      {
+        "check_id": "base-commit",
+        "outcome": "passed",
+        "eligible": true,
+        "node_id": "review"
+      },
+      {
+        "check_id": "checks-intact",
+        "outcome": "passed",
+        "eligible": true,
+        "node_id": "review"
+      },
+      {
+        "check_id": "no-secrets",
+        "outcome": "passed",
+        "eligible": true,
+        "node_id": "review"
+      },
+      {
+        "check_id": "oracle",
+        "outcome": "passed",
+        "eligible": true,
+        "node_id": "verify-oracle"
+      },
+      {
+        "check_id": "unit",
+        "outcome": "passed",
+        "eligible": true,
+        "node_id": "verify-unit"
+      },
+      {
+        "check_id": "output-valid",
+        "outcome": "passed",
+        "eligible": true,
+        "node_id": "observe"
+      }
+    ],
+    "spent": {
+      "artifact_bytes": 18572,
+      "cpu_ms": 0,
+      "currency_micro_units": 0,
+      "model_requests": 2,
+      "model_tokens": 1874,
+      "tool_attempts": 7
+    },
+    "port_calls": 9,
+    "log": [
+      "plan v1 accepted: ['plan version 1 accepted with 8 nodes']",
+      "observe -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+      "assess observe/output-valid -> passed: assessment passed recorded for output-valid; node observe verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+      "baseline-unit -> completed (result accepted; checks pending)",
+      "assess baseline-unit/baseline:unit -> passed: assessment passed recorded for baseline:unit; node baseline-unit verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+      "propose -> completed (result accepted; checks pending)",
+      "assess propose/output-valid -> passed: assessment passed recorded for output-valid; node propose verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+      "apply -> completed (result accepted; checks pending)",
+      "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+      "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+      "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+      "review -> completed (result accepted; checks pending)",
+      "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,unit",
+      "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,oracle,unit",
+      "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,oracle,unit",
+      "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; node review verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: oracle,unit",
+      "verify-oracle -> completed (result accepted; checks pending)",
+      "assess verify-oracle/oracle -> passed: assessment passed recorded for oracle; node verify-oracle verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: unit",
+      "verify-unit -> completed (result accepted; checks pending)",
+      "assess verify-unit/unit -> passed: assessment passed recorded for unit; node verify-unit verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+    ]
+  },
+  "model_envelopes": [
+    {
+      "elapsed_ms": 3395,
+      "error": null,
+      "finish_reason": "stop",
+      "http_status": 200,
+      "loss": [],
+      "model_revision": "gpt-4.1-mini-2025-04-14",
+      "normalization_profile_id": "json-fenced-v1",
+      "provider_request_id": "chatcmpl-EUaxx8MMNTTw3oMqynhXXYCq8bwXj",
+      "raw_response_ref": {
+        "bytes": 1965,
+        "media_type": "application/json",
+        "sha256": "6eb84a0af63cac4a98d42b211f93a28d1a8e11c1bc203c9445140a1d03e3fe41"
+      },
+      "request_ref": {
+        "bytes": 1065,
+        "media_type": "application/json",
+        "sha256": "14027f44921d7e6bd63400703c3c08d818b6aac2c48b1eacb0c0cbc0ff3d4d11"
+      },
+      "status": "completed",
+      "usage_known": true
+    },
+    {
+      "elapsed_ms": 5599,
+      "error": null,
+      "finish_reason": "stop",
+      "http_status": 200,
+      "loss": [],
+      "model_revision": "gpt-4.1-mini-2025-04-14",
+      "normalization_profile_id": "json-fenced-v1",
+      "provider_request_id": "chatcmpl-EUaxskFhkYMgssa6dIbs9L0CgfACk",
+      "raw_response_ref": {
+        "bytes": 2945,
+        "media_type": "application/json",
+        "sha256": "48ac10921f226a620ea122080328cad309ec94742fa04c9d03056e729057da61"
+      },
+      "request_ref": {
+        "bytes": 956,
+        "media_type": "application/json",
+        "sha256": "1a6bc4f5f0937ab4fd4b261bbeab5844cf81dfeb8a83f8993bf9c214c07e796c"
+      },
+      "status": "completed",
+      "usage_known": true
+    }
+  ],
+  "base_commit": "ece9ca515f022a57b40d59ea55cc9c582e2ab577",
+  "replay": {
+    "status": "passed",
+    "events": 41,
+    "head": "976fdb5efc7d13d491c0bf30d54dbce43e07a1a522fb19583180dda7c7a487f6",
+    "inputs_head": "510d33caa2901479877c2a024ff843b7acae9adc71db45e4d404b098d7ce3251",
+    "runs": 1,
+    "payloads_verified": 41,
+    "missing_referenced_artifacts": [],
+    "external_calls": 0,
+    "anchor_checked": false
+  }
+}

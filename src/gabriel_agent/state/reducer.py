@@ -22,7 +22,10 @@ from ..planning.scheduler import WRITE_CLASSES, node_dependencies_verified, writ
 from ..policy import budget, grants
 
 TERMINAL_STATES = {"succeeded", "failed", "cancelled"}
-RETRYABLE_RESULT_STATUSES = {"rate_limited", "timed_out", "failed"}
+# Statuses that may be retried as a NEW attempt within the node's attempt limit. Invalid or
+# truncated provider output is retained as the failed attempt and never parsed as a result;
+# a bounded retry under target_idempotent_retry is cheaper than a whole plan version.
+RETRYABLE_RESULT_STATUSES = {"rate_limited", "timed_out", "failed", "invalid_output", "truncated"}
 MAX_ATTEMPTS_PER_NODE = 3
 DEFAULT_MAX_PLAN_VERSIONS = 4
 DEFAULT_MAX_REPAIRS = 2

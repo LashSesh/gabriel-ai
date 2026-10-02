@@ -9,7 +9,8 @@ dispatch-marker supervisor, a model gateway (scripted, OpenAI-compatible, Anthro
 domain-independent goal/evidence kernel, and a software domain pack that repairs a repository
 in an isolated worktree with independent acceptance checks.
 
-- Status, executed evidence and the honest release assessment: `docs/IMPLEMENTATION_STATUS.md`
+- Status, executed evidence and the release assessment (G1 established on the development host
+  with four real-provider runs and the Linux-namespace containment self-test): `docs/IMPLEMENTATION_STATUS.md`
 - How to install, configure a task and run it: `docs/RUNBOOK.md`
 - Contract extensions: `docs/adr/ADR-10-hold-records.md`, `ADR-11`, `ADR-12`
 - Evidence (test log, environment, baseline rerun, spec validation): `evidence/`

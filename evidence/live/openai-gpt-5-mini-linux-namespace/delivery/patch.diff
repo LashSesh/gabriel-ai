@@ -1,0 +1,66 @@
+diff --git a/src/kvparse.py b/src/kvparse.py
+index e5377f0..0753de4 100644
+--- a/src/kvparse.py
++++ b/src/kvparse.py
+@@ -1,10 +1,54 @@
+-"""kvparse: parse comma-separated key=value pairs."""
++"""
++Simple key/value pair parser.
+ 
++Public API:
++- parse_pairs(s, item_sep=",", kv_sep="=") -> dict
+ 
+-def parse_pairs(text):
+-    """Return a dict of key -> value for ``"a=1,b=2"``."""
+-    result = {}
+-    for item in text.split(","):
+-        key, _, value = item.partition("=")
+-        result[key.strip()] = value.strip()
++Behavior:
++- empty or None input -> returns {}
++- blank items (e.g. due to consecutive separators or leading/trailing separators) are ignored
++- keys and values are stripped of surrounding whitespace
++- split on first kv separator occurrence for each item
++"""
++from typing import Dict, Optional
++
++
++def parse_pairs(s: Optional[str], item_sep: str = ",", kv_sep: str = "=") -> Dict[str, str]:
++    """Parse a string of key/value pairs into a dict.
++
++    Examples:
++      parse_pairs('a=1,b=2') -> {'a': '1', 'b': '2'}
++      parse_pairs(' a = 1 , b = 2 ') -> {'a': '1', 'b': '2'}
++      parse_pairs('') -> {}
++      parse_pairs(None) -> {}
++      parse_pairs('a=1,,b=2,') -> {'a':'1','b':'2'}  # ignores blank items
++
++    The function does not change the public API: it always returns a dict.
++    """
++    if not s:
++        # Covers None and empty string
++        return {}
++
++    result: Dict[str, str] = {}
++    # Split into items on the item separator
++    for raw_item in s.split(item_sep):
++        if raw_item is None:
++            continue
++        item = raw_item.strip()
++        if item == "":
++            # ignore blank items
++            continue
++        # Split on first kv separator only
++        if kv_sep in item:
++            key, value = item.split(kv_sep, 1)
++            key = key.strip()
++            value = value.strip()
++        else:
++            # If no kv separator present, treat the whole item as key with empty value
++            key = item
++            value = ""
++        result[key] = value
+     return result
++
++
++__all__ = ["parse_pairs"]

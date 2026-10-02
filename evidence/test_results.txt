@@ -115,7 +115,7 @@ tests/test_workers.py::test_registry_fingerprints_and_visible_catalog PASSED [ 9
 tests/test_workers.py::test_worktree_pin_manifest_and_patch PASSED       [ 91%]
 tests/test_workers.py::test_trusted_local_capture_timeout_and_descendant_report PASSED [ 92%]
 tests/test_workers.py::test_namespace_backend_probe_is_non_mutating PASSED [ 93%]
-tests/test_workers.py::test_namespace_jail_isolation_selftest SKIPPED    [ 94%]
+tests/test_workers.py::test_namespace_jail_isolation_selftest PASSED     [ 94%]
 tests/test_workers.py::test_supervisor_dispatch_happy_path_and_receipt_retry PASSED [ 94%]
 tests/test_workers.py::test_crash_before_marker_abandons_lease_without_io PASSED [ 95%]
 tests/test_workers.py::test_crash_after_marker_before_io_reconciles_by_status PASSED [ 96%]
@@ -126,5 +126,4 @@ tests/test_workers.py::test_late_result_after_lease_expiry_matches_prior_attempt
 
 =========================== short test summary info ============================
 SKIPPED [1] tests/test_live_provider.py:20: live provider tests need GABRIEL_LIVE_PROVIDER=1 and a credential
-SKIPPED [1] tests/test_workers.py:158: privileged containment self-tests need GABRIEL_CONTAINMENT_TESTS=1
-======================= 116 passed, 2 skipped in 15.11s ========================
+======================= 117 passed, 1 skipped in 15.73s ========================

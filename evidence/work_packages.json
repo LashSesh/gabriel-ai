@@ -1,6 +1,6 @@
 {
   "schema": "gabriel.evidence.work-packages/1",
-  "produced_at_utc": "2026-10-02T16:50:04.262339+00:00",
+  "produced_at_utc": "2026-10-02T17:08:12.356028+00:00",
   "rule": "A package counts as done only with actual code and recorded test output; privileged and paid runs are listed under not_executed.",
   "packages": {
     "WP01": {
@@ -318,23 +318,21 @@
       }
     },
     "WP05": {
-      "status": "DONE_EXCEPT_PRIVILEGED_SELFTEST",
+      "status": "DONE",
       "tests": [
         "tests/test_workers.py"
       ],
       "evidence": [
-        "evidence/doctor_linux_namespace_workspace.json"
+        "evidence/doctor_linux_namespace_selftest.json",
+        "evidence/test_results.txt (test_namespace_jail_isolation_selftest PASSED)"
       ],
       "acceptance": [
-        "AT08(host parts)",
+        "AT08",
         "AT12",
         "AT13",
-        "AT24(partial)"
+        "AT24"
       ],
-      "not_executed": [
-        "tests/test_workers.py::test_namespace_jail_isolation_selftest",
-        "gabriel doctor --selftest"
-      ],
+      "not_executed": [],
       "test_results": {
         "tests/test_workers.py": [
           {
@@ -359,7 +357,7 @@
           },
           {
             "test": "test_namespace_jail_isolation_selftest",
-            "result": "SKIPPED"
+            "result": "PASSED"
           },
           {
             "test": "test_supervisor_dispatch_happy_path_and_receipt_retry",
@@ -393,17 +391,17 @@
       }
     },
     "WP06": {
-      "status": "DONE_EXCEPT_REAL_PROVIDER_RUN",
+      "status": "DONE",
       "tests": [
         "tests/test_models.py"
       ],
-      "evidence": [],
+      "evidence": [
+        "evidence/live/summary.json"
+      ],
       "acceptance": [
         "AT09"
       ],
-      "not_executed": [
-        "tests/test_live_provider.py::test_real_provider_repairs_seeded_bug"
-      ],
+      "not_executed": [],
       "test_results": {
         "tests/test_models.py": [
           {
@@ -566,7 +564,7 @@
           },
           {
             "test": "test_namespace_jail_isolation_selftest",
-            "result": "SKIPPED"
+            "result": "PASSED"
           },
           {
             "test": "test_supervisor_dispatch_happy_path_and_receipt_retry",
@@ -600,23 +598,21 @@
       }
     },
     "WP08": {
-      "status": "DONE_SCRIPTED_PROVIDER_TRUSTED_LOCAL",
+      "status": "DONE",
       "tests": [
         "tests/test_slice.py"
       ],
       "evidence": [
+        "evidence/live/summary.json",
         "evidence/test_results.txt"
       ],
       "acceptance": [
-        "AT11(scripted)",
+        "AT11",
         "AT19",
         "AT22",
-        "AT24(partial)"
+        "AT24"
       ],
-      "not_executed": [
-        "AT11 real-provider part",
-        "end-to-end inside linux_namespace"
-      ],
+      "not_executed": [],
       "test_results": {
         "tests/test_slice.py": [
           {
@@ -648,10 +644,14 @@
     }
   },
   "release_scope_G1": {
-    "established": false,
-    "missing": [
-      "containment self-test on the target host",
-      "one real-provider end-to-end run"
-    ]
+    "established_on_this_host": true,
+    "evidence": [
+      "evidence/live/summary.json",
+      "evidence/doctor_linux_namespace_selftest.json",
+      "evidence/test_results.txt",
+      "evidence/wp01/baseline_manifest.json",
+      "evidence/wp02/spec_validation.json"
+    ],
+    "scope": "single host (Linux 6.18 x86_64, uid 0, util-linux unshare/setpriv), one real provider, one synthetic task family; AT17 matched evaluation (WP11) and AT18 release restore bundle (WP12) remain future work"
   }
 }

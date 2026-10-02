@@ -1,0 +1,230 @@
+{
+  "schema": "gabriel.evidence.live-runs/1",
+  "produced_at_utc": "2026-10-02T17:08:12.356028+00:00",
+  "provider": "openai_compat via https://api.openai.com/v1 (credential env:OPENAI_API_KEY, resolved by the supervisor; never stored)",
+  "task": "seeded kvparse parser defect with an independent oracle (src/gabriel_agent/evaluation/fixtures/parser_bug.py)",
+  "runs": [
+    {
+      "directory": "evidence/live/openai-gpt-4.1-mini-linux-namespace",
+      "model_requested": null,
+      "backend": "linux_namespace",
+      "state": "succeeded",
+      "plan_versions": 1,
+      "repair_count": 0,
+      "model_requests": 2,
+      "model_tokens": 1846,
+      "tool_attempts": 7,
+      "model_revisions": [
+        "gpt-4.1-mini-2025-04-14"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed"
+      ],
+      "usage_known_for_every_request": true,
+      "replay": {
+        "status": "passed",
+        "events": 41,
+        "external_calls": 0
+      },
+      "export_state": "succeeded",
+      "base_commit": "0911ca704d1decd1f5ce87ede7bf804da23bb6cb",
+      "final_tree_digest": "d9b81b2d328c59dcdf9204f203ba20f01ed71cbb284d34abb8c703845347d0b5",
+      "mandatory_checks": {
+        "unit": "passed",
+        "oracle": "passed",
+        "scope": "passed",
+        "base-commit": "passed",
+        "checks-intact": "passed",
+        "no-secrets": "passed"
+      },
+      "executed_checks": {
+        "oracle": {
+          "outcome": "passed",
+          "backend": "linux_namespace",
+          "containment": true,
+          "exit_code": 0
+        },
+        "unit": {
+          "outcome": "passed",
+          "backend": "linux_namespace",
+          "containment": true,
+          "exit_code": 0
+        },
+        "baseline:unit": {
+          "outcome": "passed",
+          "backend": "linux_namespace",
+          "containment": true,
+          "exit_code": 0
+        }
+      }
+    },
+    {
+      "directory": "evidence/live/openai-gpt-4.1-mini-trusted-local",
+      "model_requested": null,
+      "backend": "trusted_local",
+      "state": "succeeded",
+      "plan_versions": 1,
+      "repair_count": 0,
+      "model_requests": 2,
+      "model_tokens": 1874,
+      "tool_attempts": 7,
+      "model_revisions": [
+        "gpt-4.1-mini-2025-04-14"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed"
+      ],
+      "usage_known_for_every_request": true,
+      "replay": {
+        "status": "passed",
+        "events": 41,
+        "external_calls": 0
+      },
+      "export_state": "succeeded",
+      "base_commit": "ece9ca515f022a57b40d59ea55cc9c582e2ab577",
+      "final_tree_digest": "7c3370981ccae542e80d094145871a656329c319d879676aff130c27d24688f5",
+      "mandatory_checks": {
+        "unit": "passed",
+        "oracle": "passed",
+        "scope": "passed",
+        "base-commit": "passed",
+        "checks-intact": "passed",
+        "no-secrets": "passed"
+      },
+      "executed_checks": {
+        "baseline:unit": {
+          "outcome": "passed",
+          "backend": "trusted_local",
+          "containment": false,
+          "exit_code": 0
+        },
+        "oracle": {
+          "outcome": "passed",
+          "backend": "trusted_local",
+          "containment": false,
+          "exit_code": 0
+        },
+        "unit": {
+          "outcome": "passed",
+          "backend": "trusted_local",
+          "containment": false,
+          "exit_code": 0
+        }
+      }
+    },
+    {
+      "directory": "evidence/live/openai-gpt-5-mini-linux-namespace",
+      "model_requested": null,
+      "backend": "linux_namespace",
+      "state": "succeeded",
+      "plan_versions": 2,
+      "repair_count": 0,
+      "model_requests": 3,
+      "model_tokens": 5290,
+      "tool_attempts": 8,
+      "model_revisions": [
+        "gpt-5-mini-2025-08-07"
+      ],
+      "provider_statuses": [
+        "invalid_output",
+        "completed",
+        "completed"
+      ],
+      "usage_known_for_every_request": true,
+      "replay": {
+        "status": "passed",
+        "events": 49,
+        "external_calls": 0
+      },
+      "export_state": "succeeded",
+      "base_commit": "7bd11e4f37efe02f89cabf44f1f6d6acd400f4bc",
+      "final_tree_digest": "2029079edb78e6e303f71cd2c1be1edf32a8fd5a5e9562a8574eee542e27b041",
+      "mandatory_checks": {
+        "unit": "passed",
+        "oracle": "passed",
+        "scope": "passed",
+        "base-commit": "passed",
+        "checks-intact": "passed",
+        "no-secrets": "passed"
+      },
+      "executed_checks": {
+        "unit": {
+          "outcome": "passed",
+          "backend": "linux_namespace",
+          "containment": true,
+          "exit_code": 0
+        },
+        "baseline:unit": {
+          "outcome": "passed",
+          "backend": "linux_namespace",
+          "containment": true,
+          "exit_code": 0
+        },
+        "oracle": {
+          "outcome": "passed",
+          "backend": "linux_namespace",
+          "containment": true,
+          "exit_code": 0
+        }
+      }
+    },
+    {
+      "directory": "evidence/live/openai-gpt-5-mini-linux-namespace-retry",
+      "model_requested": null,
+      "backend": "linux_namespace",
+      "state": "succeeded",
+      "plan_versions": 1,
+      "repair_count": 0,
+      "model_requests": 2,
+      "model_tokens": 3756,
+      "tool_attempts": 7,
+      "model_revisions": [
+        "gpt-5-mini-2025-08-07"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed"
+      ],
+      "usage_known_for_every_request": true,
+      "replay": {
+        "status": "passed",
+        "events": 41,
+        "external_calls": 0
+      },
+      "export_state": "succeeded",
+      "base_commit": "0b05807cac2b992aedaf8c7005b74c85cd792898",
+      "final_tree_digest": "f301d11bb6e779741a54ed6ff12565d9eff768b3926622c5581fe4cc3af4d1fe",
+      "mandatory_checks": {
+        "unit": "passed",
+        "oracle": "passed",
+        "scope": "passed",
+        "base-commit": "passed",
+        "checks-intact": "passed",
+        "no-secrets": "passed"
+      },
+      "executed_checks": {
+        "oracle": {
+          "outcome": "passed",
+          "backend": "linux_namespace",
+          "containment": true,
+          "exit_code": 0
+        },
+        "unit": {
+          "outcome": "passed",
+          "backend": "linux_namespace",
+          "containment": true,
+          "exit_code": 0
+        },
+        "baseline:unit": {
+          "outcome": "passed",
+          "backend": "linux_namespace",
+          "containment": true,
+          "exit_code": 0
+        }
+      }
+    }
+  ],
+  "claim_scope": "Four executed real-provider repository-repair runs on one synthetic task family. They establish that the G1 workflow operates end to end with a real provider, inside the Linux-namespace backend, with recorded replay. They are not a benchmark, not a matched comparison and not a general-capability claim."
+}

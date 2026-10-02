@@ -70,9 +70,12 @@ class OpenAICompatibleProvider:
 
     def generate(self, prompt: bytes, config: dict, deadline_unix_ms=None) -> ProviderResponse:
         headers = {"Authorization": "Bearer " + self.credential} if self.credential else {}
-        body = {"model": self.profile["model_alias"], "messages": [{"role": "user", "content": prompt.decode("utf8")}],
-                "max_tokens": config.get("max_output_tokens", self.profile["max_output_tokens"]),
-                "temperature": self.profile.get("temperature_milli", 0) / 1000}
+        model = self.profile["model_alias"]
+        body = {"model": model, "messages": [{"role": "user", "content": prompt.decode("utf8")}],
+                "max_completion_tokens": config.get("max_output_tokens", self.profile["max_output_tokens"])}
+        # Reasoning model families reject a sampling temperature other than their default.
+        if not model.startswith(("o1", "o3", "o4", "gpt-5")):
+            body["temperature"] = self.profile.get("temperature_milli", 0) / 1000
         raw, status, elapsed, kind, error = _post(self.endpoint + "/chat/completions", headers, body,
                                                   self.profile.get("timeout_ms", 60000) / 1000)
         if kind is not None or status != 200:

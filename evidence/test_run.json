@@ -1,21 +1,20 @@
 {
   "schema": "gabriel.evidence.tests/1",
-  "command": ".venv/bin/python -m pytest tests -vv -rs",
+  "command": "GABRIEL_CONTAINMENT_TESTS=1 .venv/bin/python -m pytest tests -vv -rs",
   "log": "evidence/test_results.txt",
-  "summary_line": "======================= 116 passed, 2 skipped in 15.11s ========================",
+  "summary_line": "======================= 117 passed, 1 skipped in 15.73s ========================",
   "counts": {
-    "passed": 116,
-    "skipped": 2
+    "passed": 117,
+    "skipped": 1
   },
   "skipped": [
-    "SKIPPED [1] tests/test_live_provider.py:20: live provider tests need GABRIEL_LIVE_PROVIDER=1 and a credential",
-    "SKIPPED [1] tests/test_workers.py:158: privileged containment self-tests need GABRIEL_CONTAINMENT_TESTS=1"
+    "SKIPPED [1] tests/test_live_provider.py:20: live provider tests need GABRIEL_LIVE_PROVIDER=1 and a credential"
   ],
   "source_sha256": {
     "src/gabriel_agent/__init__.py": "d81f3fb7a7b3f8cf8e0f00c381d30a261d2fb4924fd534f87c0c1fd204e04099",
     "src/gabriel_agent/agent/__init__.py": "d4fd6a68ba0ebc257d605efb3556be8fef1e059058543c409ab69205870c7f1c",
     "src/gabriel_agent/agent/export.py": "967e9670330d8846166968910b5ed0845ba34f6639eec6805b76cdabd06995ea",
-    "src/gabriel_agent/agent/runner.py": "8531654e4309bdf8a6afe9389795ea47ff6d53e9a03fe4f288cde36c687c52fc",
+    "src/gabriel_agent/agent/runner.py": "aea3c598405d8eefb8fd0111dd9cc35833153de97c579ef47974723fdd93a3ae",
     "src/gabriel_agent/agent/workspace.py": "b7fb02fb8baedcc223ce4d496dd72af776de376024e50031e6ecc5f0618f5323",
     "src/gabriel_agent/artifacts/__init__.py": "96c8ba41c0fd264134b1fa638a826b5f47dff0c3445108f5168eaf5d511842b5",
     "src/gabriel_agent/artifacts/store.py": "2108ec4a7bc1acdcf28974613dd30920ea4b92db576e7788b1e6c3e3ce890e55",
@@ -36,7 +35,7 @@
     "src/gabriel_agent/kernel/kernel.py": "1384bc387f6d48f7c8551822a26daf287019542c8f861d37f79d0821b865c760",
     "src/gabriel_agent/models/__init__.py": "f8303a60e53efd26eb08ade3756f82a4f01a208bc0ec77dc27b198fcdf2ec634",
     "src/gabriel_agent/models/gateway.py": "42ce64336741dafd3664ecba379d9ac95bf5a2c124b038e9050a8d03ca5af519",
-    "src/gabriel_agent/models/http_providers.py": "94b191a4392578d04ffdd6a54d680134674f7d12fa84a4ae9562dcb18f08022b",
+    "src/gabriel_agent/models/http_providers.py": "c4efb1dde708cf06fd7fd98e5166d31c211042c3ba1cad87959989b95d2bf124",
     "src/gabriel_agent/models/port.py": "97c150b73da4c11291b14f0920335ce9ff246ff0c6c1427294328d38bf56bc1e",
     "src/gabriel_agent/models/scripted.py": "a99dfe0761cd14d232b801e02b15104ba47e976a3b090bf6cc4fb6fb3f036c2b",
     "src/gabriel_agent/planning/__init__.py": "3db562cfa71af116fe0511199744d12652ef26e45c9542388c22c669a806d4a4",
@@ -47,7 +46,7 @@
     "src/gabriel_agent/policy/principals.py": "92ecb5276eaef5cf7d08cafa0938cc2f56282be5f9a655867446151cff71cc51",
     "src/gabriel_agent/state/__init__.py": "79fe69ff72a700aa31a6a6045bf5478cc020b2705075e4b7015b530b243832b4",
     "src/gabriel_agent/state/owner.py": "e6477d7619b24be44efc5cf222078b5537368b16273740d2f60243ec044539b6",
-    "src/gabriel_agent/state/reducer.py": "068e7f5ca9b6cee836f8e905d22b4838792e8300155b21642ffb5acafc1fee08",
+    "src/gabriel_agent/state/reducer.py": "ea45d1d2bc7959619be6b48b5bfea5e357161decaa06b9c44b0f9eb96e14e0e7",
     "src/gabriel_agent/tools/__init__.py": "0e94e9cb0cc1ee0ff86ee60022fe5e22e8e27908c6f70e4ca3ade791e38cb978",
     "src/gabriel_agent/tools/fs.py": "ca8a28fb6295052be62d7f61ec5723fad287f021b907db9987b854c1a2102f14",
     "src/gabriel_agent/tools/registry.py": "01369f707eb847e26af0d18c7c57f0b0077617b1d9b8c3dabe557d2efb3b289b",
@@ -387,7 +386,7 @@
       },
       {
         "test": "test_namespace_jail_isolation_selftest",
-        "result": "SKIPPED"
+        "result": "PASSED"
       },
       {
         "test": "test_supervisor_dispatch_happy_path_and_receipt_retry",

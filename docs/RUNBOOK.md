@@ -74,5 +74,12 @@ GABRIEL_LIVE_PROVIDER=1 GABRIEL_LIVE_KIND=openai_compat GABRIEL_LIVE_MODEL=gpt-4
   python -m pytest -q -m live_provider
 ```
 Both are opt-in: the first creates namespaces, mounts a tmpfs root and pivots into it; the
-second spends provider credit. Their results are the missing G1 evidence (see
-`docs/IMPLEMENTATION_STATUS.md`).
+second spends provider credit. Both were executed on the development host; results are in
+`evidence/test_results.txt`, `evidence/doctor_linux_namespace_selftest.json` and
+`evidence/live/summary.json`.
+
+## Catalog identity
+A workspace journal pins the capability catalog (tool descriptors with implementation
+fingerprints). After changing any tool implementation, `Workspace.open` refuses the old journal
+with `UNSUPPORTED: capability catalog differs`; create a new workspace. An explicit, replayed
+migration is future work.
