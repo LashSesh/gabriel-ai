@@ -59,8 +59,13 @@ def compile_task(spec: dict, store, **ids):
     declaration = {"schema": "gabriel.document-sources/1",
                    "sources": [{"path": s["path"], "source_id": s["source_id"], "source_revision": int(s.get("revision", 1)),
                                 "event_kind": s.get("event_kind", "timeless_document"), "event_start_unix_ms": s.get("event_start_unix_ms"),
-                                "event_end_unix_ms": s.get("event_end_unix_ms"), "source_time_basis": s.get("source_time_basis", "source_declared")} for s in sources],
-                   "targets": list(targets)}
+                                "event_end_unix_ms": s.get("event_end_unix_ms"), "source_time_basis": s.get("source_time_basis", "source_declared"),
+                                "access": s.get("access", "available"), "revocation_reason": s.get("revocation_reason"),
+                                "object_id": s.get("object_id")} for s in sources],
+                   "targets": list(targets),
+                   # The production default: the effective revision of every authorized, available source. The other
+                   # views are declared ablations for evaluation (ADR-16); a task carries its view in its base inputs.
+                   "retrieval_view": spec.get("retrieval_view", "provenance")}
     validate(declaration, "document-sources")
     for target in targets:
         if not fs.path_in_scope(target, spec.get("allowed_paths") or []):
@@ -127,7 +132,8 @@ def take_snapshot(worktree, binding: dict, store, frontier: int, *, memory, prin
             if entry is None or entry["kind"] != "file":
                 sources.append(dict(path=declared["path"], source_id=declared["source_id"], source_revision=declared["source_revision"], observation_id=None,
                                     sha256="0" * 64, bytes=0, extraction="unsupported", event_kind=declared["event_kind"],
-                                    event_start_unix_ms=declared["event_start_unix_ms"], event_end_unix_ms=declared["event_end_unix_ms"]))
+                                    event_start_unix_ms=declared["event_start_unix_ms"], event_end_unix_ms=declared["event_end_unix_ms"],
+                                    access=declared.get("access", "available")))
                 continue
             raw = root.read(declared["path"])
             observation_id = None
@@ -137,21 +143,44 @@ def take_snapshot(worktree, binding: dict, store, frontier: int, *, memory, prin
                 extraction = "text_utf8"
             except UnicodeDecodeError:
                 pass
+            access = declared.get("access", "available")
             if extraction == "text_utf8" and memory is not None:
-                record = memory.ingest(source_id=declared["source_id"], source_object_id=declared["path"].replace("/", ":"), source_revision=declared["source_revision"],
+                # Revisions of the same document share the declared object identity (default: the path), so the
+                # memory's revision rule applies across files that hold different revisions of one document.
+                record = memory.ingest(source_id=declared["source_id"], source_object_id=declared.get("object_id") or declared["path"].replace("/", ":"),
+                                       source_revision=declared["source_revision"],
                                        content=raw, event_kind=declared["event_kind"], event_start_unix_ms=declared["event_start_unix_ms"],
                                        event_end_unix_ms=declared["event_end_unix_ms"], received_at_unix_ms=received_at_unix_ms,
                                        source_time_basis=declared["source_time_basis"], extraction_digest=EXTRACTION_DIGEST,
                                        scope={"principals": [principal_id], "source_kind": "document", "task_id": task_id})
                 observation_id = record["observation_id"]
+                if access == "revoked" and not memory.is_revoked(observation_id):
+                    # Declared revoked: the bytes stay retained for audit (AT15) and the access policy
+                    # excludes the observation from every later retrieval and citation binding.
+                    memory.revoke(observation_id, principal_id=principal_id, reason=declared.get("revocation_reason") or "declared revoked by the task")
             sources.append(dict(path=declared["path"], source_id=declared["source_id"], source_revision=declared["source_revision"], observation_id=observation_id,
                                 sha256=entry["sha256"], bytes=entry["bytes"], extraction=extraction, event_kind=declared["event_kind"],
-                                event_start_unix_ms=declared["event_start_unix_ms"], event_end_unix_ms=declared["event_end_unix_ms"]))
+                                event_start_unix_ms=declared["event_start_unix_ms"], event_end_unix_ms=declared["event_end_unix_ms"], access=access))
+    view = declaration.get("retrieval_view", "provenance")
     retrieval_ref = None
     if memory is not None:
         current = memory.frontier()
-        manifest_record = memory.retrieve(principal_id=principal_id, task_id=task_id, frontier=current, query=goal, allowed_source_kinds=["document"],
-                                          max_bytes=PROMPT_SOURCE_BUDGET, max_items=32)
+        if view == "plain":
+            # Declared ablation of provenance filtering (ADR-16): every declared source file enters the
+            # prompt by its observation id, whatever its revision or access state. Not a memory retrieval.
+            items = []
+            for source in sources:
+                if source["observation_id"] is None:
+                    continue
+                observation = memory.observation(source["observation_id"])
+                items.append({"observation_id": source["observation_id"], "source_id": source["source_id"], "source_revision": source["source_revision"],
+                              "artifact_ref": observation["content_ref"], "span_start": 0, "span_end": observation["content_ref"]["bytes"], "score_milli": 0,
+                              "source_kind": "document", "label": "file " + source["path"]})
+            manifest_record = {"schema": "gabriel.document-source-view/1", "view": "plain", "frontier": current.record(), "items": items, "excluded": []}
+        else:
+            manifest_record = memory.retrieve(principal_id=principal_id, task_id=task_id, frontier=current, query=goal, allowed_source_kinds=["document"],
+                                              version_policy="all_revisions" if view == "all_revisions" else "highest_revision",
+                                              max_bytes=PROMPT_SOURCE_BUDGET, max_items=32)
         retrieval_ref = store.put(canonical(manifest_record), "application/json")
         frontier_record = current.record()
     else:
@@ -159,7 +188,7 @@ def take_snapshot(worktree, binding: dict, store, frontier: int, *, memory, prin
     manifest_ref = store.put(dumps_utf8(manifest), "application/json; charset=utf-8")
     snapshot = {"schema": "gabriel.document-snapshot/1", "worktree_id": "worktree", "base_commit": worktree.base_commit, "head_commit": worktree.head(),
                 "manifest_ref": manifest_ref, "tree_digest": sha256_hex(canonical(manifest)), "sources": sources[:256], "targets": list(declaration["targets"])[:64],
-                "frontier": frontier_record, "retrieval_manifest_ref": retrieval_ref, "extraction_profile": EXTRACTION_PROFILE,
+                "frontier": frontier_record, "retrieval_manifest_ref": retrieval_ref, "retrieval_view": view, "extraction_profile": EXTRACTION_PROFILE,
                 "coverage": {"observes": ["file bytes and digests", "declared sources as versioned observations", "as-of retrieval at the frontier"],
                              "does_not_observe": ["semantic truth of any source", "sources ingested after the frontier"]}, "observed_frontier": frontier}
     validate(snapshot, "document-snapshot")
@@ -235,7 +264,7 @@ def build_prompt(task_goal: str, binding: dict, snapshot: dict, manifest: dict, 
         entries.append({"entry_id": "target-%d" % len(entries), "kind": "source", "artifact_ref": ref, "source_id": "worktree", "source_revision": None,
                         "observation_id": None, "span_start": 0, "span_end": min(entry["bytes"], PROMPT_SOURCE_BUDGET), "purpose": "target",
                         "truncated": entry["bytes"] > PROMPT_SOURCE_BUDGET, "omitted_bytes": max(0, entry["bytes"] - PROMPT_SOURCE_BUDGET), "disclosure_scope": "provider"})
-    lines += ["", "Sources available at the issue frontier (cite them by observation id; quotes must be exact substrings of the cited source):"]
+    lines += ["", "Sources (cite them by observation id; quotes must be exact substrings of the cited source):"]
     retrieval = loads(store.get(snapshot["retrieval_manifest_ref"])) if snapshot.get("retrieval_manifest_ref") else {"items": [], "excluded": []}
     budget = PROMPT_SOURCE_BUDGET
     for item in retrieval["items"]:
@@ -245,8 +274,8 @@ def build_prompt(task_goal: str, binding: dict, snapshot: dict, manifest: dict, 
             continue
         shown = content[:max(0, min(len(content), budget))]
         budget -= len(shown)
-        lines += ["=== source %s revision %d observation %s (%d bytes%s) ===" % (item["source_id"], item["source_revision"], item["observation_id"], len(content),
-                                                                                "" if len(shown) == len(content) else ", truncated"),
+        label = item.get("label") or ("source %s revision %d" % (item["source_id"], item["source_revision"]))
+        lines += ["=== %s observation %s (%d bytes%s) ===" % (label, item["observation_id"], len(content), "" if len(shown) == len(content) else ", truncated"),
                   shown.decode("utf8", "replace"), ""]
         observation_ids.append(item["observation_id"])
         entries.append({"entry_id": "obs-%d" % len(entries), "kind": "observation", "artifact_ref": item["artifact_ref"], "source_id": item["source_id"],
@@ -353,8 +382,15 @@ class RequiredClaimsVerifier:
                         cited = True
                         break
             results.append({"claim": " | ".join(phrasings)[:200], "present": present, "cited_from_expected_source": cited, "path": path})
-        ok = bool(results) and all(r["present"] and r["cited_from_expected_source"] for r in results)
-        return ("passed" if ok else "failed"), {"claims": results}
+        # The oracle may also forbid statements (a stale value, a withdrawn figure): their presence fails the claim check.
+        forbidden = []
+        for rule in oracle.get("forbidden") or []:
+            text = contents.get(rule.get("path") or (report["targets"][0]["path"] if report["targets"] else None), "")
+            hits = [p for p in rule.get("must_not_contain", []) if p in text]
+            if hits:
+                forbidden.append({"path": rule.get("path"), "present": hits[:8]})
+        ok = bool(results) and all(r["present"] and r["cited_from_expected_source"] for r in results) and not forbidden
+        return ("passed" if ok else "failed"), {"claims": results, "forbidden_present": forbidden}
 
 
 class DocumentOutputValidVerifier(OutputValidVerifier):

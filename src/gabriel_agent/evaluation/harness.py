@@ -28,7 +28,7 @@ from pathlib import Path
 
 from ..contracts.codec import canonical
 from ..contracts.errors import Code, GabrielError
-from . import comparators, corpus
+from . import comparators, comparators_domains, corpus
 
 PROTOCOL_SCHEMA = "gabriel.evaluation-protocol/1"
 
@@ -48,15 +48,19 @@ def default_protocol(provider: dict, *, repetitions: int = 2, systems=comparator
     tasks = [t for t in corpus.tasks() if (task_ids is None or t.task_id in task_ids) and (tiers is None or t.tier in tiers)]
     if any(s in comparators.G3_SYSTEMS for s in systems) and policy is None:
         raise GabrielError(Code.INVALID_SCHEMA, "the G3 systems need a frozen router policy in the protocol")
+    selected_tiers = sorted({t.tier for t in tasks})
+    treatment = "gabriel" if "gabriel" in systems else ("gabriel_reference_plan" if "gabriel_reference_plan" in systems else None)
     return {
         "schema": PROTOCOL_SCHEMA,
-        "purpose": "Matched G1 coding comparison: increase independently verified task success or reduce resources at equal success, "
+        "purpose": "Matched comparison: increase independently verified task success or reduce resources at equal success, "
                    "under a fixed task distribution and matched constraints. Not a benchmark of general capability.",
-        "corpus_digest": corpus.corpus_digest(),
+        "corpus_digest": corpus.corpus_digest(selected_tiers),
         "tasks": [{"task_id": t.task_id, "family": t.family, "tier": t.tier, "digest": t.digest()} for t in tasks],
         "families": sorted({t.family for t in tasks}),
-        "tiers": sorted({t.tier for t in tasks}),
+        "tiers": selected_tiers,
         "systems": list(systems),
+        # paired differences: the treatment against every other system (verified success and model tokens per task)
+        "paired": [[treatment, s] for s in systems if treatment and s != treatment],
         "provider": {k: v for k, v in provider.items() if k != "script"},
         "budget_per_task": budget,
         "repetitions": repetitions,
@@ -69,7 +73,9 @@ def default_protocol(provider: dict, *, repetitions: int = 2, systems=comparator
             "gabriel_reference_plan": "as gabriel, with the domain pack's deterministic reference plan admitted without a planner request (planner ablation)",
             "gabriel_policy": "as gabriel_reference_plan, with the frozen readout policy pinned: at a failed verification it chooses repair or "
                               "stop from the progress channels, and it may retrieve frozen episodes into the worker prompt",
-            "gabriel_episodes": "as gabriel_reference_plan (rule-based repair) with the frozen episodes retrievable into the worker prompt (readout ablation)"},
+            "gabriel_episodes": "as gabriel_reference_plan (rule-based repair) with the frozen episodes retrievable into the worker prompt (readout ablation)",
+            # document and numerical tiers (protocol 5): the same names, declared per family
+            "document_and_numerical_tiers": comparators_domains.DECLARED_SUCCESS},
         "policy": policy,
         "episode_seed": episode_seed,
         "declared_criterion": declared_criterion,
@@ -101,7 +107,8 @@ def check_frozen(protocol: dict) -> dict:
     digest = hashlib.sha256(canonical(body)).hexdigest()
     if digest != protocol.get("frozen_digest"):
         raise GabrielError(Code.POLICY_DENIED, "protocol was modified after freezing (digest mismatch)")
-    if protocol["corpus_digest"] != corpus.corpus_digest():
+    # the protocol pins the digest of the tiers it uses; protocols 1 to 4 pinned the digest of every software task
+    if protocol["corpus_digest"] not in (corpus.corpus_digest(protocol.get("tiers")), corpus.legacy_corpus_digest()):
         raise GabrielError(Code.POLICY_DENIED, "corpus changed after the protocol was frozen")
     return {"frozen_digest": digest, "harness_identity_now": harness_identity(),
             "harness_amended": harness_identity() != protocol.get("harness_identity")}
@@ -112,12 +119,22 @@ def _unit(protocol, task, system, rep, out_dir, provider):
     record = {"task_id": task.task_id, "family": task.family, "system": system, "rep": rep, "run_dir": str(run_dir)}
     started = time.monotonic()
     try:
-        ctx = comparators.EvalContext(task, run_dir, provider, comparators.Budget(**{k: protocol["budget_per_task"][k] for k in comparators.Budget().__dict__}),
-                                      protocol["backend"])
+        budget = comparators.Budget(**{k: protocol["budget_per_task"][k] for k in comparators.Budget().__dict__})
+        if getattr(task, "domain", "software") == "software":
+            ctx = comparators.EvalContext(task, run_dir, provider, budget, protocol["backend"])
+            runners, verify = comparators.RUNNERS, comparators.verify
+        else:
+            ctx = comparators_domains.DomainEvalContext(task, run_dir, provider, budget, protocol["backend"])
+            runners, verify = comparators_domains.RUNNERS, comparators_domains.verify
+        record["domain"] = getattr(task, "domain", "software")
         ctx.policy = protocol.get("policy")
         ctx.episode_seed = protocol.get("episode_seed")
-        outcome = comparators.RUNNERS[system](ctx, rep)
-        verification = comparators.verify(ctx, outcome.worktree, "eval-verify-%s-%s-%d" % (task.task_id, system, rep))
+        try:
+            outcome = runners[system](ctx, rep)
+            verification = verify(ctx, outcome.worktree, "eval-verify-%s-%s-%d" % (task.task_id, system, rep))
+        finally:
+            if hasattr(ctx, "close"):
+                ctx.close()
         record.update({"outcome": outcome.to_dict(), "verification": verification,
                        "V": int(verification["verified"]), "D": int(outcome.declared),
                        "false_completion": int(outcome.declared and not verification["verified"])})
@@ -140,7 +157,7 @@ def run(protocol: dict, out_dir: Path, provider: dict, *, workers: int = 3, syst
         tasks = [t for t in tasks if t.task_id in task_ids]
     systems = list(systems or protocol["systems"])
     reps = repetitions or protocol["repetitions"]
-    units = [(t, s, r) for t in tasks for s in systems for r in range(reps)]
+    units = [(t, s, r) for t in tasks for s in systems for r in range(reps) if comparators_domains.applicable(s, t)]
     (out_dir / "protocol.json").write_text(json.dumps(protocol, indent=2, sort_keys=True) + "\n")
     records = []
     started = time.monotonic()
@@ -223,31 +240,39 @@ def _report(records: list, protocol: dict) -> dict:
             "per_task": {task: {"p_success": _mean(v), "runs": len(v)} for task, v in sorted(by_task.items())},
         }
     paired = {}
-    if "gabriel" in systems:
-        gabriel_by_task = {}
+    pairs = protocol.get("paired") or ([["gabriel", s] for s in systems if s != "gabriel"] if "gabriel" in systems else [])
+    family_of = {r["task_id"]: r["family"] for r in records}
+    for treatment, baseline in pairs:
+        if treatment not in systems or baseline not in systems:
+            continue
+        by_task = {}
         for r in records:
-            if r["system"] == "gabriel":
-                gabriel_by_task.setdefault(r["task_id"], []).append(r["V"])
-        for baseline in systems:
-            if baseline == "gabriel":
+            if r["system"] in (treatment, baseline):
+                entry = by_task.setdefault(r["task_id"], {treatment: [], baseline: []})
+                entry[r["system"]].append(r)
+        diffs_by_task, tokens_by_task, requests_by_task = {}, {}, {}
+        for t, entry in by_task.items():
+            if not entry[treatment] or not entry[baseline]:
                 continue
-            base_by_task = {}
-            for r in records:
-                if r["system"] == baseline:
-                    base_by_task.setdefault(r["task_id"], []).append(r["V"])
-            diffs_by_task = {t: _mean(gabriel_by_task[t]) - _mean(base_by_task[t]) for t in gabriel_by_task if t in base_by_task}
-            family_of = {r["task_id"]: r["family"] for r in records}
-            diffs_by_family = {}
-            for t, d in diffs_by_task.items():
-                diffs_by_family.setdefault(family_of[t], []).append(d)
-            paired["gabriel_minus_" + baseline] = {"per_task": diffs_by_task, "mean": _mean(list(diffs_by_task.values())),
-                                                   "ci95_by_family": _bootstrap(diffs_by_family, _mean, resamples, seed + 2),
-                                                   "ci95_by_task": _bootstrap({t: [d] for t, d in diffs_by_task.items()}, _mean, resamples, seed + 3)}
+            diffs_by_task[t] = _mean([x["V"] for x in entry[treatment]]) - _mean([x["V"] for x in entry[baseline]])
+            cost = lambda rows, key: _mean([x["outcome"][key] for x in rows if x.get("outcome")])  # noqa: E731
+            tokens_by_task[t] = cost(entry[treatment], "model_tokens") - cost(entry[baseline], "model_tokens")
+            requests_by_task[t] = cost(entry[treatment], "model_requests") - cost(entry[baseline], "model_requests")
+        diffs_by_family = {}
+        for t, d in diffs_by_task.items():
+            diffs_by_family.setdefault(family_of[t], []).append(d)
+        paired["%s_minus_%s" % (treatment, baseline)] = {
+            "per_task": diffs_by_task, "mean": _mean(list(diffs_by_task.values())),
+            "ci95_by_family": _bootstrap(diffs_by_family, _mean, resamples, seed + 2),
+            "ci95_by_task": _bootstrap({t: [d] for t, d in diffs_by_task.items()}, _mean, resamples, seed + 3),
+            "tokens_per_task": tokens_by_task, "mean_tokens": _mean(list(tokens_by_task.values())),
+            "requests_per_task": requests_by_task, "mean_requests": _mean(list(requests_by_task.values()))}
     failures = [{"task_id": r["task_id"], "system": r["system"], "rep": r["rep"], "declared": bool(r["D"]), "verified": bool(r["V"]),
                  "reason": (r.get("outcome") or {}).get("declared_reason") or r.get("harness_error"),
                  "oracle_exit": ((r.get("verification") or {}).get("oracle") or {}).get("exit_code"),
                  "visible_exit": ((r.get("verification") or {}).get("visible") or {}).get("exit_code"),
                  "out_of_scope": (r.get("verification") or {}).get("out_of_scope_paths"),
+                 "problems": (r.get("verification") or {}).get("problems"),
                  "provider_statuses": (r.get("outcome") or {}).get("provider_statuses")}
                 for r in records if not r["V"] or r["false_completion"]]
     return {"schema": "gabriel.evaluation-report/1", "protocol_frozen_digest": protocol["frozen_digest"],
@@ -286,18 +311,19 @@ def render_markdown(rep: dict, protocol: dict) -> str:
         lines += ["", "## Held-out families only (%s): never run before this protocol" % ", ".join(protocol["held_out_families"]), ""] + _table(rep["held_out"]["per_system"])
     if rep.get("previously_seen"):
         lines += ["", "## Previously seen tasks only (not a held-out test)", ""] + _table(rep["previously_seen"]["per_system"])
-    lines += ["", "## Paired differences, all tasks (gabriel minus baseline, verified success per task)", ""]
+    lines += ["", "## Paired differences, all tasks (treatment minus baseline per task: verified success; mean model tokens and requests)", ""]
     for name, d in rep["paired_differences"].items():
         ci = d["ci95_by_family"]
-        lines.append("- %s: mean %+.2f, CI95 by family [%+.2f, %+.2f], by task [%+.2f, %+.2f]; per task: %s" % (
-            name, d["mean"], ci["low"], ci["high"], d["ci95_by_task"]["low"], d["ci95_by_task"]["high"],
+        lines.append("- %s: success mean %+.2f, CI95 by family [%+.2f, %+.2f], by task [%+.2f, %+.2f]; tokens %+.0f, requests %+.2f; per task: %s" % (
+            name, d["mean"], ci["low"] if ci else 0, ci["high"] if ci else 0, d["ci95_by_task"]["low"] if d["ci95_by_task"] else 0,
+            d["ci95_by_task"]["high"] if d["ci95_by_task"] else 0, d.get("mean_tokens", 0), d.get("mean_requests", 0),
             ", ".join("%s %+.1f" % (t, v) for t, v in sorted(d["per_task"].items()))))
     lines += ["", "## Retained failures and false completions", ""]
     if not rep["failures"]:
         lines.append("none")
     for f in rep["failures"]:
-        lines.append("- %s / %s / rep %d: declared=%s verified=%s; %s; oracle exit %s, visible exit %s, out of scope %s; provider %s" % (
-            f["task_id"], f["system"], f["rep"], f["declared"], f["verified"], f["reason"], f["oracle_exit"], f["visible_exit"],
-            f["out_of_scope"], f["provider_statuses"]))
+        detail = ("problems %s" % "; ".join(f["problems"][:3])) if f.get("problems") else ("oracle exit %s, visible exit %s" % (f["oracle_exit"], f["visible_exit"]))
+        lines.append("- %s / %s / rep %d: declared=%s verified=%s; %s; %s, out of scope %s; provider %s" % (
+            f["task_id"], f["system"], f["rep"], f["declared"], f["verified"], f["reason"], detail, f["out_of_scope"], f["provider_statuses"]))
     lines += ["", rep["claim_scope"], ""]
     return "\n".join(lines)

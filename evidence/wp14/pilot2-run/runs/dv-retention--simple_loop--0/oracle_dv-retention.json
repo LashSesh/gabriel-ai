@@ -1,0 +1,36 @@
+{
+ "claims": [
+  {
+   "path": "doc/records_summary.md",
+   "must_contain": [
+    "5 years",
+    "five (5) years",
+    "(5) years",
+    "five years",
+    "5-year"
+   ],
+   "cited_source_id": "policy",
+   "quote_must_include": "five (5) years"
+  },
+  {
+   "path": "doc/records_summary.md",
+   "must_contain": [
+    "weekly"
+   ],
+   "cited_source_id": "audit",
+   "quote_must_include": "weekly"
+  }
+ ],
+ "forbidden": [
+  {
+   "path": "doc/records_summary.md",
+   "must_not_contain": [
+    "2 years",
+    "two (2) years",
+    "(2) years",
+    "two years",
+    "2-year"
+   ]
+  }
+ ]
+}

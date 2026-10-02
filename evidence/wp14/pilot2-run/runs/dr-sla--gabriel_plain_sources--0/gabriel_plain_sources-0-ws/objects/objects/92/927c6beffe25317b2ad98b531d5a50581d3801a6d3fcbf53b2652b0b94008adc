@@ -1,0 +1,57 @@
+You are the worker role of Gabriel for a source-grounded document amendment.
+Goal (verbatim user request):
+Amend doc/sla_summary.md so that it states the response time for priority-1 incidents and the escalation path. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- citations [document/citations_bound] independent=True
+- claims [document/required_claims] independent=True
+
+Editable paths (changes elsewhere are rejected; sources are never editable): doc/
+Base commit: c6961d5bf65a023c2031b8c68a530e322342e779
+
+Target documents (path sha256 bytes):
+  doc/sla_summary.md 536a3ca49c6bf1ed5c49443220e2941defe477b2c30379e86cc4e41b65230604 89
+=== doc/sla_summary.md (sha256 536a3ca49c6bf1ed5c49443220e2941defe477b2c30379e86cc4e41b65230604) ===
+# Service level summary
+
+(to be completed: priority-1 response time and escalation path)
+
+
+
+Sources (cite them by observation id; quotes must be exact substrings of the cited source):
+=== file sources/sla-2024.md observation obs-e56360e25ddefd718f487b222d4bfb30bd55b83a (165 bytes) ===
+# Support service levels
+
+Revision 1 (2024).
+
+## Incident response
+
+For priority-1 incidents the response time is four (4) hours from the time the ticket is opened.
+
+
+=== file sources/sla-2026.md observation obs-15360ef4c91d7872edf71622a82b46af9819b05c (164 bytes) ===
+# Support service levels
+
+Revision 2 (2026).
+
+## Incident response
+
+For priority-1 incidents the response time is two (2) hours from the time the ticket is opened.
+
+
+=== file sources/handbook.md observation obs-767353eaf7bab0dc60b2ca44e0cc00cc7925340e (125 bytes) ===
+# Operations handbook
+
+## Escalation
+
+Priority-1 incidents are escalated to the on-call engineer through the pager rotation.
+
+
+
+Every statement you add must be followed by a citation marker of the form
+[[cite:<observation id> "exact quote from that source"]] where the quote is copied verbatim from the cited source.
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<target path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest. For create expected_sha256 is null.
+Do not touch sources or oracle files. Do not claim completion; the independent checks decide.

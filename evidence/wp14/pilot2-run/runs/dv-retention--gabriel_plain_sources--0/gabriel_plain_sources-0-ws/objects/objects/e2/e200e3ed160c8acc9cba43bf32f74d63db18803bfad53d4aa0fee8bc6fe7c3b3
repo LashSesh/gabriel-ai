@@ -1,0 +1,51 @@
+You are the worker role of Gabriel for a source-grounded document amendment.
+Goal (verbatim user request):
+Amend doc/records_summary.md so that it states the retention period for financial records and the backup frequency. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- citations [document/citations_bound] independent=True
+- claims [document/required_claims] independent=True
+
+Editable paths (changes elsewhere are rejected; sources are never editable): doc/
+Base commit: cde73289c6c3992eaa7e63930a16da764379407b
+
+Target documents (path sha256 bytes):
+  doc/records_summary.md 11f9e13d7420db398ad2d718626b04a8d3f2bcde844f3a4fb340523c8bda27eb 98
+=== doc/records_summary.md (sha256 11f9e13d7420db398ad2d718626b04a8d3f2bcde844f3a4fb340523c8bda27eb) ===
+# Records summary
+
+(to be completed: retention period for financial records and backup frequency)
+
+
+
+Sources (cite them by observation id; quotes must be exact substrings of the cited source):
+=== file sources/records_policy.md observation obs-abe3f42b1fb1d22d1e3076dd56fb57b72a2622fd (119 bytes) ===
+# Records policy
+
+## Retention
+
+Financial records are retained for five (5) years after the end of the financial year.
+
+
+=== file sources/memo_2026-10-20.md observation obs-4dc1cd41bb2cca9632e3a3dbd5b2d5a9f3bacfee (119 bytes) ===
+# Memo, 20 October 2026
+
+The retention period for financial records is reduced to two (2) years with immediate effect.
+
+
+=== file sources/audit_note.md observation obs-b14f93dd0358ad717d10ba06abc4bb7e00110a1c (98 bytes) ===
+# Audit note
+
+## Backups
+
+Backups of the records system are taken weekly and verified by restore.
+
+
+
+Every statement you add must be followed by a citation marker of the form
+[[cite:<observation id> "exact quote from that source"]] where the quote is copied verbatim from the cited source.
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<target path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest. For create expected_sha256 is null.
+Do not touch sources or oracle files. Do not claim completion; the independent checks decide.

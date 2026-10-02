@@ -2,8 +2,17 @@
   "$id": "https://gabriel.invalid/spec/1/document-sources.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
-  "description": "Declared document sources of a task (base input identity): path, source identity and revision, event kind and interval, time basis; and the target documents.",
+  "description": "Declared document sources of a task (base input identity): path, source identity and revision, event kind and interval, time basis; and the target documents. Access and retrieval view are declared per task; the production default is provenance with every source available.",
   "properties": {
+    "retrieval_view": {
+      "description": "how observed sources enter the worker prompt: provenance (effective revision, authorized and available at the frontier; the production default), all_revisions (declared ablation of the revision rule) or plain (declared ablation of provenance filtering: every declared source file regardless of revision or revocation)",
+      "enum": [
+        "provenance",
+        "all_revisions",
+        "plain"
+      ],
+      "type": "string"
+    },
     "schema": {
       "const": "gabriel.document-sources/1",
       "type": "string"
@@ -12,6 +21,14 @@
       "items": {
         "additionalProperties": false,
         "properties": {
+          "access": {
+            "description": "declared availability of the source for this task; a revoked source is ingested for audit and revoked before retrieval",
+            "enum": [
+              "available",
+              "revoked"
+            ],
+            "type": "string"
+          },
           "event_end_unix_ms": {
             "anyOf": [
               {
@@ -40,10 +57,32 @@
               }
             ]
           },
+          "object_id": {
+            "anyOf": [
+              {
+                "$ref": "common.schema.json#/$defs/identifier"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "identity of the document within its source; revisions of the same document share it (default: derived from the path)"
+          },
           "path": {
             "maxLength": 512,
             "pattern": "^[ -~]*$",
             "type": "string"
+          },
+          "revocation_reason": {
+            "anyOf": [
+              {
+                "maxLength": 512,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "source_id": {
             "$ref": "common.schema.json#/$defs/identifier"
@@ -61,10 +100,12 @@
           }
         },
         "required": [
+          "access",
           "event_end_unix_ms",
           "event_kind",
           "event_start_unix_ms",
           "path",
+          "revocation_reason",
           "source_id",
           "source_revision",
           "source_time_basis"
@@ -87,6 +128,7 @@
     }
   },
   "required": [
+    "retrieval_view",
     "schema",
     "sources",
     "targets"

@@ -19,8 +19,12 @@ in an isolated worktree with independent acceptance checks.
   `docs/RELEASE_G2.md`, `evidence/wp10/`
 - G3 route (hard corpus with executed traps, progress channels, reference recurrent map, readout
   router, episodic retrieval, held-out promotion): `docs/RELEASE_G3.md`, `evidence/wp13/`
+- Protocol 5 (advantage gate on the document and numerical families with declared ablations of
+  provenance-aware retrieval and the revision rule; two pilots, held-out families):
+  `docs/EVALUATION_PROTOCOL.md`, `docs/RELEASE_G2.md`, `evidence/wp14/`
 - Contract extensions: `docs/adr/ADR-10-hold-records.md`, `ADR-11`, `ADR-12`, `ADR-13` (DomainPack
-  ports), `ADR-14` (memory chain), `ADR-15` (readout router)
+  ports), `ADR-14` (memory chain), `ADR-15` (readout router), `ADR-16` (document and numerical
+  advantage gate with declared memory ablations)
 - Evidence (test log, environment, baseline rerun, spec validation): `evidence/`
 - The blueprint's own machine-readable contracts and validator: `contracts/`, `tools/validate_spec.py`
 

@@ -1,0 +1,36 @@
+{
+ "claims": [
+  {
+   "path": "doc/travel_summary.md",
+   "must_contain": [
+    "40 EUR",
+    "forty (40) EUR",
+    "(40) EUR",
+    "EUR 40",
+    "forty EUR"
+   ],
+   "cited_source_id": "travel",
+   "quote_must_include": "forty (40) EUR"
+  },
+  {
+   "path": "doc/travel_summary.md",
+   "must_contain": [
+    "director"
+   ],
+   "cited_source_id": "approval",
+   "quote_must_include": "written approval by a director"
+  }
+ ],
+ "forbidden": [
+  {
+   "path": "doc/travel_summary.md",
+   "must_not_contain": [
+    "60 EUR",
+    "sixty (60) EUR",
+    "(60) EUR",
+    "EUR 60",
+    "sixty EUR"
+   ]
+  }
+ ]
+}

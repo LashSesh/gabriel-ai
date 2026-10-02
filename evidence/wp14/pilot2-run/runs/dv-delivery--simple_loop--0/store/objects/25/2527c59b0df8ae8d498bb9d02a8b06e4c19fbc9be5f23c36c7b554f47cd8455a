@@ -1,0 +1,49 @@
+You are the worker role of Gabriel for a source-grounded document amendment.
+Goal (verbatim user request):
+Amend doc/vendor_terms.md so that it states the delivery time and the warranty period. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- citations [document/citations_bound] independent=True
+- claims [document/required_claims] independent=True
+
+Editable paths (changes elsewhere are rejected; sources are never editable): doc/
+Base commit: a8b42d338d367cd3a76fdf44da0e2d51b2a8d495
+
+Target documents (path sha256 bytes):
+  doc/vendor_terms.md 88bb57614c2bfc9cbaa7cac0220fe52009171f13d4d913cc99f78e31277a0388 69
+=== doc/vendor_terms.md (sha256 88bb57614c2bfc9cbaa7cac0220fe52009171f13d4d913cc99f78e31277a0388) ===
+# Vendor terms
+
+(to be completed: delivery time and warranty period)
+
+
+
+Sources (cite them by observation id; quotes must be exact substrings of the cited source):
+=== file sources/contract.md observation obs-9f2404efc5c5ecb266a2bcfcfc94c1c2c441a3f6 (107 bytes) ===
+# Supply contract (signed)
+
+## Delivery
+
+The supplier delivers within ten (10) business days of the order.
+
+
+=== file sources/quotation.md observation obs-edf1276dc914441d26cdf0336e3f7411279dc070 (75 bytes) ===
+# Quotation 2026-07
+
+Delivery within seven (7) business days of the order.
+
+
+=== file sources/warranty.md observation obs-46bd5d92e55c929e431ef5de234412b5918b25de (82 bytes) ===
+# Warranty note
+
+All delivered items carry a warranty of twenty-four (24) months.
+
+
+
+Every statement you add must be followed by a citation marker of the form
+[[cite:<observation id> "exact quote from that source"]] where the quote is copied verbatim from the cited source.
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<target path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest. For create expected_sha256 is null.
+Do not touch sources or oracle files. Do not claim completion; the independent checks decide.

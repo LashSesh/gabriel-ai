@@ -1,0 +1,53 @@
+You are the worker role of Gabriel for a source-grounded document amendment.
+Goal (verbatim user request):
+Amend doc/records_summary.md so that it states the retention period for financial records and the backup frequency. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- citations [document/citations_bound] independent=True
+- claims [document/required_claims] independent=True
+
+Editable paths (changes elsewhere are rejected; sources are never editable): doc/
+Base commit: c8835cdeddbb95f330fcc0f346f5af9503b2435b
+
+Target documents (path sha256 bytes):
+  doc/records_summary.md 11f9e13d7420db398ad2d718626b04a8d3f2bcde844f3a4fb340523c8bda27eb 98
+=== doc/records_summary.md (sha256 11f9e13d7420db398ad2d718626b04a8d3f2bcde844f3a4fb340523c8bda27eb) ===
+# Records summary
+
+(to be completed: retention period for financial records and backup frequency)
+
+
+
+Sources (cite them by observation id; quotes must be exact substrings of the cited source):
+=== file sources/records_policy.md observation obs-027668921d70fe7e4f54a22e8078f76af694c2cd (119 bytes) ===
+# Records policy
+
+## Retention
+
+Financial records are retained for five (5) years after the end of the financial year.
+
+
+=== file sources/memo_2026-10-20.md observation obs-fdb8881fcdfdb8bc6de1a0ccb667a2bb04d6129a (180 bytes) ===
+# Memo, 20 October 2026
+
+The retention period for financial records is reduced to two (2) years with immediate effect.
+
+(This memo was withdrawn by its author on 22 October 2026.)
+
+
+=== file sources/audit_note.md observation obs-5efb827e7fe5aeaa1e024a057ddfe120a3e41684 (98 bytes) ===
+# Audit note
+
+## Backups
+
+Backups of the records system are taken weekly and verified by restore.
+
+
+
+Every statement you add must be followed by a citation marker of the form
+[[cite:<observation id> "exact quote from that source"]] where the quote is copied verbatim from the cited source.
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<target path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest. For create expected_sha256 is null.
+Do not touch sources or oracle files. Do not claim completion; the independent checks decide.

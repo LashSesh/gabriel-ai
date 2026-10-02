@@ -29,10 +29,11 @@ def _git_dir(worktree: Path) -> list:
     if link.is_file():
         target = link.read_text().strip().removeprefix("gitdir:").strip()
         if not Path(target).is_dir():
-            unit = worktree.resolve().parent.parent.parent  # <unit>/<ws>/worktrees/<run>
-            repo = unit / "repo" / ".git"
-            if repo.is_dir():
-                return ["--git-dir=" + str(repo), "--work-tree=" + str(worktree.resolve())]
+            # <unit>/<ws>/worktrees/<run> (Gabriel) or <unit>/worktrees/<name> (baselines): the unit holds repo/
+            for parent in worktree.resolve().parents:
+                repo = parent / "repo" / ".git"
+                if repo.is_dir():
+                    return ["--git-dir=" + str(repo), "--work-tree=" + str(worktree.resolve())]
     return []
 
 

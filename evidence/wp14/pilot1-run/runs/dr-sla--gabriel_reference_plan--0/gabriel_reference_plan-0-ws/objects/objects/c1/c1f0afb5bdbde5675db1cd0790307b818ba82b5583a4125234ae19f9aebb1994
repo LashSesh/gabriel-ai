@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-EUfs8LxpagD3v79URW64j6MTnqfGB",
+  "object": "chat.completion",
+  "created": 1790979504,
+  "model": "gpt-4.1-mini-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"operations\": [{\"kind\": \"modify\", \"path\": \"doc/sla_summary.md\", \"expected_sha256\": \"536a3ca49c6bf1ed5c49443220e2941defe477b2c30379e86cc4e41b65230604\", \"content\": \"# Service level summary\\n\\nFor priority-1 incidents the response time is two (2) hours from the time the ticket is opened [[cite:obs-549f2b73b90701cbea76c129956d2c7c7d891833 \\\"For priority-1 incidents the response time is two (2) hours from the time the ticket is opened.\\\"]].\\n\\nPriority-1 incidents are escalated to the on-call engineer through the pager rotation [[cite:obs-842165e6fc43a6987f9f2c4ec1fa7358effa6724 \\\"Priority-1 incidents are escalated to the on-call engineer through the pager rotation.\\\"]].\\n\"}], \"rationale\": \"Added the priority-1 incident response time and escalation path statements with exact citations from the provided sources, as requested.\"}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 627,
+    "completion_tokens": 246,
+    "total_tokens": 873,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_d30c168746"
+}

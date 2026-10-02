@@ -287,26 +287,32 @@ def run_gabriel(ctx: EvalContext, rep: int, *, system: str = "gabriel", max_repa
                              scope={"principals": [ws.config["principal_id"]], "source_kind": "episode", "task_id": None})
         created = ws.create_task(spec, task_id="task-%s-%s-%d" % (ctx.task.task_id, system, rep))
         summary = TaskRunner(ws, created["task_id"]).run()
-        projection = ws.owner.projection(summary["run_id"])
-        statuses, revisions = [], []
-        for attempt in projection["attempts"].values():
-            if attempt["capability_id"] == "model.generate" and attempt["result_ref"]:
-                result = loads(ws.store.get(attempt["result_ref"]))
-                statuses.append(result["status"])
-                for output in result["outputs"]:
-                    if output["output_slot"] == "envelope":
-                        revisions.append(loads(ws.store.get(output["artifact_ref"])).get("model_revision"))
-        replay = ws.owner.replay()
-        deadline = projection["run_meta"]["hold"] is not None and projection["run_meta"]["hold"]["reason_code"] in ("budget_exhausted", "planner_budget_exhausted")
-        return Outcome(system, ctx.task.task_id, ctx.task.family, rep, summary["state"] == "succeeded", "run state " + summary["state"],
-                       summary["spent"]["model_requests"], summary["spent"]["model_tokens"], int((time.monotonic() - started) * 1000),
-                       statuses, sorted({r for r in revisions if r}), created["worktree"], timed_out=deadline,
-                       log=summary["log"][-12:], gabriel={"run_id": summary["run_id"], "workspace": str(ws_dir), "hold": summary["hold"],
-                                                          "replay": replay["status"], "events": replay["events"],
-                                                          "assessments": summary["assessments"]},
-                       repairs_used=summary["repair_count"], plan_versions=summary["plan_versions"])
+        return gabriel_outcome(ws, ws_dir, created, summary, system=system, task_id=ctx.task.task_id, family=ctx.task.family, rep=rep, started=started)
     finally:
         ws.close()
+
+
+def gabriel_outcome(ws, ws_dir, created: dict, summary: dict, *, system: str, task_id: str, family: str, rep: int, started: float) -> Outcome:
+    """The retained outcome of a Gabriel run: declared success is run state ``succeeded``; provider
+    statuses and model revisions come from the journal; replay is executed and recorded."""
+    projection = ws.owner.projection(summary["run_id"])
+    statuses, revisions = [], []
+    for attempt in projection["attempts"].values():
+        if attempt["capability_id"] == "model.generate" and attempt["result_ref"]:
+            result = loads(ws.store.get(attempt["result_ref"]))
+            statuses.append(result["status"])
+            for output in result["outputs"]:
+                if output["output_slot"] == "envelope":
+                    revisions.append(loads(ws.store.get(output["artifact_ref"])).get("model_revision"))
+    replay = ws.owner.replay()
+    deadline = projection["run_meta"]["hold"] is not None and projection["run_meta"]["hold"]["reason_code"] in ("budget_exhausted", "planner_budget_exhausted")
+    return Outcome(system, task_id, family, rep, summary["state"] == "succeeded", "run state " + summary["state"],
+                   summary["spent"]["model_requests"], summary["spent"]["model_tokens"], int((time.monotonic() - started) * 1000),
+                   statuses, sorted({r for r in revisions if r}), created["worktree"], timed_out=deadline,
+                   log=summary["log"][-12:], gabriel={"run_id": summary["run_id"], "workspace": str(ws_dir), "hold": summary["hold"],
+                                                      "replay": replay["status"], "events": replay["events"],
+                                                      "assessments": summary["assessments"]},
+                   repairs_used=summary["repair_count"], plan_versions=summary["plan_versions"])
 
 
 RUNNERS = {"provider_only": run_provider_only, "simple_loop": run_simple_loop,

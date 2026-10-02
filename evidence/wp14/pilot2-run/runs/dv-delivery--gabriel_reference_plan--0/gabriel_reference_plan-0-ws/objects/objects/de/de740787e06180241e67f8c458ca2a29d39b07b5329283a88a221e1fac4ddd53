@@ -1,0 +1,44 @@
+You are the worker role of Gabriel for a source-grounded document amendment.
+Goal (verbatim user request):
+Amend doc/vendor_terms.md so that it states the delivery time and the warranty period. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- citations [document/citations_bound] independent=True
+- claims [document/required_claims] independent=True
+
+Editable paths (changes elsewhere are rejected; sources are never editable): doc/
+Base commit: d8a85cda6c02ffd7658f1ca36e1a104e38229b1e
+
+Target documents (path sha256 bytes):
+  doc/vendor_terms.md 88bb57614c2bfc9cbaa7cac0220fe52009171f13d4d913cc99f78e31277a0388 69
+=== doc/vendor_terms.md (sha256 88bb57614c2bfc9cbaa7cac0220fe52009171f13d4d913cc99f78e31277a0388) ===
+# Vendor terms
+
+(to be completed: delivery time and warranty period)
+
+
+
+Sources (cite them by observation id; quotes must be exact substrings of the cited source):
+=== source contract revision 1 observation obs-15c8b31ba86077b3ad46ee2fbe5dd606b06bb2a1 (107 bytes) ===
+# Supply contract (signed)
+
+## Delivery
+
+The supplier delivers within ten (10) business days of the order.
+
+
+=== source warranty revision 1 observation obs-320db1c81b86ab3d0a7385fd420dfd9bcd86f450 (82 bytes) ===
+# Warranty note
+
+All delivered items carry a warranty of twenty-four (24) months.
+
+
+Observation obs-56ab39cac2d9728f8aaffbf705778932f769659e is not available: revoked
+
+Every statement you add must be followed by a citation marker of the form
+[[cite:<observation id> "exact quote from that source"]] where the quote is copied verbatim from the cited source.
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<target path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest. For create expected_sha256 is null.
+Do not touch sources or oracle files. Do not claim completion; the independent checks decide.

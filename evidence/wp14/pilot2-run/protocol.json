@@ -1,0 +1,134 @@
+{
+  "backend": "linux_namespace",
+  "bootstrap": {
+    "resamples": 2000,
+    "seed": 20261002
+  },
+  "budget_per_task": {
+    "max_input_tokens": 60000,
+    "max_output_tokens": 4000,
+    "model_requests": 6,
+    "model_tokens_total": 120000,
+    "tool_attempts": 64,
+    "wall_ms": 600000
+  },
+  "corpus_digest": "0832e08477c4f4e77f0ce8fdd1df4fd5441641be82310b50c2e8ef9f9312adcf",
+  "declared_criterion": "Pilot 2: estimate discrimination on the amended corpus; the minimum relevant effect for the final protocol is declared in evidence/wp14/pilot_declaration.md",
+  "declared_success": {
+    "document_and_numerical_tiers": {
+      "gabriel": "as gabriel_reference_plan with the model planner (one planner request per plan version)",
+      "gabriel_all_revisions": "as gabriel_reference_plan with the declared all_revisions view: every eligible revision enters the prompt, revocation and authorization still apply (ablation of the revision rule; document tasks only)",
+      "gabriel_no_repair": "as gabriel with max_repairs=0 and max_plan_versions=1 (ablation of the repair cycle)",
+      "gabriel_plain_sources": "as gabriel_reference_plan with the declared plain view: every declared source file enters the prompt regardless of revision or revocation (ablation of provenance-aware retrieval; document tasks only)",
+      "gabriel_reference_plan": "run state succeeded with the pack's reference plan and the production retrieval view (effective revision, authorized and available sources; contained numerical worker)",
+      "provider_only": "an admissible deliverable was produced (amendment applied or declared operation executed through the same adapter); no verification",
+      "simple_loop": "the system's own run of the independent content checks passed (plain source view, no owner, memory service or policy)"
+    },
+    "gabriel": "run state succeeded (every mandatory check passed with eligible evidence, artifacts verified, effects reconciled)",
+    "gabriel_episodes": "as gabriel_reference_plan (rule-based repair) with the frozen episodes retrievable into the worker prompt (readout ablation)",
+    "gabriel_no_repair": "as gabriel, with max_repairs=0 and max_plan_versions=1 (ablation of the repair cycle)",
+    "gabriel_policy": "as gabriel_reference_plan, with the frozen readout policy pinned: at a failed verification it chooses repair or stop from the progress channels, and it may retrieve frozen episodes into the worker prompt",
+    "gabriel_reference_plan": "as gabriel, with the domain pack's deterministic reference plan admitted without a planner request (planner ablation)",
+    "provider_only": "an admissible patch was applied (no verification)",
+    "simple_loop": "the system's own runs of the visible tests and the oracle both exited 0"
+  },
+  "episode_seed": null,
+  "families": [
+    "revision",
+    "revoked"
+  ],
+  "frozen_at_utc": "2026-10-02T22:21:00.989284+00:00",
+  "frozen_digest": "48c1a88773d0c84600f8d47645cd21ea12d0571e5797345f68b19d3a1b84a312",
+  "harness_identity": "96e9f6a9d8635dc0e4d256ff5620945cf82faaf0c2a9f691f01e294cd47df5fb",
+  "held_out_families": [],
+  "metrics": [
+    "p_success = mean(V)",
+    "p_false_completion = mean(D*(1-V))",
+    "conditional false completion = sum(D*(1-V))/sum(D)",
+    "model requests, model tokens and wall time per run",
+    "recovery: Gabriel runs that used repair cycles or extra plan versions",
+    "paired differences gabriel - baseline per task (mean over repetitions)",
+    "bootstrap percentile intervals, resampling task families with replacement (and tasks as a secondary view)"
+  ],
+  "note": "Protocol 5 pilot 2 on the amended document corpus (status statements removed from the source texts; see evidence/wp14/pilot_declaration.md, amendment after pilot 1). Document families only: the numerical tasks are unchanged since pilot 1. Same declaration of the minimum relevant effect.",
+  "paired": [
+    [
+      "gabriel_reference_plan",
+      "provider_only"
+    ],
+    [
+      "gabriel_reference_plan",
+      "simple_loop"
+    ],
+    [
+      "gabriel_reference_plan",
+      "gabriel_plain_sources"
+    ],
+    [
+      "gabriel_reference_plan",
+      "gabriel_all_revisions"
+    ]
+  ],
+  "policy": null,
+  "provider": {
+    "credential_ref": "env:OPENAI_API_KEY",
+    "kind": "openai_compat",
+    "model": "gpt-4.1-mini",
+    "temperature_milli": 0,
+    "timeout_ms": 120000
+  },
+  "purpose": "Matched comparison: increase independently verified task success or reduce resources at equal success, under a fixed task distribution and matched constraints. Not a benchmark of general capability.",
+  "repetitions": 1,
+  "sample_size_statement": "6 tasks in 2 families; the minimum relevant effect is not predeclared from a pilot, so intervals are reported as descriptive uncertainty, not as a powered test",
+  "schema": "gabriel.evaluation-protocol/1",
+  "systems": [
+    "provider_only",
+    "simple_loop",
+    "gabriel_reference_plan",
+    "gabriel_plain_sources",
+    "gabriel_all_revisions"
+  ],
+  "tasks": [
+    {
+      "digest": "2b9c370b172b66606de1fb5e7256990add95ad11a8095b46a85b536ab77fb459",
+      "family": "revision",
+      "task_id": "dr-notice",
+      "tier": "document"
+    },
+    {
+      "digest": "4d480b447108e1d35c371e5f55df135f05e049400c01c05247ba1048039514df",
+      "family": "revision",
+      "task_id": "dr-sla",
+      "tier": "document"
+    },
+    {
+      "digest": "e837fe40aa6cd0819145ea84b4c3752aee4d36229468c65e2260adf2cc18444c",
+      "family": "revision",
+      "task_id": "dr-fee",
+      "tier": "document"
+    },
+    {
+      "digest": "ffb14dcbd7a7dd43a6a9b0dfe9a83925468f18ffea3484cfb59e8c893f636593",
+      "family": "revoked",
+      "task_id": "dv-retention",
+      "tier": "document"
+    },
+    {
+      "digest": "ff4c970a21e509105ab0da107ab22fe753a80f06b88919f674d0d596b1526db3",
+      "family": "revoked",
+      "task_id": "dv-delivery",
+      "tier": "document"
+    },
+    {
+      "digest": "6e1f7c7bcf995bf2ac1a06391e5d1d29a9c750fef11493f437b74ed19e4eef60",
+      "family": "revoked",
+      "task_id": "dv-travel",
+      "tier": "document"
+    }
+  ],
+  "tiers": [
+    "document"
+  ],
+  "time_limit_is_failure": true,
+  "verification": "fresh, system-independent: changed paths within allowed_paths; visible tests exit 0; oracle installed from the corpus text and exit 0; all executed in the containment backend on the final tree"
+}

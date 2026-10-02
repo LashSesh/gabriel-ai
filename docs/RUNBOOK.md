@@ -63,6 +63,13 @@ claims with the source each must be cited from:
             {"check_id": "claims", "kind": "document/required_claims", "independent": true,
              "oracle_files": [{"path": "oracle/required_claims.json", "source": "/outside/required_claims.json"}]}]}
 ```
+A source may carry `"object_id"` (revisions of one document share it, so the memory's revision
+rule applies across files), `"access": "revoked"` with a `"revocation_reason"` (the source is
+ingested for audit and revoked before any retrieval, so it is never cited), and the task may
+declare `"retrieval_view"`: `provenance` (the default: effective revision, authorized and
+available sources), `all_revisions` or `plain`. The last two are declared evaluation ablations
+(ADR-16), not modes for production tasks.
+
 A numerical task binds one declared operation of `gabriel_agent.adapters.analytical`
 (`units.convert`, `series.resample_mean`, `graph.small_signature`) to an observed dataset; the
 job runs in a fresh contained worker and the oracle is the expected output with units and
@@ -123,6 +130,19 @@ scripts/eval_final_diffs.py ./eval-run                             # retain the 
 `provider.json` is a provider spec such as `{"kind": "openai_compat", "model": "gpt-4.1-mini",
 "credential_ref": "env:OPENAI_API_KEY", "temperature_milli": 0}`. The run refuses a protocol
 whose digest or corpus changed after freezing. See `docs/EVALUATION_PROTOCOL.md`.
+
+The corpus has four tiers: `standard` and `hard` (repository repair), `document` (source-grounded
+amendments with revisions, revoked sources and conflicts) and `numerical` (declared transforms
+with reference values). `gabriel eval corpus-check --tier document|numerical` executes the
+positive and negative deliverable controls of those tiers. Protocol 5 (ADR-16) compares the
+matched baselines with the production arm and the memory ablations on them:
+```bash
+gabriel eval corpus-check --tier document && gabriel eval corpus-check --tier numerical
+gabriel eval freeze --provider provider.json --out protocol5.json --repetitions 2 --backend linux_namespace \
+    --tiers document,numerical --systems provider_only,simple_loop,gabriel_reference_plan,gabriel_plain_sources,gabriel_all_revisions \
+    --held-out-families conflict,graph --criterion "<declared before the run>" --note "<provenance>"
+```
+The view ablations run on document tasks only; the harness skips them elsewhere.
 
 ## Routing policies and the G3 route
 A task may pin a routing policy (`"policy": {...}` in the task spec, a `gabriel.router-policy/1`

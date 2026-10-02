@@ -75,8 +75,17 @@ class ScriptedProvider:
             # that source ("=== source <id> revision <n> observation <obs> ..."): identities that
             # only exist at run time can still be scripted deterministically.
             decoded = prompt.decode("utf8", "replace")
-            ids = {m.group(1): m.group(2) for m in re.finditer(r"=== source (\S+) revision \d+ observation (\S+) ", decoded)}
+            ids = {}
+            for m in re.finditer(r"=== source (\S+) revision (\d+) observation (\S+) ", decoded):
+                ids[m.group(1)] = m.group(3)                        # {{obs:<source_id>}}: the last listed revision
+                ids["%s@%s" % (m.group(1), m.group(2))] = m.group(3)  # {{obs:<source_id>@<revision>}}
+            for m in re.finditer(r"=== file (\S+) observation (\S+) ", decoded):
+                ids["file:" + m.group(1)] = m.group(2)              # {{obs:file:<path>}} (plain source view)
+            # {{sha:<path>}} resolves to the digest the prompt lists for a target or source file, so a
+            # scripted repair round can name the identity of the file as it stands after an earlier edit.
+            shas = {m.group(1): m.group(2) for m in re.finditer(r"^  (\S+) ([0-9a-f]{64}) \d+$", decoded, re.MULTILINE)}
             text = re.sub(r"\{\{obs:([^}]+)\}\}", lambda m: ids.get(m.group(1), "obs-unresolved-" + m.group(1)), text or "")
+            text = re.sub(r"\{\{sha:([^}]+)\}\}", lambda m: shas.get(m.group(1), "0" * 64), text)
             kind = "text"
         elapsed = int((time.monotonic() - started) * 1000)
         common = dict(input_tokens=usage.get("input_tokens", len(prompt) // 4), output_tokens=usage.get("output_tokens"),

@@ -1,0 +1,55 @@
+You are the worker role of Gabriel for a source-grounded document amendment.
+Goal (verbatim user request):
+Amend doc/summary.md so that it states the notice period for members and the expense approval threshold. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- citations [document/citations_bound] independent=True
+- claims [document/required_claims] independent=True
+
+Editable paths (changes elsewhere are rejected; sources are never editable): doc/
+Base commit: 201b178dc06709932c1e69befc6d7ec07c6b48ee
+
+Target documents (path sha256 bytes):
+  doc/summary.md 0268b0bec2307479021852e9fa4468a841c899c151531ca17806e527d658b8f6 86
+=== doc/summary.md (sha256 0268b0bec2307479021852e9fa4468a841c899c151531ca17806e527d658b8f6) ===
+# Membership summary
+
+(to be completed: notice period and expense approval threshold)
+
+
+
+Sources (cite them by observation id; quotes must be exact substrings of the cited source):
+=== file sources/policy-2025.md observation obs-4e7d1b26f4815595ddc2a36f3913fea8e8c7f05d (230 bytes) ===
+# Membership policy
+
+Revision 1, adopted 12 January 2025.
+
+## Termination
+
+Members may terminate their membership in writing. The notice period for members is thirty (30) days, counted from the day the written notice is received.
+
+
+=== file sources/policy-2026.md observation obs-75db6bbcf33f1a8bbf10048d19dcb9145af348b2 (252 bytes) ===
+# Membership policy
+
+Revision 2, adopted 3 March 2026; replaces revision 1.
+
+## Termination
+
+Members may terminate their membership in writing. The notice period for members is forty-five (45) days, counted from the day the written notice is received.
+
+
+=== file sources/memo.md observation obs-bc33ba3b5677fa201c056c41109caa62109f4299 (126 bytes) ===
+# Finance memo, September 2026
+
+With effect from 1 October 2026 the expense approval threshold is 500 EUR per single expense.
+
+
+
+Every statement you add must be followed by a citation marker of the form
+[[cite:<observation id> "exact quote from that source"]] where the quote is copied verbatim from the cited source.
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<target path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest. For create expected_sha256 is null.
+Do not touch sources or oracle files. Do not claim completion; the independent checks decide.

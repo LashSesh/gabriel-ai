@@ -1,0 +1,49 @@
+You are the worker role of Gabriel for a source-grounded document amendment.
+Goal (verbatim user request):
+Amend doc/travel_summary.md so that it states the daily allowance for domestic travel and the approval rule for expensive trips. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- citations [document/citations_bound] independent=True
+- claims [document/required_claims] independent=True
+
+Editable paths (changes elsewhere are rejected; sources are never editable): doc/
+Base commit: 885489b4fa8cd8de8434963da95540e76e284070
+
+Target documents (path sha256 bytes):
+  doc/travel_summary.md 4a05b25bc118838212c5880bb5952c5469d044071be3a7213bb9973f64b35357 71
+=== doc/travel_summary.md (sha256 4a05b25bc118838212c5880bb5952c5469d044071be3a7213bb9973f64b35357) ===
+# Travel summary
+
+(to be completed: daily allowance and approval rule)
+
+
+
+Sources (cite them by observation id; quotes must be exact substrings of the cited source):
+=== file sources/travel_policy.md observation obs-d93bd5a70e63280cdc87f129beb482ca9f05607d (90 bytes) ===
+# Travel policy
+
+## Allowance
+
+The daily allowance for domestic travel is forty (40) EUR.
+
+
+=== file sources/travel_draft.md observation obs-e28d432aedb2021daec17663c4c9cfc212088807 (96 bytes) ===
+# Draft travel policy (not adopted)
+
+The daily allowance for domestic travel is sixty (60) EUR.
+
+
+=== file sources/approval_memo.md observation obs-23368ba6840031cd61e7313c5d05f38607a83d1f (108 bytes) ===
+# Approval memo
+
+Trips with a total cost above one thousand (1000) EUR need written approval by a director.
+
+
+
+Every statement you add must be followed by a citation marker of the form
+[[cite:<observation id> "exact quote from that source"]] where the quote is copied verbatim from the cited source.
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<target path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest. For create expected_sha256 is null.
+Do not touch sources or oracle files. Do not claim completion; the independent checks decide.

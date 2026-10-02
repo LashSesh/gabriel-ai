@@ -79,6 +79,14 @@
         }
       ]
     },
+    "retrieval_view": {
+      "enum": [
+        "provenance",
+        "all_revisions",
+        "plain"
+      ],
+      "type": "string"
+    },
     "schema": {
       "const": "gabriel.document-snapshot/1",
       "type": "string"
@@ -87,6 +95,13 @@
       "items": {
         "additionalProperties": false,
         "properties": {
+          "access": {
+            "enum": [
+              "available",
+              "revoked"
+            ],
+            "type": "string"
+          },
           "bytes": {
             "$ref": "common.schema.json#/$defs/safe_uint"
           },

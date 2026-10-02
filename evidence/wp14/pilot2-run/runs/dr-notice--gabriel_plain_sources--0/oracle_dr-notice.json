@@ -1,0 +1,40 @@
+{
+ "claims": [
+  {
+   "path": "doc/summary.md",
+   "must_contain": [
+    "45 days",
+    "forty-five (45) days",
+    "(45) days",
+    "45-day",
+    "forty-five days"
+   ],
+   "cited_source_id": "policy",
+   "quote_must_include": "forty-five (45) days",
+   "cited_source_revision": 2
+  },
+  {
+   "path": "doc/summary.md",
+   "must_contain": [
+    "500 EUR",
+    "EUR 500",
+    "500 euro",
+    "500 Euro"
+   ],
+   "cited_source_id": "memo",
+   "quote_must_include": "500 EUR"
+  }
+ ],
+ "forbidden": [
+  {
+   "path": "doc/summary.md",
+   "must_not_contain": [
+    "30 days",
+    "thirty (30) days",
+    "(30) days",
+    "30-day",
+    "thirty days"
+   ]
+  }
+ ]
+}

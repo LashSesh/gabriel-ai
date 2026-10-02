@@ -1,0 +1,3564 @@
+{
+  "schema": "gabriel.evaluation-results/1",
+  "protocol_frozen_digest": "48c1a88773d0c84600f8d47645cd21ea12d0571e5797345f68b19d3a1b84a312",
+  "frozen_check": {
+    "frozen_digest": "48c1a88773d0c84600f8d47645cd21ea12d0571e5797345f68b19d3a1b84a312",
+    "harness_identity_now": "96e9f6a9d8635dc0e4d256ff5620945cf82faaf0c2a9f691f01e294cd47df5fb",
+    "harness_amended": false
+  },
+  "started_at_utc": "2026-10-02T22:21:36.950143+00:00",
+  "wall_ms": 35777,
+  "units": 30,
+  "records": [
+    {
+      "task_id": "dr-fee",
+      "family": "revision",
+      "system": "gabriel_all_revisions",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-fee--gabriel_all_revisions--0",
+      "domain": "document",
+      "outcome": {
+        "system": "gabriel_all_revisions",
+        "task_id": "dr-fee",
+        "family": "revision",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 1,
+        "model_tokens": 805,
+        "wall_ms": 2697,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-mini-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-fee--gabriel_all_revisions--0/gabriel_all_revisions-0-ws/worktrees/run-dr-fee-gabriel_all_revisions-0-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess propose/output-valid -> passed: assessment passed recorded for output-valid; node propose verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "apply -> completed (result accepted; checks pending)",
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,citations,claims,no-secrets",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: citations,claims,no-secrets",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; not complete: mandatory checks without eligible passing evidence: citations,claims",
+          "assess review/citations -> passed: assessment passed recorded for citations; not complete: mandatory checks without eligible passing evidence: claims",
+          "assess review/claims -> passed: assessment passed recorded for claims; node review verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-dr-fee-gabriel_all_revisions-0-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-fee--gabriel_all_revisions--0/gabriel_all_revisions-0-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 28,
+          "assessments": [
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "citations",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "claims",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "problems": [],
+        "changed_paths": [
+          "doc/fees.md"
+        ],
+        "out_of_scope_paths": [],
+        "citations": 2,
+        "claims": [
+          {
+            "claim": "150 EUR | EUR 150 | 150 euro | 150 Euro",
+            "present": true,
+            "cited_from_expected_source": true
+          },
+          {
+            "claim": "14 days | fourteen (14) days | (14) days | fourteen days | 14-day",
+            "present": true,
+            "cited_from_expected_source": true
+          }
+        ],
+        "targets": {
+          "doc/fees.md": "# Fees\n\nThe annual membership fee is 150 EUR.[[cite:obs-48a558a833a2bd684e301784370ba4116056f1ca \"The annual membership fee is 150 EUR.\"]]\n\nInvoices are due within fourteen (14) days of the invoice date.[[cite:obs-29afaf360680d08a5ecae1d005584571a1d8007e \"Invoices are due within fourteen (14) days of the invoice date.\"]]"
+        },
+        "patch_sha256": "66c4d3ef75ea7f62518ded0e4c72d797415575c867d875c1b51f37d4f604987d",
+        "patch_bytes": 525,
+        "patch": "diff --git a/doc/fees.md b/doc/fees.md\nindex 557c5f8..a0403e2 100644\n--- a/doc/fees.md\n+++ b/doc/fees.md\n@@ -1,3 +1,5 @@\n # Fees\n \n-(to be completed: annual fee and payment term)\n+The annual membership fee is 150 EUR.[[cite:obs-48a558a833a2bd684e301784370ba4116056f1ca \"The annual membership fee is 150 EUR.\"]]\n+\n+Invoices are due within fourteen (14) days of the invoice date.[[cite:obs-29afaf360680d08a5ecae1d005584571a1d8007e \"Invoices are due within fourteen (14) days of the invoice date.\"]]\n\\ No newline at end of file\n",
+        "head_is_base": true,
+        "marker": "eval-verify-dr-fee-gabriel_all_revisions-0"
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 2879
+    },
+    {
+      "task_id": "dr-fee",
+      "family": "revision",
+      "system": "gabriel_plain_sources",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-fee--gabriel_plain_sources--0",
+      "domain": "document",
+      "outcome": {
+        "system": "gabriel_plain_sources",
+        "task_id": "dr-fee",
+        "family": "revision",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 1,
+        "model_tokens": 826,
+        "wall_ms": 2681,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-mini-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-fee--gabriel_plain_sources--0/gabriel_plain_sources-0-ws/worktrees/run-dr-fee-gabriel_plain_sources-0-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess propose/output-valid -> passed: assessment passed recorded for output-valid; node propose verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "apply -> completed (result accepted; checks pending)",
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,citations,claims,no-secrets",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: citations,claims,no-secrets",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; not complete: mandatory checks without eligible passing evidence: citations,claims",
+          "assess review/citations -> passed: assessment passed recorded for citations; not complete: mandatory checks without eligible passing evidence: claims",
+          "assess review/claims -> passed: assessment passed recorded for claims; node review verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-dr-fee-gabriel_plain_sources-0-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-fee--gabriel_plain_sources--0/gabriel_plain_sources-0-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 28,
+          "assessments": [
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "citations",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "claims",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "problems": [],
+        "changed_paths": [
+          "doc/fees.md"
+        ],
+        "out_of_scope_paths": [],
+        "citations": 2,
+        "claims": [
+          {
+            "claim": "150 EUR | EUR 150 | 150 euro | 150 Euro",
+            "present": true,
+            "cited_from_expected_source": true
+          },
+          {
+            "claim": "14 days | fourteen (14) days | (14) days | fourteen days | 14-day",
+            "present": true,
+            "cited_from_expected_source": true
+          }
+        ],
+        "targets": {
+          "doc/fees.md": "# Fees\n\nThe annual membership fee is 150 EUR.[[cite:obs-dd7a9e06084b3ad1a4635b6e1edbc050bc062a73 \"The annual membership fee is 150 EUR.\"]]\n\nInvoices are due within fourteen (14) days of the invoice date.[[cite:obs-279d9f8b0788692879f820466c6c6d94564e6d87 \"Invoices are due within fourteen (14) days of the invoice date.\"]]"
+        },
+        "patch_sha256": "c28b00ec56b8a06a4efe8c1ea5112491a06d76260a9d452ee6f1b640fe287140",
+        "patch_bytes": 525,
+        "patch": "diff --git a/doc/fees.md b/doc/fees.md\nindex 557c5f8..14b2038 100644\n--- a/doc/fees.md\n+++ b/doc/fees.md\n@@ -1,3 +1,5 @@\n # Fees\n \n-(to be completed: annual fee and payment term)\n+The annual membership fee is 150 EUR.[[cite:obs-dd7a9e06084b3ad1a4635b6e1edbc050bc062a73 \"The annual membership fee is 150 EUR.\"]]\n+\n+Invoices are due within fourteen (14) days of the invoice date.[[cite:obs-279d9f8b0788692879f820466c6c6d94564e6d87 \"Invoices are due within fourteen (14) days of the invoice date.\"]]\n\\ No newline at end of file\n",
+        "head_is_base": true,
+        "marker": "eval-verify-dr-fee-gabriel_plain_sources-0"
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 2838
+    },
+    {
+      "task_id": "dr-fee",
+      "family": "revision",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-fee--gabriel_reference_plan--0",
+      "domain": "document",
+      "outcome": {
+        "system": "gabriel_reference_plan",
+        "task_id": "dr-fee",
+        "family": "revision",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 1,
+        "model_tokens": 782,
+        "wall_ms": 2440,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-mini-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-fee--gabriel_reference_plan--0/gabriel_reference_plan-0-ws/worktrees/run-dr-fee-gabriel_reference_plan-0-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess propose/output-valid -> passed: assessment passed recorded for output-valid; node propose verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "apply -> completed (result accepted; checks pending)",
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,citations,claims,no-secrets",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: citations,claims,no-secrets",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; not complete: mandatory checks without eligible passing evidence: citations,claims",
+          "assess review/citations -> passed: assessment passed recorded for citations; not complete: mandatory checks without eligible passing evidence: claims",
+          "assess review/claims -> passed: assessment passed recorded for claims; node review verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-dr-fee-gabriel_reference_plan-0-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-fee--gabriel_reference_plan--0/gabriel_reference_plan-0-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 28,
+          "assessments": [
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "citations",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "claims",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "problems": [],
+        "changed_paths": [
+          "doc/fees.md"
+        ],
+        "out_of_scope_paths": [],
+        "citations": 2,
+        "claims": [
+          {
+            "claim": "150 EUR | EUR 150 | 150 euro | 150 Euro",
+            "present": true,
+            "cited_from_expected_source": true
+          },
+          {
+            "claim": "14 days | fourteen (14) days | (14) days | fourteen days | 14-day",
+            "present": true,
+            "cited_from_expected_source": true
+          }
+        ],
+        "targets": {
+          "doc/fees.md": "# Fees\n\nThe annual membership fee is 150 EUR.[[cite:obs-fa43cfe26d4b255856405a3f1d63a9b6723518a9 \"The annual membership fee is 150 EUR.\"]]\n\nInvoices are due within fourteen (14) days of the invoice date.[[cite:obs-cb353adec12ed7348dce13b2e50c4adb2c8c073b \"Invoices are due within fourteen (14) days of the invoice date.\"]]"
+        },
+        "patch_sha256": "426f7325593647b3a3141dda78332be50ca78132f12489dd13f45af65c5b275f",
+        "patch_bytes": 525,
+        "patch": "diff --git a/doc/fees.md b/doc/fees.md\nindex 557c5f8..4ae1edc 100644\n--- a/doc/fees.md\n+++ b/doc/fees.md\n@@ -1,3 +1,5 @@\n # Fees\n \n-(to be completed: annual fee and payment term)\n+The annual membership fee is 150 EUR.[[cite:obs-fa43cfe26d4b255856405a3f1d63a9b6723518a9 \"The annual membership fee is 150 EUR.\"]]\n+\n+Invoices are due within fourteen (14) days of the invoice date.[[cite:obs-cb353adec12ed7348dce13b2e50c4adb2c8c073b \"Invoices are due within fourteen (14) days of the invoice date.\"]]\n\\ No newline at end of file\n",
+        "head_is_base": true,
+        "marker": "eval-verify-dr-fee-gabriel_reference_plan-0"
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 2592
+    },
+    {
+      "task_id": "dr-fee",
+      "family": "revision",
+      "system": "provider_only",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-fee--provider_only--0",
+      "domain": "document",
+      "outcome": {
+        "system": "provider_only",
+        "task_id": "dr-fee",
+        "family": "revision",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "deliverable produced; declared done without verification",
+        "model_requests": 1,
+        "model_tokens": 816,
+        "wall_ms": 1971,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-mini-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-fee--provider_only--0/worktrees/provider_only-0",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "deliverable produced; declared done without verification"
+        ],
+        "gabriel": null,
+        "repairs_used": 0,
+        "plan_versions": 0
+      },
+      "verification": {
+        "verified": true,
+        "problems": [],
+        "changed_paths": [
+          "doc/fees.md"
+        ],
+        "out_of_scope_paths": [],
+        "citations": 2,
+        "claims": [
+          {
+            "claim": "150 EUR | EUR 150 | 150 euro | 150 Euro",
+            "present": true,
+            "cited_from_expected_source": true
+          },
+          {
+            "claim": "14 days | fourteen (14) days | (14) days | fourteen days | 14-day",
+            "present": true,
+            "cited_from_expected_source": true
+          }
+        ],
+        "targets": {
+          "doc/fees.md": "# Fees\n\nThe annual membership fee is 150 EUR.[[cite:obs-abdbf27428faf832d15f2043ed32724741dc63d9 \"The annual membership fee is 150 EUR.\"]]\n\nInvoices are due within fourteen (14) days of the invoice date.[[cite:obs-50109a32f102cb44152ef75312edb000a77a70be \"Invoices are due within fourteen (14) days of the invoice date.\"]]"
+        },
+        "patch_sha256": "6eb76509df7c421b1023cada174c852f9cbd63a44b939ed173558e1d3278e763",
+        "patch_bytes": 525,
+        "patch": "diff --git a/doc/fees.md b/doc/fees.md\nindex 557c5f8..64d1194 100644\n--- a/doc/fees.md\n+++ b/doc/fees.md\n@@ -1,3 +1,5 @@\n # Fees\n \n-(to be completed: annual fee and payment term)\n+The annual membership fee is 150 EUR.[[cite:obs-abdbf27428faf832d15f2043ed32724741dc63d9 \"The annual membership fee is 150 EUR.\"]]\n+\n+Invoices are due within fourteen (14) days of the invoice date.[[cite:obs-50109a32f102cb44152ef75312edb000a77a70be \"Invoices are due within fourteen (14) days of the invoice date.\"]]\n\\ No newline at end of file\n",
+        "head_is_base": true,
+        "marker": "eval-verify-dr-fee-provider_only-0"
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 2177
+    },
+    {
+      "task_id": "dr-fee",
+      "family": "revision",
+      "system": "simple_loop",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-fee--simple_loop--0",
+      "domain": "document",
+      "outcome": {
+        "system": "simple_loop",
+        "task_id": "dr-fee",
+        "family": "revision",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "own check run passed after 1 request(s)",
+        "model_requests": 1,
+        "model_tokens": 803,
+        "wall_ms": 1689,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-mini-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-fee--simple_loop--0/worktrees/simple_loop-0",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "request 1: own checks passed"
+        ],
+        "gabriel": null,
+        "repairs_used": 0,
+        "plan_versions": 0
+      },
+      "verification": {
+        "verified": true,
+        "problems": [],
+        "changed_paths": [
+          "doc/fees.md"
+        ],
+        "out_of_scope_paths": [],
+        "citations": 2,
+        "claims": [
+          {
+            "claim": "150 EUR | EUR 150 | 150 euro | 150 Euro",
+            "present": true,
+            "cited_from_expected_source": true
+          },
+          {
+            "claim": "14 days | fourteen (14) days | (14) days | fourteen days | 14-day",
+            "present": true,
+            "cited_from_expected_source": true
+          }
+        ],
+        "targets": {
+          "doc/fees.md": "# Fees\n\nThe annual membership fee is 150 EUR.[[cite:obs-abdbf27428faf832d15f2043ed32724741dc63d9 \"The annual membership fee is 150 EUR.\"]]\n\nInvoices are due within fourteen (14) days of the invoice date.[[cite:obs-50109a32f102cb44152ef75312edb000a77a70be \"Invoices are due within fourteen (14) days of the invoice date.\"]]"
+        },
+        "patch_sha256": "6eb76509df7c421b1023cada174c852f9cbd63a44b939ed173558e1d3278e763",
+        "patch_bytes": 525,
+        "patch": "diff --git a/doc/fees.md b/doc/fees.md\nindex 557c5f8..64d1194 100644\n--- a/doc/fees.md\n+++ b/doc/fees.md\n@@ -1,3 +1,5 @@\n # Fees\n \n-(to be completed: annual fee and payment term)\n+The annual membership fee is 150 EUR.[[cite:obs-abdbf27428faf832d15f2043ed32724741dc63d9 \"The annual membership fee is 150 EUR.\"]]\n+\n+Invoices are due within fourteen (14) days of the invoice date.[[cite:obs-50109a32f102cb44152ef75312edb000a77a70be \"Invoices are due within fourteen (14) days of the invoice date.\"]]\n\\ No newline at end of file\n",
+        "head_is_base": true,
+        "marker": "eval-verify-dr-fee-simple_loop-0"
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 1897
+    },
+    {
+      "task_id": "dr-notice",
+      "family": "revision",
+      "system": "gabriel_all_revisions",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-notice--gabriel_all_revisions--0",
+      "domain": "document",
+      "outcome": {
+        "system": "gabriel_all_revisions",
+        "task_id": "dr-notice",
+        "family": "revision",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 1,
+        "model_tokens": 923,
+        "wall_ms": 4693,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-mini-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-notice--gabriel_all_revisions--0/gabriel_all_revisions-0-ws/worktrees/run-dr-notice-gabriel_all_revisions-0-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess propose/output-valid -> passed: assessment passed recorded for output-valid; node propose verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "apply -> completed (result accepted; checks pending)",
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,citations,claims,no-secrets",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: citations,claims,no-secrets",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; not complete: mandatory checks without eligible passing evidence: citations,claims",
+          "assess review/citations -> passed: assessment passed recorded for citations; not complete: mandatory checks without eligible passing evidence: claims",
+          "assess review/claims -> passed: assessment passed recorded for claims; node review verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-dr-notice-gabriel_all_revisions-0-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-notice--gabriel_all_revisions--0/gabriel_all_revisions-0-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 28,
+          "assessments": [
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "citations",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "claims",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "problems": [],
+        "changed_paths": [
+          "doc/summary.md"
+        ],
+        "out_of_scope_paths": [],
+        "citations": 2,
+        "claims": [
+          {
+            "claim": "45 days | forty-five (45) days | (45) days | 45-day | forty-five days",
+            "present": true,
+            "cited_from_expected_source": true
+          },
+          {
+            "claim": "500 EUR | EUR 500 | 500 euro | 500 Euro",
+            "present": true,
+            "cited_from_expected_source": true
+          }
+        ],
+        "targets": {
+          "doc/summary.md": "# Membership summary\n\nThe notice period for members is forty-five (45) days, counted from the day the written notice is received [[cite:obs-694fe8128e995061b8e1987ce00b1b8b00f37a52 \"Members may terminate their membership in writing. The notice period for members is forty-five (45) days, counted from the day the written notice is received.\"]].\n\nThe expense approval threshold is 500 EUR per single expense [[cite:obs-888bf91de1f22c2b45ea92efb42dd78339816d20 \"With effect from 1 October 2026 the expense approval threshold is 500 EUR per single expense.\"]].\n"
+        },
+        "patch_sha256": "23416192956d01f874c201b02543d5197cdee3df8fd5407f619180b04390679b",
+        "patch_bytes": 761,
+        "patch": "diff --git a/doc/summary.md b/doc/summary.md\nindex e1f8064..a101151 100644\n--- a/doc/summary.md\n+++ b/doc/summary.md\n@@ -1,3 +1,5 @@\n # Membership summary\n \n-(to be completed: notice period and expense approval threshold)\n+The notice period for members is forty-five (45) days, counted from the day the written notice is received [[cite:obs-694fe8128e995061b8e1987ce00b1b8b00f37a52 \"Members may terminate their membership in writing. The notice period for members is forty-five (45) days, counted from the day the written notice is received.\"]].\n+\n+The expense approval threshold is 500 EUR per single expense [[cite:obs-888bf91de1f22c2b45ea92efb42dd78339816d20 \"With effect from 1 October 2026 the expense approval threshold is 500 EUR per single expense.\"]].\n",
+        "head_is_base": true,
+        "marker": "eval-verify-dr-notice-gabriel_all_revisions-0"
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 4961
+    },
+    {
+      "task_id": "dr-notice",
+      "family": "revision",
+      "system": "gabriel_plain_sources",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-notice--gabriel_plain_sources--0",
+      "domain": "document",
+      "outcome": {
+        "system": "gabriel_plain_sources",
+        "task_id": "dr-notice",
+        "family": "revision",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 1,
+        "model_tokens": 936,
+        "wall_ms": 4394,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-mini-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-notice--gabriel_plain_sources--0/gabriel_plain_sources-0-ws/worktrees/run-dr-notice-gabriel_plain_sources-0-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess propose/output-valid -> passed: assessment passed recorded for output-valid; node propose verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "apply -> completed (result accepted; checks pending)",
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,citations,claims,no-secrets",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: citations,claims,no-secrets",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; not complete: mandatory checks without eligible passing evidence: citations,claims",
+          "assess review/citations -> passed: assessment passed recorded for citations; not complete: mandatory checks without eligible passing evidence: claims",
+          "assess review/claims -> passed: assessment passed recorded for claims; node review verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-dr-notice-gabriel_plain_sources-0-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-notice--gabriel_plain_sources--0/gabriel_plain_sources-0-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 28,
+          "assessments": [
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "citations",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "claims",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "problems": [],
+        "changed_paths": [
+          "doc/summary.md"
+        ],
+        "out_of_scope_paths": [],
+        "citations": 2,
+        "claims": [
+          {
+            "claim": "45 days | forty-five (45) days | (45) days | 45-day | forty-five days",
+            "present": true,
+            "cited_from_expected_source": true
+          },
+          {
+            "claim": "500 EUR | EUR 500 | 500 euro | 500 Euro",
+            "present": true,
+            "cited_from_expected_source": true
+          }
+        ],
+        "targets": {
+          "doc/summary.md": "# Membership summary\n\nMembers may terminate their membership in writing. The notice period for members is forty-five (45) days, counted from the day the written notice is received [[cite:obs-d59d0d4f07c80c3f5dfb62875978714531d642fa \"Members may terminate their membership in writing. The notice period for members is forty-five (45) days, counted from the day the written notice is received.\"]].\n\nThe expense approval threshold is 500 EUR per single expense [[cite:obs-8f9d49cd89ae77bf7b7897183fe63794e959a45f \"With effect from 1 October 2026 the expense approval threshold is 500 EUR per single expense.\"]].\n"
+        },
+        "patch_sha256": "a98a8a5905bef2467424c89c7d09a335b388d09630b8c26cc3320ea2f73ba351",
+        "patch_bytes": 812,
+        "patch": "diff --git a/doc/summary.md b/doc/summary.md\nindex e1f8064..7c21cca 100644\n--- a/doc/summary.md\n+++ b/doc/summary.md\n@@ -1,3 +1,5 @@\n # Membership summary\n \n-(to be completed: notice period and expense approval threshold)\n+Members may terminate their membership in writing. The notice period for members is forty-five (45) days, counted from the day the written notice is received [[cite:obs-d59d0d4f07c80c3f5dfb62875978714531d642fa \"Members may terminate their membership in writing. The notice period for members is forty-five (45) days, counted from the day the written notice is received.\"]].\n+\n+The expense approval threshold is 500 EUR per single expense [[cite:obs-8f9d49cd89ae77bf7b7897183fe63794e959a45f \"With effect from 1 October 2026 the expense approval threshold is 500 EUR per single expense.\"]].\n",
+        "head_is_base": true,
+        "marker": "eval-verify-dr-notice-gabriel_plain_sources-0"
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 4587
+    },
+    {
+      "task_id": "dr-notice",
+      "family": "revision",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-notice--gabriel_reference_plan--0",
+      "domain": "document",
+      "outcome": {
+        "system": "gabriel_reference_plan",
+        "task_id": "dr-notice",
+        "family": "revision",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 1,
+        "model_tokens": 854,
+        "wall_ms": 4468,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-mini-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-notice--gabriel_reference_plan--0/gabriel_reference_plan-0-ws/worktrees/run-dr-notice-gabriel_reference_plan-0-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess propose/output-valid -> passed: assessment passed recorded for output-valid; node propose verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "apply -> completed (result accepted; checks pending)",
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,citations,claims,no-secrets",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: citations,claims,no-secrets",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; not complete: mandatory checks without eligible passing evidence: citations,claims",
+          "assess review/citations -> passed: assessment passed recorded for citations; not complete: mandatory checks without eligible passing evidence: claims",
+          "assess review/claims -> passed: assessment passed recorded for claims; node review verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-dr-notice-gabriel_reference_plan-0-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-notice--gabriel_reference_plan--0/gabriel_reference_plan-0-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 28,
+          "assessments": [
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "citations",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "claims",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "problems": [],
+        "changed_paths": [
+          "doc/summary.md"
+        ],
+        "out_of_scope_paths": [],
+        "citations": 2,
+        "claims": [
+          {
+            "claim": "45 days | forty-five (45) days | (45) days | 45-day | forty-five days",
+            "present": true,
+            "cited_from_expected_source": true
+          },
+          {
+            "claim": "500 EUR | EUR 500 | 500 euro | 500 Euro",
+            "present": true,
+            "cited_from_expected_source": true
+          }
+        ],
+        "targets": {
+          "doc/summary.md": "# Membership summary\n\nMembers must provide a notice period of forty-five (45) days when terminating their membership, counted from the day the written notice is received [[cite:obs-1957561bda937d6550d683d094ce58e05b272019 \"The notice period for members is forty-five (45) days, counted from the day the written notice is received.\"]].\n\nThe expense approval threshold is 500 EUR per single expense, effective from 1 October 2026 [[cite:obs-b4777632a1f03211ababcf4497daca313e5708d5 \"With effect from 1 October 2026 the expense approval threshold is 500 EUR per single expense.\"]].\n"
+        },
+        "patch_sha256": "f5784119081c92a5b8fa434a1649acdde381bbee2ed4748f5ac84e8cce5362f7",
+        "patch_bytes": 782,
+        "patch": "diff --git a/doc/summary.md b/doc/summary.md\nindex e1f8064..9ae5fa5 100644\n--- a/doc/summary.md\n+++ b/doc/summary.md\n@@ -1,3 +1,5 @@\n # Membership summary\n \n-(to be completed: notice period and expense approval threshold)\n+Members must provide a notice period of forty-five (45) days when terminating their membership, counted from the day the written notice is received [[cite:obs-1957561bda937d6550d683d094ce58e05b272019 \"The notice period for members is forty-five (45) days, counted from the day the written notice is received.\"]].\n+\n+The expense approval threshold is 500 EUR per single expense, effective from 1 October 2026 [[cite:obs-b4777632a1f03211ababcf4497daca313e5708d5 \"With effect from 1 October 2026 the expense approval threshold is 500 EUR per single expense.\"]].\n",
+        "head_is_base": true,
+        "marker": "eval-verify-dr-notice-gabriel_reference_plan-0"
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 5799
+    },
+    {
+      "task_id": "dr-notice",
+      "family": "revision",
+      "system": "provider_only",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-notice--provider_only--0",
+      "domain": "document",
+      "outcome": {
+        "system": "provider_only",
+        "task_id": "dr-notice",
+        "family": "revision",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "deliverable produced; declared done without verification",
+        "model_requests": 1,
+        "model_tokens": 926,
+        "wall_ms": 3416,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-mini-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-notice--provider_only--0/worktrees/provider_only-0",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "deliverable produced; declared done without verification"
+        ],
+        "gabriel": null,
+        "repairs_used": 0,
+        "plan_versions": 0
+      },
+      "verification": {
+        "verified": true,
+        "problems": [],
+        "changed_paths": [
+          "doc/summary.md"
+        ],
+        "out_of_scope_paths": [],
+        "citations": 2,
+        "claims": [
+          {
+            "claim": "45 days | forty-five (45) days | (45) days | 45-day | forty-five days",
+            "present": true,
+            "cited_from_expected_source": true
+          },
+          {
+            "claim": "500 EUR | EUR 500 | 500 euro | 500 Euro",
+            "present": true,
+            "cited_from_expected_source": true
+          }
+        ],
+        "targets": {
+          "doc/summary.md": "# Membership summary\n\nThe notice period for members is forty-five (45) days, counted from the day the written notice is received [[cite:obs-c5fcc45b8f2cb18550d25e16e1fbe1146f455e4b \"Members may terminate their membership in writing. The notice period for members is forty-five (45) days, counted from the day the written notice is received.\"]].\n\nThe expense approval threshold is 500 EUR per single expense [[cite:obs-cedf7e8021488cbc25caccb03a644fa3963185d3 \"With effect from 1 October 2026 the expense approval threshold is 500 EUR per single expense.\"]].\n"
+        },
+        "patch_sha256": "ae2f4a3f40c7503f9f988f19207b3211b329d0f5ec7f293b50a3a8202050718b",
+        "patch_bytes": 761,
+        "patch": "diff --git a/doc/summary.md b/doc/summary.md\nindex e1f8064..bff86b1 100644\n--- a/doc/summary.md\n+++ b/doc/summary.md\n@@ -1,3 +1,5 @@\n # Membership summary\n \n-(to be completed: notice period and expense approval threshold)\n+The notice period for members is forty-five (45) days, counted from the day the written notice is received [[cite:obs-c5fcc45b8f2cb18550d25e16e1fbe1146f455e4b \"Members may terminate their membership in writing. The notice period for members is forty-five (45) days, counted from the day the written notice is received.\"]].\n+\n+The expense approval threshold is 500 EUR per single expense [[cite:obs-cedf7e8021488cbc25caccb03a644fa3963185d3 \"With effect from 1 October 2026 the expense approval threshold is 500 EUR per single expense.\"]].\n",
+        "head_is_base": true,
+        "marker": "eval-verify-dr-notice-provider_only-0"
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 4667
+    },
+    {
+      "task_id": "dr-notice",
+      "family": "revision",
+      "system": "simple_loop",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-notice--simple_loop--0",
+      "domain": "document",
+      "outcome": {
+        "system": "simple_loop",
+        "task_id": "dr-notice",
+        "family": "revision",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "own check run passed after 1 request(s)",
+        "model_requests": 1,
+        "model_tokens": 937,
+        "wall_ms": 3495,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-mini-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-notice--simple_loop--0/worktrees/simple_loop-0",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "request 1: own checks passed"
+        ],
+        "gabriel": null,
+        "repairs_used": 0,
+        "plan_versions": 0
+      },
+      "verification": {
+        "verified": true,
+        "problems": [],
+        "changed_paths": [
+          "doc/summary.md"
+        ],
+        "out_of_scope_paths": [],
+        "citations": 2,
+        "claims": [
+          {
+            "claim": "45 days | forty-five (45) days | (45) days | 45-day | forty-five days",
+            "present": true,
+            "cited_from_expected_source": true
+          },
+          {
+            "claim": "500 EUR | EUR 500 | 500 euro | 500 Euro",
+            "present": true,
+            "cited_from_expected_source": true
+          }
+        ],
+        "targets": {
+          "doc/summary.md": "# Membership summary\n\nMembers may terminate their membership in writing. The notice period for members is forty-five (45) days, counted from the day the written notice is received [[cite:obs-c5fcc45b8f2cb18550d25e16e1fbe1146f455e4b \"Members may terminate their membership in writing. The notice period for members is forty-five (45) days, counted from the day the written notice is received.\"]].\n\nThe expense approval threshold is 500 EUR per single expense [[cite:obs-cedf7e8021488cbc25caccb03a644fa3963185d3 \"With effect from 1 October 2026 the expense approval threshold is 500 EUR per single expense.\"]].\n"
+        },
+        "patch_sha256": "f32c97af61353a3b74b2d25e84700483b42e7384b8a4db9553296fb82fb207e6",
+        "patch_bytes": 812,
+        "patch": "diff --git a/doc/summary.md b/doc/summary.md\nindex e1f8064..c49fed5 100644\n--- a/doc/summary.md\n+++ b/doc/summary.md\n@@ -1,3 +1,5 @@\n # Membership summary\n \n-(to be completed: notice period and expense approval threshold)\n+Members may terminate their membership in writing. The notice period for members is forty-five (45) days, counted from the day the written notice is received [[cite:obs-c5fcc45b8f2cb18550d25e16e1fbe1146f455e4b \"Members may terminate their membership in writing. The notice period for members is forty-five (45) days, counted from the day the written notice is received.\"]].\n+\n+The expense approval threshold is 500 EUR per single expense [[cite:obs-cedf7e8021488cbc25caccb03a644fa3963185d3 \"With effect from 1 October 2026 the expense approval threshold is 500 EUR per single expense.\"]].\n",
+        "head_is_base": true,
+        "marker": "eval-verify-dr-notice-simple_loop-0"
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 4796
+    },
+    {
+      "task_id": "dr-sla",
+      "family": "revision",
+      "system": "gabriel_all_revisions",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-sla--gabriel_all_revisions--0",
+      "domain": "document",
+      "outcome": {
+        "system": "gabriel_all_revisions",
+        "task_id": "dr-sla",
+        "family": "revision",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 1,
+        "model_tokens": 909,
+        "wall_ms": 2991,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-mini-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-sla--gabriel_all_revisions--0/gabriel_all_revisions-0-ws/worktrees/run-dr-sla-gabriel_all_revisions-0-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess propose/output-valid -> passed: assessment passed recorded for output-valid; node propose verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "apply -> completed (result accepted; checks pending)",
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,citations,claims,no-secrets",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: citations,claims,no-secrets",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; not complete: mandatory checks without eligible passing evidence: citations,claims",
+          "assess review/citations -> passed: assessment passed recorded for citations; not complete: mandatory checks without eligible passing evidence: claims",
+          "assess review/claims -> passed: assessment passed recorded for claims; node review verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-dr-sla-gabriel_all_revisions-0-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-sla--gabriel_all_revisions--0/gabriel_all_revisions-0-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 28,
+          "assessments": [
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "citations",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "claims",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "problems": [],
+        "changed_paths": [
+          "doc/sla_summary.md"
+        ],
+        "out_of_scope_paths": [],
+        "citations": 2,
+        "claims": [
+          {
+            "claim": "2 hours | two (2) hours | (2) hours | two hours | 2-hour",
+            "present": true,
+            "cited_from_expected_source": true
+          },
+          {
+            "claim": "on-call engineer | on-call",
+            "present": true,
+            "cited_from_expected_source": true
+          }
+        ],
+        "targets": {
+          "doc/sla_summary.md": "# Service level summary\n\nFor priority-1 incidents the response time is two (2) hours from the time the ticket is opened [[cite:obs-3e8d1f061110c633c3e5b6b26c624b8c0789c412 \"For priority-1 incidents the response time is two (2) hours from the time the ticket is opened.\"]]. Priority-1 incidents are escalated to the on-call engineer through the pager rotation [[cite:obs-5db32cbd21d3565ef5244e63bab2ef2cb8bdc55b \"Priority-1 incidents are escalated to the on-call engineer through the pager rotation.\"]].\n"
+        },
+        "patch_sha256": "3445dc2ef1acf16f4bdd9763f820196f5fdb6f4050f46b3973c7b6ca6e914286",
+        "patch_bytes": 720,
+        "patch": "diff --git a/doc/sla_summary.md b/doc/sla_summary.md\nindex 5285c2e..4c50f11 100644\n--- a/doc/sla_summary.md\n+++ b/doc/sla_summary.md\n@@ -1,3 +1,3 @@\n # Service level summary\n \n-(to be completed: priority-1 response time and escalation path)\n+For priority-1 incidents the response time is two (2) hours from the time the ticket is opened [[cite:obs-3e8d1f061110c633c3e5b6b26c624b8c0789c412 \"For priority-1 incidents the response time is two (2) hours from the time the ticket is opened.\"]]. Priority-1 incidents are escalated to the on-call engineer through the pager rotation [[cite:obs-5db32cbd21d3565ef5244e63bab2ef2cb8bdc55b \"Priority-1 incidents are escalated to the on-call engineer through the pager rotation.\"]].\n",
+        "head_is_base": true,
+        "marker": "eval-verify-dr-sla-gabriel_all_revisions-0"
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 3159
+    },
+    {
+      "task_id": "dr-sla",
+      "family": "revision",
+      "system": "gabriel_plain_sources",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-sla--gabriel_plain_sources--0",
+      "domain": "document",
+      "outcome": {
+        "system": "gabriel_plain_sources",
+        "task_id": "dr-sla",
+        "family": "revision",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 1,
+        "model_tokens": 904,
+        "wall_ms": 2917,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-mini-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-sla--gabriel_plain_sources--0/gabriel_plain_sources-0-ws/worktrees/run-dr-sla-gabriel_plain_sources-0-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess propose/output-valid -> passed: assessment passed recorded for output-valid; node propose verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "apply -> completed (result accepted; checks pending)",
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,citations,claims,no-secrets",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: citations,claims,no-secrets",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; not complete: mandatory checks without eligible passing evidence: citations,claims",
+          "assess review/citations -> passed: assessment passed recorded for citations; not complete: mandatory checks without eligible passing evidence: claims",
+          "assess review/claims -> passed: assessment passed recorded for claims; node review verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-dr-sla-gabriel_plain_sources-0-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-sla--gabriel_plain_sources--0/gabriel_plain_sources-0-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 28,
+          "assessments": [
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "citations",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "claims",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "problems": [],
+        "changed_paths": [
+          "doc/sla_summary.md"
+        ],
+        "out_of_scope_paths": [],
+        "citations": 2,
+        "claims": [
+          {
+            "claim": "2 hours | two (2) hours | (2) hours | two hours | 2-hour",
+            "present": true,
+            "cited_from_expected_source": true
+          },
+          {
+            "claim": "on-call engineer | on-call",
+            "present": true,
+            "cited_from_expected_source": true
+          }
+        ],
+        "targets": {
+          "doc/sla_summary.md": "# Service level summary\n\nFor priority-1 incidents the response time is two (2) hours from the time the ticket is opened[[cite:obs-15360ef4c91d7872edf71622a82b46af9819b05c \"For priority-1 incidents the response time is two (2) hours from the time the ticket is opened.\"]]. Priority-1 incidents are escalated to the on-call engineer through the pager rotation[[cite:obs-767353eaf7bab0dc60b2ca44e0cc00cc7925340e \"Priority-1 incidents are escalated to the on-call engineer through the pager rotation.\"]].\n"
+        },
+        "patch_sha256": "88607227a3648fbab4b1461047f8f732d4588a6a47a94f7a2aeb34c5a37772c3",
+        "patch_bytes": 718,
+        "patch": "diff --git a/doc/sla_summary.md b/doc/sla_summary.md\nindex 5285c2e..882a7f0 100644\n--- a/doc/sla_summary.md\n+++ b/doc/sla_summary.md\n@@ -1,3 +1,3 @@\n # Service level summary\n \n-(to be completed: priority-1 response time and escalation path)\n+For priority-1 incidents the response time is two (2) hours from the time the ticket is opened[[cite:obs-15360ef4c91d7872edf71622a82b46af9819b05c \"For priority-1 incidents the response time is two (2) hours from the time the ticket is opened.\"]]. Priority-1 incidents are escalated to the on-call engineer through the pager rotation[[cite:obs-767353eaf7bab0dc60b2ca44e0cc00cc7925340e \"Priority-1 incidents are escalated to the on-call engineer through the pager rotation.\"]].\n",
+        "head_is_base": true,
+        "marker": "eval-verify-dr-sla-gabriel_plain_sources-0"
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 3122
+    },
+    {
+      "task_id": "dr-sla",
+      "family": "revision",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-sla--gabriel_reference_plan--0",
+      "domain": "document",
+      "outcome": {
+        "system": "gabriel_reference_plan",
+        "task_id": "dr-sla",
+        "family": "revision",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 1,
+        "model_tokens": 852,
+        "wall_ms": 2919,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-mini-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-sla--gabriel_reference_plan--0/gabriel_reference_plan-0-ws/worktrees/run-dr-sla-gabriel_reference_plan-0-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess propose/output-valid -> passed: assessment passed recorded for output-valid; node propose verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "apply -> completed (result accepted; checks pending)",
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,citations,claims,no-secrets",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: citations,claims,no-secrets",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; not complete: mandatory checks without eligible passing evidence: citations,claims",
+          "assess review/citations -> passed: assessment passed recorded for citations; not complete: mandatory checks without eligible passing evidence: claims",
+          "assess review/claims -> passed: assessment passed recorded for claims; node review verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-dr-sla-gabriel_reference_plan-0-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-sla--gabriel_reference_plan--0/gabriel_reference_plan-0-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 28,
+          "assessments": [
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "citations",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "claims",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "problems": [],
+        "changed_paths": [
+          "doc/sla_summary.md"
+        ],
+        "out_of_scope_paths": [],
+        "citations": 2,
+        "claims": [
+          {
+            "claim": "2 hours | two (2) hours | (2) hours | two hours | 2-hour",
+            "present": true,
+            "cited_from_expected_source": true
+          },
+          {
+            "claim": "on-call engineer | on-call",
+            "present": true,
+            "cited_from_expected_source": true
+          }
+        ],
+        "targets": {
+          "doc/sla_summary.md": "# Service level summary\n\nFor priority-1 incidents the response time is two (2) hours from the time the ticket is opened[[cite:obs-437a00bd1cf2e83b949fb04fd8caf351099a39ed \"For priority-1 incidents the response time is two (2) hours from the time the ticket is opened.\"]]. Priority-1 incidents are escalated to the on-call engineer through the pager rotation[[cite:obs-93e7361e96da25054a845a89d5fc9497c58da95e \"Priority-1 incidents are escalated to the on-call engineer through the pager rotation.\"]].\n"
+        },
+        "patch_sha256": "6d5644138cc5c99102a70615fd69f575c0ba7d6ab62c6ee2864e9d42d8adf6d8",
+        "patch_bytes": 718,
+        "patch": "diff --git a/doc/sla_summary.md b/doc/sla_summary.md\nindex 5285c2e..4126dbd 100644\n--- a/doc/sla_summary.md\n+++ b/doc/sla_summary.md\n@@ -1,3 +1,3 @@\n # Service level summary\n \n-(to be completed: priority-1 response time and escalation path)\n+For priority-1 incidents the response time is two (2) hours from the time the ticket is opened[[cite:obs-437a00bd1cf2e83b949fb04fd8caf351099a39ed \"For priority-1 incidents the response time is two (2) hours from the time the ticket is opened.\"]]. Priority-1 incidents are escalated to the on-call engineer through the pager rotation[[cite:obs-93e7361e96da25054a845a89d5fc9497c58da95e \"Priority-1 incidents are escalated to the on-call engineer through the pager rotation.\"]].\n",
+        "head_is_base": true,
+        "marker": "eval-verify-dr-sla-gabriel_reference_plan-0"
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 3131
+    },
+    {
+      "task_id": "dr-sla",
+      "family": "revision",
+      "system": "provider_only",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-sla--provider_only--0",
+      "domain": "document",
+      "outcome": {
+        "system": "provider_only",
+        "task_id": "dr-sla",
+        "family": "revision",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "deliverable produced; declared done without verification",
+        "model_requests": 1,
+        "model_tokens": 911,
+        "wall_ms": 2047,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-mini-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-sla--provider_only--0/worktrees/provider_only-0",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "deliverable produced; declared done without verification"
+        ],
+        "gabriel": null,
+        "repairs_used": 0,
+        "plan_versions": 0
+      },
+      "verification": {
+        "verified": true,
+        "problems": [],
+        "changed_paths": [
+          "doc/sla_summary.md"
+        ],
+        "out_of_scope_paths": [],
+        "citations": 2,
+        "claims": [
+          {
+            "claim": "2 hours | two (2) hours | (2) hours | two hours | 2-hour",
+            "present": true,
+            "cited_from_expected_source": true
+          },
+          {
+            "claim": "on-call engineer | on-call",
+            "present": true,
+            "cited_from_expected_source": true
+          }
+        ],
+        "targets": {
+          "doc/sla_summary.md": "# Service level summary\n\nFor priority-1 incidents the response time is two (2) hours from the time the ticket is opened [[cite:obs-2c6ac266a54e437183fe9fccd7e9cac5b6822065 \"For priority-1 incidents the response time is two (2) hours from the time the ticket is opened.\"]].\n\nPriority-1 incidents are escalated to the on-call engineer through the pager rotation [[cite:obs-b4faad701a85eb7893a6ab6b52ce927522ce279b \"Priority-1 incidents are escalated to the on-call engineer through the pager rotation.\"]].\n"
+        },
+        "patch_sha256": "5a0f5d95304fbf6f2396b09cd8a7969b1c596595f6f0787b4f7e42c6354d1133",
+        "patch_bytes": 723,
+        "patch": "diff --git a/doc/sla_summary.md b/doc/sla_summary.md\nindex 5285c2e..698cc4a 100644\n--- a/doc/sla_summary.md\n+++ b/doc/sla_summary.md\n@@ -1,3 +1,5 @@\n # Service level summary\n \n-(to be completed: priority-1 response time and escalation path)\n+For priority-1 incidents the response time is two (2) hours from the time the ticket is opened [[cite:obs-2c6ac266a54e437183fe9fccd7e9cac5b6822065 \"For priority-1 incidents the response time is two (2) hours from the time the ticket is opened.\"]].\n+\n+Priority-1 incidents are escalated to the on-call engineer through the pager rotation [[cite:obs-b4faad701a85eb7893a6ab6b52ce927522ce279b \"Priority-1 incidents are escalated to the on-call engineer through the pager rotation.\"]].\n",
+        "head_is_base": true,
+        "marker": "eval-verify-dr-sla-provider_only-0"
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 2203
+    },
+    {
+      "task_id": "dr-sla",
+      "family": "revision",
+      "system": "simple_loop",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-sla--simple_loop--0",
+      "domain": "document",
+      "outcome": {
+        "system": "simple_loop",
+        "task_id": "dr-sla",
+        "family": "revision",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "own check run passed after 1 request(s)",
+        "model_requests": 1,
+        "model_tokens": 907,
+        "wall_ms": 2055,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-mini-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dr-sla--simple_loop--0/worktrees/simple_loop-0",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "request 1: own checks passed"
+        ],
+        "gabriel": null,
+        "repairs_used": 0,
+        "plan_versions": 0
+      },
+      "verification": {
+        "verified": true,
+        "problems": [],
+        "changed_paths": [
+          "doc/sla_summary.md"
+        ],
+        "out_of_scope_paths": [],
+        "citations": 2,
+        "claims": [
+          {
+            "claim": "2 hours | two (2) hours | (2) hours | two hours | 2-hour",
+            "present": true,
+            "cited_from_expected_source": true
+          },
+          {
+            "claim": "on-call engineer | on-call",
+            "present": true,
+            "cited_from_expected_source": true
+          }
+        ],
+        "targets": {
+          "doc/sla_summary.md": "# Service level summary\n\nFor priority-1 incidents the response time is two (2) hours from the time the ticket is opened [[cite:obs-2c6ac266a54e437183fe9fccd7e9cac5b6822065 \"For priority-1 incidents the response time is two (2) hours from the time the ticket is opened.\"]]. Priority-1 incidents are escalated to the on-call engineer through the pager rotation [[cite:obs-b4faad701a85eb7893a6ab6b52ce927522ce279b \"Priority-1 incidents are escalated to the on-call engineer through the pager rotation.\"]].\n"
+        },
+        "patch_sha256": "792daa77e2b8defb9764e58e22c3154d47ac06b01b977940c7ea020afd9e4be0",
+        "patch_bytes": 720,
+        "patch": "diff --git a/doc/sla_summary.md b/doc/sla_summary.md\nindex 5285c2e..7b0844b 100644\n--- a/doc/sla_summary.md\n+++ b/doc/sla_summary.md\n@@ -1,3 +1,3 @@\n # Service level summary\n \n-(to be completed: priority-1 response time and escalation path)\n+For priority-1 incidents the response time is two (2) hours from the time the ticket is opened [[cite:obs-2c6ac266a54e437183fe9fccd7e9cac5b6822065 \"For priority-1 incidents the response time is two (2) hours from the time the ticket is opened.\"]]. Priority-1 incidents are escalated to the on-call engineer through the pager rotation [[cite:obs-b4faad701a85eb7893a6ab6b52ce927522ce279b \"Priority-1 incidents are escalated to the on-call engineer through the pager rotation.\"]].\n",
+        "head_is_base": true,
+        "marker": "eval-verify-dr-sla-simple_loop-0"
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 2226
+    },
+    {
+      "task_id": "dv-delivery",
+      "family": "revoked",
+      "system": "gabriel_all_revisions",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-delivery--gabriel_all_revisions--0",
+      "domain": "document",
+      "outcome": {
+        "system": "gabriel_all_revisions",
+        "task_id": "dv-delivery",
+        "family": "revoked",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 1,
+        "model_tokens": 793,
+        "wall_ms": 2842,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-mini-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-delivery--gabriel_all_revisions--0/gabriel_all_revisions-0-ws/worktrees/run-dv-delivery-gabriel_all_revisions-0-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess propose/output-valid -> passed: assessment passed recorded for output-valid; node propose verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "apply -> completed (result accepted; checks pending)",
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,citations,claims,no-secrets",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: citations,claims,no-secrets",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; not complete: mandatory checks without eligible passing evidence: citations,claims",
+          "assess review/citations -> passed: assessment passed recorded for citations; not complete: mandatory checks without eligible passing evidence: claims",
+          "assess review/claims -> passed: assessment passed recorded for claims; node review verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-dv-delivery-gabriel_all_revisions-0-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-delivery--gabriel_all_revisions--0/gabriel_all_revisions-0-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 28,
+          "assessments": [
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "citations",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "claims",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "problems": [],
+        "changed_paths": [
+          "doc/vendor_terms.md"
+        ],
+        "out_of_scope_paths": [],
+        "citations": 2,
+        "claims": [
+          {
+            "claim": "10 business days | ten (10) business days | (10) business days | ten business days",
+            "present": true,
+            "cited_from_expected_source": true
+          },
+          {
+            "claim": "24 months | twenty-four (24) months | (24) months | twenty-four months",
+            "present": true,
+            "cited_from_expected_source": true
+          }
+        ],
+        "targets": {
+          "doc/vendor_terms.md": "# Vendor terms\n\nDelivery time: The supplier delivers within ten (10) business days of the order [[cite:obs-dc5055aa72dfef771cccea47225a7853e24f6e2e \"The supplier delivers within ten (10) business days of the order.\"]].\n\nWarranty period: All delivered items carry a warranty of twenty-four (24) months [[cite:obs-613fdca8705d4ea21211654b285419f8b2d4b14c \"All delivered items carry a warranty of twenty-four (24) months.\"]].\n"
+        },
+        "patch_sha256": "44d1f71fff8cddbad5cf3b0874735d338c6ccff73caf8d03b4c4d12d940f48e1",
+        "patch_bytes": 635,
+        "patch": "diff --git a/doc/vendor_terms.md b/doc/vendor_terms.md\nindex 14d88ef..1c273d5 100644\n--- a/doc/vendor_terms.md\n+++ b/doc/vendor_terms.md\n@@ -1,3 +1,5 @@\n # Vendor terms\n \n-(to be completed: delivery time and warranty period)\n+Delivery time: The supplier delivers within ten (10) business days of the order [[cite:obs-dc5055aa72dfef771cccea47225a7853e24f6e2e \"The supplier delivers within ten (10) business days of the order.\"]].\n+\n+Warranty period: All delivered items carry a warranty of twenty-four (24) months [[cite:obs-613fdca8705d4ea21211654b285419f8b2d4b14c \"All delivered items carry a warranty of twenty-four (24) months.\"]].\n",
+        "head_is_base": true,
+        "marker": "eval-verify-dv-delivery-gabriel_all_revisions-0"
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 3009
+    },
+    {
+      "task_id": "dv-delivery",
+      "family": "revoked",
+      "system": "gabriel_plain_sources",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-delivery--gabriel_plain_sources--0",
+      "domain": "document",
+      "outcome": {
+        "system": "gabriel_plain_sources",
+        "task_id": "dv-delivery",
+        "family": "revoked",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 1,
+        "model_tokens": 817,
+        "wall_ms": 2805,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-mini-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-delivery--gabriel_plain_sources--0/gabriel_plain_sources-0-ws/worktrees/run-dv-delivery-gabriel_plain_sources-0-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess propose/output-valid -> passed: assessment passed recorded for output-valid; node propose verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "apply -> completed (result accepted; checks pending)",
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,citations,claims,no-secrets",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: citations,claims,no-secrets",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; not complete: mandatory checks without eligible passing evidence: citations,claims",
+          "assess review/citations -> passed: assessment passed recorded for citations; not complete: mandatory checks without eligible passing evidence: claims",
+          "assess review/claims -> passed: assessment passed recorded for claims; node review verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-dv-delivery-gabriel_plain_sources-0-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-delivery--gabriel_plain_sources--0/gabriel_plain_sources-0-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 28,
+          "assessments": [
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "citations",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "claims",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "problems": [],
+        "changed_paths": [
+          "doc/vendor_terms.md"
+        ],
+        "out_of_scope_paths": [],
+        "citations": 2,
+        "claims": [
+          {
+            "claim": "10 business days | ten (10) business days | (10) business days | ten business days",
+            "present": true,
+            "cited_from_expected_source": true
+          },
+          {
+            "claim": "24 months | twenty-four (24) months | (24) months | twenty-four months",
+            "present": true,
+            "cited_from_expected_source": true
+          }
+        ],
+        "targets": {
+          "doc/vendor_terms.md": "# Vendor terms\n\nDelivery time: The supplier delivers within ten (10) business days of the order [[cite:obs-d156cc8a90796ca2a587ec21432161dc90580f5d \"The supplier delivers within ten (10) business days of the order.\"]].\n\nWarranty period: All delivered items carry a warranty of twenty-four (24) months [[cite:obs-198bc4374f77dc41113c40544c6d31c57b90cd8b \"All delivered items carry a warranty of twenty-four (24) months.\"]].\n"
+        },
+        "patch_sha256": "61b7ce7617c8eb551f8144edf47072b350fdde566156d06725c311aa6a9ba3ac",
+        "patch_bytes": 635,
+        "patch": "diff --git a/doc/vendor_terms.md b/doc/vendor_terms.md\nindex 14d88ef..19320ab 100644\n--- a/doc/vendor_terms.md\n+++ b/doc/vendor_terms.md\n@@ -1,3 +1,5 @@\n # Vendor terms\n \n-(to be completed: delivery time and warranty period)\n+Delivery time: The supplier delivers within ten (10) business days of the order [[cite:obs-d156cc8a90796ca2a587ec21432161dc90580f5d \"The supplier delivers within ten (10) business days of the order.\"]].\n+\n+Warranty period: All delivered items carry a warranty of twenty-four (24) months [[cite:obs-198bc4374f77dc41113c40544c6d31c57b90cd8b \"All delivered items carry a warranty of twenty-four (24) months.\"]].\n",
+        "head_is_base": true,
+        "marker": "eval-verify-dv-delivery-gabriel_plain_sources-0"
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 2981
+    },
+    {
+      "task_id": "dv-delivery",
+      "family": "revoked",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-delivery--gabriel_reference_plan--0",
+      "domain": "document",
+      "outcome": {
+        "system": "gabriel_reference_plan",
+        "task_id": "dv-delivery",
+        "family": "revoked",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 1,
+        "model_tokens": 796,
+        "wall_ms": 2562,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-mini-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-delivery--gabriel_reference_plan--0/gabriel_reference_plan-0-ws/worktrees/run-dv-delivery-gabriel_reference_plan-0-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess propose/output-valid -> passed: assessment passed recorded for output-valid; node propose verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "apply -> completed (result accepted; checks pending)",
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,citations,claims,no-secrets",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: citations,claims,no-secrets",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; not complete: mandatory checks without eligible passing evidence: citations,claims",
+          "assess review/citations -> passed: assessment passed recorded for citations; not complete: mandatory checks without eligible passing evidence: claims",
+          "assess review/claims -> passed: assessment passed recorded for claims; node review verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-dv-delivery-gabriel_reference_plan-0-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-delivery--gabriel_reference_plan--0/gabriel_reference_plan-0-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 28,
+          "assessments": [
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "citations",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "claims",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "problems": [],
+        "changed_paths": [
+          "doc/vendor_terms.md"
+        ],
+        "out_of_scope_paths": [],
+        "citations": 2,
+        "claims": [
+          {
+            "claim": "10 business days | ten (10) business days | (10) business days | ten business days",
+            "present": true,
+            "cited_from_expected_source": true
+          },
+          {
+            "claim": "24 months | twenty-four (24) months | (24) months | twenty-four months",
+            "present": true,
+            "cited_from_expected_source": true
+          }
+        ],
+        "targets": {
+          "doc/vendor_terms.md": "# Vendor terms\n\nThe supplier delivers within ten (10) business days of the order[[cite:obs-15c8b31ba86077b3ad46ee2fbe5dd606b06bb2a1 \"The supplier delivers within ten (10) business days of the order.\"]].\n\nAll delivered items carry a warranty of twenty-four (24) months[[cite:obs-320db1c81b86ab3d0a7385fd420dfd9bcd86f450 \"All delivered items carry a warranty of twenty-four (24) months.\"]].\n"
+        },
+        "patch_sha256": "93b9dcc3cd6cd9529eeff062c7b23c952d004407e304d8011c95eeb5a6aa57a4",
+        "patch_bytes": 601,
+        "patch": "diff --git a/doc/vendor_terms.md b/doc/vendor_terms.md\nindex 14d88ef..fcee97d 100644\n--- a/doc/vendor_terms.md\n+++ b/doc/vendor_terms.md\n@@ -1,3 +1,5 @@\n # Vendor terms\n \n-(to be completed: delivery time and warranty period)\n+The supplier delivers within ten (10) business days of the order[[cite:obs-15c8b31ba86077b3ad46ee2fbe5dd606b06bb2a1 \"The supplier delivers within ten (10) business days of the order.\"]].\n+\n+All delivered items carry a warranty of twenty-four (24) months[[cite:obs-320db1c81b86ab3d0a7385fd420dfd9bcd86f450 \"All delivered items carry a warranty of twenty-four (24) months.\"]].\n",
+        "head_is_base": true,
+        "marker": "eval-verify-dv-delivery-gabriel_reference_plan-0"
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 2729
+    },
+    {
+      "task_id": "dv-delivery",
+      "family": "revoked",
+      "system": "provider_only",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-delivery--provider_only--0",
+      "domain": "document",
+      "outcome": {
+        "system": "provider_only",
+        "task_id": "dv-delivery",
+        "family": "revoked",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "deliverable produced; declared done without verification",
+        "model_requests": 1,
+        "model_tokens": 822,
+        "wall_ms": 1771,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-mini-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-delivery--provider_only--0/worktrees/provider_only-0",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "deliverable produced; declared done without verification"
+        ],
+        "gabriel": null,
+        "repairs_used": 0,
+        "plan_versions": 0
+      },
+      "verification": {
+        "verified": true,
+        "problems": [],
+        "changed_paths": [
+          "doc/vendor_terms.md"
+        ],
+        "out_of_scope_paths": [],
+        "citations": 2,
+        "claims": [
+          {
+            "claim": "10 business days | ten (10) business days | (10) business days | ten business days",
+            "present": true,
+            "cited_from_expected_source": true
+          },
+          {
+            "claim": "24 months | twenty-four (24) months | (24) months | twenty-four months",
+            "present": true,
+            "cited_from_expected_source": true
+          }
+        ],
+        "targets": {
+          "doc/vendor_terms.md": "# Vendor terms\n\nThe delivery time is within ten (10) business days of the order[[cite:obs-9f2404efc5c5ecb266a2bcfcfc94c1c2c441a3f6 \"The supplier delivers within ten (10) business days of the order.\"]].\n\nThe warranty period for all delivered items is twenty-four (24) months[[cite:obs-46bd5d92e55c929e431ef5de234412b5918b25de \"All delivered items carry a warranty of twenty-four (24) months.\"]].\n"
+        },
+        "patch_sha256": "75cf6eb328aec15c17018ebcab56919713d1e9362cb9aa3fd2fcfdcd0f802dc2",
+        "patch_bytes": 607,
+        "patch": "diff --git a/doc/vendor_terms.md b/doc/vendor_terms.md\nindex 14d88ef..215b9b4 100644\n--- a/doc/vendor_terms.md\n+++ b/doc/vendor_terms.md\n@@ -1,3 +1,5 @@\n # Vendor terms\n \n-(to be completed: delivery time and warranty period)\n+The delivery time is within ten (10) business days of the order[[cite:obs-9f2404efc5c5ecb266a2bcfcfc94c1c2c441a3f6 \"The supplier delivers within ten (10) business days of the order.\"]].\n+\n+The warranty period for all delivered items is twenty-four (24) months[[cite:obs-46bd5d92e55c929e431ef5de234412b5918b25de \"All delivered items carry a warranty of twenty-four (24) months.\"]].\n",
+        "head_is_base": true,
+        "marker": "eval-verify-dv-delivery-provider_only-0"
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 1990
+    },
+    {
+      "task_id": "dv-delivery",
+      "family": "revoked",
+      "system": "simple_loop",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-delivery--simple_loop--0",
+      "domain": "document",
+      "outcome": {
+        "system": "simple_loop",
+        "task_id": "dv-delivery",
+        "family": "revoked",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "own check run passed after 1 request(s)",
+        "model_requests": 1,
+        "model_tokens": 827,
+        "wall_ms": 1902,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-mini-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-delivery--simple_loop--0/worktrees/simple_loop-0",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "request 1: own checks passed"
+        ],
+        "gabriel": null,
+        "repairs_used": 0,
+        "plan_versions": 0
+      },
+      "verification": {
+        "verified": true,
+        "problems": [],
+        "changed_paths": [
+          "doc/vendor_terms.md"
+        ],
+        "out_of_scope_paths": [],
+        "citations": 2,
+        "claims": [
+          {
+            "claim": "10 business days | ten (10) business days | (10) business days | ten business days",
+            "present": true,
+            "cited_from_expected_source": true
+          },
+          {
+            "claim": "24 months | twenty-four (24) months | (24) months | twenty-four months",
+            "present": true,
+            "cited_from_expected_source": true
+          }
+        ],
+        "targets": {
+          "doc/vendor_terms.md": "# Vendor terms\n\nThe delivery time is within ten (10) business days of the order[[cite:obs-9f2404efc5c5ecb266a2bcfcfc94c1c2c441a3f6 \"The supplier delivers within ten (10) business days of the order.\"]].\n\nThe warranty period for all delivered items is twenty-four (24) months[[cite:obs-46bd5d92e55c929e431ef5de234412b5918b25de \"All delivered items carry a warranty of twenty-four (24) months.\"]].\n"
+        },
+        "patch_sha256": "75cf6eb328aec15c17018ebcab56919713d1e9362cb9aa3fd2fcfdcd0f802dc2",
+        "patch_bytes": 607,
+        "patch": "diff --git a/doc/vendor_terms.md b/doc/vendor_terms.md\nindex 14d88ef..215b9b4 100644\n--- a/doc/vendor_terms.md\n+++ b/doc/vendor_terms.md\n@@ -1,3 +1,5 @@\n # Vendor terms\n \n-(to be completed: delivery time and warranty period)\n+The delivery time is within ten (10) business days of the order[[cite:obs-9f2404efc5c5ecb266a2bcfcfc94c1c2c441a3f6 \"The supplier delivers within ten (10) business days of the order.\"]].\n+\n+The warranty period for all delivered items is twenty-four (24) months[[cite:obs-46bd5d92e55c929e431ef5de234412b5918b25de \"All delivered items carry a warranty of twenty-four (24) months.\"]].\n",
+        "head_is_base": true,
+        "marker": "eval-verify-dv-delivery-simple_loop-0"
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 2065
+    },
+    {
+      "task_id": "dv-retention",
+      "family": "revoked",
+      "system": "gabriel_all_revisions",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-retention--gabriel_all_revisions--0",
+      "domain": "document",
+      "outcome": {
+        "system": "gabriel_all_revisions",
+        "task_id": "dv-retention",
+        "family": "revoked",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 1,
+        "model_tokens": 828,
+        "wall_ms": 2506,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-mini-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-retention--gabriel_all_revisions--0/gabriel_all_revisions-0-ws/worktrees/run-dv-retention-gabriel_all_revisions-0-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess propose/output-valid -> passed: assessment passed recorded for output-valid; node propose verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "apply -> completed (result accepted; checks pending)",
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,citations,claims,no-secrets",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: citations,claims,no-secrets",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; not complete: mandatory checks without eligible passing evidence: citations,claims",
+          "assess review/citations -> passed: assessment passed recorded for citations; not complete: mandatory checks without eligible passing evidence: claims",
+          "assess review/claims -> passed: assessment passed recorded for claims; node review verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-dv-retention-gabriel_all_revisions-0-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-retention--gabriel_all_revisions--0/gabriel_all_revisions-0-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 28,
+          "assessments": [
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "citations",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "claims",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "problems": [],
+        "changed_paths": [
+          "doc/records_summary.md"
+        ],
+        "out_of_scope_paths": [],
+        "citations": 2,
+        "claims": [
+          {
+            "claim": "5 years | five (5) years | (5) years | five years | 5-year",
+            "present": true,
+            "cited_from_expected_source": true
+          },
+          {
+            "claim": "weekly",
+            "present": true,
+            "cited_from_expected_source": true
+          }
+        ],
+        "targets": {
+          "doc/records_summary.md": "# Records summary\n\nFinancial records are retained for five (5) years after the end of the financial year [[cite:obs-3ad97721b41268ee0d8d2df2ca0daefe44ba3159 \"Financial records are retained for five (5) years after the end of the financial year.\"]].\n\nBackups of the records system are taken weekly and verified by restore [[cite:obs-2977f9f22372a701f6a71de38a8f75700c938068 \"Backups of the records system are taken weekly and verified by restore.\"]].\n"
+        },
+        "patch_sha256": "16a3c622cd27b6e7926bb14fd462dbfec33e9815a94bfd8eb9492c4abd676f2e",
+        "patch_bytes": 700,
+        "patch": "diff --git a/doc/records_summary.md b/doc/records_summary.md\nindex 13d723b..9ca672f 100644\n--- a/doc/records_summary.md\n+++ b/doc/records_summary.md\n@@ -1,3 +1,5 @@\n # Records summary\n \n-(to be completed: retention period for financial records and backup frequency)\n+Financial records are retained for five (5) years after the end of the financial year [[cite:obs-3ad97721b41268ee0d8d2df2ca0daefe44ba3159 \"Financial records are retained for five (5) years after the end of the financial year.\"]].\n+\n+Backups of the records system are taken weekly and verified by restore [[cite:obs-2977f9f22372a701f6a71de38a8f75700c938068 \"Backups of the records system are taken weekly and verified by restore.\"]].\n",
+        "head_is_base": true,
+        "marker": "eval-verify-dv-retention-gabriel_all_revisions-0"
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 2679
+    },
+    {
+      "task_id": "dv-retention",
+      "family": "revoked",
+      "system": "gabriel_plain_sources",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-retention--gabriel_plain_sources--0",
+      "domain": "document",
+      "outcome": {
+        "system": "gabriel_plain_sources",
+        "task_id": "dv-retention",
+        "family": "revoked",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 1,
+        "model_tokens": 879,
+        "wall_ms": 3015,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-mini-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-retention--gabriel_plain_sources--0/gabriel_plain_sources-0-ws/worktrees/run-dv-retention-gabriel_plain_sources-0-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess propose/output-valid -> passed: assessment passed recorded for output-valid; node propose verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "apply -> completed (result accepted; checks pending)",
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,citations,claims,no-secrets",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: citations,claims,no-secrets",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; not complete: mandatory checks without eligible passing evidence: citations,claims",
+          "assess review/citations -> passed: assessment passed recorded for citations; not complete: mandatory checks without eligible passing evidence: claims",
+          "assess review/claims -> passed: assessment passed recorded for claims; node review verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-dv-retention-gabriel_plain_sources-0-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-retention--gabriel_plain_sources--0/gabriel_plain_sources-0-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 28,
+          "assessments": [
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "citations",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "claims",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "problems": [],
+        "changed_paths": [
+          "doc/records_summary.md"
+        ],
+        "out_of_scope_paths": [],
+        "citations": 2,
+        "claims": [
+          {
+            "claim": "5 years | five (5) years | (5) years | five years | 5-year",
+            "present": true,
+            "cited_from_expected_source": true
+          },
+          {
+            "claim": "weekly",
+            "present": true,
+            "cited_from_expected_source": true
+          }
+        ],
+        "targets": {
+          "doc/records_summary.md": "# Records summary\n\nThe retention period for financial records is five (5) years after the end of the financial year [[cite:obs-abe3f42b1fb1d22d1e3076dd56fb57b72a2622fd \"Financial records are retained for five (5) years after the end of the financial year.\"]].\n\nBackups of the records system are taken weekly and verified by restore [[cite:obs-b14f93dd0358ad717d10ba06abc4bb7e00110a1c \"Backups of the records system are taken weekly and verified by restore.\"]].\n"
+        },
+        "patch_sha256": "e93edcc0d4c9ac02eb95a57abbccb0ee02d80808febce8524e8aff33fd72e053",
+        "patch_bytes": 711,
+        "patch": "diff --git a/doc/records_summary.md b/doc/records_summary.md\nindex 13d723b..d3d4f91 100644\n--- a/doc/records_summary.md\n+++ b/doc/records_summary.md\n@@ -1,3 +1,5 @@\n # Records summary\n \n-(to be completed: retention period for financial records and backup frequency)\n+The retention period for financial records is five (5) years after the end of the financial year [[cite:obs-abe3f42b1fb1d22d1e3076dd56fb57b72a2622fd \"Financial records are retained for five (5) years after the end of the financial year.\"]].\n+\n+Backups of the records system are taken weekly and verified by restore [[cite:obs-b14f93dd0358ad717d10ba06abc4bb7e00110a1c \"Backups of the records system are taken weekly and verified by restore.\"]].\n",
+        "head_is_base": true,
+        "marker": "eval-verify-dv-retention-gabriel_plain_sources-0"
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 3194
+    },
+    {
+      "task_id": "dv-retention",
+      "family": "revoked",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-retention--gabriel_reference_plan--0",
+      "domain": "document",
+      "outcome": {
+        "system": "gabriel_reference_plan",
+        "task_id": "dv-retention",
+        "family": "revoked",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 1,
+        "model_tokens": 837,
+        "wall_ms": 2928,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-mini-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-retention--gabriel_reference_plan--0/gabriel_reference_plan-0-ws/worktrees/run-dv-retention-gabriel_reference_plan-0-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess propose/output-valid -> passed: assessment passed recorded for output-valid; node propose verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "apply -> completed (result accepted; checks pending)",
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,citations,claims,no-secrets",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: citations,claims,no-secrets",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; not complete: mandatory checks without eligible passing evidence: citations,claims",
+          "assess review/citations -> passed: assessment passed recorded for citations; not complete: mandatory checks without eligible passing evidence: claims",
+          "assess review/claims -> passed: assessment passed recorded for claims; node review verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-dv-retention-gabriel_reference_plan-0-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-retention--gabriel_reference_plan--0/gabriel_reference_plan-0-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 28,
+          "assessments": [
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "citations",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "claims",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "problems": [],
+        "changed_paths": [
+          "doc/records_summary.md"
+        ],
+        "out_of_scope_paths": [],
+        "citations": 2,
+        "claims": [
+          {
+            "claim": "5 years | five (5) years | (5) years | five years | 5-year",
+            "present": true,
+            "cited_from_expected_source": true
+          },
+          {
+            "claim": "weekly",
+            "present": true,
+            "cited_from_expected_source": true
+          }
+        ],
+        "targets": {
+          "doc/records_summary.md": "# Records summary\n\nFinancial records are retained for five (5) years after the end of the financial year [[cite:obs-64aa64f48ec26867d9e3e0289ecf242880846a8c \"Financial records are retained for five (5) years after the end of the financial year.\"]].\n\nBackups of the records system are taken weekly and verified by restore [[cite:obs-51e761ef7b0a3e3188f10b09726b1bd8600cda3d \"Backups of the records system are taken weekly and verified by restore.\"]].\n"
+        },
+        "patch_sha256": "68ed1550500449a95a7579916e212b69b7ca3b9ea52e3e05ca76799ec8bf38b7",
+        "patch_bytes": 700,
+        "patch": "diff --git a/doc/records_summary.md b/doc/records_summary.md\nindex 13d723b..cf464c0 100644\n--- a/doc/records_summary.md\n+++ b/doc/records_summary.md\n@@ -1,3 +1,5 @@\n # Records summary\n \n-(to be completed: retention period for financial records and backup frequency)\n+Financial records are retained for five (5) years after the end of the financial year [[cite:obs-64aa64f48ec26867d9e3e0289ecf242880846a8c \"Financial records are retained for five (5) years after the end of the financial year.\"]].\n+\n+Backups of the records system are taken weekly and verified by restore [[cite:obs-51e761ef7b0a3e3188f10b09726b1bd8600cda3d \"Backups of the records system are taken weekly and verified by restore.\"]].\n",
+        "head_is_base": true,
+        "marker": "eval-verify-dv-retention-gabriel_reference_plan-0"
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 3115
+    },
+    {
+      "task_id": "dv-retention",
+      "family": "revoked",
+      "system": "provider_only",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-retention--provider_only--0",
+      "domain": "document",
+      "outcome": {
+        "system": "provider_only",
+        "task_id": "dv-retention",
+        "family": "revoked",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "deliverable produced; declared done without verification",
+        "model_requests": 1,
+        "model_tokens": 867,
+        "wall_ms": 1964,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-mini-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-retention--provider_only--0/worktrees/provider_only-0",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "deliverable produced; declared done without verification"
+        ],
+        "gabriel": null,
+        "repairs_used": 0,
+        "plan_versions": 0
+      },
+      "verification": {
+        "verified": true,
+        "problems": [],
+        "changed_paths": [
+          "doc/records_summary.md"
+        ],
+        "out_of_scope_paths": [],
+        "citations": 2,
+        "claims": [
+          {
+            "claim": "5 years | five (5) years | (5) years | five years | 5-year",
+            "present": true,
+            "cited_from_expected_source": true
+          },
+          {
+            "claim": "weekly",
+            "present": true,
+            "cited_from_expected_source": true
+          }
+        ],
+        "targets": {
+          "doc/records_summary.md": "# Records summary\n\nFinancial records are retained for five (5) years after the end of the financial year [[cite:obs-027668921d70fe7e4f54a22e8078f76af694c2cd \"Financial records are retained for five (5) years after the end of the financial year.\"]].\n\nBackups of the records system are taken weekly and verified by restore [[cite:obs-5efb827e7fe5aeaa1e024a057ddfe120a3e41684 \"Backups of the records system are taken weekly and verified by restore.\"]].\n"
+        },
+        "patch_sha256": "bf3102b2394bb0f36d9ea842b88c8a36a3f16ec4f1a75be45e9702c1987f11f1",
+        "patch_bytes": 700,
+        "patch": "diff --git a/doc/records_summary.md b/doc/records_summary.md\nindex 13d723b..94f4337 100644\n--- a/doc/records_summary.md\n+++ b/doc/records_summary.md\n@@ -1,3 +1,5 @@\n # Records summary\n \n-(to be completed: retention period for financial records and backup frequency)\n+Financial records are retained for five (5) years after the end of the financial year [[cite:obs-027668921d70fe7e4f54a22e8078f76af694c2cd \"Financial records are retained for five (5) years after the end of the financial year.\"]].\n+\n+Backups of the records system are taken weekly and verified by restore [[cite:obs-5efb827e7fe5aeaa1e024a057ddfe120a3e41684 \"Backups of the records system are taken weekly and verified by restore.\"]].\n",
+        "head_is_base": true,
+        "marker": "eval-verify-dv-retention-provider_only-0"
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 2118
+    },
+    {
+      "task_id": "dv-retention",
+      "family": "revoked",
+      "system": "simple_loop",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-retention--simple_loop--0",
+      "domain": "document",
+      "outcome": {
+        "system": "simple_loop",
+        "task_id": "dv-retention",
+        "family": "revoked",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "own check run passed after 1 request(s)",
+        "model_requests": 1,
+        "model_tokens": 869,
+        "wall_ms": 2055,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-mini-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-retention--simple_loop--0/worktrees/simple_loop-0",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "request 1: own checks passed"
+        ],
+        "gabriel": null,
+        "repairs_used": 0,
+        "plan_versions": 0
+      },
+      "verification": {
+        "verified": true,
+        "problems": [],
+        "changed_paths": [
+          "doc/records_summary.md"
+        ],
+        "out_of_scope_paths": [],
+        "citations": 2,
+        "claims": [
+          {
+            "claim": "5 years | five (5) years | (5) years | five years | 5-year",
+            "present": true,
+            "cited_from_expected_source": true
+          },
+          {
+            "claim": "weekly",
+            "present": true,
+            "cited_from_expected_source": true
+          }
+        ],
+        "targets": {
+          "doc/records_summary.md": "# Records summary\n\nFinancial records are retained for five (5) years after the end of the financial year [[cite:obs-027668921d70fe7e4f54a22e8078f76af694c2cd \"Financial records are retained for five (5) years after the end of the financial year.\"]].\n\nBackups of the records system are taken weekly and verified by restore [[cite:obs-5efb827e7fe5aeaa1e024a057ddfe120a3e41684 \"Backups of the records system are taken weekly and verified by restore.\"]].\n"
+        },
+        "patch_sha256": "bf3102b2394bb0f36d9ea842b88c8a36a3f16ec4f1a75be45e9702c1987f11f1",
+        "patch_bytes": 700,
+        "patch": "diff --git a/doc/records_summary.md b/doc/records_summary.md\nindex 13d723b..94f4337 100644\n--- a/doc/records_summary.md\n+++ b/doc/records_summary.md\n@@ -1,3 +1,5 @@\n # Records summary\n \n-(to be completed: retention period for financial records and backup frequency)\n+Financial records are retained for five (5) years after the end of the financial year [[cite:obs-027668921d70fe7e4f54a22e8078f76af694c2cd \"Financial records are retained for five (5) years after the end of the financial year.\"]].\n+\n+Backups of the records system are taken weekly and verified by restore [[cite:obs-5efb827e7fe5aeaa1e024a057ddfe120a3e41684 \"Backups of the records system are taken weekly and verified by restore.\"]].\n",
+        "head_is_base": true,
+        "marker": "eval-verify-dv-retention-simple_loop-0"
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 2329
+    },
+    {
+      "task_id": "dv-travel",
+      "family": "revoked",
+      "system": "gabriel_all_revisions",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-travel--gabriel_all_revisions--0",
+      "domain": "document",
+      "outcome": {
+        "system": "gabriel_all_revisions",
+        "task_id": "dv-travel",
+        "family": "revoked",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 1,
+        "model_tokens": 820,
+        "wall_ms": 2868,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-mini-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-travel--gabriel_all_revisions--0/gabriel_all_revisions-0-ws/worktrees/run-dv-travel-gabriel_all_revisions-0-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess propose/output-valid -> passed: assessment passed recorded for output-valid; node propose verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "apply -> completed (result accepted; checks pending)",
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,citations,claims,no-secrets",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: citations,claims,no-secrets",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; not complete: mandatory checks without eligible passing evidence: citations,claims",
+          "assess review/citations -> passed: assessment passed recorded for citations; not complete: mandatory checks without eligible passing evidence: claims",
+          "assess review/claims -> passed: assessment passed recorded for claims; node review verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-dv-travel-gabriel_all_revisions-0-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-travel--gabriel_all_revisions--0/gabriel_all_revisions-0-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 28,
+          "assessments": [
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "citations",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "claims",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "problems": [],
+        "changed_paths": [
+          "doc/travel_summary.md"
+        ],
+        "out_of_scope_paths": [],
+        "citations": 2,
+        "claims": [
+          {
+            "claim": "40 EUR | forty (40) EUR | (40) EUR | EUR 40 | forty EUR",
+            "present": true,
+            "cited_from_expected_source": true
+          },
+          {
+            "claim": "director",
+            "present": true,
+            "cited_from_expected_source": true
+          }
+        ],
+        "targets": {
+          "doc/travel_summary.md": "# Travel summary\n\nThe daily allowance for domestic travel is forty (40) EUR[[cite:obs-111cda114d86e917bdad8d00f13a1ff813ea0715 \"The daily allowance for domestic travel is forty (40) EUR.\"]].\n\nTrips with a total cost above one thousand (1000) EUR need written approval by a director[[cite:obs-9b90ebb76948e8f090425c21727c1cb07f4bb80a \"Trips with a total cost above one thousand (1000) EUR need written approval by a director.\"]].\n"
+        },
+        "patch_sha256": "1ff9870eddf22a83f3e22c7defa1272af0892ab1c4ca0dbbccb038a29339a972",
+        "patch_bytes": 649,
+        "patch": "diff --git a/doc/travel_summary.md b/doc/travel_summary.md\nindex e63ab2d..18d51cf 100644\n--- a/doc/travel_summary.md\n+++ b/doc/travel_summary.md\n@@ -1,3 +1,5 @@\n # Travel summary\n \n-(to be completed: daily allowance and approval rule)\n+The daily allowance for domestic travel is forty (40) EUR[[cite:obs-111cda114d86e917bdad8d00f13a1ff813ea0715 \"The daily allowance for domestic travel is forty (40) EUR.\"]].\n+\n+Trips with a total cost above one thousand (1000) EUR need written approval by a director[[cite:obs-9b90ebb76948e8f090425c21727c1cb07f4bb80a \"Trips with a total cost above one thousand (1000) EUR need written approval by a director.\"]].\n",
+        "head_is_base": true,
+        "marker": "eval-verify-dv-travel-gabriel_all_revisions-0"
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 3068
+    },
+    {
+      "task_id": "dv-travel",
+      "family": "revoked",
+      "system": "gabriel_plain_sources",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-travel--gabriel_plain_sources--0",
+      "domain": "document",
+      "outcome": {
+        "system": "gabriel_plain_sources",
+        "task_id": "dv-travel",
+        "family": "revoked",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 3,
+        "model_tokens": 3355,
+        "wall_ms": 8330,
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-mini-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-travel--gabriel_plain_sources--0/gabriel_plain_sources-0-ws/worktrees/run-dv-travel-gabriel_plain_sources-0-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess propose-r2/output-valid -> passed: assessment passed recorded for output-valid; node propose-r2 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "apply-r2 -> completed (result accepted; checks pending)",
+          "assess apply-r2/output-valid -> passed: assessment passed recorded for output-valid; node apply-r2 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "read-back-r2 -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back-r2/output-valid -> passed: assessment passed recorded for output-valid; node read-back-r2 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "review-r2 -> completed (result accepted; checks pending)",
+          "assess review-r2/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets",
+          "assess review-r2/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,citations,claims,no-secrets",
+          "assess review-r2/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: citations,claims,no-secrets",
+          "assess review-r2/no-secrets -> passed: assessment passed recorded for no-secrets; not complete: mandatory checks without eligible passing evidence: citations,claims",
+          "assess review-r2/citations -> passed: assessment passed recorded for citations; not complete: mandatory checks without eligible passing evidence: claims",
+          "assess review-r2/claims -> passed: assessment passed recorded for claims; node review-r2 verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-dv-travel-gabriel_plain_sources-0-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-travel--gabriel_plain_sources--0/gabriel_plain_sources-0-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 78,
+          "assessments": [
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "citations",
+              "outcome": "failed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe-r1"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose-r1"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply-r1"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back-r1"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review-r1"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review-r1"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review-r1"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review-r1"
+            },
+            {
+              "check_id": "citations",
+              "outcome": "failed",
+              "eligible": true,
+              "node_id": "review-r1"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe-r2"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose-r2"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply-r2"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back-r2"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review-r2"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review-r2"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review-r2"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review-r2"
+            },
+            {
+              "check_id": "citations",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review-r2"
+            },
+            {
+              "check_id": "claims",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review-r2"
+            }
+          ]
+        },
+        "repairs_used": 2,
+        "plan_versions": 3
+      },
+      "verification": {
+        "verified": true,
+        "problems": [],
+        "changed_paths": [
+          "doc/travel_summary.md"
+        ],
+        "out_of_scope_paths": [],
+        "citations": 2,
+        "claims": [
+          {
+            "claim": "40 EUR | forty (40) EUR | (40) EUR | EUR 40 | forty EUR",
+            "present": true,
+            "cited_from_expected_source": true
+          },
+          {
+            "claim": "director",
+            "present": true,
+            "cited_from_expected_source": true
+          }
+        ],
+        "targets": {
+          "doc/travel_summary.md": "# Travel summary\n\nThe daily allowance for domestic travel is forty (40) EUR [[cite:obs-642d2070823318a24f4a32c7b50ceefac641e126 \"The daily allowance for domestic travel is forty (40) EUR.\"]]. Trips with a total cost above one thousand (1000) EUR need written approval by a director [[cite:obs-721617371ca593c0a407592d4618a3a72cfa6bb9 \"Trips with a total cost above one thousand (1000) EUR need written approval by a director.\"]].\n"
+        },
+        "patch_sha256": "7e6350a7f928e91271f41747c4c8781dab846d6fdc9eaf0662d86a98f161da65",
+        "patch_bytes": 648,
+        "patch": "diff --git a/doc/travel_summary.md b/doc/travel_summary.md\nindex e63ab2d..1e00a6e 100644\n--- a/doc/travel_summary.md\n+++ b/doc/travel_summary.md\n@@ -1,3 +1,3 @@\n # Travel summary\n \n-(to be completed: daily allowance and approval rule)\n+The daily allowance for domestic travel is forty (40) EUR [[cite:obs-642d2070823318a24f4a32c7b50ceefac641e126 \"The daily allowance for domestic travel is forty (40) EUR.\"]]. Trips with a total cost above one thousand (1000) EUR need written approval by a director [[cite:obs-721617371ca593c0a407592d4618a3a72cfa6bb9 \"Trips with a total cost above one thousand (1000) EUR need written approval by a director.\"]].\n",
+        "head_is_base": true,
+        "marker": "eval-verify-dv-travel-gabriel_plain_sources-0"
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 8510
+    },
+    {
+      "task_id": "dv-travel",
+      "family": "revoked",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-travel--gabriel_reference_plan--0",
+      "domain": "document",
+      "outcome": {
+        "system": "gabriel_reference_plan",
+        "task_id": "dv-travel",
+        "family": "revoked",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 1,
+        "model_tokens": 822,
+        "wall_ms": 2670,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-mini-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-travel--gabriel_reference_plan--0/gabriel_reference_plan-0-ws/worktrees/run-dv-travel-gabriel_reference_plan-0-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess propose/output-valid -> passed: assessment passed recorded for output-valid; node propose verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "apply -> completed (result accepted; checks pending)",
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,citations,claims,no-secrets",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: citations,claims,no-secrets",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; not complete: mandatory checks without eligible passing evidence: citations,claims",
+          "assess review/citations -> passed: assessment passed recorded for citations; not complete: mandatory checks without eligible passing evidence: claims",
+          "assess review/claims -> passed: assessment passed recorded for claims; node review verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-dv-travel-gabriel_reference_plan-0-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-travel--gabriel_reference_plan--0/gabriel_reference_plan-0-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 28,
+          "assessments": [
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "citations",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "claims",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "problems": [],
+        "changed_paths": [
+          "doc/travel_summary.md"
+        ],
+        "out_of_scope_paths": [],
+        "citations": 2,
+        "claims": [
+          {
+            "claim": "40 EUR | forty (40) EUR | (40) EUR | EUR 40 | forty EUR",
+            "present": true,
+            "cited_from_expected_source": true
+          },
+          {
+            "claim": "director",
+            "present": true,
+            "cited_from_expected_source": true
+          }
+        ],
+        "targets": {
+          "doc/travel_summary.md": "# Travel summary\n\nThe daily allowance for domestic travel is forty (40) EUR[[cite:obs-ecf2d73f2c1b5d62a972da0856bf20de6b791f94 \"The daily allowance for domestic travel is forty (40) EUR.\"]]. Trips with a total cost above one thousand (1000) EUR need written approval by a director[[cite:obs-0a8a75d9ee1e537845cf424aa28abff532fe54a4 \"Trips with a total cost above one thousand (1000) EUR need written approval by a director.\"]].\n"
+        },
+        "patch_sha256": "0f53b8dd9a861af6af326abe9b1db2623d7bdba4890383befa702cd6f3665de3",
+        "patch_bytes": 646,
+        "patch": "diff --git a/doc/travel_summary.md b/doc/travel_summary.md\nindex e63ab2d..3dc947a 100644\n--- a/doc/travel_summary.md\n+++ b/doc/travel_summary.md\n@@ -1,3 +1,3 @@\n # Travel summary\n \n-(to be completed: daily allowance and approval rule)\n+The daily allowance for domestic travel is forty (40) EUR[[cite:obs-ecf2d73f2c1b5d62a972da0856bf20de6b791f94 \"The daily allowance for domestic travel is forty (40) EUR.\"]]. Trips with a total cost above one thousand (1000) EUR need written approval by a director[[cite:obs-0a8a75d9ee1e537845cf424aa28abff532fe54a4 \"Trips with a total cost above one thousand (1000) EUR need written approval by a director.\"]].\n",
+        "head_is_base": true,
+        "marker": "eval-verify-dv-travel-gabriel_reference_plan-0"
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 2838
+    },
+    {
+      "task_id": "dv-travel",
+      "family": "revoked",
+      "system": "provider_only",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-travel--provider_only--0",
+      "domain": "document",
+      "outcome": {
+        "system": "provider_only",
+        "task_id": "dv-travel",
+        "family": "revoked",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "deliverable produced; declared done without verification",
+        "model_requests": 1,
+        "model_tokens": 848,
+        "wall_ms": 1896,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-mini-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-travel--provider_only--0/worktrees/provider_only-0",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "deliverable produced; declared done without verification"
+        ],
+        "gabriel": null,
+        "repairs_used": 0,
+        "plan_versions": 0
+      },
+      "verification": {
+        "verified": false,
+        "problems": [
+          "doc/travel_summary.md: quote 'The daily allowance for domestic travel is sixty (60) EUR.' is found only in a revoked source",
+          "required statement missing: 40 EUR | forty (40) EUR | (40) EUR | EUR 40 | forty EUR",
+          "required statement not cited from travel with 'forty (40) EUR'",
+          "forbidden statement present in doc/travel_summary.md: sixty (60) EUR, (60) EUR"
+        ],
+        "changed_paths": [
+          "doc/travel_summary.md"
+        ],
+        "out_of_scope_paths": [],
+        "citations": 2,
+        "claims": [
+          {
+            "claim": "40 EUR | forty (40) EUR | (40) EUR | EUR 40 | forty EUR",
+            "present": false,
+            "cited_from_expected_source": false
+          },
+          {
+            "claim": "director",
+            "present": true,
+            "cited_from_expected_source": true
+          }
+        ],
+        "targets": {
+          "doc/travel_summary.md": "# Travel summary\n\nThe daily allowance for domestic travel is sixty (60) EUR[[cite:obs-180e9dc4e39f4436d1ac773ba13fa9e87dd69254 \"The daily allowance for domestic travel is sixty (60) EUR.\"]]. Trips with a total cost above one thousand (1000) EUR need written approval by a director[[cite:obs-23368ba6840031cd61e7313c5d05f38607a83d1f \"Trips with a total cost above one thousand (1000) EUR need written approval by a director.\"]].\n"
+        },
+        "patch_sha256": "ef3432eb4c4842a71011fd9127ad347193a0db4a1446dc4f1df02c4c7c5b60dd",
+        "patch_bytes": 646,
+        "patch": "diff --git a/doc/travel_summary.md b/doc/travel_summary.md\nindex e63ab2d..cf2b68d 100644\n--- a/doc/travel_summary.md\n+++ b/doc/travel_summary.md\n@@ -1,3 +1,3 @@\n # Travel summary\n \n-(to be completed: daily allowance and approval rule)\n+The daily allowance for domestic travel is sixty (60) EUR[[cite:obs-180e9dc4e39f4436d1ac773ba13fa9e87dd69254 \"The daily allowance for domestic travel is sixty (60) EUR.\"]]. Trips with a total cost above one thousand (1000) EUR need written approval by a director[[cite:obs-23368ba6840031cd61e7313c5d05f38607a83d1f \"Trips with a total cost above one thousand (1000) EUR need written approval by a director.\"]].\n",
+        "head_is_base": true,
+        "marker": "eval-verify-dv-travel-provider_only-0"
+      },
+      "V": 0,
+      "D": 1,
+      "false_completion": 1,
+      "unit_wall_ms": 2117
+    },
+    {
+      "task_id": "dv-travel",
+      "family": "revoked",
+      "system": "simple_loop",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-travel--simple_loop--0",
+      "domain": "document",
+      "outcome": {
+        "system": "simple_loop",
+        "task_id": "dv-travel",
+        "family": "revoked",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "own check run passed after 2 request(s)",
+        "model_requests": 2,
+        "model_tokens": 1922,
+        "wall_ms": 3992,
+        "provider_statuses": [
+          "completed",
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-mini-2025-04-14",
+          "gpt-4.1-mini-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-travel--simple_loop--0/worktrees/simple_loop-0",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "request 1: own checks failed: doc/travel_summary.md: quote 'The daily allowance for domestic travel is sixty (60) EUR.' is found only in a revoked source; required statement missing: 40 EUR | forty (40) EUR | (40) EUR | EUR 40 | forty EUR; required statement not cited from travel with 'forty (40) EUR'",
+          "request 2: own checks passed"
+        ],
+        "gabriel": null,
+        "repairs_used": 0,
+        "plan_versions": 0
+      },
+      "verification": {
+        "verified": true,
+        "problems": [],
+        "changed_paths": [
+          "doc/travel_summary.md"
+        ],
+        "out_of_scope_paths": [],
+        "citations": 2,
+        "claims": [
+          {
+            "claim": "40 EUR | forty (40) EUR | (40) EUR | EUR 40 | forty EUR",
+            "present": true,
+            "cited_from_expected_source": true
+          },
+          {
+            "claim": "director",
+            "present": true,
+            "cited_from_expected_source": true
+          }
+        ],
+        "targets": {
+          "doc/travel_summary.md": "# Travel summary\n\nThe daily allowance for domestic travel is forty (40) EUR [[cite:obs-d93bd5a70e63280cdc87f129beb482ca9f05607d \"The daily allowance for domestic travel is forty (40) EUR.\"]]. Trips with a total cost above one thousand (1000) EUR need written approval by a director [[cite:obs-23368ba6840031cd61e7313c5d05f38607a83d1f \"Trips with a total cost above one thousand (1000) EUR need written approval by a director.\"]].\n"
+        },
+        "patch_sha256": "4bf40623972b0c502d921f8b3dbe4c740fc633d9928093ef11f7a14139012eb6",
+        "patch_bytes": 648,
+        "patch": "diff --git a/doc/travel_summary.md b/doc/travel_summary.md\nindex e63ab2d..bd25f99 100644\n--- a/doc/travel_summary.md\n+++ b/doc/travel_summary.md\n@@ -1,3 +1,3 @@\n # Travel summary\n \n-(to be completed: daily allowance and approval rule)\n+The daily allowance for domestic travel is forty (40) EUR [[cite:obs-d93bd5a70e63280cdc87f129beb482ca9f05607d \"The daily allowance for domestic travel is forty (40) EUR.\"]]. Trips with a total cost above one thousand (1000) EUR need written approval by a director [[cite:obs-23368ba6840031cd61e7313c5d05f38607a83d1f \"Trips with a total cost above one thousand (1000) EUR need written approval by a director.\"]].\n",
+        "head_is_base": true,
+        "marker": "eval-verify-dv-travel-simple_loop-0"
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 4210
+    }
+  ]
+}

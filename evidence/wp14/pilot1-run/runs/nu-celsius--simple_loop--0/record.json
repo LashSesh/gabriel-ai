@@ -1,0 +1,52 @@
+{
+  "task_id": "nu-celsius",
+  "family": "units",
+  "system": "simple_loop",
+  "rep": 0,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp14/pilot-run/runs/nu-celsius--simple_loop--0",
+  "domain": "numerical",
+  "outcome": {
+    "system": "simple_loop",
+    "task_id": "nu-celsius",
+    "family": "units",
+    "rep": 0,
+    "declared": true,
+    "declared_reason": "own check run passed after 1 request(s)",
+    "model_requests": 1,
+    "model_tokens": 521,
+    "wall_ms": 1206,
+    "provider_statuses": [
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp14/pilot-run/runs/nu-celsius--simple_loop--0/worktrees/simple_loop-0",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "request 1: own checks passed"
+    ],
+    "gabriel": null,
+    "repairs_used": 0,
+    "plan_versions": 0
+  },
+  "verification": {
+    "verified": true,
+    "problems": [],
+    "changed_paths": [
+      "out/converted.json"
+    ],
+    "out_of_scope_paths": [],
+    "output": "{\"kind\":\"series\",\"time_basis\":\"unix_ms\",\"units\":\"degC\",\"values\":[[0,0.0],[600,100.0],[1200,37.0],[1800,-40.0],[2400,10.0]]}",
+    "patch_sha256": "7337600d6bac198d7ec09a9c218399236e985921652acf156d7b47bf64c6f8e3",
+    "patch_bytes": 303,
+    "patch": "diff --git a/out/converted.json b/out/converted.json\nnew file mode 100644\nindex 0000000..d903a8a\n--- /dev/null\n+++ b/out/converted.json\n@@ -0,0 +1 @@\n+{\"kind\":\"series\",\"time_basis\":\"unix_ms\",\"units\":\"degC\",\"values\":[[0,0.0],[600,100.0],[1200,37.0],[1800,-40.0],[2400,10.0]]}\n\\ No newline at end of file\n",
+    "head_is_base": true,
+    "marker": "eval-verify-nu-celsius-simple_loop-0"
+  },
+  "V": 1,
+  "D": 1,
+  "false_completion": 0,
+  "unit_wall_ms": 1362
+}

@@ -42,7 +42,7 @@ def main(argv=None) -> int:
     for name in ("status", "verify", "compact"):
         p = msub.add_parser(name); p.add_argument("--workspace", required=True)
     ev = sub.add_parser("eval", help="frozen matched evaluation (WP11)"); esub = ev.add_subparsers(dest="action", required=True)
-    cc = esub.add_parser("corpus-check"); cc.add_argument("--tier", choices=("standard", "hard"), default=None)
+    cc = esub.add_parser("corpus-check"); cc.add_argument("--tier", choices=("standard", "hard", "document", "numerical"), default=None)
     freeze = esub.add_parser("freeze"); freeze.add_argument("--provider", required=True, help="JSON provider spec (file or inline)")
     freeze.add_argument("--out", required=True); freeze.add_argument("--repetitions", type=int, default=2)
     freeze.add_argument("--backend", choices=("linux_namespace", "trusted_local"), default="linux_namespace")

@@ -1,0 +1,52 @@
+{
+  "task_id": "nu-metres",
+  "family": "units",
+  "system": "provider_only",
+  "rep": 0,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp14/pilot-run/runs/nu-metres--provider_only--0",
+  "domain": "numerical",
+  "outcome": {
+    "system": "provider_only",
+    "task_id": "nu-metres",
+    "family": "units",
+    "rep": 0,
+    "declared": true,
+    "declared_reason": "deliverable produced; declared done without verification",
+    "model_requests": 1,
+    "model_tokens": 524,
+    "wall_ms": 1384,
+    "provider_statuses": [
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp14/pilot-run/runs/nu-metres--provider_only--0/worktrees/provider_only-0",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "deliverable produced; declared done without verification"
+    ],
+    "gabriel": null,
+    "repairs_used": 0,
+    "plan_versions": 0
+  },
+  "verification": {
+    "verified": true,
+    "problems": [],
+    "changed_paths": [
+      "out/converted.json"
+    ],
+    "out_of_scope_paths": [],
+    "output": "{\"kind\":\"series\",\"time_basis\":\"unix_ms\",\"units\":\"m\",\"values\":[[0,1500.0],[60000,2250.0],[120000,400.0],[180000,10000.0]]}",
+    "patch_sha256": "3242ee24303f8e58ae9c98040aa5653bb7d567e0499d8b922eba8a66e9e4315f",
+    "patch_bytes": 301,
+    "patch": "diff --git a/out/converted.json b/out/converted.json\nnew file mode 100644\nindex 0000000..b0c5fb9\n--- /dev/null\n+++ b/out/converted.json\n@@ -0,0 +1 @@\n+{\"kind\":\"series\",\"time_basis\":\"unix_ms\",\"units\":\"m\",\"values\":[[0,1500.0],[60000,2250.0],[120000,400.0],[180000,10000.0]]}\n\\ No newline at end of file\n",
+    "head_is_base": true,
+    "marker": "eval-verify-nu-metres-provider_only-0"
+  },
+  "V": 1,
+  "D": 1,
+  "false_completion": 0,
+  "unit_wall_ms": 1559
+}

@@ -320,28 +320,34 @@ class MemoryService:
         items, excluded = [], []
         query_tokens = set(_tokens(query))
         for key in keys:
-            choice = self.effective(key, f, version_policy)
-            if choice["status"] != "resolved":
+            if version_policy == "all_revisions":
+                # Declared ablation of the revision rule (ADR-16): every eligible revision of the source is a
+                # candidate; authorization, revocation and kind filtering still apply before scoring.
+                chosen_set = self.eligible(key, f)
+            else:
+                choice = self.effective(key, f, version_policy)
+                if choice["status"] != "resolved":
+                    for c in choice["candidates"]:
+                        excluded.append({"observation_id": c["observation_id"], "reason": choice["status"] if choice["status"] in ("contested",) else "unresolved_revision"})
+                    continue
+                chosen_set = [choice["observation"]]
                 for c in choice["candidates"]:
-                    excluded.append({"observation_id": c["observation_id"], "reason": choice["status"] if choice["status"] in ("contested",) else "unresolved_revision"})
-                continue
-            chosen = choice["observation"]
-            for c in choice["candidates"]:
-                if c["observation_id"] != chosen["observation_id"]:
-                    excluded.append({"observation_id": c["observation_id"], "reason": "superseded"})
-            ok, why = self._authorized(chosen, principal_id)
-            if not ok:
-                excluded.append({"observation_id": chosen["observation_id"], "reason": why})
-                continue
-            kind = self.scope(chosen).get("source_kind", "unknown")
-            if allowed_source_kinds and kind not in allowed_source_kinds:
-                excluded.append({"observation_id": chosen["observation_id"], "reason": "kind_not_allowed"})
-                continue
-            # 2. scoring on authorized, eligible content only
-            content = self.content(chosen)
-            span_start, span_end, score = self._best_span(content, query_tokens)
-            items.append({"observation_id": chosen["observation_id"], "source_id": chosen["source_id"], "source_revision": chosen["source_revision"],
-                          "artifact_ref": chosen["content_ref"], "span_start": span_start, "span_end": span_end, "score_milli": score, "source_kind": kind})
+                    if c["observation_id"] != choice["observation"]["observation_id"]:
+                        excluded.append({"observation_id": c["observation_id"], "reason": "superseded"})
+            for chosen in chosen_set:
+                ok, why = self._authorized(chosen, principal_id)
+                if not ok:
+                    excluded.append({"observation_id": chosen["observation_id"], "reason": why})
+                    continue
+                kind = self.scope(chosen).get("source_kind", "unknown")
+                if allowed_source_kinds and kind not in allowed_source_kinds:
+                    excluded.append({"observation_id": chosen["observation_id"], "reason": "kind_not_allowed"})
+                    continue
+                # 2. scoring on authorized, eligible content only
+                content = self.content(chosen)
+                span_start, span_end, score = self._best_span(content, query_tokens)
+                items.append({"observation_id": chosen["observation_id"], "source_id": chosen["source_id"], "source_revision": chosen["source_revision"],
+                              "artifact_ref": chosen["content_ref"], "span_start": span_start, "span_end": span_end, "score_milli": score, "source_kind": kind})
         items.sort(key=lambda i: (-i["score_milli"], i["observation_id"]))
         budget, kept = max_bytes, []
         for item in items:

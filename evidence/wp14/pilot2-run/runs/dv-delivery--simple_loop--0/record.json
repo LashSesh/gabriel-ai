@@ -1,0 +1,67 @@
+{
+  "task_id": "dv-delivery",
+  "family": "revoked",
+  "system": "simple_loop",
+  "rep": 0,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-delivery--simple_loop--0",
+  "domain": "document",
+  "outcome": {
+    "system": "simple_loop",
+    "task_id": "dv-delivery",
+    "family": "revoked",
+    "rep": 0,
+    "declared": true,
+    "declared_reason": "own check run passed after 1 request(s)",
+    "model_requests": 1,
+    "model_tokens": 827,
+    "wall_ms": 1902,
+    "provider_statuses": [
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp14/pilot2-run/runs/dv-delivery--simple_loop--0/worktrees/simple_loop-0",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "request 1: own checks passed"
+    ],
+    "gabriel": null,
+    "repairs_used": 0,
+    "plan_versions": 0
+  },
+  "verification": {
+    "verified": true,
+    "problems": [],
+    "changed_paths": [
+      "doc/vendor_terms.md"
+    ],
+    "out_of_scope_paths": [],
+    "citations": 2,
+    "claims": [
+      {
+        "claim": "10 business days | ten (10) business days | (10) business days | ten business days",
+        "present": true,
+        "cited_from_expected_source": true
+      },
+      {
+        "claim": "24 months | twenty-four (24) months | (24) months | twenty-four months",
+        "present": true,
+        "cited_from_expected_source": true
+      }
+    ],
+    "targets": {
+      "doc/vendor_terms.md": "# Vendor terms\n\nThe delivery time is within ten (10) business days of the order[[cite:obs-9f2404efc5c5ecb266a2bcfcfc94c1c2c441a3f6 \"The supplier delivers within ten (10) business days of the order.\"]].\n\nThe warranty period for all delivered items is twenty-four (24) months[[cite:obs-46bd5d92e55c929e431ef5de234412b5918b25de \"All delivered items carry a warranty of twenty-four (24) months.\"]].\n"
+    },
+    "patch_sha256": "75cf6eb328aec15c17018ebcab56919713d1e9362cb9aa3fd2fcfdcd0f802dc2",
+    "patch_bytes": 607,
+    "patch": "diff --git a/doc/vendor_terms.md b/doc/vendor_terms.md\nindex 14d88ef..215b9b4 100644\n--- a/doc/vendor_terms.md\n+++ b/doc/vendor_terms.md\n@@ -1,3 +1,5 @@\n # Vendor terms\n \n-(to be completed: delivery time and warranty period)\n+The delivery time is within ten (10) business days of the order[[cite:obs-9f2404efc5c5ecb266a2bcfcfc94c1c2c441a3f6 \"The supplier delivers within ten (10) business days of the order.\"]].\n+\n+The warranty period for all delivered items is twenty-four (24) months[[cite:obs-46bd5d92e55c929e431ef5de234412b5918b25de \"All delivered items carry a warranty of twenty-four (24) months.\"]].\n",
+    "head_is_base": true,
+    "marker": "eval-verify-dv-delivery-simple_loop-0"
+  },
+  "V": 1,
+  "D": 1,
+  "false_completion": 0,
+  "unit_wall_ms": 2065
+}

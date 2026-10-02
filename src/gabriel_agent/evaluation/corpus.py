@@ -23,6 +23,7 @@ from pathlib import Path
 from ..contracts.codec import canonical
 
 
+from . import corpus_domains  # noqa: E402
 from .corpus_base import EvalTask, task as _task  # noqa: E402
 from .corpus_hard import HARD_TASKS  # noqa: E402
 
@@ -971,12 +972,14 @@ if __name__ == "__main__":
 ]
 
 
-TASKS = STANDARD_TASKS + HARD_TASKS
-TIERS = ("standard", "hard")
+TASKS = STANDARD_TASKS + HARD_TASKS          # software tiers
+SOFTWARE_TIERS = ("standard", "hard")
+TIERS = SOFTWARE_TIERS + corpus_domains.DOMAIN_TIERS
 
 
 def tasks(tier: str | None = None) -> list:
-    return [t for t in TASKS if tier is None or t.tier == tier]
+    """Every frozen evaluation task across the software, document and numerical tiers."""
+    return [t for t in TASKS + corpus_domains.DOMAIN_TASKS if tier is None or t.tier == tier]
 
 
 def families(tier: str | None = None) -> dict:
@@ -986,7 +989,15 @@ def families(tier: str | None = None) -> dict:
     return result
 
 
-def corpus_digest() -> str:
+def corpus_digest(tiers=None) -> str:
+    """Digest of the tasks of the given tiers (default: every tier). A protocol pins the digest of
+    the tiers it uses, so adding a tier does not invalidate protocols frozen on other tiers."""
+    selected = [t for t in tasks() if tiers is None or t.tier in tiers]
+    return hashlib.sha256(canonical([t.digest() for t in selected])).hexdigest()
+
+
+def legacy_corpus_digest() -> str:
+    """The digest protocols 1 to 4 were frozen with: every software task, whatever their tiers."""
     return hashlib.sha256(canonical([t.digest() for t in TASKS])).hexdigest()
 
 
@@ -1073,6 +1084,8 @@ def soundness_check(task: EvalTask, python: str = "python3") -> dict:
 
 
 def check_all(python: str = sys.executable, tier: str | None = None) -> dict:
-    report = [soundness_check(task, python) for task in tasks(tier)]
+    """Execute every corpus invariant: visible/oracle/trap behaviour of the software tiers and the
+    positive and negative deliverable controls of the document and numerical tiers."""
+    report = [soundness_check(task, python) if task.tier in SOFTWARE_TIERS else corpus_domains.soundness_check(task) for task in tasks(tier)]
     return {"corpus_digest": corpus_digest(), "tasks": report, "all_sound": all(r["sound"] for r in report),
             "families": families(tier), "tiers": {t: len(tasks(t)) for t in TIERS}}
