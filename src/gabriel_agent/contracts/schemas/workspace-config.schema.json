@@ -1,0 +1,76 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/workspace-config.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Closed gabriel_agent contract; representation only, cross-record rules are enforced by the owner.",
+  "properties": {
+    "allow_trusted_local": {
+      "type": "boolean"
+    },
+    "artifact_root": {
+      "maxLength": 512,
+      "pattern": "^[ -~]*$",
+      "type": "string"
+    },
+    "config_revision": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "containment_backend": {
+      "enum": [
+        "linux_namespace",
+        "trusted_local"
+      ],
+      "type": "string"
+    },
+    "database": {
+      "maxLength": 512,
+      "pattern": "^[ -~]*$",
+      "type": "string"
+    },
+    "default_limits": {
+      "$ref": "common.schema.json#/$defs/budget"
+    },
+    "principal_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "provider_profile_ref": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/artifact_ref"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "registry_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "schema": {
+      "const": "gabriel.workspace-config/1",
+      "type": "string"
+    },
+    "schema_version": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "workspace_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    }
+  },
+  "required": [
+    "schema",
+    "schema_version",
+    "workspace_id",
+    "principal_id",
+    "artifact_root",
+    "database",
+    "registry_digest",
+    "containment_backend",
+    "allow_trusted_local",
+    "default_limits",
+    "config_revision",
+    "provider_profile_ref"
+  ],
+  "title": "workspace-config",
+  "type": "object"
+}

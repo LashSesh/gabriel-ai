@@ -1,0 +1,60 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/outcome-label.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "PROPOSED specification; representation validation does not implement runtime behavior.",
+  "properties": {
+    "first_matured_sequence": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "issue_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "label_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "label_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "maturity_condition_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "revision": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "run_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "schema": {
+      "const": "gabriel.outcome-label/1",
+      "type": "string"
+    },
+    "source_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "supersedes": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "schema",
+    "label_id",
+    "issue_id",
+    "run_id",
+    "source_id",
+    "revision",
+    "maturity_condition_ref",
+    "label_ref",
+    "first_matured_sequence",
+    "supersedes"
+  ],
+  "title": "outcome-label",
+  "type": "object"
+}

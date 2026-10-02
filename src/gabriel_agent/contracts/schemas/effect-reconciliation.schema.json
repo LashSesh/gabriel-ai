@@ -1,0 +1,49 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/effect-reconciliation.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Closed gabriel_agent contract; representation only, cross-record rules are enforced by the owner.",
+  "properties": {
+    "attempt_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "evidence_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "intent_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "method": {
+      "enum": [
+        "read_back",
+        "target_status_by_key",
+        "same_key_retry",
+        "manual_review"
+      ],
+      "type": "string"
+    },
+    "outcome": {
+      "enum": [
+        "confirmed_success",
+        "confirmed_failure",
+        "confirmed_not_executed",
+        "still_unknown"
+      ],
+      "type": "string"
+    },
+    "schema": {
+      "const": "gabriel.effect-reconciliation/1",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema",
+    "intent_id",
+    "attempt_id",
+    "method",
+    "outcome",
+    "evidence_ref"
+  ],
+  "title": "effect-reconciliation",
+  "type": "object"
+}

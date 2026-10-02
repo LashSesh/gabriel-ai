@@ -1,0 +1,56 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/hold.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "ADR-10 hold record: a recorded prerequisite/decision/exhaustion that moves a run to blocked, waiting_user or failed.",
+  "properties": {
+    "missing_prerequisite": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "reason_code": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "reason_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "schema": {
+      "const": "gabriel.hold/1",
+      "type": "string"
+    },
+    "target_state": {
+      "enum": [
+        "blocked",
+        "waiting_user",
+        "failed"
+      ],
+      "type": "string"
+    },
+    "wakeup_condition": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "schema",
+    "reason_code",
+    "target_state",
+    "reason_ref",
+    "missing_prerequisite",
+    "wakeup_condition"
+  ],
+  "title": "hold",
+  "type": "object"
+}

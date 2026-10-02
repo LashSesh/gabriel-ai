@@ -1,0 +1,44 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/dispatch-marker.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "PROPOSED representation of durable pre-I/O dispatch marking; authentication, time and current pause/authority checks belong to owner/supervisor.",
+  "properties": {
+    "attempt_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "authorization_input_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "fencing_token": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "intent_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "lease_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "owner_time_unix_ms": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "run_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "schema": {
+      "const": "gabriel.dispatch-marker/1",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema",
+    "run_id",
+    "intent_id",
+    "attempt_id",
+    "lease_id",
+    "fencing_token",
+    "owner_time_unix_ms",
+    "authorization_input_ref"
+  ],
+  "type": "object"
+}

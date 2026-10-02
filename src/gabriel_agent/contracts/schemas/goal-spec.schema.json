@@ -1,0 +1,143 @@
+{
+  "$defs": {
+    "obligation": {
+      "additionalProperties": false,
+      "properties": {
+        "check_id": {
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/$defs/identifier"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "depends_on": {
+          "items": {
+            "$ref": "common.schema.json#/$defs/identifier"
+          },
+          "maxItems": 64,
+          "minItems": 0,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "execution_requirement": {
+          "enum": [
+            "observed",
+            "synthetic_allowed"
+          ],
+          "type": "string"
+        },
+        "mandatory": {
+          "type": "boolean"
+        },
+        "obligation_id": {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        "predicate_kind": {
+          "maxLength": 112,
+          "pattern": "^[a-z][a-z0-9_]{0,47}/[a-z][a-z0-9_]{0,63}$",
+          "type": "string"
+        },
+        "spec_ref": {
+          "$ref": "common.schema.json#/$defs/artifact_ref"
+        },
+        "subject_ref": {
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/$defs/artifact_ref"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "verifier_id": {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        "verifier_profile_digest": {
+          "$ref": "common.schema.json#/$defs/sha256"
+        },
+        "verifier_version": {
+          "$ref": "common.schema.json#/$defs/identifier"
+        }
+      },
+      "required": [
+        "obligation_id",
+        "predicate_kind",
+        "subject_ref",
+        "verifier_id",
+        "verifier_version",
+        "verifier_profile_digest",
+        "mandatory",
+        "depends_on",
+        "execution_requirement",
+        "spec_ref",
+        "check_id"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://gabriel.invalid/spec/1/goal-spec.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Closed gabriel_agent contract; representation only, cross-record rules are enforced by the owner.",
+  "properties": {
+    "domain_namespace": {
+      "pattern": "^[a-z][a-z0-9_]{0,47}$",
+      "type": "string"
+    },
+    "goal_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "obligations": {
+      "items": {
+        "$ref": "#/$defs/obligation"
+      },
+      "maxItems": 64,
+      "minItems": 1,
+      "type": "array"
+    },
+    "pack_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "pack_version": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "schema": {
+      "const": "gabriel.goal-spec/1",
+      "type": "string"
+    },
+    "source_acceptance_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "source_goal_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "task_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "task_spec_revision": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "transform_profile_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    }
+  },
+  "required": [
+    "schema",
+    "goal_id",
+    "task_id",
+    "task_spec_revision",
+    "domain_namespace",
+    "pack_id",
+    "pack_version",
+    "source_goal_ref",
+    "source_acceptance_ref",
+    "obligations",
+    "transform_profile_id"
+  ],
+  "title": "goal-spec",
+  "type": "object"
+}

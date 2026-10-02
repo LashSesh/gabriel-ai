@@ -1,0 +1,129 @@
+{
+  "$defs": {
+    "clause": {
+      "additionalProperties": false,
+      "properties": {
+        "byte_end": {
+          "$ref": "common.schema.json#/$defs/safe_uint"
+        },
+        "byte_start": {
+          "$ref": "common.schema.json#/$defs/safe_uint"
+        },
+        "clause_id": {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        "mandatory": {
+          "type": "boolean"
+        },
+        "mapped_obligation_ids": {
+          "items": {
+            "$ref": "common.schema.json#/$defs/identifier"
+          },
+          "maxItems": 64,
+          "minItems": 0,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "reason": {
+          "maxLength": 512,
+          "pattern": "^[ -~]*$",
+          "type": "string"
+        },
+        "source_ref": {
+          "$ref": "common.schema.json#/$defs/artifact_ref"
+        },
+        "status": {
+          "enum": [
+            "mapped",
+            "ambiguous",
+            "unsupported",
+            "excluded_optional",
+            "unknown_operation_rejected"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "clause_id",
+        "source_ref",
+        "byte_start",
+        "byte_end",
+        "mapped_obligation_ids",
+        "status",
+        "mandatory",
+        "reason"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://gabriel.invalid/spec/1/compilation-report.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Closed gabriel_agent contract; representation only, cross-record rules are enforced by the owner.",
+  "properties": {
+    "admissible": {
+      "type": "boolean"
+    },
+    "clauses": {
+      "items": {
+        "$ref": "#/$defs/clause"
+      },
+      "maxItems": 256,
+      "minItems": 1,
+      "type": "array"
+    },
+    "goal_spec_ref": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/artifact_ref"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "raw_response_ref": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/artifact_ref"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "report_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "schema": {
+      "const": "gabriel.compilation-report/1",
+      "type": "string"
+    },
+    "task_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "task_spec_revision": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "transform_profile_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "unresolved_mandatory_count": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    }
+  },
+  "required": [
+    "schema",
+    "report_id",
+    "task_id",
+    "task_spec_revision",
+    "goal_spec_ref",
+    "clauses",
+    "raw_response_ref",
+    "transform_profile_id",
+    "unresolved_mandatory_count",
+    "admissible"
+  ],
+  "title": "compilation-report",
+  "type": "object"
+}

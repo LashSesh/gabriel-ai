@@ -1,0 +1,177 @@
+{
+  "$defs": {
+    "stream": {
+      "additionalProperties": false,
+      "properties": {
+        "capture_limit_bytes": {
+          "$ref": "common.schema.json#/$defs/safe_uint"
+        },
+        "captured_ref": {
+          "$ref": "common.schema.json#/$defs/artifact_ref"
+        },
+        "full_sha256": {
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/$defs/sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "total_bytes": {
+          "$ref": "common.schema.json#/$defs/safe_uint"
+        },
+        "truncated": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "captured_ref",
+        "total_bytes",
+        "full_sha256",
+        "truncated",
+        "capture_limit_bytes"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://gabriel.invalid/spec/1/run-witness.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Closed gabriel_agent contract; representation only, cross-record rules are enforced by the owner.",
+  "properties": {
+    "argv": {
+      "items": {
+        "maxLength": 512,
+        "pattern": "^[ -~]*$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "minItems": 1,
+      "type": "array"
+    },
+    "backend_identity": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "backend_kind": {
+      "enum": [
+        "linux_namespace",
+        "trusted_local"
+      ],
+      "type": "string"
+    },
+    "cwd": {
+      "maxLength": 512,
+      "pattern": "^[ -~]*$",
+      "type": "string"
+    },
+    "descendants_cleaned": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "duration_ms": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "env_allowlist": {
+      "items": {
+        "maxLength": 512,
+        "pattern": "^[ -~]*$",
+        "type": "string"
+      },
+      "maxItems": 64,
+      "minItems": 0,
+      "type": "array"
+    },
+    "exit_code": {
+      "anyOf": [
+        {
+          "maximum": 2147483647,
+          "minimum": -2147483648,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "network": {
+      "enum": [
+        "none",
+        "unrestricted_host"
+      ],
+      "type": "string"
+    },
+    "rlimits": {
+      "items": {
+        "maxLength": 512,
+        "pattern": "^[ -~]*$",
+        "type": "string"
+      },
+      "maxItems": 16,
+      "minItems": 0,
+      "type": "array"
+    },
+    "schema": {
+      "const": "gabriel.run-witness/1",
+      "type": "string"
+    },
+    "signal": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/safe_uint"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "start_failure": {
+      "anyOf": [
+        {
+          "maxLength": 512,
+          "pattern": "^[ -~]*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "stderr": {
+      "$ref": "#/$defs/stream"
+    },
+    "stdout": {
+      "$ref": "#/$defs/stream"
+    },
+    "timed_out": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "schema",
+    "argv",
+    "cwd",
+    "exit_code",
+    "signal",
+    "timed_out",
+    "duration_ms",
+    "backend_identity",
+    "backend_kind",
+    "stdout",
+    "stderr",
+    "env_allowlist",
+    "network",
+    "descendants_cleaned",
+    "rlimits",
+    "start_failure"
+  ],
+  "title": "run-witness",
+  "type": "object"
+}

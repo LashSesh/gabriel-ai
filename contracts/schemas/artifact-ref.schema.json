@@ -1,0 +1,32 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/artifact-ref.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "PROPOSED specification; representation validation does not implement runtime behavior.",
+  "properties": {
+    "bytes": {
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "media_type": {
+      "maxLength": 128,
+      "minLength": 3,
+      "pattern": "^[A-Za-z0-9!#$&^_.+/-]+(?:;[ -~]+)?$",
+      "type": "string"
+    },
+    "sha256": {
+      "maxLength": 64,
+      "minLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "sha256",
+    "bytes",
+    "media_type"
+  ],
+  "title": "artifact-ref",
+  "type": "object"
+}

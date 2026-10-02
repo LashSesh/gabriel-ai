@@ -1,0 +1,25 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/run-start.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Closed gabriel_agent contract; representation only, cross-record rules are enforced by the owner.",
+  "properties": {
+    "reason_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "run_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "schema": {
+      "const": "gabriel.run-start/1",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema",
+    "run_id",
+    "reason_ref"
+  ],
+  "title": "run-start",
+  "type": "object"
+}

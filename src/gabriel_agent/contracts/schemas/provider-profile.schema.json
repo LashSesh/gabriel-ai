@@ -1,0 +1,100 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/provider-profile.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Closed gabriel_agent contract; representation only, cross-record rules are enforced by the owner.",
+  "properties": {
+    "credential_ref": {
+      "anyOf": [
+        {
+          "pattern": "^env:[A-Z_][A-Z0-9_]{0,63}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "data_classes": {
+      "items": {
+        "$ref": "common.schema.json#/$defs/identifier"
+      },
+      "maxItems": 8,
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "endpoint": {
+      "anyOf": [
+        {
+          "maxLength": 512,
+          "pattern": "^[ -~]*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "kind": {
+      "enum": [
+        "scripted",
+        "openai_compat",
+        "anthropic"
+      ],
+      "type": "string"
+    },
+    "max_input_tokens": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "max_output_tokens": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "max_retries": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "model_alias": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "provider_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "schema": {
+      "const": "gabriel.provider-profile/1",
+      "type": "string"
+    },
+    "script_ref": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/artifact_ref"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "temperature_milli": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "timeout_ms": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    }
+  },
+  "required": [
+    "schema",
+    "provider_id",
+    "kind",
+    "model_alias",
+    "endpoint",
+    "credential_ref",
+    "max_input_tokens",
+    "max_output_tokens",
+    "temperature_milli",
+    "timeout_ms",
+    "script_ref",
+    "data_classes",
+    "max_retries"
+  ],
+  "title": "provider-profile",
+  "type": "object"
+}

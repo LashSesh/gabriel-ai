@@ -1,0 +1,65 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/event.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "PROPOSED specification; representation validation does not implement runtime behavior.",
+  "properties": {
+    "command_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "kind": {
+      "enum": [
+        "TaskAdmitted",
+        "PlanAccepted",
+        "IntentIssued",
+        "ResultAccepted",
+        "AssessmentAccepted",
+        "TaskAmended",
+        "TaskCancelled",
+        "ObservationRecorded",
+        "EffectReconciled",
+        "PauseRequested",
+        "RunResumed",
+        "RunStarted",
+        "DispatchAttemptMarked",
+        "HoldRecorded"
+      ],
+      "type": "string"
+    },
+    "payload_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "previous_hash": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "run_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "run_revision": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "schema": {
+      "const": "gabriel.event/1",
+      "type": "string"
+    },
+    "sequence": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "task_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    }
+  },
+  "required": [
+    "schema",
+    "sequence",
+    "task_id",
+    "kind",
+    "command_id",
+    "payload_ref",
+    "previous_hash",
+    "run_id",
+    "run_revision"
+  ],
+  "title": "event",
+  "type": "object"
+}

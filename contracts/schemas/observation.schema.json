@@ -1,0 +1,128 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/observation.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "PROPOSED specification; representation validation does not implement runtime behavior.",
+  "properties": {
+    "authentication": {
+      "enum": [
+        "unverified",
+        "authenticated_transport",
+        "verified_signature"
+      ],
+      "type": "string"
+    },
+    "availability_sequence": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "content_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "event_end_unix_ms": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/safe_uint"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "event_kind": {
+      "enum": [
+        "completed_observation",
+        "future_claim",
+        "timeless_document"
+      ],
+      "type": "string"
+    },
+    "event_start_unix_ms": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/safe_uint"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "extraction_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "observation_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "published_at_unix_ms": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/safe_uint"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "received_at_unix_ms": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "schema": {
+      "const": "gabriel.observation/1",
+      "type": "string"
+    },
+    "scope_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "source_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "source_object_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "source_revision": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "source_time_basis": {
+      "enum": [
+        "source_declared",
+        "owner_observed",
+        "unknown"
+      ],
+      "type": "string"
+    },
+    "supersedes": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "workspace_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    }
+  },
+  "required": [
+    "schema",
+    "observation_id",
+    "workspace_id",
+    "source_id",
+    "source_object_id",
+    "source_revision",
+    "content_ref",
+    "availability_sequence",
+    "event_kind",
+    "event_start_unix_ms",
+    "event_end_unix_ms",
+    "published_at_unix_ms",
+    "received_at_unix_ms",
+    "source_time_basis",
+    "extraction_digest",
+    "scope_ref",
+    "supersedes",
+    "authentication"
+  ],
+  "title": "observation",
+  "type": "object"
+}

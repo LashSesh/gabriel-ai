@@ -1,0 +1,250 @@
+{
+  "$defs": {
+    "artifact_ref": {
+      "additionalProperties": false,
+      "properties": {
+        "bytes": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "media_type": {
+          "maxLength": 128,
+          "minLength": 3,
+          "pattern": "^[A-Za-z0-9!#$&^_.+/-]+(?:;[ -~]+)?$",
+          "type": "string"
+        },
+        "sha256": {
+          "maxLength": 64,
+          "minLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "sha256",
+        "bytes",
+        "media_type"
+      ],
+      "type": "object"
+    },
+    "budget": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_bytes": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "concurrent_reads": {
+          "maximum": 64,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "concurrent_writes_per_resource": {
+          "const": "one",
+          "type": "string"
+        },
+        "cpu_ms": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "currency": {
+          "pattern": "^[A-Z]{3}$",
+          "type": "string"
+        },
+        "currency_micro_units": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "elapsed_ms": {
+          "description": "Run wall-clock deadline allowance. Enforced as a deadline; excluded from the additive spent + reserved + demand ledger.",
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "model_requests": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "model_tokens_total": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "scratch_bytes": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "tool_attempts": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "model_tokens_total",
+        "model_requests",
+        "tool_attempts",
+        "cpu_ms",
+        "elapsed_ms",
+        "artifact_bytes",
+        "scratch_bytes",
+        "currency_micro_units",
+        "currency",
+        "concurrent_reads",
+        "concurrent_writes_per_resource"
+      ],
+      "type": "object"
+    },
+    "check_ref": {
+      "additionalProperties": false,
+      "properties": {
+        "check_id": {
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$",
+          "type": "string"
+        },
+        "mandatory": {
+          "type": "boolean"
+        },
+        "spec_ref": {
+          "additionalProperties": false,
+          "properties": {
+            "bytes": {
+              "maximum": 9007199254740991,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "media_type": {
+              "maxLength": 128,
+              "minLength": 3,
+              "pattern": "^[A-Za-z0-9!#$&^_.+/-]+(?:;[ -~]+)?$",
+              "type": "string"
+            },
+            "sha256": {
+              "maxLength": 64,
+              "minLength": 64,
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes",
+            "media_type"
+          ],
+          "type": "object"
+        },
+        "version": {
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "check_id",
+        "version",
+        "mandatory",
+        "spec_ref"
+      ],
+      "type": "object"
+    },
+    "effect_class": {
+      "enum": [
+        "read",
+        "local_reversible_write",
+        "external_idempotent_effect",
+        "external_non_idempotent_effect"
+      ],
+      "type": "string"
+    },
+    "identifier": {
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$",
+      "type": "string"
+    },
+    "safe_uint": {
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "sha256": {
+      "maxLength": 64,
+      "minLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "usage": {
+      "additionalProperties": false,
+      "properties": {
+        "accounting_status": {
+          "enum": [
+            "confirmed",
+            "conservative_pending_reconciliation"
+          ],
+          "type": "string"
+        },
+        "artifact_bytes": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "cpu_ms": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "currency": {
+          "pattern": "^[A-Z]{3}$",
+          "type": "string"
+        },
+        "currency_micro_units": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "elapsed_ms": {
+          "description": "Attempt latency for reporting. Concurrent attempt latencies are not summed into the run wall-clock deadline.",
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "model_requests": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "model_tokens": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "tool_attempts": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "model_tokens",
+        "model_requests",
+        "tool_attempts",
+        "cpu_ms",
+        "elapsed_ms",
+        "artifact_bytes",
+        "currency_micro_units",
+        "currency",
+        "accounting_status"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://gabriel.invalid/spec/1/common.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "PROPOSED closed definitions. Integer tokens require the strict companion validator; JSON Schema numeric equality alone accepts 1.0 as an integer."
+}

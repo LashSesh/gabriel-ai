@@ -1,0 +1,208 @@
+{
+  "capability_requirements": [
+    "fixture.compile",
+    "fixture.observe",
+    "fixture.evaluate",
+    "fixture.propose",
+    "fixture.execute",
+    "fixture.read_back"
+  ],
+  "conventions_ref": {
+    "bytes": 396,
+    "media_type": "application/json",
+    "sha256": "d6ee294af53f8e9a5a79adad86e9a3fcf336dadd6b7b662c38da0f8fa360b376"
+  },
+  "evaluation_profiles": [
+    {
+      "profile_id": "fixture-evaluator-v1",
+      "spec_ref": {
+        "bytes": 251,
+        "media_type": "application/json",
+        "sha256": "7da06791cdd31a0712bbb38ae82dd145e1e89b2feab2032d4639315410be3486"
+      }
+    }
+  ],
+  "fixtures": [
+    {
+      "case_kind": "valid",
+      "expected_ref": {
+        "bytes": 58,
+        "media_type": "application/json",
+        "sha256": "fbba24e04e95d033d7975ac017812aa78eb66a791b5bf9962f25fac625a37712"
+      },
+      "fixture_id": "fixture-valid",
+      "input_ref": {
+        "bytes": 48,
+        "media_type": "application/json",
+        "sha256": "84270718e9df105a64ed8111e5d222fdea9f3d01bbf155b9af865a15e4598ed7"
+      },
+      "port": "evaluate"
+    },
+    {
+      "case_kind": "invalid",
+      "expected_ref": {
+        "bytes": 57,
+        "media_type": "application/json",
+        "sha256": "24f914484620777913cebca58423dfc85f89ca182ef0b8151213ca19a3ff0ca7"
+      },
+      "fixture_id": "fixture-invalid",
+      "input_ref": {
+        "bytes": 29,
+        "media_type": "application/json",
+        "sha256": "e6a878201126ef7c1b61323d53b14f94ef42459f336fea25cd7ccbd1cc7da1c0"
+      },
+      "port": "evaluate"
+    },
+    {
+      "case_kind": "out_of_scope",
+      "expected_ref": {
+        "bytes": 62,
+        "media_type": "application/json",
+        "sha256": "bd862e8b00b2df0dfddd4c7e860eacc100b1b63ec7cbbbe6deb89bf854f7697b"
+      },
+      "fixture_id": "fixture-out_of_scope",
+      "input_ref": {
+        "bytes": 56,
+        "media_type": "application/json",
+        "sha256": "c6e7085589418464043dc10d2319e986987851ca16e1bd876337471339f893a0"
+      },
+      "port": "evaluate"
+    }
+  ],
+  "manifest_kind": "synthetic_fixture",
+  "namespace": "fixture_measurement",
+  "observation_coverage_ref": {
+    "bytes": 249,
+    "media_type": "application/json",
+    "sha256": "eee4d824a74566b7932b5dd7fbbe71ac0b17b71c62babe23ffe5ada2684a49c2"
+  },
+  "pack_id": "fixture-measurement-pack",
+  "pack_version": "1.0.0",
+  "ports": {
+    "compile": {
+      "capability_id": "fixture.compile",
+      "effect_class": "read",
+      "implementation_ref": {
+        "bytes": 287,
+        "media_type": "application/json",
+        "sha256": "271cca8bbb5920bbd3420467210d7dedb072249bcfe35fc5d0efce499e18d42f"
+      },
+      "input_schema_ref": {
+        "bytes": 427,
+        "media_type": "application/json",
+        "sha256": "c1ab40fb1bc990b90844e5d33de114c1e0fa94bbf28529235297247920c661e6"
+      },
+      "output_schema_ref": {
+        "bytes": 530,
+        "media_type": "application/json",
+        "sha256": "29c4e3f1b359e58f05aa595cf341ef1a4814136bc2d95e3a944f00410dd1cec6"
+      }
+    },
+    "evaluate": {
+      "capability_id": "fixture.evaluate",
+      "effect_class": "read",
+      "implementation_ref": {
+        "bytes": 287,
+        "media_type": "application/json",
+        "sha256": "271cca8bbb5920bbd3420467210d7dedb072249bcfe35fc5d0efce499e18d42f"
+      },
+      "input_schema_ref": {
+        "bytes": 427,
+        "media_type": "application/json",
+        "sha256": "c1ab40fb1bc990b90844e5d33de114c1e0fa94bbf28529235297247920c661e6"
+      },
+      "output_schema_ref": {
+        "bytes": 530,
+        "media_type": "application/json",
+        "sha256": "29c4e3f1b359e58f05aa595cf341ef1a4814136bc2d95e3a944f00410dd1cec6"
+      }
+    },
+    "execute": {
+      "capability_id": "fixture.execute",
+      "effect_class": "read",
+      "implementation_ref": {
+        "bytes": 287,
+        "media_type": "application/json",
+        "sha256": "271cca8bbb5920bbd3420467210d7dedb072249bcfe35fc5d0efce499e18d42f"
+      },
+      "input_schema_ref": {
+        "bytes": 427,
+        "media_type": "application/json",
+        "sha256": "c1ab40fb1bc990b90844e5d33de114c1e0fa94bbf28529235297247920c661e6"
+      },
+      "output_schema_ref": {
+        "bytes": 530,
+        "media_type": "application/json",
+        "sha256": "29c4e3f1b359e58f05aa595cf341ef1a4814136bc2d95e3a944f00410dd1cec6"
+      }
+    },
+    "observe": {
+      "capability_id": "fixture.observe",
+      "effect_class": "read",
+      "implementation_ref": {
+        "bytes": 287,
+        "media_type": "application/json",
+        "sha256": "271cca8bbb5920bbd3420467210d7dedb072249bcfe35fc5d0efce499e18d42f"
+      },
+      "input_schema_ref": {
+        "bytes": 427,
+        "media_type": "application/json",
+        "sha256": "c1ab40fb1bc990b90844e5d33de114c1e0fa94bbf28529235297247920c661e6"
+      },
+      "output_schema_ref": {
+        "bytes": 530,
+        "media_type": "application/json",
+        "sha256": "29c4e3f1b359e58f05aa595cf341ef1a4814136bc2d95e3a944f00410dd1cec6"
+      }
+    },
+    "propose": {
+      "capability_id": "fixture.propose",
+      "effect_class": "read",
+      "implementation_ref": {
+        "bytes": 287,
+        "media_type": "application/json",
+        "sha256": "271cca8bbb5920bbd3420467210d7dedb072249bcfe35fc5d0efce499e18d42f"
+      },
+      "input_schema_ref": {
+        "bytes": 427,
+        "media_type": "application/json",
+        "sha256": "c1ab40fb1bc990b90844e5d33de114c1e0fa94bbf28529235297247920c661e6"
+      },
+      "output_schema_ref": {
+        "bytes": 530,
+        "media_type": "application/json",
+        "sha256": "29c4e3f1b359e58f05aa595cf341ef1a4814136bc2d95e3a944f00410dd1cec6"
+      }
+    },
+    "read_back": {
+      "capability_id": "fixture.read_back",
+      "effect_class": "read",
+      "implementation_ref": {
+        "bytes": 287,
+        "media_type": "application/json",
+        "sha256": "271cca8bbb5920bbd3420467210d7dedb072249bcfe35fc5d0efce499e18d42f"
+      },
+      "input_schema_ref": {
+        "bytes": 427,
+        "media_type": "application/json",
+        "sha256": "c1ab40fb1bc990b90844e5d33de114c1e0fa94bbf28529235297247920c661e6"
+      },
+      "output_schema_ref": {
+        "bytes": 530,
+        "media_type": "application/json",
+        "sha256": "29c4e3f1b359e58f05aa595cf341ef1a4814136bc2d95e3a944f00410dd1cec6"
+      }
+    }
+  },
+  "schema": "gabriel.domain-pack/1",
+  "transformation_profiles": [
+    {
+      "profile_id": "fixture-transform-v1",
+      "spec_ref": {
+        "bytes": 180,
+        "media_type": "application/json",
+        "sha256": "563ac182d74f8c53b06a37c836dcefedb6d26b83be684d3a50304d82d7e638e4"
+      }
+    }
+  ]
+}

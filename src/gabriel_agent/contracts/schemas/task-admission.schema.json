@@ -1,0 +1,37 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/task-admission.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Closed gabriel_agent contract; representation only, cross-record rules are enforced by the owner.",
+  "properties": {
+    "binding_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "compilation_report_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "goal_spec_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "run_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "schema": {
+      "const": "gabriel.task-admission/1",
+      "type": "string"
+    },
+    "task": {
+      "$ref": "task.schema.json"
+    }
+  },
+  "required": [
+    "schema",
+    "task",
+    "run_id",
+    "binding_ref",
+    "goal_spec_ref",
+    "compilation_report_ref"
+  ],
+  "title": "task-admission",
+  "type": "object"
+}

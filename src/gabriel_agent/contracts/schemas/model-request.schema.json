@@ -1,0 +1,103 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/model-request.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "PROPOSED specification; representation validation does not implement runtime behavior.",
+  "properties": {
+    "evidence_refs": {
+      "items": {
+        "$ref": "common.schema.json#/$defs/artifact_ref"
+      },
+      "maxItems": 64,
+      "minItems": 0,
+      "type": "array"
+    },
+    "issue_frontier": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "max_input_tokens": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "max_output_tokens": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "model_alias": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "model_revision": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "observation_ids": {
+      "items": {
+        "$ref": "common.schema.json#/$defs/identifier"
+      },
+      "maxItems": 64,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "output_schema_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "prompt_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "provider_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "request_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "role": {
+      "enum": [
+        "planner",
+        "worker",
+        "critic"
+      ],
+      "type": "string"
+    },
+    "run_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "sampling_config_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "schema": {
+      "const": "gabriel.model-request/1",
+      "type": "string"
+    },
+    "task_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "tool_schema_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    }
+  },
+  "required": [
+    "schema",
+    "request_id",
+    "task_id",
+    "run_id",
+    "provider_id",
+    "model_alias",
+    "model_revision",
+    "prompt_ref",
+    "evidence_refs",
+    "tool_schema_digest",
+    "output_schema_digest",
+    "sampling_config_ref",
+    "max_input_tokens",
+    "max_output_tokens",
+    "role",
+    "observation_ids",
+    "issue_frontier"
+  ],
+  "title": "model-request",
+  "type": "object"
+}

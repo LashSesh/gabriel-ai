@@ -1,0 +1,80 @@
+{
+  "schema": "gabriel.evidence.baseline/1",
+  "produced_at_utc": "2026-10-02T16:18:44.441380+00:00",
+  "recovered_baseline_commit": "ed3da014e41999b4201b1654c8b2667ed907636b",
+  "kosmocrates_donor_commit_pinned": "a320ad101bbf0fdcde85d4617366ddee435d40b8",
+  "kosmocrates_checkout_head": "a320ad101bbf0fdcde85d4617366ddee435d40b8",
+  "kosmocrates_matches_pinned_donor": true,
+  "gabriel_head_at_handoff": "b2b69c4c8273c46d668cba6ed3a24779b25db07e",
+  "head_vs_baseline_diff_stat": "Gabriel_AI_Blueprint.zip | Bin 0 -> 510347 bytes\n 1 file changed, 0 insertions(+), 0 deletions(-)",
+  "head_vs_baseline_assessment": "HEAD adds only Gabriel_AI_Blueprint.zip (the handoff package); no runtime source changed since the pinned baseline.",
+  "blueprint_package_sha256": "031d1930d42acd1dbece29bac6736b654a519349d2da1629e71e75b4911ec6f1",
+  "legacy_baseline_check": {
+    "command": "python reproduction/check_runtime.py (isolated git worktree at the baseline commit)",
+    "exit_code": 0,
+    "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+    "sqlite": "3.45.1",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "status": "passed",
+    "assertions_total": 3449,
+    "categories": 98,
+    "process_crashes": [
+      {
+        "stage": "before_commit",
+        "os_exit_code": 77,
+        "committed_effect_count_after_retry": 1,
+        "journal_events_after_retry": 2
+      },
+      {
+        "stage": "after_commit",
+        "os_exit_code": 78,
+        "committed_effect_count_after_retry": 1,
+        "journal_events_after_retry": 2
+      }
+    ],
+    "source_hashes_match_blueprint_evidence": true,
+    "counts_match_blueprint_evidence": true,
+    "environment_difference": "Blueprint evidence used Python 3.12.14/SQLite 3.53.1; this rerun used Python 3.12.3/SQLite 3.45.1 on Linux x86_64 with the same pinned NumPy/SciPy."
+  },
+  "legacy_source_identities": {
+    "gabriel_runtime/__init__.py": "a26aa646ebf84297705d761216ab161151a2cd7e185d61fe95a2447e940084a2",
+    "gabriel_runtime/__main__.py": "14f9f37324b9f0437b0d91afccc90585d220475862e39df4fa9dff8604edd117",
+    "gabriel_runtime/adapters.py": "832978f5b5fa2ed6df9d51a797b702cbfa020531084d7d6e9f0e8857f6e2ece9",
+    "gabriel_runtime/batched_reachability.py": "c0dbd7959b3365dd7a7b36de897d4c1e6246b3301e897eb6629066945b4099ac",
+    "gabriel_runtime/canonical.py": "f5237347101531a0c64e41fdae65adc66aa5b731b42d474ff4f68e83e85695dc",
+    "gabriel_runtime/engine.py": "2499574e2e9733665398fc8203f5e2ca1dc22190860344725568667b7a258bc1",
+    "gabriel_runtime/fast_owner.py": "708b6d4ce676fa2947c7a1fa303c5ec28d4d370a6370c06214a31da25730865b",
+    "gabriel_runtime/graph_observer.py": "0b33dad1fe0d112960b0ac270d5b84e2768b41c8ea3905b1abe0f04803e28033",
+    "gabriel_runtime/graph_reachability.py": "f26e368d59c8b50aeb0026322adf7d7ea54d6a25795cc4c19dcf38f73c97edf3",
+    "gabriel_runtime/incremental.py": "587a39b94df8121bee18820fc466b38a20f87352e69892c3e1446368d6686b36",
+    "gabriel_runtime/replay_owner.py": "6be0297231802e64ca1ba56bbac5716cc9c802cf7d99e798bff2b568c3e8eba7",
+    "gabriel_runtime/stream.py": "fc6d8a9bb280bc80aaa64d453ea79414ebc45eec56ac1b64bf9c606fc1667ccd",
+    "gabriel_runtime/stream_demo.py": "e36850e0732f82b1b49f283121f743b4db39d88dd735b0b196e9863f7f18e430",
+    "gabriel_runtime/window_batch.py": "d61b27e68437eac5e847864cd2a4bc3923b77db88e172e6cc5a7ca7e624112ea",
+    "gabriel_runtime/window_certificate.py": "b344b7282c8c28262236e680d68fe58bfda67ecc45073c3b8d38f0b11214925c",
+    "reproduction/check_runtime.py": "c5f4929bd2967202ec88075d659d392d0cc1db7f278310cd70fa6bc81b4b4daa"
+  },
+  "dependency_groups": {
+    "core": [
+      "jsonschema==4.25.1",
+      "referencing>=0.36"
+    ],
+    "provider": [],
+    "numerical": [
+      "numpy==2.3.5",
+      "scipy==1.17.0"
+    ],
+    "native": [],
+    "dev": [
+      "pytest>=8.3,<9"
+    ]
+  },
+  "missing_evidence_register": [
+    "native_pse/benchmark-results/phase_engine/executed/captured_records.json is a Git LFS pointer in this checkout; the object was not fetched or verified.",
+    "No Rust build, native PSE throughput, MiniRocket or predictive benchmark was executed for this baseline.",
+    "The blueprint's inherited probe (runtime_contract_probe.py) was not rerun here; its retained reports are in the handoff package.",
+    "No root license file exists in the recovered tree; redistribution terms remain unresolved (see pyproject license placeholder).",
+    "Historical benchmark values under results/ and audit/ were not relabelled as reproduced."
+  ]
+}

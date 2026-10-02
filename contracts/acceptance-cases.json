@@ -1,0 +1,428 @@
+{
+  "cases": [
+    {
+      "execution_status": "NOT_EXECUTED",
+      "expected": "Output matches its scoped reference; missing fixtures and filtered historical failures stay visible.",
+      "id": "AT01",
+      "procedure": "Restore a fresh checkout at the recorded commit and execute a chosen existing replay with declared dependencies.",
+      "required_evidence": [
+        "commit identity",
+        "environment manifest",
+        "command and return code",
+        "scoped output comparison"
+      ],
+      "requirement_ids": [
+        "R01"
+      ],
+      "title": "Recovered baseline replay"
+    },
+    {
+      "execution_status": "NOT_EXECUTED",
+      "expected": "Invalid envelopes reject before admission; valid byte-preserved artifact references pass representation checks.",
+      "id": "AT02",
+      "procedure": "Submit unknown fields, duplicate JSON keys, bool-as-counter, 1.0-as-counter, excessive integer and Unicode envelope text; submit valid UTF-8 by artifact ref.",
+      "required_evidence": [
+        "original request bytes",
+        "validation outcome",
+        "unchanged event frontier"
+      ],
+      "requirement_ids": [
+        "R02"
+      ],
+      "title": "Closed schema and exact primitives"
+    },
+    {
+      "execution_status": "NOT_EXECUTED",
+      "expected": "No committed dangling reference; orphan collection is delayed; corruption is a visible storage fault.",
+      "id": "AT03",
+      "procedure": "Interrupt before blob rename, after rename, and before event commit; corrupt one committed blob.",
+      "required_evidence": [
+        "crash point",
+        "object hashes",
+        "reference scan",
+        "fault receipt"
+      ],
+      "requirement_ids": [
+        "R02"
+      ],
+      "title": "Artifact integrity and installation crash"
+    },
+    {
+      "execution_status": "NOT_EXECUTED",
+      "expected": "One conflicting transition admits; exact retry returns original receipt; changed reuse rejects.",
+      "id": "AT04",
+      "procedure": "Race two commands at the same run revision; retry an identical old command and reuse its ID with changed bytes.",
+      "required_evidence": [
+        "canonical command bytes",
+        "both responses",
+        "transaction frontier",
+        "receipt equality"
+      ],
+      "requirement_ids": [
+        "R03"
+      ],
+      "title": "Retry and concurrent revision"
+    },
+    {
+      "execution_status": "NOT_EXECUTED",
+      "expected": "Recovered state matches committed prefix; replay emits no external call and reproduces projections.",
+      "id": "AT05",
+      "procedure": "Kill before commit and after commit before acknowledgment; replay with model/tool ports disabled.",
+      "required_evidence": [
+        "fault injection point",
+        "event chain",
+        "port call counters",
+        "projection digests"
+      ],
+      "requirement_ids": [
+        "R03"
+      ],
+      "title": "Crash and recorded replay"
+    },
+    {
+      "execution_status": "NOT_EXECUTED",
+      "expected": "Dispatch rejects both; already in-flight effects retain reconciliation obligations.",
+      "id": "AT06",
+      "procedure": "Revoke a grant before dispatch and change an approved artifact digest.",
+      "required_evidence": [
+        "grant revisions",
+        "intent digest",
+        "dispatch decision",
+        "effect state"
+      ],
+      "requirement_ids": [
+        "R04"
+      ],
+      "title": "Grant revocation and approval mutation"
+    },
+    {
+      "execution_status": "NOT_EXECUTED",
+      "expected": "No oversubscription; unknown consumption remains charged; retries cannot reset budget.",
+      "id": "AT07",
+      "procedure": "Race reservations at the task ceiling; simulate a paid-provider timeout and retry request.",
+      "required_evidence": [
+        "reservation events",
+        "spent/reserved vectors",
+        "provider result",
+        "admission decisions"
+      ],
+      "requirement_ids": [
+        "R05"
+      ],
+      "title": "Concurrent budget and unknown usage"
+    },
+    {
+      "execution_status": "NOT_EXECUTED",
+      "expected": "No rights expansion or secret disclosure; containment rejects escapes and cleans descendants.",
+      "id": "AT08",
+      "procedure": "Run malicious repository instructions, symlink escape, descendant process and denied network redirect fixtures.",
+      "required_evidence": [
+        "tool descriptor",
+        "OS backend identity",
+        "process/resource observations",
+        "broker denials"
+      ],
+      "requirement_ids": [
+        "R06"
+      ],
+      "title": "Hostile content and containment"
+    },
+    {
+      "execution_status": "NOT_EXECUTED",
+      "expected": "Only complete validated response permits admission; distinct failures have bounded retries and usage records.",
+      "id": "AT09",
+      "procedure": "Feed valid output, truncation, invalid JSON, provider refusal, rate limit and transport timeout from a scripted provider.",
+      "required_evidence": [
+        "exact request/response refs",
+        "finish statuses",
+        "retry count",
+        "reservations"
+      ],
+      "requirement_ids": [
+        "R07"
+      ],
+      "title": "Model response boundaries"
+    },
+    {
+      "execution_status": "NOT_EXECUTED",
+      "expected": "Invalid plans reject; valid ready nodes use the documented tie-break and bounded workers.",
+      "id": "AT10",
+      "procedure": "Submit a cycle, missing dependency, 65 nodes, depth 13, unknown capability and ready nodes with equal priority.",
+      "required_evidence": [
+        "candidate plans",
+        "validator decisions",
+        "dispatch order",
+        "worker counters"
+      ],
+      "requirement_ids": [
+        "R08"
+      ],
+      "title": "Plan and scheduler bounds"
+    },
+    {
+      "execution_status": "NOT_EXECUTED",
+      "expected": "Positive task resumes and delivers matching base commit, scoped patch and passing independent oracle evidence. Negative task cannot succeed or weaken acceptance; at most configured repairs execute; all failure artifacts remain.",
+      "id": "AT11",
+      "procedure": "Use one real configured provider to repair a seeded repository bug in an isolated worktree; interrupt and resume before completing independent baseline and behavior checks. Also let a model announce done with a failing independent oracle and attempt to remove that mandatory check.",
+      "required_evidence": [
+        "real provider request/response and revision identity",
+        "task acceptance identity",
+        "base commit and patch manifest",
+        "independent oracle and retained baseline results",
+        "interruption/recovery frontier",
+        "plan versions and terminal state"
+      ],
+      "requirement_ids": [
+        "R08"
+      ],
+      "title": "Complete coding slice and false-completion controls"
+    },
+    {
+      "execution_status": "NOT_EXECUTED",
+      "expected": "Unmarked intent may admit its first dispatch. Any marked attempt is treated as possibly executed regardless of lease expiry or an unobserved pre-I/O crash. Stable idempotency key reconciles one logical effect; unsafe target enters outcome_unknown without blind retry; committed result returns on exact retry.",
+      "id": "AT12",
+      "procedure": "Inject crashes before dispatch marking, after the durable dispatch marker but before external I/O, after target success before acknowledgment, and after owner result commit; use both idempotent and non-idempotent fake targets and expire the dispatch lease.",
+      "required_evidence": [
+        "intent and dispatch marker transaction frontier",
+        "injected crash point",
+        "target call log",
+        "stable idempotency key",
+        "lease history",
+        "reconciliation events"
+      ],
+      "requirement_ids": [
+        "R09"
+      ],
+      "title": "External effect ambiguity"
+    },
+    {
+      "execution_status": "NOT_EXECUTED",
+      "expected": "Cancellation preserves unknown effects; late result is matched/reconciled, never mistaken for a new attempt.",
+      "id": "AT13",
+      "procedure": "Cancel during dispatch, expire a lease and deliver a late result from the prior attempt.",
+      "required_evidence": [
+        "attempt/lease/fencing IDs",
+        "cancel event",
+        "late response",
+        "obligation status"
+      ],
+      "requirement_ids": [
+        "R09"
+      ],
+      "title": "Cancellation and late result"
+    },
+    {
+      "execution_status": "NOT_EXECUTED",
+      "expected": "Historical view remains unchanged; current view selects correction once; no future-available evidence leaks.",
+      "id": "AT14",
+      "procedure": "Issue a decision, then ingest older-event-time evidence and a corrected source version.",
+      "required_evidence": [
+        "issue frontier",
+        "source versions",
+        "both query results",
+        "label count"
+      ],
+      "requirement_ids": [
+        "R10"
+      ],
+      "title": "Availability and correction"
+    },
+    {
+      "execution_status": "NOT_EXECUTED",
+      "expected": "Contradiction/provenance retained; revoked item is absent; generated assertion does not become supported without assessment.",
+      "id": "AT15",
+      "procedure": "Retrieve conflicting sources, derived summary and one newly revoked artifact.",
+      "required_evidence": [
+        "retrieval manifest",
+        "source spans",
+        "access policy revision",
+        "claim assessment"
+      ],
+      "requirement_ids": [
+        "R10"
+      ],
+      "title": "Retrieval conflict and access revoke"
+    },
+    {
+      "execution_status": "NOT_EXECUTED",
+      "expected": "Supported outputs meet their reference contract; unsupported inputs abstain/reject; hash collision cannot authorize cache reuse.",
+      "id": "AT16",
+      "procedure": "Compare direct and hosted declared analytical cases; send unsupported graph and a known signature collision.",
+      "required_evidence": [
+        "worker identity",
+        "inputs",
+        "direct/hosted comparison",
+        "scope/collision controls"
+      ],
+      "requirement_ids": [
+        "R11"
+      ],
+      "title": "Domain worker equivalence and scope"
+    },
+    {
+      "execution_status": "NOT_EXECUTED",
+      "expected": "Report verified completion, false completion, recovery and total cost by task; preserve all failures and sample identities.",
+      "id": "AT17",
+      "procedure": "Freeze unseen repository task snapshots and compare fixed provider-only, simple loop and Gabriel under equal model/tools/budgets.",
+      "required_evidence": [
+        "frozen protocol",
+        "baseline settings",
+        "oracle results",
+        "all attempts and costs"
+      ],
+      "requirement_ids": [
+        "R12"
+      ],
+      "title": "Matched product evaluation"
+    },
+    {
+      "execution_status": "NOT_EXECUTED",
+      "expected": "Valid restored run reaches expected frontier, referenced bytes verify, and exports match delivered bytes. A matching frontier alone cannot authorize a changed projection: its verified binding or recomputation rejects the corrupted checkpoint.",
+      "id": "AT18",
+      "procedure": "Back up coherently, restore elsewhere, verify independent frontier, replay and export final artifact bundle. Corrupt the checkpoint projection while retaining its correct event frontier, then attempt recovery.",
+      "required_evidence": [
+        "backup/restore commands",
+        "independent frontier anchor",
+        "checkpoint projection digest binding or replay recomputation",
+        "corruption control outcome",
+        "manifest and export hashes"
+      ],
+      "requirement_ids": [
+        "R12"
+      ],
+      "title": "Release restore and export"
+    },
+    {
+      "execution_status": "NOT_EXECUTED",
+      "expected": "A CompilationReport accounts for every source clause. Unsupported or ambiguous mandatory obligations remain unresolved and cannot disappear or become successful empty work. Unknown operation kinds reject. Valid complete compilation binds the admitted goal revision; weakening acceptance requires an explicit authorized amendment.",
+      "id": "AT19",
+      "procedure": "Compile a request with mandatory supported, ambiguous and unsupported clauses; return unknown facet kinds, malformed operation kinds, an empty goal and a proposal that weakens a mandatory check. Include a valid compilation preserving every clause.",
+      "required_evidence": [
+        "source goal and independent acceptance bytes",
+        "raw provider response and normalization profile",
+        "clause-to-obligation map including loss reasons",
+        "admission outcome and goal revision"
+      ],
+      "requirement_ids": [
+        "R02",
+        "R07",
+        "R08"
+      ],
+      "title": "Loss-preserving goal compilation"
+    },
+    {
+      "execution_status": "NOT_EXECUTED",
+      "expected": "Completion follows the eligible passing result for every mandatory obligation plus required artifacts and reconciled effects. Scalar zero, rank and self-confidence cannot authorize completion or action. Dry-run/skipped records cannot satisfy actual-execution obligations. No eligible candidate yields no dispatch.",
+      "id": "AT20",
+      "procedure": "Evaluate nonempty mandatory goals with zero weights, fixed-point residual rounding to zero, high-ranked forbidden candidates, dry-run or skipped checks, and one truly eligible all-passed case. Include an empty goal substituted for a nonempty task.",
+      "required_evidence": [
+        "mandatory obligation identities and execution requirements",
+        "score inputs and categorical outcomes",
+        "candidate admission decisions independent of scores",
+        "artifact verification and effect reconciliation evidence"
+      ],
+      "requirement_ids": [
+        "R02",
+        "R08"
+      ],
+      "title": "Categorical completion independent of ranking"
+    },
+    {
+      "execution_status": "NOT_EXECUTED",
+      "expected": "Every semantically relevant change alters the corresponding immutable content identity; create/modify/delete remain distinct. Exact retries return the original receipt; changed bytes under an existing identity reject. A stable logical task ID is not an execution cache key, and unrelated event receipt order does not invalidate an unchanged relevant snapshot.",
+      "id": "AT21",
+      "procedure": "Change only operation kind, target, prior content, provider-visible context, model profile, ordered child evidence or assessment value while retaining logical task identity; retry old and changed bytes under the same immutable result ID.",
+      "required_evidence": [
+        "canonical input bytes and computed digests",
+        "context and ordered child evidence manifests",
+        "normalization and model profile identities",
+        "exact and conflicting retry receipts"
+      ],
+      "requirement_ids": [
+        "R02",
+        "R03",
+        "R07"
+      ],
+      "title": "Complete action context and evidence identity"
+    },
+    {
+      "execution_status": "NOT_EXECUTED",
+      "expected": "Only confirmed scoped read-back advances observed state. Rejected, failed or ambiguous proposals remain separate. Successful revised observations replace the affected effective view while retaining history; removed properties do not survive through append-only absorption. Topology equality alone cannot assert unchanged content or behavior.",
+      "id": "AT22",
+      "procedure": "Propose a resource change then reject it, fail execution, or lose acknowledgment; inspect subsequent prompts. Separately confirm a change that removes old symbols or retracts a claim, then supply a topology-only snapshot without content verification.",
+      "required_evidence": [
+        "proposed and observed context manifests",
+        "execution intent/result and ambiguity history",
+        "pre/post observations with coverage and source versions",
+        "subsequent exact model context and invalidation records"
+      ],
+      "requirement_ids": [
+        "R03",
+        "R08",
+        "R09",
+        "R10"
+      ],
+      "title": "Proposed versus observed state and read-back"
+    },
+    {
+      "execution_status": "NOT_EXECUTED",
+      "expected": "All three workflows reuse the same goal, candidate, evidence, authority and completion machinery without core branching on domain names. Adapter-specific semantics remain scoped. Representation fixtures alone cannot pass this case; report actual success or failure for each domain and preserve all attempted tasks.",
+      "id": "AT23",
+      "procedure": "Run genuine repository repair, source-grounded document amendment and numerical transformation through one frozen owner/scheduler/policy build. Use actual registered domain observers and independent task oracles, including invalid and out-of-scope inputs for each.",
+      "required_evidence": [
+        "identical core build and registry identities",
+        "three versioned DomainPack manifests and task inputs",
+        "actual execution and read-back traces",
+        "independent domain-specific oracle results and all failure records"
+      ],
+      "requirement_ids": [
+        "R08",
+        "R10",
+        "R11",
+        "R12"
+      ],
+      "title": "One core across three real domain adapters"
+    },
+    {
+      "execution_status": "NOT_EXECUTED",
+      "expected": "Missing required verification prevents success. Disallowed paths reject before writing; process containment protects host resources. Partial effects are either isolated from the host or durably recorded and reconciled after interruption. No atomic rollback or full-output digest is claimed without its actual evidence; retained output distinguishes capture truncation from full-stream observation.",
+      "id": "AT24",
+      "procedure": "Request required unsupported, unavailable and skipped checks; attempt out-of-root/absolute/symlink target writes; inject failure or termination between two file writes and during a noisy child process. Verify recovery in the supported containment backend.",
+      "required_evidence": [
+        "required check coverage with supported/not-run outcomes",
+        "effective grant and resolved resource identities",
+        "containment backend and host-before/after snapshots",
+        "injected interruption point and recovery journal",
+        "captured/full-stream output digests and truncation metadata"
+      ],
+      "requirement_ids": [
+        "R04",
+        "R06",
+        "R08",
+        "R09"
+      ],
+      "title": "Required verification coverage and contained partial effects"
+    },
+    {
+      "execution_status": "NOT_EXECUTED",
+      "expected": "Effective support counts each unique matured outcome once; corrections replace labels and retain refutations. Dry-run/skipped/unreconciled records cannot count as successful production outcomes. Compaction preserves required bytes and ordered anchors; a nonzero digest with unavailable bytes is a storage fault, not a successful compacted record. Policy promotion still requires held-out evidence.",
+      "id": "AT25",
+      "procedure": "Promote a candidate procedure using repeated delivery of one outcome, a corrected label, dry-run/skipped records and distinct matured outcomes. Compact working memory, then remove a referenced durable blob while preserving its declared hash and event frontier and attempt restore.",
+      "required_evidence": [
+        "unique outcome IDs with maturity and revision history",
+        "effective support/refutation counts",
+        "held-out promotion decision and profile",
+        "compaction manifest and retained byte hashes",
+        "missing-blob control and restore/replay results"
+      ],
+      "requirement_ids": [
+        "R03",
+        "R10",
+        "R12"
+      ],
+      "title": "Procedure outcome deduplication and durable compaction"
+    }
+  ],
+  "scope": "These are runtime acceptance designs. tools/validate_spec.py checks only this specification and synthetic examples.",
+  "status": "PROPOSED_NOT_EXECUTED"
+}

@@ -1,0 +1,21 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/pause-request.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Closed gabriel_agent contract; representation only, cross-record rules are enforced by the owner.",
+  "properties": {
+    "reason_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "schema": {
+      "const": "gabriel.pause-request/1",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema",
+    "reason_ref"
+  ],
+  "title": "pause-request",
+  "type": "object"
+}

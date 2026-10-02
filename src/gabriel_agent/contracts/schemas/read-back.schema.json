@@ -1,0 +1,85 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/read-back.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Closed gabriel_agent contract; representation only, cross-record rules are enforced by the owner.",
+  "properties": {
+    "attempt_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "changed_resources": {
+      "items": {
+        "maxLength": 512,
+        "pattern": "^[ -~]*$",
+        "type": "string"
+      },
+      "maxItems": 4096,
+      "minItems": 0,
+      "type": "array"
+    },
+    "detail": {
+      "maxLength": 512,
+      "pattern": "^[ -~]*$",
+      "type": "string"
+    },
+    "intent_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "invalidated_observation_ids": {
+      "items": {
+        "$ref": "common.schema.json#/$defs/identifier"
+      },
+      "maxItems": 4096,
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "outcome": {
+      "enum": [
+        "confirmed",
+        "mismatch",
+        "inconclusive"
+      ],
+      "type": "string"
+    },
+    "post_snapshot_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "postcondition_profile_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "pre_snapshot_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "read_back_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "run_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "schema": {
+      "const": "gabriel.read-back/1",
+      "type": "string"
+    },
+    "task_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    }
+  },
+  "required": [
+    "schema",
+    "read_back_id",
+    "task_id",
+    "run_id",
+    "intent_id",
+    "attempt_id",
+    "pre_snapshot_ref",
+    "post_snapshot_ref",
+    "changed_resources",
+    "invalidated_observation_ids",
+    "postcondition_profile_id",
+    "outcome",
+    "detail"
+  ],
+  "title": "read-back",
+  "type": "object"
+}

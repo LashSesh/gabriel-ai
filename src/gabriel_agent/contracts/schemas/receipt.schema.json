@@ -1,0 +1,82 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/receipt.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Closed gabriel_agent contract; representation only, cross-record rules are enforced by the owner.",
+  "properties": {
+    "command_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "event_hash": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "event_kind": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "head": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "inputs_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "notes": {
+      "items": {
+        "maxLength": 512,
+        "pattern": "^[ -~]*$",
+        "type": "string"
+      },
+      "maxItems": 32,
+      "minItems": 0,
+      "type": "array"
+    },
+    "projection_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "run_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "run_revision": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "run_state": {
+      "enum": [
+        "admitted",
+        "planning",
+        "running",
+        "waiting_user",
+        "blocked",
+        "succeeded",
+        "failed",
+        "cancelled"
+      ],
+      "type": "string"
+    },
+    "schema": {
+      "const": "gabriel.receipt/1",
+      "type": "string"
+    },
+    "sequence": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "task_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    }
+  },
+  "required": [
+    "schema",
+    "command_id",
+    "sequence",
+    "task_id",
+    "run_id",
+    "run_revision",
+    "event_kind",
+    "event_hash",
+    "head",
+    "inputs_digest",
+    "projection_digest",
+    "run_state",
+    "notes"
+  ],
+  "title": "receipt",
+  "type": "object"
+}

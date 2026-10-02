@@ -1,0 +1,379 @@
+{
+  "packages": [
+    {
+      "acceptance_ids": [
+        "AT01"
+      ],
+      "deliverable": "Pinned inventory, dependency groups, preserved reference replay and missing-evidence register. Pin both recovered Gabriel and Kosmocrates commits; retain extraction/reuse decisions, source identities and unresolved evidence.",
+      "depends_on": [],
+      "id": "WP01",
+      "requirement_ids": [
+        "R01"
+      ],
+      "status": "NOT_STARTED",
+      "title": "Baseline packaging"
+    },
+    {
+      "acceptance_ids": [
+        "AT02",
+        "AT19",
+        "AT20",
+        "AT21"
+      ],
+      "deliverable": "Versioned closed schemas, strict parser, fixtures and normative cross-record rules. Add loss-preserving GoalSpec/CompilationReport, DomainPack, ContextManifest, ProposalEnvelope, CheckEvidence and read-back contracts with complete identities and mandatory coverage rules.",
+      "depends_on": [
+        "WP01"
+      ],
+      "id": "WP02",
+      "requirement_ids": [
+        "R02",
+        "R07",
+        "R08"
+      ],
+      "status": "NOT_STARTED",
+      "title": "Contracts"
+    },
+    {
+      "acceptance_ids": [
+        "AT03",
+        "AT04",
+        "AT05",
+        "AT21"
+      ],
+      "deliverable": "Agent event owner, content-addressed bytes, receipts, replay and coherent checkpoints. Seal complete action/context/child-evidence identities, retain proposed-versus-observed projections, and preserve referenced bytes and anchors across compaction.",
+      "depends_on": [
+        "WP02"
+      ],
+      "id": "WP03",
+      "requirement_ids": [
+        "R02",
+        "R03",
+        "R07"
+      ],
+      "status": "NOT_STARTED",
+      "title": "Owner and artifacts"
+    },
+    {
+      "acceptance_ids": [
+        "AT06",
+        "AT07"
+      ],
+      "deliverable": "Authenticated grants, dispatch recheck, digest approvals and serialized reservations.",
+      "depends_on": [
+        "WP03"
+      ],
+      "id": "WP04",
+      "requirement_ids": [
+        "R04",
+        "R05"
+      ],
+      "status": "NOT_STARTED",
+      "title": "Policy and budget"
+    },
+    {
+      "acceptance_ids": [
+        "AT08",
+        "AT24"
+      ],
+      "deliverable": "One tested OS isolation backend, scoped broker and complete execution evidence. Route extracted process/file helpers through one contained broker; verify target confinement, output capture and recovery after partial effects.",
+      "depends_on": [
+        "WP04"
+      ],
+      "id": "WP05",
+      "requirement_ids": [
+        "R04",
+        "R06",
+        "R08",
+        "R09"
+      ],
+      "status": "NOT_STARTED",
+      "title": "Tool sandbox"
+    },
+    {
+      "acceptance_ids": [
+        "AT09",
+        "AT19",
+        "AT21"
+      ],
+      "deliverable": "Scripted provider plus one real provider and complete request/result normalization. Preserve raw model output and compilation loss; bind all provider-visible context, configuration and normalization identities.",
+      "depends_on": [
+        "WP04"
+      ],
+      "id": "WP06",
+      "requirement_ids": [
+        "R02",
+        "R07",
+        "R08"
+      ],
+      "status": "NOT_STARTED",
+      "title": "Model gateway"
+    },
+    {
+      "acceptance_ids": [
+        "AT10",
+        "AT12",
+        "AT13",
+        "AT20",
+        "AT22"
+      ],
+      "deliverable": "Bounded DAG scheduling, leases, outbox and ambiguous-effect recovery with fake targets. Filter categorical admission before ranking; require eligible mandatory evidence for completion and publish observed changes only after read-back.",
+      "depends_on": [
+        "WP03",
+        "WP04",
+        "WP05",
+        "WP06"
+      ],
+      "id": "WP07",
+      "requirement_ids": [
+        "R03",
+        "R08",
+        "R09",
+        "R10"
+      ],
+      "status": "NOT_STARTED",
+      "title": "Scheduler"
+    },
+    {
+      "acceptance_ids": [
+        "AT11",
+        "AT24"
+      ],
+      "deliverable": "Isolated repository repair with independent oracle, diff and restartable artifact delivery. Extract corrected software-specific observers, patch builders and checks into a DomainPack; keep code vocabulary outside the core and verify required coverage.",
+      "depends_on": [
+        "WP07"
+      ],
+      "id": "WP08",
+      "requirement_ids": [
+        "R04",
+        "R06",
+        "R08",
+        "R09"
+      ],
+      "status": "NOT_STARTED",
+      "title": "Coding vertical slice"
+    },
+    {
+      "acceptance_ids": [
+        "AT14",
+        "AT15",
+        "AT22",
+        "AT25"
+      ],
+      "deliverable": "Versioned evidence, scoped retrieval, contradiction retention and delayed feedback. Separate proposed and observed context, retraction and correction; add uniquely counted matured procedure outcomes and actual-byte compaction checks.",
+      "depends_on": [
+        "WP03",
+        "WP04",
+        "WP08"
+      ],
+      "id": "WP09",
+      "requirement_ids": [
+        "R03",
+        "R08",
+        "R09",
+        "R10",
+        "R12"
+      ],
+      "status": "NOT_STARTED",
+      "title": "Memory"
+    },
+    {
+      "acceptance_ids": [
+        "AT16",
+        "AT23"
+      ],
+      "deliverable": "Optional legacy analytical and PSE capabilities behind explicit contracts. Add genuine document and numerical DomainPacks alongside software, each with declared observation/error/time/unit semantics and read-back verification; optional PSE stays optional.",
+      "depends_on": [
+        "WP07",
+        "WP08"
+      ],
+      "id": "WP10",
+      "requirement_ids": [
+        "R08",
+        "R10",
+        "R11",
+        "R12"
+      ],
+      "status": "NOT_STARTED",
+      "title": "Domain workers"
+    },
+    {
+      "acceptance_ids": [
+        "AT17",
+        "AT23",
+        "AT25"
+      ],
+      "deliverable": "Frozen matched G1 coding comparison and failure analysis; extension evaluations are added after the applicable WP09/WP10 artifacts exist. Evaluate three-domain portability only after WP09/WP10; test candidate/procedure additions against held-out matched-budget baselines.",
+      "depends_on": [
+        "WP08"
+      ],
+      "extension_prerequisites": {
+        "domain_evaluation": [
+          "WP10"
+        ],
+        "memory_evaluation": [
+          "WP09"
+        ]
+      },
+      "id": "WP11",
+      "requirement_ids": [
+        "R03",
+        "R08",
+        "R10",
+        "R11",
+        "R12"
+      ],
+      "status": "NOT_STARTED",
+      "title": "Evaluation"
+    },
+    {
+      "acceptance_ids": [
+        "AT18"
+      ],
+      "deliverable": "G1 coherent backup/restore, doctor checks, CLI/API, export and declared dependency/license manifest; G2/G3 release requires its additional applicable evidence. Release reports distinguish G1 evidence from later domain/procedure/compaction extension gates; never turn a synthetic specification check into product acceptance.",
+      "depends_on": [
+        "WP08",
+        "WP11"
+      ],
+      "extension_prerequisites": {
+        "G2": [
+          "WP09",
+          "WP10"
+        ],
+        "G3": [
+          "WP09"
+        ]
+      },
+      "id": "WP12",
+      "requirement_ids": [
+        "R12"
+      ],
+      "status": "NOT_STARTED",
+      "title": "Release"
+    }
+  ],
+  "release_scopes": {
+    "G1": {
+      "extension_rule": "Memory and cross-domain work do not block the coding product. AT22 applies to coding proposed/observed state using WP07; WP09 supplies later temporal-memory coverage. AT23 and AT25 are extension gates, not G1 gates.",
+      "required_acceptance_ids": [
+        "AT01",
+        "AT02",
+        "AT03",
+        "AT04",
+        "AT05",
+        "AT06",
+        "AT07",
+        "AT08",
+        "AT09",
+        "AT10",
+        "AT11",
+        "AT12",
+        "AT13",
+        "AT17",
+        "AT18",
+        "AT19",
+        "AT20",
+        "AT21",
+        "AT22",
+        "AT24"
+      ],
+      "required_packages": [
+        "WP01",
+        "WP02",
+        "WP03",
+        "WP04",
+        "WP05",
+        "WP06",
+        "WP07",
+        "WP08",
+        "WP11",
+        "WP12"
+      ]
+    },
+    "G2": {
+      "extension_rule": "Require document evidence plus one numerical adapter. PSE and recurrent experiments remain optional choices within WP10.",
+      "required_acceptance_ids": [
+        "AT01",
+        "AT02",
+        "AT03",
+        "AT04",
+        "AT05",
+        "AT06",
+        "AT07",
+        "AT08",
+        "AT09",
+        "AT10",
+        "AT11",
+        "AT12",
+        "AT13",
+        "AT14",
+        "AT15",
+        "AT16",
+        "AT17",
+        "AT18",
+        "AT19",
+        "AT20",
+        "AT21",
+        "AT22",
+        "AT23",
+        "AT24"
+      ],
+      "required_packages": [
+        "WP01",
+        "WP02",
+        "WP03",
+        "WP04",
+        "WP05",
+        "WP06",
+        "WP07",
+        "WP08",
+        "WP09",
+        "WP10",
+        "WP11",
+        "WP12"
+      ]
+    },
+    "G3": {
+      "extension_rule": "Also requires held-out policy-promotion benefit and regression evidence; package completion alone does not establish G3. Domain portability AT23 requires the separate G2/domain evaluation route; it is not implied by policy improvement on the coding domain.",
+      "required_acceptance_ids": [
+        "AT01",
+        "AT02",
+        "AT03",
+        "AT04",
+        "AT05",
+        "AT06",
+        "AT07",
+        "AT08",
+        "AT09",
+        "AT10",
+        "AT11",
+        "AT12",
+        "AT13",
+        "AT14",
+        "AT15",
+        "AT17",
+        "AT18",
+        "AT19",
+        "AT20",
+        "AT21",
+        "AT22",
+        "AT24",
+        "AT25"
+      ],
+      "required_packages": [
+        "WP01",
+        "WP02",
+        "WP03",
+        "WP04",
+        "WP05",
+        "WP06",
+        "WP07",
+        "WP08",
+        "WP09",
+        "WP11",
+        "WP12"
+      ]
+    }
+  },
+  "rule": "No package is complete without its named artifacts and passed acceptance evidence; no fixed calendar dates are promised. Optional PSE must not block the G1 coding slice. For each release, required_acceptance_ids selects applicable portions of package scope; extension-only acceptance must not silently become a G1 prerequisite.",
+  "status": "PROPOSED"
+}

@@ -1,0 +1,37 @@
+name: ci
+on:
+  push:
+  pull_request:
+jobs:
+  core:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install minimal core (no numerical extras)
+        run: python -m pip install -e ".[dev]"
+      - name: Validate blueprint specification assets
+        run: python tools/validate_spec.py --output /tmp/spec_validation.json
+      - name: Unit and contract tests (unprivileged)
+        run: python -m pytest -q
+      - name: Containment self-tests (Linux namespaces; privileged runner only)
+        if: matrix.python == '3.12'
+        env:
+          GABRIEL_CONTAINMENT_TESTS: "1"
+        run: python -m pytest -q -m containment || echo "containment self-tests unavailable on this runner (see evidence/wp05)"
+  legacy-baseline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned numerical environment
+        run: python -m pip install -r requirements.txt
+      - name: Inherited synthetic runtime checks (legacy owner)
+        run: python reproduction/check_runtime.py

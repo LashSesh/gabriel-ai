@@ -1,0 +1,111 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/proposal-envelope.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Closed gabriel_agent contract; representation only, cross-record rules are enforced by the owner.",
+  "properties": {
+    "candidate_ids": {
+      "items": {
+        "$ref": "common.schema.json#/$defs/identifier"
+      },
+      "maxItems": 64,
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "context_manifest_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "loss": {
+      "items": {
+        "maxLength": 512,
+        "pattern": "^[ -~]*$",
+        "type": "string"
+      },
+      "maxItems": 64,
+      "minItems": 0,
+      "type": "array"
+    },
+    "normalization_profile_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "normalized_ref": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/artifact_ref"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "output_schema_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "proposal_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "raw_response_ref": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/artifact_ref"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "request_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "role": {
+      "enum": [
+        "planner",
+        "worker",
+        "critic"
+      ],
+      "type": "string"
+    },
+    "run_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "schema": {
+      "const": "gabriel.proposal-envelope/1",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "normalized",
+        "rejected",
+        "truncated",
+        "invalid_output",
+        "provider_refusal",
+        "rate_limited",
+        "timed_out",
+        "failed"
+      ],
+      "type": "string"
+    },
+    "task_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    }
+  },
+  "required": [
+    "schema",
+    "proposal_id",
+    "task_id",
+    "run_id",
+    "role",
+    "context_manifest_ref",
+    "request_ref",
+    "raw_response_ref",
+    "normalized_ref",
+    "normalization_profile_id",
+    "output_schema_digest",
+    "candidate_ids",
+    "loss",
+    "status"
+  ],
+  "title": "proposal-envelope",
+  "type": "object"
+}

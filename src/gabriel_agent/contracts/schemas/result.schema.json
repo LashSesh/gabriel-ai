@@ -1,0 +1,126 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/result.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "PROPOSED specification; representation validation does not implement runtime behavior.",
+  "properties": {
+    "attempt_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "duration_ms": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "effect_outcome": {
+      "enum": [
+        "not_applicable",
+        "acknowledged_success",
+        "acknowledged_failure",
+        "outcome_unknown"
+      ],
+      "type": "string"
+    },
+    "exit_code": {
+      "anyOf": [
+        {
+          "maximum": 2147483647,
+          "minimum": -2147483648,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "fencing_token": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "intent_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "lease_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "outputs": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "artifact_ref": {
+            "$ref": "common.schema.json#/$defs/artifact_ref"
+          },
+          "output_slot": {
+            "$ref": "common.schema.json#/$defs/identifier"
+          },
+          "schema_digest": {
+            "$ref": "common.schema.json#/$defs/sha256"
+          }
+        },
+        "required": [
+          "output_slot",
+          "artifact_ref",
+          "schema_digest"
+        ],
+        "type": "object"
+      },
+      "maxItems": 64,
+      "type": "array"
+    },
+    "provider_request_id": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "result_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "run_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "schema": {
+      "const": "gabriel.result/1",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "completed",
+        "failed",
+        "cancelled",
+        "timed_out",
+        "rate_limited",
+        "invalid_output",
+        "truncated",
+        "provider_refusal"
+      ],
+      "type": "string"
+    },
+    "task_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "usage": {
+      "$ref": "common.schema.json#/$defs/usage"
+    }
+  },
+  "required": [
+    "schema",
+    "result_id",
+    "intent_id",
+    "attempt_id",
+    "lease_id",
+    "fencing_token",
+    "status",
+    "exit_code",
+    "usage",
+    "duration_ms",
+    "effect_outcome",
+    "provider_request_id",
+    "run_id",
+    "task_id",
+    "outputs"
+  ],
+  "title": "result",
+  "type": "object"
+}

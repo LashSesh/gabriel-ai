@@ -1,0 +1,106 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/check-evidence.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Closed gabriel_agent contract; representation only, cross-record rules are enforced by the owner.",
+  "properties": {
+    "applicability": {
+      "enum": [
+        "supported",
+        "out_of_scope",
+        "invalid"
+      ],
+      "type": "string"
+    },
+    "attempt_id": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "check_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "coverage_reason": {
+      "maxLength": 512,
+      "pattern": "^[ -~]*$",
+      "type": "string"
+    },
+    "evidence_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "execution_kind": {
+      "enum": [
+        "observed",
+        "synthetic",
+        "dry_run"
+      ],
+      "type": "string"
+    },
+    "goal_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "obligation_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "outcome": {
+      "enum": [
+        "passed",
+        "failed",
+        "inconclusive",
+        "not_run"
+      ],
+      "type": "string"
+    },
+    "result_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "run_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "schema": {
+      "const": "gabriel.check-evidence/1",
+      "type": "string"
+    },
+    "snapshot_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "task_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "verifier_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "verifier_profile_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "verifier_version": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    }
+  },
+  "required": [
+    "schema",
+    "evidence_id",
+    "task_id",
+    "run_id",
+    "goal_id",
+    "obligation_id",
+    "check_id",
+    "snapshot_ref",
+    "verifier_id",
+    "verifier_version",
+    "verifier_profile_digest",
+    "outcome",
+    "applicability",
+    "execution_kind",
+    "result_ref",
+    "attempt_id",
+    "coverage_reason"
+  ],
+  "title": "check-evidence",
+  "type": "object"
+}

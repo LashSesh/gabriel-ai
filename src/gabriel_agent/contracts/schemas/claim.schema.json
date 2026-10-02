@@ -1,0 +1,75 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/claim.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "PROPOSED specification; representation validation does not implement runtime behavior.",
+  "properties": {
+    "assessment_id": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "assessment_status": {
+      "enum": [
+        "supported",
+        "contested",
+        "unresolved",
+        "out_of_scope",
+        "invalid"
+      ],
+      "type": "string"
+    },
+    "claim_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "proposition_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "refuting_observation_ids": {
+      "items": {
+        "$ref": "common.schema.json#/$defs/identifier"
+      },
+      "maxItems": 256,
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "schema": {
+      "const": "gabriel.claim/1",
+      "type": "string"
+    },
+    "scope_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "supporting_observation_ids": {
+      "items": {
+        "$ref": "common.schema.json#/$defs/identifier"
+      },
+      "maxItems": 256,
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "task_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    }
+  },
+  "required": [
+    "schema",
+    "claim_id",
+    "task_id",
+    "proposition_ref",
+    "supporting_observation_ids",
+    "refuting_observation_ids",
+    "assessment_status",
+    "scope_ref",
+    "assessment_id"
+  ],
+  "title": "claim",
+  "type": "object"
+}

@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gabriel-agent"
+version = "0.1.0"
+description = "Gabriel AI: durable, evidence-aware agent application with a domain-independent goal/evidence kernel"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "LicenseRef-Unresolved"}
+authors = [{name = "Sebastian Klemm"}]
+# Core: the owner, contracts, kernel, planning, policy, workers and the
+# scripted provider need only the standard library plus a schema validator.
+dependencies = [
+    "jsonschema==4.25.1",
+    "referencing>=0.36",
+]
+
+[project.optional-dependencies]
+# Real model providers use the standard-library HTTP client; no SDK is required.
+provider = []
+# Legacy analytical runtime (gabriel_runtime) and its reproduction modules.
+numerical = ["numpy==2.3.5", "scipy==1.17.0"]
+# Optional native PSE worker build products are a separate artifact.
+native = []
+dev = ["pytest>=8.3,<9"]
+
+[project.scripts]
+gabriel = "gabriel_agent.interfaces.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"gabriel_agent.contracts" = ["schemas/*.json"]
+"gabriel_agent.evaluation" = ["fixtures/**/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+markers = [
+    "containment: privileged Linux-namespace self tests (opt in with GABRIEL_CONTAINMENT_TESTS=1)",
+    "live_provider: requires a configured real provider credential (opt in with GABRIEL_LIVE_PROVIDER=1)",
+]

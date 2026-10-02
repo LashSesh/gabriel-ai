@@ -1,0 +1,62 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/checkpoint.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Closed gabriel_agent contract; representation only, cross-record rules are enforced by the owner.",
+  "properties": {
+    "checkpoint_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "codec_version": {
+      "const": "gabriel.codec/1",
+      "type": "string"
+    },
+    "created_owner_time_unix_ms": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "dependency_manifest_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "head": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "inputs_head": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "projection_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "reducer_identity": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "schema": {
+      "const": "gabriel.checkpoint/1",
+      "type": "string"
+    },
+    "schema_registry_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "sequence": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "workspace_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    }
+  },
+  "required": [
+    "schema",
+    "checkpoint_id",
+    "workspace_id",
+    "sequence",
+    "head",
+    "inputs_head",
+    "projection_digest",
+    "reducer_identity",
+    "schema_registry_digest",
+    "codec_version",
+    "created_owner_time_unix_ms",
+    "dependency_manifest_ref"
+  ],
+  "title": "checkpoint",
+  "type": "object"
+}

@@ -1,0 +1,72 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/task.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "PROPOSED specification; representation validation does not implement runtime behavior.",
+  "properties": {
+    "acceptance_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "base_inputs": {
+      "items": {
+        "$ref": "common.schema.json#/$defs/artifact_ref"
+      },
+      "maxItems": 64,
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "budget_ceiling": {
+      "$ref": "common.schema.json#/$defs/budget"
+    },
+    "checks": {
+      "items": {
+        "$ref": "common.schema.json#/$defs/check_ref"
+      },
+      "maxItems": 64,
+      "minItems": 1,
+      "type": "array"
+    },
+    "goal_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "grant_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "policy_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "principal_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "schema": {
+      "const": "gabriel.task/1",
+      "type": "string"
+    },
+    "task_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "task_spec_revision": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "workspace_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    }
+  },
+  "required": [
+    "schema",
+    "task_id",
+    "workspace_id",
+    "principal_id",
+    "goal_ref",
+    "acceptance_ref",
+    "grant_id",
+    "budget_ceiling",
+    "base_inputs",
+    "checks",
+    "policy_digest",
+    "task_spec_revision"
+  ],
+  "title": "task",
+  "type": "object"
+}

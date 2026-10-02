@@ -1,0 +1,68 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/assessment.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "PROPOSED specification; representation validation does not implement runtime behavior.",
+  "properties": {
+    "assessment_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "check_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "check_version": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "evidence_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "input_refs": {
+      "items": {
+        "$ref": "common.schema.json#/$defs/artifact_ref"
+      },
+      "maxItems": 64,
+      "minItems": 1,
+      "type": "array"
+    },
+    "outcome": {
+      "enum": [
+        "passed",
+        "failed",
+        "inconclusive",
+        "not_run"
+      ],
+      "type": "string"
+    },
+    "run_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "schema": {
+      "const": "gabriel.assessment/1",
+      "type": "string"
+    },
+    "task_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "verifier_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "verifier_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    }
+  },
+  "required": [
+    "schema",
+    "assessment_id",
+    "task_id",
+    "check_id",
+    "check_version",
+    "input_refs",
+    "outcome",
+    "evidence_ref",
+    "verifier_id",
+    "verifier_digest",
+    "run_id"
+  ],
+  "title": "assessment",
+  "type": "object"
+}

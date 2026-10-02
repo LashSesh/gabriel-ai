@@ -1,0 +1,76 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/run.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "PROPOSED specification; representation validation does not implement runtime behavior.",
+  "properties": {
+    "budget": {
+      "$ref": "common.schema.json#/$defs/budget"
+    },
+    "parent_run_id": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "pause_requested": {
+      "type": "boolean"
+    },
+    "run_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "run_revision": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "schema": {
+      "const": "gabriel.run/1",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "admitted",
+        "planning",
+        "running",
+        "waiting_user",
+        "blocked",
+        "succeeded",
+        "failed",
+        "cancelled"
+      ],
+      "type": "string"
+    },
+    "task_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "task_spec_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "unresolved_effect_ids": {
+      "items": {
+        "$ref": "common.schema.json#/$defs/identifier"
+      },
+      "maxItems": 256,
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "schema",
+    "run_id",
+    "task_id",
+    "run_revision",
+    "state",
+    "pause_requested",
+    "budget",
+    "unresolved_effect_ids",
+    "parent_run_id",
+    "task_spec_ref"
+  ],
+  "title": "run",
+  "type": "object"
+}

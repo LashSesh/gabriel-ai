@@ -1,0 +1,106 @@
+{
+  "$defs": {
+    "verifier": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "maxLength": 512,
+          "pattern": "^[ -~]*$",
+          "type": "string"
+        },
+        "implementation_fingerprint": {
+          "$ref": "common.schema.json#/$defs/sha256"
+        },
+        "independent": {
+          "type": "boolean"
+        },
+        "predicate_kind": {
+          "pattern": "^[a-z][a-z0-9_]{0,47}/[a-z][a-z0-9_]{0,63}$",
+          "type": "string"
+        },
+        "profile_digest": {
+          "$ref": "common.schema.json#/$defs/sha256"
+        },
+        "verifier_id": {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        "version": {
+          "$ref": "common.schema.json#/$defs/identifier"
+        }
+      },
+      "required": [
+        "verifier_id",
+        "version",
+        "predicate_kind",
+        "implementation_fingerprint",
+        "profile_digest",
+        "independent",
+        "description"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://gabriel.invalid/spec/1/catalog.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Closed gabriel_agent contract; representation only, cross-record rules are enforced by the owner.",
+  "properties": {
+    "catalog_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "domain_packs": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "manifest_digest": {
+            "$ref": "common.schema.json#/$defs/sha256"
+          },
+          "pack_id": {
+            "$ref": "common.schema.json#/$defs/identifier"
+          },
+          "pack_version": {
+            "$ref": "common.schema.json#/$defs/identifier"
+          }
+        },
+        "required": [
+          "pack_id",
+          "pack_version",
+          "manifest_digest"
+        ],
+        "type": "object"
+      },
+      "maxItems": 16,
+      "minItems": 0,
+      "type": "array"
+    },
+    "schema": {
+      "const": "gabriel.catalog/1",
+      "type": "string"
+    },
+    "tools": {
+      "items": {
+        "$ref": "tool-descriptor.schema.json"
+      },
+      "maxItems": 64,
+      "minItems": 1,
+      "type": "array"
+    },
+    "verifiers": {
+      "items": {
+        "$ref": "#/$defs/verifier"
+      },
+      "maxItems": 64,
+      "minItems": 0,
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema",
+    "catalog_id",
+    "tools",
+    "verifiers",
+    "domain_packs"
+  ],
+  "title": "catalog",
+  "type": "object"
+}

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "applicability": {
+      "enum": [
+        "supported",
+        "invalid",
+        "out_of_scope"
+      ],
+      "type": "string"
+    },
+    "outcome": {
+      "enum": [
+        "passed",
+        "failed",
+        "inconclusive",
+        "not_run"
+      ],
+      "type": "string"
+    }
+  },
+  "required": [
+    "applicability",
+    "outcome"
+  ],
+  "title": "Synthetic fixture port output",
+  "type": "object"
+}

@@ -1,0 +1,106 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/intent.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "PROPOSED specification; representation validation does not implement runtime behavior.",
+  "properties": {
+    "approval_digest": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/sha256"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "args_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "attempt_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "capability_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "effect_class": {
+      "$ref": "common.schema.json#/$defs/effect_class"
+    },
+    "expires_at_unix_ms": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "fencing_token": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "grant_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "idempotency_key": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "intent_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "lease_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "policy_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "precondition_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "reconciliation": {
+      "enum": [
+        "read_back",
+        "target_status_by_key",
+        "same_key_retry",
+        "manual_review"
+      ],
+      "type": "string"
+    },
+    "reservation_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "run_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "schema": {
+      "const": "gabriel.intent/1",
+      "type": "string"
+    },
+    "step_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "target_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "task_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    }
+  },
+  "required": [
+    "schema",
+    "intent_id",
+    "task_id",
+    "run_id",
+    "step_id",
+    "attempt_id",
+    "capability_id",
+    "args_ref",
+    "target_id",
+    "grant_id",
+    "reservation_id",
+    "policy_digest",
+    "effect_class",
+    "idempotency_key",
+    "approval_digest",
+    "precondition_ref",
+    "reconciliation",
+    "expires_at_unix_ms",
+    "lease_id",
+    "fencing_token"
+  ],
+  "title": "intent",
+  "type": "object"
+}

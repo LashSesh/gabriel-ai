@@ -1,0 +1,86 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/grant.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "PROPOSED specification; representation validation does not implement runtime behavior.",
+  "properties": {
+    "budget_ceiling": {
+      "$ref": "common.schema.json#/$defs/budget"
+    },
+    "effect_classes": {
+      "items": {
+        "$ref": "common.schema.json#/$defs/effect_class"
+      },
+      "maxItems": 4,
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "expires_at_unix_ms": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "grant_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "parent_grant_id": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "policy_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "principal_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "resource_ids": {
+      "items": {
+        "$ref": "common.schema.json#/$defs/identifier"
+      },
+      "maxItems": 64,
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "schema": {
+      "const": "gabriel.grant/1",
+      "type": "string"
+    },
+    "task_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "tool_ids": {
+      "items": {
+        "$ref": "common.schema.json#/$defs/identifier"
+      },
+      "maxItems": 64,
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "workspace_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    }
+  },
+  "required": [
+    "schema",
+    "grant_id",
+    "principal_id",
+    "workspace_id",
+    "task_id",
+    "tool_ids",
+    "resource_ids",
+    "effect_classes",
+    "budget_ceiling",
+    "expires_at_unix_ms",
+    "policy_digest",
+    "parent_grant_id"
+  ],
+  "title": "grant",
+  "type": "object"
+}

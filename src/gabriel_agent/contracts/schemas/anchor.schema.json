@@ -1,0 +1,33 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/anchor.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Closed gabriel_agent contract; representation only, cross-record rules are enforced by the owner.",
+  "properties": {
+    "head": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "inputs_head": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "schema": {
+      "const": "gabriel.anchor/1",
+      "type": "string"
+    },
+    "sequence": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "workspace_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    }
+  },
+  "required": [
+    "schema",
+    "workspace_id",
+    "sequence",
+    "head",
+    "inputs_head"
+  ],
+  "title": "anchor",
+  "type": "object"
+}

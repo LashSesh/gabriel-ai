@@ -1,0 +1,191 @@
+{
+  "$defs": {
+    "entry": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_ref": {
+          "$ref": "common.schema.json#/$defs/artifact_ref"
+        },
+        "disclosure_scope": {
+          "enum": [
+            "provider",
+            "local_only"
+          ],
+          "type": "string"
+        },
+        "entry_id": {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        "kind": {
+          "enum": [
+            "source",
+            "observation",
+            "candidate",
+            "planned_output",
+            "procedure",
+            "diagnostic",
+            "goal"
+          ],
+          "type": "string"
+        },
+        "observation_id": {
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/$defs/identifier"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "omitted_bytes": {
+          "$ref": "common.schema.json#/$defs/safe_uint"
+        },
+        "purpose": {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        "source_id": {
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/$defs/identifier"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "source_revision": {
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/$defs/safe_uint"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "span_end": {
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/$defs/safe_uint"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "span_start": {
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/$defs/safe_uint"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "truncated": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "entry_id",
+        "kind",
+        "artifact_ref",
+        "source_id",
+        "source_revision",
+        "observation_id",
+        "span_start",
+        "span_end",
+        "purpose",
+        "truncated",
+        "omitted_bytes",
+        "disclosure_scope"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://gabriel.invalid/spec/1/context-manifest.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Closed gabriel_agent contract; representation only, cross-record rules are enforced by the owner.",
+  "properties": {
+    "catalog_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "entries": {
+      "items": {
+        "$ref": "#/$defs/entry"
+      },
+      "maxItems": 256,
+      "minItems": 0,
+      "type": "array"
+    },
+    "goal_spec_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "issue_frontier": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "manifest_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "observed_snapshot_ref": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/artifact_ref"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "omitted_obligation_ids": {
+      "items": {
+        "$ref": "common.schema.json#/$defs/identifier"
+      },
+      "maxItems": 64,
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "run_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "schema": {
+      "const": "gabriel.context-manifest/1",
+      "type": "string"
+    },
+    "task_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "task_spec_revision": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "transform_ids": {
+      "items": {
+        "$ref": "common.schema.json#/$defs/identifier"
+      },
+      "maxItems": 32,
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "schema",
+    "manifest_id",
+    "task_id",
+    "run_id",
+    "task_spec_revision",
+    "goal_spec_ref",
+    "observed_snapshot_ref",
+    "issue_frontier",
+    "entries",
+    "transform_ids",
+    "omitted_obligation_ids",
+    "catalog_digest"
+  ],
+  "title": "context-manifest",
+  "type": "object"
+}

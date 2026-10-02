@@ -1,0 +1,178 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/plan.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "PROPOSED specification; representation validation does not implement runtime behavior.",
+  "properties": {
+    "max_depth": {
+      "maximum": 12,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "nodes": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "capability_id": {
+            "$ref": "common.schema.json#/$defs/identifier"
+          },
+          "check_ids": {
+            "items": {
+              "$ref": "common.schema.json#/$defs/identifier"
+            },
+            "maxItems": 64,
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "depends_on": {
+            "items": {
+              "$ref": "common.schema.json#/$defs/identifier"
+            },
+            "maxItems": 64,
+            "minItems": 0,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "effect_class": {
+            "$ref": "common.schema.json#/$defs/effect_class"
+          },
+          "inputs": {
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "common.schema.json#/$defs/artifact_ref"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "output_slot": {
+                      "$ref": "common.schema.json#/$defs/identifier"
+                    },
+                    "producer_node": {
+                      "$ref": "common.schema.json#/$defs/identifier"
+                    },
+                    "required_schema": {
+                      "$ref": "common.schema.json#/$defs/sha256"
+                    }
+                  },
+                  "required": [
+                    "producer_node",
+                    "output_slot",
+                    "required_schema"
+                  ],
+                  "type": "object"
+                }
+              ]
+            },
+            "maxItems": 64,
+            "type": "array"
+          },
+          "max_repair_attempts": {
+            "maximum": 2,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "node_id": {
+            "$ref": "common.schema.json#/$defs/identifier"
+          },
+          "output_schema_digest": {
+            "$ref": "common.schema.json#/$defs/sha256"
+          },
+          "outputs": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "output_slot": {
+                  "$ref": "common.schema.json#/$defs/identifier"
+                },
+                "schema_digest": {
+                  "$ref": "common.schema.json#/$defs/sha256"
+                }
+              },
+              "required": [
+                "output_slot",
+                "schema_digest"
+              ],
+              "type": "object"
+            },
+            "maxItems": 64,
+            "minItems": 1,
+            "type": "array"
+          },
+          "priority": {
+            "$ref": "common.schema.json#/$defs/safe_uint"
+          },
+          "reservation": {
+            "$ref": "common.schema.json#/$defs/usage"
+          },
+          "retry_class": {
+            "enum": [
+              "never",
+              "read_retry",
+              "target_idempotent_retry",
+              "reconcile_before_retry"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "node_id",
+          "depends_on",
+          "capability_id",
+          "output_schema_digest",
+          "check_ids",
+          "reservation",
+          "retry_class",
+          "effect_class",
+          "priority",
+          "max_repair_attempts",
+          "inputs",
+          "outputs"
+        ],
+        "type": "object"
+      },
+      "maxItems": 64,
+      "minItems": 1,
+      "type": "array"
+    },
+    "parent_plan_id": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "plan_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "reason_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "run_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "schema": {
+      "const": "gabriel.plan/1",
+      "type": "string"
+    },
+    "task_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    }
+  },
+  "required": [
+    "schema",
+    "plan_id",
+    "task_id",
+    "run_id",
+    "parent_plan_id",
+    "reason_ref",
+    "nodes",
+    "max_depth"
+  ],
+  "title": "plan",
+  "type": "object"
+}

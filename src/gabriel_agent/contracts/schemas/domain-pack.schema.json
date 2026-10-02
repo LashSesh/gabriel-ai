@@ -1,0 +1,205 @@
+{
+  "$defs": {
+    "fixture": {
+      "additionalProperties": false,
+      "properties": {
+        "case_kind": {
+          "enum": [
+            "valid",
+            "invalid",
+            "out_of_scope"
+          ],
+          "type": "string"
+        },
+        "expected_ref": {
+          "$ref": "common.schema.json#/$defs/artifact_ref"
+        },
+        "fixture_id": {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        "input_ref": {
+          "$ref": "common.schema.json#/$defs/artifact_ref"
+        },
+        "port": {
+          "enum": [
+            "compile",
+            "observe",
+            "evaluate",
+            "propose",
+            "execute",
+            "read_back"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "fixture_id",
+        "port",
+        "case_kind",
+        "input_ref",
+        "expected_ref"
+      ],
+      "type": "object"
+    },
+    "port": {
+      "additionalProperties": false,
+      "properties": {
+        "capability_id": {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        "effect_class": {
+          "$ref": "common.schema.json#/$defs/effect_class"
+        },
+        "implementation_ref": {
+          "$ref": "common.schema.json#/$defs/artifact_ref"
+        },
+        "input_schema_ref": {
+          "$ref": "common.schema.json#/$defs/artifact_ref"
+        },
+        "output_schema_ref": {
+          "$ref": "common.schema.json#/$defs/artifact_ref"
+        }
+      },
+      "required": [
+        "capability_id",
+        "input_schema_ref",
+        "output_schema_ref",
+        "implementation_ref",
+        "effect_class"
+      ],
+      "type": "object"
+    },
+    "profile": {
+      "additionalProperties": false,
+      "properties": {
+        "profile_id": {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        "spec_ref": {
+          "$ref": "common.schema.json#/$defs/artifact_ref"
+        }
+      },
+      "required": [
+        "profile_id",
+        "spec_ref"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://gabriel.invalid/spec/1/domain-pack.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "PROPOSED closed domain manifest. All artifact references bind included bytes in examples. Registration validates referenced schemas, coverage and implementations and grants no execution authority. pack_id is a logical name; immutable manifest bytes supply its content identity. All six port descriptions are required; one contained implementation may supply several ports. Runtime capability authorization remains separate.",
+  "properties": {
+    "capability_requirements": {
+      "items": {
+        "$ref": "common.schema.json#/$defs/identifier"
+      },
+      "maxItems": 128,
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "conventions_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "evaluation_profiles": {
+      "items": {
+        "$ref": "#/$defs/profile"
+      },
+      "maxItems": 64,
+      "minItems": 1,
+      "type": "array"
+    },
+    "fixtures": {
+      "items": {
+        "$ref": "#/$defs/fixture"
+      },
+      "maxItems": 256,
+      "minItems": 3,
+      "type": "array"
+    },
+    "manifest_kind": {
+      "enum": [
+        "proposed",
+        "synthetic_fixture",
+        "implementation_release"
+      ],
+      "type": "string"
+    },
+    "namespace": {
+      "maxLength": 48,
+      "pattern": "^[a-z][a-z0-9_]{0,47}$",
+      "type": "string"
+    },
+    "observation_coverage_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "pack_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "pack_version": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "ports": {
+      "additionalProperties": false,
+      "properties": {
+        "compile": {
+          "$ref": "#/$defs/port"
+        },
+        "evaluate": {
+          "$ref": "#/$defs/port"
+        },
+        "execute": {
+          "$ref": "#/$defs/port"
+        },
+        "observe": {
+          "$ref": "#/$defs/port"
+        },
+        "propose": {
+          "$ref": "#/$defs/port"
+        },
+        "read_back": {
+          "$ref": "#/$defs/port"
+        }
+      },
+      "required": [
+        "compile",
+        "observe",
+        "evaluate",
+        "propose",
+        "execute",
+        "read_back"
+      ],
+      "type": "object"
+    },
+    "schema": {
+      "const": "gabriel.domain-pack/1",
+      "type": "string"
+    },
+    "transformation_profiles": {
+      "items": {
+        "$ref": "#/$defs/profile"
+      },
+      "maxItems": 64,
+      "minItems": 1,
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema",
+    "pack_id",
+    "namespace",
+    "pack_version",
+    "manifest_kind",
+    "ports",
+    "observation_coverage_ref",
+    "evaluation_profiles",
+    "transformation_profiles",
+    "capability_requirements",
+    "conventions_ref",
+    "fixtures"
+  ],
+  "title": "DomainPack",
+  "type": "object"
+}

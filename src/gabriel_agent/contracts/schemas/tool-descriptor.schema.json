@@ -1,0 +1,106 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/tool-descriptor.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Closed gabriel_agent contract; representation only, cross-record rules are enforced by the owner.",
+  "properties": {
+    "concurrency_key": {
+      "enum": [
+        "read",
+        "writer",
+        "model",
+        "export"
+      ],
+      "type": "string"
+    },
+    "description": {
+      "maxLength": 512,
+      "pattern": "^[ -~]*$",
+      "type": "string"
+    },
+    "effect_class": {
+      "$ref": "common.schema.json#/$defs/effect_class"
+    },
+    "implementation_fingerprint": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "input_schema_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "max_output_bytes": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "observation_slot": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "output_schema_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "reconciliation": {
+      "enum": [
+        "read_back",
+        "target_status_by_key",
+        "same_key_retry",
+        "manual_review"
+      ],
+      "type": "string"
+    },
+    "requires_approval": {
+      "type": "boolean"
+    },
+    "resource_forms": {
+      "items": {
+        "enum": [
+          "worktree",
+          "delivery",
+          "provider",
+          "none"
+        ],
+        "type": "string"
+      },
+      "maxItems": 4,
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "schema": {
+      "const": "gabriel.tool-descriptor/1",
+      "type": "string"
+    },
+    "timeout_ms": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "tool_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "version": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    }
+  },
+  "required": [
+    "schema",
+    "tool_id",
+    "version",
+    "effect_class",
+    "input_schema_digest",
+    "output_schema_digest",
+    "timeout_ms",
+    "max_output_bytes",
+    "concurrency_key",
+    "reconciliation",
+    "requires_approval",
+    "implementation_fingerprint",
+    "description",
+    "resource_forms",
+    "observation_slot"
+  ],
+  "title": "tool-descriptor",
+  "type": "object"
+}

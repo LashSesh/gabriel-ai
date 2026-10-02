@@ -1,0 +1,65 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/command.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "PROPOSED specification; representation validation does not implement runtime behavior.",
+  "properties": {
+    "command_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "expected_revision": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "op": {
+      "enum": [
+        "admit_task",
+        "accept_plan",
+        "issue_intent",
+        "accept_result",
+        "accept_assessment",
+        "amend_task",
+        "cancel_task",
+        "record_observation",
+        "reconcile_effect",
+        "request_pause",
+        "resume_run",
+        "start_run",
+        "mark_dispatch",
+        "record_hold"
+      ],
+      "type": "string"
+    },
+    "payload_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "policy_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "run_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "schema": {
+      "const": "gabriel.command/1",
+      "type": "string"
+    },
+    "task_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "workspace_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    }
+  },
+  "required": [
+    "schema",
+    "command_id",
+    "workspace_id",
+    "task_id",
+    "expected_revision",
+    "op",
+    "payload_ref",
+    "policy_digest",
+    "run_id"
+  ],
+  "title": "command",
+  "type": "object"
+}

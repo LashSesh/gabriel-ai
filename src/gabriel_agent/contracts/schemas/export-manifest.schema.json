@@ -1,0 +1,138 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/export-manifest.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Closed gabriel_agent contract; representation only, cross-record rules are enforced by the owner.",
+  "properties": {
+    "anchor": {
+      "$ref": "anchor.schema.json"
+    },
+    "assessments": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "assessment_id": {
+            "anyOf": [
+              {
+                "$ref": "common.schema.json#/$defs/identifier"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "check_id": {
+            "$ref": "common.schema.json#/$defs/identifier"
+          },
+          "established": {
+            "type": "boolean"
+          },
+          "mandatory": {
+            "type": "boolean"
+          },
+          "outcome": {
+            "enum": [
+              "passed",
+              "failed",
+              "inconclusive",
+              "not_run"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "check_id",
+          "mandatory",
+          "outcome",
+          "assessment_id",
+          "established"
+        ],
+        "type": "object"
+      },
+      "maxItems": 64,
+      "minItems": 0,
+      "type": "array"
+    },
+    "base_commit": {
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "claims_requiring_user_review": {
+      "items": {
+        "maxLength": 512,
+        "pattern": "^[ -~]*$",
+        "type": "string"
+      },
+      "maxItems": 64,
+      "minItems": 0,
+      "type": "array"
+    },
+    "evidence_refs": {
+      "items": {
+        "$ref": "common.schema.json#/$defs/artifact_ref"
+      },
+      "maxItems": 256,
+      "minItems": 0,
+      "type": "array"
+    },
+    "export_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "final_tree_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "patch_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "run_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "run_state": {
+      "enum": [
+        "admitted",
+        "planning",
+        "running",
+        "waiting_user",
+        "blocked",
+        "succeeded",
+        "failed",
+        "cancelled"
+      ],
+      "type": "string"
+    },
+    "schema": {
+      "const": "gabriel.export-manifest/1",
+      "type": "string"
+    },
+    "task_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "unresolved_issues": {
+      "items": {
+        "maxLength": 512,
+        "pattern": "^[ -~]*$",
+        "type": "string"
+      },
+      "maxItems": 64,
+      "minItems": 0,
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema",
+    "export_id",
+    "task_id",
+    "run_id",
+    "run_state",
+    "base_commit",
+    "final_tree_digest",
+    "patch_ref",
+    "assessments",
+    "unresolved_issues",
+    "evidence_refs",
+    "anchor",
+    "claims_requiring_user_review"
+  ],
+  "title": "export-manifest",
+  "type": "object"
+}

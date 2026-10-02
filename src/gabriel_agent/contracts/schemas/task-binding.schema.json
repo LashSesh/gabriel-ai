@@ -1,0 +1,180 @@
+{
+  "$defs": {
+    "check_spec": {
+      "additionalProperties": false,
+      "properties": {
+        "allowed_paths": {
+          "items": {
+            "maxLength": 512,
+            "pattern": "^[ -~]*$",
+            "type": "string"
+          },
+          "maxItems": 64,
+          "minItems": 0,
+          "type": "array"
+        },
+        "argv": {
+          "items": {
+            "maxLength": 512,
+            "pattern": "^[ -~]*$",
+            "type": "string"
+          },
+          "maxItems": 64,
+          "minItems": 0,
+          "type": "array"
+        },
+        "check_id": {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        "independent": {
+          "type": "boolean"
+        },
+        "mandatory": {
+          "type": "boolean"
+        },
+        "oracle_files": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "artifact_ref": {
+                "$ref": "common.schema.json#/$defs/artifact_ref"
+              },
+              "path": {
+                "maxLength": 512,
+                "pattern": "^[ -~]*$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "path",
+              "artifact_ref"
+            ],
+            "type": "object"
+          },
+          "maxItems": 64,
+          "minItems": 0,
+          "type": "array"
+        },
+        "predicate_kind": {
+          "pattern": "^[a-z][a-z0-9_]{0,47}/[a-z][a-z0-9_]{0,63}$",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "baseline_and_acceptance",
+            "acceptance_only",
+            "baseline_only",
+            "structural"
+          ],
+          "type": "string"
+        },
+        "timeout_ms": {
+          "$ref": "common.schema.json#/$defs/safe_uint"
+        },
+        "version": {
+          "$ref": "common.schema.json#/$defs/identifier"
+        }
+      },
+      "required": [
+        "check_id",
+        "version",
+        "mandatory",
+        "predicate_kind",
+        "argv",
+        "timeout_ms",
+        "independent",
+        "role",
+        "oracle_files",
+        "allowed_paths"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://gabriel.invalid/spec/1/task-binding.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Closed gabriel_agent contract; representation only, cross-record rules are enforced by the owner.",
+  "properties": {
+    "allowed_paths": {
+      "items": {
+        "maxLength": 512,
+        "pattern": "^[ -~]*$",
+        "type": "string"
+      },
+      "maxItems": 64,
+      "minItems": 1,
+      "type": "array"
+    },
+    "base_commit": {
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "check_specs": {
+      "items": {
+        "$ref": "#/$defs/check_spec"
+      },
+      "maxItems": 64,
+      "minItems": 1,
+      "type": "array"
+    },
+    "containment_backend": {
+      "enum": [
+        "linux_namespace",
+        "trusted_local"
+      ],
+      "type": "string"
+    },
+    "domain_namespace": {
+      "pattern": "^[a-z][a-z0-9_]{0,47}$",
+      "type": "string"
+    },
+    "max_plan_versions": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "max_repairs": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "owner_time_basis": {
+      "enum": [
+        "host_clock",
+        "logical"
+      ],
+      "type": "string"
+    },
+    "pack_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "pack_version": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "provider_profile_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "repository_path": {
+      "maxLength": 512,
+      "pattern": "^[ -~]*$",
+      "type": "string"
+    },
+    "schema": {
+      "const": "gabriel.task-binding/1",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema",
+    "domain_namespace",
+    "pack_id",
+    "pack_version",
+    "provider_profile_ref",
+    "containment_backend",
+    "repository_path",
+    "base_commit",
+    "allowed_paths",
+    "check_specs",
+    "max_plan_versions",
+    "max_repairs",
+    "owner_time_basis"
+  ],
+  "title": "task-binding",
+  "type": "object"
+}
