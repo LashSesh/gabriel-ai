@@ -1,0 +1,10 @@
+diff --git a/src/intervals.py b/src/intervals.py
+index 8e57ee2..54fb1c3 100644
+--- a/src/intervals.py
++++ b/src/intervals.py
+@@ -3,4 +3,4 @@
+ 
+ def overlaps(a, b):
+     """True when the half-open intervals a and b share at least one point."""
+-    return a[0] <= b[1] and b[0] <= a[1]
++    return a[0] < b[1] and b[0] < a[1]

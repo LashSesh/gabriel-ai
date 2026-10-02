@@ -1,0 +1,15 @@
+"""memo: memoization for pure functions."""
+
+
+def memoize(func):
+    """Cache results per distinct argument combination; identical calls hit the cache."""
+    cache = {}
+
+    def wrapper(*args, **kwargs):
+        # Include kwargs in the cache key as a sorted tuple of items to ensure calls with different kwargs are cached separately
+        key = args + (frozenset(kwargs.items()),)
+        if key not in cache:
+            cache[key] = func(*args, **kwargs)
+        return cache[key]
+    wrapper.cache = cache
+    return wrapper

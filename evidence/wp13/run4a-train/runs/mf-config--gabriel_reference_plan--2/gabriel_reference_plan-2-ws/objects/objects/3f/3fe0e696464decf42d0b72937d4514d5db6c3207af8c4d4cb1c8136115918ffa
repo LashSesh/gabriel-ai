@@ -1,0 +1,1 @@
+Fix the reported defect: layered configuration must merge nested sections instead of replacing them, so that config.load({'server': {'port': 9000}}) keeps the default host. defaults.merge is the merge rule used everywhere. Keep the public API and the existing tests.

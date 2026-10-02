@@ -67,6 +67,30 @@ class Workspace:
         except KeyError:
             raise GabrielError(Code.UNSUPPORTED, "no registered domain pack for namespace " + str(namespace))
 
+    def policy_for(self, task: dict) -> dict:
+        """The routing policy pinned by the task (a policy-pin record among its base inputs);
+        the rule-based policy when none is pinned. The pin's digest must match the artifact."""
+        from ..policy import router
+        for ref in task["base_inputs"]:
+            record = loads(self.store.get(ref))
+            if record.get("schema") == "gabriel.policy-pin/1":
+                validate(record, "policy-pin")
+                policy = validate_bytes(self.store.get(record["policy_ref"]), "router-policy")
+                if router.policy_digest(policy) != record["policy_digest"]:
+                    raise GabrielError(Code.STALE_EVIDENCE, "pinned policy artifact does not match the pin digest")
+                return policy
+        return router.rule_based()
+
+    def pin_policy(self, policy: dict) -> dict:
+        """Store a routing policy and return the pin record's artifact reference."""
+        from ..policy import router
+        validate(policy, "router-policy")
+        policy_ref = self.store.put(canonical(policy), "application/json")
+        pin = {"schema": "gabriel.policy-pin/1", "policy_id": policy["policy_id"], "policy_ref": policy_ref,
+               "policy_digest": router.policy_digest(policy), "selected_by": self.config["principal_id"]}
+        validate(pin, "policy-pin")
+        return self.store.put(canonical(pin), "application/json")
+
     # ------------------------------------------------------------ lifecycle
     @classmethod
     def create(cls, path, *, workspace_id=None, principal_id="local-user", backend="linux_namespace", allow_trusted_local=False, clock=None):
@@ -192,6 +216,10 @@ class Workspace:
             unresolved = [c for c in compiled.report["clauses"] if c["mandatory"] and c["status"] != "mapped"]
             raise GabrielError(Code.POLICY_DENIED, "task is not admissible: " + "; ".join("%s: %s" % (c["clause_id"], c["reason"]) for c in unresolved),
                                details={"compilation_report": compiled.report, "problems": compiled.problems})
+        if spec.get("policy") is not None:
+            # Production tasks pin one policy version; promotion affects new runs only.
+            compiled.task["base_inputs"] = list(compiled.task["base_inputs"]) + [self.pin_policy(spec["policy"])]
+            validate(compiled.task, "task")
         grant = {"schema": "gabriel.grant/1", "grant_id": grant_id, "principal_id": self.config["principal_id"], "workspace_id": self.config["workspace_id"],
                  "task_id": task_id, "tool_ids": sorted(self.registry.catalog()["tools"]), "resource_ids": RESOURCES, "effect_classes": GRANTED_EFFECTS,
                  "budget_ceiling": budget, "expires_at_unix_ms": self.owner.owner_time() + int(spec.get("grant_ttl_ms", 7 * 24 * 3600 * 1000)),

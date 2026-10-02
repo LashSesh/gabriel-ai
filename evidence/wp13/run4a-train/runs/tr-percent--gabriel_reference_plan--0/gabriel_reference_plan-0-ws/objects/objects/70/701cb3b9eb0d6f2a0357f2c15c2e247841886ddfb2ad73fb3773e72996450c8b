@@ -1,0 +1,7 @@
+"""change: percentage change between two readings."""
+
+def percent_change(old, new):
+    """Percentage change from old to new; a zero baseline has no defined change."""
+    if old == 0:
+        return None
+    return (new - old) / old * 100.0

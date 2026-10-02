@@ -1,0 +1,1 @@
+Fix the reported defect in memo.memoize: keyword arguments must be part of the cache key, so that calls with different keyword arguments are computed separately while identical calls (including keyword arguments) still hit the cache. Keep the public API and the existing tests.

@@ -1,0 +1,9 @@
+{
+ "goal": "Fix the reported defect: layered configuration must merge nested sections instead of replacing them, so that config.load({'server': {'port': 9000}}) keeps the default host. defaults.merge is the merge rule used everywhere. Keep the public API and the existing tests.",
+ "domain": "software",
+ "state": "succeeded",
+ "outcome": "success",
+ "repair_count": 0,
+ "plan_versions": 1,
+ "final_diff": "diff --git a/src/defaults.py b/src/defaults.py\nindex 2508d66..4b50a52 100644\n--- a/src/defaults.py\n+++ b/src/defaults.py\n@@ -4,5 +4,13 @@\n def merge(base, override):\n     \"\"\"Return base updated with override; nested dicts merge recursively.\"\"\"\n     result = dict(base)\n-    result.update(override)\n+    for key, value in override.items():\n+        if (\n+            key in result\n+            and isinstance(result[key], dict)\n+            and isinstance(value, dict)\n+        ):\n+            result[key] = merge(result[key], value)\n+        else:\n+            result[key] = value\n     return result\n"
+}

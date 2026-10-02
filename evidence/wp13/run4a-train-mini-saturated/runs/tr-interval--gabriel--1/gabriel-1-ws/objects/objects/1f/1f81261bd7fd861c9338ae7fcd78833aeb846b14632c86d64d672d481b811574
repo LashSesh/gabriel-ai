@@ -1,0 +1,6 @@
+"""intervals: half-open [start, end) interval helpers."""
+
+
+def overlaps(a, b):
+    """True when the half-open intervals a and b share at least one point."""
+    return a[0] < b[1] and b[0] < a[1]

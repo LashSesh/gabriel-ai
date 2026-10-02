@@ -1,0 +1,12 @@
+diff --git a/src/ratelimit.py b/src/ratelimit.py
+index 1e92be7..32a8f2e 100644
+--- a/src/ratelimit.py
++++ b/src/ratelimit.py
+@@ -12,6 +12,7 @@ class Limiter:
+         now = self.clock()
+         if now - self.window_start >= self.window_s:
+             self.window_start = now
++            self.count = 0
+         if self.count < self.limit:
+             self.count += 1
+             return True

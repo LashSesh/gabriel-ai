@@ -1,0 +1,1 @@
+Fix the reported defect in ratelimit.Limiter: when a new fixed window starts the request count must start again from zero; within a window the count keeps accumulating even while the clock advances. Keep the public API and the existing tests.

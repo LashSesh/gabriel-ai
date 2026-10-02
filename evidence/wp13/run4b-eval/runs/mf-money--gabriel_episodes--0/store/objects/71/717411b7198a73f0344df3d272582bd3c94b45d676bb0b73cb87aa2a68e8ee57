@@ -1,0 +1,1 @@
+Ledger totals are off by one cent for some inputs. Fix the reported defect: money.round_cents must round halves away from zero (0.125 -> 0.13, 2.675 -> 2.68, -0.125 -> -0.13) and ledger.total must keep using it. Keep the public API and the existing tests.

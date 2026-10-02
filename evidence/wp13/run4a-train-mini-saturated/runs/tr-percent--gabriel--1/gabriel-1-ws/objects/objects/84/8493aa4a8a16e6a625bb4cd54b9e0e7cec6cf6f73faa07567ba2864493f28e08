@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-EUezfChnaJb0nF8ZMiaZvbKzXCI5R",
+  "object": "chat.completion",
+  "created": 1790976127,
+  "model": "gpt-4.1-mini-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"operations\": [{\"kind\": \"modify\", \"path\": \"src/change.py\", \"expected_sha256\": \"ef13b6011835df58889d7fd66fab920d8082e16f13ab9af8bce25d4cb146642f\", \"content\": \"\\\"\\\"\\\"change: percentage change between two readings.\\\"\\\"\\\"\\n\\n\\ndef percent_change(old, new):\\n    \\\"\\\"\\\"Percentage change from old to new; a zero baseline has no defined change.\\\"\\\"\\\"\\n    if old == 0:\\n        return None\\n    return (new - old) / old * 100.0\\n\"}], \"rationale\": \"Added a check for zero baseline to return None, preserving the public API and existing tests.\"}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 519,
+    "completion_tokens": 162,
+    "total_tokens": 681,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_972c397bd9"
+}

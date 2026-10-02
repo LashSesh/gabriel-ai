@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-EUf5sZrOTkfkx7sg2WKdlg4wteuHS",
+  "object": "chat.completion",
+  "created": 1790976512,
+  "model": "gpt-4.1-mini-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"operations\": [{\"kind\": \"modify\", \"path\": \"src/money.py\", \"expected_sha256\": \"fa816984cb1f791630c850f452d214933dceee46a979c2276da8800a2c0570db\", \"content\": \"\\\"\\\"\\\"money: cent rounding for ledgers.\\\"\\\"\\\"\\n\\n\\ndef round_cents(amount):\\n    \\\"\\\"\\\"Round a decimal amount to cents, halves away from zero.\\\"\\\"\\\"\\n    # Multiply by 100 to shift cents to integer\\n    shifted = amount * 100\\n    # Determine sign\\n    sign = 1 if shifted >= 0 else -1\\n    abs_shifted = abs(shifted)\\n    # Extract integer and fractional parts\\n    integer_part = int(abs_shifted)\\n    fractional_part = abs_shifted - integer_part\\n    # If fractional part is exactly 0.5, round away from zero\\n    if abs(fractional_part - 0.5) < 1e-12:\\n        rounded = integer_part + 1\\n    else:\\n        # Otherwise, use normal round\\n        rounded = round(abs_shifted)\\n    # Restore sign and scale back\\n    return sign * rounded / 100\\n\"}], \"rationale\": \"Replaced the built-in round with custom logic to round halves away from zero as required, preserving the public API and ensuring ledger.total uses this function unchanged.\"}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 665,
+    "completion_tokens": 307,
+    "total_tokens": 972,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_0e9fc63c9b"
+}

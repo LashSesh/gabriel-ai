@@ -1,0 +1,25 @@
+diff --git a/src/money.py b/src/money.py
+index fbca006..53e068b 100644
+--- a/src/money.py
++++ b/src/money.py
+@@ -3,4 +3,19 @@
+ 
+ def round_cents(amount):
+     """Round a decimal amount to cents, halves away from zero."""
+-    return round(amount, 2)
++    # Multiply by 100 to shift cents to integer
++    shifted = amount * 100
++    # Determine sign
++    sign = 1 if shifted >= 0 else -1
++    abs_shifted = abs(shifted)
++    # Extract integer and fractional parts
++    integer_part = int(abs_shifted)
++    fractional_part = abs_shifted - integer_part
++    # If fractional part is exactly 0.5, round away from zero
++    if abs(fractional_part - 0.5) < 1e-12:
++        rounded = integer_part + 1
++    else:
++        # Otherwise, use normal round
++        rounded = round(abs_shifted)
++    # Restore sign and scale back
++    return sign * rounded / 100

@@ -207,6 +207,15 @@ class MemoryService:
                           content_ref["media_type"], scope_ref["sha256"], scope_ref["bytes"], str(scope.get("source_kind", "unknown")), supersedes, ref["sha256"]))
         return record
 
+    def observations_of_kind(self, source_kind: str) -> list:
+        """Every retained observation whose scope declares the source kind, in ingestion order."""
+        rows = self._db.execute("SELECT record_sha FROM observations WHERE source_kind = ? ORDER BY seq", (source_kind,)).fetchall()
+        return [self._load(r[0]) for r in rows]
+
+    def labels(self) -> list:
+        rows = self._db.execute("SELECT label_id, issue_id, source_id, revision, status_kind, outcome, supersedes FROM labels ORDER BY seq").fetchall()
+        return [{"label_id": r[0], "issue_id": r[1], "source_id": r[2], "revision": r[3], "status_kind": r[4], "outcome": r[5], "supersedes": r[6]} for r in rows]
+
     def observation(self, observation_id: str) -> dict | None:
         row = self._db.execute("SELECT record_sha FROM observations WHERE observation_id = ?", (observation_id,)).fetchone()
         if row is None:

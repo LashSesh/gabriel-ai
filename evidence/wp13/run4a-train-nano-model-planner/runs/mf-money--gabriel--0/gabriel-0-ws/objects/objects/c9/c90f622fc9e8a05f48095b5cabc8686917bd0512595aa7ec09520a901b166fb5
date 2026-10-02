@@ -1,0 +1,1 @@
+The original implementation used Python's built-in round, which uses banker's rounding and does not always round halves away from zero. By switching to decimal.Decimal with ROUND_HALF_UP, we ensure halves are always rounded away from zero, fixing the cent rounding behavior as specified.

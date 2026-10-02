@@ -1,0 +1,197 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/router-policy.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Content-addressed routing policy: the rule or a logistic readout over progress channels (optionally through the reference recurrent map), the decision point and the episode retrieval setting.",
+  "properties": {
+    "channel_schema_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "decision_point": {
+      "enum": [
+        "failed_verification",
+        "any_boundary"
+      ],
+      "type": "string"
+    },
+    "episodes": {
+      "additionalProperties": false,
+      "properties": {
+        "k": {
+          "$ref": "common.schema.json#/$defs/safe_uint"
+        },
+        "min_score_milli": {
+          "$ref": "common.schema.json#/$defs/safe_uint"
+        }
+      },
+      "required": [
+        "k",
+        "min_score_milli"
+      ],
+      "type": "object"
+    },
+    "feature_source": {
+      "enum": [
+        "channels",
+        "recurrent"
+      ],
+      "type": "string"
+    },
+    "kind": {
+      "enum": [
+        "rule_based",
+        "readout"
+      ],
+      "type": "string"
+    },
+    "policy_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "readout": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "bias_micro": {
+              "maximum": 9007199254740991,
+              "minimum": -9007199254740991,
+              "type": "integer"
+            },
+            "weights_micro": {
+              "items": {
+                "maximum": 9007199254740991,
+                "minimum": -9007199254740991,
+                "type": "integer"
+              },
+              "maxItems": 256,
+              "minItems": 1,
+              "type": "array"
+            }
+          },
+          "required": [
+            "bias_micro",
+            "weights_micro"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "recurrent_config": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "alpha_milli": {
+              "$ref": "common.schema.json#/$defs/safe_uint"
+            },
+            "beta_milli": {
+              "maximum": 9007199254740991,
+              "minimum": -9007199254740991,
+              "type": "integer"
+            },
+            "bias_scale_milli": {
+              "$ref": "common.schema.json#/$defs/safe_uint"
+            },
+            "channels": {
+              "$ref": "common.schema.json#/$defs/safe_uint"
+            },
+            "float_model": {
+              "maxLength": 32,
+              "type": "string"
+            },
+            "input_scale_milli": {
+              "$ref": "common.schema.json#/$defs/safe_uint"
+            },
+            "parents": {
+              "$ref": "common.schema.json#/$defs/safe_uint"
+            },
+            "profile": {
+              "enum": [
+                "adaptive",
+                "trace_only"
+              ],
+              "type": "string"
+            },
+            "schema": {
+              "const": "gabriel.recurrent-config/1",
+              "type": "string"
+            },
+            "seed": {
+              "$ref": "common.schema.json#/$defs/safe_uint"
+            },
+            "trace": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "g_milli": {
+                    "$ref": "common.schema.json#/$defs/safe_uint"
+                  },
+                  "rho_milli": {
+                    "$ref": "common.schema.json#/$defs/safe_uint"
+                  },
+                  "theta_milli": {
+                    "$ref": "common.schema.json#/$defs/safe_uint"
+                  }
+                },
+                "required": [
+                  "g_milli",
+                  "rho_milli",
+                  "theta_milli"
+                ],
+                "type": "object"
+              },
+              "maxItems": 4,
+              "minItems": 1,
+              "type": "array"
+            },
+            "units": {
+              "$ref": "common.schema.json#/$defs/safe_uint"
+            }
+          },
+          "required": [
+            "alpha_milli",
+            "beta_milli",
+            "bias_scale_milli",
+            "channels",
+            "float_model",
+            "input_scale_milli",
+            "parents",
+            "profile",
+            "schema",
+            "seed",
+            "trace",
+            "units"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "schema": {
+      "const": "gabriel.router-policy/1",
+      "type": "string"
+    },
+    "threshold_milli": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    }
+  },
+  "required": [
+    "channel_schema_id",
+    "decision_point",
+    "episodes",
+    "feature_source",
+    "kind",
+    "policy_id",
+    "readout",
+    "recurrent_config",
+    "schema",
+    "threshold_milli"
+  ],
+  "title": "router-policy",
+  "type": "object"
+}

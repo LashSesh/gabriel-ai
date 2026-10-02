@@ -1,0 +1,9 @@
+{
+ "goal": "Fix the reported defect: paths.normalize must drop a trailing slash (except for the root path) in addition to collapsing repeated slashes, so that router.match('/users/me/') resolves. Keep the public API and the existing tests.",
+ "domain": "software",
+ "state": "succeeded",
+ "outcome": "success",
+ "repair_count": 0,
+ "plan_versions": 1,
+ "final_diff": "diff --git a/src/paths.py b/src/paths.py\nindex 0f5ffc6..712e345 100644\n--- a/src/paths.py\n+++ b/src/paths.py\n@@ -7,4 +7,6 @@ def normalize(path):\n         path = \"/\" + path\n     while \"//\" in path:\n         path = path.replace(\"//\", \"/\")\n+    if len(path) > 1 and path.endswith(\"/\"):\n+        path = path[:-1]\n     return path\n"
+}

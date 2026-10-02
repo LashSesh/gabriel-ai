@@ -1,0 +1,16 @@
+diff --git a/src/money.py b/src/money.py
+index fbca006..820ad4a 100644
+--- a/src/money.py
++++ b/src/money.py
+@@ -1,6 +1,9 @@
+ """money: cent rounding for ledgers."""
+ 
++import decimal
+ 
+ def round_cents(amount):
+     """Round a decimal amount to cents, halves away from zero."""
+-    return round(amount, 2)
++    d = decimal.Decimal(str(amount))
++    # Set rounding mode to ROUND_HALF_UP for halves away from zero
++    return float(d.quantize(decimal.Decimal('0.01'), rounding=decimal.ROUND_HALF_UP))
+\ No newline at end of file

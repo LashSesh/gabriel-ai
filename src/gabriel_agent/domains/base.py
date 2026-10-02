@@ -124,8 +124,9 @@ class DomainPack:
 
     # ---------------------------------------------------------------- propose port
     def build_prompt(self, goal_text: str, binding: dict, snapshot: dict, manifest: dict, store, *, failure_context: list, round_index: int,
-                     memory=None, principal_id: str | None = None) -> tuple:
-        """Returns (prompt bytes, context entries, selected observation ids)."""
+                     memory=None, principal_id: str | None = None, episodes=()) -> tuple:
+        """Returns (prompt bytes, context entries, selected observation ids). ``episodes`` are
+        past cases the pinned policy selected; a pack may ignore them."""
         raise NotImplementedError
 
     def normalize_proposal(self, proposal: dict, snapshot: dict, manifest: dict, binding: dict, store, *, task_id, run_id, proposal_ref,

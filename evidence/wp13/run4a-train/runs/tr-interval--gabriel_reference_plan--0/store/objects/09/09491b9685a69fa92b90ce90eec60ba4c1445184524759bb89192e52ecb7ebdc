@@ -1,0 +1,1 @@
+Fix the reported defect in intervals.overlaps for half-open intervals [start, end): intervals that merely touch (the end of one equals the start of the other) do not overlap, in either order. Keep the public API and the existing tests.

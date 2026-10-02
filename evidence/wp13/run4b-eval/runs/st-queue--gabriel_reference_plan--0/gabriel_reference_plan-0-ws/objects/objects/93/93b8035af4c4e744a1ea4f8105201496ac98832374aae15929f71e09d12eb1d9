@@ -1,0 +1,9 @@
+{
+ "goal": "Fix the reported defect in pq.PriorityQueue: among items with equal priority the queue must be first-in first-out, and items need not be comparable with each other. Keep the public API and the existing tests.",
+ "domain": "software",
+ "state": "succeeded",
+ "outcome": "success",
+ "repair_count": 0,
+ "plan_versions": 1,
+ "final_diff": "diff --git a/src/pq.py b/src/pq.py\nindex 96ceb6f..7a280df 100644\n--- a/src/pq.py\n+++ b/src/pq.py\n@@ -5,9 +5,12 @@ import heapq\n class PriorityQueue:\n     def __init__(self):\n         self._heap = []\n+        self._counter = 0\n \n     def push(self, priority, item):\n-        heapq.heappush(self._heap, (priority, item))\n+        # Use a counter to preserve insertion order among equal priorities\n+        heapq.heappush(self._heap, (priority, self._counter, item))\n+        self._counter += 1\n \n     def pop(self):\n-        return heapq.heappop(self._heap)[1]\n+        return heapq.heappop(self._heap)[2]\n"
+}

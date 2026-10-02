@@ -1,0 +1,1 @@
+The original implementation considered intervals touching at endpoints as overlapping, which is incorrect for half-open intervals. Changing the comparison to strict inequalities ensures that intervals sharing only a boundary point do not overlap, aligning with the specified behavior.

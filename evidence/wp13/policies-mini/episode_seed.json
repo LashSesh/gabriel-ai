@@ -1,0 +1,128 @@
+[
+ {
+  "id": "mf-config-gabriel-0",
+  "task_id": "mf-config",
+  "family": "multi_file",
+  "verified": 1,
+  "text": "{\n \"goal\": \"Fix the reported defect: layered configuration must merge nested sections instead of replacing them, so that config.load({'server': {'port': 9000}}) keeps the default host. defaults.merge is the merge rule used everywhere. Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/defaults.py b/src/defaults.py\\nindex 2508d66..4b50a52 100644\\n--- a/src/defaults.py\\n+++ b/src/defaults.py\\n@@ -4,5 +4,13 @@\\n def merge(base, override):\\n     \\\"\\\"\\\"Return base updated with override; nested dicts merge recursively.\\\"\\\"\\\"\\n     result = dict(base)\\n-    result.update(override)\\n+    for key, value in override.items():\\n+        if (\\n+            key in result\\n+            and isinstance(result[key], dict)\\n+            and isinstance(value, dict)\\n+        ):\\n+            result[key] = merge(result[key], value)\\n+        else:\\n+            result[key] = value\\n     return result\\n\"\n}"
+ },
+ {
+  "id": "mf-config-gabriel-1",
+  "task_id": "mf-config",
+  "family": "multi_file",
+  "verified": 1,
+  "text": "{\n \"goal\": \"Fix the reported defect: layered configuration must merge nested sections instead of replacing them, so that config.load({'server': {'port': 9000}}) keeps the default host. defaults.merge is the merge rule used everywhere. Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/defaults.py b/src/defaults.py\\nindex 2508d66..85865b7 100644\\n--- a/src/defaults.py\\n+++ b/src/defaults.py\\n@@ -4,5 +4,9 @@\\n def merge(base, override):\\n     \\\"\\\"\\\"Return base updated with override; nested dicts merge recursively.\\\"\\\"\\\"\\n     result = dict(base)\\n-    result.update(override)\\n+    for key, value in override.items():\\n+        if key in result and isinstance(result[key], dict) and isinstance(value, dict):\\n+            result[key] = merge(result[key], value)\\n+        else:\\n+            result[key] = value\\n     return result\\n\"\n}"
+ },
+ {
+  "id": "mf-config-gabriel-2",
+  "task_id": "mf-config",
+  "family": "multi_file",
+  "verified": 1,
+  "text": "{\n \"goal\": \"Fix the reported defect: layered configuration must merge nested sections instead of replacing them, so that config.load({'server': {'port': 9000}}) keeps the default host. defaults.merge is the merge rule used everywhere. Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/defaults.py b/src/defaults.py\\nindex 2508d66..85865b7 100644\\n--- a/src/defaults.py\\n+++ b/src/defaults.py\\n@@ -4,5 +4,9 @@\\n def merge(base, override):\\n     \\\"\\\"\\\"Return base updated with override; nested dicts merge recursively.\\\"\\\"\\\"\\n     result = dict(base)\\n-    result.update(override)\\n+    for key, value in override.items():\\n+        if key in result and isinstance(result[key], dict) and isinstance(value, dict):\\n+            result[key] = merge(result[key], value)\\n+        else:\\n+            result[key] = value\\n     return result\\n\"\n}"
+ },
+ {
+  "id": "mf-money-gabriel-0",
+  "task_id": "mf-money",
+  "family": "multi_file",
+  "verified": 1,
+  "text": "{\n \"goal\": \"Ledger totals are off by one cent for some inputs. Fix the reported defect: money.round_cents must round halves away from zero (0.125 -> 0.13, 2.675 -> 2.68, -0.125 -> -0.13) and ledger.total must keep using it. Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/money.py b/src/money.py\\nindex fbca006..412fc4d 100644\\n--- a/src/money.py\\n+++ b/src/money.py\\n@@ -3,4 +3,11 @@\\n \\n def round_cents(amount):\\n     \\\"\\\"\\\"Round a decimal amount to cents, halves away from zero.\\\"\\\"\\\"\\n-    return round(amount, 2)\\n+    # Multiply by 100 to shift cents to integer domain\\n+    shifted = amount * 100\\n+    # Determine sign for rounding direction\\n+    sign = 1 if shifted >= 0 else -1\\n+    # Add 0.5 with sign to shift halves away from zero\\n+    shifted_rounded = int(shifted + sign * 0.5)\\n+    # Return back to decimal with two decimals\\n+    return shifted_rounded / 100\\n\"\n}"
+ },
+ {
+  "id": "mf-money-gabriel-1",
+  "task_id": "mf-money",
+  "family": "multi_file",
+  "verified": 1,
+  "text": "{\n \"goal\": \"Ledger totals are off by one cent for some inputs. Fix the reported defect: money.round_cents must round halves away from zero (0.125 -> 0.13, 2.675 -> 2.68, -0.125 -> -0.13) and ledger.total must keep using it. Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/money.py b/src/money.py\\nindex fbca006..651a310 100644\\n--- a/src/money.py\\n+++ b/src/money.py\\n@@ -3,4 +3,10 @@\\n \\n def round_cents(amount):\\n     \\\"\\\"\\\"Round a decimal amount to cents, halves away from zero.\\\"\\\"\\\"\\n-    return round(amount, 2)\\n+    # Multiply by 100 to shift cents, then round halves away from zero\\n+    shifted = amount * 100\\n+    if shifted > 0:\\n+        rounded = int(shifted + 0.5)\\n+    else:\\n+        rounded = int(shifted - 0.5)\\n+    return rounded / 100\\n\"\n}"
+ },
+ {
+  "id": "mf-money-gabriel-2",
+  "task_id": "mf-money",
+  "family": "multi_file",
+  "verified": 1,
+  "text": "{\n \"goal\": \"Ledger totals are off by one cent for some inputs. Fix the reported defect: money.round_cents must round halves away from zero (0.125 -> 0.13, 2.675 -> 2.68, -0.125 -> -0.13) and ledger.total must keep using it. Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/money.py b/src/money.py\\nindex fbca006..6c10322 100644\\n--- a/src/money.py\\n+++ b/src/money.py\\n@@ -3,4 +3,10 @@\\n \\n def round_cents(amount):\\n     \\\"\\\"\\\"Round a decimal amount to cents, halves away from zero.\\\"\\\"\\\"\\n-    return round(amount, 2)\\n+    # Multiply by 100 to shift cents, then round halves away from zero\\n+    # Python's built-in round uses round half to even, so implement manually\\n+    sign = 1 if amount >= 0 else -1\\n+    shifted = abs(amount) * 100\\n+    # Add 0.5 to shift halves away from zero, then floor\\n+    shifted_rounded = int(shifted + 0.5)\\n+    return sign * shifted_rounded / 100\\n\"\n}"
+ },
+ {
+  "id": "mf-paths-gabriel-0",
+  "task_id": "mf-paths",
+  "family": "multi_file",
+  "verified": 1,
+  "text": "{\n \"goal\": \"Fix the reported defect: paths.normalize must drop a trailing slash (except for the root path) in addition to collapsing repeated slashes, so that router.match('/users/me/') resolves. Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/paths.py b/src/paths.py\\nindex 0f5ffc6..773147d 100644\\n--- a/src/paths.py\\n+++ b/src/paths.py\\n@@ -7,4 +7,6 @@ def normalize(path):\\n         path = \\\"/\\\" + path\\n     while \\\"//\\\" in path:\\n         path = path.replace(\\\"//\\\", \\\"/\\\")\\n+    if path != \\\"/\\\" and path.endswith(\\\"/\\\"):\\n+        path = path[:-1]\\n     return path\\n\"\n}"
+ },
+ {
+  "id": "mf-paths-gabriel-1",
+  "task_id": "mf-paths",
+  "family": "multi_file",
+  "verified": 1,
+  "text": "{\n \"goal\": \"Fix the reported defect: paths.normalize must drop a trailing slash (except for the root path) in addition to collapsing repeated slashes, so that router.match('/users/me/') resolves. Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/paths.py b/src/paths.py\\nindex 0f5ffc6..773147d 100644\\n--- a/src/paths.py\\n+++ b/src/paths.py\\n@@ -7,4 +7,6 @@ def normalize(path):\\n         path = \\\"/\\\" + path\\n     while \\\"//\\\" in path:\\n         path = path.replace(\\\"//\\\", \\\"/\\\")\\n+    if path != \\\"/\\\" and path.endswith(\\\"/\\\"):\\n+        path = path[:-1]\\n     return path\\n\"\n}"
+ },
+ {
+  "id": "mf-paths-gabriel-2",
+  "task_id": "mf-paths",
+  "family": "multi_file",
+  "verified": 1,
+  "text": "{\n \"goal\": \"Fix the reported defect: paths.normalize must drop a trailing slash (except for the root path) in addition to collapsing repeated slashes, so that router.match('/users/me/') resolves. Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/paths.py b/src/paths.py\\nindex 0f5ffc6..712e345 100644\\n--- a/src/paths.py\\n+++ b/src/paths.py\\n@@ -7,4 +7,6 @@ def normalize(path):\\n         path = \\\"/\\\" + path\\n     while \\\"//\\\" in path:\\n         path = path.replace(\\\"//\\\", \\\"/\\\")\\n+    if len(path) > 1 and path.endswith(\\\"/\\\"):\\n+        path = path[:-1]\\n     return path\\n\"\n}"
+ },
+ {
+  "id": "tr-interval-gabriel-0",
+  "task_id": "tr-interval",
+  "family": "trap",
+  "verified": 1,
+  "text": "{\n \"goal\": \"Fix the reported defect in intervals.overlaps for half-open intervals [start, end): intervals that merely touch (the end of one equals the start of the other) do not overlap, in either order. Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/intervals.py b/src/intervals.py\\nindex 8e57ee2..54fb1c3 100644\\n--- a/src/intervals.py\\n+++ b/src/intervals.py\\n@@ -3,4 +3,4 @@\\n \\n def overlaps(a, b):\\n     \\\"\\\"\\\"True when the half-open intervals a and b share at least one point.\\\"\\\"\\\"\\n-    return a[0] <= b[1] and b[0] <= a[1]\\n+    return a[0] < b[1] and b[0] < a[1]\\n\"\n}"
+ },
+ {
+  "id": "tr-interval-gabriel-1",
+  "task_id": "tr-interval",
+  "family": "trap",
+  "verified": 1,
+  "text": "{\n \"goal\": \"Fix the reported defect in intervals.overlaps for half-open intervals [start, end): intervals that merely touch (the end of one equals the start of the other) do not overlap, in either order. Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/intervals.py b/src/intervals.py\\nindex 8e57ee2..54fb1c3 100644\\n--- a/src/intervals.py\\n+++ b/src/intervals.py\\n@@ -3,4 +3,4 @@\\n \\n def overlaps(a, b):\\n     \\\"\\\"\\\"True when the half-open intervals a and b share at least one point.\\\"\\\"\\\"\\n-    return a[0] <= b[1] and b[0] <= a[1]\\n+    return a[0] < b[1] and b[0] < a[1]\\n\"\n}"
+ },
+ {
+  "id": "tr-interval-gabriel-2",
+  "task_id": "tr-interval",
+  "family": "trap",
+  "verified": 1,
+  "text": "{\n \"goal\": \"Fix the reported defect in intervals.overlaps for half-open intervals [start, end): intervals that merely touch (the end of one equals the start of the other) do not overlap, in either order. Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/intervals.py b/src/intervals.py\\nindex 8e57ee2..7966bf8 100644\\n--- a/src/intervals.py\\n+++ b/src/intervals.py\\n@@ -3,4 +3,6 @@\\n \\n def overlaps(a, b):\\n     \\\"\\\"\\\"True when the half-open intervals a and b share at least one point.\\\"\\\"\\\"\\n-    return a[0] <= b[1] and b[0] <= a[1]\\n+    # For half-open intervals [start, end), intervals overlap if:\\n+    # a.start < b.end and b.start < a.end\\n+    return a[0] < b[1] and b[0] < a[1]\\n\"\n}"
+ },
+ {
+  "id": "tr-percent-gabriel-0",
+  "task_id": "tr-percent",
+  "family": "trap",
+  "verified": 1,
+  "text": "{\n \"goal\": \"Fix the reported defect in change.percent_change: a zero baseline has no defined percentage change and must yield None, so that callers can distinguish it from no change (0.0). Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/change.py b/src/change.py\\nindex 7258b28..32e55bb 100644\\n--- a/src/change.py\\n+++ b/src/change.py\\n@@ -3,4 +3,6 @@\\n \\n def percent_change(old, new):\\n     \\\"\\\"\\\"Percentage change from old to new; a zero baseline has no defined change.\\\"\\\"\\\"\\n+    if old == 0:\\n+        return None\\n     return (new - old) / old * 100.0\\n\"\n}"
+ },
+ {
+  "id": "tr-percent-gabriel-1",
+  "task_id": "tr-percent",
+  "family": "trap",
+  "verified": 1,
+  "text": "{\n \"goal\": \"Fix the reported defect in change.percent_change: a zero baseline has no defined percentage change and must yield None, so that callers can distinguish it from no change (0.0). Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/change.py b/src/change.py\\nindex 7258b28..32e55bb 100644\\n--- a/src/change.py\\n+++ b/src/change.py\\n@@ -3,4 +3,6 @@\\n \\n def percent_change(old, new):\\n     \\\"\\\"\\\"Percentage change from old to new; a zero baseline has no defined change.\\\"\\\"\\\"\\n+    if old == 0:\\n+        return None\\n     return (new - old) / old * 100.0\\n\"\n}"
+ },
+ {
+  "id": "tr-percent-gabriel-2",
+  "task_id": "tr-percent",
+  "family": "trap",
+  "verified": 1,
+  "text": "{\n \"goal\": \"Fix the reported defect in change.percent_change: a zero baseline has no defined percentage change and must yield None, so that callers can distinguish it from no change (0.0). Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/change.py b/src/change.py\\nindex 7258b28..32e55bb 100644\\n--- a/src/change.py\\n+++ b/src/change.py\\n@@ -3,4 +3,6 @@\\n \\n def percent_change(old, new):\\n     \\\"\\\"\\\"Percentage change from old to new; a zero baseline has no defined change.\\\"\\\"\\\"\\n+    if old == 0:\\n+        return None\\n     return (new - old) / old * 100.0\\n\"\n}"
+ },
+ {
+  "id": "tr-version-gabriel-0",
+  "task_id": "tr-version",
+  "family": "trap",
+  "verified": 1,
+  "text": "{\n \"goal\": \"Fix the reported defect in versions.compare: dotted versions compare numerically per component ('1.10' is newer than '1.9', '1.0.1' is newer than '1.0', and '1.0' equals '1.0.0'). Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/versions.py b/src/versions.py\\nindex c704259..0dba97e 100644\\n--- a/src/versions.py\\n+++ b/src/versions.py\\n@@ -3,4 +3,17 @@\\n \\n def compare(a, b):\\n     \\\"\\\"\\\"Return -1, 0 or 1 comparing dotted numeric versions numerically per component.\\\"\\\"\\\"\\n-    return (a > b) - (a < b)\\n+    a_parts = [int(x) for x in a.split('.')]\\n+    b_parts = [int(x) for x in b.split('.')]\\n+\\n+    # Extend the shorter list with zeros (e.g. '1.0' == '1.0.0')\\n+    max_len = max(len(a_parts), len(b_parts))\\n+    a_parts.extend([0] * (max_len - len(a_parts)))\\n+    b_parts.extend([0] * (max_len - len(b_parts)))\\n+\\n+    for a_part, b_part in zip(a_parts, b_parts):\\n+        if a_part < b_part:\\n+            return -1\\n+        elif a_part > b_part:\\n+            return 1\\n+    return 0\\n\"\n}"
+ },
+ {
+  "id": "tr-version-gabriel-1",
+  "task_id": "tr-version",
+  "family": "trap",
+  "verified": 1,
+  "text": "{\n \"goal\": \"Fix the reported defect in versions.compare: dotted versions compare numerically per component ('1.10' is newer than '1.9', '1.0.1' is newer than '1.0', and '1.0' equals '1.0.0'). Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/versions.py b/src/versions.py\\nindex c704259..0dba97e 100644\\n--- a/src/versions.py\\n+++ b/src/versions.py\\n@@ -3,4 +3,17 @@\\n \\n def compare(a, b):\\n     \\\"\\\"\\\"Return -1, 0 or 1 comparing dotted numeric versions numerically per component.\\\"\\\"\\\"\\n-    return (a > b) - (a < b)\\n+    a_parts = [int(x) for x in a.split('.')]\\n+    b_parts = [int(x) for x in b.split('.')]\\n+\\n+    # Extend the shorter list with zeros (e.g. '1.0' == '1.0.0')\\n+    max_len = max(len(a_parts), len(b_parts))\\n+    a_parts.extend([0] * (max_len - len(a_parts)))\\n+    b_parts.extend([0] * (max_len - len(b_parts)))\\n+\\n+    for a_part, b_part in zip(a_parts, b_parts):\\n+        if a_part < b_part:\\n+            return -1\\n+        elif a_part > b_part:\\n+            return 1\\n+    return 0\\n\"\n}"
+ },
+ {
+  "id": "tr-version-gabriel-2",
+  "task_id": "tr-version",
+  "family": "trap",
+  "verified": 1,
+  "text": "{\n \"goal\": \"Fix the reported defect in versions.compare: dotted versions compare numerically per component ('1.10' is newer than '1.9', '1.0.1' is newer than '1.0', and '1.0' equals '1.0.0'). Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/versions.py b/src/versions.py\\nindex c704259..0dba97e 100644\\n--- a/src/versions.py\\n+++ b/src/versions.py\\n@@ -3,4 +3,17 @@\\n \\n def compare(a, b):\\n     \\\"\\\"\\\"Return -1, 0 or 1 comparing dotted numeric versions numerically per component.\\\"\\\"\\\"\\n-    return (a > b) - (a < b)\\n+    a_parts = [int(x) for x in a.split('.')]\\n+    b_parts = [int(x) for x in b.split('.')]\\n+\\n+    # Extend the shorter list with zeros (e.g. '1.0' == '1.0.0')\\n+    max_len = max(len(a_parts), len(b_parts))\\n+    a_parts.extend([0] * (max_len - len(a_parts)))\\n+    b_parts.extend([0] * (max_len - len(b_parts)))\\n+\\n+    for a_part, b_part in zip(a_parts, b_parts):\\n+        if a_part < b_part:\\n+            return -1\\n+        elif a_part > b_part:\\n+            return 1\\n+    return 0\\n\"\n}"
+ }
+]

@@ -1,0 +1,8 @@
+"""config: user configuration over defaults."""
+from defaults import merge
+
+DEFAULTS = {"server": {"host": "localhost", "port": 8080}, "debug": False}
+
+
+def load(user):
+    return merge(DEFAULTS, user)

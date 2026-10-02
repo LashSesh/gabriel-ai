@@ -1,0 +1,97 @@
+{
+  "task_id": "mf-money",
+  "family": "multi_file",
+  "system": "gabriel",
+  "rep": 2,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-money--gabriel--2",
+  "outcome": {
+    "system": "gabriel",
+    "task_id": "mf-money",
+    "family": "multi_file",
+    "rep": 2,
+    "declared": false,
+    "declared_reason": "run state blocked",
+    "model_requests": 2,
+    "model_tokens": 2264,
+    "wall_ms": 5730,
+    "provider_statuses": [
+      "invalid_output",
+      "invalid_output"
+    ],
+    "model_revisions": [
+      "gpt-4.1-nano-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-money--gabriel--2/gabriel-2-ws/worktrees/run-mf-money-gabriel-2-1",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "planner attempt invalid_output",
+      "planner attempt invalid_output",
+      "hold plan_unavailable -> blocked: planner returned no usable proposal (invalid_output); planner request limit reached for this plan version"
+    ],
+    "gabriel": {
+      "run_id": "run-mf-money-gabriel-2-1",
+      "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-money--gabriel--2/gabriel-2-ws",
+      "hold": {
+        "from_state": "planning",
+        "missing_prerequisite": "valid-plan-proposal",
+        "reason_code": "plan_unavailable",
+        "ref": {
+          "bytes": 307,
+          "media_type": "application/json",
+          "sha256": "09648ff494c535087c4fceb0f22860b599df50e3d061405852329024e27d45a1"
+        },
+        "target_state": "blocked",
+        "wakeup_condition": "user-review"
+      },
+      "replay": "passed",
+      "events": 9,
+      "assessments": []
+    },
+    "repairs_used": 0,
+    "plan_versions": 0
+  },
+  "verification": {
+    "verified": false,
+    "changed_paths": [],
+    "out_of_scope_paths": [],
+    "visible": {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "start_failure": null,
+      "stdout_tail": "",
+      "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+      "backend": "linux_namespace"
+    },
+    "oracle": {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "oracle_money"
+      ],
+      "exit_code": 1,
+      "timed_out": false,
+      "start_failure": null,
+      "stdout_tail": "",
+      "stderr_tail": "F.F\n======================================================================\nFAIL: test_halves_away_from_zero (oracle_money.OracleTests.test_halves_away_from_zero)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/work/oracle_money.py\", line 10, in test_halves_away_from_zero\n    self.assertEqual(round_cents(0.125), 0.13)\nAssertionError: 0.12 != 0.13\n\n======================================================================\nFAIL: test_total_rounds_each_line (oracle_money.OracleTests.test_total_rounds_each_line)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/work/oracle_money.py\", line 15, in test_total_rounds_each_line\n    self.assertEqual(total([0.125, 0.125]), 0.26)\nAssertionError: 0.24 != 0.26\n\n----------------------------------------------------------------------\nRan 3 tests in 0.001s\n\nFAILED (failures=2)\n",
+      "backend": "linux_namespace"
+    },
+    "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "patch_bytes": 0,
+    "patch": "",
+    "head_is_base": true
+  },
+  "V": 0,
+  "D": 0,
+  "false_completion": 0,
+  "unit_wall_ms": 7536
+}

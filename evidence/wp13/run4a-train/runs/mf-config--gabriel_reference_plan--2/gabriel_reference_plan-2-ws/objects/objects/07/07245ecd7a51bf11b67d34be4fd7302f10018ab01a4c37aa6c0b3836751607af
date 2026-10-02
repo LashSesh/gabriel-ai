@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-EUf2dqE6CYvijwsArR6QES7U5rw4Y",
+  "object": "chat.completion",
+  "created": 1790976311,
+  "model": "gpt-4.1-nano-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"operations\": [{\"kind\": \"modify\", \"path\": \"src/defaults.py\", \"expected_sha256\": \"3bf3321278b3310cd05fb4c9f7f2cab8cf5b82a9c70f2b03f3bdc437f3d9f146\", \"content\": \"\\\"\\\"\\\"defaults: layered configuration values.\\\"\\\"\\\"\\n\\ndef merge(base, override):\\n    \\\"\\\"\\\"Return base updated with override; nested dicts merge recursively.\\\"\\\"\\\"\\n    result = dict(base)\\n    for key, value in override.items():\\n        if key in result and isinstance(result[key], dict) and isinstance(value, dict):\\n            result[key] = merge(result[key], value)\\n        else:\\n            result[key] = value\\n    return result\\n\"}], \"rationale\": \"The merge function was modified to perform recursive merging of nested dictionaries, ensuring that nested sections are merged rather than replaced, aligning with the requirement to keep default host when layered configuration is loaded.\"}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 678,
+    "completion_tokens": 221,
+    "total_tokens": 899,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_ab2033f114"
+}

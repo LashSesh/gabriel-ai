@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-EUf7KcQuwATA28e5MAXDshBgAzLUd",
+  "object": "chat.completion",
+  "created": 1790976602,
+  "model": "gpt-4.1-mini-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"operations\": [{\"kind\": \"modify\", \"path\": \"src/pq.py\", \"expected_sha256\": \"fd6ac7776276728e41d841f6d141e19555d31aace69c9b004580ef0f677703a6\", \"content\": \"\\\"\\\"\\\"pq: priority queue, lowest priority value first, FIFO among equal priorities.\\\"\\\"\\\"\\nimport heapq\\n\\n\\nclass PriorityQueue:\\n    def __init__(self):\\n        self._heap = []\\n        self._counter = 0\\n\\n    def push(self, priority, item):\\n        # Use a counter to preserve insertion order among equal priorities\\n        heapq.heappush(self._heap, (priority, self._counter, item))\\n        self._counter += 1\\n\\n    def pop(self):\\n        return heapq.heappop(self._heap)[2]\\n\"}], \"rationale\": \"Added a counter to each pushed item to ensure FIFO order among items with equal priority, avoiding comparison of items themselves and preserving the public API.\"}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 1152,
+    "completion_tokens": 232,
+    "total_tokens": 1384,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_8548b1113e"
+}

@@ -21,10 +21,14 @@ from ..contracts.schemas import validate, validate_bytes, schema_digest
 from ..domains.base import ArgsHelper
 from ..models import build_model_request
 from ..planning import ready_nodes
+from ..policy import features as progress
+from ..policy import router
 from ..state.reducer import PLAN_REQUEST_STEP, TERMINAL_STATES
 from ..workers import Supervisor
 
 STOP_STATES = TERMINAL_STATES | {"blocked", "waiting_user"}
+EPISODE_SOURCE_KIND = "episode"
+DECISION_SOURCE_KIND = "router_decision"
 
 
 class TaskRunner:
@@ -36,6 +40,9 @@ class TaskRunner:
         projection = self.owner.projection(self.run_id)
         self.binding = validate_bytes(self.store.get(projection["binding_ref"]), "task-binding")
         self.pack = workspace.pack_for(self.binding["domain_namespace"])
+        self.policy = workspace.policy_for(projection["task"])
+        self.policy_digest = router.policy_digest(self.policy)
+        self.principal_id = workspace.config["principal_id"]
         self.profile = validate_bytes(self.store.get(self.binding["provider_profile_ref"]), "provider-profile")
         self.goal_text = self.store.get(projection["task"]["goal_ref"]).decode("utf8")
         self.notes = workspace.run_notes(self.run_id)
@@ -105,7 +112,90 @@ class TaskRunner:
                            prerequisite="restart", wakeup="runner-restart")
                 continue
             self._handle_stall(projection)
+        self._record_episode()
         return self.summary()
+
+    # ------------------------------------------------------------ policy: decisions, episodes, outcomes
+    def _decision_history(self) -> list:
+        """Channels of every earlier decision of this run, from the retained decision records."""
+        memory = self.ws.memory
+        if memory is None:
+            return []
+        history = []
+        for record in memory.eligible(memory_key(self.run_id), memory.frontier()):
+            try:
+                history.append(loads(memory.content(record), ascii_only=False)["channels"])
+            except (GabrielError, KeyError, ValueError):
+                continue
+        return history
+
+    def _route_repair(self, projection, boundary: str = "failed_verification") -> bool:
+        """At a repair boundary (failed verification, or a node that exhausted its attempts) the
+        pinned policy chooses between the authorized actions: a bounded repair (the rule) or a
+        documented stop. Returns True to continue with the repair."""
+        channels = progress.progress_channels(projection, self.binding, owner_time_unix_ms=self.owner.owner_time(), goal_text=self.goal_text)
+        history = self._decision_history()
+        decision = router.decide(self.policy, channels, history) if router.covers(self.policy, boundary) else router.decide(router.rule_based(), channels, history)
+        record = {"schema": "gabriel.router-decision/1", "decision_id": "decision-%s-%d" % (self.run_id, len(history) + 1), "run_id": self.run_id,
+                  "task_id": self.task_id, "policy_id": self.policy["policy_id"], "policy_digest": self.policy_digest,
+                  "decision_point": boundary, "action": decision["action"], "score_milli": decision["score_milli"],
+                  "feature_source": decision["feature_source"], "channels": channels, "features_milli": decision.get("features_milli"),
+                  "history_length": len(history), "reason": decision["reason"][:512]}
+        validate(record, "router-decision")
+        if self.ws.memory is not None:
+            self.ws.memory.ingest(source_id=memory_key(self.run_id).split("/")[0], source_object_id=memory_key(self.run_id).split("/")[1],
+                                  source_revision=len(history) + 1, content=canonical(record), media_type="application/json",
+                                  received_at_unix_ms=self.owner.owner_time(), extraction_digest=sha256_hex(b"router-decision/1"),
+                                  scope={"principals": [self.principal_id], "source_kind": DECISION_SOURCE_KIND, "task_id": self.task_id},
+                                  observation_id=record["decision_id"])
+        self.log.append("router %s: %s" % (decision["action"], decision["reason"]))
+        if decision["action"] == "stop":
+            self._hold("router_stop", "failed", "policy %s stopped the repair: %s" % (self.policy["policy_id"], decision["reason"]),
+                       prerequisite="user-review", wakeup="user-review")
+            return False
+        return True
+
+    def _episodes(self) -> list:
+        k = int(self.policy.get("episodes", {}).get("k", 0))
+        memory = self.ws.memory
+        if k <= 0 or memory is None:
+            return []
+        manifest = memory.retrieve(principal_id=self.principal_id, task_id=self.task_id, frontier=memory.frontier(), query=self.goal_text.encode("utf8"),
+                                   allowed_source_kinds=[EPISODE_SOURCE_KIND], max_items=k, max_bytes=k * 3000)
+        episodes = []
+        for item in manifest["items"]:
+            if item["score_milli"] < int(self.policy["episodes"].get("min_score_milli", 0)):
+                continue
+            try:
+                text = self.store.get(item["artifact_ref"]).decode("utf8", "replace")
+            except GabrielError:
+                continue
+            episodes.append({"observation_id": item["observation_id"], "artifact_ref": item["artifact_ref"], "text": text})
+        return episodes
+
+    def _record_episode(self) -> None:
+        """A terminal run becomes an explicit outcome label and a scoped episode for later retrieval."""
+        memory = self.ws.memory
+        projection = self._projection()
+        state = projection["run"]["state"]
+        if memory is None or state not in TERMINAL_STATES:
+            return
+        outcome = "success" if state == "succeeded" else "failure"
+        meta = projection["run_meta"]
+        memory.record_outcome(issue_id=self.run_id, run_id=self.run_id, source_id=self.policy["policy_id"],
+                              maturity_condition={"condition": "run reached a terminal state", "state": state},
+                              outcome=outcome, status_kind="production",
+                              detail={"domain": self.pack.namespace, "repair_count": meta["repair_count"], "plan_versions": meta["plan_versions"],
+                                      "spent": projection["ledger"]["spent"]})
+        try:
+            diff = self.worktree.patch().decode("utf8", "replace")[:8000]
+        except GabrielError:
+            diff = ""
+        text = json.dumps({"goal": self.goal_text, "domain": self.pack.namespace, "state": state, "outcome": outcome, "repair_count": meta["repair_count"],
+                           "plan_versions": meta["plan_versions"], "final_diff": diff}, ensure_ascii=False, indent=1)
+        memory.ingest(source_id="episode", source_object_id=self.run_id, source_revision=1, content=text.encode("utf8"),
+                      received_at_unix_ms=self.owner.owner_time(), extraction_digest=sha256_hex(b"episode/1"),
+                      scope={"principals": [self.principal_id], "source_kind": EPISODE_SOURCE_KIND, "task_id": self.task_id})
 
     def summary(self) -> dict:
         projection = self._projection()
@@ -194,6 +284,8 @@ class TaskRunner:
     def _plan(self, projection):
         task = projection["task"]
         version = projection["run_meta"]["plan_versions"]
+        if version > 0 and projection["run_meta"]["repair_count"] > 0 and not self._route_repair(projection, "failed_verification"):
+            return
         reference = self.pack.reference_plan_proposal(task, self.binding, repair_round=version)
         if self.binding.get("planner_mode", "model") == "reference":
             self._accept_reference_plan(projection, reference, version)
@@ -286,7 +378,7 @@ class TaskRunner:
         failure_context += self._attempt_diagnostics(projection, node["node_id"])
         prompt, entries, observation_ids = self.pack.build_prompt(self.goal_text, self.binding, snapshot, manifest, self.store,
                                                                   failure_context=failure_context, round_index=projection["run_meta"]["plan_versions"],
-                                                                  memory=self.ws.memory, principal_id=self.ws.config["principal_id"])
+                                                                  memory=self.ws.memory, principal_id=self.ws.config["principal_id"], episodes=self._episodes())
         prompt_ref = self.store.put(prompt, "text/plain; charset=utf-8")
         task = projection["task"]
         visible = self.registry.visible_catalog(self.owner.grant(task["grant_id"])["grant"])
@@ -415,6 +507,8 @@ class TaskRunner:
         if versions >= self.binding["max_plan_versions"]:
             self._hold("repair_exhausted", "failed", reason + "; plan version limit reached")
             return
+        if not self._route_repair(projection, "failed_node"):
+            return
         reference = self.pack.reference_plan_proposal(projection["task"], self.binding, repair_round=versions)
         try:
             plan, _ = self._materialize(projection, reference, versions)
@@ -422,6 +516,11 @@ class TaskRunner:
             self.log.append("replanned after failure (%s): %s" % (reason, "; ".join(receipt["notes"])))
         except GabrielError as exc:
             self._hold("replan_rejected", "failed", reason + "; replan rejected: " + exc.message)
+
+
+def memory_key(run_id: str) -> str:
+    """Source key of a run's decision records: source id ``router`` and object id ``decisions:<run>``."""
+    return "router/decisions:" + run_id
 
 
 class _VerifierContext:

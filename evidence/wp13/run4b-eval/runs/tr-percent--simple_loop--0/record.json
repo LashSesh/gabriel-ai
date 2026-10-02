@@ -1,0 +1,78 @@
+{
+  "task_id": "tr-percent",
+  "family": "trap",
+  "system": "simple_loop",
+  "rep": 0,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4b-eval/runs/tr-percent--simple_loop--0",
+  "outcome": {
+    "system": "simple_loop",
+    "task_id": "tr-percent",
+    "family": "trap",
+    "rep": 0,
+    "declared": true,
+    "declared_reason": "own check runs passed after 1 request(s)",
+    "model_requests": 1,
+    "model_tokens": 685,
+    "wall_ms": 2010,
+    "provider_statuses": [
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp13/run4b-eval/runs/tr-percent--simple_loop--0/worktrees/simple_loop-0",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "request 1: visible exit 0, oracle exit 0"
+    ],
+    "gabriel": null,
+    "repairs_used": 0,
+    "plan_versions": 0
+  },
+  "verification": {
+    "verified": true,
+    "changed_paths": [
+      "src/change.py"
+    ],
+    "out_of_scope_paths": [],
+    "visible": {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "start_failure": null,
+      "stdout_tail": "",
+      "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+      "backend": "linux_namespace"
+    },
+    "oracle": {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "oracle_change"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "start_failure": null,
+      "stdout_tail": "",
+      "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+      "backend": "linux_namespace"
+    },
+    "patch_sha256": "7d77f509570015f1b1ef1408e2debc016a0e6c4f4fe901aa30770a7e2655ec7f",
+    "patch_bytes": 324,
+    "patch": "diff --git a/src/change.py b/src/change.py\nindex 7258b28..32e55bb 100644\n--- a/src/change.py\n+++ b/src/change.py\n@@ -3,4 +3,6 @@\n \n def percent_change(old, new):\n     \"\"\"Percentage change from old to new; a zero baseline has no defined change.\"\"\"\n+    if old == 0:\n+        return None\n     return (new - old) / old * 100.0\n",
+    "head_is_base": true
+  },
+  "V": 1,
+  "D": 1,
+  "false_completion": 0,
+  "unit_wall_ms": 2696
+}

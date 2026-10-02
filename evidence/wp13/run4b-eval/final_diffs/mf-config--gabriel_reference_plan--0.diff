@@ -1,0 +1,15 @@
+diff --git a/src/defaults.py b/src/defaults.py
+index 2508d66..85865b7 100644
+--- a/src/defaults.py
++++ b/src/defaults.py
+@@ -4,5 +4,9 @@
+ def merge(base, override):
+     """Return base updated with override; nested dicts merge recursively."""
+     result = dict(base)
+-    result.update(override)
++    for key, value in override.items():
++        if key in result and isinstance(result[key], dict) and isinstance(value, dict):
++            result[key] = merge(result[key], value)
++        else:
++            result[key] = value
+     return result

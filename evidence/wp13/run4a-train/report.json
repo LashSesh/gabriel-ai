@@ -1,0 +1,71 @@
+{
+  "schema": "gabriel.evaluation-report/1",
+  "protocol_frozen_digest": "51e813eafa15bdc556603fb5496fc5ac6ed78822e93f81c0b15c8a46189c6d53",
+  "tasks": 6,
+  "families": 2,
+  "runs": 18,
+  "per_system": {
+    "gabriel_reference_plan": {
+      "runs": 18,
+      "verified_successes": 18,
+      "p_success": 1.0,
+      "declared_successes": 18,
+      "false_completions": 0,
+      "p_false_completion": 0.0,
+      "conditional_false_completion": 0.0,
+      "conditional_denominator": 18,
+      "harness_errors": 0,
+      "timed_out": 0,
+      "recovery_runs": 3,
+      "mean_model_requests": 1.5,
+      "total_model_requests": 27,
+      "mean_model_tokens": 1411.388888888889,
+      "total_model_tokens": 25405,
+      "mean_wall_ms": 5564.444444444444,
+      "p_success_ci95_by_family": {
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 2
+      },
+      "p_success_ci95_by_task": {
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 6
+      },
+      "per_task": {
+        "mf-config": {
+          "p_success": 1.0,
+          "runs": 3
+        },
+        "mf-money": {
+          "p_success": 1.0,
+          "runs": 3
+        },
+        "mf-paths": {
+          "p_success": 1.0,
+          "runs": 3
+        },
+        "tr-interval": {
+          "p_success": 1.0,
+          "runs": 3
+        },
+        "tr-percent": {
+          "p_success": 1.0,
+          "runs": 3
+        },
+        "tr-version": {
+          "p_success": 1.0,
+          "runs": 3
+        }
+      }
+    }
+  },
+  "paired_differences": {},
+  "failures": [],
+  "claim_scope": "Scoped comparison on one synthetic task distribution with one provider; a difference here is not a general superiority claim. Costs include every attempt, including failed and timed-out runs.",
+  "frozen_check": {
+    "frozen_digest": "51e813eafa15bdc556603fb5496fc5ac6ed78822e93f81c0b15c8a46189c6d53",
+    "harness_identity_now": "04d3f84905e9e2556fc3ee803c850d9feb38c9d647be2d85338a2c568469954a",
+    "harness_amended": false
+  }
+}

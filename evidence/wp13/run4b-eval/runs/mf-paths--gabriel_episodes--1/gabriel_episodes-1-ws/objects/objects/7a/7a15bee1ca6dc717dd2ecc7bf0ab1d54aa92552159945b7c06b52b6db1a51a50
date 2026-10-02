@@ -1,0 +1,9 @@
+{
+ "goal": "Fix the reported defect in intervals.overlaps for half-open intervals [start, end): intervals that merely touch (the end of one equals the start of the other) do not overlap, in either order. Keep the public API and the existing tests.",
+ "domain": "software",
+ "state": "succeeded",
+ "outcome": "success",
+ "repair_count": 0,
+ "plan_versions": 1,
+ "final_diff": "diff --git a/src/intervals.py b/src/intervals.py\nindex 8e57ee2..7966bf8 100644\n--- a/src/intervals.py\n+++ b/src/intervals.py\n@@ -3,4 +3,6 @@\n \n def overlaps(a, b):\n     \"\"\"True when the half-open intervals a and b share at least one point.\"\"\"\n-    return a[0] <= b[1] and b[0] <= a[1]\n+    # For half-open intervals [start, end), intervals overlap if:\n+    # a.start < b.end and b.start < a.end\n+    return a[0] < b[1] and b[0] < a[1]\n"
+}

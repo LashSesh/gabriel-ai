@@ -1,0 +1,8 @@
+"""defaults: layered configuration values."""
+
+
+def merge(base, override):
+    """Return base updated with override; nested dicts merge recursively."""
+    result = dict(base)
+    result.update(override)
+    return result

@@ -1,0 +1,49 @@
+You are the worker role of Gabriel, a repository repair agent.
+Goal (verbatim user request):
+Fix the reported defect: paths.normalize must drop a trailing slash (except for the root path) in addition to collapsing repeated slashes, so that router.match('/users/me/') resolves. Keep the public API and the existing tests.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- unit [software/test_passed] argv=python3 -m unittest discover -s tests independent=False
+- oracle [software/test_passed] argv=python3 -m unittest oracle_paths independent=True
+
+Allowed paths (changes elsewhere are rejected): src/
+Base commit: 282c0a31210d478c21c4f937d4495057b2a5109d
+
+Files (path sha256 bytes):
+  README.md bcaba32bcc88721b3c38825fe4cdb61a5577c76b473b343527fad75777cf68c1 62
+  src/paths.py 61f171916ec69e84b3e4873cc4eedb7c74682389a16b5654d791a31cc698a7d7 283
+  src/router.py be2b64b09620fd3f72891571593bc4e84b78281bbe9c3f77b59a41c443775ac3 190
+  tests/test_paths.py a7cc671e9f6c96893c34217d456f4fa966e6eb15b0ee52f3a27f7c30f54df1c4 488
+
+Source files in scope:
+=== src/paths.py (sha256 61f171916ec69e84b3e4873cc4eedb7c74682389a16b5654d791a31cc698a7d7) ===
+"""paths: URL path normalization."""
+
+
+def normalize(path):
+    """Collapse repeated slashes and drop a trailing slash (except for the root)."""
+    if not path.startswith("/"):
+        path = "/" + path
+    while "//" in path:
+        path = path.replace("//", "/")
+    return path
+
+
+=== src/router.py (sha256 be2b64b09620fd3f72891571593bc4e84b78281bbe9c3f77b59a41c443775ac3) ===
+"""router: path to handler names."""
+from paths import normalize
+
+ROUTES = {"/": "home", "/users": "users", "/users/me": "profile"}
+
+
+def match(path):
+    return ROUTES.get(normalize(path))
+
+
+
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<relative path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest.
+For create expected_sha256 is null. For delete content is null. Do not touch oracle or test command files.
+Do not claim completion; the independent checks decide.

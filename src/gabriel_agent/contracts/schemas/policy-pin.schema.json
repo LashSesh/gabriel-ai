@@ -1,0 +1,33 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/policy-pin.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "The routing policy a task pins for its runs; promotion affects new runs only and rollback selects an earlier policy.",
+  "properties": {
+    "policy_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "policy_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "policy_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "schema": {
+      "const": "gabriel.policy-pin/1",
+      "type": "string"
+    },
+    "selected_by": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    }
+  },
+  "required": [
+    "policy_digest",
+    "policy_id",
+    "policy_ref",
+    "schema",
+    "selected_by"
+  ],
+  "title": "policy-pin",
+  "type": "object"
+}

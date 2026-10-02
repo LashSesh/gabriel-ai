@@ -1,0 +1,1 @@
+The original implementation used Python's built-in round(), which implements banker's rounding (half to even). To achieve halves away from zero, we switch to the decimal module with ROUND_HALF_UP, ensuring correct rounding behavior for all cases, including halves.

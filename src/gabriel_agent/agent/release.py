@@ -91,7 +91,10 @@ def release_manifest(root: Path, *, evidence: dict | None = None, python: str = 
                   "G2": "established on the release host for the three fixture task families: repository repair, source-grounded document "
                         "amendment and numerical transformation run through one owner/scheduler/policy build with registered domain observers "
                         "and independent oracles (AT23, evidence/wp10/at23); memory and analytical adapters per AT14-AT16 and AT25 (tests)",
-                  "G3": "not established: no evaluated adaptive policy"},
+                  "G3": "not established: the routing feature experiment was executed under frozen protocols on the hard tier (evidence/wp13) "
+                        "but no first patch failed verification, so no labeled router decision exists and no readout candidate was trained or "
+                        "evaluated; the episodic-retrieval ablation failed its declared held-out criterion (equal verified success at more tokens); "
+                        "the rule-based policy without episodes remains the pinned default"},
         "known_issues": ([] if _license_status(root)["status"] == "resolved" else ["root license unresolved"]) +
                         ["catalog fingerprint change requires a new workspace (no migration command)",
                          "single-host, single-user deployment only",

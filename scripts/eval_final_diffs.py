@@ -20,8 +20,24 @@ from pathlib import Path
 IGNORED_UNTRACKED = ("__pycache__/", ".pyc", "oracle_")
 
 
+def _git_dir(worktree: Path) -> list:
+    """Extra git arguments for a worktree whose ``.git`` link dangles because the run directory was
+    moved after the run: the unit's seeded base repository (``<unit>/repo``) then serves as the git
+    directory, which is equivalent because the agent never commits (the worktree head is the base
+    commit, verified against the retained index of unmoved runs)."""
+    link = worktree / ".git"
+    if link.is_file():
+        target = link.read_text().strip().removeprefix("gitdir:").strip()
+        if not Path(target).is_dir():
+            unit = worktree.resolve().parent.parent.parent  # <unit>/<ws>/worktrees/<run>
+            repo = unit / "repo" / ".git"
+            if repo.is_dir():
+                return ["--git-dir=" + str(repo), "--work-tree=" + str(worktree.resolve())]
+    return []
+
+
 def _git(worktree: Path, *args: str) -> str:
-    return subprocess.run(["git", "-C", str(worktree), *args], capture_output=True, text=True, check=True).stdout
+    return subprocess.run(["git", "-C", str(worktree), *_git_dir(worktree), *args], capture_output=True, text=True, check=True).stdout
 
 
 def unit_diff(worktree: Path) -> str:
@@ -29,7 +45,7 @@ def unit_diff(worktree: Path) -> str:
     untracked = [p for p in _git(worktree, "ls-files", "--others", "--exclude-standard").splitlines()
                  if p and not any(marker in p for marker in IGNORED_UNTRACKED)]
     for path in sorted(untracked):
-        proc = subprocess.run(["git", "-C", str(worktree), "-c", "core.quotepath=false", "diff", "--no-color", "--no-index", "--",
+        proc = subprocess.run(["git", "-C", str(worktree), *_git_dir(worktree), "-c", "core.quotepath=false", "diff", "--no-color", "--no-index", "--",
                                "/dev/null", path], capture_output=True, text=True)
         parts.append(proc.stdout)  # --no-index exits 1 when the files differ
     return "".join(parts)
@@ -43,6 +59,13 @@ def collect(run_dir: Path) -> dict:
         record = json.loads(record_path.read_text())
         unit = record_path.parent.name
         worktree = Path(record["outcome"]["worktree"])
+        if not worktree.is_dir():
+            # The run directory was moved or renamed after the run: rebase the recorded absolute
+            # path onto the unit directory the record now lives in.
+            try:
+                worktree = record_path.parent / worktree.relative_to(Path(record["run_dir"]))
+            except ValueError:
+                pass
         entry = {"task_id": record["task_id"], "system": record["system"], "rep": record["rep"], "verified": bool(record["V"]),
                  "worktree_present": worktree.is_dir()}
         if worktree.is_dir():

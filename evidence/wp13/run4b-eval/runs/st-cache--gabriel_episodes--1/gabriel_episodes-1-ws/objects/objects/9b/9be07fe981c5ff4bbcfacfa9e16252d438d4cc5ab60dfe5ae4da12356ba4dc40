@@ -1,0 +1,1 @@
+Fixed memoize to include keyword arguments in the cache key by adding a sorted tuple of kwargs items to the args tuple, ensuring calls with different keyword arguments are cached separately while preserving the public API and existing tests.

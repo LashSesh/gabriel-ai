@@ -1,0 +1,15 @@
+diff --git a/src/change.py b/src/change.py
+index 7258b28..5941432 100644
+--- a/src/change.py
++++ b/src/change.py
+@@ -1,6 +1,7 @@
+ """change: percentage change between two readings."""
+ 
+-
+ def percent_change(old, new):
+     """Percentage change from old to new; a zero baseline has no defined change."""
+-    return (new - old) / old * 100.0
++    if old == 0:
++        return None
++    return (new - old) / old * 100.0
+\ No newline at end of file

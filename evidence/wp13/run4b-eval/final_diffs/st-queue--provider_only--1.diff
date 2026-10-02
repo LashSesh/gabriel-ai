@@ -1,0 +1,18 @@
+diff --git a/src/pq.py b/src/pq.py
+index 96ceb6f..1223abe 100644
+--- a/src/pq.py
++++ b/src/pq.py
+@@ -5,9 +5,11 @@ import heapq
+ class PriorityQueue:
+     def __init__(self):
+         self._heap = []
++        self._counter = 0  # to keep insertion order among equal priorities
+ 
+     def push(self, priority, item):
+-        heapq.heappush(self._heap, (priority, item))
++        heapq.heappush(self._heap, (priority, self._counter, item))
++        self._counter += 1
+ 
+     def pop(self):
+-        return heapq.heappop(self._heap)[1]
++        return heapq.heappop(self._heap)[2]

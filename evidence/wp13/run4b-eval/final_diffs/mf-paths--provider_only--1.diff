@@ -1,0 +1,11 @@
+diff --git a/src/paths.py b/src/paths.py
+index 0f5ffc6..773147d 100644
+--- a/src/paths.py
++++ b/src/paths.py
+@@ -7,4 +7,6 @@ def normalize(path):
+         path = "/" + path
+     while "//" in path:
+         path = path.replace("//", "/")
++    if path != "/" and path.endswith("/"):
++        path = path[:-1]
+     return path

@@ -37,6 +37,7 @@ from ..workers import LinuxNamespaceBackend, TrustedLocalBackend, RunSpec, Workt
 from . import corpus
 
 SYSTEMS = ("provider_only", "simple_loop", "gabriel", "gabriel_no_repair", "gabriel_reference_plan")
+G3_SYSTEMS = ("gabriel_policy", "gabriel_episodes")
 
 
 @dataclass
@@ -104,6 +105,8 @@ class EvalContext:
         self.protected = set(self.compiled.refs["protected_paths"])
         self._provider = None
         self._counter = 0
+        self.policy = None          # router policy record of the frozen protocol (G3 arms)
+        self.episode_seed = None    # frozen list of {"id", "text"} episodes (G3 arms)
 
     def _profile(self, provider: dict) -> dict:
         kind = provider.get("kind", "scripted")
@@ -266,7 +269,7 @@ def run_simple_loop(ctx: EvalContext, rep: int) -> Outcome:
 
 
 def run_gabriel(ctx: EvalContext, rep: int, *, system: str = "gabriel", max_repairs: int = 2, max_plan_versions: int = 4,
-               planner_mode: str = "model") -> Outcome:
+               planner_mode: str = "model", policy: dict | None = None, episode_seed: list | None = None) -> Outcome:
     started = time.monotonic()
     ws_dir = ctx.run_dir / ("%s-%d-ws" % (system, rep))
     ws = Workspace.create(ws_dir, backend=ctx.backend_name, allow_trusted_local=(ctx.backend_name == "trusted_local"))
@@ -274,6 +277,14 @@ def run_gabriel(ctx: EvalContext, rep: int, *, system: str = "gabriel", max_repa
         spec = corpus.task_spec(ctx.task, ctx.repo, ctx.base_commit, ctx.oracle_path, ctx.provider_spec, ctx.budget.gabriel_budget(),
                                max_repairs=max_repairs, max_plan_versions=max_plan_versions, planner_mode=planner_mode)
         spec["provider"] = dict(spec["provider"], max_input_tokens=ctx.budget.max_input_tokens, max_output_tokens=ctx.budget.max_output_tokens)
+        if policy is not None:
+            spec["policy"] = policy
+        for episode in episode_seed or []:
+            # scoped past cases from the frozen seed enter this workspace's memory before the run; the
+            # worker request records which of them entered the prompt
+            ws.memory.ingest(source_id="episode", source_object_id=episode["id"], source_revision=1, content=episode["text"].encode("utf8"),
+                             received_at_unix_ms=1, extraction_digest=sha256_hex(b"episode/1"),
+                             scope={"principals": [ws.config["principal_id"]], "source_kind": "episode", "task_id": None})
         created = ws.create_task(spec, task_id="task-%s-%s-%d" % (ctx.task.task_id, system, rep))
         summary = TaskRunner(ws, created["task_id"]).run()
         projection = ws.owner.projection(summary["run_id"])
@@ -301,7 +312,19 @@ def run_gabriel(ctx: EvalContext, rep: int, *, system: str = "gabriel", max_repa
 RUNNERS = {"provider_only": run_provider_only, "simple_loop": run_simple_loop,
            "gabriel": lambda ctx, rep: run_gabriel(ctx, rep),
            "gabriel_no_repair": lambda ctx, rep: run_gabriel(ctx, rep, system="gabriel_no_repair", max_repairs=0, max_plan_versions=1),
-           "gabriel_reference_plan": lambda ctx, rep: run_gabriel(ctx, rep, system="gabriel_reference_plan", planner_mode="reference")}
+           "gabriel_reference_plan": lambda ctx, rep: run_gabriel(ctx, rep, system="gabriel_reference_plan", planner_mode="reference"),
+           # G3 arms: the pinned readout policy (decides repair versus stop, may retrieve episodes) and
+           # the rule-based policy with episodic retrieval only (ablation of the readout)
+           # both use the reference plan (no planner request), like gabriel_reference_plan, their matched comparator
+           "gabriel_policy": lambda ctx, rep: run_gabriel(ctx, rep, system="gabriel_policy", planner_mode="reference", policy=ctx.policy, episode_seed=ctx.episode_seed),
+           "gabriel_episodes": lambda ctx, rep: run_gabriel(ctx, rep, system="gabriel_episodes", planner_mode="reference", policy=_rule_with_episodes(ctx),
+                                                            episode_seed=ctx.episode_seed)}
+
+
+def _rule_with_episodes(ctx: EvalContext) -> dict:
+    from ..policy import router
+    k = int((ctx.policy or {}).get("episodes", {}).get("k", 3)) or 3
+    return router.rule_based(episodes=k)
 
 
 # ------------------------------------------------------------------ independent verification

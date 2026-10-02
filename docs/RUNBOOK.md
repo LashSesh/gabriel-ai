@@ -124,6 +124,23 @@ scripts/eval_final_diffs.py ./eval-run                             # retain the 
 "credential_ref": "env:OPENAI_API_KEY", "temperature_milli": 0}`. The run refuses a protocol
 whose digest or corpus changed after freezing. See `docs/EVALUATION_PROTOCOL.md`.
 
+## Routing policies and the G3 route
+A task may pin a routing policy (`"policy": {...}` in the task spec, a `gabriel.router-policy/1`
+record): at a failed verification the pinned policy chooses between a bounded repair and a
+documented stop from the versioned progress channels, and it may retrieve past episodes into
+the worker prompt. Without a pin the rule-based policy applies (always repair within the
+admitted limits, no episodes). Every decision is retained with its channels; every terminal run
+records an outcome label and an episode in the workspace memory (ADR-15).
+```bash
+gabriel eval corpus-check --tier hard                                          # trap invariants of the hard tier
+gabriel eval freeze ... --tiers hard --tasks mf-money,... --systems gabriel     # training run (rule-based)
+scripts/policy_route.py train --run ./run4a --out ./policies                   # readouts, decision loss, episode seed
+gabriel eval freeze ... --tiers hard --systems provider_only,simple_loop,gabriel,gabriel_policy,gabriel_episodes \
+    --policy ./policies/policy-channels.json --episode-seed ./policies/episode_seed.json \
+    --held-out-families stateful --criterion "<declared held-out criterion>"
+scripts/policy_route.py promote --train-out ./policies --eval-run ./run4b --held-out stateful --out ./promotion
+```
+
 ## Evidence manifests
 ```bash
 GABRIEL_CONTAINMENT_TESTS=1 python -m pytest tests -vv -rs | tee evidence/test_results.txt

@@ -1,0 +1,44 @@
+You are the worker role of Gabriel, a repository repair agent.
+Goal (verbatim user request):
+Ledger totals are off by one cent for some inputs. Fix the reported defect: money.round_cents must round halves away from zero (0.125 -> 0.13, 2.675 -> 2.68, -0.125 -> -0.13) and ledger.total must keep using it. Keep the public API and the existing tests.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- unit [software/test_passed] argv=python3 -m unittest discover -s tests independent=False
+- oracle [software/test_passed] argv=python3 -m unittest oracle_money independent=True
+
+Allowed paths (changes elsewhere are rejected): src/
+Base commit: 738ae7c451209a1a9a97f466fb51bc4974b4ee48
+
+Files (path sha256 bytes):
+  README.md ce170993d4dd8ef2488820aece02d5065e741fc667c37af72d9a91db43c44b6a 62
+  src/ledger.py 78b9593e22627b187319db7cd97ef4dab3af64d7a02121476cca595a6e381e99 219
+  src/money.py fa816984cb1f791630c850f452d214933dceee46a979c2276da8800a2c0570db 161
+  tests/test_money.py d03f7df7ab33103060989889d27f63eca5b1145e4609f3103678368330d3aca5 467
+
+Source files in scope:
+=== src/ledger.py (sha256 78b9593e22627b187319db7cd97ef4dab3af64d7a02121476cca595a6e381e99) ===
+"""ledger: totals over money lines."""
+from money import round_cents
+
+
+def total(lines):
+    """Sum of the lines, each rounded to cents, then rounded again."""
+    return round_cents(sum(round_cents(x) for x in lines))
+
+
+=== src/money.py (sha256 fa816984cb1f791630c850f452d214933dceee46a979c2276da8800a2c0570db) ===
+"""money: cent rounding for ledgers."""
+
+
+def round_cents(amount):
+    """Round a decimal amount to cents, halves away from zero."""
+    return round(amount, 2)
+
+
+
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<relative path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest.
+For create expected_sha256 is null. For delete content is null. Do not touch oracle or test command files.
+Do not claim completion; the independent checks decide.

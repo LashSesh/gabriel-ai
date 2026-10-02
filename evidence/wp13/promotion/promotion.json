@@ -1,0 +1,208 @@
+{
+  "schema": "gabriel.evidence.policy-promotion/1",
+  "produced_at_utc": "2026-10-02T21:33:37.917308+00:00",
+  "candidate": null,
+  "policy_id": null,
+  "policy_digest": null,
+  "held_out_families": [
+    "stateful"
+  ],
+  "promotion": {
+    "decision": "rejected",
+    "reason": "no readout can be trained: the training run produced 0 decision samples with labels []"
+  },
+  "training_manifest": {
+    "training_run": "evidence/wp13/run4a-train",
+    "protocol_frozen_digest": "51e813eafa15bdc556603fb5496fc5ac6ed78822e93f81c0b15c8a46189c6d53",
+    "decision_samples": 0,
+    "positive_samples": 0,
+    "families": []
+  },
+  "evaluation_run": "evidence/wp13/run4b-eval",
+  "treatment_criterion": {
+    "declared": "Declared before the run. Readout candidate: a logistic readout may be promoted only if the training run yielded labeled router decisions of both classes and its leave-one-family-out decision loss is below the rule's; no such candidate exists (0 decisions in 54 training runs), so no readout is evaluated here. Episodic retrieval arm: on the held-out stateful family gabriel_episodes must reach at least the verified success of gabriel_reference_plan, use fewer mean model tokens and make no false completion; previously seen families are reported separately because their seed episodes contain earlier solutions of the same tasks.",
+    "held_out_families": [
+      "stateful"
+    ],
+    "baseline": "gabriel_reference_plan",
+    "treatment": "gabriel_episodes",
+    "success_baseline": 1.0,
+    "success_treatment": 1.0,
+    "requests_baseline": 1.0,
+    "requests_treatment": 1.0,
+    "tokens_baseline": 828.6666666666666,
+    "tokens_treatment": 1395.1666666666667,
+    "false_completions_treatment": 0,
+    "met": false
+  },
+  "held_out_report": {
+    "provider_only": {
+      "runs": 6,
+      "verified_successes": 6,
+      "p_success": 1.0,
+      "declared_successes": 6,
+      "false_completions": 0,
+      "p_false_completion": 0.0,
+      "conditional_false_completion": 0.0,
+      "conditional_denominator": 6,
+      "harness_errors": 0,
+      "timed_out": 0,
+      "recovery_runs": 0,
+      "mean_model_requests": 1.0,
+      "total_model_requests": 6,
+      "mean_model_tokens": 827.6666666666666,
+      "total_model_tokens": 4966,
+      "mean_wall_ms": 2212.0,
+      "p_success_ci95_by_family": {
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 1
+      },
+      "p_success_ci95_by_task": {
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 3
+      },
+      "per_task": {
+        "st-cache": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "st-queue": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "st-rate": {
+          "p_success": 1.0,
+          "runs": 2
+        }
+      }
+    },
+    "simple_loop": {
+      "runs": 6,
+      "verified_successes": 6,
+      "p_success": 1.0,
+      "declared_successes": 6,
+      "false_completions": 0,
+      "p_false_completion": 0.0,
+      "conditional_false_completion": 0.0,
+      "conditional_denominator": 6,
+      "harness_errors": 0,
+      "timed_out": 0,
+      "recovery_runs": 0,
+      "mean_model_requests": 1.0,
+      "total_model_requests": 6,
+      "mean_model_tokens": 826.8333333333334,
+      "total_model_tokens": 4961,
+      "mean_wall_ms": 2564.6666666666665,
+      "p_success_ci95_by_family": {
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 1
+      },
+      "p_success_ci95_by_task": {
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 3
+      },
+      "per_task": {
+        "st-cache": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "st-queue": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "st-rate": {
+          "p_success": 1.0,
+          "runs": 2
+        }
+      }
+    },
+    "gabriel_reference_plan": {
+      "runs": 6,
+      "verified_successes": 6,
+      "p_success": 1.0,
+      "declared_successes": 6,
+      "false_completions": 0,
+      "p_false_completion": 0.0,
+      "conditional_false_completion": 0.0,
+      "conditional_denominator": 6,
+      "harness_errors": 0,
+      "timed_out": 0,
+      "recovery_runs": 0,
+      "mean_model_requests": 1.0,
+      "total_model_requests": 6,
+      "mean_model_tokens": 828.6666666666666,
+      "total_model_tokens": 4972,
+      "mean_wall_ms": 4782.833333333333,
+      "p_success_ci95_by_family": {
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 1
+      },
+      "p_success_ci95_by_task": {
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 3
+      },
+      "per_task": {
+        "st-cache": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "st-queue": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "st-rate": {
+          "p_success": 1.0,
+          "runs": 2
+        }
+      }
+    },
+    "gabriel_episodes": {
+      "runs": 6,
+      "verified_successes": 6,
+      "p_success": 1.0,
+      "declared_successes": 6,
+      "false_completions": 0,
+      "p_false_completion": 0.0,
+      "conditional_false_completion": 0.0,
+      "conditional_denominator": 6,
+      "harness_errors": 0,
+      "timed_out": 0,
+      "recovery_runs": 0,
+      "mean_model_requests": 1.0,
+      "total_model_requests": 6,
+      "mean_model_tokens": 1395.1666666666667,
+      "total_model_tokens": 8371,
+      "mean_wall_ms": 4544.5,
+      "p_success_ci95_by_family": {
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 1
+      },
+      "p_success_ci95_by_task": {
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 3
+      },
+      "per_task": {
+        "st-cache": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "st-queue": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "st-rate": {
+          "p_success": 1.0,
+          "runs": 2
+        }
+      }
+    }
+  }
+}

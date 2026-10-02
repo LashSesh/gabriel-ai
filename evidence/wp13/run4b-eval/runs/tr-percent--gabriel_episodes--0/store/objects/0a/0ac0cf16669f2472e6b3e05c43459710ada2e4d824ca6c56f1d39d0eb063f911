@@ -1,0 +1,1 @@
+Fix the reported defect in change.percent_change: a zero baseline has no defined percentage change and must yield None, so that callers can distinguish it from no change (0.0). Keep the public API and the existing tests.

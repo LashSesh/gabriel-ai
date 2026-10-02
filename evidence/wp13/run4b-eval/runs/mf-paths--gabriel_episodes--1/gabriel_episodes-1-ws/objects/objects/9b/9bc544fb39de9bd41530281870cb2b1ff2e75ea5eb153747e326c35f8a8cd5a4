@@ -1,0 +1,12 @@
+"""paths: URL path normalization."""
+
+
+def normalize(path):
+    """Collapse repeated slashes and drop a trailing slash (except for the root)."""
+    if not path.startswith("/"):
+        path = "/" + path
+    while "//" in path:
+        path = path.replace("//", "/")
+    if len(path) > 1 and path.endswith("/"):
+        path = path[:-1]
+    return path

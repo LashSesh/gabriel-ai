@@ -42,16 +42,20 @@ def harness_identity() -> str:
 
 
 def default_protocol(provider: dict, *, repetitions: int = 2, systems=comparators.SYSTEMS, backend: str = "linux_namespace",
-                     budget: dict | None = None, task_ids=None, held_out_families=(), note: str = "") -> dict:
+                     budget: dict | None = None, task_ids=None, held_out_families=(), note: str = "", tiers=None,
+                     policy: dict | None = None, episode_seed: list | None = None, declared_criterion: str = "") -> dict:
     budget = dict(comparators.Budget().__dict__, **(budget or {}))
-    tasks = [t for t in corpus.tasks() if task_ids is None or t.task_id in task_ids]
+    tasks = [t for t in corpus.tasks() if (task_ids is None or t.task_id in task_ids) and (tiers is None or t.tier in tiers)]
+    if any(s in comparators.G3_SYSTEMS for s in systems) and policy is None:
+        raise GabrielError(Code.INVALID_SCHEMA, "the G3 systems need a frozen router policy in the protocol")
     return {
         "schema": PROTOCOL_SCHEMA,
         "purpose": "Matched G1 coding comparison: increase independently verified task success or reduce resources at equal success, "
                    "under a fixed task distribution and matched constraints. Not a benchmark of general capability.",
         "corpus_digest": corpus.corpus_digest(),
-        "tasks": [{"task_id": t.task_id, "family": t.family, "digest": t.digest()} for t in tasks],
+        "tasks": [{"task_id": t.task_id, "family": t.family, "tier": t.tier, "digest": t.digest()} for t in tasks],
         "families": sorted({t.family for t in tasks}),
+        "tiers": sorted({t.tier for t in tasks}),
         "systems": list(systems),
         "provider": {k: v for k, v in provider.items() if k != "script"},
         "budget_per_task": budget,
@@ -62,7 +66,13 @@ def default_protocol(provider: dict, *, repetitions: int = 2, systems=comparator
             "simple_loop": "the system's own runs of the visible tests and the oracle both exited 0",
             "gabriel": "run state succeeded (every mandatory check passed with eligible evidence, artifacts verified, effects reconciled)",
             "gabriel_no_repair": "as gabriel, with max_repairs=0 and max_plan_versions=1 (ablation of the repair cycle)",
-            "gabriel_reference_plan": "as gabriel, with the domain pack's deterministic reference plan admitted without a planner request (planner ablation)"},
+            "gabriel_reference_plan": "as gabriel, with the domain pack's deterministic reference plan admitted without a planner request (planner ablation)",
+            "gabriel_policy": "as gabriel_reference_plan, with the frozen readout policy pinned: at a failed verification it chooses repair or "
+                              "stop from the progress channels, and it may retrieve frozen episodes into the worker prompt",
+            "gabriel_episodes": "as gabriel_reference_plan (rule-based repair) with the frozen episodes retrievable into the worker prompt (readout ablation)"},
+        "policy": policy,
+        "episode_seed": episode_seed,
+        "declared_criterion": declared_criterion,
         "verification": "fresh, system-independent: changed paths within allowed_paths; visible tests exit 0; oracle installed from the "
                         "corpus text and exit 0; all executed in the containment backend on the final tree",
         "metrics": ["p_success = mean(V)", "p_false_completion = mean(D*(1-V))", "conditional false completion = sum(D*(1-V))/sum(D)",
@@ -104,6 +114,8 @@ def _unit(protocol, task, system, rep, out_dir, provider):
     try:
         ctx = comparators.EvalContext(task, run_dir, provider, comparators.Budget(**{k: protocol["budget_per_task"][k] for k in comparators.Budget().__dict__}),
                                       protocol["backend"])
+        ctx.policy = protocol.get("policy")
+        ctx.episode_seed = protocol.get("episode_seed")
         outcome = comparators.RUNNERS[system](ctx, rep)
         verification = comparators.verify(ctx, outcome.worktree, "eval-verify-%s-%s-%d" % (task.task_id, system, rep))
         record.update({"outcome": outcome.to_dict(), "verification": verification,

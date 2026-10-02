@@ -47,10 +47,18 @@ PACKAGES = {
              "not_executed": []},
     "WP09": {"status": "DONE", "tests": ["tests/test_memory.py"], "acceptance": ["AT14", "AT15", "AT22(memory)", "AT25"],
              "evidence": ["evidence/test_results.txt", "evidence/wp10/at23/summary.json (memory chain check)", "docs/adr/ADR-14-memory-chain.md"],
-             "not_executed": ["policy adaptation beyond the promotion rule (no trained router or retrieval policy)"]},
+             "not_executed": ["policy adaptation beyond the promotion rule (the G3 route trained no router or retrieval policy; see G3-route)"]},
     "WP10": {"status": "DONE", "tests": ["tests/test_domains.py"], "acceptance": ["AT16", "AT23"],
              "evidence": ["evidence/wp10/at23/summary.json", "evidence/wp10/at23/report.md", "docs/adr/ADR-13-domain-pack-ports.md"],
-             "not_executed": ["native PSE worker (optional; the analytical adapter is the stdlib worker)", "recurrent routing feature experiment"]},
+             "not_executed": ["native PSE worker (optional; the analytical adapter is the stdlib worker)",
+                              "recurrent routing feature experiment in the document and numerical packs (executed in the software pack only; see G3-route)"]},
+    "G3-route": {"status": "DONE_EXECUTED_NOT_ESTABLISHED", "tests": ["tests/test_policy_route.py", "tests/test_evaluation.py"], "acceptance": ["AT17(hard tier)", "AT25(promotion)"],
+                 "evidence": ["evidence/wp13/protocol4a-train.frozen.json", "evidence/wp13/run4a-train/report.md", "evidence/wp13/policies/metrics.json",
+                              "evidence/wp13/protocol4b-eval.frozen.json", "evidence/wp13/run4b-eval/report.md", "evidence/wp13/promotion/promotion.json",
+                              "evidence/wp13/*/final_diffs/index.json", "docs/RELEASE_G3.md", "docs/adr/ADR-15-readout-router.md"],
+                 "not_executed": ["readout training on real task outcomes (no failed verification in 54 training runs, so no labeled decision of either class)",
+                                  "evaluation of a readout policy in protocol 4b (no candidate existed)",
+                                  "weight training (outside G1-G3 by the blueprint)", "native PSE worker"]},
     "WP12": {"status": "DONE", "tests": ["tests/test_release.py"], "acceptance": ["AT18"],
              "evidence": ["evidence/wp12/smoke_linux_namespace.log", "evidence/wp12/release_manifest_smoke.json",
                           "evidence/wp12/smoke_restore_report.json", "LICENSE", "docs/RELEASE_G1.md"],
@@ -63,6 +71,16 @@ RELEASE_SCOPE_G2 = {
     "scope": "one owner/scheduler/policy build served repository repair, source-grounded document amendment and numerical transformation "
              "(fixture tasks, real provider for the valid tasks, scripted invalid and out-of-scope controls) with registered domain observers, "
              "independent oracles and recorded replay; the analytical worker is the standard-library adapter, native PSE remains optional and unbuilt",
+}
+
+RELEASE_SCOPE_G3 = {
+    "established_on_this_host": False,
+    "evidence": ["evidence/wp13/run4b-eval/report.md", "evidence/wp13/promotion/promotion.json", "evidence/wp13/policies/metrics.json"],
+    "scope": "not established: the routing feature experiment ran under frozen protocols on the hard tier (54 training runs with two providers, "
+             "72 evaluation runs with gpt-4.1-mini, stateful family held out) but no first patch failed verification, so no labeled router "
+             "decision exists and no readout candidate could be trained or evaluated; the episodic-retrieval ablation reached equal verified "
+             "success on the held-out family with no false completion at 68 percent more model tokens and failed its declared criterion; "
+             "the rule-based policy without episodes remains the pinned default",
 }
 
 RELEASE_SCOPE_G1 = {
@@ -114,7 +132,7 @@ def main() -> int:
         packages[wp] = entry
     work = {"schema": "gabriel.evidence.work-packages/1", "produced_at_utc": dt.datetime.now(dt.timezone.utc).isoformat(),
             "rule": "A package counts as done only with actual code and recorded test output; privileged and paid runs are listed under not_executed.",
-            "packages": packages, "release_scope_G1": RELEASE_SCOPE_G1, "release_scope_G2": RELEASE_SCOPE_G2}
+            "packages": packages, "release_scope_G1": RELEASE_SCOPE_G1, "release_scope_G2": RELEASE_SCOPE_G2, "release_scope_G3": RELEASE_SCOPE_G3}
     (ROOT / "evidence" / "work_packages.json").write_text(json.dumps(work, indent=2) + "\n")
     failed = [t for tests in by_module.values() for t in tests if t["result"] in ("FAILED", "ERROR")]
     print("test_run.json: %s; work_packages.json: %d packages; failed tests: %d" % (meta["summary_line"], len(packages), len(failed)))

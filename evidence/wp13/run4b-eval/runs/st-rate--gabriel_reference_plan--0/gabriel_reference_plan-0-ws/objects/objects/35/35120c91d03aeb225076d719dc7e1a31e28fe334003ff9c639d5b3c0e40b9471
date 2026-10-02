@@ -1,0 +1,9 @@
+{
+ "goal": "Fix the reported defect in ratelimit.Limiter: when a new fixed window starts the request count must start again from zero; within a window the count keeps accumulating even while the clock advances. Keep the public API and the existing tests.",
+ "domain": "software",
+ "state": "succeeded",
+ "outcome": "success",
+ "repair_count": 0,
+ "plan_versions": 1,
+ "final_diff": "diff --git a/src/ratelimit.py b/src/ratelimit.py\nindex 1e92be7..32a8f2e 100644\n--- a/src/ratelimit.py\n+++ b/src/ratelimit.py\n@@ -12,6 +12,7 @@ class Limiter:\n         now = self.clock()\n         if now - self.window_start >= self.window_s:\n             self.window_start = now\n+            self.count = 0\n         if self.count < self.limit:\n             self.count += 1\n             return True\n"
+}

@@ -1,0 +1,1 @@
+The original normalize function only collapsed repeated slashes but did not remove a trailing slash (except for root). The fix adds a check to remove a trailing slash if the path is longer than one character, ensuring paths like '/users/me/' normalize to '/users/me', satisfying the defect requirement while keeping the existing API and tests intact.

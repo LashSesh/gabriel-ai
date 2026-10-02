@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-EUf1dHnzrHoOhZFmVPKSNnV0aARq4",
+  "object": "chat.completion",
+  "created": 1790976249,
+  "model": "gpt-4.1-nano-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"nodes\": [\n    {\n      \"node_id\": \"observe\",\n      \"capability_id\": \"software.observe\",\n      \"depends_on\": [],\n      \"check_ids\": [\"output-valid\"],\n      \"purpose\": \"pin and observe the worktree\",\n      \"args\": {}\n    },\n    {\n      \"node_id\": \"baseline-unit\",\n      \"capability_id\": \"software.run_check\",\n      \"depends_on\": [\"observe\"],\n      \"check_ids\": [\"baseline:unit\"],\n      \"purpose\": \"baseline run of baseline:unit\",\n      \"args\": {\n        \"check_id\": \"baseline:unit\"\n      }\n    },\n    {\n      \"node_id\": \"propose\",\n      \"capability_id\": \"model.generate\",\n      \"depends_on\": [\"observe\", \"baseline-unit\"],\n      \"check_ids\": [\"output-valid\"],\n      \"purpose\": \"propose a patch\",\n      \"args\": {\n        \"role\": \"worker\"\n      }\n    },\n    {\n      \"node_id\": \"apply\",\n      \"capability_id\": \"software.apply_patch\",\n      \"depends_on\": [\"propose\"],\n      \"check_ids\": [\"output-valid\"],\n      \"purpose\": \"apply the proposed patch\",\n      \"args\": {\n        \"from_node\": \"propose\"\n      }\n    },\n    {\n      \"node_id\": \"read-back\",\n      \"capability_id\": \"software.read_back\",\n      \"depends_on\": [\"apply\"],\n      \"check_ids\": [\"output-valid\"],\n      \"purpose\": \"observe the changed tree\",\n      \"args\": {}\n    },\n    {\n      \"node_id\": \"verify-unit\",\n      \"capability_id\": \"software.run_check\",\n      \"depends_on\": [\"read-back\"],\n      \"check_ids\": [\"unit\"],\n      \"purpose\": \"acceptance run of unit\",\n      \"args\": {\n        \"check_id\": \"unit\"\n      }\n    },\n    {\n      \"node_id\": \"verify-oracle\",\n      \"capability_id\": \"software.run_check\",\n      \"depends_on\": [\"read-back\"],\n      \"check_ids\": [\"oracle\"],\n      \"purpose\": \"acceptance run of oracle\",\n      \"args\": {\n        \"check_id\": \"oracle\"\n      }\n    },\n    {\n      \"node_id\": \"review\",\n      \"capability_id\": \"software.review\",\n      \"depends_on\": [\"read-back\"],\n      \"check_ids\": [\"scope\", \"base-commit\", \"checks-intact\", \"no-secrets\"],\n      \"purpose\": \"scope, identity and secret review of the diff\",\n      \"args\": {}\n    }\n  ],\n  \"rationale\": \"reference repair plan (round 0)\"\n}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 663,
+    "completion_tokens": 548,
+    "total_tokens": 1211,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_5c9add6efc"
+}

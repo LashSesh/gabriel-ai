@@ -1,0 +1,1 @@
+Fix the reported defect: paths.normalize must drop a trailing slash (except for the root path) in addition to collapsing repeated slashes, so that router.match('/users/me/') resolves. Keep the public API and the existing tests.

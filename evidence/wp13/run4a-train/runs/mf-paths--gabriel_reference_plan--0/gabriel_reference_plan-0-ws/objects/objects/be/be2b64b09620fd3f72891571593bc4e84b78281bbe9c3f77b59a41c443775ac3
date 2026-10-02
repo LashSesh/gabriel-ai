@@ -1,0 +1,8 @@
+"""router: path to handler names."""
+from paths import normalize
+
+ROUTES = {"/": "home", "/users": "users", "/users/me": "profile"}
+
+
+def match(path):
+    return ROUTES.get(normalize(path))

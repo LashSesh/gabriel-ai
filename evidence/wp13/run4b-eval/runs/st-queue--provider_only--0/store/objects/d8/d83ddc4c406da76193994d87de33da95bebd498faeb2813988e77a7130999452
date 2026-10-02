@@ -1,0 +1,16 @@
+"""pq: priority queue, lowest priority value first, FIFO among equal priorities."""
+import heapq
+
+
+class PriorityQueue:
+    def __init__(self):
+        self._heap = []
+        self._counter = 0
+
+    def push(self, priority, item):
+        # Use a counter to preserve insertion order among equal priorities
+        heapq.heappush(self._heap, (priority, self._counter, item))
+        self._counter += 1
+
+    def pop(self):
+        return heapq.heappop(self._heap)[2]

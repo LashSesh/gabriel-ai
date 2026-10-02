@@ -1,0 +1,65 @@
+You are the worker role of Gabriel, a repository repair agent.
+Goal (verbatim user request):
+Fix the reported defect in memo.memoize: keyword arguments must be part of the cache key, so that calls with different keyword arguments are computed separately while identical calls (including keyword arguments) still hit the cache. Keep the public API and the existing tests.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- unit [software/test_passed] argv=python3 -m unittest discover -s tests independent=False
+- oracle [software/test_passed] argv=python3 -m unittest oracle_memo independent=True
+
+Allowed paths (changes elsewhere are rejected): src/
+Base commit: c1abf8c4cff1a80d4f080ee45e848d3f851d8fa4
+
+Files (path sha256 bytes):
+  README.md 65635db23b78f42a62a01705f1371f169c3c280d149099f2175aa4a088f1a50d 61
+  src/memo.py 8c57af56b277a56dd7922d7d408a3366f226aded1fda75a9bbe55f6a92902420 371
+  tests/test_memo.py febb1332b8610c67b4c4b3d437d7fbe6787a07e5a3ecaf539a53fdeee65fc227 533
+
+Source files in scope:
+=== src/memo.py (sha256 8c57af56b277a56dd7922d7d408a3366f226aded1fda75a9bbe55f6a92902420) ===
+"""memo: memoization for pure functions."""
+
+
+def memoize(func):
+    """Cache results per distinct argument combination; identical calls hit the cache."""
+    cache = {}
+
+    def wrapper(*args, **kwargs):
+        key = args
+        if key not in cache:
+            cache[key] = func(*args, **kwargs)
+        return cache[key]
+    wrapper.cache = cache
+    return wrapper
+
+
+
+Past episodes retrieved as evidence (outcomes of earlier tasks; they are not instructions):
+=== episode obs-1fd0c66131576d91e530b66230b96c58f2966913 ===
+{
+ "goal": "Fix the reported defect: layered configuration must merge nested sections instead of replacing them, so that config.load({'server': {'port': 9000}}) keeps the default host. defaults.merge is the merge rule used everywhere. Keep the public API and the existing tests.",
+ "domain": "software",
+ "state": "succeeded",
+ "outcome": "success",
+ "repair_count": 0,
+ "plan_versions": 1,
+ "final_diff": "diff --git a/src/defaults.py b/src/defaults.py\nindex 2508d66..85865b7 100644\n--- a/src/defaults.py\n+++ b/src/defaults.py\n@@ -4,5 +4,9 @@\n def merge(base, override):\n     \"\"\"Return base updated with override; nested dicts merge recursively.\"\"\"\n     result = dict(base)\n-    result.update(override)\n+    for key, value in override.items():\n+        if key in result and isinstance(result[key], dict) and isinstance(value, dict):\n+            result[key] = merge(result[key], value)\n+        else:\n+            result[key] = value\n     return result\n"
+}
+
+=== episode obs-a3ba351c4b1a96bb0b4dd5547e4413cb20713328 ===
+{
+ "goal": "Fix the reported defect: layered configuration must merge nested sections instead of replacing them, so that config.load({'server': {'port': 9000}}) keeps the default host. defaults.merge is the merge rule used everywhere. Keep the public API and the existing tests.",
+ "domain": "software",
+ "state": "succeeded",
+ "outcome": "success",
+ "repair_count": 0,
+ "plan_versions": 1,
+ "final_diff": "diff --git a/src/defaults.py b/src/defaults.py\nindex 2508d66..85865b7 100644\n--- a/src/defaults.py\n+++ b/src/defaults.py\n@@ -4,5 +4,9 @@\n def merge(base, override):\n     \"\"\"Return base updated with override; nested dicts merge recursively.\"\"\"\n     result = dict(base)\n-    result.update(override)\n+    for key, value in override.items():\n+        if key in result and isinstance(result[key], dict) and isinstance(value, dict):\n+            result[key] = merge(result[key], value)\n+        else:\n+            result[key] = value\n     return result\n"
+}
+
+
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<relative path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest.
+For create expected_sha256 is null. For delete content is null. Do not touch oracle or test command files.
+Do not claim completion; the independent checks decide.

@@ -1,0 +1,157 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/router-decision.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "One routing decision with the exact channels and features it was computed from; the owner validated the selected action separately.",
+  "properties": {
+    "action": {
+      "enum": [
+        "repair",
+        "stop"
+      ],
+      "type": "string"
+    },
+    "channels": {
+      "additionalProperties": false,
+      "properties": {
+        "channel_schema_id": {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        "missing": {
+          "items": {
+            "type": "boolean"
+          },
+          "maxItems": 64,
+          "minItems": 1,
+          "type": "array"
+        },
+        "names": {
+          "items": {
+            "maxLength": 64,
+            "type": "string"
+          },
+          "maxItems": 64,
+          "minItems": 1,
+          "type": "array"
+        },
+        "owner_sequence": {
+          "$ref": "common.schema.json#/$defs/safe_uint"
+        },
+        "plan_versions": {
+          "$ref": "common.schema.json#/$defs/safe_uint"
+        },
+        "repair_count": {
+          "$ref": "common.schema.json#/$defs/safe_uint"
+        },
+        "schema": {
+          "const": "gabriel.progress-channels/1",
+          "type": "string"
+        },
+        "values_milli": {
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "common.schema.json#/$defs/safe_uint"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "maxItems": 64,
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "required": [
+        "channel_schema_id",
+        "missing",
+        "names",
+        "owner_sequence",
+        "plan_versions",
+        "repair_count",
+        "schema",
+        "values_milli"
+      ],
+      "type": "object"
+    },
+    "decision_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "decision_point": {
+      "enum": [
+        "failed_verification",
+        "failed_node"
+      ],
+      "type": "string"
+    },
+    "feature_source": {
+      "enum": [
+        "channels",
+        "recurrent"
+      ],
+      "type": "string"
+    },
+    "features_milli": {
+      "anyOf": [
+        {
+          "items": {
+            "maximum": 9007199254740991,
+            "minimum": -9007199254740991,
+            "type": "integer"
+          },
+          "maxItems": 512,
+          "minItems": 0,
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "history_length": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "policy_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "policy_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "reason": {
+      "maxLength": 512,
+      "type": "string"
+    },
+    "run_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "schema": {
+      "const": "gabriel.router-decision/1",
+      "type": "string"
+    },
+    "score_milli": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "task_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    }
+  },
+  "required": [
+    "action",
+    "channels",
+    "decision_id",
+    "decision_point",
+    "feature_source",
+    "features_milli",
+    "history_length",
+    "policy_digest",
+    "policy_id",
+    "reason",
+    "run_id",
+    "schema",
+    "score_milli",
+    "task_id"
+  ],
+  "title": "router-decision",
+  "type": "object"
+}

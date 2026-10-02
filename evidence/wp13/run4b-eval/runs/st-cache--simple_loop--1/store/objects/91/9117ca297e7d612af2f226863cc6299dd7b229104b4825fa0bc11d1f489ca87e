@@ -1,0 +1,41 @@
+You are the worker role of Gabriel, a repository repair agent.
+Goal (verbatim user request):
+Fix the reported defect in memo.memoize: keyword arguments must be part of the cache key, so that calls with different keyword arguments are computed separately while identical calls (including keyword arguments) still hit the cache. Keep the public API and the existing tests.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- unit [software/test_passed] argv=python3 -m unittest discover -s tests independent=False
+- oracle [software/test_passed] argv=python3 -m unittest oracle_memo independent=True
+
+Allowed paths (changes elsewhere are rejected): src/
+Base commit: b995cc6514142d224ef5485b2686eadebb6075aa
+
+Files (path sha256 bytes):
+  README.md 65635db23b78f42a62a01705f1371f169c3c280d149099f2175aa4a088f1a50d 61
+  src/memo.py 8c57af56b277a56dd7922d7d408a3366f226aded1fda75a9bbe55f6a92902420 371
+  tests/test_memo.py febb1332b8610c67b4c4b3d437d7fbe6787a07e5a3ecaf539a53fdeee65fc227 533
+
+Source files in scope:
+=== src/memo.py (sha256 8c57af56b277a56dd7922d7d408a3366f226aded1fda75a9bbe55f6a92902420) ===
+"""memo: memoization for pure functions."""
+
+
+def memoize(func):
+    """Cache results per distinct argument combination; identical calls hit the cache."""
+    cache = {}
+
+    def wrapper(*args, **kwargs):
+        key = args
+        if key not in cache:
+            cache[key] = func(*args, **kwargs)
+        return cache[key]
+    wrapper.cache = cache
+    return wrapper
+
+
+
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<relative path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest.
+For create expected_sha256 is null. For delete content is null. Do not touch oracle or test command files.
+Do not claim completion; the independent checks decide.

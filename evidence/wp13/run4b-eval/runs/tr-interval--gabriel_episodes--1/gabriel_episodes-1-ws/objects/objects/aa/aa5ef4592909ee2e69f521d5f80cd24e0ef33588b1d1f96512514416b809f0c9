@@ -1,0 +1,9 @@
+{
+ "goal": "Ledger totals are off by one cent for some inputs. Fix the reported defect: money.round_cents must round halves away from zero (0.125 -> 0.13, 2.675 -> 2.68, -0.125 -> -0.13) and ledger.total must keep using it. Keep the public API and the existing tests.",
+ "domain": "software",
+ "state": "succeeded",
+ "outcome": "success",
+ "repair_count": 0,
+ "plan_versions": 1,
+ "final_diff": "diff --git a/src/money.py b/src/money.py\nindex fbca006..651a310 100644\n--- a/src/money.py\n+++ b/src/money.py\n@@ -3,4 +3,10 @@\n \n def round_cents(amount):\n     \"\"\"Round a decimal amount to cents, halves away from zero.\"\"\"\n-    return round(amount, 2)\n+    # Multiply by 100 to shift cents, then round halves away from zero\n+    shifted = amount * 100\n+    if shifted > 0:\n+        rounded = int(shifted + 0.5)\n+    else:\n+        rounded = int(shifted - 0.5)\n+    return rounded / 100\n"
+}

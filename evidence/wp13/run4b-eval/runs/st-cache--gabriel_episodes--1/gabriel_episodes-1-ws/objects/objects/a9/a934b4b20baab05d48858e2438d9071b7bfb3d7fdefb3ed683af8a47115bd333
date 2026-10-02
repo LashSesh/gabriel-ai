@@ -1,0 +1,9 @@
+{
+ "goal": "Fix the reported defect in memo.memoize: keyword arguments must be part of the cache key, so that calls with different keyword arguments are computed separately while identical calls (including keyword arguments) still hit the cache. Keep the public API and the existing tests.",
+ "domain": "software",
+ "state": "succeeded",
+ "outcome": "success",
+ "repair_count": 0,
+ "plan_versions": 1,
+ "final_diff": "diff --git a/src/memo.py b/src/memo.py\nindex d17d9d6..7d669eb 100644\n--- a/src/memo.py\n+++ b/src/memo.py\n@@ -6,7 +6,8 @@ def memoize(func):\n     cache = {}\n \n     def wrapper(*args, **kwargs):\n-        key = args\n+        # Create a cache key that includes args and a sorted tuple of kwargs items\n+        key = args + tuple(sorted(kwargs.items()))\n         if key not in cache:\n             cache[key] = func(*args, **kwargs)\n         return cache[key]\n"
+}

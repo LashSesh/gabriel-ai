@@ -17,8 +17,10 @@ in an isolated worktree with independent acceptance checks.
 - G1 release report, backup/restore and license (Apache-2.0, `LICENSE`) (WP12): `docs/RELEASE_G1.md`
 - G2 domain portability (WP09 memory, WP10 document and numerical packs, AT23 evidence):
   `docs/RELEASE_G2.md`, `evidence/wp10/`
+- G3 route (hard corpus with executed traps, progress channels, reference recurrent map, readout
+  router, episodic retrieval, held-out promotion): `docs/RELEASE_G3.md`, `evidence/wp13/`
 - Contract extensions: `docs/adr/ADR-10-hold-records.md`, `ADR-11`, `ADR-12`, `ADR-13` (DomainPack
-  ports), `ADR-14` (memory chain)
+  ports), `ADR-14` (memory chain), `ADR-15` (readout router)
 - Evidence (test log, environment, baseline rerun, spec validation): `evidence/`
 - The blueprint's own machine-readable contracts and validator: `contracts/`, `tools/validate_spec.py`
 

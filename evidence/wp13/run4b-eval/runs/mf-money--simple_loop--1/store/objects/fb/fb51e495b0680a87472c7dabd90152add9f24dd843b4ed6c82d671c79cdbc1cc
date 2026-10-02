@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-EUf5rpJ7fYymRgJuPnuUVmF9SS8NK",
+  "object": "chat.completion",
+  "created": 1790976511,
+  "model": "gpt-4.1-mini-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"operations\": [{\"kind\": \"modify\", \"path\": \"src/money.py\", \"expected_sha256\": \"fa816984cb1f791630c850f452d214933dceee46a979c2276da8800a2c0570db\", \"content\": \"\\\"\\\"\\\"money: cent rounding for ledgers.\\\"\\\"\\\"\\n\\n\\ndef round_cents(amount):\\n    \\\"\\\"\\\"Round a decimal amount to cents, halves away from zero.\\\"\\\"\\\"\\n    # Multiply by 100 to shift cents, then round halves away from zero\\n    shifted = amount * 100\\n    if shifted > 0:\\n        rounded = int(shifted + 0.5)\\n    else:\\n        rounded = int(shifted - 0.5)\\n    return rounded / 100\\n\"}], \"rationale\": \"Replaced the built-in round with a custom implementation that rounds halves away from zero as required, preserving the public API and usage in ledger.total.\"}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 666,
+    "completion_tokens": 213,
+    "total_tokens": 879,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_0e9fc63c9b"
+}

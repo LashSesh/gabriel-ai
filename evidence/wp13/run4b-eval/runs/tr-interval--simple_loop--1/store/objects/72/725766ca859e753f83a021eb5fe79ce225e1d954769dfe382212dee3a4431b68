@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-EUf6MeD0axr5XYov7W0g0yOPWhZr0",
+  "object": "chat.completion",
+  "created": 1790976542,
+  "model": "gpt-4.1-mini-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"operations\": [{\"kind\": \"modify\", \"path\": \"src/intervals.py\", \"expected_sha256\": \"7804ea1e689d2ce59c4e21364a546adef229a771d7e4020880a6a30a21d00861\", \"content\": \"\\\"\\\"\\\"intervals: half-open [start, end) interval helpers.\\\"\\\"\\\"\\n\\n\\ndef overlaps(a, b):\\n    \\\"\\\"\\\"True when the half-open intervals a and b share at least one point.\\\"\\\"\\\"\\n    return a[0] < b[1] and b[0] < a[1]\\n\"}], \"rationale\": \"Fixed overlaps to correctly handle half-open intervals by using strict inequalities, so intervals that only touch at endpoints do not count as overlapping.\"}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 543,
+    "completion_tokens": 173,
+    "total_tokens": 716,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_0919f5ceed"
+}

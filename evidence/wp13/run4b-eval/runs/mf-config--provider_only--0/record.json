@@ -1,0 +1,78 @@
+{
+  "task_id": "mf-config",
+  "family": "multi_file",
+  "system": "provider_only",
+  "rep": 0,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4b-eval/runs/mf-config--provider_only--0",
+  "outcome": {
+    "system": "provider_only",
+    "task_id": "mf-config",
+    "family": "multi_file",
+    "rep": 0,
+    "declared": true,
+    "declared_reason": "patch applied; declared done without verification",
+    "model_requests": 1,
+    "model_tokens": 895,
+    "wall_ms": 2033,
+    "provider_statuses": [
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp13/run4b-eval/runs/mf-config--provider_only--0/worktrees/provider_only-0",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "patch applied; declared done without verification"
+    ],
+    "gabriel": null,
+    "repairs_used": 0,
+    "plan_versions": 0
+  },
+  "verification": {
+    "verified": true,
+    "changed_paths": [
+      "src/defaults.py"
+    ],
+    "out_of_scope_paths": [],
+    "visible": {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "start_failure": null,
+      "stdout_tail": "",
+      "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+      "backend": "linux_namespace"
+    },
+    "oracle": {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "oracle_defaults"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "start_failure": null,
+      "stdout_tail": "",
+      "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+      "backend": "linux_namespace"
+    },
+    "patch_sha256": "62eef4e38e510ce592496ce852cfebb1b2b36a8fa83c046126f0beb6af8ebc9c",
+    "patch_bytes": 600,
+    "patch": "diff --git a/src/defaults.py b/src/defaults.py\nindex 2508d66..4b50a52 100644\n--- a/src/defaults.py\n+++ b/src/defaults.py\n@@ -4,5 +4,13 @@\n def merge(base, override):\n     \"\"\"Return base updated with override; nested dicts merge recursively.\"\"\"\n     result = dict(base)\n-    result.update(override)\n+    for key, value in override.items():\n+        if (\n+            key in result\n+            and isinstance(result[key], dict)\n+            and isinstance(value, dict)\n+        ):\n+            result[key] = merge(result[key], value)\n+        else:\n+            result[key] = value\n     return result\n",
+    "head_is_base": true
+  },
+  "V": 1,
+  "D": 1,
+  "false_completion": 0,
+  "unit_wall_ms": 2845
+}

@@ -1,0 +1,7 @@
+"""ledger: totals over money lines."""
+from money import round_cents
+
+
+def total(lines):
+    """Sum of the lines, each rounded to cents, then rounded again."""
+    return round_cents(sum(round_cents(x) for x in lines))

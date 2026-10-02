@@ -1,0 +1,17 @@
+diff --git a/src/money.py b/src/money.py
+index fbca006..412fc4d 100644
+--- a/src/money.py
++++ b/src/money.py
+@@ -3,4 +3,11 @@
+ 
+ def round_cents(amount):
+     """Round a decimal amount to cents, halves away from zero."""
+-    return round(amount, 2)
++    # Multiply by 100 to shift cents to integer domain
++    shifted = amount * 100
++    # Determine sign for rounding direction
++    sign = 1 if shifted >= 0 else -1
++    # Add 0.5 with sign to shift halves away from zero
++    shifted_rounded = int(shifted + sign * 0.5)
++    # Return back to decimal with two decimals
++    return shifted_rounded / 100

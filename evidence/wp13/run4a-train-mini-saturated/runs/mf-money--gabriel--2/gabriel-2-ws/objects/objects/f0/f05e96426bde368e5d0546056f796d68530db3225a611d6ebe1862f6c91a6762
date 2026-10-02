@@ -1,0 +1,1 @@
+Replaced the round_cents function to implement rounding halves away from zero by scaling, adding 0.5, truncating, and restoring sign. This fixes the off-by-one-cent errors while preserving the public API and usage in ledger.total.

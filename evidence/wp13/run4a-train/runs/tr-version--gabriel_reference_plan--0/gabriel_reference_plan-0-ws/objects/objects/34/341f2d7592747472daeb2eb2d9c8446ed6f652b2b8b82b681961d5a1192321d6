@@ -1,0 +1,33 @@
+You are the worker role of Gabriel, a repository repair agent.
+Goal (verbatim user request):
+Fix the reported defect in versions.compare: dotted versions compare numerically per component ('1.10' is newer than '1.9', '1.0.1' is newer than '1.0', and '1.0' equals '1.0.0'). Keep the public API and the existing tests.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- unit [software/test_passed] argv=python3 -m unittest discover -s tests independent=False
+- oracle [software/test_passed] argv=python3 -m unittest oracle_versions independent=True
+
+Allowed paths (changes elsewhere are rejected): src/
+Base commit: 415af05d6e41af457eeea4efc694cbf6027fa07a
+
+Files (path sha256 bytes):
+  README.md fba904c9cc7c515280f3dccfe355b7cbd7a82f24436e0545c3aec7b95a7966c5 65
+  src/versions.py dd2aa5c4cfa6a9b6f791e4be638bad93c4dc07d97e7f2d801a2b72198f335e6d 182
+  tests/test_versions.py 34807ce4cf06d8df02014dfd9b935814532629b14f34a9d1a8b6af83876d653b 437
+
+Source files in scope:
+=== src/versions.py (sha256 dd2aa5c4cfa6a9b6f791e4be638bad93c4dc07d97e7f2d801a2b72198f335e6d) ===
+"""versions: dotted version comparison."""
+
+
+def compare(a, b):
+    """Return -1, 0 or 1 comparing dotted numeric versions numerically per component."""
+    return (a > b) - (a < b)
+
+
+
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<relative path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest.
+For create expected_sha256 is null. For delete content is null. Do not touch oracle or test command files.
+Do not claim completion; the independent checks decide.

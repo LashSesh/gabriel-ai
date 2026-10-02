@@ -153,6 +153,45 @@ The gate is **not passed**. What the three protocols establish, with their retai
   stays optional for the coding slice, and what G1 provides regardless is containment, retained
   evidence, recorded replay and restore.
 
+## Protocol 4: the G3 route on the hard tier
+After run 3 saturated the standard tier, a hard tier was written (`evaluation/corpus_hard.py`,
+nine tasks in the families `multi_file`, `trap` and `stateful`): every task carries a
+plausible wrong fix that passes the visible tests and fails the oracle, and
+`gabriel eval corpus-check --tier hard` executes that trap invariant beside the soundness
+invariants. The G3 route trains a readout router from explicit task outcomes on two training
+families and evaluates it on the held-out third family with a declared criterion
+(`docs/RELEASE_G3.md`, `evidence/wp13/`).
+
+Protocol 4a (training; `multi_file` and `trap`, six tasks, three repetitions, rule-based policy,
+`linux_namespace`) was executed three times with different providers and planners:
+gpt-4.1-mini with the model planner (18/18 verified), gpt-4.1-nano with the model planner (7/18;
+eleven runs ended on invalid plan JSON before any plan) and gpt-4.1-nano with the reference plan
+(18/18). In none of the 54 runs did a first patch fail the independent verification, so the
+failed-verification boundary never occurred, no labeled router decision exists and no readout
+was trained (`evidence/wp13/policies/metrics.json`: `trained: false`). The 18 episodes of the
+gpt-4.1-mini run seed the episodic-retrieval arm.
+
+Protocol 4b (evaluation; all nine tasks, `stateful` held out, gpt-4.1-mini, two repetitions,
+frozen episode seed, digest `0acb56ab…`):
+
+| system | verified | p_success | false compl. | mean requests | mean tokens | held-out verified | held-out tokens |
+|---|---|---|---|---|---|---|---|
+| provider_only | 18/18 | 1.00 | 0 | 1.00 | 825 | 6/6 | 828 |
+| simple_loop | 18/18 | 1.00 | 0 | 1.00 | 824 | 6/6 | 827 |
+| gabriel_reference_plan | 18/18 | 1.00 | 0 | 1.00 | 829 | 6/6 | 829 |
+| gabriel_episodes | 18/18 | 1.00 | 0 | 1.00 | 1433 | 6/6 | 1395 |
+
+Every `gabriel_episodes` run carried two retrieved episodes with recorded observation ids; on
+the held-out family they came from other tasks. The declared criterion for that arm (at least
+the reference's verified success, fewer tokens, no false completion on the held-out family) is
+not met: equal success at 68 % more tokens. The promotion procedure recorded `rejected` for the
+readout (no candidate) and `met: false` for the episodic arm
+(`evidence/wp13/promotion/promotion.json`). The hard tier's trap exists for every task
+(`corpus-check` executes the plausible wrong fix against visible tests and oracle) but
+gpt-4.1-mini never produced it: zero false completions in the provider-only baseline, zero
+failed verifications in 72 runs. For this provider the hard tier is at ceiling like the standard
+tier; G3 is not established (`docs/RELEASE_G3.md`).
+
 ## Freezing and amendments
 `gabriel eval freeze` digests the protocol body and records the harness code identity.
 `gabriel eval run` refuses a changed protocol or corpus. A harness code change after freezing is

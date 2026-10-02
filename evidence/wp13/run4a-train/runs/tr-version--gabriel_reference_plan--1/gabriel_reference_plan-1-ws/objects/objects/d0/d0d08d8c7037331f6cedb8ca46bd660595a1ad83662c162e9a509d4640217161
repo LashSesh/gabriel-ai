@@ -1,0 +1,1 @@
+The original compare function was a simple lexicographical comparison, which does not handle numeric comparison per component. The new implementation splits the version strings into integer components, pads shorter versions with zeros, and compares each component numerically, ensuring correct ordering such as '1.10' > '1.9' and '1.0' == '1.0.0'.

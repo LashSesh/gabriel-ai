@@ -1,0 +1,103 @@
+{
+  "backend": "linux_namespace",
+  "bootstrap": {
+    "resamples": 2000,
+    "seed": 20261002
+  },
+  "budget_per_task": {
+    "max_input_tokens": 60000,
+    "max_output_tokens": 4000,
+    "model_requests": 6,
+    "model_tokens_total": 120000,
+    "tool_attempts": 64,
+    "wall_ms": 600000
+  },
+  "corpus_digest": "09c7eca34e1aa8f6801de9173b38ae8fa16fb59879a974603b3354a7001d19c4",
+  "declared_criterion": "",
+  "declared_success": {
+    "gabriel": "run state succeeded (every mandatory check passed with eligible evidence, artifacts verified, effects reconciled)",
+    "gabriel_episodes": "as gabriel (rule-based repair) with the frozen episodes retrievable into the worker prompt (readout ablation)",
+    "gabriel_no_repair": "as gabriel, with max_repairs=0 and max_plan_versions=1 (ablation of the repair cycle)",
+    "gabriel_policy": "as gabriel, with the frozen readout policy pinned: at a failed verification it chooses repair or stop from the progress channels, and it may retrieve frozen episodes into the worker prompt",
+    "gabriel_reference_plan": "as gabriel, with the domain pack's deterministic reference plan admitted without a planner request (planner ablation)",
+    "provider_only": "an admissible patch was applied (no verification)",
+    "simple_loop": "the system's own runs of the visible tests and the oracle both exited 0"
+  },
+  "episode_seed": null,
+  "families": [
+    "multi_file",
+    "trap"
+  ],
+  "frozen_at_utc": "2026-10-02T21:21:05.773068+00:00",
+  "frozen_digest": "8f76836bfb7626ff806ada8667d245b6b05b1f52a8d5f3ee6e47ea6080227bee",
+  "harness_identity": "74881835bc40469b76df9da675c9d7219e7b189aa7807b9b89f9b57f0b42cb01",
+  "held_out_families": [],
+  "metrics": [
+    "p_success = mean(V)",
+    "p_false_completion = mean(D*(1-V))",
+    "conditional false completion = sum(D*(1-V))/sum(D)",
+    "model requests, model tokens and wall time per run",
+    "recovery: Gabriel runs that used repair cycles or extra plan versions",
+    "paired differences gabriel - baseline per task (mean over repetitions)",
+    "bootstrap percentile intervals, resampling task families with replacement (and tasks as a secondary view)"
+  ],
+  "note": "Protocol 4a (G3 route, training): the rule-based Gabriel on the hard tier's training families multi_file and trap, three repetitions, to collect router decisions at the failed-verification boundary labeled by the independent verification, and episodes for the frozen seed. The stateful family is never run under this protocol and stays held out for protocol 4b.",
+  "policy": null,
+  "provider": {
+    "credential_ref": "env:OPENAI_API_KEY",
+    "kind": "openai_compat",
+    "model": "gpt-4.1-mini",
+    "temperature_milli": 0,
+    "timeout_ms": 120000
+  },
+  "purpose": "Matched G1 coding comparison: increase independently verified task success or reduce resources at equal success, under a fixed task distribution and matched constraints. Not a benchmark of general capability.",
+  "repetitions": 3,
+  "sample_size_statement": "6 tasks in 2 families; the minimum relevant effect is not predeclared from a pilot, so intervals are reported as descriptive uncertainty, not as a powered test",
+  "schema": "gabriel.evaluation-protocol/1",
+  "systems": [
+    "gabriel"
+  ],
+  "tasks": [
+    {
+      "digest": "d113c7086a1e9dbd6babbcaff5c0986fcfad48ac143c34e1ede6230259aac724",
+      "family": "multi_file",
+      "task_id": "mf-money",
+      "tier": "hard"
+    },
+    {
+      "digest": "891055af6d863211f7915ada6fd5014016f8515d1f64de3c57dc9ef0f687b729",
+      "family": "multi_file",
+      "task_id": "mf-config",
+      "tier": "hard"
+    },
+    {
+      "digest": "c5ed8c5495586ab0b2c3b9004284290835e370232a69dfeae6b17c58e18f8eb6",
+      "family": "multi_file",
+      "task_id": "mf-paths",
+      "tier": "hard"
+    },
+    {
+      "digest": "07d77e42349cea158a8822c0bfa20cea9c81ca844398538658a1c338e0d39850",
+      "family": "trap",
+      "task_id": "tr-interval",
+      "tier": "hard"
+    },
+    {
+      "digest": "20f9b5953c2460971db480407149d747c764afe73e14730c3a1553d0a2d6cda8",
+      "family": "trap",
+      "task_id": "tr-version",
+      "tier": "hard"
+    },
+    {
+      "digest": "b569bb4996c7917a66e32642566cbdfa3a80fa43bd3eed8be8b9bac5f3cfe463",
+      "family": "trap",
+      "task_id": "tr-percent",
+      "tier": "hard"
+    }
+  ],
+  "tiers": [
+    "hard"
+  ],
+  "time_limit_is_failure": true,
+  "verification": "fresh, system-independent: changed paths within allowed_paths; visible tests exit 0; oracle installed from the corpus text and exit 0; all executed in the containment backend on the final tree"
+}

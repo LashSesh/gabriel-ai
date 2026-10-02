@@ -432,7 +432,7 @@ class DocumentPack(DomainPack):
     def reference_plan_proposal(self, task, binding, repair_round=0):
         return reference_plan_proposal(task, binding, repair_round=repair_round)
 
-    def build_prompt(self, goal_text, binding, snapshot, manifest, store, *, failure_context, round_index, memory=None, principal_id=None):
+    def build_prompt(self, goal_text, binding, snapshot, manifest, store, *, failure_context, round_index, memory=None, principal_id=None, episodes=()):
         return build_prompt(goal_text, binding, snapshot, manifest, store, failure_context=failure_context, round_index=round_index, memory=memory)
 
     def normalize_proposal(self, proposal, snapshot, manifest, binding, store, *, task_id, run_id, proposal_ref, protected, goal_id, policy_digest):

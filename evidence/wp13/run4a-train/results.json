@@ -1,0 +1,2975 @@
+{
+  "schema": "gabriel.evaluation-results/1",
+  "protocol_frozen_digest": "51e813eafa15bdc556603fb5496fc5ac6ed78822e93f81c0b15c8a46189c6d53",
+  "frozen_check": {
+    "frozen_digest": "51e813eafa15bdc556603fb5496fc5ac6ed78822e93f81c0b15c8a46189c6d53",
+    "harness_identity_now": "04d3f84905e9e2556fc3ee803c850d9feb38c9d647be2d85338a2c568469954a",
+    "harness_amended": false
+  },
+  "started_at_utc": "2026-10-02T21:25:37.389834+00:00",
+  "wall_ms": 39856,
+  "units": 18,
+  "records": [
+    {
+      "task_id": "mf-config",
+      "family": "multi_file",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-config--gabriel_reference_plan--0",
+      "outcome": {
+        "system": "gabriel_reference_plan",
+        "task_id": "mf-config",
+        "family": "multi_file",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 1,
+        "model_tokens": 895,
+        "wall_ms": 4890,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-config--gabriel_reference_plan--0/gabriel_reference_plan-0-ws/worktrees/run-mf-config-gabriel_reference_plan-0-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,unit",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,oracle,unit",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,oracle,unit",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; node review verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: oracle,unit",
+          "verify-oracle -> completed (result accepted; checks pending)",
+          "assess verify-oracle/oracle -> passed: assessment passed recorded for oracle; node verify-oracle verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: unit",
+          "verify-unit -> completed (result accepted; checks pending)",
+          "assess verify-unit/unit -> passed: assessment passed recorded for unit; node verify-unit verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-mf-config-gabriel_reference_plan-0-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-config--gabriel_reference_plan--0/gabriel_reference_plan-0-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 38,
+          "assessments": [
+            {
+              "check_id": "baseline:unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "baseline-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "oracle",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-oracle"
+            },
+            {
+              "check_id": "unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "changed_paths": [
+          "src/defaults.py"
+        ],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_defaults"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "3edeb52c863ccdced2fcd36fb3334e7ca41f635f53d50685bc2cdf379bddacae",
+        "patch_bytes": 599,
+        "patch": "diff --git a/src/defaults.py b/src/defaults.py\nindex 2508d66..e324d87 100644\n--- a/src/defaults.py\n+++ b/src/defaults.py\n@@ -1,8 +1,11 @@\n \"\"\"defaults: layered configuration values.\"\"\"\n \n-\n def merge(base, override):\n     \"\"\"Return base updated with override; nested dicts merge recursively.\"\"\"\n     result = dict(base)\n-    result.update(override)\n+    for key, value in override.items():\n+        if key in result and isinstance(result[key], dict) and isinstance(value, dict):\n+            result[key] = merge(result[key], value)\n+        else:\n+            result[key] = value\n     return result\n",
+        "head_is_base": true
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 5872
+    },
+    {
+      "task_id": "mf-config",
+      "family": "multi_file",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-config--gabriel_reference_plan--1",
+      "outcome": {
+        "system": "gabriel_reference_plan",
+        "task_id": "mf-config",
+        "family": "multi_file",
+        "rep": 1,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 1,
+        "model_tokens": 899,
+        "wall_ms": 5080,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-config--gabriel_reference_plan--1/gabriel_reference_plan-1-ws/worktrees/run-mf-config-gabriel_reference_plan-1-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,unit",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,oracle,unit",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,oracle,unit",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; node review verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: oracle,unit",
+          "verify-oracle -> completed (result accepted; checks pending)",
+          "assess verify-oracle/oracle -> passed: assessment passed recorded for oracle; node verify-oracle verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: unit",
+          "verify-unit -> completed (result accepted; checks pending)",
+          "assess verify-unit/unit -> passed: assessment passed recorded for unit; node verify-unit verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-mf-config-gabriel_reference_plan-1-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-config--gabriel_reference_plan--1/gabriel_reference_plan-1-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 38,
+          "assessments": [
+            {
+              "check_id": "baseline:unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "baseline-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "oracle",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-oracle"
+            },
+            {
+              "check_id": "unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "changed_paths": [
+          "src/defaults.py"
+        ],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_defaults"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "3edeb52c863ccdced2fcd36fb3334e7ca41f635f53d50685bc2cdf379bddacae",
+        "patch_bytes": 599,
+        "patch": "diff --git a/src/defaults.py b/src/defaults.py\nindex 2508d66..e324d87 100644\n--- a/src/defaults.py\n+++ b/src/defaults.py\n@@ -1,8 +1,11 @@\n \"\"\"defaults: layered configuration values.\"\"\"\n \n-\n def merge(base, override):\n     \"\"\"Return base updated with override; nested dicts merge recursively.\"\"\"\n     result = dict(base)\n-    result.update(override)\n+    for key, value in override.items():\n+        if key in result and isinstance(result[key], dict) and isinstance(value, dict):\n+            result[key] = merge(result[key], value)\n+        else:\n+            result[key] = value\n     return result\n",
+        "head_is_base": true
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 5794
+    },
+    {
+      "task_id": "mf-config",
+      "family": "multi_file",
+      "system": "gabriel_reference_plan",
+      "rep": 2,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-config--gabriel_reference_plan--2",
+      "outcome": {
+        "system": "gabriel_reference_plan",
+        "task_id": "mf-config",
+        "family": "multi_file",
+        "rep": 2,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 1,
+        "model_tokens": 899,
+        "wall_ms": 5193,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-config--gabriel_reference_plan--2/gabriel_reference_plan-2-ws/worktrees/run-mf-config-gabriel_reference_plan-2-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,unit",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,oracle,unit",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,oracle,unit",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; node review verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: oracle,unit",
+          "verify-oracle -> completed (result accepted; checks pending)",
+          "assess verify-oracle/oracle -> passed: assessment passed recorded for oracle; node verify-oracle verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: unit",
+          "verify-unit -> completed (result accepted; checks pending)",
+          "assess verify-unit/unit -> passed: assessment passed recorded for unit; node verify-unit verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-mf-config-gabriel_reference_plan-2-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-config--gabriel_reference_plan--2/gabriel_reference_plan-2-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 38,
+          "assessments": [
+            {
+              "check_id": "baseline:unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "baseline-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "oracle",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-oracle"
+            },
+            {
+              "check_id": "unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "changed_paths": [
+          "src/defaults.py"
+        ],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_defaults"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "3edeb52c863ccdced2fcd36fb3334e7ca41f635f53d50685bc2cdf379bddacae",
+        "patch_bytes": 599,
+        "patch": "diff --git a/src/defaults.py b/src/defaults.py\nindex 2508d66..e324d87 100644\n--- a/src/defaults.py\n+++ b/src/defaults.py\n@@ -1,8 +1,11 @@\n \"\"\"defaults: layered configuration values.\"\"\"\n \n-\n def merge(base, override):\n     \"\"\"Return base updated with override; nested dicts merge recursively.\"\"\"\n     result = dict(base)\n-    result.update(override)\n+    for key, value in override.items():\n+        if key in result and isinstance(result[key], dict) and isinstance(value, dict):\n+            result[key] = merge(result[key], value)\n+        else:\n+            result[key] = value\n     return result\n",
+        "head_is_base": true
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 5939
+    },
+    {
+      "task_id": "mf-money",
+      "family": "multi_file",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-money--gabriel_reference_plan--0",
+      "outcome": {
+        "system": "gabriel_reference_plan",
+        "task_id": "mf-money",
+        "family": "multi_file",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 4,
+        "model_tokens": 4360,
+        "wall_ms": 10723,
+        "provider_statuses": [
+          "invalid_output",
+          "invalid_output",
+          "invalid_output",
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-money--gabriel_reference_plan--0/gabriel_reference_plan-0-ws/worktrees/run-mf-money-gabriel_reference_plan-0-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess apply-r1/output-valid -> passed: assessment passed recorded for output-valid; node apply-r1 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "read-back-r1 -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back-r1/output-valid -> passed: assessment passed recorded for output-valid; node read-back-r1 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "review-r1 -> completed (result accepted; checks pending)",
+          "assess review-r1/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,unit",
+          "assess review-r1/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,oracle,unit",
+          "assess review-r1/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,oracle,unit",
+          "assess review-r1/no-secrets -> passed: assessment passed recorded for no-secrets; node review-r1 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: oracle,unit",
+          "verify-oracle-r1 -> completed (result accepted; checks pending)",
+          "assess verify-oracle-r1/oracle -> passed: assessment passed recorded for oracle; node verify-oracle-r1 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: unit",
+          "verify-unit-r1 -> completed (result accepted; checks pending)",
+          "assess verify-unit-r1/unit -> passed: assessment passed recorded for unit; node verify-unit-r1 verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-mf-money-gabriel_reference_plan-0-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-money--gabriel_reference_plan--0/gabriel_reference_plan-0-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 52,
+          "assessments": [
+            {
+              "check_id": "baseline:unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "baseline-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe-r1"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose-r1"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply-r1"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back-r1"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review-r1"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review-r1"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review-r1"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review-r1"
+            },
+            {
+              "check_id": "oracle",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-oracle-r1"
+            },
+            {
+              "check_id": "unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-unit-r1"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 2
+      },
+      "verification": {
+        "verified": true,
+        "changed_paths": [
+          "src/money.py"
+        ],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_money"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "957e1a11dd7d5df7fa219ca662ffe9d448cb4c505e9c18f72425666bd5289024",
+        "patch_bytes": 529,
+        "patch": "diff --git a/src/money.py b/src/money.py\nindex fbca006..820ad4a 100644\n--- a/src/money.py\n+++ b/src/money.py\n@@ -1,6 +1,9 @@\n \"\"\"money: cent rounding for ledgers.\"\"\"\n \n+import decimal\n \n def round_cents(amount):\n     \"\"\"Round a decimal amount to cents, halves away from zero.\"\"\"\n-    return round(amount, 2)\n+    d = decimal.Decimal(str(amount))\n+    # Set rounding mode to ROUND_HALF_UP for halves away from zero\n+    return float(d.quantize(decimal.Decimal('0.01'), rounding=decimal.ROUND_HALF_UP))\n\\ No newline at end of file\n",
+        "head_is_base": true
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 12704
+    },
+    {
+      "task_id": "mf-money",
+      "family": "multi_file",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-money--gabriel_reference_plan--1",
+      "outcome": {
+        "system": "gabriel_reference_plan",
+        "task_id": "mf-money",
+        "family": "multi_file",
+        "rep": 1,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 4,
+        "model_tokens": 4305,
+        "wall_ms": 10862,
+        "provider_statuses": [
+          "invalid_output",
+          "invalid_output",
+          "invalid_output",
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-money--gabriel_reference_plan--1/gabriel_reference_plan-1-ws/worktrees/run-mf-money-gabriel_reference_plan-1-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess apply-r1/output-valid -> passed: assessment passed recorded for output-valid; node apply-r1 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "read-back-r1 -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back-r1/output-valid -> passed: assessment passed recorded for output-valid; node read-back-r1 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "review-r1 -> completed (result accepted; checks pending)",
+          "assess review-r1/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,unit",
+          "assess review-r1/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,oracle,unit",
+          "assess review-r1/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,oracle,unit",
+          "assess review-r1/no-secrets -> passed: assessment passed recorded for no-secrets; node review-r1 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: oracle,unit",
+          "verify-oracle-r1 -> completed (result accepted; checks pending)",
+          "assess verify-oracle-r1/oracle -> passed: assessment passed recorded for oracle; node verify-oracle-r1 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: unit",
+          "verify-unit-r1 -> completed (result accepted; checks pending)",
+          "assess verify-unit-r1/unit -> passed: assessment passed recorded for unit; node verify-unit-r1 verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-mf-money-gabriel_reference_plan-1-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-money--gabriel_reference_plan--1/gabriel_reference_plan-1-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 52,
+          "assessments": [
+            {
+              "check_id": "baseline:unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "baseline-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe-r1"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose-r1"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply-r1"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back-r1"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review-r1"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review-r1"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review-r1"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review-r1"
+            },
+            {
+              "check_id": "oracle",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-oracle-r1"
+            },
+            {
+              "check_id": "unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-unit-r1"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 2
+      },
+      "verification": {
+        "verified": true,
+        "changed_paths": [
+          "src/money.py"
+        ],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_money"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "957e1a11dd7d5df7fa219ca662ffe9d448cb4c505e9c18f72425666bd5289024",
+        "patch_bytes": 529,
+        "patch": "diff --git a/src/money.py b/src/money.py\nindex fbca006..820ad4a 100644\n--- a/src/money.py\n+++ b/src/money.py\n@@ -1,6 +1,9 @@\n \"\"\"money: cent rounding for ledgers.\"\"\"\n \n+import decimal\n \n def round_cents(amount):\n     \"\"\"Round a decimal amount to cents, halves away from zero.\"\"\"\n-    return round(amount, 2)\n+    d = decimal.Decimal(str(amount))\n+    # Set rounding mode to ROUND_HALF_UP for halves away from zero\n+    return float(d.quantize(decimal.Decimal('0.01'), rounding=decimal.ROUND_HALF_UP))\n\\ No newline at end of file\n",
+        "head_is_base": true
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 12811
+    },
+    {
+      "task_id": "mf-money",
+      "family": "multi_file",
+      "system": "gabriel_reference_plan",
+      "rep": 2,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-money--gabriel_reference_plan--2",
+      "outcome": {
+        "system": "gabriel_reference_plan",
+        "task_id": "mf-money",
+        "family": "multi_file",
+        "rep": 2,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 4,
+        "model_tokens": 4337,
+        "wall_ms": 9963,
+        "provider_statuses": [
+          "invalid_output",
+          "invalid_output",
+          "invalid_output",
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-money--gabriel_reference_plan--2/gabriel_reference_plan-2-ws/worktrees/run-mf-money-gabriel_reference_plan-2-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess apply-r1/output-valid -> passed: assessment passed recorded for output-valid; node apply-r1 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "read-back-r1 -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back-r1/output-valid -> passed: assessment passed recorded for output-valid; node read-back-r1 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "review-r1 -> completed (result accepted; checks pending)",
+          "assess review-r1/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,unit",
+          "assess review-r1/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,oracle,unit",
+          "assess review-r1/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,oracle,unit",
+          "assess review-r1/no-secrets -> passed: assessment passed recorded for no-secrets; node review-r1 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: oracle,unit",
+          "verify-oracle-r1 -> completed (result accepted; checks pending)",
+          "assess verify-oracle-r1/oracle -> passed: assessment passed recorded for oracle; node verify-oracle-r1 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: unit",
+          "verify-unit-r1 -> completed (result accepted; checks pending)",
+          "assess verify-unit-r1/unit -> passed: assessment passed recorded for unit; node verify-unit-r1 verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-mf-money-gabriel_reference_plan-2-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-money--gabriel_reference_plan--2/gabriel_reference_plan-2-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 52,
+          "assessments": [
+            {
+              "check_id": "baseline:unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "baseline-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe-r1"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose-r1"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply-r1"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back-r1"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review-r1"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review-r1"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review-r1"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review-r1"
+            },
+            {
+              "check_id": "oracle",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-oracle-r1"
+            },
+            {
+              "check_id": "unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-unit-r1"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 2
+      },
+      "verification": {
+        "verified": true,
+        "changed_paths": [
+          "src/money.py"
+        ],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_money"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "957e1a11dd7d5df7fa219ca662ffe9d448cb4c505e9c18f72425666bd5289024",
+        "patch_bytes": 529,
+        "patch": "diff --git a/src/money.py b/src/money.py\nindex fbca006..820ad4a 100644\n--- a/src/money.py\n+++ b/src/money.py\n@@ -1,6 +1,9 @@\n \"\"\"money: cent rounding for ledgers.\"\"\"\n \n+import decimal\n \n def round_cents(amount):\n     \"\"\"Round a decimal amount to cents, halves away from zero.\"\"\"\n-    return round(amount, 2)\n+    d = decimal.Decimal(str(amount))\n+    # Set rounding mode to ROUND_HALF_UP for halves away from zero\n+    return float(d.quantize(decimal.Decimal('0.01'), rounding=decimal.ROUND_HALF_UP))\n\\ No newline at end of file\n",
+        "head_is_base": true
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 12563
+    },
+    {
+      "task_id": "mf-paths",
+      "family": "multi_file",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-paths--gabriel_reference_plan--0",
+      "outcome": {
+        "system": "gabriel_reference_plan",
+        "task_id": "mf-paths",
+        "family": "multi_file",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 1,
+        "model_tokens": 914,
+        "wall_ms": 5467,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-paths--gabriel_reference_plan--0/gabriel_reference_plan-0-ws/worktrees/run-mf-paths-gabriel_reference_plan-0-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,unit",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,oracle,unit",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,oracle,unit",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; node review verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: oracle,unit",
+          "verify-oracle -> completed (result accepted; checks pending)",
+          "assess verify-oracle/oracle -> passed: assessment passed recorded for oracle; node verify-oracle verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: unit",
+          "verify-unit -> completed (result accepted; checks pending)",
+          "assess verify-unit/unit -> passed: assessment passed recorded for unit; node verify-unit verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-mf-paths-gabriel_reference_plan-0-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-paths--gabriel_reference_plan--0/gabriel_reference_plan-0-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 38,
+          "assessments": [
+            {
+              "check_id": "baseline:unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "baseline-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "oracle",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-oracle"
+            },
+            {
+              "check_id": "unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "changed_paths": [
+          "src/paths.py"
+        ],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_paths"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "b3f0f9c2ae21fdff18213ec71c06c66ce8a57b78a78d08ad3e5c48e6252002a4",
+        "patch_bytes": 533,
+        "patch": "diff --git a/src/paths.py b/src/paths.py\nindex 0f5ffc6..3f7af7a 100644\n--- a/src/paths.py\n+++ b/src/paths.py\n@@ -1,10 +1,12 @@\n \"\"\"paths: URL path normalization.\"\"\"\n \n-\n def normalize(path):\n     \"\"\"Collapse repeated slashes and drop a trailing slash (except for the root).\"\"\"\n     if not path.startswith(\"/\"):\n         path = \"/\" + path\n     while \"//\" in path:\n         path = path.replace(\"//\", \"/\")\n+    # Remove trailing slash if not root\n+    if len(path) > 1 and path.endswith(\"/\"):\n+        path = path[:-1]\n     return path\n",
+        "head_is_base": true
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 6175
+    },
+    {
+      "task_id": "mf-paths",
+      "family": "multi_file",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-paths--gabriel_reference_plan--1",
+      "outcome": {
+        "system": "gabriel_reference_plan",
+        "task_id": "mf-paths",
+        "family": "multi_file",
+        "rep": 1,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 1,
+        "model_tokens": 948,
+        "wall_ms": 5423,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-paths--gabriel_reference_plan--1/gabriel_reference_plan-1-ws/worktrees/run-mf-paths-gabriel_reference_plan-1-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,unit",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,oracle,unit",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,oracle,unit",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; node review verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: oracle,unit",
+          "verify-oracle -> completed (result accepted; checks pending)",
+          "assess verify-oracle/oracle -> passed: assessment passed recorded for oracle; node verify-oracle verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: unit",
+          "verify-unit -> completed (result accepted; checks pending)",
+          "assess verify-unit/unit -> passed: assessment passed recorded for unit; node verify-unit verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-mf-paths-gabriel_reference_plan-1-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-paths--gabriel_reference_plan--1/gabriel_reference_plan-1-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 38,
+          "assessments": [
+            {
+              "check_id": "baseline:unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "baseline-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "oracle",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-oracle"
+            },
+            {
+              "check_id": "unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "changed_paths": [
+          "src/paths.py"
+        ],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_paths"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "3a6e31d81dc008035bdf41c4750231a1d4743712cbe105271cbbca97eccb0a6d",
+        "patch_bytes": 522,
+        "patch": "diff --git a/src/paths.py b/src/paths.py\nindex 0f5ffc6..2261275 100644\n--- a/src/paths.py\n+++ b/src/paths.py\n@@ -5,6 +5,10 @@ def normalize(path):\n     \"\"\"Collapse repeated slashes and drop a trailing slash (except for the root).\"\"\"\n     if not path.startswith(\"/\"):\n         path = \"/\" + path\n+    # Collapse multiple slashes\n     while \"//\" in path:\n         path = path.replace(\"//\", \"/\")\n+    # Remove trailing slash if not root\n+    if len(path) > 1 and path.endswith(\"/\"):\n+        path = path[:-1]\n     return path\n",
+        "head_is_base": true
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 6085
+    },
+    {
+      "task_id": "mf-paths",
+      "family": "multi_file",
+      "system": "gabriel_reference_plan",
+      "rep": 2,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-paths--gabriel_reference_plan--2",
+      "outcome": {
+        "system": "gabriel_reference_plan",
+        "task_id": "mf-paths",
+        "family": "multi_file",
+        "rep": 2,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 1,
+        "model_tokens": 919,
+        "wall_ms": 4562,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-paths--gabriel_reference_plan--2/gabriel_reference_plan-2-ws/worktrees/run-mf-paths-gabriel_reference_plan-2-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,unit",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,oracle,unit",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,oracle,unit",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; node review verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: oracle,unit",
+          "verify-oracle -> completed (result accepted; checks pending)",
+          "assess verify-oracle/oracle -> passed: assessment passed recorded for oracle; node verify-oracle verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: unit",
+          "verify-unit -> completed (result accepted; checks pending)",
+          "assess verify-unit/unit -> passed: assessment passed recorded for unit; node verify-unit verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-mf-paths-gabriel_reference_plan-2-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-paths--gabriel_reference_plan--2/gabriel_reference_plan-2-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 38,
+          "assessments": [
+            {
+              "check_id": "baseline:unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "baseline-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "oracle",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-oracle"
+            },
+            {
+              "check_id": "unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "changed_paths": [
+          "src/paths.py"
+        ],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_paths"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "b63a9213aa94a6726714794840181d37dc3c4110a63bf8dc5df4e27f5fd9e1f7",
+        "patch_bytes": 576,
+        "patch": "diff --git a/src/paths.py b/src/paths.py\nindex 0f5ffc6..f6e2a58 100644\n--- a/src/paths.py\n+++ b/src/paths.py\n@@ -2,9 +2,12 @@\n \n \n def normalize(path):\n-    \"\"\"Collapse repeated slashes and drop a trailing slash (except for the root).\"\"\"\n+    \"\"\"Collapse repeated slashes and drop a trailing slash (except for root).\"\"\"\n     if not path.startswith(\"/\"):\n         path = \"/\" + path\n     while \"//\" in path:\n         path = path.replace(\"//\", \"/\")\n+    # Remove trailing slash if not root\n+    if len(path) > 1 and path.endswith(\"/\"):\n+        path = path[:-1]\n     return path\n",
+        "head_is_base": true
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 5609
+    },
+    {
+      "task_id": "tr-interval",
+      "family": "trap",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-interval--gabriel_reference_plan--0",
+      "outcome": {
+        "system": "gabriel_reference_plan",
+        "task_id": "tr-interval",
+        "family": "trap",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 1,
+        "model_tokens": 714,
+        "wall_ms": 4008,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-interval--gabriel_reference_plan--0/gabriel_reference_plan-0-ws/worktrees/run-tr-interval-gabriel_reference_plan-0-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,unit",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,oracle,unit",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,oracle,unit",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; node review verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: oracle,unit",
+          "verify-oracle -> completed (result accepted; checks pending)",
+          "assess verify-oracle/oracle -> passed: assessment passed recorded for oracle; node verify-oracle verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: unit",
+          "verify-unit -> completed (result accepted; checks pending)",
+          "assess verify-unit/unit -> passed: assessment passed recorded for unit; node verify-unit verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-tr-interval-gabriel_reference_plan-0-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-interval--gabriel_reference_plan--0/gabriel_reference_plan-0-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 38,
+          "assessments": [
+            {
+              "check_id": "baseline:unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "baseline-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "oracle",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-oracle"
+            },
+            {
+              "check_id": "unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "changed_paths": [
+          "src/intervals.py"
+        ],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_intervals"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "5b94ee340aa8de9954e225342106b8d0025efdd244af4f153330fdab98eafd99",
+        "patch_bytes": 386,
+        "patch": "diff --git a/src/intervals.py b/src/intervals.py\nindex 8e57ee2..5359bac 100644\n--- a/src/intervals.py\n+++ b/src/intervals.py\n@@ -1,6 +1,3 @@\n-\"\"\"intervals: half-open [start, end) interval helpers.\"\"\"\n-\n-\n def overlaps(a, b):\n     \"\"\"True when the half-open intervals a and b share at least one point.\"\"\"\n-    return a[0] <= b[1] and b[0] <= a[1]\n+    return a[0] < b[1] and b[0] < a[1]\n",
+        "head_is_base": true
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 4872
+    },
+    {
+      "task_id": "tr-interval",
+      "family": "trap",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-interval--gabriel_reference_plan--1",
+      "outcome": {
+        "system": "gabriel_reference_plan",
+        "task_id": "tr-interval",
+        "family": "trap",
+        "rep": 1,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 1,
+        "model_tokens": 713,
+        "wall_ms": 4079,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-interval--gabriel_reference_plan--1/gabriel_reference_plan-1-ws/worktrees/run-tr-interval-gabriel_reference_plan-1-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,unit",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,oracle,unit",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,oracle,unit",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; node review verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: oracle,unit",
+          "verify-oracle -> completed (result accepted; checks pending)",
+          "assess verify-oracle/oracle -> passed: assessment passed recorded for oracle; node verify-oracle verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: unit",
+          "verify-unit -> completed (result accepted; checks pending)",
+          "assess verify-unit/unit -> passed: assessment passed recorded for unit; node verify-unit verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-tr-interval-gabriel_reference_plan-1-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-interval--gabriel_reference_plan--1/gabriel_reference_plan-1-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 38,
+          "assessments": [
+            {
+              "check_id": "baseline:unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "baseline-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "oracle",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-oracle"
+            },
+            {
+              "check_id": "unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "changed_paths": [
+          "src/intervals.py"
+        ],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_intervals"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "5b94ee340aa8de9954e225342106b8d0025efdd244af4f153330fdab98eafd99",
+        "patch_bytes": 386,
+        "patch": "diff --git a/src/intervals.py b/src/intervals.py\nindex 8e57ee2..5359bac 100644\n--- a/src/intervals.py\n+++ b/src/intervals.py\n@@ -1,6 +1,3 @@\n-\"\"\"intervals: half-open [start, end) interval helpers.\"\"\"\n-\n-\n def overlaps(a, b):\n     \"\"\"True when the half-open intervals a and b share at least one point.\"\"\"\n-    return a[0] <= b[1] and b[0] <= a[1]\n+    return a[0] < b[1] and b[0] < a[1]\n",
+        "head_is_base": true
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 4944
+    },
+    {
+      "task_id": "tr-interval",
+      "family": "trap",
+      "system": "gabriel_reference_plan",
+      "rep": 2,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-interval--gabriel_reference_plan--2",
+      "outcome": {
+        "system": "gabriel_reference_plan",
+        "task_id": "tr-interval",
+        "family": "trap",
+        "rep": 2,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 1,
+        "model_tokens": 740,
+        "wall_ms": 4318,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-interval--gabriel_reference_plan--2/gabriel_reference_plan-2-ws/worktrees/run-tr-interval-gabriel_reference_plan-2-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,unit",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,oracle,unit",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,oracle,unit",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; node review verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: oracle,unit",
+          "verify-oracle -> completed (result accepted; checks pending)",
+          "assess verify-oracle/oracle -> passed: assessment passed recorded for oracle; node verify-oracle verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: unit",
+          "verify-unit -> completed (result accepted; checks pending)",
+          "assess verify-unit/unit -> passed: assessment passed recorded for unit; node verify-unit verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-tr-interval-gabriel_reference_plan-2-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-interval--gabriel_reference_plan--2/gabriel_reference_plan-2-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 38,
+          "assessments": [
+            {
+              "check_id": "baseline:unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "baseline-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "oracle",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-oracle"
+            },
+            {
+              "check_id": "unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "changed_paths": [
+          "src/intervals.py"
+        ],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_intervals"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "5b94ee340aa8de9954e225342106b8d0025efdd244af4f153330fdab98eafd99",
+        "patch_bytes": 386,
+        "patch": "diff --git a/src/intervals.py b/src/intervals.py\nindex 8e57ee2..5359bac 100644\n--- a/src/intervals.py\n+++ b/src/intervals.py\n@@ -1,6 +1,3 @@\n-\"\"\"intervals: half-open [start, end) interval helpers.\"\"\"\n-\n-\n def overlaps(a, b):\n     \"\"\"True when the half-open intervals a and b share at least one point.\"\"\"\n-    return a[0] <= b[1] and b[0] <= a[1]\n+    return a[0] < b[1] and b[0] < a[1]\n",
+        "head_is_base": true
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 5195
+    },
+    {
+      "task_id": "tr-percent",
+      "family": "trap",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-percent--gabriel_reference_plan--0",
+      "outcome": {
+        "system": "gabriel_reference_plan",
+        "task_id": "tr-percent",
+        "family": "trap",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 1,
+        "model_tokens": 690,
+        "wall_ms": 4253,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-percent--gabriel_reference_plan--0/gabriel_reference_plan-0-ws/worktrees/run-tr-percent-gabriel_reference_plan-0-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,unit",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,oracle,unit",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,oracle,unit",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; node review verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: oracle,unit",
+          "verify-oracle -> completed (result accepted; checks pending)",
+          "assess verify-oracle/oracle -> passed: assessment passed recorded for oracle; node verify-oracle verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: unit",
+          "verify-unit -> completed (result accepted; checks pending)",
+          "assess verify-unit/unit -> passed: assessment passed recorded for unit; node verify-unit verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-tr-percent-gabriel_reference_plan-0-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-percent--gabriel_reference_plan--0/gabriel_reference_plan-0-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 38,
+          "assessments": [
+            {
+              "check_id": "baseline:unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "baseline-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "oracle",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-oracle"
+            },
+            {
+              "check_id": "unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "changed_paths": [
+          "src/change.py"
+        ],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_change"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "2b17dda89d5ff222918041683d1b278974c500d7a521e796c4bd6455b2a9cc78",
+        "patch_bytes": 447,
+        "patch": "diff --git a/src/change.py b/src/change.py\nindex 7258b28..5941432 100644\n--- a/src/change.py\n+++ b/src/change.py\n@@ -1,6 +1,7 @@\n \"\"\"change: percentage change between two readings.\"\"\"\n \n-\n def percent_change(old, new):\n     \"\"\"Percentage change from old to new; a zero baseline has no defined change.\"\"\"\n-    return (new - old) / old * 100.0\n+    if old == 0:\n+        return None\n+    return (new - old) / old * 100.0\n\\ No newline at end of file\n",
+        "head_is_base": true
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 4965
+    },
+    {
+      "task_id": "tr-percent",
+      "family": "trap",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-percent--gabriel_reference_plan--1",
+      "outcome": {
+        "system": "gabriel_reference_plan",
+        "task_id": "tr-percent",
+        "family": "trap",
+        "rep": 1,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 1,
+        "model_tokens": 694,
+        "wall_ms": 4310,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-percent--gabriel_reference_plan--1/gabriel_reference_plan-1-ws/worktrees/run-tr-percent-gabriel_reference_plan-1-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,unit",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,oracle,unit",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,oracle,unit",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; node review verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: oracle,unit",
+          "verify-oracle -> completed (result accepted; checks pending)",
+          "assess verify-oracle/oracle -> passed: assessment passed recorded for oracle; node verify-oracle verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: unit",
+          "verify-unit -> completed (result accepted; checks pending)",
+          "assess verify-unit/unit -> passed: assessment passed recorded for unit; node verify-unit verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-tr-percent-gabriel_reference_plan-1-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-percent--gabriel_reference_plan--1/gabriel_reference_plan-1-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 38,
+          "assessments": [
+            {
+              "check_id": "baseline:unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "baseline-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "oracle",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-oracle"
+            },
+            {
+              "check_id": "unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "changed_paths": [
+          "src/change.py"
+        ],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_change"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "7d77f509570015f1b1ef1408e2debc016a0e6c4f4fe901aa30770a7e2655ec7f",
+        "patch_bytes": 324,
+        "patch": "diff --git a/src/change.py b/src/change.py\nindex 7258b28..32e55bb 100644\n--- a/src/change.py\n+++ b/src/change.py\n@@ -3,4 +3,6 @@\n \n def percent_change(old, new):\n     \"\"\"Percentage change from old to new; a zero baseline has no defined change.\"\"\"\n+    if old == 0:\n+        return None\n     return (new - old) / old * 100.0\n",
+        "head_is_base": true
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 5142
+    },
+    {
+      "task_id": "tr-percent",
+      "family": "trap",
+      "system": "gabriel_reference_plan",
+      "rep": 2,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-percent--gabriel_reference_plan--2",
+      "outcome": {
+        "system": "gabriel_reference_plan",
+        "task_id": "tr-percent",
+        "family": "trap",
+        "rep": 2,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 1,
+        "model_tokens": 691,
+        "wall_ms": 4066,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-percent--gabriel_reference_plan--2/gabriel_reference_plan-2-ws/worktrees/run-tr-percent-gabriel_reference_plan-2-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,unit",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,oracle,unit",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,oracle,unit",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; node review verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: oracle,unit",
+          "verify-oracle -> completed (result accepted; checks pending)",
+          "assess verify-oracle/oracle -> passed: assessment passed recorded for oracle; node verify-oracle verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: unit",
+          "verify-unit -> completed (result accepted; checks pending)",
+          "assess verify-unit/unit -> passed: assessment passed recorded for unit; node verify-unit verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-tr-percent-gabriel_reference_plan-2-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-percent--gabriel_reference_plan--2/gabriel_reference_plan-2-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 38,
+          "assessments": [
+            {
+              "check_id": "baseline:unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "baseline-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "oracle",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-oracle"
+            },
+            {
+              "check_id": "unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "changed_paths": [
+          "src/change.py"
+        ],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_change"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "427417df63c0e031baf5bbe456ab5b99c5f04bd2f2c6bd3ef98c4cdc94b12b44",
+        "patch_bytes": 390,
+        "patch": "diff --git a/src/change.py b/src/change.py\nindex 7258b28..f00932a 100644\n--- a/src/change.py\n+++ b/src/change.py\n@@ -3,4 +3,6 @@\n \n def percent_change(old, new):\n     \"\"\"Percentage change from old to new; a zero baseline has no defined change.\"\"\"\n-    return (new - old) / old * 100.0\n+    if old == 0:\n+        return None\n+    return (new - old) / old * 100.0\n\\ No newline at end of file\n",
+        "head_is_base": true
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 4608
+    },
+    {
+      "task_id": "tr-version",
+      "family": "trap",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-version--gabriel_reference_plan--0",
+      "outcome": {
+        "system": "gabriel_reference_plan",
+        "task_id": "tr-version",
+        "family": "trap",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 1,
+        "model_tokens": 891,
+        "wall_ms": 3904,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-version--gabriel_reference_plan--0/gabriel_reference_plan-0-ws/worktrees/run-tr-version-gabriel_reference_plan-0-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,unit",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,oracle,unit",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,oracle,unit",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; node review verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: oracle,unit",
+          "verify-oracle -> completed (result accepted; checks pending)",
+          "assess verify-oracle/oracle -> passed: assessment passed recorded for oracle; node verify-oracle verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: unit",
+          "verify-unit -> completed (result accepted; checks pending)",
+          "assess verify-unit/unit -> passed: assessment passed recorded for unit; node verify-unit verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-tr-version-gabriel_reference_plan-0-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-version--gabriel_reference_plan--0/gabriel_reference_plan-0-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 38,
+          "assessments": [
+            {
+              "check_id": "baseline:unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "baseline-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "oracle",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-oracle"
+            },
+            {
+              "check_id": "unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "changed_paths": [
+          "src/versions.py"
+        ],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_versions"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "ff5189246f2131a08185758b812113adef093538069e0894f6280c099561c60f",
+        "patch_bytes": 825,
+        "patch": "diff --git a/src/versions.py b/src/versions.py\nindex c704259..ab59e4c 100644\n--- a/src/versions.py\n+++ b/src/versions.py\n@@ -1,6 +1,15 @@\n \"\"\"versions: dotted version comparison.\"\"\"\n \n-\n def compare(a, b):\n     \"\"\"Return -1, 0 or 1 comparing dotted numeric versions numerically per component.\"\"\"\n-    return (a > b) - (a < b)\n+    a_components = [int(x) for x in a.split('.')]\n+    b_components = [int(x) for x in b.split('.')]\n+    max_length = max(len(a_components), len(b_components))\n+    a_components.extend([0] * (max_length - len(a_components)))\n+    b_components.extend([0] * (max_length - len(b_components)))\n+    for a_part, b_part in zip(a_components, b_components):\n+        if a_part > b_part:\n+            return 1\n+        elif a_part < b_part:\n+            return -1\n+    return 0\n\\ No newline at end of file\n",
+        "head_is_base": true
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 4826
+    },
+    {
+      "task_id": "tr-version",
+      "family": "trap",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-version--gabriel_reference_plan--1",
+      "outcome": {
+        "system": "gabriel_reference_plan",
+        "task_id": "tr-version",
+        "family": "trap",
+        "rep": 1,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 1,
+        "model_tokens": 900,
+        "wall_ms": 4313,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-version--gabriel_reference_plan--1/gabriel_reference_plan-1-ws/worktrees/run-tr-version-gabriel_reference_plan-1-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,unit",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,oracle,unit",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,oracle,unit",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; node review verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: oracle,unit",
+          "verify-oracle -> completed (result accepted; checks pending)",
+          "assess verify-oracle/oracle -> passed: assessment passed recorded for oracle; node verify-oracle verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: unit",
+          "verify-unit -> completed (result accepted; checks pending)",
+          "assess verify-unit/unit -> passed: assessment passed recorded for unit; node verify-unit verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-tr-version-gabriel_reference_plan-1-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-version--gabriel_reference_plan--1/gabriel_reference_plan-1-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 38,
+          "assessments": [
+            {
+              "check_id": "baseline:unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "baseline-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "oracle",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-oracle"
+            },
+            {
+              "check_id": "unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "changed_paths": [
+          "src/versions.py"
+        ],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_versions"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "0ecdf8aae878df17af205345c0f7ba67a9d5f2c73697a9bbdb3e7dc287c4394a",
+        "patch_bytes": 851,
+        "patch": "diff --git a/src/versions.py b/src/versions.py\nindex c704259..3b98443 100644\n--- a/src/versions.py\n+++ b/src/versions.py\n@@ -1,6 +1,16 @@\n \"\"\"versions: dotted version comparison.\"\"\"\n \n-\n def compare(a, b):\n     \"\"\"Return -1, 0 or 1 comparing dotted numeric versions numerically per component.\"\"\"\n-    return (a > b) - (a < b)\n+    a_components = [int(x) for x in a.split('.')]\n+    b_components = [int(x) for x in b.split('.')]\n+    # Pad the shorter list with zeros for comparison\n+    max_length = max(len(a_components), len(b_components))\n+    a_components.extend([0] * (max_length - len(a_components)))\n+    b_components.extend([0] * (max_length - len(b_components)))\n+    for a_part, b_part in zip(a_components, b_components):\n+        if a_part > b_part:\n+            return 1\n+        elif a_part < b_part:\n+            return -1\n+    return 0\n",
+        "head_is_base": true
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 5003
+    },
+    {
+      "task_id": "tr-version",
+      "family": "trap",
+      "system": "gabriel_reference_plan",
+      "rep": 2,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-version--gabriel_reference_plan--2",
+      "outcome": {
+        "system": "gabriel_reference_plan",
+        "task_id": "tr-version",
+        "family": "trap",
+        "rep": 2,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 1,
+        "model_tokens": 896,
+        "wall_ms": 4746,
+        "provider_statuses": [
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-version--gabriel_reference_plan--2/gabriel_reference_plan-2-ws/worktrees/run-tr-version-gabriel_reference_plan-2-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,unit",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,oracle,unit",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,oracle,unit",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; node review verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: oracle,unit",
+          "verify-oracle -> completed (result accepted; checks pending)",
+          "assess verify-oracle/oracle -> passed: assessment passed recorded for oracle; node verify-oracle verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: unit",
+          "verify-unit -> completed (result accepted; checks pending)",
+          "assess verify-unit/unit -> passed: assessment passed recorded for unit; node verify-unit verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-tr-version-gabriel_reference_plan-2-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-version--gabriel_reference_plan--2/gabriel_reference_plan-2-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 38,
+          "assessments": [
+            {
+              "check_id": "baseline:unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "baseline-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "oracle",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-oracle"
+            },
+            {
+              "check_id": "unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "changed_paths": [
+          "src/versions.py"
+        ],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_versions"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "ff5189246f2131a08185758b812113adef093538069e0894f6280c099561c60f",
+        "patch_bytes": 825,
+        "patch": "diff --git a/src/versions.py b/src/versions.py\nindex c704259..ab59e4c 100644\n--- a/src/versions.py\n+++ b/src/versions.py\n@@ -1,6 +1,15 @@\n \"\"\"versions: dotted version comparison.\"\"\"\n \n-\n def compare(a, b):\n     \"\"\"Return -1, 0 or 1 comparing dotted numeric versions numerically per component.\"\"\"\n-    return (a > b) - (a < b)\n+    a_components = [int(x) for x in a.split('.')]\n+    b_components = [int(x) for x in b.split('.')]\n+    max_length = max(len(a_components), len(b_components))\n+    a_components.extend([0] * (max_length - len(a_components)))\n+    b_components.extend([0] * (max_length - len(b_components)))\n+    for a_part, b_part in zip(a_components, b_components):\n+        if a_part > b_part:\n+            return 1\n+        elif a_part < b_part:\n+            return -1\n+    return 0\n\\ No newline at end of file\n",
+        "head_is_base": true
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 5433
+    }
+  ]
+}

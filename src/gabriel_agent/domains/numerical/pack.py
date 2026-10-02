@@ -537,7 +537,7 @@ class NumericalPack(DomainPack):
     def reference_plan_proposal(self, task, binding, repair_round=0):
         return reference_plan_proposal(task, binding, repair_round=repair_round)
 
-    def build_prompt(self, goal_text, binding, snapshot, manifest, store, *, failure_context, round_index, memory=None, principal_id=None):
+    def build_prompt(self, goal_text, binding, snapshot, manifest, store, *, failure_context, round_index, memory=None, principal_id=None, episodes=()):
         prompt, entries = build_prompt(goal_text, binding, snapshot, manifest, store, failure_context=failure_context, round_index=round_index)
         return prompt, entries, []
 

@@ -42,13 +42,17 @@ def main(argv=None) -> int:
     for name in ("status", "verify", "compact"):
         p = msub.add_parser(name); p.add_argument("--workspace", required=True)
     ev = sub.add_parser("eval", help="frozen matched evaluation (WP11)"); esub = ev.add_subparsers(dest="action", required=True)
-    esub.add_parser("corpus-check")
+    cc = esub.add_parser("corpus-check"); cc.add_argument("--tier", choices=("standard", "hard"), default=None)
     freeze = esub.add_parser("freeze"); freeze.add_argument("--provider", required=True, help="JSON provider spec (file or inline)")
     freeze.add_argument("--out", required=True); freeze.add_argument("--repetitions", type=int, default=2)
     freeze.add_argument("--backend", choices=("linux_namespace", "trusted_local"), default="linux_namespace")
     freeze.add_argument("--systems", default=",".join(("provider_only", "simple_loop", "gabriel", "gabriel_no_repair")))
     freeze.add_argument("--tasks", default=None, help="comma-separated task ids (default: whole corpus)")
     freeze.add_argument("--held-out-families", default="", help="comma-separated families never run before this protocol")
+    freeze.add_argument("--tiers", default="", help="comma-separated corpus tiers to include (default: all)")
+    freeze.add_argument("--policy", default=None, help="router policy record (JSON file) frozen with the protocol for the G3 systems")
+    freeze.add_argument("--episode-seed", default=None, help="JSON file with the frozen episode seed [{id, text}] for the G3 systems")
+    freeze.add_argument("--criterion", default="", help="declared held-out criterion the G3 systems must meet")
     freeze.add_argument("--note", default="", help="free-text provenance note recorded in the protocol")
     erun = esub.add_parser("run"); erun.add_argument("--protocol", required=True); erun.add_argument("--out", required=True)
     erun.add_argument("--provider", required=True, help="JSON provider spec with credential_ref (file or inline)")
@@ -152,13 +156,17 @@ def _json_arg(value):
 def _eval(args) -> int:
     from ..evaluation import corpus, harness
     if args.action == "corpus-check":
-        report = corpus.check_all(); _emit(report)
+        report = corpus.check_all(tier=args.tier); _emit(report)
         return 0 if report["all_sound"] else 5
     if args.action == "freeze":
         provider = _json_arg(args.provider)
         protocol = harness.default_protocol(provider, repetitions=args.repetitions, systems=tuple(args.systems.split(",")),
                                             backend=args.backend, task_ids=args.tasks.split(",") if args.tasks else None,
-                                            held_out_families=[f for f in args.held_out_families.split(",") if f], note=args.note)
+                                            held_out_families=[f for f in args.held_out_families.split(",") if f], note=args.note,
+                                            tiers=[t for t in args.tiers.split(",") if t] or None,
+                                            policy=_json_arg(args.policy) if args.policy else None,
+                                            episode_seed=_json_arg(args.episode_seed) if args.episode_seed else None,
+                                            declared_criterion=args.criterion)
         frozen = harness.freeze(protocol, Path(args.out))
         _emit({"frozen_digest": frozen["frozen_digest"], "corpus_digest": frozen["corpus_digest"], "tasks": len(frozen["tasks"]),
                "systems": frozen["systems"], "repetitions": frozen["repetitions"], "path": args.out})

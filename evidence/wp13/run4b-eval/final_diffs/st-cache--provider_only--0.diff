@@ -1,0 +1,14 @@
+diff --git a/src/memo.py b/src/memo.py
+index d17d9d6..c11ffd3 100644
+--- a/src/memo.py
++++ b/src/memo.py
+@@ -6,7 +6,8 @@ def memoize(func):
+     cache = {}
+ 
+     def wrapper(*args, **kwargs):
+-        key = args
++        # Create a key that includes args and a frozenset of sorted kwargs items
++        key = args + (frozenset(sorted(kwargs.items())),)
+         if key not in cache:
+             cache[key] = func(*args, **kwargs)
+         return cache[key]

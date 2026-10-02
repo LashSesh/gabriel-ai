@@ -1,0 +1,9 @@
+{
+ "goal": "Fix the reported defect in change.percent_change: a zero baseline has no defined percentage change and must yield None, so that callers can distinguish it from no change (0.0). Keep the public API and the existing tests.",
+ "domain": "software",
+ "state": "succeeded",
+ "outcome": "success",
+ "repair_count": 0,
+ "plan_versions": 1,
+ "final_diff": "diff --git a/src/change.py b/src/change.py\nindex 7258b28..5941432 100644\n--- a/src/change.py\n+++ b/src/change.py\n@@ -1,6 +1,7 @@\n \"\"\"change: percentage change between two readings.\"\"\"\n \n-\n def percent_change(old, new):\n     \"\"\"Percentage change from old to new; a zero baseline has no defined change.\"\"\"\n-    return (new - old) / old * 100.0\n+    if old == 0:\n+        return None\n+    return (new - old) / old * 100.0\n\\ No newline at end of file\n"
+}

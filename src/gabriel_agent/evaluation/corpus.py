@@ -23,43 +23,10 @@ from pathlib import Path
 from ..contracts.codec import canonical
 
 
-@dataclass(frozen=True)
-class EvalTask:
-    task_id: str
-    family: str
-    module: str
-    goal: str
-    buggy: str
-    fixed: str
-    visible_tests: str
-    oracle: str
-    allowed_paths: tuple = ("src/",)
+from .corpus_base import EvalTask, task as _task  # noqa: E402
+from .corpus_hard import HARD_TASKS  # noqa: E402
 
-    def files(self) -> dict:
-        return {"src/%s.py" % self.module: self.buggy, "tests/test_%s.py" % self.module: self.visible_tests,
-                "README.md": "# %s\n\nSmall library used in the Gabriel evaluation corpus.\n" % self.module}
-
-    def digest(self) -> str:
-        return hashlib.sha256(canonical({"task_id": self.task_id, "family": self.family, "module": self.module, "goal": self.goal,
-                                         "buggy": self.buggy, "visible_tests": self.visible_tests, "oracle": self.oracle,
-                                         "allowed_paths": list(self.allowed_paths)})).hexdigest()
-
-
-_VISIBLE_HEADER = '''import unittest
-import sys, os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
-'''
-_ORACLE_HEADER = '''import unittest
-import sys, os
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "src"))
-'''
-
-
-def _task(task_id, family, module, goal, buggy, fixed, visible, oracle):
-    return EvalTask(task_id, family, module, goal, buggy, fixed, _VISIBLE_HEADER + visible, _ORACLE_HEADER + oracle)
-
-
-TASKS = [
+STANDARD_TASKS = [
     # ------------------------------------------------------------ family: text_parsing
     _task("tp-kvparse", "text_parsing", "kvparse",
           "Fix the kvparse parser bug: parse_pairs must return an empty dict for empty input and ignore blank items. "
@@ -1004,13 +971,17 @@ if __name__ == "__main__":
 ]
 
 
-def tasks() -> list:
-    return list(TASKS)
+TASKS = STANDARD_TASKS + HARD_TASKS
+TIERS = ("standard", "hard")
 
 
-def families() -> dict:
+def tasks(tier: str | None = None) -> list:
+    return [t for t in TASKS if tier is None or t.tier == tier]
+
+
+def families(tier: str | None = None) -> dict:
     result = {}
-    for task in TASKS:
+    for task in tasks(tier):
         result.setdefault(task.family, []).append(task.task_id)
     return result
 
@@ -1073,25 +1044,35 @@ def soundness_check(task: EvalTask, python: str = "python3") -> dict:
     """Execute the corpus invariants: visible tests pass on the defect, the oracle fails on the
     defect, and both pass on the reference fix. Runs in temporary directories only."""
     results = {}
+    variants = [("buggy", {"src/%s.py" % task.module: task.buggy}), ("fixed", {"src/%s.py" % task.module: task.fixed})]
+    if task.naive:
+        variants.append(("naive", dict(task.naive)))
     with tempfile.TemporaryDirectory(prefix="gabriel-corpus-") as directory:
         root = Path(directory)
-        for variant, source in (("buggy", task.buggy), ("fixed", task.fixed)):
+        for variant, overrides in variants:
             repo = root / variant
             for rel, content in task.files().items():
                 path = repo / rel
                 path.parent.mkdir(parents=True, exist_ok=True)
                 path.write_text(content)
-            (repo / "src" / (task.module + ".py")).write_text(source)
+            for rel, content in overrides.items():
+                (repo / rel).write_text(content)
             write_oracle(task, repo)
             visible = _run([python] + visible_argv(task)[1:], repo)
             oracle = _run([python] + oracle_argv(task)[1:], repo)
             results[variant] = {"visible_exit": visible, "oracle_exit": oracle}
     sound = (results["buggy"]["visible_exit"] == 0 and results["buggy"]["oracle_exit"] != 0
              and results["fixed"]["visible_exit"] == 0 and results["fixed"]["oracle_exit"] == 0)
-    return {"task_id": task.task_id, "family": task.family, "sound": sound, "results": results, "digest": task.digest()}
+    # The trap invariant: the plausible wrong fix passes the visible tests and fails the oracle.
+    trap_holds = None
+    if task.naive:
+        trap_holds = results["naive"]["visible_exit"] == 0 and results["naive"]["oracle_exit"] != 0
+        sound = sound and trap_holds
+    return {"task_id": task.task_id, "family": task.family, "tier": task.tier, "sound": sound, "trap_holds": trap_holds,
+            "results": results, "digest": task.digest()}
 
 
-def check_all(python: str = sys.executable) -> dict:
-    report = [soundness_check(task, python) for task in TASKS]
+def check_all(python: str = sys.executable, tier: str | None = None) -> dict:
+    report = [soundness_check(task, python) for task in tasks(tier)]
     return {"corpus_digest": corpus_digest(), "tasks": report, "all_sound": all(r["sound"] for r in report),
-            "families": families()}
+            "families": families(tier), "tiers": {t: len(tasks(t)) for t in TIERS}}

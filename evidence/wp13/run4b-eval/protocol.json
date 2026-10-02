@@ -1,0 +1,268 @@
+{
+  "backend": "linux_namespace",
+  "bootstrap": {
+    "resamples": 2000,
+    "seed": 20261002
+  },
+  "budget_per_task": {
+    "max_input_tokens": 60000,
+    "max_output_tokens": 4000,
+    "model_requests": 6,
+    "model_tokens_total": 120000,
+    "tool_attempts": 64,
+    "wall_ms": 600000
+  },
+  "corpus_digest": "09c7eca34e1aa8f6801de9173b38ae8fa16fb59879a974603b3354a7001d19c4",
+  "declared_criterion": "Declared before the run. Readout candidate: a logistic readout may be promoted only if the training run yielded labeled router decisions of both classes and its leave-one-family-out decision loss is below the rule's; no such candidate exists (0 decisions in 54 training runs), so no readout is evaluated here. Episodic retrieval arm: on the held-out stateful family gabriel_episodes must reach at least the verified success of gabriel_reference_plan, use fewer mean model tokens and make no false completion; previously seen families are reported separately because their seed episodes contain earlier solutions of the same tasks.",
+  "declared_success": {
+    "gabriel": "run state succeeded (every mandatory check passed with eligible evidence, artifacts verified, effects reconciled)",
+    "gabriel_episodes": "as gabriel_reference_plan (rule-based repair) with the frozen episodes retrievable into the worker prompt (readout ablation)",
+    "gabriel_no_repair": "as gabriel, with max_repairs=0 and max_plan_versions=1 (ablation of the repair cycle)",
+    "gabriel_policy": "as gabriel_reference_plan, with the frozen readout policy pinned: at a failed verification it chooses repair or stop from the progress channels, and it may retrieve frozen episodes into the worker prompt",
+    "gabriel_reference_plan": "as gabriel, with the domain pack's deterministic reference plan admitted without a planner request (planner ablation)",
+    "provider_only": "an admissible patch was applied (no verification)",
+    "simple_loop": "the system's own runs of the visible tests and the oracle both exited 0"
+  },
+  "episode_seed": [
+    {
+      "family": "multi_file",
+      "id": "mf-config-gabriel-0",
+      "task_id": "mf-config",
+      "text": "{\n \"goal\": \"Fix the reported defect: layered configuration must merge nested sections instead of replacing them, so that config.load({'server': {'port': 9000}}) keeps the default host. defaults.merge is the merge rule used everywhere. Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/defaults.py b/src/defaults.py\\nindex 2508d66..4b50a52 100644\\n--- a/src/defaults.py\\n+++ b/src/defaults.py\\n@@ -4,5 +4,13 @@\\n def merge(base, override):\\n     \\\"\\\"\\\"Return base updated with override; nested dicts merge recursively.\\\"\\\"\\\"\\n     result = dict(base)\\n-    result.update(override)\\n+    for key, value in override.items():\\n+        if (\\n+            key in result\\n+            and isinstance(result[key], dict)\\n+            and isinstance(value, dict)\\n+        ):\\n+            result[key] = merge(result[key], value)\\n+        else:\\n+            result[key] = value\\n     return result\\n\"\n}",
+      "verified": 1
+    },
+    {
+      "family": "multi_file",
+      "id": "mf-config-gabriel-1",
+      "task_id": "mf-config",
+      "text": "{\n \"goal\": \"Fix the reported defect: layered configuration must merge nested sections instead of replacing them, so that config.load({'server': {'port': 9000}}) keeps the default host. defaults.merge is the merge rule used everywhere. Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/defaults.py b/src/defaults.py\\nindex 2508d66..85865b7 100644\\n--- a/src/defaults.py\\n+++ b/src/defaults.py\\n@@ -4,5 +4,9 @@\\n def merge(base, override):\\n     \\\"\\\"\\\"Return base updated with override; nested dicts merge recursively.\\\"\\\"\\\"\\n     result = dict(base)\\n-    result.update(override)\\n+    for key, value in override.items():\\n+        if key in result and isinstance(result[key], dict) and isinstance(value, dict):\\n+            result[key] = merge(result[key], value)\\n+        else:\\n+            result[key] = value\\n     return result\\n\"\n}",
+      "verified": 1
+    },
+    {
+      "family": "multi_file",
+      "id": "mf-config-gabriel-2",
+      "task_id": "mf-config",
+      "text": "{\n \"goal\": \"Fix the reported defect: layered configuration must merge nested sections instead of replacing them, so that config.load({'server': {'port': 9000}}) keeps the default host. defaults.merge is the merge rule used everywhere. Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/defaults.py b/src/defaults.py\\nindex 2508d66..85865b7 100644\\n--- a/src/defaults.py\\n+++ b/src/defaults.py\\n@@ -4,5 +4,9 @@\\n def merge(base, override):\\n     \\\"\\\"\\\"Return base updated with override; nested dicts merge recursively.\\\"\\\"\\\"\\n     result = dict(base)\\n-    result.update(override)\\n+    for key, value in override.items():\\n+        if key in result and isinstance(result[key], dict) and isinstance(value, dict):\\n+            result[key] = merge(result[key], value)\\n+        else:\\n+            result[key] = value\\n     return result\\n\"\n}",
+      "verified": 1
+    },
+    {
+      "family": "multi_file",
+      "id": "mf-money-gabriel-0",
+      "task_id": "mf-money",
+      "text": "{\n \"goal\": \"Ledger totals are off by one cent for some inputs. Fix the reported defect: money.round_cents must round halves away from zero (0.125 -> 0.13, 2.675 -> 2.68, -0.125 -> -0.13) and ledger.total must keep using it. Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/money.py b/src/money.py\\nindex fbca006..412fc4d 100644\\n--- a/src/money.py\\n+++ b/src/money.py\\n@@ -3,4 +3,11 @@\\n \\n def round_cents(amount):\\n     \\\"\\\"\\\"Round a decimal amount to cents, halves away from zero.\\\"\\\"\\\"\\n-    return round(amount, 2)\\n+    # Multiply by 100 to shift cents to integer domain\\n+    shifted = amount * 100\\n+    # Determine sign for rounding direction\\n+    sign = 1 if shifted >= 0 else -1\\n+    # Add 0.5 with sign to shift halves away from zero\\n+    shifted_rounded = int(shifted + sign * 0.5)\\n+    # Return back to decimal with two decimals\\n+    return shifted_rounded / 100\\n\"\n}",
+      "verified": 1
+    },
+    {
+      "family": "multi_file",
+      "id": "mf-money-gabriel-1",
+      "task_id": "mf-money",
+      "text": "{\n \"goal\": \"Ledger totals are off by one cent for some inputs. Fix the reported defect: money.round_cents must round halves away from zero (0.125 -> 0.13, 2.675 -> 2.68, -0.125 -> -0.13) and ledger.total must keep using it. Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/money.py b/src/money.py\\nindex fbca006..651a310 100644\\n--- a/src/money.py\\n+++ b/src/money.py\\n@@ -3,4 +3,10 @@\\n \\n def round_cents(amount):\\n     \\\"\\\"\\\"Round a decimal amount to cents, halves away from zero.\\\"\\\"\\\"\\n-    return round(amount, 2)\\n+    # Multiply by 100 to shift cents, then round halves away from zero\\n+    shifted = amount * 100\\n+    if shifted > 0:\\n+        rounded = int(shifted + 0.5)\\n+    else:\\n+        rounded = int(shifted - 0.5)\\n+    return rounded / 100\\n\"\n}",
+      "verified": 1
+    },
+    {
+      "family": "multi_file",
+      "id": "mf-money-gabriel-2",
+      "task_id": "mf-money",
+      "text": "{\n \"goal\": \"Ledger totals are off by one cent for some inputs. Fix the reported defect: money.round_cents must round halves away from zero (0.125 -> 0.13, 2.675 -> 2.68, -0.125 -> -0.13) and ledger.total must keep using it. Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/money.py b/src/money.py\\nindex fbca006..6c10322 100644\\n--- a/src/money.py\\n+++ b/src/money.py\\n@@ -3,4 +3,10 @@\\n \\n def round_cents(amount):\\n     \\\"\\\"\\\"Round a decimal amount to cents, halves away from zero.\\\"\\\"\\\"\\n-    return round(amount, 2)\\n+    # Multiply by 100 to shift cents, then round halves away from zero\\n+    # Python's built-in round uses round half to even, so implement manually\\n+    sign = 1 if amount >= 0 else -1\\n+    shifted = abs(amount) * 100\\n+    # Add 0.5 to shift halves away from zero, then floor\\n+    shifted_rounded = int(shifted + 0.5)\\n+    return sign * shifted_rounded / 100\\n\"\n}",
+      "verified": 1
+    },
+    {
+      "family": "multi_file",
+      "id": "mf-paths-gabriel-0",
+      "task_id": "mf-paths",
+      "text": "{\n \"goal\": \"Fix the reported defect: paths.normalize must drop a trailing slash (except for the root path) in addition to collapsing repeated slashes, so that router.match('/users/me/') resolves. Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/paths.py b/src/paths.py\\nindex 0f5ffc6..773147d 100644\\n--- a/src/paths.py\\n+++ b/src/paths.py\\n@@ -7,4 +7,6 @@ def normalize(path):\\n         path = \\\"/\\\" + path\\n     while \\\"//\\\" in path:\\n         path = path.replace(\\\"//\\\", \\\"/\\\")\\n+    if path != \\\"/\\\" and path.endswith(\\\"/\\\"):\\n+        path = path[:-1]\\n     return path\\n\"\n}",
+      "verified": 1
+    },
+    {
+      "family": "multi_file",
+      "id": "mf-paths-gabriel-1",
+      "task_id": "mf-paths",
+      "text": "{\n \"goal\": \"Fix the reported defect: paths.normalize must drop a trailing slash (except for the root path) in addition to collapsing repeated slashes, so that router.match('/users/me/') resolves. Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/paths.py b/src/paths.py\\nindex 0f5ffc6..773147d 100644\\n--- a/src/paths.py\\n+++ b/src/paths.py\\n@@ -7,4 +7,6 @@ def normalize(path):\\n         path = \\\"/\\\" + path\\n     while \\\"//\\\" in path:\\n         path = path.replace(\\\"//\\\", \\\"/\\\")\\n+    if path != \\\"/\\\" and path.endswith(\\\"/\\\"):\\n+        path = path[:-1]\\n     return path\\n\"\n}",
+      "verified": 1
+    },
+    {
+      "family": "multi_file",
+      "id": "mf-paths-gabriel-2",
+      "task_id": "mf-paths",
+      "text": "{\n \"goal\": \"Fix the reported defect: paths.normalize must drop a trailing slash (except for the root path) in addition to collapsing repeated slashes, so that router.match('/users/me/') resolves. Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/paths.py b/src/paths.py\\nindex 0f5ffc6..712e345 100644\\n--- a/src/paths.py\\n+++ b/src/paths.py\\n@@ -7,4 +7,6 @@ def normalize(path):\\n         path = \\\"/\\\" + path\\n     while \\\"//\\\" in path:\\n         path = path.replace(\\\"//\\\", \\\"/\\\")\\n+    if len(path) > 1 and path.endswith(\\\"/\\\"):\\n+        path = path[:-1]\\n     return path\\n\"\n}",
+      "verified": 1
+    },
+    {
+      "family": "trap",
+      "id": "tr-interval-gabriel-0",
+      "task_id": "tr-interval",
+      "text": "{\n \"goal\": \"Fix the reported defect in intervals.overlaps for half-open intervals [start, end): intervals that merely touch (the end of one equals the start of the other) do not overlap, in either order. Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/intervals.py b/src/intervals.py\\nindex 8e57ee2..54fb1c3 100644\\n--- a/src/intervals.py\\n+++ b/src/intervals.py\\n@@ -3,4 +3,4 @@\\n \\n def overlaps(a, b):\\n     \\\"\\\"\\\"True when the half-open intervals a and b share at least one point.\\\"\\\"\\\"\\n-    return a[0] <= b[1] and b[0] <= a[1]\\n+    return a[0] < b[1] and b[0] < a[1]\\n\"\n}",
+      "verified": 1
+    },
+    {
+      "family": "trap",
+      "id": "tr-interval-gabriel-1",
+      "task_id": "tr-interval",
+      "text": "{\n \"goal\": \"Fix the reported defect in intervals.overlaps for half-open intervals [start, end): intervals that merely touch (the end of one equals the start of the other) do not overlap, in either order. Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/intervals.py b/src/intervals.py\\nindex 8e57ee2..54fb1c3 100644\\n--- a/src/intervals.py\\n+++ b/src/intervals.py\\n@@ -3,4 +3,4 @@\\n \\n def overlaps(a, b):\\n     \\\"\\\"\\\"True when the half-open intervals a and b share at least one point.\\\"\\\"\\\"\\n-    return a[0] <= b[1] and b[0] <= a[1]\\n+    return a[0] < b[1] and b[0] < a[1]\\n\"\n}",
+      "verified": 1
+    },
+    {
+      "family": "trap",
+      "id": "tr-interval-gabriel-2",
+      "task_id": "tr-interval",
+      "text": "{\n \"goal\": \"Fix the reported defect in intervals.overlaps for half-open intervals [start, end): intervals that merely touch (the end of one equals the start of the other) do not overlap, in either order. Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/intervals.py b/src/intervals.py\\nindex 8e57ee2..7966bf8 100644\\n--- a/src/intervals.py\\n+++ b/src/intervals.py\\n@@ -3,4 +3,6 @@\\n \\n def overlaps(a, b):\\n     \\\"\\\"\\\"True when the half-open intervals a and b share at least one point.\\\"\\\"\\\"\\n-    return a[0] <= b[1] and b[0] <= a[1]\\n+    # For half-open intervals [start, end), intervals overlap if:\\n+    # a.start < b.end and b.start < a.end\\n+    return a[0] < b[1] and b[0] < a[1]\\n\"\n}",
+      "verified": 1
+    },
+    {
+      "family": "trap",
+      "id": "tr-percent-gabriel-0",
+      "task_id": "tr-percent",
+      "text": "{\n \"goal\": \"Fix the reported defect in change.percent_change: a zero baseline has no defined percentage change and must yield None, so that callers can distinguish it from no change (0.0). Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/change.py b/src/change.py\\nindex 7258b28..32e55bb 100644\\n--- a/src/change.py\\n+++ b/src/change.py\\n@@ -3,4 +3,6 @@\\n \\n def percent_change(old, new):\\n     \\\"\\\"\\\"Percentage change from old to new; a zero baseline has no defined change.\\\"\\\"\\\"\\n+    if old == 0:\\n+        return None\\n     return (new - old) / old * 100.0\\n\"\n}",
+      "verified": 1
+    },
+    {
+      "family": "trap",
+      "id": "tr-percent-gabriel-1",
+      "task_id": "tr-percent",
+      "text": "{\n \"goal\": \"Fix the reported defect in change.percent_change: a zero baseline has no defined percentage change and must yield None, so that callers can distinguish it from no change (0.0). Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/change.py b/src/change.py\\nindex 7258b28..32e55bb 100644\\n--- a/src/change.py\\n+++ b/src/change.py\\n@@ -3,4 +3,6 @@\\n \\n def percent_change(old, new):\\n     \\\"\\\"\\\"Percentage change from old to new; a zero baseline has no defined change.\\\"\\\"\\\"\\n+    if old == 0:\\n+        return None\\n     return (new - old) / old * 100.0\\n\"\n}",
+      "verified": 1
+    },
+    {
+      "family": "trap",
+      "id": "tr-percent-gabriel-2",
+      "task_id": "tr-percent",
+      "text": "{\n \"goal\": \"Fix the reported defect in change.percent_change: a zero baseline has no defined percentage change and must yield None, so that callers can distinguish it from no change (0.0). Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/change.py b/src/change.py\\nindex 7258b28..32e55bb 100644\\n--- a/src/change.py\\n+++ b/src/change.py\\n@@ -3,4 +3,6 @@\\n \\n def percent_change(old, new):\\n     \\\"\\\"\\\"Percentage change from old to new; a zero baseline has no defined change.\\\"\\\"\\\"\\n+    if old == 0:\\n+        return None\\n     return (new - old) / old * 100.0\\n\"\n}",
+      "verified": 1
+    },
+    {
+      "family": "trap",
+      "id": "tr-version-gabriel-0",
+      "task_id": "tr-version",
+      "text": "{\n \"goal\": \"Fix the reported defect in versions.compare: dotted versions compare numerically per component ('1.10' is newer than '1.9', '1.0.1' is newer than '1.0', and '1.0' equals '1.0.0'). Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/versions.py b/src/versions.py\\nindex c704259..0dba97e 100644\\n--- a/src/versions.py\\n+++ b/src/versions.py\\n@@ -3,4 +3,17 @@\\n \\n def compare(a, b):\\n     \\\"\\\"\\\"Return -1, 0 or 1 comparing dotted numeric versions numerically per component.\\\"\\\"\\\"\\n-    return (a > b) - (a < b)\\n+    a_parts = [int(x) for x in a.split('.')]\\n+    b_parts = [int(x) for x in b.split('.')]\\n+\\n+    # Extend the shorter list with zeros (e.g. '1.0' == '1.0.0')\\n+    max_len = max(len(a_parts), len(b_parts))\\n+    a_parts.extend([0] * (max_len - len(a_parts)))\\n+    b_parts.extend([0] * (max_len - len(b_parts)))\\n+\\n+    for a_part, b_part in zip(a_parts, b_parts):\\n+        if a_part < b_part:\\n+            return -1\\n+        elif a_part > b_part:\\n+            return 1\\n+    return 0\\n\"\n}",
+      "verified": 1
+    },
+    {
+      "family": "trap",
+      "id": "tr-version-gabriel-1",
+      "task_id": "tr-version",
+      "text": "{\n \"goal\": \"Fix the reported defect in versions.compare: dotted versions compare numerically per component ('1.10' is newer than '1.9', '1.0.1' is newer than '1.0', and '1.0' equals '1.0.0'). Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/versions.py b/src/versions.py\\nindex c704259..0dba97e 100644\\n--- a/src/versions.py\\n+++ b/src/versions.py\\n@@ -3,4 +3,17 @@\\n \\n def compare(a, b):\\n     \\\"\\\"\\\"Return -1, 0 or 1 comparing dotted numeric versions numerically per component.\\\"\\\"\\\"\\n-    return (a > b) - (a < b)\\n+    a_parts = [int(x) for x in a.split('.')]\\n+    b_parts = [int(x) for x in b.split('.')]\\n+\\n+    # Extend the shorter list with zeros (e.g. '1.0' == '1.0.0')\\n+    max_len = max(len(a_parts), len(b_parts))\\n+    a_parts.extend([0] * (max_len - len(a_parts)))\\n+    b_parts.extend([0] * (max_len - len(b_parts)))\\n+\\n+    for a_part, b_part in zip(a_parts, b_parts):\\n+        if a_part < b_part:\\n+            return -1\\n+        elif a_part > b_part:\\n+            return 1\\n+    return 0\\n\"\n}",
+      "verified": 1
+    },
+    {
+      "family": "trap",
+      "id": "tr-version-gabriel-2",
+      "task_id": "tr-version",
+      "text": "{\n \"goal\": \"Fix the reported defect in versions.compare: dotted versions compare numerically per component ('1.10' is newer than '1.9', '1.0.1' is newer than '1.0', and '1.0' equals '1.0.0'). Keep the public API and the existing tests.\",\n \"domain\": \"software\",\n \"state\": \"succeeded\",\n \"outcome\": \"success\",\n \"repair_count\": 0,\n \"plan_versions\": 1,\n \"final_diff\": \"diff --git a/src/versions.py b/src/versions.py\\nindex c704259..0dba97e 100644\\n--- a/src/versions.py\\n+++ b/src/versions.py\\n@@ -3,4 +3,17 @@\\n \\n def compare(a, b):\\n     \\\"\\\"\\\"Return -1, 0 or 1 comparing dotted numeric versions numerically per component.\\\"\\\"\\\"\\n-    return (a > b) - (a < b)\\n+    a_parts = [int(x) for x in a.split('.')]\\n+    b_parts = [int(x) for x in b.split('.')]\\n+\\n+    # Extend the shorter list with zeros (e.g. '1.0' == '1.0.0')\\n+    max_len = max(len(a_parts), len(b_parts))\\n+    a_parts.extend([0] * (max_len - len(a_parts)))\\n+    b_parts.extend([0] * (max_len - len(b_parts)))\\n+\\n+    for a_part, b_part in zip(a_parts, b_parts):\\n+        if a_part < b_part:\\n+            return -1\\n+        elif a_part > b_part:\\n+            return 1\\n+    return 0\\n\"\n}",
+      "verified": 1
+    }
+  ],
+  "families": [
+    "multi_file",
+    "stateful",
+    "trap"
+  ],
+  "frozen_at_utc": "2026-10-02T21:28:26.669359+00:00",
+  "frozen_digest": "0acb56abf9ce0372e966198a8e87665779a2c7c87afed5327e0c06233beb6ced",
+  "harness_identity": "04d3f84905e9e2556fc3ee803c850d9feb38c9d647be2d85338a2c568469954a",
+  "held_out_families": [
+    "stateful"
+  ],
+  "metrics": [
+    "p_success = mean(V)",
+    "p_false_completion = mean(D*(1-V))",
+    "conditional false completion = sum(D*(1-V))/sum(D)",
+    "model requests, model tokens and wall time per run",
+    "recovery: Gabriel runs that used repair cycles or extra plan versions",
+    "paired differences gabriel - baseline per task (mean over repetitions)",
+    "bootstrap percentile intervals, resampling task families with replacement (and tasks as a secondary view)"
+  ],
+  "note": "Protocol 4b (G3 route, evaluation) on the hard tier with gpt-4.1-mini: baselines, the reference-plan Gabriel and the episodic-retrieval ablation seeded with the 18 episodes of run4a-train-mini-saturated (training families only). The stateful family was never run before this protocol. A first freeze of this protocol carried an empty seed because the seed builder read unit paths of a moved run; it was discarded before any result was read and the builder was corrected.",
+  "policy": {
+    "channel_schema_id": "progress-channels-v1",
+    "decision_point": "any_boundary",
+    "episodes": {
+      "k": 2,
+      "min_score_milli": 0
+    },
+    "feature_source": "channels",
+    "kind": "rule_based",
+    "policy_id": "rule-based-episodes2-v1",
+    "readout": null,
+    "recurrent_config": null,
+    "schema": "gabriel.router-policy/1",
+    "threshold_milli": 0
+  },
+  "provider": {
+    "credential_ref": "env:OPENAI_API_KEY",
+    "kind": "openai_compat",
+    "model": "gpt-4.1-mini",
+    "temperature_milli": 0,
+    "timeout_ms": 120000
+  },
+  "purpose": "Matched G1 coding comparison: increase independently verified task success or reduce resources at equal success, under a fixed task distribution and matched constraints. Not a benchmark of general capability.",
+  "repetitions": 2,
+  "sample_size_statement": "9 tasks in 3 families; the minimum relevant effect is not predeclared from a pilot, so intervals are reported as descriptive uncertainty, not as a powered test",
+  "schema": "gabriel.evaluation-protocol/1",
+  "systems": [
+    "provider_only",
+    "simple_loop",
+    "gabriel_reference_plan",
+    "gabriel_episodes"
+  ],
+  "tasks": [
+    {
+      "digest": "d113c7086a1e9dbd6babbcaff5c0986fcfad48ac143c34e1ede6230259aac724",
+      "family": "multi_file",
+      "task_id": "mf-money",
+      "tier": "hard"
+    },
+    {
+      "digest": "891055af6d863211f7915ada6fd5014016f8515d1f64de3c57dc9ef0f687b729",
+      "family": "multi_file",
+      "task_id": "mf-config",
+      "tier": "hard"
+    },
+    {
+      "digest": "c5ed8c5495586ab0b2c3b9004284290835e370232a69dfeae6b17c58e18f8eb6",
+      "family": "multi_file",
+      "task_id": "mf-paths",
+      "tier": "hard"
+    },
+    {
+      "digest": "07d77e42349cea158a8822c0bfa20cea9c81ca844398538658a1c338e0d39850",
+      "family": "trap",
+      "task_id": "tr-interval",
+      "tier": "hard"
+    },
+    {
+      "digest": "20f9b5953c2460971db480407149d747c764afe73e14730c3a1553d0a2d6cda8",
+      "family": "trap",
+      "task_id": "tr-version",
+      "tier": "hard"
+    },
+    {
+      "digest": "b569bb4996c7917a66e32642566cbdfa3a80fa43bd3eed8be8b9bac5f3cfe463",
+      "family": "trap",
+      "task_id": "tr-percent",
+      "tier": "hard"
+    },
+    {
+      "digest": "8a41f5962ec3dfa1d10a8077f8a6676084680bd1344c60b3487b7fafe4f3cd38",
+      "family": "stateful",
+      "task_id": "st-cache",
+      "tier": "hard"
+    },
+    {
+      "digest": "47b9feb642a7b3264e09d754b4507a2e7b9559f5f6621e8171584f521c4761e7",
+      "family": "stateful",
+      "task_id": "st-rate",
+      "tier": "hard"
+    },
+    {
+      "digest": "beeddfc301eb2fc048462b2038a97ba30103e1ec4c650876ab129c2ea3dbf6ab",
+      "family": "stateful",
+      "task_id": "st-queue",
+      "tier": "hard"
+    }
+  ],
+  "tiers": [
+    "hard"
+  ],
+  "time_limit_is_failure": true,
+  "verification": "fresh, system-independent: changed paths within allowed_paths; visible tests exit 0; oracle installed from the corpus text and exit 0; all executed in the containment backend on the final tree"
+}

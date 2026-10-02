@@ -1,0 +1,2238 @@
+{
+  "schema": "gabriel.evaluation-results/1",
+  "protocol_frozen_digest": "21838d1897632ed7c2e852c88c758befa73bd0821fb979d360a2fd556d61a25e",
+  "frozen_check": {
+    "frozen_digest": "21838d1897632ed7c2e852c88c758befa73bd0821fb979d360a2fd556d61a25e",
+    "harness_identity_now": "74881835bc40469b76df9da675c9d7219e7b189aa7807b9b89f9b57f0b42cb01",
+    "harness_amended": false
+  },
+  "started_at_utc": "2026-10-02T21:24:23.389887+00:00",
+  "wall_ms": 59181,
+  "units": 18,
+  "records": [
+    {
+      "task_id": "mf-config",
+      "family": "multi_file",
+      "system": "gabriel",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-config--gabriel--0",
+      "outcome": {
+        "system": "gabriel",
+        "task_id": "mf-config",
+        "family": "multi_file",
+        "rep": 0,
+        "declared": false,
+        "declared_reason": "run state blocked",
+        "model_requests": 2,
+        "model_tokens": 2218,
+        "wall_ms": 8018,
+        "provider_statuses": [
+          "invalid_output",
+          "invalid_output"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-config--gabriel--0/gabriel-0-ws/worktrees/run-mf-config-gabriel-0-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "planner attempt invalid_output",
+          "planner attempt invalid_output",
+          "hold plan_unavailable -> blocked: planner returned no usable proposal (invalid_output); planner request limit reached for this plan version"
+        ],
+        "gabriel": {
+          "run_id": "run-mf-config-gabriel-0-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-config--gabriel--0/gabriel-0-ws",
+          "hold": {
+            "from_state": "planning",
+            "missing_prerequisite": "valid-plan-proposal",
+            "reason_code": "plan_unavailable",
+            "ref": {
+              "bytes": 307,
+              "media_type": "application/json",
+              "sha256": "09648ff494c535087c4fceb0f22860b599df50e3d061405852329024e27d45a1"
+            },
+            "target_state": "blocked",
+            "wakeup_condition": "user-review"
+          },
+          "replay": "passed",
+          "events": 9,
+          "assessments": []
+        },
+        "repairs_used": 0,
+        "plan_versions": 0
+      },
+      "verification": {
+        "verified": false,
+        "changed_paths": [],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_defaults"
+          ],
+          "exit_code": 1,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "FF\n======================================================================\nFAIL: test_merge_is_recursive (oracle_defaults.OracleTests.test_merge_is_recursive)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/work/oracle_defaults.py\", line 13, in test_merge_is_recursive\n    self.assertEqual(merge({\"a\": {\"x\": 1, \"y\": 2}}, {\"a\": {\"y\": 3}}), {\"a\": {\"x\": 1, \"y\": 3}})\nAssertionError: {'a': {'y': 3}} != {'a': {'x': 1, 'y': 3}}\n- {'a': {'y': 3}}\n+ {'a': {'x': 1, 'y': 3}}\n?        ++++++++\n\n\n======================================================================\nFAIL: test_nested_section_keeps_defaults (oracle_defaults.OracleTests.test_nested_section_keeps_defaults)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/work/oracle_defaults.py\", line 10, in test_nested_section_keeps_defaults\n    self.assertEqual(load({\"server\": {\"port\": 9000}})[\"server\"], {\"host\": \"localhost\", \"port\": 9000})\nAssertionError: {'port': 9000} != {'host': 'localhost', 'port': 9000}\n- {'port': 9000}\n+ {'host': 'localhost', 'port': 9000}\n\n----------------------------------------------------------------------\nRan 2 tests in 0.001s\n\nFAILED (failures=2)\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "patch_bytes": 0,
+        "patch": "",
+        "head_is_base": true
+      },
+      "V": 0,
+      "D": 0,
+      "false_completion": 0,
+      "unit_wall_ms": 8715
+    },
+    {
+      "task_id": "mf-config",
+      "family": "multi_file",
+      "system": "gabriel",
+      "rep": 1,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-config--gabriel--1",
+      "outcome": {
+        "system": "gabriel",
+        "task_id": "mf-config",
+        "family": "multi_file",
+        "rep": 1,
+        "declared": false,
+        "declared_reason": "run state blocked",
+        "model_requests": 2,
+        "model_tokens": 2218,
+        "wall_ms": 8078,
+        "provider_statuses": [
+          "invalid_output",
+          "invalid_output"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-config--gabriel--1/gabriel-1-ws/worktrees/run-mf-config-gabriel-1-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "planner attempt invalid_output",
+          "planner attempt invalid_output",
+          "hold plan_unavailable -> blocked: planner returned no usable proposal (invalid_output); planner request limit reached for this plan version"
+        ],
+        "gabriel": {
+          "run_id": "run-mf-config-gabriel-1-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-config--gabriel--1/gabriel-1-ws",
+          "hold": {
+            "from_state": "planning",
+            "missing_prerequisite": "valid-plan-proposal",
+            "reason_code": "plan_unavailable",
+            "ref": {
+              "bytes": 307,
+              "media_type": "application/json",
+              "sha256": "09648ff494c535087c4fceb0f22860b599df50e3d061405852329024e27d45a1"
+            },
+            "target_state": "blocked",
+            "wakeup_condition": "user-review"
+          },
+          "replay": "passed",
+          "events": 9,
+          "assessments": []
+        },
+        "repairs_used": 0,
+        "plan_versions": 0
+      },
+      "verification": {
+        "verified": false,
+        "changed_paths": [],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_defaults"
+          ],
+          "exit_code": 1,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "FF\n======================================================================\nFAIL: test_merge_is_recursive (oracle_defaults.OracleTests.test_merge_is_recursive)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/work/oracle_defaults.py\", line 13, in test_merge_is_recursive\n    self.assertEqual(merge({\"a\": {\"x\": 1, \"y\": 2}}, {\"a\": {\"y\": 3}}), {\"a\": {\"x\": 1, \"y\": 3}})\nAssertionError: {'a': {'y': 3}} != {'a': {'x': 1, 'y': 3}}\n- {'a': {'y': 3}}\n+ {'a': {'x': 1, 'y': 3}}\n?        ++++++++\n\n\n======================================================================\nFAIL: test_nested_section_keeps_defaults (oracle_defaults.OracleTests.test_nested_section_keeps_defaults)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/work/oracle_defaults.py\", line 10, in test_nested_section_keeps_defaults\n    self.assertEqual(load({\"server\": {\"port\": 9000}})[\"server\"], {\"host\": \"localhost\", \"port\": 9000})\nAssertionError: {'port': 9000} != {'host': 'localhost', 'port': 9000}\n- {'port': 9000}\n+ {'host': 'localhost', 'port': 9000}\n\n----------------------------------------------------------------------\nRan 2 tests in 0.001s\n\nFAILED (failures=2)\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "patch_bytes": 0,
+        "patch": "",
+        "head_is_base": true
+      },
+      "V": 0,
+      "D": 0,
+      "false_completion": 0,
+      "unit_wall_ms": 8762
+    },
+    {
+      "task_id": "mf-config",
+      "family": "multi_file",
+      "system": "gabriel",
+      "rep": 2,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-config--gabriel--2",
+      "outcome": {
+        "system": "gabriel",
+        "task_id": "mf-config",
+        "family": "multi_file",
+        "rep": 2,
+        "declared": false,
+        "declared_reason": "run state blocked",
+        "model_requests": 2,
+        "model_tokens": 2218,
+        "wall_ms": 8748,
+        "provider_statuses": [
+          "invalid_output",
+          "invalid_output"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-config--gabriel--2/gabriel-2-ws/worktrees/run-mf-config-gabriel-2-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "planner attempt invalid_output",
+          "planner attempt invalid_output",
+          "hold plan_unavailable -> blocked: planner returned no usable proposal (invalid_output); planner request limit reached for this plan version"
+        ],
+        "gabriel": {
+          "run_id": "run-mf-config-gabriel-2-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-config--gabriel--2/gabriel-2-ws",
+          "hold": {
+            "from_state": "planning",
+            "missing_prerequisite": "valid-plan-proposal",
+            "reason_code": "plan_unavailable",
+            "ref": {
+              "bytes": 307,
+              "media_type": "application/json",
+              "sha256": "09648ff494c535087c4fceb0f22860b599df50e3d061405852329024e27d45a1"
+            },
+            "target_state": "blocked",
+            "wakeup_condition": "user-review"
+          },
+          "replay": "passed",
+          "events": 9,
+          "assessments": []
+        },
+        "repairs_used": 0,
+        "plan_versions": 0
+      },
+      "verification": {
+        "verified": false,
+        "changed_paths": [],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_defaults"
+          ],
+          "exit_code": 1,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "FF\n======================================================================\nFAIL: test_merge_is_recursive (oracle_defaults.OracleTests.test_merge_is_recursive)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/work/oracle_defaults.py\", line 13, in test_merge_is_recursive\n    self.assertEqual(merge({\"a\": {\"x\": 1, \"y\": 2}}, {\"a\": {\"y\": 3}}), {\"a\": {\"x\": 1, \"y\": 3}})\nAssertionError: {'a': {'y': 3}} != {'a': {'x': 1, 'y': 3}}\n- {'a': {'y': 3}}\n+ {'a': {'x': 1, 'y': 3}}\n?        ++++++++\n\n\n======================================================================\nFAIL: test_nested_section_keeps_defaults (oracle_defaults.OracleTests.test_nested_section_keeps_defaults)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/work/oracle_defaults.py\", line 10, in test_nested_section_keeps_defaults\n    self.assertEqual(load({\"server\": {\"port\": 9000}})[\"server\"], {\"host\": \"localhost\", \"port\": 9000})\nAssertionError: {'port': 9000} != {'host': 'localhost', 'port': 9000}\n- {'port': 9000}\n+ {'host': 'localhost', 'port': 9000}\n\n----------------------------------------------------------------------\nRan 2 tests in 0.001s\n\nFAILED (failures=2)\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "patch_bytes": 0,
+        "patch": "",
+        "head_is_base": true
+      },
+      "V": 0,
+      "D": 0,
+      "false_completion": 0,
+      "unit_wall_ms": 9302
+    },
+    {
+      "task_id": "mf-money",
+      "family": "multi_file",
+      "system": "gabriel",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-money--gabriel--0",
+      "outcome": {
+        "system": "gabriel",
+        "task_id": "mf-money",
+        "family": "multi_file",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 5,
+        "model_tokens": 5507,
+        "wall_ms": 12565,
+        "provider_statuses": [
+          "invalid_output",
+          "invalid_output",
+          "completed",
+          "invalid_output",
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-money--gabriel--0/gabriel-0-ws/worktrees/run-mf-money-gabriel-0-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess apply-r1/output-valid -> passed: assessment passed recorded for output-valid; node apply-r1 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "read-back-r1 -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back-r1/output-valid -> passed: assessment passed recorded for output-valid; node read-back-r1 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "review-r1 -> completed (result accepted; checks pending)",
+          "assess review-r1/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,unit",
+          "assess review-r1/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,oracle,unit",
+          "assess review-r1/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,oracle,unit",
+          "assess review-r1/no-secrets -> passed: assessment passed recorded for no-secrets; node review-r1 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: oracle,unit",
+          "verify-oracle-r1 -> completed (result accepted; checks pending)",
+          "assess verify-oracle-r1/oracle -> passed: assessment passed recorded for oracle; node verify-oracle-r1 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: unit",
+          "verify-unit-r1 -> completed (result accepted; checks pending)",
+          "assess verify-unit-r1/unit -> passed: assessment passed recorded for unit; node verify-unit-r1 verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-mf-money-gabriel-0-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-money--gabriel--0/gabriel-0-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 55,
+          "assessments": [
+            {
+              "check_id": "baseline:unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "baseline-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe-r1"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose-r1"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply-r1"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back-r1"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review-r1"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review-r1"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review-r1"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review-r1"
+            },
+            {
+              "check_id": "oracle",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-oracle-r1"
+            },
+            {
+              "check_id": "unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-unit-r1"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 2
+      },
+      "verification": {
+        "verified": true,
+        "changed_paths": [
+          "src/money.py"
+        ],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_money"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "957e1a11dd7d5df7fa219ca662ffe9d448cb4c505e9c18f72425666bd5289024",
+        "patch_bytes": 529,
+        "patch": "diff --git a/src/money.py b/src/money.py\nindex fbca006..820ad4a 100644\n--- a/src/money.py\n+++ b/src/money.py\n@@ -1,6 +1,9 @@\n \"\"\"money: cent rounding for ledgers.\"\"\"\n \n+import decimal\n \n def round_cents(amount):\n     \"\"\"Round a decimal amount to cents, halves away from zero.\"\"\"\n-    return round(amount, 2)\n+    d = decimal.Decimal(str(amount))\n+    # Set rounding mode to ROUND_HALF_UP for halves away from zero\n+    return float(d.quantize(decimal.Decimal('0.01'), rounding=decimal.ROUND_HALF_UP))\n\\ No newline at end of file\n",
+        "head_is_base": true
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 14209
+    },
+    {
+      "task_id": "mf-money",
+      "family": "multi_file",
+      "system": "gabriel",
+      "rep": 1,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-money--gabriel--1",
+      "outcome": {
+        "system": "gabriel",
+        "task_id": "mf-money",
+        "family": "multi_file",
+        "rep": 1,
+        "declared": false,
+        "declared_reason": "run state blocked",
+        "model_requests": 2,
+        "model_tokens": 2260,
+        "wall_ms": 5868,
+        "provider_statuses": [
+          "invalid_output",
+          "invalid_output"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-money--gabriel--1/gabriel-1-ws/worktrees/run-mf-money-gabriel-1-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "planner attempt invalid_output",
+          "planner attempt invalid_output",
+          "hold plan_unavailable -> blocked: planner returned no usable proposal (invalid_output); planner request limit reached for this plan version"
+        ],
+        "gabriel": {
+          "run_id": "run-mf-money-gabriel-1-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-money--gabriel--1/gabriel-1-ws",
+          "hold": {
+            "from_state": "planning",
+            "missing_prerequisite": "valid-plan-proposal",
+            "reason_code": "plan_unavailable",
+            "ref": {
+              "bytes": 307,
+              "media_type": "application/json",
+              "sha256": "09648ff494c535087c4fceb0f22860b599df50e3d061405852329024e27d45a1"
+            },
+            "target_state": "blocked",
+            "wakeup_condition": "user-review"
+          },
+          "replay": "passed",
+          "events": 9,
+          "assessments": []
+        },
+        "repairs_used": 0,
+        "plan_versions": 0
+      },
+      "verification": {
+        "verified": false,
+        "changed_paths": [],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_money"
+          ],
+          "exit_code": 1,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "F.F\n======================================================================\nFAIL: test_halves_away_from_zero (oracle_money.OracleTests.test_halves_away_from_zero)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/work/oracle_money.py\", line 10, in test_halves_away_from_zero\n    self.assertEqual(round_cents(0.125), 0.13)\nAssertionError: 0.12 != 0.13\n\n======================================================================\nFAIL: test_total_rounds_each_line (oracle_money.OracleTests.test_total_rounds_each_line)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/work/oracle_money.py\", line 15, in test_total_rounds_each_line\n    self.assertEqual(total([0.125, 0.125]), 0.26)\nAssertionError: 0.24 != 0.26\n\n----------------------------------------------------------------------\nRan 3 tests in 0.001s\n\nFAILED (failures=2)\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "patch_bytes": 0,
+        "patch": "",
+        "head_is_base": true
+      },
+      "V": 0,
+      "D": 0,
+      "false_completion": 0,
+      "unit_wall_ms": 7618
+    },
+    {
+      "task_id": "mf-money",
+      "family": "multi_file",
+      "system": "gabriel",
+      "rep": 2,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-money--gabriel--2",
+      "outcome": {
+        "system": "gabriel",
+        "task_id": "mf-money",
+        "family": "multi_file",
+        "rep": 2,
+        "declared": false,
+        "declared_reason": "run state blocked",
+        "model_requests": 2,
+        "model_tokens": 2264,
+        "wall_ms": 5730,
+        "provider_statuses": [
+          "invalid_output",
+          "invalid_output"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-money--gabriel--2/gabriel-2-ws/worktrees/run-mf-money-gabriel-2-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "planner attempt invalid_output",
+          "planner attempt invalid_output",
+          "hold plan_unavailable -> blocked: planner returned no usable proposal (invalid_output); planner request limit reached for this plan version"
+        ],
+        "gabriel": {
+          "run_id": "run-mf-money-gabriel-2-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-money--gabriel--2/gabriel-2-ws",
+          "hold": {
+            "from_state": "planning",
+            "missing_prerequisite": "valid-plan-proposal",
+            "reason_code": "plan_unavailable",
+            "ref": {
+              "bytes": 307,
+              "media_type": "application/json",
+              "sha256": "09648ff494c535087c4fceb0f22860b599df50e3d061405852329024e27d45a1"
+            },
+            "target_state": "blocked",
+            "wakeup_condition": "user-review"
+          },
+          "replay": "passed",
+          "events": 9,
+          "assessments": []
+        },
+        "repairs_used": 0,
+        "plan_versions": 0
+      },
+      "verification": {
+        "verified": false,
+        "changed_paths": [],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_money"
+          ],
+          "exit_code": 1,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "F.F\n======================================================================\nFAIL: test_halves_away_from_zero (oracle_money.OracleTests.test_halves_away_from_zero)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/work/oracle_money.py\", line 10, in test_halves_away_from_zero\n    self.assertEqual(round_cents(0.125), 0.13)\nAssertionError: 0.12 != 0.13\n\n======================================================================\nFAIL: test_total_rounds_each_line (oracle_money.OracleTests.test_total_rounds_each_line)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/work/oracle_money.py\", line 15, in test_total_rounds_each_line\n    self.assertEqual(total([0.125, 0.125]), 0.26)\nAssertionError: 0.24 != 0.26\n\n----------------------------------------------------------------------\nRan 3 tests in 0.001s\n\nFAILED (failures=2)\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "patch_bytes": 0,
+        "patch": "",
+        "head_is_base": true
+      },
+      "V": 0,
+      "D": 0,
+      "false_completion": 0,
+      "unit_wall_ms": 7536
+    },
+    {
+      "task_id": "mf-paths",
+      "family": "multi_file",
+      "system": "gabriel",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-paths--gabriel--0",
+      "outcome": {
+        "system": "gabriel",
+        "task_id": "mf-paths",
+        "family": "multi_file",
+        "rep": 0,
+        "declared": false,
+        "declared_reason": "run state blocked",
+        "model_requests": 2,
+        "model_tokens": 2217,
+        "wall_ms": 8351,
+        "provider_statuses": [
+          "invalid_output",
+          "invalid_output"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-paths--gabriel--0/gabriel-0-ws/worktrees/run-mf-paths-gabriel-0-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "planner attempt invalid_output",
+          "planner attempt invalid_output",
+          "hold plan_unavailable -> blocked: planner returned no usable proposal (invalid_output); planner request limit reached for this plan version"
+        ],
+        "gabriel": {
+          "run_id": "run-mf-paths-gabriel-0-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-paths--gabriel--0/gabriel-0-ws",
+          "hold": {
+            "from_state": "planning",
+            "missing_prerequisite": "valid-plan-proposal",
+            "reason_code": "plan_unavailable",
+            "ref": {
+              "bytes": 307,
+              "media_type": "application/json",
+              "sha256": "09648ff494c535087c4fceb0f22860b599df50e3d061405852329024e27d45a1"
+            },
+            "target_state": "blocked",
+            "wakeup_condition": "user-review"
+          },
+          "replay": "passed",
+          "events": 9,
+          "assessments": []
+        },
+        "repairs_used": 0,
+        "plan_versions": 0
+      },
+      "verification": {
+        "verified": false,
+        "changed_paths": [],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_paths"
+          ],
+          "exit_code": 1,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": ".FF\n======================================================================\nFAIL: test_router_uses_normalize (oracle_paths.OracleTests.test_router_uses_normalize)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/work/oracle_paths.py\", line 17, in test_router_uses_normalize\n    self.assertEqual(match(\"/users/me/\"), \"profile\")\nAssertionError: None != 'profile'\n\n======================================================================\nFAIL: test_trailing_slash_dropped (oracle_paths.OracleTests.test_trailing_slash_dropped)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/work/oracle_paths.py\", line 10, in test_trailing_slash_dropped\n    self.assertEqual(normalize(\"/users/\"), \"/users\")\nAssertionError: '/users/' != '/users'\n- /users/\n?       -\n+ /users\n\n\n----------------------------------------------------------------------\nRan 3 tests in 0.001s\n\nFAILED (failures=2)\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "patch_bytes": 0,
+        "patch": "",
+        "head_is_base": true
+      },
+      "V": 0,
+      "D": 0,
+      "false_completion": 0,
+      "unit_wall_ms": 9051
+    },
+    {
+      "task_id": "mf-paths",
+      "family": "multi_file",
+      "system": "gabriel",
+      "rep": 1,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-paths--gabriel--1",
+      "outcome": {
+        "system": "gabriel",
+        "task_id": "mf-paths",
+        "family": "multi_file",
+        "rep": 1,
+        "declared": false,
+        "declared_reason": "run state blocked",
+        "model_requests": 2,
+        "model_tokens": 2215,
+        "wall_ms": 8294,
+        "provider_statuses": [
+          "invalid_output",
+          "invalid_output"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-paths--gabriel--1/gabriel-1-ws/worktrees/run-mf-paths-gabriel-1-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "planner attempt invalid_output",
+          "planner attempt invalid_output",
+          "hold plan_unavailable -> blocked: planner returned no usable proposal (invalid_output); planner request limit reached for this plan version"
+        ],
+        "gabriel": {
+          "run_id": "run-mf-paths-gabriel-1-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-paths--gabriel--1/gabriel-1-ws",
+          "hold": {
+            "from_state": "planning",
+            "missing_prerequisite": "valid-plan-proposal",
+            "reason_code": "plan_unavailable",
+            "ref": {
+              "bytes": 307,
+              "media_type": "application/json",
+              "sha256": "09648ff494c535087c4fceb0f22860b599df50e3d061405852329024e27d45a1"
+            },
+            "target_state": "blocked",
+            "wakeup_condition": "user-review"
+          },
+          "replay": "passed",
+          "events": 9,
+          "assessments": []
+        },
+        "repairs_used": 0,
+        "plan_versions": 0
+      },
+      "verification": {
+        "verified": false,
+        "changed_paths": [],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_paths"
+          ],
+          "exit_code": 1,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": ".FF\n======================================================================\nFAIL: test_router_uses_normalize (oracle_paths.OracleTests.test_router_uses_normalize)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/work/oracle_paths.py\", line 17, in test_router_uses_normalize\n    self.assertEqual(match(\"/users/me/\"), \"profile\")\nAssertionError: None != 'profile'\n\n======================================================================\nFAIL: test_trailing_slash_dropped (oracle_paths.OracleTests.test_trailing_slash_dropped)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/work/oracle_paths.py\", line 10, in test_trailing_slash_dropped\n    self.assertEqual(normalize(\"/users/\"), \"/users\")\nAssertionError: '/users/' != '/users'\n- /users/\n?       -\n+ /users\n\n\n----------------------------------------------------------------------\nRan 3 tests in 0.001s\n\nFAILED (failures=2)\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "patch_bytes": 0,
+        "patch": "",
+        "head_is_base": true
+      },
+      "V": 0,
+      "D": 0,
+      "false_completion": 0,
+      "unit_wall_ms": 8902
+    },
+    {
+      "task_id": "mf-paths",
+      "family": "multi_file",
+      "system": "gabriel",
+      "rep": 2,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-paths--gabriel--2",
+      "outcome": {
+        "system": "gabriel",
+        "task_id": "mf-paths",
+        "family": "multi_file",
+        "rep": 2,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 2,
+        "model_tokens": 2103,
+        "wall_ms": 9502,
+        "provider_statuses": [
+          "completed",
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-paths--gabriel--2/gabriel-2-ws/worktrees/run-mf-paths-gabriel-2-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,unit",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,oracle,unit",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,oracle,unit",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; node review verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: oracle,unit",
+          "verify-oracle -> completed (result accepted; checks pending)",
+          "assess verify-oracle/oracle -> passed: assessment passed recorded for oracle; node verify-oracle verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: unit",
+          "verify-unit -> completed (result accepted; checks pending)",
+          "assess verify-unit/unit -> passed: assessment passed recorded for unit; node verify-unit verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-mf-paths-gabriel-2-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/mf-paths--gabriel--2/gabriel-2-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 41,
+          "assessments": [
+            {
+              "check_id": "baseline:unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "baseline-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "oracle",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-oracle"
+            },
+            {
+              "check_id": "unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "changed_paths": [
+          "src/paths.py"
+        ],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_paths"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "b63a9213aa94a6726714794840181d37dc3c4110a63bf8dc5df4e27f5fd9e1f7",
+        "patch_bytes": 576,
+        "patch": "diff --git a/src/paths.py b/src/paths.py\nindex 0f5ffc6..f6e2a58 100644\n--- a/src/paths.py\n+++ b/src/paths.py\n@@ -2,9 +2,12 @@\n \n \n def normalize(path):\n-    \"\"\"Collapse repeated slashes and drop a trailing slash (except for the root).\"\"\"\n+    \"\"\"Collapse repeated slashes and drop a trailing slash (except for root).\"\"\"\n     if not path.startswith(\"/\"):\n         path = \"/\" + path\n     while \"//\" in path:\n         path = path.replace(\"//\", \"/\")\n+    # Remove trailing slash if not root\n+    if len(path) > 1 and path.endswith(\"/\"):\n+        path = path[:-1]\n     return path\n",
+        "head_is_base": true
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 10126
+    },
+    {
+      "task_id": "tr-interval",
+      "family": "trap",
+      "system": "gabriel",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-interval--gabriel--0",
+      "outcome": {
+        "system": "gabriel",
+        "task_id": "tr-interval",
+        "family": "trap",
+        "rep": 0,
+        "declared": false,
+        "declared_reason": "run state blocked",
+        "model_requests": 2,
+        "model_tokens": 2231,
+        "wall_ms": 8586,
+        "provider_statuses": [
+          "invalid_output",
+          "invalid_output"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-interval--gabriel--0/gabriel-0-ws/worktrees/run-tr-interval-gabriel-0-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "planner attempt invalid_output",
+          "planner attempt invalid_output",
+          "hold plan_unavailable -> blocked: planner returned no usable proposal (invalid_output); planner request limit reached for this plan version"
+        ],
+        "gabriel": {
+          "run_id": "run-tr-interval-gabriel-0-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-interval--gabriel--0/gabriel-0-ws",
+          "hold": {
+            "from_state": "planning",
+            "missing_prerequisite": "valid-plan-proposal",
+            "reason_code": "plan_unavailable",
+            "ref": {
+              "bytes": 307,
+              "media_type": "application/json",
+              "sha256": "09648ff494c535087c4fceb0f22860b599df50e3d061405852329024e27d45a1"
+            },
+            "target_state": "blocked",
+            "wakeup_condition": "user-review"
+          },
+          "replay": "passed",
+          "events": 9,
+          "assessments": []
+        },
+        "repairs_used": 0,
+        "plan_versions": 0
+      },
+      "verification": {
+        "verified": false,
+        "changed_paths": [],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_intervals"
+          ],
+          "exit_code": 1,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": ".F\n======================================================================\nFAIL: test_touching_is_not_overlap_in_either_order (oracle_intervals.OracleTests.test_touching_is_not_overlap_in_either_order)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/work/oracle_intervals.py\", line 9, in test_touching_is_not_overlap_in_either_order\n    self.assertFalse(overlaps((0, 5), (5, 8)))\nAssertionError: True is not false\n\n----------------------------------------------------------------------\nRan 2 tests in 0.001s\n\nFAILED (failures=1)\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "patch_bytes": 0,
+        "patch": "",
+        "head_is_base": true
+      },
+      "V": 0,
+      "D": 0,
+      "false_completion": 0,
+      "unit_wall_ms": 9226
+    },
+    {
+      "task_id": "tr-interval",
+      "family": "trap",
+      "system": "gabriel",
+      "rep": 1,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-interval--gabriel--1",
+      "outcome": {
+        "system": "gabriel",
+        "task_id": "tr-interval",
+        "family": "trap",
+        "rep": 1,
+        "declared": false,
+        "declared_reason": "run state blocked",
+        "model_requests": 2,
+        "model_tokens": 2234,
+        "wall_ms": 8831,
+        "provider_statuses": [
+          "invalid_output",
+          "invalid_output"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-interval--gabriel--1/gabriel-1-ws/worktrees/run-tr-interval-gabriel-1-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "planner attempt invalid_output",
+          "planner attempt invalid_output",
+          "hold plan_unavailable -> blocked: planner returned no usable proposal (invalid_output); planner request limit reached for this plan version"
+        ],
+        "gabriel": {
+          "run_id": "run-tr-interval-gabriel-1-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-interval--gabriel--1/gabriel-1-ws",
+          "hold": {
+            "from_state": "planning",
+            "missing_prerequisite": "valid-plan-proposal",
+            "reason_code": "plan_unavailable",
+            "ref": {
+              "bytes": 307,
+              "media_type": "application/json",
+              "sha256": "09648ff494c535087c4fceb0f22860b599df50e3d061405852329024e27d45a1"
+            },
+            "target_state": "blocked",
+            "wakeup_condition": "user-review"
+          },
+          "replay": "passed",
+          "events": 9,
+          "assessments": []
+        },
+        "repairs_used": 0,
+        "plan_versions": 0
+      },
+      "verification": {
+        "verified": false,
+        "changed_paths": [],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_intervals"
+          ],
+          "exit_code": 1,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": ".F\n======================================================================\nFAIL: test_touching_is_not_overlap_in_either_order (oracle_intervals.OracleTests.test_touching_is_not_overlap_in_either_order)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/work/oracle_intervals.py\", line 9, in test_touching_is_not_overlap_in_either_order\n    self.assertFalse(overlaps((0, 5), (5, 8)))\nAssertionError: True is not false\n\n----------------------------------------------------------------------\nRan 2 tests in 0.001s\n\nFAILED (failures=1)\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "patch_bytes": 0,
+        "patch": "",
+        "head_is_base": true
+      },
+      "V": 0,
+      "D": 0,
+      "false_completion": 0,
+      "unit_wall_ms": 9562
+    },
+    {
+      "task_id": "tr-interval",
+      "family": "trap",
+      "system": "gabriel",
+      "rep": 2,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-interval--gabriel--2",
+      "outcome": {
+        "system": "gabriel",
+        "task_id": "tr-interval",
+        "family": "trap",
+        "rep": 2,
+        "declared": false,
+        "declared_reason": "run state blocked",
+        "model_requests": 2,
+        "model_tokens": 2236,
+        "wall_ms": 6984,
+        "provider_statuses": [
+          "invalid_output",
+          "invalid_output"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-interval--gabriel--2/gabriel-2-ws/worktrees/run-tr-interval-gabriel-2-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "planner attempt invalid_output",
+          "planner attempt invalid_output",
+          "hold plan_unavailable -> blocked: planner returned no usable proposal (invalid_output); planner request limit reached for this plan version"
+        ],
+        "gabriel": {
+          "run_id": "run-tr-interval-gabriel-2-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-interval--gabriel--2/gabriel-2-ws",
+          "hold": {
+            "from_state": "planning",
+            "missing_prerequisite": "valid-plan-proposal",
+            "reason_code": "plan_unavailable",
+            "ref": {
+              "bytes": 307,
+              "media_type": "application/json",
+              "sha256": "09648ff494c535087c4fceb0f22860b599df50e3d061405852329024e27d45a1"
+            },
+            "target_state": "blocked",
+            "wakeup_condition": "user-review"
+          },
+          "replay": "passed",
+          "events": 9,
+          "assessments": []
+        },
+        "repairs_used": 0,
+        "plan_versions": 0
+      },
+      "verification": {
+        "verified": false,
+        "changed_paths": [],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_intervals"
+          ],
+          "exit_code": 1,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": ".F\n======================================================================\nFAIL: test_touching_is_not_overlap_in_either_order (oracle_intervals.OracleTests.test_touching_is_not_overlap_in_either_order)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/work/oracle_intervals.py\", line 9, in test_touching_is_not_overlap_in_either_order\n    self.assertFalse(overlaps((0, 5), (5, 8)))\nAssertionError: True is not false\n\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nFAILED (failures=1)\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "patch_bytes": 0,
+        "patch": "",
+        "head_is_base": true
+      },
+      "V": 0,
+      "D": 0,
+      "false_completion": 0,
+      "unit_wall_ms": 7578
+    },
+    {
+      "task_id": "tr-percent",
+      "family": "trap",
+      "system": "gabriel",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-percent--gabriel--0",
+      "outcome": {
+        "system": "gabriel",
+        "task_id": "tr-percent",
+        "family": "trap",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 2,
+        "model_tokens": 1901,
+        "wall_ms": 7774,
+        "provider_statuses": [
+          "completed",
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-percent--gabriel--0/gabriel-0-ws/worktrees/run-tr-percent-gabriel-0-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,unit",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,oracle,unit",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,oracle,unit",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; node review verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: oracle,unit",
+          "verify-oracle -> completed (result accepted; checks pending)",
+          "assess verify-oracle/oracle -> passed: assessment passed recorded for oracle; node verify-oracle verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: unit",
+          "verify-unit -> completed (result accepted; checks pending)",
+          "assess verify-unit/unit -> passed: assessment passed recorded for unit; node verify-unit verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-tr-percent-gabriel-0-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-percent--gabriel--0/gabriel-0-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 41,
+          "assessments": [
+            {
+              "check_id": "baseline:unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "baseline-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "oracle",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-oracle"
+            },
+            {
+              "check_id": "unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "changed_paths": [
+          "src/change.py"
+        ],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_change"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "7d77f509570015f1b1ef1408e2debc016a0e6c4f4fe901aa30770a7e2655ec7f",
+        "patch_bytes": 324,
+        "patch": "diff --git a/src/change.py b/src/change.py\nindex 7258b28..32e55bb 100644\n--- a/src/change.py\n+++ b/src/change.py\n@@ -3,4 +3,6 @@\n \n def percent_change(old, new):\n     \"\"\"Percentage change from old to new; a zero baseline has no defined change.\"\"\"\n+    if old == 0:\n+        return None\n     return (new - old) / old * 100.0\n",
+        "head_is_base": true
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 8550
+    },
+    {
+      "task_id": "tr-percent",
+      "family": "trap",
+      "system": "gabriel",
+      "rep": 1,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-percent--gabriel--1",
+      "outcome": {
+        "system": "gabriel",
+        "task_id": "tr-percent",
+        "family": "trap",
+        "rep": 1,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 2,
+        "model_tokens": 1902,
+        "wall_ms": 7885,
+        "provider_statuses": [
+          "completed",
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-percent--gabriel--1/gabriel-1-ws/worktrees/run-tr-percent-gabriel-1-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,unit",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,oracle,unit",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,oracle,unit",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; node review verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: oracle,unit",
+          "verify-oracle -> completed (result accepted; checks pending)",
+          "assess verify-oracle/oracle -> passed: assessment passed recorded for oracle; node verify-oracle verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: unit",
+          "verify-unit -> completed (result accepted; checks pending)",
+          "assess verify-unit/unit -> passed: assessment passed recorded for unit; node verify-unit verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-tr-percent-gabriel-1-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-percent--gabriel--1/gabriel-1-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 41,
+          "assessments": [
+            {
+              "check_id": "baseline:unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "baseline-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "oracle",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-oracle"
+            },
+            {
+              "check_id": "unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "changed_paths": [
+          "src/change.py"
+        ],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_change"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "427417df63c0e031baf5bbe456ab5b99c5f04bd2f2c6bd3ef98c4cdc94b12b44",
+        "patch_bytes": 390,
+        "patch": "diff --git a/src/change.py b/src/change.py\nindex 7258b28..f00932a 100644\n--- a/src/change.py\n+++ b/src/change.py\n@@ -3,4 +3,6 @@\n \n def percent_change(old, new):\n     \"\"\"Percentage change from old to new; a zero baseline has no defined change.\"\"\"\n-    return (new - old) / old * 100.0\n+    if old == 0:\n+        return None\n+    return (new - old) / old * 100.0\n\\ No newline at end of file\n",
+        "head_is_base": true
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 8574
+    },
+    {
+      "task_id": "tr-percent",
+      "family": "trap",
+      "system": "gabriel",
+      "rep": 2,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-percent--gabriel--2",
+      "outcome": {
+        "system": "gabriel",
+        "task_id": "tr-percent",
+        "family": "trap",
+        "rep": 2,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 2,
+        "model_tokens": 1912,
+        "wall_ms": 7993,
+        "provider_statuses": [
+          "completed",
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-percent--gabriel--2/gabriel-2-ws/worktrees/run-tr-percent-gabriel-2-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,unit",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,oracle,unit",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,oracle,unit",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; node review verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: oracle,unit",
+          "verify-oracle -> completed (result accepted; checks pending)",
+          "assess verify-oracle/oracle -> passed: assessment passed recorded for oracle; node verify-oracle verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: unit",
+          "verify-unit -> completed (result accepted; checks pending)",
+          "assess verify-unit/unit -> passed: assessment passed recorded for unit; node verify-unit verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-tr-percent-gabriel-2-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-percent--gabriel--2/gabriel-2-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 41,
+          "assessments": [
+            {
+              "check_id": "baseline:unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "baseline-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "oracle",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-oracle"
+            },
+            {
+              "check_id": "unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "changed_paths": [
+          "src/change.py"
+        ],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_change"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "427417df63c0e031baf5bbe456ab5b99c5f04bd2f2c6bd3ef98c4cdc94b12b44",
+        "patch_bytes": 390,
+        "patch": "diff --git a/src/change.py b/src/change.py\nindex 7258b28..f00932a 100644\n--- a/src/change.py\n+++ b/src/change.py\n@@ -3,4 +3,6 @@\n \n def percent_change(old, new):\n     \"\"\"Percentage change from old to new; a zero baseline has no defined change.\"\"\"\n-    return (new - old) / old * 100.0\n+    if old == 0:\n+        return None\n+    return (new - old) / old * 100.0\n\\ No newline at end of file\n",
+        "head_is_base": true
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 8648
+    },
+    {
+      "task_id": "tr-version",
+      "family": "trap",
+      "system": "gabriel",
+      "rep": 0,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-version--gabriel--0",
+      "outcome": {
+        "system": "gabriel",
+        "task_id": "tr-version",
+        "family": "trap",
+        "rep": 0,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 2,
+        "model_tokens": 2117,
+        "wall_ms": 8903,
+        "provider_statuses": [
+          "completed",
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-version--gabriel--0/gabriel-0-ws/worktrees/run-tr-version-gabriel-0-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,unit",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,oracle,unit",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,oracle,unit",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; node review verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: oracle,unit",
+          "verify-oracle -> completed (result accepted; checks pending)",
+          "assess verify-oracle/oracle -> passed: assessment passed recorded for oracle; node verify-oracle verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: unit",
+          "verify-unit -> completed (result accepted; checks pending)",
+          "assess verify-unit/unit -> passed: assessment passed recorded for unit; node verify-unit verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-tr-version-gabriel-0-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-version--gabriel--0/gabriel-0-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 41,
+          "assessments": [
+            {
+              "check_id": "baseline:unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "baseline-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "oracle",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-oracle"
+            },
+            {
+              "check_id": "unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "changed_paths": [
+          "src/versions.py"
+        ],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_versions"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "0ecdf8aae878df17af205345c0f7ba67a9d5f2c73697a9bbdb3e7dc287c4394a",
+        "patch_bytes": 851,
+        "patch": "diff --git a/src/versions.py b/src/versions.py\nindex c704259..3b98443 100644\n--- a/src/versions.py\n+++ b/src/versions.py\n@@ -1,6 +1,16 @@\n \"\"\"versions: dotted version comparison.\"\"\"\n \n-\n def compare(a, b):\n     \"\"\"Return -1, 0 or 1 comparing dotted numeric versions numerically per component.\"\"\"\n-    return (a > b) - (a < b)\n+    a_components = [int(x) for x in a.split('.')]\n+    b_components = [int(x) for x in b.split('.')]\n+    # Pad the shorter list with zeros for comparison\n+    max_length = max(len(a_components), len(b_components))\n+    a_components.extend([0] * (max_length - len(a_components)))\n+    b_components.extend([0] * (max_length - len(b_components)))\n+    for a_part, b_part in zip(a_components, b_components):\n+        if a_part > b_part:\n+            return 1\n+        elif a_part < b_part:\n+            return -1\n+    return 0\n",
+        "head_is_base": true
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 9767
+    },
+    {
+      "task_id": "tr-version",
+      "family": "trap",
+      "system": "gabriel",
+      "rep": 1,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-version--gabriel--1",
+      "outcome": {
+        "system": "gabriel",
+        "task_id": "tr-version",
+        "family": "trap",
+        "rep": 1,
+        "declared": true,
+        "declared_reason": "run state succeeded",
+        "model_requests": 2,
+        "model_tokens": 2110,
+        "wall_ms": 9222,
+        "provider_statuses": [
+          "completed",
+          "completed"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-version--gabriel--1/gabriel-1-ws/worktrees/run-tr-version-gabriel-1-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+          "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+          "review -> completed (result accepted; checks pending)",
+          "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,unit",
+          "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,oracle,unit",
+          "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,oracle,unit",
+          "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; node review verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: oracle,unit",
+          "verify-oracle -> completed (result accepted; checks pending)",
+          "assess verify-oracle/oracle -> passed: assessment passed recorded for oracle; node verify-oracle verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: unit",
+          "verify-unit -> completed (result accepted; checks pending)",
+          "assess verify-unit/unit -> passed: assessment passed recorded for unit; node verify-unit verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+        ],
+        "gabriel": {
+          "run_id": "run-tr-version-gabriel-1-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-version--gabriel--1/gabriel-1-ws",
+          "hold": null,
+          "replay": "passed",
+          "events": 41,
+          "assessments": [
+            {
+              "check_id": "baseline:unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "baseline-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "propose"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "apply"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "read-back"
+            },
+            {
+              "check_id": "scope",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "base-commit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "checks-intact",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "no-secrets",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "review"
+            },
+            {
+              "check_id": "oracle",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-oracle"
+            },
+            {
+              "check_id": "unit",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "verify-unit"
+            },
+            {
+              "check_id": "output-valid",
+              "outcome": "passed",
+              "eligible": true,
+              "node_id": "observe"
+            }
+          ]
+        },
+        "repairs_used": 0,
+        "plan_versions": 1
+      },
+      "verification": {
+        "verified": true,
+        "changed_paths": [
+          "src/versions.py"
+        ],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_versions"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "0ecdf8aae878df17af205345c0f7ba67a9d5f2c73697a9bbdb3e7dc287c4394a",
+        "patch_bytes": 851,
+        "patch": "diff --git a/src/versions.py b/src/versions.py\nindex c704259..3b98443 100644\n--- a/src/versions.py\n+++ b/src/versions.py\n@@ -1,6 +1,16 @@\n \"\"\"versions: dotted version comparison.\"\"\"\n \n-\n def compare(a, b):\n     \"\"\"Return -1, 0 or 1 comparing dotted numeric versions numerically per component.\"\"\"\n-    return (a > b) - (a < b)\n+    a_components = [int(x) for x in a.split('.')]\n+    b_components = [int(x) for x in b.split('.')]\n+    # Pad the shorter list with zeros for comparison\n+    max_length = max(len(a_components), len(b_components))\n+    a_components.extend([0] * (max_length - len(a_components)))\n+    b_components.extend([0] * (max_length - len(b_components)))\n+    for a_part, b_part in zip(a_components, b_components):\n+        if a_part > b_part:\n+            return 1\n+        elif a_part < b_part:\n+            return -1\n+    return 0\n",
+        "head_is_base": true
+      },
+      "V": 1,
+      "D": 1,
+      "false_completion": 0,
+      "unit_wall_ms": 9886
+    },
+    {
+      "task_id": "tr-version",
+      "family": "trap",
+      "system": "gabriel",
+      "rep": 2,
+      "run_dir": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-version--gabriel--2",
+      "outcome": {
+        "system": "gabriel",
+        "task_id": "tr-version",
+        "family": "trap",
+        "rep": 2,
+        "declared": false,
+        "declared_reason": "run state blocked",
+        "model_requests": 2,
+        "model_tokens": 2242,
+        "wall_ms": 8646,
+        "provider_statuses": [
+          "invalid_output",
+          "invalid_output"
+        ],
+        "model_revisions": [
+          "gpt-4.1-nano-2025-04-14"
+        ],
+        "worktree": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-version--gabriel--2/gabriel-2-ws/worktrees/run-tr-version-gabriel-2-1",
+        "timed_out": false,
+        "error": null,
+        "log": [
+          "planner attempt invalid_output",
+          "planner attempt invalid_output",
+          "hold plan_unavailable -> blocked: planner returned no usable proposal (invalid_output); planner request limit reached for this plan version"
+        ],
+        "gabriel": {
+          "run_id": "run-tr-version-gabriel-2-1",
+          "workspace": "/home/user/gabriel-ai/evidence/wp13/run4a-train/runs/tr-version--gabriel--2/gabriel-2-ws",
+          "hold": {
+            "from_state": "planning",
+            "missing_prerequisite": "valid-plan-proposal",
+            "reason_code": "plan_unavailable",
+            "ref": {
+              "bytes": 307,
+              "media_type": "application/json",
+              "sha256": "09648ff494c535087c4fceb0f22860b599df50e3d061405852329024e27d45a1"
+            },
+            "target_state": "blocked",
+            "wakeup_condition": "user-review"
+          },
+          "replay": "passed",
+          "events": 9,
+          "assessments": []
+        },
+        "repairs_used": 0,
+        "plan_versions": 0
+      },
+      "verification": {
+        "verified": false,
+        "changed_paths": [],
+        "out_of_scope_paths": [],
+        "visible": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ],
+          "exit_code": 0,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+          "backend": "linux_namespace"
+        },
+        "oracle": {
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "oracle_versions"
+          ],
+          "exit_code": 1,
+          "timed_out": false,
+          "start_failure": null,
+          "stdout_tail": "",
+          "stderr_tail": "FF\n======================================================================\nFAIL: test_numeric_components (oracle_versions.OracleTests.test_numeric_components)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/work/oracle_versions.py\", line 9, in test_numeric_components\n    self.assertEqual(compare(\"1.10\", \"1.9\"), 1)\nAssertionError: -1 != 1\n\n======================================================================\nFAIL: test_three_components (oracle_versions.OracleTests.test_three_components)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/work/oracle_versions.py\", line 14, in test_three_components\n    self.assertEqual(compare(\"1.0\", \"1.0.0\"), 0)\nAssertionError: -1 != 0\n\n----------------------------------------------------------------------\nRan 2 tests in 0.001s\n\nFAILED (failures=2)\n",
+          "backend": "linux_namespace"
+        },
+        "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "patch_bytes": 0,
+        "patch": "",
+        "head_is_base": true
+      },
+      "V": 0,
+      "D": 0,
+      "false_completion": 0,
+      "unit_wall_ms": 9311
+    }
+  ]
+}

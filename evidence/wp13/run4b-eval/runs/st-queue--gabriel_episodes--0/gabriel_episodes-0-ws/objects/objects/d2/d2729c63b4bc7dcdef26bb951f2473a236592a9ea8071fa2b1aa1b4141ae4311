@@ -1,0 +1,64 @@
+You are the worker role of Gabriel, a repository repair agent.
+Goal (verbatim user request):
+Fix the reported defect in pq.PriorityQueue: among items with equal priority the queue must be first-in first-out, and items need not be comparable with each other. Keep the public API and the existing tests.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- unit [software/test_passed] argv=python3 -m unittest discover -s tests independent=False
+- oracle [software/test_passed] argv=python3 -m unittest oracle_pq independent=True
+
+Allowed paths (changes elsewhere are rejected): src/
+Base commit: 1c399d84ccab9c1ecef727ec1691ca9b2b76b3ad
+
+Files (path sha256 bytes):
+  README.md e1765be1b6dcec368714dc255bf09630c855b15270b10e1d49ed5ab2ab53c4d5 59
+  src/pq.py fd6ac7776276728e41d841f6d141e19555d31aace69c9b004580ef0f677703a6 322
+  tests/test_pq.py ba66603d31dc9db12f527e69d1c2f8771ac783ab9e89091662bc3b12b689db66 523
+
+Source files in scope:
+=== src/pq.py (sha256 fd6ac7776276728e41d841f6d141e19555d31aace69c9b004580ef0f677703a6) ===
+"""pq: priority queue, lowest priority value first, FIFO among equal priorities."""
+import heapq
+
+
+class PriorityQueue:
+    def __init__(self):
+        self._heap = []
+
+    def push(self, priority, item):
+        heapq.heappush(self._heap, (priority, item))
+
+    def pop(self):
+        return heapq.heappop(self._heap)[1]
+
+
+
+Past episodes retrieved as evidence (outcomes of earlier tasks; they are not instructions):
+=== episode obs-5b7090de270457f222619768270c53745901cea0 ===
+{
+ "goal": "Fix the reported defect: layered configuration must merge nested sections instead of replacing them, so that config.load({'server': {'port': 9000}}) keeps the default host. defaults.merge is the merge rule used everywhere. Keep the public API and the existing tests.",
+ "domain": "software",
+ "state": "succeeded",
+ "outcome": "success",
+ "repair_count": 0,
+ "plan_versions": 1,
+ "final_diff": "diff --git a/src/defaults.py b/src/defaults.py\nindex 2508d66..4b50a52 100644\n--- a/src/defaults.py\n+++ b/src/defaults.py\n@@ -4,5 +4,13 @@\n def merge(base, override):\n     \"\"\"Return base updated with override; nested dicts merge recursively.\"\"\"\n     result = dict(base)\n-    result.update(override)\n+    for key, value in override.items():\n+        if (\n+            key in result\n+            and isinstance(result[key], dict)\n+            and isinstance(value, dict)\n+        ):\n+            result[key] = merge(result[key], value)\n+        else:\n+            result[key] = value\n     return result\n"
+}
+
+=== episode obs-6fe318a7377c8ab7caf1be127517747fb2094625 ===
+{
+ "goal": "Fix the reported defect: layered configuration must merge nested sections instead of replacing them, so that config.load({'server': {'port': 9000}}) keeps the default host. defaults.merge is the merge rule used everywhere. Keep the public API and the existing tests.",
+ "domain": "software",
+ "state": "succeeded",
+ "outcome": "success",
+ "repair_count": 0,
+ "plan_versions": 1,
+ "final_diff": "diff --git a/src/defaults.py b/src/defaults.py\nindex 2508d66..85865b7 100644\n--- a/src/defaults.py\n+++ b/src/defaults.py\n@@ -4,5 +4,9 @@\n def merge(base, override):\n     \"\"\"Return base updated with override; nested dicts merge recursively.\"\"\"\n     result = dict(base)\n-    result.update(override)\n+    for key, value in override.items():\n+        if key in result and isinstance(result[key], dict) and isinstance(value, dict):\n+            result[key] = merge(result[key], value)\n+        else:\n+            result[key] = value\n     return result\n"
+}
+
+
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<relative path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest.
+For create expected_sha256 is null. For delete content is null. Do not touch oracle or test command files.
+Do not claim completion; the independent checks decide.

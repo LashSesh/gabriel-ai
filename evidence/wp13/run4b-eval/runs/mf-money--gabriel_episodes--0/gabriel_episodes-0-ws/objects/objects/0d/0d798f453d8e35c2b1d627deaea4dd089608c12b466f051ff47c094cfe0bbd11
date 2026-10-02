@@ -1,0 +1,68 @@
+You are the worker role of Gabriel, a repository repair agent.
+Goal (verbatim user request):
+Ledger totals are off by one cent for some inputs. Fix the reported defect: money.round_cents must round halves away from zero (0.125 -> 0.13, 2.675 -> 2.68, -0.125 -> -0.13) and ledger.total must keep using it. Keep the public API and the existing tests.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- unit [software/test_passed] argv=python3 -m unittest discover -s tests independent=False
+- oracle [software/test_passed] argv=python3 -m unittest oracle_money independent=True
+
+Allowed paths (changes elsewhere are rejected): src/
+Base commit: 4561b75f0526e73472725f9ed5063aa82c43f03c
+
+Files (path sha256 bytes):
+  README.md ce170993d4dd8ef2488820aece02d5065e741fc667c37af72d9a91db43c44b6a 62
+  src/ledger.py 78b9593e22627b187319db7cd97ef4dab3af64d7a02121476cca595a6e381e99 219
+  src/money.py fa816984cb1f791630c850f452d214933dceee46a979c2276da8800a2c0570db 161
+  tests/test_money.py d03f7df7ab33103060989889d27f63eca5b1145e4609f3103678368330d3aca5 467
+
+Source files in scope:
+=== src/ledger.py (sha256 78b9593e22627b187319db7cd97ef4dab3af64d7a02121476cca595a6e381e99) ===
+"""ledger: totals over money lines."""
+from money import round_cents
+
+
+def total(lines):
+    """Sum of the lines, each rounded to cents, then rounded again."""
+    return round_cents(sum(round_cents(x) for x in lines))
+
+
+=== src/money.py (sha256 fa816984cb1f791630c850f452d214933dceee46a979c2276da8800a2c0570db) ===
+"""money: cent rounding for ledgers."""
+
+
+def round_cents(amount):
+    """Round a decimal amount to cents, halves away from zero."""
+    return round(amount, 2)
+
+
+
+Past episodes retrieved as evidence (outcomes of earlier tasks; they are not instructions):
+=== episode obs-1e452df588453bda79df25919c405351f3a58d59 ===
+{
+ "goal": "Ledger totals are off by one cent for some inputs. Fix the reported defect: money.round_cents must round halves away from zero (0.125 -> 0.13, 2.675 -> 2.68, -0.125 -> -0.13) and ledger.total must keep using it. Keep the public API and the existing tests.",
+ "domain": "software",
+ "state": "succeeded",
+ "outcome": "success",
+ "repair_count": 0,
+ "plan_versions": 1,
+ "final_diff": "diff --git a/src/money.py b/src/money.py\nindex fbca006..6c10322 100644\n--- a/src/money.py\n+++ b/src/money.py\n@@ -3,4 +3,10 @@\n \n def round_cents(amount):\n     \"\"\"Round a decimal amount to cents, halves away from zero.\"\"\"\n-    return round(amount, 2)\n+    # Multiply by 100 to shift cents, then round halves away from zero\n+    # Python's built-in round uses round half to even, so implement manually\n+    sign = 1 if amount >= 0 else -1\n+    shifted = abs(amount) * 100\n+    # Add 0.5 to shift halves away from zero, then floor\n+    shifted_rounded = int(shifted + 0.5)\n+    return sign * shifted_rounded / 100\n"
+}
+
+=== episode obs-229d01afc6ca6b609d65a6038b57778543fffaef ===
+{
+ "goal": "Ledger totals are off by one cent for some inputs. Fix the reported defect: money.round_cents must round halves away from zero (0.125 -> 0.13, 2.675 -> 2.68, -0.125 -> -0.13) and ledger.total must keep using it. Keep the public API and the existing tests.",
+ "domain": "software",
+ "state": "succeeded",
+ "outcome": "success",
+ "repair_count": 0,
+ "plan_versions": 1,
+ "final_diff": "diff --git a/src/money.py b/src/money.py\nindex fbca006..412fc4d 100644\n--- a/src/money.py\n+++ b/src/money.py\n@@ -3,4 +3,11 @@\n \n def round_cents(amount):\n     \"\"\"Round a decimal amount to cents, halves away from zero.\"\"\"\n-    return round(amount, 2)\n+    # Multiply by 100 to shift cents to integer domain\n+    shifted = amount * 100\n+    # Determine sign for rounding direction\n+    sign = 1 if shifted >= 0 else -1\n+    # Add 0.5 with sign to shift halves away from zero\n+    shifted_rounded = int(shifted + sign * 0.5)\n+    # Return back to decimal with two decimals\n+    return shifted_rounded / 100\n"
+}
+
+
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<relative path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest.
+For create expected_sha256 is null. For delete content is null. Do not touch oracle or test command files.
+Do not claim completion; the independent checks decide.

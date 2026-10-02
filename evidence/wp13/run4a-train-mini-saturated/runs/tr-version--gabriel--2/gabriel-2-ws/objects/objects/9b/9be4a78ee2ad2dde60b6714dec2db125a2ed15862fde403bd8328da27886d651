@@ -1,0 +1,1 @@
+The original compare function compared version strings lexicographically, which fails for numeric components (e.g., '1.10' < '1.9'). The fix splits versions into integer components, pads shorter versions with zeros, and compares numerically per component, preserving the public API and behavior.

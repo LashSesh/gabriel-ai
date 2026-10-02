@@ -1,0 +1,47 @@
+You are the worker role of Gabriel, a repository repair agent.
+Goal (verbatim user request):
+Fix the reported defect: layered configuration must merge nested sections instead of replacing them, so that config.load({'server': {'port': 9000}}) keeps the default host. defaults.merge is the merge rule used everywhere. Keep the public API and the existing tests.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- unit [software/test_passed] argv=python3 -m unittest discover -s tests independent=False
+- oracle [software/test_passed] argv=python3 -m unittest oracle_defaults independent=True
+
+Allowed paths (changes elsewhere are rejected): src/
+Base commit: 0c6db98166784711bd6aa9db715954ffed3c40ff
+
+Files (path sha256 bytes):
+  README.md 4afb981467d2248bf6d8366b4200e08bb29f97e9a44ed1fbb3feb14ea9f3c357 65
+  src/config.py 2887ad3c05212d8eac56789111aa54d671a06ebaa69ff93ddb6baac59241b408 202
+  src/defaults.py 3bf3321278b3310cd05fb4c9f7f2cab8cf5b82a9c70f2b03f3bdc437f3d9f146 222
+  tests/test_defaults.py 554767ba3bc32b635b27f968c186343ca56cd68e2d47df9dfd61a0d650a3e8e9 449
+
+Source files in scope:
+=== src/config.py (sha256 2887ad3c05212d8eac56789111aa54d671a06ebaa69ff93ddb6baac59241b408) ===
+"""config: user configuration over defaults."""
+from defaults import merge
+
+DEFAULTS = {"server": {"host": "localhost", "port": 8080}, "debug": False}
+
+
+def load(user):
+    return merge(DEFAULTS, user)
+
+
+=== src/defaults.py (sha256 3bf3321278b3310cd05fb4c9f7f2cab8cf5b82a9c70f2b03f3bdc437f3d9f146) ===
+"""defaults: layered configuration values."""
+
+
+def merge(base, override):
+    """Return base updated with override; nested dicts merge recursively."""
+    result = dict(base)
+    result.update(override)
+    return result
+
+
+
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<relative path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest.
+For create expected_sha256 is null. For delete content is null. Do not touch oracle or test command files.
+Do not claim completion; the independent checks decide.

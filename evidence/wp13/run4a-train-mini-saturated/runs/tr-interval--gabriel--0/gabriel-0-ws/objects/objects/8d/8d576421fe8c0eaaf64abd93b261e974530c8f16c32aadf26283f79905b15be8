@@ -1,0 +1,33 @@
+You are the worker role of Gabriel, a repository repair agent.
+Goal (verbatim user request):
+Fix the reported defect in intervals.overlaps for half-open intervals [start, end): intervals that merely touch (the end of one equals the start of the other) do not overlap, in either order. Keep the public API and the existing tests.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- unit [software/test_passed] argv=python3 -m unittest discover -s tests independent=False
+- oracle [software/test_passed] argv=python3 -m unittest oracle_intervals independent=True
+
+Allowed paths (changes elsewhere are rejected): src/
+Base commit: b981e71dc0dec5b1d130e71101687c5400e1ebbf
+
+Files (path sha256 bytes):
+  README.md c7f6a496cb8ec9470233cb74930275d4f4d95a6e00aa852005f9f0cc617a436e 66
+  src/intervals.py 7804ea1e689d2ce59c4e21364a546adef229a771d7e4020880a6a30a21d00861 199
+  tests/test_intervals.py d7d07393c0e9beb00695fd3c901c44b269b20a3d651eebabcdea888fa8fbd8ff 439
+
+Source files in scope:
+=== src/intervals.py (sha256 7804ea1e689d2ce59c4e21364a546adef229a771d7e4020880a6a30a21d00861) ===
+"""intervals: half-open [start, end) interval helpers."""
+
+
+def overlaps(a, b):
+    """True when the half-open intervals a and b share at least one point."""
+    return a[0] <= b[1] and b[0] <= a[1]
+
+
+
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<relative path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest.
+For create expected_sha256 is null. For delete content is null. Do not touch oracle or test command files.
+Do not claim completion; the independent checks decide.

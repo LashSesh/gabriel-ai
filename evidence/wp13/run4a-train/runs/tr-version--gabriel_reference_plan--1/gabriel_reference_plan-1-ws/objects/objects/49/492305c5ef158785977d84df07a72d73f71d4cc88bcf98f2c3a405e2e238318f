@@ -1,0 +1,9 @@
+{
+ "goal": "Fix the reported defect in versions.compare: dotted versions compare numerically per component ('1.10' is newer than '1.9', '1.0.1' is newer than '1.0', and '1.0' equals '1.0.0'). Keep the public API and the existing tests.",
+ "domain": "software",
+ "state": "succeeded",
+ "outcome": "success",
+ "repair_count": 0,
+ "plan_versions": 1,
+ "final_diff": "diff --git a/src/versions.py b/src/versions.py\nindex c704259..3b98443 100644\n--- a/src/versions.py\n+++ b/src/versions.py\n@@ -1,6 +1,16 @@\n \"\"\"versions: dotted version comparison.\"\"\"\n \n-\n def compare(a, b):\n     \"\"\"Return -1, 0 or 1 comparing dotted numeric versions numerically per component.\"\"\"\n-    return (a > b) - (a < b)\n+    a_components = [int(x) for x in a.split('.')]\n+    b_components = [int(x) for x in b.split('.')]\n+    # Pad the shorter list with zeros for comparison\n+    max_length = max(len(a_components), len(b_components))\n+    a_components.extend([0] * (max_length - len(a_components)))\n+    b_components.extend([0] * (max_length - len(b_components)))\n+    for a_part, b_part in zip(a_components, b_components):\n+        if a_part > b_part:\n+            return 1\n+        elif a_part < b_part:\n+            return -1\n+    return 0\n"
+}

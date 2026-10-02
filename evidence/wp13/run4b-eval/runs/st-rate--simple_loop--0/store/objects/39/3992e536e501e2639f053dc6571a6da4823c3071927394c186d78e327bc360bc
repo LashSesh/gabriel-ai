@@ -1,0 +1,19 @@
+"""ratelimit: fixed-window request limiter with an injectable clock."""
+
+
+class Limiter:
+    def __init__(self, limit, window_s, clock):
+        self.limit, self.window_s, self.clock = limit, window_s, clock
+        self.count = 0
+        self.window_start = clock()
+
+    def allow(self):
+        """True while fewer than `limit` requests were allowed in the current window."""
+        now = self.clock()
+        if now - self.window_start >= self.window_s:
+            self.window_start = now
+            self.count = 0
+        if self.count < self.limit:
+            self.count += 1
+            return True
+        return False
