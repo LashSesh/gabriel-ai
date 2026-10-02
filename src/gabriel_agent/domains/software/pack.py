@@ -210,7 +210,14 @@ def reference_plan_proposal(task: dict, binding: dict, repair_round: int = 0) ->
             baseline_ids.append(nid)
             nodes.append({"node_id": nid, "capability_id": "software.run_check", "depends_on": ["observe"], "check_ids": [s["check_id"]],
                           "purpose": "baseline run of " + s["check_id"], "args": {"check_id": s["check_id"]}})
-    nodes.append({"node_id": "propose" + suffix, "capability_id": "model.generate", "depends_on": ["observe"] + baseline_ids,
+    observe_id = "observe"
+    if repair_round > 0:
+        # A repair round starts from a fresh observation: partial effects of the failed
+        # round are read back before any new proposal binds file identities.
+        observe_id = "observe" + suffix
+        nodes.append({"node_id": observe_id, "capability_id": "software.observe", "depends_on": [], "check_ids": ["output-valid"],
+                      "purpose": "re-observe the worktree after the failed round", "args": {}})
+    nodes.append({"node_id": "propose" + suffix, "capability_id": "model.generate", "depends_on": [observe_id] + baseline_ids,
                   "check_ids": ["output-valid"], "purpose": "propose a patch", "args": {"role": "worker"}})
     nodes.append({"node_id": "apply" + suffix, "capability_id": "software.apply_patch", "depends_on": ["propose" + suffix],
                   "check_ids": ["output-valid"], "purpose": "apply the proposed patch", "args": {"from_node": "propose" + suffix}})
@@ -690,7 +697,7 @@ def normalize_patch_proposal(proposal: dict, snapshot: dict, manifest: dict, bin
     rationale_ref = store.put(proposal["rationale"].encode("utf8"), "text/plain; charset=utf-8")
     ops_blob = Artifact(canonical(operations), "application/json")
     snapshot_ref = store.put(canonical(snapshot), "application/json")
-    cand = kernel_candidate(hashlib.sha256(goal_id.encode()).hexdigest(), snapshot_ref["sha256"], "patch:" + "+".join(sorted({o["kind"] for o in operations})),
+    cand = kernel_candidate(hashlib.sha256(goal_id.encode()).hexdigest(), snapshot_ref["sha256"], "patch:" + ".".join(sorted({o["kind"] for o in operations})),
                             {"sha256": snapshot["tree_digest"], "bytes": 0, "media_type": "application/json"}, ops_blob.ref())
     patch = {"schema": "gabriel.software-patch/1", "patch_id": "patch-" + cand.id[:16], "task_id": task_id, "run_id": run_id,
              "base_tree_digest": snapshot["tree_digest"], "base_snapshot_ref": snapshot_ref, "operations": operations,

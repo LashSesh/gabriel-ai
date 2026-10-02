@@ -1,0 +1,657 @@
+{
+  "schema": "gabriel.evidence.work-packages/1",
+  "produced_at_utc": "2026-10-02T16:50:04.262339+00:00",
+  "rule": "A package counts as done only with actual code and recorded test output; privileged and paid runs are listed under not_executed.",
+  "packages": {
+    "WP01": {
+      "status": "DONE",
+      "tests": [],
+      "evidence": [
+        "evidence/wp01/baseline_manifest.json",
+        "evidence/wp01/legacy_check_runtime.log",
+        "evidence/wp01/legacy_runtime_checks_rerun.json"
+      ],
+      "acceptance": [
+        "AT01"
+      ],
+      "test_results": {}
+    },
+    "WP02": {
+      "status": "DONE",
+      "tests": [
+        "tests/test_contracts.py"
+      ],
+      "evidence": [
+        "evidence/wp02/spec_validation.json"
+      ],
+      "acceptance": [
+        "AT02",
+        "AT19(representation)",
+        "AT20(representation)",
+        "AT21(representation)"
+      ],
+      "test_results": {
+        "tests/test_contracts.py": [
+          {
+            "test": "test_canonical_strictness",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_every_blueprint_example_validates_and_round_trips",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_command_representation_controls_reject_before_admission",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_utf8_artifact_bytes_are_preserved_by_reference",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_run_pause_is_a_flag_not_a_state",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_operation_and_event_enums_are_closed_and_aligned",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_schema_registry_is_closed_and_identified",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_plan_dag_rules",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_amendment_weakening_detected",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_approval_digest_binds_exact_intent_fields",
+            "result": "PASSED"
+          }
+        ]
+      }
+    },
+    "WP03": {
+      "status": "DONE",
+      "tests": [
+        "tests/test_artifacts.py",
+        "tests/test_owner.py"
+      ],
+      "evidence": [],
+      "acceptance": [
+        "AT03",
+        "AT04",
+        "AT05",
+        "AT18(partial)"
+      ],
+      "test_results": {
+        "tests/test_artifacts.py": [
+          {
+            "test": "test_put_get_verify_roundtrip",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_crash_before_rename_leaves_no_object_but_temporary",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_crash_after_rename_is_a_retained_orphan_until_grace",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_corruption_is_a_visible_storage_fault",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_invalid_reference_rejected",
+            "result": "PASSED"
+          }
+        ],
+        "tests/test_owner.py": [
+          {
+            "test": "test_lifecycle_to_success_and_replay",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_admission_rejects_unverified_artifacts_and_foreign_principal",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_exact_retry_returns_receipt_and_changed_reuse_rejects",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_race_two_commands_at_same_revision_admits_exactly_one",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_crash_before_and_after_commit_with_replay",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_process_kill_before_commit_leaves_journal_consistent",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_pause_blocks_dispatch_and_resume_restores",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_grant_revocation_and_approval_mutation_at_dispatch",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_in_flight_effect_survives_revocation_as_reconciliation_obligation",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_budget_race_unknown_usage_and_no_reset_on_retry",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_cancel_retains_unknown_effects_and_late_result_is_audit_only",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_unmarked_attempt_result_rejected_and_fencing_enforced",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_assessment_eligibility_and_verifier_registration",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_failed_mandatory_check_opens_bounded_repair_cycles",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_amendment_cannot_weaken_without_principal_confirmation",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_hold_records_and_resume",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_plan_bounds_at_owner",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_anchor_detects_truncated_suffix_and_checkpoint_binding",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_replay_rejects_tampered_event",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_open_refuses_changed_catalog",
+            "result": "PASSED"
+          }
+        ]
+      }
+    },
+    "WP04": {
+      "status": "DONE",
+      "tests": [
+        "tests/test_policy.py",
+        "tests/test_owner.py"
+      ],
+      "evidence": [],
+      "acceptance": [
+        "AT06",
+        "AT07"
+      ],
+      "test_results": {
+        "tests/test_policy.py": [
+          {
+            "test": "test_reservation_inequality_and_overrun_retention",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_deadline_is_separate_from_additive_ledger",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_grant_expiry_and_revocation_use_owner_time",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_intent_admission_rules",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_child_grant_must_be_subset",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_principal_authentication",
+            "result": "PASSED"
+          }
+        ],
+        "tests/test_owner.py": [
+          {
+            "test": "test_lifecycle_to_success_and_replay",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_admission_rejects_unverified_artifacts_and_foreign_principal",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_exact_retry_returns_receipt_and_changed_reuse_rejects",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_race_two_commands_at_same_revision_admits_exactly_one",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_crash_before_and_after_commit_with_replay",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_process_kill_before_commit_leaves_journal_consistent",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_pause_blocks_dispatch_and_resume_restores",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_grant_revocation_and_approval_mutation_at_dispatch",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_in_flight_effect_survives_revocation_as_reconciliation_obligation",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_budget_race_unknown_usage_and_no_reset_on_retry",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_cancel_retains_unknown_effects_and_late_result_is_audit_only",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_unmarked_attempt_result_rejected_and_fencing_enforced",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_assessment_eligibility_and_verifier_registration",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_failed_mandatory_check_opens_bounded_repair_cycles",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_amendment_cannot_weaken_without_principal_confirmation",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_hold_records_and_resume",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_plan_bounds_at_owner",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_anchor_detects_truncated_suffix_and_checkpoint_binding",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_replay_rejects_tampered_event",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_open_refuses_changed_catalog",
+            "result": "PASSED"
+          }
+        ]
+      }
+    },
+    "WP05": {
+      "status": "DONE_EXCEPT_PRIVILEGED_SELFTEST",
+      "tests": [
+        "tests/test_workers.py"
+      ],
+      "evidence": [
+        "evidence/doctor_linux_namespace_workspace.json"
+      ],
+      "acceptance": [
+        "AT08(host parts)",
+        "AT12",
+        "AT13",
+        "AT24(partial)"
+      ],
+      "not_executed": [
+        "tests/test_workers.py::test_namespace_jail_isolation_selftest",
+        "gabriel doctor --selftest"
+      ],
+      "test_results": {
+        "tests/test_workers.py": [
+          {
+            "test": "test_contained_root_rejects_escapes_and_symlinks",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_registry_fingerprints_and_visible_catalog",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_worktree_pin_manifest_and_patch",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_trusted_local_capture_timeout_and_descendant_report",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_namespace_backend_probe_is_non_mutating",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_namespace_jail_isolation_selftest",
+            "result": "SKIPPED"
+          },
+          {
+            "test": "test_supervisor_dispatch_happy_path_and_receipt_retry",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_crash_before_marker_abandons_lease_without_io",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_crash_after_marker_before_io_reconciles_by_status",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_crash_after_io_before_result_commit_idempotent_target",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_non_idempotent_unknown_outcome_never_retried_blindly",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_crash_after_result_commit_before_ack_is_idempotent_on_retry",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_late_result_after_lease_expiry_matches_prior_attempt",
+            "result": "PASSED"
+          }
+        ]
+      }
+    },
+    "WP06": {
+      "status": "DONE_EXCEPT_REAL_PROVIDER_RUN",
+      "tests": [
+        "tests/test_models.py"
+      ],
+      "evidence": [],
+      "acceptance": [
+        "AT09"
+      ],
+      "not_executed": [
+        "tests/test_live_provider.py::test_real_provider_repairs_seeded_bug"
+      ],
+      "test_results": {
+        "tests/test_models.py": [
+          {
+            "test": "test_scripted_statuses_map_to_distinct_outcomes",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_normalization_rejects_partial_and_wrapped_output",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_openai_compatible_status_mapping",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_anthropic_status_mapping",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_credential_resolution_never_reads_other_sources",
+            "result": "PASSED"
+          }
+        ]
+      }
+    },
+    "WP07": {
+      "status": "DONE",
+      "tests": [
+        "tests/test_kernel.py",
+        "tests/test_scheduler.py",
+        "tests/test_owner.py",
+        "tests/test_workers.py"
+      ],
+      "evidence": [],
+      "acceptance": [
+        "AT10",
+        "AT12",
+        "AT13",
+        "AT20",
+        "AT22"
+      ],
+      "test_results": {
+        "tests/test_kernel.py": [],
+        "tests/test_scheduler.py": [
+          {
+            "test": "test_equal_priority_uses_node_id_tie_break",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_dependencies_and_pause_and_read_worker_bound",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_single_writer_per_resource",
+            "result": "PASSED"
+          }
+        ],
+        "tests/test_owner.py": [
+          {
+            "test": "test_lifecycle_to_success_and_replay",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_admission_rejects_unverified_artifacts_and_foreign_principal",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_exact_retry_returns_receipt_and_changed_reuse_rejects",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_race_two_commands_at_same_revision_admits_exactly_one",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_crash_before_and_after_commit_with_replay",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_process_kill_before_commit_leaves_journal_consistent",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_pause_blocks_dispatch_and_resume_restores",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_grant_revocation_and_approval_mutation_at_dispatch",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_in_flight_effect_survives_revocation_as_reconciliation_obligation",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_budget_race_unknown_usage_and_no_reset_on_retry",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_cancel_retains_unknown_effects_and_late_result_is_audit_only",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_unmarked_attempt_result_rejected_and_fencing_enforced",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_assessment_eligibility_and_verifier_registration",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_failed_mandatory_check_opens_bounded_repair_cycles",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_amendment_cannot_weaken_without_principal_confirmation",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_hold_records_and_resume",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_plan_bounds_at_owner",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_anchor_detects_truncated_suffix_and_checkpoint_binding",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_replay_rejects_tampered_event",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_open_refuses_changed_catalog",
+            "result": "PASSED"
+          }
+        ],
+        "tests/test_workers.py": [
+          {
+            "test": "test_contained_root_rejects_escapes_and_symlinks",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_registry_fingerprints_and_visible_catalog",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_worktree_pin_manifest_and_patch",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_trusted_local_capture_timeout_and_descendant_report",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_namespace_backend_probe_is_non_mutating",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_namespace_jail_isolation_selftest",
+            "result": "SKIPPED"
+          },
+          {
+            "test": "test_supervisor_dispatch_happy_path_and_receipt_retry",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_crash_before_marker_abandons_lease_without_io",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_crash_after_marker_before_io_reconciles_by_status",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_crash_after_io_before_result_commit_idempotent_target",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_non_idempotent_unknown_outcome_never_retried_blindly",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_crash_after_result_commit_before_ack_is_idempotent_on_retry",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_late_result_after_lease_expiry_matches_prior_attempt",
+            "result": "PASSED"
+          }
+        ]
+      }
+    },
+    "WP08": {
+      "status": "DONE_SCRIPTED_PROVIDER_TRUSTED_LOCAL",
+      "tests": [
+        "tests/test_slice.py"
+      ],
+      "evidence": [
+        "evidence/test_results.txt"
+      ],
+      "acceptance": [
+        "AT11(scripted)",
+        "AT19",
+        "AT22",
+        "AT24(partial)"
+      ],
+      "not_executed": [
+        "AT11 real-provider part",
+        "end-to-end inside linux_namespace"
+      ],
+      "test_results": {
+        "tests/test_slice.py": [
+          {
+            "test": "test_end_to_end_repair_with_independent_oracle",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_interrupt_after_marker_and_resume",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_false_completion_and_acceptance_weakening_are_rejected",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_task_without_oracle_needs_explicit_acknowledgement",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_cli_smoke",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_termination_between_two_file_writes_is_reconciled_not_hidden",
+            "result": "PASSED"
+          }
+        ]
+      }
+    }
+  },
+  "release_scope_G1": {
+    "established": false,
+    "missing": [
+      "containment self-test on the target host",
+      "one real-provider end-to-end run"
+    ]
+  }
+}

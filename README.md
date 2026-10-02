@@ -1,3 +1,25 @@
+# Gabriel AI agent application (`gabriel_agent`)
+
+The agent application described in `Gabriel_AI_Blueprint.zip` now lives beside the recovered
+research runtime: `src/gabriel_agent/` (install with `pip install -e ".[dev]"`, entry point
+`gabriel`). It implements work packages WP01–WP08 of the blueprint: exact contracts, a
+content-addressed object store, a single SQLite journal owner with a pure reducer and recorded
+replay, scoped grants and vector reservations, a Linux-namespace tool sandbox with a
+dispatch-marker supervisor, a model gateway (scripted, OpenAI-compatible, Anthropic), the
+domain-independent goal/evidence kernel, and a software domain pack that repairs a repository
+in an isolated worktree with independent acceptance checks.
+
+- Status, executed evidence and the honest release assessment: `docs/IMPLEMENTATION_STATUS.md`
+- How to install, configure a task and run it: `docs/RUNBOOK.md`
+- Contract extensions: `docs/adr/ADR-10-hold-records.md`, `ADR-11`, `ADR-12`
+- Evidence (test log, environment, baseline rerun, spec validation): `evidence/`
+- The blueprint's own machine-readable contracts and validator: `contracts/`, `tools/validate_spec.py`
+
+The legacy `python -m gabriel_runtime` interface below is unchanged and remains the diagnostic
+entry point for the recovered analytical runtime.
+
+---
+
 # Gabriel: Contractive Dynamics, Temporal Memory and Selective Observation
 
 Sebastian Klemm

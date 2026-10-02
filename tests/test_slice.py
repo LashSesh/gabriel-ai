@@ -166,3 +166,30 @@ def test_cli_smoke(tmp_path, capsys):
     assert cli_main(["task", "inspect", task_id, "--workspace", str(ws_dir), "--evidence"]) == 0
     view = json.loads(capsys.readouterr().out)
     assert view["run"]["state"] == "succeeded" and len(view["events"]) > 20
+
+
+def test_termination_between_two_file_writes_is_reconciled_not_hidden(tmp_path):
+    """AT24: a crash between two file writes leaves a recorded partial effect; recovery reads the
+    tree back, the repair round re-observes, and the delivered tree is complete."""
+    ws = workspace(tmp_path)
+    created, base, repo = seeded_task(tmp_path, ws, variant="two_files")
+    task_id = created["task_id"]
+    crashes = {"n": 0}
+
+    def crash_between_writes():
+        if crashes["n"] == 0:
+            crashes["n"] += 1
+            raise RuntimeError("worker terminated between two file writes")
+    summary = TaskRunner(ws, task_id, extras={"crash_between_writes": crash_between_writes}).run()
+    assert summary["state"] == "succeeded", summary["log"]
+    projection = ws.owner.projection(summary["run_id"])
+    apply_attempts = [a for a in projection["attempts"].values() if a["capability_id"] == "software.apply_patch"]
+    unknown = [a for a in apply_attempts if a["status"] in ("reconciled",)]
+    assert unknown, "the interrupted application must be recorded as an unknown, then reconciled, outcome"
+    assert any(r["outcome"] == "confirmed_failure" for r in projection["reconciliations"].values())
+    assert projection["run"]["unresolved_effect_ids"] == [] and projection["run_meta"]["plan_versions"] >= 2
+    assert any(line.startswith("reconciled ") for line in summary["log"])
+    worktree = Path(created["worktree"])
+    assert (worktree / "src" / "kvparse.py").read_text() == fixture.FIXED and (worktree / "src" / "extra.py").exists()
+    assert ws.owner.replay()["status"] == "passed"
+    ws.close()

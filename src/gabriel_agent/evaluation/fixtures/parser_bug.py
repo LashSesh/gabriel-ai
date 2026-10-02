@@ -164,4 +164,16 @@ def script(variant: str = "correct") -> dict:
                                                  "rationale": "relax the oracle"}}
         return {"by_step": {"plan-request": [{"kind": "echo_reference"}, weakened_plan, weakened_plan], "propose": [wrong], "propose-r1": [edit_oracle]},
                 "by_role": {"planner": [{"kind": "echo_reference"}], "worker": [wrong]}}
+    if variant == "two_files":
+        # Round 1 modifies kvparse.py and creates src/extra.py; a crash between the two writes
+        # leaves a partial effect. Round 2 (after re-observation) only creates the missing file.
+        first = {"kind": "text", "value": {"operations": [
+            {"kind": "modify", "path": "src/kvparse.py", "expected_sha256": sha(BUGGY), "content": FIXED},
+            {"kind": "create", "path": "src/extra.py", "expected_sha256": None, "content": "EXTRA = True\n"}],
+            "rationale": "fix and add a helper module"}}
+        second = {"kind": "text", "value": {"operations": [
+            {"kind": "create", "path": "src/extra.py", "expected_sha256": None, "content": "EXTRA = True\n"}],
+            "rationale": "the parser fix is already applied; add the missing helper module"}}
+        return {"by_step": {"plan-request": [{"kind": "echo_reference"}], "propose": [first], "propose-r1": [second]},
+                "by_role": {"planner": [{"kind": "echo_reference"}], "worker": [first]}}
     raise ValueError("unknown variant " + variant)

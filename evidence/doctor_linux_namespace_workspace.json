@@ -1,0 +1,81 @@
+{
+  "backends": {
+    "linux_namespace": {
+      "available": true,
+      "backend": "linux_namespace",
+      "checks": {
+        "jail_selftest": "not_executed",
+        "platform": "linux",
+        "setpriv": "/usr/bin/setpriv",
+        "unshare": "/usr/bin/unshare",
+        "unshare_namespaces": true
+      },
+      "containment": true,
+      "identity": "linux_namespace:6.18.44-fc-v51:x86_64:python-3.12.3",
+      "reasons": []
+    },
+    "trusted_local": {
+      "available": true,
+      "backend": "trusted_local",
+      "checks": {
+        "python": "/home/user/gabriel-ai/.venv/bin/python"
+      },
+      "containment": false,
+      "reasons": [
+        "plain subprocess in a new session; no filesystem, network or credential boundary"
+      ]
+    }
+  },
+  "catalog_digest": "cc9572e443431c2f6d1449af34306e0b94b7dbf146ad26f6b48a159b4e473ab1",
+  "configured_backend": "linux_namespace",
+  "effective_limits": {
+    "artifact_bytes": 16777216,
+    "concurrent_reads": 4,
+    "concurrent_writes_per_resource": "one",
+    "cpu_ms": 1800000,
+    "currency": "EUR",
+    "currency_micro_units": 0,
+    "elapsed_ms": 1800000,
+    "model_requests": 12,
+    "model_tokens_total": 20000,
+    "scratch_bytes": 1073741824,
+    "tool_attempts": 64
+  },
+  "git": "git version 2.43.0",
+  "journal": {
+    "head": "0000000000000000000000000000000000000000000000000000000000000000",
+    "inputs_head": "0000000000000000000000000000000000000000000000000000000000000000",
+    "schema": "gabriel.anchor/1",
+    "sequence": 0,
+    "workspace_id": "ws-52379465020d"
+  },
+  "object_store": {
+    "faults": {},
+    "referenced": 0,
+    "status": "passed",
+    "stray_temporaries": []
+  },
+  "platform": "Linux-6.18.44-fc-v51-x86_64-with-glibc2.39",
+  "problems": [
+    "linux_namespace jail self-test not executed (run doctor --selftest on a Linux host that permits namespaces)"
+  ],
+  "python": "3.12.3",
+  "registry_loaded": {
+    "model.generate": true,
+    "owner.output_valid": true,
+    "software.apply_patch": true,
+    "software.base_commit_pinned": true,
+    "software.checks_intact": true,
+    "software.diff_in_scope": true,
+    "software.no_secrets": true,
+    "software.observe": true,
+    "software.read_back": true,
+    "software.review": true,
+    "software.run_check": true,
+    "software.test_passed": true
+  },
+  "schema_registry_digest": "20f02f07c77cf7cc4cac02e5a57bef7649c6f284e905bcf1c6548407af4aadb6",
+  "untrusted_execution_supported": false,
+  "version": "0.1.0",
+  "workspace_id": "ws-52379465020d"
+}

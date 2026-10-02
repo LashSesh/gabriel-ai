@@ -339,9 +339,24 @@ class TaskRunner:
         return False
 
     # ------------------------------------------------------------ stalls
+    def _reconcile_unresolved(self, projection) -> bool:
+        """Local effects reconcile through their registered read-back/status method; manual
+        review stays with the user. Returns True when a reconciliation was recorded."""
+        for intent_id in list(projection["run"]["unresolved_effect_ids"]):
+            attempt = next((a for a in projection["attempts"].values() if a["intent_id"] == intent_id), None)
+            if attempt is None or attempt["reconciliation"] == "manual_review":
+                continue
+            intent = validate(loads(self.store.get(attempt["intent_ref"])), "intent")
+            action = self.supervisor.reconcile(intent, worktree=self.worktree, binding=self.binding)
+            self.log.append("reconciled %s: %s" % (intent_id, action["outcome"]))
+            return True
+        return False
+
     def _handle_stall(self, projection):
         failed = [nid for nid, s in projection["nodes"].items() if s["status"] == "failed"]
         if projection["run"]["unresolved_effect_ids"]:
+            if self._reconcile_unresolved(projection):
+                return
             self._hold("unresolved_external_effects", "waiting_user", "external outcomes await reconciliation: " + ",".join(projection["run"]["unresolved_effect_ids"]),
                        prerequisite="effect-reconciliation", wakeup="reconcile_effect")
             return
