@@ -1,12 +1,9 @@
-smoke workdir: /tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke6 (backend linux_namespace)
-
-[notice] A new release of pip is available: 24.0 -> 26.2.1
-[notice] To update, run: python -m pip install --upgrade pip
+smoke workdir: /tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke (backend linux_namespace)
 {
   "backend": "linux_namespace",
   "status": "created",
-  "workspace": "/tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke6/ws",
-  "workspace_id": "ws-7506197894c7"
+  "workspace": "/tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke/ws",
+  "workspace_id": "ws-750c38df7de4"
 }
 {
   "backends": {
@@ -25,14 +22,14 @@ smoke workdir: /tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scr
         "unshare_namespaces": true
       },
       "containment": true,
-      "identity": "linux_namespace:6.18.44-fc-v51:x86_64:python-3.11.15",
+      "identity": "linux_namespace:6.18.44-fc-v51:x86_64:python-3.12.3",
       "reasons": []
     },
     "trusted_local": {
       "available": true,
       "backend": "trusted_local",
       "checks": {
-        "python": "/tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke6/venv/bin/python"
+        "python": "/tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke/venv/bin/python"
       },
       "containment": false,
       "reasons": [
@@ -40,7 +37,7 @@ smoke workdir: /tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scr
       ]
     }
   },
-  "catalog_digest": "ff1616bea15411efb7672e388a0b85b7d725b585d4e01af71c962b6fd9c33972",
+  "catalog_digest": "6daf42746d5c60bd59eb6695d0f1a740adaca0d716a9fccb761586a968b480de",
   "configured_backend": "linux_namespace",
   "effective_limits": {
     "artifact_bytes": 16777216,
@@ -61,7 +58,7 @@ smoke workdir: /tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scr
     "inputs_head": "0000000000000000000000000000000000000000000000000000000000000000",
     "schema": "gabriel.anchor/1",
     "sequence": 0,
-    "workspace_id": "ws-7506197894c7"
+    "workspace_id": "ws-750c38df7de4"
   },
   "object_store": {
     "faults": {},
@@ -71,7 +68,7 @@ smoke workdir: /tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scr
   },
   "platform": "Linux-6.18.44-fc-v51-x86_64-with-glibc2.39",
   "problems": [],
-  "python": "3.11.15",
+  "python": "3.12.3",
   "registry_loaded": {
     "document.apply_amendment": true,
     "document.base_commit_pinned": true,
@@ -108,11 +105,11 @@ smoke workdir: /tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scr
     "software.run_check": true,
     "software.test_passed": true
   },
-  "schema_registry_digest": "a149fe0113badf61894b6eb29142e5c18baf94bdbaf0e8a6297cdf293fea1c9e",
+  "schema_registry_digest": "735011f649bb26253dcfe2820f418c2720af20e07bd8c45796c6fa592935049b",
   "untrusted_execution_supported": true,
   "version": "0.1.0",
-  "workspace_id": "ws-7506197894c7"
+  "workspace_id": "ws-750c38df7de4"
 }
 run state succeeded
 restore passed events 41
-smoke passed: /tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke6
+smoke passed: /tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke
