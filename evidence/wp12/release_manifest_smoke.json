@@ -2,7 +2,7 @@
   "acceptance_evidence": {
     "evidence/doctor_linux_namespace_selftest.json": "5ff218e9cd2d85f7c131b78183449c2d379b55f90fb8aa7d51c1dc34cbac1bd7",
     "evidence/live/summary.json": "b90e9583a5a5e0fad701e0a378a35d741a6eae7516908492a3c2e027b60a6b4e",
-    "evidence/test_run.json": "bd3992d59e0c9b1af237243cb51e5ddd415d538e550f2aae232a54492d685047",
+    "evidence/test_run.json": "d09829cf3f5d7ef9c458ec3935961ddd3f961281729a17f9415c88c3d3040b84",
     "evidence/wp01/baseline_manifest.json": "ef39b8ed0762a44c9ee8ff5e8ca616deef771c5ca389d6dd2841ce666233b96f",
     "evidence/wp02/spec_validation.json": "658d50d5fc0991f485240e1e6161ac5f46c171b6fc7abf953eb98db8748ac93f",
     "evidence/wp11/protocol.frozen.json": "a568a973976bbcae7aa4e0847492e973e55e826c4140ac754a96471d4697c533",
@@ -13,7 +13,7 @@
     "evidence/wp11/run3-gpt-4.1-mini/report.json": "4477efb9365669e3adb06bc57a9d1e2c6461dee9693bb4a1c3e3fe25efddcd80"
   },
   "catalog_digest": "b444e1a7c50683e8f9e74c8813b20bc35a6c4e9bfc490fba309eaaf74543d67d",
-  "created_at_utc": "2026-10-02T18:56:36.211735+00:00",
+  "created_at_utc": "2026-10-02T18:58:20.745316+00:00",
   "dependency_lock": [
     "attrs==26.1.0",
     "gabriel-agent @ file:///home/user/gabriel-ai",
@@ -29,7 +29,11 @@
         "available": true,
         "backend": "linux_namespace",
         "checks": {
-          "jail_selftest": "not_executed",
+          "jail_selftest": {
+            "exit_code": 0,
+            "start_failure": null,
+            "stdout": "pid 1\nnet blocked OSError\n"
+          },
           "platform": "linux",
           "setpriv": "/usr/bin/setpriv",
           "unshare": "/usr/bin/unshare",
@@ -43,7 +47,7 @@
         "available": true,
         "backend": "trusted_local",
         "checks": {
-          "python": "/tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke4/venv/bin/python"
+          "python": "/tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke5/venv/bin/python"
         },
         "containment": false,
         "reasons": [
@@ -68,11 +72,11 @@
     },
     "git": "git version 2.43.0",
     "journal": {
-      "head": "ed22f0fd857e6595351d55e07b309dfce9bebcbe2e6ac05cd36d12b9f6b60685",
-      "inputs_head": "b4b19fb7060a839870045d1562323ad14e32411dd82b0f762ac8895043f707f0",
+      "head": "05aed810921beef4bc6d1711f5ef4120ce5bcd105e146b3d171532109d30f5c7",
+      "inputs_head": "107aab21bfc244207c51bb4cd2cfe78d2e0ae60ea0c38cccde33fa8731b65522",
       "schema": "gabriel.anchor/1",
       "sequence": 41,
-      "workspace_id": "ws-e4ce4028c4e7"
+      "workspace_id": "ws-9014c127ef44"
     },
     "object_store": {
       "faults": {},
@@ -81,9 +85,7 @@
       "stray_temporaries": []
     },
     "platform": "Linux-6.18.44-fc-v51-x86_64-with-glibc2.39",
-    "problems": [
-      "linux_namespace jail self-test not executed (run doctor --selftest on a Linux host that permits namespaces)"
-    ],
+    "problems": [],
     "python": "3.11.15",
     "registry_loaded": {
       "model.generate": true,
@@ -100,9 +102,9 @@
       "software.test_passed": true
     },
     "schema_registry_digest": "e4aafc892311837c79dc31a49ffac8b06bfc5e5bce6160665acbd1a49a1880a8",
-    "untrusted_execution_supported": false,
+    "untrusted_execution_supported": true,
     "version": "0.1.0",
-    "workspace_id": "ws-e4ce4028c4e7"
+    "workspace_id": "ws-9014c127ef44"
   },
   "gates": {
     "G0": "holds: inherited runtime checks rerun (evidence/wp01)",
@@ -125,7 +127,7 @@
     ]
   },
   "package_source_files": 99,
-  "package_source_identity": "e407b25381c9d696226d7c2dad443c1560022ec6a14623530c1c4adfe5bae3cb",
+  "package_source_identity": "38d05e79b5615c7b89f6a39b365adc3cb666f60ed6eefd39dae2e8009cf08c67",
   "platform": {
     "machine": "x86_64",
     "release": "6.18.44-fc-v51",
@@ -136,7 +138,7 @@
   "schema": "gabriel.release-manifest/1",
   "schema_registry_digest": "e4aafc892311837c79dc31a49ffac8b06bfc5e5bce6160665acbd1a49a1880a8",
   "source_branch": "claude/vigilant-gauss-03dalc",
-  "source_commit": "a102d7e8eca094d2d4f92661edb9ba09f206281e",
+  "source_commit": "d2fe4f0ebafee86052cde4898f47446eec014c94",
   "source_dirty": false,
   "supported_backends": {
     "linux_namespace": "supported containment backend; requires Linux user namespaces, util-linux unshare and setpriv; verified by gabriel doctor --selftest on the release host",
