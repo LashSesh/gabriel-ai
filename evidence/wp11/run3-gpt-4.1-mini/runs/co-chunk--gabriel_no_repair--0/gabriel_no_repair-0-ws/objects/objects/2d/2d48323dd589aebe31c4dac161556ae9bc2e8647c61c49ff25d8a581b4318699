@@ -1,0 +1,17 @@
+diff --git a/src/chunking.py b/src/chunking.py
+index 37221a6..8d06805 100644
+--- a/src/chunking.py
++++ b/src/chunking.py
+@@ -4,4 +4,11 @@
+ def chunk(items, size):
+     if size <= 0:
+         raise ValueError("size must be positive")
+-    return [items[i:i + size] for i in range(0, len(items) - size + 1, size)]
++    if len(items) == 0:
++        return []
++    # If size is larger than input, return one chunk
++    if size >= len(items):
++        return [items]
++    # Otherwise, chunk fully and keep final partial chunk if any
++    chunks = [items[i:i + size] for i in range(0, len(items), size)]
++    return chunks

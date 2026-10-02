@@ -1,0 +1,16 @@
+diff --git a/src/seqtools.py b/src/seqtools.py
+index 030da4b..ac36e1b 100644
+--- a/src/seqtools.py
++++ b/src/seqtools.py
+@@ -2,4 +2,10 @@
+ 
+ 
+ def dedupe(items):
+-    return list(set(items))
++    seen = set()
++    result = []
++    for item in items:
++        if item not in seen:
++            seen.add(item)
++            result.append(item)
++    return result

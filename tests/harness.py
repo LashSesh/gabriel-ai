@@ -123,7 +123,7 @@ class World:
                    "pack_version": "1.0.0", "provider_profile_ref": self.put({"fixture": "provider"}),
                    "containment_backend": "trusted_local", "repository_path": "/fixture", "base_commit": "0" * 40,
                    "allowed_paths": ["src/"], "max_plan_versions": max_plan_versions, "max_repairs": max_repairs,
-                   "owner_time_basis": "logical",
+                   "owner_time_basis": "logical", "planner_mode": "model",
                    "check_specs": [{"check_id": "oracle", "version": "v1", "mandatory": True, "predicate_kind": "fixture/passed",
                                     "argv": ["true"], "timeout_ms": 1000, "independent": True, "role": "acceptance_only",
                                     "oracle_files": [], "allowed_paths": []},

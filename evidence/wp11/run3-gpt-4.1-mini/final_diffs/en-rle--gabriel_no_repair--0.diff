@@ -1,0 +1,13 @@
+diff --git a/src/rle.py b/src/rle.py
+index db03dd8..376e1e0 100644
+--- a/src/rle.py
++++ b/src/rle.py
+@@ -9,7 +9,7 @@ def encode(text):
+             runs[-1] = (ch, runs[-1][1] + 1)
+         else:
+             runs.append((ch, 1))
+-    return [run for run in runs if run[1] > 1]
++    return runs
+ 
+ 
+ def decode(runs):

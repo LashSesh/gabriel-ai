@@ -1,0 +1,78 @@
+{
+  "task_id": "nl-leapyear",
+  "family": "numeric_logic",
+  "system": "simple_loop",
+  "rep": 0,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp11/run2-gpt-4.1-mini/runs/nl-leapyear--simple_loop--0",
+  "outcome": {
+    "system": "simple_loop",
+    "task_id": "nl-leapyear",
+    "family": "numeric_logic",
+    "rep": 0,
+    "declared": true,
+    "declared_reason": "own check runs passed after 1 request(s)",
+    "model_requests": 1,
+    "model_tokens": 825,
+    "wall_ms": 3315,
+    "provider_statuses": [
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp11/run2-gpt-4.1-mini/runs/nl-leapyear--simple_loop--0/worktrees/simple_loop-0",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "request 1: visible exit 0, oracle exit 0"
+    ],
+    "gabriel": null,
+    "repairs_used": 0,
+    "plan_versions": 0
+  },
+  "verification": {
+    "verified": true,
+    "changed_paths": [
+      "src/calendarx.py"
+    ],
+    "out_of_scope_paths": [],
+    "visible": {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "start_failure": null,
+      "stdout_tail": "",
+      "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+      "backend": "linux_namespace"
+    },
+    "oracle": {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "oracle_calendarx"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "start_failure": null,
+      "stdout_tail": "",
+      "stderr_tail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n",
+      "backend": "linux_namespace"
+    },
+    "patch_sha256": "e0d2ac9d2786017898c69b57d2b7446b89267fb6417f4f807a70862a97574192",
+    "patch_bytes": 994,
+    "patch": "diff --git a/src/calendarx.py b/src/calendarx.py\nindex 9271cf4..3ef6b30 100644\n--- a/src/calendarx.py\n+++ b/src/calendarx.py\n@@ -1,11 +1,24 @@\n-\"\"\"calendarx: Gregorian calendar helpers.\"\"\"\n-\n-\n def is_leap(year):\n-    return year % 4 == 0\n+    \"\"\"Return True if the given year is a leap year, False otherwise.\n+\n+    A year is a leap year if it is divisible by 4, except for years which are\n+    divisible by 100, unless they are also divisible by 400.\n+    \"\"\"\n+    if year % 400 == 0:\n+        return True\n+    if year % 100 == 0:\n+        return False\n+    if year % 4 == 0:\n+        return True\n+    return False\n \n \n def days_in_month(year, month):\n+    \"\"\"Return the number of days in the given month and year.\"\"\"\n     if month == 2:\n         return 29 if is_leap(year) else 28\n-    return 30 if month in (4, 6, 9, 11) else 31\n+    if month in {1, 3, 5, 7, 8, 10, 12}:\n+        return 31\n+    if month in {4, 6, 9, 11}:\n+        return 30\n+    raise ValueError(f\"Invalid month: {month}\")\n",
+    "head_is_base": true
+  },
+  "V": 1,
+  "D": 1,
+  "false_completion": 0,
+  "unit_wall_ms": 3911
+}

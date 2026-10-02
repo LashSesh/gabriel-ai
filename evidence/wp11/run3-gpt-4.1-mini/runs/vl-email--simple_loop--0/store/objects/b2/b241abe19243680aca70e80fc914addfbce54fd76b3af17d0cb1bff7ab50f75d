@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-EUcbYnwmpyR7tgyN0MFTNHoII6Pmd",
+  "object": "chat.completion",
+  "created": 1790966944,
+  "model": "gpt-4.1-mini-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"operations\": [{\"kind\": \"modify\", \"path\": \"src/emailcheck.py\", \"expected_sha256\": \"96a692750dc93725bdc45320b6fae8958c5c8b03105242f4cac85ac4e3f3b4db\", \"content\": \"\\\"\\\"\\\"emailcheck: minimal e-mail address validation.\\\"\\\"\\\"\\n\\n\\ndef is_valid_email(text):\\n    if text.count(\\\"@\\\") != 1:\\n        return False\\n    local, domain = text.split(\\\"@\\\")\\n    if not local or not domain or \\\" \\\" in text:\\n        return False\\n    # domain must contain a dot with at least one character before and after it\\n    if \\\".\\\" not in domain:\\n        return False\\n    dot_index = domain.find(\\\".\\\")\\n    if dot_index == 0 or dot_index == len(domain) - 1:\\n        return False\\n    return True\\n\"}], \"rationale\": \"Enhanced is_valid_email to check that the domain part contains a dot with at least one character before and after it, fulfilling the defect requirement while preserving the public API and existing tests.\"}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 538,
+    "completion_tokens": 250,
+    "total_tokens": 788,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_441de9a712"
+}

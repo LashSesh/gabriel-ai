@@ -1,0 +1,19 @@
+diff --git a/src/querystring.py b/src/querystring.py
+index e32c2b2..09e9c5e 100644
+--- a/src/querystring.py
++++ b/src/querystring.py
+@@ -8,7 +8,13 @@ def parse_qs(text):
+         return result
+     for part in text.split("&"):
+         if "=" not in part:
++            # key without '=' maps to empty string
++            key = unquote(part)
++            result[key] = ""
+             continue
+         key, value = part.split("=", 1)
+-        result[unquote(key)] = unquote(value)
++        # plus signs decode to spaces
++        key = unquote(key.replace('+', ' '))
++        value = unquote(value.replace('+', ' '))
++        result[key] = value
+     return result

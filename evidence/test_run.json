@@ -1,421 +1,616 @@
 {
-  "schema": "gabriel.evidence.tests/1",
-  "command": "GABRIEL_CONTAINMENT_TESTS=1 .venv/bin/python -m pytest tests -vv -rs",
-  "log": "evidence/test_results.txt",
-  "summary_line": "======================= 117 passed, 1 skipped in 15.73s ========================",
-  "counts": {
-    "passed": 117,
-    "skipped": 1
-  },
-  "skipped": [
-    "SKIPPED [1] tests/test_live_provider.py:20: live provider tests need GABRIEL_LIVE_PROVIDER=1 and a credential"
+ "schema": "gabriel.evidence.tests/1",
+ "command": "GABRIEL_CONTAINMENT_TESTS=1 .venv/bin/python -m pytest tests -vv -rs",
+ "log": "evidence/test_results.txt",
+ "summary_line": "======================= 126 passed, 1 skipped in 29.41s ========================",
+ "counts": {
+  "passed": 126,
+  "skipped": 1
+ },
+ "skipped": [
+  "SKIPPED [1] tests/test_live_provider.py:20: live provider tests need GABRIEL_LIVE_PROVIDER=1 and a credential"
+ ],
+ "test_sha256": {
+  "tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "tests/conftest.py": "efaf17a74fa01a50b6d15f46d229d1e3cf203830a0d84e8ea1243c9d5471f095",
+  "tests/fake_targets.py": "d6d811020c6a31c173ebbd1a75eff31ae26613ee12566c5c5f20358514de9aea",
+  "tests/harness.py": "2997c0530ad66bda92f75436423ae4adebf28d9e7ea8885f72bde36ae7b88a88",
+  "tests/test_artifacts.py": "38e1144d9be2e9be9d7988fa8f44137cf50a3762a8a110b7261e9f9c7eecdd82",
+  "tests/test_contracts.py": "7f4dec6fe89d809a6b936736e0ec649614469493e374405b4c7b6a86160e89de",
+  "tests/test_evaluation.py": "f1413d2bd774273b838c40e4f924ed8692071abcbb0e76f79ef9bf924fdcddc9",
+  "tests/test_kernel.py": "ba6c0c8cc4964704fd1e6c74d5ea9ed7d4672ee9787fbdd0ff26b36fdd84a7c7",
+  "tests/test_live_provider.py": "4380358f73608e27ad6b5748e19eff89b5b8d41a41a187e1e089e03044153d39",
+  "tests/test_models.py": "e6d890b33fb984845502f0635df3e109bf3249d968630ad85229fa536c24c631",
+  "tests/test_owner.py": "20c13feb5069c88960a6e6edc90aaa92eeb4e0008ea5fdcfb85151d545b1650f",
+  "tests/test_policy.py": "6e907d85544324466fa96674a6b6b84d9e12ec35093f29e4444a8818e8d823f0",
+  "tests/test_release.py": "e8919a8617ce4bdbcd62d919da3f4bb30ce48b3ec143faf7dcf9dc049e4e1e7c",
+  "tests/test_scheduler.py": "91693f6e43fb525893c839abec208d45114d89f32f39a18052106142694965b6",
+  "tests/test_slice.py": "b01df59b9e5b32ce1b2e9c725b5ca29df222a00fe86d9d0591e745226505130a",
+  "tests/test_workers.py": "3d0a1f6bc1eb748efcbc5d220bac5479671925bf99e5c92c231e44ec55dd1491"
+ },
+ "results_by_module": {
+  "tests/test_artifacts.py": [
+   {
+    "test": "test_put_get_verify_roundtrip",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_crash_before_rename_leaves_no_object_but_temporary",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_crash_after_rename_is_a_retained_orphan_until_grace",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_corruption_is_a_visible_storage_fault",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_invalid_reference_rejected",
+    "result": "PASSED"
+   }
   ],
-  "source_sha256": {
-    "src/gabriel_agent/__init__.py": "d81f3fb7a7b3f8cf8e0f00c381d30a261d2fb4924fd534f87c0c1fd204e04099",
-    "src/gabriel_agent/agent/__init__.py": "d4fd6a68ba0ebc257d605efb3556be8fef1e059058543c409ab69205870c7f1c",
-    "src/gabriel_agent/agent/export.py": "967e9670330d8846166968910b5ed0845ba34f6639eec6805b76cdabd06995ea",
-    "src/gabriel_agent/agent/runner.py": "aea3c598405d8eefb8fd0111dd9cc35833153de97c579ef47974723fdd93a3ae",
-    "src/gabriel_agent/agent/workspace.py": "b7fb02fb8baedcc223ce4d496dd72af776de376024e50031e6ecc5f0618f5323",
-    "src/gabriel_agent/artifacts/__init__.py": "96c8ba41c0fd264134b1fa638a826b5f47dff0c3445108f5168eaf5d511842b5",
-    "src/gabriel_agent/artifacts/store.py": "2108ec4a7bc1acdcf28974613dd30920ea4b92db576e7788b1e6c3e3ce890e55",
-    "src/gabriel_agent/contracts/__init__.py": "acaeb2344335f8c2455b17e226d1b921612eeb722893ff4cfbf6f39a030eb184",
-    "src/gabriel_agent/contracts/codec.py": "3306522ffc63580983085502fc68dcbad8804e8861f30015b8e04e83eebe2b5f",
-    "src/gabriel_agent/contracts/errors.py": "30ca3db3bfb5f7c8333cea2c6f071000c9ffe86ee10483358cef9047d6cf42e9",
-    "src/gabriel_agent/contracts/rules.py": "707337997efaada27608df40f2ad8c2295e63025a22dce52012f0261373b2bce",
-    "src/gabriel_agent/contracts/schemas.py": "e003296ca44fde57ca82e70e5f6bd361692c9f8328cb6e930363151240fdc98f",
-    "src/gabriel_agent/domains/__init__.py": "106901ce8fe25842e7809477e30a9d049c75e8ffadc723d4e2edf6152e77da89",
-    "src/gabriel_agent/domains/software/__init__.py": "0fd732b035722113a3ff6c316a0706de8550e3899b40bbf815ed0b04ad7330cd",
-    "src/gabriel_agent/domains/software/pack.py": "36753752d36f1e8a43d8ffa1949f8bb68750e2a2b82f50e2ca00906b5b3cbcab",
-    "src/gabriel_agent/evaluation/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "src/gabriel_agent/evaluation/fixtures/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "src/gabriel_agent/evaluation/fixtures/parser_bug.py": "7b84a8a375129eae8d652d90984b93d1e4ad95933cc974e02bd4c7ed759e2361",
-    "src/gabriel_agent/interfaces/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "src/gabriel_agent/interfaces/cli.py": "98f2f98e9c6ced1ffcc102f9a03fb33d4a11634e999ff22ec630c9a50c8dc9e1",
-    "src/gabriel_agent/kernel/__init__.py": "d8dcb524a0fd13396c6e9cfe5c0098e9001daecdea89f3526a9f9a2ddefc2a1f",
-    "src/gabriel_agent/kernel/kernel.py": "1384bc387f6d48f7c8551822a26daf287019542c8f861d37f79d0821b865c760",
-    "src/gabriel_agent/models/__init__.py": "f8303a60e53efd26eb08ade3756f82a4f01a208bc0ec77dc27b198fcdf2ec634",
-    "src/gabriel_agent/models/gateway.py": "42ce64336741dafd3664ecba379d9ac95bf5a2c124b038e9050a8d03ca5af519",
-    "src/gabriel_agent/models/http_providers.py": "c4efb1dde708cf06fd7fd98e5166d31c211042c3ba1cad87959989b95d2bf124",
-    "src/gabriel_agent/models/port.py": "97c150b73da4c11291b14f0920335ce9ff246ff0c6c1427294328d38bf56bc1e",
-    "src/gabriel_agent/models/scripted.py": "a99dfe0761cd14d232b801e02b15104ba47e976a3b090bf6cc4fb6fb3f036c2b",
-    "src/gabriel_agent/planning/__init__.py": "3db562cfa71af116fe0511199744d12652ef26e45c9542388c22c669a806d4a4",
-    "src/gabriel_agent/planning/scheduler.py": "46c94af7e74b6ace8728b8e9ca60da1ba30dfb80e174c4d382e31a5780867028",
-    "src/gabriel_agent/policy/__init__.py": "e87adf576bf00e1ec0364de35137d45c36cb1dc3108e6f34a8d29e77efd1dd8c",
-    "src/gabriel_agent/policy/budget.py": "d68596fc1967d50703fac4f0ca2c0df0a912fd8fe57c831475d89de2e978ad3c",
-    "src/gabriel_agent/policy/grants.py": "724b6612c2a09913d61cb4a50c9825f9758310aef376a302d9655a85fa58a88c",
-    "src/gabriel_agent/policy/principals.py": "92ecb5276eaef5cf7d08cafa0938cc2f56282be5f9a655867446151cff71cc51",
-    "src/gabriel_agent/state/__init__.py": "79fe69ff72a700aa31a6a6045bf5478cc020b2705075e4b7015b530b243832b4",
-    "src/gabriel_agent/state/owner.py": "e6477d7619b24be44efc5cf222078b5537368b16273740d2f60243ec044539b6",
-    "src/gabriel_agent/state/reducer.py": "ea45d1d2bc7959619be6b48b5bfea5e357161decaa06b9c44b0f9eb96e14e0e7",
-    "src/gabriel_agent/tools/__init__.py": "0e94e9cb0cc1ee0ff86ee60022fe5e22e8e27908c6f70e4ca3ade791e38cb978",
-    "src/gabriel_agent/tools/fs.py": "ca8a28fb6295052be62d7f61ec5723fad287f021b907db9987b854c1a2102f14",
-    "src/gabriel_agent/tools/registry.py": "01369f707eb847e26af0d18c7c57f0b0077617b1d9b8c3dabe557d2efb3b289b",
-    "src/gabriel_agent/workers/__init__.py": "98f2dcf7b6e8dd26c316c17585c2d8042637904bb67f5fe6a9fa54a3f4b74c07",
-    "src/gabriel_agent/workers/isolation.py": "4b1780fc486fe89afad97e89fd669143ffd3bea95837965c098342a6360fe475",
-    "src/gabriel_agent/workers/jail_init.py": "6240139555875245b39d8054f2c9831d8ae173416e53d1d5182815436d4b6aeb",
-    "src/gabriel_agent/workers/supervisor.py": "f07609921b6b411872d1151308ad026e85bae955420772d17458a3f0e09a0ddb",
-    "src/gabriel_agent/workers/worktree.py": "600a3107456b130ff328830cfa9e948f0bce6c3b9a0aff280490289f228a5f9a",
-    "src/gabriel_agent/contracts/schemas/anchor.schema.json": "bd333491d55621c03da07a3c36130dc9b21d9b8e9c62f1af060a048ad6d16d07",
-    "src/gabriel_agent/contracts/schemas/artifact-ref.schema.json": "02094e69e48404ab98283d1601086a7d93ce8ccd9a655dbc653f772d87b75c06",
-    "src/gabriel_agent/contracts/schemas/assessment.schema.json": "d5b1167742572c181d18e949bf619d52dc992fe6fabb8dec206c5196a6a09a50",
-    "src/gabriel_agent/contracts/schemas/cancellation.schema.json": "354886fd9b77a2a290b67fe1ebacd308248fc260b411db628e7059be29dcd9ea",
-    "src/gabriel_agent/contracts/schemas/catalog.schema.json": "26668abac184cdb3b066e49f05fdb1c99e0c64be4d9a05d1d77d7267ec75b991",
-    "src/gabriel_agent/contracts/schemas/check-evidence.schema.json": "f458626004e9e42f3284a8fb2c956899346c8144a4fe82560c40dc62fd2a8eca",
-    "src/gabriel_agent/contracts/schemas/checkpoint.schema.json": "36bdfec2201e5a87769f6f5053e6f9146b293f3b7707e340ea67cd31c8ec1e69",
-    "src/gabriel_agent/contracts/schemas/claim.schema.json": "c9560c6a33c98f0b17bd2a1174937f950f5e1fc75fba533bebdd21805eae81b9",
-    "src/gabriel_agent/contracts/schemas/command.schema.json": "ad84c2248d80785eaa795ae4156892d775a46fa8bc9fa861a7c4b615cb523093",
-    "src/gabriel_agent/contracts/schemas/common.schema.json": "3bc1054955de5ae6fc4065004e47901ca84918782665e15e56c02e442132ec25",
-    "src/gabriel_agent/contracts/schemas/compilation-report.schema.json": "c617806b1782634ece11fa9c2bdaaf6f17594b792e918660a8d5ed79b38bc2e8",
-    "src/gabriel_agent/contracts/schemas/context-manifest.schema.json": "ccb628a2ebfc477c07b8537d4fb9b294d3a2b16cccea1b5608e23180797c7b88",
-    "src/gabriel_agent/contracts/schemas/dispatch-marker.schema.json": "d23377d68b8b21dbf63fabe6e270e30c7eddd92ec11ce1719c9d5e027276f872",
-    "src/gabriel_agent/contracts/schemas/domain-pack.schema.json": "ca3f9c4aa3abca57269b005e2f4f9afb10a3dbf68102cae3f081660479a9c690",
-    "src/gabriel_agent/contracts/schemas/effect-reconciliation.schema.json": "432eb9e210cec6cd7fef159c5c4b1544c70b423bfea22650a97e6bc3f6f9f440",
-    "src/gabriel_agent/contracts/schemas/event.schema.json": "6caa3d55afaa1ef2a360b13eeb2009088a99d80c15545592af14763c8b00e02d",
-    "src/gabriel_agent/contracts/schemas/export-manifest.schema.json": "a7a9120ee3daf275b589cc3078059f09dd23735f99b007ba0cf893225692d937",
-    "src/gabriel_agent/contracts/schemas/goal-spec.schema.json": "5bfb1001684fd25969e48ebee8c23fd7a0cbc20a2efc863a84a413b80282dea8",
-    "src/gabriel_agent/contracts/schemas/grant.schema.json": "5016fd1ff6bf4996f9e44ab3641f07c62c53f77bef247d2e18d4c654397a0737",
-    "src/gabriel_agent/contracts/schemas/hold.schema.json": "9ed9e98eb1ebd74fb99fbf8ac27bde30d6033b213f04afcff5b4465c8fd908fb",
-    "src/gabriel_agent/contracts/schemas/intent.schema.json": "d62920104de03cefc46a7f102358b91d8c1f54973935087e6457c507fdc9714d",
-    "src/gabriel_agent/contracts/schemas/model-request.schema.json": "49e403f33f746e9bc64d4417059e305f049bdcd4c1185d03de544848ac88f860",
-    "src/gabriel_agent/contracts/schemas/observation.schema.json": "6eca094356fb3c9f17dcbc8f38945f3bcea72a5ea0e87b159a6b7a30d542f67c",
-    "src/gabriel_agent/contracts/schemas/outcome-label.schema.json": "1be856ae7dcb8959e8e99348c76b3b7db4b9b64c11694f05b2bd01bcd32e3612",
-    "src/gabriel_agent/contracts/schemas/pause-request.schema.json": "9e39d0ebed114ae0e9e57745b2ac22f410b2f044b972eb9e28f138a813baf905",
-    "src/gabriel_agent/contracts/schemas/plan-proposal.schema.json": "22901b73f183a42796c53ded1d270a0c2dd4bc4295f2acc967ad93e56e6d4ebe",
-    "src/gabriel_agent/contracts/schemas/plan.schema.json": "bc8c879435b64749b09731e0eb7fd790aa58f111cf0ba7a463f3f82ae2284a30",
-    "src/gabriel_agent/contracts/schemas/proposal-envelope.schema.json": "467803fd69a69c7b7397c08c6811b3a5d45116b51fb07eada61b8396493c64bf",
-    "src/gabriel_agent/contracts/schemas/provider-profile.schema.json": "c522adc79ea213db8b48f7dcd9830a4ebbe1e2fad700756fa060594caac6a022",
-    "src/gabriel_agent/contracts/schemas/read-back.schema.json": "16ba92fd753f4ff7fd098b14c1bd24ee121db8fb355b9a7f1483868b9a89cab7",
-    "src/gabriel_agent/contracts/schemas/receipt.schema.json": "3be46bb7287db23b9b497f215eb07af64cb546446c508914efedddcb86efda1e",
-    "src/gabriel_agent/contracts/schemas/result.schema.json": "6d4cde4166325bb81d52f72cf8631c4510b5b244128aae81a41023b40bac368d",
-    "src/gabriel_agent/contracts/schemas/resume.schema.json": "5c025ff8a96c445fe96b747a3938c6e2354814425f98c2337169b0c36fe58685",
-    "src/gabriel_agent/contracts/schemas/run-start.schema.json": "7c6562bb06b155a839cd6fac64fb873ef19de8335b40b8ce2f99d683c772a2ca",
-    "src/gabriel_agent/contracts/schemas/run-witness.schema.json": "a0a818103229b39017079214a845b91ec33d9cba4ebb3741b8e2bc966aa55a07",
-    "src/gabriel_agent/contracts/schemas/run.schema.json": "4028de7078bf0b382557926c4810eb8777f901eb094bd5addf47ca5c211a2579",
-    "src/gabriel_agent/contracts/schemas/task-admission.schema.json": "ddfe173437e614e45265e1e92080462f7ae273edc9deab3e75bfe874014acbc1",
-    "src/gabriel_agent/contracts/schemas/task-amendment.schema.json": "1ce67adc9038e6de20feff02e0b7266004a01168c9909f8aefc82fc55f935878",
-    "src/gabriel_agent/contracts/schemas/task-binding.schema.json": "aedb939258025fda29104041c18333077c39e36f8182da92bf0c5a46a5486049",
-    "src/gabriel_agent/contracts/schemas/task.schema.json": "de727d24bb76ed17a2f0058a5578020d935b1b16a9a3d2aa90dac856e14c69fc",
-    "src/gabriel_agent/contracts/schemas/text-output.schema.json": "2d17fa25696627b8fb315ae55dc6d2cf95ef78ec14e9be1eee4495862078ff4a",
-    "src/gabriel_agent/contracts/schemas/tool-descriptor.schema.json": "0fb2d7192a4a5b325f7e2fc2893cafc1bfefe546a55c9c95d630302243a5f2a1",
-    "src/gabriel_agent/contracts/schemas/workspace-config.schema.json": "1c437b2dd4c3d38442a02889ec50e0a0c2480ae266adff0fe6511e70c818be9d",
-    "src/gabriel_agent/domains/software/schemas/software-apply-report.schema.json": "af5726c59f52487cbb1fdfb7e4e540aecef48bfd91eb7de0c9457a963434d8a6",
-    "src/gabriel_agent/domains/software/schemas/software-check-result.schema.json": "71f8df8a63c52dc125c6543056452303d72e205ff30f175d7473335f3b824f2f",
-    "src/gabriel_agent/domains/software/schemas/software-patch-proposal.schema.json": "af778929cbca91ca76b887d16df5539dc191835a4ad1330a4675bee686669ebc",
-    "src/gabriel_agent/domains/software/schemas/software-patch.schema.json": "1eb76b8f01f90bc01edcd5593a4b4775591976b56face0cc6a317d0c0dbe388d",
-    "src/gabriel_agent/domains/software/schemas/software-repository-pin.schema.json": "4dbd9e8cce50e5c3c1007052c1a2e095b53e58d22ebbb35e4ac0c7da9cecdf23",
-    "src/gabriel_agent/domains/software/schemas/software-review.schema.json": "f17ef3c5bac0f12717c905aa1513fa7ac954d6feecfb6b7180f8d98fc6f1517e",
-    "src/gabriel_agent/domains/software/schemas/software-snapshot.schema.json": "8e3c1076b8d02c3c9a4c553a920ee85c0757279fbffd192c7faab4b4729814af"
-  },
-  "test_sha256": {
-    "tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "tests/conftest.py": "efaf17a74fa01a50b6d15f46d229d1e3cf203830a0d84e8ea1243c9d5471f095",
-    "tests/fake_targets.py": "d6d811020c6a31c173ebbd1a75eff31ae26613ee12566c5c5f20358514de9aea",
-    "tests/harness.py": "f28459bbe7c9eef06db9138f832bd2fbf161f391adbde6ea3fe7dd8e8e0f9bd5",
-    "tests/test_artifacts.py": "38e1144d9be2e9be9d7988fa8f44137cf50a3762a8a110b7261e9f9c7eecdd82",
-    "tests/test_contracts.py": "7f4dec6fe89d809a6b936736e0ec649614469493e374405b4c7b6a86160e89de",
-    "tests/test_kernel.py": "ba6c0c8cc4964704fd1e6c74d5ea9ed7d4672ee9787fbdd0ff26b36fdd84a7c7",
-    "tests/test_live_provider.py": "4380358f73608e27ad6b5748e19eff89b5b8d41a41a187e1e089e03044153d39",
-    "tests/test_models.py": "e6d890b33fb984845502f0635df3e109bf3249d968630ad85229fa536c24c631",
-    "tests/test_owner.py": "20c13feb5069c88960a6e6edc90aaa92eeb4e0008ea5fdcfb85151d545b1650f",
-    "tests/test_policy.py": "6e907d85544324466fa96674a6b6b84d9e12ec35093f29e4444a8818e8d823f0",
-    "tests/test_scheduler.py": "91693f6e43fb525893c839abec208d45114d89f32f39a18052106142694965b6",
-    "tests/test_slice.py": "b01df59b9e5b32ce1b2e9c725b5ca29df222a00fe86d9d0591e745226505130a",
-    "tests/test_workers.py": "3d0a1f6bc1eb748efcbc5d220bac5479671925bf99e5c92c231e44ec55dd1491"
-  },
-  "results_by_module": {
-    "tests/test_artifacts.py": [
-      {
-        "test": "test_put_get_verify_roundtrip",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_crash_before_rename_leaves_no_object_but_temporary",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_crash_after_rename_is_a_retained_orphan_until_grace",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_corruption_is_a_visible_storage_fault",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_invalid_reference_rejected",
-        "result": "PASSED"
-      }
-    ],
-    "tests/test_contracts.py": [
-      {
-        "test": "test_canonical_strictness",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_every_blueprint_example_validates_and_round_trips",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_command_representation_controls_reject_before_admission",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_utf8_artifact_bytes_are_preserved_by_reference",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_run_pause_is_a_flag_not_a_state",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_operation_and_event_enums_are_closed_and_aligned",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_schema_registry_is_closed_and_identified",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_plan_dag_rules",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_amendment_weakening_detected",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_approval_digest_binds_exact_intent_fields",
-        "result": "PASSED"
-      }
-    ],
-    "tests/test_live_provider.py": [
-      {
-        "test": "test_real_provider_repairs_seeded_bug",
-        "result": "SKIPPED"
-      }
-    ],
-    "tests/test_models.py": [
-      {
-        "test": "test_scripted_statuses_map_to_distinct_outcomes",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_normalization_rejects_partial_and_wrapped_output",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_openai_compatible_status_mapping",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_anthropic_status_mapping",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_credential_resolution_never_reads_other_sources",
-        "result": "PASSED"
-      }
-    ],
-    "tests/test_owner.py": [
-      {
-        "test": "test_lifecycle_to_success_and_replay",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_admission_rejects_unverified_artifacts_and_foreign_principal",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_exact_retry_returns_receipt_and_changed_reuse_rejects",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_race_two_commands_at_same_revision_admits_exactly_one",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_crash_before_and_after_commit_with_replay",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_process_kill_before_commit_leaves_journal_consistent",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_pause_blocks_dispatch_and_resume_restores",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_grant_revocation_and_approval_mutation_at_dispatch",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_in_flight_effect_survives_revocation_as_reconciliation_obligation",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_budget_race_unknown_usage_and_no_reset_on_retry",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_cancel_retains_unknown_effects_and_late_result_is_audit_only",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_unmarked_attempt_result_rejected_and_fencing_enforced",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_assessment_eligibility_and_verifier_registration",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_failed_mandatory_check_opens_bounded_repair_cycles",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_amendment_cannot_weaken_without_principal_confirmation",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_hold_records_and_resume",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_plan_bounds_at_owner",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_anchor_detects_truncated_suffix_and_checkpoint_binding",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_replay_rejects_tampered_event",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_open_refuses_changed_catalog",
-        "result": "PASSED"
-      }
-    ],
-    "tests/test_policy.py": [
-      {
-        "test": "test_reservation_inequality_and_overrun_retention",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_deadline_is_separate_from_additive_ledger",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_grant_expiry_and_revocation_use_owner_time",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_intent_admission_rules",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_child_grant_must_be_subset",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_principal_authentication",
-        "result": "PASSED"
-      }
-    ],
-    "tests/test_scheduler.py": [
-      {
-        "test": "test_equal_priority_uses_node_id_tie_break",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_dependencies_and_pause_and_read_worker_bound",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_single_writer_per_resource",
-        "result": "PASSED"
-      }
-    ],
-    "tests/test_slice.py": [
-      {
-        "test": "test_end_to_end_repair_with_independent_oracle",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_interrupt_after_marker_and_resume",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_false_completion_and_acceptance_weakening_are_rejected",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_task_without_oracle_needs_explicit_acknowledgement",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_cli_smoke",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_termination_between_two_file_writes_is_reconciled_not_hidden",
-        "result": "PASSED"
-      }
-    ],
-    "tests/test_workers.py": [
-      {
-        "test": "test_contained_root_rejects_escapes_and_symlinks",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_registry_fingerprints_and_visible_catalog",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_worktree_pin_manifest_and_patch",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_trusted_local_capture_timeout_and_descendant_report",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_namespace_backend_probe_is_non_mutating",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_namespace_jail_isolation_selftest",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_supervisor_dispatch_happy_path_and_receipt_retry",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_crash_before_marker_abandons_lease_without_io",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_crash_after_marker_before_io_reconciles_by_status",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_crash_after_io_before_result_commit_idempotent_target",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_non_idempotent_unknown_outcome_never_retried_blindly",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_crash_after_result_commit_before_ack_is_idempotent_on_retry",
-        "result": "PASSED"
-      },
-      {
-        "test": "test_late_result_after_lease_expiry_matches_prior_attempt",
-        "result": "PASSED"
-      }
-    ]
-  }
+  "tests/test_contracts.py": [
+   {
+    "test": "test_canonical_strictness",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_every_blueprint_example_validates_and_round_trips",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_command_representation_controls_reject_before_admission",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_utf8_artifact_bytes_are_preserved_by_reference",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_run_pause_is_a_flag_not_a_state",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_operation_and_event_enums_are_closed_and_aligned",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_schema_registry_is_closed_and_identified",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_plan_dag_rules",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_amendment_weakening_detected",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_approval_digest_binds_exact_intent_fields",
+    "result": "PASSED"
+   }
+  ],
+  "tests/test_evaluation.py": [
+   {
+    "test": "test_corpus_is_sound_and_frozen_by_digest",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_worker_prompt_contains_retained_sources",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_comparators_under_scripted_provider",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_false_completion_is_measured_not_hidden",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_protocol_freeze_and_metrics",
+    "result": "PASSED"
+   }
+  ],
+  "tests/test_kernel.py": [
+   {
+    "test": "ContractTests::test_all_mandatory_obligations_required",
+    "result": "PASSED"
+   },
+   {
+    "test": "ContractTests::test_all_semantic_candidate_fields_bind_identity",
+    "result": "PASSED"
+   },
+   {
+    "test": "ContractTests::test_artifact_immutability_and_hash_copy",
+    "result": "PASSED"
+   },
+   {
+    "test": "ContractTests::test_assessment_identity_binds_passed_receipts_not_just_verdict",
+    "result": "PASSED"
+   },
+   {
+    "test": "ContractTests::test_assessment_identity_retains_rejected_and_duplicate_inputs",
+    "result": "PASSED"
+   },
+   {
+    "test": "ContractTests::test_canonical_encoder_strictness",
+    "result": "PASSED"
+   },
+   {
+    "test": "ContractTests::test_dry_run_and_synthetic_pass_are_not_observed_passes",
+    "result": "PASSED"
+   },
+   {
+    "test": "ContractTests::test_duplicate_evidence_does_not_increase_support",
+    "result": "PASSED"
+   },
+   {
+    "test": "ContractTests::test_duplicates_unknown_gate_and_noninteger_rank_rejected",
+    "result": "PASSED"
+   },
+   {
+    "test": "ContractTests::test_empty_goal_and_boolean_frontier_are_rejected",
+    "result": "PASSED"
+   },
+   {
+    "test": "ContractTests::test_missing_gate_or_inconclusive_gate_gives_no_candidate",
+    "result": "PASSED"
+   },
+   {
+    "test": "ContractTests::test_missing_or_wrong_oracle_is_invalid",
+    "result": "PASSED"
+   },
+   {
+    "test": "ContractTests::test_proposed_snapshot_never_becomes_observed_by_hashing",
+    "result": "PASSED"
+   },
+   {
+    "test": "ContractTests::test_ranking_ties_use_stable_identifier",
+    "result": "PASSED"
+   },
+   {
+    "test": "ContractTests::test_rejected_high_rank_never_selected",
+    "result": "PASSED"
+   },
+   {
+    "test": "ContractTests::test_scope_does_not_turn_invalid_pass_into_success",
+    "result": "PASSED"
+   },
+   {
+    "test": "ContractTests::test_stale_gate_or_wrong_policy_does_not_authorize",
+    "result": "PASSED"
+   },
+   {
+    "test": "ContractTests::test_stale_snapshot_invalidates_prior_pass",
+    "result": "PASSED"
+   },
+   {
+    "test": "ContractTests::test_supported_failures_and_nondecisions_are_distinct",
+    "result": "PASSED"
+   },
+   {
+    "test": "ContractTests::test_three_domain_labels_share_only_representation",
+    "result": "PASSED"
+   },
+   {
+    "test": "ContractTests::test_unknown_obligation_is_invalid",
+    "result": "PASSED"
+   },
+   {
+    "test": "ContractTests::test_wrong_domain_or_profile_cannot_borrow_evidence",
+    "result": "PASSED"
+   },
+   {
+    "test": "ContractTests::test_zero_priority_or_quantized_distance_cannot_complete",
+    "result": "PASSED"
+   },
+   {
+    "test": "CompletionTests::test_all_mandatory_obligations_required",
+    "result": "PASSED"
+   },
+   {
+    "test": "CompletionTests::test_all_semantic_candidate_fields_bind_identity",
+    "result": "PASSED"
+   },
+   {
+    "test": "CompletionTests::test_artifact_immutability_and_hash_copy",
+    "result": "PASSED"
+   },
+   {
+    "test": "CompletionTests::test_assessment_identity_binds_passed_receipts_not_just_verdict",
+    "result": "PASSED"
+   },
+   {
+    "test": "CompletionTests::test_assessment_identity_retains_rejected_and_duplicate_inputs",
+    "result": "PASSED"
+   },
+   {
+    "test": "CompletionTests::test_canonical_encoder_strictness",
+    "result": "PASSED"
+   },
+   {
+    "test": "CompletionTests::test_completion_requires_assessment_artifacts_and_effects",
+    "result": "PASSED"
+   },
+   {
+    "test": "CompletionTests::test_dry_run_and_synthetic_pass_are_not_observed_passes",
+    "result": "PASSED"
+   },
+   {
+    "test": "CompletionTests::test_duplicate_evidence_does_not_increase_support",
+    "result": "PASSED"
+   },
+   {
+    "test": "CompletionTests::test_duplicates_unknown_gate_and_noninteger_rank_rejected",
+    "result": "PASSED"
+   },
+   {
+    "test": "CompletionTests::test_empty_goal_and_boolean_frontier_are_rejected",
+    "result": "PASSED"
+   },
+   {
+    "test": "CompletionTests::test_kernel_contract_identity_differs_from_reference",
+    "result": "PASSED"
+   },
+   {
+    "test": "CompletionTests::test_missing_gate_or_inconclusive_gate_gives_no_candidate",
+    "result": "PASSED"
+   },
+   {
+    "test": "CompletionTests::test_missing_or_wrong_oracle_is_invalid",
+    "result": "PASSED"
+   },
+   {
+    "test": "CompletionTests::test_progress_vector_is_diagnostic_only",
+    "result": "PASSED"
+   },
+   {
+    "test": "CompletionTests::test_proposed_snapshot_never_becomes_observed_by_hashing",
+    "result": "PASSED"
+   },
+   {
+    "test": "CompletionTests::test_ranking_ties_use_stable_identifier",
+    "result": "PASSED"
+   },
+   {
+    "test": "CompletionTests::test_rejected_high_rank_never_selected",
+    "result": "PASSED"
+   },
+   {
+    "test": "CompletionTests::test_scope_does_not_turn_invalid_pass_into_success",
+    "result": "PASSED"
+   },
+   {
+    "test": "CompletionTests::test_stale_gate_or_wrong_policy_does_not_authorize",
+    "result": "PASSED"
+   },
+   {
+    "test": "CompletionTests::test_stale_snapshot_invalidates_prior_pass",
+    "result": "PASSED"
+   },
+   {
+    "test": "CompletionTests::test_supported_failures_and_nondecisions_are_distinct",
+    "result": "PASSED"
+   },
+   {
+    "test": "CompletionTests::test_three_domain_labels_share_only_representation",
+    "result": "PASSED"
+   },
+   {
+    "test": "CompletionTests::test_unknown_obligation_is_invalid",
+    "result": "PASSED"
+   },
+   {
+    "test": "CompletionTests::test_wrong_domain_or_profile_cannot_borrow_evidence",
+    "result": "PASSED"
+   },
+   {
+    "test": "CompletionTests::test_zero_priority_or_quantized_distance_cannot_complete",
+    "result": "PASSED"
+   }
+  ],
+  "tests/test_live_provider.py": [
+   {
+    "test": "test_real_provider_repairs_seeded_bug",
+    "result": "SKIPPED"
+   }
+  ],
+  "tests/test_models.py": [
+   {
+    "test": "test_scripted_statuses_map_to_distinct_outcomes",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_normalization_rejects_partial_and_wrapped_output",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_openai_compatible_status_mapping",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_anthropic_status_mapping",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_credential_resolution_never_reads_other_sources",
+    "result": "PASSED"
+   }
+  ],
+  "tests/test_owner.py": [
+   {
+    "test": "test_lifecycle_to_success_and_replay",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_admission_rejects_unverified_artifacts_and_foreign_principal",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_exact_retry_returns_receipt_and_changed_reuse_rejects",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_race_two_commands_at_same_revision_admits_exactly_one",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_crash_before_and_after_commit_with_replay",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_process_kill_before_commit_leaves_journal_consistent",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_pause_blocks_dispatch_and_resume_restores",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_grant_revocation_and_approval_mutation_at_dispatch",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_in_flight_effect_survives_revocation_as_reconciliation_obligation",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_budget_race_unknown_usage_and_no_reset_on_retry",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_cancel_retains_unknown_effects_and_late_result_is_audit_only",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_unmarked_attempt_result_rejected_and_fencing_enforced",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_assessment_eligibility_and_verifier_registration",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_failed_mandatory_check_opens_bounded_repair_cycles",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_amendment_cannot_weaken_without_principal_confirmation",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_hold_records_and_resume",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_plan_bounds_at_owner",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_anchor_detects_truncated_suffix_and_checkpoint_binding",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_replay_rejects_tampered_event",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_open_refuses_changed_catalog",
+    "result": "PASSED"
+   }
+  ],
+  "tests/test_policy.py": [
+   {
+    "test": "test_reservation_inequality_and_overrun_retention",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_deadline_is_separate_from_additive_ledger",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_grant_expiry_and_revocation_use_owner_time",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_intent_admission_rules",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_child_grant_must_be_subset",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_principal_authentication",
+    "result": "PASSED"
+   }
+  ],
+  "tests/test_release.py": [
+   {
+    "test": "test_backup_restore_replay_and_export_match",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_restore_rejects_corrupted_object_and_truncated_journal",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_cli_backup_restore_and_release_manifest",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_release_manifest_binds_source_identity",
+    "result": "PASSED"
+   }
+  ],
+  "tests/test_scheduler.py": [
+   {
+    "test": "test_equal_priority_uses_node_id_tie_break",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_dependencies_and_pause_and_read_worker_bound",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_single_writer_per_resource",
+    "result": "PASSED"
+   }
+  ],
+  "tests/test_slice.py": [
+   {
+    "test": "test_end_to_end_repair_with_independent_oracle",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_interrupt_after_marker_and_resume",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_false_completion_and_acceptance_weakening_are_rejected",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_task_without_oracle_needs_explicit_acknowledgement",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_cli_smoke",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_termination_between_two_file_writes_is_reconciled_not_hidden",
+    "result": "PASSED"
+   }
+  ],
+  "tests/test_workers.py": [
+   {
+    "test": "test_contained_root_rejects_escapes_and_symlinks",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_registry_fingerprints_and_visible_catalog",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_worktree_pin_manifest_and_patch",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_trusted_local_capture_timeout_and_descendant_report",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_namespace_backend_probe_is_non_mutating",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_namespace_jail_isolation_selftest",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_supervisor_dispatch_happy_path_and_receipt_retry",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_crash_before_marker_abandons_lease_without_io",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_crash_after_marker_before_io_reconciles_by_status",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_crash_after_io_before_result_commit_idempotent_target",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_non_idempotent_unknown_outcome_never_retried_blindly",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_crash_after_result_commit_before_ack_is_idempotent_on_retry",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_late_result_after_lease_expiry_matches_prior_attempt",
+    "result": "PASSED"
+   }
+  ]
+ },
+ "source_sha256": {
+  "src/gabriel_agent/__init__.py": "d81f3fb7a7b3f8cf8e0f00c381d30a261d2fb4924fd534f87c0c1fd204e04099",
+  "src/gabriel_agent/agent/__init__.py": "d4fd6a68ba0ebc257d605efb3556be8fef1e059058543c409ab69205870c7f1c",
+  "src/gabriel_agent/agent/backup.py": "3e1f1fdccaf73a218878fec9c607efa813b3f661c14444ccf7c54cdac921e730",
+  "src/gabriel_agent/agent/export.py": "967e9670330d8846166968910b5ed0845ba34f6639eec6805b76cdabd06995ea",
+  "src/gabriel_agent/agent/release.py": "72903aedfbf4313839fb4fdda01559f517df65d7473033ff9442d6294c3dc841",
+  "src/gabriel_agent/agent/runner.py": "06ef6b4dec3b50ce48fc3381b4ca02ab4bdc225eb3566848ac89b6d98785a2af",
+  "src/gabriel_agent/agent/workspace.py": "b7fb02fb8baedcc223ce4d496dd72af776de376024e50031e6ecc5f0618f5323",
+  "src/gabriel_agent/artifacts/__init__.py": "96c8ba41c0fd264134b1fa638a826b5f47dff0c3445108f5168eaf5d511842b5",
+  "src/gabriel_agent/artifacts/store.py": "2108ec4a7bc1acdcf28974613dd30920ea4b92db576e7788b1e6c3e3ce890e55",
+  "src/gabriel_agent/contracts/__init__.py": "acaeb2344335f8c2455b17e226d1b921612eeb722893ff4cfbf6f39a030eb184",
+  "src/gabriel_agent/contracts/codec.py": "3306522ffc63580983085502fc68dcbad8804e8861f30015b8e04e83eebe2b5f",
+  "src/gabriel_agent/contracts/errors.py": "30ca3db3bfb5f7c8333cea2c6f071000c9ffe86ee10483358cef9047d6cf42e9",
+  "src/gabriel_agent/contracts/rules.py": "707337997efaada27608df40f2ad8c2295e63025a22dce52012f0261373b2bce",
+  "src/gabriel_agent/contracts/schemas.py": "e003296ca44fde57ca82e70e5f6bd361692c9f8328cb6e930363151240fdc98f",
+  "src/gabriel_agent/domains/__init__.py": "106901ce8fe25842e7809477e30a9d049c75e8ffadc723d4e2edf6152e77da89",
+  "src/gabriel_agent/domains/software/__init__.py": "0fd732b035722113a3ff6c316a0706de8550e3899b40bbf815ed0b04ad7330cd",
+  "src/gabriel_agent/domains/software/pack.py": "0ff5c2c7ff0f08b92101d580c2634fe07dcc14a0677fde58d4d0b1beb3c22f45",
+  "src/gabriel_agent/evaluation/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "src/gabriel_agent/evaluation/comparators.py": "f86603f558cd76dd89155db69cdb711f6c50b31710a9428b8b2b068cfb20c741",
+  "src/gabriel_agent/evaluation/corpus.py": "008f8f4a547fcd852c86467c2c7d6a008c47b105b3b8e5bda000d95baa5933b7",
+  "src/gabriel_agent/evaluation/fixtures/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "src/gabriel_agent/evaluation/fixtures/parser_bug.py": "7b84a8a375129eae8d652d90984b93d1e4ad95933cc974e02bd4c7ed759e2361",
+  "src/gabriel_agent/evaluation/harness.py": "53a0d809bd7fa249e289d89a57bd9f5920b151c2828c9a79a5b59af9cd3a3ed6",
+  "src/gabriel_agent/interfaces/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "src/gabriel_agent/interfaces/cli.py": "758f299dc69f4e75b3a3b1aff70bc3d25dd0fd2967fb241327cf9ea39610c5cf",
+  "src/gabriel_agent/kernel/__init__.py": "d8dcb524a0fd13396c6e9cfe5c0098e9001daecdea89f3526a9f9a2ddefc2a1f",
+  "src/gabriel_agent/kernel/kernel.py": "1384bc387f6d48f7c8551822a26daf287019542c8f861d37f79d0821b865c760",
+  "src/gabriel_agent/models/__init__.py": "f8303a60e53efd26eb08ade3756f82a4f01a208bc0ec77dc27b198fcdf2ec634",
+  "src/gabriel_agent/models/gateway.py": "42ce64336741dafd3664ecba379d9ac95bf5a2c124b038e9050a8d03ca5af519",
+  "src/gabriel_agent/models/http_providers.py": "c4efb1dde708cf06fd7fd98e5166d31c211042c3ba1cad87959989b95d2bf124",
+  "src/gabriel_agent/models/port.py": "97c150b73da4c11291b14f0920335ce9ff246ff0c6c1427294328d38bf56bc1e",
+  "src/gabriel_agent/models/scripted.py": "a99dfe0761cd14d232b801e02b15104ba47e976a3b090bf6cc4fb6fb3f036c2b",
+  "src/gabriel_agent/planning/__init__.py": "3db562cfa71af116fe0511199744d12652ef26e45c9542388c22c669a806d4a4",
+  "src/gabriel_agent/planning/scheduler.py": "46c94af7e74b6ace8728b8e9ca60da1ba30dfb80e174c4d382e31a5780867028",
+  "src/gabriel_agent/policy/__init__.py": "e87adf576bf00e1ec0364de35137d45c36cb1dc3108e6f34a8d29e77efd1dd8c",
+  "src/gabriel_agent/policy/budget.py": "d68596fc1967d50703fac4f0ca2c0df0a912fd8fe57c831475d89de2e978ad3c",
+  "src/gabriel_agent/policy/grants.py": "724b6612c2a09913d61cb4a50c9825f9758310aef376a302d9655a85fa58a88c",
+  "src/gabriel_agent/policy/principals.py": "92ecb5276eaef5cf7d08cafa0938cc2f56282be5f9a655867446151cff71cc51",
+  "src/gabriel_agent/state/__init__.py": "79fe69ff72a700aa31a6a6045bf5478cc020b2705075e4b7015b530b243832b4",
+  "src/gabriel_agent/state/owner.py": "e6477d7619b24be44efc5cf222078b5537368b16273740d2f60243ec044539b6",
+  "src/gabriel_agent/state/reducer.py": "ea45d1d2bc7959619be6b48b5bfea5e357161decaa06b9c44b0f9eb96e14e0e7",
+  "src/gabriel_agent/tools/__init__.py": "0e94e9cb0cc1ee0ff86ee60022fe5e22e8e27908c6f70e4ca3ade791e38cb978",
+  "src/gabriel_agent/tools/fs.py": "ca8a28fb6295052be62d7f61ec5723fad287f021b907db9987b854c1a2102f14",
+  "src/gabriel_agent/tools/registry.py": "01369f707eb847e26af0d18c7c57f0b0077617b1d9b8c3dabe557d2efb3b289b",
+  "src/gabriel_agent/workers/__init__.py": "98f2dcf7b6e8dd26c316c17585c2d8042637904bb67f5fe6a9fa54a3f4b74c07",
+  "src/gabriel_agent/workers/isolation.py": "4b1780fc486fe89afad97e89fd669143ffd3bea95837965c098342a6360fe475",
+  "src/gabriel_agent/workers/jail_init.py": "6240139555875245b39d8054f2c9831d8ae173416e53d1d5182815436d4b6aeb",
+  "src/gabriel_agent/workers/supervisor.py": "f07609921b6b411872d1151308ad026e85bae955420772d17458a3f0e09a0ddb",
+  "src/gabriel_agent/workers/worktree.py": "9275cf6e159058ce2471a058b57a39f729d3ad34b447da5c335124dc3662b355"
+ }
 }

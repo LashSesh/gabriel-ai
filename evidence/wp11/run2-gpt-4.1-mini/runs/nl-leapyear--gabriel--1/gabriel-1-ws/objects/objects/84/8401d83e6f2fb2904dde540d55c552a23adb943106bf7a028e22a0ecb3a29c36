@@ -1,0 +1,19 @@
+def is_leap(year):
+    # Correct leap year calculation:
+    # A year is a leap year if it is divisible by 4,
+    # except for years divisible by 100, unless also divisible by 400.
+    if year % 400 == 0:
+        return True
+    if year % 100 == 0:
+        return False
+    if year % 4 == 0:
+        return True
+    return False
+
+
+def days_in_month(year, month):
+    # Days in each month, index 1-12
+    dim = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    if month == 2 and is_leap(year):
+        return 29
+    return dim[month - 1]

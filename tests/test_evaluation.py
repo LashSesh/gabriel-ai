@@ -12,10 +12,25 @@ from gabriel_agent.evaluation.fixtures import parser_bug as fixture
 def test_corpus_is_sound_and_frozen_by_digest():
     report = corpus.check_all()
     assert report["all_sound"], [t for t in report["tasks"] if not t["sound"]]
-    assert len(report["tasks"]) == 12 and len(report["families"]) == 4
+    assert len(report["tasks"]) == 15 and len(report["families"]) == 5
     assert all(len(ids) == 3 for ids in report["families"].values())
     assert report["corpus_digest"] == corpus.corpus_digest()
-    assert all(t.family in ("text_parsing", "numeric_logic", "collections", "validation") for t in corpus.tasks())
+    assert all(t.family in ("text_parsing", "numeric_logic", "collections", "validation", "encoding") for t in corpus.tasks())
+
+
+def test_worker_prompt_contains_retained_sources(tmp_path):
+    """Run-2 failure analysis: the first observation did not retain the in-scope sources, so the
+    worker prompt listed digests only and the model rewrote files blind. The prompt must carry
+    the content of every in-scope text file, and never omit one silently."""
+    task = next(t for t in corpus.tasks() if t.task_id == "nl-median")
+    budget = comparators.Budget(model_requests=2, model_tokens_total=60000, max_input_tokens=20000, max_output_tokens=2000)
+    ctx = comparators.EvalContext(task, tmp_path / "ctx", scripted_provider(), budget, "trusted_local")
+    prompt, snapshot, manifest = ctx.prompt(ctx.worktree("probe"), [], 0)
+    text = prompt.decode("utf8")
+    assert "=== src/stats.py (sha256 %s) ===" % manifest["src/stats.py"]["sha256"] in text
+    assert "def mean(" in text and "def median(" in text
+    assert "CONTENT NOT RETAINED" not in text
+    assert "tests/test_stats.py" in text and "class" not in text.split("Source files in scope:")[1].split("def median(")[0]
 
 
 def scripted_provider(variant="correct"):

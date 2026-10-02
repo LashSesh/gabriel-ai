@@ -1,0 +1,8 @@
+"""emailcheck: minimal e-mail address validation."""
+
+
+def is_valid_email(text):
+    if text.count("@") != 1:
+        return False
+    local, domain = text.split("@")
+    return bool(local) and bool(domain) and " " not in text

@@ -1,0 +1,127 @@
+{
+  "backend": "linux_namespace",
+  "bootstrap": {
+    "resamples": 2000,
+    "seed": 20261002
+  },
+  "budget_per_task": {
+    "max_input_tokens": 60000,
+    "max_output_tokens": 4000,
+    "model_requests": 6,
+    "model_tokens_total": 120000,
+    "tool_attempts": 64,
+    "wall_ms": 600000
+  },
+  "corpus_digest": "d36d8e65ba2140e6d0e6d98130b6d5317be7cdff68579062eb546e9dd4d8149a",
+  "declared_success": {
+    "gabriel": "run state succeeded (every mandatory check passed with eligible evidence, artifacts verified, effects reconciled)",
+    "gabriel_no_repair": "as gabriel, with max_repairs=0 and max_plan_versions=1 (ablation of the repair cycle)",
+    "gabriel_reference_plan": "as gabriel, with the domain pack's deterministic reference plan admitted without a planner request (planner ablation)",
+    "provider_only": "an admissible patch was applied (no verification)",
+    "simple_loop": "the system's own runs of the visible tests and the oracle both exited 0"
+  },
+  "families": [
+    "collections",
+    "numeric_logic",
+    "text_parsing",
+    "validation"
+  ],
+  "frozen_at_utc": "2026-10-02T18:34:09.215798+00:00",
+  "frozen_digest": "b9a6e0d096ca285c129d9947e666d61b254fc7e59fc42bf4b35ba7e8fb3f9b4f",
+  "harness_identity": "ee5be54e004f02b4f48996594242953808f3bf74be7c009d58e5b3a34b51f19f",
+  "held_out_families": [
+    "validation"
+  ],
+  "metrics": [
+    "p_success = mean(V)",
+    "p_false_completion = mean(D*(1-V))",
+    "conditional false completion = sum(D*(1-V))/sum(D)",
+    "model requests, model tokens and wall time per run",
+    "recovery: Gabriel runs that used repair cycles or extra plan versions",
+    "paired differences gabriel - baseline per task (mean over repetitions)",
+    "bootstrap percentile intervals, resampling task families with replacement (and tasks as a secondary view)"
+  ],
+  "note": "Second frozen protocol after the failure analysis of run 1 (protocol b9f824a4...): the runner now includes retained test output in repair prompts, and gabriel_reference_plan admits the domain pack's reference plan without a planner request. The nine tasks of run 1 were seen before this freeze; the validation family was written after run 1 and never run before.",
+  "provider": {
+    "credential_ref": "env:OPENAI_API_KEY",
+    "kind": "openai_compat",
+    "model": "gpt-4.1-mini",
+    "temperature_milli": 0,
+    "timeout_ms": 120000
+  },
+  "purpose": "Matched G1 coding comparison: increase independently verified task success or reduce resources at equal success, under a fixed task distribution and matched constraints. Not a benchmark of general capability.",
+  "repetitions": 2,
+  "sample_size_statement": "12 tasks in 4 families; the minimum relevant effect is not predeclared from a pilot, so intervals are reported as descriptive uncertainty, not as a powered test",
+  "schema": "gabriel.evaluation-protocol/1",
+  "systems": [
+    "provider_only",
+    "simple_loop",
+    "gabriel",
+    "gabriel_no_repair",
+    "gabriel_reference_plan"
+  ],
+  "tasks": [
+    {
+      "digest": "1a9839ed35bd7423426682a75e1e092892d3628d3e1750811d26e98536f1b494",
+      "family": "text_parsing",
+      "task_id": "tp-kvparse"
+    },
+    {
+      "digest": "817e961b5a43576ce1a26ef12ee353f2d9ae4d3405767dd6e8ccdb06c7b85fcd",
+      "family": "text_parsing",
+      "task_id": "tp-csvfields"
+    },
+    {
+      "digest": "66c30d5fcd19ceee7792d16a7b18d169bbcd7c027cb17e5d43bc987adb9bb70a",
+      "family": "text_parsing",
+      "task_id": "tp-querystring"
+    },
+    {
+      "digest": "391ee2bcd60a47eea11afb0838ff032ed24f331480b0460307cbf663f9c33357",
+      "family": "numeric_logic",
+      "task_id": "nl-median"
+    },
+    {
+      "digest": "21fcb05930f4918822c99c75920f5a5006e633ff7558b8f4c91712b982708ebc",
+      "family": "numeric_logic",
+      "task_id": "nl-roman"
+    },
+    {
+      "digest": "05a1d7d3a9a39b9f1cb009d67875b508a5f4bf766155f4a33ca3673494e7b1e4",
+      "family": "numeric_logic",
+      "task_id": "nl-leapyear"
+    },
+    {
+      "digest": "2fcc839e38ade3e6c54789ba1e9e70c696cd5062a164005c9cb42e425aa65c6e",
+      "family": "collections",
+      "task_id": "co-dedupe"
+    },
+    {
+      "digest": "66b917b7bcf4ee4bb24613c665ba03c9ffba00315961971f5a12dae33bca7164",
+      "family": "collections",
+      "task_id": "co-slugify"
+    },
+    {
+      "digest": "c962bfa79017838d6f200a88fdf31cfc346688bff1381968861936abfad99132",
+      "family": "collections",
+      "task_id": "co-chunk"
+    },
+    {
+      "digest": "0bfdbcc63bb4767c743dfeed3e372e57dda4b285929134784f08e30219780ed5",
+      "family": "validation",
+      "task_id": "vl-email"
+    },
+    {
+      "digest": "e58aa1bf75b19be5f205416368b63afef80510d75d8ef683d364d712a8550707",
+      "family": "validation",
+      "task_id": "vl-isbn10"
+    },
+    {
+      "digest": "07ede0853d6527a7b81fe765ca7e6aedf34625e2b6afdbb66d2790476b3ce4ec",
+      "family": "validation",
+      "task_id": "vl-luhn"
+    }
+  ],
+  "time_limit_is_failure": true,
+  "verification": "fresh, system-independent: changed paths within allowed_paths; visible tests exit 0; oracle installed from the corpus text and exit 0; all executed in the containment backend on the final tree"
+}

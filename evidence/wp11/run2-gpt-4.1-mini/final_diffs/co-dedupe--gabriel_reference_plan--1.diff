@@ -1,0 +1,19 @@
+diff --git a/src/seqtools.py b/src/seqtools.py
+index 030da4b..7d4147a 100644
+--- a/src/seqtools.py
++++ b/src/seqtools.py
+@@ -1,5 +1,9 @@
+-"""seqtools: sequence helpers."""
+-
+-
+-def dedupe(items):
+-    return list(set(items))
++def dedupe(seq):
++    """Remove duplicates from the sequence while preserving order of first occurrence."""
++    seen = set()
++    result = []
++    for item in seq:
++        if item not in seen:
++            seen.add(item)
++            result.append(item)
++    return result

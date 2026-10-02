@@ -1,0 +1,52 @@
+diff --git a/src/querystring.py b/src/querystring.py
+index e32c2b2..ee7e066 100644
+--- a/src/querystring.py
++++ b/src/querystring.py
+@@ -1,14 +1,39 @@
+-"""querystring: parse application/x-www-form-urlencoded strings."""
+-from urllib.parse import unquote
++import urllib.parse
+ 
+ 
+-def parse_qs(text):
++def parse_qs(qs):
++    """Parse a query string into a dictionary mapping keys to lists of values.
++
++    A plus sign in a value decodes to a space.
++    A key without an equals sign maps to an empty string.
++    Percent-decoding is preserved.
++
++    Args:
++        qs (str): The query string to parse.
++
++    Returns:
++        dict: A dictionary mapping keys to lists of values.
++    """
+     result = {}
+-    if not text:
++    if not qs:
+         return result
+-    for part in text.split("&"):
+-        if "=" not in part:
++
++    pairs = qs.split('&')
++    for pair in pairs:
++        if not pair:
+             continue
+-        key, value = part.split("=", 1)
+-        result[unquote(key)] = unquote(value)
++        if '=' in pair:
++            key, value = pair.split('=', 1)
++            # Replace plus with space before percent-decoding
++            key = urllib.parse.unquote(key.replace('+', ' '))
++            value = urllib.parse.unquote(value.replace('+', ' '))
++        else:
++            # Key without equals sign maps to empty string
++            key = urllib.parse.unquote(pair.replace('+', ' '))
++            value = ''
++
++        if key in result:
++            result[key].append(value)
++        else:
++            result[key] = [value]
+     return result

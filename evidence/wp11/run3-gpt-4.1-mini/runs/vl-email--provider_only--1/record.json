@@ -1,0 +1,78 @@
+{
+  "task_id": "vl-email",
+  "family": "validation",
+  "system": "provider_only",
+  "rep": 1,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp11/run3-gpt-4.1-mini/runs/vl-email--provider_only--1",
+  "outcome": {
+    "system": "provider_only",
+    "task_id": "vl-email",
+    "family": "validation",
+    "rep": 1,
+    "declared": true,
+    "declared_reason": "patch applied; declared done without verification",
+    "model_requests": 1,
+    "model_tokens": 810,
+    "wall_ms": 2033,
+    "provider_statuses": [
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp11/run3-gpt-4.1-mini/runs/vl-email--provider_only--1/worktrees/provider_only-1",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "patch applied; declared done without verification"
+    ],
+    "gabriel": null,
+    "repairs_used": 0,
+    "plan_versions": 0
+  },
+  "verification": {
+    "verified": true,
+    "changed_paths": [
+      "src/emailcheck.py"
+    ],
+    "out_of_scope_paths": [],
+    "visible": {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "start_failure": null,
+      "stdout_tail": "",
+      "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+      "backend": "linux_namespace"
+    },
+    "oracle": {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "oracle_emailcheck"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "start_failure": null,
+      "stdout_tail": "",
+      "stderr_tail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n",
+      "backend": "linux_namespace"
+    },
+    "patch_sha256": "43ec29a0f51d4e5a2fe23b2661c4617eecc9ce0260a24dc42854c39f2a641403",
+    "patch_bytes": 651,
+    "patch": "diff --git a/src/emailcheck.py b/src/emailcheck.py\nindex c957300..7ff8178 100644\n--- a/src/emailcheck.py\n+++ b/src/emailcheck.py\n@@ -5,4 +5,12 @@ def is_valid_email(text):\n     if text.count(\"@\") != 1:\n         return False\n     local, domain = text.split(\"@\")\n-    return bool(local) and bool(domain) and \" \" not in text\n+    if not local or not domain or \" \" in text:\n+        return False\n+    # domain must contain a dot with at least one character before and after it\n+    if \".\" not in domain:\n+        return False\n+    dot_index = domain.find(\".\")\n+    if dot_index == 0 or dot_index == len(domain) - 1:\n+        return False\n+    return True\n",
+    "head_is_base": true
+  },
+  "V": 1,
+  "D": 1,
+  "false_completion": 0,
+  "unit_wall_ms": 2593
+}

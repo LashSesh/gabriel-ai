@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-EUcQoMGXgoIvLVKPDnpfTdqSGDW2H",
+  "object": "chat.completion",
+  "created": 1790966278,
+  "model": "gpt-4.1-mini-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"operations\": [{\"kind\": \"modify\", \"path\": \"src/chunking.py\", \"expected_sha256\": \"9490fadee20e59b525aa4b8c552e6a7a90dc101e2627630076dea0a46087fbb8\", \"content\": \"def chunk(data, size):\\n    \\\"\\\"\\\"Yield successive chunks from data of given size.\\n\\n    If the length of data is not a multiple of size, the final partial chunk is yielded.\\n    If size is larger than the length of data, a single chunk containing all data is yielded.\\n\\n    Args:\\n        data (bytes or str or list): The input data to chunk.\\n        size (int): The chunk size.\\n\\n    Yields:\\n        bytes or str or list: Chunks of the input data.\\n    \\\"\\\"\\\"\\n    if size <= 0:\\n        raise ValueError(\\\"size must be positive\\\")\\n    if not data:\\n        return\\n    length = len(data)\\n    if size >= length:\\n        yield data\\n        return\\n    for i in range(0, length, size):\\n        yield data[i:i + size]\\n\"}], \"rationale\": \"The original function always yields chunks as a generator, but the tests expect a list when the input is empty or when the chunk size is larger than the input length. To fix this, the function now returns immediately (no yield) if data is empty, and yields the entire data as a single chunk if size >= len(data). This ensures the final partial chunk is yielded and the single chunk case is handled correctly, matching the expected outputs without changing the public API or existing tests.\"}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 1574,
+    "completion_tokens": 365,
+    "total_tokens": 1939,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_f4b5aaa691"
+}

@@ -1,0 +1,1 @@
+The median function already correctly computes the median as the arithmetic mean of the two middle values for even-length data. The test import error was due to the missing mean function in stats.py, so adding a mean function with the expected API fixes the import error without changing the median behavior or public API.

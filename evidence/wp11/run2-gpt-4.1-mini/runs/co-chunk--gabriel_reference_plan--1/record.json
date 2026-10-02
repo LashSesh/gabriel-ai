@@ -1,0 +1,267 @@
+{
+  "task_id": "co-chunk",
+  "family": "collections",
+  "system": "gabriel_reference_plan",
+  "rep": 1,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp11/run2-gpt-4.1-mini/runs/co-chunk--gabriel_reference_plan--1",
+  "outcome": {
+    "system": "gabriel_reference_plan",
+    "task_id": "co-chunk",
+    "family": "collections",
+    "rep": 1,
+    "declared": false,
+    "declared_reason": "run state failed",
+    "model_requests": 3,
+    "model_tokens": 4068,
+    "wall_ms": 12228,
+    "provider_statuses": [
+      "completed",
+      "completed",
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp11/run2-gpt-4.1-mini/runs/co-chunk--gabriel_reference_plan--1/gabriel_reference_plan-1-ws/worktrees/run-co-chunk-gabriel_reference_plan-1-1",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "assess propose-r2/output-valid -> passed: assessment passed recorded for output-valid; node propose-r2 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+      "apply-r2 -> completed (result accepted; checks pending)",
+      "assess apply-r2/output-valid -> passed: assessment passed recorded for output-valid; node apply-r2 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+      "read-back-r2 -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+      "assess read-back-r2/output-valid -> passed: assessment passed recorded for output-valid; node read-back-r2 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+      "review-r2 -> completed (result accepted; checks pending)",
+      "assess review-r2/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,unit",
+      "assess review-r2/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,oracle,unit",
+      "assess review-r2/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,oracle,unit",
+      "assess review-r2/no-secrets -> passed: assessment passed recorded for no-secrets; node review-r2 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: oracle,unit",
+      "verify-oracle-r2 -> completed (result accepted; checks pending)",
+      "assess verify-oracle-r2/oracle -> failed: assessment failed recorded for oracle; mandatory check failed; repair policy exhausted"
+    ],
+    "gabriel": {
+      "run_id": "run-co-chunk-gabriel_reference_plan-1-1",
+      "workspace": "/home/user/gabriel-ai/evidence/wp11/run2-gpt-4.1-mini/runs/co-chunk--gabriel_reference_plan--1/gabriel_reference_plan-1-ws",
+      "hold": null,
+      "replay": "passed",
+      "events": 90,
+      "assessments": [
+        {
+          "check_id": "baseline:unit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "baseline-unit"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "propose"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "apply"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "read-back"
+        },
+        {
+          "check_id": "scope",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "base-commit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "checks-intact",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "no-secrets",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "oracle",
+          "outcome": "failed",
+          "eligible": true,
+          "node_id": "verify-oracle"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "observe-r1"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "propose-r1"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "apply-r1"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "read-back-r1"
+        },
+        {
+          "check_id": "scope",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "base-commit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "checks-intact",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "no-secrets",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "observe"
+        },
+        {
+          "check_id": "oracle",
+          "outcome": "failed",
+          "eligible": true,
+          "node_id": "verify-oracle-r1"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "observe-r2"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "propose-r2"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "apply-r2"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "read-back-r2"
+        },
+        {
+          "check_id": "scope",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r2"
+        },
+        {
+          "check_id": "base-commit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r2"
+        },
+        {
+          "check_id": "checks-intact",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r2"
+        },
+        {
+          "check_id": "no-secrets",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r2"
+        },
+        {
+          "check_id": "oracle",
+          "outcome": "failed",
+          "eligible": true,
+          "node_id": "verify-oracle-r2"
+        }
+      ]
+    },
+    "repairs_used": 2,
+    "plan_versions": 3
+  },
+  "verification": {
+    "verified": false,
+    "changed_paths": [
+      "src/chunking.py"
+    ],
+    "out_of_scope_paths": [],
+    "visible": {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ],
+      "exit_code": 1,
+      "timed_out": false,
+      "start_failure": null,
+      "stdout_tail": "",
+      "stderr_tail": "FF\n======================================================================\nFAIL: test_exact_multiple (test_chunking.ChunkTests.test_exact_multiple)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/work/tests/test_chunking.py\", line 9, in test_exact_multiple\n    self.assertEqual(chunk([1, 2, 3, 4], 2), [[1, 2], [3, 4]])\nAssertionError: <generator object chunk at 0x7fd5f50274c0> != [[1, 2], [3, 4]]\n\n======================================================================\nFAIL: test_invalid_size (test_chunking.ChunkTests.test_invalid_size)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/work/tests/test_chunking.py\", line 12, in test_invalid_size\n    with self.assertRaises(ValueError):\nAssertionError: ValueError not raised\n\n----------------------------------------------------------------------\nRan 2 tests in 0.001s\n\nFAILED (failures=2)\n",
+      "backend": "linux_namespace"
+    },
+    "oracle": {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "oracle_chunking"
+      ],
+      "exit_code": 1,
+      "timed_out": false,
+      "start_failure": null,
+      "stdout_tail": "",
+      "stderr_tail": "FFF\n======================================================================\nFAIL: test_empty (oracle_chunking.OracleTests.test_empty)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/work/oracle_chunking.py\", line 15, in test_empty\n    self.assertEqual(chunk([], 3), [])\nAssertionError: <generator object chunk at 0x7f70f952b5b0> != []\n\n======================================================================\nFAIL: test_partial_last_chunk (oracle_chunking.OracleTests.test_partial_last_chunk)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/work/oracle_chunking.py\", line 9, in test_partial_last_chunk\n    self.assertEqual(chunk([1, 2, 3, 4, 5], 2), [[1, 2], [3, 4], [5]])\nAssertionError: <generator object chunk at 0x7f70f952b6a0> != [[1, 2], [3, 4], [5]]\n\n======================================================================\nFAIL: test_size_larger_than_input (oracle_chunking.OracleTests.test_size_larger_than_input)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/work/oracle_chunking.py\", line 12, in test_size_larger_than_input\n    self.assertEqual(chunk([1, 2], 5), [[1, 2]])\nAssertionError: <generator object chunk at 0x7f70f952b5b0> != [[1, 2]]\n\n----------------------------------------------------------------------\nRan 3 tests in 0.001s\n\nFAILED (failures=3)\n",
+      "backend": "linux_namespace"
+    },
+    "patch_sha256": "f104c7c48c25bd83f6b643804a52f2ce41683f5f6348803f837b0c151eeed341",
+    "patch_bytes": 1019,
+    "patch": "diff --git a/src/chunking.py b/src/chunking.py\nindex 37221a6..cc42c52 100644\n--- a/src/chunking.py\n+++ b/src/chunking.py\n@@ -1,7 +1,23 @@\n-\"\"\"chunking: split sequences into fixed-size chunks.\"\"\"\n+def chunk(data, size):\n+    \"\"\"Yield successive chunks from data of given size.\n \n+    If the length of data is not a multiple of size, the final partial chunk is yielded.\n+    If size is larger than the length of data, a single chunk containing all data is yielded.\n \n-def chunk(items, size):\n+    Args:\n+        data (bytes or str or list): The input data to chunk.\n+        size (int): The chunk size.\n+\n+    Yields:\n+        bytes or str or list: Chunks of the input data.\n+    \"\"\"\n     if size <= 0:\n         raise ValueError(\"size must be positive\")\n-    return [items[i:i + size] for i in range(0, len(items) - size + 1, size)]\n+    if not data:\n+        return\n+    length = len(data)\n+    if size >= length:\n+        yield data\n+        return\n+    for i in range(0, length, size):\n+        yield data[i:i + size]\n",
+    "head_is_base": true
+  },
+  "V": 0,
+  "D": 0,
+  "false_completion": 0,
+  "unit_wall_ms": 12829
+}

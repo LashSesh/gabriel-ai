@@ -1,0 +1,42 @@
+diff --git a/src/isbn.py b/src/isbn.py
+index 5643d95..786fa5a 100644
+--- a/src/isbn.py
++++ b/src/isbn.py
+@@ -1,9 +1,32 @@
+-"""isbn: ISBN-10 validation."""
++def is_valid_isbn10(isbn):
++    """Check if the given string is a valid ISBN-10.
+ 
++    The ISBN-10 consists of 9 digits plus a check digit which may be 0-9 or 'X' (representing 10).
++    Hyphens are ignored.
++    """
++    # Remove hyphens
++    isbn = isbn.replace('-', '')
+ 
+-def is_valid_isbn10(text):
+-    digits = [ch for ch in text if ch != "-"]
+-    if len(digits) != 10 or not all(ch.isdigit() for ch in digits):
++    # ISBN-10 must be 10 characters
++    if len(isbn) != 10:
+         return False
+-    total = sum((10 - index) * int(ch) for index, ch in enumerate(digits))
++
++    # Check first 9 characters are digits
++    if not isbn[:9].isdigit():
++        return False
++
++    # Check last character is digit or 'X'
++    if not (isbn[9].isdigit() or isbn[9] == 'X'):
++        return False
++
++    total = 0
++    for i in range(9):
++        total += (i + 1) * int(isbn[i])
++
++    # Check digit
++    if isbn[9] == 'X':
++        total += 10 * 10
++    else:
++        total += 10 * int(isbn[9])
++
+     return total % 11 == 0

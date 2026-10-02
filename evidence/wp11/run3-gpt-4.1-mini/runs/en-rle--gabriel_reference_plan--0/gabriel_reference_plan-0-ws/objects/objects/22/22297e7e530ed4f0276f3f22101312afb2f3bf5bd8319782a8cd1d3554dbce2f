@@ -1,0 +1,44 @@
+You are the worker role of Gabriel, a repository repair agent.
+Goal (verbatim user request):
+Fix the reported defect in rle.encode: runs of length one must be kept, so that decode(encode(text)) == text for every string. Keep the public API and the existing tests.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- unit [software/test_passed] argv=python3 -m unittest discover -s tests independent=False
+- oracle [software/test_passed] argv=python3 -m unittest oracle_rle independent=True
+
+Allowed paths (changes elsewhere are rejected): src/
+Base commit: 7b86772c715ad5e9857dcff6766bf8c8c1e59c06
+
+Files (path sha256 bytes):
+  README.md acb0929ee23542ad578f93d03b1f6d98077a7980086de65672e4a917de0b28f4 60
+  src/rle.py ea03f77291021dedd935126638d2d523764346956a7b3d282e778da0794c20b9 441
+  tests/test_rle.py 6b3c3556f0a15c821d1b9a1531325f7f78ac48d772211560a5fb97a7830ebf31 463
+
+Source files in scope:
+=== src/rle.py (sha256 ea03f77291021dedd935126638d2d523764346956a7b3d282e778da0794c20b9) ===
+"""rle: run-length encoding of strings."""
+
+
+def encode(text):
+    """Return a list of (char, count) runs for ``text``."""
+    runs = []
+    for ch in text:
+        if runs and runs[-1][0] == ch:
+            runs[-1] = (ch, runs[-1][1] + 1)
+        else:
+            runs.append((ch, 1))
+    return [run for run in runs if run[1] > 1]
+
+
+def decode(runs):
+    """Inverse of ``encode``."""
+    return "".join(ch * count for ch, count in runs)
+
+
+
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<relative path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest.
+For create expected_sha256 is null. For delete content is null. Do not touch oracle or test command files.
+Do not claim completion; the independent checks decide.

@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-EUcZeuc8H734zKgFMbu5mRggFvipd",
+  "object": "chat.completion",
+  "created": 1790966826,
+  "model": "gpt-4.1-mini-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"nodes\": [{\"node_id\": \"observe\", \"capability_id\": \"software.observe\", \"depends_on\": [], \"check_ids\": [\"output-valid\"], \"purpose\": \"pin and observe the worktree\", \"args\": {}}, {\"node_id\": \"baseline-unit\", \"capability_id\": \"software.run_check\", \"depends_on\": [\"observe\"], \"check_ids\": [\"baseline:unit\"], \"purpose\": \"baseline run of baseline:unit\", \"args\": {\"check_id\": \"baseline:unit\"}}, {\"node_id\": \"propose\", \"capability_id\": \"model.generate\", \"depends_on\": [\"observe\", \"baseline-unit\"], \"check_ids\": [\"output-valid\"], \"purpose\": \"propose a patch to fix querystring.parse_qs decoding plus signs and keys without equals\", \"args\": {\"role\": \"worker\"}}, {\"node_id\": \"apply\", \"capability_id\": \"software.apply_patch\", \"depends_on\": [\"propose\"], \"check_ids\": [\"output-valid\"], \"purpose\": \"apply the proposed patch\", \"args\": {\"from_node\": \"propose\"}}, {\"node_id\": \"read-back\", \"capability_id\": \"software.read_back\", \"depends_on\": [\"apply\"], \"check_ids\": [\"output-valid\"], \"purpose\": \"observe the changed tree\", \"args\": {}}, {\"node_id\": \"verify-unit\", \"capability_id\": \"software.run_check\", \"depends_on\": [\"read-back\"], \"check_ids\": [\"unit\"], \"purpose\": \"acceptance run of unit\", \"args\": {\"check_id\": \"unit\"}}, {\"node_id\": \"verify-oracle\", \"capability_id\": \"software.run_check\", \"depends_on\": [\"read-back\"], \"check_ids\": [\"oracle\"], \"purpose\": \"acceptance run of oracle\", \"args\": {\"check_id\": \"oracle\"}}, {\"node_id\": \"review\", \"capability_id\": \"software.review\", \"depends_on\": [\"read-back\"], \"check_ids\": [\"scope\", \"base-commit\", \"checks-intact\", \"no-secrets\"], \"purpose\": \"scope, identity and secret review of the diff\", \"args\": {}}], \"rationale\": \"Follow the reference plan structure to ensure all mandatory checks are covered and the patch is properly proposed, applied, tested, and reviewed.\"}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 635,
+    "completion_tokens": 483,
+    "total_tokens": 1118,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_26294412b5"
+}

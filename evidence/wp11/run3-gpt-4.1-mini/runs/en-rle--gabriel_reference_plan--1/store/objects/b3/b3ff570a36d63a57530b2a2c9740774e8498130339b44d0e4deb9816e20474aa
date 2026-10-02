@@ -1,0 +1,1 @@
+Fix the reported defect in rle.encode: runs of length one must be kept, so that decode(encode(text)) == text for every string. Keep the public API and the existing tests.

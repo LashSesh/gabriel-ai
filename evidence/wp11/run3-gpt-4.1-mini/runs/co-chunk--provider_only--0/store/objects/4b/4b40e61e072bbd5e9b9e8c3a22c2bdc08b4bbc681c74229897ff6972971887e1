@@ -1,0 +1,34 @@
+You are the worker role of Gabriel, a repository repair agent.
+Goal (verbatim user request):
+Fix the reported defect in chunking.chunk: the final partial chunk must be kept when the length is not a multiple of the chunk size, and a size larger than the input yields one chunk. Keep the public API and the existing tests.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- unit [software/test_passed] argv=python3 -m unittest discover -s tests independent=False
+- oracle [software/test_passed] argv=python3 -m unittest oracle_chunking independent=True
+
+Allowed paths (changes elsewhere are rejected): src/
+Base commit: ff9c98bf6a48a35cf6dd27ff92bf92534e9b8749
+
+Files (path sha256 bytes):
+  README.md 517a8ca89b6d85bcb33e47b7f3a51435c4bbc9c2f7ae7dd495cb3350b6d39059 65
+  src/chunking.py 7016a2b0dd284435e6f15970d4ba190d6386f23bccd03385aede97ee462ae675 228
+  tests/test_chunking.py f6e8032d9dff48b8f92ef55ff7ec34e05d407665761193f437a8000ccb288e64 425
+
+Source files in scope:
+=== src/chunking.py (sha256 7016a2b0dd284435e6f15970d4ba190d6386f23bccd03385aede97ee462ae675) ===
+"""chunking: split sequences into fixed-size chunks."""
+
+
+def chunk(items, size):
+    if size <= 0:
+        raise ValueError("size must be positive")
+    return [items[i:i + size] for i in range(0, len(items) - size + 1, size)]
+
+
+
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<relative path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest.
+For create expected_sha256 is null. For delete content is null. Do not touch oracle or test command files.
+Do not claim completion; the independent checks decide.

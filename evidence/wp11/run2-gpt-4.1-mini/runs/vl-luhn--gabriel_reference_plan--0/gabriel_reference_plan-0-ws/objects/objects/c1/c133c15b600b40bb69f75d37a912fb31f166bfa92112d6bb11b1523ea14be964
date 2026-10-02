@@ -1,0 +1,25 @@
+def is_valid(number: str) -> bool:
+    """Check if the provided number string is valid per the Luhn algorithm."""
+    # Remove spaces
+    number = number.replace(' ', '')
+    if not number.isdigit():
+        return False
+
+    total = 0
+    # Process digits from right to left
+    # The rightmost digit is the check digit and is not doubled
+    # Double every second digit from the right (indexing from 0)
+    digits = list(map(int, number))
+    length = len(digits)
+
+    for i in range(length - 1, -1, -1):
+        digit = digits[i]
+        # Determine if this digit should be doubled
+        # Double every second digit from the right, excluding the check digit
+        if (length - 1 - i) % 2 == 1:
+            digit *= 2
+            if digit > 9:
+                digit -= 9
+        total += digit
+
+    return total % 10 == 0

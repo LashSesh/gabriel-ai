@@ -1,0 +1,10 @@
+"""kvparse: parse comma-separated key=value pairs."""
+
+
+def parse_pairs(text):
+    """Return a dict of key -> value for ``"a=1,b=2"``."""
+    result = {}
+    for item in text.split(","):
+        key, _, value = item.partition("=")
+        result[key.strip()] = value.strip()
+    return result

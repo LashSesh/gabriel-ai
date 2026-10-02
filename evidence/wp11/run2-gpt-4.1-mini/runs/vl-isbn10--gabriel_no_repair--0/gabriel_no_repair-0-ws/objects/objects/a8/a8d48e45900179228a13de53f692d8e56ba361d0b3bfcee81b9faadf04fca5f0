@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-EUcRMynbeenJGRJbySbhuu0MIVOEJ",
+  "object": "chat.completion",
+  "created": 1790966312,
+  "model": "gpt-4.1-mini-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"operations\": [{\"kind\": \"modify\", \"path\": \"src/isbn.py\", \"expected_sha256\": \"114aa799811c51f89a8ba9fc5692b4e682023d46a66fa224e724a76b75c28e58\", \"content\": \"def is_valid_isbn10(isbn):\\n    \\\"\\\"\\\"Check if the given string is a valid ISBN-10.\\n\\n    An ISBN-10 is valid if it consists of 9 digits followed by a check digit,\\n    which can be a digit or 'X' (representing 10).\\n\\n    The checksum is calculated by multiplying each of the first nine digits\\n    by its position (1 to 9) and adding the check digit multiplied by 10.\\n    The sum must be divisible by 11.\\n\\n    Args:\\n        isbn (str): The ISBN-10 string, possibly with hyphens.\\n\\n    Returns:\\n        bool: True if valid, False otherwise.\\n    \\\"\\\"\\\"\\n    # Remove hyphens\\n    isbn = isbn.replace('-', '')\\n\\n    # ISBN-10 must be 10 characters\\n    if len(isbn) != 10:\\n        return False\\n\\n    # First 9 characters must be digits\\n    if not isbn[:9].isdigit():\\n        return False\\n\\n    # Last character can be digit or 'X'\\n    if not (isbn[9].isdigit() or isbn[9] in ['X', 'x']):\\n        return False\\n\\n    total = 0\\n    for i in range(9):\\n        total += (i + 1) * int(isbn[i])\\n\\n    # Check digit\\n    if isbn[9] in ['X', 'x']:\\n        total += 10 * 10\\n    else:\\n        total += 10 * int(isbn[9])\\n\\n    return total % 11 == 0\\n\"}], \"rationale\": \"Updated is_valid_isbn10 to correctly handle 'X' as a valid check digit representing 10, preserving the public API and existing tests.\"}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 456,
+    "completion_tokens": 464,
+    "total_tokens": 920,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_eb9b0343ec"
+}

@@ -1,0 +1,78 @@
+{
+  "task_id": "nl-roman",
+  "family": "numeric_logic",
+  "system": "simple_loop",
+  "rep": 1,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp11/run2-gpt-4.1-mini/runs/nl-roman--simple_loop--1",
+  "outcome": {
+    "system": "simple_loop",
+    "task_id": "nl-roman",
+    "family": "numeric_logic",
+    "rep": 1,
+    "declared": true,
+    "declared_reason": "own check runs passed after 1 request(s)",
+    "model_requests": 1,
+    "model_tokens": 720,
+    "wall_ms": 3153,
+    "provider_statuses": [
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp11/run2-gpt-4.1-mini/runs/nl-roman--simple_loop--1/worktrees/simple_loop-1",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "request 1: visible exit 0, oracle exit 0"
+    ],
+    "gabriel": null,
+    "repairs_used": 0,
+    "plan_versions": 0
+  },
+  "verification": {
+    "verified": true,
+    "changed_paths": [
+      "src/roman.py"
+    ],
+    "out_of_scope_paths": [],
+    "visible": {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "start_failure": null,
+      "stdout_tail": "",
+      "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+      "backend": "linux_namespace"
+    },
+    "oracle": {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "oracle_roman"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "start_failure": null,
+      "stdout_tail": "",
+      "stderr_tail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n",
+      "backend": "linux_namespace"
+    },
+    "patch_sha256": "81865af289648debca45fc310d84c886a5c55956aa85db80594457fcde3fff20",
+    "patch_bytes": 824,
+    "patch": "diff --git a/src/roman.py b/src/roman.py\nindex 30e64d2..9ef1867 100644\n--- a/src/roman.py\n+++ b/src/roman.py\n@@ -1,9 +1,22 @@\n-\"\"\"roman: Roman numeral conversion.\"\"\"\n-VALUES = {\"I\": 1, \"V\": 5, \"X\": 10, \"L\": 50, \"C\": 100, \"D\": 500, \"M\": 1000}\n+def to_int(s: str) -> int:\n+    \"\"\"Convert a Roman numeral to an integer, handling subtractive notation.\"\"\"\n+    roman_map = {\n+        'I': 1,\n+        'V': 5,\n+        'X': 10,\n+        'L': 50,\n+        'C': 100,\n+        'D': 500,\n+        'M': 1000\n+    }\n \n-\n-def to_int(text):\n     total = 0\n-    for ch in text:\n-        total += VALUES[ch]\n+    prev_value = 0\n+    for char in reversed(s):\n+        value = roman_map[char]\n+        if value < prev_value:\n+            total -= value\n+        else:\n+            total += value\n+        prev_value = value\n     return total\n",
+    "head_is_base": true
+  },
+  "V": 1,
+  "D": 1,
+  "false_completion": 0,
+  "unit_wall_ms": 3756
+}

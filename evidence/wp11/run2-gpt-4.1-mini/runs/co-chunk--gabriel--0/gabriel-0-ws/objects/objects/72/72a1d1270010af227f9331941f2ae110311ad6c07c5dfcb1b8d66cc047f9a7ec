@@ -1,0 +1,1 @@
+Fixed chunk to yield one chunk if size >= length, and to yield nothing if data is empty, so final partial chunk is kept and size larger than input yields one chunk, matching the oracle tests.

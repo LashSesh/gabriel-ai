@@ -1,0 +1,78 @@
+{
+  "task_id": "tp-querystring",
+  "family": "text_parsing",
+  "system": "simple_loop",
+  "rep": 1,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp11/run3-gpt-4.1-mini/runs/tp-querystring--simple_loop--1",
+  "outcome": {
+    "system": "simple_loop",
+    "task_id": "tp-querystring",
+    "family": "text_parsing",
+    "rep": 1,
+    "declared": true,
+    "declared_reason": "own check runs passed after 1 request(s)",
+    "model_requests": 1,
+    "model_tokens": 809,
+    "wall_ms": 2515,
+    "provider_statuses": [
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp11/run3-gpt-4.1-mini/runs/tp-querystring--simple_loop--1/worktrees/simple_loop-1",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "request 1: visible exit 0, oracle exit 0"
+    ],
+    "gabriel": null,
+    "repairs_used": 0,
+    "plan_versions": 0
+  },
+  "verification": {
+    "verified": true,
+    "changed_paths": [
+      "src/querystring.py"
+    ],
+    "out_of_scope_paths": [],
+    "visible": {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "start_failure": null,
+      "stdout_tail": "",
+      "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+      "backend": "linux_namespace"
+    },
+    "oracle": {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "oracle_querystring"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "start_failure": null,
+      "stdout_tail": "",
+      "stderr_tail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n",
+      "backend": "linux_namespace"
+    },
+    "patch_sha256": "fffe3b159d0fd72409da330fd4f7cd1c3051029ed2cde9b71fd12f4aa265447d",
+    "patch_bytes": 745,
+    "patch": "diff --git a/src/querystring.py b/src/querystring.py\nindex e32c2b2..1b50189 100644\n--- a/src/querystring.py\n+++ b/src/querystring.py\n@@ -1,5 +1,5 @@\n \"\"\"querystring: parse application/x-www-form-urlencoded strings.\"\"\"\n-from urllib.parse import unquote\n+from urllib.parse import unquote_plus\n \n \n def parse_qs(text):\n@@ -8,7 +8,10 @@ def parse_qs(text):\n         return result\n     for part in text.split(\"&\"):\n         if \"=\" not in part:\n+            # key without '=' maps to empty string\n+            key = unquote_plus(part)\n+            result[key] = \"\"\n             continue\n         key, value = part.split(\"=\", 1)\n-        result[unquote(key)] = unquote(value)\n+        result[unquote_plus(key)] = unquote_plus(value)\n     return result\n",
+    "head_is_base": true
+  },
+  "V": 1,
+  "D": 1,
+  "false_completion": 0,
+  "unit_wall_ms": 3133
+}

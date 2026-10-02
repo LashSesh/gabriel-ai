@@ -1,0 +1,1 @@
+The original encode function filtered out runs of length one, causing loss of information and breaking decode(encode(text)) == text. Returning all runs, including those of length one, preserves the original string when decoded.

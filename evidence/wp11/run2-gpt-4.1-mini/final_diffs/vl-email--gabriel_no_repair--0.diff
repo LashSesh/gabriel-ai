@@ -1,0 +1,45 @@
+diff --git a/src/emailcheck.py b/src/emailcheck.py
+index c957300..739fc43 100644
+--- a/src/emailcheck.py
++++ b/src/emailcheck.py
+@@ -1,8 +1,35 @@
+-"""emailcheck: minimal e-mail address validation."""
++import re
+ 
++# We keep the public API: is_valid_email
+ 
+-def is_valid_email(text):
+-    if text.count("@") != 1:
++def is_valid_email(email: str) -> bool:
++    """Check if the email is valid.
++
++    The domain part must contain a dot with at least one character before and after it.
++    """
++    if not isinstance(email, str):
++        return False
++
++    # Basic email regex: local@domain
++    # We split the email into local and domain parts
++    parts = email.split('@')
++    if len(parts) != 2:
++        return False
++
++    local, domain = parts
++    if not local or not domain:
+         return False
+-    local, domain = text.split("@")
+-    return bool(local) and bool(domain) and " " not in text
++
++    # Domain must contain a dot with at least one character before and after it
++    # So domain must match pattern: something.something
++    # We check if domain contains a dot and that no part is empty
++    domain_parts = domain.split('.')
++    if len(domain_parts) < 2:
++        return False
++    if any(len(part) == 0 for part in domain_parts):
++        return False
++
++    # We can add a simple regex for local part validity (optional)
++    # But since the task is only about domain dot, we keep it simple
++
++    return True

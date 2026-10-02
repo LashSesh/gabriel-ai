@@ -1,0 +1,62 @@
+diff --git a/src/csvfields.py b/src/csvfields.py
+index 4538d40..7472b6b 100644
+--- a/src/csvfields.py
++++ b/src/csvfields.py
+@@ -1,23 +1,41 @@
+-"""csvfields: split one CSV line into fields (RFC 4180 subset)."""
++def split_fields(line):
++    """Split a CSV line into fields, handling quoted fields with commas and escaped quotes.
+ 
++    Args:
++        line (str): A single line of CSV text.
+ 
+-def split_fields(line):
+-    fields, current, quoted = [], [], False
++    Returns:
++        list of str: The parsed fields with quotes and escapes handled.
++    """
++    fields = []
++    field = []
++    in_quotes = False
+     i = 0
+-    while i < len(line):
+-        ch = line[i]
+-        if quoted:
+-            if ch == '"':
+-                quoted = False
++    length = len(line)
++
++    while i < length:
++        c = line[i]
++
++        if in_quotes:
++            if c == '"':
++                # Check if this is an escaped double quote
++                if i + 1 < length and line[i + 1] == '"':
++                    field.append('"')  # Unescape doubled quote
++                    i += 1  # Skip the next quote
++                else:
++                    in_quotes = False  # End of quoted field
+             else:
+-                current.append(ch)
+-        elif ch == '"':
+-            quoted = True
+-        elif ch == ",":
+-            fields.append("".join(current))
+-            current = []
++                field.append(c)
+         else:
+-            current.append(ch)
++            if c == ',':
++                fields.append(''.join(field))
++                field = []
++            elif c == '"':
++                in_quotes = True
++            else:
++                field.append(c)
+         i += 1
+-    fields.append("".join(current))
++
++    # Append the last field
++    fields.append(''.join(field))
+     return fields

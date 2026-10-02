@@ -1,0 +1,1 @@
+Modified the chunk function to iterate over the entire input in steps of size, ensuring the final partial chunk is included if the length is not a multiple of size, and that a size larger than the input yields one chunk. This preserves the public API and existing tests.

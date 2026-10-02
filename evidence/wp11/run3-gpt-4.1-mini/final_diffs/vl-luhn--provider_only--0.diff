@@ -1,0 +1,17 @@
+diff --git a/src/luhn.py b/src/luhn.py
+index 288946e..dd13a31 100644
+--- a/src/luhn.py
++++ b/src/luhn.py
+@@ -6,8 +6,10 @@ def is_valid(text):
+     if len(digits) < 2:
+         return False
+     total = 0
+-    for index, digit in enumerate(digits):
+-        if index % 2 == 1:
++    # Double every second digit from the right (excluding the check digit at the rightmost)
++    for i in range(len(digits)):
++        digit = digits[-(i + 1)]
++        if i % 2 == 1:
+             digit *= 2
+             if digit > 9:
+                 digit -= 9

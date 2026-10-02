@@ -1,0 +1,1 @@
+Changed chunk to return immediately if input is empty, so chunk([]) yields nothing (empty list when converted). The original code already yields the final partial chunk correctly and yields one chunk if size > length. The main fix is to handle empty input by returning instead of yielding, so tests expecting [] instead of a generator pass.

@@ -1,0 +1,1 @@
+Fix the reported defect in luhn.is_valid: the Luhn algorithm doubles every second digit counting from the rightmost digit (the check digit is never doubled), so the 16-digit number '4539 1488 0343 6467' must be valid and '4539 1488 0343 6468' invalid. Keep the public API and the existing tests.

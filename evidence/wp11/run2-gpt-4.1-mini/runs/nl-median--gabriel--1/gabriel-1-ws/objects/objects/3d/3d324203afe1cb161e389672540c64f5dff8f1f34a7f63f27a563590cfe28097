@@ -1,0 +1,70 @@
+You are the worker role of Gabriel, a repository repair agent.
+Goal (verbatim user request):
+Fix the reported defect in stats.median: for an even number of values the median must be the arithmetic mean of the two middle values of the sorted data (as a float). Keep the public API and the existing tests.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- unit [software/test_passed] argv=python3 -m unittest discover -s tests independent=False
+- oracle [software/test_passed] argv=python3 -m unittest oracle_stats independent=True
+
+Allowed paths (changes elsewhere are rejected): src/
+Base commit: 57362af332345f97a9916514c0373f2d7c5f6ade
+
+Files (path sha256 bytes):
+  README.md f8d54fc81673b51b414f724b1e57ab638e9824998c1ec5c9c82eb01ca1b9dac7 62
+  src/stats.py 885a14b94964dd5c0a20c32c501bfd53c78b7c0d6d8b4efe600e996c85acba5b 453
+  tests/test_stats.py c9127e99584492f26100548880d970717b9b8f12b378a7513de62f51b702a6a0 377
+
+Source files in scope:
+=== src/stats.py (sha256 885a14b94964dd5c0a20c32c501bfd53c78b7c0d6d8b4efe600e996c85acba5b) ===
+def median(data):
+    """Return the median of the data as a float.
+
+    For an even number of values, the median is the arithmetic mean of the two middle values.
+    """
+    if not data:
+        raise ValueError("median() arg is an empty sequence")
+    sorted_data = sorted(data)
+    n = len(sorted_data)
+    mid = n // 2
+    if n % 2 == 1:
+        return float(sorted_data[mid])
+    else:
+        return (sorted_data[mid - 1] + sorted_data[mid]) / 2.0
+
+
+
+Previous attempt failed verification (round 2). Diagnostics:
+--- unit ---
+{"check_id": "unit", "evidence": {"argv": ["python3", "-m", "unittest", "discover", "-s", "tests"], "backend": "linux_namespace", "containment": true, "exit_code": 1, "witness_ref": {"bytes": 1029, "media_type": "application/json", "sha256": "f219bdbb3f006114f43e02d9a954692ff0efc8d59102caf3637a9a0cfab37434"}}, "node_id": "verify-unit", "outcome": "failed"}
+stdout:
+
+stderr:
+E
+======================================================================
+ERROR: test_stats (unittest.loader._FailedTest.test_stats)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_stats
+Traceback (most recent call last):
+  File "/usr/lib/python3.11/unittest/loader.py", line 419, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/unittest/loader.py", line 362, in _get_module_from_name
+    __import__(name)
+  File "/work/tests/test_stats.py", line 4, in <module>
+    from stats import median, mean
+ImportError: cannot import name 'mean' from 'stats' (/work/tests/../src/stats.py)
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)
+
+
+
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<relative path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest.
+For create expected_sha256 is null. For delete content is null. Do not touch oracle or test command files.
+Do not claim completion; the independent checks decide.

@@ -1,0 +1,32 @@
+diff --git a/src/calendarx.py b/src/calendarx.py
+index 9271cf4..f5fd47f 100644
+--- a/src/calendarx.py
++++ b/src/calendarx.py
+@@ -1,11 +1,22 @@
+-"""calendarx: Gregorian calendar helpers."""
+-
+-
+ def is_leap(year):
+-    return year % 4 == 0
++    """Return True if the given year is a leap year, False otherwise.
++
++    A year is a leap year if it is divisible by 4, except for years which are
++    divisible by 100, unless they are also divisible by 400.
++    """
++    if year % 400 == 0:
++        return True
++    if year % 100 == 0:
++        return False
++    if year % 4 == 0:
++        return True
++    return False
+ 
+ 
+ def days_in_month(year, month):
++    """Return the number of days in the given month and year."""
+     if month == 2:
+         return 29 if is_leap(year) else 28
+-    return 30 if month in (4, 6, 9, 11) else 31
++    if month in (4, 6, 9, 11):
++        return 30
++    return 31

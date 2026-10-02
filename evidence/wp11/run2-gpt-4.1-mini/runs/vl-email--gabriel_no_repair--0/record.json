@@ -1,0 +1,164 @@
+{
+  "task_id": "vl-email",
+  "family": "validation",
+  "system": "gabriel_no_repair",
+  "rep": 0,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp11/run2-gpt-4.1-mini/runs/vl-email--gabriel_no_repair--0",
+  "outcome": {
+    "system": "gabriel_no_repair",
+    "task_id": "vl-email",
+    "family": "validation",
+    "rep": 0,
+    "declared": true,
+    "declared_reason": "run state succeeded",
+    "model_requests": 2,
+    "model_tokens": 1927,
+    "wall_ms": 7979,
+    "provider_statuses": [
+      "completed",
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp11/run2-gpt-4.1-mini/runs/vl-email--gabriel_no_repair--0/gabriel_no_repair-0-ws/worktrees/run-vl-email-gabriel_no_repair-0-1",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+      "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+      "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+      "review -> completed (result accepted; checks pending)",
+      "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,unit",
+      "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,oracle,unit",
+      "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,oracle,unit",
+      "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; node review verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: oracle,unit",
+      "verify-oracle -> completed (result accepted; checks pending)",
+      "assess verify-oracle/oracle -> passed: assessment passed recorded for oracle; node verify-oracle verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: unit",
+      "verify-unit -> completed (result accepted; checks pending)",
+      "assess verify-unit/unit -> passed: assessment passed recorded for unit; node verify-unit verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+    ],
+    "gabriel": {
+      "run_id": "run-vl-email-gabriel_no_repair-0-1",
+      "workspace": "/home/user/gabriel-ai/evidence/wp11/run2-gpt-4.1-mini/runs/vl-email--gabriel_no_repair--0/gabriel_no_repair-0-ws",
+      "hold": null,
+      "replay": "passed",
+      "events": 41,
+      "assessments": [
+        {
+          "check_id": "baseline:unit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "baseline-unit"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "propose"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "apply"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "read-back"
+        },
+        {
+          "check_id": "scope",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "base-commit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "checks-intact",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "no-secrets",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "oracle",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "verify-oracle"
+        },
+        {
+          "check_id": "unit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "verify-unit"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "observe"
+        }
+      ]
+    },
+    "repairs_used": 0,
+    "plan_versions": 1
+  },
+  "verification": {
+    "verified": true,
+    "changed_paths": [
+      "src/emailcheck.py"
+    ],
+    "out_of_scope_paths": [],
+    "visible": {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "start_failure": null,
+      "stdout_tail": "",
+      "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+      "backend": "linux_namespace"
+    },
+    "oracle": {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "oracle_emailcheck"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "start_failure": null,
+      "stdout_tail": "",
+      "stderr_tail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n",
+      "backend": "linux_namespace"
+    },
+    "patch_sha256": "d66175386edd31dd1326c0b351a1bc70060d9c0752c8795f46d8aaa324313276",
+    "patch_bytes": 1437,
+    "patch": "diff --git a/src/emailcheck.py b/src/emailcheck.py\nindex c957300..739fc43 100644\n--- a/src/emailcheck.py\n+++ b/src/emailcheck.py\n@@ -1,8 +1,35 @@\n-\"\"\"emailcheck: minimal e-mail address validation.\"\"\"\n+import re\n \n+# We keep the public API: is_valid_email\n \n-def is_valid_email(text):\n-    if text.count(\"@\") != 1:\n+def is_valid_email(email: str) -> bool:\n+    \"\"\"Check if the email is valid.\n+\n+    The domain part must contain a dot with at least one character before and after it.\n+    \"\"\"\n+    if not isinstance(email, str):\n+        return False\n+\n+    # Basic email regex: local@domain\n+    # We split the email into local and domain parts\n+    parts = email.split('@')\n+    if len(parts) != 2:\n+        return False\n+\n+    local, domain = parts\n+    if not local or not domain:\n         return False\n-    local, domain = text.split(\"@\")\n-    return bool(local) and bool(domain) and \" \" not in text\n+\n+    # Domain must contain a dot with at least one character before and after it\n+    # So domain must match pattern: something.something\n+    # We check if domain contains a dot and that no part is empty\n+    domain_parts = domain.split('.')\n+    if len(domain_parts) < 2:\n+        return False\n+    if any(len(part) == 0 for part in domain_parts):\n+        return False\n+\n+    # We can add a simple regex for local part validity (optional)\n+    # But since the task is only about domain dot, we keep it simple\n+\n+    return True\n",
+    "head_is_base": true
+  },
+  "V": 1,
+  "D": 1,
+  "false_completion": 0,
+  "unit_wall_ms": 8601
+}

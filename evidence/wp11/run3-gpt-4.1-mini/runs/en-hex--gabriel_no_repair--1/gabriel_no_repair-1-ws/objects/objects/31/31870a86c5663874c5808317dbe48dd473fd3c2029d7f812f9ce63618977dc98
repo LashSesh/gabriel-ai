@@ -1,0 +1,1 @@
+Fix the reported defect in hexcodec.to_hex: every byte must be rendered as exactly two lowercase hexadecimal digits (bytes below 0x10 get a leading zero), so that from_hex(to_hex(data)) == data. Keep the public API and the existing tests.

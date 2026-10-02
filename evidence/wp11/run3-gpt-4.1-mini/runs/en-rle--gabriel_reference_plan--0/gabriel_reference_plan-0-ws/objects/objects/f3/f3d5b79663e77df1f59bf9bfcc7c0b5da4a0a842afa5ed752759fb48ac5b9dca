@@ -1,0 +1,1 @@
+The original encode function filtered out runs of length one, causing decode(encode(text)) != text for strings with single characters. Removing the filter preserves all runs, including those of length one, ensuring the decode function can reconstruct the original text exactly.

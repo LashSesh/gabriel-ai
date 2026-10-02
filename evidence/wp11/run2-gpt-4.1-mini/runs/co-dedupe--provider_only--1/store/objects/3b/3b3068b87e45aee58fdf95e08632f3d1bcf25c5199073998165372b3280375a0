@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-EUcPRVM6Gu3B7Qg3K6qKHzaCz3D3W",
+  "object": "chat.completion",
+  "created": 1790966193,
+  "model": "gpt-4.1-mini-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"operations\": [{\"kind\": \"modify\", \"path\": \"src/seqtools.py\", \"expected_sha256\": \"16ed7928b39478b9059b242cb4bb639a1b4a2e3e9d8bf6cc50cb98bf9c80a194\", \"content\": \"def dedupe(seq):\\n    \\\"\\\"\\\"Remove duplicates from the sequence while preserving order of first occurrence.\\\"\\\"\\\"\\n    seen = set()\\n    result = []\\n    for item in seq:\\n        if item not in seen:\\n            seen.add(item)\\n            result.append(item)\\n    return result\\n\"}], \"rationale\": \"Rewrote dedupe to remove duplicates while preserving the order of first occurrence by using a set to track seen items and appending only the first occurrence to the result list. This keeps the public API unchanged and should pass existing tests.\"}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 420,
+    "completion_tokens": 194,
+    "total_tokens": 614,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_24e0f3b040"
+}

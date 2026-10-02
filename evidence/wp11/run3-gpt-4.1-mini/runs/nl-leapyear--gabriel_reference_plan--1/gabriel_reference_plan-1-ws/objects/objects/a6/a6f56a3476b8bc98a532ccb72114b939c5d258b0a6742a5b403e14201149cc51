@@ -1,0 +1,38 @@
+You are the worker role of Gabriel, a repository repair agent.
+Goal (verbatim user request):
+Fix the reported defect in calendarx.is_leap: years divisible by 100 are not leap years unless they are also divisible by 400 (1900 is not a leap year, 2000 is). days_in_month must follow. Keep the public API and the existing tests.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- unit [software/test_passed] argv=python3 -m unittest discover -s tests independent=False
+- oracle [software/test_passed] argv=python3 -m unittest oracle_calendarx independent=True
+
+Allowed paths (changes elsewhere are rejected): src/
+Base commit: d4fa0f1e9277c41fb14e7cd90e5a60a955149a30
+
+Files (path sha256 bytes):
+  README.md 1722cd8bf1bec2e50a9b383aa314b19135e5d8535fdd2161eb045d5f0937142c 66
+  src/calendarx.py 8135221e9a6b6b707b52b180d1f0faf3fc974844be6b0b4b7b2e2238dbe1ba08 235
+  tests/test_calendarx.py 7c6518b09c0af54ef1134d7479a013e587b43bf79da4b3b6f4328ea53886e2d1 484
+
+Source files in scope:
+=== src/calendarx.py (sha256 8135221e9a6b6b707b52b180d1f0faf3fc974844be6b0b4b7b2e2238dbe1ba08) ===
+"""calendarx: Gregorian calendar helpers."""
+
+
+def is_leap(year):
+    return year % 4 == 0
+
+
+def days_in_month(year, month):
+    if month == 2:
+        return 29 if is_leap(year) else 28
+    return 30 if month in (4, 6, 9, 11) else 31
+
+
+
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<relative path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest.
+For create expected_sha256 is null. For delete content is null. Do not touch oracle or test command files.
+Do not claim completion; the independent checks decide.

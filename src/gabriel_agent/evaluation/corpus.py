@@ -1,6 +1,8 @@
 """Held-out repository-repair corpus for the G1 evaluation.
 
-Nine small Python repositories in three task families. Each carries a seeded
+Fifteen small Python repositories in five task families (nine in three families
+at the first freeze; ``validation`` was added after run 1 and ``encoding`` after
+run 2, each held out for the protocol that followed). Each carries a seeded
 defect, visible tests that pass on the defective code, a reference fix and an
 independent oracle (never placed in the repository) that fails on the defect
 and passes on the fix. ``soundness_check`` executes these properties with the
@@ -792,6 +794,208 @@ class OracleTests(unittest.TestCase):
     def test_odd_length_still_works(self):
         self.assertTrue(is_valid("79927398713"))
         self.assertFalse(is_valid("79927398710"))
+
+
+if __name__ == "__main__":
+    unittest.main()
+'''),
+    # ------------------------------------------------------------ family: encoding (written after run 2; held out for protocol 3)
+    _task("en-rle", "encoding", "rle",
+          "Fix the reported defect in rle.encode: runs of length one must be kept, so that decode(encode(text)) == text "
+          "for every string. Keep the public API and the existing tests.",
+          '''"""rle: run-length encoding of strings."""
+
+
+def encode(text):
+    """Return a list of (char, count) runs for ``text``."""
+    runs = []
+    for ch in text:
+        if runs and runs[-1][0] == ch:
+            runs[-1] = (ch, runs[-1][1] + 1)
+        else:
+            runs.append((ch, 1))
+    return [run for run in runs if run[1] > 1]
+
+
+def decode(runs):
+    """Inverse of ``encode``."""
+    return "".join(ch * count for ch, count in runs)
+''',
+          '''"""rle: run-length encoding of strings."""
+
+
+def encode(text):
+    """Return a list of (char, count) runs for ``text``."""
+    runs = []
+    for ch in text:
+        if runs and runs[-1][0] == ch:
+            runs[-1] = (ch, runs[-1][1] + 1)
+        else:
+            runs.append((ch, 1))
+    return runs
+
+
+def decode(runs):
+    """Inverse of ``encode``."""
+    return "".join(ch * count for ch, count in runs)
+''',
+          '''from rle import encode, decode
+
+
+class RleTests(unittest.TestCase):
+    def test_empty(self):
+        self.assertEqual(encode(""), [])
+
+    def test_single_run(self):
+        self.assertEqual(encode("aaa"), [("a", 3)])
+
+    def test_decode(self):
+        self.assertEqual(decode([("a", 3), ("b", 1)]), "aaab")
+
+
+if __name__ == "__main__":
+    unittest.main()
+''',
+          '''from rle import encode, decode
+
+
+class OracleTests(unittest.TestCase):
+    def test_single_character_runs_kept(self):
+        self.assertEqual(encode("aaab"), [("a", 3), ("b", 1)])
+
+    def test_all_singletons(self):
+        self.assertEqual(encode("abc"), [("a", 1), ("b", 1), ("c", 1)])
+
+    def test_round_trip(self):
+        for text in ("hello world", "x", "", "aabbbc"):
+            self.assertEqual(decode(encode(text)), text)
+
+
+if __name__ == "__main__":
+    unittest.main()
+'''),
+    _task("en-rot13", "encoding", "rot13",
+          "Fix the reported defect in rot13.rot13: uppercase ASCII letters must be rotated as well (A-Z stay uppercase); "
+          "non-letters stay unchanged. Keep the public API and the existing tests.",
+          '''"""rot13: letter rotation cipher."""
+
+
+def rot13(text):
+    """Rotate every ASCII letter by 13 places; other characters are unchanged."""
+    out = []
+    for ch in text:
+        if "a" <= ch <= "z":
+            out.append(chr((ord(ch) - ord("a") + 13) % 26 + ord("a")))
+        else:
+            out.append(ch)
+    return "".join(out)
+''',
+          '''"""rot13: letter rotation cipher."""
+
+
+def rot13(text):
+    """Rotate every ASCII letter by 13 places; other characters are unchanged."""
+    out = []
+    for ch in text:
+        if "a" <= ch <= "z":
+            out.append(chr((ord(ch) - ord("a") + 13) % 26 + ord("a")))
+        elif "A" <= ch <= "Z":
+            out.append(chr((ord(ch) - ord("A") + 13) % 26 + ord("A")))
+        else:
+            out.append(ch)
+    return "".join(out)
+''',
+          '''from rot13 import rot13
+
+
+class Rot13Tests(unittest.TestCase):
+    def test_lowercase(self):
+        self.assertEqual(rot13("hello"), "uryyb")
+
+    def test_non_letters_unchanged(self):
+        self.assertEqual(rot13("a-b!"), "n-o!")
+
+    def test_empty(self):
+        self.assertEqual(rot13(""), "")
+
+
+if __name__ == "__main__":
+    unittest.main()
+''',
+          '''from rot13 import rot13
+
+
+class OracleTests(unittest.TestCase):
+    def test_uppercase_rotated(self):
+        self.assertEqual(rot13("Hello, World"), "Uryyb, Jbeyq")
+
+    def test_uppercase_only(self):
+        self.assertEqual(rot13("ABCXYZ"), "NOPKLM")
+
+    def test_lowercase_still_works(self):
+        self.assertEqual(rot13("uryyb"), "hello")
+
+
+if __name__ == "__main__":
+    unittest.main()
+'''),
+    _task("en-hex", "encoding", "hexcodec",
+          "Fix the reported defect in hexcodec.to_hex: every byte must be rendered as exactly two lowercase hexadecimal digits "
+          "(bytes below 0x10 get a leading zero), so that from_hex(to_hex(data)) == data. Keep the public API and the existing tests.",
+          '''"""hexcodec: hexadecimal encoding of byte strings."""
+
+
+def to_hex(data):
+    """Return the lowercase hexadecimal text of ``data``."""
+    return "".join("%x" % b for b in data)
+
+
+def from_hex(text):
+    """Inverse of ``to_hex``."""
+    return bytes(int(text[i:i + 2], 16) for i in range(0, len(text), 2))
+''',
+          '''"""hexcodec: hexadecimal encoding of byte strings."""
+
+
+def to_hex(data):
+    """Return the lowercase hexadecimal text of ``data`` (two digits per byte)."""
+    return "".join("%02x" % b for b in data)
+
+
+def from_hex(text):
+    """Inverse of ``to_hex``."""
+    return bytes(int(text[i:i + 2], 16) for i in range(0, len(text), 2))
+''',
+          '''from hexcodec import to_hex, from_hex
+
+
+class HexTests(unittest.TestCase):
+    def test_large_bytes(self):
+        self.assertEqual(to_hex(b"\\xff\\x10"), "ff10")
+
+    def test_empty(self):
+        self.assertEqual(to_hex(b""), "")
+
+    def test_from_hex(self):
+        self.assertEqual(from_hex("ff10"), b"\\xff\\x10")
+
+
+if __name__ == "__main__":
+    unittest.main()
+''',
+          '''from hexcodec import to_hex, from_hex
+
+
+class OracleTests(unittest.TestCase):
+    def test_small_bytes_padded(self):
+        self.assertEqual(to_hex(b"\\x00\\x0f"), "000f")
+
+    def test_mixed(self):
+        self.assertEqual(to_hex(b"\\x01\\xab"), "01ab")
+
+    def test_round_trip_all_bytes(self):
+        data = bytes(range(256))
+        self.assertEqual(from_hex(to_hex(data)), data)
 
 
 if __name__ == "__main__":

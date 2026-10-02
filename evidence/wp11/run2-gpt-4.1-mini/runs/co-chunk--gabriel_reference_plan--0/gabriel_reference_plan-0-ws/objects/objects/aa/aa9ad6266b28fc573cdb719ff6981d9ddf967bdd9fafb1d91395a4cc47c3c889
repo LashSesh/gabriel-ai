@@ -1,0 +1,1 @@
+Fixed chunk to yield a list of chunks (not a generator object) for empty input (yield nothing), yield one chunk if size >= length, and keep the final partial chunk when length is not multiple of size, matching the public API and tests.

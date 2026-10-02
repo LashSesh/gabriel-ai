@@ -1,0 +1,42 @@
+You are the worker role of Gabriel, a repository repair agent.
+Goal (verbatim user request):
+Fix the reported defect in luhn.is_valid: the Luhn algorithm doubles every second digit counting from the rightmost digit (the check digit is never doubled), so the 16-digit number '4539 1488 0343 6467' must be valid and '4539 1488 0343 6468' invalid. Keep the public API and the existing tests.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- unit [software/test_passed] argv=python3 -m unittest discover -s tests independent=False
+- oracle [software/test_passed] argv=python3 -m unittest oracle_luhn independent=True
+
+Allowed paths (changes elsewhere are rejected): src/
+Base commit: 33f437736bda0373433b795d9fb490f4fe719ca9
+
+Files (path sha256 bytes):
+  README.md 5eb28cbea235e1a6c927cfd63d5e5cb0b4b6343ec6f6c8fb915be5b9b985750a 61
+  src/luhn.py daa56df7794aa8b4da213da4d9fdee84518147a03a7f4ee745a11a06b101c3b1 396
+  tests/test_luhn.py 732ca3d51afe52995ef2771777e56c2a72ca4c160159d5d0ea894d86643a488d 374
+
+Source files in scope:
+=== src/luhn.py (sha256 daa56df7794aa8b4da213da4d9fdee84518147a03a7f4ee745a11a06b101c3b1) ===
+"""luhn: Luhn checksum validation for identification numbers."""
+
+
+def is_valid(text):
+    digits = [int(ch) for ch in text if ch.isdigit()]
+    if len(digits) < 2:
+        return False
+    total = 0
+    for index, digit in enumerate(digits):
+        if index % 2 == 1:
+            digit *= 2
+            if digit > 9:
+                digit -= 9
+        total += digit
+    return total % 10 == 0
+
+
+
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<relative path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest.
+For create expected_sha256 is null. For delete content is null. Do not touch oracle or test command files.
+Do not claim completion; the independent checks decide.

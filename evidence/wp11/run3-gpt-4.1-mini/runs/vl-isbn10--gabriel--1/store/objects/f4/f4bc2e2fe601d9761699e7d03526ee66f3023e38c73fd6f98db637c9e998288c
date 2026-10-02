@@ -1,0 +1,1 @@
+Fix the reported defect in isbn.is_valid_isbn10: the check digit may be the letter X (value 10) in the last position, so '0-306-40615-2' and '0-8044-2957-X' are both valid. Keep the public API and the existing tests.

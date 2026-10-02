@@ -1,0 +1,1 @@
+The original encode function filtered out runs of length one, causing decode(encode(text)) != text for strings with single characters. Returning all runs, including those of length one, fixes this while preserving the public API and existing tests.

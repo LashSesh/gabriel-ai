@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-EUcRgT9Lhq6vNYADM9TyrxfOWt8kS",
+  "object": "chat.completion",
+  "created": 1790966332,
+  "model": "gpt-4.1-mini-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"operations\": [{\"kind\": \"modify\", \"path\": \"src/luhn.py\", \"expected_sha256\": \"daa56df7794aa8b4da213da4d9fdee84518147a03a7f4ee745a11a06b101c3b1\", \"content\": \"def is_valid(number: str) -> bool:\\n    \\\"\\\"\\\"Check if the provided number string is valid per the Luhn algorithm.\\\"\\\"\\\"\\n    # Remove spaces\\n    number = number.replace(' ', '')\\n    if not number.isdigit() or len(number) == 0:\\n        return False\\n\\n    total = 0\\n    # Process digits from right to left\\n    # The rightmost digit is the check digit and is not doubled\\n    # Double every second digit from the right (indexing from 0)\\n    digits = list(map(int, number))\\n    length = len(digits)\\n\\n    for i in range(length - 1, -1, -1):\\n        digit = digits[i]\\n        # Check if this digit should be doubled\\n        # Double every second digit from the right, excluding the check digit\\n        if (length - 1 - i) % 2 == 1:\\n            digit *= 2\\n            if digit > 9:\\n                digit -= 9\\n        total += digit\\n\\n    return total % 10 == 0\\n\"}], \"rationale\": \"Corrected the doubling logic in is_valid to double every second digit from the right excluding the check digit, as per the Luhn algorithm specification. This fixes the defect and ensures the given examples validate correctly.\"}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 467,
+    "completion_tokens": 355,
+    "total_tokens": 822,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_e2d3531b36"
+}

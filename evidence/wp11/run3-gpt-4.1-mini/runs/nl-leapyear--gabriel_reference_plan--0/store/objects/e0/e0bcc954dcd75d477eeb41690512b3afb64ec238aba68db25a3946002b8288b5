@@ -1,0 +1,1 @@
+Fix the reported defect in calendarx.is_leap: years divisible by 100 are not leap years unless they are also divisible by 400 (1900 is not a leap year, 2000 is). days_in_month must follow. Keep the public API and the existing tests.

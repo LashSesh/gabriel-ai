@@ -70,7 +70,10 @@ def main(argv=None) -> int:
                     ws.close()
             evidence = {}
             for name in ("evidence/test_run.json", "evidence/live/summary.json", "evidence/wp01/baseline_manifest.json",
-                         "evidence/wp02/spec_validation.json", "evidence/doctor_linux_namespace_selftest.json", "evidence/wp11/protocol.frozen.json"):
+                         "evidence/wp02/spec_validation.json", "evidence/doctor_linux_namespace_selftest.json",
+                         "evidence/wp11/protocol.frozen.json", "evidence/wp11/run-gpt-4.1-mini/report.json",
+                         "evidence/wp11/protocol2.frozen.json", "evidence/wp11/run2-gpt-4.1-mini/report.json",
+                         "evidence/wp11/protocol3.frozen.json", "evidence/wp11/run3-gpt-4.1-mini/report.json"):
                 path = Path(args.root) / name
                 if path.is_file():
                     evidence[name] = __import__("hashlib").sha256(path.read_bytes()).hexdigest()

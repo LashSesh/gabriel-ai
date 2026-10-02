@@ -1,0 +1,1 @@
+Updated is_valid_email to enforce that the domain part contains a dot with at least one character before and after it, ensuring emails like 'a@b' are invalid and 'a@b.co' are valid, while preserving the public API and existing tests.

@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-EUcQIUP48kQ5DCuauu3U0BlF3A4ey",
+  "object": "chat.completion",
+  "created": 1790966246,
+  "model": "gpt-4.1-mini-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"nodes\": [{\"node_id\": \"observe\", \"capability_id\": \"software.observe\", \"depends_on\": [], \"check_ids\": [\"output-valid\"], \"purpose\": \"pin and observe the worktree\", \"args\": {}}, {\"node_id\": \"baseline-unit\", \"capability_id\": \"software.run_check\", \"depends_on\": [\"observe\"], \"check_ids\": [\"baseline:unit\"], \"purpose\": \"baseline run of baseline:unit\", \"args\": {\"check_id\": \"baseline:unit\"}}, {\"node_id\": \"observe-r1\", \"capability_id\": \"software.observe\", \"depends_on\": [], \"check_ids\": [\"output-valid\"], \"purpose\": \"re-observe the worktree after the failed round\", \"args\": {}}, {\"node_id\": \"propose-r1\", \"capability_id\": \"model.generate\", \"depends_on\": [\"observe-r1\", \"baseline-unit\"], \"check_ids\": [\"output-valid\"], \"purpose\": \"propose a patch\", \"args\": {\"role\": \"worker\"}}, {\"node_id\": \"apply-r1\", \"capability_id\": \"software.apply_patch\", \"depends_on\": [\"propose-r1\"], \"check_ids\": [\"output-valid\"], \"purpose\": \"apply the proposed patch\", \"args\": {\"from_node\": \"propose-r1\"}}, {\"node_id\": \"read-back-r1\", \"capability_id\": \"software.read_back\", \"depends_on\": [\"apply-r1\"], \"check_ids\": [\"output-valid\"], \"purpose\": \"observe the changed tree\", \"args\": {}}, {\"node_id\": \"verify-unit-r1\", \"capability_id\": \"software.run_check\", \"depends_on\": [\"read-back-r1\"], \"check_ids\": [\"unit\"], \"purpose\": \"acceptance run of unit\", \"args\": {\"check_id\": \"unit\"}}, {\"node_id\": \"verify-oracle-r1\", \"capability_id\": \"software.run_check\", \"depends_on\": [\"read-back-r1\"], \"check_ids\": [\"oracle\"], \"purpose\": \"acceptance run of oracle\", \"args\": {\"check_id\": \"oracle\"}}, {\"node_id\": \"review-r1\", \"capability_id\": \"software.review\", \"depends_on\": [\"read-back-r1\"], \"check_ids\": [\"scope\", \"base-commit\", \"checks-intact\", \"no-secrets\"], \"purpose\": \"scope, identity and secret review of the diff\", \"args\": {}}], \"rationale\": \"reference repair plan (round 1) adapted to fix chunking.chunk defect ensuring final partial chunk is kept and large chunk size yields one chunk, preserving public API and existing tests.\"}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 931,
+    "completion_tokens": 556,
+    "total_tokens": 1487,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_15bc4c2b05"
+}

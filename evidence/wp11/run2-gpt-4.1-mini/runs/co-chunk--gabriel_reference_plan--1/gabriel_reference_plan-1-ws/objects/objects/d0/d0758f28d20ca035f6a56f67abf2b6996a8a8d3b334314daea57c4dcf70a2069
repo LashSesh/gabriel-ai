@@ -1,0 +1,1 @@
+Changed chunk to handle empty input by returning immediately (yielding nothing) so chunk([]) returns empty list when converted, and kept the existing logic for partial last chunk and size larger than input, which already yields one chunk. This satisfies the oracle tests expecting list output and correct chunking behavior.

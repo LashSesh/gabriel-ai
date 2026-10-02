@@ -1,0 +1,1 @@
+Fixed split_fields to correctly handle doubled double-quotes inside quoted fields by unescaping them to a single double-quote, and allowed commas inside quoted fields by not splitting on commas when inside quotes. Kept the public API and existing tests unchanged.

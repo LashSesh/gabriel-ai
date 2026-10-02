@@ -1,0 +1,67 @@
+diff --git a/src/csvfields.py b/src/csvfields.py
+index 4538d40..e33be39 100644
+--- a/src/csvfields.py
++++ b/src/csvfields.py
+@@ -1,23 +1,44 @@
+-"""csvfields: split one CSV line into fields (RFC 4180 subset)."""
+-
+-
+ def split_fields(line):
+-    fields, current, quoted = [], [], False
++    fields = []
++    field = []
++    in_quotes = False
+     i = 0
+-    while i < len(line):
+-        ch = line[i]
+-        if quoted:
+-            if ch == '"':
+-                quoted = False
++    length = len(line)
++
++    while i < length:
++        c = line[i]
++
++        if in_quotes:
++            if c == '"':
++                # Check if this is an escaped double quote
++                if i + 1 < length and line[i + 1] == '"':
++                    field.append('"')
++                    i += 2
++                    continue
++                else:
++                    in_quotes = False
++                    i += 1
++                    continue
+             else:
+-                current.append(ch)
+-        elif ch == '"':
+-            quoted = True
+-        elif ch == ",":
+-            fields.append("".join(current))
+-            current = []
++                field.append(c)
++                i += 1
++                continue
++
+         else:
+-            current.append(ch)
+-        i += 1
+-    fields.append("".join(current))
++            if c == ',':
++                fields.append(''.join(field))
++                field = []
++                i += 1
++                continue
++            elif c == '"':
++                in_quotes = True
++                i += 1
++                continue
++            else:
++                field.append(c)
++                i += 1
++                continue
++
++    # Append last field
++    fields.append(''.join(field))
+     return fields

@@ -1,0 +1,1 @@
+Fix the reported defect in emailcheck.is_valid_email: the domain part must contain a dot with at least one character before and after it, so 'a@b' is invalid while 'a@b.co' is valid. Keep the public API and the existing tests.

@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-EUcQCeeRvHo1t8MIMXYZXhd8Df2Va",
+  "object": "chat.completion",
+  "created": 1790966240,
+  "model": "gpt-4.1-mini-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"operations\": [{\"kind\": \"modify\", \"path\": \"src/chunking.py\", \"expected_sha256\": \"cb3a478271df46c7d2ab405f3490c7dbefbec6ae7a2d6a2af5e4769b82567418\", \"content\": \"def chunk(data, size):\\n    \\\"\\\"\\\"Yield successive chunks from data of given size.\\n\\n    If size is larger than the length of data, yield one chunk containing all data.\\n    The final chunk may be smaller than size if data length is not a multiple of size.\\n\\n    Args:\\n        data (bytes or str or list): The input data to chunk.\\n        size (int): The chunk size.\\n\\n    Yields:\\n        chunks of data of length size, except possibly the last one.\\n    \\\"\\\"\\\"\\n    if size <= 0:\\n        raise ValueError(\\\"chunk size must be positive\\\")\\n\\n    length = len(data)\\n    if length == 0:\\n        return\\n\\n    # If size is larger than length, yield one chunk with all data\\n    if size >= length:\\n        yield data\\n        return\\n\\n    for start in range(0, length, size):\\n        yield data[start:start + size]\\n\"}], \"rationale\": \"Added explicit handling for empty data and size larger than data length to yield one chunk. Also ensured ValueError is raised for non-positive size. This fixes the defect by keeping the final partial chunk and yielding one chunk if size > data length, matching the public API and tests.\"}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 1194,
+    "completion_tokens": 346,
+    "total_tokens": 1540,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_f4b5aaa691"
+}

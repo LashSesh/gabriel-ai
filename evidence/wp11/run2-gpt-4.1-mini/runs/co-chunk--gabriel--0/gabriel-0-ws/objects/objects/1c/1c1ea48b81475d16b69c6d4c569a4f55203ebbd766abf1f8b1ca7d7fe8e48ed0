@@ -1,0 +1,1 @@
+Removed the special case for size >= length to always yield chunks in the loop, which correctly yields the final partial chunk and yields one chunk if size is larger than input. This matches the expected output of the oracle tests.

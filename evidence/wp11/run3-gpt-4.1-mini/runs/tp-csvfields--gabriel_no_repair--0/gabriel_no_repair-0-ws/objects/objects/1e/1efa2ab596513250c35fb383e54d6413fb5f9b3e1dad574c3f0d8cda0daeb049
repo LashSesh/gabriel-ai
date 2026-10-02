@@ -1,0 +1,23 @@
+"""csvfields: split one CSV line into fields (RFC 4180 subset)."""
+
+
+def split_fields(line):
+    fields, current, quoted = [], [], False
+    i = 0
+    while i < len(line):
+        ch = line[i]
+        if quoted:
+            if ch == '"':
+                quoted = False
+            else:
+                current.append(ch)
+        elif ch == '"':
+            quoted = True
+        elif ch == ",":
+            fields.append("".join(current))
+            current = []
+        else:
+            current.append(ch)
+        i += 1
+    fields.append("".join(current))
+    return fields

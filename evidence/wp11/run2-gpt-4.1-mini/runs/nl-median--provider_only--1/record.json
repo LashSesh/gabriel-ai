@@ -1,0 +1,78 @@
+{
+  "task_id": "nl-median",
+  "family": "numeric_logic",
+  "system": "provider_only",
+  "rep": 1,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp11/run2-gpt-4.1-mini/runs/nl-median--provider_only--1",
+  "outcome": {
+    "system": "provider_only",
+    "task_id": "nl-median",
+    "family": "numeric_logic",
+    "rep": 1,
+    "declared": true,
+    "declared_reason": "patch applied; declared done without verification",
+    "model_requests": 1,
+    "model_tokens": 673,
+    "wall_ms": 2394,
+    "provider_statuses": [
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp11/run2-gpt-4.1-mini/runs/nl-median--provider_only--1/worktrees/provider_only-1",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "patch applied; declared done without verification"
+    ],
+    "gabriel": null,
+    "repairs_used": 0,
+    "plan_versions": 0
+  },
+  "verification": {
+    "verified": false,
+    "changed_paths": [
+      "src/stats.py"
+    ],
+    "out_of_scope_paths": [],
+    "visible": {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ],
+      "exit_code": 1,
+      "timed_out": false,
+      "start_failure": null,
+      "stdout_tail": "",
+      "stderr_tail": "E\n======================================================================\nERROR: test_stats (unittest.loader._FailedTest.test_stats)\n----------------------------------------------------------------------\nImportError: Failed to import test module: test_stats\nTraceback (most recent call last):\n  File \"/usr/lib/python3.11/unittest/loader.py\", line 419, in _find_test_path\n    module = self._get_module_from_name(name)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.11/unittest/loader.py\", line 362, in _get_module_from_name\n    __import__(name)\n  File \"/work/tests/test_stats.py\", line 4, in <module>\n    from stats import median, mean\nImportError: cannot import name 'mean' from 'stats' (/work/tests/../src/stats.py)\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nFAILED (errors=1)\n",
+      "backend": "linux_namespace"
+    },
+    "oracle": {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "oracle_stats"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "start_failure": null,
+      "stdout_tail": "",
+      "stderr_tail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n",
+      "backend": "linux_namespace"
+    },
+    "patch_sha256": "6582bd99740ff96c97da4dfa64f358a5188ece45aa106d474165479ae12aceb7",
+    "patch_bytes": 926,
+    "patch": "diff --git a/src/stats.py b/src/stats.py\nindex fd99082..e04a678 100644\n--- a/src/stats.py\n+++ b/src/stats.py\n@@ -1,15 +1,14 @@\n-\"\"\"stats: tiny descriptive statistics.\"\"\"\n+def median(data):\n+    \"\"\"Return the median of the data as a float.\n \n-\n-def median(values):\n-    data = sorted(values)\n+    For an even number of values, the median is the arithmetic mean of the two middle values.\n+    \"\"\"\n     if not data:\n-        raise ValueError(\"median of empty data\")\n-    return data[len(data) // 2]\n-\n-\n-def mean(values):\n-    values = list(values)\n-    if not values:\n-        raise ValueError(\"mean of empty data\")\n-    return sum(values) / len(values)\n+        raise ValueError(\"median() arg is an empty sequence\")\n+    sorted_data = sorted(data)\n+    n = len(sorted_data)\n+    mid = n // 2\n+    if n % 2 == 1:\n+        return float(sorted_data[mid])\n+    else:\n+        return (sorted_data[mid - 1] + sorted_data[mid]) / 2.0\n",
+    "head_is_base": true
+  },
+  "V": 0,
+  "D": 1,
+  "false_completion": 1,
+  "unit_wall_ms": 3003
+}

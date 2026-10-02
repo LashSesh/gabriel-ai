@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-EUcZuDnj0A4JI1zazMuEevk7yQTJz",
+  "object": "chat.completion",
+  "created": 1790966842,
+  "model": "gpt-4.1-mini-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"operations\": [{\"kind\": \"modify\", \"path\": \"src/stats.py\", \"expected_sha256\": \"4c013130f7574f6b153f4d98a9c98273bda8991360d04fe68fff4aaa2feba889\", \"content\": \"\\\"\\\"\\\"stats: tiny descriptive statistics.\\\"\\\"\\\"\\n\\n\\ndef median(values):\\n    data = sorted(values)\\n    if not data:\\n        raise ValueError(\\\"median of empty data\\\")\\n    n = len(data)\\n    mid = n // 2\\n    if n % 2 == 1:\\n        return data[mid]\\n    else:\\n        return (data[mid - 1] + data[mid]) / 2.0\\n\\n\\ndef mean(values):\\n    values = list(values)\\n    if not values:\\n        raise ValueError(\\\"mean of empty data\\\")\\n    return sum(values) / len(values)\\n\"}], \"rationale\": \"Fixed median to correctly compute the arithmetic mean of the two middle values for even-length data, returning a float, while preserving the public API and existing tests.\"}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 552,
+    "completion_tokens": 246,
+    "total_tokens": 798,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_47a68edfc3"
+}

@@ -1,0 +1,17 @@
+"""rle: run-length encoding of strings."""
+
+
+def encode(text):
+    """Return a list of (char, count) runs for ``text``."""
+    runs = []
+    for ch in text:
+        if runs and runs[-1][0] == ch:
+            runs[-1] = (ch, runs[-1][1] + 1)
+        else:
+            runs.append((ch, 1))
+    return runs
+
+
+def decode(runs):
+    """Inverse of ``encode``."""
+    return "".join(ch * count for ch, count in runs)

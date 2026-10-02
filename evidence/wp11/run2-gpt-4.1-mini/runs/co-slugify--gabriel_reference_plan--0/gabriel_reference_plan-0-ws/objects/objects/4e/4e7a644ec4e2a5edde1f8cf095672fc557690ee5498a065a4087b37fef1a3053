@@ -1,0 +1,11 @@
+import re
+
+
+def slugify(text: str) -> str:
+    # Lowercase the input text
+    text = text.lower()
+    # Replace runs of non-alphanumeric characters with a single hyphen
+    slug = re.sub(r'[^a-z0-9]+', '-', text)
+    # Remove leading and trailing hyphens
+    slug = slug.strip('-')
+    return slug

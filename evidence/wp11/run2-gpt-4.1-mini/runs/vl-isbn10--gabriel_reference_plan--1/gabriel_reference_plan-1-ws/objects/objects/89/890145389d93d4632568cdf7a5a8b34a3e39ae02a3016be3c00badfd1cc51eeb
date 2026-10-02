@@ -1,0 +1,45 @@
+import re
+
+
+def is_valid_isbn10(isbn):
+    """Check if the given string is a valid ISBN-10.
+
+    The ISBN-10 consists of 9 digits plus a check digit which can be 0-9 or 'X' (representing 10).
+    Hyphens are allowed and ignored.
+
+    Args:
+        isbn (str): The ISBN-10 string to validate.
+
+    Returns:
+        bool: True if valid ISBN-10, False otherwise.
+    """
+    # Remove hyphens
+    isbn = isbn.replace('-', '')
+
+    # ISBN-10 must be 10 characters
+    if len(isbn) != 10:
+        return False
+
+    # First 9 characters must be digits
+    if not isbn[:9].isdigit():
+        return False
+
+    # Last character can be digit or 'X'
+    if not (isbn[9].isdigit() or isbn[9] == 'X'):
+        return False
+
+    # Calculate checksum
+    total = 0
+    for i in range(9):
+        total += (i + 1) * int(isbn[i])
+
+    # Check digit
+    if isbn[9] == 'X':
+        total += 10 * 10
+    else:
+        total += 10 * int(isbn[9])
+
+    return total % 11 == 0
+
+
+# Other functions in isbn.py (if any) remain unchanged

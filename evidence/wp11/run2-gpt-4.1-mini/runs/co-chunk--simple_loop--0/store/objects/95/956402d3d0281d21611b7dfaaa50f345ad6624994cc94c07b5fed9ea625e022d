@@ -1,0 +1,1 @@
+Added explicit handling for empty data and size larger than data length to yield one chunk. Also ensured ValueError is raised for non-positive size. This fixes the defect by keeping the final partial chunk and yielding one chunk if size > data length, matching the public API and tests.

@@ -1,0 +1,22 @@
+def is_valid_email(email: str) -> bool:
+    """Check if the email is valid.
+
+    The email must have exactly one '@' character.
+    The domain part must contain at least one dot with at least one character before and after it.
+    """
+    if '@' not in email or email.count('@') != 1:
+        return False
+    local, domain = email.split('@')
+    if not local or not domain:
+        return False
+    # Check domain contains a dot with at least one character before and after
+    if '.' not in domain:
+        return False
+    parts = domain.split('.')
+    # There must be at least two parts separated by dot
+    if len(parts) < 2:
+        return False
+    # Each part must be at least one character
+    if any(len(part) == 0 for part in parts):
+        return False
+    return True

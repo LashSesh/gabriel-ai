@@ -1,0 +1,20 @@
+"""stats: tiny descriptive statistics."""
+
+
+def median(values):
+    data = sorted(values)
+    if not data:
+        raise ValueError("median of empty data")
+    n = len(data)
+    mid = n // 2
+    if n % 2 == 1:
+        return data[mid]
+    else:
+        return (data[mid - 1] + data[mid]) / 2.0
+
+
+def mean(values):
+    values = list(values)
+    if not values:
+        raise ValueError("mean of empty data")
+    return sum(values) / len(values)

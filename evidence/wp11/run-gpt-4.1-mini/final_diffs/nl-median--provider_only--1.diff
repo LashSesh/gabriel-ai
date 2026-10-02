@@ -1,0 +1,32 @@
+diff --git a/src/stats.py b/src/stats.py
+index fd99082..e04a678 100644
+--- a/src/stats.py
++++ b/src/stats.py
+@@ -1,15 +1,14 @@
+-"""stats: tiny descriptive statistics."""
++def median(data):
++    """Return the median of the data as a float.
+ 
+-
+-def median(values):
+-    data = sorted(values)
++    For an even number of values, the median is the arithmetic mean of the two middle values.
++    """
+     if not data:
+-        raise ValueError("median of empty data")
+-    return data[len(data) // 2]
+-
+-
+-def mean(values):
+-    values = list(values)
+-    if not values:
+-        raise ValueError("mean of empty data")
+-    return sum(values) / len(values)
++        raise ValueError("median() arg is an empty sequence")
++    sorted_data = sorted(data)
++    n = len(sorted_data)
++    mid = n // 2
++    if n % 2 == 1:
++        return float(sorted_data[mid])
++    else:
++        return (sorted_data[mid - 1] + sorted_data[mid]) / 2.0

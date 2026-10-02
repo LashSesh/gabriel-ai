@@ -1,0 +1,18 @@
+diff --git a/src/stats.py b/src/stats.py
+index fd99082..86c2c53 100644
+--- a/src/stats.py
++++ b/src/stats.py
+@@ -5,7 +5,12 @@ def median(values):
+     data = sorted(values)
+     if not data:
+         raise ValueError("median of empty data")
+-    return data[len(data) // 2]
++    n = len(data)
++    mid = n // 2
++    if n % 2 == 1:
++        return data[mid]
++    else:
++        return (data[mid - 1] + data[mid]) / 2.0
+ 
+ 
+ def mean(values):

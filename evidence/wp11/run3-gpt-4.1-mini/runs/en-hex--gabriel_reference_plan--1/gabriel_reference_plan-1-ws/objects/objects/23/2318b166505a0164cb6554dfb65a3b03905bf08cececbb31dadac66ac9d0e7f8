@@ -1,0 +1,38 @@
+You are the worker role of Gabriel, a repository repair agent.
+Goal (verbatim user request):
+Fix the reported defect in hexcodec.to_hex: every byte must be rendered as exactly two lowercase hexadecimal digits (bytes below 0x10 get a leading zero), so that from_hex(to_hex(data)) == data. Keep the public API and the existing tests.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- unit [software/test_passed] argv=python3 -m unittest discover -s tests independent=False
+- oracle [software/test_passed] argv=python3 -m unittest oracle_hexcodec independent=True
+
+Allowed paths (changes elsewhere are rejected): src/
+Base commit: aff75518986faacb0ea99021a517f2b16e741ff8
+
+Files (path sha256 bytes):
+  README.md c3e6121a571c05f26fa63fda23b1e29c45580bb58d2ce5039b31ca5039950f7b 65
+  src/hexcodec.py 808c84e9d34a48a4107efedb407a665444d56da87838a2c2f5c732c984c2ffc7 306
+  tests/test_hexcodec.py b9760de5797d44fd9871b58312900faba2c67a7508f145219acba75da730383f 469
+
+Source files in scope:
+=== src/hexcodec.py (sha256 808c84e9d34a48a4107efedb407a665444d56da87838a2c2f5c732c984c2ffc7) ===
+"""hexcodec: hexadecimal encoding of byte strings."""
+
+
+def to_hex(data):
+    """Return the lowercase hexadecimal text of ``data``."""
+    return "".join("%x" % b for b in data)
+
+
+def from_hex(text):
+    """Inverse of ``to_hex``."""
+    return bytes(int(text[i:i + 2], 16) for i in range(0, len(text), 2))
+
+
+
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<relative path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest.
+For create expected_sha256 is null. For delete content is null. Do not touch oracle or test command files.
+Do not claim completion; the independent checks decide.

@@ -1,0 +1,14 @@
+"""chunking: split sequences into fixed-size chunks."""
+
+
+def chunk(items, size):
+    if size <= 0:
+        raise ValueError("size must be positive")
+    if len(items) == 0:
+        return []
+    # If size is larger than input, return one chunk
+    if size >= len(items):
+        return [items]
+    # Otherwise, chunk normally, including final partial chunk
+    chunks = [items[i:i + size] for i in range(0, len(items), size)]
+    return chunks

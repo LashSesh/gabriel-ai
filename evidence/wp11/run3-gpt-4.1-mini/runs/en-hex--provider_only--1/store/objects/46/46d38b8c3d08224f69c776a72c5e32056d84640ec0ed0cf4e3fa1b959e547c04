@@ -1,0 +1,11 @@
+"""hexcodec: hexadecimal encoding of byte strings."""
+
+
+def to_hex(data):
+    """Return the lowercase hexadecimal text of ``data``."""
+    return "".join("%02x" % b for b in data)
+
+
+def from_hex(text):
+    """Inverse of ``to_hex``."""
+    return bytes(int(text[i:i + 2], 16) for i in range(0, len(text), 2))

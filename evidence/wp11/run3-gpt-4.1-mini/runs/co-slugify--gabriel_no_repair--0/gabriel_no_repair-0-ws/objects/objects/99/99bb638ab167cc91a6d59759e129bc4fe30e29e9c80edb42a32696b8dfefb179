@@ -1,0 +1,33 @@
+You are the worker role of Gabriel, a repository repair agent.
+Goal (verbatim user request):
+Fix the reported defect in slug.slugify: runs of non-alphanumeric characters must collapse into a single hyphen and the result must not start or end with a hyphen. Keep the public API and the existing tests.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- unit [software/test_passed] argv=python3 -m unittest discover -s tests independent=False
+- oracle [software/test_passed] argv=python3 -m unittest oracle_slug independent=True
+
+Allowed paths (changes elsewhere are rejected): src/
+Base commit: 3c329d224a04b68f913fe1d32e40b691fcf04207
+
+Files (path sha256 bytes):
+  README.md bacff0e5d884b1ff8d2c7a9ede558e784315ba68064004d7438f7e44f846c2a8 61
+  src/slug.py 1e9d120348c7179cb629b3583043390d8615862a5dc5d5004ec112a73581f950 105
+  tests/test_slug.py dc55c0bacf580d268996b00a73d6a2eed7962045e35f7a1ee54ffe32b2da9178 389
+
+Source files in scope:
+=== src/slug.py (sha256 1e9d120348c7179cb629b3583043390d8615862a5dc5d5004ec112a73581f950) ===
+"""slug: URL slugs."""
+import re
+
+
+def slugify(text):
+    return re.sub(r"[^a-z0-9]", "-", text.lower())
+
+
+
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<relative path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest.
+For create expected_sha256 is null. For delete content is null. Do not touch oracle or test command files.
+Do not claim completion; the independent checks decide.

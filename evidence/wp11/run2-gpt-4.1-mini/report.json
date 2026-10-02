@@ -1,0 +1,1975 @@
+{
+  "schema": "gabriel.evaluation-report/1",
+  "protocol_frozen_digest": "b9a6e0d096ca285c129d9947e666d61b254fc7e59fc42bf4b35ba7e8fb3f9b4f",
+  "tasks": 12,
+  "families": 4,
+  "runs": 120,
+  "per_system": {
+    "provider_only": {
+      "runs": 24,
+      "verified_successes": 17,
+      "p_success": 0.7083333333333334,
+      "declared_successes": 24,
+      "false_completions": 7,
+      "p_false_completion": 0.2916666666666667,
+      "conditional_false_completion": 0.2916666666666667,
+      "conditional_denominator": 24,
+      "harness_errors": 0,
+      "timed_out": 0,
+      "recovery_runs": 0,
+      "mean_model_requests": 1.0,
+      "total_model_requests": 24,
+      "mean_model_tokens": 747.6666666666666,
+      "total_model_tokens": 17944,
+      "mean_wall_ms": 2703.3333333333335,
+      "p_success_ci95_by_family": {
+        "low": 0.4583333333333333,
+        "high": 0.9166666666666666,
+        "clusters": 4
+      },
+      "p_success_ci95_by_task": {
+        "low": 0.4583333333333333,
+        "high": 0.9166666666666666,
+        "clusters": 12
+      },
+      "per_task": {
+        "co-chunk": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "co-dedupe": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "co-slugify": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "nl-leapyear": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "nl-median": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "nl-roman": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "tp-csvfields": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "tp-kvparse": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "tp-querystring": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "vl-email": {
+          "p_success": 0.5,
+          "runs": 2
+        },
+        "vl-isbn10": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "vl-luhn": {
+          "p_success": 1.0,
+          "runs": 2
+        }
+      }
+    },
+    "simple_loop": {
+      "runs": 24,
+      "verified_successes": 22,
+      "p_success": 0.9166666666666666,
+      "declared_successes": 22,
+      "false_completions": 0,
+      "p_false_completion": 0.0,
+      "conditional_false_completion": 0.0,
+      "conditional_denominator": 22,
+      "harness_errors": 0,
+      "timed_out": 0,
+      "recovery_runs": 0,
+      "mean_model_requests": 1.7916666666666667,
+      "total_model_requests": 43,
+      "mean_model_tokens": 1835.5833333333333,
+      "total_model_tokens": 44054,
+      "mean_wall_ms": 5620.041666666667,
+      "p_success_ci95_by_family": {
+        "low": 0.75,
+        "high": 1.0,
+        "clusters": 4
+      },
+      "p_success_ci95_by_task": {
+        "low": 0.75,
+        "high": 1.0,
+        "clusters": 12
+      },
+      "per_task": {
+        "co-chunk": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "co-dedupe": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "co-slugify": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "nl-leapyear": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "nl-median": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "nl-roman": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "tp-csvfields": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "tp-kvparse": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "tp-querystring": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "vl-email": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "vl-isbn10": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "vl-luhn": {
+          "p_success": 1.0,
+          "runs": 2
+        }
+      }
+    },
+    "gabriel": {
+      "runs": 24,
+      "verified_successes": 21,
+      "p_success": 0.875,
+      "declared_successes": 21,
+      "false_completions": 0,
+      "p_false_completion": 0.0,
+      "conditional_false_completion": 0.0,
+      "conditional_denominator": 21,
+      "harness_errors": 0,
+      "timed_out": 0,
+      "recovery_runs": 6,
+      "mean_model_requests": 2.75,
+      "total_model_requests": 66,
+      "mean_model_tokens": 2976.0,
+      "total_model_tokens": 71424,
+      "mean_wall_ms": 10984.791666666666,
+      "p_success_ci95_by_family": {
+        "low": 0.75,
+        "high": 1.0,
+        "clusters": 4
+      },
+      "p_success_ci95_by_task": {
+        "low": 0.6666666666666666,
+        "high": 1.0,
+        "clusters": 12
+      },
+      "per_task": {
+        "co-chunk": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "co-dedupe": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "co-slugify": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "nl-leapyear": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "nl-median": {
+          "p_success": 0.5,
+          "runs": 2
+        },
+        "nl-roman": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "tp-csvfields": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "tp-kvparse": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "tp-querystring": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "vl-email": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "vl-isbn10": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "vl-luhn": {
+          "p_success": 1.0,
+          "runs": 2
+        }
+      }
+    },
+    "gabriel_no_repair": {
+      "runs": 24,
+      "verified_successes": 16,
+      "p_success": 0.6666666666666666,
+      "declared_successes": 16,
+      "false_completions": 0,
+      "p_false_completion": 0.0,
+      "conditional_false_completion": 0.0,
+      "conditional_denominator": 16,
+      "harness_errors": 0,
+      "timed_out": 0,
+      "recovery_runs": 0,
+      "mean_model_requests": 2.0,
+      "total_model_requests": 48,
+      "mean_model_tokens": 1860.7916666666667,
+      "total_model_tokens": 44659,
+      "mean_wall_ms": 8255.125,
+      "p_success_ci95_by_family": {
+        "low": 0.4583333333333333,
+        "high": 0.8333333333333334,
+        "clusters": 4
+      },
+      "p_success_ci95_by_task": {
+        "low": 0.4166666666666667,
+        "high": 0.875,
+        "clusters": 12
+      },
+      "per_task": {
+        "co-chunk": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "co-dedupe": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "co-slugify": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "nl-leapyear": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "nl-median": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "nl-roman": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "tp-csvfields": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "tp-kvparse": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "tp-querystring": {
+          "p_success": 0.5,
+          "runs": 2
+        },
+        "vl-email": {
+          "p_success": 0.5,
+          "runs": 2
+        },
+        "vl-isbn10": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "vl-luhn": {
+          "p_success": 1.0,
+          "runs": 2
+        }
+      }
+    },
+    "gabriel_reference_plan": {
+      "runs": 24,
+      "verified_successes": 21,
+      "p_success": 0.875,
+      "declared_successes": 21,
+      "false_completions": 0,
+      "p_false_completion": 0.0,
+      "conditional_false_completion": 0.0,
+      "conditional_denominator": 21,
+      "harness_errors": 0,
+      "timed_out": 0,
+      "recovery_runs": 6,
+      "mean_model_requests": 1.375,
+      "total_model_requests": 33,
+      "mean_model_tokens": 1270.7916666666667,
+      "total_model_tokens": 30499,
+      "mean_wall_ms": 6159.416666666667,
+      "p_success_ci95_by_family": {
+        "low": 0.75,
+        "high": 1.0,
+        "clusters": 4
+      },
+      "p_success_ci95_by_task": {
+        "low": 0.6666666666666666,
+        "high": 1.0,
+        "clusters": 12
+      },
+      "per_task": {
+        "co-chunk": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "co-dedupe": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "co-slugify": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "nl-leapyear": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "nl-median": {
+          "p_success": 0.5,
+          "runs": 2
+        },
+        "nl-roman": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "tp-csvfields": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "tp-kvparse": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "tp-querystring": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "vl-email": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "vl-isbn10": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "vl-luhn": {
+          "p_success": 1.0,
+          "runs": 2
+        }
+      }
+    }
+  },
+  "paired_differences": {
+    "gabriel_minus_provider_only": {
+      "per_task": {
+        "co-chunk": 0.0,
+        "co-dedupe": 0.0,
+        "co-slugify": 1.0,
+        "nl-leapyear": 0.0,
+        "nl-median": 0.5,
+        "nl-roman": 0.0,
+        "tp-csvfields": 0.0,
+        "tp-kvparse": 0.0,
+        "tp-querystring": 0.0,
+        "vl-email": 0.5,
+        "vl-isbn10": 0.0,
+        "vl-luhn": 0.0
+      },
+      "mean": 0.16666666666666666,
+      "ci95_by_family": {
+        "low": 0.041666666666666664,
+        "high": 0.2916666666666667,
+        "clusters": 4
+      },
+      "ci95_by_task": {
+        "low": 0.0,
+        "high": 0.375,
+        "clusters": 12
+      }
+    },
+    "gabriel_minus_simple_loop": {
+      "per_task": {
+        "co-chunk": 0.0,
+        "co-dedupe": 0.0,
+        "co-slugify": 0.0,
+        "nl-leapyear": 0.0,
+        "nl-median": -0.5,
+        "nl-roman": 0.0,
+        "tp-csvfields": 0.0,
+        "tp-kvparse": 0.0,
+        "tp-querystring": 0.0,
+        "vl-email": 0.0,
+        "vl-isbn10": 0.0,
+        "vl-luhn": 0.0
+      },
+      "mean": -0.041666666666666664,
+      "ci95_by_family": {
+        "low": -0.125,
+        "high": 0.0,
+        "clusters": 4
+      },
+      "ci95_by_task": {
+        "low": -0.125,
+        "high": 0.0,
+        "clusters": 12
+      }
+    },
+    "gabriel_minus_gabriel_no_repair": {
+      "per_task": {
+        "co-chunk": 0.0,
+        "co-dedupe": 0.0,
+        "co-slugify": 1.0,
+        "nl-leapyear": 0.0,
+        "nl-median": 0.5,
+        "nl-roman": 0.0,
+        "tp-csvfields": 0.0,
+        "tp-kvparse": 0.0,
+        "tp-querystring": 0.5,
+        "vl-email": 0.5,
+        "vl-isbn10": 0.0,
+        "vl-luhn": 0.0
+      },
+      "mean": 0.20833333333333334,
+      "ci95_by_family": {
+        "low": 0.16666666666666666,
+        "high": 0.2916666666666667,
+        "clusters": 4
+      },
+      "ci95_by_task": {
+        "low": 0.041666666666666664,
+        "high": 0.4166666666666667,
+        "clusters": 12
+      }
+    },
+    "gabriel_minus_gabriel_reference_plan": {
+      "per_task": {
+        "co-chunk": 0.0,
+        "co-dedupe": 0.0,
+        "co-slugify": 0.0,
+        "nl-leapyear": 0.0,
+        "nl-median": 0.0,
+        "nl-roman": 0.0,
+        "tp-csvfields": 0.0,
+        "tp-kvparse": 0.0,
+        "tp-querystring": 0.0,
+        "vl-email": 0.0,
+        "vl-isbn10": 0.0,
+        "vl-luhn": 0.0
+      },
+      "mean": 0.0,
+      "ci95_by_family": {
+        "low": 0.0,
+        "high": 0.0,
+        "clusters": 4
+      },
+      "ci95_by_task": {
+        "low": 0.0,
+        "high": 0.0,
+        "clusters": 12
+      }
+    }
+  },
+  "failures": [
+    {
+      "task_id": "co-chunk",
+      "system": "gabriel",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": 1,
+      "visible_exit": 1,
+      "out_of_scope": [],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed",
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "co-chunk",
+      "system": "gabriel",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": 1,
+      "visible_exit": 1,
+      "out_of_scope": [],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed",
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "co-chunk",
+      "system": "gabriel_no_repair",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": 1,
+      "visible_exit": 1,
+      "out_of_scope": [],
+      "provider_statuses": [
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "co-chunk",
+      "system": "gabriel_no_repair",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": 1,
+      "visible_exit": 1,
+      "out_of_scope": [],
+      "provider_statuses": [
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "co-chunk",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": 1,
+      "visible_exit": 1,
+      "out_of_scope": [],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "co-chunk",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": 1,
+      "visible_exit": 1,
+      "out_of_scope": [],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "co-chunk",
+      "system": "provider_only",
+      "rep": 0,
+      "declared": true,
+      "verified": false,
+      "reason": "patch applied; declared done without verification",
+      "oracle_exit": 1,
+      "visible_exit": 1,
+      "out_of_scope": [],
+      "provider_statuses": [
+        "completed"
+      ]
+    },
+    {
+      "task_id": "co-chunk",
+      "system": "provider_only",
+      "rep": 1,
+      "declared": true,
+      "verified": false,
+      "reason": "patch applied; declared done without verification",
+      "oracle_exit": 1,
+      "visible_exit": 1,
+      "out_of_scope": [],
+      "provider_statuses": [
+        "completed"
+      ]
+    },
+    {
+      "task_id": "co-chunk",
+      "system": "simple_loop",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "budget exhausted without passing checks",
+      "oracle_exit": 1,
+      "visible_exit": 1,
+      "out_of_scope": [],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed",
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "co-chunk",
+      "system": "simple_loop",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "budget exhausted without passing checks",
+      "oracle_exit": 1,
+      "visible_exit": 1,
+      "out_of_scope": [],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed",
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "co-slugify",
+      "system": "gabriel_no_repair",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": 1,
+      "visible_exit": 1,
+      "out_of_scope": [],
+      "provider_statuses": [
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "co-slugify",
+      "system": "gabriel_no_repair",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": 1,
+      "visible_exit": 1,
+      "out_of_scope": [],
+      "provider_statuses": [
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "co-slugify",
+      "system": "provider_only",
+      "rep": 0,
+      "declared": true,
+      "verified": false,
+      "reason": "patch applied; declared done without verification",
+      "oracle_exit": 1,
+      "visible_exit": 1,
+      "out_of_scope": [],
+      "provider_statuses": [
+        "completed"
+      ]
+    },
+    {
+      "task_id": "co-slugify",
+      "system": "provider_only",
+      "rep": 1,
+      "declared": true,
+      "verified": false,
+      "reason": "patch applied; declared done without verification",
+      "oracle_exit": 1,
+      "visible_exit": 1,
+      "out_of_scope": [],
+      "provider_statuses": [
+        "completed"
+      ]
+    },
+    {
+      "task_id": "nl-median",
+      "system": "gabriel",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": 0,
+      "visible_exit": 1,
+      "out_of_scope": [],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed",
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "nl-median",
+      "system": "gabriel_no_repair",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": 0,
+      "visible_exit": 1,
+      "out_of_scope": [],
+      "provider_statuses": [
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "nl-median",
+      "system": "gabriel_no_repair",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": 0,
+      "visible_exit": 1,
+      "out_of_scope": [],
+      "provider_statuses": [
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "nl-median",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": 0,
+      "visible_exit": 1,
+      "out_of_scope": [],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "nl-median",
+      "system": "provider_only",
+      "rep": 0,
+      "declared": true,
+      "verified": false,
+      "reason": "patch applied; declared done without verification",
+      "oracle_exit": 0,
+      "visible_exit": 1,
+      "out_of_scope": [],
+      "provider_statuses": [
+        "completed"
+      ]
+    },
+    {
+      "task_id": "nl-median",
+      "system": "provider_only",
+      "rep": 1,
+      "declared": true,
+      "verified": false,
+      "reason": "patch applied; declared done without verification",
+      "oracle_exit": 0,
+      "visible_exit": 1,
+      "out_of_scope": [],
+      "provider_statuses": [
+        "completed"
+      ]
+    },
+    {
+      "task_id": "tp-querystring",
+      "system": "gabriel_no_repair",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": 1,
+      "visible_exit": 1,
+      "out_of_scope": [],
+      "provider_statuses": [
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "vl-email",
+      "system": "gabriel_no_repair",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": 0,
+      "visible_exit": 1,
+      "out_of_scope": [],
+      "provider_statuses": [
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "vl-email",
+      "system": "provider_only",
+      "rep": 1,
+      "declared": true,
+      "verified": false,
+      "reason": "patch applied; declared done without verification",
+      "oracle_exit": 0,
+      "visible_exit": 1,
+      "out_of_scope": [],
+      "provider_statuses": [
+        "completed"
+      ]
+    }
+  ],
+  "claim_scope": "Scoped comparison on one synthetic task distribution with one provider; a difference here is not a general superiority claim. Costs include every attempt, including failed and timed-out runs.",
+  "frozen_check": {
+    "frozen_digest": "b9a6e0d096ca285c129d9947e666d61b254fc7e59fc42bf4b35ba7e8fb3f9b4f",
+    "harness_identity_now": "ee5be54e004f02b4f48996594242953808f3bf74be7c009d58e5b3a34b51f19f",
+    "harness_amended": false
+  },
+  "held_out": {
+    "schema": "gabriel.evaluation-report/1",
+    "protocol_frozen_digest": "b9a6e0d096ca285c129d9947e666d61b254fc7e59fc42bf4b35ba7e8fb3f9b4f",
+    "tasks": 3,
+    "families": 1,
+    "runs": 30,
+    "per_system": {
+      "provider_only": {
+        "runs": 6,
+        "verified_successes": 5,
+        "p_success": 0.8333333333333334,
+        "declared_successes": 6,
+        "false_completions": 1,
+        "p_false_completion": 0.16666666666666666,
+        "conditional_false_completion": 0.16666666666666666,
+        "conditional_denominator": 6,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 0,
+        "mean_model_requests": 1.0,
+        "total_model_requests": 6,
+        "mean_model_tokens": 830.5,
+        "total_model_tokens": 4983,
+        "mean_wall_ms": 3016.3333333333335,
+        "p_success_ci95_by_family": {
+          "low": 0.8333333333333334,
+          "high": 0.8333333333333334,
+          "clusters": 1
+        },
+        "p_success_ci95_by_task": {
+          "low": 0.5,
+          "high": 1.0,
+          "clusters": 3
+        },
+        "per_task": {
+          "vl-email": {
+            "p_success": 0.5,
+            "runs": 2
+          },
+          "vl-isbn10": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "vl-luhn": {
+            "p_success": 1.0,
+            "runs": 2
+          }
+        }
+      },
+      "simple_loop": {
+        "runs": 6,
+        "verified_successes": 6,
+        "p_success": 1.0,
+        "declared_successes": 6,
+        "false_completions": 0,
+        "p_false_completion": 0.0,
+        "conditional_false_completion": 0.0,
+        "conditional_denominator": 6,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 0,
+        "mean_model_requests": 1.3333333333333333,
+        "total_model_requests": 8,
+        "mean_model_tokens": 1155.6666666666667,
+        "total_model_tokens": 6934,
+        "mean_wall_ms": 4517.666666666667,
+        "p_success_ci95_by_family": {
+          "low": 1.0,
+          "high": 1.0,
+          "clusters": 1
+        },
+        "p_success_ci95_by_task": {
+          "low": 1.0,
+          "high": 1.0,
+          "clusters": 3
+        },
+        "per_task": {
+          "vl-email": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "vl-isbn10": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "vl-luhn": {
+            "p_success": 1.0,
+            "runs": 2
+          }
+        }
+      },
+      "gabriel": {
+        "runs": 6,
+        "verified_successes": 6,
+        "p_success": 1.0,
+        "declared_successes": 6,
+        "false_completions": 0,
+        "p_false_completion": 0.0,
+        "conditional_false_completion": 0.0,
+        "conditional_denominator": 6,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 0,
+        "mean_model_requests": 2.0,
+        "total_model_requests": 12,
+        "mean_model_tokens": 1940.0,
+        "total_model_tokens": 11640,
+        "mean_wall_ms": 8294.833333333334,
+        "p_success_ci95_by_family": {
+          "low": 1.0,
+          "high": 1.0,
+          "clusters": 1
+        },
+        "p_success_ci95_by_task": {
+          "low": 1.0,
+          "high": 1.0,
+          "clusters": 3
+        },
+        "per_task": {
+          "vl-email": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "vl-isbn10": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "vl-luhn": {
+            "p_success": 1.0,
+            "runs": 2
+          }
+        }
+      },
+      "gabriel_no_repair": {
+        "runs": 6,
+        "verified_successes": 5,
+        "p_success": 0.8333333333333334,
+        "declared_successes": 5,
+        "false_completions": 0,
+        "p_false_completion": 0.0,
+        "conditional_false_completion": 0.0,
+        "conditional_denominator": 5,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 0,
+        "mean_model_requests": 2.0,
+        "total_model_requests": 12,
+        "mean_model_tokens": 1966.3333333333333,
+        "total_model_tokens": 11798,
+        "mean_wall_ms": 8386.666666666666,
+        "p_success_ci95_by_family": {
+          "low": 0.8333333333333334,
+          "high": 0.8333333333333334,
+          "clusters": 1
+        },
+        "p_success_ci95_by_task": {
+          "low": 0.5,
+          "high": 1.0,
+          "clusters": 3
+        },
+        "per_task": {
+          "vl-email": {
+            "p_success": 0.5,
+            "runs": 2
+          },
+          "vl-isbn10": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "vl-luhn": {
+            "p_success": 1.0,
+            "runs": 2
+          }
+        }
+      },
+      "gabriel_reference_plan": {
+        "runs": 6,
+        "verified_successes": 6,
+        "p_success": 1.0,
+        "declared_successes": 6,
+        "false_completions": 0,
+        "p_false_completion": 0.0,
+        "conditional_false_completion": 0.0,
+        "conditional_denominator": 6,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 0,
+        "mean_model_requests": 1.0,
+        "total_model_requests": 6,
+        "mean_model_tokens": 826.0,
+        "total_model_tokens": 4956,
+        "mean_wall_ms": 4821.166666666667,
+        "p_success_ci95_by_family": {
+          "low": 1.0,
+          "high": 1.0,
+          "clusters": 1
+        },
+        "p_success_ci95_by_task": {
+          "low": 1.0,
+          "high": 1.0,
+          "clusters": 3
+        },
+        "per_task": {
+          "vl-email": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "vl-isbn10": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "vl-luhn": {
+            "p_success": 1.0,
+            "runs": 2
+          }
+        }
+      }
+    },
+    "paired_differences": {
+      "gabriel_minus_provider_only": {
+        "per_task": {
+          "vl-email": 0.5,
+          "vl-isbn10": 0.0,
+          "vl-luhn": 0.0
+        },
+        "mean": 0.16666666666666666,
+        "ci95_by_family": {
+          "low": 0.16666666666666666,
+          "high": 0.16666666666666666,
+          "clusters": 1
+        },
+        "ci95_by_task": {
+          "low": 0.0,
+          "high": 0.5,
+          "clusters": 3
+        }
+      },
+      "gabriel_minus_simple_loop": {
+        "per_task": {
+          "vl-email": 0.0,
+          "vl-isbn10": 0.0,
+          "vl-luhn": 0.0
+        },
+        "mean": 0.0,
+        "ci95_by_family": {
+          "low": 0.0,
+          "high": 0.0,
+          "clusters": 1
+        },
+        "ci95_by_task": {
+          "low": 0.0,
+          "high": 0.0,
+          "clusters": 3
+        }
+      },
+      "gabriel_minus_gabriel_no_repair": {
+        "per_task": {
+          "vl-email": 0.5,
+          "vl-isbn10": 0.0,
+          "vl-luhn": 0.0
+        },
+        "mean": 0.16666666666666666,
+        "ci95_by_family": {
+          "low": 0.16666666666666666,
+          "high": 0.16666666666666666,
+          "clusters": 1
+        },
+        "ci95_by_task": {
+          "low": 0.0,
+          "high": 0.5,
+          "clusters": 3
+        }
+      },
+      "gabriel_minus_gabriel_reference_plan": {
+        "per_task": {
+          "vl-email": 0.0,
+          "vl-isbn10": 0.0,
+          "vl-luhn": 0.0
+        },
+        "mean": 0.0,
+        "ci95_by_family": {
+          "low": 0.0,
+          "high": 0.0,
+          "clusters": 1
+        },
+        "ci95_by_task": {
+          "low": 0.0,
+          "high": 0.0,
+          "clusters": 3
+        }
+      }
+    },
+    "failures": [
+      {
+        "task_id": "vl-email",
+        "system": "gabriel_no_repair",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": 0,
+        "visible_exit": 1,
+        "out_of_scope": [],
+        "provider_statuses": [
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "vl-email",
+        "system": "provider_only",
+        "rep": 1,
+        "declared": true,
+        "verified": false,
+        "reason": "patch applied; declared done without verification",
+        "oracle_exit": 0,
+        "visible_exit": 1,
+        "out_of_scope": [],
+        "provider_statuses": [
+          "completed"
+        ]
+      }
+    ],
+    "claim_scope": "Scoped comparison on one synthetic task distribution with one provider; a difference here is not a general superiority claim. Costs include every attempt, including failed and timed-out runs."
+  },
+  "previously_seen": {
+    "schema": "gabriel.evaluation-report/1",
+    "protocol_frozen_digest": "b9a6e0d096ca285c129d9947e666d61b254fc7e59fc42bf4b35ba7e8fb3f9b4f",
+    "tasks": 9,
+    "families": 3,
+    "runs": 90,
+    "per_system": {
+      "provider_only": {
+        "runs": 18,
+        "verified_successes": 12,
+        "p_success": 0.6666666666666666,
+        "declared_successes": 18,
+        "false_completions": 6,
+        "p_false_completion": 0.3333333333333333,
+        "conditional_false_completion": 0.3333333333333333,
+        "conditional_denominator": 18,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 0,
+        "mean_model_requests": 1.0,
+        "total_model_requests": 18,
+        "mean_model_tokens": 720.0555555555555,
+        "total_model_tokens": 12961,
+        "mean_wall_ms": 2599.0,
+        "p_success_ci95_by_family": {
+          "low": 0.3333333333333333,
+          "high": 1.0,
+          "clusters": 3
+        },
+        "p_success_ci95_by_task": {
+          "low": 0.3333333333333333,
+          "high": 1.0,
+          "clusters": 9
+        },
+        "per_task": {
+          "co-chunk": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "co-dedupe": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "co-slugify": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "nl-leapyear": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "nl-median": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "nl-roman": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "tp-csvfields": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "tp-kvparse": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "tp-querystring": {
+            "p_success": 1.0,
+            "runs": 2
+          }
+        }
+      },
+      "simple_loop": {
+        "runs": 18,
+        "verified_successes": 16,
+        "p_success": 0.8888888888888888,
+        "declared_successes": 16,
+        "false_completions": 0,
+        "p_false_completion": 0.0,
+        "conditional_false_completion": 0.0,
+        "conditional_denominator": 16,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 0,
+        "mean_model_requests": 1.9444444444444444,
+        "total_model_requests": 35,
+        "mean_model_tokens": 2062.222222222222,
+        "total_model_tokens": 37120,
+        "mean_wall_ms": 5987.5,
+        "p_success_ci95_by_family": {
+          "low": 0.6666666666666666,
+          "high": 1.0,
+          "clusters": 3
+        },
+        "p_success_ci95_by_task": {
+          "low": 0.6666666666666666,
+          "high": 1.0,
+          "clusters": 9
+        },
+        "per_task": {
+          "co-chunk": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "co-dedupe": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "co-slugify": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "nl-leapyear": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "nl-median": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "nl-roman": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "tp-csvfields": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "tp-kvparse": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "tp-querystring": {
+            "p_success": 1.0,
+            "runs": 2
+          }
+        }
+      },
+      "gabriel": {
+        "runs": 18,
+        "verified_successes": 15,
+        "p_success": 0.8333333333333334,
+        "declared_successes": 15,
+        "false_completions": 0,
+        "p_false_completion": 0.0,
+        "conditional_false_completion": 0.0,
+        "conditional_denominator": 15,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 6,
+        "mean_model_requests": 3.0,
+        "total_model_requests": 54,
+        "mean_model_tokens": 3321.3333333333335,
+        "total_model_tokens": 59784,
+        "mean_wall_ms": 11881.444444444445,
+        "p_success_ci95_by_family": {
+          "low": 0.6666666666666666,
+          "high": 1.0,
+          "clusters": 3
+        },
+        "p_success_ci95_by_task": {
+          "low": 0.5555555555555556,
+          "high": 1.0,
+          "clusters": 9
+        },
+        "per_task": {
+          "co-chunk": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "co-dedupe": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "co-slugify": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "nl-leapyear": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "nl-median": {
+            "p_success": 0.5,
+            "runs": 2
+          },
+          "nl-roman": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "tp-csvfields": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "tp-kvparse": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "tp-querystring": {
+            "p_success": 1.0,
+            "runs": 2
+          }
+        }
+      },
+      "gabriel_no_repair": {
+        "runs": 18,
+        "verified_successes": 11,
+        "p_success": 0.6111111111111112,
+        "declared_successes": 11,
+        "false_completions": 0,
+        "p_false_completion": 0.0,
+        "conditional_false_completion": 0.0,
+        "conditional_denominator": 11,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 0,
+        "mean_model_requests": 2.0,
+        "total_model_requests": 36,
+        "mean_model_tokens": 1825.611111111111,
+        "total_model_tokens": 32861,
+        "mean_wall_ms": 8211.277777777777,
+        "p_success_ci95_by_family": {
+          "low": 0.3333333333333333,
+          "high": 0.8333333333333334,
+          "clusters": 3
+        },
+        "p_success_ci95_by_task": {
+          "low": 0.2777777777777778,
+          "high": 0.8888888888888888,
+          "clusters": 9
+        },
+        "per_task": {
+          "co-chunk": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "co-dedupe": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "co-slugify": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "nl-leapyear": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "nl-median": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "nl-roman": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "tp-csvfields": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "tp-kvparse": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "tp-querystring": {
+            "p_success": 0.5,
+            "runs": 2
+          }
+        }
+      },
+      "gabriel_reference_plan": {
+        "runs": 18,
+        "verified_successes": 15,
+        "p_success": 0.8333333333333334,
+        "declared_successes": 15,
+        "false_completions": 0,
+        "p_false_completion": 0.0,
+        "conditional_false_completion": 0.0,
+        "conditional_denominator": 15,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 6,
+        "mean_model_requests": 1.5,
+        "total_model_requests": 27,
+        "mean_model_tokens": 1419.0555555555557,
+        "total_model_tokens": 25543,
+        "mean_wall_ms": 6605.5,
+        "p_success_ci95_by_family": {
+          "low": 0.6666666666666666,
+          "high": 1.0,
+          "clusters": 3
+        },
+        "p_success_ci95_by_task": {
+          "low": 0.5555555555555556,
+          "high": 1.0,
+          "clusters": 9
+        },
+        "per_task": {
+          "co-chunk": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "co-dedupe": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "co-slugify": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "nl-leapyear": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "nl-median": {
+            "p_success": 0.5,
+            "runs": 2
+          },
+          "nl-roman": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "tp-csvfields": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "tp-kvparse": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "tp-querystring": {
+            "p_success": 1.0,
+            "runs": 2
+          }
+        }
+      }
+    },
+    "paired_differences": {
+      "gabriel_minus_provider_only": {
+        "per_task": {
+          "co-chunk": 0.0,
+          "co-dedupe": 0.0,
+          "co-slugify": 1.0,
+          "nl-leapyear": 0.0,
+          "nl-median": 0.5,
+          "nl-roman": 0.0,
+          "tp-csvfields": 0.0,
+          "tp-kvparse": 0.0,
+          "tp-querystring": 0.0
+        },
+        "mean": 0.16666666666666666,
+        "ci95_by_family": {
+          "low": 0.0,
+          "high": 0.3333333333333333,
+          "clusters": 3
+        },
+        "ci95_by_task": {
+          "low": 0.0,
+          "high": 0.3888888888888889,
+          "clusters": 9
+        }
+      },
+      "gabriel_minus_simple_loop": {
+        "per_task": {
+          "co-chunk": 0.0,
+          "co-dedupe": 0.0,
+          "co-slugify": 0.0,
+          "nl-leapyear": 0.0,
+          "nl-median": -0.5,
+          "nl-roman": 0.0,
+          "tp-csvfields": 0.0,
+          "tp-kvparse": 0.0,
+          "tp-querystring": 0.0
+        },
+        "mean": -0.05555555555555555,
+        "ci95_by_family": {
+          "low": -0.16666666666666666,
+          "high": 0.0,
+          "clusters": 3
+        },
+        "ci95_by_task": {
+          "low": -0.16666666666666666,
+          "high": 0.0,
+          "clusters": 9
+        }
+      },
+      "gabriel_minus_gabriel_no_repair": {
+        "per_task": {
+          "co-chunk": 0.0,
+          "co-dedupe": 0.0,
+          "co-slugify": 1.0,
+          "nl-leapyear": 0.0,
+          "nl-median": 0.5,
+          "nl-roman": 0.0,
+          "tp-csvfields": 0.0,
+          "tp-kvparse": 0.0,
+          "tp-querystring": 0.5
+        },
+        "mean": 0.2222222222222222,
+        "ci95_by_family": {
+          "low": 0.16666666666666666,
+          "high": 0.3333333333333333,
+          "clusters": 3
+        },
+        "ci95_by_task": {
+          "low": 0.0,
+          "high": 0.4444444444444444,
+          "clusters": 9
+        }
+      },
+      "gabriel_minus_gabriel_reference_plan": {
+        "per_task": {
+          "co-chunk": 0.0,
+          "co-dedupe": 0.0,
+          "co-slugify": 0.0,
+          "nl-leapyear": 0.0,
+          "nl-median": 0.0,
+          "nl-roman": 0.0,
+          "tp-csvfields": 0.0,
+          "tp-kvparse": 0.0,
+          "tp-querystring": 0.0
+        },
+        "mean": 0.0,
+        "ci95_by_family": {
+          "low": 0.0,
+          "high": 0.0,
+          "clusters": 3
+        },
+        "ci95_by_task": {
+          "low": 0.0,
+          "high": 0.0,
+          "clusters": 9
+        }
+      }
+    },
+    "failures": [
+      {
+        "task_id": "co-chunk",
+        "system": "gabriel",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": 1,
+        "visible_exit": 1,
+        "out_of_scope": [],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed",
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "co-chunk",
+        "system": "gabriel",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": 1,
+        "visible_exit": 1,
+        "out_of_scope": [],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed",
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "co-chunk",
+        "system": "gabriel_no_repair",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": 1,
+        "visible_exit": 1,
+        "out_of_scope": [],
+        "provider_statuses": [
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "co-chunk",
+        "system": "gabriel_no_repair",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": 1,
+        "visible_exit": 1,
+        "out_of_scope": [],
+        "provider_statuses": [
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "co-chunk",
+        "system": "gabriel_reference_plan",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": 1,
+        "visible_exit": 1,
+        "out_of_scope": [],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "co-chunk",
+        "system": "gabriel_reference_plan",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": 1,
+        "visible_exit": 1,
+        "out_of_scope": [],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "co-chunk",
+        "system": "provider_only",
+        "rep": 0,
+        "declared": true,
+        "verified": false,
+        "reason": "patch applied; declared done without verification",
+        "oracle_exit": 1,
+        "visible_exit": 1,
+        "out_of_scope": [],
+        "provider_statuses": [
+          "completed"
+        ]
+      },
+      {
+        "task_id": "co-chunk",
+        "system": "provider_only",
+        "rep": 1,
+        "declared": true,
+        "verified": false,
+        "reason": "patch applied; declared done without verification",
+        "oracle_exit": 1,
+        "visible_exit": 1,
+        "out_of_scope": [],
+        "provider_statuses": [
+          "completed"
+        ]
+      },
+      {
+        "task_id": "co-chunk",
+        "system": "simple_loop",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "budget exhausted without passing checks",
+        "oracle_exit": 1,
+        "visible_exit": 1,
+        "out_of_scope": [],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed",
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "co-chunk",
+        "system": "simple_loop",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "budget exhausted without passing checks",
+        "oracle_exit": 1,
+        "visible_exit": 1,
+        "out_of_scope": [],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed",
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "co-slugify",
+        "system": "gabriel_no_repair",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": 1,
+        "visible_exit": 1,
+        "out_of_scope": [],
+        "provider_statuses": [
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "co-slugify",
+        "system": "gabriel_no_repair",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": 1,
+        "visible_exit": 1,
+        "out_of_scope": [],
+        "provider_statuses": [
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "co-slugify",
+        "system": "provider_only",
+        "rep": 0,
+        "declared": true,
+        "verified": false,
+        "reason": "patch applied; declared done without verification",
+        "oracle_exit": 1,
+        "visible_exit": 1,
+        "out_of_scope": [],
+        "provider_statuses": [
+          "completed"
+        ]
+      },
+      {
+        "task_id": "co-slugify",
+        "system": "provider_only",
+        "rep": 1,
+        "declared": true,
+        "verified": false,
+        "reason": "patch applied; declared done without verification",
+        "oracle_exit": 1,
+        "visible_exit": 1,
+        "out_of_scope": [],
+        "provider_statuses": [
+          "completed"
+        ]
+      },
+      {
+        "task_id": "nl-median",
+        "system": "gabriel",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": 0,
+        "visible_exit": 1,
+        "out_of_scope": [],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed",
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "nl-median",
+        "system": "gabriel_no_repair",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": 0,
+        "visible_exit": 1,
+        "out_of_scope": [],
+        "provider_statuses": [
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "nl-median",
+        "system": "gabriel_no_repair",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": 0,
+        "visible_exit": 1,
+        "out_of_scope": [],
+        "provider_statuses": [
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "nl-median",
+        "system": "gabriel_reference_plan",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": 0,
+        "visible_exit": 1,
+        "out_of_scope": [],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "nl-median",
+        "system": "provider_only",
+        "rep": 0,
+        "declared": true,
+        "verified": false,
+        "reason": "patch applied; declared done without verification",
+        "oracle_exit": 0,
+        "visible_exit": 1,
+        "out_of_scope": [],
+        "provider_statuses": [
+          "completed"
+        ]
+      },
+      {
+        "task_id": "nl-median",
+        "system": "provider_only",
+        "rep": 1,
+        "declared": true,
+        "verified": false,
+        "reason": "patch applied; declared done without verification",
+        "oracle_exit": 0,
+        "visible_exit": 1,
+        "out_of_scope": [],
+        "provider_statuses": [
+          "completed"
+        ]
+      },
+      {
+        "task_id": "tp-querystring",
+        "system": "gabriel_no_repair",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": 1,
+        "visible_exit": 1,
+        "out_of_scope": [],
+        "provider_statuses": [
+          "completed",
+          "completed"
+        ]
+      }
+    ],
+    "claim_scope": "Scoped comparison on one synthetic task distribution with one provider; a difference here is not a general superiority claim. Costs include every attempt, including failed and timed-out runs."
+  }
+}

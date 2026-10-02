@@ -1,0 +1,25 @@
+diff --git a/src/csvfields.py b/src/csvfields.py
+index 4538d40..a31643e 100644
+--- a/src/csvfields.py
++++ b/src/csvfields.py
+@@ -1,6 +1,5 @@
+ """csvfields: split one CSV line into fields (RFC 4180 subset)."""
+ 
+-
+ def split_fields(line):
+     fields, current, quoted = [], [], False
+     i = 0
+@@ -8,7 +7,12 @@ def split_fields(line):
+         ch = line[i]
+         if quoted:
+             if ch == '"':
+-                quoted = False
++                # Check for escaped double quote
++                if i + 1 < len(line) and line[i + 1] == '"':
++                    current.append('"')
++                    i += 1  # skip the escaped quote
++                else:
++                    quoted = False
+             else:
+                 current.append(ch)
+         elif ch == '"':

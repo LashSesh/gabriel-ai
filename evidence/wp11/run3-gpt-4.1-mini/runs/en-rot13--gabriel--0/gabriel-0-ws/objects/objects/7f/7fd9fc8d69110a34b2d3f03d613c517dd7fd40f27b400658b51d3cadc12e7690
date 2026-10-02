@@ -1,0 +1,39 @@
+You are the worker role of Gabriel, a repository repair agent.
+Goal (verbatim user request):
+Fix the reported defect in rot13.rot13: uppercase ASCII letters must be rotated as well (A-Z stay uppercase); non-letters stay unchanged. Keep the public API and the existing tests.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- unit [software/test_passed] argv=python3 -m unittest discover -s tests independent=False
+- oracle [software/test_passed] argv=python3 -m unittest oracle_rot13 independent=True
+
+Allowed paths (changes elsewhere are rejected): src/
+Base commit: e6db615705cf1af619cc8d5a5d4dd5f7cb761220
+
+Files (path sha256 bytes):
+  README.md 820f65dc360479dfc40a99dcfc86133bd8071952d001522c3a96512227d5610f 62
+  src/rot13.py a87705ef3bd47ded35dcd45f3ac9caf5fb7080d6e1bb232081662cd3f087fff1 336
+  tests/test_rot13.py 0bb442dc8d94b8a14ad408f1a6714dbea7a8bad40e2c7aa0324e1e590f8527b0 454
+
+Source files in scope:
+=== src/rot13.py (sha256 a87705ef3bd47ded35dcd45f3ac9caf5fb7080d6e1bb232081662cd3f087fff1) ===
+"""rot13: letter rotation cipher."""
+
+
+def rot13(text):
+    """Rotate every ASCII letter by 13 places; other characters are unchanged."""
+    out = []
+    for ch in text:
+        if "a" <= ch <= "z":
+            out.append(chr((ord(ch) - ord("a") + 13) % 26 + ord("a")))
+        else:
+            out.append(ch)
+    return "".join(out)
+
+
+
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<relative path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest.
+For create expected_sha256 is null. For delete content is null. Do not touch oracle or test command files.
+Do not claim completion; the independent checks decide.

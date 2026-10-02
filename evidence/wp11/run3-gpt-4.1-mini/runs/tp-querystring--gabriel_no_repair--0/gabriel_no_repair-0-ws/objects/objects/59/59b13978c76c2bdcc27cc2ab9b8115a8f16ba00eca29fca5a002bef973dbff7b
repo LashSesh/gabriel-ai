@@ -1,0 +1,1 @@
+Fix the reported defect in querystring.parse_qs: a plus sign in a value must decode to a space, and a key without an equals sign must map to an empty string. Keep percent-decoding, the public API and the existing tests.

@@ -1,0 +1,77 @@
+You are the worker role of Gabriel, a repository repair agent.
+Goal (verbatim user request):
+Fix the reported defect in slug.slugify: runs of non-alphanumeric characters must collapse into a single hyphen and the result must not start or end with a hyphen. Keep the public API and the existing tests.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- unit [software/test_passed] argv=python3 -m unittest discover -s tests independent=False
+- oracle [software/test_passed] argv=python3 -m unittest oracle_slug independent=True
+
+Allowed paths (changes elsewhere are rejected): src/
+Base commit: 681b59c65826d174b5993a4d3c94e8ed50a47382
+
+Files (path sha256 bytes):
+  README.md bacff0e5d884b1ff8d2c7a9ede558e784315ba68064004d7438f7e44f846c2a8 61
+  src/slug.py d9b935daaa1d9715e2b1d01f610fc2ae54909070a54fe19b1230f8ae1a3ed1a4 402
+  tests/test_slug.py dc55c0bacf580d268996b00a73d6a2eed7962045e35f7a1ee54ffe32b2da9178 389
+
+Source files in scope:
+=== src/slug.py (sha256 d9b935daaa1d9715e2b1d01f610fc2ae54909070a54fe19b1230f8ae1a3ed1a4) ===
+import re
+
+def slugify(text):
+    """Convert text to a slug by collapsing runs of non-alphanumeric characters into a single hyphen,
+    and ensuring the result does not start or end with a hyphen."""
+    # Replace runs of non-alphanumeric characters with a single hyphen
+    slug = re.sub(r'[^a-zA-Z0-9]+', '-', text)
+    # Strip leading and trailing hyphens
+    slug = slug.strip('-')
+    return slug
+
+
+
+Previous attempt failed verification (round 2). Diagnostics:
+--- oracle ---
+{"check_id": "oracle", "evidence": {"argv": ["python3", "-m", "unittest", "oracle_slug"], "backend": "linux_namespace", "containment": true, "exit_code": 1, "witness_ref": {"bytes": 1021, "media_type": "application/json", "sha256": "b0e536aae4a6915d040731ad53885622f025e77c3395c1b654d3976ef7439b24"}}, "node_id": "verify-oracle", "outcome": "failed"}
+stdout:
+
+stderr:
+FF.
+======================================================================
+FAIL: test_collapses_runs (oracle_slug.OracleTests.test_collapses_runs)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/work/oracle_slug.py", line 9, in test_collapses_runs
+    self.assertEqual(slugify("Hello   World!"), "hello-world")
+AssertionError: 'Hello-World' != 'hello-world'
+- Hello-World
+? ^     ^
++ hello-world
+? ^     ^
+
+
+======================================================================
+FAIL: test_simple_still_works (oracle_slug.OracleTests.test_simple_still_works)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/work/oracle_slug.py", line 15, in test_simple_still_works
+    self.assertEqual(slugify("Hello World"), "hello-world")
+AssertionError: 'Hello-World' != 'hello-world'
+- Hello-World
+? ^     ^
++ hello-world
+? ^     ^
+
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+FAILED (failures=2)
+
+
+
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<relative path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest.
+For create expected_sha256 is null. For delete content is null. Do not touch oracle or test command files.
+Do not claim completion; the independent checks decide.

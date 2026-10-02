@@ -1,0 +1,18 @@
+"""luhn: Luhn checksum validation for identification numbers."""
+
+
+def is_valid(text):
+    digits = [int(ch) for ch in text if ch.isdigit()]
+    if len(digits) < 2:
+        return False
+    total = 0
+    # The Luhn algorithm doubles every second digit from the right (excluding the check digit)
+    # So we reverse the digits to process from right to left
+    digits.reverse()
+    for index, digit in enumerate(digits):
+        if index % 2 == 1:
+            digit *= 2
+            if digit > 9:
+                digit -= 9
+        total += digit
+    return total % 10 == 0

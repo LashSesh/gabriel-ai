@@ -1,0 +1,1 @@
+Changed return [] to return in empty data case to yield nothing (empty generator), and fixed ValueError raising by ensuring exception is raised for size <= 0. This preserves the generator API and yields the final partial chunk correctly.

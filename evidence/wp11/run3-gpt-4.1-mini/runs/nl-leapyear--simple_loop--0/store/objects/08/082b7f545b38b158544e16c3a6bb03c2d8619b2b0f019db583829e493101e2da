@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-EUcaOWnAdcaX377bNfYsjQYs7DzdP",
+  "object": "chat.completion",
+  "created": 1790966872,
+  "model": "gpt-4.1-mini-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"operations\": [{\"kind\": \"modify\", \"path\": \"src/calendarx.py\", \"expected_sha256\": \"8135221e9a6b6b707b52b180d1f0faf3fc974844be6b0b4b7b2e2238dbe1ba08\", \"content\": \"\\\"\\\"\\\"calendarx: Gregorian calendar helpers.\\\"\\\"\\\"\\n\\n\\ndef is_leap(year):\\n    return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)\\n\\n\\ndef days_in_month(year, month):\\n    if month == 2:\\n        return 29 if is_leap(year) else 28\\n    return 30 if month in (4, 6, 9, 11) else 31\\n\"}], \"rationale\": \"Fixed is_leap to correctly implement leap year rules: years divisible by 100 are not leap years unless divisible by 400. days_in_month uses is_leap unchanged, preserving public API and existing tests.\"}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 584,
+    "completion_tokens": 228,
+    "total_tokens": 812,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_90cae43228"
+}

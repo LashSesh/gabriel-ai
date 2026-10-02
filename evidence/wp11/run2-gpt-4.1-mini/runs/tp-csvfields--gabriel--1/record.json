@@ -1,0 +1,164 @@
+{
+  "task_id": "tp-csvfields",
+  "family": "text_parsing",
+  "system": "gabriel",
+  "rep": 1,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp11/run2-gpt-4.1-mini/runs/tp-csvfields--gabriel--1",
+  "outcome": {
+    "system": "gabriel",
+    "task_id": "tp-csvfields",
+    "family": "text_parsing",
+    "rep": 1,
+    "declared": true,
+    "declared_reason": "run state succeeded",
+    "model_requests": 2,
+    "model_tokens": 1944,
+    "wall_ms": 8478,
+    "provider_statuses": [
+      "completed",
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp11/run2-gpt-4.1-mini/runs/tp-csvfields--gabriel--1/gabriel-1-ws/worktrees/run-tp-csvfields-gabriel-1-1",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+      "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+      "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+      "review -> completed (result accepted; checks pending)",
+      "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,unit",
+      "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,oracle,unit",
+      "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,oracle,unit",
+      "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; node review verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: oracle,unit",
+      "verify-oracle -> completed (result accepted; checks pending)",
+      "assess verify-oracle/oracle -> passed: assessment passed recorded for oracle; node verify-oracle verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: unit",
+      "verify-unit -> completed (result accepted; checks pending)",
+      "assess verify-unit/unit -> passed: assessment passed recorded for unit; node verify-unit verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+    ],
+    "gabriel": {
+      "run_id": "run-tp-csvfields-gabriel-1-1",
+      "workspace": "/home/user/gabriel-ai/evidence/wp11/run2-gpt-4.1-mini/runs/tp-csvfields--gabriel--1/gabriel-1-ws",
+      "hold": null,
+      "replay": "passed",
+      "events": 41,
+      "assessments": [
+        {
+          "check_id": "baseline:unit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "baseline-unit"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "propose"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "apply"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "read-back"
+        },
+        {
+          "check_id": "scope",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "base-commit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "checks-intact",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "no-secrets",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "oracle",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "verify-oracle"
+        },
+        {
+          "check_id": "unit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "verify-unit"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "observe"
+        }
+      ]
+    },
+    "repairs_used": 0,
+    "plan_versions": 1
+  },
+  "verification": {
+    "verified": true,
+    "changed_paths": [
+      "src/csvfields.py"
+    ],
+    "out_of_scope_paths": [],
+    "visible": {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "start_failure": null,
+      "stdout_tail": "",
+      "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+      "backend": "linux_namespace"
+    },
+    "oracle": {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "oracle_csvfields"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "start_failure": null,
+      "stdout_tail": "",
+      "stderr_tail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n",
+      "backend": "linux_namespace"
+    },
+    "patch_sha256": "1230220c1519e57cac8b64ccd8772e9c588e88fd9863f41f40149ffc566db05a",
+    "patch_bytes": 1691,
+    "patch": "diff --git a/src/csvfields.py b/src/csvfields.py\nindex 4538d40..b7fd0c6 100644\n--- a/src/csvfields.py\n+++ b/src/csvfields.py\n@@ -1,23 +1,36 @@\n-\"\"\"csvfields: split one CSV line into fields (RFC 4180 subset).\"\"\"\n-\n-\n def split_fields(line):\n-    fields, current, quoted = [], [], False\n+    \"\"\"Split a CSV line into fields, handling quoted fields with commas and escaped quotes.\n+\n+    A doubled double-quote inside a quoted field is unescaped to a single double-quote.\n+    \"\"\"\n+    fields = []\n+    field = []\n+    in_quotes = False\n     i = 0\n-    while i < len(line):\n-        ch = line[i]\n-        if quoted:\n-            if ch == '\"':\n-                quoted = False\n+    length = len(line)\n+\n+    while i < length:\n+        c = line[i]\n+\n+        if in_quotes:\n+            if c == '\"':\n+                # Check if next char is also a double quote (escaped quote)\n+                if i + 1 < length and line[i + 1] == '\"':\n+                    field.append('\"')\n+                    i += 1  # skip the escaped quote\n+                else:\n+                    in_quotes = False\n             else:\n-                current.append(ch)\n-        elif ch == '\"':\n-            quoted = True\n-        elif ch == \",\":\n-            fields.append(\"\".join(current))\n-            current = []\n+                field.append(c)\n         else:\n-            current.append(ch)\n+            if c == ',':\n+                fields.append(''.join(field))\n+                field = []\n+            elif c == '\"':\n+                in_quotes = True\n+            else:\n+                field.append(c)\n         i += 1\n-    fields.append(\"\".join(current))\n+\n+    fields.append(''.join(field))\n     return fields\n",
+    "head_is_base": true
+  },
+  "V": 1,
+  "D": 1,
+  "false_completion": 0,
+  "unit_wall_ms": 9151
+}

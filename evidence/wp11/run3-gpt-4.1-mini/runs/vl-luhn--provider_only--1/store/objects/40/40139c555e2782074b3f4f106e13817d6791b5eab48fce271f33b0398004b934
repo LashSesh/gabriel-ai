@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-EUcc9Tp9EsOBLxxHKaE1MxAPfGtco",
+  "object": "chat.completion",
+  "created": 1790966981,
+  "model": "gpt-4.1-mini-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"operations\": [{\"kind\": \"modify\", \"path\": \"src/luhn.py\", \"expected_sha256\": \"daa56df7794aa8b4da213da4d9fdee84518147a03a7f4ee745a11a06b101c3b1\", \"content\": \"\\\"\\\"\\\"luhn: Luhn checksum validation for identification numbers.\\\"\\\"\\\"\\n\\n\\ndef is_valid(text):\\n    digits = [int(ch) for ch in text if ch.isdigit()]\\n    if len(digits) < 2:\\n        return False\\n    total = 0\\n    # Double every second digit from the right (excluding the check digit at the rightmost)\\n    # So we reverse the digits and enumerate\\n    for index, digit in enumerate(reversed(digits)):\\n        if index % 2 == 1:\\n            digit *= 2\\n            if digit > 9:\\n                digit -= 9\\n        total += digit\\n    return total % 10 == 0\\n\"}], \"rationale\": \"The original code doubled every second digit from the left, but the Luhn algorithm requires doubling every second digit from the right, excluding the check digit. Reversing the digits before processing fixes this while keeping the public API and existing tests unchanged.\"}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 623,
+    "completion_tokens": 278,
+    "total_tokens": 901,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_e2d3531b36"
+}

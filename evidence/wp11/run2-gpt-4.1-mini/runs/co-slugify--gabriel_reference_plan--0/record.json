@@ -1,0 +1,218 @@
+{
+  "task_id": "co-slugify",
+  "family": "collections",
+  "system": "gabriel_reference_plan",
+  "rep": 0,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp11/run2-gpt-4.1-mini/runs/co-slugify--gabriel_reference_plan--0",
+  "outcome": {
+    "system": "gabriel_reference_plan",
+    "task_id": "co-slugify",
+    "family": "collections",
+    "rep": 0,
+    "declared": true,
+    "declared_reason": "run state succeeded",
+    "model_requests": 2,
+    "model_tokens": 1726,
+    "wall_ms": 7629,
+    "provider_statuses": [
+      "completed",
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp11/run2-gpt-4.1-mini/runs/co-slugify--gabriel_reference_plan--0/gabriel_reference_plan-0-ws/worktrees/run-co-slugify-gabriel_reference_plan-0-1",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "assess apply-r1/output-valid -> passed: assessment passed recorded for output-valid; node apply-r1 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+      "read-back-r1 -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+      "assess read-back-r1/output-valid -> passed: assessment passed recorded for output-valid; node read-back-r1 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,scope,unit",
+      "review-r1 -> completed (result accepted; checks pending)",
+      "assess review-r1/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,oracle,unit",
+      "assess review-r1/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,oracle,unit",
+      "assess review-r1/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,oracle,unit",
+      "assess review-r1/no-secrets -> passed: assessment passed recorded for no-secrets; node review-r1 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: oracle,unit",
+      "verify-oracle-r1 -> completed (result accepted; checks pending)",
+      "assess verify-oracle-r1/oracle -> passed: assessment passed recorded for oracle; node verify-oracle-r1 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: unit",
+      "verify-unit-r1 -> completed (result accepted; checks pending)",
+      "assess verify-unit-r1/unit -> passed: assessment passed recorded for unit; node verify-unit-r1 verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+    ],
+    "gabriel": {
+      "run_id": "run-co-slugify-gabriel_reference_plan-0-1",
+      "workspace": "/home/user/gabriel-ai/evidence/wp11/run2-gpt-4.1-mini/runs/co-slugify--gabriel_reference_plan--0/gabriel_reference_plan-0-ws",
+      "hold": null,
+      "replay": "passed",
+      "events": 66,
+      "assessments": [
+        {
+          "check_id": "baseline:unit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "baseline-unit"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "propose"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "apply"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "read-back"
+        },
+        {
+          "check_id": "scope",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "base-commit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "checks-intact",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "no-secrets",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "oracle",
+          "outcome": "failed",
+          "eligible": true,
+          "node_id": "verify-oracle"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "observe-r1"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "propose-r1"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "apply-r1"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "read-back-r1"
+        },
+        {
+          "check_id": "scope",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "base-commit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "checks-intact",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "no-secrets",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "observe"
+        },
+        {
+          "check_id": "oracle",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "verify-oracle-r1"
+        },
+        {
+          "check_id": "unit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "verify-unit-r1"
+        }
+      ]
+    },
+    "repairs_used": 1,
+    "plan_versions": 2
+  },
+  "verification": {
+    "verified": true,
+    "changed_paths": [
+      "src/slug.py"
+    ],
+    "out_of_scope_paths": [],
+    "visible": {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "start_failure": null,
+      "stdout_tail": "",
+      "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+      "backend": "linux_namespace"
+    },
+    "oracle": {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "oracle_slug"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "start_failure": null,
+      "stdout_tail": "",
+      "stderr_tail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n",
+      "backend": "linux_namespace"
+    },
+    "patch_sha256": "6bee3253a33fa04d8ad3f072203fe0e6d820d23a3d61b0b58433afd251ee59d3",
+    "patch_bytes": 527,
+    "patch": "diff --git a/src/slug.py b/src/slug.py\nindex 551f8a1..4655367 100644\n--- a/src/slug.py\n+++ b/src/slug.py\n@@ -1,6 +1,11 @@\n-\"\"\"slug: URL slugs.\"\"\"\n import re\n \n \n-def slugify(text):\n-    return re.sub(r\"[^a-z0-9]\", \"-\", text.lower())\n+def slugify(text: str) -> str:\n+    # Lowercase the input text\n+    text = text.lower()\n+    # Replace runs of non-alphanumeric characters with a single hyphen\n+    slug = re.sub(r'[^a-z0-9]+', '-', text)\n+    # Remove leading and trailing hyphens\n+    slug = slug.strip('-')\n+    return slug\n",
+    "head_is_base": true
+  },
+  "V": 1,
+  "D": 1,
+  "false_completion": 0,
+  "unit_wall_ms": 8229
+}

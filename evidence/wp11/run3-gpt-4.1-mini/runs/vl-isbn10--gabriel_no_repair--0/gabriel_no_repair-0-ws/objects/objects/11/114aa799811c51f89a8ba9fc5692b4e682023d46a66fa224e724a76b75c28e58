@@ -1,0 +1,9 @@
+"""isbn: ISBN-10 validation."""
+
+
+def is_valid_isbn10(text):
+    digits = [ch for ch in text if ch != "-"]
+    if len(digits) != 10 or not all(ch.isdigit() for ch in digits):
+        return False
+    total = sum((10 - index) * int(ch) for index, ch in enumerate(digits))
+    return total % 11 == 0

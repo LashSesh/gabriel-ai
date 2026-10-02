@@ -1,0 +1,17 @@
+"""querystring: parse application/x-www-form-urlencoded strings."""
+from urllib.parse import unquote_plus
+
+
+def parse_qs(text):
+    result = {}
+    if not text:
+        return result
+    for part in text.split("&"):
+        if "=" not in part:
+            # key without '=' maps to empty string
+            key = unquote_plus(part)
+            result[key] = ""
+            continue
+        key, value = part.split("=", 1)
+        result[unquote_plus(key)] = unquote_plus(value)
+    return result

@@ -27,16 +27,21 @@ product acceptance.
 | Release gate | install, restore, identity manifest, known issues, license review | install and restore passed (`scripts/smoke.sh`, `evidence/wp12/`); license review **open** (no root license) |
 
 ## What the evaluation established (WP11)
-The frozen matched comparison (`evidence/wp11/run-gpt-4.1-mini/report.md`) shows that the
-verification machinery removes false completions: the provider-only baseline declared success
-in every run and was wrong in a third of them; Gabriel and the simple verification loop declared
-no false completion. It also shows that, on this task distribution and provider, Gabriel's
-verified success did not exceed the simple loop's; the failure analysis found a Gabriel defect
-(repair prompts lacked the retained test output) and a budget asymmetry (one planner request per
-plan version). A second frozen protocol (`evidence/wp11/protocol2.frozen.json`) evaluates the
-corrected runner and a reference-plan variant, reporting previously seen tasks and a new
-held-out family separately. A failed advantage gate does not erase the working G1 slice; it
-determines what stays optional.
+Three frozen matched comparisons were executed with gpt-4.1-mini (72, 120 and 150 runs;
+`docs/EVALUATION_PROTOCOL.md`, `evidence/wp11/`). Across all of them the verification machinery
+removed false completions: the provider-only baseline declared success in every run and was
+wrong in roughly a third of them, while Gabriel and the simple verification loop never declared
+an unverified success. No protocol measured a higher verified success for Gabriel than for the
+simple loop (paired means -0.17, -0.04 and 0.00), and none measured lower resource use at equal
+success: the planner request doubles model cost unless the reference plan is admitted directly,
+and the owner adds about 2.5 s of observation, journal and review per task. After the last fix
+every system, including the provider-only baseline, solved all 15 tasks on its first request, so
+the corpus is saturated for gpt-4.1-mini and a further protocol needs a harder frozen
+distribution before an advantage can be shown or refuted.
+Each run's failure analysis found a real defect that the next protocol fixed (repair prompts
+without the retained test output; one planner request per plan version; observations that did
+not retain the sources the worker edits), and the defective runs are retained unchanged. A
+failed advantage gate does not erase the working G1 slice; it determines what stays optional.
 
 ## Backup and restore (AT18)
 `gabriel backup` writes a coherent SQLite snapshot through the online backup API, every

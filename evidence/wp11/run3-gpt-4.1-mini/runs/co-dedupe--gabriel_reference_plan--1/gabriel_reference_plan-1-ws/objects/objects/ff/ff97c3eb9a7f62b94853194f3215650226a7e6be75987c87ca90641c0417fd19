@@ -1,0 +1,32 @@
+You are the worker role of Gabriel, a repository repair agent.
+Goal (verbatim user request):
+Fix the reported defect in seqtools.dedupe: duplicates must be removed while preserving the order of first occurrence. Keep the public API and the existing tests.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- unit [software/test_passed] argv=python3 -m unittest discover -s tests independent=False
+- oracle [software/test_passed] argv=python3 -m unittest oracle_seqtools independent=True
+
+Allowed paths (changes elsewhere are rejected): src/
+Base commit: 48878023afef75aac45ca2f11a8f3481045090a0
+
+Files (path sha256 bytes):
+  README.md 1c86eb85c24818ee02f1611d18e1b1679a20f70d33da551767b57e35541e20e2 65
+  src/seqtools.py 16ed7928b39478b9059b242cb4bb639a1b4a2e3e9d8bf6cc50cb98bf9c80a194 83
+  tests/test_seqtools.py b0c9ad00ad6d850f9b5789842d5d735f9a660e707f3640520e802c02656ea794 399
+
+Source files in scope:
+=== src/seqtools.py (sha256 16ed7928b39478b9059b242cb4bb639a1b4a2e3e9d8bf6cc50cb98bf9c80a194) ===
+"""seqtools: sequence helpers."""
+
+
+def dedupe(items):
+    return list(set(items))
+
+
+
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<relative path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest.
+For create expected_sha256 is null. For delete content is null. Do not touch oracle or test command files.
+Do not claim completion; the independent checks decide.

@@ -298,10 +298,37 @@ def _python_structure(root: fs.ContainedRoot, manifest: dict, allowed) -> dict:
     return structure
 
 
+RETAINED_SOURCE_SUFFIXES = (".py", ".md", ".txt", ".cfg", ".toml", ".ini")
+RETAINED_SOURCE_BUDGET = 2 << 20
+
+
+def _retain_sources(root: fs.ContainedRoot, manifest: dict, allowed, store) -> int:
+    """Retain the bytes of in-scope text files in the artifact store (the inputs a proposal
+    edits), bounded by ``RETAINED_SOURCE_BUDGET``. The manifest already carries every digest; the
+    worker prompt reads the content back from the store by that digest, so an observation
+    that does not retain a file leaves the model without it. Returns the retained byte count."""
+    retained = 0
+    for path, entry in sorted(manifest.items()):
+        if entry["kind"] != "file" or not path.endswith(RETAINED_SOURCE_SUFFIXES) or not fs.path_in_scope(path, allowed):
+            continue
+        if entry["bytes"] > MAX_FILE_BYTES or retained + entry["bytes"] > RETAINED_SOURCE_BUDGET:
+            continue
+        try:
+            data = root.read(path)
+        except GabrielError:
+            continue
+        if sha256_hex(data) != entry["sha256"]:
+            continue  # changed under us; the next observation sees the new identity
+        store.put(data, "text/plain; charset=utf-8")
+        retained += len(data)
+    return retained
+
+
 def take_snapshot(worktree, binding: dict, store, frontier: int) -> tuple[dict, dict]:
     manifest = worktree.manifest()
     with fs.ContainedRoot(str(worktree.path)) as root:
         structure = _python_structure(root, manifest, binding["allowed_paths"])
+        _retain_sources(root, manifest, binding["allowed_paths"], store)
     manifest_ref = store.put(dumps_utf8(manifest), "application/json; charset=utf-8")
     tests = sorted(p for p in manifest if re.search(r"(^|/)(test_[^/]*\.py|[^/]*_test\.py)$", p))
     snapshot = {"schema": "gabriel.software-snapshot/1", "worktree_id": "worktree", "base_commit": worktree.base_commit,
@@ -615,7 +642,7 @@ def build_prompt(task_goal: str, binding: dict, snapshot: dict, manifest: dict, 
         if entry["kind"] != "file":
             continue
         lines.append("  %s %s %d" % (path, entry["sha256"], entry["bytes"]))
-        if fs.path_in_scope(path, allowed) and path.endswith((".py", ".md", ".txt", ".cfg", ".toml", ".ini")):
+        if fs.path_in_scope(path, allowed) and path.endswith(RETAINED_SOURCE_SUFFIXES):
             sources.append((path, entry))
     lines += ["", "Source files in scope:"]
     for path, entry in sources:
@@ -623,6 +650,8 @@ def build_prompt(task_goal: str, binding: dict, snapshot: dict, manifest: dict, 
         try:
             data = store.get(ref)
         except GabrielError:
+            # Never omit a file silently: the model must know that it is editing unseen content.
+            lines += ["=== %s (sha256 %s) === [CONTENT NOT RETAINED: %d bytes not shown]" % (path, entry["sha256"], entry["bytes"]), ""]
             continue
         truncated = len(data) > budget
         shown = data[:max(budget, 0)]

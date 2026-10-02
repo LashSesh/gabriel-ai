@@ -1,0 +1,76 @@
+You are the worker role of Gabriel, a repository repair agent.
+Goal (verbatim user request):
+Fix the reported defect in emailcheck.is_valid_email: the domain part must contain a dot with at least one character before and after it, so 'a@b' is invalid while 'a@b.co' is valid. Keep the public API and the existing tests.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- unit [software/test_passed] argv=python3 -m unittest discover -s tests independent=False
+- oracle [software/test_passed] argv=python3 -m unittest oracle_emailcheck independent=True
+
+Allowed paths (changes elsewhere are rejected): src/
+Base commit: dce44279c943b992d385f32befe96c83a40cffcf
+
+Files (path sha256 bytes):
+  README.md 4c05aa3432a3ccabb70ce943775920513bb2e143a2fce72f04a3de4483c7d29e 67
+  src/emailcheck.py 741cb9ce06fe4d3cd9381e1d19082eccf68e1edac11656c95c7f6a5b28923186 676
+  tests/test_emailcheck.py cf028fa64f8631998ff77909357e311caf9ef599ffbbfb9c867e73cb12554677 461
+
+Source files in scope:
+=== src/emailcheck.py (sha256 741cb9ce06fe4d3cd9381e1d19082eccf68e1edac11656c95c7f6a5b28923186) ===
+def is_valid_email(email: str) -> bool:
+    """Check if the given email is valid.
+
+    A valid email has exactly one '@' symbol, and the domain part must contain a dot with at least one character before and after it.
+
+    Examples:
+    - 'a@b' is invalid
+    - 'a@b.co' is valid
+    """
+    if '@' not in email:
+        return False
+    local, domain = email.rsplit('@', 1)
+    if not local or not domain:
+        return False
+    # domain must contain a dot with at least one character before and after
+    if '.' not in domain:
+        return False
+    dot_index = domain.find('.')
+    if dot_index == 0 or dot_index == len(domain) - 1:
+        return False
+    return True
+
+
+
+Previous attempt failed verification (round 1). Diagnostics:
+--- unit ---
+exit 1
+F.
+======================================================================
+FAIL: test_invalid (test_emailcheck.EmailTests.test_invalid)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/work/tests/test_emailcheck.py", line 13, in test_invalid
+    self.assertFalse(is_valid_email("two@@example.com"))
+AssertionError: True is not false
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+FAILED (failures=1)
+
+
+--- oracle ---
+exit 0
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.000s
+
+OK
+
+
+
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<relative path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest.
+For create expected_sha256 is null. For delete content is null. Do not touch oracle or test command files.
+Do not claim completion; the independent checks decide.

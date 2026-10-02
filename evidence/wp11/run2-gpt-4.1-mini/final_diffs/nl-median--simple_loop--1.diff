@@ -1,0 +1,38 @@
+diff --git a/src/stats.py b/src/stats.py
+index fd99082..2820b13 100644
+--- a/src/stats.py
++++ b/src/stats.py
+@@ -1,15 +1,22 @@
+-"""stats: tiny descriptive statistics."""
++def median(data):
++    """Return the median of the data.
+ 
+-
+-def median(values):
+-    data = sorted(values)
++    For an even number of values, the median is the arithmetic mean of the two middle values (as a float).
++    """
+     if not data:
+-        raise ValueError("median of empty data")
+-    return data[len(data) // 2]
++        raise ValueError("median() arg is an empty sequence")
++    sorted_data = sorted(data)
++    n = len(sorted_data)
++    mid = n // 2
++    if n % 2 == 1:
++        return float(sorted_data[mid])
++    else:
++        return (float(sorted_data[mid - 1]) + float(sorted_data[mid])) / 2.0
+ 
++# Added mean function to fix import error in tests
+ 
+-def mean(values):
+-    values = list(values)
+-    if not values:
+-        raise ValueError("mean of empty data")
+-    return sum(values) / len(values)
++def mean(data):
++    """Return the arithmetic mean of the data."""
++    if not data:
++        raise ValueError("mean() arg is an empty sequence")
++    return sum(data) / float(len(data))

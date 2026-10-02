@@ -66,6 +66,34 @@ gabriel replay RUN_ID --workspace ./workspace --recorded
 `task run` returns 0 only for `succeeded`. Blocked and waiting runs report their hold
 (`reason_code`, `missing_prerequisite`, `wakeup_condition`) in `status`.
 
+## Backup, restore and release metadata
+```bash
+gabriel backup --workspace ./workspace --out ./backup            # SQLite online backup + referenced objects + anchor
+gabriel restore --from ./backup --workspace ./restored             # verifies objects, anchor and replay; no secret restored
+gabriel release-manifest --workspace ./workspace --out release.json --root .
+scripts/smoke.sh                                                  # clean venv install, doctor --selftest, task, export, audit, backup, restore
+```
+
+## Evaluation (WP11)
+```bash
+gabriel eval corpus-check                                          # executes the corpus invariants
+gabriel eval freeze --provider provider.json --out protocol.json --repetitions 2 --backend linux_namespace \
+    --systems provider_only,simple_loop,gabriel,gabriel_no_repair,gabriel_reference_plan \
+    --held-out-families <family never run before> --note "<provenance>"
+gabriel eval run --protocol protocol.json --out ./eval-run --provider provider.json --workers 3
+gabriel eval report --run ./eval-run
+scripts/eval_final_diffs.py ./eval-run                             # retain the verified worktree content per unit
+```
+`provider.json` is a provider spec such as `{"kind": "openai_compat", "model": "gpt-4.1-mini",
+"credential_ref": "env:OPENAI_API_KEY", "temperature_milli": 0}`. The run refuses a protocol
+whose digest or corpus changed after freezing. See `docs/EVALUATION_PROTOCOL.md`.
+
+## Evidence manifests
+```bash
+GABRIEL_CONTAINMENT_TESTS=1 python -m pytest tests -vv -rs | tee evidence/test_results.txt
+scripts/evidence_manifest.py                                       # evidence/test_run.json, evidence/work_packages.json
+```
+
 ## Privileged self-tests
 ```bash
 GABRIEL_CONTAINMENT_TESTS=1 python -m pytest -q -m containment

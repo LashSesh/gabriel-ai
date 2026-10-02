@@ -1,0 +1,1 @@
+Modified the chunk function to include the final partial chunk when the length is not a multiple of the chunk size, and to return one chunk if the size is larger than the input, by changing the range stop condition to len(items) instead of len(items) - size + 1.

@@ -1,0 +1,35 @@
+diff --git a/src/chunking.py b/src/chunking.py
+index 37221a6..df6f282 100644
+--- a/src/chunking.py
++++ b/src/chunking.py
+@@ -1,7 +1,27 @@
+-"""chunking: split sequences into fixed-size chunks."""
++def chunk(data, size):
++    """Yield successive chunks from data of given size.
+ 
++    If size is larger than the length of data, yield one chunk containing all data.
++    The final chunk may be smaller than size if data length is not a multiple of size.
+ 
+-def chunk(items, size):
++    Args:
++        data (bytes or str or list): The input data to chunk.
++        size (int): The chunk size.
++
++    Yields:
++        chunks of data of length size, except possibly the last one.
++    """
+     if size <= 0:
+         raise ValueError("size must be positive")
+-    return [items[i:i + size] for i in range(0, len(items) - size + 1, size)]
++
++    length = len(data)
++    if length == 0:
++        return
++
++    # If size is larger than length, yield one chunk with all data
++    if size >= length:
++        yield data
++        return
++
++    for start in range(0, length, size):
++        yield data[start:start + size]

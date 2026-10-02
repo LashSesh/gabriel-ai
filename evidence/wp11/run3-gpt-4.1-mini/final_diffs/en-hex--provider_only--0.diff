@@ -1,0 +1,13 @@
+diff --git a/src/hexcodec.py b/src/hexcodec.py
+index f880b67..91179e5 100644
+--- a/src/hexcodec.py
++++ b/src/hexcodec.py
+@@ -3,7 +3,7 @@
+ 
+ def to_hex(data):
+     """Return the lowercase hexadecimal text of ``data``."""
+-    return "".join("%x" % b for b in data)
++    return "".join("%02x" % b for b in data)
+ 
+ 
+ def from_hex(text):

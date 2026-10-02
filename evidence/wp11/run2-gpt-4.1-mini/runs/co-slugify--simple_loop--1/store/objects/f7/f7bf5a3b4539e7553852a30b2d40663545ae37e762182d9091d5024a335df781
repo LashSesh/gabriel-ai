@@ -1,0 +1,108 @@
+You are the worker role of Gabriel, a repository repair agent.
+Goal (verbatim user request):
+Fix the reported defect in slug.slugify: runs of non-alphanumeric characters must collapse into a single hyphen and the result must not start or end with a hyphen. Keep the public API and the existing tests.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- unit [software/test_passed] argv=python3 -m unittest discover -s tests independent=False
+- oracle [software/test_passed] argv=python3 -m unittest oracle_slug independent=True
+
+Allowed paths (changes elsewhere are rejected): src/
+Base commit: f32a7bf4758cbc5bc0c95d8c413796f29354902a
+
+Files (path sha256 bytes):
+  README.md bacff0e5d884b1ff8d2c7a9ede558e784315ba68064004d7438f7e44f846c2a8 61
+  src/slug.py ca48adec3235135c40dc72c9576d8f8113f1dd872955eb92242e45eb62bf6dd8 403
+  tests/test_slug.py dc55c0bacf580d268996b00a73d6a2eed7962045e35f7a1ee54ffe32b2da9178 389
+
+Source files in scope:
+=== src/slug.py (sha256 ca48adec3235135c40dc72c9576d8f8113f1dd872955eb92242e45eb62bf6dd8) ===
+import re
+
+
+def slugify(text):
+    """Convert text to a slug by collapsing runs of non-alphanumeric characters into a single hyphen,
+    and ensuring the result does not start or end with a hyphen."""
+    # Replace runs of non-alphanumeric characters with a single hyphen
+    slug = re.sub(r'[^a-zA-Z0-9]+', '-', text)
+    # Strip leading and trailing hyphens
+    slug = slug.strip('-')
+    return slug
+
+
+
+Previous attempt failed verification (round 1). Diagnostics:
+--- unit ---
+exit 1
+FF
+======================================================================
+FAIL: test_lowercase (test_slug.SlugifyTests.test_lowercase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/work/tests/test_slug.py", line 12, in test_lowercase
+    self.assertEqual(slugify("ABC"), "abc")
+AssertionError: 'ABC' != 'abc'
+- ABC
++ abc
+
+
+======================================================================
+FAIL: test_simple (test_slug.SlugifyTests.test_simple)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/work/tests/test_slug.py", line 9, in test_simple
+    self.assertEqual(slugify("Hello World"), "hello-world")
+AssertionError: 'Hello-World' != 'hello-world'
+- Hello-World
+? ^     ^
++ hello-world
+? ^     ^
+
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.001s
+
+FAILED (failures=2)
+
+
+--- oracle ---
+exit 1
+FF.
+======================================================================
+FAIL: test_collapses_runs (oracle_slug.OracleTests.test_collapses_runs)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/work/oracle_slug.py", line 9, in test_collapses_runs
+    self.assertEqual(slugify("Hello   World!"), "hello-world")
+AssertionError: 'Hello-World' != 'hello-world'
+- Hello-World
+? ^     ^
++ hello-world
+? ^     ^
+
+
+======================================================================
+FAIL: test_simple_still_works (oracle_slug.OracleTests.test_simple_still_works)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/work/oracle_slug.py", line 15, in test_simple_still_works
+    self.assertEqual(slugify("Hello World"), "hello-world")
+AssertionError: 'Hello-World' != 'hello-world'
+- Hello-World
+? ^     ^
++ hello-world
+? ^     ^
+
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+FAILED (failures=2)
+
+
+
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<relative path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest.
+For create expected_sha256 is null. For delete content is null. Do not touch oracle or test command files.
+Do not claim completion; the independent checks decide.

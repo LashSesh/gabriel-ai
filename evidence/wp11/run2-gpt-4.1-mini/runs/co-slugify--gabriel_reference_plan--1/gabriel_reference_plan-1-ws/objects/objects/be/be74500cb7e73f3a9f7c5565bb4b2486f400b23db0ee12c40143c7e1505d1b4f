@@ -1,0 +1,12 @@
+import re
+
+def slugify(text):
+    """Convert text to a slug by collapsing runs of non-alphanumeric characters into a single hyphen,
+    and ensuring the result does not start or end with a hyphen, and the slug is lowercase."""
+    # Replace runs of non-alphanumeric characters with a single hyphen
+    slug = re.sub(r'[^a-zA-Z0-9]+', '-', text)
+    # Strip leading and trailing hyphens
+    slug = slug.strip('-')
+    # Convert to lowercase
+    slug = slug.lower()
+    return slug

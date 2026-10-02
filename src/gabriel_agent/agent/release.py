@@ -79,11 +79,13 @@ def release_manifest(root: Path, *, evidence: dict | None = None, python: str = 
         "license": _license_status(root),
         "acceptance_evidence": evidence or {},
         "gates": {"G0": "holds: inherited runtime checks rerun (evidence/wp01)",
-                  "G1": "established on the release host for one provider and one synthetic task family (evidence/live, evidence/wp11, evidence/wp12)",
+                  "G1": "established on the release host for one provider and fifteen synthetic repository-repair tasks in five families "
+                        "(evidence/live, evidence/wp11, evidence/wp12); advantage gate (AT17) executed under three frozen protocols and not passed",
                   "G2": "not established: no document or numerical domain pack (WP09/WP10 not started)",
                   "G3": "not established: no evaluated adaptive policy"},
         "known_issues": ["root license unresolved", "catalog fingerprint change requires a new workspace (no migration command)",
-                         "single-host, single-user deployment only"],
+                         "single-host, single-user deployment only",
+                         "advantage over a simple verification loop not shown; the evaluation corpus is saturated for gpt-4.1-mini"],
     }
     return manifest
 

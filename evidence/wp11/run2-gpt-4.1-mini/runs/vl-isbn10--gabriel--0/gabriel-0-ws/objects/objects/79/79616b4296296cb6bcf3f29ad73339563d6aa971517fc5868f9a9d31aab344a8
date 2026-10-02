@@ -1,0 +1,35 @@
+def is_valid_isbn10(isbn):
+    """Check if the given string is a valid ISBN-10.
+
+    An ISBN-10 is valid if it consists of 10 characters, where the first 9 are digits,
+    and the last one is either a digit or 'X' (which represents 10).
+    The checksum is computed by multiplying each digit by its position (1 to 10) and
+    summing these products. The sum must be divisible by 11.
+
+    Args:
+        isbn (str): The ISBN-10 string to validate.
+
+    Returns:
+        bool: True if valid, False otherwise.
+    """
+    # Remove hyphens and spaces
+    isbn = isbn.replace('-', '').replace(' ', '')
+
+    if len(isbn) != 10:
+        return False
+
+    total = 0
+    for i in range(9):
+        if not isbn[i].isdigit():
+            return False
+        total += (i + 1) * int(isbn[i])
+
+    # Check last character
+    if isbn[9] == 'X':
+        total += 10 * 10
+    elif isbn[9].isdigit():
+        total += 10 * int(isbn[9])
+    else:
+        return False
+
+    return total % 11 == 0

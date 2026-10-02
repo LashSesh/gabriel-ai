@@ -1,0 +1,20 @@
+diff --git a/src/slug.py b/src/slug.py
+index 551f8a1..9e21032 100644
+--- a/src/slug.py
++++ b/src/slug.py
+@@ -1,6 +1,12 @@
+-"""slug: URL slugs."""
+ import re
+ 
+-
+ def slugify(text):
+-    return re.sub(r"[^a-z0-9]", "-", text.lower())
++    """Convert text to a slug by collapsing runs of non-alphanumeric characters into a single hyphen,
++    converting to lowercase, and ensuring the result does not start or end with a hyphen."""
++    # Replace runs of non-alphanumeric characters with a single hyphen
++    slug = re.sub(r'[^a-zA-Z0-9]+', '-', text)
++    # Strip leading and trailing hyphens
++    slug = slug.strip('-')
++    # Convert to lowercase
++    slug = slug.lower()
++    return slug

@@ -1,0 +1,34 @@
+diff --git a/src/emailcheck.py b/src/emailcheck.py
+index c957300..3def775 100644
+--- a/src/emailcheck.py
++++ b/src/emailcheck.py
+@@ -1,8 +1,24 @@
+-"""emailcheck: minimal e-mail address validation."""
++def is_valid_email(email: str) -> bool:
++    """Check if the email is valid.
+ 
++    The email must have exactly one '@' character.
++    The domain part must contain a dot with at least one character before and after it.
+ 
+-def is_valid_email(text):
+-    if text.count("@") != 1:
++    Args:
++        email (str): The email address to validate.
++
++    Returns:
++        bool: True if valid, False otherwise.
++    """
++    if '@' not in email or email.count('@') != 1:
++        return False
++    local, domain = email.split('@')
++    if not local or not domain:
++        return False
++    # Check domain contains a dot with at least one character before and after
++    if '.' not in domain:
++        return False
++    dot_index = domain.find('.')
++    if dot_index == 0 or dot_index == len(domain) - 1:
+         return False
+-    local, domain = text.split("@")
+-    return bool(local) and bool(domain) and " " not in text
++    return True

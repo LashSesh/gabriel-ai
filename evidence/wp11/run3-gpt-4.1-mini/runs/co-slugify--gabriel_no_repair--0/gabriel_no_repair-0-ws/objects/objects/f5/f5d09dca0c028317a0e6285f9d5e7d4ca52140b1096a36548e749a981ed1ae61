@@ -1,0 +1,15 @@
+diff --git a/src/slug.py b/src/slug.py
+index 551f8a1..9543ff8 100644
+--- a/src/slug.py
++++ b/src/slug.py
+@@ -3,4 +3,9 @@ import re
+ 
+ 
+ def slugify(text):
+-    return re.sub(r"[^a-z0-9]", "-", text.lower())
++    # Lowercase the text
++    text = text.lower()
++    # Replace runs of non-alphanumeric characters with a single hyphen
++    text = re.sub(r"[^a-z0-9]+", "-", text)
++    # Strip leading and trailing hyphens
++    return text.strip('-')

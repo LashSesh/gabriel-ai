@@ -1,0 +1,10 @@
+diff --git a/src/chunking.py b/src/chunking.py
+index 37221a6..83b3d09 100644
+--- a/src/chunking.py
++++ b/src/chunking.py
+@@ -4,4 +4,4 @@
+ def chunk(items, size):
+     if size <= 0:
+         raise ValueError("size must be positive")
+-    return [items[i:i + size] for i in range(0, len(items) - size + 1, size)]
++    return [items[i:i + size] for i in range(0, len(items), size)]

@@ -1,0 +1,24 @@
+You are the worker role of Gabriel, a repository repair agent.
+Goal (verbatim user request):
+Fix the reported defect in isbn.is_valid_isbn10: the check digit may be the letter X (value 10) in the last position, so '0-306-40615-2' and '0-8044-2957-X' are both valid. Keep the public API and the existing tests.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- unit [software/test_passed] argv=python3 -m unittest discover -s tests independent=False
+- oracle [software/test_passed] argv=python3 -m unittest oracle_isbn independent=True
+
+Allowed paths (changes elsewhere are rejected): src/
+Base commit: 6f0b76147c954d2272af9975d564da8f70d4d710
+
+Files (path sha256 bytes):
+  README.md 4928a2e077b5d91e81cd73c1425eeef587a24a04f13f4f9bb66469aba1c3c04f 61
+  src/isbn.py 114aa799811c51f89a8ba9fc5692b4e682023d46a66fa224e724a76b75c28e58 298
+  tests/test_isbn.py 9c3939a7e5cc98c1e9cfdc9af720958a6921e497736e67efa980fa0c094e69f8 455
+
+Source files in scope:
+
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<relative path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest.
+For create expected_sha256 is null. For delete content is null. Do not touch oracle or test command files.
+Do not claim completion; the independent checks decide.
