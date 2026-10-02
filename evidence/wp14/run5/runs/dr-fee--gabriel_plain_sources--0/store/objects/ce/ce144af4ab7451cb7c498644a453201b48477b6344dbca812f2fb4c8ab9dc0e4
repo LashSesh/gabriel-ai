@@ -1,0 +1,39 @@
+{
+ "claims": [
+  {
+   "path": "doc/fees.md",
+   "must_contain": [
+    "150 EUR",
+    "EUR 150",
+    "150 euro",
+    "150 Euro"
+   ],
+   "cited_source_id": "fees",
+   "quote_must_include": "150 EUR",
+   "cited_source_revision": 2
+  },
+  {
+   "path": "doc/fees.md",
+   "must_contain": [
+    "14 days",
+    "fourteen (14) days",
+    "(14) days",
+    "fourteen days",
+    "14-day"
+   ],
+   "cited_source_id": "terms",
+   "quote_must_include": "fourteen (14) days"
+  }
+ ],
+ "forbidden": [
+  {
+   "path": "doc/fees.md",
+   "must_not_contain": [
+    "120 EUR",
+    "EUR 120",
+    "120 euro",
+    "120 Euro"
+   ]
+  }
+ ]
+}

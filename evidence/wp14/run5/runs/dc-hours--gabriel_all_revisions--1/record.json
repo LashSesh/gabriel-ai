@@ -1,0 +1,231 @@
+{
+  "task_id": "dc-hours",
+  "family": "conflict",
+  "system": "gabriel_all_revisions",
+  "rep": 1,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp14/run5/runs/dc-hours--gabriel_all_revisions--1",
+  "domain": "document",
+  "outcome": {
+    "system": "gabriel_all_revisions",
+    "task_id": "dc-hours",
+    "family": "conflict",
+    "rep": 1,
+    "declared": false,
+    "declared_reason": "run state failed",
+    "model_requests": 6,
+    "model_tokens": 8577,
+    "wall_ms": 22514,
+    "provider_statuses": [
+      "completed",
+      "invalid_output",
+      "invalid_output",
+      "invalid_output",
+      "completed",
+      "invalid_output"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp14/run5/runs/dc-hours--gabriel_all_revisions--1/gabriel_all_revisions-1-ws/worktrees/run-dc-hours-gabriel_all_revisions-1-1",
+    "timed_out": true,
+    "error": null,
+    "log": [
+      "reference plan v3 accepted: ['plan version 3 accepted with 5 nodes']",
+      "observe-r2 -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+      "assess observe-r2/output-valid -> passed: assessment passed recorded for output-valid; node observe-r2 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+      "propose-r2 -> invalid_output (attempt invalid_output; node pending)",
+      "propose-r2 -> invalid_output (attempt invalid_output; node pending)",
+      "propose-r2 -> invalid_output (attempt invalid_output; node failed)",
+      "router repair: rule: repair within the admitted limits",
+      "replanned after failure (failed nodes: propose-r2(invalid_output)): plan version 4 accepted with 5 nodes",
+      "observe-r3 -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+      "assess observe-r3/output-valid -> passed: assessment passed recorded for output-valid; node observe-r3 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+      "propose-r3 -> invalid_output (attempt invalid_output; node pending)",
+      "hold budget_exhausted -> failed: cannot issue propose-r3: reservation exceeds ceiling in model_requests"
+    ],
+    "gabriel": {
+      "run_id": "run-dc-hours-gabriel_all_revisions-1-1",
+      "workspace": "/home/user/gabriel-ai/evidence/wp14/run5/runs/dc-hours--gabriel_all_revisions--1/gabriel_all_revisions-1-ws",
+      "hold": {
+        "from_state": "running",
+        "missing_prerequisite": null,
+        "reason_code": "budget_exhausted",
+        "ref": {
+          "bytes": 279,
+          "media_type": "application/json",
+          "sha256": "75e5f9c0b19ac8aa712d33f51102f822b59f2bc222b76b51a9eb4c5aa8399209"
+        },
+        "target_state": "failed",
+        "wakeup_condition": null
+      },
+      "replay": "passed",
+      "events": 77,
+      "assessments": [
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "propose"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "apply"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "read-back"
+        },
+        {
+          "check_id": "scope",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "base-commit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "checks-intact",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "no-secrets",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "citations",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "claims",
+          "outcome": "failed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "observe-r1"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "propose-r1"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "apply-r1"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "read-back-r1"
+        },
+        {
+          "check_id": "scope",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "base-commit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "checks-intact",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "no-secrets",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "citations",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "claims",
+          "outcome": "failed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "observe-r2"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "observe"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "observe-r3"
+        }
+      ]
+    },
+    "repairs_used": 2,
+    "plan_versions": 4
+  },
+  "verification": {
+    "verified": false,
+    "problems": [
+      "forbidden statement present in doc/hours.md: 10:00 to 16:00"
+    ],
+    "changed_paths": [
+      "doc/hours.md"
+    ],
+    "out_of_scope_paths": [],
+    "citations": 3,
+    "claims": [
+      {
+        "claim": "09:00 to 15:00 | 9:00 to 15:00 | 09:00-15:00 | 9:00-15:00 | 09:00 and 15:00 | 9:00 and 15:00",
+        "present": true,
+        "cited_from_expected_source": true
+      }
+    ],
+    "targets": {
+      "doc/hours.md": "# Core hours\n\nCore hours are set from 09:00 to 15:00 on working days, effective 1 October 2026[[cite:obs-ac340d00aa568bb7393e4ba8b8f98afe8c8b7e5f \"Core hours are set from 09:00 to 15:00 on working days, effective 1 October 2026.\"]]. Where the board resolution of 15 September 2026 and the staff handbook differ, the resolution applies[[cite:obs-ac340d00aa568bb7393e4ba8b8f98afe8c8b7e5f \"# Board resolution of 15 September 2026\"]]. The staff handbook states core hours are from 10:00 to 16:00 on working days[[cite:obs-43e04700f165a30e5870a60b8fbf2b8dafe85aad \"Core hours are from 10:00 to 16:00 on working days.\"]].\n"
+    },
+    "patch_sha256": "5502c286edce1a8cca71e7e727cfa44e4133fd07030776f445bb370e29187274",
+    "patch_bytes": 763,
+    "patch": "diff --git a/doc/hours.md b/doc/hours.md\nindex fe9489b..83e00e2 100644\n--- a/doc/hours.md\n+++ b/doc/hours.md\n@@ -1,3 +1,3 @@\n # Core hours\n \n-(to be completed)\n+Core hours are set from 09:00 to 15:00 on working days, effective 1 October 2026[[cite:obs-ac340d00aa568bb7393e4ba8b8f98afe8c8b7e5f \"Core hours are set from 09:00 to 15:00 on working days, effective 1 October 2026.\"]]. Where the board resolution of 15 September 2026 and the staff handbook differ, the resolution applies[[cite:obs-ac340d00aa568bb7393e4ba8b8f98afe8c8b7e5f \"# Board resolution of 15 September 2026\"]]. The staff handbook states core hours are from 10:00 to 16:00 on working days[[cite:obs-43e04700f165a30e5870a60b8fbf2b8dafe85aad \"Core hours are from 10:00 to 16:00 on working days.\"]].\n",
+    "head_is_base": true,
+    "marker": "eval-verify-dc-hours-gabriel_all_revisions-1"
+  },
+  "V": 0,
+  "D": 0,
+  "false_completion": 0,
+  "unit_wall_ms": 22813
+}

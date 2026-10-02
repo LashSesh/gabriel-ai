@@ -1,0 +1,52 @@
+{
+  "task_id": "nr-five",
+  "family": "resample",
+  "system": "provider_only",
+  "rep": 1,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp14/run5/runs/nr-five--provider_only--1",
+  "domain": "numerical",
+  "outcome": {
+    "system": "provider_only",
+    "task_id": "nr-five",
+    "family": "resample",
+    "rep": 1,
+    "declared": true,
+    "declared_reason": "deliverable produced; declared done without verification",
+    "model_requests": 1,
+    "model_tokens": 533,
+    "wall_ms": 1252,
+    "provider_statuses": [
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp14/run5/runs/nr-five--provider_only--1/worktrees/provider_only-1",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "deliverable produced; declared done without verification"
+    ],
+    "gabriel": null,
+    "repairs_used": 0,
+    "plan_versions": 0
+  },
+  "verification": {
+    "verified": true,
+    "problems": [],
+    "changed_paths": [
+      "out/resampled.json"
+    ],
+    "out_of_scope_paths": [],
+    "output": "{\"kind\":\"series\",\"time_basis\":\"unix_ms\",\"units\":\"degC\",\"values\":[[0,15.0],[5000,40.0],[10000,8.0],[20000,1.0]]}",
+    "patch_sha256": "a79fb9f71a015fb49fa506679a9e2eb73a930b348e2b9e22e9a8b9c970b592e1",
+    "patch_bytes": 291,
+    "patch": "diff --git a/out/resampled.json b/out/resampled.json\nnew file mode 100644\nindex 0000000..e33bdc7\n--- /dev/null\n+++ b/out/resampled.json\n@@ -0,0 +1 @@\n+{\"kind\":\"series\",\"time_basis\":\"unix_ms\",\"units\":\"degC\",\"values\":[[0,15.0],[5000,40.0],[10000,8.0],[20000,1.0]]}\n\\ No newline at end of file\n",
+    "head_is_base": true,
+    "marker": "eval-verify-nr-five-provider_only-1"
+  },
+  "V": 1,
+  "D": 1,
+  "false_completion": 0,
+  "unit_wall_ms": 1437
+}

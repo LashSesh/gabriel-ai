@@ -1,0 +1,46 @@
+You are the worker role of Gabriel for a source-grounded document amendment.
+Goal (verbatim user request):
+Amend doc/records_summary.md so that it states the retention period for financial records and the backup frequency. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- citations [document/citations_bound] independent=True
+- claims [document/required_claims] independent=True
+
+Editable paths (changes elsewhere are rejected; sources are never editable): doc/
+Base commit: 1d40043f449967ca65825e8ac2f91704ae5f28f3
+
+Target documents (path sha256 bytes):
+  doc/records_summary.md 11f9e13d7420db398ad2d718626b04a8d3f2bcde844f3a4fb340523c8bda27eb 98
+=== doc/records_summary.md (sha256 11f9e13d7420db398ad2d718626b04a8d3f2bcde844f3a4fb340523c8bda27eb) ===
+# Records summary
+
+(to be completed: retention period for financial records and backup frequency)
+
+
+
+Sources (cite them by observation id; quotes must be exact substrings of the cited source):
+=== source policy revision 1 observation obs-58f4b81e09f700e384c8b0ac3291406ff4e6da14 (119 bytes) ===
+# Records policy
+
+## Retention
+
+Financial records are retained for five (5) years after the end of the financial year.
+
+
+=== source audit revision 1 observation obs-8cfac417b6a326a45632c0d33754176ecb15dce9 (98 bytes) ===
+# Audit note
+
+## Backups
+
+Backups of the records system are taken weekly and verified by restore.
+
+
+Observation obs-c4872ecfdcedcb0cca1e72dd14df76d55cbd2e12 is not available: revoked
+
+Every statement you add must be followed by a citation marker of the form
+[[cite:<observation id> "exact quote from that source"]] where the quote is copied verbatim from the cited source.
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<target path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest. For create expected_sha256 is null.
+Do not touch sources or oracle files. Do not claim completion; the independent checks decide.

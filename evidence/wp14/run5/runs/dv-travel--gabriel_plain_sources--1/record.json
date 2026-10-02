@@ -1,0 +1,262 @@
+{
+  "task_id": "dv-travel",
+  "family": "revoked",
+  "system": "gabriel_plain_sources",
+  "rep": 1,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp14/run5/runs/dv-travel--gabriel_plain_sources--1",
+  "domain": "document",
+  "outcome": {
+    "system": "gabriel_plain_sources",
+    "task_id": "dv-travel",
+    "family": "revoked",
+    "rep": 1,
+    "declared": true,
+    "declared_reason": "run state succeeded",
+    "model_requests": 3,
+    "model_tokens": 3410,
+    "wall_ms": 8542,
+    "provider_statuses": [
+      "completed",
+      "completed",
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp14/run5/runs/dv-travel--gabriel_plain_sources--1/gabriel_plain_sources-1-ws/worktrees/run-dv-travel-gabriel_plain_sources-1-1",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "assess propose-r2/output-valid -> passed: assessment passed recorded for output-valid; node propose-r2 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+      "apply-r2 -> completed (result accepted; checks pending)",
+      "assess apply-r2/output-valid -> passed: assessment passed recorded for output-valid; node apply-r2 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+      "read-back-r2 -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+      "assess read-back-r2/output-valid -> passed: assessment passed recorded for output-valid; node read-back-r2 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+      "review-r2 -> completed (result accepted; checks pending)",
+      "assess review-r2/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets",
+      "assess review-r2/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,citations,claims,no-secrets",
+      "assess review-r2/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: citations,claims,no-secrets",
+      "assess review-r2/no-secrets -> passed: assessment passed recorded for no-secrets; not complete: mandatory checks without eligible passing evidence: citations,claims",
+      "assess review-r2/citations -> passed: assessment passed recorded for citations; not complete: mandatory checks without eligible passing evidence: claims",
+      "assess review-r2/claims -> passed: assessment passed recorded for claims; node review-r2 verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+    ],
+    "gabriel": {
+      "run_id": "run-dv-travel-gabriel_plain_sources-1-1",
+      "workspace": "/home/user/gabriel-ai/evidence/wp14/run5/runs/dv-travel--gabriel_plain_sources--1/gabriel_plain_sources-1-ws",
+      "hold": null,
+      "replay": "passed",
+      "events": 79,
+      "assessments": [
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "propose"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "apply"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "read-back"
+        },
+        {
+          "check_id": "scope",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "base-commit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "checks-intact",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "no-secrets",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "citations",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "claims",
+          "outcome": "failed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "observe-r1"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "propose-r1"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "apply-r1"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "read-back-r1"
+        },
+        {
+          "check_id": "scope",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "base-commit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "checks-intact",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "no-secrets",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "citations",
+          "outcome": "failed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "observe-r2"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "observe"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "propose-r2"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "apply-r2"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "read-back-r2"
+        },
+        {
+          "check_id": "scope",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r2"
+        },
+        {
+          "check_id": "base-commit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r2"
+        },
+        {
+          "check_id": "checks-intact",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r2"
+        },
+        {
+          "check_id": "no-secrets",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r2"
+        },
+        {
+          "check_id": "citations",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r2"
+        },
+        {
+          "check_id": "claims",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r2"
+        }
+      ]
+    },
+    "repairs_used": 2,
+    "plan_versions": 3
+  },
+  "verification": {
+    "verified": true,
+    "problems": [],
+    "changed_paths": [
+      "doc/travel_summary.md"
+    ],
+    "out_of_scope_paths": [],
+    "citations": 2,
+    "claims": [
+      {
+        "claim": "40 EUR | forty (40) EUR | (40) EUR | EUR 40 | forty EUR",
+        "present": true,
+        "cited_from_expected_source": true
+      },
+      {
+        "claim": "director",
+        "present": true,
+        "cited_from_expected_source": true
+      }
+    ],
+    "targets": {
+      "doc/travel_summary.md": "# Travel summary\n\nThe daily allowance for domestic travel is forty (40) EUR.[[cite:obs-00e6d75c5d34f5d63d914e2a9ed9d1bf9b0cf3c2 \"The daily allowance for domestic travel is forty (40) EUR.\"]]\n\nTrips with a total cost above one thousand (1000) EUR need written approval by a director.[[cite:obs-1244d4b7e83de1ef32e4f0032b40a5626d2d4fcd \"Trips with a total cost above one thousand (1000) EUR need written approval by a director.\"]]\n\n"
+    },
+    "patch_sha256": "e92264679e8a7952f31bb7c6d735e574c4c1e5e4c4563d55401f84eaa9d86211",
+    "patch_bytes": 651,
+    "patch": "diff --git a/doc/travel_summary.md b/doc/travel_summary.md\nindex e63ab2d..27b49d9 100644\n--- a/doc/travel_summary.md\n+++ b/doc/travel_summary.md\n@@ -1,3 +1,6 @@\n # Travel summary\n \n-(to be completed: daily allowance and approval rule)\n+The daily allowance for domestic travel is forty (40) EUR.[[cite:obs-00e6d75c5d34f5d63d914e2a9ed9d1bf9b0cf3c2 \"The daily allowance for domestic travel is forty (40) EUR.\"]]\n+\n+Trips with a total cost above one thousand (1000) EUR need written approval by a director.[[cite:obs-1244d4b7e83de1ef32e4f0032b40a5626d2d4fcd \"Trips with a total cost above one thousand (1000) EUR need written approval by a director.\"]]\n+\n",
+    "head_is_base": true,
+    "marker": "eval-verify-dv-travel-gabriel_plain_sources-1"
+  },
+  "V": 1,
+  "D": 1,
+  "false_completion": 0,
+  "unit_wall_ms": 8744
+}

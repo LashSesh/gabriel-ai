@@ -287,6 +287,8 @@ def build_prompt(task_goal: str, binding: dict, snapshot: dict, manifest: dict, 
     if unsupported:
         lines += ["Sources that could not be extracted (never cite them): " + ", ".join(unsupported)]
     for excluded in retrieval.get("excluded", []):
+        if excluded["reason"] == "kind_not_allowed":
+            continue  # observations of other kinds (router decisions, episodes) are not document sources
         lines.append("Observation %s is not available: %s" % (excluded["observation_id"], excluded["reason"]))
     if failure_context:
         lines += ["", "Previous attempt failed verification (round %d). Diagnostics:" % round_index]

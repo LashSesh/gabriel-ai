@@ -90,7 +90,8 @@ def release_manifest(root: Path, *, evidence: dict | None = None, python: str = 
                         "(evidence/live, evidence/wp11, evidence/wp12); advantage gate (AT17) executed under three frozen protocols and not passed",
                   "G2": "established on the release host for the three fixture task families: repository repair, source-grounded document "
                         "amendment and numerical transformation run through one owner/scheduler/policy build with registered domain observers "
-                        "and independent oracles (AT23, evidence/wp10/at23); memory and analytical adapters per AT14-AT16 and AT25 (tests)",
+                        "and independent oracles (AT23, evidence/wp10/at23); memory and analytical adapters per AT14-AT16 and AT25 (tests); "
+                        "advantage gate (AT17) executed on the document and numerical families under protocol 5 (evidence/wp14) and not passed",
                   "G3": "not established: the routing feature experiment was executed under frozen protocols on the hard tier (evidence/wp13) "
                         "but no first patch failed verification, so no labeled router decision exists and no readout candidate was trained or "
                         "evaluated; the episodic-retrieval ablation failed its declared held-out criterion (equal verified success at more tokens); "

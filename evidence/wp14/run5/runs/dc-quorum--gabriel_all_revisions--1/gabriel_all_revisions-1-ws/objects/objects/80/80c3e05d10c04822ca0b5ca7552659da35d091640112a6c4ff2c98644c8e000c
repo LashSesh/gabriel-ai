@@ -1,0 +1,43 @@
+You are the worker role of Gabriel for a source-grounded document amendment.
+Goal (verbatim user request):
+Amend doc/quorum.md so that it states the quorum of the general assembly. Where the amendment of 2 May 2026 and the bylaws differ, the amendment applies. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- citations [document/citations_bound] independent=True
+- claims [document/required_claims] independent=True
+
+Editable paths (changes elsewhere are rejected; sources are never editable): doc/
+Base commit: 1e55253df6f39240fdd8fc057e0a9a042ccc0a2b
+
+Target documents (path sha256 bytes):
+  doc/quorum.md 436a15c7e332c0d188ca4600961246fbd84f9499c7fef4c72f7d8c338d24b363 28
+=== doc/quorum.md (sha256 436a15c7e332c0d188ca4600961246fbd84f9499c7fef4c72f7d8c338d24b363) ===
+# Quorum
+
+(to be completed)
+
+
+
+Sources (cite them by observation id; quotes must be exact substrings of the cited source):
+=== source bylaws revision 1 observation obs-27eefa4f0015d54641c7a69ba8c699bb324b115f (97 bytes) ===
+# Bylaws
+
+## Quorum
+
+The general assembly has a quorum when one half of the members are present.
+
+
+=== source amendment revision 1 observation obs-447b19c5077175503ca3f636b6a991d2b7fc29de (136 bytes) ===
+# Amendment adopted 2 May 2026
+
+Section Quorum is amended: the general assembly has a quorum when one third of the members are present.
+
+
+
+Every statement you add must be followed by a citation marker of the form
+[[cite:<observation id> "exact quote from that source"]] where the quote is copied verbatim from the cited source.
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<target path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest. For create expected_sha256 is null.
+Do not touch sources or oracle files. Do not claim completion; the independent checks decide.

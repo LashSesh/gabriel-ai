@@ -1,0 +1,50 @@
+You are the worker role of Gabriel for a source-grounded document amendment.
+Goal (verbatim user request):
+Amend doc/quorum.md so that it states the quorum of the general assembly. Where the amendment of 2 May 2026 and the bylaws differ, the amendment applies. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- citations [document/citations_bound] independent=True
+- claims [document/required_claims] independent=True
+
+Editable paths (changes elsewhere are rejected; sources are never editable): doc/
+Base commit: ece5f002da0766dac5e162b85b4c62dcde40d745
+
+Target documents (path sha256 bytes):
+  doc/quorum.md 867959196ef80595db1197f8e90990ae3f18f030526038184ce3ee1a3eb7bdad 596
+=== doc/quorum.md (sha256 867959196ef80595db1197f8e90990ae3f18f030526038184ce3ee1a3eb7bdad) ===
+The quorum of the general assembly is one third of the members present. Where the amendment of 2 May 2026 and the bylaws differ, the amendment applies.
+
+The general assembly has a quorum when one third of the members are present.[[cite:obs-4cc185f2ae34401d85be81ffbf22431e7035aba8 "Section Quorum is amended: the general assembly has a quorum when one third of the members are present."]]
+
+The general assembly has a quorum when one half of the members are present.[[cite:obs-83476ca10f0ce934801e45301dfb44417d8127a5 "The general assembly has a quorum when one half of the members are present."]]
+
+
+Sources (cite them by observation id; quotes must be exact substrings of the cited source):
+=== source amendment revision 1 observation obs-4cc185f2ae34401d85be81ffbf22431e7035aba8 (136 bytes) ===
+# Amendment adopted 2 May 2026
+
+Section Quorum is amended: the general assembly has a quorum when one third of the members are present.
+
+
+=== source bylaws revision 1 observation obs-83476ca10f0ce934801e45301dfb44417d8127a5 (97 bytes) ===
+# Bylaws
+
+## Quorum
+
+The general assembly has a quorum when one half of the members are present.
+
+
+Observation decision-run-dc-quorum-gabriel_reference_plan-0-1-1 is not available: kind_not_allowed
+
+Previous attempt failed verification (round 2). Diagnostics:
+--- claims ---
+{"check_id": "claims", "evidence": {"claims": [{"cited_from_expected_source": true, "claim": "one third | one-third | a third | 1/3", "path": "doc/quorum.md", "present": true}], "forbidden_present": [{"path": "doc/quorum.md", "present": ["one half", "half of the members"]}]}, "node_id": "review", "outcome": "failed"}
+
+
+Every statement you add must be followed by a citation marker of the form
+[[cite:<observation id> "exact quote from that source"]] where the quote is copied verbatim from the cited source.
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<target path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest. For create expected_sha256 is null.
+Do not touch sources or oracle files. Do not claim completion; the independent checks decide.

@@ -1,0 +1,53 @@
+You are the worker role of Gabriel for a source-grounded document amendment.
+Goal (verbatim user request):
+Amend doc/quorum.md so that it states the quorum of the general assembly. Where the amendment of 2 May 2026 and the bylaws differ, the amendment applies. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- citations [document/citations_bound] independent=True
+- claims [document/required_claims] independent=True
+
+Editable paths (changes elsewhere are rejected; sources are never editable): doc/
+Base commit: 1e55253df6f39240fdd8fc057e0a9a042ccc0a2b
+
+Target documents (path sha256 bytes):
+  doc/quorum.md dad24efecd632af5519a5fe56a0f428aeb66a33d72864bd618fc25a10775e4f6 496
+=== doc/quorum.md (sha256 dad24efecd632af5519a5fe56a0f428aeb66a33d72864bd618fc25a10775e4f6) ===
+The quorum of the general assembly is one third of the members present, as established by the amendment adopted 2 May 2026. Where the amendment of 2 May 2026 and the bylaws differ, the amendment applies.
+
+[[cite:obs-447b19c5077175503ca3f636b6a991d2b7fc29de "Section Quorum is amended: the general assembly has a quorum when one third of the members are present."]]
+[[cite:obs-27eefa4f0015d54641c7a69ba8c699bb324b115f "The general assembly has a quorum when one half of the members are present."]]
+
+
+Sources (cite them by observation id; quotes must be exact substrings of the cited source):
+=== source bylaws revision 1 observation obs-27eefa4f0015d54641c7a69ba8c699bb324b115f (97 bytes) ===
+# Bylaws
+
+## Quorum
+
+The general assembly has a quorum when one half of the members are present.
+
+
+=== source amendment revision 1 observation obs-447b19c5077175503ca3f636b6a991d2b7fc29de (136 bytes) ===
+# Amendment adopted 2 May 2026
+
+Section Quorum is amended: the general assembly has a quorum when one third of the members are present.
+
+
+Observation decision-run-dc-quorum-gabriel_all_revisions-1-1-1 is not available: kind_not_allowed
+Observation decision-run-dc-quorum-gabriel_all_revisions-1-1-2 is not available: kind_not_allowed
+
+Previous attempt failed verification (round 3). Diagnostics:
+--- claims ---
+{"check_id": "claims", "evidence": {"claims": [{"cited_from_expected_source": true, "claim": "one third | one-third | a third | 1/3", "path": "doc/quorum.md", "present": true}], "forbidden_present": [{"path": "doc/quorum.md", "present": ["one half", "half of the members"]}]}, "node_id": "review", "outcome": "failed"}
+
+--- output-valid ---
+{"check_id": "output-valid", "evidence": {"problems": ["proposal normalization rejected: modify expected_sha256 does not match the observed file identity for doc/quorum.md"], "slots": ["envelope", "model_output", "raw_response", "request"]}, "node_id": "propose-r1", "outcome": "failed"}
+
+
+Every statement you add must be followed by a citation marker of the form
+[[cite:<observation id> "exact quote from that source"]] where the quote is copied verbatim from the cited source.
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<target path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest. For create expected_sha256 is null.
+Do not touch sources or oracle files. Do not claim completion; the independent checks decide.

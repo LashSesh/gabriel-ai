@@ -1,0 +1,215 @@
+{
+  "task_id": "dc-quorum",
+  "family": "conflict",
+  "system": "gabriel_all_revisions",
+  "rep": 0,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp14/run5/runs/dc-quorum--gabriel_all_revisions--0",
+  "domain": "document",
+  "outcome": {
+    "system": "gabriel_all_revisions",
+    "task_id": "dc-quorum",
+    "family": "conflict",
+    "rep": 0,
+    "declared": true,
+    "declared_reason": "run state succeeded",
+    "model_requests": 3,
+    "model_tokens": 3089,
+    "wall_ms": 9255,
+    "provider_statuses": [
+      "completed",
+      "completed",
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp14/run5/runs/dc-quorum--gabriel_all_revisions--0/gabriel_all_revisions-0-ws/worktrees/run-dc-quorum-gabriel_all_revisions-0-1",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "assess propose-r2/output-valid -> passed: assessment passed recorded for output-valid; node propose-r2 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+      "apply-r2 -> completed (result accepted; checks pending)",
+      "assess apply-r2/output-valid -> passed: assessment passed recorded for output-valid; node apply-r2 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+      "read-back-r2 -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+      "assess read-back-r2/output-valid -> passed: assessment passed recorded for output-valid; node read-back-r2 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+      "review-r2 -> completed (result accepted; checks pending)",
+      "assess review-r2/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets",
+      "assess review-r2/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,citations,claims,no-secrets",
+      "assess review-r2/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: citations,claims,no-secrets",
+      "assess review-r2/no-secrets -> passed: assessment passed recorded for no-secrets; not complete: mandatory checks without eligible passing evidence: citations,claims",
+      "assess review-r2/citations -> passed: assessment passed recorded for citations; not complete: mandatory checks without eligible passing evidence: claims",
+      "assess review-r2/claims -> passed: assessment passed recorded for claims; node review-r2 verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+    ],
+    "gabriel": {
+      "run_id": "run-dc-quorum-gabriel_all_revisions-0-1",
+      "workspace": "/home/user/gabriel-ai/evidence/wp14/run5/runs/dc-quorum--gabriel_all_revisions--0/gabriel_all_revisions-0-ws",
+      "hold": null,
+      "replay": "passed",
+      "events": 63,
+      "assessments": [
+        {
+          "check_id": "output-valid",
+          "outcome": "failed",
+          "eligible": true,
+          "node_id": "propose"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "observe-r1"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "propose-r1"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "apply-r1"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "read-back-r1"
+        },
+        {
+          "check_id": "scope",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "base-commit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "checks-intact",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "no-secrets",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "citations",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "claims",
+          "outcome": "failed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "observe-r2"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "propose-r2"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "apply-r2"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "read-back-r2"
+        },
+        {
+          "check_id": "scope",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r2"
+        },
+        {
+          "check_id": "base-commit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r2"
+        },
+        {
+          "check_id": "checks-intact",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r2"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "observe"
+        },
+        {
+          "check_id": "no-secrets",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r2"
+        },
+        {
+          "check_id": "citations",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r2"
+        },
+        {
+          "check_id": "claims",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r2"
+        }
+      ]
+    },
+    "repairs_used": 1,
+    "plan_versions": 3
+  },
+  "verification": {
+    "verified": true,
+    "problems": [],
+    "changed_paths": [
+      "doc/quorum.md"
+    ],
+    "out_of_scope_paths": [],
+    "citations": 2,
+    "claims": [
+      {
+        "claim": "one third | one-third | a third | 1/3",
+        "present": true,
+        "cited_from_expected_source": true
+      }
+    ],
+    "targets": {
+      "doc/quorum.md": "# Quorum\n\nThe general assembly has a quorum when one third of the members are present. Where the amendment of 2 May 2026 and the bylaws differ, the amendment applies.\n\n[[cite:obs-8c9f6126e0334f702f6fa58dad16e41a3674e4c6 \"Section Quorum is amended: the general assembly has a quorum when one third of the members are present.\"]]\n[[cite:obs-8c9f6126e0334f702f6fa58dad16e41a3674e4c6 \"Section Quorum is amended: the general assembly has a quorum when one third of the members are present.\"]]\n"
+    },
+    "patch_sha256": "2ed7527b0ae66d1559a0a1f51ddba2c1addf73a98bde3710b0b2b7dfd9f0da0e",
+    "patch_bytes": 642,
+    "patch": "diff --git a/doc/quorum.md b/doc/quorum.md\nindex 8531efa..0ff3493 100644\n--- a/doc/quorum.md\n+++ b/doc/quorum.md\n@@ -1,3 +1,6 @@\n # Quorum\n \n-(to be completed)\n+The general assembly has a quorum when one third of the members are present. Where the amendment of 2 May 2026 and the bylaws differ, the amendment applies.\n+\n+[[cite:obs-8c9f6126e0334f702f6fa58dad16e41a3674e4c6 \"Section Quorum is amended: the general assembly has a quorum when one third of the members are present.\"]]\n+[[cite:obs-8c9f6126e0334f702f6fa58dad16e41a3674e4c6 \"Section Quorum is amended: the general assembly has a quorum when one third of the members are present.\"]]\n",
+    "head_is_base": true,
+    "marker": "eval-verify-dc-quorum-gabriel_all_revisions-0"
+  },
+  "V": 1,
+  "D": 1,
+  "false_completion": 0,
+  "unit_wall_ms": 9433
+}

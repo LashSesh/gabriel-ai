@@ -1,0 +1,23 @@
+You are the worker role of Gabriel for a numerical transformation task.
+Goal (verbatim user request):
+Convert the series in data/series.json from kilometres to metres using the declared units and write the converted series to out/converted.json. Keep the time stamps unchanged.
+
+Acceptance checks (an independent reference contract decides completion; you cannot change it):
+- reference [numerical/reference_contract] independent=True
+
+Allowed output paths (writes elsewhere are rejected): out/
+Base commit: e60a3c48892a203e8ecc5cb957e63f841f037cef
+
+Observed datasets (path sha256 bytes kind units time_basis rows problems):
+  data/series.json 6e1e4ad851ca863531eb4ab82f2e3b4658ec2816cb3af0e7812b0920a4e1a3bf 184 series km unix_ms 4 -
+
+Declared operations (id: input kind; parameters; description):
+  graph.small_signature: graph; {}; canonical structural signature of a simple undirected graph with at most seven vertices; retains the vertex count
+  series.resample_mean: series; {"bucket_ms": "integer"}; arithmetic mean of the values per bucket of bucket_ms on the unix_ms time basis; empty buckets are omitted
+  units.convert: series; {"to_units": "string"}; convert every value of a series to the target unit of the same dimension; time stamps unchanged
+
+Respond with exactly one JSON object and nothing else:
+{"operation": "<operation id>", "input_path": "<observed dataset path>", "expected_sha256": "<its sha256>", "output_path": "<path inside the allowed output paths>",
+ "parameters": {<parameters of the operation>}, "rationale": "<short explanation>"}
+Rules: the operation must be one of the declared ids; parameters must match its declared types; integers only (no floats) in parameters.
+Do not claim completion; the independent reference contract decides.

@@ -1,0 +1,43 @@
+You are the worker role of Gabriel for a source-grounded document amendment.
+Goal (verbatim user request):
+Amend doc/hours.md so that it states the core working hours. Where the board resolution of 15 September 2026 and the staff handbook differ, the resolution applies. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- citations [document/citations_bound] independent=True
+- claims [document/required_claims] independent=True
+
+Editable paths (changes elsewhere are rejected; sources are never editable): doc/
+Base commit: edce7a7bdeab004da094f711fb3346632c6cad8c
+
+Target documents (path sha256 bytes):
+  doc/hours.md 95599f78b5502ced097bf6c3a8a462f93868e193ae36501badd312db3464f557 32
+=== doc/hours.md (sha256 95599f78b5502ced097bf6c3a8a462f93868e193ae36501badd312db3464f557) ===
+# Core hours
+
+(to be completed)
+
+
+
+Sources (cite them by observation id; quotes must be exact substrings of the cited source):
+=== file sources/handbook.md observation obs-b90a573bb0faa3351f4b4ae1917ae758d9ccf7d7 (88 bytes) ===
+# Staff handbook
+
+## Working hours
+
+Core hours are from 10:00 to 16:00 on working days.
+
+
+=== file sources/resolution_2026-09-15.md observation obs-3019ad1999a71f2c7ef7e467cbe37b454cb50786 (123 bytes) ===
+# Board resolution of 15 September 2026
+
+Core hours are set from 09:00 to 15:00 on working days, effective 1 October 2026.
+
+
+
+Every statement you add must be followed by a citation marker of the form
+[[cite:<observation id> "exact quote from that source"]] where the quote is copied verbatim from the cited source.
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<target path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest. For create expected_sha256 is null.
+Do not touch sources or oracle files. Do not claim completion; the independent checks decide.

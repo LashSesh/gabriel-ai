@@ -1,0 +1,67 @@
+{
+  "task_id": "dr-sla",
+  "family": "revision",
+  "system": "simple_loop",
+  "rep": 0,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp14/run5/runs/dr-sla--simple_loop--0",
+  "domain": "document",
+  "outcome": {
+    "system": "simple_loop",
+    "task_id": "dr-sla",
+    "family": "revision",
+    "rep": 0,
+    "declared": true,
+    "declared_reason": "own check run passed after 1 request(s)",
+    "model_requests": 1,
+    "model_tokens": 910,
+    "wall_ms": 2326,
+    "provider_statuses": [
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp14/run5/runs/dr-sla--simple_loop--0/worktrees/simple_loop-0",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "request 1: own checks passed"
+    ],
+    "gabriel": null,
+    "repairs_used": 0,
+    "plan_versions": 0
+  },
+  "verification": {
+    "verified": true,
+    "problems": [],
+    "changed_paths": [
+      "doc/sla_summary.md"
+    ],
+    "out_of_scope_paths": [],
+    "citations": 2,
+    "claims": [
+      {
+        "claim": "2 hours | two (2) hours | (2) hours | two hours | 2-hour",
+        "present": true,
+        "cited_from_expected_source": true
+      },
+      {
+        "claim": "on-call engineer | on-call",
+        "present": true,
+        "cited_from_expected_source": true
+      }
+    ],
+    "targets": {
+      "doc/sla_summary.md": "# Service level summary\n\nFor priority-1 incidents the response time is two (2) hours from the time the ticket is opened [[cite:obs-2c6ac266a54e437183fe9fccd7e9cac5b6822065 \"For priority-1 incidents the response time is two (2) hours from the time the ticket is opened.\"]]. Priority-1 incidents are escalated to the on-call engineer through the pager rotation [[cite:obs-b4faad701a85eb7893a6ab6b52ce927522ce279b \"Priority-1 incidents are escalated to the on-call engineer through the pager rotation.\"]].\n"
+    },
+    "patch_sha256": "792daa77e2b8defb9764e58e22c3154d47ac06b01b977940c7ea020afd9e4be0",
+    "patch_bytes": 720,
+    "patch": "diff --git a/doc/sla_summary.md b/doc/sla_summary.md\nindex 5285c2e..7b0844b 100644\n--- a/doc/sla_summary.md\n+++ b/doc/sla_summary.md\n@@ -1,3 +1,3 @@\n # Service level summary\n \n-(to be completed: priority-1 response time and escalation path)\n+For priority-1 incidents the response time is two (2) hours from the time the ticket is opened [[cite:obs-2c6ac266a54e437183fe9fccd7e9cac5b6822065 \"For priority-1 incidents the response time is two (2) hours from the time the ticket is opened.\"]]. Priority-1 incidents are escalated to the on-call engineer through the pager rotation [[cite:obs-b4faad701a85eb7893a6ab6b52ce927522ce279b \"Priority-1 incidents are escalated to the on-call engineer through the pager rotation.\"]].\n",
+    "head_is_base": true,
+    "marker": "eval-verify-dr-sla-simple_loop-0"
+  },
+  "V": 1,
+  "D": 1,
+  "false_completion": 0,
+  "unit_wall_ms": 2509
+}

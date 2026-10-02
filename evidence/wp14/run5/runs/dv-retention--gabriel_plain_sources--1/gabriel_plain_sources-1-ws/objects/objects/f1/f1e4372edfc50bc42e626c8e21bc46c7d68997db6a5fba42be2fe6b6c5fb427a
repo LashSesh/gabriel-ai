@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-EUfwbzWaUxL23IfIJdziC44waxGVh",
+  "object": "chat.completion",
+  "created": 1790979781,
+  "model": "gpt-4.1-mini-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"operations\": [{\"kind\": \"modify\", \"path\": \"doc/records_summary.md\", \"expected_sha256\": \"4bca2d2ef9fd96e696e77040be2c60aaa05c89cb335a830642dc1736cbe4f6a1\", \"content\": \"# Records summary\\n\\nThe retention period for financial records is five (5) years after the end of the financial year [[cite:obs-d2b4eec7e8eb409bd5b8ee57d9445df0f24898aa \\\"Financial records are retained for five (5) years after the end of the financial year.\\\"]].\\n\\nBackups of the records system are taken weekly and verified by restore [[cite:obs-37e3c76475c309fb4436732d67ef80d0052dffe9 \\\"Backups of the records system are taken weekly and verified by restore.\\\"]].\\n\"}], \"rationale\": \"Replaced the retention period statement with the correct one from the valid source obs-d2b4eec7e8eb409bd5b8ee57d9445df0f24898aa, as the previous citation was revoked. Kept the backup frequency statement unchanged with its valid citation.\"}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 924,
+    "completion_tokens": 273,
+    "total_tokens": 1197,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_da6dae5035"
+}

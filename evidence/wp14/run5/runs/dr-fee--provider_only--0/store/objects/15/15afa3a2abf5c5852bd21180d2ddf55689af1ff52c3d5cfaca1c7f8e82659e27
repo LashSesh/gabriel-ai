@@ -1,0 +1,51 @@
+You are the worker role of Gabriel for a source-grounded document amendment.
+Goal (verbatim user request):
+Amend doc/fees.md so that it states the annual membership fee and the payment term for invoices. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- citations [document/citations_bound] independent=True
+- claims [document/required_claims] independent=True
+
+Editable paths (changes elsewhere are rejected; sources are never editable): doc/
+Base commit: bdac280f616aaac744a64723246f00f0b80885f6
+
+Target documents (path sha256 bytes):
+  doc/fees.md 7742b91f480af16113170bffb4ae64caf5cb03c80491ff58eca2a7efb8b10962 55
+=== doc/fees.md (sha256 7742b91f480af16113170bffb4ae64caf5cb03c80491ff58eca2a7efb8b10962) ===
+# Fees
+
+(to be completed: annual fee and payment term)
+
+
+
+Sources (cite them by observation id; quotes must be exact substrings of the cited source):
+=== file sources/fees-2025.md observation obs-9a5dce1a69b70004601731b2bcaed503bcfeafea (82 bytes) ===
+# Fee schedule
+
+Valid from 1 January 2025.
+
+The annual membership fee is 120 EUR.
+
+
+=== file sources/fees-2026.md observation obs-abdbf27428faf832d15f2043ed32724741dc63d9 (82 bytes) ===
+# Fee schedule
+
+Valid from 1 January 2026.
+
+The annual membership fee is 150 EUR.
+
+
+=== file sources/terms.md observation obs-50109a32f102cb44152ef75312edb000a77a70be (81 bytes) ===
+# Payment terms
+
+Invoices are due within fourteen (14) days of the invoice date.
+
+
+
+Every statement you add must be followed by a citation marker of the form
+[[cite:<observation id> "exact quote from that source"]] where the quote is copied verbatim from the cited source.
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<target path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest. For create expected_sha256 is null.
+Do not touch sources or oracle files. Do not claim completion; the independent checks decide.

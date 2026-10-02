@@ -1,0 +1,58 @@
+You are the worker role of Gabriel for a source-grounded document amendment.
+Goal (verbatim user request):
+Amend doc/records_summary.md so that it states the retention period for financial records and the backup frequency. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- citations [document/citations_bound] independent=True
+- claims [document/required_claims] independent=True
+
+Editable paths (changes elsewhere are rejected; sources are never editable): doc/
+Base commit: bbb55b46d24aa192d8b850c13b98f6535fcdce61
+
+Target documents (path sha256 bytes):
+  doc/records_summary.md 4bca2d2ef9fd96e696e77040be2c60aaa05c89cb335a830642dc1736cbe4f6a1 453
+=== doc/records_summary.md (sha256 4bca2d2ef9fd96e696e77040be2c60aaa05c89cb335a830642dc1736cbe4f6a1) ===
+# Records summary
+
+The retention period for financial records is two (2) years with immediate effect [[cite:obs-5e1459596b0872e62da1bbc84fb9c1028d138967 "The retention period for financial records is reduced to two (2) years with immediate effect."]].
+
+Backups of the records system are taken weekly and verified by restore [[cite:obs-37e3c76475c309fb4436732d67ef80d0052dffe9 "Backups of the records system are taken weekly and verified by restore."]].
+
+
+
+Sources (cite them by observation id; quotes must be exact substrings of the cited source):
+=== file sources/records_policy.md observation obs-d2b4eec7e8eb409bd5b8ee57d9445df0f24898aa (119 bytes) ===
+# Records policy
+
+## Retention
+
+Financial records are retained for five (5) years after the end of the financial year.
+
+
+=== file sources/memo_2026-10-20.md observation obs-5e1459596b0872e62da1bbc84fb9c1028d138967 (119 bytes) ===
+# Memo, 20 October 2026
+
+The retention period for financial records is reduced to two (2) years with immediate effect.
+
+
+=== file sources/audit_note.md observation obs-37e3c76475c309fb4436732d67ef80d0052dffe9 (98 bytes) ===
+# Audit note
+
+## Backups
+
+Backups of the records system are taken weekly and verified by restore.
+
+
+
+Previous attempt failed verification (round 2). Diagnostics:
+--- citations ---
+{"check_id": "citations", "evidence": {"frontier": {"memory_sequence": 4, "owner_sequence": 5}, "problems": ["doc/records_summary.md: citation of obs-5e1459596b0872e62da1bbc84fb9c1028d138967 not bound: revoked"], "resolved": [{"path": "doc/records_summary.md", "spans": [{"observation_id": "obs-37e3c76475c309fb4436732d67ef80d0052dffe9", "source_id": "audit", "span_end": 97, "span_start": 26}]}]}, "node_id": "review", "outcome": "failed"}
+
+
+Every statement you add must be followed by a citation marker of the form
+[[cite:<observation id> "exact quote from that source"]] where the quote is copied verbatim from the cited source.
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<target path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest. For create expected_sha256 is null.
+Do not touch sources or oracle files. Do not claim completion; the independent checks decide.

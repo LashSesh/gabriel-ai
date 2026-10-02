@@ -1,0 +1,9 @@
+{
+ "goal": "Amend doc/sla_summary.md so that it states the response time for priority-1 incidents and the escalation path. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.",
+ "domain": "document",
+ "state": "succeeded",
+ "outcome": "success",
+ "repair_count": 0,
+ "plan_versions": 1,
+ "final_diff": "diff --git a/doc/sla_summary.md b/doc/sla_summary.md\nindex 5285c2e..f77cd74 100644\n--- a/doc/sla_summary.md\n+++ b/doc/sla_summary.md\n@@ -1,3 +1,5 @@\n # Service level summary\n \n-(to be completed: priority-1 response time and escalation path)\n+For priority-1 incidents the response time is two (2) hours from the time the ticket is opened [[cite:obs-9f8f4511f6dcbc4ebff29a9db7563f2c50b4e3ad \"For priority-1 incidents the response time is two (2) hours from the time the ticket is opened.\"]].\n+\n+Priority-1 incidents are escalated to the on-call engineer through the pager rotation [[cite:obs-846fa55e2f380d5e7609dd97a22e6febbd49849f \"Priority-1 incidents are escalated to the on-call engineer through the pager rotation.\"]].\n"
+}

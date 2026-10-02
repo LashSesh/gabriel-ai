@@ -1,0 +1,67 @@
+{
+  "task_id": "dr-fee",
+  "family": "revision",
+  "system": "simple_loop",
+  "rep": 1,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp14/run5/runs/dr-fee--simple_loop--1",
+  "domain": "document",
+  "outcome": {
+    "system": "simple_loop",
+    "task_id": "dr-fee",
+    "family": "revision",
+    "rep": 1,
+    "declared": true,
+    "declared_reason": "own check run passed after 1 request(s)",
+    "model_requests": 1,
+    "model_tokens": 813,
+    "wall_ms": 1795,
+    "provider_statuses": [
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp14/run5/runs/dr-fee--simple_loop--1/worktrees/simple_loop-1",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "request 1: own checks passed"
+    ],
+    "gabriel": null,
+    "repairs_used": 0,
+    "plan_versions": 0
+  },
+  "verification": {
+    "verified": true,
+    "problems": [],
+    "changed_paths": [
+      "doc/fees.md"
+    ],
+    "out_of_scope_paths": [],
+    "citations": 2,
+    "claims": [
+      {
+        "claim": "150 EUR | EUR 150 | 150 euro | 150 Euro",
+        "present": true,
+        "cited_from_expected_source": true
+      },
+      {
+        "claim": "14 days | fourteen (14) days | (14) days | fourteen days | 14-day",
+        "present": true,
+        "cited_from_expected_source": true
+      }
+    ],
+    "targets": {
+      "doc/fees.md": "# Fees\n\nThe annual membership fee is 150 EUR.[[cite:obs-abdbf27428faf832d15f2043ed32724741dc63d9 \"The annual membership fee is 150 EUR.\"]]\n\nInvoices are due within fourteen (14) days of the invoice date.[[cite:obs-50109a32f102cb44152ef75312edb000a77a70be \"Invoices are due within fourteen (14) days of the invoice date.\"]]"
+    },
+    "patch_sha256": "6eb76509df7c421b1023cada174c852f9cbd63a44b939ed173558e1d3278e763",
+    "patch_bytes": 525,
+    "patch": "diff --git a/doc/fees.md b/doc/fees.md\nindex 557c5f8..64d1194 100644\n--- a/doc/fees.md\n+++ b/doc/fees.md\n@@ -1,3 +1,5 @@\n # Fees\n \n-(to be completed: annual fee and payment term)\n+The annual membership fee is 150 EUR.[[cite:obs-abdbf27428faf832d15f2043ed32724741dc63d9 \"The annual membership fee is 150 EUR.\"]]\n+\n+Invoices are due within fourteen (14) days of the invoice date.[[cite:obs-50109a32f102cb44152ef75312edb000a77a70be \"Invoices are due within fourteen (14) days of the invoice date.\"]]\n\\ No newline at end of file\n",
+    "head_is_base": true,
+    "marker": "eval-verify-dr-fee-simple_loop-1"
+  },
+  "V": 1,
+  "D": 1,
+  "false_completion": 0,
+  "unit_wall_ms": 1948
+}

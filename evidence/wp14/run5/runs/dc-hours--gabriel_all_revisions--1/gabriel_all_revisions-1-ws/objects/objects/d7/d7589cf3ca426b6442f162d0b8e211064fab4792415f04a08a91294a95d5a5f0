@@ -1,0 +1,53 @@
+You are the worker role of Gabriel for a source-grounded document amendment.
+Goal (verbatim user request):
+Amend doc/hours.md so that it states the core working hours. Where the board resolution of 15 September 2026 and the staff handbook differ, the resolution applies. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- citations [document/citations_bound] independent=True
+- claims [document/required_claims] independent=True
+
+Editable paths (changes elsewhere are rejected; sources are never editable): doc/
+Base commit: 8721a8383ad1a628bb409cf882a3d8313de30d19
+
+Target documents (path sha256 bytes):
+  doc/hours.md dea524449681b2986c5b729931c496fcadf7c1aeb7bd5a10b202cffca6c76b8e 616
+=== doc/hours.md (sha256 dea524449681b2986c5b729931c496fcadf7c1aeb7bd5a10b202cffca6c76b8e) ===
+# Core hours
+
+Core hours are set from 09:00 to 15:00 on working days, effective 1 October 2026[[cite:obs-ac340d00aa568bb7393e4ba8b8f98afe8c8b7e5f "Core hours are set from 09:00 to 15:00 on working days, effective 1 October 2026."]]. Where the board resolution of 15 September 2026 and the staff handbook differ, the resolution applies[[cite:obs-ac340d00aa568bb7393e4ba8b8f98afe8c8b7e5f "# Board resolution of 15 September 2026"]]. The staff handbook states core hours are from 10:00 to 16:00 on working days[[cite:obs-43e04700f165a30e5870a60b8fbf2b8dafe85aad "Core hours are from 10:00 to 16:00 on working days."]].
+
+
+
+Sources (cite them by observation id; quotes must be exact substrings of the cited source):
+=== source resolution revision 1 observation obs-ac340d00aa568bb7393e4ba8b8f98afe8c8b7e5f (123 bytes) ===
+# Board resolution of 15 September 2026
+
+Core hours are set from 09:00 to 15:00 on working days, effective 1 October 2026.
+
+
+=== source handbook revision 1 observation obs-43e04700f165a30e5870a60b8fbf2b8dafe85aad (88 bytes) ===
+# Staff handbook
+
+## Working hours
+
+Core hours are from 10:00 to 16:00 on working days.
+
+
+Observation decision-run-dc-hours-gabriel_all_revisions-1-1-1 is not available: kind_not_allowed
+Observation decision-run-dc-hours-gabriel_all_revisions-1-1-2 is not available: kind_not_allowed
+
+Previous attempt failed verification (round 3). Diagnostics:
+--- claims ---
+{"check_id": "claims", "evidence": {"claims": [{"cited_from_expected_source": true, "claim": "09:00 to 15:00 | 9:00 to 15:00 | 09:00-15:00 | 9:00-15:00 | 09:00 and 15:00 | 9:00 and 15:00", "path": "doc/hours.md", "present": true}], "forbidden_present": [{"path": "doc/hours.md", "present": ["10:00 to 16:00"]}]}, "node_id": "review", "outcome": "failed"}
+
+--- claims ---
+{"check_id": "claims", "evidence": {"claims": [{"cited_from_expected_source": true, "claim": "09:00 to 15:00 | 9:00 to 15:00 | 09:00-15:00 | 9:00-15:00 | 09:00 and 15:00 | 9:00 and 15:00", "path": "doc/hours.md", "present": true}], "forbidden_present": [{"path": "doc/hours.md", "present": ["10:00 to 16:00"]}]}, "node_id": "review-r1", "outcome": "failed"}
+
+
+Every statement you add must be followed by a citation marker of the form
+[[cite:<observation id> "exact quote from that source"]] where the quote is copied verbatim from the cited source.
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<target path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest. For create expected_sha256 is null.
+Do not touch sources or oracle files. Do not claim completion; the independent checks decide.

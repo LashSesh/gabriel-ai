@@ -1,0 +1,66 @@
+{
+  "task_id": "dc-quorum",
+  "family": "conflict",
+  "system": "provider_only",
+  "rep": 1,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp14/run5/runs/dc-quorum--provider_only--1",
+  "domain": "document",
+  "outcome": {
+    "system": "provider_only",
+    "task_id": "dc-quorum",
+    "family": "conflict",
+    "rep": 1,
+    "declared": true,
+    "declared_reason": "deliverable produced; declared done without verification",
+    "model_requests": 1,
+    "model_tokens": 888,
+    "wall_ms": 2402,
+    "provider_statuses": [
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp14/run5/runs/dc-quorum--provider_only--1/worktrees/provider_only-1",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "deliverable produced; declared done without verification"
+    ],
+    "gabriel": null,
+    "repairs_used": 0,
+    "plan_versions": 0
+  },
+  "verification": {
+    "verified": false,
+    "problems": [
+      "doc/quorum.md: quote 'The general assembly has a quorum when one third of the memb' is not a verbatim span of any available source",
+      "required statement not cited from amendment with 'one third of the members'",
+      "forbidden statement present in doc/quorum.md: one half, half of the members"
+    ],
+    "changed_paths": [
+      "doc/quorum.md"
+    ],
+    "out_of_scope_paths": [],
+    "citations": 2,
+    "claims": [
+      {
+        "claim": "one third | one-third | a third | 1/3",
+        "present": true,
+        "cited_from_expected_source": false
+      }
+    ],
+    "targets": {
+      "doc/quorum.md": "The quorum of the general assembly is one third of the members present, as established by the amendment of 2 May 2026. Where the amendment of 2 May 2026 and the bylaws differ, the amendment applies.\n\nThe general assembly has a quorum when one third of the members are present[[cite:obs-0fea77438fbfe3945c0fd4e4af8f4005c2b0c0b2 \"The general assembly has a quorum when one third of the members are present.\"]].\n\nThe bylaws state that the general assembly has a quorum when one half of the members are present[[cite:obs-8760f71804a123ef0787db970f414207f7b783c7 \"The general assembly has a quorum when one half of the members are present.\"]]."
+    },
+    "patch_sha256": "3da7c9f9fd51d3c6338cb63bbb8403b5b362775fc109326323a0f665df5bbdbb",
+    "patch_bytes": 830,
+    "patch": "diff --git a/doc/quorum.md b/doc/quorum.md\nindex 8531efa..d8cc5b0 100644\n--- a/doc/quorum.md\n+++ b/doc/quorum.md\n@@ -1,3 +1,5 @@\n-# Quorum\n+The quorum of the general assembly is one third of the members present, as established by the amendment of 2 May 2026. Where the amendment of 2 May 2026 and the bylaws differ, the amendment applies.\n \n-(to be completed)\n+The general assembly has a quorum when one third of the members are present[[cite:obs-0fea77438fbfe3945c0fd4e4af8f4005c2b0c0b2 \"The general assembly has a quorum when one third of the members are present.\"]].\n+\n+The bylaws state that the general assembly has a quorum when one half of the members are present[[cite:obs-8760f71804a123ef0787db970f414207f7b783c7 \"The general assembly has a quorum when one half of the members are present.\"]].\n\\ No newline at end of file\n",
+    "head_is_base": true,
+    "marker": "eval-verify-dc-quorum-provider_only-1"
+  },
+  "V": 0,
+  "D": 1,
+  "false_completion": 1,
+  "unit_wall_ms": 2572
+}

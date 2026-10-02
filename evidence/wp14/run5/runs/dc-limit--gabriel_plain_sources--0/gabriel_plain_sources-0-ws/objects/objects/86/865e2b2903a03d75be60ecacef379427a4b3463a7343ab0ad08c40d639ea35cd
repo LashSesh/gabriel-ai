@@ -1,0 +1,54 @@
+You are the worker role of Gabriel for a source-grounded document amendment.
+Goal (verbatim user request):
+Amend doc/signature_limit.md so that it states the single-signature purchase limit. Where the CFO directive of 1 July 2026 and the procurement policy differ, the directive applies. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- citations [document/citations_bound] independent=True
+- claims [document/required_claims] independent=True
+
+Editable paths (changes elsewhere are rejected; sources are never editable): doc/
+Base commit: 16b91c4e0a81f49ad47fc00c84f56c1d22da0595
+
+Target documents (path sha256 bytes):
+  doc/signature_limit.md 8aa2e21b411ad40e2a0afe77231610b873292d47874ccef8b9aeb45e4ad3ce50 505
+=== doc/signature_limit.md (sha256 8aa2e21b411ad40e2a0afe77231610b873292d47874ccef8b9aeb45e4ad3ce50) ===
+# Signature limit
+
+A single signature suffices for purchases up to one thousand (1000) EUR only, as per the CFO directive of 1 July 2026. Where the CFO directive and the procurement policy differ, the directive applies.
+
+[[cite:obs-868447f8b88be9b9257a5075ef17182e1dd3e00a "Until further notice a single signature suffices for purchases up to one thousand (1000) EUR only."]]
+[[cite:obs-c952885b48e81fac003fdd0e4462519c046a47d0 "A single signature suffices for purchases up to two thousand (2000) EUR."]]
+
+
+
+Sources (cite them by observation id; quotes must be exact substrings of the cited source):
+=== file sources/procurement_policy.md observation obs-c952885b48e81fac003fdd0e4462519c046a47d0 (116 bytes) ===
+# Procurement policy
+
+## Signature limits
+
+A single signature suffices for purchases up to two thousand (2000) EUR.
+
+
+=== file sources/cfo_directive_2026-07-01.md observation obs-868447f8b88be9b9257a5075ef17182e1dd3e00a (131 bytes) ===
+# CFO directive of 1 July 2026
+
+Until further notice a single signature suffices for purchases up to one thousand (1000) EUR only.
+
+
+
+Previous attempt failed verification (round 3). Diagnostics:
+--- claims ---
+{"check_id": "claims", "evidence": {"claims": [{"cited_from_expected_source": true, "claim": "1000 EUR | 1,000 EUR | one thousand (1000) EUR | (1000) EUR | EUR 1000 | EUR 1,000", "path": "doc/signature_limit.md", "present": true}], "forbidden_present": [{"path": "doc/signature_limit.md", "present": ["two thousand (2000) EUR", "(2000) EUR"]}]}, "node_id": "review", "outcome": "failed"}
+
+--- claims ---
+{"check_id": "claims", "evidence": {"claims": [{"cited_from_expected_source": true, "claim": "1000 EUR | 1,000 EUR | one thousand (1000) EUR | (1000) EUR | EUR 1000 | EUR 1,000", "path": "doc/signature_limit.md", "present": true}], "forbidden_present": [{"path": "doc/signature_limit.md", "present": ["two thousand (2000) EUR", "(2000) EUR"]}]}, "node_id": "review-r1", "outcome": "failed"}
+
+
+Every statement you add must be followed by a citation marker of the form
+[[cite:<observation id> "exact quote from that source"]] where the quote is copied verbatim from the cited source.
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<target path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest. For create expected_sha256 is null.
+Do not touch sources or oracle files. Do not claim completion; the independent checks decide.

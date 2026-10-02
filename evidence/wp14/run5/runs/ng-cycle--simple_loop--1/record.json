@@ -1,0 +1,52 @@
+{
+  "task_id": "ng-cycle",
+  "family": "graph",
+  "system": "simple_loop",
+  "rep": 1,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp14/run5/runs/ng-cycle--simple_loop--1",
+  "domain": "numerical",
+  "outcome": {
+    "system": "simple_loop",
+    "task_id": "ng-cycle",
+    "family": "graph",
+    "rep": 1,
+    "declared": true,
+    "declared_reason": "own check run passed after 1 request(s)",
+    "model_requests": 1,
+    "model_tokens": 510,
+    "wall_ms": 1048,
+    "provider_statuses": [
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp14/run5/runs/ng-cycle--simple_loop--1/worktrees/simple_loop-1",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "request 1: own checks passed"
+    ],
+    "gabriel": null,
+    "repairs_used": 0,
+    "plan_versions": 0
+  },
+  "verification": {
+    "verified": true,
+    "problems": [],
+    "changed_paths": [
+      "out/signature.json"
+    ],
+    "out_of_scope_paths": [],
+    "output": "{\"canonical_adjacency\":\"0001100101010101010011000\",\"edges\":5,\"kind\":\"graph_signature\",\"signature\":\"68faeacbf3c25dff274a873a0ff0bc9534877ac3a1b360eb358c3d9c4c476748\",\"vertices\":5}",
+    "patch_sha256": "9c4f7d380bce4c20b4f44696c9e7d454a36ebcb4bb73e0736aa3e80966599935",
+    "patch_bytes": 358,
+    "patch": "diff --git a/out/signature.json b/out/signature.json\nnew file mode 100644\nindex 0000000..b54209e\n--- /dev/null\n+++ b/out/signature.json\n@@ -0,0 +1 @@\n+{\"canonical_adjacency\":\"0001100101010101010011000\",\"edges\":5,\"kind\":\"graph_signature\",\"signature\":\"68faeacbf3c25dff274a873a0ff0bc9534877ac3a1b360eb358c3d9c4c476748\",\"vertices\":5}\n\\ No newline at end of file\n",
+    "head_is_base": true,
+    "marker": "eval-verify-ng-cycle-simple_loop-1"
+  },
+  "V": 1,
+  "D": 1,
+  "false_completion": 0,
+  "unit_wall_ms": 1295
+}

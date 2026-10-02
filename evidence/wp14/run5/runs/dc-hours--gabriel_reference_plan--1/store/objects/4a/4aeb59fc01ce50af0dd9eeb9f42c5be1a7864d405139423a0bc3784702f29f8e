@@ -1,0 +1,27 @@
+{
+ "claims": [
+  {
+   "path": "doc/hours.md",
+   "must_contain": [
+    "09:00 to 15:00",
+    "9:00 to 15:00",
+    "09:00-15:00",
+    "9:00-15:00",
+    "09:00 and 15:00",
+    "9:00 and 15:00"
+   ],
+   "cited_source_id": "resolution",
+   "quote_must_include": "09:00 to 15:00"
+  }
+ ],
+ "forbidden": [
+  {
+   "path": "doc/hours.md",
+   "must_not_contain": [
+    "10:00 to 16:00",
+    "10:00-16:00",
+    "10:00 and 16:00"
+   ]
+  }
+ ]
+}

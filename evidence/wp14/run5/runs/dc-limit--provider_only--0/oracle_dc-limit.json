@@ -1,0 +1,30 @@
+{
+ "claims": [
+  {
+   "path": "doc/signature_limit.md",
+   "must_contain": [
+    "1000 EUR",
+    "1,000 EUR",
+    "one thousand (1000) EUR",
+    "(1000) EUR",
+    "EUR 1000",
+    "EUR 1,000"
+   ],
+   "cited_source_id": "directive",
+   "quote_must_include": "one thousand (1000) EUR"
+  }
+ ],
+ "forbidden": [
+  {
+   "path": "doc/signature_limit.md",
+   "must_not_contain": [
+    "2000 EUR",
+    "2,000 EUR",
+    "two thousand (2000) EUR",
+    "(2000) EUR",
+    "EUR 2000",
+    "EUR 2,000"
+   ]
+  }
+ ]
+}

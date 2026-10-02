@@ -192,6 +192,89 @@ gpt-4.1-mini never produced it: zero false completions in the provider-only base
 failed verifications in 72 runs. For this provider the hard tier is at ceiling like the standard
 tier; G3 is not established (`docs/RELEASE_G3.md`).
 
+## Protocol 5: the advantage gate on the document and numerical families (ADR-16)
+The blueprint names three families for the comparison after G1; protocols 1 to 4 covered
+repository repair only. Protocol 5 adds frozen `document` and `numerical` tiers
+(`evaluation/corpus_domains.py`, eighteen tasks in six families, every task with executed
+positive and negative deliverable controls) and the declared ablations of the two memory
+mechanisms the document pack is built on: `gabriel_plain_sources` removes provenance-aware
+retrieval (every declared file enters the prompt, revoked or not) and `gabriel_all_revisions`
+removes the revision rule (every eligible revision enters the prompt). `provider_only` and
+`simple_loop` see the plain view, which is what a minimal agent with the same corpus has;
+`gabriel_reference_plan` is the production arm. Verification is system-independent and content
+based: a citation must quote an available declared source verbatim, each required claim must be
+cited from the expected source revision, forbidden statements (the stale or withdrawn figure)
+must be absent; numerical outputs are compared with reference values computed independently of
+the adapter.
+
+Two pilots preceded the freeze (`evidence/wp14/pilot_declaration.md`, written before any
+provider call). Pilot 1 (48 runs) ended with every arm at 1.00 on the first request because the
+source texts stated their own status ("this memo was withdrawn", "replaces revision 1"), so the
+plain view still carried the provenance: the manipulation check failed. The declaration forbids
+corpus changes after the pilot; the one amendment (removing those status statements from the
+`revoked` and `revision` texts) is recorded there with its reason, pilot 1 is retained
+unchanged, and pilot 2 (30 runs) on the amended texts showed the provenance effect on one of six
+document tasks. The final protocol (`protocol5.frozen.json`, digest `8cc9e12f…`, gpt-4.1-mini,
+`linux_namespace`, two repetitions, 144 runs) holds out the `conflict` and `graph` families,
+which were never run before it; its declared criterion and the expected outcome ("a small effect
+confined to the revoked family") are frozen in the protocol.
+
+| system | runs | verified | p_success | false compl. | mean requests | mean tokens | held-out verified | held-out FC | held-out requests |
+|---|---|---|---|---|---|---|---|---|---|
+| provider_only | 36 | 30 | 0.83 | 5 | 1.00 | 698 | 6/12 | 5 | 1.00 |
+| simple_loop | 36 | 36 | 1.00 | 0 | 1.31 | 1027 | 12/12 | 0 | 1.67 |
+| gabriel_reference_plan | 36 | 35 | 0.97 | 0 | 1.25 | 1025 | 11/12 | 0 | 1.75 |
+| gabriel_plain_sources (document only) | 18 | 17 | 0.94 | 0 | 1.83 | 1840 | 5/6 | 0 | 2.67 |
+| gabriel_all_revisions (document only) | 18 | 16 | 0.89 | 0 | 1.83 | 1987 | 4/6 | 0 | 3.50 |
+
+Per family (`evidence/wp14/run5/report.md`, `results.json`):
+
+- `conflict` (held out): the provider-only baseline never produced a verified amendment (0 of 6)
+  and declared success five times, all false completions: it stated the superseded value beside
+  or instead of the prevailing one. Every verifying system removed them: the simple loop 6/6 at
+  2.33 requests, the production arm 5/6 at 2.50, the plain ablation 5/6 at 2.67, the
+  all-revisions ablation 4/6 at 3.50. The failed Gabriel runs ended on the forbidden statement
+  (the old figure mentioned beside the new one) after the admitted two repairs; one of them lost a
+  round to invalid JSON. The three Gabriel arms see the same sources on this family (it has no
+  revisions and no revocation), so their spread is provider variation across six runs, not a
+  mechanism.
+- `revision`: every arm 6/6 at one request; with both revisions in the prompt the model chose the
+  later dated one every time. The revision rule changed nothing measurable here.
+- `revoked`: every arm 6/6. Costs differ: the production arm needed 1.00 requests (812 tokens),
+  the plain ablation 1.83 (1878 tokens, four repairs), the simple loop 1.50 (1368 tokens). The
+  retained first answers of the four plain-view repairs show that three of them stated the
+  correct figure with the correct quote but cited the withdrawn document's observation id (the
+  owner's citation binding rejected the revoked id); only one took the withdrawn figure itself.
+- `units`, `resample`, `graph` (the last held out): every system 6/6 at one request with the
+  same tokens (509 to 535); Gabriel's jobs ran in the contained worker, the baselines' in process,
+  with byte-identical outputs. The numerical tier does not discriminate; it costs Gabriel about
+  one second of observation, journal and review per task.
+
+Against the declared criterion:
+
+- Advantage over `provider_only`: paired success +0.14 (family-clustered interval [+0.00, +0.42],
+  includes zero); the production arm avoided all five false completions but at 1.25 instead of
+  1.00 mean requests, so the "no more requests" clause fails. **Not met** as declared. What is
+  established is the same as in protocols 1 and 2: verification removes false completions at the
+  price of verification requests.
+- Advantage over `simple_loop`: paired success -0.03, tokens -2. **Not met**; the simple loop was
+  at least as good on every family and solved the one conflict task the production arm lost,
+  with six requests admitted against Gabriel's two repairs.
+- Memory mechanisms on the `revision` and `revoked` families: the production arm used 1.00 mean
+  requests against 1.42 for the plain ablation (0.42 fewer, below the declared 0.5) and 1.00 for
+  the all-revisions ablation (no difference); no Gabriel arm made a false completion, so nothing
+  was avoided. **Not met**. The effect that exists is confined to the `revoked` family (0.83 fewer
+  requests, 1066 fewer tokens at equal success) and three of its four cases were an observation-id
+  mix-up on a correct statement rather than the withdrawn content being used.
+
+The advantage gate therefore stays **not passed** on the document and numerical families as
+well. The result bounds the memory mechanisms' measurable value for this provider: gpt-4.1-mini
+resolves dated revisions and most authority conflicts from the content alone, so provenance
+filtering mainly saves the repair that an id mix-up costs, and the revision rule saves nothing
+on this distribution. The sample is small (six runs per family and arm), the intervals are
+descriptive, and the conflict family's spread between arms with identical sources is as large as
+the effects under test.
+
 ## Freezing and amendments
 `gabriel eval freeze` digests the protocol body and records the harness code identity.
 `gabriel eval run` refuses a changed protocol or corpus. A harness code change after freezing is

@@ -1,0 +1,214 @@
+{
+  "backend": "linux_namespace",
+  "bootstrap": {
+    "resamples": 2000,
+    "seed": 20261002
+  },
+  "budget_per_task": {
+    "max_input_tokens": 60000,
+    "max_output_tokens": 4000,
+    "model_requests": 6,
+    "model_tokens_total": 120000,
+    "tool_attempts": 64,
+    "wall_ms": 600000
+  },
+  "corpus_digest": "b0d0f48afe71fef00e5911e260139e13e9ed26df27f04c77cb05eb73e07a0750",
+  "declared_criterion": "Declared before the run, after two pilots (evidence/wp14/pilot_declaration.md). An advantage of gabriel_reference_plan over a baseline on a family is claimed only if, on the held-out families and on the full tiers, it reaches at least the baseline's verified success and either exceeds it by at least 0.10 with the family-clustered interval excluding zero, or avoids at least one false completion the baseline makes at no more mean model requests. The memory mechanisms (provenance-aware retrieval, ablated by gabriel_plain_sources; the revision rule, ablated by gabriel_all_revisions) are claimed to matter only if the production arm uses at least 0.5 fewer mean model requests per task than the ablation on the revision and revoked families, or avoids at least one false completion the ablation makes. On the numerical tier no success difference is expected; cost and worker containment are reported. Pilot 2 showed the mechanism effect on one of six document tasks (dv-travel) and none on the revision family, so the expected outcome, recorded before the run, is a small effect confined to the revoked family.",
+  "declared_success": {
+    "document_and_numerical_tiers": {
+      "gabriel": "as gabriel_reference_plan with the model planner (one planner request per plan version)",
+      "gabriel_all_revisions": "as gabriel_reference_plan with the declared all_revisions view: every eligible revision enters the prompt, revocation and authorization still apply (ablation of the revision rule; document tasks only)",
+      "gabriel_no_repair": "as gabriel with max_repairs=0 and max_plan_versions=1 (ablation of the repair cycle)",
+      "gabriel_plain_sources": "as gabriel_reference_plan with the declared plain view: every declared source file enters the prompt regardless of revision or revocation (ablation of provenance-aware retrieval; document tasks only)",
+      "gabriel_reference_plan": "run state succeeded with the pack's reference plan and the production retrieval view (effective revision, authorized and available sources; contained numerical worker)",
+      "provider_only": "an admissible deliverable was produced (amendment applied or declared operation executed through the same adapter); no verification",
+      "simple_loop": "the system's own run of the independent content checks passed (plain source view, no owner, memory service or policy)"
+    },
+    "gabriel": "run state succeeded (every mandatory check passed with eligible evidence, artifacts verified, effects reconciled)",
+    "gabriel_episodes": "as gabriel_reference_plan (rule-based repair) with the frozen episodes retrievable into the worker prompt (readout ablation)",
+    "gabriel_no_repair": "as gabriel, with max_repairs=0 and max_plan_versions=1 (ablation of the repair cycle)",
+    "gabriel_policy": "as gabriel_reference_plan, with the frozen readout policy pinned: at a failed verification it chooses repair or stop from the progress channels, and it may retrieve frozen episodes into the worker prompt",
+    "gabriel_reference_plan": "as gabriel, with the domain pack's deterministic reference plan admitted without a planner request (planner ablation)",
+    "provider_only": "an admissible patch was applied (no verification)",
+    "simple_loop": "the system's own runs of the visible tests and the oracle both exited 0"
+  },
+  "episode_seed": null,
+  "families": [
+    "conflict",
+    "graph",
+    "resample",
+    "revision",
+    "revoked",
+    "units"
+  ],
+  "frozen_at_utc": "2026-10-02T22:22:19.429442+00:00",
+  "frozen_digest": "8cc9e12fd75f1f904c844cbc0af798f3c01920707b8e85d8bac9e19b84b7eb7d",
+  "harness_identity": "96e9f6a9d8635dc0e4d256ff5620945cf82faaf0c2a9f691f01e294cd47df5fb",
+  "held_out_families": [
+    "conflict",
+    "graph"
+  ],
+  "metrics": [
+    "p_success = mean(V)",
+    "p_false_completion = mean(D*(1-V))",
+    "conditional false completion = sum(D*(1-V))/sum(D)",
+    "model requests, model tokens and wall time per run",
+    "recovery: Gabriel runs that used repair cycles or extra plan versions",
+    "paired differences gabriel - baseline per task (mean over repetitions)",
+    "bootstrap percentile intervals, resampling task families with replacement (and tasks as a secondary view)"
+  ],
+  "note": "Protocol 5 (ADR-16): advantage gate on the document and numerical tiers with the declared memory ablations. Frozen after two pilots on the revision, revoked, units and resample families (evidence/wp14/pilot_declaration.md, pilot1-run, pilot2-run); the conflict and graph families were never run before this protocol. The corpus was amended once between the pilots (status statements removed from the source texts) and is pinned here.",
+  "paired": [
+    [
+      "gabriel_reference_plan",
+      "provider_only"
+    ],
+    [
+      "gabriel_reference_plan",
+      "simple_loop"
+    ],
+    [
+      "gabriel_reference_plan",
+      "gabriel_plain_sources"
+    ],
+    [
+      "gabriel_reference_plan",
+      "gabriel_all_revisions"
+    ]
+  ],
+  "policy": null,
+  "provider": {
+    "credential_ref": "env:OPENAI_API_KEY",
+    "kind": "openai_compat",
+    "model": "gpt-4.1-mini",
+    "temperature_milli": 0,
+    "timeout_ms": 120000
+  },
+  "purpose": "Matched comparison: increase independently verified task success or reduce resources at equal success, under a fixed task distribution and matched constraints. Not a benchmark of general capability.",
+  "repetitions": 2,
+  "sample_size_statement": "18 tasks in 6 families; the minimum relevant effect is not predeclared from a pilot, so intervals are reported as descriptive uncertainty, not as a powered test",
+  "schema": "gabriel.evaluation-protocol/1",
+  "systems": [
+    "provider_only",
+    "simple_loop",
+    "gabriel_reference_plan",
+    "gabriel_plain_sources",
+    "gabriel_all_revisions"
+  ],
+  "tasks": [
+    {
+      "digest": "2b9c370b172b66606de1fb5e7256990add95ad11a8095b46a85b536ab77fb459",
+      "family": "revision",
+      "task_id": "dr-notice",
+      "tier": "document"
+    },
+    {
+      "digest": "4d480b447108e1d35c371e5f55df135f05e049400c01c05247ba1048039514df",
+      "family": "revision",
+      "task_id": "dr-sla",
+      "tier": "document"
+    },
+    {
+      "digest": "e837fe40aa6cd0819145ea84b4c3752aee4d36229468c65e2260adf2cc18444c",
+      "family": "revision",
+      "task_id": "dr-fee",
+      "tier": "document"
+    },
+    {
+      "digest": "ffb14dcbd7a7dd43a6a9b0dfe9a83925468f18ffea3484cfb59e8c893f636593",
+      "family": "revoked",
+      "task_id": "dv-retention",
+      "tier": "document"
+    },
+    {
+      "digest": "ff4c970a21e509105ab0da107ab22fe753a80f06b88919f674d0d596b1526db3",
+      "family": "revoked",
+      "task_id": "dv-delivery",
+      "tier": "document"
+    },
+    {
+      "digest": "6e1f7c7bcf995bf2ac1a06391e5d1d29a9c750fef11493f437b74ed19e4eef60",
+      "family": "revoked",
+      "task_id": "dv-travel",
+      "tier": "document"
+    },
+    {
+      "digest": "477f190a07dc9e5490d8ecbc017eaa1277c53dd9b5fefcf3b6816cf19f10bace",
+      "family": "conflict",
+      "task_id": "dc-hours",
+      "tier": "document"
+    },
+    {
+      "digest": "7052d6cb276039664dda772182e114a49037e189d76e9a42cae3b6621d2fc8fc",
+      "family": "conflict",
+      "task_id": "dc-quorum",
+      "tier": "document"
+    },
+    {
+      "digest": "1a77d20edf857aac3b4d69570776f82beb71aaa6b3dd8c1a4bdd797f1ad53571",
+      "family": "conflict",
+      "task_id": "dc-limit",
+      "tier": "document"
+    },
+    {
+      "digest": "b1816648ba10b09a5ff4984be7f2d1b02eec7bc4dafdef6086340912c84a5b44",
+      "family": "units",
+      "task_id": "nu-kelvin",
+      "tier": "numerical"
+    },
+    {
+      "digest": "fc44dcf9a8d748e2fcb027df9f0931c20262052bde42f0823aaaaae672f54349",
+      "family": "units",
+      "task_id": "nu-celsius",
+      "tier": "numerical"
+    },
+    {
+      "digest": "d2ddf11e12c7a8210f1c1cc58f5093ba08f6586606e4aa9be5cbb11bc26d0426",
+      "family": "units",
+      "task_id": "nu-metres",
+      "tier": "numerical"
+    },
+    {
+      "digest": "6d35efd2f590e8fbefbe1f4005b9e56677607164ea03b7023f2d085ceae5906d",
+      "family": "resample",
+      "task_id": "nr-second",
+      "tier": "numerical"
+    },
+    {
+      "digest": "35438b79f2e4803335e3648cc13d0de0ad2a6dd8ae3e34d753c8d1be25c42436",
+      "family": "resample",
+      "task_id": "nr-five",
+      "tier": "numerical"
+    },
+    {
+      "digest": "ccae9ed91ff74c414b18ad1d05a9fd44832d89f30a1ccd156a10d9f5a032a032",
+      "family": "resample",
+      "task_id": "nr-hour",
+      "tier": "numerical"
+    },
+    {
+      "digest": "e089ca1b640d21ac7534ccc220319684e029893ed3e0bb5539620d992818f33f",
+      "family": "graph",
+      "task_id": "ng-path",
+      "tier": "numerical"
+    },
+    {
+      "digest": "e3a92fac61cd292943dbe7d443ca9fde9352c58043b27dd6a8a99d604352bda6",
+      "family": "graph",
+      "task_id": "ng-star",
+      "tier": "numerical"
+    },
+    {
+      "digest": "a01fe9cd4514658cec971273405ad29eff50725b392030f01d23deae8b52b646",
+      "family": "graph",
+      "task_id": "ng-cycle",
+      "tier": "numerical"
+    }
+  ],
+  "tiers": [
+    "document",
+    "numerical"
+  ],
+  "time_limit_is_failure": true,
+  "verification": "fresh, system-independent: changed paths within allowed_paths; visible tests exit 0; oracle installed from the corpus text and exit 0; all executed in the containment backend on the final tree"
+}

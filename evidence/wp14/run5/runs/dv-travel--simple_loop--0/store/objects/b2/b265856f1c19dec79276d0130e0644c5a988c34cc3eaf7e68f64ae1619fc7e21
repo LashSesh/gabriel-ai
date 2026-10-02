@@ -1,0 +1,57 @@
+You are the worker role of Gabriel for a source-grounded document amendment.
+Goal (verbatim user request):
+Amend doc/travel_summary.md so that it states the daily allowance for domestic travel and the approval rule for expensive trips. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- citations [document/citations_bound] independent=True
+- claims [document/required_claims] independent=True
+
+Editable paths (changes elsewhere are rejected; sources are never editable): doc/
+Base commit: 14aad9f2a955c8d0377c0d3eeec8652a8cbe39f4
+
+Target documents (path sha256 bytes):
+  doc/travel_summary.md 2b7af4b9370335eff02f7de74f504c4df57533095b2e8a9bad633e8bd149c4ff 428
+=== doc/travel_summary.md (sha256 2b7af4b9370335eff02f7de74f504c4df57533095b2e8a9bad633e8bd149c4ff) ===
+# Travel summary
+
+The daily allowance for domestic travel is sixty (60) EUR[[cite:obs-180e9dc4e39f4436d1ac773ba13fa9e87dd69254 "The daily allowance for domestic travel is sixty (60) EUR."]]. Trips with a total cost above one thousand (1000) EUR need written approval by a director[[cite:obs-23368ba6840031cd61e7313c5d05f38607a83d1f "Trips with a total cost above one thousand (1000) EUR need written approval by a director."]].
+
+
+
+Sources (cite them by observation id; quotes must be exact substrings of the cited source):
+=== file sources/travel_policy.md observation obs-d93bd5a70e63280cdc87f129beb482ca9f05607d (90 bytes) ===
+# Travel policy
+
+## Allowance
+
+The daily allowance for domestic travel is forty (40) EUR.
+
+
+=== file sources/travel_allowance_update.md observation obs-180e9dc4e39f4436d1ac773ba13fa9e87dd69254 (86 bytes) ===
+# Travel allowance update
+
+The daily allowance for domestic travel is sixty (60) EUR.
+
+
+=== file sources/approval_memo.md observation obs-23368ba6840031cd61e7313c5d05f38607a83d1f (108 bytes) ===
+# Approval memo
+
+Trips with a total cost above one thousand (1000) EUR need written approval by a director.
+
+
+
+Previous attempt failed verification (round 1). Diagnostics:
+--- verification ---
+doc/travel_summary.md: quote 'The daily allowance for domestic travel is sixty (60) EUR.' is found only in a revoked source
+required statement missing: 40 EUR | forty (40) EUR | (40) EUR | EUR 40 | forty EUR
+required statement not cited from travel with 'forty (40) EUR'
+forbidden statement present in doc/travel_summary.md: sixty (60) EUR, (60) EUR
+
+
+Every statement you add must be followed by a citation marker of the form
+[[cite:<observation id> "exact quote from that source"]] where the quote is copied verbatim from the cited source.
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<target path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest. For create expected_sha256 is null.
+Do not touch sources or oracle files. Do not claim completion; the independent checks decide.

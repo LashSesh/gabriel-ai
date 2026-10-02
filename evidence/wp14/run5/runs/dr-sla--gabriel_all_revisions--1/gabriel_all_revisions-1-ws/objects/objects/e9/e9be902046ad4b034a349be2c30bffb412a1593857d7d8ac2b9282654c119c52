@@ -1,0 +1,38 @@
+{
+ "claims": [
+  {
+   "path": "doc/sla_summary.md",
+   "must_contain": [
+    "2 hours",
+    "two (2) hours",
+    "(2) hours",
+    "two hours",
+    "2-hour"
+   ],
+   "cited_source_id": "sla",
+   "quote_must_include": "two (2) hours",
+   "cited_source_revision": 2
+  },
+  {
+   "path": "doc/sla_summary.md",
+   "must_contain": [
+    "on-call engineer",
+    "on-call"
+   ],
+   "cited_source_id": "handbook",
+   "quote_must_include": "on-call engineer"
+  }
+ ],
+ "forbidden": [
+  {
+   "path": "doc/sla_summary.md",
+   "must_not_contain": [
+    "4 hours",
+    "four (4) hours",
+    "(4) hours",
+    "four hours",
+    "4-hour"
+   ]
+  }
+ ]
+}

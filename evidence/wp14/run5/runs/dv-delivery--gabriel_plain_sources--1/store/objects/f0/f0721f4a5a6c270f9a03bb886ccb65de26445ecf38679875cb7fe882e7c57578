@@ -1,0 +1,37 @@
+{
+ "claims": [
+  {
+   "path": "doc/vendor_terms.md",
+   "must_contain": [
+    "10 business days",
+    "ten (10) business days",
+    "(10) business days",
+    "ten business days"
+   ],
+   "cited_source_id": "contract",
+   "quote_must_include": "ten (10) business days"
+  },
+  {
+   "path": "doc/vendor_terms.md",
+   "must_contain": [
+    "24 months",
+    "twenty-four (24) months",
+    "(24) months",
+    "twenty-four months"
+   ],
+   "cited_source_id": "warranty",
+   "quote_must_include": "twenty-four (24) months"
+  }
+ ],
+ "forbidden": [
+  {
+   "path": "doc/vendor_terms.md",
+   "must_not_contain": [
+    "7 business days",
+    "seven (7) business days",
+    "(7) business days",
+    "seven business days"
+   ]
+  }
+ ]
+}

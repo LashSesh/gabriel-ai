@@ -1,0 +1,64 @@
+{
+  "task_id": "dc-hours",
+  "family": "conflict",
+  "system": "provider_only",
+  "rep": 1,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp14/run5/runs/dc-hours--provider_only--1",
+  "domain": "document",
+  "outcome": {
+    "system": "provider_only",
+    "task_id": "dc-hours",
+    "family": "conflict",
+    "rep": 1,
+    "declared": false,
+    "declared_reason": "provider status invalid_output",
+    "model_requests": 1,
+    "model_tokens": 899,
+    "wall_ms": 2776,
+    "provider_statuses": [
+      "invalid_output"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp14/run5/runs/dc-hours--provider_only--1/worktrees/provider_only-1",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "provider status invalid_output"
+    ],
+    "gabriel": null,
+    "repairs_used": 0,
+    "plan_versions": 0
+  },
+  "verification": {
+    "verified": false,
+    "problems": [
+      "doc/hours.md carries no citation",
+      "required statement missing: 09:00 to 15:00 | 9:00 to 15:00 | 09:00-15:00 | 9:00-15:00 | 09:00 and 15:00 | 9:00 and 15:00",
+      "required statement not cited from resolution with '09:00 to 15:00'"
+    ],
+    "changed_paths": [],
+    "out_of_scope_paths": [],
+    "citations": 0,
+    "claims": [
+      {
+        "claim": "09:00 to 15:00 | 9:00 to 15:00 | 09:00-15:00 | 9:00-15:00 | 09:00 and 15:00 | 9:00 and 15:00",
+        "present": false,
+        "cited_from_expected_source": false
+      }
+    ],
+    "targets": {
+      "doc/hours.md": "# Core hours\n\n(to be completed)\n"
+    },
+    "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "patch_bytes": 0,
+    "patch": "",
+    "head_is_base": true,
+    "marker": "eval-verify-dc-hours-provider_only-1"
+  },
+  "V": 0,
+  "D": 0,
+  "false_completion": 0,
+  "unit_wall_ms": 2998
+}

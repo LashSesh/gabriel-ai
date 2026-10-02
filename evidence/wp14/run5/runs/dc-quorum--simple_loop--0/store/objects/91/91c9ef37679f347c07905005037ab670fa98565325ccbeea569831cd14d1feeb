@@ -1,0 +1,50 @@
+You are the worker role of Gabriel for a source-grounded document amendment.
+Goal (verbatim user request):
+Amend doc/quorum.md so that it states the quorum of the general assembly. Where the amendment of 2 May 2026 and the bylaws differ, the amendment applies. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- citations [document/citations_bound] independent=True
+- claims [document/required_claims] independent=True
+
+Editable paths (changes elsewhere are rejected; sources are never editable): doc/
+Base commit: 8ffc2102a7dc409cb6ebb31c34385ff9d1399ff8
+
+Target documents (path sha256 bytes):
+  doc/quorum.md efffcb5aa4eb330801dd9293738c98d2f183e2e463eac14374ad59a89bc1d660 492
+=== doc/quorum.md (sha256 efffcb5aa4eb330801dd9293738c98d2f183e2e463eac14374ad59a89bc1d660) ===
+# Quorum
+
+The general assembly has a quorum when one third of the members are present. This rule applies where the amendment of 2 May 2026 and the bylaws differ, with the amendment taking precedence.
+
+[[cite:obs-0fea77438fbfe3945c0fd4e4af8f4005c2b0c0b2 "Section Quorum is amended: the general assembly has a quorum when one third of the members are present."]]
+[[cite:obs-8760f71804a123ef0787db970f414207f7b783c7 "The general assembly has a quorum when one half of the members are present."]]
+
+
+Sources (cite them by observation id; quotes must be exact substrings of the cited source):
+=== file sources/bylaws.md observation obs-8760f71804a123ef0787db970f414207f7b783c7 (97 bytes) ===
+# Bylaws
+
+## Quorum
+
+The general assembly has a quorum when one half of the members are present.
+
+
+=== file sources/amendment_2026-05-02.md observation obs-0fea77438fbfe3945c0fd4e4af8f4005c2b0c0b2 (136 bytes) ===
+# Amendment adopted 2 May 2026
+
+Section Quorum is amended: the general assembly has a quorum when one third of the members are present.
+
+
+
+Previous attempt failed verification (round 1). Diagnostics:
+--- verification ---
+forbidden statement present in doc/quorum.md: one half, half of the members
+
+
+Every statement you add must be followed by a citation marker of the form
+[[cite:<observation id> "exact quote from that source"]] where the quote is copied verbatim from the cited source.
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<target path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest. For create expected_sha256 is null.
+Do not touch sources or oracle files. Do not claim completion; the independent checks decide.

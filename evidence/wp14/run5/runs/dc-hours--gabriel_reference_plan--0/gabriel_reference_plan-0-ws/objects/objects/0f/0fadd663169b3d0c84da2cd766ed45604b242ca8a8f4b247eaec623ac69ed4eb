@@ -1,0 +1,48 @@
+You are the worker role of Gabriel for a source-grounded document amendment.
+Goal (verbatim user request):
+Amend doc/hours.md so that it states the core working hours. Where the board resolution of 15 September 2026 and the staff handbook differ, the resolution applies. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- citations [document/citations_bound] independent=True
+- claims [document/required_claims] independent=True
+
+Editable paths (changes elsewhere are rejected; sources are never editable): doc/
+Base commit: 2838b1c8f14f4c1e2e188150cc327f07f3ddeb39
+
+Target documents (path sha256 bytes):
+  doc/hours.md 95599f78b5502ced097bf6c3a8a462f93868e193ae36501badd312db3464f557 32
+=== doc/hours.md (sha256 95599f78b5502ced097bf6c3a8a462f93868e193ae36501badd312db3464f557) ===
+# Core hours
+
+(to be completed)
+
+
+
+Sources (cite them by observation id; quotes must be exact substrings of the cited source):
+=== source resolution revision 1 observation obs-7a88f10e674c61367a6fc21bf74b1197437baf5f (123 bytes) ===
+# Board resolution of 15 September 2026
+
+Core hours are set from 09:00 to 15:00 on working days, effective 1 October 2026.
+
+
+=== source handbook revision 1 observation obs-f9757bf8baa5c4a56810adcbda83d5070d3b3b50 (88 bytes) ===
+# Staff handbook
+
+## Working hours
+
+Core hours are from 10:00 to 16:00 on working days.
+
+
+
+Previous attempt failed verification (round 1). Diagnostics:
+--- previous-attempt:attempt-run-dc-hours-gabriel_reference_plan-0-1-7-8b0cf1 ---
+status invalid_output: {"elapsed_ms":2613,"error":"invalid JSON: invalid exact JSON: Expecting ',' delimiter: line 1 column 759 (char 758)","finish_reason":"stop","http_status":200,"loss":[],"model_revision":"gpt-4.1-mini-2025-04-14","normalization_profile_id":"json-fenced-v1","provider_request_id":"chatcmpl-EUfx6Y7OZifgxsVV8RDU2MNeWLUnX","raw_response_ref":{"bytes":1815,"media_type":"application/json","sha256":"831707def7746c1b9d2eac6f586b9903d2127b18f48d3ac9b948e31756ab1ec7"},"request_ref":{"bytes":1616,"media_type":"application/json","sha256":"c13060f0d2502e82b34ffe15f15c1641292ff5026dd16a7de28e81d94637b3f3"},"status":"invalid_output","usage_known":true}
+
+
+Every statement you add must be followed by a citation marker of the form
+[[cite:<observation id> "exact quote from that source"]] where the quote is copied verbatim from the cited source.
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<target path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest. For create expected_sha256 is null.
+Do not touch sources or oracle files. Do not claim completion; the independent checks decide.

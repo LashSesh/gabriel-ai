@@ -1,0 +1,146 @@
+{
+  "task_id": "dr-notice",
+  "family": "revision",
+  "system": "gabriel_all_revisions",
+  "rep": 0,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp14/run5/runs/dr-notice--gabriel_all_revisions--0",
+  "domain": "document",
+  "outcome": {
+    "system": "gabriel_all_revisions",
+    "task_id": "dr-notice",
+    "family": "revision",
+    "rep": 0,
+    "declared": true,
+    "declared_reason": "run state succeeded",
+    "model_requests": 1,
+    "model_tokens": 921,
+    "wall_ms": 3877,
+    "provider_statuses": [
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp14/run5/runs/dr-notice--gabriel_all_revisions--0/gabriel_all_revisions-0-ws/worktrees/run-dr-notice-gabriel_all_revisions-0-1",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "assess propose/output-valid -> passed: assessment passed recorded for output-valid; node propose verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+      "apply -> completed (result accepted; checks pending)",
+      "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+      "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+      "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+      "review -> completed (result accepted; checks pending)",
+      "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets",
+      "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,citations,claims,no-secrets",
+      "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: citations,claims,no-secrets",
+      "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; not complete: mandatory checks without eligible passing evidence: citations,claims",
+      "assess review/citations -> passed: assessment passed recorded for citations; not complete: mandatory checks without eligible passing evidence: claims",
+      "assess review/claims -> passed: assessment passed recorded for claims; node review verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+    ],
+    "gabriel": {
+      "run_id": "run-dr-notice-gabriel_all_revisions-0-1",
+      "workspace": "/home/user/gabriel-ai/evidence/wp14/run5/runs/dr-notice--gabriel_all_revisions--0/gabriel_all_revisions-0-ws",
+      "hold": null,
+      "replay": "passed",
+      "events": 28,
+      "assessments": [
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "propose"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "apply"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "read-back"
+        },
+        {
+          "check_id": "scope",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "base-commit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "checks-intact",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "no-secrets",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "citations",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "claims",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "observe"
+        }
+      ]
+    },
+    "repairs_used": 0,
+    "plan_versions": 1
+  },
+  "verification": {
+    "verified": true,
+    "problems": [],
+    "changed_paths": [
+      "doc/summary.md"
+    ],
+    "out_of_scope_paths": [],
+    "citations": 2,
+    "claims": [
+      {
+        "claim": "45 days | forty-five (45) days | (45) days | 45-day | forty-five days",
+        "present": true,
+        "cited_from_expected_source": true
+      },
+      {
+        "claim": "500 EUR | EUR 500 | 500 euro | 500 Euro",
+        "present": true,
+        "cited_from_expected_source": true
+      }
+    ],
+    "targets": {
+      "doc/summary.md": "# Membership summary\n\nThe notice period for members is forty-five (45) days, counted from the day the written notice is received [[cite:obs-fa68f1a97c8b43178b8562685037aa64e2732b25 \"The notice period for members is forty-five (45) days, counted from the day the written notice is received.\"]].\n\nThe expense approval threshold is 500 EUR per single expense [[cite:obs-7517c9a4eeb29585fb109fadda0cde98188ad01a \"With effect from 1 October 2026 the expense approval threshold is 500 EUR per single expense.\"]].\n"
+    },
+    "patch_sha256": "72309c27e9dad122d743dc2d26f2d1e583e67f286a6ac556b7b8e9285ff04e16",
+    "patch_bytes": 710,
+    "patch": "diff --git a/doc/summary.md b/doc/summary.md\nindex e1f8064..091da03 100644\n--- a/doc/summary.md\n+++ b/doc/summary.md\n@@ -1,3 +1,5 @@\n # Membership summary\n \n-(to be completed: notice period and expense approval threshold)\n+The notice period for members is forty-five (45) days, counted from the day the written notice is received [[cite:obs-fa68f1a97c8b43178b8562685037aa64e2732b25 \"The notice period for members is forty-five (45) days, counted from the day the written notice is received.\"]].\n+\n+The expense approval threshold is 500 EUR per single expense [[cite:obs-7517c9a4eeb29585fb109fadda0cde98188ad01a \"With effect from 1 October 2026 the expense approval threshold is 500 EUR per single expense.\"]].\n",
+    "head_is_base": true,
+    "marker": "eval-verify-dr-notice-gabriel_all_revisions-0"
+  },
+  "V": 1,
+  "D": 1,
+  "false_completion": 0,
+  "unit_wall_ms": 4064
+}

@@ -70,6 +70,24 @@ the cited source span stays fixed; the run was repeated.
   claimed. The promotion rule requires held-out evidence and is tested, not evaluated.
 - Document extraction supports UTF-8 text only.
 
+## Advantage gate on the document and numerical families (protocol 5, ADR-16)
+Executed after this report's gate evidence, with frozen corpora, matched baselines, two pilots
+and held-out families (`docs/EVALUATION_PROTOCOL.md`, `evidence/wp14/`): 144 runs with
+gpt-4.1-mini in `linux_namespace`. The provider-only baseline false-completed five of six
+`conflict` amendments; every verifying system, Gabriel included, removed those false
+completions, the simple verification loop as reliably as the owner and at no higher cost. On
+the `revision` family every arm, with or without the revision rule, chose the dated later
+revision at the first request; on the `revoked` family the production view saved the plain
+view's repairs (1.00 against 1.83 requests), but three of those four repairs were an
+observation-id mix-up on a correct statement, not the withdrawn content being used. The
+numerical tier did not discriminate at all (identical outcomes and tokens; Gabriel's worker
+contained, the baselines' in process). Against the criterion declared before the run, the
+advantage gate is **not passed** on these families either, and the declared memory ablations
+fell below the minimum relevant effect. The G2 claim of this report is unchanged by that
+result: the three domains run through one core; whether the core's memory mechanisms buy
+anything measurable depends on the provider and the distribution, and for gpt-4.1-mini on these
+tasks it is small.
+
 ## Known issues
 - A tool implementation change invalidates existing workspaces at open (no migration).
 - The numerical job cache lives in the workspace as a derived file; it is not part of backups.

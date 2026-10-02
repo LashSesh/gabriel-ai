@@ -1,0 +1,52 @@
+You are the worker role of Gabriel for a source-grounded document amendment.
+Goal (verbatim user request):
+Amend doc/signature_limit.md so that it states the single-signature purchase limit. Where the CFO directive of 1 July 2026 and the procurement policy differ, the directive applies. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- citations [document/citations_bound] independent=True
+- claims [document/required_claims] independent=True
+
+Editable paths (changes elsewhere are rejected; sources are never editable): doc/
+Base commit: 7b160bbbea44116c79114843cf461428ae73e623
+
+Target documents (path sha256 bytes):
+  doc/signature_limit.md ca2eaa6a2a4758f05162f9673b1cf07755f956e76fd1fb2abe79965d721f950f 861
+=== doc/signature_limit.md (sha256 ca2eaa6a2a4758f05162f9673b1cf07755f956e76fd1fb2abe79965d721f950f) ===
+# Signature limit
+
+A single signature suffices for purchases up to one thousand (1000) EUR only, as stated in the CFO directive of 1 July 2026. [[cite:obs-b75eb6febbac77286c9b737a1fa1b3edb4671acb "Until further notice a single signature suffices for purchases up to one thousand (1000) EUR only."]]
+
+Although the procurement policy states that a single signature suffices for purchases up to two thousand (2000) EUR, the CFO directive takes precedence where they differ. [[cite:obs-b31c84d6bcee89f87e4e93b853bc0ac9c748755d "A single signature suffices for purchases up to two thousand (2000) EUR."]]
+
+Therefore, the single-signature purchase limit is one thousand (1000) EUR according to the CFO directive. [[cite:obs-b75eb6febbac77286c9b737a1fa1b3edb4671acb "Until further notice a single signature suffices for purchases up to one thousand (1000) EUR only."]]
+
+
+Sources (cite them by observation id; quotes must be exact substrings of the cited source):
+=== source directive revision 1 observation obs-b75eb6febbac77286c9b737a1fa1b3edb4671acb (131 bytes) ===
+# CFO directive of 1 July 2026
+
+Until further notice a single signature suffices for purchases up to one thousand (1000) EUR only.
+
+
+=== source procurement revision 1 observation obs-b31c84d6bcee89f87e4e93b853bc0ac9c748755d (116 bytes) ===
+# Procurement policy
+
+## Signature limits
+
+A single signature suffices for purchases up to two thousand (2000) EUR.
+
+
+Observation decision-run-dc-limit-gabriel_reference_plan-0-1-1 is not available: kind_not_allowed
+
+Previous attempt failed verification (round 2). Diagnostics:
+--- claims ---
+{"check_id": "claims", "evidence": {"claims": [{"cited_from_expected_source": true, "claim": "1000 EUR | 1,000 EUR | one thousand (1000) EUR | (1000) EUR | EUR 1000 | EUR 1,000", "path": "doc/signature_limit.md", "present": true}], "forbidden_present": [{"path": "doc/signature_limit.md", "present": ["two thousand (2000) EUR", "(2000) EUR"]}]}, "node_id": "review", "outcome": "failed"}
+
+
+Every statement you add must be followed by a citation marker of the form
+[[cite:<observation id> "exact quote from that source"]] where the quote is copied verbatim from the cited source.
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<target path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest. For create expected_sha256 is null.
+Do not touch sources or oracle files. Do not claim completion; the independent checks decide.

@@ -1,0 +1,59 @@
+You are the worker role of Gabriel for a source-grounded document amendment.
+Goal (verbatim user request):
+Amend doc/travel_summary.md so that it states the daily allowance for domestic travel and the approval rule for expensive trips. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- citations [document/citations_bound] independent=True
+- claims [document/required_claims] independent=True
+
+Editable paths (changes elsewhere are rejected; sources are never editable): doc/
+Base commit: 0bac9e42081834abe9b1b9013050a468f40f1dc7
+
+Target documents (path sha256 bytes):
+  doc/travel_summary.md 27a6c9024eb6e1a71e4ecccd62aa43777c4fd5614f487679682ae768827d3b35 429
+=== doc/travel_summary.md (sha256 27a6c9024eb6e1a71e4ecccd62aa43777c4fd5614f487679682ae768827d3b35) ===
+# Travel summary
+
+The daily allowance for domestic travel is sixty (60) EUR.[[cite:obs-893f13c7a9eaa0ef6b923f2e21b441e9cff57937 "The daily allowance for domestic travel is sixty (60) EUR."]]
+
+Trips with a total cost above one thousand (1000) EUR need written approval by a director.[[cite:obs-1244d4b7e83de1ef32e4f0032b40a5626d2d4fcd "Trips with a total cost above one thousand (1000) EUR need written approval by a director."]]
+
+
+
+Sources (cite them by observation id; quotes must be exact substrings of the cited source):
+=== file sources/travel_policy.md observation obs-00e6d75c5d34f5d63d914e2a9ed9d1bf9b0cf3c2 (90 bytes) ===
+# Travel policy
+
+## Allowance
+
+The daily allowance for domestic travel is forty (40) EUR.
+
+
+=== file sources/travel_allowance_update.md observation obs-893f13c7a9eaa0ef6b923f2e21b441e9cff57937 (86 bytes) ===
+# Travel allowance update
+
+The daily allowance for domestic travel is sixty (60) EUR.
+
+
+=== file sources/approval_memo.md observation obs-1244d4b7e83de1ef32e4f0032b40a5626d2d4fcd (108 bytes) ===
+# Approval memo
+
+Trips with a total cost above one thousand (1000) EUR need written approval by a director.
+
+
+
+Previous attempt failed verification (round 3). Diagnostics:
+--- claims ---
+{"check_id": "claims", "evidence": {"claims": [{"cited_from_expected_source": false, "claim": "40 EUR | forty (40) EUR | (40) EUR | EUR 40 | forty EUR", "path": "doc/travel_summary.md", "present": true}, {"cited_from_expected_source": true, "claim": "director", "path": "doc/travel_summary.md", "present": true}], "forbidden_present": []}, "node_id": "review", "outcome": "failed"}
+
+--- citations ---
+{"check_id": "citations", "evidence": {"frontier": {"memory_sequence": 5, "owner_sequence": 31}, "problems": ["doc/travel_summary.md: citation of obs-893f13c7a9eaa0ef6b923f2e21b441e9cff57937 not bound: revoked"], "resolved": [{"path": "doc/travel_summary.md", "spans": [{"observation_id": "obs-1244d4b7e83de1ef32e4f0032b40a5626d2d4fcd", "source_id": "approval", "span_end": 107, "span_start": 17}]}]}, "node_id": "review-r1", "outcome": "failed"}
+
+
+Every statement you add must be followed by a citation marker of the form
+[[cite:<observation id> "exact quote from that source"]] where the quote is copied verbatim from the cited source.
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<target path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest. For create expected_sha256 is null.
+Do not touch sources or oracle files. Do not claim completion; the independent checks decide.

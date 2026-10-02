@@ -1,6 +1,6 @@
 {
   "schema": "gabriel.evidence.work-packages/1",
-  "produced_at_utc": "2026-10-02T21:40:19.336519+00:00",
+  "produced_at_utc": "2026-10-02T22:31:39.484853+00:00",
   "rule": "A package counts as done only with actual code and recorded test output; privileged and paid runs are listed under not_executed.",
   "packages": {
     "WP01": {
@@ -1048,6 +1048,91 @@
         ]
       }
     },
+    "P5-advantage": {
+      "status": "DONE_EXECUTED_ADVANTAGE_NOT_SHOWN",
+      "tests": [
+        "tests/test_evaluation_domains.py",
+        "tests/test_evaluation.py"
+      ],
+      "acceptance": [
+        "AT17(document and numerical families)"
+      ],
+      "evidence": [
+        "evidence/wp14/pilot_declaration.md",
+        "evidence/wp14/pilot1.frozen.json",
+        "evidence/wp14/pilot1-run/report.md",
+        "evidence/wp14/pilot2.frozen.json",
+        "evidence/wp14/pilot2-run/report.md",
+        "evidence/wp14/protocol5.frozen.json",
+        "evidence/wp14/run5/report.md",
+        "evidence/wp14/*/final_diffs/index.json",
+        "docs/EVALUATION_PROTOCOL.md",
+        "docs/adr/ADR-16-advantage-gate-document-numerical.md"
+      ],
+      "not_executed": [
+        "a second provider",
+        "a real-world document or numerical corpus",
+        "native analytical worker ablation (worker not built)"
+      ],
+      "test_results": {
+        "tests/test_evaluation_domains.py": [
+          {
+            "test": "test_domain_corpus_controls_execute_and_tiers_are_complete",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_independent_document_verification_is_content_based",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_all_revisions_policy_is_a_declared_ablation_that_keeps_authorization",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_provenance_view_hides_the_stale_revision_and_the_other_views_show_it",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_revoked_source_is_excluded_by_provenance_and_caught_by_verification_in_the_plain_view",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_document_comparators_run_through_the_frozen_harness",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_provenance_arm_solves_the_revoked_task_in_one_request_through_the_harness",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_numerical_comparators_run_through_the_frozen_harness",
+            "result": "PASSED"
+          }
+        ],
+        "tests/test_evaluation.py": [
+          {
+            "test": "test_corpus_is_sound_and_frozen_by_digest",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_worker_prompt_contains_retained_sources",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_comparators_under_scripted_provider",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_false_completion_is_measured_not_hidden",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_protocol_freeze_and_metrics",
+            "result": "PASSED"
+          }
+        ]
+      }
+    },
     "WP12": {
       "status": "DONE",
       "tests": [
@@ -1106,7 +1191,7 @@
       "evidence/wp10/at23/report.md",
       "evidence/test_results.txt"
     ],
-    "scope": "one owner/scheduler/policy build served repository repair, source-grounded document amendment and numerical transformation (fixture tasks, real provider for the valid tasks, scripted invalid and out-of-scope controls) with registered domain observers, independent oracles and recorded replay; the analytical worker is the standard-library adapter, native PSE remains optional and unbuilt"
+    "scope": "one owner/scheduler/policy build served repository repair, source-grounded document amendment and numerical transformation (fixture tasks, real provider for the valid tasks, scripted invalid and out-of-scope controls) with registered domain observers, independent oracles and recorded replay; the analytical worker is the standard-library adapter, native PSE remains optional and unbuilt; the advantage gate was executed on the document and numerical families under protocol 5 (evidence/wp14) and not passed, with the declared ablations of provenance-aware retrieval and the revision rule below the declared minimum relevant effect"
   },
   "release_scope_G3": {
     "established_on_this_host": false,

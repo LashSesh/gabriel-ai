@@ -59,6 +59,13 @@ PACKAGES = {
                  "not_executed": ["readout training on real task outcomes (no failed verification in 54 training runs, so no labeled decision of either class)",
                                   "evaluation of a readout policy in protocol 4b (no candidate existed)",
                                   "weight training (outside G1-G3 by the blueprint)", "native PSE worker"]},
+    "P5-advantage": {"status": "DONE_EXECUTED_ADVANTAGE_NOT_SHOWN", "tests": ["tests/test_evaluation_domains.py", "tests/test_evaluation.py"],
+                     "acceptance": ["AT17(document and numerical families)"],
+                     "evidence": ["evidence/wp14/pilot_declaration.md", "evidence/wp14/pilot1.frozen.json", "evidence/wp14/pilot1-run/report.md",
+                                  "evidence/wp14/pilot2.frozen.json", "evidence/wp14/pilot2-run/report.md", "evidence/wp14/protocol5.frozen.json",
+                                  "evidence/wp14/run5/report.md", "evidence/wp14/*/final_diffs/index.json", "docs/EVALUATION_PROTOCOL.md",
+                                  "docs/adr/ADR-16-advantage-gate-document-numerical.md"],
+                     "not_executed": ["a second provider", "a real-world document or numerical corpus", "native analytical worker ablation (worker not built)"]},
     "WP12": {"status": "DONE", "tests": ["tests/test_release.py"], "acceptance": ["AT18"],
              "evidence": ["evidence/wp12/smoke_linux_namespace.log", "evidence/wp12/release_manifest_smoke.json",
                           "evidence/wp12/smoke_restore_report.json", "LICENSE", "docs/RELEASE_G1.md"],
@@ -70,7 +77,9 @@ RELEASE_SCOPE_G2 = {
     "evidence": ["evidence/wp10/at23/summary.json", "evidence/wp10/at23/report.md", "evidence/test_results.txt"],
     "scope": "one owner/scheduler/policy build served repository repair, source-grounded document amendment and numerical transformation "
              "(fixture tasks, real provider for the valid tasks, scripted invalid and out-of-scope controls) with registered domain observers, "
-             "independent oracles and recorded replay; the analytical worker is the standard-library adapter, native PSE remains optional and unbuilt",
+             "independent oracles and recorded replay; the analytical worker is the standard-library adapter, native PSE remains optional and unbuilt; "
+             "the advantage gate was executed on the document and numerical families under protocol 5 (evidence/wp14) and not passed, with the "
+             "declared ablations of provenance-aware retrieval and the revision rule below the declared minimum relevant effect",
 }
 
 RELEASE_SCOPE_G3 = {

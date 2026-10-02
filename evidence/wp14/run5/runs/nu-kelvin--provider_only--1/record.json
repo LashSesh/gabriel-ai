@@ -1,0 +1,52 @@
+{
+  "task_id": "nu-kelvin",
+  "family": "units",
+  "system": "provider_only",
+  "rep": 1,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp14/run5/runs/nu-kelvin--provider_only--1",
+  "domain": "numerical",
+  "outcome": {
+    "system": "provider_only",
+    "task_id": "nu-kelvin",
+    "family": "units",
+    "rep": 1,
+    "declared": true,
+    "declared_reason": "deliverable produced; declared done without verification",
+    "model_requests": 1,
+    "model_tokens": 515,
+    "wall_ms": 1231,
+    "provider_statuses": [
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp14/run5/runs/nu-kelvin--provider_only--1/worktrees/provider_only-1",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "deliverable produced; declared done without verification"
+    ],
+    "gabriel": null,
+    "repairs_used": 0,
+    "plan_versions": 0
+  },
+  "verification": {
+    "verified": true,
+    "problems": [],
+    "changed_paths": [
+      "out/converted.json"
+    ],
+    "out_of_scope_paths": [],
+    "output": "{\"kind\":\"series\",\"time_basis\":\"unix_ms\",\"units\":\"K\",\"values\":[[0,293.15],[1000,294.65],[2000,292.4],[3500,295.15],[4000,269.65]]}",
+    "patch_sha256": "ff941042157fd922c411eec741428f192f83058f3548caad51117cb9d0f97e59",
+    "patch_bytes": 309,
+    "patch": "diff --git a/out/converted.json b/out/converted.json\nnew file mode 100644\nindex 0000000..ff22cf8\n--- /dev/null\n+++ b/out/converted.json\n@@ -0,0 +1 @@\n+{\"kind\":\"series\",\"time_basis\":\"unix_ms\",\"units\":\"K\",\"values\":[[0,293.15],[1000,294.65],[2000,292.4],[3500,295.15],[4000,269.65]]}\n\\ No newline at end of file\n",
+    "head_is_base": true,
+    "marker": "eval-verify-nu-kelvin-provider_only-1"
+  },
+  "V": 1,
+  "D": 1,
+  "false_completion": 0,
+  "unit_wall_ms": 1406
+}
