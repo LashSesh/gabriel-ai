@@ -70,7 +70,7 @@ gabriel replay RUN_ID --workspace ./workspace --recorded
 ```bash
 gabriel backup --workspace ./workspace --out ./backup            # SQLite online backup + referenced objects + anchor
 gabriel restore --from ./backup --workspace ./restored             # verifies objects, anchor and replay; no secret restored
-gabriel release-manifest --workspace ./workspace --out release.json --root .
+gabriel release-manifest --workspace ./workspace --out release.json --root . --selftest   # doctor report includes the jail self-test
 scripts/smoke.sh                                                  # clean venv install, doctor --selftest, task, export, audit, backup, restore
 ```
 

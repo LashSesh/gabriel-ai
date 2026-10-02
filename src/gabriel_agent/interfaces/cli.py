@@ -37,6 +37,7 @@ def main(argv=None) -> int:
     bk = sub.add_parser("backup", help="coherent backup: database snapshot, referenced objects, anchor"); bk.add_argument("--workspace", required=True); bk.add_argument("--out", required=True)
     rs = sub.add_parser("restore", help="restore a backup elsewhere and verify anchor, objects and replay"); rs.add_argument("--from", dest="source", required=True); rs.add_argument("--workspace", required=True)
     rm = sub.add_parser("release-manifest"); rm.add_argument("--workspace", required=False); rm.add_argument("--out", required=True); rm.add_argument("--root", default=".")
+    rm.add_argument("--selftest", action="store_true", help="run the containment self-test so the recorded doctor report carries its result")
     ev = sub.add_parser("eval", help="frozen matched evaluation (WP11)"); esub = ev.add_subparsers(dest="action", required=True)
     esub.add_parser("corpus-check")
     freeze = esub.add_parser("freeze"); freeze.add_argument("--provider", required=True, help="JSON provider spec (file or inline)")
@@ -65,7 +66,7 @@ def main(argv=None) -> int:
             if args.workspace:
                 ws = Workspace.open(args.workspace)
                 try:
-                    doctor, catalog = ws.doctor(), ws.owner.catalog_digest
+                    doctor, catalog = ws.doctor(selftest=args.selftest), ws.owner.catalog_digest
                 finally:
                     ws.close()
             evidence = {}

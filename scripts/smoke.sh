@@ -34,5 +34,7 @@ TASK_ID=$("$GABRIEL" task create --workspace "$WORK/ws" --spec "$WORK/task.json"
 "$GABRIEL" backup --workspace "$WORK/ws" --out "$WORK/backup" > /dev/null
 "$GABRIEL" restore --from "$WORK/backup" --workspace "$WORK/restored" > "$WORK/restore.json"
 "$WORK/venv/bin/python" -c 'import json,sys; d=json.load(open(sys.argv[1])); assert d["status"]=="passed"; print("restore", d["status"], "events", d["replay"]["events"])' "$WORK/restore.json"
-"$GABRIEL" release-manifest --workspace "$WORK/ws" --out "$WORK/release-manifest.json" --root "$ROOT" > /dev/null
+SELFTEST=(--selftest)
+if [ "$BACKEND" = "trusted_local" ]; then SELFTEST=(); fi
+"$GABRIEL" release-manifest --workspace "$WORK/ws" --out "$WORK/release-manifest.json" --root "$ROOT" "${SELFTEST[@]}" > /dev/null
 echo "smoke passed: $WORK"
