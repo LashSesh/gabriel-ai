@@ -1,0 +1,104 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/software-review.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Software domain pack record; representation only.",
+  "properties": {
+    "base_commit": {
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "binary_or_large": {
+      "items": {
+        "pattern": "^[ -~]{1,512}$",
+        "type": "string"
+      },
+      "maxItems": 4096,
+      "minItems": 0,
+      "type": "array"
+    },
+    "changed_paths": {
+      "items": {
+        "pattern": "^[ -~]{1,512}$",
+        "type": "string"
+      },
+      "maxItems": 4096,
+      "minItems": 0,
+      "type": "array"
+    },
+    "head_commit": {
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "out_of_scope_paths": {
+      "items": {
+        "pattern": "^[ -~]{1,512}$",
+        "type": "string"
+      },
+      "maxItems": 4096,
+      "minItems": 0,
+      "type": "array"
+    },
+    "patch_bytes": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "patch_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "protected_modified": {
+      "items": {
+        "pattern": "^[ -~]{1,512}$",
+        "type": "string"
+      },
+      "maxItems": 4096,
+      "minItems": 0,
+      "type": "array"
+    },
+    "schema": {
+      "const": "gabriel.software-review/1",
+      "type": "string"
+    },
+    "secrets_found": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "pattern": "^[ -~]{1,512}$",
+            "type": "string"
+          },
+          "pattern": {
+            "maxLength": 512,
+            "pattern": "^[ -~]*$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "pattern"
+        ],
+        "type": "object"
+      },
+      "maxItems": 256,
+      "minItems": 0,
+      "type": "array"
+    },
+    "tree_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    }
+  },
+  "required": [
+    "schema",
+    "base_commit",
+    "head_commit",
+    "changed_paths",
+    "out_of_scope_paths",
+    "protected_modified",
+    "secrets_found",
+    "binary_or_large",
+    "patch_ref",
+    "patch_bytes",
+    "tree_digest"
+  ],
+  "title": "software-review",
+  "type": "object"
+}

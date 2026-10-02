@@ -22,7 +22,7 @@ class CodecError(ValueError):
     """Raised for any value outside the exact envelope domain."""
 
 
-def _check(value, depth=0):
+def _check(value, depth=0, allow_utf8=False):
     if depth > MAX_DEPTH:
         raise CodecError("envelope nesting exceeds %d" % MAX_DEPTH)
     kind = type(value)
@@ -33,18 +33,18 @@ def _check(value, depth=0):
             raise CodecError("integer outside exact interchange domain")
         return
     if kind is str:
-        if not value.isascii():
+        if not allow_utf8 and not value.isascii():
             raise CodecError("envelope strings must be ASCII; store UTF-8 in an artifact")
         return
     if kind is list:
         for item in value:
-            _check(item, depth + 1)
+            _check(item, depth + 1, allow_utf8)
         return
     if kind is dict:
         for key, item in value.items():
             if type(key) is not str or not key.isascii():
                 raise CodecError("object keys must be ASCII strings")
-            _check(item, depth + 1)
+            _check(item, depth + 1, allow_utf8)
         return
     raise CodecError("unsupported envelope value type: " + kind.__name__)
 
@@ -72,13 +72,19 @@ def _bad_number(text):
     raise CodecError("floating point or non-finite JSON token: " + text)
 
 
-def loads(raw):
-    """Parse exact JSON from bytes or str, rejecting duplicate keys and floats."""
+def loads(raw, *, ascii_only=True):
+    """Parse exact JSON from bytes or str, rejecting duplicate keys and floats.
+
+    With ``ascii_only=False`` arbitrary UTF-8 strings are accepted (provider
+    output, domain records that carry text); integers, duplicate keys, floats
+    and nesting are still checked. Such values are not envelope values and
+    must be stored as UTF-8 artifacts, never canonicalized as envelopes.
+    """
     if isinstance(raw, (bytes, bytearray)):
         try:
-            text = bytes(raw).decode("ascii")
+            text = bytes(raw).decode("ascii" if ascii_only else "utf8")
         except UnicodeDecodeError as exc:
-            raise CodecError("envelope bytes must be ASCII") from exc
+            raise CodecError("envelope bytes must be ASCII" if ascii_only else "bytes are not valid UTF-8") from exc
     elif isinstance(raw, str):
         text = raw
     else:
@@ -88,8 +94,14 @@ def loads(raw):
                            parse_float=_bad_number, parse_constant=_bad_number)
     except (json.JSONDecodeError, RecursionError, TypeError, OverflowError) as exc:
         raise CodecError("invalid exact JSON: " + str(exc)) from exc
-    _check(value)
+    _check(value, allow_utf8=not ascii_only)
     return value
+
+
+def dumps_utf8(value) -> bytes:
+    """Deterministic UTF-8 JSON for records that legitimately carry text."""
+    _check(value, allow_utf8=True)
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False).encode("utf8")
 
 
 def sha256_hex(raw: bytes) -> str:

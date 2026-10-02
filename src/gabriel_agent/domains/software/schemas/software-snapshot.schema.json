@@ -1,0 +1,100 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/software-snapshot.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Software domain pack record; representation only.",
+  "properties": {
+    "base_commit": {
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "coverage": {
+      "additionalProperties": false,
+      "properties": {
+        "does_not_observe": {
+          "items": {
+            "maxLength": 512,
+            "pattern": "^[ -~]*$",
+            "type": "string"
+          },
+          "maxItems": 16,
+          "minItems": 1,
+          "type": "array"
+        },
+        "observes": {
+          "items": {
+            "maxLength": 512,
+            "pattern": "^[ -~]*$",
+            "type": "string"
+          },
+          "maxItems": 16,
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "required": [
+        "observes",
+        "does_not_observe"
+      ],
+      "type": "object"
+    },
+    "extraction_profile": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "file_count": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "head_commit": {
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "manifest_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "observed_frontier": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "schema": {
+      "const": "gabriel.software-snapshot/1",
+      "type": "string"
+    },
+    "structure_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "symlink_count": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "test_files": {
+      "items": {
+        "pattern": "^[ -~]{1,512}$",
+        "type": "string"
+      },
+      "maxItems": 4096,
+      "minItems": 0,
+      "type": "array"
+    },
+    "tree_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "worktree_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    }
+  },
+  "required": [
+    "schema",
+    "worktree_id",
+    "base_commit",
+    "head_commit",
+    "manifest_ref",
+    "tree_digest",
+    "structure_ref",
+    "extraction_profile",
+    "test_files",
+    "file_count",
+    "symlink_count",
+    "coverage",
+    "observed_frontier"
+  ],
+  "title": "software-snapshot",
+  "type": "object"
+}

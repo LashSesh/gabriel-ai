@@ -1,0 +1,67 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/plan-proposal.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Model-proposed plan skeleton (provider output, UTF-8 allowed). The domain pack materializes it into a gabriel.plan/1 record; the owner validates that record.",
+  "properties": {
+    "nodes": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "args": {
+            "type": "object"
+          },
+          "capability_id": {
+            "$ref": "common.schema.json#/$defs/identifier"
+          },
+          "check_ids": {
+            "items": {
+              "$ref": "common.schema.json#/$defs/identifier"
+            },
+            "maxItems": 64,
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "depends_on": {
+            "items": {
+              "$ref": "common.schema.json#/$defs/identifier"
+            },
+            "maxItems": 64,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "node_id": {
+            "$ref": "common.schema.json#/$defs/identifier"
+          },
+          "purpose": {
+            "maxLength": 4000,
+            "type": "string"
+          }
+        },
+        "required": [
+          "node_id",
+          "capability_id",
+          "depends_on",
+          "check_ids",
+          "purpose",
+          "args"
+        ],
+        "type": "object"
+      },
+      "maxItems": 64,
+      "minItems": 1,
+      "type": "array"
+    },
+    "rationale": {
+      "maxLength": 4000,
+      "type": "string"
+    }
+  },
+  "required": [
+    "nodes",
+    "rationale"
+  ],
+  "title": "plan-proposal",
+  "type": "object"
+}

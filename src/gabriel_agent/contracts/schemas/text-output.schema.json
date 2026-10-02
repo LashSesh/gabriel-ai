@@ -1,0 +1,17 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/text-output.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Free-text provider output retained as UTF-8 JSON.",
+  "properties": {
+    "text": {
+      "maxLength": 200000,
+      "type": "string"
+    }
+  },
+  "required": [
+    "text"
+  ],
+  "title": "text-output",
+  "type": "object"
+}

@@ -1,0 +1,32 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/software-repository-pin.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Software domain pack record; representation only.",
+  "properties": {
+    "base_commit": {
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "pinned_by": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "repository_path": {
+      "maxLength": 512,
+      "pattern": "^[ -~]*$",
+      "type": "string"
+    },
+    "schema": {
+      "const": "gabriel.software-repository-pin/1",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema",
+    "repository_path",
+    "base_commit",
+    "pinned_by"
+  ],
+  "title": "software-repository-pin",
+  "type": "object"
+}

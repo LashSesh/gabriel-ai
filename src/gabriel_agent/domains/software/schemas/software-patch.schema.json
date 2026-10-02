@@ -1,0 +1,115 @@
+{
+  "$defs": {
+    "op": {
+      "additionalProperties": false,
+      "properties": {
+        "content_ref": {
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/$defs/artifact_ref"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "content_sha256": {
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/$defs/sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "expected_sha256": {
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/$defs/sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "kind": {
+          "enum": [
+            "create",
+            "modify",
+            "delete"
+          ],
+          "type": "string"
+        },
+        "path": {
+          "pattern": "^[ -~]{1,512}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "path",
+        "expected_sha256",
+        "content_ref",
+        "content_sha256"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://gabriel.invalid/spec/1/software-patch.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Software domain pack record; representation only.",
+  "properties": {
+    "base_snapshot_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "base_tree_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "candidate_id": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "operations": {
+      "items": {
+        "$ref": "#/$defs/op"
+      },
+      "maxItems": 256,
+      "minItems": 1,
+      "type": "array"
+    },
+    "patch_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "proposal_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "rationale_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    },
+    "run_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "schema": {
+      "const": "gabriel.software-patch/1",
+      "type": "string"
+    },
+    "task_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    }
+  },
+  "required": [
+    "schema",
+    "patch_id",
+    "task_id",
+    "run_id",
+    "base_tree_digest",
+    "base_snapshot_ref",
+    "operations",
+    "rationale_ref",
+    "proposal_ref",
+    "candidate_id"
+  ],
+  "title": "software-patch",
+  "type": "object"
+}

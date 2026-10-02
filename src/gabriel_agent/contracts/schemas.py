@@ -73,11 +73,15 @@ def _strict_validator_class():
     return validators.extend(Draft202012Validator, type_checker=strict_integer)
 
 
+DOMAIN_SCHEMA_DIRS = sorted((SCHEMA_DIR.parents[1] / "domains").glob("*/schemas"))
+
+
 @lru_cache(maxsize=1)
 def _registry():
     schemas = {}
-    for path in sorted(SCHEMA_DIR.glob("*.schema.json")):
-        schemas[path.name[:-len(".schema.json")]] = loads(path.read_bytes())
+    for directory in [SCHEMA_DIR] + DOMAIN_SCHEMA_DIRS:
+        for path in sorted(directory.glob("*.schema.json")):
+            schemas[path.name[:-len(".schema.json")]] = loads(path.read_bytes())
     registry = Registry()
     for name, schema in schemas.items():
         Draft202012Validator.check_schema(schema)
@@ -120,10 +124,10 @@ def record_schema_for_payload(value) -> str:
     return _SCHEMA_CONST[value["schema"]]
 
 
-def validate(value, name: str):
+def validate(value, name: str, *, ascii_only: bool = True):
     """Validate an in-memory value against the named closed schema."""
     try:
-        _check(value)
+        _check(value, allow_utf8=not ascii_only)
     except CodecError as exc:
         raise GabrielError(Code.INVALID_SCHEMA, str(exc), obj=name) from exc
     try:
@@ -135,13 +139,13 @@ def validate(value, name: str):
     return value
 
 
-def validate_bytes(raw: bytes, name: str):
-    """Strictly parse exact JSON bytes and validate them."""
+def validate_bytes(raw: bytes, name: str, *, ascii_only: bool = True):
+    """Strictly parse JSON bytes and validate them."""
     try:
-        value = loads(raw)
+        value = loads(raw, ascii_only=ascii_only)
     except CodecError as exc:
         raise GabrielError(Code.INVALID_SCHEMA, str(exc), obj=name) from exc
-    return validate(value, name)
+    return validate(value, name, ascii_only=ascii_only)
 
 
 def dumps_pretty(value) -> str:

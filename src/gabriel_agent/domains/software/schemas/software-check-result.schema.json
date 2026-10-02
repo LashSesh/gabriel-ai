@@ -1,0 +1,130 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/software-check-result.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Software domain pack record; representation only.",
+  "properties": {
+    "argv": {
+      "items": {
+        "maxLength": 512,
+        "pattern": "^[ -~]*$",
+        "type": "string"
+      },
+      "maxItems": 64,
+      "minItems": 1,
+      "type": "array"
+    },
+    "backend_kind": {
+      "enum": [
+        "linux_namespace",
+        "trusted_local"
+      ],
+      "type": "string"
+    },
+    "check_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "containment": {
+      "type": "boolean"
+    },
+    "exit_code": {
+      "anyOf": [
+        {
+          "maximum": 2147483647,
+          "minimum": -2147483648,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "oracle_files": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "intact_after_run": {
+            "type": "boolean"
+          },
+          "path": {
+            "pattern": "^[ -~]{1,512}$",
+            "type": "string"
+          },
+          "sha256": {
+            "$ref": "common.schema.json#/$defs/sha256"
+          }
+        },
+        "required": [
+          "path",
+          "sha256",
+          "intact_after_run"
+        ],
+        "type": "object"
+      },
+      "maxItems": 64,
+      "minItems": 0,
+      "type": "array"
+    },
+    "outcome": {
+      "enum": [
+        "passed",
+        "failed",
+        "inconclusive"
+      ],
+      "type": "string"
+    },
+    "post_tree_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "pre_tree_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "role": {
+      "enum": [
+        "baseline",
+        "acceptance"
+      ],
+      "type": "string"
+    },
+    "schema": {
+      "const": "gabriel.software-check-result/1",
+      "type": "string"
+    },
+    "start_failure": {
+      "anyOf": [
+        {
+          "maxLength": 512,
+          "pattern": "^[ -~]*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "timed_out": {
+      "type": "boolean"
+    },
+    "witness_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref"
+    }
+  },
+  "required": [
+    "schema",
+    "check_id",
+    "role",
+    "argv",
+    "exit_code",
+    "timed_out",
+    "start_failure",
+    "outcome",
+    "witness_ref",
+    "pre_tree_digest",
+    "post_tree_digest",
+    "oracle_files",
+    "backend_kind",
+    "containment"
+  ],
+  "title": "software-check-result",
+  "type": "object"
+}

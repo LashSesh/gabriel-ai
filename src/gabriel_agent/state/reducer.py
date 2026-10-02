@@ -211,10 +211,31 @@ def _accept_plan(projection, command, payload, inputs):
                         ["plan version %d accepted with %d nodes" % (meta["plan_versions"], len(nodes))])
 
 
+PLAN_REQUEST_STEP = "plan-request"
+MAX_PLAN_REQUESTS_PER_VERSION = 2
+
+
+def _planner_node(projection, intent, inputs, tool):
+    """Synthetic node for a planner model request while no plan is admitted."""
+    binding = _binding(inputs)
+    attempts = [a for a in projection["attempts"].values() if a["step_id"] == PLAN_REQUEST_STEP
+                and a.get("plan_version") == projection["run_meta"]["plan_versions"]]
+    if len(attempts) >= MAX_PLAN_REQUESTS_PER_VERSION:
+        _deny("planner request limit reached for this plan version", intent["intent_id"], Code.BUDGET_EXHAUSTED)
+    reservation = binding.get("planner_reservation") or {
+        "model_tokens": 8000, "model_requests": 1, "tool_attempts": 0, "cpu_ms": 0, "elapsed_ms": 0,
+        "artifact_bytes": 1 << 20, "currency_micro_units": 0, "currency": projection["run"]["budget"]["currency"],
+        "accounting_status": "confirmed"}
+    return {"node_id": PLAN_REQUEST_STEP, "capability_id": intent["capability_id"], "effect_class": tool["effect_class"],
+            "retry_class": "target_idempotent_retry", "reservation": reservation, "depends_on": [], "outputs": [],
+            "check_ids": [], "priority": 0, "max_repair_attempts": 0, "inputs": [], "output_schema_digest": tool["output_schema_digest"]}
+
+
 def _issue_intent(projection, command, payload, inputs):
     run, meta, intent = projection["run"], projection["run_meta"], payload
-    if run["state"] != "running":
-        _invalid("issue_intent requires state running, found " + run["state"], run["run_id"])
+    planner_request = run["state"] == "planning" and intent["step_id"] == PLAN_REQUEST_STEP
+    if run["state"] != "running" and not planner_request:
+        _invalid("issue_intent requires state running (or a plan-request while planning), found " + run["state"], run["run_id"])
     if run["pause_requested"]:
         _deny("run is paused; no new dispatch", run["run_id"])
     if meta["limit_violation"]:
@@ -223,22 +244,28 @@ def _issue_intent(projection, command, payload, inputs):
         _deny("run wall-clock deadline exceeded", run["run_id"], Code.BUDGET_EXHAUSTED)
     if intent["run_id"] != run["run_id"] or intent["task_id"] != run["task_id"]:
         _invalid("intent names another run or task", intent["intent_id"])
-    plan = projection["plan"]
-    node = next((n for n in plan["nodes"] if n["node_id"] == intent["step_id"]), None)
-    if node is None:
-        _invalid("intent step is not in the current plan", intent["step_id"])
-    state = projection["nodes"][node["node_id"]]
-    if state["status"] != "pending":
-        _invalid("node is not pending: " + state["status"], node["node_id"])
-    if not node_dependencies_verified(node, projection["nodes"]):
-        _invalid("node dependencies are not verified", node["node_id"])
-    if state["attempts"] >= MAX_ATTEMPTS_PER_NODE or (node["retry_class"] == "never" and state["attempts"] >= 1):
-        _deny("node attempt limit reached", node["node_id"], Code.BUDGET_EXHAUSTED)
-    if intent["capability_id"] != node["capability_id"] or intent["effect_class"] != node["effect_class"]:
-        _invalid("intent capability or effect class disagrees with the plan node", intent["intent_id"])
     tool = inputs.get("catalog_tools", {}).get(intent["capability_id"])
     if tool is None:
         _deny("unknown capability " + intent["capability_id"], intent["intent_id"])
+    if planner_request:
+        if any(a["status"] in ("issued", "marked") for a in projection["attempts"].values()):
+            _invalid("a planner request is already in flight", intent["intent_id"])
+        node = _planner_node(projection, intent, inputs, tool)
+        state = {"status": "pending", "attempts": 0}
+    else:
+        plan = projection["plan"]
+        node = next((n for n in plan["nodes"] if n["node_id"] == intent["step_id"]), None)
+        if node is None:
+            _invalid("intent step is not in the current plan", intent["step_id"])
+        state = projection["nodes"][node["node_id"]]
+        if state["status"] != "pending":
+            _invalid("node is not pending: " + state["status"], node["node_id"])
+        if not node_dependencies_verified(node, projection["nodes"]):
+            _invalid("node dependencies are not verified", node["node_id"])
+        if state["attempts"] >= MAX_ATTEMPTS_PER_NODE or (node["retry_class"] == "never" and state["attempts"] >= 1):
+            _deny("node attempt limit reached", node["node_id"], Code.BUDGET_EXHAUSTED)
+    if intent["capability_id"] != node["capability_id"] or intent["effect_class"] != node["effect_class"]:
+        _invalid("intent capability or effect class disagrees with the plan node", intent["intent_id"])
     grant = _grant(inputs, projection, command)
     grants.check_intent(intent, grant, tool, approvals=set(inputs.get("approvals", [])),
                         revoked_at=inputs.get("grant_revoked_at"), owner_time_unix_ms=inputs["owner_time_unix_ms"],
@@ -273,11 +300,14 @@ def _issue_intent(projection, command, payload, inputs):
         "effect_class": intent["effect_class"], "idempotency_key": intent["idempotency_key"],
         "reconciliation": intent["reconciliation"], "issued_owner_time_unix_ms": inputs["owner_time_unix_ms"],
         "usage": None, "result_status": None, "effect_outcome": None,
+        "plan_version": meta["plan_versions"],
     }
-    state["status"] = "active"
-    state["attempts"] += 1
+    if not planner_request:
+        state["status"] = "active"
+        state["attempts"] += 1
     meta["next_fencing_token"] += 1
-    return ReduceResult(projection, OP_TO_EVENT["issue_intent"], "running", ["intent authorized and reserved"])
+    return ReduceResult(projection, OP_TO_EVENT["issue_intent"], run["state"],
+                        ["planner request authorized and reserved" if planner_request else "intent authorized and reserved"])
 
 
 def _mark_dispatch(projection, command, payload, inputs):
@@ -290,7 +320,7 @@ def _mark_dispatch(projection, command, payload, inputs):
     if (marker["intent_id"], marker["lease_id"], marker["fencing_token"], marker["run_id"]) != (
             attempt["intent_id"], attempt["lease_id"], attempt["fencing_token"], run["run_id"]):
         _invalid("marker identities disagree with the attempt", marker["attempt_id"])
-    if run["state"] != "running":
+    if run["state"] != "running" and not (run["state"] == "planning" and attempt["step_id"] == PLAN_REQUEST_STEP):
         _invalid("dispatch requires state running, found " + run["state"], run["run_id"])
     if run["pause_requested"]:
         _deny("run is paused; dispatch refused", run["run_id"])
@@ -307,7 +337,7 @@ def _mark_dispatch(projection, command, payload, inputs):
     attempt["effect_state"] = "dispatched"
     attempt["marker_ref"] = inputs["payload_ref"]
     attempt["marked_owner_time_unix_ms"] = inputs["owner_time_unix_ms"]
-    return ReduceResult(projection, OP_TO_EVENT["mark_dispatch"], "running", ["dispatch attempt marked before external I/O"])
+    return ReduceResult(projection, OP_TO_EVENT["mark_dispatch"], run["state"], ["dispatch attempt marked before external I/O"])
 
 
 def _accept_result(projection, command, payload, inputs):
@@ -319,12 +349,27 @@ def _accept_result(projection, command, payload, inputs):
             attempt["intent_id"], attempt["lease_id"], attempt["fencing_token"], run["run_id"], run["task_id"]):
         _invalid("result identities disagree with the attempt/lease", result["attempt_id"])
     if attempt["status"] == "issued":
+        # No dispatch marker was ever committed, so no I/O can have happened: the only
+        # admissible "result" is the supervisor abandoning the lease.
+        if result["status"] == "cancelled" and result["effect_outcome"] == "not_applicable" and not result["outputs"]:
+            ledger = projection["ledger"]
+            ledger["reserved"] = budget.release(ledger["reserved"], attempt["reservation"])
+            attempt["status"] = "cancelled"
+            attempt["effect_state"] = "authorized"
+            attempt["result_ref"] = inputs["payload_ref"]
+            node_state = projection["nodes"].get(attempt["step_id"])
+            if node_state is not None and node_state["status"] == "active":
+                node_state["status"] = "pending"
+                node_state["attempts"] = max(0, node_state["attempts"] - 1)
+            return ReduceResult(projection, OP_TO_EVENT["accept_result"], run["state"],
+                                ["lease abandoned before any dispatch marker; reservation released"])
         _invalid("result for an attempt that was never marked dispatched", result["attempt_id"])
     _require_artifacts(inputs, [o["artifact_ref"] for o in result["outputs"]], "result output")
     actual = budget.usage_vector(result["usage"])
     ledger = projection["ledger"]
     notes = []
-    if attempt["status"] != "marked" or run["state"] in TERMINAL_STATES or attempt["step_id"] not in projection["nodes"]:
+    planner_request = attempt["step_id"] == PLAN_REQUEST_STEP
+    if attempt["status"] != "marked" or run["state"] in TERMINAL_STATES or (attempt["step_id"] not in projection["nodes"] and not planner_request):
         # Late, duplicate, cancelled or obsolete: audit fact only, never a plan advance.
         charge_needed = attempt.get("usage") is None and attempt["status"] in ("marked", "cancelled")
         if charge_needed:
@@ -356,6 +401,15 @@ def _accept_result(projection, command, payload, inputs):
     if pending:
         ledger["pending_reconciliation"].append(attempt["attempt_id"])
         notes.append("usage conservative pending reconciliation")
+    if planner_request:
+        attempt["status"] = result["status"] if result["effect_outcome"] != "outcome_unknown" else "outcome_unknown"
+        attempt["effect_state"] = "confirmed" if result["effect_outcome"] != "outcome_unknown" else "outcome_unknown"
+        if result["effect_outcome"] == "outcome_unknown":
+            run["unresolved_effect_ids"].append(attempt["intent_id"])
+            notes.append("planner request outcome unknown; reconciliation obligation recorded")
+        else:
+            notes.append("planner response retained (%s); plan admission is a separate decision" % result["status"])
+        return ReduceResult(projection, OP_TO_EVENT["accept_result"], run["state"], notes)
     node_state = projection["nodes"][attempt["step_id"]]
     node = next(n for n in projection["plan"]["nodes"] if n["node_id"] == attempt["step_id"])
     tool = inputs.get("catalog_tools", {}).get(attempt["capability_id"], {})
@@ -486,9 +540,15 @@ def _accept_assessment(projection, command, payload, inputs):
         node = next(n for n in projection["plan"]["nodes"] if n["node_id"] == node_id)
         if state["status"] == "completed":
             verdicts = {}
+            roles = {s["check_id"]: s["role"] for s in binding.get("check_specs", [])}
             for cid in node["check_ids"]:
                 aid = state["assessments"].get(cid)
-                verdicts[cid] = projection["assessments"][aid]["outcome"] if aid else "not_run"
+                outcome = projection["assessments"][aid]["outcome"] if aid else "not_run"
+                # A baseline-only check records the pre-change outcome; a recorded failure is
+                # retained evidence (pre-existing failure), not a reason to fail the node.
+                if roles.get(cid) == "baseline_only" and outcome in ("passed", "failed"):
+                    outcome = "passed"
+                verdicts[cid] = outcome
             if all(v == "passed" for v in verdicts.values()):
                 state["status"] = "verified"
                 notes.append("node %s verified from accepted assessment evidence" % node_id)
@@ -556,7 +616,7 @@ def _reconcile_effect(projection, command, payload, inputs):
         run["unresolved_effect_ids"].remove(payload["intent_id"])
     if attempt["attempt_id"] in projection["ledger"]["pending_reconciliation"]:
         projection["ledger"]["pending_reconciliation"].remove(attempt["attempt_id"])
-    if run["state"] not in TERMINAL_STATES and attempt["step_id"] in projection["nodes"]:
+    if run["state"] not in TERMINAL_STATES and attempt["step_id"] in projection["nodes"] and attempt["step_id"] != PLAN_REQUEST_STEP:
         state = projection["nodes"][attempt["step_id"]]
         if payload["outcome"] == "confirmed_success":
             state["status"] = "failed"  # a confirmed effect without a retained result still needs read-back evidence
