@@ -1,6 +1,6 @@
 {
   "schema": "gabriel.evidence.work-packages/1",
-  "produced_at_utc": "2026-10-02T18:57:56.867162+00:00",
+  "produced_at_utc": "2026-10-02T19:15:32.349511+00:00",
   "rule": "A package counts as done only with actual code and recorded test output; privileged and paid runs are listed under not_executed.",
   "packages": {
     "WP01": {
@@ -887,7 +887,7 @@
       }
     },
     "WP12": {
-      "status": "DONE_G1_LICENSE_OPEN",
+      "status": "DONE",
       "tests": [
         "tests/test_release.py"
       ],
@@ -898,11 +898,10 @@
         "evidence/wp12/smoke_linux_namespace.log",
         "evidence/wp12/release_manifest_smoke.json",
         "evidence/wp12/smoke_restore_report.json",
+        "LICENSE",
         "docs/RELEASE_G1.md"
       ],
-      "not_executed": [
-        "root license review (no root license in the recovered tree)"
-      ],
+      "not_executed": [],
       "test_results": {
         "tests/test_release.py": [
           {
@@ -936,6 +935,6 @@
       "evidence/wp11/run3-gpt-4.1-mini/report.md",
       "evidence/wp12/release_manifest_smoke.json"
     ],
-    "scope": "single host (Linux 6.18 x86_64, uid 0, util-linux unshare/setpriv), one real provider (gpt-4.1-mini), fifteen synthetic repository-repair tasks in five families; AT17 executed under three frozen protocols without an established advantage over the simple verification loop; AT18 restore bundle executed; root license unresolved"
+    "scope": "single host (Linux 6.18 x86_64, uid 0, util-linux unshare/setpriv), one real provider (gpt-4.1-mini), fifteen synthetic repository-repair tasks in five families; AT17 executed under three frozen protocols without an established advantage over the simple verification loop; AT18 restore bundle executed; Apache-2.0 root license"
   }
 }

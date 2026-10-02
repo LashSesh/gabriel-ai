@@ -44,9 +44,16 @@ def _pip_freeze(python: str) -> list:
 def _license_status(root: Path) -> dict:
     candidates = [p for p in ("LICENSE", "LICENSE.md", "LICENSE.txt", "COPYING") if (root / p).is_file()]
     native = [str(p.relative_to(root)) for p in (root / "native_pse").glob("LICENSE*")] if (root / "native_pse").is_dir() else []
-    return {"root_license_files": candidates, "subdirectory_license_files": native,
-            "status": "resolved" if candidates else "unresolved",
-            "note": "A subdirectory license does not license the whole tree or included datasets; redistribution needs an explicit root license."}
+    declared = None
+    try:
+        import tomllib
+        declared = tomllib.loads((root / "pyproject.toml").read_text()).get("project", {}).get("license", {}).get("text")
+    except (OSError, ValueError, AttributeError):
+        declared = None
+    return {"root_license_files": candidates, "subdirectory_license_files": native, "declared": declared,
+            "status": "resolved" if candidates and declared and not str(declared).startswith("LicenseRef-") else "unresolved",
+            "note": "The root license governs the original software and manuscript materials; bundled external datasets keep their own "
+                    "attribution and terms (data/ATTRIBUTION.md), and a subdirectory license covers only its subtree."}
 
 
 def release_manifest(root: Path, *, evidence: dict | None = None, python: str = sys.executable, catalog_digest: str | None = None,
@@ -83,7 +90,8 @@ def release_manifest(root: Path, *, evidence: dict | None = None, python: str = 
                         "(evidence/live, evidence/wp11, evidence/wp12); advantage gate (AT17) executed under three frozen protocols and not passed",
                   "G2": "not established: no document or numerical domain pack (WP09/WP10 not started)",
                   "G3": "not established: no evaluated adaptive policy"},
-        "known_issues": ["root license unresolved", "catalog fingerprint change requires a new workspace (no migration command)",
+        "known_issues": ([] if _license_status(root)["status"] == "resolved" else ["root license unresolved"]) +
+                        ["catalog fingerprint change requires a new workspace (no migration command)",
                          "single-host, single-user deployment only",
                          "advantage over a simple verification loop not shown; the evaluation corpus is saturated for gpt-4.1-mini"],
     }

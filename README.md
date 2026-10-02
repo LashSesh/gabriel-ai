@@ -14,7 +14,7 @@ in an isolated worktree with independent acceptance checks.
 - How to install, configure a task and run it: `docs/RUNBOOK.md`
 - Frozen matched evaluation (WP11): three executed protocols with gpt-4.1-mini, failure analyses
   and the advantage-gate assessment (not passed): `docs/EVALUATION_PROTOCOL.md`, `evidence/wp11/`
-- G1 release report, backup/restore and open license question (WP12): `docs/RELEASE_G1.md`
+- G1 release report, backup/restore and license (Apache-2.0, `LICENSE`) (WP12): `docs/RELEASE_G1.md`
 - Contract extensions: `docs/adr/ADR-10-hold-records.md`, `ADR-11`, `ADR-12`
 - Evidence (test log, environment, baseline rerun, spec validation): `evidence/`
 - The blueprint's own machine-readable contracts and validator: `contracts/`, `tools/validate_spec.py`

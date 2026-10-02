@@ -24,7 +24,7 @@ product acceptance.
 | Containment gate | backend-specific escape/cancellation/resource tests | passed on the release host: `test_namespace_jail_isolation_selftest`, `gabriel doctor --selftest` (`evidence/doctor_linux_namespace_selftest.json`) |
 | G1 gate | real-provider coding task, independent oracle, recorded restart, export | passed: four real-provider runs (`evidence/live/summary.json`), restart/resume and false-completion controls (`tests/test_slice.py`), export in every run |
 | Advantage gate | frozen paired evaluation with uncertainty and cost accounting | executed, **not passed as an advantage claim**: see `docs/EVALUATION_PROTOCOL.md` and `evidence/wp11/` |
-| Release gate | install, restore, identity manifest, known issues, license review | install and restore passed (`scripts/smoke.sh`, `evidence/wp12/`); license review **open** (no root license) |
+| Release gate | install, restore, identity manifest, known issues, license review | passed: install and restore (`scripts/smoke.sh`, `evidence/wp12/`); root license Apache-2.0 (`LICENSE`, declared in `pyproject.toml`, recorded in the manifest) |
 
 ## What the evaluation established (WP11)
 Three frozen matched comparisons were executed with gpt-4.1-mini (72, 120 and 150 runs;
@@ -51,9 +51,14 @@ Corrupted objects and a truncated journal suffix are refused (`tests/test_releas
 corrupted checkpoint projection with a correct frontier is rejected by its binding
 (`tests/test_owner.py::test_anchor_detects_truncated_suffix_and_checkpoint_binding`).
 
+## License
+The tree is licensed under the Apache License, Version 2.0 (`LICENSE`, chosen by the author).
+`native_pse/LICENSE` (MIT, same author) keeps covering that subtree; both are permissive and
+compatible. The bundled UEA time-series files under `data/` are external datasets distributed
+under CC BY 4.0 with their own attribution (`data/ATTRIBUTION.md`); the root license does not
+re-license them. Python and LaTeX dependencies are not bundled.
+
 ## Known issues
-- Root license unresolved: the recovered tree only carries a license under `native_pse/`.
-  Redistribution needs an explicit root license; local use and review are unaffected.
 - A tool implementation change invalidates existing workspaces at open; no migration command.
 - Single-user, single-host deployment; no network identity or tenant isolation.
 - WP09 (memory), WP10 (numerical/native adapters) are not started; G2/G3 are not established.

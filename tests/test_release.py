@@ -93,7 +93,9 @@ def test_cli_backup_restore_and_release_manifest(tmp_path, capsys):
     assert cli_main(["release-manifest", "--workspace", str(tmp_path / "ws"), "--out", str(tmp_path / "release.json"), "--root", str(Path(__file__).resolve().parents[1])]) == 0
     manifest = json.loads((tmp_path / "release.json").read_text())
     assert manifest["schema"] == "gabriel.release-manifest/1" and manifest["package_source_files"] > 50
-    assert manifest["license"]["status"] == "unresolved" and "G2" in manifest["gates"]
+    assert manifest["license"]["status"] == "resolved" and manifest["license"]["declared"] == "Apache-2.0"
+    assert manifest["license"]["root_license_files"] == ["LICENSE"] and "root license unresolved" not in manifest["known_issues"]
+    assert "G2" in manifest["gates"]
     assert manifest["catalog_digest"] and manifest["doctor"]["configured_backend"] == "trusted_local"
 
 

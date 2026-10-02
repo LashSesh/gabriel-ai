@@ -45,10 +45,10 @@ PACKAGES = {
                           "evidence/wp11/protocol3.frozen.json", "evidence/wp11/run3-gpt-4.1-mini/report.md",
                           "evidence/wp11/*/final_diffs/index.json", "docs/EVALUATION_PROTOCOL.md"],
              "not_executed": ["AT23 (domain portability; WP10 not started)", "AT25 (procedure promotion; WP09 not started)"]},
-    "WP12": {"status": "DONE_G1_LICENSE_OPEN", "tests": ["tests/test_release.py"], "acceptance": ["AT18"],
+    "WP12": {"status": "DONE", "tests": ["tests/test_release.py"], "acceptance": ["AT18"],
              "evidence": ["evidence/wp12/smoke_linux_namespace.log", "evidence/wp12/release_manifest_smoke.json",
-                          "evidence/wp12/smoke_restore_report.json", "docs/RELEASE_G1.md"],
-             "not_executed": ["root license review (no root license in the recovered tree)"]},
+                          "evidence/wp12/smoke_restore_report.json", "LICENSE", "docs/RELEASE_G1.md"],
+             "not_executed": []},
 }
 
 RELEASE_SCOPE_G1 = {
@@ -58,7 +58,7 @@ RELEASE_SCOPE_G1 = {
                  "evidence/wp11/run3-gpt-4.1-mini/report.md", "evidence/wp12/release_manifest_smoke.json"],
     "scope": "single host (Linux 6.18 x86_64, uid 0, util-linux unshare/setpriv), one real provider (gpt-4.1-mini), "
              "fifteen synthetic repository-repair tasks in five families; AT17 executed under three frozen protocols without "
-             "an established advantage over the simple verification loop; AT18 restore bundle executed; root license unresolved",
+             "an established advantage over the simple verification loop; AT18 restore bundle executed; Apache-2.0 root license",
 }
 
 
