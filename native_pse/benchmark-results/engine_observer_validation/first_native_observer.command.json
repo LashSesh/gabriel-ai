@@ -1,0 +1,40 @@
+{
+  "name": "first_native_observer",
+  "command": [
+    "cargo",
+    "test",
+    "--locked",
+    "--offline",
+    "--release",
+    "--manifest-path",
+    "/workspace/scratch/657e86c899c9/integration_work/Gabriel/native_pse/Cargo.toml",
+    "--target-dir",
+    "/workspace/scratch/657e86c899c9/integration_work/Gabriel/native_pse/target/observer_validation",
+    "--jobs",
+    "1",
+    "-p",
+    "pse",
+    "--lib",
+    "--test",
+    "conditioned_engine",
+    "--all-features"
+  ],
+  "cwd": "/workspace/scratch/657e86c899c9/integration_work/Gabriel",
+  "returncode": 0,
+  "wall_seconds": 80.40999264600009,
+  "environment_overrides": {
+    "CARGO_HOME": "/workspace/scratch/657e86c899c9/tmp/integration_toolchain/cargo",
+    "CARGO_PROFILE_RELEASE_LTO": "false",
+    "CARGO_PROFILE_RELEASE_CODEGEN_UNITS": "1",
+    "CARGO_BUILD_JOBS": "1",
+    "CARGO_PROFILE_RELEASE_DEBUG": "true",
+    "CARGO_PROFILE_RELEASE_STRIP": "none",
+    "CARGO_INCREMENTAL": "0"
+  },
+  "stdout": "first_native_observer.stdout",
+  "stderr": "first_native_observer.stderr",
+  "stdout_bytes": 1140,
+  "stdout_sha256": "b00e088a5a95ccd959bb31a41130fd1e9b4e30b0fe8e535f2733874a8f941038",
+  "stderr_bytes": 3630,
+  "stderr_sha256": "a420703e79b9e1c8bd57e10123143918d6e632bdf2c75146d1844cf166cac6e9"
+}

@@ -1,0 +1,160 @@
+{
+  "schema": "gabriel.window-reachability.protocol.v1",
+  "frozen_before_execution": true,
+  "scope": "Continuous-time threshold verification of the exact represented Engine clique model; no external-event or predictive-utility claim.",
+  "primary": {
+    "nodes": [
+      7,
+      13,
+      32,
+      64
+    ],
+    "engine_batches": "one batch containing each entity 0..n-1 exactly once",
+    "source_seeds": [
+      20260927,
+      20260928
+    ],
+    "source": "SHA256 ASCII 'gabriel-window-source/v1:{seed}:{n}:{entity}'; re=3+(first 8 digest bytes interpreted big-endian mod 17)-8; im=1+(next 8 digest bytes interpreted big-endian mod 19)-9; exact integer values encoded as binary64 bits",
+    "regions": [
+      "entities with entity mod 2 = 0",
+      "entities with entity < floor(n/3)"
+    ],
+    "threshold_offsets": [
+      "-3/4",
+      "-1/4",
+      "1/4",
+      "3/4"
+    ],
+    "threshold": "round exact a+q*(abs(b)+abs(c)) once to nearest binary64 after exact clipping to [0,1]",
+    "phase_windows": [
+      [
+        "0",
+        "1/8"
+      ],
+      [
+        "1/7",
+        "17/7"
+      ],
+      [
+        "2",
+        "4"
+      ],
+      [
+        "0",
+        "8"
+      ]
+    ],
+    "window": "round each exact phase endpoint/omega once to nearest binary64; reject rather than replace zero-frequency or nonclique snapshots",
+    "expected_cases": 256,
+    "selection": "all Cartesian-product cases, with no removal or retuning based on outcomes",
+    "interpretation": "Threshold and phase normalization balance verification coverage. This is a synthetic model-verification cohort, not a sampled external population. The second fixed source seed is included without development screening."
+  },
+  "controls": {
+    "nodes": [
+      7,
+      13,
+      32,
+      64
+    ],
+    "sources": [
+      "uniform real ones",
+      "real +1 at entity0 and -1 at entity1, zero elsewhere"
+    ],
+    "region": "entities with entity mod 2 = 0",
+    "phase_window": [
+      "0",
+      "8"
+    ],
+    "threshold_offsets_from_exact_stationary_mass": [
+      "-1/8",
+      "0",
+      "1/8"
+    ],
+    "expected_cases": 24,
+    "excluded_from_primary": true
+  },
+  "stress": {
+    "nodes": 13,
+    "source": "real one at entity0, zero elsewhere",
+    "region": "entity1",
+    "cases": [
+      "alias",
+      "narrow",
+      "exact_global_equality",
+      "huge_phase"
+    ],
+    "alias": "window [0, round(510*pi/omega)] and threshold round(3/n^2); 256 uniform nodes nominally land at whole periods; endpoint rounding retained",
+    "narrow": "window [0, round(2*pi/omega)] and threshold round((4/n^2)*(1-2^-24))",
+    "exact_global_equality": "window [0, round(2*pi/omega)] and exact rational threshold 4/n^2 where supported; otherwise a separate exact constant-source equality control supplies equality",
+    "huge_phase": "binary64 window [1e250, nextafter(1e250,+infinity)] and threshold round(2/n^2)",
+    "pi_construction": "decimal constant 3.14159265358979323846264338327950288419716939937510 used as an exact rational solely to construct rounded input endpoints",
+    "excluded_from_primary": true,
+    "purpose": "Diagnostic stress fixtures, never substituted for primary cases or used for primary selection."
+  },
+  "methods": {
+    "analytic": "window_certificate.certify_window, extrema-based Arb certificate",
+    "adaptive": "best-first interval subdivision, highest certified interval upper bound first, midpoint queries; exact global amplitude/stationary shortcuts; endpoint Lipschitz envelopes and valid second-derivative interpolation bound; no stationary-point phase solver",
+    "uniform": "256 endpoint-inclusive equally spaced rational time points, stop on first certified witness; identical amplitude/stationary shortcuts and interval bounds",
+    "shared_model": "exact dyadic matrix/source input values, exact rational harmonic coefficients, normalized exact source norm",
+    "point_oracle": "window_certificate.point_enclosure using Arb at precision schedule 128,256,512",
+    "point_refinement": "retry the same point at the next precision only while its enclosure width exceeds 2^-96; every attempt counts against the point-evaluation cap",
+    "derivative_bounds": "Rup is sqrt(b^2+c^2) rounded upward to a dyadic with 128 fractional bits; K1=abs(omega)*Rup, K2=omega^2*Rup. On cell width h with endpoint upper bounds u,v: upper=min(u+K1*h,v+K1*h,(u+v+K1*h)/2,max(u,v)+K2*h^2/8,a+Rup,1).",
+    "point_evaluation_cap": 256,
+    "precision_bits": [
+      128,
+      256,
+      512
+    ],
+    "statuses": [
+      "reachable",
+      "excluded",
+      "unknown",
+      "out_of_scope"
+    ],
+    "strict_predicate": "exists t in the closed interval with mass(t)>threshold; excluded means mass(t)<=threshold everywhere"
+  },
+  "acceptance": {
+    "zero_false_certificates": true,
+    "analytic_primary_resolution_minimum": "19/20",
+    "analytic_resolution_at_least_each_baseline": true,
+    "matched_task_cost": "For each fresh worker calculate the median over all primary cases and its three repeats of adaptive_ns/analytic_ns, comparing only paired cases with identical decisive statuses. Require overall median of those worker medians > 1 and at least 4 of 5 worker medians > 1. All exact model preparation and Arb coefficient/phase/extrema/point work are timed. No point-count-only efficiency claim.",
+    "resolution_secondary_aspiration": "analytic minus uniform resolution >=1/10; report separately, not part of primary conjunction",
+    "conjunction_required": true,
+    "failed_criterion": "retain every result and report criterion unmet; no cohort, threshold, budget, or method tuning",
+    "scope": "superiority for the declared finite synthetic model-verification cohort; external predictive usefulness and overall Gabriel superiority remain unestablished",
+    "missing_timing_or_independent_verification": "primary criterion is unassessed, never passed"
+  },
+  "timing": {
+    "fresh_processes": 5,
+    "repetitions_per_process": 3,
+    "method_orders": [
+      [
+        "analytic",
+        "adaptive",
+        "uniform"
+      ],
+      [
+        "adaptive",
+        "uniform",
+        "analytic"
+      ],
+      [
+        "uniform",
+        "analytic",
+        "adaptive"
+      ]
+    ],
+    "scope": "complete certificate call including exact harmonic preparation and oracle work, excluding native snapshot production, input generation, Python startup and output serialization",
+    "execution_requires_explicit_run_flag": true,
+    "not_end_to_end_owner_timing": true
+  },
+  "evidence": [
+    "frozen protocol and SHA256",
+    "complete Engine snapshot request and response",
+    "all source/region/window/threshold inputs",
+    "all certificate outputs and point attempts",
+    "per-call raw nanosecond timings and worker process provenance",
+    "method order and counters",
+    "all primary, control and stress results retained separately"
+  ]
+}

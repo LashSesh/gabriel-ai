@@ -1,0 +1,323 @@
+{
+  "schema": "gabriel.ecb-risk.summary.v1",
+  "input_sources": {
+    "source_url": "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist.zip",
+    "source_download_date": "2026-09-26",
+    "source_csv_sha256": "e8136f072d575cb891cb58718fe31602ca2d4feccee67f035106393ed1c4bdbb",
+    "protocol_sha256": "04f39c50fb6d7eab9d59bad70548fa23dc15cc964816e37db7cad8baf73bde93",
+    "results_sha256": "b5f3a988ede82e49ccc3683fabca5cf6def9f9b7a179526ef902903e57a968f0",
+    "predictions_sha256": "0b1b232a956c090354bb73389f5ab57c2c877c477987871886ad46e5e37b98d4",
+    "forecast_source_sha256": {
+      "ecb_risk.py": "6665aecf956f8e9885a4bd269b9d2ab447b90050bb34f9c8503daa73057b8a8d",
+      "benchmark_ecb_risk.py": "60f9bc4c8b8052307ae4cb976ebaa65c564fcfba2390bf061610f276d2dea16e"
+    },
+    "summary_source_sha256": "77b812c119e572e1c1f2bcd0c020ae54638234a96b215bb238fe75f1433def18",
+    "bibliography_keys": [
+      "ecb2026fx",
+      "ecb2026reuse",
+      "ecb2026copyright",
+      "patton2019es"
+    ]
+  },
+  "test_period": [
+    "2020-01-01",
+    "2025-12-31"
+  ],
+  "alpha": "39/40",
+  "target_exceedance_percent": 2.5,
+  "contract_count": 8,
+  "contract_model_rows": 40,
+  "test_outcomes_across_contracts": 12280,
+  "test_forecast_pairs": 61400,
+  "test_n_range": {
+    "min": 1533.0,
+    "max": 1537.0
+  },
+  "selected_weights": {
+    "USD_h1": "1/4",
+    "USD_h5": "1/2",
+    "GBP_h1": "3/4",
+    "GBP_h5": "1/4",
+    "JPY_h1": "1/2",
+    "JPY_h5": "3/4",
+    "CHF_h1": "3/4",
+    "CHF_h5": "1/2"
+  },
+  "methods": {
+    "raw_hs": {
+      "label": "Raw HS",
+      "score_comparison_to_raw_hs": {
+        "lower_score": 0,
+        "tie": 8,
+        "higher_score": 0
+      },
+      "contract_mean_fz0_range": {
+        "min": -0.03323104663509134,
+        "max": 1.395980831259113
+      },
+      "score_gain_over_raw_hs_range": {
+        "min": 0.0,
+        "max": 0.0
+      },
+      "exceedance_percent_range": {
+        "min": 2.7325959661678594,
+        "max": 4.044357469015003
+      },
+      "absolute_coverage_deviation_pp_range": {
+        "min": 0.23259596616785927,
+        "max": 1.5443574690150028
+      },
+      "lowest_contract_score_including_ties": 0
+    },
+    "fast_fhs": {
+      "label": "Fast FHS",
+      "score_comparison_to_raw_hs": {
+        "lower_score": 7,
+        "tie": 0,
+        "higher_score": 1
+      },
+      "contract_mean_fz0_range": {
+        "min": -0.15557180939732634,
+        "max": 1.1769258432979885
+      },
+      "score_gain_over_raw_hs_range": {
+        "min": -0.02140817101414949,
+        "max": 0.21905498796112455
+      },
+      "exceedance_percent_range": {
+        "min": 2.3483365949119372,
+        "max": 3.3920417482061316
+      },
+      "absolute_coverage_deviation_pp_range": {
+        "min": 0.02765126870527025,
+        "max": 0.8920417482061315
+      },
+      "lowest_contract_score_including_ties": 5
+    },
+    "slow_fhs": {
+      "label": "Slow FHS",
+      "score_comparison_to_raw_hs": {
+        "lower_score": 7,
+        "tie": 0,
+        "higher_score": 1
+      },
+      "contract_mean_fz0_range": {
+        "min": -0.07702110619751275,
+        "max": 1.372684918933731
+      },
+      "score_gain_over_raw_hs_range": {
+        "min": -0.041016443633452804,
+        "max": 0.056387167873198196
+      },
+      "exceedance_percent_range": {
+        "min": 2.6024723487312946,
+        "max": 3.979125896934116
+      },
+      "absolute_coverage_deviation_pp_range": {
+        "min": 0.10247234873129452,
+        "max": 1.4791258969341157
+      },
+      "lowest_contract_score_including_ties": 0
+    },
+    "multiscale_fhs": {
+      "label": "Primary multiscale FHS",
+      "score_comparison_to_raw_hs": {
+        "lower_score": 8,
+        "tie": 0,
+        "higher_score": 0
+      },
+      "contract_mean_fz0_range": {
+        "min": -0.1368404170105779,
+        "max": 1.2818640178472616
+      },
+      "score_gain_over_raw_hs_range": {
+        "min": 0.022781677938550127,
+        "max": 0.13706490930301163
+      },
+      "exceedance_percent_range": {
+        "min": 2.2121014964216004,
+        "max": 3.65296803652968
+      },
+      "absolute_coverage_deviation_pp_range": {
+        "min": 0.044031311154598546,
+        "max": 1.15296803652968
+      },
+      "lowest_contract_score_including_ties": 1
+    },
+    "selected_fhs": {
+      "label": "Development-selected multiscale FHS",
+      "score_comparison_to_raw_hs": {
+        "lower_score": 7,
+        "tie": 0,
+        "higher_score": 1
+      },
+      "contract_mean_fz0_range": {
+        "min": -0.15646923746817867,
+        "max": 1.2818640178472616
+      },
+      "score_gain_over_raw_hs_range": {
+        "min": -0.010748131011477202,
+        "max": 0.14393298345571703
+      },
+      "exceedance_percent_range": {
+        "min": 2.2121014964216004,
+        "max": 3.7181996086105675
+      },
+      "absolute_coverage_deviation_pp_range": {
+        "min": 0.0212002609262886,
+        "max": 1.218199608610567
+      },
+      "lowest_contract_score_including_ties": 3
+    }
+  },
+  "pairwise_contract_score_counts": {
+    "raw_hs": {
+      "raw_hs": {
+        "lower_score": 0,
+        "tie": 8,
+        "higher_score": 0
+      },
+      "fast_fhs": {
+        "lower_score": 1,
+        "tie": 0,
+        "higher_score": 7
+      },
+      "slow_fhs": {
+        "lower_score": 1,
+        "tie": 0,
+        "higher_score": 7
+      },
+      "multiscale_fhs": {
+        "lower_score": 0,
+        "tie": 0,
+        "higher_score": 8
+      },
+      "selected_fhs": {
+        "lower_score": 1,
+        "tie": 0,
+        "higher_score": 7
+      }
+    },
+    "fast_fhs": {
+      "raw_hs": {
+        "lower_score": 7,
+        "tie": 0,
+        "higher_score": 1
+      },
+      "fast_fhs": {
+        "lower_score": 0,
+        "tie": 8,
+        "higher_score": 0
+      },
+      "slow_fhs": {
+        "lower_score": 7,
+        "tie": 0,
+        "higher_score": 1
+      },
+      "multiscale_fhs": {
+        "lower_score": 6,
+        "tie": 0,
+        "higher_score": 2
+      },
+      "selected_fhs": {
+        "lower_score": 5,
+        "tie": 0,
+        "higher_score": 3
+      }
+    },
+    "slow_fhs": {
+      "raw_hs": {
+        "lower_score": 7,
+        "tie": 0,
+        "higher_score": 1
+      },
+      "fast_fhs": {
+        "lower_score": 1,
+        "tie": 0,
+        "higher_score": 7
+      },
+      "slow_fhs": {
+        "lower_score": 0,
+        "tie": 8,
+        "higher_score": 0
+      },
+      "multiscale_fhs": {
+        "lower_score": 0,
+        "tie": 0,
+        "higher_score": 8
+      },
+      "selected_fhs": {
+        "lower_score": 0,
+        "tie": 0,
+        "higher_score": 8
+      }
+    },
+    "multiscale_fhs": {
+      "raw_hs": {
+        "lower_score": 8,
+        "tie": 0,
+        "higher_score": 0
+      },
+      "fast_fhs": {
+        "lower_score": 2,
+        "tie": 0,
+        "higher_score": 6
+      },
+      "slow_fhs": {
+        "lower_score": 8,
+        "tie": 0,
+        "higher_score": 0
+      },
+      "multiscale_fhs": {
+        "lower_score": 0,
+        "tie": 8,
+        "higher_score": 0
+      },
+      "selected_fhs": {
+        "lower_score": 2,
+        "tie": 3,
+        "higher_score": 3
+      }
+    },
+    "selected_fhs": {
+      "raw_hs": {
+        "lower_score": 7,
+        "tie": 0,
+        "higher_score": 1
+      },
+      "fast_fhs": {
+        "lower_score": 3,
+        "tie": 0,
+        "higher_score": 5
+      },
+      "slow_fhs": {
+        "lower_score": 8,
+        "tie": 0,
+        "higher_score": 0
+      },
+      "multiscale_fhs": {
+        "lower_score": 3,
+        "tie": 3,
+        "higher_score": 2
+      },
+      "selected_fhs": {
+        "lower_score": 0,
+        "tie": 8,
+        "higher_score": 0
+      }
+    }
+  },
+  "verification": {
+    "metrics_recomputed_from_prediction_archive": true,
+    "archive_and_protocol_hashes_match_saved_results": true,
+    "saved_metric_absolute_tolerance": 1e-12,
+    "saved_metric_relative_tolerance": 1e-12,
+    "all_test_forecasts_have_positive_es_and_var_not_above_es": true
+  },
+  "interpretation": {
+    "score_gain": "raw-HS mean FZ0 minus method mean FZ0; signed unscaled score difference, not a percentage",
+    "win_count": "descriptive number of contracts with smaller mean score; no independence or significance claim",
+    "coverage": "observed strict VaR exceedance fraction; target 1-alpha, not a statistical calibration certificate",
+    "scope": "retrospective current-vintage reference-rate forecasting; no trading or ROI result"
+  }
+}

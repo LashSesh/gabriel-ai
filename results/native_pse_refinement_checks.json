@@ -1,0 +1,54 @@
+{
+  "status": "executed",
+  "archive_sha256": "30d4a6aeab6c6509c0cc31fcf5b4be4fd3f95aec745127aa848c8ce37b7299ca",
+  "scope": "Exact legacy complete signature for binary undirected simple graphs on 1..7 vertices; inherited model defects retained.",
+  "changed_inherited_files": [
+    "crates/pse-core/src/metatron_attach.rs",
+    "crates/pse-metatron/src/lib.rs"
+  ],
+  "added_files": [
+    "GABRIEL_REVIEW.md",
+    "crates/pse-metatron/src/small_signature.rs"
+  ],
+  "source_sha256": {
+    "crates/pse-core/src/metatron_attach.rs": "d8f4cbd7d52c3b0ca2710253374bd15bc9d2c84c538e47fbdd2adb7bb1967d88",
+    "crates/pse-metatron/src/lib.rs": "3349f603759221576bd7c3797bac3e148f970b705be4e5779d9dd81668ea071d",
+    "crates/pse-metatron/src/small_signature.rs": "9f388c4aedb505983dca9c6917f56a648098b341b2735ef03f6392dd80008ba0"
+  },
+  "focused_tests": {
+    "passed": 5,
+    "failed": 0,
+    "labelled_graphs_n1_through5": 1099,
+    "seeded_graphs_n6_and7": 48,
+    "dense_complete_signature_pairs": 9,
+    "recorded_runtime_seconds": 3.28,
+    "seed": 20260926
+  },
+  "workspace_tests": {
+    "passed": 438,
+    "failed": 0,
+    "ignored": 1,
+    "filtered": 1,
+    "filter": "full_state_matches_original_golden_fixture",
+    "reason": "The supplied Windows-generated golden fixture does not match unchanged upstream execution on current Linux. Cause unresolved; current-platform original-versus-fork comparisons are separate."
+  },
+  "previous_build_failure": {
+    "log": "audit/native_workspace_tests.log",
+    "status": "Transient link error; subsequent command completed without changing scientific source.",
+    "diagnosis": "not established"
+  },
+  "commands": [
+    "cargo test --release --locked -p pse-metatron small_signature -- --nocapture",
+    "cargo test --workspace --release --locked -- --skip full_state_matches_original_golden_fixture"
+  ],
+  "toolchain": "Rust 1.95.0",
+  "platform": "Linux x86_64",
+  "claim_limit": "Hand argument and finite executed tests; not a machine proof or a cross-platform guarantee. Pre-existing elapsed-time branches in the multiscale component mean exact signature equivalence does not prove complete-engine equivalence for all inputs and execution schedules.",
+  "historical_fixture": {
+    "engine_state_hashes_different": 23,
+    "engine_state_hashes_compared": 78,
+    "crystal_hashes_different": 1,
+    "cause": "Not established. Stored historical hashes do not reveal underlying values; platform arithmetic, ordering or other causes have not been identified.",
+    "fixture_modified": false
+  }
+}

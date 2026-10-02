@@ -1,0 +1,16 @@
+\begin{table}[!htbp]
+\centering\small
+\caption{Absolute production-owner costs for four-window commands, three fresh workers per request. Setup, native execution, identity checks and storage are included in complete cost. Complete and replay costs are medians; certificate share is the median within-task fraction; no competing-owner speed ratio is measured.}
+\label{tab:windowowner}
+\begin{tabular}{rrrrr}\toprule
+Nodes & Region & Complete (ms) & Certificate share (\%) & Replay (ms)\\\midrule
+7 & 0 & 332.15 & 0.56 & 255.30\\
+7 & 1 & 335.18 & 0.45 & 257.35\\
+13 & 0 & 351.44 & 1.01 & 269.36\\
+13 & 1 & 346.07 & 0.91 & 262.29\\
+32 & 0 & 383.96 & 3.40 & 313.99\\
+32 & 1 & 377.90 & 3.22 & 308.49\\
+64 & 0 & 518.31 & 8.90 & 472.76\\
+64 & 1 & 531.29 & 7.82 & 464.59\\
+\bottomrule\end{tabular}
+\end{table}

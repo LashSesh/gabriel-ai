@@ -1,0 +1,56 @@
+   Compiling syn v2.0.117
+   Compiling hashbrown v0.17.0
+   Compiling equivalent v1.0.2
+   Compiling foldhash v0.1.5
+   Compiling fixedbitset v0.5.7
+   Compiling once_cell v1.21.4
+   Compiling pin-project-lite v0.2.17
+   Compiling hashbrown v0.15.5
+   Compiling tracing-core v0.1.36
+   Compiling indexmap v2.14.0
+   Compiling petgraph v0.8.3
+   Compiling serde_derive v1.0.228
+   Compiling thiserror-impl v2.0.18
+   Compiling nalgebra-macros v0.3.0
+   Compiling tracing-attributes v0.1.31
+   Compiling nalgebra v0.35.0
+   Compiling tracing v0.1.44
+   Compiling thiserror v2.0.18
+   Compiling serde v1.0.228
+   Compiling serde_jcs v0.2.0
+   Compiling ordered-float v5.3.0
+   Compiling pse-types v0.1.0 (/workspace/scratch/657e86c899c9/output/Gabriel/native_pse/crates/pse-types)
+   Compiling pse-graph v0.1.0 (/workspace/scratch/657e86c899c9/output/Gabriel/native_pse/crates/pse-graph)
+   Compiling pse-evidence v0.1.0 (/workspace/scratch/657e86c899c9/output/Gabriel/native_pse/crates/pse-evidence)
+   Compiling pse-constraint v0.1.0 (/workspace/scratch/657e86c899c9/output/Gabriel/native_pse/crates/pse-constraint)
+   Compiling pse-extract v0.1.0 (/workspace/scratch/657e86c899c9/output/Gabriel/native_pse/crates/pse-extract)
+   Compiling pse-topology v0.1.0 (/workspace/scratch/657e86c899c9/output/Gabriel/native_pse/crates/pse-topology)
+   Compiling pse-metatron v0.1.0 (/workspace/scratch/657e86c899c9/output/Gabriel/native_pse/crates/pse-metatron)
+   Compiling pse-memory v0.1.0 (/workspace/scratch/657e86c899c9/output/Gabriel/native_pse/crates/pse-memory)
+   Compiling pse-scale v0.1.0 (/workspace/scratch/657e86c899c9/output/Gabriel/native_pse/crates/pse-scale)
+   Compiling pse-cascade v0.1.0 (/workspace/scratch/657e86c899c9/output/Gabriel/native_pse/crates/pse-cascade)
+   Compiling pse-navigator v0.1.0 (/workspace/scratch/657e86c899c9/output/Gabriel/native_pse/crates/pse-navigator)
+   Compiling pse-core v0.1.0 (/workspace/scratch/657e86c899c9/output/Gabriel/native_pse/crates/pse-core)
+   Compiling pse v0.1.0 (/workspace/scratch/657e86c899c9/output/Gabriel/native_pse)
+error: linking with `cc` failed: exit status: 1
+  |
+  = note:  "cc" "-m64" "<68 object files omitted>" "-Wl,--as-needed" "-Wl,-Bstatic" "<sysroot>/lib/rustlib/x86_64-unknown-linux-gnu/lib/libcompiler_builtins-*.rlib" "-Wl,-Bdynamic" "-lgcc_s" "-lutil" "-lrt" "-lpthread" "-lm" "-ldl" "-lc" "-L" "/workspace/scratch/657e86c899c9/tmp/gabriel_pse/fork-target/release/deps/rustcZMcf1p/raw-dylibs" "-B<sysroot>/lib/rustlib/x86_64-unknown-linux-gnu/bin/gcc-ld" "-fuse-ld=lld" "-Wl,--eh-frame-hdr" "-Wl,-z,noexecstack" "-L" "<sysroot>/lib/rustlib/x86_64-unknown-linux-gnu/lib" "-o" "/workspace/scratch/657e86c899c9/tmp/gabriel_pse/fork-target/release/deps/pse_navigator-9569902d36857506" "-Wl,--gc-sections" "-pie" "-Wl,-z,relro,-z,now" "-Wl,-O1" "-Wl,--strip-all" "-nodefaultlibs"
+  = note: some arguments are omitted. use `--verbose` to show all linker arguments
+  = note: rust-lld: error: undefined symbol: alloc::raw_vec::RawVec$LT$T$C$A$GT$::grow_one::hac205c08beb3b393
+          >>> referenced by pse_navigator.4af7f4a5b42265d-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/tmp/gabriel_pse/fork-target/release/deps/pse_navigator-9569902d36857506.pse_navigator.4af7f4a5b42265d-cgu.0.rcgu.o:(pse_navigator::SimplexMesh::laplacian_matrix::h8f404758f7fd7063)
+          >>> referenced by pse_navigator.4af7f4a5b42265d-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/tmp/gabriel_pse/fork-target/release/deps/pse_navigator-9569902d36857506.pse_navigator.4af7f4a5b42265d-cgu.0.rcgu.o:(pse_navigator::SimplexMesh::laplacian_matrix::h8f404758f7fd7063)
+          
+          rust-lld: error: undefined symbol: pse_topology::spectral_decompose::h607152ffee78ea2a
+          >>> referenced by pse_navigator.4af7f4a5b42265d-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/tmp/gabriel_pse/fork-target/release/deps/pse_navigator-9569902d36857506.pse_navigator.4af7f4a5b42265d-cgu.0.rcgu.o:(pse_navigator::SimplexMesh::spectral_gradient_and_gap::he6bc1c3686bacc94)
+          >>> referenced by pse_navigator.4af7f4a5b42265d-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/tmp/gabriel_pse/fork-target/release/deps/pse_navigator-9569902d36857506.pse_navigator.4af7f4a5b42265d-cgu.0.rcgu.o:(pse_navigator::tests::at_nv7_spectral_gradient::h26ea550ca7645f25)
+          >>> referenced by pse_navigator.4af7f4a5b42265d-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/tmp/gabriel_pse/fork-target/release/deps/pse_navigator-9569902d36857506.pse_navigator.4af7f4a5b42265d-cgu.0.rcgu.o:(pse_navigator::tests::at_nv13_spectral_singularity_detection::h91012352cae3ff43)
+          collect2: error: ld returned 1 exit status
+          
+
+error: could not compile `pse-navigator` (lib test) due to 1 previous error
+warning: build failed, waiting for other jobs to finish...

@@ -1,0 +1,22 @@
+{
+  "study": "Damped phase memory and retrospective conditioning",
+  "status": "Internally fixed before executing this extension; not externally preregistered. All four datasets were examined in previous phases.",
+  "date": "2026-09-25",
+  "datasets": ["RacketSports", "BasicMotions", "NATOPS", "Epilepsy"],
+  "models": ["real_bank", "phase_bank", "real_plus_trace", "phase_plus_trace", "trace_observer", "real_3", "phase_3", "real_5", "phase_5", "real_7", "phase_7"],
+  "preexecution_amendment": "User clarified that five means an optimum of state degrees of freedom, not a new physical dimension. Before any extension experiments, add matched 3/5/7-real-coordinate bank ablations; this is not a test of a universal optimum for nonlinear dynamical systems.",
+  "small_banks": "Real: geomspace taus 1/16 through 4, with 3/5/7 states per channel. Phase: one real mode (lambda=1) plus first 1/2/3 complex pairs with lambda=(4,1,16) and omega=4*lambda. Fixed nested phase family. Degrees of freedom are per channel, excluding unchanged Gabriel core and readout parameters.",
+  "clock": "Known held samples of duration 1/N; record duration 1 in normalized model time. No claim about physical sampling intervals.",
+  "phase_taus": [0.0625, 0.25, 1.0, 4.0],
+  "phase_omega_tau": [1.0, 4.0],
+  "real_control": "16 real exponential modes with time constants geomspace(1/16,4,16); same 16 real state coordinates per input channel as 8 complex modes.",
+  "initial_state": "Zero independently at each record; fixed bank and graph parameters; no memory feedback into graph.",
+  "graph": "Existing 48-cell trace-only observer, seed 0 and unchanged defaults.",
+  "normalization": "Per-channel train mean and SD; tanh((x-mu)/(3*sd)); fitted inside each CV fold.",
+  "training": "Existing 5 stratified training-only folds, seeds 93400+dataset index; ridge penalties [0.0001,0.001,0.01,0.1,1,10,100,1000]; stronger penalty wins exact CV balanced-accuracy ties.",
+  "endpoints": ["External-label correct counts for every family", "Paired gains/losses of phase versus equal-state real control", "Conditional retrieval fraction for standalone linear banks"],
+  "acquisition": "Only standalone real and phase banks. Same random_half and middle_half masks as saved prefix experiment; unknown transformed scalars in [-1,1], exact passive retrieval, unit cost. Policies: descending maximum pairwise coefficient magnitude and reverse temporal order. Stop on strict all-rival margin >1e-10; validate every stopped box with Arb at 100 bits, retry 160/256 only if needed.",
+  "numerical_checks": "Exact-held transition versus real matrix exponential; subdivision; disk invariance; common-input contraction; units covariance; kernel/recurrence; affine box vertices; shared-variable cancellation; counterexamples; Arb validation of all linear stops and all hybrid point predictions.",
+  "mechanism_checks_seed": 20260925,
+  "scope": "Controlled extension on reused small datasets; no broad superiority, new domain, learned transfer or new general complex-state-space principle is claimed. No post-test parameter or family selection. Historical experiments retained, not rerun."
+}

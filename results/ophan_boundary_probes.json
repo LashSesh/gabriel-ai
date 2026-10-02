@@ -1,0 +1,44 @@
+{
+  "fresh_execution": true,
+  "notes": "Independent probes by audit agent; characterize boundaries, not claim complete adversarial security.",
+  "legacy_duplicate_boolean_alias": {
+    "outcome": "accepted_as_duplicate",
+    "canonical_bytes_differ": true,
+    "python_mapping_equality": true,
+    "records_after": 1,
+    "location": "grfps_l2.py Kernel.step inputs[eid] == event"
+  },
+  "legacy_tracking_profile": {
+    "gateway_status_before_during_after": [
+      "Known",
+      "Known",
+      "Known"
+    ],
+    "source_refs_after": [
+      "e1",
+      "e2"
+    ],
+    "scope": "Historical Boolean model; current reference profile is tested separately."
+  },
+  "current_new_report_invalidation": {
+    "before": "Known",
+    "after": "Unknown",
+    "history_certificate_preserved": true,
+    "physical_validation": "Unknown"
+  },
+  "complete_suffix_deletion": {
+    "full_sequence": 2,
+    "prefix_sequence": 1,
+    "prefix_accepted": true,
+    "full_head": "b9b782cabebf4a075770aac21b8e5c58c3d71516ff68309824041d07e047aa1c",
+    "prefix_head": "2930f15e1280bcd944c7c8d7c8bed220b37e62ccab0568df3c7cf3ee9b86abb2",
+    "heads_differ": true,
+    "scope": "Hash-linked semantic replay verifies supplied prefix; trusted terminal head/count is needed to detect complete suffix loss."
+  },
+  "torn_record": {
+    "rejected": true,
+    "exception": "ValueError",
+    "reason": "segment_line"
+  },
+  "elapsed_seconds": 1.2808566889998474
+}

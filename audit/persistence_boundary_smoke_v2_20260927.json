@@ -1,0 +1,894 @@
+{
+  "cases": [
+    {
+      "all_postclose_path_checks_match": true,
+      "expected_stage": 2,
+      "explicit_final_fsync": [
+        {
+          "returned_successfully": true,
+          "target": "/tmp/gabriel_boundary_smoke_v2_20260927/plain_00.bin"
+        },
+        {
+          "returned_successfully": true,
+          "target": "/tmp/gabriel_boundary_smoke_v2_20260927"
+        }
+      ],
+      "explicit_store_reopen_passed": true,
+      "final_baseline_monotonic_ns": 4508542904149,
+      "final_baseline_observation": "committed-2",
+      "final_committed_sha256": "5df61bc7dd5f3ab5c0ae8f9bdbbbaf113fad125fe1beca7a0fdecba68d4afc01",
+      "final_path_matches_committed": true,
+      "held_inode_final_preserves_committed_bytes": true,
+      "history": [
+        {
+          "held_inode": {
+            "read_bytes": 65536,
+            "sha256": "bab6be2e967f85b820d3c9ddf5c217411f2b77fa2397439f33d53114a5bd7a41",
+            "st_ctime_ns": 1790496935629053021,
+            "st_dev": 27,
+            "st_ino": 792566,
+            "st_mtime_ns": 1790496935629053021,
+            "st_nlink": 1,
+            "st_size": 65536,
+            "stable_during_read": true
+          },
+          "label": "initialized",
+          "logical": {
+            "seed": 0,
+            "stage": 0
+          },
+          "monotonic_ns": 4508538273023,
+          "path": {
+            "path_still_names_open_inode": true,
+            "read_bytes": 65536,
+            "sha256": "bab6be2e967f85b820d3c9ddf5c217411f2b77fa2397439f33d53114a5bd7a41",
+            "st_ctime_ns": 1790496935629053021,
+            "st_dev": 27,
+            "st_ino": 792566,
+            "st_mtime_ns": 1790496935629053021,
+            "st_nlink": 1,
+            "st_size": 65536,
+            "stable_during_read": true
+          },
+          "sidecars": {},
+          "wall_ns": 1790496935632750955
+        },
+        {
+          "held_inode": {
+            "read_bytes": 65536,
+            "sha256": "803b98be713ee51df1075faa8f2f5447769829a279efadb61d0afbb41525f567",
+            "st_ctime_ns": 1790496935635135517,
+            "st_dev": 27,
+            "st_ino": 792566,
+            "st_mtime_ns": 1790496935635135517,
+            "st_nlink": 1,
+            "st_size": 65536,
+            "stable_during_read": true
+          },
+          "label": "committed-1",
+          "logical": {
+            "seed": 0,
+            "stage": 1
+          },
+          "monotonic_ns": 4508541198229,
+          "path": {
+            "path_still_names_open_inode": true,
+            "read_bytes": 65536,
+            "sha256": "803b98be713ee51df1075faa8f2f5447769829a279efadb61d0afbb41525f567",
+            "st_ctime_ns": 1790496935635135517,
+            "st_dev": 27,
+            "st_ino": 792566,
+            "st_mtime_ns": 1790496935635135517,
+            "st_nlink": 1,
+            "st_size": 65536,
+            "stable_during_read": true
+          },
+          "sidecars": {},
+          "wall_ns": 1790496935635675440
+        },
+        {
+          "held_inode": {
+            "read_bytes": 65536,
+            "sha256": "5df61bc7dd5f3ab5c0ae8f9bdbbbaf113fad125fe1beca7a0fdecba68d4afc01",
+            "st_ctime_ns": 1790496935636808617,
+            "st_dev": 27,
+            "st_ino": 792566,
+            "st_mtime_ns": 1790496935636808617,
+            "st_nlink": 1,
+            "st_size": 65536,
+            "stable_during_read": true
+          },
+          "label": "committed-2",
+          "logical": {
+            "seed": 0,
+            "stage": 2
+          },
+          "monotonic_ns": 4508542904149,
+          "path": {
+            "path_still_names_open_inode": true,
+            "read_bytes": 65536,
+            "sha256": "5df61bc7dd5f3ab5c0ae8f9bdbbbaf113fad125fe1beca7a0fdecba68d4afc01",
+            "st_ctime_ns": 1790496935636808617,
+            "st_dev": 27,
+            "st_ino": 792566,
+            "st_mtime_ns": 1790496935636808617,
+            "st_nlink": 1,
+            "st_size": 65536,
+            "stable_during_read": true
+          },
+          "sidecars": {},
+          "wall_ns": 1790496935637381370
+        },
+        {
+          "held_inode": {
+            "read_bytes": 65536,
+            "sha256": "5df61bc7dd5f3ab5c0ae8f9bdbbbaf113fad125fe1beca7a0fdecba68d4afc01",
+            "st_ctime_ns": 1790496935636808617,
+            "st_dev": 27,
+            "st_ino": 792566,
+            "st_mtime_ns": 1790496935636808617,
+            "st_nlink": 1,
+            "st_size": 65536,
+            "stable_during_read": true
+          },
+          "label": "after-close-and-extra-fsync",
+          "logical": {
+            "seed": 0,
+            "stage": 2
+          },
+          "monotonic_ns": 4508545006015,
+          "path": {
+            "path_still_names_open_inode": true,
+            "read_bytes": 65536,
+            "sha256": "5df61bc7dd5f3ab5c0ae8f9bdbbbaf113fad125fe1beca7a0fdecba68d4afc01",
+            "st_ctime_ns": 1790496935636808617,
+            "st_dev": 27,
+            "st_ino": 792566,
+            "st_mtime_ns": 1790496935636808617,
+            "st_nlink": 1,
+            "st_size": 65536,
+            "stable_during_read": true
+          },
+          "sidecars": {},
+          "wall_ns": 1790496935639483176
+        },
+        {
+          "held_inode": {
+            "read_bytes": 65536,
+            "sha256": "5df61bc7dd5f3ab5c0ae8f9bdbbbaf113fad125fe1beca7a0fdecba68d4afc01",
+            "st_ctime_ns": 1790496935636808617,
+            "st_dev": 27,
+            "st_ino": 792566,
+            "st_mtime_ns": 1790496935636808617,
+            "st_nlink": 1,
+            "st_size": 65536,
+            "stable_during_read": true
+          },
+          "label": "settle-0",
+          "logical": {
+            "seed": 0,
+            "stage": 2
+          },
+          "monotonic_ns": 4508747714892,
+          "path": {
+            "path_still_names_open_inode": true,
+            "read_bytes": 65536,
+            "sha256": "5df61bc7dd5f3ab5c0ae8f9bdbbbaf113fad125fe1beca7a0fdecba68d4afc01",
+            "st_ctime_ns": 1790496935636808617,
+            "st_dev": 27,
+            "st_ino": 792566,
+            "st_mtime_ns": 1790496935636808617,
+            "st_nlink": 1,
+            "st_size": 65536,
+            "stable_during_read": true
+          },
+          "sidecars": {},
+          "wall_ns": 1790496935842192994
+        }
+      ],
+      "kind": "plain",
+      "location": "smoke",
+      "path": "/tmp/gabriel_boundary_smoke_v2_20260927/plain_00.bin",
+      "path_inode_changed": false,
+      "seed": 0,
+      "unavailable_or_raced_observations": 0
+    },
+    {
+      "all_postclose_path_checks_match": true,
+      "expected_stage": 2,
+      "explicit_final_fsync": [
+        {
+          "returned_successfully": true,
+          "target": "/tmp/gabriel_boundary_smoke_v2_20260927/sqlite_00.sqlite"
+        },
+        {
+          "returned_successfully": true,
+          "target": "/tmp/gabriel_boundary_smoke_v2_20260927"
+        }
+      ],
+      "explicit_store_reopen_passed": true,
+      "final_baseline_monotonic_ns": 4508543452945,
+      "final_baseline_observation": "committed-2",
+      "final_committed_sha256": "fa07230da0d11d2aecb65f230cdd65e059b6bf4e4d25763ba18fd86a2dde125c",
+      "final_path_matches_committed": true,
+      "held_inode_final_preserves_committed_bytes": true,
+      "history": [
+        {
+          "held_inode": {
+            "read_bytes": 73728,
+            "sha256": "cb557908cf68eca2ef91594abd8a987b9d3fcd8a9ef82a97491a11bee9e74a81",
+            "st_ctime_ns": 1790496935633649449,
+            "st_dev": 27,
+            "st_ino": 792567,
+            "st_mtime_ns": 1790496935633649449,
+            "st_nlink": 1,
+            "st_size": 73728,
+            "stable_during_read": true
+          },
+          "label": "initialized",
+          "logical": {
+            "integrity": [
+              [
+                "ok"
+              ]
+            ],
+            "payload_sha256": "bab6be2e967f85b820d3c9ddf5c217411f2b77fa2397439f33d53114a5bd7a41",
+            "seed": 0,
+            "stage": 0
+          },
+          "monotonic_ns": 4508539277005,
+          "path": {
+            "path_still_names_open_inode": true,
+            "read_bytes": 73728,
+            "sha256": "cb557908cf68eca2ef91594abd8a987b9d3fcd8a9ef82a97491a11bee9e74a81",
+            "st_ctime_ns": 1790496935633649449,
+            "st_dev": 27,
+            "st_ino": 792567,
+            "st_mtime_ns": 1790496935633649449,
+            "st_nlink": 1,
+            "st_size": 73728,
+            "stable_during_read": true
+          },
+          "sidecars": {},
+          "wall_ns": 1790496935633754286
+        },
+        {
+          "held_inode": {
+            "read_bytes": 73728,
+            "sha256": "79fe83616c605ad1119d7fb50ca12d06d58e408cb0eb56943b6b0643b28e5719",
+            "st_ctime_ns": 1790496935635924926,
+            "st_dev": 27,
+            "st_ino": 792567,
+            "st_mtime_ns": 1790496935635924926,
+            "st_nlink": 1,
+            "st_size": 73728,
+            "stable_during_read": true
+          },
+          "label": "committed-1",
+          "logical": {
+            "integrity": [
+              [
+                "ok"
+              ]
+            ],
+            "payload_sha256": "803b98be713ee51df1075faa8f2f5447769829a279efadb61d0afbb41525f567",
+            "seed": 0,
+            "stage": 1
+          },
+          "monotonic_ns": 4508541605993,
+          "path": {
+            "path_still_names_open_inode": true,
+            "read_bytes": 73728,
+            "sha256": "79fe83616c605ad1119d7fb50ca12d06d58e408cb0eb56943b6b0643b28e5719",
+            "st_ctime_ns": 1790496935635924926,
+            "st_dev": 27,
+            "st_ino": 792567,
+            "st_mtime_ns": 1790496935635924926,
+            "st_nlink": 1,
+            "st_size": 73728,
+            "stable_during_read": true
+          },
+          "sidecars": {},
+          "wall_ns": 1790496935636083265
+        },
+        {
+          "held_inode": {
+            "read_bytes": 139264,
+            "sha256": "fa07230da0d11d2aecb65f230cdd65e059b6bf4e4d25763ba18fd86a2dde125c",
+            "st_ctime_ns": 1790496935637812059,
+            "st_dev": 27,
+            "st_ino": 792567,
+            "st_mtime_ns": 1790496935637812059,
+            "st_nlink": 1,
+            "st_size": 139264,
+            "stable_during_read": true
+          },
+          "label": "committed-2",
+          "logical": {
+            "integrity": [
+              [
+                "ok"
+              ]
+            ],
+            "payload_sha256": "5df61bc7dd5f3ab5c0ae8f9bdbbbaf113fad125fe1beca7a0fdecba68d4afc01",
+            "seed": 0,
+            "stage": 2
+          },
+          "monotonic_ns": 4508543452945,
+          "path": {
+            "path_still_names_open_inode": true,
+            "read_bytes": 139264,
+            "sha256": "fa07230da0d11d2aecb65f230cdd65e059b6bf4e4d25763ba18fd86a2dde125c",
+            "st_ctime_ns": 1790496935637812059,
+            "st_dev": 27,
+            "st_ino": 792567,
+            "st_mtime_ns": 1790496935637812059,
+            "st_nlink": 1,
+            "st_size": 139264,
+            "stable_during_read": true
+          },
+          "sidecars": {},
+          "wall_ns": 1790496935637930247
+        },
+        {
+          "held_inode": {
+            "read_bytes": 139264,
+            "sha256": "fa07230da0d11d2aecb65f230cdd65e059b6bf4e4d25763ba18fd86a2dde125c",
+            "st_ctime_ns": 1790496935637812059,
+            "st_dev": 27,
+            "st_ino": 792567,
+            "st_mtime_ns": 1790496935637812059,
+            "st_nlink": 1,
+            "st_size": 139264,
+            "stable_during_read": true
+          },
+          "label": "after-close-and-extra-fsync",
+          "logical": {
+            "integrity": [
+              [
+                "ok"
+              ]
+            ],
+            "payload_sha256": "5df61bc7dd5f3ab5c0ae8f9bdbbbaf113fad125fe1beca7a0fdecba68d4afc01",
+            "seed": 0,
+            "stage": 2
+          },
+          "monotonic_ns": 4508545196622,
+          "path": {
+            "path_still_names_open_inode": true,
+            "read_bytes": 139264,
+            "sha256": "fa07230da0d11d2aecb65f230cdd65e059b6bf4e4d25763ba18fd86a2dde125c",
+            "st_ctime_ns": 1790496935637812059,
+            "st_dev": 27,
+            "st_ino": 792567,
+            "st_mtime_ns": 1790496935637812059,
+            "st_nlink": 1,
+            "st_size": 139264,
+            "stable_during_read": true
+          },
+          "sidecars": {},
+          "wall_ns": 1790496935639673743
+        },
+        {
+          "held_inode": {
+            "read_bytes": 139264,
+            "sha256": "fa07230da0d11d2aecb65f230cdd65e059b6bf4e4d25763ba18fd86a2dde125c",
+            "st_ctime_ns": 1790496935637812059,
+            "st_dev": 27,
+            "st_ino": 792567,
+            "st_mtime_ns": 1790496935637812059,
+            "st_nlink": 1,
+            "st_size": 139264,
+            "stable_during_read": true
+          },
+          "label": "settle-0",
+          "logical": {
+            "integrity": [
+              [
+                "ok"
+              ]
+            ],
+            "payload_sha256": "5df61bc7dd5f3ab5c0ae8f9bdbbbaf113fad125fe1beca7a0fdecba68d4afc01",
+            "seed": 0,
+            "stage": 2
+          },
+          "monotonic_ns": 4508748125260,
+          "path": {
+            "path_still_names_open_inode": true,
+            "read_bytes": 139264,
+            "sha256": "fa07230da0d11d2aecb65f230cdd65e059b6bf4e4d25763ba18fd86a2dde125c",
+            "st_ctime_ns": 1790496935637812059,
+            "st_dev": 27,
+            "st_ino": 792567,
+            "st_mtime_ns": 1790496935637812059,
+            "st_nlink": 1,
+            "st_size": 139264,
+            "stable_during_read": true
+          },
+          "sidecars": {},
+          "wall_ns": 1790496935842602471
+        }
+      ],
+      "kind": "sqlite",
+      "location": "smoke",
+      "path": "/tmp/gabriel_boundary_smoke_v2_20260927/sqlite_00.sqlite",
+      "path_inode_changed": false,
+      "seed": 0,
+      "settings": {
+        "database_list": [
+          [
+            0,
+            "main",
+            "/tmp/gabriel_boundary_smoke_v2_20260927/sqlite_00.sqlite"
+          ]
+        ],
+        "journal_mode": "delete",
+        "synchronous": 3
+      },
+      "unavailable_or_raced_observations": 0
+    },
+    {
+      "all_postclose_path_checks_match": true,
+      "expected_anchor": {
+        "events": 3,
+        "head": "4cc95acd121cb5913c48549078faa8944cdfafdc59b65784ca4031f88e6e0b44"
+      },
+      "expected_stage": 2,
+      "explicit_final_fsync": [
+        {
+          "returned_successfully": true,
+          "target": "/tmp/gabriel_boundary_smoke_v2_20260927/store_00.sqlite"
+        },
+        {
+          "returned_successfully": true,
+          "target": "/tmp/gabriel_boundary_smoke_v2_20260927"
+        }
+      ],
+      "explicit_store_reopen_audit": {
+        "bytes": 4646,
+        "contracts": 1,
+        "events": 3,
+        "external_anchor_checked": true,
+        "head": "4cc95acd121cb5913c48549078faa8944cdfafdc59b65784ca4031f88e6e0b44",
+        "journal_mode": "delete",
+        "semantic_replay": true,
+        "status": "passed",
+        "synchronous": 3
+      },
+      "explicit_store_reopen_passed": true,
+      "final_baseline_monotonic_ns": 4508544586293,
+      "final_baseline_observation": "committed-2",
+      "final_committed_sha256": "61b97fb23f17f2109b2da9c6df1ecf3df7032465e20ce7a965c489f8d4d2d912",
+      "final_path_matches_committed": true,
+      "held_inode_final_preserves_committed_bytes": true,
+      "history": [
+        {
+          "held_inode": {
+            "read_bytes": 24576,
+            "sha256": "ebaaebee7f7a213daf0a69add4261516bbf60215111790e59f52feb359ed1a40",
+            "st_ctime_ns": 1790496935635135517,
+            "st_dev": 27,
+            "st_ino": 792568,
+            "st_mtime_ns": 1790496935635135517,
+            "st_nlink": 1,
+            "st_size": 24576,
+            "stable_during_read": true
+          },
+          "label": "initialized",
+          "logical": {
+            "events": 1,
+            "head": "84b0245a6b4a11379b0b70f3306bc32c15abc481dcebfb7af44debeb6a3b8b36",
+            "integrity": [
+              [
+                "ok"
+              ]
+            ],
+            "seed": 0,
+            "stage": 0
+          },
+          "monotonic_ns": 4508540829554,
+          "path": {
+            "path_still_names_open_inode": true,
+            "read_bytes": 24576,
+            "sha256": "ebaaebee7f7a213daf0a69add4261516bbf60215111790e59f52feb359ed1a40",
+            "st_ctime_ns": 1790496935635135517,
+            "st_dev": 27,
+            "st_ino": 792568,
+            "st_mtime_ns": 1790496935635135517,
+            "st_nlink": 1,
+            "st_size": 24576,
+            "stable_during_read": true
+          },
+          "sidecars": {},
+          "wall_ns": 1790496935635306855
+        },
+        {
+          "held_inode": {
+            "read_bytes": 28672,
+            "sha256": "60c90a06ad51b1e036c808f2be848c5872c66eb76398a3fb92b824e17a655106",
+            "st_ctime_ns": 1790496935636808617,
+            "st_dev": 27,
+            "st_ino": 792568,
+            "st_mtime_ns": 1790496935636808617,
+            "st_nlink": 1,
+            "st_size": 28672,
+            "stable_during_read": true
+          },
+          "label": "committed-1",
+          "logical": {
+            "events": 2,
+            "head": "bc2290a20cde359abd83cc7f425ceffc91fcbf961b75b4048654962dbcb0975a",
+            "integrity": [
+              [
+                "ok"
+              ]
+            ],
+            "seed": 0,
+            "stage": 1
+          },
+          "monotonic_ns": 4508542480180,
+          "path": {
+            "path_still_names_open_inode": true,
+            "read_bytes": 28672,
+            "sha256": "60c90a06ad51b1e036c808f2be848c5872c66eb76398a3fb92b824e17a655106",
+            "st_ctime_ns": 1790496935636808617,
+            "st_dev": 27,
+            "st_ino": 792568,
+            "st_mtime_ns": 1790496935636808617,
+            "st_nlink": 1,
+            "st_size": 28672,
+            "stable_during_read": true
+          },
+          "sidecars": {},
+          "wall_ns": 1790496935636957472
+        },
+        {
+          "held_inode": {
+            "read_bytes": 32768,
+            "sha256": "61b97fb23f17f2109b2da9c6df1ecf3df7032465e20ce7a965c489f8d4d2d912",
+            "st_ctime_ns": 1790496935638913598,
+            "st_dev": 27,
+            "st_ino": 792568,
+            "st_mtime_ns": 1790496935638913598,
+            "st_nlink": 1,
+            "st_size": 32768,
+            "stable_during_read": true
+          },
+          "label": "committed-2",
+          "logical": {
+            "events": 3,
+            "head": "4cc95acd121cb5913c48549078faa8944cdfafdc59b65784ca4031f88e6e0b44",
+            "integrity": [
+              [
+                "ok"
+              ]
+            ],
+            "seed": 0,
+            "stage": 2
+          },
+          "monotonic_ns": 4508544586293,
+          "path": {
+            "path_still_names_open_inode": true,
+            "read_bytes": 32768,
+            "sha256": "61b97fb23f17f2109b2da9c6df1ecf3df7032465e20ce7a965c489f8d4d2d912",
+            "st_ctime_ns": 1790496935638913598,
+            "st_dev": 27,
+            "st_ino": 792568,
+            "st_mtime_ns": 1790496935638913598,
+            "st_nlink": 1,
+            "st_size": 32768,
+            "stable_during_read": true
+          },
+          "sidecars": {},
+          "wall_ns": 1790496935639063514
+        },
+        {
+          "held_inode": {
+            "read_bytes": 32768,
+            "sha256": "61b97fb23f17f2109b2da9c6df1ecf3df7032465e20ce7a965c489f8d4d2d912",
+            "st_ctime_ns": 1790496935638913598,
+            "st_dev": 27,
+            "st_ino": 792568,
+            "st_mtime_ns": 1790496935638913598,
+            "st_nlink": 1,
+            "st_size": 32768,
+            "stable_during_read": true
+          },
+          "label": "after-close-and-extra-fsync",
+          "logical": {
+            "events": 3,
+            "head": "4cc95acd121cb5913c48549078faa8944cdfafdc59b65784ca4031f88e6e0b44",
+            "integrity": [
+              [
+                "ok"
+              ]
+            ],
+            "seed": 0,
+            "stage": 2
+          },
+          "monotonic_ns": 4508545623916,
+          "path": {
+            "path_still_names_open_inode": true,
+            "read_bytes": 32768,
+            "sha256": "61b97fb23f17f2109b2da9c6df1ecf3df7032465e20ce7a965c489f8d4d2d912",
+            "st_ctime_ns": 1790496935638913598,
+            "st_dev": 27,
+            "st_ino": 792568,
+            "st_mtime_ns": 1790496935638913598,
+            "st_nlink": 1,
+            "st_size": 32768,
+            "stable_during_read": true
+          },
+          "sidecars": {},
+          "wall_ns": 1790496935640101057
+        },
+        {
+          "held_inode": {
+            "read_bytes": 32768,
+            "sha256": "61b97fb23f17f2109b2da9c6df1ecf3df7032465e20ce7a965c489f8d4d2d912",
+            "st_ctime_ns": 1790496935638913598,
+            "st_dev": 27,
+            "st_ino": 792568,
+            "st_mtime_ns": 1790496935638913598,
+            "st_nlink": 1,
+            "st_size": 32768,
+            "stable_during_read": true
+          },
+          "label": "settle-0",
+          "logical": {
+            "events": 3,
+            "head": "4cc95acd121cb5913c48549078faa8944cdfafdc59b65784ca4031f88e6e0b44",
+            "integrity": [
+              [
+                "ok"
+              ]
+            ],
+            "seed": 0,
+            "stage": 2
+          },
+          "monotonic_ns": 4508748686064,
+          "path": {
+            "path_still_names_open_inode": true,
+            "read_bytes": 32768,
+            "sha256": "61b97fb23f17f2109b2da9c6df1ecf3df7032465e20ce7a965c489f8d4d2d912",
+            "st_ctime_ns": 1790496935638913598,
+            "st_dev": 27,
+            "st_ino": 792568,
+            "st_mtime_ns": 1790496935638913598,
+            "st_nlink": 1,
+            "st_size": 32768,
+            "stable_during_read": true
+          },
+          "sidecars": {},
+          "wall_ns": 1790496935843163266
+        }
+      ],
+      "kind": "store",
+      "location": "smoke",
+      "path": "/tmp/gabriel_boundary_smoke_v2_20260927/store_00.sqlite",
+      "path_inode_changed": false,
+      "seed": 0,
+      "unavailable_or_raced_observations": 0
+    }
+  ],
+  "command": [
+    "reproduction/check_persistence_boundary.py",
+    "--location",
+    "smoke",
+    "/tmp/gabriel_boundary_smoke_v2_20260927",
+    "--records",
+    "1",
+    "--steps",
+    "2",
+    "--interval",
+    "0",
+    "--settle",
+    "0.2",
+    "--output",
+    "audit/persistence_boundary_smoke_v2_20260927.json"
+  ],
+  "environment_after": {
+    "clock": {
+      "monotonic_ns": 4508750895392,
+      "wall_ns": 1790496935845372664
+    },
+    "kernel": "6.18.44",
+    "pid": 5,
+    "python": "3.12.14",
+    "relevant_processes": [
+      {
+        "comm": "rsync",
+        "pid": 3
+      },
+      {
+        "comm": "sync_share.sh",
+        "pid": 4
+      },
+      {
+        "comm": "sync_share.sh",
+        "pid": 5
+      },
+      {
+        "comm": "inotifywait",
+        "pid": 75
+      },
+      {
+        "comm": "inotifywait",
+        "pid": 86320
+      }
+    ],
+    "root_mount": [
+      {
+        "device": "0:27",
+        "mountpoint": "/",
+        "type": "overlay",
+        "volatile_sync_reported": true
+      }
+    ],
+    "rsync_scratch_module": {
+      "path": "/workspace/scratch",
+      "read only": "false"
+    },
+    "service_sources": {
+      "/usr/local/scripts/sync_share.sh": {
+        "relevant_lines": [
+          "rsync -a \\",
+          "--delay-updates --partial-dir=\".rsync-tmp\" \\",
+          "--update --times \\",
+          "inotifywait -rq \\",
+          "-e close_write,create,delete,move,attrib,move_self,delete_self,unmount \\",
+          "sleep 2 # debounce"
+        ],
+        "sha256": "7a4b7aa2c2ee89eddb9b24fbe5267f4abd75a8cded4328773be9248d61cf3c32"
+      }
+    },
+    "source_sha256": {
+      "gabriel_runtime/canonical.py": "f5237347101531a0c64e41fdae65adc66aa5b731b42d474ff4f68e83e85695dc",
+      "gabriel_runtime/engine.py": "2499574e2e9733665398fc8203f5e2ca1dc22190860344725568667b7a258bc1",
+      "reproduction/check_persistence_boundary.py": "1898b45d7e8a6c8dc9b4b04555349b7cd1ddc302537d19b469569a395d7c267b"
+    },
+    "sqlite": "3.53.1"
+  },
+  "environment_before": {
+    "clock": {
+      "monotonic_ns": 4508486879360,
+      "wall_ns": 1790496935581356851
+    },
+    "kernel": "6.18.44",
+    "pid": 5,
+    "python": "3.12.14",
+    "relevant_processes": [
+      {
+        "comm": "rsync",
+        "pid": 3
+      },
+      {
+        "comm": "sync_share.sh",
+        "pid": 4
+      },
+      {
+        "comm": "sync_share.sh",
+        "pid": 5
+      },
+      {
+        "comm": "inotifywait",
+        "pid": 75
+      },
+      {
+        "comm": "inotifywait",
+        "pid": 86320
+      }
+    ],
+    "root_mount": [
+      {
+        "device": "0:27",
+        "mountpoint": "/",
+        "type": "overlay",
+        "volatile_sync_reported": true
+      }
+    ],
+    "rsync_scratch_module": {
+      "path": "/workspace/scratch",
+      "read only": "false"
+    },
+    "service_sources": {
+      "/usr/local/scripts/sync_share.sh": {
+        "relevant_lines": [
+          "rsync -a \\",
+          "--delay-updates --partial-dir=\".rsync-tmp\" \\",
+          "--update --times \\",
+          "inotifywait -rq \\",
+          "-e close_write,create,delete,move,attrib,move_self,delete_self,unmount \\",
+          "sleep 2 # debounce"
+        ],
+        "sha256": "7a4b7aa2c2ee89eddb9b24fbe5267f4abd75a8cded4328773be9248d61cf3c32"
+      }
+    },
+    "source_sha256": {
+      "gabriel_runtime/canonical.py": "f5237347101531a0c64e41fdae65adc66aa5b731b42d474ff4f68e83e85695dc",
+      "gabriel_runtime/engine.py": "2499574e2e9733665398fc8203f5e2ca1dc22190860344725568667b7a258bc1",
+      "reproduction/check_persistence_boundary.py": "1898b45d7e8a6c8dc9b4b04555349b7cd1ddc302537d19b469569a395d7c267b"
+    },
+    "sqlite": "3.53.1"
+  },
+  "failure": null,
+  "inotify_events": [
+    {
+      "monotonic_ns": 4508538550291,
+      "observations": "/tmp/gabriel_boundary_smoke_v2_20260927/|CREATE|plain_00.bin\n",
+      "wall_ns": 1790496935633027512
+    },
+    {
+      "monotonic_ns": 4508539843679,
+      "observations": "/tmp/gabriel_boundary_smoke_v2_20260927/|CREATE|sqlite_00.sqlite\n/tmp/gabriel_boundary_smoke_v2_20260927/|CREATE|sqlite_00.sqlite-journal\n/tmp/gabriel_boundary_smoke_v2_20260927/|ATTRIB|sqlite_00.sqlite-journal\n/tmp/gabriel_boundary_smoke_v2_20260927/|CLOSE_WRITE,CLOSE|sqlite_00.sqlite-journal\n/tmp/gabriel_boundary_smoke_v2_20260927/|DELETE|sqlite_00.sqlite-journal\n/tmp/gabriel_boundary_smoke_v2_20260927/|CREATE|sqlite_00.sqlite-journal\n/tmp/gabriel_boundary_smoke_v2_20260927/|ATTRIB|sqlite_00.sqlite-journal\n/tmp/gabriel_boundary_smoke_v2_20260927/|CLOSE_WRITE,CLOSE|sqlite_00.sqlite-journal\n/tmp/gabriel_boundary_smoke_v2_20260927/|DELETE|sqlite_00.sqlite-journal\n",
+      "wall_ns": 1790496935634320920
+    },
+    {
+      "monotonic_ns": 4508541150768,
+      "observations": "/tmp/gabriel_boundary_smoke_v2_20260927/|CREATE|store_00.sqlite\n/tmp/gabriel_boundary_smoke_v2_20260927/|CLOSE_WRITE,CLOSE|store_00.sqlite\n/tmp/gabriel_boundary_smoke_v2_20260927/|CREATE|store_00.sqlite-journal\n/tmp/gabriel_boundary_smoke_v2_20260927/|ATTRIB|store_00.sqlite-journal\n/tmp/gabriel_boundary_smoke_v2_20260927/|CLOSE_WRITE,CLOSE|store_00.sqlite-journal\n/tmp/gabriel_boundary_smoke_v2_20260927/|DELETE|store_00.sqlite-journal\n/tmp/gabriel_boundary_smoke_v2_20260927/|CREATE|store_00.sqlite-journal\n/tmp/gabriel_boundary_smoke_v2_20260927/|ATTRIB|store_00.sqlite-journal\n/tmp/gabriel_boundary_smoke_v2_20260927/|CLOSE_WRITE,CLOSE|store_00.sqlite-journal\n/tmp/gabriel_boundary_smoke_v2_20260927/|DELETE|store_00.sqlite-journal\n",
+      "wall_ns": 1790496935635628009
+    },
+    {
+      "monotonic_ns": 4508542035761,
+      "observations": "/tmp/gabriel_boundary_smoke_v2_20260927/|CREATE|sqlite_00.sqlite-journal\n/tmp/gabriel_boundary_smoke_v2_20260927/|ATTRIB|sqlite_00.sqlite-journal\n/tmp/gabriel_boundary_smoke_v2_20260927/|CLOSE_WRITE,CLOSE|sqlite_00.sqlite-journal\n/tmp/gabriel_boundary_smoke_v2_20260927/|DELETE|sqlite_00.sqlite-journal\n",
+      "wall_ns": 1790496935636513012
+    },
+    {
+      "monotonic_ns": 4508542784709,
+      "observations": "/tmp/gabriel_boundary_smoke_v2_20260927/|CREATE|store_00.sqlite-journal\n/tmp/gabriel_boundary_smoke_v2_20260927/|ATTRIB|store_00.sqlite-journal\n/tmp/gabriel_boundary_smoke_v2_20260927/|CLOSE_WRITE,CLOSE|store_00.sqlite-journal\n/tmp/gabriel_boundary_smoke_v2_20260927/|DELETE|store_00.sqlite-journal\n",
+      "wall_ns": 1790496935637261980
+    },
+    {
+      "monotonic_ns": 4508544100261,
+      "observations": "/tmp/gabriel_boundary_smoke_v2_20260927/|CREATE|sqlite_00.sqlite-journal\n/tmp/gabriel_boundary_smoke_v2_20260927/|ATTRIB|sqlite_00.sqlite-journal\n/tmp/gabriel_boundary_smoke_v2_20260927/|CLOSE_WRITE,CLOSE|sqlite_00.sqlite-journal\n/tmp/gabriel_boundary_smoke_v2_20260927/|DELETE|sqlite_00.sqlite-journal\n",
+      "wall_ns": 1790496935638577572
+    },
+    {
+      "monotonic_ns": 4508544887657,
+      "observations": "/tmp/gabriel_boundary_smoke_v2_20260927/|CREATE|store_00.sqlite-journal\n/tmp/gabriel_boundary_smoke_v2_20260927/|ATTRIB|store_00.sqlite-journal\n/tmp/gabriel_boundary_smoke_v2_20260927/|CLOSE_WRITE,CLOSE|store_00.sqlite-journal\n/tmp/gabriel_boundary_smoke_v2_20260927/|DELETE|store_00.sqlite-journal\n",
+      "wall_ns": 1790496935639364848
+    },
+    {
+      "monotonic_ns": 4508545151504,
+      "observations": "/tmp/gabriel_boundary_smoke_v2_20260927/|CLOSE_WRITE,CLOSE|plain_00.bin\n",
+      "wall_ns": 1790496935639628655
+    },
+    {
+      "monotonic_ns": 4508545578928,
+      "observations": "/tmp/gabriel_boundary_smoke_v2_20260927/|CLOSE_WRITE,CLOSE|sqlite_00.sqlite\n",
+      "wall_ns": 1790496935640056079
+    },
+    {
+      "monotonic_ns": 4508547564038,
+      "observations": "/tmp/gabriel_boundary_smoke_v2_20260927/|CLOSE_WRITE,CLOSE|store_00.sqlite\n/tmp/gabriel_boundary_smoke_v2_20260927/|CLOSE_WRITE,CLOSE|store_00.sqlite\n",
+      "wall_ns": 1790496935642041420
+    }
+  ],
+  "kind": "controlled live pathname and inode probe; no power-loss claim",
+  "schema": "gabriel.persistence-boundary.v1",
+  "settings": {
+    "check": null,
+    "interval": 0.0,
+    "location": [
+      [
+        "smoke",
+        "/tmp/gabriel_boundary_smoke_v2_20260927"
+      ]
+    ],
+    "output": "audit/persistence_boundary_smoke_v2_20260927.json",
+    "records": 1,
+    "settle": 0.2,
+    "steps": 2
+  },
+  "summary": {
+    "completed": 3,
+    "final_path_failures": 0,
+    "held_inode_failures": 0,
+    "pathname_replacements": 0
+  },
+  "watcher": {
+    "alive_before_cleanup": true,
+    "returncode": -15,
+    "stderr": ""
+  }
+}

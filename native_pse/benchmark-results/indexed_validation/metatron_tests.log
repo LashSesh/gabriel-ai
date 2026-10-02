@@ -1,0 +1,190 @@
+   Compiling autocfg v1.5.0
+   Compiling proc-macro2 v1.0.106
+   Compiling quote v1.0.45
+   Compiling unicode-ident v1.0.24
+   Compiling serde_core v1.0.228
+   Compiling typenum v1.20.0
+   Compiling crossbeam-utils v0.8.21
+   Compiling zmij v1.0.21
+   Compiling serde v1.0.228
+   Compiling serde_json v1.0.150
+   Compiling bytemuck v1.25.0
+   Compiling itoa v1.0.18
+   Compiling safe_arch v1.0.0
+   Compiling num-traits v0.2.19
+   Compiling matrixmultiply v0.3.10
+   Compiling memchr v2.8.0
+   Compiling const-oid v0.10.2
+   Compiling crossbeam-epoch v0.9.18
+   Compiling hybrid-array v0.4.11
+   Compiling syn v2.0.117
+   Compiling rayon-core v1.13.0
+   Compiling crossbeam-deque v0.8.6
+   Compiling num-integer v0.1.46
+   Compiling num-complex v0.4.6
+   Compiling approx v0.5.1
+   Compiling wide v1.5.0
+   Compiling ryu-js v0.2.2
+   Compiling cpufeatures v0.3.0
+   Compiling thiserror v2.0.18
+   Compiling cfg-if v1.0.4
+   Compiling block-buffer v0.12.0
+   Compiling crypto-common v0.2.1
+   Compiling rawpointer v0.2.1
+   Compiling num-rational v0.4.2
+   Compiling either v1.15.0
+   Compiling rayon v1.12.0
+   Compiling digest v0.11.3
+   Compiling sha2 v0.11.0
+   Compiling serde_derive v1.0.228
+   Compiling thiserror-impl v2.0.18
+   Compiling nalgebra-macros v0.3.0
+   Compiling simba v0.10.0
+   Compiling ordered-float v5.3.0
+   Compiling serde_jcs v0.2.0
+   Compiling pse-types v0.1.0 (/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/crates/pse-types)
+   Compiling nalgebra v0.35.0
+   Compiling pse-metatron v0.1.0 (/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/crates/pse-metatron)
+    Finished `release` profile [optimized] target(s) in 28.38s
+     Running unittests src/lib.rs (native_pse/target/release/deps/pse_metatron-385f7b39cfc55562)
+
+running 113 tests
+test bitgraph::tests::bits_to_adjacency_matches_edges ... ok
+test bitgraph::tests::bit_edge_roundtrip ... ok
+test bitgraph::tests::complement_involution ... ok
+test bitgraph::tests::identity_perm_is_identity_table ... ok
+test bitgraph::tests::mask_for_n_values ... ok
+test bitgraph::tests::max_bit_is_20 ... ok
+test bitgraph::tests::cache_size_5040 ... ok
+test bitgraph::tests::empty_graph_orbit_1_stab_5040 ... ok
+test bitgraph::tests::k7_orbit_1_stab_5040 ... ok
+test bitgraph::tests::single_edge_orbit_stab ... ok
+test bitgraph_n::tests::orderly_count_matches_oeis_for_n6 ... ok
+test bitgraph_n::tests::is_canonical_matches_full_orbit_n5 ... ok
+test bitgraph_n::tests::parallel_enumeration_matches_sequential_n6 ... ok
+test catalog::tests::n1_has_one_graph ... ok
+test bitgraph_n::tests::is_canonical_empty_and_complete ... ok
+test catalog::tests::n3_has_four_graphs ... ok
+test catalog::tests::n2_has_two_graphs ... ok
+test complement::tests::complement_of_k3_is_empty ... ok
+test complement::tests::mat_pow_0_is_identity ... ok
+test complement::tests::trace_of_identity ... ok
+test complement::tests::triangle_count_k3 ... ok
+test complement::tests::triangle_count_path ... ok
+test embed::tests::embed_3_in_13 ... ok
+test embed::tests::embed_preserves_adjacency ... ok
+test geometry::tests::canonical_nodes_count ... ok
+test geometry::tests::canonical_nodes_indices ... ok
+test geometry::tests::center_at_origin ... ok
+test geometry::tests::cuboctahedron_all_on_sphere ... ok
+test geometry::tests::cuboctahedron_edge_count ... ok
+test geometry::tests::cuboctahedron_equal_edge_length ... ok
+test geometry::tests::cuboctahedron_faces_eight_triangles_six_squares ... ok
+test geometry::tests::cuboctahedron_vertex_count ... ok
+test geometry::tests::cuboctahedron_vertex_degree_4 ... ok
+test geometry::tests::each_vertex_has_one_zero_coordinate ... ok
+test geometry::tests::no_coordinate_coincidence ... ok
+test group::tests::c6_count ... ok
+test group::tests::c6_identity_first ... ok
+test group::tests::c6_subset_of_s7 ... ok
+test group::tests::conjugate_with_identity ... ok
+test catalog::tests::n4_has_eleven_graphs ... ok
+test group::tests::d6_count ... ok
+test group::tests::identity_permutation_gives_identity_matrix ... ok
+test group::tests::s7_all_unique ... ok
+test group::tests::s7_count ... ok
+test group::tests::s7_matrix_valid ... ok
+test indexed_signature::tests::boundaries ... ok
+test bitgraph_n::tests::sn_counts ... ok
+test ingest::tests::accept_n_eq_8 ... ok
+test ingest::tests::accept_valid_triangle ... ok
+test ingest::tests::edge_count_empty ... ok
+test ingest::tests::from_adj_list_works ... ok
+test ingest::tests::reject_empty ... ok
+test ingest::tests::reject_n_gt_8 ... ok
+test catalog::tests::ids_are_unique_and_sorted ... ok
+test ingest::tests::reject_non_binary ... ok
+test ingest::tests::reject_non_symmetric ... ok
+test ingest::tests::reject_self_loop ... ok
+test memoized_signature::tests::cache_entries_and_resets_are_thread_local ... ok
+test memoized_signature::tests::graph_size_and_labelled_input_are_part_of_identity ... ok
+test memoized_signature::tests::colliding_keys_evict_without_returning_the_other_signature ... ok
+test catalog::tests::build_catalog_to_4_yields_18_entries ... ok
+test catalog::tests::n5_has_thirtyfour_graphs ... ok
+test memoized_signature::tests::returned_values_cannot_mutate_cached_entries ... ok
+test memoized_signature::tests::negative_zero_in_any_matrix_part_bypasses_even_a_warm_cache ... ok
+test memoized_signature::tests::validation_precedes_lookup_and_preserves_error_details ... ok
+test bitgraph_n::tests::cache_n8_matches ... ok
+test indexed_signature::tests::sampled_larger_graphs ... ok
+test phase_layout::tests::cuboctahedron_phases_are_balanced ... ok
+test phase_layout::tests::first_entry_is_center_with_radius_zero ... ok
+test phase_layout::tests::layout_has_13_entries ... ok
+test phase_layout::tests::outer_entries_have_radius_one ... ok
+test phase_layout::tests::outer_phases_are_pairwise_distinct ... ok
+test phase_layout::tests::outer_phases_lie_in_zero_two_pi ... ok
+test phase_layout::tests::phase_layout_is_deterministic ... ok
+test platonic::tests::empty_graph_is_subgraph_of_no_solid ... ok
+test platonic::tests::k333_is_not_octahedron ... ok
+test platonic::tests::k4_is_tetrahedron ... ok
+test platonic::tests::k5_contains_tetrahedron_but_is_not ... ok
+test platonic::tests::large_platonic_never_match_in_catalog_range ... ok
+test platonic::tests::octahedron_k222_recognized ... ok
+test platonic::tests::scaffold_platonic_classification_is_empty ... ok
+test properties::tests::c5_is_self_complementary ... ok
+test properties::tests::cycle_c6_is_planar_not_threshold ... ok
+test catalog::tests::n4_includes_self_complementary_p4 ... ok
+test properties::tests::k33_is_not_planar ... ok
+test properties::tests::k3_props ... ok
+test properties::tests::empty_graph_props ... ok
+test properties::tests::k4_is_planar_and_threshold ... ok
+test properties::tests::k5_is_not_planar ... ok
+test properties::tests::p4_is_self_complementary ... ok
+test properties::tests::star_is_tree_and_bipartite ... ok
+test memoized_signature::tests::sampled_inputs_and_immediate_repeats_match_complete_indexed_signatures ... ok
+test memoized_signature::tests::more_than_capacity_unique_inputs_remain_bounded_and_clearable ... ok
+test indexed_signature::tests::all_labelled_graphs_through_five_vertices ... ok
+test orbit::tests::empty_graph_orbit_size_1 ... ok
+test orbit::tests::complete_k7_orbit_size_1 ... ok
+test orbit::tests::canonical_hash_is_deterministic ... ok
+test signature::tests::signature_of_triangle_has_correct_basics ... ok
+test small_signature::tests::inherited_padding_identity_limitation_is_explicit ... ok
+test small_signature::tests::rejects_invalid_or_out_of_scope_graphs ... ok
+test small_signature::tests::sampled_six_and_seven_vertex_graphs_match_indexed_action ... ok
+test spectrum::tests::empty_graph_eigenvalues ... ok
+test spectrum::tests::k3_eigenvalues ... ok
+test spectrum::tests::k3_spectral_radius ... ok
+test signature::tests::empty_graph_has_no_platonic_subgraph ... ok
+test signature::tests::orbit_stabilizer_product_equals_5040 ... ok
+test stabilizer::tests::empty_graph_stabilizer_is_s7 ... ok
+test signature::tests::signature_detects_tetrahedron_subgraph ... ok
+test signature::tests::cache_reuse_produces_identical_signature ... ok
+test stabilizer::tests::single_edge_stabilizer ... ok
+test signature::tests::signature_is_deterministic ... ok
+test small_signature::tests::every_simple_graph_through_five_vertices_matches_indexed_action ... ok
+test small_signature::tests::complete_signatures_equal_dense_reference_bytes ... ok
+
+test result: ok. 113 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 5.50s
+
+     Running tests/catalog_invariants.rs (native_pse/target/release/deps/catalog_invariants-24dd8faf6ea5bf71)
+
+running 11 tests
+test find_in_catalog_locates_triangle ... ok
+test find_in_catalog_distinguishes_p3_from_k3 ... ok
+test catalog_ids_are_unique ... ok
+test catalog_counts_match_oeis_a000088_for_n1_to_4 ... ok
+test all_catalog_entries_have_non_empty_hashes ... ok
+test connected_counts_match_oeis_a001349_for_n1_to_4 ... ok
+test tree_counts_match_oeis_a000055_for_n1_to_5 ... ok
+test non_isomorphic_graphs_have_distinct_canonical_hashes ... ok
+test isomorphic_relabelings_have_same_canonical_hash ... ok
+test scan_is_deterministic ... ok
+test scan_spectrum_is_stable ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.80s
+
+   Doc-tests pse_metatron
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

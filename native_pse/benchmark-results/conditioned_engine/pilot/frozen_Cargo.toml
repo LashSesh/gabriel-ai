@@ -1,0 +1,23 @@
+[package]
+name = "pse-conditioned-engine-benchmark"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[workspace]
+resolver = "2"
+
+[dependencies]
+pse = { path = "../..", features = ["memoized-signature", "phase-hoist", "shared-spectrum"] }
+pse-graph = { path = "../../crates/pse-graph" }
+pse-types = { path = "../../crates/pse-types" }
+serde_json = "1"
+
+[profile.release]
+opt-level = 3
+lto = false
+codegen-units = 1
+debug = true
+strip = "none"
+overflow-checks = false
+panic = "unwind"

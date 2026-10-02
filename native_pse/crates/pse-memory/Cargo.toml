@@ -1,0 +1,19 @@
+[package]
+publish = false
+name = "pse-memory"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Persistent pattern memory — topological similarity index for cross-session learning"
+rust-version.workspace = true
+
+[dependencies]
+pse-types = { path = "../pse-types", version = "0.1.0" }
+pse-metatron = { path = "../pse-metatron", version = "0.1.0" }
+serde = { workspace = true }
+sha2 = { workspace = true }
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]

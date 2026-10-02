@@ -1,0 +1,20 @@
+{
+  "schema": "gabriel.window-collection-invocation.v1",
+  "command": [
+    "python",
+    "reproduction/benchmark_window_reachability.py",
+    "collect",
+    "--inputs",
+    "results/window_reachability_study/inputs.json",
+    "--output",
+    "results/window_reachability_study/timings",
+    "--run"
+  ],
+  "cwd": "/tmp/gabriel_next_phase_e8d6xl0c/Gabriel",
+  "environment_additions": {
+    "PYTHONPATH": "/tmp/gabriel_next_phase_e8d6xl0c/deps"
+  },
+  "exit_code": 0,
+  "captured_completion_output": "{\"output\":\"results/window_reachability_study/timings\",\"workers\":5}\n",
+  "worker_commands_stdout_stderr": "each worker_N.command.json, worker_N.stdout and worker_N.stderr retained"
+}

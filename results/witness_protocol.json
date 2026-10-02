@@ -1,0 +1,10 @@
+{
+  "budgets": "0, floor(J/2), floor(3J/4), floor(9J/10), J-6",
+  "policy": "saved decision policy; no effect of witness search on acquisition",
+  "seed": "261025 + 1000*dataset_index + 100*mask_index + budget_index",
+  "iterations": 24,
+  "restarts": 2,
+  "step": "(.15*(1-step/24)+.02) times box width, signed projected gradient",
+  "scope": "witness success proves ambiguity on that box; failure is inconclusive",
+  "validation": "100-bit Arb, exact stored dyadic inputs and coefficients; strict distinct point winners"
+}

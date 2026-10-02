@@ -1,0 +1,27 @@
+{
+  "command": [
+    "cargo",
+    "test",
+    "--locked",
+    "--release",
+    "--manifest-path",
+    "native_pse/Cargo.toml",
+    "--target-dir",
+    "native_pse/target/validation_nolto",
+    "--jobs",
+    "1",
+    "--workspace",
+    "--all-features"
+  ],
+  "returncode": 101,
+  "wall_seconds": 0.3046698570251465,
+  "stdout_sha256": "deecbda5fc70f542a6cea044051b59c517c46f7f58997bf09656b1f6652d2caa",
+  "stderr_sha256": "7de67a0042fafc46eb5bff630e2f3c90993342e0cdb8537f4a9c8d04341d1504",
+  "totals": {
+    "passed": 2,
+    "failed": 1,
+    "ignored": 0,
+    "measured": 0,
+    "filtered": 0
+  }
+}

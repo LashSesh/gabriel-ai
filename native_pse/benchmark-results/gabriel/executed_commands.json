@@ -1,0 +1,115 @@
+[
+  {
+    "label": "compiler",
+    "command": [
+      "rustc",
+      "--version",
+      "--verbose"
+    ],
+    "cwd": "/workspace/scratch/657e86c899c9/tmp/gabriel_pse/upstream/pse",
+    "returncode": 0,
+    "seconds": 0.016400814056396484
+  },
+  {
+    "label": "cargo",
+    "command": [
+      "cargo",
+      "--version"
+    ],
+    "cwd": "/workspace/scratch/657e86c899c9/tmp/gabriel_pse/upstream/pse",
+    "returncode": 0,
+    "seconds": 0.01597428321838379
+  },
+  {
+    "label": "tests",
+    "command": [
+      "cargo",
+      "test",
+      "--locked",
+      "--workspace",
+      "--release"
+    ],
+    "cwd": "/workspace/scratch/657e86c899c9/tmp/gabriel_pse/upstream/pse",
+    "returncode": 101,
+    "seconds": 70.75988531112671
+  },
+  {
+    "label": "compiler",
+    "command": [
+      "rustc",
+      "--version",
+      "--verbose"
+    ],
+    "cwd": "/workspace/scratch/657e86c899c9/tmp/gabriel_pse/upstream/pse",
+    "returncode": 0,
+    "seconds": 0.016040563583374023
+  },
+  {
+    "label": "cargo",
+    "command": [
+      "cargo",
+      "--version"
+    ],
+    "cwd": "/workspace/scratch/657e86c899c9/tmp/gabriel_pse/upstream/pse",
+    "returncode": 0,
+    "seconds": 0.015900373458862305
+  },
+  {
+    "label": "tests_without_windows_fixture",
+    "command": [
+      "cargo",
+      "test",
+      "--locked",
+      "--workspace",
+      "--release",
+      "--",
+      "--skip",
+      "full_state_matches_original_golden_fixture"
+    ],
+    "cwd": "/workspace/scratch/657e86c899c9/tmp/gabriel_pse/upstream/pse",
+    "returncode": 0,
+    "seconds": 4.0402162075042725
+  },
+  {
+    "label": "example",
+    "command": [
+      "cargo",
+      "run",
+      "--locked",
+      "--release",
+      "--example",
+      "stream"
+    ],
+    "cwd": "/workspace/scratch/657e86c899c9/tmp/gabriel_pse/upstream/pse",
+    "returncode": 0,
+    "seconds": 0.06430220603942871
+  },
+  {
+    "label": "golden",
+    "command": [
+      "cargo",
+      "bench",
+      "--locked",
+      "--bench",
+      "engine",
+      "--",
+      "golden"
+    ],
+    "cwd": "/workspace/scratch/657e86c899c9/tmp/gabriel_pse/upstream/pse",
+    "returncode": 0,
+    "seconds": 40.58520245552063
+  },
+  {
+    "label": "benchmark",
+    "command": [
+      "cargo",
+      "bench",
+      "--locked",
+      "--bench",
+      "engine"
+    ],
+    "cwd": "/workspace/scratch/657e86c899c9/tmp/gabriel_pse/upstream/pse",
+    "returncode": 0,
+    "seconds": 2.370589017868042
+  }
+]

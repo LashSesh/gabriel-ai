@@ -1,0 +1,143 @@
+{
+  "schema": "gabriel.window-summary.v1",
+  "protocol_sha256": "aa4d41d74c11e7d80654d3df1cbdc1eabbfa249e047e2adae8d384c547a763c2",
+  "cohort_digest": "0edec494f8ea6c9f4ff4009712fabc10bca0d9b0a767a93a7939d5d2e4c23256",
+  "cohorts": {
+    "primary": {
+      "analytic": {
+        "cases": 256,
+        "statuses": {
+          "reachable": 180,
+          "excluded": 76,
+          "unknown": 0,
+          "out_of_scope": 0
+        },
+        "resolved": 256
+      },
+      "adaptive": {
+        "cases": 256,
+        "statuses": {
+          "reachable": 180,
+          "excluded": 76,
+          "unknown": 0,
+          "out_of_scope": 0
+        },
+        "resolved": 256
+      },
+      "uniform": {
+        "cases": 256,
+        "statuses": {
+          "reachable": 180,
+          "excluded": 76,
+          "unknown": 0,
+          "out_of_scope": 0
+        },
+        "resolved": 256
+      }
+    },
+    "control": {
+      "analytic": {
+        "cases": 24,
+        "statuses": {
+          "reachable": 8,
+          "excluded": 16,
+          "unknown": 0,
+          "out_of_scope": 0
+        },
+        "resolved": 24
+      },
+      "adaptive": {
+        "cases": 24,
+        "statuses": {
+          "reachable": 8,
+          "excluded": 16,
+          "unknown": 0,
+          "out_of_scope": 0
+        },
+        "resolved": 24
+      },
+      "uniform": {
+        "cases": 24,
+        "statuses": {
+          "reachable": 8,
+          "excluded": 16,
+          "unknown": 0,
+          "out_of_scope": 0
+        },
+        "resolved": 24
+      }
+    },
+    "stress": {
+      "analytic": {
+        "cases": 4,
+        "statuses": {
+          "reachable": 3,
+          "excluded": 1,
+          "unknown": 0,
+          "out_of_scope": 0
+        },
+        "resolved": 4
+      },
+      "adaptive": {
+        "cases": 4,
+        "statuses": {
+          "reachable": 3,
+          "excluded": 1,
+          "unknown": 0,
+          "out_of_scope": 0
+        },
+        "resolved": 4
+      },
+      "uniform": {
+        "cases": 4,
+        "statuses": {
+          "reachable": 1,
+          "excluded": 1,
+          "unknown": 2,
+          "out_of_scope": 0
+        },
+        "resolved": 2
+      }
+    }
+  },
+  "timing_workers": [
+    {
+      "worker": 0,
+      "matched_decisive_pairs": 768,
+      "excluded_pairs": 0,
+      "median_paired_adaptive_over_analytic": 0.9916342798500857
+    },
+    {
+      "worker": 1,
+      "matched_decisive_pairs": 768,
+      "excluded_pairs": 0,
+      "median_paired_adaptive_over_analytic": 0.9952941481345741
+    },
+    {
+      "worker": 2,
+      "matched_decisive_pairs": 768,
+      "excluded_pairs": 0,
+      "median_paired_adaptive_over_analytic": 0.9928619998830192
+    },
+    {
+      "worker": 3,
+      "matched_decisive_pairs": 768,
+      "excluded_pairs": 0,
+      "median_paired_adaptive_over_analytic": 0.9924174101759191
+    },
+    {
+      "worker": 4,
+      "matched_decisive_pairs": 768,
+      "excluded_pairs": 0,
+      "median_paired_adaptive_over_analytic": 0.9864426447416572
+    }
+  ],
+  "gates": {
+    "resolution": true,
+    "matched_task_timing": false,
+    "independent_zero_false_certificates": "requires independent verifier",
+    "secondary_uniform_ten_percentage_points": false
+  },
+  "overall": "unassessed until independent certificate verification is incorporated",
+  "scope": "synthetic graph-model verification; no external predictive or overall-system superiority claim"
+}

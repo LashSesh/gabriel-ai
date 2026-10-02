@@ -1,0 +1,560 @@
+{
+  "manifest_url": "https://static.rust-lang.org/dist/channel-rust-1.95.0.toml",
+  "manifest_sha256": "821ff14e4c4a1cbe1e8915f35aff0a3fbbdf8d293ad48ab8f31e3b0440c581f9",
+  "date": "2026-04-16",
+  "target": "x86_64-unknown-linux-gnu",
+  "prefix": "/workspace/scratch/657e86c899c9/tmp/integration_toolchain/installed",
+  "components": [
+    {
+      "component": "rustc",
+      "url": "https://static.rust-lang.org/dist/2026-04-16/rustc-1.95.0-x86_64-unknown-linux-gnu.tar.xz",
+      "sha256": "8426a3d170a5879f5682f5fbdd024a1779b3951e7baba685af2d6dc32a6dfc15",
+      "bytes": 80351960,
+      "version": "1.95.0 (59807616e 2026-04-14)"
+    },
+    {
+      "component": "cargo",
+      "url": "https://static.rust-lang.org/dist/2026-04-16/cargo-1.95.0-x86_64-unknown-linux-gnu.tar.xz",
+      "sha256": "e74edd2cf7d0f1f1383b4f00eb90c843750bc489e2ccf7214e6476678a907425",
+      "bytes": 10984780,
+      "version": "0.96.0 (f2d3ce0bd 2026-03-21)"
+    },
+    {
+      "component": "rust-std",
+      "url": "https://static.rust-lang.org/dist/2026-04-16/rust-std-1.95.0-x86_64-unknown-linux-gnu.tar.xz",
+      "sha256": "047ea7098803d3500fa1072e9cee5392697e21525559e4458128a2bf874aa382",
+      "bytes": 29573972,
+      "version": "1.95.0 (59807616e 2026-04-14)"
+    }
+  ],
+  "commands": [
+    {
+      "command": [
+        "sh",
+        "/workspace/scratch/657e86c899c9/tmp/integration_toolchain/rustc-1.95.0-x86_64-unknown-linux-gnu/install.sh",
+        "--prefix=/workspace/scratch/657e86c899c9/tmp/integration_toolchain/installed",
+        "--disable-ldconfig"
+      ],
+      "returncode": 0,
+      "stdout": "install: creating uninstall script at /workspace/scratch/657e86c899c9/tmp/integration_toolchain/installed/lib/rustlib/uninstall.sh\ninstall: installing component 'rustc'\n\n    rustc installed.\n\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "sh",
+        "/workspace/scratch/657e86c899c9/tmp/integration_toolchain/cargo-1.95.0-x86_64-unknown-linux-gnu/install.sh",
+        "--prefix=/workspace/scratch/657e86c899c9/tmp/integration_toolchain/installed",
+        "--disable-ldconfig"
+      ],
+      "returncode": 0,
+      "stdout": "install: creating uninstall script at /workspace/scratch/657e86c899c9/tmp/integration_toolchain/installed/lib/rustlib/uninstall.sh\ninstall: installing component 'cargo'\n\n    cargo installed.\n\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "sh",
+        "/workspace/scratch/657e86c899c9/tmp/integration_toolchain/rust-std-1.95.0-x86_64-unknown-linux-gnu/install.sh",
+        "--prefix=/workspace/scratch/657e86c899c9/tmp/integration_toolchain/installed",
+        "--disable-ldconfig"
+      ],
+      "returncode": 0,
+      "stdout": "install: creating uninstall script at /workspace/scratch/657e86c899c9/tmp/integration_toolchain/installed/lib/rustlib/uninstall.sh\ninstall: installing component 'rust-std-x86_64-unknown-linux-gnu'\n\n    rust std installed.\n\n",
+      "stderr": ""
+    }
+  ],
+  "rustc": {
+    "returncode": 0,
+    "stdout": "rustc 1.95.0 (59807616e 2026-04-14)\nbinary: rustc\ncommit-hash: 59807616e1fa2540724bfbac14d7976d7e4a3860\ncommit-date: 2026-04-14\nhost: x86_64-unknown-linux-gnu\nrelease: 1.95.0\nLLVM version: 22.1.2\n",
+    "stderr": ""
+  },
+  "cargo": {
+    "returncode": 0,
+    "stdout": "cargo 1.95.0 (f2d3ce0bd 2026-03-21)\nrelease: 1.95.0\ncommit-hash: f2d3ce0bd7f24a49f8f72d9000448f8838c4e850\ncommit-date: 2026-03-21\nhost: x86_64-unknown-linux-gnu\nlibgit2: 1.9.2 (sys:0.20.4 vendored)\nlibcurl: 8.15.0-DEV (sys:0.4.83+curl-8.15.0 vendored ssl:OpenSSL/3.5.4)\nssl: OpenSSL 3.5.4 30 Sep 2025\nos: Ubuntu 24.4.0 (noble) [64-bit]\n",
+    "stderr": ""
+  },
+  "fetch": {
+    "command": [
+      "cargo",
+      "fetch",
+      "--locked",
+      "--manifest-path",
+      "/workspace/scratch/657e86c899c9/integration_work/Gabriel/native_pse/Cargo.toml"
+    ],
+    "returncode": 0,
+    "seconds": 22.52576806000002,
+    "environment": {
+      "PATH": "/workspace/scratch/657e86c899c9/tmp/integration_toolchain/installed/bin:/root/.codex/tmp/arg0/codex-arg02BQD5W:/opt/codex/codex-path:/opt/codex/runtimes/codex-primary-runtime/dependencies/bin/override:/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/bin/fallback",
+      "CARGO_HOME": "/workspace/scratch/657e86c899c9/tmp/integration_toolchain/cargo",
+      "CARGO_PROFILE_RELEASE_LTO": "false",
+      "CARGO_PROFILE_RELEASE_CODEGEN_UNITS": "1",
+      "CARGO_BUILD_JOBS": "1"
+    }
+  },
+  "registry_checksums": [
+    {
+      "name": "approx",
+      "version": "0.5.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "cab112f0a86d568ea0e627cc1d6be74a1e9cd55214684db5561995f6dad897c6",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "autocfg",
+      "version": "1.5.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "c08606f8c3cbf4ce6ec8e28fb0014a2c086708fe954eaa885384a6165172e7e8",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "block-buffer",
+      "version": "0.12.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "cdd35008169921d80bc60d3d0ab416eecb028c4cd653352907921d95084790be",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "bytemuck",
+      "version": "1.25.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "c8efb64bd706a16a1bdde310ae86b351e4d21550d98d056f22f8a7f7a2183fec",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "cfg-if",
+      "version": "1.0.4",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "9330f8b2ff13f34540b44e946ef35111825727b38d33286ef986142615121801",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "const-oid",
+      "version": "0.10.2",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "a6ef517f0926dd24a1582492c791b6a4818a4d94e789a334894aa15b0d12f55c",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "cpufeatures",
+      "version": "0.3.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "8b2a41393f66f16b0823bb79094d54ac5fbd34ab292ddafb9a0456ac9f87d201",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "crossbeam-deque",
+      "version": "0.8.6",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "9dd111b7b7f7d55b72c0a6ae361660ee5853c9af73f70c3c2ef6858b950e2e51",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "crossbeam-epoch",
+      "version": "0.9.18",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "5b82ac4a3c2ca9c3460964f020e1402edd5753411d7737aa39c3714ad1b5420e",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "crossbeam-utils",
+      "version": "0.8.21",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "d0a5c400df2834b80a4c3327b3aad3a4c4cd4de0629063962b03235697506a28",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "crypto-common",
+      "version": "0.2.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "77727bb15fa921304124b128af125e7e3b968275d1b108b379190264f4423710",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "digest",
+      "version": "0.11.3",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "f1dd6dbb5841937940781866fa1281a1ff7bd3bf827091440879f9994983d5c2",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "either",
+      "version": "1.15.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "48c757948c5ede0e46177b7add2e67155f70e33c07fea8284df6576da70b3719",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "equivalent",
+      "version": "1.0.2",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "877a4ace8713b0bcf2a4e7eec82529c029f1d0619886d18145fea96c3ffe5c0f",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "fixedbitset",
+      "version": "0.5.7",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "1d674e81391d1e1ab681a28d99df07927c6d4aa5b027d7da16ba32d1d21ecd99",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "foldhash",
+      "version": "0.1.5",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "d9c4f5dac5e15c24eb999c26181a6ca40b39fe946cbe4c263c7209467bc83af2",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "glam",
+      "version": "0.30.10",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "19fc433e8437a212d1b6f1e68c7824af3aed907da60afa994e7f542d18d12aa9",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "glam",
+      "version": "0.31.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "556f6b2ea90b8d15a74e0e7bb41671c9bdf38cd9f78c284d750b9ce58a2b5be7",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "glam",
+      "version": "0.32.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "f70749695b063ecbf6b62949ccccde2e733ec3ecbbd71d467dca4e5c6c97cca0",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "glam",
+      "version": "0.33.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "898f5a568a84989b6c0f8caa50a93074b97dbdc58fc6d9543157bb4562758933",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "hashbrown",
+      "version": "0.15.5",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "9229cfe53dfd69f0609a49f65461bd93001ea1ef889cd5529dd176593f5338a1",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "hashbrown",
+      "version": "0.17.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "4f467dd6dccf739c208452f8014c75c18bb8301b050ad1cfb27153803edb0f51",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "hybrid-array",
+      "version": "0.4.11",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "08d46837a0ed51fe95bd3b05de33cd64a1ee88fc797477ca48446872504507c5",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "indexmap",
+      "version": "2.14.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "d466e9454f08e4a911e14806c24e16fba1b4c121d1ea474396f396069cf949d9",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "itoa",
+      "version": "1.0.18",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "8f42a60cbdf9a97f5d2305f08a87dc4e09308d1276d28c869c684d7777685682",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "libc",
+      "version": "0.2.186",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "68ab91017fe16c622486840e4c83c9a37afeff978bd239b5293d61ece587de66",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "matrixmultiply",
+      "version": "0.3.10",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "a06de3016e9fae57a36fd14dba131fccf49f74b40b7fbdb472f96e361ec71a08",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "memchr",
+      "version": "2.8.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "f8ca58f447f06ed17d5fc4043ce1b10dd205e060fb3ce5b979b8ed8e59ff3f79",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "nalgebra",
+      "version": "0.35.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "adc43a60c217b0c6ff46e47f26911015ad8d2e5a8be1af668c67e370d99a4346",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "nalgebra-macros",
+      "version": "0.3.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "973e7178a678cfd059ccec50887658d482ce16b0aa9da3888ddeab5cd5eb4889",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "num-bigint",
+      "version": "0.4.6",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "a5e44f723f1133c9deac646763579fdb3ac745e418f2a7af9cd0c431da1f20b9",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "num-complex",
+      "version": "0.4.6",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "73f88a1307638156682bada9d7604135552957b7818057dcef22705b4d509495",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "num-integer",
+      "version": "0.1.46",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "7969661fd2958a5cb096e56c8e1ad0444ac2bbcd0061bd28660485a44879858f",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "num-rational",
+      "version": "0.4.2",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "f83d14da390562dca69fc84082e73e548e1ad308d24accdedd2720017cb37824",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "num-traits",
+      "version": "0.2.19",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "071dfc062690e90b734c0b2273ce72ad0ffa95f0c74596bc250dcfd960262841",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "once_cell",
+      "version": "1.21.4",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "9f7c3e4beb33f85d45ae3e3a1792185706c8e16d043238c593331cc7cd313b50",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "ordered-float",
+      "version": "5.3.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "b7d950ca161dc355eaf28f82b11345ed76c6e1f6eb1f4f4479e0323b9e2fbd0e",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "petgraph",
+      "version": "0.8.3",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "8701b58ea97060d5e5b155d383a69952a60943f0e6dfe30b04c287beb0b27455",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "pin-project-lite",
+      "version": "0.2.17",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "a89322df9ebe1c1578d689c92318e070967d1042b512afbe49518723f4e6d5cd",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "proc-macro2",
+      "version": "1.0.106",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "8fd00f0bb2e90d81d1044c2b32617f68fcb9fa3bb7640c23e9c748e53fb30934",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "quote",
+      "version": "1.0.45",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "41f2619966050689382d2b44f664f4bc593e129785a36d6ee376ddf37259b924",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "rand",
+      "version": "0.8.6",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "5ca0ecfa931c29007047d1bc58e623ab12e5590e8c7cc53200d5202b69266d8a",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "rand_core",
+      "version": "0.6.4",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "ec0be4795e2f6a28069bec0b5ff3e2ac9bafc99e6a9a7dc3547996c5c816922c",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "rawpointer",
+      "version": "0.2.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "60a357793950651c4ed0f3f52338f53b2f809f32d83a07f72909fa13e4c6c1e3",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "rayon",
+      "version": "1.12.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "fb39b166781f92d482534ef4b4b1b2568f42613b53e5b6c160e24cfbfa30926d",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "rayon-core",
+      "version": "1.13.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "22e18b0f0062d30d4230b2e85ff77fdfe4326feb054b9783a3460d8435c8ab91",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "ryu-js",
+      "version": "0.2.2",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "6518fc26bced4d53678a22d6e423e9d8716377def84545fe328236e3af070e7f",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "safe_arch",
+      "version": "1.0.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "1f7caad094bd561859bcd467734a720c3c1f5d1f338995351fefe2190c45efed",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "serde",
+      "version": "1.0.228",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "9a8e94ea7f378bd32cbbd37198a4a91436180c5bb472411e48b5ec2e2124ae9e",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "serde_core",
+      "version": "1.0.228",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "41d385c7d4ca58e59fc732af25c3983b67ac852c1a25000afe1175de458b67ad",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "serde_derive",
+      "version": "1.0.228",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "d540f220d3187173da220f885ab66608367b6574e925011a9353e4badda91d79",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "serde_jcs",
+      "version": "0.2.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "d3a60f3fda61525e439ef6d67422118f11e986566997d9021c56867ad814a0aa",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "serde_json",
+      "version": "1.0.150",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "e8014e44b4736ed0538adeecded0fce2a272f22dc9578a7eb6b2d9993c74cfb9",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "sha2",
+      "version": "0.11.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "446ba717509524cb3f22f17ecc096f10f4822d76ab5c0b9822c5f9c284e825f4",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "simba",
+      "version": "0.10.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "8f45c644a9f3a386f9288625d9f0c1e999e1acf07a37df35d0516c7f199d9cb2",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "syn",
+      "version": "2.0.117",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "e665b8803e7b1d2a727f4023456bbbbe74da67099c585258af0ad9c5013b9b99",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "thiserror",
+      "version": "2.0.18",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "4288b5bcbc7920c07a1149a35cf9590a2aa808e0bc1eafaade0b80947865fbc4",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "thiserror-impl",
+      "version": "2.0.18",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "ebc4ee7f67670e9b64d05fa4253e753e016c6c95ff35b89b7941d6b856dec1d5",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "tracing",
+      "version": "0.1.44",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "63e71662fa4b2a2c3a26f570f037eb95bb1f85397f3cd8076caed2f026a6d100",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "tracing-attributes",
+      "version": "0.1.31",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "7490cfa5ec963746568740651ac6781f701c9c5ea257c58e057f3ba8cf69e8da",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "tracing-core",
+      "version": "0.1.36",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "db97caf9d906fbde555dd62fa95ddba9eecfd14cb388e4f491a66d74cd5fb79a",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "typenum",
+      "version": "1.20.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "40ce102ab67701b8526c123c1bab5cbe42d7040ccfd0f64af1a385808d2f43de",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "unicode-ident",
+      "version": "1.0.24",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "e6e4313cd5fcd3dad5cafa179702e2b244f760991f45397d14d4ebf38247da75",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "wide",
+      "version": "1.5.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "dfdfe6a32973f2d1b268b8895845a8a96cac2f0191e72c27cc929036060dbf89",
+      "matches_cargo_lock": true
+    },
+    {
+      "name": "zmij",
+      "version": "1.0.21",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "b8848ee67ecc8aedbaf3e4122217aff892639231befc6a1b58d29fff4c2cabaa",
+      "matches_cargo_lock": true
+    }
+  ],
+  "lock_sha256": "2e0466ae3f152862fc9ee308ba9417ab1f4a3a95366db5fbf2a7584dc94583e0",
+  "scope": "Toolchain restoration and dependency fetch only. No project compilation, test or timing run by this restoration procedure.",
+  "invocation": {
+    "PATH_prefix": "/workspace/scratch/657e86c899c9/tmp/integration_toolchain/installed/bin",
+    "CARGO_HOME": "/workspace/scratch/657e86c899c9/tmp/integration_toolchain/cargo",
+    "CARGO_PROFILE_RELEASE_LTO": "false",
+    "CARGO_PROFILE_RELEASE_CODEGEN_UNITS": "1",
+    "CARGO_BUILD_JOBS": "1"
+  },
+  "rust_toolchain_toml_note": "Project declares stable; direct task-local binaries select 1.95.0 without editing source or using rustup."
+}

@@ -1,0 +1,93 @@
+{
+  "schema": "gabriel.forgetting.refinement.v1",
+  "frozen_utc": "2026-09-26T12:09:42.880713+00:00",
+  "parent_selection_sha256": "232b8e1dc6e54f3fcac853530215f8f406acb658400a2d530cbd59b12d62edcf",
+  "parent_design_sha256": "10d6bc73eae4ae7d62ac772833b9ec6c7c63f95ddcafe9274b7292de4df04a1d",
+  "reason": "Initial six candidates fail the old-market development improvement criterion. Discount/window variants improve known switching laws with little stationary penalty. Expand only their step-scale grid on already designated development material before any unused-currency data access. This is a development-stage search extension, not an untouched confirmation.",
+  "variants": [
+    {
+      "name": "discount_125_c0p025",
+      "kind": "discount",
+      "memory": 125,
+      "c": 0.025
+    },
+    {
+      "name": "discount_125_c0p05",
+      "kind": "discount",
+      "memory": 125,
+      "c": 0.05
+    },
+    {
+      "name": "discount_125_c0p2",
+      "kind": "discount",
+      "memory": 125,
+      "c": 0.2
+    },
+    {
+      "name": "discount_500_c0p025",
+      "kind": "discount",
+      "memory": 500,
+      "c": 0.025
+    },
+    {
+      "name": "discount_500_c0p05",
+      "kind": "discount",
+      "memory": 500,
+      "c": 0.05
+    },
+    {
+      "name": "discount_500_c0p2",
+      "kind": "discount",
+      "memory": 500,
+      "c": 0.2
+    },
+    {
+      "name": "window_125_c0p025",
+      "kind": "window",
+      "memory": 125,
+      "c": 0.025
+    },
+    {
+      "name": "window_125_c0p05",
+      "kind": "window",
+      "memory": 125,
+      "c": 0.05
+    },
+    {
+      "name": "window_125_c0p2",
+      "kind": "window",
+      "memory": 125,
+      "c": 0.2
+    },
+    {
+      "name": "window_500_c0p025",
+      "kind": "window",
+      "memory": 500,
+      "c": 0.025
+    },
+    {
+      "name": "window_500_c0p05",
+      "kind": "window",
+      "memory": 500,
+      "c": 0.05
+    },
+    {
+      "name": "window_500_c0p2",
+      "kind": "window",
+      "memory": 500,
+      "c": 0.2
+    }
+  ],
+  "selection": {
+    "eligibility": "candidate has lower development mean than cumulative, lower equal-case/latency mean conditional score on five changing synthetic cases, and maximum stationary case/latency mean penalty <= .02 versus cumulative",
+    "criterion": "minimum old-development mean among eligible candidates; ties follow variant order; cumulative if none",
+    "stationary_penalty_limit": 0.02
+  },
+  "test_assets_uninspected": [
+    "NZD",
+    "SGD",
+    "KRW",
+    "ZAR"
+  ],
+  "reporting": "Retain first-stage fallback and all candidates, then select once from all eligible candidates before new-market evaluation; no test-based retuning."
+}

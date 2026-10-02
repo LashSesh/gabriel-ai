@@ -1,0 +1,18 @@
+[package]
+publish = false
+name = "pse-graph"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Observation graph, entity tracking, and persistent hash-DAG for PSE"
+rust-version.workspace = true
+
+[dependencies]
+pse-types = { path = "../pse-types", version = "0.1.0" }
+petgraph = { workspace = true }
+thiserror = { workspace = true }
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]

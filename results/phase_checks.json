@@ -1,0 +1,81 @@
+{
+  "seed": 20260925,
+  "random_continuous_cases": 300,
+  "bank_variants": 8,
+  "vertex_boxes": 20,
+  "vertices_per_box": 256,
+  "event_pairs": 40,
+  "max_absolute_errors": {
+    "matrix_exponential": 3.564491360409743e-14,
+    "subdivision": 4.441027621704298e-16,
+    "contraction": 2.220446049250313e-16,
+    "units_covariance": 6.23728986632994e-16,
+    "kernel": 1.1102230246251565e-16,
+    "vertices": 0.0
+  },
+  "counterexamples": {
+    "singleton_segment_action": {
+      "W_ab": 1,
+      "W_a_plus_W_b": 0
+    },
+    "pseudometric": {
+      "s": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "t": [
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "fields": "first three coordinates",
+      "distance": 0
+    },
+    "gradient_feedback": {
+      "potential": "||s||^2/2",
+      "step": 0.1,
+      "expansion": 1.1,
+      "angle": "constant along nonzero radial orbit"
+    },
+    "expanding_radius": {
+      "exponent": 1,
+      "one_step_gain": 2.718281828459045
+    },
+    "phase_only_alias": {
+      "angles": [
+        0,
+        6.283185307179586
+      ],
+      "same_angle_modulo_2pi": true
+    },
+    "shared_uncertainty": {
+      "coefficients": [
+        1,
+        -1
+      ],
+      "shared_half_width": 0,
+      "independent_half_width": 2
+    },
+    "six_state_linear_system": {
+      "controllability_rank": 6,
+      "observability_rank": 6
+    },
+    "euler_rotation": {
+      "lambda": 1,
+      "omega": 4,
+      "h": 0.2,
+      "one_step_modulus": 1.131370849898476,
+      "exact_modulus": 0.8187307530779818
+    }
+  },
+  "tolerances": {
+    "float_reference": 2e-11,
+    "event_clock": 1e-13
+  },
+  "status": "executed; numeric checks supplement proofs, not a formal proof assistant"
+}

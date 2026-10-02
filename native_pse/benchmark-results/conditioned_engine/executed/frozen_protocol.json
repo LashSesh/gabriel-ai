@@ -1,0 +1,112 @@
+{
+  "schema": "gabriel.conditioned-engine.protocol.v1",
+  "toolchain": "1.95.0",
+  "build_jobs": 1,
+  "fresh_processes": 7,
+  "batches_per_process": 5,
+  "query_counts": [
+    1,
+    16,
+    256
+  ],
+  "query_times": [
+    0.25,
+    0.03125,
+    0.125,
+    0.5,
+    1.0,
+    2.0,
+    4.0,
+    8.0,
+    0.0625,
+    0.375,
+    0.75,
+    1.5,
+    3.0,
+    6.0,
+    10.0,
+    16.0
+  ],
+  "deadband": 1e-07,
+  "component_absolute_tolerance": 5e-10,
+  "component_relative_tolerance": 5e-10,
+  "mass_absolute_tolerance": 5e-10,
+  "norm_absolute_tolerance": 5e-10,
+  "variants": [
+    "spectral_full",
+    "auto_full",
+    "auto_region"
+  ],
+  "cases": [
+    {
+      "id": "clique_n7",
+      "family": "clique",
+      "n": 7,
+      "expected_auto": "complete_graph"
+    },
+    {
+      "id": "clique_n13",
+      "family": "clique",
+      "n": 13,
+      "expected_auto": "complete_graph"
+    },
+    {
+      "id": "clique_n32",
+      "family": "clique",
+      "n": 32,
+      "expected_auto": "complete_graph"
+    },
+    {
+      "id": "clique_n64",
+      "family": "clique",
+      "n": 64,
+      "expected_auto": "complete_graph"
+    },
+    {
+      "id": "path_n13",
+      "family": "path",
+      "n": 13,
+      "expected_auto": "spectral"
+    },
+    {
+      "id": "path_n64",
+      "family": "path",
+      "n": 64,
+      "expected_auto": "spectral"
+    },
+    {
+      "id": "near_clique_n13",
+      "family": "near_clique",
+      "n": 13,
+      "expected_auto": "spectral"
+    },
+    {
+      "id": "near_clique_n64",
+      "family": "near_clique",
+      "n": 64,
+      "expected_auto": "spectral"
+    }
+  ],
+  "configuration": "Config::default with persistence.lambda_decay=0 and consensus.min_crystal_tick=u64::MAX. Actual public Engine::step performs canonicalization, ingestion, graph embeddings, carrier updates and metrics. The explicit read-only observation workload suppresses crystal extraction/commit/morphogenesis; it does not measure legacy crystal throughput.",
+  "graph": "Clique: one batch of n distinct sources. Path: n-1 pair batches (i,i+1). Near-clique: two batches {0,...,n-2}, {0,...,n-3,n-1}, omitting exactly edge {n-2,n-1}. No raw graph mutation. Payloads are frozen canonical JSON ASCII with entity, tick, phase=0. Stable source IDs are sensor-i. Snapshot uses the engine-defined symmetric weighted Laplacian.",
+  "source": "For each source i, raw re=((17*i+3)%29)-14 and im=((11*i+5)%23)-11. Normalize once in increasing source-index order. Align those values to immutable snapshot VertexIds; no future label or outcome exists or is read. The observer then applies its contractually stable maximum-component normalization before propagation; golden records retain both caller source and normalized unit_source.",
+  "region": "The even-index source IDs; scalar normalized region mass. Threshold equals the same source region mass at t=0; fixed deadband=1e-7. Return above, below, or abstain relative to that threshold. The deadband is a declared decision policy, not a machine-verified roundoff certificate.",
+  "comparison": "Three variants of the same scalar task: forced full spectral state evaluation; automatic backend with full state evaluation; automatic backend with precompiled fixed-region scalar readout. All produce every requested mass and band decision. Complete fields are separately recorded for functional checks, not forced into the scalar timing contract.",
+  "order": "For every case/query-count/batch, cyclically rotate the three variant names by (process_index+case_index+query_count_index+batch_index)%3 and reverse the order on odd (process_index+batch_index). Each fresh process contains all paired variants. One untimed complete task per case/query-count/variant precedes the measured batches.",
+  "cold_and_amortized": "Every measurement starts a fresh Engine, performs all required ingest steps, constructs one immutable snapshot and prepares one source/region. It then issues 1,16,or256 time queries on that snapshot. Query j uses base_times[j mod 16] + floor(j/16)/4096, where base_times is query_times. The 256 query times are distinct; q=1 and q=16 retain the initial base sequence. An exact same-time result cache cannot reduce work within one task. The q=1 case uses t=0.25; t=0 is a separate functional control.",
+  "timing": "Total timer includes Engine construction, all public ingest, snapshot construction and validation, source ID alignment/normalization, source/region preparation, all mass evaluations, band decisions, response-vector creation, black_box, and Engine/snapshot/prepared-state destruction. The returned scalar response vectors survive the timer for validation; their later JSON encoding and destruction are excluded. Input byte generation, the frozen Config construction, process startup, golden validation, JSON encoding and disk IO are excluded. Separate nested nonoverlapping ingest, snapshot, preparation and query spans are retained; total also includes timer/counter bookkeeping and all destruction. Ingestion includes Engine construction.",
+  "validation": "One golden command records every actual graph Laplacian, immutable VertexId mapping, stimulus, fixed region, 257 primary times (t=0 plus all 256 distinct query times), full amplitudes, normalized intensities, norm ratios, all three scalar masses and decisions. Validate complete Auto/Spectral vectors, scalar agreement, norm preservation and identical decisions. Additional explicit uniform, one-hot and real-zero-mean sources expose clique degeneracies on 17 diagnostic times (t=0 plus the 16 base times). The permutation diagnostic uses the same 17 diagnostic times. Identity of the normalized prepared state at zero time and source-label permutation equivariance are checked independently.",
+  "summary": "For each case/query-count/phase/process, use the median of five within-batch paired ratios. Report across seven fresh processes the median and observed minimum/maximum. Three pairs: spectral_full/auto_full, spectral_full/auto_region, auto_full/auto_region. No confidence intervals, throughput extrapolation, forecast-accuracy claim, hardware universality or platform comparison.",
+  "profile": {
+    "opt_level": 3,
+    "lto": false,
+    "codegen_units": 1,
+    "debug": true,
+    "strip": "none",
+    "overflow_checks": false,
+    "panic": "unwind"
+  },
+  "query_offsets_denominator": 4096,
+  "golden_query_count": 256,
+  "pilot_history": "A retained earlier duration-only pilot used repeated cycles of 16 times. It is excluded from all reported final measurements. The unique-time protocol was fixed before any final seven-process paired measurement."
+}

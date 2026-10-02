@@ -1,0 +1,10 @@
+{
+  "id": "gabriel-independent-query-removal-v1",
+  "status": "exploratory follow-up after all primary finite-model results were observed",
+  "purpose": "Verify an exact model reduction motivated by nuisance-query costs; do not replace primary comparisons",
+  "criterion": "For each query, the support of (target plus remaining outcomes, query outcome) is a Cartesian product; retain integer multiplicities and separately check their product factorization",
+  "selection": "query index order, repeated until no further query can be removed; leave at least one query",
+  "metrics": "all twelve original catalogues, unchanged targets, same five policies, all raw cases, independent replay and compression checks",
+  "guarantee": "support factorization preserves optimal worst query cost, not arbitrary policies or general expected-cost objectives",
+  "control": "correlated metadata must remain if the product test fails"
+}

@@ -1,0 +1,16 @@
+\begin{table}[H]\centering\small
+\caption{Complete fresh-owner replay on synthetic histories. Fast and replay columns give median opening seconds; the ratio is the median of paired fast/replay times, with its observed range. Register size denotes width; stream size denotes observations. Database preparation and output comparisons are excluded.}\label{tab:replayopens}
+\begin{tabular}{llrrrr}\toprule
+Case & Size & Fast (s) & Replay (s) & Ratio & Range \\ \midrule
+$h=1$ & 360 & 1.922 & 1.593 & 1.204 & 1.189--1.206 \\
+$h=1$ & 500 & 10.415 & 8.002 & 1.302 & 1.266--1.317 \\
+$h=1$ & 800 & 61.164 & 45.860 & 1.339 & 1.334--1.374 \\
+$h=5$ & 360 & 1.872 & 1.577 & 1.187 & 1.184--1.194 \\
+$h=5$ & 500 & 10.057 & 7.753 & 1.297 & 1.286--1.331 \\
+$h=5$ & 800 & 63.341 & 46.597 & 1.338 & 1.276--1.408 \\
+Registers & 32 & 0.162 & 0.086 & 1.862 & 1.793--2.094 \\
+Registers & 256 & 0.307 & 0.185 & 1.633 & 1.366--1.701 \\
+Registers & 2048 & 1.376 & 0.989 & 1.394 & 1.343--1.516 \\
+\bottomrule\end{tabular}\end{table}
+For horizon $h=1$ at 800 observations, the median opening time falls from 61.16 to 45.86 seconds (25.0\%); the unchanged database occupies 303.10 MB (decimal).
+For horizon $h=5$ at 800 observations, the median opening time falls from 63.34 to 46.60 seconds (26.4\%); the unchanged database occupies 293.63 MB (decimal).

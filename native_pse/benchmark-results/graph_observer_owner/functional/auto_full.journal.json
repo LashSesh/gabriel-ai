@@ -1,0 +1,704 @@
+{
+  "header": {
+    "format": "gabriel-runtime/v1",
+    "limits": {
+      "max_bytes": 10000000,
+      "max_command_bytes": 65536,
+      "max_events": 10000
+    },
+    "registry": {
+      "native-graph-observer/v1": {
+        "adapter": "native-graph-observer/v1",
+        "binary64_encoding": "ieee754-f64-lowercase-16-hex-bits",
+        "executable_sha256": "629b13f23fad4a4e8142eb7345e5bb2ca36dce508fb364758d76050d096300b1",
+        "execution": "fresh-native-process-full-batch-replay",
+        "hard_caps": {
+          "max_batches": 128,
+          "max_nodes": 64,
+          "max_queries": 256
+        },
+        "max_wire_bytes": 4194304,
+        "schema": "gabriel-engine-observer/v1",
+        "source_sha256": {
+          "gabriel_runtime/__init__.py": "a26aa646ebf84297705d761216ab161151a2cd7e185d61fe95a2447e940084a2",
+          "gabriel_runtime/canonical.py": "f5237347101531a0c64e41fdae65adc66aa5b731b42d474ff4f68e83e85695dc",
+          "gabriel_runtime/engine.py": "2499574e2e9733665398fc8203f5e2ca1dc22190860344725568667b7a258bc1",
+          "gabriel_runtime/graph_observer.py": "0b33dad1fe0d112960b0ac270d5b84e2768b41c8ea3905b1abe0f04803e28033",
+          "native_pse/Cargo.lock": "2e0466ae3f152862fc9ee308ba9417ab1f4a3a95366db5fbf2a7584dc94583e0",
+          "native_pse/Cargo.toml": "dfeac2c1c5a58ffd958ed0937e718e6ea69578b4c41df7a5875b17f06353b505",
+          "native_pse/crates/pse-cascade/Cargo.toml": "ae4887764714acd59e623b452c4096656bd183afe5d6e42cf5227314a24cf301",
+          "native_pse/crates/pse-cascade/src/lib.rs": "7bf14dc004a6454061dc11708c1543e084af028d2ee6eea3636bc6d114a94ea4",
+          "native_pse/crates/pse-constraint/Cargo.toml": "13bc8b4ae196fb1fd212e7fe578740ffc81fe4bcfa19421ae28af4fb826ba376",
+          "native_pse/crates/pse-constraint/src/lib.rs": "00b95cd580c84ddea1748e5e66191d241a1f23dee41ce6650decfaa383789231",
+          "native_pse/crates/pse-core/Cargo.toml": "c10bac026beae10a55831f4e528e262dfa69be0d57b3431ea37b258089b4086b",
+          "native_pse/crates/pse-core/src/adaptive.rs": "d2415ba58b976a35709dbb1bdfe47affc1e6b52fb4f30837fd14619d26ef5038",
+          "native_pse/crates/pse-core/src/crystal_adapter.rs": "d29dc0843122bd4e3d9c5f95112ee4ecd0ae5fc973913e78aeda40bc93917365",
+          "native_pse/crates/pse-core/src/explore.rs": "4e5ebe678350af198209ac4d2e6ec9f28a2963593c335e96de50f87628d0bb25",
+          "native_pse/crates/pse-core/src/falsify.rs": "05e2029841225e6450d0800070a98cbb30a7a6052a43c510389046bbb1450777",
+          "native_pse/crates/pse-core/src/lib.rs": "582d9ddce3a2bd1e2ec0c51c5b2953e095cac0b61adb59b3fd746bb926e6a275",
+          "native_pse/crates/pse-core/src/metatron_attach.rs": "8b033de4532c4a8009f33b5a001e0ff0295db335044e4c676420fdb2e797003f",
+          "native_pse/crates/pse-core/src/query.rs": "26a762daa9c585e82d8c84036c0a5309a1e218b1f51dd0f0d58d15daa87af865",
+          "native_pse/crates/pse-core/src/shared_spectrum_tests.rs": "7b5b707acef6c67e585b546c61954d021b75f244a6353b30debd6eef0303683e",
+          "native_pse/crates/pse-core/src/topology_ops.rs": "58cbfd5058de7760cb52dad263ae48406b89af9731373d0e2113dbe51d2a8995",
+          "native_pse/crates/pse-evidence/Cargo.toml": "0f3dd07e6eacaea72bc657103c06958ebf3d0491e912512e5b2b61f9a21895e8",
+          "native_pse/crates/pse-evidence/src/lib.rs": "5daff94c66b17f6f11766b5ef337aeacad6331ba000be5757e713e14ed8fed97",
+          "native_pse/crates/pse-extract/Cargo.toml": "d8ab2baa61191a98b192ddd223d797b83e5c65374979e8fdd7dce235c7e6165d",
+          "native_pse/crates/pse-extract/src/lib.rs": "1db11fc2f5f3e7a75c85f6e210540ef274b449383cc7e9aa29218f0f35b6feae",
+          "native_pse/crates/pse-graph/Cargo.toml": "ef07fba38fb04020d662cf871512d9b625290dcefc931bdd29083e50a456884d",
+          "native_pse/crates/pse-graph/src/lib.rs": "256f3aa4b63746a6f75fed2ceccf05b2f107ec8e3edd8a8ee74d32614e244fd8",
+          "native_pse/crates/pse-memory/Cargo.toml": "69e7a8ac5c2ac6db211e0868b470cce2eaa9c6c9ee16467f98ec1e030d788834",
+          "native_pse/crates/pse-memory/src/lib.rs": "6bd272a582a7c259ae943ef953c49271689e8696a4cbfc3c0f76b766db08c565",
+          "native_pse/crates/pse-metatron/Cargo.toml": "b4b5516bd15d9681df892946b3f8678e99afce521f2cda413001513c3d39a903",
+          "native_pse/crates/pse-metatron/data/s7_classes.bin": "2ba3e962802ea1654650f05d2e9e23c6419ac3f9569c2fe0031bb9bf6162fa67",
+          "native_pse/crates/pse-metatron/data/s7_metadata.bin": "e37aa6716d18921681ee233590f157f7de9685333d46ff9f867fdc0df2e02083",
+          "native_pse/crates/pse-metatron/data/s7_witnesses.bin": "9f144075476e5cae3b68abec340951019db14233074e53e6dd3fe5d3c3ce214c",
+          "native_pse/crates/pse-metatron/src/bitgraph.rs": "b73283670aa4c8a9c56af1469ebf671ac8b367689ccd2e4ae56a52b345263ae1",
+          "native_pse/crates/pse-metatron/src/bitgraph_n.rs": "e7186ebe197f1ec5ea570172d5343929488a3c60b367f7f65dfdb149442cd733",
+          "native_pse/crates/pse-metatron/src/catalog.rs": "5e3d7704916f98e8a24c4523612f8e558ba58eb0f8a93efa3f52e39b4b041a56",
+          "native_pse/crates/pse-metatron/src/complement.rs": "5caafb59a57fe36c3984cc54d7aa5ef3785f090d55ea8a786398ba7f8c9d88cc",
+          "native_pse/crates/pse-metatron/src/embed.rs": "06d59b236b80355fb1677272ad3e9564c67d4646eda8c34cabc023fbb8671aba",
+          "native_pse/crates/pse-metatron/src/error.rs": "75ac30ad94e2f4279943edcf567280962e933ef73c879521840c2d485f9f2d34",
+          "native_pse/crates/pse-metatron/src/geometry.rs": "3c0cfcd7925249df544f43a7d66040a9b956ff0f70df8e4988e20bdb06e40599",
+          "native_pse/crates/pse-metatron/src/group.rs": "b8274e4e02bec6dc2884a87df0480b3c87a73907fb3384002aff0a69ff712947",
+          "native_pse/crates/pse-metatron/src/indexed_signature.rs": "745fbe58c3a2cd1600e6f45d4684ab9ae71dc231380f6bed3d879b187097f8e0",
+          "native_pse/crates/pse-metatron/src/ingest.rs": "20ad5bf5ac55530040e174b1f0ece1d5f0742661be40a856e3e94c5ced19bf55",
+          "native_pse/crates/pse-metatron/src/lib.rs": "52d11ab04febed18dc648b96facff2289fdf1874a25fd388d20888431c167a41",
+          "native_pse/crates/pse-metatron/src/memoized_signature.rs": "a5c4f58ffe20f69149b29beda5d627fb1195dd17b37820f8d040a2043f4aa790",
+          "native_pse/crates/pse-metatron/src/orbit.rs": "5465a47c02992564f4f54e7cff50120bd27671b03c9535568b3867875764c8fa",
+          "native_pse/crates/pse-metatron/src/phase_layout.rs": "8f55581d4f8dc5bba2bd34068771529695cec3a6d2efe0276539b28f6bfa71c0",
+          "native_pse/crates/pse-metatron/src/platonic.rs": "9f11491e7401c58804f9888b1d42bde68f2ab2301bfeecb3aa485c6604fbed9f",
+          "native_pse/crates/pse-metatron/src/properties.rs": "273101d9a10062313a4d09dff7a09e115ad1a8e4f62ebdac0b5b568587290a8b",
+          "native_pse/crates/pse-metatron/src/scan.rs": "ae110263b2dc05a233f8bf528584dc8af579740883972ed7089f67d4a8877e3e",
+          "native_pse/crates/pse-metatron/src/signature.rs": "f41cd35c95590539ee9bf42dee60cb4e68b6c61649501da1d2d0f6565524e428",
+          "native_pse/crates/pse-metatron/src/small_signature.rs": "9f388c4aedb505983dca9c6917f56a648098b341b2735ef03f6392dd80008ba0",
+          "native_pse/crates/pse-metatron/src/spectrum.rs": "6e1965464f34b9c3d2864da9058963cbcec29571f443ec031e5d6d60c5670161",
+          "native_pse/crates/pse-metatron/src/stabilizer.rs": "94f60e4342263807731b5953800e5b6af795b319df556a4d28b854319a301e86",
+          "native_pse/crates/pse-navigator/Cargo.toml": "b5045ec959c234fa91b133f6c32ed8f2cf68817a307e32df4742598495d6a769",
+          "native_pse/crates/pse-navigator/src/lib.rs": "70820b6cd3e10c3e843c2fad07e65aac6f3c43aa67218190849e645c4342a4f8",
+          "native_pse/crates/pse-scale/Cargo.toml": "11c9b4dd2004b40b6c36113592fcd9eef813e59c9602aad56ea2cbe64e21fc7a",
+          "native_pse/crates/pse-scale/src/lib.rs": "4d01217dddb3961e0ac83a7acee0e3c4ca56b8b2ab2c20141058ae843e8985e1",
+          "native_pse/crates/pse-topology/Cargo.toml": "47cd125f1d13ebd5512592a7dd26bc8f6e829303bd2cdc6e450e8f045fcf38c1",
+          "native_pse/crates/pse-topology/src/conditioned_walk.rs": "5c5d9ff90f1aecd2dce072bf363d1e98b008fdabfd503902a442a004a86c6e53",
+          "native_pse/crates/pse-topology/src/conditioned_walk_tests.rs": "386e1a205104c74a6dcbf99f5a81e3533ce9fca60354a9c5282f1aab4b527175",
+          "native_pse/crates/pse-topology/src/ctqw_equivalence_tests.rs": "0710aae911a443cafddbdeb9da0e038dfeb7fccfab21f2c92e8f4c48ce3427b3",
+          "native_pse/crates/pse-topology/src/ctqw_hoisted.rs": "88fa368c6f84d6543956daaf2d175145240b1cdb4e1d613e47be89ff8fab67cc",
+          "native_pse/crates/pse-topology/src/lib.rs": "8c41870e55f5b7b1afc93d84005c498036780c5cfd69dfe1b4bc81fbe449a67c",
+          "native_pse/crates/pse-topology/src/shared_spectrum_tests.rs": "d3c479f94eb405682937c9c744ecb7b92230ce4925b3d22e6e46adea10f5a31f",
+          "native_pse/crates/pse-types/Cargo.toml": "f10be1086e7ee8c8c50eb75f3ca7d3df219005296d7c88a44f830f688b7a35e2",
+          "native_pse/crates/pse-types/src/lib.rs": "c5199094d2fada729cc110bfba7adef37c98d04eb2cdfe5a6cceda8b2f9c9ef7",
+          "native_pse/examples/engine_observer.rs": "379d00fc3a76f006c205989b021ac040fe5b574a75fbbae5404710034da0bed8",
+          "native_pse/src/conditioned.rs": "eb3db2399e195d3c4ec50d6a36fbedd7368a3d49c68cf48faf727c2aea723f42",
+          "native_pse/src/lib.rs": "ad1af29f21cf2afa70a787fd0c366d18bfdcca96fbf49889c4c571dca36a2e9e"
+        },
+        "timeout_seconds": 30
+      }
+    }
+  },
+  "records": [
+    {
+      "command": {
+        "at": 0,
+        "contract": "graph",
+        "expected_head": "51fe44130af8df7b182c078089223e3aa21ebd159eeb6c7db51bd3d397621f71",
+        "id": "bind",
+        "op": "bind",
+        "payload": {
+          "adapter": "native-graph-observer/v1",
+          "config": {
+            "backend": "auto_full",
+            "max_batches": 128,
+            "max_nodes": 64,
+            "max_queries": 256
+          }
+        }
+      },
+      "hash": "f234db687e1dc918d4a452180cafeff982daf11f9d842d704d594a436e9043cf",
+      "post_state_hash": "a2769d2e6a87ede3fbf33383687fbb6d27a6680c20af398714db851b9e1f7963",
+      "pre_state_hash": null,
+      "prior_head": "51fe44130af8df7b182c078089223e3aa21ebd159eeb6c7db51bd3d397621f71",
+      "result": {
+        "backend": "auto_full",
+        "batch_count": 0,
+        "issue_count": 0,
+        "last_issue": null,
+        "last_snapshot": null,
+        "query_count": 0,
+        "semantic_profile": "native-graph-observer/v1"
+      },
+      "sequence": 1
+    },
+    {
+      "command": {
+        "at": 1,
+        "contract": "graph",
+        "expected_head": "f234db687e1dc918d4a452180cafeff982daf11f9d842d704d594a436e9043cf",
+        "id": "batch",
+        "op": "append_batch",
+        "payload": {
+          "entities": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ]
+        }
+      },
+      "hash": "2ab48eadef8b756ac5c11de23f2790d2beb39c259f24ee0254bfcf7fcabbee83",
+      "post_state_hash": "5b3ebff462fb6b5649e1221b6e872bf9d1be85db68834602cef800423d806147",
+      "pre_state_hash": "a2769d2e6a87ede3fbf33383687fbb6d27a6680c20af398714db851b9e1f7963",
+      "prior_head": "f234db687e1dc918d4a452180cafeff982daf11f9d842d704d594a436e9043cf",
+      "result": {
+        "batch_count": 1,
+        "engine": {
+          "commits": 0,
+          "edges": 78,
+          "faulted": false,
+          "observations": 13,
+          "ticks": 1,
+          "vertices": 13
+        },
+        "operation": "append_batch",
+        "snapshot": {
+          "identity": "ddd025b55f27cf9557f6196dd592314f6f763d1b2282634578f980ae1a293dbc",
+          "model": "exp(-itL);L=D-A;(W+W^T)/2;inactive-included;selfloops-ignored",
+          "tick": 1,
+          "vertices": [
+            {
+              "entity": 0,
+              "vertex_id": "11570619382924184950"
+            },
+            {
+              "entity": 1,
+              "vertex_id": "11570620482435813161"
+            },
+            {
+              "entity": 2,
+              "vertex_id": "11570617183900928528"
+            },
+            {
+              "entity": 3,
+              "vertex_id": "11570618283412556739"
+            },
+            {
+              "entity": 4,
+              "vertex_id": "11570623780970697794"
+            },
+            {
+              "entity": 5,
+              "vertex_id": "11570624880482326005"
+            },
+            {
+              "entity": 6,
+              "vertex_id": "11570621581947441372"
+            },
+            {
+              "entity": 7,
+              "vertex_id": "11570622681459069583"
+            },
+            {
+              "entity": 8,
+              "vertex_id": "11570628179017210638"
+            },
+            {
+              "entity": 9,
+              "vertex_id": "11570629278528838849"
+            },
+            {
+              "entity": 10,
+              "vertex_id": "5477593069636265851"
+            },
+            {
+              "entity": 11,
+              "vertex_id": "5477591970124637640"
+            },
+            {
+              "entity": 12,
+              "vertex_id": "5477595268659522273"
+            }
+          ],
+          "walk_backend": "complete_graph"
+        }
+      },
+      "sequence": 2
+    },
+    {
+      "command": {
+        "at": 2,
+        "contract": "graph",
+        "expected_head": "2ab48eadef8b756ac5c11de23f2790d2beb39c259f24ee0254bfcf7fcabbee83",
+        "id": "query",
+        "op": "query",
+        "payload": {
+          "deadband_bits": "3e7ad7f29abcaf48",
+          "source": [
+            {
+              "entity": 0,
+              "im_bits": "c018000000000000",
+              "re_bits": "c026000000000000"
+            },
+            {
+              "entity": 1,
+              "im_bits": "4014000000000000",
+              "re_bits": "4018000000000000"
+            },
+            {
+              "entity": 2,
+              "im_bits": "c01c000000000000",
+              "re_bits": "c018000000000000"
+            },
+            {
+              "entity": 3,
+              "im_bits": "4010000000000000",
+              "re_bits": "4026000000000000"
+            },
+            {
+              "entity": 4,
+              "im_bits": "c020000000000000",
+              "re_bits": "bff0000000000000"
+            },
+            {
+              "entity": 5,
+              "im_bits": "4008000000000000",
+              "re_bits": "c02a000000000000"
+            },
+            {
+              "entity": 6,
+              "im_bits": "c022000000000000",
+              "re_bits": "4010000000000000"
+            },
+            {
+              "entity": 7,
+              "im_bits": "4000000000000000",
+              "re_bits": "c020000000000000"
+            },
+            {
+              "entity": 8,
+              "im_bits": "c024000000000000",
+              "re_bits": "4022000000000000"
+            },
+            {
+              "entity": 9,
+              "im_bits": "3ff0000000000000",
+              "re_bits": "c008000000000000"
+            },
+            {
+              "entity": 10,
+              "im_bits": "c026000000000000",
+              "re_bits": "402c000000000000"
+            },
+            {
+              "entity": 11,
+              "im_bits": "0000000000000000",
+              "re_bits": "4000000000000000"
+            },
+            {
+              "entity": 12,
+              "im_bits": "4026000000000000",
+              "re_bits": "c024000000000000"
+            }
+          ],
+          "targets": [
+            0,
+            2,
+            4,
+            6,
+            8,
+            10,
+            12
+          ],
+          "threshold_bits": "3fe6badbe42636bb",
+          "times_bits": [
+            "3fa0000000000000",
+            "3fb0000000000000",
+            "3fb8000000000000",
+            "3fc0000000000000",
+            "3fc4000000000000",
+            "3fc8000000000000",
+            "3fcc000000000000",
+            "3fd0000000000000",
+            "3fd2000000000000",
+            "3fd4000000000000",
+            "3fd6000000000000",
+            "3fd8000000000000",
+            "3fda000000000000",
+            "3fdc000000000000",
+            "3fde000000000000",
+            "3fe0000000000000"
+          ]
+        }
+      },
+      "hash": "39c694873e170b060883946dcba42b22e99fe48fc3076651bfb43f05048b7c4c",
+      "post_state_hash": "1ed813f0709b1f49bf4022ca3a61a646a03e33ed0a36b138d4ef1f198db47938",
+      "pre_state_hash": "5b3ebff462fb6b5649e1221b6e872bf9d1be85db68834602cef800423d806147",
+      "prior_head": "2ab48eadef8b756ac5c11de23f2790d2beb39c259f24ee0254bfcf7fcabbee83",
+      "result": {
+        "issue": {
+          "batch_count": 1,
+          "digest": "074af19a4452fd39f49a6f63693cff9d1ea729c1c31864596d8c0ebf336acadb",
+          "native_result": {
+            "backend": "auto_full",
+            "engine": {
+              "commits": 0,
+              "edges": 78,
+              "faulted": false,
+              "observations": 13,
+              "ticks": 1,
+              "vertices": 13
+            },
+            "query_results": [
+              {
+                "region_backend": "state_readout",
+                "values": [
+                  {
+                    "decision": "above",
+                    "mass_bits": "3fe6d2c78aa33930",
+                    "time_bits": "3fa0000000000000"
+                  },
+                  {
+                    "decision": "above",
+                    "mass_bits": "3fe6d4688dc66686",
+                    "time_bits": "3fb0000000000000"
+                  },
+                  {
+                    "decision": "above",
+                    "mass_bits": "3fe6bfadc7fe5309",
+                    "time_bits": "3fb8000000000000"
+                  },
+                  {
+                    "decision": "below",
+                    "mass_bits": "3fe695716d9dbd68",
+                    "time_bits": "3fc0000000000000"
+                  },
+                  {
+                    "decision": "below",
+                    "mass_bits": "3fe6577013fccb88",
+                    "time_bits": "3fc4000000000000"
+                  },
+                  {
+                    "decision": "below",
+                    "mass_bits": "3fe6083669af4ab6",
+                    "time_bits": "3fc8000000000000"
+                  },
+                  {
+                    "decision": "below",
+                    "mass_bits": "3fe5ab06603c7d12",
+                    "time_bits": "3fcc000000000000"
+                  },
+                  {
+                    "decision": "below",
+                    "mass_bits": "3fe543b4e1d6a3f6",
+                    "time_bits": "3fd0000000000000"
+                  },
+                  {
+                    "decision": "below",
+                    "mass_bits": "3fe4d6817c0487a2",
+                    "time_bits": "3fd2000000000000"
+                  },
+                  {
+                    "decision": "below",
+                    "mass_bits": "3fe467e9a7cbe4b0",
+                    "time_bits": "3fd4000000000000"
+                  },
+                  {
+                    "decision": "below",
+                    "mass_bits": "3fe3fc7986135068",
+                    "time_bits": "3fd6000000000000"
+                  },
+                  {
+                    "decision": "below",
+                    "mass_bits": "3fe3989c01bef853",
+                    "time_bits": "3fd8000000000000"
+                  },
+                  {
+                    "decision": "below",
+                    "mass_bits": "3fe3406c4f6382e2",
+                    "time_bits": "3fda000000000000"
+                  },
+                  {
+                    "decision": "below",
+                    "mass_bits": "3fe2f78ab40a8343",
+                    "time_bits": "3fdc000000000000"
+                  },
+                  {
+                    "decision": "below",
+                    "mass_bits": "3fe2c0f65a03b719",
+                    "time_bits": "3fde000000000000"
+                  },
+                  {
+                    "decision": "below",
+                    "mass_bits": "3fe29eedc588cc1d",
+                    "time_bits": "3fe0000000000000"
+                  }
+                ]
+              }
+            ],
+            "schema": "gabriel-engine-observer/v1",
+            "snapshot": {
+              "identity": "ddd025b55f27cf9557f6196dd592314f6f763d1b2282634578f980ae1a293dbc",
+              "model": "exp(-itL);L=D-A;(W+W^T)/2;inactive-included;selfloops-ignored",
+              "tick": 1,
+              "vertices": [
+                {
+                  "entity": 0,
+                  "vertex_id": "11570619382924184950"
+                },
+                {
+                  "entity": 1,
+                  "vertex_id": "11570620482435813161"
+                },
+                {
+                  "entity": 2,
+                  "vertex_id": "11570617183900928528"
+                },
+                {
+                  "entity": 3,
+                  "vertex_id": "11570618283412556739"
+                },
+                {
+                  "entity": 4,
+                  "vertex_id": "11570623780970697794"
+                },
+                {
+                  "entity": 5,
+                  "vertex_id": "11570624880482326005"
+                },
+                {
+                  "entity": 6,
+                  "vertex_id": "11570621581947441372"
+                },
+                {
+                  "entity": 7,
+                  "vertex_id": "11570622681459069583"
+                },
+                {
+                  "entity": 8,
+                  "vertex_id": "11570628179017210638"
+                },
+                {
+                  "entity": 9,
+                  "vertex_id": "11570629278528838849"
+                },
+                {
+                  "entity": 10,
+                  "vertex_id": "5477593069636265851"
+                },
+                {
+                  "entity": 11,
+                  "vertex_id": "5477591970124637640"
+                },
+                {
+                  "entity": 12,
+                  "vertex_id": "5477595268659522273"
+                }
+              ],
+              "walk_backend": "complete_graph"
+            }
+          },
+          "owner_receipt_at": 2,
+          "request": {
+            "deadband_bits": "3e7ad7f29abcaf48",
+            "source": [
+              {
+                "entity": 0,
+                "im_bits": "c018000000000000",
+                "re_bits": "c026000000000000"
+              },
+              {
+                "entity": 1,
+                "im_bits": "4014000000000000",
+                "re_bits": "4018000000000000"
+              },
+              {
+                "entity": 2,
+                "im_bits": "c01c000000000000",
+                "re_bits": "c018000000000000"
+              },
+              {
+                "entity": 3,
+                "im_bits": "4010000000000000",
+                "re_bits": "4026000000000000"
+              },
+              {
+                "entity": 4,
+                "im_bits": "c020000000000000",
+                "re_bits": "bff0000000000000"
+              },
+              {
+                "entity": 5,
+                "im_bits": "4008000000000000",
+                "re_bits": "c02a000000000000"
+              },
+              {
+                "entity": 6,
+                "im_bits": "c022000000000000",
+                "re_bits": "4010000000000000"
+              },
+              {
+                "entity": 7,
+                "im_bits": "4000000000000000",
+                "re_bits": "c020000000000000"
+              },
+              {
+                "entity": 8,
+                "im_bits": "c024000000000000",
+                "re_bits": "4022000000000000"
+              },
+              {
+                "entity": 9,
+                "im_bits": "3ff0000000000000",
+                "re_bits": "c008000000000000"
+              },
+              {
+                "entity": 10,
+                "im_bits": "c026000000000000",
+                "re_bits": "402c000000000000"
+              },
+              {
+                "entity": 11,
+                "im_bits": "0000000000000000",
+                "re_bits": "4000000000000000"
+              },
+              {
+                "entity": 12,
+                "im_bits": "4026000000000000",
+                "re_bits": "c024000000000000"
+              }
+            ],
+            "targets": [
+              0,
+              2,
+              4,
+              6,
+              8,
+              10,
+              12
+            ],
+            "threshold_bits": "3fe6badbe42636bb",
+            "times_bits": [
+              "3fa0000000000000",
+              "3fb0000000000000",
+              "3fb8000000000000",
+              "3fc0000000000000",
+              "3fc4000000000000",
+              "3fc8000000000000",
+              "3fcc000000000000",
+              "3fd0000000000000",
+              "3fd2000000000000",
+              "3fd4000000000000",
+              "3fd6000000000000",
+              "3fd8000000000000",
+              "3fda000000000000",
+              "3fdc000000000000",
+              "3fde000000000000",
+              "3fe0000000000000"
+            ]
+          }
+        },
+        "operation": "query"
+      },
+      "sequence": 3
+    },
+    {
+      "command": {
+        "at": 3,
+        "contract": "graph",
+        "expected_head": "39c694873e170b060883946dcba42b22e99fe48fc3076651bfb43f05048b7c4c",
+        "id": "later-batch",
+        "op": "append_batch",
+        "payload": {
+          "entities": [
+            0,
+            1,
+            2
+          ]
+        }
+      },
+      "hash": "5ff538f03385e01262527fad7dab9bff35e24edffe7d65759f671cdf06699e45",
+      "post_state_hash": "9ca0fca5d3b17087b9bd80ab434363a498d4353e70d7d5982ef8fb7bfcdfb4bd",
+      "pre_state_hash": "1ed813f0709b1f49bf4022ca3a61a646a03e33ed0a36b138d4ef1f198db47938",
+      "prior_head": "39c694873e170b060883946dcba42b22e99fe48fc3076651bfb43f05048b7c4c",
+      "result": {
+        "batch_count": 2,
+        "engine": {
+          "commits": 0,
+          "edges": 78,
+          "faulted": false,
+          "observations": 16,
+          "ticks": 2,
+          "vertices": 13
+        },
+        "operation": "append_batch",
+        "snapshot": {
+          "identity": "1ad52669d1f8d71e8ad709feffe85561e4e7e9c352efd874164c26e424c73cbb",
+          "model": "exp(-itL);L=D-A;(W+W^T)/2;inactive-included;selfloops-ignored",
+          "tick": 2,
+          "vertices": [
+            {
+              "entity": 0,
+              "vertex_id": "11570619382924184950"
+            },
+            {
+              "entity": 1,
+              "vertex_id": "11570620482435813161"
+            },
+            {
+              "entity": 2,
+              "vertex_id": "11570617183900928528"
+            },
+            {
+              "entity": 3,
+              "vertex_id": "11570618283412556739"
+            },
+            {
+              "entity": 4,
+              "vertex_id": "11570623780970697794"
+            },
+            {
+              "entity": 5,
+              "vertex_id": "11570624880482326005"
+            },
+            {
+              "entity": 6,
+              "vertex_id": "11570621581947441372"
+            },
+            {
+              "entity": 7,
+              "vertex_id": "11570622681459069583"
+            },
+            {
+              "entity": 8,
+              "vertex_id": "11570628179017210638"
+            },
+            {
+              "entity": 9,
+              "vertex_id": "11570629278528838849"
+            },
+            {
+              "entity": 10,
+              "vertex_id": "5477593069636265851"
+            },
+            {
+              "entity": 11,
+              "vertex_id": "5477591970124637640"
+            },
+            {
+              "entity": 12,
+              "vertex_id": "5477595268659522273"
+            }
+          ],
+          "walk_backend": "complete_graph"
+        }
+      },
+      "sequence": 4
+    }
+  ]
+}

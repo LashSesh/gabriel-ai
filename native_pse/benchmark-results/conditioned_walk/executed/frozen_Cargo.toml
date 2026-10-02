@@ -1,0 +1,21 @@
+[package]
+name = "pse-conditioned-walk-benchmark"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[workspace]
+resolver = "2"
+
+[dependencies]
+pse-topology = { path = "../../crates/pse-topology" }
+serde_json = "1"
+
+[profile.release]
+opt-level = 3
+lto = false
+codegen-units = 1
+debug = true
+strip = "none"
+overflow-checks = false
+panic = "unwind"

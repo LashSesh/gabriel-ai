@@ -1,0 +1,15 @@
+\begin{table}[!htbp]
+\centering\small
+\begin{tabular}{lrrrrrr}
+\toprule
+Dataset & $n$ & Trace & Real & Phase & Real+trace & Phase+trace \\
+\midrule
+RacketSports & 152 & 130 & 113 & 115 & 130 & 125 \\
+BasicMotions & 40 & 38 & 29 & 30 & 36 & 36 \\
+NATOPS & 180 & 155 & 164 & 160 & 166 & 164 \\
+Epilepsy & 138 & 121 & 65 & 71 & 118 & 124 \\
+\bottomrule
+\end{tabular}
+\caption{Correct test decisions. Standalone banks have 16 real state coordinates per input channel; the two hybrid heads add the same number of features to the unchanged trace observer. All families are reported, without test-based selection.}
+\label{tab:phase_main}
+\end{table}

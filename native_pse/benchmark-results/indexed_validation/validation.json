@@ -1,0 +1,42 @@
+{
+  "status": "passed with explicitly retained historical fixture exception",
+  "passed": 449,
+  "ignored": 1,
+  "filtered": 1,
+  "unfiltered_failure": "full_state_matches_original_golden_fixture",
+  "toolchain": "rustc1.95.0 (59807616e 2026-04-14)",
+  "compiler_home": "task-local rustup installation",
+  "profile": {
+    "opt-level": 3,
+    "lto": false,
+    "codegen-units": 1,
+    "debug": true,
+    "strip": "none",
+    "overflow-checks": false,
+    "panic": "unwind"
+  },
+  "command": "CARGO_PROFILE_RELEASE_DEBUG=true CARGO_PROFILE_RELEASE_STRIP=none cargo test --locked --release --manifest-path native_pse/Cargo.toml --target-dir native_pse/target/validation_nolto --jobs 1 --workspace --all-features -- --skip full_state_matches_original_golden_fixture",
+  "index_bytes_match_offline_certificate": true,
+  "data_sha256": {
+    "s7_classes.bin": "2ba3e962802ea1654650f05d2e9e23c6419ac3f9569c2fe0031bb9bf6162fa67",
+    "s7_metadata.bin": "e37aa6716d18921681ee233590f157f7de9685333d46ff9f867fdc0df2e02083",
+    "s7_witnesses.bin": "9f144075476e5cae3b68abec340951019db14233074e53e6dd3fe5d3c3ce214c"
+  },
+  "logs": {
+    "workspace_all_unfiltered.log": "8ebbe6afd006e081a949fc13a3c3455217d4efcfe0b87017b2bdb2f7243d3f2a",
+    "workspace_debug_unfiltered.log": "ed3798410936ba89d683aa0c7e83f53412fbdac7d28086e8555826ebb2a8329b",
+    "fetch.log": "cae40620069755ff5a568cfaf6130d4bb9aacfcae6b897c80dd1222d4a4e65ca",
+    "metatron_tests.log": "3e24d6999110934c609527128420c84675b475d56a340ef97f7cbc63287c6834",
+    "workspace_clean_unfiltered.log": "dd30d118731b404695e9f852a4aacc786765c0c1ce070a204c491caba69fb313",
+    "workspace_nolto_filtered.log": "261d8a57cac9df74a01f1456b6c69254aac8b4ba331cb40505df1240ce7ddadc",
+    "workspace_nolto_unfiltered.log": "5f30340eaa1afe47ccab5c6af618767cb37c5132448b4cc6251736f19d4d1344"
+  },
+  "notes": [
+    "Three ThinLTO build attempts failed at linking, including fresh target and unstripped debug profile; cause undiagnosed.",
+    "No-LTO unfiltered build succeeded; historical fixture failed; same-profile filtered workspace test passed.",
+    "Initial standalone metatron release tests passed113unit+11integration using original ThinLTO profile.",
+    "Compiler install and Cargo fetch actually executed; declared minimumRust1.89 not tested.",
+    "First clean ThinLTO redirected log is incomplete; second direct retry reported missing main at integration-test link.",
+    "All historical fixture files remain unchanged."
+  ]
+}

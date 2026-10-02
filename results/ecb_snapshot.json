@@ -1,0 +1,278 @@
+{
+  "schema": "gabriel.ecb-forecast-snapshot.v1",
+  "origin_date": "2025-12-23",
+  "first_prefix_event": "1999-01-04",
+  "prefix_record_count": 6909,
+  "event_cutoff": 739608,
+  "receipt_cutoff": 739608,
+  "snapshot_digest": "8d048fded643e155e6835cce334d05818f90eafeb190245575e2f2863081eee5",
+  "source_vintage_digest": "e8136f072d575cb891cb58718fe31602ca2d4feccee67f035106393ed1c4bdbb",
+  "model_parameters": {
+    "method": "fixed_multiscale_filtered_historical_simulation",
+    "protocol_digest": "b54667bb7c16af07aeecdbed35e0a41ae6543d9e9c9ee1de16ab50ea6627988a",
+    "source_vintage_digest": "e8136f072d575cb891cb58718fe31602ca2d4feccee67f035106393ed1c4bdbb",
+    "fast_weight": "1/2",
+    "alpha": "39/40",
+    "window": 250,
+    "variance_initial_observations": 60,
+    "variance_halflives_observed_intervals": [
+      20,
+      120
+    ],
+    "units": "100 times log of FX-per-EUR rate ratio; positive denotes log loss for foreign currency in EUR valuation; not executable P&L"
+  },
+  "forecasts": [
+    {
+      "currency": "USD",
+      "horizon_observed_intervals": 1,
+      "target_id": "ecb-upper-log-loss;origin=2025-12-23;currency=USD;h=1;alpha=39/40",
+      "contract": {
+        "model_digest": "86f0e794aa61dbac720e410a782a790a4e0083a26a7545df84bcb432abe3c98d",
+        "snapshot_digest": "8d048fded643e155e6835cce334d05818f90eafeb190245575e2f2863081eee5",
+        "data_vintage_id": "ecb-csv-sha256:e8136f072d575cb891cb58718fe31602ca2d4feccee67f035106393ed1c4bdbb",
+        "target_id": "ecb-upper-log-loss;origin=2025-12-23;currency=USD;h=1;alpha=39/40",
+        "event_cutoff": 739608,
+        "receipt_cutoff": 739608,
+        "availability_mode": "historical_replay_without_vintages"
+      },
+      "contract_digest": "159d8f6e94c52406584fad3f44e1d5bcdf1d4a40952d5934168be73afd0d9a4b",
+      "var": {
+        "decimal": "0.8363334608719237",
+        "binary64_hex": "0x1.ac33e63dfda62p-1"
+      },
+      "es": {
+        "decimal": "1.3203192282850693",
+        "binary64_hex": "0x1.520070e1c3ab3p+0"
+      },
+      "variance_fast": {
+        "decimal": "0.09842668920562034",
+        "binary64_hex": "0x1.9327dd33112f6p-4"
+      },
+      "variance_slow": {
+        "decimal": "0.19639124843331343",
+        "binary64_hex": "0x1.92359329eefc7p-3"
+      }
+    },
+    {
+      "currency": "USD",
+      "horizon_observed_intervals": 5,
+      "target_id": "ecb-upper-log-loss;origin=2025-12-23;currency=USD;h=5;alpha=39/40",
+      "contract": {
+        "model_digest": "86f0e794aa61dbac720e410a782a790a4e0083a26a7545df84bcb432abe3c98d",
+        "snapshot_digest": "8d048fded643e155e6835cce334d05818f90eafeb190245575e2f2863081eee5",
+        "data_vintage_id": "ecb-csv-sha256:e8136f072d575cb891cb58718fe31602ca2d4feccee67f035106393ed1c4bdbb",
+        "target_id": "ecb-upper-log-loss;origin=2025-12-23;currency=USD;h=5;alpha=39/40",
+        "event_cutoff": 739608,
+        "receipt_cutoff": 739608,
+        "availability_mode": "historical_replay_without_vintages"
+      },
+      "contract_digest": "544506d774f6b9576df18efdd69391c7d5e6cc6bff26d355bd0b29639cf6dd41",
+      "var": {
+        "decimal": "2.2160824964755372",
+        "binary64_hex": "0x1.1ba8975bccdc2p+1"
+      },
+      "es": {
+        "decimal": "2.690933477995552",
+        "binary64_hex": "0x1.58708219d9e94p+1"
+      },
+      "variance_fast": {
+        "decimal": "0.09842668920562034",
+        "binary64_hex": "0x1.9327dd33112f6p-4"
+      },
+      "variance_slow": {
+        "decimal": "0.19639124843331343",
+        "binary64_hex": "0x1.92359329eefc7p-3"
+      }
+    },
+    {
+      "currency": "GBP",
+      "horizon_observed_intervals": 1,
+      "target_id": "ecb-upper-log-loss;origin=2025-12-23;currency=GBP;h=1;alpha=39/40",
+      "contract": {
+        "model_digest": "86f0e794aa61dbac720e410a782a790a4e0083a26a7545df84bcb432abe3c98d",
+        "snapshot_digest": "8d048fded643e155e6835cce334d05818f90eafeb190245575e2f2863081eee5",
+        "data_vintage_id": "ecb-csv-sha256:e8136f072d575cb891cb58718fe31602ca2d4feccee67f035106393ed1c4bdbb",
+        "target_id": "ecb-upper-log-loss;origin=2025-12-23;currency=GBP;h=1;alpha=39/40",
+        "event_cutoff": 739608,
+        "receipt_cutoff": 739608,
+        "availability_mode": "historical_replay_without_vintages"
+      },
+      "contract_digest": "f87b694fc664018ec747f6b85df9229982d42ca54bbfcacd11a53b0ce04033fb",
+      "var": {
+        "decimal": "0.5810009907332069",
+        "binary64_hex": "0x1.2978f63c4912fp-1"
+      },
+      "es": {
+        "decimal": "0.7532118393260945",
+        "binary64_hex": "0x1.81a4fb71bb2dap-1"
+      },
+      "variance_fast": {
+        "decimal": "0.057811136496481855",
+        "binary64_hex": "0x1.d996bd931a792p-5"
+      },
+      "variance_slow": {
+        "decimal": "0.08084133410631736",
+        "binary64_hex": "0x1.4b2048626d20ap-4"
+      }
+    },
+    {
+      "currency": "GBP",
+      "horizon_observed_intervals": 5,
+      "target_id": "ecb-upper-log-loss;origin=2025-12-23;currency=GBP;h=5;alpha=39/40",
+      "contract": {
+        "model_digest": "86f0e794aa61dbac720e410a782a790a4e0083a26a7545df84bcb432abe3c98d",
+        "snapshot_digest": "8d048fded643e155e6835cce334d05818f90eafeb190245575e2f2863081eee5",
+        "data_vintage_id": "ecb-csv-sha256:e8136f072d575cb891cb58718fe31602ca2d4feccee67f035106393ed1c4bdbb",
+        "target_id": "ecb-upper-log-loss;origin=2025-12-23;currency=GBP;h=5;alpha=39/40",
+        "event_cutoff": 739608,
+        "receipt_cutoff": 739608,
+        "availability_mode": "historical_replay_without_vintages"
+      },
+      "contract_digest": "b2b38660903013df10a6832b5b80b9646c6d0f44ae5707cd28f24a6f35c01e4f",
+      "var": {
+        "decimal": "1.5893771413998419",
+        "binary64_hex": "0x1.96e16b9b52818p+0"
+      },
+      "es": {
+        "decimal": "2.1200345826161424",
+        "binary64_hex": "0x1.0f5d4b0f5cd80p+1"
+      },
+      "variance_fast": {
+        "decimal": "0.057811136496481855",
+        "binary64_hex": "0x1.d996bd931a792p-5"
+      },
+      "variance_slow": {
+        "decimal": "0.08084133410631736",
+        "binary64_hex": "0x1.4b2048626d20ap-4"
+      }
+    },
+    {
+      "currency": "JPY",
+      "horizon_observed_intervals": 1,
+      "target_id": "ecb-upper-log-loss;origin=2025-12-23;currency=JPY;h=1;alpha=39/40",
+      "contract": {
+        "model_digest": "86f0e794aa61dbac720e410a782a790a4e0083a26a7545df84bcb432abe3c98d",
+        "snapshot_digest": "8d048fded643e155e6835cce334d05818f90eafeb190245575e2f2863081eee5",
+        "data_vintage_id": "ecb-csv-sha256:e8136f072d575cb891cb58718fe31602ca2d4feccee67f035106393ed1c4bdbb",
+        "target_id": "ecb-upper-log-loss;origin=2025-12-23;currency=JPY;h=1;alpha=39/40",
+        "event_cutoff": 739608,
+        "receipt_cutoff": 739608,
+        "availability_mode": "historical_replay_without_vintages"
+      },
+      "contract_digest": "92f5989ba7645d63652c87ac5bff530be37ae637515ace1bf23cc1873c12c28f",
+      "var": {
+        "decimal": "0.7561658004131571",
+        "binary64_hex": "0x1.832829ee419fep-1"
+      },
+      "es": {
+        "decimal": "1.0287475281474265",
+        "binary64_hex": "0x1.075bff7d3be9dp+0"
+      },
+      "variance_fast": {
+        "decimal": "0.14328436052186402",
+        "binary64_hex": "0x1.25724553c1e75p-3"
+      },
+      "variance_slow": {
+        "decimal": "0.2486057642324151",
+        "binary64_hex": "0x1.fd2504d7cd6f0p-3"
+      }
+    },
+    {
+      "currency": "JPY",
+      "horizon_observed_intervals": 5,
+      "target_id": "ecb-upper-log-loss;origin=2025-12-23;currency=JPY;h=5;alpha=39/40",
+      "contract": {
+        "model_digest": "86f0e794aa61dbac720e410a782a790a4e0083a26a7545df84bcb432abe3c98d",
+        "snapshot_digest": "8d048fded643e155e6835cce334d05818f90eafeb190245575e2f2863081eee5",
+        "data_vintage_id": "ecb-csv-sha256:e8136f072d575cb891cb58718fe31602ca2d4feccee67f035106393ed1c4bdbb",
+        "target_id": "ecb-upper-log-loss;origin=2025-12-23;currency=JPY;h=5;alpha=39/40",
+        "event_cutoff": 739608,
+        "receipt_cutoff": 739608,
+        "availability_mode": "historical_replay_without_vintages"
+      },
+      "contract_digest": "f69990369cb145bb91029e966167212b3f16256250a88a8a02ceb95d290f1a56",
+      "var": {
+        "decimal": "1.4859013249664448",
+        "binary64_hex": "0x1.7c64077bd05efp+0"
+      },
+      "es": {
+        "decimal": "2.133494030021089",
+        "binary64_hex": "0x1.11165516936edp+1"
+      },
+      "variance_fast": {
+        "decimal": "0.14328436052186402",
+        "binary64_hex": "0x1.25724553c1e75p-3"
+      },
+      "variance_slow": {
+        "decimal": "0.2486057642324151",
+        "binary64_hex": "0x1.fd2504d7cd6f0p-3"
+      }
+    },
+    {
+      "currency": "CHF",
+      "horizon_observed_intervals": 1,
+      "target_id": "ecb-upper-log-loss;origin=2025-12-23;currency=CHF;h=1;alpha=39/40",
+      "contract": {
+        "model_digest": "86f0e794aa61dbac720e410a782a790a4e0083a26a7545df84bcb432abe3c98d",
+        "snapshot_digest": "8d048fded643e155e6835cce334d05818f90eafeb190245575e2f2863081eee5",
+        "data_vintage_id": "ecb-csv-sha256:e8136f072d575cb891cb58718fe31602ca2d4feccee67f035106393ed1c4bdbb",
+        "target_id": "ecb-upper-log-loss;origin=2025-12-23;currency=CHF;h=1;alpha=39/40",
+        "event_cutoff": 739608,
+        "receipt_cutoff": 739608,
+        "availability_mode": "historical_replay_without_vintages"
+      },
+      "contract_digest": "158b926b78f6b5fce13770444d287bb0b8fb65c707662ff317ca16a0dcc4292d",
+      "var": {
+        "decimal": "0.41008213247545794",
+        "binary64_hex": "0x1.a3ec920e9fc6bp-2"
+      },
+      "es": {
+        "decimal": "0.6156268546509903",
+        "binary64_hex": "0x1.3b33716e87dbdp-1"
+      },
+      "variance_fast": {
+        "decimal": "0.04519901911909569",
+        "binary64_hex": "0x1.7245369db07e9p-5"
+      },
+      "variance_slow": {
+        "decimal": "0.0809707685871522",
+        "binary64_hex": "0x1.4ba8013038895p-4"
+      }
+    },
+    {
+      "currency": "CHF",
+      "horizon_observed_intervals": 5,
+      "target_id": "ecb-upper-log-loss;origin=2025-12-23;currency=CHF;h=5;alpha=39/40",
+      "contract": {
+        "model_digest": "86f0e794aa61dbac720e410a782a790a4e0083a26a7545df84bcb432abe3c98d",
+        "snapshot_digest": "8d048fded643e155e6835cce334d05818f90eafeb190245575e2f2863081eee5",
+        "data_vintage_id": "ecb-csv-sha256:e8136f072d575cb891cb58718fe31602ca2d4feccee67f035106393ed1c4bdbb",
+        "target_id": "ecb-upper-log-loss;origin=2025-12-23;currency=CHF;h=5;alpha=39/40",
+        "event_cutoff": 739608,
+        "receipt_cutoff": 739608,
+        "availability_mode": "historical_replay_without_vintages"
+      },
+      "contract_digest": "2a29be437749324260c68137b82af41678cbb957564279b3236e33cd3e945d06",
+      "var": {
+        "decimal": "1.0446967537794125",
+        "binary64_hex": "0x1.0b713f17b84e1p+0"
+      },
+      "es": {
+        "decimal": "1.3326752823062242",
+        "binary64_hex": "0x1.552a3511b15b6p+0"
+      },
+      "variance_fast": {
+        "decimal": "0.04519901911909569",
+        "binary64_hex": "0x1.7245369db07e9p-5"
+      },
+      "variance_slow": {
+        "decimal": "0.0809707685871522",
+        "binary64_hex": "0x1.4ba8013038895p-4"
+      }
+    }
+  ],
+  "availability_mode": "historical_replay_without_vintages",
+  "scope": "binary64 forecasts bound to a model snapshot; not action or arithmetic certificates",
+  "receipt_convention": "same-day ordinal receipts assumed for chronological replay; no historical release vintages",
+  "document_digest": "2a725ae18a2b400ed33d83a9fa9581b1b15c131e69d432f1a1b625c7973ad191"
+}

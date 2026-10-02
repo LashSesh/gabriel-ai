@@ -1,0 +1,271 @@
+{
+  "schema": "gabriel.window-postmeasurement-audit.v1",
+  "analysis_timing": "written after the five frozen timing workers; groups are descriptive only",
+  "protocol_sha256": "aa4d41d74c11e7d80654d3df1cbdc1eabbfa249e047e2adae8d384c547a763c2",
+  "cohort_digest": "0edec494f8ea6c9f4ff4009712fabc10bca0d9b0a767a93a7939d5d2e4c23256",
+  "source_sha256": {
+    "reproduction/benchmark_window_reachability.py": "2506358baef5202118d7a8e7118c940af2cbf35ef84076787eea49842c5ad60d",
+    "reproduction/window_baselines.py": "f9d7970a2842f6607ebd1b83ce76cf16dc530acb629a619ab2864b77ac344d2e",
+    "gabriel_runtime/window_certificate.py": "b344b7282c8c28262236e680d68fe58bfda67ecc45073c3b8d38f0b11214925c",
+    "results/window_reachability_protocol.json": "aa4d41d74c11e7d80654d3df1cbdc1eabbfa249e047e2adae8d384c547a763c2"
+  },
+  "raw_worker_sha256": {
+    "worker_0.json": "ee551a86a64c962e5a8e240dfe8f4a288b3dece9c341429772d9206106495818",
+    "worker_1.json": "b0e23e47a1c0ae6421be628d00f834c5821c54d606880dcae1f0c08957df822b",
+    "worker_2.json": "e7d776706482c02e874a0111b2d7bf2066f88928db4687dea7fd9ac5e5d7f94c",
+    "worker_3.json": "0c24729bcf5e3435ba6cf920b3c192a5e590a0d8d9fd21b8d4d287f29e660258",
+    "worker_4.json": "20d48d18d03ea1b306e8c1f7c4b931693f162df3a4e10e77e6dd42916c1efdf4"
+  },
+  "verification_sha256": "ff2c7f2eae3d87207b668c174d1378287519f7d082f11ee62b01d3f8ac3de644",
+  "verification_counts": {
+    "certificates": 852,
+    "decisive_certificates": 850,
+    "unknown_certificates": 2
+  },
+  "gates": {
+    "resolution": true,
+    "matched_task_timing": false,
+    "independent_zero_false_certificates": true,
+    "secondary_uniform_ten_percentage_points": false
+  },
+  "primary_criterion_met": false,
+  "primary_outcome": "unmet",
+  "descriptive_groups": {
+    "overall": {
+      "distinct_cases": 256,
+      "matched_repeated_calls": 3840,
+      "worker_median_adaptive_over_analytic": [
+        0.9916342798500857,
+        0.9952941481345741,
+        0.9928619998830192,
+        0.9924174101759191,
+        0.9864426447416572
+      ],
+      "median_worker_ratio": 0.9924174101759191,
+      "sum_call_ns": {
+        "analytic": 13581065634,
+        "adaptive": 13668762482,
+        "uniform": 22530090614
+      },
+      "ratio_of_summed_adaptive_over_analytic": 1.0064572876947484,
+      "ratio_of_summed_uniform_over_analytic": 1.6589339320764525
+    },
+    "nodes/7": {
+      "distinct_cases": 64,
+      "matched_repeated_calls": 960,
+      "worker_median_adaptive_over_analytic": [
+        0.9387933957265757,
+        0.986612568840706,
+        0.9661621188375984,
+        0.9449278737261231,
+        0.9559541755620331
+      ],
+      "median_worker_ratio": 0.9559541755620331,
+      "sum_call_ns": {
+        "analytic": 334313255,
+        "adaptive": 325870963,
+        "uniform": 3618114477
+      },
+      "ratio_of_summed_adaptive_over_analytic": 0.9747473608248048,
+      "ratio_of_summed_uniform_over_analytic": 10.822527742730392
+    },
+    "branch/endpoint_or_algebraic": {
+      "distinct_cases": 196,
+      "matched_repeated_calls": 2940,
+      "worker_median_adaptive_over_analytic": [
+        0.9911573878663267,
+        0.9965433704409384,
+        0.9954403806186343,
+        0.9909255267071082,
+        0.9857735853248581
+      ],
+      "median_worker_ratio": 0.9911573878663267,
+      "sum_call_ns": {
+        "analytic": 10697473637,
+        "adaptive": 10828326496,
+        "uniform": 10825829774
+      },
+      "ratio_of_summed_adaptive_over_analytic": 1.0122321272704438,
+      "ratio_of_summed_uniform_over_analytic": 1.0119987336595107
+    },
+    "evidence/rational_point": {
+      "distinct_cases": 180,
+      "matched_repeated_calls": 2700,
+      "worker_median_adaptive_over_analytic": [
+        0.9925275645429801,
+        0.9995959325759587,
+        0.998212610563288,
+        0.992607494072482,
+        0.9878569227459013
+      ],
+      "median_worker_ratio": 0.992607494072482,
+      "sum_call_ns": {
+        "analytic": 9562937219,
+        "adaptive": 9712329682,
+        "uniform": 10322204403
+      },
+      "ratio_of_summed_adaptive_over_analytic": 1.0156220269545617,
+      "ratio_of_summed_uniform_over_analytic": 1.07939685962713
+    },
+    "decision/reachable": {
+      "distinct_cases": 180,
+      "matched_repeated_calls": 2700,
+      "worker_median_adaptive_over_analytic": [
+        0.9925275645429801,
+        0.9995959325759587,
+        0.998212610563288,
+        0.992607494072482,
+        0.9878569227459013
+      ],
+      "median_worker_ratio": 0.992607494072482,
+      "sum_call_ns": {
+        "analytic": 9562937219,
+        "adaptive": 9712329682,
+        "uniform": 10322204403
+      },
+      "ratio_of_summed_adaptive_over_analytic": 1.0156220269545617,
+      "ratio_of_summed_uniform_over_analytic": 1.07939685962713
+    },
+    "branch/phase_needed": {
+      "distinct_cases": 60,
+      "matched_repeated_calls": 900,
+      "worker_median_adaptive_over_analytic": [
+        0.9948770486477572,
+        0.9878601334148935,
+        0.9794199742657439,
+        1.0001880287217602,
+        0.9879265290595514
+      ],
+      "median_worker_ratio": 0.9879265290595514,
+      "sum_call_ns": {
+        "analytic": 2883591997,
+        "adaptive": 2840435986,
+        "uniform": 11704260840
+      },
+      "ratio_of_summed_adaptive_over_analytic": 0.9850339399454229,
+      "ratio_of_summed_uniform_over_analytic": 4.05891709096736
+    },
+    "evidence/endpoint_maximum": {
+      "distinct_cases": 44,
+      "matched_repeated_calls": 660,
+      "worker_median_adaptive_over_analytic": [
+        0.9785880924661399,
+        0.9802878758796592,
+        0.9735407252153128,
+        0.9930297796969227,
+        0.9841470863776074
+      ],
+      "median_worker_ratio": 0.9802878758796592,
+      "sum_call_ns": {
+        "analytic": 2197734138,
+        "adaptive": 2143423805,
+        "uniform": 10405853777
+      },
+      "ratio_of_summed_adaptive_over_analytic": 0.9752880332243353,
+      "ratio_of_summed_uniform_over_analytic": 4.734810092393441
+    },
+    "decision/excluded": {
+      "distinct_cases": 76,
+      "matched_repeated_calls": 1140,
+      "worker_median_adaptive_over_analytic": [
+        0.9860331522333721,
+        0.9866118920523717,
+        0.977035926289149,
+        0.9913332997179,
+        0.9837968771792949
+      ],
+      "median_worker_ratio": 0.9860331522333721,
+      "sum_call_ns": {
+        "analytic": 4018128415,
+        "adaptive": 3956432800,
+        "uniform": 12207886211
+      },
+      "ratio_of_summed_adaptive_over_analytic": 0.9846456836049129,
+      "ratio_of_summed_uniform_over_analytic": 3.0382021055939794
+    },
+    "evidence/global_amplitude_exact": {
+      "distinct_cases": 32,
+      "matched_repeated_calls": 480,
+      "worker_median_adaptive_over_analytic": [
+        0.9931802900943743,
+        0.9894991094341867,
+        0.981359734778085,
+        0.9899550993634216,
+        0.9821911689155319
+      ],
+      "median_worker_ratio": 0.9894991094341867,
+      "sum_call_ns": {
+        "analytic": 1820394277,
+        "adaptive": 1813008995,
+        "uniform": 1802032434
+      },
+      "ratio_of_summed_adaptive_over_analytic": 0.9959430316314931,
+      "ratio_of_summed_uniform_over_analytic": 0.9899132604227584
+    },
+    "nodes/13": {
+      "distinct_cases": 64,
+      "matched_repeated_calls": 960,
+      "worker_median_adaptive_over_analytic": [
+        0.9913232925839326,
+        0.9901389060472741,
+        1.0009156069259029,
+        0.9932002746043727,
+        0.9812020050615993
+      ],
+      "median_worker_ratio": 0.9913232925839326,
+      "sum_call_ns": {
+        "analytic": 630096667,
+        "adaptive": 634964867,
+        "uniform": 2643655449
+      },
+      "ratio_of_summed_adaptive_over_analytic": 1.0077261160945008,
+      "ratio_of_summed_uniform_over_analytic": 4.195634713617681
+    },
+    "nodes/32": {
+      "distinct_cases": 64,
+      "matched_repeated_calls": 960,
+      "worker_median_adaptive_over_analytic": [
+        0.99744932714969,
+        0.9962508387814224,
+        0.9915100937753998,
+        0.9951814519385342,
+        0.9878131658518737
+      ],
+      "median_worker_ratio": 0.9951814519385342,
+      "sum_call_ns": {
+        "analytic": 2756050259,
+        "adaptive": 2762692969,
+        "uniform": 4336616682
+      },
+      "ratio_of_summed_adaptive_over_analytic": 1.002410228180095,
+      "ratio_of_summed_uniform_over_analytic": 1.5734896952037043
+    },
+    "nodes/64": {
+      "distinct_cases": 64,
+      "matched_repeated_calls": 960,
+      "worker_median_adaptive_over_analytic": [
+        1.0047423026074194,
+        1.0005392370647117,
+        0.9982621933052318,
+        1.0071821980603892,
+        0.9967830987797717
+      ],
+      "median_worker_ratio": 1.0005392370647117,
+      "sum_call_ns": {
+        "analytic": 9860605453,
+        "adaptive": 9945233683,
+        "uniform": 11931704006
+      },
+      "ratio_of_summed_adaptive_over_analytic": 1.0085824577814593,
+      "ratio_of_summed_uniform_over_analytic": 1.2100376658281047
+    }
+  },
+  "interpretive_limits": [
+    "Every primary method returns the same 180 reachable and 76 excluded decisions; no primary coverage advantage.",
+    "Per-size and branch analyses are post-measurement descriptions and cannot replace the registered overall gate.",
+    "Ratios below one mean the analytic implementation is slower than adaptive subdivision.",
+    "Sums aggregate measured certificate-call intervals, excluding Engine production, worker startup, serialization and Store ownership.",
+    "The shared exact model preparation and different certificate work are included; point counts alone do not establish total work.",
+    "This synthetic graph-model verification result does not establish external predictive usefulness or overall system superiority."
+  ]
+}

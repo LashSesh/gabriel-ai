@@ -1,0 +1,74 @@
+{
+  "counts": {
+    "event_contract_rejections": 12,
+    "exact_new_score_checks": 1462,
+    "renewal_contracts": 2016,
+    "renewed_contracts": 674,
+    "risk_bound_cases": 180,
+    "sharp_distribution_cases": 12,
+    "tamper_rejections": 9
+  },
+  "late_revision": {
+    "new_certificate": "475e9bcf97c0580957845213a99f13f374aae16d2c853f1fe80e76dfd75ed4b8",
+    "new_snapshot": "c6b844145a2b52c1a7287097b018845476e436e2a2e445cf79c1a3cb31969830",
+    "old_certificate": "8103c2d95f1e5f65603d7b3a895eaac5e6523622202e1f2c64c49f5e02e81b15",
+    "old_snapshot": "41e3b55147ab6ac3e228d0bd0d688eacaf6aef832f1225d12b1e5e7a1f8338fb"
+  },
+  "limitations": [
+    "Score-change bounds are post-revision certificates unless bounded future changes are separately assumed.",
+    "Receipt and source fields do not authenticate publication times.",
+    "A failed renewal gate means recompute, not reject the action.",
+    "A binding wrapper does not verify original decision evidence or economic model adequacy."
+  ],
+  "model_expansion": {
+    "new_scores": [
+      "3",
+      "1"
+    ],
+    "old_scores": [
+      "0",
+      "1"
+    ]
+  },
+  "monotone_sharpness": {
+    "delta": 1,
+    "new_regret": 1,
+    "new_scores": [
+      1,
+      0
+    ],
+    "old_scores": [
+      0,
+      0
+    ]
+  },
+  "random_seed": 20260926,
+  "scope": "exact finite-model sensitivity/renewal; constructed bitemporal records",
+  "source_sha256": {
+    "check_sequential_contract.py": "220e52dc4eb56abebeae28f9591724946d4282551634c5564dba50a8fade4403",
+    "sequential_contract.py": "71a2d49cb89e1831d777a8683a43e7c077e4d5824f3e1525512cc00e5c2fe441"
+  },
+  "static_versus_nested": {
+    "nested": [
+      "4",
+      "3"
+    ],
+    "static": [
+      "2",
+      "3"
+    ]
+  },
+  "status": "pass",
+  "symmetric_sharpness": {
+    "delta": 1,
+    "new_regret": 2,
+    "new_scores": [
+      1,
+      -1
+    ],
+    "old_scores": [
+      0,
+      0
+    ]
+  }
+}

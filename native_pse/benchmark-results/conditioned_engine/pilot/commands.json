@@ -1,0 +1,118 @@
+[
+  {
+    "name": "compiler",
+    "command": [
+      "rustc",
+      "--version",
+      "--verbose"
+    ],
+    "cwd": "/workspace/scratch/657e86c899c9/integration_work/Gabriel/native_pse/benchmark-results/conditioned_engine",
+    "returncode": 0,
+    "failure": null,
+    "wrapper_wall_seconds": 0.006320501000118384,
+    "wrapper_wall_is_benchmark_metric": false,
+    "stdout": "compiler.stdout",
+    "stderr": "compiler.stderr",
+    "stdout_bytes": 196,
+    "stderr_bytes": 0,
+    "stdout_sha256": "4fdff2578428e9c5c08ddd7a0d3079c1a106b1cdaa46e73e46f7cd32b0fb9cad",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "cargo",
+    "command": [
+      "cargo",
+      "--version",
+      "--verbose"
+    ],
+    "cwd": "/workspace/scratch/657e86c899c9/integration_work/Gabriel/native_pse/benchmark-results/conditioned_engine",
+    "returncode": 0,
+    "failure": null,
+    "wrapper_wall_seconds": 0.00985860000014327,
+    "wrapper_wall_is_benchmark_metric": false,
+    "stdout": "cargo.stdout",
+    "stderr": "cargo.stderr",
+    "stdout_bytes": 336,
+    "stderr_bytes": 0,
+    "stdout_sha256": "bfd735e736b354adabe72cea24bc1b393488223889b6ab95e974fd8fb963552e",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "generate_lockfile",
+    "command": [
+      "cargo",
+      "generate-lockfile",
+      "--offline"
+    ],
+    "cwd": "/workspace/scratch/657e86c899c9/integration_work/Gabriel/native_pse/benchmark-results/conditioned_engine",
+    "returncode": 0,
+    "failure": null,
+    "wrapper_wall_seconds": 0.07465173800005687,
+    "wrapper_wall_is_benchmark_metric": false,
+    "stdout": "generate_lockfile.stdout",
+    "stderr": "generate_lockfile.stderr",
+    "stdout_bytes": 0,
+    "stderr_bytes": 55,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "9636c4541dc0f8184d4d87154af021567f3bc8a4154a5a8f32138b2a7d381659"
+  },
+  {
+    "name": "build",
+    "command": [
+      "cargo",
+      "build",
+      "--release",
+      "--locked",
+      "--offline",
+      "--target-dir",
+      "/workspace/scratch/657e86c899c9/integration_work/Gabriel/native_pse/benchmark-results/conditioned_engine/pilot/target"
+    ],
+    "cwd": "/workspace/scratch/657e86c899c9/integration_work/Gabriel/native_pse/benchmark-results/conditioned_engine",
+    "returncode": 0,
+    "failure": null,
+    "wrapper_wall_seconds": 78.06048936300022,
+    "wrapper_wall_is_benchmark_metric": false,
+    "stdout": "build.stdout",
+    "stderr": "build.stderr",
+    "stdout_bytes": 0,
+    "stderr_bytes": 3552,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "550f243587bc6b96e02c351a2d2a741d7f5c3187eb4205799262c1a7e824550e"
+  },
+  {
+    "name": "golden",
+    "command": [
+      "/workspace/scratch/657e86c899c9/integration_work/Gabriel/native_pse/benchmark-results/conditioned_engine/pilot/executable/pse-conditioned-engine-benchmark",
+      "golden"
+    ],
+    "cwd": "/workspace/scratch/657e86c899c9/integration_work/Gabriel/native_pse/benchmark-results/conditioned_engine",
+    "returncode": 0,
+    "failure": null,
+    "wrapper_wall_seconds": 0.0359840119999717,
+    "wrapper_wall_is_benchmark_metric": false,
+    "stdout": "golden.stdout",
+    "stderr": "golden.stderr",
+    "stdout_bytes": 1928994,
+    "stderr_bytes": 0,
+    "stdout_sha256": "e1cd8b82a78cdc93ae7abd0f438a2eb45439519a4040fc7bc4b2a88fe898b197",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "pilot",
+    "command": [
+      "/workspace/scratch/657e86c899c9/integration_work/Gabriel/native_pse/benchmark-results/conditioned_engine/pilot/executable/pse-conditioned-engine-benchmark",
+      "pilot"
+    ],
+    "cwd": "/workspace/scratch/657e86c899c9/integration_work/Gabriel/native_pse/benchmark-results/conditioned_engine",
+    "returncode": 0,
+    "failure": null,
+    "wrapper_wall_seconds": 0.04650046300002941,
+    "wrapper_wall_is_benchmark_metric": false,
+    "stdout": "pilot.stdout",
+    "stderr": "pilot.stderr",
+    "stdout_bytes": 205091,
+    "stderr_bytes": 0,
+    "stdout_sha256": "c60c7534fcb6c0db240a921b86e4c672a387e2e49108154b7ae4df6ad9da23da",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

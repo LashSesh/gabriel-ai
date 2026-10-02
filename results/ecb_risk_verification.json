@@ -1,0 +1,148 @@
+{
+  "schema": "gabriel.ecb-risk.verification.v1",
+  "status": "passed",
+  "protocol_sha256": "04f39c50fb6d7eab9d59bad70548fa23dc15cc964816e37db7cad8baf73bde93",
+  "source_csv_sha256": "e8136f072d575cb891cb58718fe31602ca2d4feccee67f035106393ed1c4bdbb",
+  "prediction_archive_sha256": "0b1b232a956c090354bb73389f5ab57c2c877c477987871886ad46e5e37b98d4",
+  "results_sha256": "b5f3a988ede82e49ccc3683fabca5cf6def9f9b7a179526ef902903e57a968f0",
+  "verifier_sha256": "0a1c99b9582a022bfb7f8351ced8368545a64993fb400f36bf9a8ab10b3d9868",
+  "raw_rows": 7101,
+  "independently_recomputed_forecast_pairs": 325728,
+  "metric_records_recomputed": 320,
+  "test_contract_cases": 12280,
+  "test_forecast_pairs": 61400,
+  "reference": "independent extended-precision states and final-unit sorted scenario integration; exact rational finite-tail test cases",
+  "tolerance": {
+    "absolute": 1e-10,
+    "relative": 1e-10
+  },
+  "maximum_absolute_differences": {
+    "variances": 1.268603277981839e-14,
+    "var": 3.1277606372948075e-13,
+    "es": 2.696462844675729e-13,
+    "realized": 3.036970902623587e-14,
+    "metrics": 2.4015511801422917e-14,
+    "selection": 9.54911063416608e-15
+  },
+  "longdouble_mantissa_bits": 63,
+  "exact_tail_tests": {
+    "exact_rational_cases": 150,
+    "max_absolute_es_difference": 7.105427357601002e-15,
+    "invalid_score_cases_rejected": 4
+  },
+  "causality": {
+    "cases": [
+      {
+        "last_retained_date": "2000-12-08",
+        "prefix_observations": 501,
+        "forecast_pairs_bitwise_unchanged_per_variant": 9072,
+        "variants": [
+          "positive_random_future_perturbation",
+          "suffix_truncation"
+        ]
+      },
+      {
+        "last_retained_date": "2019-12-31",
+        "prefix_observations": 5375,
+        "forecast_pairs_bitwise_unchanged_per_variant": 243024,
+        "variants": [
+          "positive_random_future_perturbation",
+          "suffix_truncation"
+        ]
+      },
+      {
+        "last_retained_date": "2022-06-30",
+        "prefix_observations": 6017,
+        "forecast_pairs_bitwise_unchanged_per_variant": 273840,
+        "variants": [
+          "positive_random_future_perturbation",
+          "suffix_truncation"
+        ]
+      }
+    ],
+    "development_selection_rechecks": 16,
+    "seed": 20260926
+  },
+  "contracts": [
+    {
+      "currency": "USD",
+      "horizon": 1,
+      "archive_forecast_pairs": 40740,
+      "development_n": 2558,
+      "test_n": 1537,
+      "selected_weight": "1/4",
+      "minimum_development_selection_gap": 6.414591354268864e-05
+    },
+    {
+      "currency": "USD",
+      "horizon": 5,
+      "archive_forecast_pairs": 40692,
+      "development_n": 2554,
+      "test_n": 1533,
+      "selected_weight": "1/2",
+      "minimum_development_selection_gap": 0.001480220736430633
+    },
+    {
+      "currency": "GBP",
+      "horizon": 1,
+      "archive_forecast_pairs": 40740,
+      "development_n": 2558,
+      "test_n": 1537,
+      "selected_weight": "3/4",
+      "minimum_development_selection_gap": 0.001305268695104037
+    },
+    {
+      "currency": "GBP",
+      "horizon": 5,
+      "archive_forecast_pairs": 40692,
+      "development_n": 2554,
+      "test_n": 1533,
+      "selected_weight": "1/4",
+      "minimum_development_selection_gap": 0.004238772087885887
+    },
+    {
+      "currency": "JPY",
+      "horizon": 1,
+      "archive_forecast_pairs": 40740,
+      "development_n": 2558,
+      "test_n": 1537,
+      "selected_weight": "1/2",
+      "minimum_development_selection_gap": 0.0019479894706677793
+    },
+    {
+      "currency": "JPY",
+      "horizon": 5,
+      "archive_forecast_pairs": 40692,
+      "development_n": 2554,
+      "test_n": 1533,
+      "selected_weight": "3/4",
+      "minimum_development_selection_gap": 0.005943274369724156
+    },
+    {
+      "currency": "CHF",
+      "horizon": 1,
+      "archive_forecast_pairs": 40740,
+      "development_n": 2558,
+      "test_n": 1537,
+      "selected_weight": "3/4",
+      "minimum_development_selection_gap": 0.004123665455949513
+    },
+    {
+      "currency": "CHF",
+      "horizon": 5,
+      "archive_forecast_pairs": 40692,
+      "development_n": 2554,
+      "test_n": 1533,
+      "selected_weight": "1/2",
+      "minimum_development_selection_gap": 0.004163833551479878
+    }
+  ],
+  "limits": [
+    "No directed-rounding or interval certificate for logarithms or variance estimates.",
+    "Current revised snapshot; no historical release vintages or as-was-known execution backtest.",
+    "Overlapping horizons and currencies share observations; row counts are not independent sample sizes.",
+    "Yearly metrics group by forecast-origin year; a target can cross a year boundary within the same development/test period.",
+    "Empirical comparison is descriptive; no population significance or universal-superiority claim."
+  ],
+  "seconds": 9.188040224000133
+}

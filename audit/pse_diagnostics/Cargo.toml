@@ -1,0 +1,15 @@
+[package]
+name="pse-diagnostics"
+version="0.1.0"
+edition="2021"
+
+[dependencies]
+pse-graph={path="../../native_pse/crates/pse-graph"}
+pse-topology={path="../../native_pse/crates/pse-topology"}
+pse-scale={path="../../native_pse/crates/pse-scale"}
+serde_json="1"
+
+[profile.release]
+opt-level=3
+lto="thin"
+codegen-units=1

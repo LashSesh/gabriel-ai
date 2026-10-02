@@ -1,0 +1,32 @@
+\begin{table}[H]\centering\small
+\caption{Complete native engine comparisons. Entries are median paired ratios with observed ranges across five pairs. Ratios above one favour indexed and memoized execution, respectively. Warm rows use observation throughput; first-call rows use inverse elapsed time for the first macrostep in a fresh process.}
+\label{tab:indexedengine}
+\begin{tabular}{llrr}\toprule
+Interval & Sources & Indexed / packed & Memoized / indexed \\\midrule
+Warm & 3 & $1.662\,[1.577,\,1.750]$ & $1.243\,[1.208,\,1.290]$ \\
+Warm & 5 & $1.320\,[1.234,\,1.400]$ & $1.075\,[1.057,\,1.187]$ \\
+Warm & 7 & $1.177\,[1.124,\,1.278]$ & $1.014\,[0.987,\,1.114]$ \\
+Warm & 8 & $0.989\,[0.925,\,1.042]$ & $0.985\,[0.975,\,1.084]$ \\
+\midrule
+First call & 3 & $14.154\,[8.891,\,15.838]$ & $0.851\,[0.776,\,0.911]$ \\
+First call & 5 & $5.896\,[5.615,\,7.865]$ & $0.920\,[0.760,\,1.007]$ \\
+First call & 7 & $4.008\,[3.229,\,4.854]$ & $0.937\,[0.773,\,1.397]$ \\
+First call & 8 & $0.983\,[0.748,\,1.411]$ & $1.066\,[0.879,\,1.931]$ \\
+\bottomrule\end{tabular}
+\end{table}
+
+\begin{table}[H]\centering\small
+\caption{Complete-signature kernel comparisons in one executable. Entries are median paired ratios with observed ranges across seven pairs of 512 calls. Hit rates cover timed memoized calls only, after warmup. Each changing corpus is reused across passes.}
+\label{tab:indexedmicro}
+\begin{tabular}{llrrr}\toprule
+$n$ & Inputs & Indexed / packed & Memoized / indexed & Hits (\%) \\\midrule
+3 & Fixed & $5.053\,[3.048,\,5.797]$ & $97.347\,[90.132,\,100.662]$ & 100.00 \\
+3 & Changing & $4.872\,[4.624,\,7.482]$ & $77.235\,[53.230,\,104.206]$ & 100.00 \\
+5 & Fixed & $7.202\,[6.375,\,7.767]$ & $66.855\,[39.187,\,70.227]$ & 100.00 \\
+5 & Changing & $4.690\,[4.028,\,5.135]$ & $1.335\,[1.280,\,1.510]$ & 33.59 \\
+5 & Collision & $4.708\,[4.415,\,5.488]$ & $0.978\,[0.754,\,1.094]$ & 0.00 \\
+7 & Fixed & $9.865\,[8.395,\,10.451]$ & $38.120\,[34.150,\,141.727]$ & 100.00 \\
+7 & Changing & $3.167\,[2.803,\,3.282]$ & $1.034\,[0.756,\,1.323]$ & 14.45 \\
+7 & Collision & $3.875\,[3.280,\,4.236]$ & $0.970\,[0.880,\,1.232]$ & 0.00 \\
+\bottomrule\end{tabular}
+\end{table}

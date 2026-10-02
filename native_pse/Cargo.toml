@@ -1,0 +1,69 @@
+[package]
+name = "pse"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.89"
+license = "MIT"
+description = "Deterministic, embeddable Post-Symbolic Engine"
+autobenches = false
+
+[workspace]
+resolver = "2"
+members = ["crates/*"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+authors = ["Sebastian Klemm"]
+license = "MIT"
+rust-version = "1.89"
+
+[workspace.dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+serde_jcs = "0.2"
+sha2 = "0.11"
+petgraph = "0.8"
+ordered-float = { version = "5", features = ["serde"] }
+nalgebra = "0.35"
+thiserror = "2"
+tracing = "0.1"
+rayon = "1.10"
+
+[dependencies]
+pse-core = { path = "crates/pse-core" }
+pse-types = { path = "crates/pse-types" }
+pse-graph = { path = "crates/pse-graph" }
+pse-evidence = { path = "crates/pse-evidence" }
+pse-topology = { path = "crates/pse-topology" }
+serde_json.workspace = true
+thiserror.workspace = true
+
+
+[features]
+indexed-signature = ["pse-core/indexed-signature"]
+memoized-signature = ["indexed-signature", "pse-core/memoized-signature"]
+phase-hoist = ["pse-core/phase-hoist"]
+shared-spectrum = ["pse-core/shared-spectrum"]
+
+[[bench]]
+name = "engine"
+path = "benches/engine.rs"
+harness = false
+
+[profile.release]
+opt-level = 3
+# Avoid the ThinLTO undefined-symbol link failure observed with Rust 1.95.0.
+# All current three-variant comparisons use this same no-LTO setting.
+lto = false
+codegen-units = 1
+debug = false
+strip = "symbols"
+overflow-checks = false
+# Retain unwinding for embedding. Benchmark stages all use this same setting.
+panic = "unwind"
+
+[profile.bench]
+inherits = "release"
+debug = true
+strip = "none"

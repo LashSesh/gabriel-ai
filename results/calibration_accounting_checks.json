@@ -1,0 +1,108 @@
+{
+  "arithmetic": "Exact Fraction states, updates, clipping and bounds; binary64 exp only for the ES illustration.",
+  "assumptions": "Envelope checks compare exact log-normalized losses with the issuance state; no future financial envelope is inferred.",
+  "clipping_extremes": [
+    {
+      "final_projection": "1/800",
+      "final_state": "-1",
+      "frequency": "0",
+      "hit": 0,
+      "lower_debit": "1/4",
+      "n": 1000,
+      "target": "1/40",
+      "upper_debit": "0"
+    },
+    {
+      "final_projection": "-39/800",
+      "final_state": "1",
+      "frequency": "1",
+      "hit": 1,
+      "lower_debit": "0",
+      "n": 1000,
+      "target": "1/40",
+      "upper_debit": "191/4"
+    }
+  ],
+  "conditional_counterexample": {
+    "conditional_breach_probabilities": [
+      "0",
+      "1/20"
+    ],
+    "evidence": "Exact mixture probability; aggregate frequency does not imply conditional calibration.",
+    "regime_probabilities": [
+      "1/2",
+      "1/2"
+    ],
+    "unconditional_breach_probability": "1/40"
+  },
+  "counts": {
+    "exact_updates": 40960,
+    "exhaustive_paths": 5120,
+    "finite_windows": 184320,
+    "rejected_accounting_domains": 2,
+    "two_sided_envelope_cases": 729,
+    "upper_envelope_cases": 1458
+  },
+  "enumeration": {
+    "beta": "1/40",
+    "bounds": [
+      "-1",
+      "1"
+    ],
+    "initial_states": [
+      "-1",
+      "-39/40",
+      "0",
+      "3/4",
+      "1"
+    ],
+    "path_length": 8,
+    "rates": [
+      "1/100",
+      "1/20",
+      "1/5",
+      "3"
+    ],
+    "seed": null
+  },
+  "perfect_frequency_wrong_es": {
+    "construction": "39 zero losses then one loss of 40; q=e=1; eta=1/20; theta0=0.",
+    "es_residual_analytic": "40-exp(-39/800)>39",
+    "es_residual_binary64": 39.04758079526093,
+    "exact_final_state": "0",
+    "exact_frequency": "1/40",
+    "exact_hits_per_period": 1,
+    "exact_last_issue_state": "-39/800",
+    "exact_projection_sum": "0",
+    "expected_shortfall_of_equal_weight_outcome_block": 40,
+    "period": 40,
+    "repeated_periods_checked": 10,
+    "status": "Synthetic counterexample; exact states/bits, binary64 severity illustration."
+  },
+  "pooled_identity": {
+    "hits": 5,
+    "lanes": 5,
+    "n": 15,
+    "projection_sum": "0",
+    "state_change": "37/160"
+  },
+  "reporting_window": {
+    "correct_rhs": "9/10",
+    "discrepancy": "9/10",
+    "end": 5,
+    "incorrect_zero_restart_rhs": "15/8",
+    "initial_state": "39/800",
+    "start": 1
+  },
+  "scope": "Constructed finite-path algebra checks; not a conditional calibration test.",
+  "stale_envelope_counterexample": {
+    "conclusion": "The envelope needs the update state to equal the original issuance state.",
+    "issued_state": "-1",
+    "log_normalized_loss": "0",
+    "projection": "-39/800",
+    "retained_hit": 1,
+    "update_state": "1"
+  },
+  "status": "pass",
+  "zero_rate": "Baseline state stays fixed; divided identity deliberately unavailable."
+}

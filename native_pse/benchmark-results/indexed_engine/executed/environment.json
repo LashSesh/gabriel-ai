@@ -1,0 +1,35 @@
+{
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "python": "3.12.14",
+  "machine": "x86_64",
+  "logical_cpus": 9,
+  "cpu_model": "INTEL(R) XEON(R) PLATINUM 8573C",
+  "affinity": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "profile": {
+    "opt-level": 3,
+    "lto": false,
+    "codegen-units": 1,
+    "debug": true,
+    "strip": "none",
+    "overflow-checks": false,
+    "panic": "unwind"
+  },
+  "removed_build_override_names": [],
+  "effective_rustup_toolchain": "1.95.0",
+  "effective_cargo_build_jobs": "1",
+  "profile_rationale": "All three variants use LTO disabled as a local linking workaround after Rust 1.95.0 ThinLTO link attempts failed with undefined symbols. This records an observed build workaround, not a diagnosis. These same-profile local ratios must not be multiplied by historical ThinLTO ratios.",
+  "cargo_home": "/workspace/scratch/657e86c899c9/tmp/native_phase_toolchain/cargo",
+  "rustup_home": "/workspace/scratch/657e86c899c9/tmp/native_phase_toolchain/rustup",
+  "process_startup_is_timed": false,
+  "cpu_and_rss_counters_measured": false
+}

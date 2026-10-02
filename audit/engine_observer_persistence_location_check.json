@@ -1,0 +1,536 @@
+{
+  "schema": "gabriel.engine-observer.persistence-location-check.v1",
+  "runtime_code_unchanged": true,
+  "same_inputs_and_executable": true,
+  "runs": [
+    {
+      "directory": "audit/engine_observer_residue_replay",
+      "initial_byte_exact_final_databases": 32,
+      "later_unchanged_final_databases": 30,
+      "late_prefixes": 2,
+      "concurrent_workspace_activity": "present"
+    },
+    {
+      "directory": "audit/engine_observer_residue_replay_isolated",
+      "initial_byte_exact_final_databases": 32,
+      "later_unchanged_final_databases": 27,
+      "late_prefixes": 5,
+      "concurrent_workspace_activity": "none during isolated execution"
+    },
+    {
+      "directory": "/tmp/gabriel_observer_replay_20260927_outside",
+      "initial_byte_exact_final_databases": 32,
+      "later_unchanged_final_databases": 32,
+      "late_prefixes": 0,
+      "concurrent_workspace_activity": "none during execution"
+    }
+  ],
+  "outside_post_tool_verification": {
+    "kind": "Fresh separate execution after outside-workspace verifier exited; no new timing",
+    "status": "passed",
+    "databases": 32,
+    "records": [
+      {
+        "file": "process_0/clique_n64_q256_trial0_spectral_full.sqlite",
+        "sha256": "38e0e4fac1d40a20448ef5eacff6178876844c2999a2f6cb1f127b4ac2a362e5",
+        "bytes": 180224,
+        "expected_sha256": "38e0e4fac1d40a20448ef5eacff6178876844c2999a2f6cb1f127b4ac2a362e5",
+        "expected_events": 3,
+        "actual_events": 3,
+        "head_matches": true,
+        "integrity": [
+          [
+            "ok"
+          ]
+        ],
+        "passes": true
+      },
+      {
+        "file": "process_0/path_n13_q1_trial0_spectral_full.sqlite",
+        "sha256": "7eacbb38bddce44e9a0ab7728d695524020f1fe3941716632ad3c3caceac0a47",
+        "bytes": 86016,
+        "expected_sha256": "7eacbb38bddce44e9a0ab7728d695524020f1fe3941716632ad3c3caceac0a47",
+        "expected_events": 14,
+        "actual_events": 14,
+        "head_matches": true,
+        "integrity": [
+          [
+            "ok"
+          ]
+        ],
+        "passes": true
+      },
+      {
+        "file": "process_0/path_n13_q1_trial1_spectral_full.sqlite",
+        "sha256": "7eacbb38bddce44e9a0ab7728d695524020f1fe3941716632ad3c3caceac0a47",
+        "bytes": 86016,
+        "expected_sha256": "7eacbb38bddce44e9a0ab7728d695524020f1fe3941716632ad3c3caceac0a47",
+        "expected_events": 14,
+        "actual_events": 14,
+        "head_matches": true,
+        "integrity": [
+          [
+            "ok"
+          ]
+        ],
+        "passes": true
+      },
+      {
+        "file": "process_0/path_n13_q256_trial0_spectral_full.sqlite",
+        "sha256": "464dd798761c1f155c54cf2e020374617e4c8ce6cb1eed06ca050b7933ad5da2",
+        "bytes": 176128,
+        "expected_sha256": "464dd798761c1f155c54cf2e020374617e4c8ce6cb1eed06ca050b7933ad5da2",
+        "expected_events": 14,
+        "actual_events": 14,
+        "head_matches": true,
+        "integrity": [
+          [
+            "ok"
+          ]
+        ],
+        "passes": true
+      },
+      {
+        "file": "process_0/path_n13_q256_trial1_spectral_full.sqlite",
+        "sha256": "464dd798761c1f155c54cf2e020374617e4c8ce6cb1eed06ca050b7933ad5da2",
+        "bytes": 176128,
+        "expected_sha256": "464dd798761c1f155c54cf2e020374617e4c8ce6cb1eed06ca050b7933ad5da2",
+        "expected_events": 14,
+        "actual_events": 14,
+        "head_matches": true,
+        "integrity": [
+          [
+            "ok"
+          ]
+        ],
+        "passes": true
+      },
+      {
+        "file": "process_0/path_n13_q256_trial2_spectral_full.sqlite",
+        "sha256": "464dd798761c1f155c54cf2e020374617e4c8ce6cb1eed06ca050b7933ad5da2",
+        "bytes": 176128,
+        "expected_sha256": "464dd798761c1f155c54cf2e020374617e4c8ce6cb1eed06ca050b7933ad5da2",
+        "expected_events": 14,
+        "actual_events": 14,
+        "head_matches": true,
+        "integrity": [
+          [
+            "ok"
+          ]
+        ],
+        "passes": true
+      },
+      {
+        "file": "process_0/near_clique_n13_q256_trial1_auto_full.sqlite",
+        "sha256": "ae01af9b15f1ccdaa9d70c4c24a278999b808577c823a4056d0416e0f798d381",
+        "bytes": 139264,
+        "expected_sha256": "ae01af9b15f1ccdaa9d70c4c24a278999b808577c823a4056d0416e0f798d381",
+        "expected_events": 4,
+        "actual_events": 4,
+        "head_matches": true,
+        "integrity": [
+          [
+            "ok"
+          ]
+        ],
+        "passes": true
+      },
+      {
+        "file": "process_1/clique_n13_q1_trial1_auto_full.sqlite",
+        "sha256": "3550529cd2bb0f8a61bee69ba42020a873a7c1ee29120ed6badfb34ed60d3ea9",
+        "bytes": 57344,
+        "expected_sha256": "3550529cd2bb0f8a61bee69ba42020a873a7c1ee29120ed6badfb34ed60d3ea9",
+        "expected_events": 3,
+        "actual_events": 3,
+        "head_matches": true,
+        "integrity": [
+          [
+            "ok"
+          ]
+        ],
+        "passes": true
+      },
+      {
+        "file": "process_1/clique_n64_q256_trial2_spectral_full.sqlite",
+        "sha256": "38e0e4fac1d40a20448ef5eacff6178876844c2999a2f6cb1f127b4ac2a362e5",
+        "bytes": 180224,
+        "expected_sha256": "38e0e4fac1d40a20448ef5eacff6178876844c2999a2f6cb1f127b4ac2a362e5",
+        "expected_events": 3,
+        "actual_events": 3,
+        "head_matches": true,
+        "integrity": [
+          [
+            "ok"
+          ]
+        ],
+        "passes": true
+      },
+      {
+        "file": "process_1/path_n13_q1_trial1_auto_full.sqlite",
+        "sha256": "197bedbaff287f233439614ac6f0c6f30b8418f376659691683545fece72016f",
+        "bytes": 86016,
+        "expected_sha256": "197bedbaff287f233439614ac6f0c6f30b8418f376659691683545fece72016f",
+        "expected_events": 14,
+        "actual_events": 14,
+        "head_matches": true,
+        "integrity": [
+          [
+            "ok"
+          ]
+        ],
+        "passes": true
+      },
+      {
+        "file": "process_1/path_n13_q1_trial2_auto_full.sqlite",
+        "sha256": "197bedbaff287f233439614ac6f0c6f30b8418f376659691683545fece72016f",
+        "bytes": 86016,
+        "expected_sha256": "197bedbaff287f233439614ac6f0c6f30b8418f376659691683545fece72016f",
+        "expected_events": 14,
+        "actual_events": 14,
+        "head_matches": true,
+        "integrity": [
+          [
+            "ok"
+          ]
+        ],
+        "passes": true
+      },
+      {
+        "file": "process_1/path_n13_q256_trial0_auto_region.sqlite",
+        "sha256": "ff0b3521761c2a2eda65c5213b0af142f52f246910fa38d1a4c72500b1ca893f",
+        "bytes": 176128,
+        "expected_sha256": "ff0b3521761c2a2eda65c5213b0af142f52f246910fa38d1a4c72500b1ca893f",
+        "expected_events": 14,
+        "actual_events": 14,
+        "head_matches": true,
+        "integrity": [
+          [
+            "ok"
+          ]
+        ],
+        "passes": true
+      },
+      {
+        "file": "process_1/path_n13_q256_trial1_spectral_full.sqlite",
+        "sha256": "464dd798761c1f155c54cf2e020374617e4c8ce6cb1eed06ca050b7933ad5da2",
+        "bytes": 176128,
+        "expected_sha256": "464dd798761c1f155c54cf2e020374617e4c8ce6cb1eed06ca050b7933ad5da2",
+        "expected_events": 14,
+        "actual_events": 14,
+        "head_matches": true,
+        "integrity": [
+          [
+            "ok"
+          ]
+        ],
+        "passes": true
+      },
+      {
+        "file": "process_1/path_n13_q256_trial2_spectral_full.sqlite",
+        "sha256": "464dd798761c1f155c54cf2e020374617e4c8ce6cb1eed06ca050b7933ad5da2",
+        "bytes": 176128,
+        "expected_sha256": "464dd798761c1f155c54cf2e020374617e4c8ce6cb1eed06ca050b7933ad5da2",
+        "expected_events": 14,
+        "actual_events": 14,
+        "head_matches": true,
+        "integrity": [
+          [
+            "ok"
+          ]
+        ],
+        "passes": true
+      },
+      {
+        "file": "process_1/near_clique_n13_q256_trial2_auto_region.sqlite",
+        "sha256": "8a9ae4a55b4878156458ccbadfd47b1ef35e2714ca828a1fc6baaf856921a9d9",
+        "bytes": 143360,
+        "expected_sha256": "8a9ae4a55b4878156458ccbadfd47b1ef35e2714ca828a1fc6baaf856921a9d9",
+        "expected_events": 4,
+        "actual_events": 4,
+        "head_matches": true,
+        "integrity": [
+          [
+            "ok"
+          ]
+        ],
+        "passes": true
+      },
+      {
+        "file": "process_2/clique_n64_q256_trial0_auto_full.sqlite",
+        "sha256": "34b5d9154d185eaf5afed10fe0896a0e1ee3217b9c63d2865bb50a32b8065d23",
+        "bytes": 180224,
+        "expected_sha256": "34b5d9154d185eaf5afed10fe0896a0e1ee3217b9c63d2865bb50a32b8065d23",
+        "expected_events": 3,
+        "actual_events": 3,
+        "head_matches": true,
+        "integrity": [
+          [
+            "ok"
+          ]
+        ],
+        "passes": true
+      },
+      {
+        "file": "process_2/path_n13_q1_trial0_auto_region.sqlite",
+        "sha256": "47e0433fc84f8bd999f33bc49d5d62a4245bf6c7614af7107e45c871adb7235f",
+        "bytes": 86016,
+        "expected_sha256": "47e0433fc84f8bd999f33bc49d5d62a4245bf6c7614af7107e45c871adb7235f",
+        "expected_events": 14,
+        "actual_events": 14,
+        "head_matches": true,
+        "integrity": [
+          [
+            "ok"
+          ]
+        ],
+        "passes": true
+      },
+      {
+        "file": "process_2/path_n13_q1_trial2_auto_region.sqlite",
+        "sha256": "47e0433fc84f8bd999f33bc49d5d62a4245bf6c7614af7107e45c871adb7235f",
+        "bytes": 86016,
+        "expected_sha256": "47e0433fc84f8bd999f33bc49d5d62a4245bf6c7614af7107e45c871adb7235f",
+        "expected_events": 14,
+        "actual_events": 14,
+        "head_matches": true,
+        "integrity": [
+          [
+            "ok"
+          ]
+        ],
+        "passes": true
+      },
+      {
+        "file": "process_2/path_n13_q256_trial1_auto_region.sqlite",
+        "sha256": "ff0b3521761c2a2eda65c5213b0af142f52f246910fa38d1a4c72500b1ca893f",
+        "bytes": 176128,
+        "expected_sha256": "ff0b3521761c2a2eda65c5213b0af142f52f246910fa38d1a4c72500b1ca893f",
+        "expected_events": 14,
+        "actual_events": 14,
+        "head_matches": true,
+        "integrity": [
+          [
+            "ok"
+          ]
+        ],
+        "passes": true
+      },
+      {
+        "file": "process_2/path_n13_q256_trial2_auto_full.sqlite",
+        "sha256": "45f0dcafbfd5a9439a41fbc6fb3c91d91c13d435139d112e2a9b3f8238c1d411",
+        "bytes": 176128,
+        "expected_sha256": "45f0dcafbfd5a9439a41fbc6fb3c91d91c13d435139d112e2a9b3f8238c1d411",
+        "expected_events": 14,
+        "actual_events": 14,
+        "head_matches": true,
+        "integrity": [
+          [
+            "ok"
+          ]
+        ],
+        "passes": true
+      },
+      {
+        "file": "process_3/clique_n64_q1_trial0_auto_region.sqlite",
+        "sha256": "1177234cd9f92e7582eadaca798bf07295299e44087759241a1a9176dac00cfa",
+        "bytes": 94208,
+        "expected_sha256": "1177234cd9f92e7582eadaca798bf07295299e44087759241a1a9176dac00cfa",
+        "expected_events": 3,
+        "actual_events": 3,
+        "head_matches": true,
+        "integrity": [
+          [
+            "ok"
+          ]
+        ],
+        "passes": true
+      },
+      {
+        "file": "process_3/path_n13_q1_trial0_spectral_full.sqlite",
+        "sha256": "7eacbb38bddce44e9a0ab7728d695524020f1fe3941716632ad3c3caceac0a47",
+        "bytes": 86016,
+        "expected_sha256": "7eacbb38bddce44e9a0ab7728d695524020f1fe3941716632ad3c3caceac0a47",
+        "expected_events": 14,
+        "actual_events": 14,
+        "head_matches": true,
+        "integrity": [
+          [
+            "ok"
+          ]
+        ],
+        "passes": true
+      },
+      {
+        "file": "process_3/path_n13_q1_trial2_auto_full.sqlite",
+        "sha256": "197bedbaff287f233439614ac6f0c6f30b8418f376659691683545fece72016f",
+        "bytes": 86016,
+        "expected_sha256": "197bedbaff287f233439614ac6f0c6f30b8418f376659691683545fece72016f",
+        "expected_events": 14,
+        "actual_events": 14,
+        "head_matches": true,
+        "integrity": [
+          [
+            "ok"
+          ]
+        ],
+        "passes": true
+      },
+      {
+        "file": "process_3/path_n13_q256_trial1_auto_full.sqlite",
+        "sha256": "45f0dcafbfd5a9439a41fbc6fb3c91d91c13d435139d112e2a9b3f8238c1d411",
+        "bytes": 176128,
+        "expected_sha256": "45f0dcafbfd5a9439a41fbc6fb3c91d91c13d435139d112e2a9b3f8238c1d411",
+        "expected_events": 14,
+        "actual_events": 14,
+        "head_matches": true,
+        "integrity": [
+          [
+            "ok"
+          ]
+        ],
+        "passes": true
+      },
+      {
+        "file": "process_3/path_n13_q256_trial2_auto_full.sqlite",
+        "sha256": "45f0dcafbfd5a9439a41fbc6fb3c91d91c13d435139d112e2a9b3f8238c1d411",
+        "bytes": 176128,
+        "expected_sha256": "45f0dcafbfd5a9439a41fbc6fb3c91d91c13d435139d112e2a9b3f8238c1d411",
+        "expected_events": 14,
+        "actual_events": 14,
+        "head_matches": true,
+        "integrity": [
+          [
+            "ok"
+          ]
+        ],
+        "passes": true
+      },
+      {
+        "file": "process_3/near_clique_n13_q256_trial0_auto_region.sqlite",
+        "sha256": "8a9ae4a55b4878156458ccbadfd47b1ef35e2714ca828a1fc6baaf856921a9d9",
+        "bytes": 143360,
+        "expected_sha256": "8a9ae4a55b4878156458ccbadfd47b1ef35e2714ca828a1fc6baaf856921a9d9",
+        "expected_events": 4,
+        "actual_events": 4,
+        "head_matches": true,
+        "integrity": [
+          [
+            "ok"
+          ]
+        ],
+        "passes": true
+      },
+      {
+        "file": "process_4/clique_n64_q256_trial2_spectral_full.sqlite",
+        "sha256": "38e0e4fac1d40a20448ef5eacff6178876844c2999a2f6cb1f127b4ac2a362e5",
+        "bytes": 180224,
+        "expected_sha256": "38e0e4fac1d40a20448ef5eacff6178876844c2999a2f6cb1f127b4ac2a362e5",
+        "expected_events": 3,
+        "actual_events": 3,
+        "head_matches": true,
+        "integrity": [
+          [
+            "ok"
+          ]
+        ],
+        "passes": true
+      },
+      {
+        "file": "process_4/path_n13_q1_trial1_spectral_full.sqlite",
+        "sha256": "7eacbb38bddce44e9a0ab7728d695524020f1fe3941716632ad3c3caceac0a47",
+        "bytes": 86016,
+        "expected_sha256": "7eacbb38bddce44e9a0ab7728d695524020f1fe3941716632ad3c3caceac0a47",
+        "expected_events": 14,
+        "actual_events": 14,
+        "head_matches": true,
+        "integrity": [
+          [
+            "ok"
+          ]
+        ],
+        "passes": true
+      },
+      {
+        "file": "process_4/path_n13_q1_trial2_auto_region.sqlite",
+        "sha256": "47e0433fc84f8bd999f33bc49d5d62a4245bf6c7614af7107e45c871adb7235f",
+        "bytes": 86016,
+        "expected_sha256": "47e0433fc84f8bd999f33bc49d5d62a4245bf6c7614af7107e45c871adb7235f",
+        "expected_events": 14,
+        "actual_events": 14,
+        "head_matches": true,
+        "integrity": [
+          [
+            "ok"
+          ]
+        ],
+        "passes": true
+      },
+      {
+        "file": "process_4/path_n13_q256_trial0_auto_region.sqlite",
+        "sha256": "ff0b3521761c2a2eda65c5213b0af142f52f246910fa38d1a4c72500b1ca893f",
+        "bytes": 176128,
+        "expected_sha256": "ff0b3521761c2a2eda65c5213b0af142f52f246910fa38d1a4c72500b1ca893f",
+        "expected_events": 14,
+        "actual_events": 14,
+        "head_matches": true,
+        "integrity": [
+          [
+            "ok"
+          ]
+        ],
+        "passes": true
+      },
+      {
+        "file": "process_4/path_n13_q256_trial1_spectral_full.sqlite",
+        "sha256": "464dd798761c1f155c54cf2e020374617e4c8ce6cb1eed06ca050b7933ad5da2",
+        "bytes": 176128,
+        "expected_sha256": "464dd798761c1f155c54cf2e020374617e4c8ce6cb1eed06ca050b7933ad5da2",
+        "expected_events": 14,
+        "actual_events": 14,
+        "head_matches": true,
+        "integrity": [
+          [
+            "ok"
+          ]
+        ],
+        "passes": true
+      },
+      {
+        "file": "process_4/path_n13_q256_trial2_auto_region.sqlite",
+        "sha256": "ff0b3521761c2a2eda65c5213b0af142f52f246910fa38d1a4c72500b1ca893f",
+        "bytes": 176128,
+        "expected_sha256": "ff0b3521761c2a2eda65c5213b0af142f52f246910fa38d1a4c72500b1ca893f",
+        "expected_events": 14,
+        "actual_events": 14,
+        "head_matches": true,
+        "integrity": [
+          [
+            "ok"
+          ]
+        ],
+        "passes": true
+      }
+    ]
+  },
+  "sealed_archives": [
+    {
+      "file": "audit/engine_observer_residue_replay_failed.zip",
+      "bytes": 560912,
+      "sha256": "edc1c0516203c153f887807f9dfdb7d1ca6766edfc5f15f5663b98875f65892e",
+      "sealed_files": 69
+    },
+    {
+      "file": "audit/engine_observer_residue_replay_isolated_failed.zip",
+      "bytes": 531006,
+      "sha256": "2dc8ede018e19cdfd998d8901b423037a176ceaad80387d3aa64a5fe7cc5ab57",
+      "sealed_files": 69
+    },
+    {
+      "file": "audit/engine_observer_residue_replay_outside_passed.zip",
+      "bytes": 572449,
+      "sha256": "578acd23c70fd614d892f8a733a4b7860c6e3bd1477c00f6dde590672f496bf1",
+      "sealed_files": 69
+    }
+  ],
+  "conclusion": "The same verifier/runtime/commands reproduced receipt and final database bytes in all runs at immediate checks. Late prefix regressions were observed in both workspace runs, but not in the outside-workspace run. This establishes an observed storage-location contrast, not a root-cause attribution or universal durability guarantee."
+}

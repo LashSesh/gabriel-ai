@@ -1,0 +1,67 @@
+{
+  "adapter_time": "complete apply including validation, cloning and full canonical result materialization",
+  "amendment_before_any_timing": "add paired correction-then-append to include deferred variance repair work; choose early index320 so both endpoint-dependent issued feedback contributions mature for all lengths",
+  "clocks": "event=index; received=owner=index for initial source; corrections at source_length+1",
+  "complete_trajectory_repeats": 1,
+  "config": {
+    "max_units": 100,
+    "risk_budget": "10",
+    "source_id": "efficiency-synthetic",
+    "unit_exposure": "100"
+  },
+  "correction_factors": {
+    "early_correction": "33/32",
+    "recent_correction": "65/64"
+  },
+  "correction_indexes": {
+    "early_correction": "320",
+    "recent_correction": "source_length-3"
+  },
+  "correctness": "byte-exact canonical state/result digests at every initial source transition and each measured branch",
+  "format": "gabriel-incremental-benchmark/v1",
+  "horizons": [
+    1,
+    5
+  ],
+  "kernel_time": "wall time inside _learner plus _forecast, including their own construction/digests; excludes outer apply validation, state cloning and result canonicalization",
+  "materialization_limit": "full history retained in canonical state/result, so outer operations retain linear serialization work and semantic audit replays the journal",
+  "owner_conditions": "append, then fresh cold-profile Store.open including complete semantic audit",
+  "owner_repeats": 3,
+  "owner_source_length": 360,
+  "owner_time": "Store.submit terminal append including serialization, hashing and durable SQLite commit; fresh audit measured separately",
+  "preparation_exclusions": "imports, fixed numerical warmup, prefix state construction for terminal trials, adapter/cache snapshots, source/state digest comparison, filesystem copy",
+  "protocol_revision": 2,
+  "repeat_order": "baseline then incremental at even trial index; reverse at odd trial index",
+  "scope": "bounded synthetic reference profile, 1024 source and 512 issue caps; not predictive performance or production throughput",
+  "seed": 2026092602,
+  "source_formula": "r_i = 0.006 * (1 + 0.3*sin(i/31)) * Z_i; p_i = 100*exp(cumsum(r)_i), Z from NumPy default_rng(seed).standard_normal(801); first 800 form full trajectory",
+  "source_kind": "synthetic_positive_prices",
+  "source_lengths": [
+    360,
+    500,
+    800
+  ],
+  "status": "frozen_before_timing",
+  "terminal_transition_repeats": 3,
+  "terminal_transitions": [
+    "append",
+    "early_correction",
+    "recent_correction",
+    "early_correction_then_append",
+    "recent_correction_then_append"
+  ],
+  "thread_environment": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+  },
+  "trajectory_length": 800,
+  "warmup": "one baseline 320-observation trajectory before recorded work; optimized terminal caches derive from completed sequential prefix, cold audits use fresh adapter",
+  "work_counters": {
+    "forecast_scenario_rows": "one quantile/ES evaluation row per expert; each row contains 250 scenarios",
+    "gradient_evaluations": "one eight-expert transformed gradient at immutable issued weights",
+    "projections": "one eight-dimensional simplex projection",
+    "severity_steps": "one feedback step updating both severity filters",
+    "variance_steps": "initial variance-mean calculation counts one; each later EWMA row counts one (both two-scale components together)"
+  }
+}

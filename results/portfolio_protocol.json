@@ -1,0 +1,296 @@
+{
+  "schema": "gabriel.portfolio-acquisition.protocol.v1",
+  "status": "synthetic exhaustive mechanism study; specified before first execution",
+  "date": "2026-09-25",
+  "question": "Can an independently checkable common acceptable action be selected from incomplete current records under convex-mixture CVaR risk and cash constraints?",
+  "units": {
+    "loss": "synthetic currency units",
+    "exposure": "synthetic currency units",
+    "factor": "dimensionless loss fraction",
+    "query_cost": "integer access-cost units; not time or money"
+  },
+  "alpha": "3/4",
+  "fact_values": {
+    "equity": [
+      20,
+      60
+    ],
+    "duration": [
+      20,
+      60
+    ],
+    "credit": [
+      10,
+      40
+    ],
+    "liquidity_multiplier": [
+      1,
+      3
+    ],
+    "existing_hedge": [
+      0,
+      20
+    ],
+    "cash": [
+      8,
+      24
+    ],
+    "metadata_tag": [
+      0,
+      1
+    ]
+  },
+  "query_names": [
+    "metadata_tag",
+    "cash",
+    "equity",
+    "credit",
+    "duration",
+    "existing_hedge",
+    "liquidity_multiplier",
+    "position_registry"
+  ],
+  "query_costs": [
+    1,
+    1,
+    1,
+    2,
+    2,
+    2,
+    3,
+    4
+  ],
+  "action_names": [
+    "retain",
+    "add_equity_hedge",
+    "reduce_half"
+  ],
+  "action_terms": {
+    "retain": {
+      "position_fraction": "1",
+      "additional_hedge": 0,
+      "fee_base": 0,
+      "fee_liquidity": 0,
+      "cash_base": 0,
+      "cash_liquidity": 0
+    },
+    "add_equity_hedge": {
+      "position_fraction": "1",
+      "additional_hedge": 40,
+      "fee_base": 4,
+      "fee_liquidity": 1,
+      "cash_base": 12,
+      "cash_liquidity": 2
+    },
+    "reduce_half": {
+      "position_fraction": "1/2",
+      "additional_hedge": 0,
+      "fee_base": 2,
+      "fee_liquidity": 2,
+      "cash_base": 2,
+      "cash_liquidity": 2
+    }
+  },
+  "horizons": [
+    "near",
+    "far"
+  ],
+  "scenarios": [
+    {
+      "name": "calm",
+      "near": [
+        "-1/50",
+        "-1/100",
+        "-1/100",
+        "0"
+      ],
+      "far": [
+        "-1/25",
+        "-1/50",
+        "-1/50",
+        "0"
+      ]
+    },
+    {
+      "name": "equity_shock",
+      "near": [
+        "1/4",
+        "0",
+        "1/20",
+        "1/100"
+      ],
+      "far": [
+        "3/20",
+        "-1/50",
+        "1/20",
+        "1/100"
+      ]
+    },
+    {
+      "name": "rates_shock",
+      "near": [
+        "3/100",
+        "3/20",
+        "2/25",
+        "1/100"
+      ],
+      "far": [
+        "1/20",
+        "1/4",
+        "1/10",
+        "1/100"
+      ]
+    },
+    {
+      "name": "credit_shock",
+      "near": [
+        "2/25",
+        "3/50",
+        "7/20",
+        "1/50"
+      ],
+      "far": [
+        "3/25",
+        "2/25",
+        "1/2",
+        "3/100"
+      ]
+    },
+    {
+      "name": "liquidity_freeze",
+      "near": [
+        "2/25",
+        "1/25",
+        "9/50",
+        "1/20"
+      ],
+      "far": [
+        "1/20",
+        "1/50",
+        "1/10",
+        "1/50"
+      ]
+    },
+    {
+      "name": "joint_stress",
+      "near": [
+        "3/10",
+        "9/50",
+        "3/10",
+        "3/100"
+      ],
+      "far": [
+        "7/20",
+        "1/5",
+        "2/5",
+        "1/25"
+      ]
+    },
+    {
+      "name": "risk_on",
+      "near": [
+        "-1/10",
+        "2/25",
+        "-1/50",
+        "0"
+      ],
+      "far": [
+        "-3/20",
+        "1/10",
+        "-1/25",
+        "0"
+      ]
+    },
+    {
+      "name": "rates_rally",
+      "near": [
+        "1/20",
+        "-3/20",
+        "1/50",
+        "0"
+      ],
+      "far": [
+        "1/25",
+        "-1/5",
+        "1/100",
+        "0"
+      ]
+    }
+  ],
+  "probability_models": [
+    {
+      "name": "calm_weighted",
+      "probabilities": [
+        "3/5",
+        "3/50",
+        "3/50",
+        "3/50",
+        "1/25",
+        "1/50",
+        "2/25",
+        "2/25"
+      ]
+    },
+    {
+      "name": "credit_weighted",
+      "probabilities": [
+        "1/4",
+        "1/25",
+        "2/25",
+        "1/4",
+        "4/25",
+        "1/10",
+        "3/50",
+        "3/50"
+      ]
+    },
+    {
+      "name": "rates_weighted",
+      "probabilities": [
+        "1/4",
+        "3/50",
+        "3/10",
+        "1/10",
+        "1/10",
+        "1/10",
+        "1/25",
+        "1/20"
+      ]
+    }
+  ],
+  "ambiguity_set": "convex hull of the three specified distributions; independently maximized at each horizon",
+  "horizon_aggregation": "maximum of the two horizon-specific convex-mixture CVaRs; not a dynamically consistent risk process",
+  "primary": {
+    "epsilon": "2",
+    "risk_limit": "25"
+  },
+  "controls": [
+    {
+      "epsilon": "0",
+      "risk_limit": "25"
+    },
+    {
+      "epsilon": "6",
+      "risk_limit": "25"
+    },
+    {
+      "epsilon": "2",
+      "risk_limit": "15"
+    }
+  ],
+  "policies": [
+    "minimax",
+    "fixed",
+    "reverse",
+    "hypothesis_entropy",
+    "strict_minimax",
+    "strict_ec2",
+    "full_book"
+  ],
+  "forecast_queries": false,
+  "record_snapshot_completed_at": 100,
+  "max_planner_states": 100000,
+  "data_origin": "All values are constructed rational inputs. No historical market fitting, external economic calibration, asset recommendation, backtest or live execution.",
+  "secondary_adapter": "16-row industrial inspection table; same decision engine, no finance-specific query logic",
+  "verification": "Exact rational risk certificates, independent transcript replay, terminal action intersections, wrong-contract/timestamp/tamper tests and full-book reference."
+}

@@ -1,0 +1,28 @@
+   Compiling digest v0.11.3
+   Compiling sha2 v0.11.0
+   Compiling pse-types v0.1.0 (C:\Users\stobe\Downloads\kosmocrates-main (1)\kosmocrates-main\_pse_forensics\original\crates\pse-types)
+   Compiling pse-graph v0.1.0 (C:\Users\stobe\Downloads\kosmocrates-main (1)\kosmocrates-main\_pse_forensics\original\crates\pse-graph)
+   Compiling pse-topology v0.1.0 (C:\Users\stobe\Downloads\kosmocrates-main (1)\kosmocrates-main\_pse_forensics\original\crates\pse-topology)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 6.94s
+     Running tests\deterministic_budget.rs (_pse_forensics\original\target\debug\deps\deterministic_budget-72937837c5427670.exe)
+
+running 1 test
+test wall_clock_budget_cannot_change_a_topological_result ... FAILED
+
+failures:
+
+---- wall_clock_budget_cannot_change_a_topological_result stdout ----
+
+thread 'wall_clock_budget_cannot_change_a_topological_result' (13788) panicked at crates\pse-topology\tests\deterministic_budget.rs:12:5:
+assertion `left == right` failed
+  left: 0
+ right: 4613937818241073152
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    wall_clock_budget_cannot_change_a_topological_result
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `-p pse-topology --test deterministic_budget`

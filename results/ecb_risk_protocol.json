@@ -1,0 +1,68 @@
+{
+  "schema": "gabriel.ecb-risk.protocol.v1",
+  "fixed_before_first_forecast_execution": "2026-09-26",
+  "source": "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist.zip",
+  "source_download_date": "2026-09-26",
+  "source_csv_sha256": "e8136f072d575cb891cb58718fe31602ca2d4feccee67f035106393ed1c4bdbb",
+  "currencies": [
+    "USD",
+    "GBP",
+    "JPY",
+    "CHF"
+  ],
+  "horizons_observed_intervals": [
+    1,
+    5
+  ],
+  "units": "100 times log of FX-per-EUR rate ratio; positive denotes log loss for foreign currency in EUR valuation; not executable P&L",
+  "alpha": "39/40",
+  "window": 250,
+  "variance_initial_observations": 60,
+  "variance_halflives_observed_intervals": [
+    20,
+    120
+  ],
+  "fast_weights": [
+    "0",
+    "1/4",
+    "1/2",
+    "3/4",
+    "1"
+  ],
+  "primary_weight": "1/2",
+  "development": [
+    "2010-01-01",
+    "2019-12-31"
+  ],
+  "test": [
+    "2020-01-01",
+    "2025-12-31"
+  ],
+  "endpoint_rule": "decision and target endpoint must both lie in the same declared period",
+  "models": [
+    "raw_hs",
+    "fast_fhs",
+    "slow_fhs",
+    "multiscale_fhs",
+    "selected_fhs"
+  ],
+  "selection": "lowest development mean upper-loss FZ0 per currency/horizon among five weights; ordered-grid tie rule; no test refitting or new hyperparameters",
+  "variance_update": "q_t=lambda*q_(t-1)+(1-lambda)*L_(t-1,t)^2; lambda=2^(-1/halflife); q_60=mean first60 squared one-interval losses",
+  "historical_scenarios": "h-interval log losses ending j in t-window+1..t, all endpoint<=t; standardized by sqrt(h*q_(j-h)); multiply by sqrt(h*q_t)",
+  "tail_formula": "q=sorted[ceil(alpha*N)-1]; ES=q+mean(max(scenario-q,0))/(1-alpha), including fractional boundary mass",
+  "score": "S(q,e,y)=log(e)+(q+max(y-q,0)/(1-alpha))/e-1; requires e>0 and q<=e; invalid forecasts raise, no clamping",
+  "metrics": [
+    "mean_fz0",
+    "VaR_exceedance_count",
+    "VaR_exceedance_fraction",
+    "mean_ES_identification_residual",
+    "yearly_same_metrics"
+  ],
+  "uncertainty": "descriptive paired held-out summaries; no iid confidence intervals or population significance claims",
+  "arithmetic": "binary64 forecast study; no interval/arithmetic certificate for logarithms or volatility estimates",
+  "data_vintage": "latest revised download, no historical release vintages; chronological prefix evaluation conditional on this snapshot; not an as-was-known real-time backtest",
+  "causality_checks": "future perturbation and suffix truncation must leave forecasts and state unchanged; period-crossing target labels excluded from selection/evaluation",
+  "seed_for_verification_only": 20260926,
+  "no_trading": true,
+  "no_test_selected_model": true
+}

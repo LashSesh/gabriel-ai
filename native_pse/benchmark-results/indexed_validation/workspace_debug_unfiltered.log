@@ -1,0 +1,95 @@
+   Compiling proc-macro2 v1.0.106
+   Compiling quote v1.0.45
+   Compiling unicode-ident v1.0.24
+   Compiling autocfg v1.5.0
+   Compiling syn v2.0.117
+   Compiling num-traits v0.2.19
+   Compiling typenum v1.20.0
+   Compiling serde_core v1.0.228
+   Compiling hybrid-array v0.4.11
+   Compiling serde v1.0.228
+   Compiling zmij v1.0.21
+   Compiling serde_derive v1.0.228
+   Compiling serde_json v1.0.150
+   Compiling block-buffer v0.12.0
+   Compiling crypto-common v0.2.1
+   Compiling memchr v2.8.0
+   Compiling itoa v1.0.18
+   Compiling const-oid v0.10.2
+   Compiling digest v0.11.3
+   Compiling cpufeatures v0.3.0
+   Compiling cfg-if v1.0.4
+   Compiling ryu-js v0.2.2
+   Compiling serde_jcs v0.2.0
+   Compiling sha2 v0.11.0
+   Compiling ordered-float v5.3.0
+   Compiling thiserror v2.0.18
+   Compiling pse-types v0.1.0 (/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/crates/pse-types)
+   Compiling thiserror-impl v2.0.18
+   Compiling bytemuck v1.25.0
+   Compiling safe_arch v1.0.0
+   Compiling matrixmultiply v0.3.10
+   Compiling wide v1.5.0
+   Compiling num-complex v0.4.6
+   Compiling approx v0.5.1
+   Compiling num-integer v0.1.46
+   Compiling rawpointer v0.2.1
+   Compiling num-rational v0.4.2
+   Compiling simba v0.10.0
+   Compiling nalgebra-macros v0.3.0
+   Compiling foldhash v0.1.5
+   Compiling equivalent v1.0.2
+   Compiling hashbrown v0.17.0
+   Compiling indexmap v2.14.0
+   Compiling hashbrown v0.15.5
+   Compiling nalgebra v0.35.0
+   Compiling fixedbitset v0.5.7
+   Compiling petgraph v0.8.3
+   Compiling pse-graph v0.1.0 (/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/crates/pse-graph)
+   Compiling crossbeam-utils v0.8.21
+   Compiling once_cell v1.21.4
+   Compiling tracing-core v0.1.36
+   Compiling tracing-attributes v0.1.31
+   Compiling pin-project-lite v0.2.17
+   Compiling tracing v0.1.44
+   Compiling crossbeam-epoch v0.9.18
+   Compiling rayon-core v1.13.0
+   Compiling crossbeam-deque v0.8.6
+   Compiling either v1.15.0
+   Compiling rayon v1.12.0
+   Compiling pse-metatron v0.1.0 (/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/crates/pse-metatron)
+   Compiling pse-topology v0.1.0 (/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/crates/pse-topology)
+   Compiling pse-scale v0.1.0 (/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/crates/pse-scale)
+   Compiling pse-memory v0.1.0 (/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/crates/pse-memory)
+   Compiling pse-constraint v0.1.0 (/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/crates/pse-constraint)
+   Compiling pse-evidence v0.1.0 (/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/crates/pse-evidence)
+   Compiling pse-navigator v0.1.0 (/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/crates/pse-navigator)
+   Compiling pse-cascade v0.1.0 (/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/crates/pse-cascade)
+   Compiling pse-extract v0.1.0 (/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/crates/pse-extract)
+   Compiling pse-core v0.1.0 (/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/crates/pse-core)
+   Compiling pse v0.1.0 (/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse)
+error: linking with `cc` failed: exit status: 1
+  |
+  = note:  "cc" "-m64" "<84 object files omitted>" "-Wl,--as-needed" "-Wl,-Bstatic" "<sysroot>/lib/rustlib/x86_64-unknown-linux-gnu/lib/libcompiler_builtins-*.rlib" "-Wl,-Bdynamic" "-lgcc_s" "-lutil" "-lrt" "-lpthread" "-lm" "-ldl" "-lc" "-L" "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/validation_debug/release/deps/rustcIb1Bj5/raw-dylibs" "-B<sysroot>/lib/rustlib/x86_64-unknown-linux-gnu/bin/gcc-ld" "-fuse-ld=lld" "-Wl,--eh-frame-hdr" "-Wl,-z,noexecstack" "-L" "<sysroot>/lib/rustlib/x86_64-unknown-linux-gnu/lib" "-o" "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/validation_debug/release/deps/engine-267e464f348f3bd5" "-Wl,--gc-sections" "-pie" "-Wl,-z,relro,-z,now" "-Wl,-O1" "-nodefaultlibs"
+  = note: some arguments are omitted. use `--verbose` to show all linker arguments
+  = note: rust-lld: error: undefined symbol: pse_core::GlobalState::new::h8fcae3dcd90a4b1b
+          >>> referenced by lib.rs:76 (src/lib.rs:76)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/validation_debug/release/deps/engine-267e464f348f3bd5.engine.7bf85e87bd1e35be-cgu.0.rcgu.o:(core::ops::function::FnOnce::call_once::h73bad8f818085a98)
+          >>> referenced by lib.rs:149 (src/lib.rs:149)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/validation_debug/release/deps/engine-267e464f348f3bd5.engine.7bf85e87bd1e35be-cgu.0.rcgu.o:(core::ops::function::FnOnce::call_once::h73bad8f818085a98)
+          >>> referenced by lib.rs:149 (src/lib.rs:149)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/validation_debug/release/deps/engine-267e464f348f3bd5.engine.7bf85e87bd1e35be-cgu.0.rcgu.o:(core::ops::function::FnOnce::call_once::h9d3c8f1b3e261d2a)
+          >>> referenced 3 more times
+          
+          rust-lld: error: undefined symbol: pse_core::macro_step::h5906cdc09317972b
+          >>> referenced by lib.rs:91 (src/lib.rs:91)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/validation_debug/release/deps/engine-267e464f348f3bd5.engine.7bf85e87bd1e35be-cgu.0.rcgu.o:(core::ops::function::FnOnce::call_once::h73bad8f818085a98)
+          >>> referenced by lib.rs:91 (src/lib.rs:91)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/validation_debug/release/deps/engine-267e464f348f3bd5.engine.7bf85e87bd1e35be-cgu.0.rcgu.o:(core::ops::function::FnOnce::call_once::h73bad8f818085a98)
+          >>> referenced by lib.rs:91 (src/lib.rs:91)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/validation_debug/release/deps/engine-267e464f348f3bd5.engine.7bf85e87bd1e35be-cgu.0.rcgu.o:(core::ops::function::FnOnce::call_once::h9d3c8f1b3e261d2a)
+          >>> referenced 2 more times
+          collect2: error: ld returned 1 exit status
+          
+
+error: could not compile `pse` (test "engine") due to 1 previous error

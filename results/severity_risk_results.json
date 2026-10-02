@@ -1,0 +1,2846 @@
+{
+  "schema": "gabriel.severity-risk.market.v1",
+  "protocol_sha256": "bf2b7ff636eebede7ad1e168689d836a653ddde0077314f3916fbc8691c7cc91",
+  "parent_predictions_sha256": "aa363906bc796f529f1542c81f8888c1831cddd744a1763727160c1492d8fd32",
+  "design_history": "All financial evaluation periods were inspected in earlier phases; all new financial comparisons are retrospective. No untouched market test remains in this snapshot.",
+  "contracts": [
+    {
+      "currency": "USD",
+      "horizon": 1,
+      "static_raw_ratios": {
+        "fast_base": 1.4184476331479108,
+        "primary_frequency_eta_1/20_horizon_lanes": 1.328148733030502
+      },
+      "static_ratios": {
+        "fast_base": 1.4184476331479108,
+        "primary_frequency_eta_1/20_horizon_lanes": 1.328148733030502
+      },
+      "static_fit_count": 2558,
+      "static_available_from_origin_index": 5374,
+      "static_available_from_date": "2019-12-31",
+      "periods": {
+        "development": {
+          "n": 2558,
+          "first_origin": "2010-01-04",
+          "last_origin": "2019-12-30",
+          "last_target": "2019-12-31"
+        },
+        "retrospective_2020_2025": {
+          "n": 1537,
+          "first_origin": "2020-01-02",
+          "last_origin": "2025-12-30",
+          "last_target": "2025-12-31"
+        },
+        "retrospective_2026": {
+          "n": 187,
+          "first_origin": "2026-01-02",
+          "last_origin": "2026-09-24",
+          "last_target": "2026-09-25"
+        }
+      },
+      "models": {
+        "fast_base": {
+          "development": {
+            "n": 2558,
+            "mean_fz0": 0.3068611196796002,
+            "exceedances": 81,
+            "exceedance_fraction": 0.031665363565285376,
+            "mean_es_identification_residual": 0.04668118525479165,
+            "mean_var": 0.98232428745281,
+            "mean_es": 1.3170741178163887,
+            "mean_normalized_es_residual": 0.07922177166907474,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1537,
+            "mean_fz0": 0.264611446053354,
+            "exceedances": 39,
+            "exceedance_fraction": 0.025374105400130124,
+            "mean_es_identification_residual": 0.01442627282433624,
+            "mean_var": 0.936262632509065,
+            "mean_es": 1.3067131564433256,
+            "mean_normalized_es_residual": 0.06589562165750319,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 187,
+            "mean_fz0": -0.003828830672697113,
+            "exceedances": 6,
+            "exceedance_fraction": 0.03208556149732621,
+            "mean_es_identification_residual": -0.022068628103375804,
+            "mean_var": 0.8085521689971517,
+            "mean_es": 1.0212277117826807,
+            "mean_normalized_es_residual": -0.009963961418115369,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "frequency_only": {
+          "development": {
+            "n": 2558,
+            "mean_fz0": 0.3106815528894121,
+            "exceedances": 69,
+            "exceedance_fraction": 0.02697419859265051,
+            "mean_es_identification_residual": -0.04690682384730494,
+            "mean_var": 1.0628998623177757,
+            "mean_es": 1.4242698314390418,
+            "mean_normalized_es_residual": -0.01107712844833413,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1537,
+            "mean_fz0": 0.2871865998496807,
+            "exceedances": 35,
+            "exceedance_fraction": 0.02277163305139883,
+            "mean_es_identification_residual": -0.07890638791960171,
+            "mean_var": 1.0343598742597722,
+            "mean_es": 1.4433225317831744,
+            "mean_normalized_es_residual": -0.015523786219448202,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 187,
+            "mean_fz0": 0.0219475450367355,
+            "exceedances": 5,
+            "exceedance_fraction": 0.026737967914438502,
+            "mean_es_identification_residual": -0.10932909557145387,
+            "mean_var": 0.8960377341565673,
+            "mean_es": 1.130375810371523,
+            "mean_normalized_es_residual": -0.10369467517848609,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "severity_125": {
+          "development": {
+            "n": 2558,
+            "mean_fz0": 0.304495167336109,
+            "exceedances": 81,
+            "exceedance_fraction": 0.031665363565285376,
+            "mean_es_identification_residual": -0.023999872135346576,
+            "mean_var": 0.98232428745281,
+            "mean_es": 1.3877551752065271,
+            "mean_normalized_es_residual": 0.018132463442702557,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1537,
+            "mean_fz0": 0.2723657895436418,
+            "exceedances": 39,
+            "exceedance_fraction": 0.025374105400130124,
+            "mean_es_identification_residual": -0.060022741472355604,
+            "mean_var": 0.936262632509065,
+            "mean_es": 1.3811621707400175,
+            "mean_normalized_es_residual": 0.007820932808412295,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 187,
+            "mean_fz0": 0.007598211363694821,
+            "exceedances": 6,
+            "exceedance_fraction": 0.03208556149732621,
+            "mean_es_identification_residual": -0.1584845019921718,
+            "mean_var": 0.8085521689971517,
+            "mean_es": 1.1576435856714768,
+            "mean_normalized_es_residual": -0.17307984553530573,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "joint_125": {
+          "development": {
+            "n": 2558,
+            "mean_fz0": 0.3101187093556393,
+            "exceedances": 69,
+            "exceedance_fraction": 0.02697419859265051,
+            "mean_es_identification_residual": -0.047557127351422056,
+            "mean_var": 1.0628998623177757,
+            "mean_es": 1.424920134943159,
+            "mean_normalized_es_residual": 0.003074219875675555,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1537,
+            "mean_fz0": 0.29289220084554896,
+            "exceedances": 35,
+            "exceedance_fraction": 0.02277163305139883,
+            "mean_es_identification_residual": -0.044425677878088675,
+            "mean_var": 1.0343598742597722,
+            "mean_es": 1.4088418217416614,
+            "mean_normalized_es_residual": 0.02779369673283621,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 187,
+            "mean_fz0": 0.03137062502014349,
+            "exceedances": 5,
+            "exceedance_fraction": 0.026737967914438502,
+            "mean_es_identification_residual": -0.19698643994425205,
+            "mean_var": 0.8960377341565673,
+            "mean_es": 1.218033154744321,
+            "mean_normalized_es_residual": -0.1947461219680714,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "severity_500": {
+          "development": {
+            "n": 2558,
+            "mean_fz0": 0.2993317991213183,
+            "exceedances": 81,
+            "exceedance_fraction": 0.031665363565285376,
+            "mean_es_identification_residual": 0.007028112404255309,
+            "mean_var": 0.98232428745281,
+            "mean_es": 1.3567271906669252,
+            "mean_normalized_es_residual": 0.039545169622411336,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1537,
+            "mean_fz0": 0.2644224728754468,
+            "exceedances": 39,
+            "exceedance_fraction": 0.025374105400130124,
+            "mean_es_identification_residual": -0.0004160490036109468,
+            "mean_var": 0.936262632509065,
+            "mean_es": 1.3215554782712728,
+            "mean_normalized_es_residual": 0.05477119771416386,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 187,
+            "mean_fz0": 0.0124165210815141,
+            "exceedances": 6,
+            "exceedance_fraction": 0.03208556149732621,
+            "mean_es_identification_residual": -0.20016168608433785,
+            "mean_var": 0.8085521689971517,
+            "mean_es": 1.199320769763643,
+            "mean_normalized_es_residual": -0.22937812237475874,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "joint_500": {
+          "development": {
+            "n": 2558,
+            "mean_fz0": 0.3059497495852521,
+            "exceedances": 69,
+            "exceedance_fraction": 0.02697419859265051,
+            "mean_es_identification_residual": -0.030299511600843702,
+            "mean_var": 1.0628998623177757,
+            "mean_es": 1.4076625191925807,
+            "mean_normalized_es_residual": 0.009215881121140662,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1537,
+            "mean_fz0": 0.2876837894190905,
+            "exceedances": 35,
+            "exceedance_fraction": 0.02277163305139883,
+            "mean_es_identification_residual": 0.02012331049996363,
+            "mean_var": 1.0343598742597722,
+            "mean_es": 1.344292833363609,
+            "mean_normalized_es_residual": 0.08184633190360678,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 187,
+            "mean_fz0": 0.03770900241538977,
+            "exceedances": 5,
+            "exceedance_fraction": 0.026737967914438502,
+            "mean_es_identification_residual": -0.24092656121196643,
+            "mean_var": 0.8960377341565673,
+            "mean_es": 1.2619732760120352,
+            "mean_normalized_es_residual": -0.24823233698343486,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "static_severity": {
+          "development": {
+            "n": 2558,
+            "mean_fz0": 0.2946111813323181,
+            "exceedances": 81,
+            "exceedance_fraction": 0.031665363565285376,
+            "mean_es_identification_residual": -0.029620257449965774,
+            "mean_var": 0.98232428745281,
+            "mean_es": 1.3933755605211462,
+            "mean_normalized_es_residual": 7.22209191937553e-17,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1537,
+            "mean_fz0": 0.2605907834443118,
+            "exceedances": 39,
+            "exceedance_fraction": 0.025374105400130124,
+            "mean_es_identification_residual": -0.0069000858196535475,
+            "mean_var": 0.936262632509065,
+            "mean_es": 1.3280395150873154,
+            "mean_normalized_es_residual": 0.043065088652879085,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 187,
+            "mean_fz0": 0.006737519673723805,
+            "exceedances": 6,
+            "exceedance_fraction": 0.03208556149732621,
+            "mean_es_identification_residual": -0.14772982671131418,
+            "mean_var": 0.8085521689971517,
+            "mean_es": 1.146888910390619,
+            "mean_normalized_es_residual": -0.1667722246573159,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "static_joint": {
+          "development": {
+            "n": 2558,
+            "mean_fz0": 0.3030176104525921,
+            "exceedances": 69,
+            "exceedance_fraction": 0.02697419859265051,
+            "mean_es_identification_residual": -0.03432609788391184,
+            "mean_var": 1.0628998623177757,
+            "mean_es": 1.4116891054756489,
+            "mean_normalized_es_residual": -1.3888638306491402e-17,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1537,
+            "mean_fz0": 0.28557316199930477,
+            "exceedances": 35,
+            "exceedance_fraction": 0.02277163305139883,
+            "mean_es_identification_residual": -0.009367612632132963,
+            "mean_var": 1.0343598742597722,
+            "mean_es": 1.3737837564957056,
+            "mean_normalized_es_residual": 0.0519445808933364,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 187,
+            "mean_fz0": 0.029366885249342785,
+            "exceedances": 5,
+            "exceedance_fraction": 0.026737967914438502,
+            "mean_es_identification_residual": -0.16902466656749787,
+            "mean_var": 0.8960377341565673,
+            "mean_es": 1.1900713813675667,
+            "mean_normalized_es_residual": -0.1702040383002779,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        }
+      },
+      "all_history_cap_count": {
+        "fast_base": 0,
+        "frequency_only": 0,
+        "severity_125": 0,
+        "joint_125": 0,
+        "severity_500": 0,
+        "joint_500": 0,
+        "static_severity": 0,
+        "static_joint": 0
+      }
+    },
+    {
+      "currency": "USD",
+      "horizon": 5,
+      "static_raw_ratios": {
+        "fast_base": 1.3435736898606976,
+        "primary_frequency_eta_1/20_horizon_lanes": 1.2688514912163393
+      },
+      "static_ratios": {
+        "fast_base": 1.3435736898606976,
+        "primary_frequency_eta_1/20_horizon_lanes": 1.2688514912163393
+      },
+      "static_fit_count": 2554,
+      "static_available_from_origin_index": 5374,
+      "static_available_from_date": "2019-12-31",
+      "periods": {
+        "development": {
+          "n": 2554,
+          "first_origin": "2010-01-04",
+          "last_origin": "2019-12-20",
+          "last_target": "2019-12-31"
+        },
+        "retrospective_2020_2025": {
+          "n": 1533,
+          "first_origin": "2020-01-02",
+          "last_origin": "2025-12-22",
+          "last_target": "2025-12-31"
+        },
+        "retrospective_2026": {
+          "n": 183,
+          "first_origin": "2026-01-02",
+          "last_origin": "2026-09-18",
+          "last_target": "2026-09-25"
+        }
+      },
+      "models": {
+        "fast_base": {
+          "development": {
+            "n": 2554,
+            "mean_fz0": 1.0293979473480568,
+            "exceedances": 84,
+            "exceedance_fraction": 0.03288958496476116,
+            "mean_es_identification_residual": 0.33060311185219826,
+            "mean_var": 2.190793869805815,
+            "mean_es": 2.5061401071144593,
+            "mean_normalized_es_residual": 0.19482826182629004,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1533,
+            "mean_fz0": 1.1769258432979885,
+            "exceedances": 47,
+            "exceedance_fraction": 0.03065883887801696,
+            "mean_es_identification_residual": 0.27367590477926684,
+            "mean_var": 2.11217282021094,
+            "mean_es": 2.7396690214202035,
+            "mean_normalized_es_residual": 0.2972450715085137,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 183,
+            "mean_fz0": 0.7378558973840912,
+            "exceedances": 7,
+            "exceedance_fraction": 0.03825136612021858,
+            "mean_es_identification_residual": -0.02914418904046762,
+            "mean_var": 1.7801284318972221,
+            "mean_es": 2.1322161523877865,
+            "mean_normalized_es_residual": 0.004003566340509899,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "frequency_only": {
+          "development": {
+            "n": 2554,
+            "mean_fz0": 1.0386844281935181,
+            "exceedances": 70,
+            "exceedance_fraction": 0.0274079874706343,
+            "mean_es_identification_residual": 0.16965334859286857,
+            "mean_var": 2.37507498772053,
+            "mean_es": 2.7158715580058814,
+            "mean_normalized_es_residual": 0.1201060631819319,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1533,
+            "mean_fz0": 1.1717307997190078,
+            "exceedances": 41,
+            "exceedance_fraction": 0.02674494455316373,
+            "mean_es_identification_residual": 0.04480136736233824,
+            "mean_var": 2.335606065989472,
+            "mean_es": 3.031378176266323,
+            "mean_normalized_es_residual": 0.1741507138838829,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 183,
+            "mean_fz0": 0.7829740778836974,
+            "exceedances": 3,
+            "exceedance_fraction": 0.01639344262295082,
+            "mean_es_identification_residual": -0.18505398463047606,
+            "mean_var": 1.9858763911760728,
+            "mean_es": 2.3782279236228976,
+            "mean_normalized_es_residual": -0.07365470085587052,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "severity_125": {
+          "development": {
+            "n": 2554,
+            "mean_fz0": 1.0437552087693758,
+            "exceedances": 84,
+            "exceedance_fraction": 0.03288958496476116,
+            "mean_es_identification_residual": -0.18045699958465788,
+            "mean_var": 2.190793869805815,
+            "mean_es": 3.0172002185513156,
+            "mean_normalized_es_residual": 0.00877512209738066,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1533,
+            "mean_fz0": 1.210502286806663,
+            "exceedances": 47,
+            "exceedance_fraction": 0.03065883887801696,
+            "mean_es_identification_residual": -0.5351126313432413,
+            "mean_var": 2.11217282021094,
+            "mean_es": 3.548457557542711,
+            "mean_normalized_es_residual": 0.02015342286682382,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 183,
+            "mean_fz0": 0.7594725989611414,
+            "exceedances": 7,
+            "exceedance_fraction": 0.03825136612021858,
+            "mean_es_identification_residual": -0.40158108756445066,
+            "mean_var": 1.7801284318972221,
+            "mean_es": 2.5046530509117697,
+            "mean_normalized_es_residual": -0.189760941619491,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "joint_125": {
+          "development": {
+            "n": 2554,
+            "mean_fz0": 1.0583440822370789,
+            "exceedances": 70,
+            "exceedance_fraction": 0.0274079874706343,
+            "mean_es_identification_residual": -0.2127991951990986,
+            "mean_var": 2.37507498772053,
+            "mean_es": 3.0983241017978487,
+            "mean_normalized_es_residual": 0.005738189149736824,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1533,
+            "mean_fz0": 1.2071535916748735,
+            "exceedances": 41,
+            "exceedance_fraction": 0.02674494455316373,
+            "mean_es_identification_residual": -0.5452221206379353,
+            "mean_var": 2.335606065989472,
+            "mean_es": 3.6214016642665965,
+            "mean_normalized_es_residual": 0.01383882245966511,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 183,
+            "mean_fz0": 0.7960366472848882,
+            "exceedances": 3,
+            "exceedance_fraction": 0.01639344262295082,
+            "mean_es_identification_residual": -0.3711903100916115,
+            "mean_var": 1.9858763911760728,
+            "mean_es": 2.5643642490840333,
+            "mean_normalized_es_residual": -0.15416956828213674,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "severity_500": {
+          "development": {
+            "n": 2554,
+            "mean_fz0": 1.03288486133218,
+            "exceedances": 84,
+            "exceedance_fraction": 0.03288958496476116,
+            "mean_es_identification_residual": -0.09098480252600219,
+            "mean_var": 2.190793869805815,
+            "mean_es": 2.9277280214926593,
+            "mean_normalized_es_residual": 0.021240590415535582,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1533,
+            "mean_fz0": 1.1695836857650772,
+            "exceedances": 47,
+            "exceedance_fraction": 0.03065883887801696,
+            "mean_es_identification_residual": -0.23019419145800374,
+            "mean_var": 2.11217282021094,
+            "mean_es": 3.2435391176574737,
+            "mean_normalized_es_residual": 0.07495264534947733,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 183,
+            "mean_fz0": 0.7673519701058611,
+            "exceedances": 7,
+            "exceedance_fraction": 0.03825136612021858,
+            "mean_es_identification_residual": -0.5185045189970157,
+            "mean_var": 1.7801284318972221,
+            "mean_es": 2.621576482344335,
+            "mean_normalized_es_residual": -0.26431859369132954,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "joint_500": {
+          "development": {
+            "n": 2554,
+            "mean_fz0": 1.0487798874602847,
+            "exceedances": 70,
+            "exceedance_fraction": 0.0274079874706343,
+            "mean_es_identification_residual": -0.14901948163036524,
+            "mean_var": 2.37507498772053,
+            "mean_es": 3.034544388229115,
+            "mean_normalized_es_residual": 0.007500086893282565,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1533,
+            "mean_fz0": 1.1732332396946423,
+            "exceedances": 41,
+            "exceedance_fraction": 0.02674494455316373,
+            "mean_es_identification_residual": -0.258305267433823,
+            "mean_var": 2.335606065989472,
+            "mean_es": 3.334484811062484,
+            "mean_normalized_es_residual": 0.05634865874906861,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 183,
+            "mean_fz0": 0.803763334150017,
+            "exceedances": 3,
+            "exceedance_fraction": 0.01639344262295082,
+            "mean_es_identification_residual": -0.49526460669790806,
+            "mean_var": 1.9858763911760728,
+            "mean_es": 2.688438545690329,
+            "mean_normalized_es_residual": -0.22370727342609137,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "static_severity": {
+          "development": {
+            "n": 2554,
+            "mean_fz0": 1.0251628458543467,
+            "exceedances": 84,
+            "exceedance_fraction": 0.03288958496476116,
+            "mean_es_identification_residual": -0.10674978441253784,
+            "mean_var": 2.190793869805815,
+            "mean_es": 2.9434930033791953,
+            "mean_normalized_es_residual": 6.676987336821616e-17,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1533,
+            "mean_fz0": 1.1494721617559773,
+            "exceedances": 47,
+            "exceedance_fraction": 0.03065883887801696,
+            "mean_es_identification_residual": 0.1754850965251808,
+            "mean_var": 2.11217282021094,
+            "mean_es": 2.8378598296742896,
+            "mean_normalized_es_residual": 0.23778981025405904,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 183,
+            "mean_fz0": 0.7552049585451249,
+            "exceedances": 7,
+            "exceedance_fraction": 0.03825136612021858,
+            "mean_es_identification_residual": -0.2886617623227691,
+            "mean_var": 1.7801284318972221,
+            "mean_es": 2.3917337256700884,
+            "mean_normalized_es_residual": -0.13911715021466484,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "static_joint": {
+          "development": {
+            "n": 2554,
+            "mean_fz0": 1.0417497553451314,
+            "exceedances": 70,
+            "exceedance_fraction": 0.0274079874706343,
+            "mean_es_identification_residual": -0.12809253332107348,
+            "mean_var": 2.37507498772053,
+            "mean_es": 3.0136174399198232,
+            "mean_normalized_es_residual": 2.1143793233268447e-16,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1533,
+            "mean_fz0": 1.1556591186473144,
+            "exceedances": 41,
+            "exceedance_fraction": 0.02674494455316373,
+            "mean_es_identification_residual": 0.11264230390399183,
+            "mean_var": 2.335606065989472,
+            "mean_es": 2.9635372397246695,
+            "mean_normalized_es_residual": 0.18941765127378649,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 183,
+            "mean_fz0": 0.7957132809344002,
+            "exceedances": 3,
+            "exceedance_fraction": 0.01639344262295082,
+            "mean_es_identification_residual": -0.32660828132266084,
+            "mean_var": 1.9858763911760728,
+            "mean_es": 2.519782220315082,
+            "mean_normalized_es_residual": -0.14205321876668703,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        }
+      },
+      "all_history_cap_count": {
+        "fast_base": 0,
+        "frequency_only": 0,
+        "severity_125": 0,
+        "joint_125": 0,
+        "severity_500": 0,
+        "joint_500": 0,
+        "static_severity": 0,
+        "static_joint": 0
+      }
+    },
+    {
+      "currency": "GBP",
+      "horizon": 1,
+      "static_raw_ratios": {
+        "fast_base": 1.3720465457411313,
+        "primary_frequency_eta_1/20_horizon_lanes": 1.3214459406969936
+      },
+      "static_ratios": {
+        "fast_base": 1.3720465457411313,
+        "primary_frequency_eta_1/20_horizon_lanes": 1.3214459406969936
+      },
+      "static_fit_count": 2558,
+      "static_available_from_origin_index": 5374,
+      "static_available_from_date": "2019-12-31",
+      "periods": {
+        "development": {
+          "n": 2558,
+          "first_origin": "2010-01-04",
+          "last_origin": "2019-12-30",
+          "last_target": "2019-12-31"
+        },
+        "retrospective_2020_2025": {
+          "n": 1537,
+          "first_origin": "2020-01-02",
+          "last_origin": "2025-12-30",
+          "last_target": "2025-12-31"
+        },
+        "retrospective_2026": {
+          "n": 187,
+          "first_origin": "2026-01-02",
+          "last_origin": "2026-09-24",
+          "last_target": "2026-09-25"
+        }
+      },
+      "models": {
+        "fast_base": {
+          "development": {
+            "n": 2558,
+            "mean_fz0": 0.2640234710098391,
+            "exceedances": 76,
+            "exceedance_fraction": 0.029710711493354185,
+            "mean_es_identification_residual": 0.05670202920677396,
+            "mean_var": 1.0011310201149746,
+            "mean_es": 1.293488044417948,
+            "mean_normalized_es_residual": 0.08542856684645919,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1537,
+            "mean_fz0": 0.08524123472155463,
+            "exceedances": 43,
+            "exceedance_fraction": 0.02797657774886142,
+            "mean_es_identification_residual": -0.025784842799851215,
+            "mean_var": 0.8432962989524463,
+            "mean_es": 1.1151919279963722,
+            "mean_normalized_es_residual": 0.06223709094530769,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 187,
+            "mean_fz0": -0.6497551114655347,
+            "exceedances": 5,
+            "exceedance_fraction": 0.026737967914438502,
+            "mean_es_identification_residual": 0.014609760132732172,
+            "mean_var": 0.4157064589411559,
+            "mean_es": 0.5365813047968939,
+            "mean_normalized_es_residual": -0.001188770213524047,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "frequency_only": {
+          "development": {
+            "n": 2558,
+            "mean_fz0": 0.2743094801317573,
+            "exceedances": 68,
+            "exceedance_fraction": 0.026583268178264268,
+            "mean_es_identification_residual": -0.01664663161574195,
+            "mean_var": 1.0694693191384808,
+            "mean_es": 1.3824330232557396,
+            "mean_normalized_es_residual": 0.03482796180232152,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1537,
+            "mean_fz0": 0.09461192956748671,
+            "exceedances": 35,
+            "exceedance_fraction": 0.02277163305139883,
+            "mean_es_identification_residual": -0.08712438682133594,
+            "mean_var": 0.8940147427697778,
+            "mean_es": 1.1880912181220695,
+            "mean_normalized_es_residual": 0.0066060366721508645,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 187,
+            "mean_fz0": -0.6212600250271108,
+            "exceedances": 5,
+            "exceedance_fraction": 0.026737967914438502,
+            "mean_es_identification_residual": 0.034346590444069854,
+            "mean_var": 0.409579368458011,
+            "mean_es": 0.5287375088869964,
+            "mean_normalized_es_residual": 0.05509749748819133,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "severity_125": {
+          "development": {
+            "n": 2558,
+            "mean_fz0": 0.2637015359121631,
+            "exceedances": 76,
+            "exceedance_fraction": 0.029710711493354185,
+            "mean_es_identification_residual": -0.037522616759704475,
+            "mean_var": 1.0011310201149746,
+            "mean_es": 1.3877126903844268,
+            "mean_normalized_es_residual": 0.017945199505326165,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1537,
+            "mean_fz0": 0.09092607320540519,
+            "exceedances": 43,
+            "exceedance_fraction": 0.02797657774886142,
+            "mean_es_identification_residual": -0.10270036137995209,
+            "mean_var": 0.8432962989524463,
+            "mean_es": 1.192107446576473,
+            "mean_normalized_es_residual": -0.01744288479304336,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 187,
+            "mean_fz0": -0.6446414543507627,
+            "exceedances": 5,
+            "exceedance_fraction": 0.026737967914438502,
+            "mean_es_identification_residual": -0.006418737720055234,
+            "mean_var": 0.4157064589411559,
+            "mean_es": 0.5576098026496813,
+            "mean_normalized_es_residual": -0.03571460608652686,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "joint_125": {
+          "development": {
+            "n": 2558,
+            "mean_fz0": 0.27487322870002295,
+            "exceedances": 68,
+            "exceedance_fraction": 0.026583268178264268,
+            "mean_es_identification_residual": -0.04880608043068233,
+            "mean_var": 1.0694693191384808,
+            "mean_es": 1.4145924720706802,
+            "mean_normalized_es_residual": 0.015459020062066613,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1537,
+            "mean_fz0": 0.09608968379391356,
+            "exceedances": 35,
+            "exceedance_fraction": 0.02277163305139883,
+            "mean_es_identification_residual": -0.11078840670114037,
+            "mean_var": 0.8940147427697778,
+            "mean_es": 1.2117552380018741,
+            "mean_normalized_es_residual": -0.01780367335035901,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 187,
+            "mean_fz0": -0.610947470664959,
+            "exceedances": 5,
+            "exceedance_fraction": 0.026737967914438502,
+            "mean_es_identification_residual": 0.021269328102582,
+            "mean_var": 0.409579368458011,
+            "mean_es": 0.5418147712284842,
+            "mean_normalized_es_residual": 0.0359372513446615,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "severity_500": {
+          "development": {
+            "n": 2558,
+            "mean_fz0": 0.2566881105282423,
+            "exceedances": 76,
+            "exceedance_fraction": 0.029710711493354185,
+            "mean_es_identification_residual": -0.020303503862509162,
+            "mean_var": 1.0011310201149746,
+            "mean_es": 1.370493577487231,
+            "mean_normalized_es_residual": 0.013082336577474186,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1537,
+            "mean_fz0": 0.08657757605702691,
+            "exceedances": 43,
+            "exceedance_fraction": 0.02797657774886142,
+            "mean_es_identification_residual": -0.07468123541915968,
+            "mean_var": 0.8432962989524463,
+            "mean_es": 1.1640883206156807,
+            "mean_normalized_es_residual": 0.013217397297158028,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 187,
+            "mean_fz0": -0.6473154422003087,
+            "exceedances": 5,
+            "exceedance_fraction": 0.026737967914438502,
+            "mean_es_identification_residual": -0.03657936446008612,
+            "mean_var": 0.4157064589411559,
+            "mean_es": 0.5877704293897122,
+            "mean_normalized_es_residual": -0.11425997348702872,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "joint_500": {
+          "development": {
+            "n": 2558,
+            "mean_fz0": 0.2683079068429915,
+            "exceedances": 68,
+            "exceedance_fraction": 0.026583268178264268,
+            "mean_es_identification_residual": -0.04096696423717409,
+            "mean_var": 1.0694693191384808,
+            "mean_es": 1.4067533558771719,
+            "mean_normalized_es_residual": 0.008620849140557621,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1537,
+            "mean_fz0": 0.09137054483003958,
+            "exceedances": 35,
+            "exceedance_fraction": 0.02277163305139883,
+            "mean_es_identification_residual": -0.09018410576036077,
+            "mean_var": 0.8940147427697778,
+            "mean_es": 1.1911509370610942,
+            "mean_normalized_es_residual": 0.004552158650711069,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 187,
+            "mean_fz0": -0.6217392400949057,
+            "exceedances": 5,
+            "exceedance_fraction": 0.026737967914438502,
+            "mean_es_identification_residual": 0.0036701613324898303,
+            "mean_var": 0.409579368458011,
+            "mean_es": 0.5594139379985765,
+            "mean_normalized_es_residual": -0.011280216132489734,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "static_severity": {
+          "development": {
+            "n": 2558,
+            "mean_fz0": 0.25312493234428024,
+            "exceedances": 76,
+            "exceedance_fraction": 0.029710711493354185,
+            "mean_es_identification_residual": -0.023408284358323643,
+            "mean_var": 1.0011310201149746,
+            "mean_es": 1.3735983579830455,
+            "mean_normalized_es_residual": 1.2499774475842262e-17,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1537,
+            "mean_fz0": 0.08275100963953895,
+            "exceedances": 43,
+            "exceedance_fraction": 0.02797657774886142,
+            "mean_es_identification_residual": -0.06763468881746328,
+            "mean_var": 0.8432962989524463,
+            "mean_es": 1.1570417740139842,
+            "mean_normalized_es_residual": 0.01779153114693119,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 187,
+            "mean_fz0": -0.6499697865786638,
+            "exceedances": 5,
+            "exceedance_fraction": 0.026737967914438502,
+            "mean_es_identification_residual": -0.019177546102864252,
+            "mean_var": 0.4157064589411559,
+            "mean_es": 0.5703686110324904,
+            "mean_normalized_es_residual": -0.07596669524271746,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "static_joint": {
+          "development": {
+            "n": 2558,
+            "mean_fz0": 0.2652787715197103,
+            "exceedances": 68,
+            "exceedance_fraction": 0.026583268178264268,
+            "mean_es_identification_residual": -0.04745949883552504,
+            "mean_var": 1.0694693191384808,
+            "mean_es": 1.413245890475523,
+            "mean_normalized_es_residual": -2.2221821290386245e-17,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1537,
+            "mean_fz0": 0.08782921637329252,
+            "exceedances": 35,
+            "exceedance_fraction": 0.02277163305139883,
+            "mean_es_identification_residual": -0.08042532145565591,
+            "mean_var": 0.8940147427697778,
+            "mean_es": 1.1813921527563898,
+            "mean_normalized_es_residual": 0.012761081917912025,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 187,
+            "mean_fz0": -0.6239676811351472,
+            "exceedances": 5,
+            "exceedance_fraction": 0.026737967914438502,
+            "mean_es_identification_residual": 0.02184710548898922,
+            "mean_var": 0.409579368458011,
+            "mean_es": 0.541236993842077,
+            "mean_normalized_es_residual": 0.030920177503135814,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        }
+      },
+      "all_history_cap_count": {
+        "fast_base": 0,
+        "frequency_only": 0,
+        "severity_125": 0,
+        "joint_125": 0,
+        "severity_500": 0,
+        "joint_500": 0,
+        "static_severity": 0,
+        "static_joint": 0
+      }
+    },
+    {
+      "currency": "GBP",
+      "horizon": 5,
+      "static_raw_ratios": {
+        "fast_base": 1.4823339475688555,
+        "primary_frequency_eta_1/20_horizon_lanes": 1.399627372756194
+      },
+      "static_ratios": {
+        "fast_base": 1.4823339475688555,
+        "primary_frequency_eta_1/20_horizon_lanes": 1.399627372756194
+      },
+      "static_fit_count": 2554,
+      "static_available_from_origin_index": 5374,
+      "static_available_from_date": "2019-12-31",
+      "periods": {
+        "development": {
+          "n": 2554,
+          "first_origin": "2010-01-04",
+          "last_origin": "2019-12-20",
+          "last_target": "2019-12-31"
+        },
+        "retrospective_2020_2025": {
+          "n": 1533,
+          "first_origin": "2020-01-02",
+          "last_origin": "2025-12-22",
+          "last_target": "2025-12-31"
+        },
+        "retrospective_2026": {
+          "n": 183,
+          "first_origin": "2026-01-02",
+          "last_origin": "2026-09-18",
+          "last_target": "2026-09-25"
+        }
+      },
+      "models": {
+        "fast_base": {
+          "development": {
+            "n": 2554,
+            "mean_fz0": 1.0901689208685337,
+            "exceedances": 87,
+            "exceedance_fraction": 0.034064212999216914,
+            "mean_es_identification_residual": 0.21847774427550656,
+            "mean_var": 2.1068771521075216,
+            "mean_es": 2.753507803723394,
+            "mean_normalized_es_residual": 0.20395619958812133,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1533,
+            "mean_fz0": 1.011394050850242,
+            "exceedances": 52,
+            "exceedance_fraction": 0.033920417482061316,
+            "mean_es_identification_residual": 0.1739685477871044,
+            "mean_var": 2.0132063117595482,
+            "mean_es": 2.5462807152284896,
+            "mean_normalized_es_residual": 0.22331388160912985,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 183,
+            "mean_fz0": -0.060592104538405425,
+            "exceedances": 1,
+            "exceedance_fraction": 0.00546448087431694,
+            "mean_es_identification_residual": -0.2391649634483428,
+            "mean_var": 0.9844853335738568,
+            "mean_es": 1.2265145438685041,
+            "mean_normalized_es_residual": -0.21806850582648574,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "frequency_only": {
+          "development": {
+            "n": 2554,
+            "mean_fz0": 1.0880562432695315,
+            "exceedances": 74,
+            "exceedance_fraction": 0.028974158183241974,
+            "mean_es_identification_residual": 0.03645707477071484,
+            "mean_var": 2.282008038720612,
+            "mean_es": 2.9868599679408896,
+            "mean_normalized_es_residual": 0.1212496247754599,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1533,
+            "mean_fz0": 1.0056630295767681,
+            "exceedances": 39,
+            "exceedance_fraction": 0.025440313111545987,
+            "mean_es_identification_residual": -0.0649543801041485,
+            "mean_var": 2.24168431090308,
+            "mean_es": 2.8348839847380956,
+            "mean_normalized_es_residual": 0.0863014853713194,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 183,
+            "mean_fz0": 0.024157531599842626,
+            "exceedances": 0,
+            "exceedance_fraction": 0.0,
+            "mean_es_identification_residual": -0.2669488520886701,
+            "mean_var": 1.081766568499121,
+            "mean_es": 1.3487154205877907,
+            "mean_normalized_es_residual": -0.22197433686800633,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "severity_125": {
+          "development": {
+            "n": 2554,
+            "mean_fz0": 1.0984155812226635,
+            "exceedances": 87,
+            "exceedance_fraction": 0.034064212999216914,
+            "mean_es_identification_residual": -0.22366257175531015,
+            "mean_var": 2.1068771521075216,
+            "mean_es": 3.195648119754211,
+            "mean_normalized_es_residual": 0.037542081079844046,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1533,
+            "mean_fz0": 1.0276650121730737,
+            "exceedances": 52,
+            "exceedance_fraction": 0.033920417482061316,
+            "mean_es_identification_residual": -0.5175994818094478,
+            "mean_var": 2.0132063117595482,
+            "mean_es": 3.2378487448250417,
+            "mean_normalized_es_residual": -0.010423859171673691,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 183,
+            "mean_fz0": -0.04374536559992716,
+            "exceedances": 1,
+            "exceedance_fraction": 0.00546448087431694,
+            "mean_es_identification_residual": -0.34963221081482004,
+            "mean_var": 0.9844853335738568,
+            "mean_es": 1.3369817912349813,
+            "mean_normalized_es_residual": -0.3209673222927371,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "joint_125": {
+          "development": {
+            "n": 2554,
+            "mean_fz0": 1.1030872424288622,
+            "exceedances": 74,
+            "exceedance_fraction": 0.028974158183241974,
+            "mean_es_identification_residual": -0.21841732452010995,
+            "mean_var": 2.282008038720612,
+            "mean_es": 3.2417343672317136,
+            "mean_normalized_es_residual": 0.030857531977620107,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1533,
+            "mean_fz0": 1.024051400227942,
+            "exceedances": 39,
+            "exceedance_fraction": 0.025440313111545987,
+            "mean_es_identification_residual": -0.4880455336052249,
+            "mean_var": 2.24168431090308,
+            "mean_es": 3.257975138239172,
+            "mean_normalized_es_residual": -0.011508757818348246,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 183,
+            "mean_fz0": 0.02752037308660214,
+            "exceedances": 0,
+            "exceedance_fraction": 0.0,
+            "mean_es_identification_residual": -0.2957626294047213,
+            "mean_var": 1.081766568499121,
+            "mean_es": 1.377529197903842,
+            "mean_normalized_es_residual": -0.24699880225544102,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "severity_500": {
+          "development": {
+            "n": 2554,
+            "mean_fz0": 1.0688360894245232,
+            "exceedances": 87,
+            "exceedance_fraction": 0.034064212999216914,
+            "mean_es_identification_residual": -0.0791462180719904,
+            "mean_var": 2.1068771521075216,
+            "mean_es": 3.051131766070891,
+            "mean_normalized_es_residual": 0.06070094236302436,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1533,
+            "mean_fz0": 1.0054487213800904,
+            "exceedances": 52,
+            "exceedance_fraction": 0.033920417482061316,
+            "mean_es_identification_residual": -0.32741457424253956,
+            "mean_var": 2.0132063117595482,
+            "mean_es": 3.047663837258133,
+            "mean_normalized_es_residual": 0.03627035916392807,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 183,
+            "mean_fz0": -0.007889912264410794,
+            "exceedances": 1,
+            "exceedance_fraction": 0.00546448087431694,
+            "mean_es_identification_residual": -0.5085161005828416,
+            "mean_var": 0.9844853335738568,
+            "mean_es": 1.4958656810030029,
+            "mean_normalized_es_residual": -0.5026575657251493,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "joint_500": {
+          "development": {
+            "n": 2554,
+            "mean_fz0": 1.0761043522623766,
+            "exceedances": 74,
+            "exceedance_fraction": 0.028974158183241974,
+            "mean_es_identification_residual": -0.11522428028453698,
+            "mean_var": 2.282008038720612,
+            "mean_es": 3.1385413229961414,
+            "mean_normalized_es_residual": 0.04238874653129589,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1533,
+            "mean_fz0": 1.0062948000073206,
+            "exceedances": 39,
+            "exceedance_fraction": 0.025440313111545987,
+            "mean_es_identification_residual": -0.34309919855308146,
+            "mean_var": 2.24168431090308,
+            "mean_es": 3.113028803187028,
+            "mean_normalized_es_residual": 0.0199530589993444,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 183,
+            "mean_fz0": 0.05254809957717584,
+            "exceedances": 0,
+            "exceedance_fraction": 0.0,
+            "mean_es_identification_residual": -0.4322496225625441,
+            "mean_var": 1.081766568499121,
+            "mean_es": 1.514016191061665,
+            "mean_normalized_es_residual": -0.38926551640118956,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "static_severity": {
+          "development": {
+            "n": 2554,
+            "mean_fz0": 1.0534247794256606,
+            "exceedances": 87,
+            "exceedance_fraction": 0.034064212999216914,
+            "mean_es_identification_residual": -0.1511099779272703,
+            "mean_var": 2.1068771521075216,
+            "mean_es": 3.123095525926171,
+            "mean_normalized_es_residual": -4.1731170855135095e-17,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1533,
+            "mean_fz0": 0.9899712862464396,
+            "exceedances": 52,
+            "exceedance_fraction": 0.033920417482061316,
+            "mean_es_identification_residual": -0.2639947963654735,
+            "mean_var": 2.0132063117595482,
+            "mean_es": 2.9842440593810675,
+            "mean_normalized_es_residual": 0.034508749414970764,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 183,
+            "mean_fz0": -0.013367567656650972,
+            "exceedances": 1,
+            "exceedance_fraction": 0.00546448087431694,
+            "mean_es_identification_residual": -0.4719864504200153,
+            "mean_var": 0.9844853335738568,
+            "mean_es": 1.4593360308401768,
+            "mean_normalized_es_residual": -0.47842811652733486,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "static_joint": {
+          "development": {
+            "n": 2554,
+            "mean_fz0": 1.063301548025113,
+            "exceedances": 74,
+            "exceedance_fraction": 0.028974158183241974,
+            "mean_es_identification_residual": -0.17064387313144094,
+            "mean_var": 2.282008038720612,
+            "mean_es": 3.193960915843045,
+            "mean_normalized_es_residual": -5.0077405026162113e-17,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1533,
+            "mean_fz0": 0.9933206941338969,
+            "exceedances": 39,
+            "exceedance_fraction": 0.025440313111545987,
+            "mean_es_identification_residual": -0.3675931179841102,
+            "mean_var": 2.24168431090308,
+            "mean_es": 3.137522722618057,
+            "mean_normalized_es_residual": -0.019797072010178256,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 183,
+            "mean_fz0": 0.054557700041939744,
+            "exceedances": 0,
+            "exceedance_fraction": 0.0,
+            "mean_es_identification_residual": -0.4323035317047871,
+            "mean_var": 1.081766568499121,
+            "mean_es": 1.5140701002039079,
+            "mean_normalized_es_residual": -0.39962737275619403,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        }
+      },
+      "all_history_cap_count": {
+        "fast_base": 0,
+        "frequency_only": 0,
+        "severity_125": 0,
+        "joint_125": 0,
+        "severity_500": 0,
+        "joint_500": 0,
+        "static_severity": 0,
+        "static_joint": 0
+      }
+    },
+    {
+      "currency": "JPY",
+      "horizon": 1,
+      "static_raw_ratios": {
+        "fast_base": 1.4654198355089205,
+        "primary_frequency_eta_1/20_horizon_lanes": 1.4371379426469346
+      },
+      "static_ratios": {
+        "fast_base": 1.4654198355089205,
+        "primary_frequency_eta_1/20_horizon_lanes": 1.4371379426469346
+      },
+      "static_fit_count": 2558,
+      "static_available_from_origin_index": 5374,
+      "static_available_from_date": "2019-12-31",
+      "periods": {
+        "development": {
+          "n": 2558,
+          "first_origin": "2010-01-04",
+          "last_origin": "2019-12-30",
+          "last_target": "2019-12-31"
+        },
+        "retrospective_2020_2025": {
+          "n": 1537,
+          "first_origin": "2020-01-02",
+          "last_origin": "2025-12-30",
+          "last_target": "2025-12-31"
+        },
+        "retrospective_2026": {
+          "n": 187,
+          "first_origin": "2026-01-02",
+          "last_origin": "2026-09-24",
+          "last_target": "2026-09-25"
+        }
+      },
+      "models": {
+        "fast_base": {
+          "development": {
+            "n": 2558,
+            "mean_fz0": 0.547626628576319,
+            "exceedances": 70,
+            "exceedance_fraction": 0.027365129007036748,
+            "mean_es_identification_residual": 0.02034736820655226,
+            "mean_var": 1.2510842176738315,
+            "mean_es": 1.720557281641526,
+            "mean_normalized_es_residual": 0.09126603394964461,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1537,
+            "mean_fz0": 0.2981150844125961,
+            "exceedances": 38,
+            "exceedance_fraction": 0.0247234873129473,
+            "mean_es_identification_residual": -0.03302885031620375,
+            "mean_var": 1.097092640258149,
+            "mean_es": 1.387191865806735,
+            "mean_normalized_es_residual": 0.02697214707148802,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 187,
+            "mean_fz0": -0.1649661854752963,
+            "exceedances": 2,
+            "exceedance_fraction": 0.0106951871657754,
+            "mean_es_identification_residual": -0.14437687387774467,
+            "mean_var": 0.7207108593810232,
+            "mean_es": 1.0012145144166837,
+            "mean_normalized_es_residual": -0.20094131284657885,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "frequency_only": {
+          "development": {
+            "n": 2558,
+            "mean_fz0": 0.5654921359117143,
+            "exceedances": 66,
+            "exceedance_fraction": 0.02580140734949179,
+            "mean_es_identification_residual": -0.043260518955205274,
+            "mean_var": 1.316286613565589,
+            "mean_es": 1.8121913183502285,
+            "mean_normalized_es_residual": 0.06298414108765867,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1537,
+            "mean_fz0": 0.31611941966412066,
+            "exceedances": 37,
+            "exceedance_fraction": 0.024072869225764477,
+            "mean_es_identification_residual": -0.028711187687039258,
+            "mean_var": 1.1027439457402493,
+            "mean_es": 1.3952480901420747,
+            "mean_normalized_es_residual": 0.0501159263136587,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 187,
+            "mean_fz0": -0.16257795957137325,
+            "exceedances": 2,
+            "exceedance_fraction": 0.0106951871657754,
+            "mean_es_identification_residual": -0.12237506732272455,
+            "mean_var": 0.7073518713896213,
+            "mean_es": 0.9809915708644625,
+            "mean_normalized_es_residual": -0.16159961505857776,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "severity_125": {
+          "development": {
+            "n": 2558,
+            "mean_fz0": 0.5527880400448991,
+            "exceedances": 70,
+            "exceedance_fraction": 0.027365129007036748,
+            "mean_es_identification_residual": -0.06673248236399934,
+            "mean_var": 1.2510842176738315,
+            "mean_es": 1.8076371322120772,
+            "mean_normalized_es_residual": 0.044145514362893865,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1537,
+            "mean_fz0": 0.30546167284847675,
+            "exceedances": 38,
+            "exceedance_fraction": 0.0247234873129473,
+            "mean_es_identification_residual": -0.11351127454236506,
+            "mean_var": 1.097092640258149,
+            "mean_es": 1.4676742900328963,
+            "mean_normalized_es_residual": -0.03915544023173887,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 187,
+            "mean_fz0": -0.15188845362971268,
+            "exceedances": 2,
+            "exceedance_fraction": 0.0106951871657754,
+            "mean_es_identification_residual": -0.09618306647292933,
+            "mean_var": 0.7207108593810232,
+            "mean_es": 0.9530207070118683,
+            "mean_normalized_es_residual": -0.12983108794508136,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "joint_125": {
+          "development": {
+            "n": 2558,
+            "mean_fz0": 0.5694053057218643,
+            "exceedances": 66,
+            "exceedance_fraction": 0.02580140734949179,
+            "mean_es_identification_residual": -0.08218442407412717,
+            "mean_var": 1.316286613565589,
+            "mean_es": 1.8511152234691501,
+            "mean_normalized_es_residual": 0.04485746784946967,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1537,
+            "mean_fz0": 0.32319209004640853,
+            "exceedances": 37,
+            "exceedance_fraction": 0.024072869225764477,
+            "mean_es_identification_residual": -0.12645943579695768,
+            "mean_var": 1.1027439457402493,
+            "mean_es": 1.4929963382519933,
+            "mean_normalized_es_residual": -0.03133240426356542,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 187,
+            "mean_fz0": -0.13569320536274534,
+            "exceedances": 2,
+            "exceedance_fraction": 0.0106951871657754,
+            "mean_es_identification_residual": -0.11264521705326572,
+            "mean_var": 0.7073518713896213,
+            "mean_es": 0.9712617205950038,
+            "mean_normalized_es_residual": -0.13470764110190375,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "severity_500": {
+          "development": {
+            "n": 2558,
+            "mean_fz0": 0.5455565970672175,
+            "exceedances": 70,
+            "exceedance_fraction": 0.027365129007036748,
+            "mean_es_identification_residual": -0.010833032471095664,
+            "mean_var": 1.2510842176738315,
+            "mean_es": 1.7517376823191737,
+            "mean_normalized_es_residual": 0.07142528277896978,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1537,
+            "mean_fz0": 0.2978046448641004,
+            "exceedances": 38,
+            "exceedance_fraction": 0.0247234873129473,
+            "mean_es_identification_residual": -0.1468639899002854,
+            "mean_var": 1.097092640258149,
+            "mean_es": 1.5010270053908166,
+            "mean_normalized_es_residual": -0.06813226716082443,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 187,
+            "mean_fz0": -0.15942802566161574,
+            "exceedances": 2,
+            "exceedance_fraction": 0.0106951871657754,
+            "mean_es_identification_residual": -0.08714104053420133,
+            "mean_var": 0.7207108593810232,
+            "mean_es": 0.9439786810731403,
+            "mean_normalized_es_residual": -0.11946579891337981,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "joint_500": {
+          "development": {
+            "n": 2558,
+            "mean_fz0": 0.5620323834663554,
+            "exceedances": 66,
+            "exceedance_fraction": 0.02580140734949179,
+            "mean_es_identification_residual": -0.024967160825319374,
+            "mean_var": 1.316286613565589,
+            "mean_es": 1.7938979602203424,
+            "mean_normalized_es_residual": 0.07675151916142894,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1537,
+            "mean_fz0": 0.3148473081640334,
+            "exceedances": 37,
+            "exceedance_fraction": 0.024072869225764477,
+            "mean_es_identification_residual": -0.1525127113866079,
+            "mean_var": 1.1027439457402493,
+            "mean_es": 1.5190496138416434,
+            "mean_normalized_es_residual": -0.053335550551231584,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 187,
+            "mean_fz0": -0.14820164170589692,
+            "exceedances": 2,
+            "exceedance_fraction": 0.0106951871657754,
+            "mean_es_identification_residual": -0.09161061529356561,
+            "mean_var": 0.7073518713896213,
+            "mean_es": 0.9502271188353036,
+            "mean_normalized_es_residual": -0.11213455650828026,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "static_severity": {
+          "development": {
+            "n": 2558,
+            "mean_fz0": 0.5377641438028586,
+            "exceedances": 70,
+            "exceedance_fraction": 0.027365129007036748,
+            "mean_es_identification_residual": -0.09245897862331429,
+            "mean_var": 1.2510842176738315,
+            "mean_es": 1.8333636284713926,
+            "mean_normalized_es_residual": -1.0833137879063294e-16,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1537,
+            "mean_fz0": 0.3001510431804497,
+            "exceedances": 38,
+            "exceedance_fraction": 0.0247234873129473,
+            "mean_es_identification_residual": -0.2535383009346124,
+            "mean_var": 1.097092640258149,
+            "mean_es": 1.6077013164251437,
+            "mean_normalized_es_residual": -0.16816333936965278,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 187,
+            "mean_fz0": -0.14580896946872626,
+            "exceedances": 2,
+            "exceedance_fraction": 0.0106951871657754,
+            "mean_es_identification_residual": -0.19930634846469297,
+            "mean_var": 0.7207108593810232,
+            "mean_es": 1.056143989003632,
+            "mean_normalized_es_residual": -0.27568765160568315,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "static_joint": {
+          "development": {
+            "n": 2558,
+            "mean_fz0": 0.5550669111919883,
+            "exceedances": 66,
+            "exceedance_fraction": 0.02580140734949179,
+            "mean_es_identification_residual": -0.12275463635832852,
+            "mean_var": 1.316286613565589,
+            "mean_es": 1.8916854357533515,
+            "mean_normalized_es_residual": -1.6388593201659856e-16,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1537,
+            "mean_fz0": 0.3134389420221864,
+            "exceedances": 37,
+            "exceedance_fraction": 0.024072869225764477,
+            "mean_es_identification_residual": -0.21825826299246914,
+            "mean_var": 1.1027439457402493,
+            "mean_es": 1.5847951654475045,
+            "mean_normalized_es_residual": -0.11673766726549621,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 187,
+            "mean_fz0": -0.14381670649969328,
+            "exceedances": 2,
+            "exceedance_fraction": 0.0106951871657754,
+            "mean_es_identification_residual": -0.15794570963460122,
+            "mean_var": 0.7073518713896213,
+            "mean_es": 1.0165622131763392,
+            "mean_normalized_es_residual": -0.2080640609556961,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        }
+      },
+      "all_history_cap_count": {
+        "fast_base": 0,
+        "frequency_only": 0,
+        "severity_125": 0,
+        "joint_125": 0,
+        "severity_500": 0,
+        "joint_500": 0,
+        "static_severity": 0,
+        "static_joint": 0
+      }
+    },
+    {
+      "currency": "JPY",
+      "horizon": 5,
+      "static_raw_ratios": {
+        "fast_base": 1.4114896057807695,
+        "primary_frequency_eta_1/20_horizon_lanes": 1.3415261347390677
+      },
+      "static_ratios": {
+        "fast_base": 1.4114896057807695,
+        "primary_frequency_eta_1/20_horizon_lanes": 1.3415261347390677
+      },
+      "static_fit_count": 2554,
+      "static_available_from_origin_index": 5374,
+      "static_available_from_date": "2019-12-31",
+      "periods": {
+        "development": {
+          "n": 2554,
+          "first_origin": "2010-01-04",
+          "last_origin": "2019-12-20",
+          "last_target": "2019-12-31"
+        },
+        "retrospective_2020_2025": {
+          "n": 1533,
+          "first_origin": "2020-01-02",
+          "last_origin": "2025-12-22",
+          "last_target": "2025-12-31"
+        },
+        "retrospective_2026": {
+          "n": 183,
+          "first_origin": "2026-01-02",
+          "last_origin": "2026-09-18",
+          "last_target": "2026-09-25"
+        }
+      },
+      "models": {
+        "fast_base": {
+          "development": {
+            "n": 2554,
+            "mean_fz0": 1.3751294305553525,
+            "exceedances": 85,
+            "exceedance_fraction": 0.03328112764291308,
+            "mean_es_identification_residual": 0.24844936945526358,
+            "mean_var": 2.9156363019476137,
+            "mean_es": 3.5643152560206532,
+            "mean_normalized_es_residual": 0.1882064267149348,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1533,
+            "mean_fz0": 1.0913521009614056,
+            "exceedances": 36,
+            "exceedance_fraction": 0.023483365949119372,
+            "mean_es_identification_residual": 0.13542397769826917,
+            "mean_var": 2.362938310659737,
+            "mean_es": 2.7554177558259765,
+            "mean_normalized_es_residual": 0.17581544853210757,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 183,
+            "mean_fz0": 0.5515631363090611,
+            "exceedances": 3,
+            "exceedance_fraction": 0.01639344262295082,
+            "mean_es_identification_residual": -0.674159192097745,
+            "mean_var": 1.5171146147534293,
+            "mean_es": 2.3259650550469666,
+            "mean_normalized_es_residual": -0.4283923735210809,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "frequency_only": {
+          "development": {
+            "n": 2554,
+            "mean_fz0": 1.3754554019340226,
+            "exceedances": 65,
+            "exceedance_fraction": 0.025450274079874706,
+            "mean_es_identification_residual": 0.047129358606137185,
+            "mean_var": 3.1156887430107734,
+            "mean_es": 3.8090168420904456,
+            "mean_normalized_es_residual": 0.11824295567323292,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1533,
+            "mean_fz0": 1.110886791574327,
+            "exceedances": 35,
+            "exceedance_fraction": 0.0228310502283105,
+            "mean_es_identification_residual": 0.10679254799738994,
+            "mean_var": 2.450739512401414,
+            "mean_es": 2.8570480593384935,
+            "mean_normalized_es_residual": 0.16171689830852848,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 183,
+            "mean_fz0": 0.5867557974596143,
+            "exceedances": 3,
+            "exceedance_fraction": 0.01639344262295082,
+            "mean_es_identification_residual": -0.6862174768279892,
+            "mean_var": 1.5613438516395888,
+            "mean_es": 2.3935927380464923,
+            "mean_normalized_es_residual": -0.41548281398399534,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "severity_125": {
+          "development": {
+            "n": 2554,
+            "mean_fz0": 1.3851670218674275,
+            "exceedances": 85,
+            "exceedance_fraction": 0.03328112764291308,
+            "mean_es_identification_residual": -0.2667384486778309,
+            "mean_var": 2.9156363019476137,
+            "mean_es": 4.079503074153749,
+            "mean_normalized_es_residual": 0.03279429207611227,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1533,
+            "mean_fz0": 1.118489827771577,
+            "exceedances": 36,
+            "exceedance_fraction": 0.023483365949119372,
+            "mean_es_identification_residual": -0.36464277261950534,
+            "mean_var": 2.362938310659737,
+            "mean_es": 3.2554845061437514,
+            "mean_normalized_es_residual": 0.014516825451847428,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 183,
+            "mean_fz0": 0.549695591023347,
+            "exceedances": 3,
+            "exceedance_fraction": 0.01639344262295082,
+            "mean_es_identification_residual": -0.6188379297260642,
+            "mean_var": 1.5171146147534293,
+            "mean_es": 2.2706437926752856,
+            "mean_normalized_es_residual": -0.3965004773821728,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "joint_125": {
+          "development": {
+            "n": 2554,
+            "mean_fz0": 1.3887158144596792,
+            "exceedances": 65,
+            "exceedance_fraction": 0.025450274079874706,
+            "mean_es_identification_residual": -0.27648655597204996,
+            "mean_var": 3.1156887430107734,
+            "mean_es": 4.132632756668633,
+            "mean_normalized_es_residual": 0.029509336128621784,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1533,
+            "mean_fz0": 1.1350999626188325,
+            "exceedances": 35,
+            "exceedance_fraction": 0.0228310502283105,
+            "mean_es_identification_residual": -0.35087126025005805,
+            "mean_var": 2.450739512401414,
+            "mean_es": 3.3147118675859413,
+            "mean_normalized_es_residual": 0.026179522171600786,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 183,
+            "mean_fz0": 0.5875687984573856,
+            "exceedances": 3,
+            "exceedance_fraction": 0.01639344262295082,
+            "mean_es_identification_residual": -0.6472479972466254,
+            "mean_var": 1.5613438516395888,
+            "mean_es": 2.354623258465128,
+            "mean_normalized_es_residual": -0.39449808626992,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "severity_500": {
+          "development": {
+            "n": 2554,
+            "mean_fz0": 1.3566965413711622,
+            "exceedances": 85,
+            "exceedance_fraction": 0.03328112764291308,
+            "mean_es_identification_residual": -0.12535622195398602,
+            "mean_var": 2.9156363019476137,
+            "mean_es": 3.9381208474299036,
+            "mean_normalized_es_residual": 0.06198516194145878,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1533,
+            "mean_fz0": 1.0935604511229646,
+            "exceedances": 36,
+            "exceedance_fraction": 0.023483365949119372,
+            "mean_es_identification_residual": -0.3576739597071596,
+            "mean_var": 2.362938310659737,
+            "mean_es": 3.2485156932314054,
+            "mean_normalized_es_residual": 0.0006375244911683014,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 183,
+            "mean_fz0": 0.5310118224970288,
+            "exceedances": 3,
+            "exceedance_fraction": 0.01639344262295082,
+            "mean_es_identification_residual": -0.4588050703936663,
+            "mean_var": 1.5171146147534293,
+            "mean_es": 2.1106109333428873,
+            "mean_normalized_es_residual": -0.28494376679786065,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "joint_500": {
+          "development": {
+            "n": 2554,
+            "mean_fz0": 1.3631586223227308,
+            "exceedances": 65,
+            "exceedance_fraction": 0.025450274079874706,
+            "mean_es_identification_residual": -0.15953108855394404,
+            "mean_var": 3.1156887430107734,
+            "mean_es": 4.015677289250528,
+            "mean_normalized_es_residual": 0.05216574734953058,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1533,
+            "mean_fz0": 1.1132146580006677,
+            "exceedances": 35,
+            "exceedance_fraction": 0.0228310502283105,
+            "mean_es_identification_residual": -0.31140127661287503,
+            "mean_var": 2.450739512401414,
+            "mean_es": 3.2752418839487585,
+            "mean_normalized_es_residual": 0.02445688016750519,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 183,
+            "mean_fz0": 0.5664367920260838,
+            "exceedances": 3,
+            "exceedance_fraction": 0.01639344262295082,
+            "mean_es_identification_residual": -0.4518136400584387,
+            "mean_var": 1.5613438516395888,
+            "mean_es": 2.159188901276942,
+            "mean_normalized_es_residual": -0.2635230554159509,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "static_severity": {
+          "development": {
+            "n": 2554,
+            "mean_fz0": 1.3392577380579789,
+            "exceedances": 85,
+            "exceedance_fraction": 0.03328112764291308,
+            "mean_es_identification_residual": -0.30262570896022045,
+            "mean_var": 2.9156363019476137,
+            "mean_es": 4.115390334436138,
+            "mean_normalized_es_residual": 1.669246834205404e-17,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1533,
+            "mean_fz0": 1.081867509951461,
+            "exceedances": 36,
+            "exceedance_fraction": 0.023483365949119372,
+            "mean_es_identification_residual": -0.4444211310731435,
+            "mean_var": 2.362938310659737,
+            "mean_es": 3.3352628645973894,
+            "mean_normalized_es_residual": -0.051270552172765646,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 183,
+            "mean_fz0": 0.533663709438171,
+            "exceedances": 3,
+            "exceedance_fraction": 0.01639344262295082,
+            "mean_es_identification_residual": -0.4895856465533405,
+            "mean_var": 1.5171146147534293,
+            "mean_es": 2.141391509502562,
+            "mean_normalized_es_residual": -0.30381166421823236,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "static_joint": {
+          "development": {
+            "n": 2554,
+            "mean_fz0": 1.3475253307292925,
+            "exceedances": 65,
+            "exceedance_fraction": 0.025450274079874706,
+            "mean_es_identification_residual": -0.3236316757646843,
+            "mean_var": 3.1156887430107734,
+            "mean_es": 4.179777876461268,
+            "mean_normalized_es_residual": 2.5038702513081057e-17,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1533,
+            "mean_fz0": 1.10216684685559,
+            "exceedances": 35,
+            "exceedance_fraction": 0.0228310502283105,
+            "mean_es_identification_residual": -0.32389049798829334,
+            "mean_var": 2.450739512401414,
+            "mean_es": 3.287731105324177,
+            "mean_normalized_es_residual": 0.004594368645357187,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 183,
+            "mean_fz0": 0.560554801743326,
+            "exceedances": 3,
+            "exceedance_fraction": 0.01639344262295082,
+            "mean_es_identification_residual": -0.38720832107016295,
+            "mean_var": 1.5613438516395888,
+            "mean_es": 2.094583582288666,
+            "mean_normalized_es_residual": -0.2209386336394448,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        }
+      },
+      "all_history_cap_count": {
+        "fast_base": 0,
+        "frequency_only": 0,
+        "severity_125": 0,
+        "joint_125": 0,
+        "severity_500": 0,
+        "joint_500": 0,
+        "static_severity": 0,
+        "static_joint": 0
+      }
+    },
+    {
+      "currency": "CHF",
+      "horizon": 1,
+      "static_raw_ratios": {
+        "fast_base": 1.89121604150888,
+        "primary_frequency_eta_1/20_horizon_lanes": 1.7631707197159996
+      },
+      "static_ratios": {
+        "fast_base": 1.89121604150888,
+        "primary_frequency_eta_1/20_horizon_lanes": 1.7631707197159996
+      },
+      "static_fit_count": 2558,
+      "static_available_from_origin_index": 5374,
+      "static_available_from_date": "2019-12-31",
+      "periods": {
+        "development": {
+          "n": 2558,
+          "first_origin": "2010-01-04",
+          "last_origin": "2019-12-30",
+          "last_target": "2019-12-31"
+        },
+        "retrospective_2020_2025": {
+          "n": 1537,
+          "first_origin": "2020-01-02",
+          "last_origin": "2025-12-30",
+          "last_target": "2025-12-31"
+        },
+        "retrospective_2026": {
+          "n": 187,
+          "first_origin": "2026-01-02",
+          "last_origin": "2026-09-24",
+          "last_target": "2026-09-25"
+        }
+      },
+      "models": {
+        "fast_base": {
+          "development": {
+            "n": 2558,
+            "mean_fz0": 0.012093632996111192,
+            "exceedances": 74,
+            "exceedance_fraction": 0.028928850664581705,
+            "mean_es_identification_residual": -0.02865207753675365,
+            "mean_var": 0.7691953366693425,
+            "mean_es": 1.142376836455311,
+            "mean_normalized_es_residual": 0.37074767438498435,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1537,
+            "mean_fz0": -0.15557180939732634,
+            "exceedances": 41,
+            "exceedance_fraction": 0.026675341574495772,
+            "mean_es_identification_residual": -0.034360293412041755,
+            "mean_var": 0.6259557767482044,
+            "mean_es": 0.878761494734372,
+            "mean_normalized_es_residual": 0.0334716136580626,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 187,
+            "mean_fz0": -0.7754638012201636,
+            "exceedances": 6,
+            "exceedance_fraction": 0.03208556149732621,
+            "mean_es_identification_residual": -0.011947651439041978,
+            "mean_var": 0.34339899779712557,
+            "mean_es": 0.4664097954938087,
+            "mean_normalized_es_residual": -0.0142578621169046,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "frequency_only": {
+          "development": {
+            "n": 2558,
+            "mean_fz0": 0.03430491960409484,
+            "exceedances": 66,
+            "exceedance_fraction": 0.02580140734949179,
+            "mean_es_identification_residual": -0.1239748942108224,
+            "mean_var": 0.8571566238149513,
+            "mean_es": 1.274096782440193,
+            "mean_normalized_es_residual": 0.24270235259210382,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1537,
+            "mean_fz0": -0.1427641307679017,
+            "exceedances": 37,
+            "exceedance_fraction": 0.024072869225764477,
+            "mean_es_identification_residual": -0.07362827309476096,
+            "mean_var": 0.6624365009708136,
+            "mean_es": 0.929862724729071,
+            "mean_normalized_es_residual": -0.016748827062659878,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 187,
+            "mean_fz0": -0.752260714286046,
+            "exceedances": 6,
+            "exceedance_fraction": 0.03208556149732621,
+            "mean_es_identification_residual": -0.008812520564647448,
+            "mean_var": 0.3468762294321866,
+            "mean_es": 0.4707804749272381,
+            "mean_normalized_es_residual": 0.0057555100288464636,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "severity_125": {
+          "development": {
+            "n": 2558,
+            "mean_fz0": 0.06304303006940365,
+            "exceedances": 74,
+            "exceedance_fraction": 0.028928850664581705,
+            "mean_es_identification_residual": -0.3334216469698896,
+            "mean_var": 0.7691953366693425,
+            "mean_es": 1.4471464058884471,
+            "mean_normalized_es_residual": -0.0010654983034579792,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1537,
+            "mean_fz0": -0.14484412063816343,
+            "exceedances": 41,
+            "exceedance_fraction": 0.026675341574495772,
+            "mean_es_identification_residual": -0.06794830345516759,
+            "mean_var": 0.6259557767482044,
+            "mean_es": 0.9123495047774979,
+            "mean_normalized_es_residual": -0.007273684761664708,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 187,
+            "mean_fz0": -0.7681676881340308,
+            "exceedances": 6,
+            "exceedance_fraction": 0.03208556149732621,
+            "mean_es_identification_residual": -0.02529585960628244,
+            "mean_var": 0.34339899779712557,
+            "mean_es": 0.47975800366104915,
+            "mean_normalized_es_residual": -0.051328449160004,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "joint_125": {
+          "development": {
+            "n": 2558,
+            "mean_fz0": 0.09136701848480855,
+            "exceedances": 66,
+            "exceedance_fraction": 0.02580140734949179,
+            "mean_es_identification_residual": -0.41033722947127355,
+            "mean_var": 0.8571566238149513,
+            "mean_es": 1.560459117700644,
+            "mean_normalized_es_residual": -0.008959612820298975,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1537,
+            "mean_fz0": -0.13213078211062704,
+            "exceedances": 37,
+            "exceedance_fraction": 0.024072869225764477,
+            "mean_es_identification_residual": -0.0677395776576028,
+            "mean_var": 0.6624365009708136,
+            "mean_es": 0.9239740292919126,
+            "mean_normalized_es_residual": 0.0026909101906503526,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 187,
+            "mean_fz0": -0.7433035321906734,
+            "exceedances": 6,
+            "exceedance_fraction": 0.03208556149732621,
+            "mean_es_identification_residual": -0.028289490487837264,
+            "mean_var": 0.3468762294321866,
+            "mean_es": 0.4902574448504278,
+            "mean_normalized_es_residual": -0.0474345883091308,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "severity_500": {
+          "development": {
+            "n": 2558,
+            "mean_fz0": 0.08671856408035393,
+            "exceedances": 74,
+            "exceedance_fraction": 0.028928850664581705,
+            "mean_es_identification_residual": -0.2690818864485636,
+            "mean_var": 0.7691953366693425,
+            "mean_es": 1.382806645367121,
+            "mean_normalized_es_residual": 0.05101694659878317,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1537,
+            "mean_fz0": -0.15885999955249097,
+            "exceedances": 41,
+            "exceedance_fraction": 0.026675341574495772,
+            "mean_es_identification_residual": -0.09736613583412915,
+            "mean_var": 0.6259557767482044,
+            "mean_es": 0.9417673371564594,
+            "mean_normalized_es_residual": -0.06912961475627381,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 187,
+            "mean_fz0": -0.7723114804738711,
+            "exceedances": 6,
+            "exceedance_fraction": 0.03208556149732621,
+            "mean_es_identification_residual": -0.036621026900761036,
+            "mean_var": 0.34339899779712557,
+            "mean_es": 0.4910831709555277,
+            "mean_normalized_es_residual": -0.08485934139831952,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "joint_500": {
+          "development": {
+            "n": 2558,
+            "mean_fz0": 0.11166849996241097,
+            "exceedances": 66,
+            "exceedance_fraction": 0.02580140734949179,
+            "mean_es_identification_residual": -0.3400016265956933,
+            "mean_var": 0.8571566238149513,
+            "mean_es": 1.4901235148250638,
+            "mean_normalized_es_residual": 0.018652625185359598,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1537,
+            "mean_fz0": -0.14583294390608637,
+            "exceedances": 37,
+            "exceedance_fraction": 0.024072869225764477,
+            "mean_es_identification_residual": -0.0833424371395468,
+            "mean_var": 0.6624365009708136,
+            "mean_es": 0.9395768887738568,
+            "mean_normalized_es_residual": -0.034142329614560686,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 187,
+            "mean_fz0": -0.7490598389839775,
+            "exceedances": 6,
+            "exceedance_fraction": 0.03208556149732621,
+            "mean_es_identification_residual": -0.02487508000222812,
+            "mean_var": 0.3468762294321866,
+            "mean_es": 0.4868430343648187,
+            "mean_normalized_es_residual": -0.03827519796760481,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "static_severity": {
+          "development": {
+            "n": 2558,
+            "mean_fz0": 0.06756038408065534,
+            "exceedances": 74,
+            "exceedance_fraction": 0.028928850664581705,
+            "mean_es_identification_residual": -0.3409898008443267,
+            "mean_var": 0.7691953366693425,
+            "mean_es": 1.4547145597628839,
+            "mean_normalized_es_residual": 2.2221821290386245e-17,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1537,
+            "mean_fz0": -0.1288209834547441,
+            "exceedances": 41,
+            "exceedance_fraction": 0.026675341574495772,
+            "mean_es_identification_residual": -0.33941640493902475,
+            "mean_var": 0.6259557767482044,
+            "mean_es": 1.1838176062613552,
+            "mean_normalized_es_residual": -0.4633494553641992,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 187,
+            "mean_fz0": -0.7236486437270836,
+            "exceedances": 6,
+            "exceedance_fraction": 0.03208556149732621,
+            "mean_es_identification_residual": -0.19497954921722974,
+            "mean_var": 0.34339899779712557,
+            "mean_es": 0.6494416932719965,
+            "mean_normalized_es_residual": -0.5462047757956693,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "static_joint": {
+          "development": {
+            "n": 2558,
+            "mean_fz0": 0.09671571738839507,
+            "exceedances": 66,
+            "exceedance_fraction": 0.02580140734949179,
+            "mean_es_identification_residual": -0.3611915730917734,
+            "mean_var": 0.8571566238149513,
+            "mean_es": 1.5113134613211439,
+            "mean_normalized_es_residual": -1.999963916134762e-16,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1537,
+            "mean_fz0": -0.12336216708315574,
+            "exceedances": 37,
+            "exceedance_fraction": 0.024072869225764477,
+            "mean_es_identification_residual": -0.31175419054854797,
+            "mean_var": 0.6624365009708136,
+            "mean_es": 1.1679886421828578,
+            "mean_normalized_es_residual": -0.3855245742920414,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 187,
+            "mean_fz0": -0.7213443168043465,
+            "exceedances": 6,
+            "exceedance_fraction": 0.03208556149732621,
+            "mean_es_identification_residual": -0.14963405673773,
+            "mean_var": 0.3468762294321866,
+            "mean_es": 0.6116020111003206,
+            "mean_normalized_es_residual": -0.398146081857038,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        }
+      },
+      "all_history_cap_count": {
+        "fast_base": 0,
+        "frequency_only": 0,
+        "severity_125": 0,
+        "joint_125": 0,
+        "severity_500": 0,
+        "joint_500": 0,
+        "static_severity": 0,
+        "static_joint": 0
+      }
+    },
+    {
+      "currency": "CHF",
+      "horizon": 5,
+      "static_raw_ratios": {
+        "fast_base": 2.5283455553717573,
+        "primary_frequency_eta_1/20_horizon_lanes": 2.244480947333469
+      },
+      "static_ratios": {
+        "fast_base": 2.5283455553717573,
+        "primary_frequency_eta_1/20_horizon_lanes": 2.244480947333469
+      },
+      "static_fit_count": 2554,
+      "static_available_from_origin_index": 5374,
+      "static_available_from_date": "2019-12-31",
+      "periods": {
+        "development": {
+          "n": 2554,
+          "first_origin": "2010-01-04",
+          "last_origin": "2019-12-20",
+          "last_target": "2019-12-31"
+        },
+        "retrospective_2020_2025": {
+          "n": 1533,
+          "first_origin": "2020-01-02",
+          "last_origin": "2025-12-22",
+          "last_target": "2025-12-31"
+        },
+        "retrospective_2026": {
+          "n": 183,
+          "first_origin": "2026-01-02",
+          "last_origin": "2026-09-18",
+          "last_target": "2026-09-25"
+        }
+      },
+      "models": {
+        "fast_base": {
+          "development": {
+            "n": 2554,
+            "mean_fz0": 1.4486199112228382,
+            "exceedances": 88,
+            "exceedance_fraction": 0.03445575567736883,
+            "mean_es_identification_residual": 0.14995716282105245,
+            "mean_var": 1.8164610441094737,
+            "mean_es": 2.5206303717494873,
+            "mean_normalized_es_residual": 1.1111080924132655,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1533,
+            "mean_fz0": 0.7538783846418472,
+            "exceedances": 52,
+            "exceedance_fraction": 0.033920417482061316,
+            "mean_es_identification_residual": 0.0317369805066952,
+            "mean_var": 1.5547493734862796,
+            "mean_es": 1.9641204284713274,
+            "mean_normalized_es_residual": 0.1418766502060184,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 183,
+            "mean_fz0": 0.06426231987270187,
+            "exceedances": 5,
+            "exceedance_fraction": 0.0273224043715847,
+            "mean_es_identification_residual": -0.006129742204867605,
+            "mean_var": 0.8953762722394992,
+            "mean_es": 1.0619829121107147,
+            "mean_normalized_es_residual": 0.02634988893626503,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "frequency_only": {
+          "development": {
+            "n": 2554,
+            "mean_fz0": 1.3805706460420604,
+            "exceedances": 70,
+            "exceedance_fraction": 0.0274079874706343,
+            "mean_es_identification_residual": -0.14293820884449068,
+            "mean_var": 2.1011185831335433,
+            "mean_es": 2.918950731329592,
+            "mean_normalized_es_residual": 0.8272434843749771,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1533,
+            "mean_fz0": 0.7565544471599803,
+            "exceedances": 38,
+            "exceedance_fraction": 0.024787997390737115,
+            "mean_es_identification_residual": -0.14606952408096402,
+            "mean_var": 1.7417252365818303,
+            "mean_es": 2.2016447568485162,
+            "mean_normalized_es_residual": 0.0018720204372248955,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 183,
+            "mean_fz0": 0.09061615031155944,
+            "exceedances": 4,
+            "exceedance_fraction": 0.02185792349726776,
+            "mean_es_identification_residual": -0.10853930339542281,
+            "mean_var": 1.0075838427451695,
+            "mean_es": 1.1945297183881143,
+            "mean_normalized_es_residual": -0.09071890067790864,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "severity_125": {
+          "development": {
+            "n": 2554,
+            "mean_fz0": 1.5262421953438507,
+            "exceedances": 88,
+            "exceedance_fraction": 0.03445575567736883,
+            "mean_es_identification_residual": -2.5346850554807903,
+            "mean_var": 1.8164610441094737,
+            "mean_es": 5.2052725900513295,
+            "mean_normalized_es_residual": -0.004715377616732094,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1533,
+            "mean_fz0": 0.7638917394344191,
+            "exceedances": 52,
+            "exceedance_fraction": 0.033920417482061316,
+            "mean_es_identification_residual": -0.2205147594758666,
+            "mean_var": 1.5547493734862796,
+            "mean_es": 2.2163721684538893,
+            "mean_normalized_es_residual": -0.0022845518506116455,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 183,
+            "mean_fz0": 0.09141484411163514,
+            "exceedances": 5,
+            "exceedance_fraction": 0.0273224043715847,
+            "mean_es_identification_residual": -0.15079911590430586,
+            "mean_var": 0.8953762722394992,
+            "mean_es": 1.206652285810153,
+            "mean_normalized_es_residual": -0.13253729728367303,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "joint_125": {
+          "development": {
+            "n": 2554,
+            "mean_fz0": 1.5084763467298241,
+            "exceedances": 70,
+            "exceedance_fraction": 0.0274079874706343,
+            "mean_es_identification_residual": -2.647724032829705,
+            "mean_var": 2.1011185831335433,
+            "mean_es": 5.4237365553148065,
+            "mean_normalized_es_residual": -0.010477646539534655,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1533,
+            "mean_fz0": 0.7630102045555622,
+            "exceedances": 38,
+            "exceedance_fraction": 0.024787997390737115,
+            "mean_es_identification_residual": -0.18163294463475937,
+            "mean_var": 1.7417252365818303,
+            "mean_es": 2.237208177402312,
+            "mean_normalized_es_residual": -0.0012775532303745834,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 183,
+            "mean_fz0": 0.10015307685033824,
+            "exceedances": 4,
+            "exceedance_fraction": 0.02185792349726776,
+            "mean_es_identification_residual": -0.14086820794629262,
+            "mean_var": 1.0075838427451695,
+            "mean_es": 1.2268586229389842,
+            "mean_normalized_es_residual": -0.12009447437611459,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "severity_500": {
+          "development": {
+            "n": 2554,
+            "mean_fz0": 1.4301608410069353,
+            "exceedances": 88,
+            "exceedance_fraction": 0.03445575567736883,
+            "mean_es_identification_residual": -1.8682866877716144,
+            "mean_var": 1.8164610441094737,
+            "mean_es": 4.538874222342154,
+            "mean_normalized_es_residual": 0.11981920597840125,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1533,
+            "mean_fz0": 0.7395929391766544,
+            "exceedances": 52,
+            "exceedance_fraction": 0.033920417482061316,
+            "mean_es_identification_residual": -0.5264640750893016,
+            "mean_var": 1.5547493734862796,
+            "mean_es": 2.522321484067324,
+            "mean_normalized_es_residual": -0.1883677502590544,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 183,
+            "mean_fz0": 0.09309804800535122,
+            "exceedances": 5,
+            "exceedance_fraction": 0.0273224043715847,
+            "mean_es_identification_residual": -0.22624712443644096,
+            "mean_var": 0.8953762722394992,
+            "mean_es": 1.282100294342288,
+            "mean_normalized_es_residual": -0.21834116542622214,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "joint_500": {
+          "development": {
+            "n": 2554,
+            "mean_fz0": 1.4226520825927982,
+            "exceedances": 70,
+            "exceedance_fraction": 0.0274079874706343,
+            "mean_es_identification_residual": -1.9785823440205517,
+            "mean_var": 2.1011185831335433,
+            "mean_es": 4.754594866505654,
+            "mean_normalized_es_residual": 0.08209338187706393,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1533,
+            "mean_fz0": 0.7477587954206913,
+            "exceedances": 38,
+            "exceedance_fraction": 0.024787997390737115,
+            "mean_es_identification_residual": -0.47784973589276236,
+            "mean_var": 1.7417252365818303,
+            "mean_es": 2.5334249686603147,
+            "mean_normalized_es_residual": -0.16092923220162444,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 183,
+            "mean_fz0": 0.10717015166485117,
+            "exceedances": 4,
+            "exceedance_fraction": 0.02185792349726776,
+            "mean_es_identification_residual": -0.2220171610639886,
+            "mean_var": 1.0075838427451695,
+            "mean_es": 1.30800757605668,
+            "mean_normalized_es_residual": -0.2017903860128163,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "static_severity": {
+          "development": {
+            "n": 2554,
+            "mean_fz0": 1.207036798747979,
+            "exceedances": 88,
+            "exceedance_fraction": 0.03445575567736883,
+            "mean_es_identification_residual": -1.9220536728095898,
+            "mean_var": 1.8164610441094737,
+            "mean_es": 4.5926412073801295,
+            "mean_normalized_es_residual": -8.90264978242882e-17,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1533,
+            "mean_fz0": 0.8587923457176884,
+            "exceedances": 52,
+            "exceedance_fraction": 0.033920417482061316,
+            "mean_es_identification_residual": -1.9350862591930365,
+            "mean_var": 1.5547493734862796,
+            "mean_es": 3.9309436681710594,
+            "mean_normalized_es_residual": -1.089732590275649,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 183,
+            "mean_fz0": 0.2931916853649365,
+            "exceedances": 5,
+            "exceedance_fraction": 0.0273224043715847,
+            "mean_es_identification_residual": -1.2079674483962237,
+            "mean_var": 0.8953762722394992,
+            "mean_es": 2.263820618302071,
+            "mean_normalized_es_residual": -1.3155389739543175,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        },
+        "static_joint": {
+          "development": {
+            "n": 2554,
+            "mean_fz0": 1.2164913501503576,
+            "exceedances": 70,
+            "exceedance_fraction": 0.0274079874706343,
+            "mean_es_identification_residual": -1.9399081054464296,
+            "mean_var": 2.1011185831335433,
+            "mean_es": 4.71592062793153,
+            "mean_normalized_es_residual": 0.0,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2020_2025": {
+            "n": 1533,
+            "mean_fz0": 0.8617249780968608,
+            "exceedances": 38,
+            "exceedance_fraction": 0.024787997390737115,
+            "mean_es_identification_residual": -1.8536938762302437,
+            "mean_var": 1.7417252365818303,
+            "mean_es": 3.9092691089977962,
+            "mean_normalized_es_residual": -0.9458726120061537,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          },
+          "retrospective_2026": {
+            "n": 183,
+            "mean_fz0": 0.2988590139896326,
+            "exceedances": 4,
+            "exceedance_fraction": 0.02185792349726776,
+            "mean_es_identification_residual": -1.1755123228898834,
+            "mean_var": 1.0075838427451695,
+            "mean_es": 2.261502737882575,
+            "mean_normalized_es_residual": -1.1487431555302028,
+            "cap_count": 0,
+            "cap_fraction": 0.0
+          }
+        }
+      },
+      "all_history_cap_count": {
+        "fast_base": 0,
+        "frequency_only": 0,
+        "severity_125": 0,
+        "joint_125": 0,
+        "severity_500": 0,
+        "joint_500": 0,
+        "static_severity": 0,
+        "static_joint": 0
+      }
+    }
+  ],
+  "normalized_es_residual": "(Q + max(Y-Q,0)/beta - E)/Q = R-E/Q",
+  "pending_convention": "Responses and pre/post-update states NaN; issued forecasts and states retained.",
+  "static_availability": "Static formulas before the last development target receipt are retrospective/in-sample evaluations; the fitted ratio is first available after processing that receipt, before issuing at that same origin.",
+  "model_order": [
+    "fast_base",
+    "frequency_only",
+    "severity_125",
+    "joint_125",
+    "severity_500",
+    "joint_500",
+    "static_severity",
+    "static_joint"
+  ],
+  "period_contract_cases": {
+    "development": 20448,
+    "retrospective_2020_2025": 12280,
+    "retrospective_2026": 1480
+  },
+  "period_forecast_pairs": {
+    "development": 163584,
+    "retrospective_2020_2025": 98240,
+    "retrospective_2026": 11840
+  },
+  "predictions_sha256": "b9b859a9fa45bc5340837a4ec98d1b0b7c4b16f0a0b00700191072ea0f8b58ac",
+  "source_sha256": {
+    "severity_risk.py": "0041d336c5d368ace5134ad2c612d00b3ed2f50620eb13676f43fb340b23747c",
+    "benchmark_severity_risk.py": "77c0c2c2e9f685e416de91393f770b8d38c0a8aab14c0d5076aadd3c65192a93",
+    "ecb_risk.py": "6665aecf956f8e9885a4bd269b9d2ab447b90050bb34f9c8503daa73057b8a8d"
+  },
+  "combined_execution_seconds": 20.200974588000463
+}

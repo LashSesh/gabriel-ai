@@ -1,0 +1,116 @@
+{
+  "protocol_sha256": "375210e4d9dadca8536d6a70e7270319001c8555ae31f42b3fd91e6b70993a37",
+  "cases_per_policy": 102400,
+  "policies": {
+    "ring_minimax": {
+      "cases": 102400,
+      "wrong_known": 0,
+      "unresolved": 0,
+      "minimum_queries": 12,
+      "maximum_queries": 17,
+      "mean_queries": 14.24,
+      "clean_queries": [
+        12
+      ],
+      "count_sum": 1458176,
+      "query_histogram": {
+        "12": 53248,
+        "16": 16384,
+        "17": 32768
+      }
+    },
+    "ring_ec2": {
+      "cases": 102400,
+      "wrong_known": 0,
+      "unresolved": 0,
+      "minimum_queries": 12,
+      "maximum_queries": 17,
+      "mean_queries": 14.24,
+      "clean_queries": [
+        12
+      ],
+      "count_sum": 1458176,
+      "query_histogram": {
+        "12": 53248,
+        "17": 32768,
+        "16": 16384
+      }
+    },
+    "ring_fixed": {
+      "cases": 102400,
+      "wrong_known": 0,
+      "unresolved": 0,
+      "minimum_queries": 12,
+      "maximum_queries": 24,
+      "mean_queries": 15.56,
+      "clean_queries": [
+        12
+      ],
+      "count_sum": 1593344,
+      "query_histogram": {
+        "12": 53248,
+        "15": 4096,
+        "23": 4096,
+        "17": 4096,
+        "19": 4096,
+        "21": 4096,
+        "24": 8192,
+        "14": 4096,
+        "16": 4096,
+        "18": 4096,
+        "20": 4096,
+        "22": 4096
+      }
+    },
+    "lexical_robust_prefix": {
+      "cases": 102400,
+      "wrong_known": 0,
+      "unresolved": 0,
+      "minimum_queries": 18,
+      "maximum_queries": 24,
+      "mean_queries": 20.72,
+      "clean_queries": [
+        18
+      ],
+      "count_sum": 2121728,
+      "query_histogram": {
+        "18": 28672,
+        "21": 12288,
+        "20": 12288,
+        "19": 8192,
+        "22": 12288,
+        "23": 12288,
+        "24": 16384
+      }
+    },
+    "full_robust": {
+      "cases": 102400,
+      "wrong_known": 0,
+      "unresolved": 0,
+      "minimum_queries": 24,
+      "maximum_queries": 24,
+      "mean_queries": 24.0,
+      "clean_queries": [
+        24
+      ],
+      "count_sum": 2457600,
+      "query_histogram": {
+        "24": 102400
+      }
+    }
+  },
+  "target_distance": 3,
+  "minimum_logical_patterns": 12,
+  "required_fixed_queries": 24,
+  "ring_prefix_queries": 12,
+  "continuation_minimax": 5,
+  "bellman_nodes": 289,
+  "stress_two_error_patterns": 276,
+  "two_budget_status": {
+    "known": 240,
+    "ambiguous": 36
+  },
+  "one_budget_wrong_full": 36,
+  "one_budget_wrong_ring": 70,
+  "seconds": 7.260586921001959
+}

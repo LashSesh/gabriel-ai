@@ -1,0 +1,100 @@
+{
+  "full_owner_probe": {
+    "certificate_comparisons": 4,
+    "complete_owners_executed": 2,
+    "cross_profile_issue_comparisons": 2,
+    "passed": true,
+    "profiles": {
+      "legacy_scalar": {
+        "closed_database_sha256": "a69d181141bbc021eee3542c169f84144e55e0d0e5ef3a8adea0919325827f87",
+        "execute_guard_trace": [
+          "__init__",
+          "fingerprint",
+          "fingerprint",
+          "fingerprint",
+          "_invoke",
+          "_invoke",
+          "apply",
+          "apply",
+          "fingerprint",
+          "_invoke",
+          "_invoke",
+          "apply",
+          "apply"
+        ],
+        "issue_hashes": [
+          "b0da1e72184956f63c12e8019ddf629b8fa0114dafc56e41c546a60864ce8cac",
+          "7bed67fc041c9487c9c21c50646543749b4be1fcc4aa1c3c2e42537f15c35c11"
+        ],
+        "own_event_count": 3,
+        "own_head": "c8df6d0403fbeac81f1dcd46fdc127006b5a06ffd777b23b1aa9e3a8f88b8e5f",
+        "replay_guard_trace": [
+          "__init__",
+          "fingerprint",
+          "_invoke",
+          "_invoke",
+          "apply",
+          "apply",
+          "_invoke",
+          "_invoke",
+          "apply",
+          "apply"
+        ]
+      },
+      "strict_batch": {
+        "closed_database_sha256": "1fe40898556808c8295387126d62fc453800f4c35587e8c2669d05fdf03ee0fc",
+        "execute_guard_trace": [
+          "__init__",
+          "fingerprint",
+          "fingerprint",
+          "fingerprint",
+          "_invoke",
+          "_invoke",
+          "apply",
+          "apply",
+          "fingerprint",
+          "_invoke",
+          "_invoke",
+          "apply",
+          "apply"
+        ],
+        "issue_hashes": [
+          "b0da1e72184956f63c12e8019ddf629b8fa0114dafc56e41c546a60864ce8cac",
+          "7bed67fc041c9487c9c21c50646543749b4be1fcc4aa1c3c2e42537f15c35c11"
+        ],
+        "own_event_count": 3,
+        "own_head": "c8feff241c3450ad88134f78631ff23b29c19e7d23ead269f03c0e7816086132",
+        "replay_guard_trace": [
+          "__init__",
+          "fingerprint",
+          "_invoke",
+          "_invoke",
+          "apply",
+          "apply",
+          "_invoke",
+          "_invoke",
+          "apply",
+          "apply"
+        ]
+      }
+    },
+    "scope": "Actual Engine + Store; two sequential observations with changed source and targets; no timing.",
+    "separate_full_replays_executed": 2
+  },
+  "passed": true,
+  "schema": "gabriel.strict-batch-independent-verification/v1",
+  "scope": "Independent structural and full-owner equivalence verification; no performance measurement.",
+  "source_contract": {
+    "constructor_and_guard_ast_equal_after_qualifier_normalization": true,
+    "extra_sources": [
+      "gabriel_runtime/batched_reachability.py",
+      "gabriel_runtime/window_batch.py"
+    ],
+    "original_closure_digest": "c4d86ee34585d46890963dafb046dbb0d6ed08d31604b84f09c7589698d5bcf1",
+    "original_source_files": 72,
+    "strict_closure_digest": "b0d907698922c84ad389a864b1af4e020110a38c9126f2901c50780d00a83f3f",
+    "strict_source_files": 74,
+    "whole_transition_ast_equal_outside_certificate_call": true
+  },
+  "verifier_sha256": "57e1ad0b06e9c763cf6336f7e010b138c94de9953f6a90b3b1fd7827914b241a"
+}

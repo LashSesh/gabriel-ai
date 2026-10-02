@@ -1,0 +1,67 @@
+{
+  "config": {
+    "n": 48,
+    "degree": 6,
+    "backbone_degree": 2,
+    "input_dim": 2,
+    "g0": 0.4,
+    "gains": [
+      0.07,
+      0.07
+    ],
+    "betas": [
+      0.03,
+      0.2
+    ],
+    "thresholds": [
+      0.08,
+      0.08
+    ],
+    "leaks": [
+      0.15,
+      0.4,
+      0.8
+    ],
+    "input_scale": 0.8,
+    "bias_scale": 0.15
+  },
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "input_seed_rule": "10000 + model seed",
+  "verification_seed": 8801,
+  "n_steps": 6000,
+  "train": [
+    400,
+    3000
+  ],
+  "validation": [
+    3100,
+    4000
+  ],
+  "test": [
+    4100,
+    6000
+  ],
+  "indexing": "zero-based, half-open",
+  "ridge_grid": [
+    1e-06,
+    0.0001,
+    0.01,
+    1.0,
+    100.0
+  ],
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "scipy": "1.17.0",
+  "elapsed_seconds": 32.89709138870239
+}

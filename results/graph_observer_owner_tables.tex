@@ -1,0 +1,15 @@
+\begin{table}[H]\centering\small
+\caption{Complete durable graph-observation tasks, from adapter creation through SQLite owner close. Median ratios and observed ranges of five worker medians, each from three paired triples. Every append and query starts a native process and replays the accumulated history. This includes the actual process, identity-check and durable-transaction costs.}
+\label{tab:graphobserverowner}
+\begin{tabular}{lrrrr}\toprule
+Graph & $q$ & Total/full & Total/region [range] & Region (ms)\\\midrule
+Clique 13 & 1 & 0.99 & $1.00\,[0.98,\,1.08]$ & 150.7\\
+Clique 13 & 256 & 0.99 & $0.99\,[0.97,\,1.00]$ & 155.9\\
+Clique 64 & 1 & 1.01 & $0.99\,[0.97,\,1.01]$ & 151.0\\
+Clique 64 & 256 & 1.02 & $1.06\,[1.02,\,1.07]$ & 157.2\\
+Path 13 & 1 & 1.01 & $1.00\,[0.99,\,1.03]$ & 640.8\\
+Path 13 & 256 & 1.02 & $0.99\,[0.97,\,1.01]$ & 658.2\\
+Near-clique 13 & 1 & 1.01 & $0.99\,[0.92,\,1.02]$ & 191.4\\
+Near-clique 13 & 256 & 0.98 & $0.98\,[0.96,\,1.01]$ & 199.6\\
+\bottomrule\end{tabular}
+\end{table}

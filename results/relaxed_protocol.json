@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-25",
+  "selection": "Methods specified after training-only probes on first eight training records per dataset; no head refitting",
+  "frozen_model": "same trace observer as preceding study",
+  "datasets": [
+    "RacketSports",
+    "BasicMotions"
+  ],
+  "policies": [
+    "derivative",
+    "decision"
+  ],
+  "bounds": [
+    "old_hybrid",
+    "affine_intersection"
+  ],
+  "affine": "parallel secant-slope tanh residual bounds; centered quadratic history residual",
+  "nesting": "running intersection under exact compatible queries",
+  "decision_rule": "midpoint candidate; least-proven rival; largest interval derivative contribution",
+  "decision_margin": 1e-10,
+  "arithmetic": "float64 screening; independent validated arithmetic is separate",
+  "scope": "development on previously examined tasks, not fresh confirmation"
+}

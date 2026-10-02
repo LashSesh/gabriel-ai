@@ -1,0 +1,731 @@
+{
+  "schema": 1,
+  "review": "Independent read-only recomputation from retained full raw measurement records in results.json, cross-checked against every nonempty per-command stdout; no builds/timings rerun or benchmark sources changed.",
+  "data_directory": "native_pse/benchmark-results/indexed_engine/executed",
+  "recomputed_summary_rows": 32,
+  "maximum_absolute_ratio_difference_from_published_summary": 0.0,
+  "all_orders_counts_and_commit_assertions_passed": true,
+  "raw_artifact_issue": {
+    "expected_json_stdout_count": 111,
+    "incomplete_json_stdout_count": 2,
+    "incomplete_records": [
+      {
+        "filename": "engine_indexed_vs_packed_0_indexed.stdout",
+        "mode": "engine",
+        "bytes": 0,
+        "parse_error": "JSONDecodeError"
+      },
+      {
+        "filename": "engine_memoized_vs_indexed_2_indexed.stdout",
+        "mode": "engine",
+        "bytes": 0,
+        "parse_error": "JSONDecodeError"
+      }
+    ],
+    "legitimate_empty_build_stdout": [
+      "build_packed.stdout",
+      "build_indexed.stdout",
+      "build_memoized.stdout"
+    ],
+    "retained_payload_source": "results.json",
+    "retained_payload_source_sha256": "5dd3bd54357d9abb4d72ce98fdb61cebdc748ed084fa7be8b0b7a2c7e6e4f843",
+    "retained_record_counts": {
+      "engine_processes": 20,
+      "engine_measurement_rows": 2000,
+      "first_macrostep_rows": 80,
+      "micro_rows": 224
+    },
+    "retained_companions": [
+      {
+        "file": "engine_indexed_vs_packed_0_indexed_retained_payload.json",
+        "sha256": "66310d0fae9bceceaf541d48d03fc8cdace85f405d55213f730707043a6d36a0",
+        "measurement_rows": 100
+      },
+      {
+        "file": "engine_memoized_vs_indexed_2_indexed_retained_payload.json",
+        "sha256": "369398d6745f735f827164c0478d93177f5c7a99b72845e0bd56041697cfc943",
+        "measurement_rows": 100
+      }
+    ],
+    "nonempty_engine_first_micro_stdout_crosscheck": "Every available nonempty individual engine/first/micro stdout parses identically to its retained results.json payload",
+    "evidence_gap": "Two of 20 warm-engine process stdout files are zero bytes (200 of 2000 engine rows). Their full originally parsed measurements remain in results.json and explicit provenance-marked re-serialized companions. Original stdout byte streams for these two processes are unavailable. No timing was rerun and empty originals remain unchanged."
+  },
+  "frozen_source_hash_manifests_equal": true,
+  "source_files_guarded": 71,
+  "goldens": {
+    "engine": {
+      "three_way_exact_bytes": true,
+      "bytes_each": 1257369,
+      "sha256": "d5cd9c4dc99a68b8d51fd3ebf4e5cddf8efba718846bcecfd86d56b74fa6973c"
+    },
+    "micro": {
+      "three_way_exact_bytes": true,
+      "bytes_each": 3173601,
+      "sha256": "5b5140807d34632aa84f469247aaf2c98c0c23d03d14d4be83af22233780af2b"
+    }
+  },
+  "counts": {
+    "recorded_successful_commands": 116,
+    "warm_engine_processes": 20,
+    "timed_fresh_8_tick_engines": 2000,
+    "timed_engine_ticks": 16000,
+    "timed_engine_commits": 16000,
+    "timed_engine_observations": 92000,
+    "first_macrostep_processes": 80,
+    "first_macrostep_ticks": 80,
+    "first_macrostep_commits": 80,
+    "timed_micro_passes": 224,
+    "timed_complete_signature_calls": 114688,
+    "untimed_engine_warmup_ticks": 640,
+    "untimed_engine_golden_ticks": 96,
+    "untimed_micro_warmup_calls": 16384,
+    "untimed_micro_golden_signature_calls": 7689,
+    "untimed_micro_diagnostic_calls": 8192
+  },
+  "engine": [
+    {
+      "comparison": "indexed_vs_packed",
+      "entities": 3,
+      "median_paired_ratio": 1.6617364305630073,
+      "paired_ratio_range": [
+        1.5767065537208613,
+        1.7504673578828975
+      ],
+      "median_8_tick_engine_us": {
+        "packed": 912.018,
+        "indexed": 567.5
+      },
+      "absolute_time_statistic": "median of five per-process medians, each from 25 fresh engines"
+    },
+    {
+      "comparison": "indexed_vs_packed",
+      "entities": 5,
+      "median_paired_ratio": 1.3201388594428112,
+      "paired_ratio_range": [
+        1.23404800871159,
+        1.3996676489143898
+      ],
+      "median_8_tick_engine_us": {
+        "packed": 2397.289,
+        "indexed": 1815.937
+      },
+      "absolute_time_statistic": "median of five per-process medians, each from 25 fresh engines"
+    },
+    {
+      "comparison": "indexed_vs_packed",
+      "entities": 7,
+      "median_paired_ratio": 1.1773060823532622,
+      "paired_ratio_range": [
+        1.1242661707057993,
+        1.2783833986041526
+      ],
+      "median_8_tick_engine_us": {
+        "packed": 5523.558,
+        "indexed": 4580.875
+      },
+      "absolute_time_statistic": "median of five per-process medians, each from 25 fresh engines"
+    },
+    {
+      "comparison": "indexed_vs_packed",
+      "entities": 8,
+      "median_paired_ratio": 0.9889991963937687,
+      "paired_ratio_range": [
+        0.924525996653428,
+        1.0416972203400465
+      ],
+      "median_8_tick_engine_us": {
+        "packed": 6381.186,
+        "indexed": 6452.165
+      },
+      "absolute_time_statistic": "median of five per-process medians, each from 25 fresh engines"
+    },
+    {
+      "comparison": "memoized_vs_indexed",
+      "entities": 3,
+      "median_paired_ratio": 1.2434724129498298,
+      "paired_ratio_range": [
+        1.207655491435376,
+        1.2897003005495906
+      ],
+      "median_8_tick_engine_us": {
+        "indexed": 526.876,
+        "memoized": 425.272
+      },
+      "absolute_time_statistic": "median of five per-process medians, each from 25 fresh engines"
+    },
+    {
+      "comparison": "memoized_vs_indexed",
+      "entities": 5,
+      "median_paired_ratio": 1.075033270208411,
+      "paired_ratio_range": [
+        1.0573510038770548,
+        1.1869831792919747
+      ],
+      "median_8_tick_engine_us": {
+        "indexed": 1788.034,
+        "memoized": 1652.543
+      },
+      "absolute_time_statistic": "median of five per-process medians, each from 25 fresh engines"
+    },
+    {
+      "comparison": "memoized_vs_indexed",
+      "entities": 7,
+      "median_paired_ratio": 1.0138594701109478,
+      "paired_ratio_range": [
+        0.9873266495999972,
+        1.1137016195198308
+      ],
+      "median_8_tick_engine_us": {
+        "indexed": 4461.608,
+        "memoized": 4353.346
+      },
+      "absolute_time_statistic": "median of five per-process medians, each from 25 fresh engines"
+    },
+    {
+      "comparison": "memoized_vs_indexed",
+      "entities": 8,
+      "median_paired_ratio": 0.9853621314330074,
+      "paired_ratio_range": [
+        0.9748594770292726,
+        1.0841649440017274
+      ],
+      "median_8_tick_engine_us": {
+        "indexed": 6322.382,
+        "memoized": 6304.221
+      },
+      "absolute_time_statistic": "median of five per-process medians, each from 25 fresh engines"
+    }
+  ],
+  "first_macrostep": [
+    {
+      "comparison": "indexed_vs_packed",
+      "entities": 3,
+      "median_paired_ratio": 14.153611557942199,
+      "paired_ratio_range": [
+        8.891206185834765,
+        15.838100668208412
+      ],
+      "median_first_macrostep_us": {
+        "packed": 2396.349,
+        "indexed": 172.956
+      }
+    },
+    {
+      "comparison": "indexed_vs_packed",
+      "entities": 5,
+      "median_paired_ratio": 5.896077893648571,
+      "paired_ratio_range": [
+        5.615404056929704,
+        7.864900521796627
+      ],
+      "median_first_macrostep_us": {
+        "packed": 2488.427,
+        "indexed": 412.049
+      }
+    },
+    {
+      "comparison": "indexed_vs_packed",
+      "entities": 7,
+      "median_paired_ratio": 4.007735092792834,
+      "paired_ratio_range": [
+        3.2289814706162363,
+        4.854159851706466
+      ],
+      "median_first_macrostep_us": {
+        "packed": 2916.81,
+        "indexed": 660.312
+      }
+    },
+    {
+      "comparison": "indexed_vs_packed",
+      "entities": 8,
+      "median_paired_ratio": 0.9829572804200569,
+      "paired_ratio_range": [
+        0.7477725656351668,
+        1.41142880117495
+      ],
+      "median_first_macrostep_us": {
+        "packed": 988.331,
+        "indexed": 860.074
+      }
+    },
+    {
+      "comparison": "memoized_vs_indexed",
+      "entities": 3,
+      "median_paired_ratio": 0.8513966932125965,
+      "paired_ratio_range": [
+        0.7763384911554247,
+        0.9109415023763192
+      ],
+      "median_first_macrostep_us": {
+        "indexed": 170.987,
+        "memoized": 197.896
+      }
+    },
+    {
+      "comparison": "memoized_vs_indexed",
+      "entities": 5,
+      "median_paired_ratio": 0.9201443252851779,
+      "paired_ratio_range": [
+        0.7603973659925837,
+        1.0065255985797226
+      ],
+      "median_first_macrostep_us": {
+        "indexed": 315.59,
+        "memoized": 343.4
+      }
+    },
+    {
+      "comparison": "memoized_vs_indexed",
+      "entities": 7,
+      "median_paired_ratio": 0.9367500657312905,
+      "paired_ratio_range": [
+        0.7727859926857126,
+        1.3968614650303723
+      ],
+      "median_first_macrostep_us": {
+        "indexed": 629.911,
+        "memoized": 669.392
+      }
+    },
+    {
+      "comparison": "memoized_vs_indexed",
+      "entities": 8,
+      "median_paired_ratio": 1.0661121345027538,
+      "paired_ratio_range": [
+        0.8785621788626011,
+        1.9312125282199297
+      ],
+      "median_first_macrostep_us": {
+        "indexed": 916.156,
+        "memoized": 875.906
+      }
+    }
+  ],
+  "micro": [
+    {
+      "comparison": "indexed_vs_packed",
+      "n": 3,
+      "workload": "fixed",
+      "median_paired_ratio": 5.053441235958337,
+      "paired_ratio_range": [
+        3.0483828772664965,
+        5.797462592595578
+      ],
+      "median_ns_per_signature": {
+        "packed": 61741.705078125,
+        "indexed": 11571.486328125
+      }
+    },
+    {
+      "comparison": "indexed_vs_packed",
+      "n": 3,
+      "workload": "changing",
+      "median_paired_ratio": 4.871983046991545,
+      "paired_ratio_range": [
+        4.62381795510679,
+        7.482488685396943
+      ],
+      "median_ns_per_signature": {
+        "packed": 53664.02734375,
+        "indexed": 11014.822265625
+      }
+    },
+    {
+      "comparison": "indexed_vs_packed",
+      "n": 5,
+      "workload": "fixed",
+      "median_paired_ratio": 7.202169297385987,
+      "paired_ratio_range": [
+        6.375383449509041,
+        7.7673123442675305
+      ],
+      "median_ns_per_signature": {
+        "packed": 87642.2109375,
+        "indexed": 12596.3984375
+      }
+    },
+    {
+      "comparison": "indexed_vs_packed",
+      "n": 5,
+      "workload": "changing",
+      "median_paired_ratio": 4.68957144254326,
+      "paired_ratio_range": [
+        4.0284632146223505,
+        5.135393501925867
+      ],
+      "median_ns_per_signature": {
+        "packed": 69928.4140625,
+        "indexed": 14558.150390625
+      }
+    },
+    {
+      "comparison": "indexed_vs_packed",
+      "n": 5,
+      "workload": "collision",
+      "median_paired_ratio": 4.708405519211521,
+      "paired_ratio_range": [
+        4.414662994319511,
+        5.4882660385071995
+      ],
+      "median_ns_per_signature": {
+        "packed": 62373.359375,
+        "indexed": 13254.212890625
+      }
+    },
+    {
+      "comparison": "indexed_vs_packed",
+      "n": 7,
+      "workload": "fixed",
+      "median_paired_ratio": 9.864786737762048,
+      "paired_ratio_range": [
+        8.394962807854958,
+        10.451377191116528
+      ],
+      "median_ns_per_signature": {
+        "packed": 140507.689453125,
+        "indexed": 14298.939453125
+      }
+    },
+    {
+      "comparison": "indexed_vs_packed",
+      "n": 7,
+      "workload": "changing",
+      "median_paired_ratio": 3.167095716152782,
+      "paired_ratio_range": [
+        2.802896286406542,
+        3.281707298926544
+      ],
+      "median_ns_per_signature": {
+        "packed": 120439.6953125,
+        "indexed": 40951.9765625
+      }
+    },
+    {
+      "comparison": "indexed_vs_packed",
+      "n": 7,
+      "workload": "collision",
+      "median_paired_ratio": 3.8751109132107215,
+      "paired_ratio_range": [
+        3.280458198464485,
+        4.236174177364471
+      ],
+      "median_ns_per_signature": {
+        "packed": 54212.916015625,
+        "indexed": 14303.6328125
+      }
+    },
+    {
+      "comparison": "memoized_vs_indexed",
+      "n": 3,
+      "workload": "fixed",
+      "median_paired_ratio": 97.3473217158631,
+      "paired_ratio_range": [
+        90.13245819397993,
+        100.66238754502467
+      ],
+      "median_ns_per_signature": {
+        "indexed": 11227.07421875,
+        "memoized": 115.330078125
+      }
+    },
+    {
+      "comparison": "memoized_vs_indexed",
+      "n": 3,
+      "workload": "changing",
+      "median_paired_ratio": 77.23477535301669,
+      "paired_ratio_range": [
+        53.23010921934085,
+        104.2064685464781
+      ],
+      "median_ns_per_signature": {
+        "indexed": 11936.369140625,
+        "memoized": 155.8125
+      }
+    },
+    {
+      "comparison": "memoized_vs_indexed",
+      "n": 5,
+      "workload": "fixed",
+      "median_paired_ratio": 66.85538848550684,
+      "paired_ratio_range": [
+        39.18666952077703,
+        70.22711936840685
+      ],
+      "median_ns_per_signature": {
+        "indexed": 11616.8828125,
+        "memoized": 173.66796875
+      }
+    },
+    {
+      "comparison": "memoized_vs_indexed",
+      "n": 5,
+      "workload": "changing",
+      "median_paired_ratio": 1.3348748976823086,
+      "paired_ratio_range": [
+        1.2798756134677374,
+        1.5103478001298332
+      ],
+      "median_ns_per_signature": {
+        "indexed": 14366.71875,
+        "memoized": 10621.849609375
+      }
+    },
+    {
+      "comparison": "memoized_vs_indexed",
+      "n": 5,
+      "workload": "collision",
+      "median_paired_ratio": 0.9777873145508332,
+      "paired_ratio_range": [
+        0.7544069772586615,
+        1.0942367263841546
+      ],
+      "median_ns_per_signature": {
+        "indexed": 13136.4140625,
+        "memoized": 13450.373046875
+      }
+    },
+    {
+      "comparison": "memoized_vs_indexed",
+      "n": 7,
+      "workload": "fixed",
+      "median_paired_ratio": 38.11972762500932,
+      "paired_ratio_range": [
+        34.150149876501764,
+        141.72673143692515
+      ],
+      "median_ns_per_signature": {
+        "indexed": 15985.26953125,
+        "memoized": 383.423828125
+      }
+    },
+    {
+      "comparison": "memoized_vs_indexed",
+      "n": 7,
+      "workload": "changing",
+      "median_paired_ratio": 1.033595209503219,
+      "paired_ratio_range": [
+        0.7564986527768464,
+        1.3228113847916656
+      ],
+      "median_ns_per_signature": {
+        "indexed": 40149.328125,
+        "memoized": 37541.513671875
+      }
+    },
+    {
+      "comparison": "memoized_vs_indexed",
+      "n": 7,
+      "workload": "collision",
+      "median_paired_ratio": 0.9698870288998924,
+      "paired_ratio_range": [
+        0.8802990602092755,
+        1.2321136334997163
+      ],
+      "median_ns_per_signature": {
+        "indexed": 14269.65234375,
+        "memoized": 14712.6953125
+      }
+    }
+  ],
+  "memo_micro_cache": [
+    {
+      "n": 3,
+      "workload": "fixed",
+      "timed_passes": 7,
+      "calls": 3584,
+      "hits": 3584,
+      "misses": 0,
+      "bypasses": 0,
+      "evictions": 0,
+      "hit_fraction": 1.0,
+      "hit_percent": 100.0,
+      "hits_per_512_call_pass": 512,
+      "misses_per_512_call_pass": 0
+    },
+    {
+      "n": 3,
+      "workload": "changing",
+      "timed_passes": 7,
+      "calls": 3584,
+      "hits": 3584,
+      "misses": 0,
+      "bypasses": 0,
+      "evictions": 0,
+      "hit_fraction": 1.0,
+      "hit_percent": 100.0,
+      "hits_per_512_call_pass": 512,
+      "misses_per_512_call_pass": 0
+    },
+    {
+      "n": 5,
+      "workload": "fixed",
+      "timed_passes": 7,
+      "calls": 3584,
+      "hits": 3584,
+      "misses": 0,
+      "bypasses": 0,
+      "evictions": 0,
+      "hit_fraction": 1.0,
+      "hit_percent": 100.0,
+      "hits_per_512_call_pass": 512,
+      "misses_per_512_call_pass": 0
+    },
+    {
+      "n": 5,
+      "workload": "changing",
+      "timed_passes": 7,
+      "calls": 3584,
+      "hits": 1204,
+      "misses": 2380,
+      "bypasses": 0,
+      "evictions": 2380,
+      "hit_fraction": 0.3359375,
+      "hit_percent": 33.59375,
+      "hits_per_512_call_pass": 172,
+      "misses_per_512_call_pass": 340
+    },
+    {
+      "n": 5,
+      "workload": "collision",
+      "timed_passes": 7,
+      "calls": 3584,
+      "hits": 0,
+      "misses": 3584,
+      "bypasses": 0,
+      "evictions": 3584,
+      "hit_fraction": 0.0,
+      "hit_percent": 0.0,
+      "hits_per_512_call_pass": 0,
+      "misses_per_512_call_pass": 512
+    },
+    {
+      "n": 7,
+      "workload": "fixed",
+      "timed_passes": 7,
+      "calls": 3584,
+      "hits": 3584,
+      "misses": 0,
+      "bypasses": 0,
+      "evictions": 0,
+      "hit_fraction": 1.0,
+      "hit_percent": 100.0,
+      "hits_per_512_call_pass": 512,
+      "misses_per_512_call_pass": 0
+    },
+    {
+      "n": 7,
+      "workload": "changing",
+      "timed_passes": 7,
+      "calls": 3584,
+      "hits": 518,
+      "misses": 3066,
+      "bypasses": 0,
+      "evictions": 3066,
+      "hit_fraction": 0.14453125,
+      "hit_percent": 14.453125,
+      "hits_per_512_call_pass": 74,
+      "misses_per_512_call_pass": 438
+    },
+    {
+      "n": 7,
+      "workload": "collision",
+      "timed_passes": 7,
+      "calls": 3584,
+      "hits": 0,
+      "misses": 3584,
+      "bypasses": 0,
+      "evictions": 3584,
+      "hit_fraction": 0.0,
+      "hit_percent": 0.0,
+      "hits_per_512_call_pass": 0,
+      "misses_per_512_call_pass": 512
+    }
+  ],
+  "memo_warm_engine_cache": [
+    {
+      "entities": 3,
+      "fresh_engines": 125,
+      "signature_calls_observed": 1000,
+      "hits": 1000,
+      "misses": 0,
+      "bypasses": 0,
+      "evictions": 0,
+      "hit_fraction": 1.0
+    },
+    {
+      "entities": 5,
+      "fresh_engines": 125,
+      "signature_calls_observed": 1000,
+      "hits": 1000,
+      "misses": 0,
+      "bypasses": 0,
+      "evictions": 0,
+      "hit_fraction": 1.0
+    },
+    {
+      "entities": 7,
+      "fresh_engines": 125,
+      "signature_calls_observed": 1000,
+      "hits": 1000,
+      "misses": 0,
+      "bypasses": 0,
+      "evictions": 0,
+      "hit_fraction": 1.0
+    },
+    {
+      "entities": 8,
+      "fresh_engines": 125,
+      "signature_calls_observed": 0,
+      "hits": 0,
+      "misses": 0,
+      "bypasses": 0,
+      "evictions": 0,
+      "hit_fraction": null
+    }
+  ],
+  "memo_first_macrostep_cache": [
+    {
+      "entities": 3,
+      "fresh_processes": 5,
+      "hits": 0,
+      "misses": 5
+    },
+    {
+      "entities": 5,
+      "fresh_processes": 5,
+      "hits": 0,
+      "misses": 5
+    },
+    {
+      "entities": 7,
+      "fresh_processes": 5,
+      "hits": 0,
+      "misses": 5
+    },
+    {
+      "entities": 8,
+      "fresh_processes": 5,
+      "hits": 0,
+      "misses": 0
+    }
+  ],
+  "changing_input_distinct_counts": {
+    "3": 8,
+    "5": 397,
+    "7": 512
+  },
+  "scope_and_overclaim_flags": [
+    "Full-engine cases repeatedly reuse complete K3/K5/K7 graphs; eight-source case bypasses bounded signatures. No changing/sparse full-engine benchmark was run.",
+    "Fresh GlobalState does not mean cold process caches. Warm memoized engine samples at n<=7 have 100% cache hits.",
+    "Changing micro inputs repeat the same frozen 512-input sequence each pass. n3 has only eight distinct graphs and warms to 100% hits; n5/n7 retain 33.59375%/14.453125% hit fractions.",
+    "Fixed-signature micro ratios (memoized/indexed about 38x-97x) are API hit-path results, not whole-engine or application speedups.",
+    "Memoized n7 engine median is only 1.01386x and paired range crosses 1; n8 control ratios are near 1 with variation. Do not assert a robust general n7 gain.",
+    "Collision controls have zero hits and 512 evictions per timed pass; memoized/indexed medians 0.97779x and 0.96989x indicate no miss-path advantage, with ranges crossing 1.",
+    "Fresh-process memoized first-step medians are slower than indexed for n3/n5/n7 (ratios 0.85140/0.92014/0.93675).",
+    "First-step intervals exclude process launch, input/config/GlobalState construction and serialization. They include lazy initialization inside macro_step and do not measure cold OS page-cache startup.",
+    "Engine equality covers selected state fields plus complete crystals; micro equality covers complete canonical signature bytes for the frozen corpus. Neither is exhaustive correctness over all engine state/inputs.",
+    "All three measured builds use Rust1.95.0 with LTO disabled as the recorded local linking workaround. Do not multiply ratios across comparisons or by historical ThinLTO measurements.",
+    "Paired ranges quantify observed local variation; no statistical confidence intervals or general application/model performance claims are justified."
+  ]
+}

@@ -1,0 +1,1467 @@
+{
+  "schema": 1,
+  "environment": {
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "python": "3.12.14",
+    "logical_cpus": 9,
+    "tools": {
+      "rustc": null,
+      "cargo": null,
+      "rustup": null
+    },
+    "cargo_home": null,
+    "cpu_model": "AMD EPYC 9V74 80-Core Processor",
+    "RUSTFLAGS": "",
+    "compiler_toolchain": "1.95.0-x86_64-unknown-linux-gnu",
+    "compiler_stdout": "rustc 1.95.0 (59807616e 2026-04-14)\nbinary: rustc\ncommit-hash: 59807616e1fa2540724bfbac14d7976d7e4a3860\ncommit-date: 2026-04-14\nhost: x86_64-unknown-linux-gnu\nrelease: 1.95.0\nLLVM version: 22.1.2\n",
+    "cargo_stdout": "cargo 1.95.0 (f2d3ce0bd 2026-03-21)\n",
+    "target_dir": "/workspace/scratch/657e86c899c9/tmp/gabriel_pse/build/target",
+    "source_path": "/workspace/scratch/657e86c899c9/tmp/gabriel_pse/upstream/pse",
+    "target_profile": "Cargo profile release for tests/example, bench inherits release with debug=true and strip=none",
+    "compiler_thread_scheduling": "default Cargo parallelism; no processor affinity or frequency locking",
+    "performance_counters": "Windows-only supplied harness; Linux cpu_seconds/rss fields are unavailable zeros"
+  },
+  "upstream_test_status": {
+    "test_command_label": "tests_without_windows_fixture",
+    "suites": 35,
+    "passed": 433,
+    "failed": 0,
+    "ignored": 1,
+    "filtered_out": 1,
+    "excluded_exact_test": "full_state_matches_original_golden_fixture",
+    "unfiltered_command_failed": true
+  },
+  "fork_test_status": {
+    "passed": 438,
+    "ignored": 1,
+    "filtered_out": 1,
+    "excluded_exact_test": "full_state_matches_original_golden_fixture",
+    "log": "audit/native_workspace_compatible_tests.log (relative to native_pse when delivered by core-review agent)",
+    "source": "independent core-review agent execution, see delivered exact log"
+  },
+  "historical_fixture": {
+    "engine_traces": 78,
+    "mismatching_state_hashes": 23,
+    "mismatching_crystal_hashes": 1,
+    "all_ticks_and_commit_counts_equal": true,
+    "graph_history_hashes": 128,
+    "mismatching_graph_history_hashes": 0,
+    "cause": "not established; frozen expected file has hashes, not all original values"
+  },
+  "current_comparisons": {
+    "stock": {
+      "original": {
+        "sha256": "776530dd7fbe441bacf82c11c21453595fb277e5f8cb6b742662958f710d736d",
+        "bytes": 26599,
+        "seconds": 14.585188150405884
+      },
+      "fork": {
+        "sha256": "776530dd7fbe441bacf82c11c21453595fb277e5f8cb6b742662958f710d736d",
+        "bytes": 26599,
+        "seconds": 0.41970062255859375
+      },
+      "stdout_bytes_identical": true
+    },
+    "focused": {
+      "original": {
+        "sha256": "aced3468d2bf9226287d85eccb503bb3621eafe292a8ea77a8709cc21bca96b4",
+        "bytes": 1257237,
+        "seconds": 8.443076372146606
+      },
+      "fork": {
+        "sha256": "aced3468d2bf9226287d85eccb503bb3621eafe292a8ea77a8709cc21bca96b4",
+        "bytes": 1257237,
+        "seconds": 0.04274868965148926
+      },
+      "stdout_bytes_identical": true
+    },
+    "focused_scope": "Selected explicit state snapshots plus complete returned crystal values; see snapshot_scope.json."
+  },
+  "focused_workload_semantics": [
+    {
+      "entities": 3,
+      "ticks": 8,
+      "commits": 8,
+      "region_sizes": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "metatron_signature_present": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "entities": 5,
+      "ticks": 8,
+      "commits": 8,
+      "region_sizes": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "metatron_signature_present": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "entities": 7,
+      "ticks": 8,
+      "commits": 8,
+      "region_sizes": [
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7
+      ],
+      "metatron_signature_present": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "entities": 8,
+      "ticks": 8,
+      "commits": 8,
+      "region_sizes": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "metatron_signature_present": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    }
+  ],
+  "stock_summary": [
+    {
+      "mode": "adaptive",
+      "entities": 8,
+      "ticks": 256,
+      "pairs": [
+        {
+          "pair": 0,
+          "original": {
+            "obs_per_s_median": 705285.161805778,
+            "p50_tick_ns_median": 10646,
+            "allocations_per_observation": 11.4443359375,
+            "nodes": [
+              8
+            ],
+            "edges": [
+              28
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 715556.50590404,
+            "p50_tick_ns_median": 10436,
+            "allocations_per_observation": 11.4443359375,
+            "nodes": [
+              8
+            ],
+            "edges": [
+              28
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "speed_ratio": 1.0145633917378378
+        },
+        {
+          "pair": 1,
+          "original": {
+            "obs_per_s_median": 697431.7620232059,
+            "p50_tick_ns_median": 10626,
+            "allocations_per_observation": 11.4443359375,
+            "nodes": [
+              8
+            ],
+            "edges": [
+              28
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 694286.711935426,
+            "p50_tick_ns_median": 10436,
+            "allocations_per_observation": 11.4443359375,
+            "nodes": [
+              8
+            ],
+            "edges": [
+              28
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "speed_ratio": 0.9954905264442556
+        },
+        {
+          "pair": 2,
+          "original": {
+            "obs_per_s_median": 644092.8072319545,
+            "p50_tick_ns_median": 10636,
+            "allocations_per_observation": 11.4443359375,
+            "nodes": [
+              8
+            ],
+            "edges": [
+              28
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 706127.7615439649,
+            "p50_tick_ns_median": 10355,
+            "allocations_per_observation": 11.4443359375,
+            "nodes": [
+              8
+            ],
+            "edges": [
+              28
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "speed_ratio": 1.096313688983131
+        }
+      ],
+      "median_paired_speed_ratio": 1.0145633917378378,
+      "original_obs_per_s_median": 697431.7620232059,
+      "fork_obs_per_s_median": 706127.7615439649
+    },
+    {
+      "mode": "commit",
+      "entities": 8,
+      "ticks": 16,
+      "pairs": [
+        {
+          "pair": 0,
+          "original": {
+            "obs_per_s_median": 10531.119746812135,
+            "p50_tick_ns_median": 755910,
+            "allocations_per_observation": 150.265625,
+            "nodes": [
+              8
+            ],
+            "edges": [
+              28
+            ],
+            "commits": [
+              16
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 10137.324313437832,
+            "p50_tick_ns_median": 771674,
+            "allocations_per_observation": 150.265625,
+            "nodes": [
+              8
+            ],
+            "edges": [
+              28
+            ],
+            "commits": [
+              16
+            ]
+          },
+          "speed_ratio": 0.9626064993237297
+        },
+        {
+          "pair": 1,
+          "original": {
+            "obs_per_s_median": 9599.859842046306,
+            "p50_tick_ns_median": 799586,
+            "allocations_per_observation": 150.265625,
+            "nodes": [
+              8
+            ],
+            "edges": [
+              28
+            ],
+            "commits": [
+              16
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 10204.10522313867,
+            "p50_tick_ns_median": 761359,
+            "allocations_per_observation": 150.265625,
+            "nodes": [
+              8
+            ],
+            "edges": [
+              28
+            ],
+            "commits": [
+              16
+            ]
+          },
+          "speed_ratio": 1.0629431461536383
+        },
+        {
+          "pair": 2,
+          "original": {
+            "obs_per_s_median": 9615.053086736267,
+            "p50_tick_ns_median": 773206,
+            "allocations_per_observation": 150.265625,
+            "nodes": [
+              8
+            ],
+            "edges": [
+              28
+            ],
+            "commits": [
+              16
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 10385.708162087476,
+            "p50_tick_ns_median": 761348,
+            "allocations_per_observation": 150.265625,
+            "nodes": [
+              8
+            ],
+            "edges": [
+              28
+            ],
+            "commits": [
+              16
+            ]
+          },
+          "speed_ratio": 1.08015089135746
+        }
+      ],
+      "median_paired_speed_ratio": 1.0629431461536383,
+      "original_obs_per_s_median": 9615.053086736267,
+      "fork_obs_per_s_median": 10204.10522313867
+    },
+    {
+      "mode": "gate",
+      "entities": 1,
+      "ticks": 4096,
+      "pairs": [
+        {
+          "pair": 0,
+          "original": {
+            "obs_per_s_median": 721873.0349403468,
+            "p50_tick_ns_median": 1272,
+            "allocations_per_observation": 14.01171875,
+            "nodes": [
+              1
+            ],
+            "edges": [
+              0
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 741678.3006585655,
+            "p50_tick_ns_median": 1242,
+            "allocations_per_observation": 14.01171875,
+            "nodes": [
+              1
+            ],
+            "edges": [
+              0
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "speed_ratio": 1.0274359406150353
+        },
+        {
+          "pair": 1,
+          "original": {
+            "obs_per_s_median": 698862.9315832641,
+            "p50_tick_ns_median": 1262,
+            "allocations_per_observation": 14.01171875,
+            "nodes": [
+              1
+            ],
+            "edges": [
+              0
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 712306.4503731435,
+            "p50_tick_ns_median": 1242,
+            "allocations_per_observation": 14.01171875,
+            "nodes": [
+              1
+            ],
+            "edges": [
+              0
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "speed_ratio": 1.0192362739277405
+        },
+        {
+          "pair": 2,
+          "original": {
+            "obs_per_s_median": 705014.3283490634,
+            "p50_tick_ns_median": 1271,
+            "allocations_per_observation": 14.01171875,
+            "nodes": [
+              1
+            ],
+            "edges": [
+              0
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 743201.2778126658,
+            "p50_tick_ns_median": 1252,
+            "allocations_per_observation": 14.01171875,
+            "nodes": [
+              1
+            ],
+            "edges": [
+              0
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "speed_ratio": 1.0541647849243363
+        }
+      ],
+      "median_paired_speed_ratio": 1.0274359406150353,
+      "original_obs_per_s_median": 705014.3283490634,
+      "fork_obs_per_s_median": 741678.3006585655
+    },
+    {
+      "mode": "gate",
+      "entities": 8,
+      "ticks": 512,
+      "pairs": [
+        {
+          "pair": 0,
+          "original": {
+            "obs_per_s_median": 638044.5927122722,
+            "p50_tick_ns_median": 11768,
+            "allocations_per_observation": 13.426513671875,
+            "nodes": [
+              8
+            ],
+            "edges": [
+              28
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 655598.742838192,
+            "p50_tick_ns_median": 11317,
+            "allocations_per_observation": 13.426513671875,
+            "nodes": [
+              8
+            ],
+            "edges": [
+              28
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "speed_ratio": 1.0275124189224747
+        },
+        {
+          "pair": 1,
+          "original": {
+            "obs_per_s_median": 632077.1109384833,
+            "p50_tick_ns_median": 11738,
+            "allocations_per_observation": 13.426513671875,
+            "nodes": [
+              8
+            ],
+            "edges": [
+              28
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 651138.7456486095,
+            "p50_tick_ns_median": 11357,
+            "allocations_per_observation": 13.426513671875,
+            "nodes": [
+              8
+            ],
+            "edges": [
+              28
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "speed_ratio": 1.0301571349132137
+        },
+        {
+          "pair": 2,
+          "original": {
+            "obs_per_s_median": 627774.0031980303,
+            "p50_tick_ns_median": 11598,
+            "allocations_per_observation": 13.426513671875,
+            "nodes": [
+              8
+            ],
+            "edges": [
+              28
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 675169.9174878404,
+            "p50_tick_ns_median": 11287,
+            "allocations_per_observation": 13.426513671875,
+            "nodes": [
+              8
+            ],
+            "edges": [
+              28
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "speed_ratio": 1.075498370509712
+        }
+      ],
+      "median_paired_speed_ratio": 1.0301571349132137,
+      "original_obs_per_s_median": 632077.1109384833,
+      "fork_obs_per_s_median": 655598.742838192
+    },
+    {
+      "mode": "gate",
+      "entities": 32,
+      "ticks": 64,
+      "pairs": [
+        {
+          "pair": 0,
+          "original": {
+            "obs_per_s_median": 371063.1611827348,
+            "p50_tick_ns_median": 81674,
+            "allocations_per_observation": 11.4736328125,
+            "nodes": [
+              32
+            ],
+            "edges": [
+              496
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 366740.24153999385,
+            "p50_tick_ns_median": 80742,
+            "allocations_per_observation": 11.4736328125,
+            "nodes": [
+              32
+            ],
+            "edges": [
+              496
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "speed_ratio": 0.988349908870064
+        },
+        {
+          "pair": 1,
+          "original": {
+            "obs_per_s_median": 364354.00905939203,
+            "p50_tick_ns_median": 81342,
+            "allocations_per_observation": 11.4736328125,
+            "nodes": [
+              32
+            ],
+            "edges": [
+              496
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 358107.3188882726,
+            "p50_tick_ns_median": 81162,
+            "allocations_per_observation": 11.4736328125,
+            "nodes": [
+              32
+            ],
+            "edges": [
+              496
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "speed_ratio": 0.9828554372511347
+        },
+        {
+          "pair": 2,
+          "original": {
+            "obs_per_s_median": 351787.8224728863,
+            "p50_tick_ns_median": 80822,
+            "allocations_per_observation": 11.4736328125,
+            "nodes": [
+              32
+            ],
+            "edges": [
+              496
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 355900.39585230063,
+            "p50_tick_ns_median": 79991,
+            "allocations_per_observation": 11.4736328125,
+            "nodes": [
+              32
+            ],
+            "edges": [
+              496
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "speed_ratio": 1.0116904938621953
+        }
+      ],
+      "median_paired_speed_ratio": 0.988349908870064,
+      "original_obs_per_s_median": 364354.00905939203,
+      "fork_obs_per_s_median": 358107.3188882726
+    },
+    {
+      "mode": "gate",
+      "entities": 65,
+      "ticks": 128,
+      "pairs": [
+        {
+          "pair": 0,
+          "original": {
+            "obs_per_s_median": 708803.2598134535,
+            "p50_tick_ns_median": 85750,
+            "allocations_per_observation": 10.824278846153845,
+            "nodes": [
+              65
+            ],
+            "edges": [
+              130
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 720801.8296584135,
+            "p50_tick_ns_median": 83926,
+            "allocations_per_observation": 10.824278846153845,
+            "nodes": [
+              65
+            ],
+            "edges": [
+              130
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "speed_ratio": 1.0169279270077254
+        },
+        {
+          "pair": 1,
+          "original": {
+            "obs_per_s_median": 683572.7686627895,
+            "p50_tick_ns_median": 86070,
+            "allocations_per_observation": 10.824278846153845,
+            "nodes": [
+              65
+            ],
+            "edges": [
+              130
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 696999.2590194176,
+            "p50_tick_ns_median": 83265,
+            "allocations_per_observation": 10.824278846153845,
+            "nodes": [
+              65
+            ],
+            "edges": [
+              130
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "speed_ratio": 1.019641640176646
+        },
+        {
+          "pair": 2,
+          "original": {
+            "obs_per_s_median": 671179.0009387633,
+            "p50_tick_ns_median": 85789,
+            "allocations_per_observation": 10.824278846153845,
+            "nodes": [
+              65
+            ],
+            "edges": [
+              130
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 730994.3447219968,
+            "p50_tick_ns_median": 82875,
+            "allocations_per_observation": 10.824278846153845,
+            "nodes": [
+              65
+            ],
+            "edges": [
+              130
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "speed_ratio": 1.089119808128042
+        }
+      ],
+      "median_paired_speed_ratio": 1.019641640176646,
+      "original_obs_per_s_median": 683572.7686627895,
+      "fork_obs_per_s_median": 720801.8296584135
+    },
+    {
+      "mode": "ingest",
+      "entities": 1,
+      "ticks": 4096,
+      "pairs": [
+        {
+          "pair": 0,
+          "original": {
+            "obs_per_s_median": 1345681.449998045,
+            "p50_tick_ns_median": 671,
+            "allocations_per_observation": 11.011962890625,
+            "nodes": [
+              1
+            ],
+            "edges": [
+              0
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 1296175.0494530655,
+            "p50_tick_ns_median": 671,
+            "allocations_per_observation": 11.011962890625,
+            "nodes": [
+              1
+            ],
+            "edges": [
+              0
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "speed_ratio": 0.9632109066041956
+        },
+        {
+          "pair": 1,
+          "original": {
+            "obs_per_s_median": 1265994.931074983,
+            "p50_tick_ns_median": 681,
+            "allocations_per_observation": 11.011962890625,
+            "nodes": [
+              1
+            ],
+            "edges": [
+              0
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 1325428.2239844264,
+            "p50_tick_ns_median": 681,
+            "allocations_per_observation": 11.011962890625,
+            "nodes": [
+              1
+            ],
+            "edges": [
+              0
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "speed_ratio": 1.0469459169626985
+        },
+        {
+          "pair": 2,
+          "original": {
+            "obs_per_s_median": 1314175.967392009,
+            "p50_tick_ns_median": 671,
+            "allocations_per_observation": 11.011962890625,
+            "nodes": [
+              1
+            ],
+            "edges": [
+              0
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 1339686.8154996792,
+            "p50_tick_ns_median": 691,
+            "allocations_per_observation": 11.011962890625,
+            "nodes": [
+              1
+            ],
+            "edges": [
+              0
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "speed_ratio": 1.019412048873711
+        }
+      ],
+      "median_paired_speed_ratio": 1.019412048873711,
+      "original_obs_per_s_median": 1314175.967392009,
+      "fork_obs_per_s_median": 1325428.2239844264
+    },
+    {
+      "mode": "ingest",
+      "entities": 8,
+      "ticks": 512,
+      "pairs": [
+        {
+          "pair": 0,
+          "original": {
+            "obs_per_s_median": 1124201.17492197,
+            "p50_tick_ns_median": 6780,
+            "allocations_per_observation": 9.552001953125,
+            "nodes": [
+              8
+            ],
+            "edges": [
+              28
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 1112498.414499635,
+            "p50_tick_ns_median": 6701,
+            "allocations_per_observation": 9.552001953125,
+            "nodes": [
+              8
+            ],
+            "edges": [
+              28
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "speed_ratio": 0.9895901546063165
+        },
+        {
+          "pair": 1,
+          "original": {
+            "obs_per_s_median": 1092157.1597087865,
+            "p50_tick_ns_median": 6871,
+            "allocations_per_observation": 9.552001953125,
+            "nodes": [
+              8
+            ],
+            "edges": [
+              28
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 1120640.384694832,
+            "p50_tick_ns_median": 6690,
+            "allocations_per_observation": 9.552001953125,
+            "nodes": [
+              8
+            ],
+            "edges": [
+              28
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "speed_ratio": 1.0260797859839514
+        },
+        {
+          "pair": 2,
+          "original": {
+            "obs_per_s_median": 1128264.0049625987,
+            "p50_tick_ns_median": 6670,
+            "allocations_per_observation": 9.552001953125,
+            "nodes": [
+              8
+            ],
+            "edges": [
+              28
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 1065601.6200474629,
+            "p50_tick_ns_median": 6770,
+            "allocations_per_observation": 9.552001953125,
+            "nodes": [
+              8
+            ],
+            "edges": [
+              28
+            ],
+            "commits": [
+              0
+            ]
+          },
+          "speed_ratio": 0.9444612390012274
+        }
+      ],
+      "median_paired_speed_ratio": 0.9895901546063165,
+      "original_obs_per_s_median": 1124201.17492197,
+      "fork_obs_per_s_median": 1112498.414499635
+    }
+  ],
+  "focused_summary": [
+    {
+      "mode": "commit",
+      "entities": 3,
+      "ticks": 8,
+      "pairs": [
+        {
+          "pair": 0,
+          "original": {
+            "obs_per_s_median": 8.291269984716214,
+            "p50_tick_ns_median": 356199225,
+            "allocations_per_observation": 90605.125,
+            "nodes": [
+              3
+            ],
+            "edges": [
+              3
+            ],
+            "commits": [
+              8
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 28566.089433284495,
+            "p50_tick_ns_median": 99360,
+            "allocations_per_observation": 163.45833333333334,
+            "nodes": [
+              3
+            ],
+            "edges": [
+              3
+            ],
+            "commits": [
+              8
+            ]
+          },
+          "speed_ratio": 3445.321342320543
+        },
+        {
+          "pair": 1,
+          "original": {
+            "obs_per_s_median": 8.222895456103279,
+            "p50_tick_ns_median": 363873607,
+            "allocations_per_observation": 90605.125,
+            "nodes": [
+              3
+            ],
+            "edges": [
+              3
+            ],
+            "commits": [
+              8
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 22291.076881924168,
+            "p50_tick_ns_median": 102965,
+            "allocations_per_observation": 163.45833333333334,
+            "nodes": [
+              3
+            ],
+            "edges": [
+              3
+            ],
+            "commits": [
+              8
+            ]
+          },
+          "speed_ratio": 2710.854953820319
+        },
+        {
+          "pair": 2,
+          "original": {
+            "obs_per_s_median": 8.254571545007368,
+            "p50_tick_ns_median": 356111321,
+            "allocations_per_observation": 90605.125,
+            "nodes": [
+              3
+            ],
+            "edges": [
+              3
+            ],
+            "commits": [
+              8
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 25544.225036107826,
+            "p50_tick_ns_median": 101033,
+            "allocations_per_observation": 163.45833333333334,
+            "nodes": [
+              3
+            ],
+            "edges": [
+              3
+            ],
+            "commits": [
+              8
+            ]
+          },
+          "speed_ratio": 3094.5549259377126
+        }
+      ],
+      "median_paired_speed_ratio": 3094.5549259377126,
+      "original_obs_per_s_median": 8.254571545007368,
+      "fork_obs_per_s_median": 25544.225036107826
+    },
+    {
+      "mode": "commit",
+      "entities": 5,
+      "ticks": 8,
+      "pairs": [
+        {
+          "pair": 0,
+          "original": {
+            "obs_per_s_median": 13.588725128471044,
+            "p50_tick_ns_median": 363406511,
+            "allocations_per_observation": 54474.55,
+            "nodes": [
+              5
+            ],
+            "edges": [
+              10
+            ],
+            "commits": [
+              8
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 17461.652029436853,
+            "p50_tick_ns_median": 282255,
+            "allocations_per_observation": 187.35,
+            "nodes": [
+              5
+            ],
+            "edges": [
+              10
+            ],
+            "commits": [
+              8
+            ]
+          },
+          "speed_ratio": 1285.0103202728906
+        },
+        {
+          "pair": 1,
+          "original": {
+            "obs_per_s_median": 13.826221554097259,
+            "p50_tick_ns_median": 357750550,
+            "allocations_per_observation": 54474.55,
+            "nodes": [
+              5
+            ],
+            "edges": [
+              10
+            ],
+            "commits": [
+              8
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 14264.27202822614,
+            "p50_tick_ns_median": 313082,
+            "allocations_per_observation": 187.35,
+            "nodes": [
+              5
+            ],
+            "edges": [
+              10
+            ],
+            "commits": [
+              8
+            ]
+          },
+          "speed_ratio": 1031.6825874961528
+        },
+        {
+          "pair": 2,
+          "original": {
+            "obs_per_s_median": 14.126100813884234,
+            "p50_tick_ns_median": 352429097,
+            "allocations_per_observation": 54474.55,
+            "nodes": [
+              5
+            ],
+            "edges": [
+              10
+            ],
+            "commits": [
+              8
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 17271.7314003963,
+            "p50_tick_ns_median": 284569,
+            "allocations_per_observation": 187.35,
+            "nodes": [
+              5
+            ],
+            "edges": [
+              10
+            ],
+            "commits": [
+              8
+            ]
+          },
+          "speed_ratio": 1222.6821560993176
+        }
+      ],
+      "median_paired_speed_ratio": 1222.6821560993176,
+      "original_obs_per_s_median": 13.826221554097259,
+      "fork_obs_per_s_median": 17271.7314003963
+    },
+    {
+      "mode": "commit",
+      "entities": 7,
+      "ticks": 8,
+      "pairs": [
+        {
+          "pair": 0,
+          "original": {
+            "obs_per_s_median": 19.138659568064924,
+            "p50_tick_ns_median": 365037137,
+            "allocations_per_observation": 39624.25,
+            "nodes": [
+              7
+            ],
+            "edges": [
+              21
+            ],
+            "commits": [
+              8
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 10269.589563016129,
+            "p50_tick_ns_median": 658443,
+            "allocations_per_observation": 157.82142857142858,
+            "nodes": [
+              7
+            ],
+            "edges": [
+              21
+            ],
+            "commits": [
+              8
+            ]
+          },
+          "speed_ratio": 536.5887577702741
+        },
+        {
+          "pair": 1,
+          "original": {
+            "obs_per_s_median": 19.38753155793765,
+            "p50_tick_ns_median": 357819127,
+            "allocations_per_observation": 39624.25,
+            "nodes": [
+              7
+            ],
+            "edges": [
+              21
+            ],
+            "commits": [
+              8
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 9701.261770359008,
+            "p50_tick_ns_median": 698393,
+            "allocations_per_observation": 157.82142857142858,
+            "nodes": [
+              7
+            ],
+            "edges": [
+              21
+            ],
+            "commits": [
+              8
+            ]
+          },
+          "speed_ratio": 500.3866398034109
+        },
+        {
+          "pair": 2,
+          "original": {
+            "obs_per_s_median": 19.533142511622497,
+            "p50_tick_ns_median": 356283000,
+            "allocations_per_observation": 39624.25,
+            "nodes": [
+              7
+            ],
+            "edges": [
+              21
+            ],
+            "commits": [
+              8
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 10027.733846753306,
+            "p50_tick_ns_median": 662038,
+            "allocations_per_observation": 157.82142857142858,
+            "nodes": [
+              7
+            ],
+            "edges": [
+              21
+            ],
+            "commits": [
+              8
+            ]
+          },
+          "speed_ratio": 513.3702291265556
+        }
+      ],
+      "median_paired_speed_ratio": 513.3702291265556,
+      "original_obs_per_s_median": 19.38753155793765,
+      "fork_obs_per_s_median": 10027.733846753306
+    },
+    {
+      "mode": "commit",
+      "entities": 8,
+      "ticks": 8,
+      "pairs": [
+        {
+          "pair": 0,
+          "original": {
+            "obs_per_s_median": 10070.86743528366,
+            "p50_tick_ns_median": 755379,
+            "allocations_per_observation": 131.140625,
+            "nodes": [
+              8
+            ],
+            "edges": [
+              28
+            ],
+            "commits": [
+              8
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 10289.686839812084,
+            "p50_tick_ns_median": 763111,
+            "allocations_per_observation": 131.140625,
+            "nodes": [
+              8
+            ],
+            "edges": [
+              28
+            ],
+            "commits": [
+              8
+            ]
+          },
+          "speed_ratio": 1.0217279599731182
+        },
+        {
+          "pair": 1,
+          "original": {
+            "obs_per_s_median": 9576.008746486988,
+            "p50_tick_ns_median": 781779,
+            "allocations_per_observation": 131.140625,
+            "nodes": [
+              8
+            ],
+            "edges": [
+              28
+            ],
+            "commits": [
+              8
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 9811.801972693449,
+            "p50_tick_ns_median": 772174,
+            "allocations_per_observation": 131.140625,
+            "nodes": [
+              8
+            ],
+            "edges": [
+              28
+            ],
+            "commits": [
+              8
+            ]
+          },
+          "speed_ratio": 1.0246233302880976
+        },
+        {
+          "pair": 2,
+          "original": {
+            "obs_per_s_median": 10162.073964972918,
+            "p50_tick_ns_median": 766126,
+            "allocations_per_observation": 131.140625,
+            "nodes": [
+              8
+            ],
+            "edges": [
+              28
+            ],
+            "commits": [
+              8
+            ]
+          },
+          "fork": {
+            "obs_per_s_median": 9479.077306614974,
+            "p50_tick_ns_median": 790362,
+            "allocations_per_observation": 131.140625,
+            "nodes": [
+              8
+            ],
+            "edges": [
+              28
+            ],
+            "commits": [
+              8
+            ]
+          },
+          "speed_ratio": 0.932789639131527
+        }
+      ],
+      "median_paired_speed_ratio": 1.0217279599731182,
+      "original_obs_per_s_median": 10070.86743528366,
+      "fork_obs_per_s_median": 9811.801972693449
+    }
+  ],
+  "statistics": "Per outer pair: ratio of fork to reference median throughput over five fresh-state inner runs. Report median of three paired ratios. Aggregate rate columns are medians of three inner medians and their ratio need not equal paired statistic.",
+  "restrictions": [
+    "Only synthetic homogeneous small graphs with relaxed commit thresholds",
+    "No CPU affinity, frequency locking or inferential confidence intervals",
+    "No Gabriel predictor, durable SQLite owner, network transport, broker or replica workloads",
+    "Historical Windows baseline sources/executables outside upload were not rerun",
+    "Focused reference/fork identical wrapper compiler profiles and driver source",
+    "Current comparison does not cure inherited spectrum, clustering, or historical-fixture failures"
+  ]
+}

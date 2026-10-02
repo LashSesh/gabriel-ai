@@ -1,0 +1,770 @@
+{
+  "schema": "gabriel.replay-owner.synthetic-inputs.v1",
+  "synthetic": true,
+  "existing_runtime_inputs": {
+    "finite_catalogues": [
+      {
+        "contract_id": "parity-two",
+        "query_names": [
+          "q0",
+          "q1"
+        ],
+        "costs": [
+          1,
+          2
+        ],
+        "rows": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "1"
+          ],
+          [
+            "1",
+            "0"
+          ],
+          [
+            "1",
+            "1"
+          ]
+        ],
+        "labels": [
+          0,
+          1,
+          1,
+          0
+        ],
+        "weights": []
+      },
+      {
+        "contract_id": "parity-three",
+        "query_names": [
+          "q0",
+          "q1",
+          "q2"
+        ],
+        "costs": [
+          1,
+          2,
+          3
+        ],
+        "rows": [
+          [
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "1"
+          ],
+          [
+            "0",
+            "1",
+            "0"
+          ],
+          [
+            "0",
+            "1",
+            "1"
+          ],
+          [
+            "1",
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "0",
+            "1"
+          ],
+          [
+            "1",
+            "1",
+            "0"
+          ],
+          [
+            "1",
+            "1",
+            "1"
+          ]
+        ],
+        "labels": [
+          0,
+          1,
+          1,
+          0,
+          1,
+          0,
+          0,
+          1
+        ],
+        "weights": []
+      }
+    ],
+    "finite_indistinguishable": {
+      "contract_id": "indistinguishable",
+      "query_names": [
+        "same"
+      ],
+      "costs": [
+        1
+      ],
+      "rows": [
+        [
+          "x"
+        ],
+        [
+          "x"
+        ]
+      ],
+      "labels": [
+        0,
+        1
+      ],
+      "weights": [
+        1,
+        2
+      ]
+    },
+    "maturity": {
+      "config": {
+        "scoring_rule_id": "binary64-upper-loss-hit-primary-v1",
+        "availability_mode": "declared_observed_receipts",
+        "initial_states": {
+          "a": {
+            "theta_units": 0,
+            "updates": 0
+          },
+          "b": {
+            "theta_units": 10,
+            "updates": 0
+          }
+        }
+      },
+      "operations": [
+        [
+          "issue",
+          0,
+          {
+            "forecast_id": "A",
+            "issued_at": 0,
+            "lane_id": "a",
+            "origin": 0,
+            "prediction": {
+              "es_hex": "0x1.0000000000000p+1",
+              "var_hex": "0x1.0000000000000p+0"
+            },
+            "provenance": {
+              "synthetic": true
+            },
+            "requirements": [
+              {
+                "event_end": 0,
+                "event_start": 0,
+                "record_id": "0",
+                "source_id": "synthetic"
+              },
+              {
+                "event_end": 4,
+                "event_start": 4,
+                "record_id": "4",
+                "source_id": "synthetic"
+              }
+            ],
+            "target_end": 4
+          }
+        ],
+        [
+          "outcome",
+          0,
+          {
+            "event_interval": [
+              0,
+              0
+            ],
+            "payload": {
+              "rate_hex": "0x1.9000000000000p+6"
+            },
+            "received_at": 0,
+            "record_id": "0",
+            "revision": 0,
+            "source_id": "synthetic",
+            "vintage_id": "synthetic-v0"
+          }
+        ],
+        [
+          "issue",
+          1,
+          {
+            "forecast_id": "B",
+            "issued_at": 1,
+            "lane_id": "b",
+            "origin": 1,
+            "prediction": {
+              "es_hex": "0x1.0000000000000p+1",
+              "var_hex": "0x1.0000000000000p+0"
+            },
+            "provenance": {
+              "synthetic": true
+            },
+            "requirements": [
+              {
+                "event_end": 1,
+                "event_start": 1,
+                "record_id": "1",
+                "source_id": "synthetic"
+              },
+              {
+                "event_end": 3,
+                "event_start": 3,
+                "record_id": "3",
+                "source_id": "synthetic"
+              }
+            ],
+            "target_end": 3
+          }
+        ],
+        [
+          "outcome",
+          1,
+          {
+            "event_interval": [
+              1,
+              1
+            ],
+            "payload": {
+              "rate_hex": "0x1.9000000000000p+6"
+            },
+            "received_at": 1,
+            "record_id": "1",
+            "revision": 0,
+            "source_id": "synthetic",
+            "vintage_id": "synthetic-v0"
+          }
+        ],
+        [
+          "outcome",
+          5,
+          {
+            "event_interval": [
+              4,
+              4
+            ],
+            "payload": {
+              "rate_hex": "0x1.9c00000000000p+6"
+            },
+            "received_at": 5,
+            "record_id": "4",
+            "revision": 0,
+            "source_id": "synthetic",
+            "vintage_id": "synthetic-v0"
+          }
+        ],
+        [
+          "outcome",
+          6,
+          {
+            "event_interval": [
+              3,
+              3
+            ],
+            "payload": {
+              "rate_hex": "0x1.8c00000000000p+6"
+            },
+            "received_at": 6,
+            "record_id": "3",
+            "revision": 0,
+            "source_id": "synthetic",
+            "vintage_id": "synthetic-v0"
+          }
+        ],
+        [
+          "outcome",
+          7,
+          {
+            "event_interval": [
+              4,
+              4
+            ],
+            "payload": {
+              "rate_hex": "0x1.8c00000000000p+6"
+            },
+            "received_at": 7,
+            "record_id": "4",
+            "revision": 1,
+            "source_id": "synthetic",
+            "vintage_id": "synthetic-v1"
+          }
+        ],
+        [
+          "outcome",
+          7,
+          {
+            "event_interval": [
+              3,
+              3
+            ],
+            "payload": {
+              "rate_hex": "0x1.a000000000000p+6"
+            },
+            "received_at": 7,
+            "record_id": "3",
+            "revision": 1,
+            "source_id": "synthetic",
+            "vintage_id": "synthetic-v1"
+          }
+        ],
+        [
+          "issue",
+          7,
+          {
+            "forecast_id": "C",
+            "issued_at": 7,
+            "lane_id": "a",
+            "origin": 7,
+            "prediction": {
+              "es_hex": "0x1.0000000000000p+1",
+              "var_hex": "0x1.0000000000000p+0"
+            },
+            "provenance": {
+              "synthetic": true
+            },
+            "requirements": [
+              {
+                "event_end": 7,
+                "event_start": 7,
+                "record_id": "7",
+                "source_id": "synthetic"
+              },
+              {
+                "event_end": 9,
+                "event_start": 9,
+                "record_id": "9",
+                "source_id": "synthetic"
+              }
+            ],
+            "target_end": 9
+          }
+        ],
+        [
+          "outcome",
+          7,
+          {
+            "event_interval": [
+              7,
+              7
+            ],
+            "payload": {
+              "rate_hex": "0x1.9000000000000p+6"
+            },
+            "received_at": 7,
+            "record_id": "7",
+            "revision": 0,
+            "source_id": "synthetic",
+            "vintage_id": "synthetic-v0"
+          }
+        ],
+        [
+          "outcome",
+          12,
+          {
+            "event_interval": [
+              9,
+              9
+            ],
+            "payload": {
+              "rate_hex": "0x1.9800000000000p+6"
+            },
+            "received_at": 12,
+            "record_id": "9",
+            "revision": 0,
+            "source_id": "synthetic",
+            "vintage_id": "synthetic-v0"
+          }
+        ],
+        [
+          "outcome",
+          13,
+          {
+            "event_interval": [
+              0,
+              0
+            ],
+            "payload": {
+              "rate_hex": "0x1.8800000000000p+6"
+            },
+            "received_at": 13,
+            "record_id": "0",
+            "revision": 1,
+            "source_id": "synthetic",
+            "vintage_id": "synthetic-v1"
+          }
+        ]
+      ]
+    },
+    "positive_finite_endpoint_arithmetic_boundaries": [
+      [
+        "0x0.0000000000001p-1022",
+        "0x1.fffffffffffffp+1023"
+      ],
+      [
+        "0x1.fffffffffffffp+1023",
+        "0x0.0000000000001p-1022"
+      ]
+    ]
+  },
+  "stream_paths": {
+    "source": "results/incremental_inputs.json",
+    "source_sha256": "c29977ed72f9b4d68bcb1c85681bdfb0cc03a5e48e19c9e6f2ce22457c725531",
+    "record_count": 324,
+    "rates_hex": [
+      "0x1.9000000000000p+6",
+      "0x1.903fd3c00f04ep+6",
+      "0x1.8ed20e78f81efp+6",
+      "0x1.90ec375131479p+6",
+      "0x1.954112ea137efp+6",
+      "0x1.91486f3240a6fp+6",
+      "0x1.925cbeb7a2782p+6",
+      "0x1.9453727b248c6p+6",
+      "0x1.965f3e6661b1dp+6",
+      "0x1.976da69629c1bp+6",
+      "0x1.997e6e7bed941p+6",
+      "0x1.97f757d3647dbp+6",
+      "0x1.9bb37f50f05f6p+6",
+      "0x1.9d152e02a0f95p+6",
+      "0x1.a0e4034af0351p+6",
+      "0x1.a24622569cb63p+6",
+      "0x1.9ca069832336dp+6",
+      "0x1.9c4539a49acabp+6",
+      "0x1.9cf5ddff336c2p+6",
+      "0x1.9b36337c1c643p+6",
+      "0x1.9bb8d364f01c7p+6",
+      "0x1.992ffbce8ddbap+6",
+      "0x1.9dc7d83bb0b3bp+6",
+      "0x1.9a05f50184e6cp+6",
+      "0x1.9cff513de339ep+6",
+      "0x1.a1407a95b0419p+6",
+      "0x1.a37bb590a249cp+6",
+      "0x1.9edcf18c235b2p+6",
+      "0x1.9fa1b2226729fp+6",
+      "0x1.9f8793abfe65dp+6",
+      "0x1.9ee9722874729p+6",
+      "0x1.9faeabfa1f3bep+6",
+      "0x1.a21ffe041e21dp+6",
+      "0x1.a1ba14f108e6ep+6",
+      "0x1.a1dbc8571eebcp+6",
+      "0x1.a53a5f183855dp+6",
+      "0x1.a3d69989d06d6p+6",
+      "0x1.a78b8100c8c69p+6",
+      "0x1.a92cdd342726bp+6",
+      "0x1.a322fdf2f3167p+6",
+      "0x1.a4bef01fc4937p+6",
+      "0x1.a204541e19c8fp+6",
+      "0x1.a6b5c3a5cc5a0p+6",
+      "0x1.a2ac57f192403p+6",
+      "0x1.a4fe48bf904b0p+6",
+      "0x1.a27f3c0680e8ap+6",
+      "0x1.9fb4bb0d66b4fp+6",
+      "0x1.98d7ac5c4b4c8p+6",
+      "0x1.98e9b3410b609p+6",
+      "0x1.9c72fa75b5298p+6",
+      "0x1.9b31bb1993557p+6",
+      "0x1.94590da7b1b33p+6",
+      "0x1.91afae4398bf8p+6",
+      "0x1.90d7428bbd8c7p+6",
+      "0x1.90e5ded18dca2p+6",
+      "0x1.92aa66913492bp+6",
+      "0x1.8d3bc0309c4f9p+6",
+      "0x1.8953dcfe683c0p+6",
+      "0x1.8d5b5906f52dcp+6",
+      "0x1.8cb6c841a9472p+6",
+      "0x1.89377314ff32fp+6",
+      "0x1.89b071c4cb5c2p+6",
+      "0x1.8d4d4547a958fp+6",
+      "0x1.8c80ca90a53a7p+6",
+      "0x1.89d57204e4172p+6",
+      "0x1.8b518c31df54ap+6",
+      "0x1.8a678d76c3b4cp+6",
+      "0x1.898ca5aaedd23p+6",
+      "0x1.8bc2113b89a2dp+6",
+      "0x1.8e3b0bdd153a4p+6",
+      "0x1.8e8ad3006a9dbp+6",
+      "0x1.8eed6848ab8bap+6",
+      "0x1.93417fb473f4ap+6",
+      "0x1.9ae7247c982b1p+6",
+      "0x1.9c2bb05b65e00p+6",
+      "0x1.9624f9d3973a7p+6",
+      "0x1.96c72e6d8c2eap+6",
+      "0x1.94d7bd2e30c30p+6",
+      "0x1.935eab5703a09p+6",
+      "0x1.95c5eecf644efp+6",
+      "0x1.9ef5237023c18p+6",
+      "0x1.9dfcbfc37bbabp+6",
+      "0x1.9eb7a8a22f7edp+6",
+      "0x1.a738aa5bef541p+6",
+      "0x1.a6700acb1dc18p+6",
+      "0x1.a35452ef526afp+6",
+      "0x1.a5ecf57b830bep+6",
+      "0x1.a4c34c885d914p+6",
+      "0x1.a532469cbe808p+6",
+      "0x1.a5567b172fca5p+6",
+      "0x1.a392e3385cf1ep+6",
+      "0x1.a29c057d414e8p+6",
+      "0x1.a62eb3f652c1ep+6",
+      "0x1.a317bbee622a0p+6",
+      "0x1.a295993ece1cep+6",
+      "0x1.a6c612000afb5p+6",
+      "0x1.a86afb8a60aa0p+6",
+      "0x1.a2fe35c94eb19p+6",
+      "0x1.a124c9a13d6abp+6",
+      "0x1.9ee7db8b5cb9ap+6",
+      "0x1.9ebed0ba49cbdp+6",
+      "0x1.9fd412ff45903p+6",
+      "0x1.9dd7791edf720p+6",
+      "0x1.98581cbb97ddep+6",
+      "0x1.9b4c976589654p+6",
+      "0x1.9f3b7f38ed8d4p+6",
+      "0x1.a1190332dc45bp+6",
+      "0x1.a7bae1f676a19p+6",
+      "0x1.ac2a4f2826333p+6",
+      "0x1.acf0881780593p+6",
+      "0x1.adaef68c38561p+6",
+      "0x1.a8c1ba4eb2716p+6",
+      "0x1.ad728c7fbd82ep+6",
+      "0x1.b03c9e3881516p+6",
+      "0x1.b02536fe5fe92p+6",
+      "0x1.b2a6bfe3191a8p+6",
+      "0x1.b2f79bdd749c9p+6",
+      "0x1.b27289cfd7116p+6",
+      "0x1.b5e46b443e51cp+6",
+      "0x1.b5f545b66c37bp+6",
+      "0x1.b781a8a7ed5e6p+6",
+      "0x1.b9216e09ff0b9p+6",
+      "0x1.be9f3db97a440p+6",
+      "0x1.bf7a8f075e323p+6",
+      "0x1.c13fbce7ba750p+6",
+      "0x1.c3917a47a10cdp+6",
+      "0x1.c6eabb54f009ep+6",
+      "0x1.c67b923e2e135p+6",
+      "0x1.c38f75965f422p+6",
+      "0x1.cb46cf7949dc4p+6",
+      "0x1.c9c6dda2a8dbap+6",
+      "0x1.c84ee6dca6818p+6",
+      "0x1.c56c7a3cfc85ep+6",
+      "0x1.c711e1286e1b4p+6",
+      "0x1.c56ac46cf3448p+6",
+      "0x1.c1ca419e188b4p+6",
+      "0x1.c4beadd7cfd02p+6",
+      "0x1.c22360ad031ffp+6",
+      "0x1.c2f2e001ad4bap+6",
+      "0x1.be45e8a30ba0fp+6",
+      "0x1.bedff07a01f04p+6",
+      "0x1.c1d14d2926c71p+6",
+      "0x1.c6c26aababbe3p+6",
+      "0x1.c723cbd207fc8p+6",
+      "0x1.c58a2a515cb91p+6",
+      "0x1.c3cb09d597b95p+6",
+      "0x1.c4c30441731c5p+6",
+      "0x1.c44b7a93aae01p+6",
+      "0x1.c7c8e473ece8ep+6",
+      "0x1.cd15afb003ac2p+6",
+      "0x1.cb02cc4b56f4bp+6",
+      "0x1.c8727df79e24bp+6",
+      "0x1.c878a95649acdp+6",
+      "0x1.c87aade89a053p+6",
+      "0x1.c6961e2b5f386p+6",
+      "0x1.c1feb59bbfd03p+6",
+      "0x1.c4505ce939401p+6",
+      "0x1.bf5c7a597d492p+6",
+      "0x1.c34625df3998dp+6",
+      "0x1.c40d79168447ep+6",
+      "0x1.c55daff895943p+6",
+      "0x1.c7bdff39ae65cp+6",
+      "0x1.c5b23374e7039p+6",
+      "0x1.c18cff9702e4ap+6",
+      "0x1.bc2927103878fp+6",
+      "0x1.c0ed9f3e41d32p+6",
+      "0x1.c225551e6878ap+6",
+      "0x1.c37b171b9c201p+6",
+      "0x1.c2e6684fc8fc2p+6",
+      "0x1.c59052c0bd6e2p+6",
+      "0x1.c019628e6d8a0p+6",
+      "0x1.bc58d993d3213p+6",
+      "0x1.b878911e42c8cp+6",
+      "0x1.b605d0daa5093p+6",
+      "0x1.b6fa1b37f0d92p+6",
+      "0x1.b80beec31fd4ap+6",
+      "0x1.bf56830b497fdp+6",
+      "0x1.c22e844fb5780p+6",
+      "0x1.c62e956613fdap+6",
+      "0x1.c580cc61783e3p+6",
+      "0x1.c28274005b734p+6",
+      "0x1.c16c693d49dc3p+6",
+      "0x1.bd7cfd0d4df28p+6",
+      "0x1.ba1a995c85c59p+6",
+      "0x1.bab78242e8795p+6",
+      "0x1.bc3318a48c143p+6",
+      "0x1.c107979d662b1p+6",
+      "0x1.bee460e99b7afp+6",
+      "0x1.bedf592c8aca9p+6",
+      "0x1.bd95f72a1e813p+6",
+      "0x1.b9193112bb0d6p+6",
+      "0x1.b847b07b09e2cp+6",
+      "0x1.afec37e4622bap+6",
+      "0x1.af0588cd35b5dp+6",
+      "0x1.af5a6a9097f97p+6",
+      "0x1.aa5c165bb071ep+6",
+      "0x1.ac981c2dc6920p+6",
+      "0x1.ac1ebd67214a0p+6",
+      "0x1.ac42316aa78d4p+6",
+      "0x1.ab1ab076288c6p+6",
+      "0x1.a916c3af63c1cp+6",
+      "0x1.a33e23f9f5b0ap+6",
+      "0x1.a1dfc245a0c26p+6",
+      "0x1.a167e640375c4p+6",
+      "0x1.a0a37a88f8f3ap+6",
+      "0x1.a134ddde35e0ep+6",
+      "0x1.a5aa3d9f455eep+6",
+      "0x1.a700a3c904b67p+6",
+      "0x1.a9c61770534a4p+6",
+      "0x1.a9bb55728fa6cp+6",
+      "0x1.a681252799594p+6",
+      "0x1.a3595a2c68332p+6",
+      "0x1.a8bc903a93f23p+6",
+      "0x1.abe92c7aba9fap+6",
+      "0x1.a8c8ec9617800p+6",
+      "0x1.a9452f6fd9712p+6",
+      "0x1.a8924cdb22efap+6",
+      "0x1.a506c03be5dd8p+6",
+      "0x1.a1f372d42e42cp+6",
+      "0x1.9fb31fe689285p+6",
+      "0x1.a20b96e21a514p+6",
+      "0x1.9f31a04970c72p+6",
+      "0x1.9e0fc1c3470d9p+6",
+      "0x1.9c655e3ee350fp+6",
+      "0x1.9c492b110abd5p+6",
+      "0x1.9ad529d2e9d04p+6",
+      "0x1.974d0fdac350bp+6",
+      "0x1.96de3e693b6c7p+6",
+      "0x1.9193b62f25fbcp+6",
+      "0x1.8fd70824bcfe3p+6",
+      "0x1.8f3fa99e886b5p+6",
+      "0x1.8c225245f0975p+6",
+      "0x1.89f0acec373e3p+6",
+      "0x1.877518d746507p+6",
+      "0x1.890a0ba5d5711p+6",
+      "0x1.86a4f3cd8a7e6p+6",
+      "0x1.86a348ed44915p+6",
+      "0x1.83f0d8f6a46fcp+6",
+      "0x1.87564dd63acb8p+6",
+      "0x1.885987dda6027p+6",
+      "0x1.8b1600d5c3cf2p+6",
+      "0x1.8cddfbdfab6ccp+6",
+      "0x1.8dd190a4d02a7p+6",
+      "0x1.90700d30e2ecbp+6",
+      "0x1.92776356b9546p+6",
+      "0x1.91e4c7a05cdadp+6",
+      "0x1.88ff3659f96d7p+6",
+      "0x1.89c18ed33a80ep+6",
+      "0x1.89e60331716b3p+6",
+      "0x1.910c25587ef7ep+6",
+      "0x1.9417513bf7186p+6",
+      "0x1.903fec90e81f2p+6",
+      "0x1.8f77446b18b1fp+6",
+      "0x1.8fa53540efacfp+6",
+      "0x1.94879dbc58f59p+6",
+      "0x1.955c7f01f04f5p+6",
+      "0x1.96ce56e4bfa19p+6",
+      "0x1.9b331d4f16426p+6",
+      "0x1.96223a9b985fcp+6",
+      "0x1.9847dd979ebe8p+6",
+      "0x1.98928b48f3e33p+6",
+      "0x1.9c65e30fa0f2dp+6",
+      "0x1.9a4e8c6196db2p+6",
+      "0x1.9a1622b30acc4p+6",
+      "0x1.98695d17cb01dp+6",
+      "0x1.9de108c49883ap+6",
+      "0x1.9bdddd66d0683p+6",
+      "0x1.a043c54d549dap+6",
+      "0x1.9ab0161a80626p+6",
+      "0x1.97c6c427c381ep+6",
+      "0x1.9adf9f08e990ep+6",
+      "0x1.9ade199016b01p+6",
+      "0x1.9a682813b1408p+6",
+      "0x1.97b84ca9ac03cp+6",
+      "0x1.9688fafedb5d6p+6",
+      "0x1.942615a14a204p+6",
+      "0x1.934302b58aeddp+6",
+      "0x1.92dc8b7869dbdp+6",
+      "0x1.9566883ff1718p+6",
+      "0x1.96a5f3b98d1bbp+6",
+      "0x1.97ebfabe8377ap+6",
+      "0x1.996757e930f7bp+6",
+      "0x1.99d094d2737c8p+6",
+      "0x1.9931e9ca15765p+6",
+      "0x1.992a400efc48ep+6",
+      "0x1.9767a440f129cp+6",
+      "0x1.9b56c7e446c17p+6",
+      "0x1.99bd77142fa69p+6",
+      "0x1.962fc7262f349p+6",
+      "0x1.9039b0182f22ep+6",
+      "0x1.8f20eb6b2aad8p+6",
+      "0x1.8f1ad5cc9f56ap+6",
+      "0x1.8fd81439896aap+6",
+      "0x1.8d98e09851746p+6",
+      "0x1.8cc1510a9a555p+6",
+      "0x1.93da160c131d5p+6",
+      "0x1.90dd9ef582bb7p+6",
+      "0x1.8f18ac594d3edp+6",
+      "0x1.911bdfa33afb0p+6",
+      "0x1.903aa887cd3eap+6",
+      "0x1.95122b2e87e60p+6",
+      "0x1.95ecbe059bb50p+6",
+      "0x1.98546c86a6f11p+6",
+      "0x1.a07f2d4ad61b7p+6",
+      "0x1.a3a1478623a96p+6",
+      "0x1.a134dab87195fp+6",
+      "0x1.9f50f8e60827cp+6",
+      "0x1.a3f845fe97e0cp+6",
+      "0x1.a58cff59098b6p+6",
+      "0x1.a6b8237dce238p+6",
+      "0x1.a97c449d7479cp+6",
+      "0x1.aa0e72119f052p+6",
+      "0x1.acbb78442a48fp+6",
+      "0x1.aec7f3a5226c0p+6",
+      "0x1.ae63fcb3b10ecp+6",
+      "0x1.ade0bbb9bb368p+6",
+      "0x1.aadaf76d105c4p+6",
+      "0x1.a9ca7503a9da2p+6",
+      "0x1.a88399149b53fp+6",
+      "0x1.a5afced997371p+6",
+      "0x1.a0efd435a07f3p+6",
+      "0x1.9f990cc2ae2adp+6",
+      "0x1.a1ff5abdb049ap+6",
+      "0x1.a206f308b40f5p+6",
+      "0x1.9fb6c24335ad1p+6"
+    ],
+    "correction_indices": [
+      0,
+      60,
+      160,
+      315,
+      320,
+      322
+    ],
+    "horizons": [
+      1,
+      5
+    ],
+    "profiles": [
+      "legacy",
+      "stream",
+      "incremental"
+    ]
+  }
+}

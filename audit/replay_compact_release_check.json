@@ -1,0 +1,141 @@
+{
+  "archive_path": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel_Runtime.zip",
+  "archive_sha256": "807ac83908b6bf0cf36086d3814b0c28340e09febd5ba28c059dc258326bf468",
+  "archive_crc": {
+    "passed": true
+  },
+  "manifest": {
+    "entries": 72,
+    "passed": true,
+    "failures": []
+  },
+  "byte_comparison": {
+    "python_entries": 29,
+    "passed": true,
+    "failures": []
+  },
+  "smoke": {
+    "replay_incremental_demo": {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-m",
+        "gabriel_runtime",
+        "incremental-demo",
+        "--out",
+        "/workspace/scratch/657e86c899c9/tmp/compact_qa/replay_incremental_run",
+        "--owner",
+        "replay"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "elapsed_seconds": 3.1876538930000606,
+      "stdout_path": "/workspace/scratch/657e86c899c9/tmp/compact_qa/replay_incremental_demo.stdout.txt",
+      "stderr_path": "/workspace/scratch/657e86c899c9/tmp/compact_qa/replay_incremental_demo.stderr.txt",
+      "result": {
+        "correction_without_historical_reissue": true,
+        "current_feedback_changed": true,
+        "events": 322,
+        "example_kind": "synthetic",
+        "head": "8d4e65ad1fbbf99d373282f96256c7e725d3079e779cc43a621328fcbf3c1522",
+        "issued_count": 10,
+        "last_issued_digest": "b7c3d5dca58966aa16885c4a689e7e400b387ad1e2f338fe2d857271bc22c734",
+        "pending_count": 1,
+        "prediction_basis": "next_unreceived_observation",
+        "profile": "incremental",
+        "proposal": {
+          "budget_satisfied": true,
+          "es_exact": "1183636096777679/562949953421312",
+          "kind": "read_only_log_loss_proxy",
+          "max_units": 100,
+          "maximum_feasible": true,
+          "next_unit_proxy_loss": "5918180483888395/562949953421312",
+          "proxy_loss": "1183636096777679/140737488355328",
+          "risk_budget": "10",
+          "unit_exposure": "100",
+          "units": 4
+        },
+        "published_prefix_unchanged_after_correction": true,
+        "revision_count": 321,
+        "source_count": 320,
+        "status": "passed"
+      }
+    },
+    "reference_anchor_audit": {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-m",
+        "gabriel_runtime",
+        "audit",
+        "/workspace/scratch/657e86c899c9/tmp/compact_qa/replay_incremental_run/owner.sqlite",
+        "--profile",
+        "incremental",
+        "--owner",
+        "reference",
+        "--anchor",
+        "/workspace/scratch/657e86c899c9/tmp/compact_qa/replay_incremental_run/anchor.json"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "elapsed_seconds": 3.6210925410000527,
+      "stdout_path": "/workspace/scratch/657e86c899c9/tmp/compact_qa/reference_anchor_audit.stdout.txt",
+      "stderr_path": "/workspace/scratch/657e86c899c9/tmp/compact_qa/reference_anchor_audit.stderr.txt",
+      "result": {
+        "bytes": 81289,
+        "contracts": 1,
+        "events": 322,
+        "external_anchor_checked": true,
+        "head": "8d4e65ad1fbbf99d373282f96256c7e725d3079e779cc43a621328fcbf3c1522",
+        "journal_mode": "delete",
+        "semantic_replay": true,
+        "status": "passed",
+        "synchronous": 3
+      }
+    },
+    "new_benchmark_help": {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "reproduction/benchmark_replay_owner.py",
+        "--help"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "elapsed_seconds": 0.08436636899978112,
+      "stdout_path": "/workspace/scratch/657e86c899c9/tmp/compact_qa/new_benchmark_help.stdout.txt",
+      "stderr_path": "/workspace/scratch/657e86c899c9/tmp/compact_qa/new_benchmark_help.stderr.txt",
+      "stdout": "usage: benchmark_replay_owner.py [-h] [--prepare] [--run {registers,h1,h5}]\n                                 [--summarize]\n\noptions:\n  -h, --help            show this help message and exit\n  --prepare\n  --run {registers,h1,h5}\n  --summarize\n"
+    }
+  },
+  "demo_canonical_comparison": {
+    "passed": true,
+    "reference": "results/incremental_demo.json",
+    "bundle_keys": [
+      "anchor",
+      "commands",
+      "journal",
+      "summary"
+    ],
+    "matches": {
+      "anchor": true,
+      "commands": true,
+      "journal": true,
+      "summary": true
+    },
+    "expected_sha256": "e06f921e15f471f3ce9820346a748c1dc0a76be4dd70cf82ab7f07f6c9f6e68b",
+    "actual_sha256": "e06f921e15f471f3ce9820346a748c1dc0a76be4dd70cf82ab7f07f6c9f6e68b"
+  },
+  "manifest_after_smoke_passed": true,
+  "status": "passed",
+  "issues": [],
+  "requirements_comparison": {
+    "byte_identical": false,
+    "compact": [
+      "numpy==2.3.5",
+      "scipy==1.17.0"
+    ],
+    "full_additional": [
+      "matplotlib==3.10.8",
+      "python-flint==0.9.0"
+    ],
+    "classification": "Expected compact dependency reduction; smoke commands pass."
+  }
+}

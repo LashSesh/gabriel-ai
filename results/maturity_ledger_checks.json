@@ -1,0 +1,57 @@
+{
+  "schema": "gabriel.maturity-ledger-checks.v1",
+  "status": "pass",
+  "seed": 761390,
+  "arithmetic": "exact rational test scorer and reducer",
+  "checks": {
+    "randomized_histories": 160,
+    "snapshot_oracle_comparisons": 7734,
+    "lane_replay_comparisons": 30417,
+    "past_snapshot_immutability_checks": 7734,
+    "duplicate_issue_checks": 2880,
+    "duplicate_receipt_checks": 4854,
+    "invalid_input_rejections": 19,
+    "prefix_nonanticipation_checks": 3815
+  },
+  "correction_case": {
+    "old_state": {
+      "count": 2,
+      "theta": "1/20"
+    },
+    "corrected_state": {
+      "count": 2,
+      "theta": "-1/20"
+    },
+    "active_targets": 2,
+    "retained_receipts": 3,
+    "old_feedback_digest": "6d031e0908f61561725e072ae13406fe4f2e5fffd28b8bae4249c22ba281b23b",
+    "new_feedback_digest": "41f6d679bf1f4ac55cac7503912307c9ec8860a606386203c76f6517aeea0f8d",
+    "changes": [
+      [
+        "B",
+        "revised"
+      ]
+    ]
+  },
+  "example": {
+    "final_feedback_identity": "b626736111d42ea282df1664b4a9be5347b469c1741ac9f08a39afdfec403cfa",
+    "forecasts": 18,
+    "received_revisions": 30,
+    "active": 18,
+    "state": {
+      "theta": "7/40",
+      "count": 18
+    }
+  },
+  "noncommutative_example": {
+    "hit_then_miss": {
+      "theta": "9/40",
+      "count": 2
+    },
+    "miss_then_hit": {
+      "theta": "1/4",
+      "count": 2
+    }
+  },
+  "scope": "Declared clocks and pure deterministic scorer/reducer. No authenticated publication timestamps or calibration claim."
+}

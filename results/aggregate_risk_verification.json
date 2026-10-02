@@ -1,0 +1,537 @@
+{
+  "status": "passed",
+  "protocol_sha256": "0f674533411924d18f38e5ee9651630eeaf40c1f6d6b85d10fdc8627ea2a1246",
+  "predictions_sha256": "26e79d1adb2edd8fbe0065e99d1c7a13b7b0a52484ce7594661544fa148f0405",
+  "archive_counts": {
+    "base_pairs": 325872,
+    "expert_pairs": 434496,
+    "model_pairs": 868992,
+    "metrics": 704,
+    "jensen_rows": 271440,
+    "online_updates": 102768,
+    "fit_start_objectives": 144,
+    "fit_dual_witness_rows": 20448,
+    "selected_individuals": 8,
+    "regret_comparators": 240,
+    "pending_targets": 24
+  },
+  "max_absolute_differences": {
+    "variance": 1.2366084718717918e-14,
+    "base_var": 8.128827472253519e-14,
+    "base_es": 7.227551890309769e-14,
+    "realized": 2.931682674400804e-14,
+    "severity": 1.327176216148196e-13,
+    "model_var": 1.069803967634897e-14,
+    "model_es": 3.2860866805428657e-14,
+    "scores": 5.771771949270033e-14,
+    "weights": 2.1611689895355626e-15,
+    "gradients": 5.179190409876355e-14,
+    "accumulators": 6.752109982244292e-11,
+    "jensen": 3.552713678800501e-14,
+    "metrics": 2.4424906541753444e-15,
+    "selection": 1.0369201157434116e-14
+  },
+  "contracts": [
+    {
+      "currency": "AUD",
+      "horizon": 1,
+      "common_origins": 1721,
+      "first_common_origin": "2020-01-02",
+      "last_common_origin": "2026-09-18"
+    },
+    {
+      "currency": "AUD",
+      "horizon": 5,
+      "common_origins": 1721,
+      "first_common_origin": "2020-01-02",
+      "last_common_origin": "2026-09-18"
+    },
+    {
+      "currency": "CAD",
+      "horizon": 1,
+      "common_origins": 1721,
+      "first_common_origin": "2020-01-02",
+      "last_common_origin": "2026-09-18"
+    },
+    {
+      "currency": "CAD",
+      "horizon": 5,
+      "common_origins": 1721,
+      "first_common_origin": "2020-01-02",
+      "last_common_origin": "2026-09-18"
+    },
+    {
+      "currency": "NOK",
+      "horizon": 1,
+      "common_origins": 1721,
+      "first_common_origin": "2020-01-02",
+      "last_common_origin": "2026-09-18"
+    },
+    {
+      "currency": "NOK",
+      "horizon": 5,
+      "common_origins": 1721,
+      "first_common_origin": "2020-01-02",
+      "last_common_origin": "2026-09-18"
+    },
+    {
+      "currency": "SEK",
+      "horizon": 1,
+      "common_origins": 1721,
+      "first_common_origin": "2020-01-02",
+      "last_common_origin": "2026-09-18"
+    },
+    {
+      "currency": "SEK",
+      "horizon": 5,
+      "common_origins": 1721,
+      "first_common_origin": "2020-01-02",
+      "last_common_origin": "2026-09-18"
+    }
+  ],
+  "static_fit_checks": [
+    {
+      "starts": 9,
+      "failed_starts": [],
+      "max_objective_difference": 9.359375253981117e-17,
+      "currency": "AUD",
+      "horizon": 1,
+      "geometry": "arithmetic"
+    },
+    {
+      "starts": 9,
+      "failed_starts": [],
+      "max_objective_difference": 1.7509865085640897e-16,
+      "numerical_gap": 6.170208019756589e-09,
+      "dual_witness_rows": 2558,
+      "lp_success": true,
+      "currency": "AUD",
+      "horizon": 1,
+      "geometry": "transformed"
+    },
+    {
+      "starts": 9,
+      "failed_starts": [],
+      "max_objective_difference": 2.4231918555051024e-16,
+      "currency": "AUD",
+      "horizon": 5,
+      "geometry": "arithmetic"
+    },
+    {
+      "starts": 9,
+      "failed_starts": [],
+      "max_objective_difference": 6.430403085011527e-16,
+      "numerical_gap": 6.479037217756861e-11,
+      "dual_witness_rows": 2554,
+      "lp_success": true,
+      "currency": "AUD",
+      "horizon": 5,
+      "geometry": "transformed"
+    },
+    {
+      "starts": 9,
+      "failed_starts": [],
+      "max_objective_difference": 7.508100044462118e-17,
+      "currency": "CAD",
+      "horizon": 1,
+      "geometry": "arithmetic"
+    },
+    {
+      "starts": 9,
+      "failed_starts": [],
+      "max_objective_difference": 9.62202323026573e-16,
+      "numerical_gap": 2.325386658268624e-09,
+      "dual_witness_rows": 2558,
+      "lp_success": true,
+      "currency": "CAD",
+      "horizon": 1,
+      "geometry": "transformed"
+    },
+    {
+      "starts": 9,
+      "failed_starts": [],
+      "max_objective_difference": 2.2388774861825667e-16,
+      "currency": "CAD",
+      "horizon": 5,
+      "geometry": "arithmetic"
+    },
+    {
+      "starts": 9,
+      "failed_starts": [],
+      "max_objective_difference": 2.415602440297704e-16,
+      "numerical_gap": 8.510585135929061e-10,
+      "dual_witness_rows": 2554,
+      "lp_success": true,
+      "currency": "CAD",
+      "horizon": 5,
+      "geometry": "transformed"
+    },
+    {
+      "starts": 9,
+      "failed_starts": [],
+      "max_objective_difference": 5.8302971825408e-17,
+      "currency": "NOK",
+      "horizon": 1,
+      "geometry": "arithmetic"
+    },
+    {
+      "starts": 9,
+      "failed_starts": [],
+      "max_objective_difference": 2.590701091154113e-16,
+      "numerical_gap": 1.855922642131358e-13,
+      "dual_witness_rows": 2558,
+      "lp_success": true,
+      "currency": "NOK",
+      "horizon": 1,
+      "geometry": "transformed"
+    },
+    {
+      "starts": 9,
+      "failed_starts": [],
+      "max_objective_difference": 1.824712256293104e-16,
+      "currency": "NOK",
+      "horizon": 5,
+      "geometry": "arithmetic"
+    },
+    {
+      "starts": 9,
+      "failed_starts": [],
+      "max_objective_difference": 1.5569143196891844e-16,
+      "numerical_gap": 1.6264662793669116e-11,
+      "dual_witness_rows": 2554,
+      "lp_success": true,
+      "currency": "NOK",
+      "horizon": 5,
+      "geometry": "transformed"
+    },
+    {
+      "starts": 9,
+      "failed_starts": [],
+      "max_objective_difference": 3.2885207144200956e-17,
+      "currency": "SEK",
+      "horizon": 1,
+      "geometry": "arithmetic"
+    },
+    {
+      "starts": 9,
+      "failed_starts": [],
+      "max_objective_difference": 4.399150314859934e-17,
+      "numerical_gap": 5.723041529153176e-09,
+      "dual_witness_rows": 2558,
+      "lp_success": true,
+      "currency": "SEK",
+      "horizon": 1,
+      "geometry": "transformed"
+    },
+    {
+      "starts": 9,
+      "failed_starts": [],
+      "max_objective_difference": 7.871307772244762e-17,
+      "currency": "SEK",
+      "horizon": 5,
+      "geometry": "arithmetic"
+    },
+    {
+      "starts": 9,
+      "failed_starts": [],
+      "max_objective_difference": 2.540285690133537e-16,
+      "numerical_gap": 1.0532818107283903e-13,
+      "dual_witness_rows": 2554,
+      "lp_success": true,
+      "currency": "SEK",
+      "horizon": 5,
+      "geometry": "transformed"
+    }
+  ],
+  "pathwise_regret_checks": [
+    {
+      "currency": "AUD",
+      "horizon": 1,
+      "scale": 0.1,
+      "completed_targets": 4284,
+      "bound": 1216.6060761340848,
+      "largest_checked_regret": 21.745146504404538,
+      "scope": "fixed comparators on observed expert path; no generalization guarantee"
+    },
+    {
+      "currency": "AUD",
+      "horizon": 1,
+      "scale": 0.3,
+      "completed_targets": 4284,
+      "bound": 446.2536702351453,
+      "largest_checked_regret": 28.811921296257598,
+      "scope": "fixed comparators on observed expert path; no generalization guarantee"
+    },
+    {
+      "currency": "AUD",
+      "horizon": 1,
+      "scale": 1.0,
+      "completed_targets": 4284,
+      "bound": 247.1692817128417,
+      "largest_checked_regret": 68.36430564426668,
+      "scope": "fixed comparators on observed expert path; no generalization guarantee"
+    },
+    {
+      "currency": "AUD",
+      "horizon": 5,
+      "scale": 0.1,
+      "completed_targets": 4280,
+      "bound": 4440.366084090546,
+      "largest_checked_regret": 248.26481407112632,
+      "scope": "fixed comparators on observed expert path; no generalization guarantee"
+    },
+    {
+      "currency": "AUD",
+      "horizon": 5,
+      "scale": 0.3,
+      "completed_targets": 4280,
+      "bound": 1599.4294272514292,
+      "largest_checked_regret": 259.51303028236526,
+      "scope": "fixed comparators on observed expert path; no generalization guarantee"
+    },
+    {
+      "currency": "AUD",
+      "horizon": 5,
+      "scale": 1.0,
+      "completed_targets": 4280,
+      "bound": 879.9642841151491,
+      "largest_checked_regret": 289.76182534559115,
+      "scope": "fixed comparators on observed expert path; no generalization guarantee"
+    },
+    {
+      "currency": "CAD",
+      "horizon": 1,
+      "scale": 0.1,
+      "completed_targets": 4284,
+      "bound": 1017.2352087306772,
+      "largest_checked_regret": 9.76812724516069,
+      "scope": "fixed comparators on observed expert path; no generalization guarantee"
+    },
+    {
+      "currency": "CAD",
+      "horizon": 1,
+      "scale": 0.3,
+      "completed_targets": 4284,
+      "bound": 369.4099615305401,
+      "largest_checked_regret": 8.689154922325224,
+      "scope": "fixed comparators on observed expert path; no generalization guarantee"
+    },
+    {
+      "currency": "CAD",
+      "horizon": 1,
+      "scale": 1.0,
+      "completed_targets": 4284,
+      "bound": 201.4721641169813,
+      "largest_checked_regret": 35.095743015554746,
+      "scope": "fixed comparators on observed expert path; no generalization guarantee"
+    },
+    {
+      "currency": "CAD",
+      "horizon": 5,
+      "scale": 0.1,
+      "completed_targets": 4280,
+      "bound": 2419.2899505816245,
+      "largest_checked_regret": 42.514441458829026,
+      "scope": "fixed comparators on observed expert path; no generalization guarantee"
+    },
+    {
+      "currency": "CAD",
+      "horizon": 5,
+      "scale": 0.3,
+      "completed_targets": 4280,
+      "bound": 861.5976510287455,
+      "largest_checked_regret": 38.91720570760546,
+      "scope": "fixed comparators on observed expert path; no generalization guarantee"
+    },
+    {
+      "currency": "CAD",
+      "horizon": 5,
+      "scale": 1.0,
+      "completed_targets": 4280,
+      "bound": 473.2767559839285,
+      "largest_checked_regret": 26.1902851003535,
+      "scope": "fixed comparators on observed expert path; no generalization guarantee"
+    },
+    {
+      "currency": "NOK",
+      "horizon": 1,
+      "scale": 0.1,
+      "completed_targets": 4284,
+      "bound": 1745.9157018485391,
+      "largest_checked_regret": 15.315068908022344,
+      "scope": "fixed comparators on observed expert path; no generalization guarantee"
+    },
+    {
+      "currency": "NOK",
+      "horizon": 1,
+      "scale": 0.3,
+      "completed_targets": 4284,
+      "bound": 628.4395416450724,
+      "largest_checked_regret": 25.536215936376294,
+      "scope": "fixed comparators on observed expert path; no generalization guarantee"
+    },
+    {
+      "currency": "NOK",
+      "horizon": 1,
+      "scale": 1.0,
+      "completed_targets": 4284,
+      "bound": 346.4942788633992,
+      "largest_checked_regret": 23.763866104223005,
+      "scope": "fixed comparators on observed expert path; no generalization guarantee"
+    },
+    {
+      "currency": "NOK",
+      "horizon": 5,
+      "scale": 0.1,
+      "completed_targets": 4280,
+      "bound": 4718.231607775182,
+      "largest_checked_regret": 88.53694585222364,
+      "scope": "fixed comparators on observed expert path; no generalization guarantee"
+    },
+    {
+      "currency": "NOK",
+      "horizon": 5,
+      "scale": 0.3,
+      "completed_targets": 4280,
+      "bound": 1682.3891447273143,
+      "largest_checked_regret": 116.5186596922611,
+      "scope": "fixed comparators on observed expert path; no generalization guarantee"
+    },
+    {
+      "currency": "NOK",
+      "horizon": 5,
+      "scale": 1.0,
+      "completed_targets": 4280,
+      "bound": 923.6742702105364,
+      "largest_checked_regret": 189.1119304051894,
+      "scope": "fixed comparators on observed expert path; no generalization guarantee"
+    },
+    {
+      "currency": "SEK",
+      "horizon": 1,
+      "scale": 0.1,
+      "completed_targets": 4284,
+      "bound": 1149.6591998850251,
+      "largest_checked_regret": 24.61611016683786,
+      "scope": "fixed comparators on observed expert path; no generalization guarantee"
+    },
+    {
+      "currency": "SEK",
+      "horizon": 1,
+      "scale": 0.3,
+      "completed_targets": 4284,
+      "bound": 412.93938048814607,
+      "largest_checked_regret": 29.243425682625634,
+      "scope": "fixed comparators on observed expert path; no generalization guarantee"
+    },
+    {
+      "currency": "SEK",
+      "horizon": 1,
+      "scale": 1.0,
+      "completed_targets": 4284,
+      "bound": 228.12414759639063,
+      "largest_checked_regret": 35.18896268388378,
+      "scope": "fixed comparators on observed expert path; no generalization guarantee"
+    },
+    {
+      "currency": "SEK",
+      "horizon": 5,
+      "scale": 0.1,
+      "completed_targets": 4280,
+      "bound": 2242.1699631675206,
+      "largest_checked_regret": 130.28666669507578,
+      "scope": "fixed comparators on observed expert path; no generalization guarantee"
+    },
+    {
+      "currency": "SEK",
+      "horizon": 5,
+      "scale": 0.3,
+      "completed_targets": 4280,
+      "bound": 831.1995125683005,
+      "largest_checked_regret": 59.655951295025076,
+      "scope": "fixed comparators on observed expert path; no generalization guarantee"
+    },
+    {
+      "currency": "SEK",
+      "horizon": 5,
+      "scale": 1.0,
+      "completed_targets": 4280,
+      "bound": 457.090239211181,
+      "largest_checked_regret": 39.83190206623263,
+      "scope": "fixed comparators on observed expert path; no generalization guarantee"
+    }
+  ],
+  "generic_checks": {
+    "counts": {
+      "jensen_rows": 332,
+      "vertices": 14,
+      "gradients": 4,
+      "finite_differences": 10,
+      "projections": 450,
+      "controller_runs": 9,
+      "causal_prefix_variants": 54,
+      "pending_variants": 27,
+      "invalid_inputs": 12,
+      "regret_comparators": 54,
+      "zero_gradient_runs": 6
+    },
+    "max_absolute_differences": {
+      "pool": 5.102255423716784e-16,
+      "jensen_identity": 2.2315591215182895e-16,
+      "gradient": 1.0236603231739139e-14,
+      "finite_difference": 1.868542653937766e-09,
+      "projection": 7.401712706286978e-17,
+      "controller_var": 7.685909200749741e-16,
+      "controller_es": 1.3598063647313197e-15,
+      "controller_weights": 7.619772868228125e-16,
+      "unit_rescaling": 8.881784197001252e-16
+    },
+    "scope": "constructed numerical, causal and edge cases; not a statistical or rounding guarantee"
+  },
+  "selection_causality_checks": {
+    "selected_individual_rechecks": 16,
+    "static_fit_input_arrays_bitwise_unchanged": 48,
+    "cutoff": "2019-12-31",
+    "variants": [
+      "future_suffix_mutation",
+      "suffix_truncation"
+    ],
+    "seed": 2026092609,
+    "primary_selection_reconstructed_from_eight_saved_development_scores": true
+  },
+  "tolerances": {
+    "atol": 2e-09,
+    "rtol": 2e-09
+  },
+  "arithmetic_scope": "longdouble and independent algorithm cross-checks; no interval enclosure or automatic proof",
+  "source_sha256": {
+    "verify_aggregate_risk.py": "bd3b31e7c890b1a80162cbdac0121d0582f82c544a7b2cd96f5be8a2f5d37eb4",
+    "verify_ecb_risk.py": "0a1c99b9582a022bfb7f8351ced8368545a64993fb400f36bf9a8ab10b3d9868",
+    "verify_severity_risk.py": "27a6a922d33413c96cfd8154a9eb76150740e2bb8c49fd23f6898661eabb2db2"
+  },
+  "execution_seconds": 19.986478435999743,
+  "bootstrap_verification": {
+    "status": "passed",
+    "summary_sha256": "53a061f2fdfab7fe12bfa67347ad7cf84c0c76ee850525a6f773757b330df97b",
+    "bootstrap_sha256": "cd35375baa13e0d74f0cc3abe4c9d8af6f92b3ff8042304b3afdea0e193f569e",
+    "common_dates": 1721,
+    "contracts": 8,
+    "block_replays": [
+      {
+        "length": 20,
+        "replicates": 5000,
+        "comparators": 4,
+        "last_block_retained_dates": 1
+      },
+      {
+        "length": 60,
+        "replicates": 5000,
+        "comparators": 4,
+        "last_block_retained_dates": 41
+      }
+    ],
+    "max_absolute_difference": 3.8663516832571077e-14,
+    "conjunctive_gate_passed": false,
+    "scope": "Independent deterministic replay of archived bootstrap; does not validate stationarity or future coverage"
+  }
+}

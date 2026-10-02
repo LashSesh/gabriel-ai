@@ -1,0 +1,41 @@
+{
+  "schema": "gabriel.decision-regions.checks.v1",
+  "passed": true,
+  "scope": "exhaustive synthetic finite-table verification; no empirical finance claim",
+  "counts": {
+    "two_row_models": 82944,
+    "two_row_states": 248832,
+    "four_row_models": 4096,
+    "four_row_states": 65536,
+    "certificates": 776,
+    "tamper_rejections": 28,
+    "invalid_input_rejections": 35,
+    "policy_paths": 768
+  },
+  "assessed_statuses": {
+    "known": 166641,
+    "blocked": 70849,
+    "unresolved": 72782,
+    "conflict": 4096
+  },
+  "exact_arithmetic": "fractions.Fraction for scores; integer positive query costs",
+  "named_cases": [
+    "exists common action versus pointwise existence",
+    "empty intersection versus empty union",
+    "negative rational scores",
+    "no-query tie with canonical action",
+    "strict labels unresolved while acceptable action known",
+    "observationally equivalent incompatible records",
+    "independent feasibility and scalar risk constraint",
+    "timestamped passive ingestion and idempotence",
+    "future-scenario evidence rejected",
+    "explicit state guard",
+    "model identity and transcript tampering"
+  ],
+  "python": "3.12.14",
+  "elapsed_seconds": 12.923,
+  "source_sha256": {
+    "decision_regions.py": "4e6cc2582ce77b6fd31d5230dd0f2399b4ba4ad7f80b74839d3a696924ac8246",
+    "check_decision_regions.py": "29d5bbf58ecf79e31a04952f59ea7a34fcf7a083a12825751d6918f57af5d717"
+  }
+}

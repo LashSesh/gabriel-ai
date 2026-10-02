@@ -1,0 +1,43 @@
+{
+  "date": "2026-09-25",
+  "datasets": [
+    "RacketSports",
+    "BasicMotions"
+  ],
+  "fitted_model": "existing frozen trace_observer from external_*_model.npz",
+  "refit": false,
+  "graph_seed": 0,
+  "initialization": "zero per complete finite record",
+  "masks": "identical saved masks from ordered-head audit",
+  "policies": [
+    "random",
+    "recent",
+    "derivative"
+  ],
+  "enclosures": [
+    "basic",
+    "structured",
+    "hybrid"
+  ],
+  "random_recent": "identical saved query paths; do not depend on head",
+  "derivative_query": "minimize maximum frozen interval-gradient radius after deleting one coordinate contribution",
+  "query_noise": 0,
+  "query_cost": 1,
+  "input_domain": [
+    -1,
+    1
+  ],
+  "noise_radii_normalized": [
+    0.0,
+    0.005,
+    0.01,
+    0.02,
+    0.05,
+    0.1
+  ],
+  "decision_margin": 1e-10,
+  "arithmetic": "float64; checks at 1e-9, nesting at 1e-8; no outward rounding",
+  "scope": "conditional complete-model winner, not true label or physical safety",
+  "data_reuse": "development comparison on tasks previously examined, not independent replication",
+  "selection_rule": "fixed before this observer acquisition run"
+}

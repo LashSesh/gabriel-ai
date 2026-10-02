@@ -1,0 +1,46 @@
+{
+  "measured_prior_source_snapshot": "audit/native_indexed_measured_sources.zip",
+  "changed_recorded_native_files": [
+    {
+      "file": "Cargo.toml",
+      "status": "modified",
+      "before": "29371d11e5df0d7f6ceca3c33ae75aea025cb728f9ac3622b25357754ebd67d9",
+      "after": "b4679f26bd1053f09d5ddaa9751d1e046a14be79d8a04b18078454fb00a5c0c8"
+    },
+    {
+      "file": "crates/pse-core/Cargo.toml",
+      "status": "modified",
+      "before": "089d61c4c5ae41e7ec6ac77a27c4ee70ab1f402d159526be15f4f26dead24f0f",
+      "after": "c10bac026beae10a55831f4e528e262dfa69be0d57b3431ea37b258089b4086b"
+    },
+    {
+      "file": "crates/pse-core/src/lib.rs",
+      "status": "modified",
+      "before": "0087d63279d57ff3f8cd18486c1eea737cadd49aca757e7341973f5671f86f96",
+      "after": "582d9ddce3a2bd1e2ec0c51c5b2953e095cac0b61adb59b3fd746bb926e6a275"
+    },
+    {
+      "file": "crates/pse-topology/Cargo.toml",
+      "status": "modified",
+      "before": "a1f2e1a33ecd735f8a901a7b4934de6073c32550af3e80273e110e2060b62b00",
+      "after": "47cd125f1d13ebd5512592a7dd26bc8f6e829303bd2cdc6e450e8f045fcf38c1"
+    },
+    {
+      "file": "crates/pse-topology/src/lib.rs",
+      "status": "modified",
+      "before": "f002d5e1e86568c4d557826799fa26cdfb59cc2cdb8decde13004b0af2728b5c",
+      "after": "4d212d9f87bad8c7f1a23e3b6e0308891fa9b629e7f4f8edd08443a10fa7966d"
+    }
+  ],
+  "new_native_rust_files": [
+    "crates/pse-topology/src/ctqw_equivalence_tests.rs",
+    "crates/pse-topology/src/shared_spectrum_tests.rs",
+    "crates/pse-topology/src/ctqw_hoisted.rs",
+    "crates/pse-core/src/shared_spectrum_tests.rs"
+  ],
+  "reference_ctqw_body_sha256": "a0d94fdef6254c04e80704b7ae9fe3c3d7454b797cf05b86603adbcf7dde11a4",
+  "reference_attribute_change": "inline(never), body unchanged; common to all new variants",
+  "validation": "native_pse/benchmark-results/phase_validation/guarded_all_features_filtered.command.json",
+  "retained_failed_attempt": "native_pse/benchmark-results/phase_validation/all_features_filtered.stdout",
+  "failed_attempt_reason": "NaN sign mismatch before conservative reference fallback; regression added, test not relaxed"
+}

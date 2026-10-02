@@ -1,0 +1,289 @@
+{
+  "schema": 1,
+  "toolchain": "1.95.0",
+  "scope": "Synthetic in-memory complete native macro_step; no Gabriel owner, durable storage, scientific validation or financial predictor",
+  "variants": [
+    "packed",
+    "indexed",
+    "memoized"
+  ],
+  "features": {
+    "packed": [],
+    "indexed": [
+      "indexed-engine"
+    ],
+    "memoized": [
+      "memoized-engine"
+    ]
+  },
+  "profile": {
+    "opt-level": 3,
+    "lto": false,
+    "codegen-units": 1,
+    "debug": true,
+    "strip": "none",
+    "overflow-checks": false,
+    "panic": "unwind"
+  },
+  "comparisons": [
+    {
+      "name": "indexed_vs_packed",
+      "variants": [
+        "packed",
+        "indexed"
+      ],
+      "engine_orders": [
+        [
+          "packed",
+          "indexed"
+        ],
+        [
+          "indexed",
+          "packed"
+        ],
+        [
+          "packed",
+          "indexed"
+        ],
+        [
+          "indexed",
+          "packed"
+        ],
+        [
+          "packed",
+          "indexed"
+        ]
+      ],
+      "first_orders": [
+        [
+          "packed",
+          "indexed"
+        ],
+        [
+          "indexed",
+          "packed"
+        ],
+        [
+          "packed",
+          "indexed"
+        ],
+        [
+          "indexed",
+          "packed"
+        ],
+        [
+          "packed",
+          "indexed"
+        ]
+      ],
+      "micro_orders": [
+        [
+          "packed",
+          "indexed"
+        ],
+        [
+          "indexed",
+          "packed"
+        ],
+        [
+          "packed",
+          "indexed"
+        ],
+        [
+          "indexed",
+          "packed"
+        ],
+        [
+          "packed",
+          "indexed"
+        ],
+        [
+          "indexed",
+          "packed"
+        ],
+        [
+          "packed",
+          "indexed"
+        ]
+      ]
+    },
+    {
+      "name": "memoized_vs_indexed",
+      "variants": [
+        "indexed",
+        "memoized"
+      ],
+      "engine_orders": [
+        [
+          "indexed",
+          "memoized"
+        ],
+        [
+          "memoized",
+          "indexed"
+        ],
+        [
+          "indexed",
+          "memoized"
+        ],
+        [
+          "memoized",
+          "indexed"
+        ],
+        [
+          "indexed",
+          "memoized"
+        ]
+      ],
+      "first_orders": [
+        [
+          "indexed",
+          "memoized"
+        ],
+        [
+          "memoized",
+          "indexed"
+        ],
+        [
+          "indexed",
+          "memoized"
+        ],
+        [
+          "memoized",
+          "indexed"
+        ],
+        [
+          "indexed",
+          "memoized"
+        ]
+      ],
+      "micro_orders": [
+        [
+          "indexed",
+          "memoized"
+        ],
+        [
+          "memoized",
+          "indexed"
+        ],
+        [
+          "indexed",
+          "memoized"
+        ],
+        [
+          "memoized",
+          "indexed"
+        ],
+        [
+          "indexed",
+          "memoized"
+        ],
+        [
+          "memoized",
+          "indexed"
+        ],
+        [
+          "indexed",
+          "memoized"
+        ]
+      ]
+    }
+  ],
+  "engine": {
+    "entities": [
+      3,
+      5,
+      7,
+      8
+    ],
+    "ticks": 8,
+    "required_commits": 8,
+    "inner_repetitions": 25,
+    "external_pairs_per_comparison": 5,
+    "warmup": "one fresh 8-tick engine per entity count, outside reported repetitions",
+    "freshness": "fresh GlobalState per repetition; process-global packed/index/cache and memoized thread cache retain state",
+    "timing": "Instant around 8 macro_step calls including per-tick timer/recording, returned crystal drop and black_box; excludes input/config/GlobalState construction, final state drop, shape checks and JSON",
+    "golden": "exact output bytes of all per-tick selected state snapshots and complete SemanticCrystal values, three builds; snapshot field scope matches prior focused harness",
+    "shape": "every tick commits; every crystal region equals source count; signature Some with matching n for 3/5/7, None for 8",
+    "graph_scope": "these sources form complete region graphs; 8-source workload bypasses bounded signature as a negative control",
+    "statistic": "per external pair: ratio of per-process median observation throughput across 25 fresh repetitions; report median and range of five paired ratios"
+  },
+  "first_macrostep": {
+    "entities": [
+      3,
+      5,
+      7,
+      8
+    ],
+    "external_pairs_per_comparison": 5,
+    "freshness": "new executable process per entity count per variant per pair; no preceding macro_step, golden, signature, or warmup in that process",
+    "timing": "only first macro_step including its internal lazy initialization; process launch, input/config/GlobalState construction, output inspection/drop/serialization excluded",
+    "cache_warning": "fresh process is not a cold OS page cache; no page-cache flushing",
+    "statistic": "reference elapsed_ns divided by candidate elapsed_ns within each alternating pair; report all five values and median/range"
+  },
+  "micro": {
+    "n": [
+      3,
+      5,
+      7
+    ],
+    "workloads": [
+      "fixed",
+      "changing",
+      "collision"
+    ],
+    "calls_per_pass": 512,
+    "pairs_per_comparison": 7,
+    "same_binary": "memoized-engine executable contains all three complete signature functions",
+    "fixed": "512 calls of the complete graph at n, matching full-engine graph shape",
+    "changing": "512 frozen xorshift64 graph words per n; not necessarily unique (only eight possible n=3 graphs); distinct count in inputs.json",
+    "timing": "full signature API (validation, orbit selection, canonical hash, spectral and subgraph fields), black_box and output drop; owned adjacency cloning/construction, diagnostics and serialization excluded",
+    "warmup": "per n/workload/comparison: clear memo cache, one untimed 512-call pass of each comparison function; cache persists through seven timed pairs",
+    "golden": "complete pse_types::canonical_bytes output for fixed, all 512 changing and all collision inputs from each of three functions in same executable, exact bytes compared before timing",
+    "diagnostics": "memoizer cumulative per-thread counters sampled before/after each pass outside timer; implementation counter increments remain part of function cost",
+    "statistic": "reference elapsed_ns divided by candidate elapsed_ns within each alternating pair; report all seven values and median/range",
+    "workload_n": {
+      "fixed": [
+        3,
+        5,
+        7
+      ],
+      "changing": [
+        3,
+        5,
+        7
+      ],
+      "collision": [
+        5,
+        7
+      ]
+    },
+    "collision": "512 alternating calls of two distinct same-n labelled graph words with different edge counts mapped to the same memoizer slot; n5/n7 only; n3 has no within-size slot collision. Untimed preflight requires all second-pass calls to miss and evict.",
+    "collision_slot_formula": "word=bits|(n<<21); mixed=word*0x9e3779b1 wrapping u32; slot=(mixed^(mixed>>16))&255; fixture freezes actual colliding words"
+  },
+  "execution_order": [
+    "source/inputs/protocol freeze",
+    "three locked release builds",
+    "configuration freeze",
+    "three-way engine golden",
+    "three-way same-binary micro golden",
+    "untimed memo cache diagnostics including collision assertions",
+    "source guard",
+    "first macrosteps",
+    "warm engines",
+    "micro",
+    "source guard",
+    "summary"
+  ],
+  "not_measured": [
+    "OS process startup",
+    "allocation counts",
+    "CPU counters",
+    "RSS",
+    "OS page-cache-cold startup"
+  ],
+  "interpretation": "Ratios are local synthetic measurements with explicit noise/ranges; do not multiply by historical ratios or claim general application/model speedups",
+  "profile_rationale": "All three variants use LTO disabled as a local linking workaround after Rust 1.95.0 ThinLTO link attempts failed with undefined symbols. This records an observed build workaround, not a diagnosis. These same-profile local ratios must not be multiplied by historical ThinLTO ratios.",
+  "build_jobs": 1,
+  "build_cache": "All builds share output/target/build for untimed Cargo dependency reuse. Immediately after each successful build its executable is copied to output/target/binaries/<variant>, byte-hash verified, and all later golden/measurement commands execute those preserved copies. Exact copied binary hashes are recorded."
+}

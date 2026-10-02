@@ -1,0 +1,21 @@
+{
+  "id": "gabriel-finite-domain-observation-v1",
+  "date": "2026-09-25",
+  "status": "fixed before executing this study; internal protocol, not externally preregistered",
+  "purpose": "Exact conditional decisions in finite declared models, not estimation of population accuracy",
+  "domains": ["conservative_transport", "event_order"],
+  "transport": {"rates": ["0", "1/4", "1/2"], "initial_p": ["1/4", "3/4"], "steps": 4, "update_order": [[0,1],[1,2]], "queries": "exact scalar r_i(t), t=0,1,2,3; i=0,1,2", "target": "r_2(4) >= 1/4"},
+  "event_order": {"events": ["A", "B", "C", "D"], "histories": "all 24 permutations", "queries": "event position of A, B, C, D, one-based", "target": "A precedes B"},
+  "nuisance_values": [1, 4, 16],
+  "unobservable_aliases_per_history": 2,
+  "nuisance_query": "independent metadata tag, appended after physical queries; excluded from target and recurrent input",
+  "targets": ["domain_predicate", "frozen_gabriel_readout"],
+  "gabriel": {"graph_seed": 0, "mode": "trace_only", "config": "unchanged default Config, input_dim per adapter", "initial_state": "zero", "head": "w=U[:,0]-U[:,1], score=w dot final activity, positive score is label 1", "training": "none; diagnostic fixed readout, not a predictive accuracy experiment", "point_validation_bits": [100,160]},
+  "policies": ["fixed", "reverse", "hypothesis_entropy", "ec2", "minimax"],
+  "cost": "one unit per actual scalar or metadata query, zero for inference and skipped constant tests",
+  "minimax_ties": "query index, independent of test outcomes",
+  "greedy_ties": "query index; entropy floating tie tolerance 1e-12, EC2 exact rational comparisons",
+  "evaluation": "exhaustive over each finite catalogue; uniform averages, worst costs, unresolved decisions, remaining physical histories; save every path",
+  "additional_checks": ["all 24576 four-hypothesis three-binary-query tables with balanced binary targets", "exact rational conservation and dissipation", "safe quotient versus all raw aliases", "past-equivalence counterexample", "delayed receipt and duplicate evidence", "persistent one-bit error expansion", "detectable and undetectable misspecification", "passive observation versus state-changing intervention"],
+  "scope": "Noise-free immutable observation tables in the main experiment; no market, clinical, hardware, or general domain-transfer performance claim"
+}

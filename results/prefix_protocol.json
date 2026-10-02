@@ -1,0 +1,22 @@
+{
+  "phase": "continuous-state prefix voters",
+  "locked_before_new_test_evaluation": "2026-09-25",
+  "scope": "Development on previously examined RacketSports and BasicMotions; first project evaluation on NATOPS and Epilepsy. This local protocol is not an external preregistration.",
+  "datasets": ["RacketSports", "BasicMotions", "NATOPS", "Epilepsy"],
+  "new_dataset_selection": "UEA multichannel human-motion records with original public splits, manageable lengths, and different channel counts; metadata consulted before fitting, no test outcomes used for selection.",
+  "models": ["full_observer", "reset_blocks", "shared_prefix", "stage_prefix", "stage_mean"],
+  "primary_candidate": "stage_prefix",
+  "comparisons": "Report all five families on all four datasets. No family selection from test performance and no claim of replacing the full observer uniformly.",
+  "checkpoints": "Five event indices floor(b*N/5), b=1,...,5. No search over checkpoint number or locations.",
+  "state": "Graph seed 0 and existing 48-node trace-only observer, reset only at record start for both prefix families. reset_blocks resets at each block. stage_mean uses cumulative channel means only.",
+  "training": "Five stratified folds of original training records; fold-specific normalization; inherited record labels at each checkpoint; ridge selected by mean record-level ensemble balanced accuracy, strongest regularization in exact ties. Shared families fit one head across checkpoints; stage families fit five heads with one common selected penalty. Full observer fits final-record head.",
+  "fold_seeds": [93400, 93401, 93402, 93403],
+  "penalties": [0.0001, 0.001, 0.01, 0.1, 1, 10, 100, 1000],
+  "normalization": "Training channel mean and SD, floor SD at 1e-12; tanh((x-mean)/(3*SD)).",
+  "masks": "Reuse exact original random_half and middle_half masks on old datasets. New random_half masks choose floor(N*m/2) scalars without replacement with seed 93500+1000*dataset_index+case. New middle_half masks hide floor(N/2) complete events starting at floor(N/4). Report each actual denominator. Also evaluate stream_all with no initially known input.",
+  "acquisition": "Unit-cost exact scalar retrieval. Prefix models expose only fully known prefixes, querying missing coordinates in chronological then channel order to the next checkpoint. Reset blocks use already complete blocks immediately, then left-to-right missing blocks. Full observer comparator reads all initially missing values; its retrieval is a full-read baseline, not a new bound optimization.",
+  "stopping": "Full classifier uses plurality of five votes and smallest-class-index ties. Report both strict dominance and the tight tie-aware rule in the unconstrained unread-vote abstraction. Point winners validated with 100-bit Arb, retry 160 then 256 bits if necessary; unresolved local ties block early certification. No claim of full-box validated arithmetic.",
+  "metrics": "Correct cases, accuracy, balanced accuracy, predictions changed and paired errors versus full observer; mean and median missing-input fraction and count, early cases, end checkpoint; strict and tie-aware stopping. No significance or population noninferiority claim from four chosen datasets.",
+  "saved_material": "Source inputs and attribution, exact protocol hash, folds, normalized arrays, coefficients, CV scores, all checkpoint scores and votes, Arb outward endpoints, masks, stop decisions, deterministic replay and finite-rule tests.",
+  "negative_results": "Retain every declared family and dataset regardless of accuracy or retrieval outcome. Do not tune after test evaluation within this phase."
+}

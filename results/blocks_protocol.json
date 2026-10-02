@@ -1,0 +1,8 @@
+{
+  "blocks": 5,
+  "selection": "fixed before executing this alternative; no search over block counts",
+  "training": "block labels inherit record label; 5 folds grouped by record; fold-specific input normalization; ridge selected by record-level majority balanced accuracy",
+  "decision": "strict observed vote dominance over every rival plus all unread votes; deterministic lowest-label tie only after full observation",
+  "scope": "development on previously inspected external datasets; fresh independent evaluation still needed",
+  "arithmetic": "all test block winners validated with 100-bit Arb; votes and stopping use exact integers"
+}

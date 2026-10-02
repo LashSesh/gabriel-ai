@@ -1,0 +1,18 @@
+\begin{table}[H]\centering\small
+\caption{Conditioned full-state queries. Median Spectral/Auto elapsed-time ratios and observed ranges of seven process medians, each based on five alternating pairs. Setup and source preparation are timed separately. One in sixteen queries is at zero time. These are synthetic API measurements, not whole-engine gains.}
+\label{tab:conditionedwalk}
+\resizebox{\textwidth}{!}{\begin{tabular}{lrrrr}\toprule
+Graph & $n$ & Setup ratio & Prepare ratio & Query ratio [range]\\\midrule
+Clique & 7 & 3.70 & 2.05 & $3.42\,[3.22,\,3.66]$ \\
+Clique & 13 & 4.15 & 3.20 & $5.98\,[5.49,\,6.31]$ \\
+Clique & 32 & 4.78 & 14.93 & $15.91\,[14.48,\,16.88]$ \\
+Clique & 64 & 6.05 & 45.18 & $31.17\,[27.84,\,33.45]$ \\
+Clique & 128 & 10.32 & 100.55 & $63.88\,[59.20,\,68.42]$ \\
+Clique ($w=1$) & 13 & 4.02 & 3.23 & $6.51\,[6.04,\,7.75]$ \\
+Clique (guard) & 13 & 0.96 & 1.00 & $1.03\,[0.96,\,1.11]$ \\
+Near-clique & 13 & 1.00 & 1.00 & $1.02\,[0.91,\,1.07]$ \\
+Near-clique & 64 & 1.00 & 1.00 & $1.01\,[0.96,\,1.04]$ \\
+Path & 13 & 0.99 & 0.98 & $1.01\,[0.89,\,1.05]$ \\
+Path & 64 & 1.00 & 0.99 & $1.01\,[0.96,\,1.06]$ \\
+\bottomrule\end{tabular}}
+\end{table}

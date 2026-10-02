@@ -1,0 +1,673 @@
+
+running 3 tests
+test conditioned::tests::malformed_vertex_maps_are_rejected_before_projection ... ok
+test conditioned::tests::invalid_raw_weights_are_not_hidden_by_projection ... ok
+test conditioned::tests::vertex_budget_is_checked_before_dense_allocation ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 8 tests
+test faulted_engine_refuses_new_snapshots ... ok
+test source_conditioning_preserves_stationary_controls_and_complex_interference_sign ... ok
+test normalized_observer_handles_subnormal_and_near_maximum_sources_before_evolution ... ok
+test sparse_graph_from_pair_batches_uses_fallback_without_manual_graph_edits ... ok
+test querying_between_real_commits_does_not_change_crystal_bytes_or_statistics ... ok
+test labelled_sources_and_target_sets_cannot_alias_or_silently_fill_missing_vertices ... ok
+test actual_ingestion_selects_clique_and_preserves_snapshot_after_step_and_reset ... ok
+test snapshot_auto_spectral_and_fixed_region_agree_on_same_ingested_operator ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+running 2 tests
+test cooldown_does_not_report_a_previous_ticks_gate ... ok
+test real_commits_replay_and_parallel_instances_match_full_bytes ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 0.00s
+
+
+running 4 tests
+test failed_step_requires_explicit_recovery ... ok
+test digest_mismatch_is_not_trusted ... ok
+test invalid_config_is_an_error_before_state_allocation ... ok
+test rejected_ticks_and_reset_are_reproducible ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 54 tests
+test consensus_tests::gate_snapshot_kairos_all_high ... ok
+test consensus_tests::gate_snapshot_kairos_one_below ... ok
+test consensus_tests::dual_consensus_can_diverge_under_carrier_specific_resonance ... ok
+test consensus_tests::dk_score_high_for_axis_aligned_data ... ok
+test consensus_tests::cascade_ops_are_state_mutators ... ok
+test consensus_tests::dual_consensus_basic ... ok
+test consensus_tests::norm_exp_basic ... ok
+test consensus_tests::pi_zero_at_node ... ok
+test consensus_tests::por_fsm_resets_on_instability ... ok
+test consensus_tests::pi_high_at_clear_local_max ... ok
+test consensus_tests::por_fsm_transitions_search_to_commit ... ok
+test consensus_tests::norm_saturate_basic ... ok
+test consensus_tests::sw_score_one_for_axis_aligned_data ... ok
+test consensus_tests::sw_score_zero_for_diagonal_data ... ok
+test consensus_tests::wt_score_zero_when_active_carrier_kappa_is_zero ... ok
+test tests::batch_data_helix_circular_mean_handles_wrap_around ... ok
+test consensus_tests::wt_migrates_when_better_carrier_exists ... ok
+test tests::advance_phase_ladder_monotonic ... ok
+test tests::batch_data_helix_empty_is_origin_at_tau ... ok
+test tests::batch_data_helix_phi_in_zero_two_pi ... ok
+test tests::build_phase_ladder_size ... ok
+test tests::helix_pair_pi_offset ... ok
+test tests::data_helix_with_hint_resonates_with_aligned_carrier ... ok
+test tests::batch_data_helix_single_observation_matches_single_helix ... ok
+test tests::mandorla_real_amplitude_mismatch_attenuates_kappa ... ok
+test tests::helix_pair_pi_offset_nonzero_phi ... ok
+test tests::mandorla_real_anti_aligned_data_also_resonant ... ok
+test tests::mandorla_real_is_dominated_by_carrier_only ... ok
+test tests::mandorla_kappa_at_zero_phase_diff ... ok
+test tests::mandorla_kappa_in_unit_interval ... ok
+test tests::mandorla_real_axis_aligned_data_matches_carrier_only ... ok
+test tests::mandorla_real_kappa_in_unit_interval ... ok
+test tests::mandorla_real_three_quarter_node_also_kills_kappa ... ok
+test tests::mandorla_real_transverse_data_kills_kappa ... ok
+test tests::metatron_ladder_has_thirteen_carriers ... ok
+test tests::metatron_ladder_first_is_center ... ok
+test tests::metatron_ladder_helix_pair_pi_offset_invariant ... ok
+test tests::metatron_ladder_is_vector_equilibrium ... ok
+test tests::metatron_ladder_outer_vertices_unit_radius ... ok
+test tests::metatron_ladder_outer_phases_distinct ... ok
+test tests::metatron_ladder_tau_propagates_to_all_carriers ... ok
+test tests::observation_data_helix_carries_intrinsic_tau ... ok
+test tests::observation_phase_uses_hint_when_present ... ok
+test tests::observation_phase_falls_back_to_digest_when_hint_is_none ... ok
+test tests::phase_from_digest_distinct_payloads_distinct_phases ... ok
+test tests::phase_from_digest_deterministic ... ok
+test tests::phase_from_digest_in_zero_two_pi ... ok
+test tests::observation_phase_wraps_hint_into_unit_circle ... ok
+test tests::restore_neutrality_resets_resonance ... ok
+test tests::semantic_phase_creates_coherent_batch_phi ... ok
+test tests::shannon_entropy_norm_constant_byte_is_zero ... ok
+test tests::shannon_entropy_norm_empty_is_zero ... ok
+test tests::shannon_entropy_norm_in_unit_interval ... ok
+test tests::shannon_entropy_norm_uniform_bytes_approaches_one ... ok
+
+test result: ok. 54 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 4 tests
+test tests::intrinsic_step_converges_to_attractor ... ok
+test tests::compute_attractor_centroid_single_vertex ... ok
+test tests::intrinsic_step_no_mutation_of_history ... ok
+test tests::morphogenic_update_empty_graph ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 8 tests
+test attractor_centroid_is_deterministic ... ok
+test mutation_log_accumulates_across_updates ... ok
+test attractor_centroid_empty_graph_is_zero ... ok
+test node_merge_deactivates_not_deletes ... ok
+test mutation_log_is_append_only ... ok
+test subgraph_prune_deactivates_not_deletes ... ok
+test attractor_centroid_is_finite ... ok
+test node_split_deactivates_parent_not_deletes ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 106 tests
+test adaptive::tests::calibrate_uses_quantile_after_warmup ... ok
+test adaptive::tests::quantile_endpoints ... ok
+test adaptive::tests::warmup_returns_base_unchanged ... ok
+test adaptive::tests::rolling_window_evicts_oldest ... ok
+test crystal_adapter::tests::rejects_non_crystal_payload ... ok
+test crystal_adapter::tests::distinct_crystals_get_distinct_source_ids ... ok
+test crystal_adapter::tests::round_trip_through_canonical_bytes ... ok
+test crystal_adapter::tests::same_crystal_yields_same_source_id ... ok
+test crystal_adapter::tests::distinct_crystals_create_distinct_graph_vertices ... ok
+test falsify::tests::block_bootstrap_handles_uneven_division ... ok
+test falsify::tests::block_bootstrap_is_deterministic_under_same_seed ... ok
+test falsify::tests::block_bootstrap_keeps_within_block_order ... ok
+test crystal_adapter::tests::different_layers_yield_different_source_ids_for_same_crystal ... ok
+test falsify::tests::block_bootstrap_preserves_multiset ... ok
+test falsify::tests::block_bootstrap_rejects_oversized_block ... ok
+test falsify::tests::block_bootstrap_rejects_zero_block_size ... ok
+test falsify::tests::falsify_disables_recursion_in_inner_config ... ok
+test falsify::tests::falsify_does_not_pollute_caller_state ... ok
+test explore::tests::explorer_best_point_lies_in_landscape ... ok
+test falsify::tests::falsify_with_zero_k_returns_p_value_one ... ok
+test falsify::tests::phase_randomize_returns_unimplemented_marker ... ok
+test falsify::tests::falsify_returns_well_formed_result_for_small_input ... ok
+test falsify::tests::shuffle_actually_permutes_long_streams ... ok
+test falsify::tests::shuffle_changes_with_seed ... ok
+test falsify::tests::shuffle_handles_trivial_input ... ok
+test falsify::tests::falsify_is_deterministic_under_same_seed ... ok
+test falsify::tests::shuffle_is_deterministic_under_same_seed ... ok
+test falsify::tests::shuffle_preserves_multiset ... ok
+test metatron_attach::tests::induced_adjacency_disconnected_region_is_zero_matrix ... ok
+test metatron_attach::tests::induced_adjacency_empty_region_is_empty_matrix ... ok
+test metatron_attach::tests::induced_adjacency_recovers_triangle ... ok
+test query::tests::empty_state_yields_well_formed_fingerprint ... ok
+test query::tests::fingerprint_after_observations_has_data_helix ... ok
+test query::tests::fingerprint_centroid_axes_in_unit_interval ... ok
+test query::tests::fingerprint_mandorla_uses_real_interference_when_data_present ... ok
+test query::tests::fingerprint_query_does_not_alter_memory_stats ... ok
+test explore::tests::explorer_runs_to_completion_on_empty_state ... ok
+test explore::tests::explorer_is_deterministic_at_same_engine_state ... ok
+test shared_spectrum_tests::shared_spectrum_preserves_rejection_cooldown_and_observation_errors ... ok
+test tests::adaptive_carrier_disabled_by_default_keeps_initial_index ... ok
+test tests::adaptive_carrier_picks_carrier_aligned_with_data_phase ... ok
+test tests::adaptive_carrier_preserves_replay_determinism ... ok
+test tests::falsification_disabled_by_default_no_op ... ok
+test tests::falsification_disabled_run_is_deterministic_replayable ... ok
+test tests::falsification_with_alpha_one_admits_every_commit ... ok
+test tests::falsification_with_alpha_zero_rejects_every_commit ... ok
+test explore::tests::explorer_history_kappas_match_best ... ok
+test tests::global_state_initializes ... ok
+test explore::tests::explorer_finds_higher_kappa_than_a_random_probe ... ok
+test tests::temperature_calibration_basic ... ok
+test topology_ops::tests::bridge_betti_mismatch_errors ... ok
+test topology_ops::tests::bridge_is_symmetric_in_argument_order ... ok
+test topology_ops::tests::bridge_disjoint_regions_errors ... ok
+test tests::temperature_regime_classification ... ok
+test topology_ops::tests::bridge_overlapping_regions_succeeds ... ok
+test topology_ops::tests::bridge_of_compose_outputs_works ... ok
+test topology_ops::tests::bridge_spectral_gap_outside_tolerance_errors ... ok
+test topology_ops::tests::bridge_stability_is_strictly_below_compose_stability ... ok
+test topology_ops::tests::bridge_stability_is_bounded_min_geometric ... ok
+test topology_ops::tests::bridge_with_self_returns_same_region ... ok
+test topology_ops::tests::bridge_stability_is_harmonic_mean ... ok
+test topology_ops::tests::compose_betti_mismatch_errors ... ok
+test topology_ops::tests::compose_compatible_pair_succeeds ... ok
+test topology_ops::tests::compose_constraint_program_is_deduplicated ... ok
+test topology_ops::tests::compose_created_at_strictly_posterior_to_inputs ... ok
+test topology_ops::tests::compose_kuramoto_outside_tolerance_errors ... ok
+test topology_ops::tests::compose_is_deterministic_under_input_reorder ... ok
+test topology_ops::tests::compose_region_is_deduplicated_union ... ok
+test topology_ops::tests::compose_parent_ids_are_sorted_by_crystal_id ... ok
+test topology_ops::tests::compose_one_crystal_errors ... ok
+test topology_ops::tests::compose_spectral_gap_outside_tolerance_errors ... ok
+test topology_ops::tests::compose_stability_geometric_mean_dominates_minimum ... ok
+test topology_ops::tests::compose_stability_is_geometric_mean ... ok
+test topology_ops::tests::compose_zero_crystals_errors ... ok
+test topology_ops::tests::dual_and_original_are_compose_compatible ... ok
+test topology_ops::tests::composed_crystal_is_compose_input ... ok
+test topology_ops::tests::composed_crystal_id_changes_with_inputs ... ok
+test topology_ops::tests::dual_commit_proof_carries_dual_operator ... ok
+test topology_ops::tests::dual_flips_carrier_instance_idx_lowest_bit ... ok
+test topology_ops::tests::dual_changes_crystal_id ... ok
+test topology_ops::tests::dual_is_involutive ... ok
+test topology_ops::tests::dual_of_composed_is_dual ... ok
+test topology_ops::tests::dual_records_parent ... ok
+test topology_ops::tests::interpolate_at_alpha_one_reproduces_b ... ok
+test topology_ops::tests::dual_preserves_form ... ok
+test topology_ops::tests::interpolate_at_alpha_zero_reproduces_a ... ok
+test topology_ops::tests::interpolate_clamps_alpha_outside_unit_interval ... ok
+test topology_ops::tests::interpolate_creates_a_new_crystal_id ... ok
+test topology_ops::tests::interpolate_created_at_is_strictly_posterior ... ok
+test topology_ops::tests::interpolate_is_compose_input_closure ... ok
+test topology_ops::tests::interpolate_records_both_parents ... ok
+test topology_ops::tests::interpolate_topology_lies_between_endpoints ... ok
+test topology_ops::tests::query_empty_candidates_returns_empty ... ok
+test topology_ops::tests::query_is_deterministic_under_same_inputs ... ok
+test topology_ops::tests::query_returns_sorted_descending ... ok
+test topology_ops::tests::query_top_k_caps_result_size ... ok
+test topology_ops::tests::query_self_match_scores_one ... ok
+test topology_ops::tests::query_top_k_larger_than_candidates_returns_all ... ok
+test topology_ops::tests::query_top_k_zero_returns_empty ... ok
+test topology_ops::tests::query_with_topology_only_weights_ignores_region ... ok
+test topology_ops::tests::query_works_on_compose_and_bridge_outputs ... ok
+test metatron_attach::tests::signature_for_region_skips_oversized ... ok
+test shared_spectrum_tests::shared_spectrum_matches_reference_small_and_sparse_commits ... ok
+test shared_spectrum_tests::shared_spectrum_matches_reference_size_boundaries_and_partial_solver ... ok
+test metatron_attach::tests::signature_attached_to_crystal_carries_canonical_hash ... ok
+test metatron_attach::tests::signature_for_triangle_has_three_vertices ... ok
+
+test result: ok. 106 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.48s
+
+
+running 8 tests
+test commit_index_is_monotone_per_step ... ok
+test gate_snapshot_always_populated_after_first_step ... ok
+test identical_observation_sequences_yield_identical_crystal_ids ... ok
+test gate_snapshots_are_deterministic ... ok
+test gate_metrics_are_finite_after_each_step ... ok
+test kairos_gate_is_consistent_with_crystal_emission ... ok
+test null_center_is_never_a_graph_vertex ... ok
+test llm_text_config_produces_crystals ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 8 tests
+test tests::build_evidence_chain_empty ... ok
+test tests::archive_append_only ... ok
+test tests::build_evidence_chain_links ... ok
+test tests::build_evidence_chain_single ... ok
+test tests::verify_crystal_gate_fail ... ok
+test tests::verify_crystal_consensus_fail ... ok
+test tests::verify_crystal_operator_drift ... ok
+test tests::verify_crystal_valid ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 10 tests
+test archive_len_never_decreases ... ok
+test evidence_chain_digests_are_correct ... ok
+test crystal_with_kairos_false_fails_verification ... ok
+test archive_previously_appended_crystals_are_unchanged ... ok
+test evidence_chain_links_are_valid ... ok
+test matching_operator_version_passes ... ok
+test archive_verify_all_valid_crystals ... ok
+test operator_drift_is_detected ... ok
+test valid_crystal_passes_verify ... ok
+test por_trace_monotonicity_is_enforced ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 5 tests
+test tests::band_op_evaluates ... ok
+test tests::band_op_outside_band ... ok
+test tests::inverse_weave_read_only ... ok
+test tests::lattice_free_energy_zero_program ... ok
+test tests::reference_fast_path_matches_general_weaving_across_regions ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+
+running 14 tests
+test tests::different_inputs_different_digests ... ok
+test tests::apply_observations_increments_commit_index ... ok
+test tests::deactivate_vertex_preserves_history ... ok
+test tests::embedding_eta_is_05_for_balanced_flow ... ok
+test tests::embedding_eta_is_no_longer_constant_05 ... ok
+test tests::embedding_eta_for_pure_sink_is_below_05 ... ok
+test tests::embedding_is_deterministic_on_same_input ... ok
+test tests::embedding_omega_reflects_recurrence ... ok
+test tests::embedding_p_in_unit_interval_after_observations ... ok
+test tests::passthrough_adapter_idempotent ... ok
+test tests::embedding_rho_one_for_triangle ... ok
+test tests::embedding_rho_zero_for_isolated_neighbours ... ok
+test tests::topology_signature_empty_graph ... ok
+test tests::upsert_vertex_idempotent ... ok
+
+test result: ok. 14 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 23 tests
+test tests::canonical_index_supports_multiple_crystals_per_class ... ok
+test tests::cosine_similarity_identical_vectors ... ok
+test tests::cosine_similarity_orthogonal_vectors ... ok
+test tests::dissimilar_patterns_dont_match ... ok
+test tests::cosine_similarity_zero_vector ... ok
+test tests::empty_memory_returns_none ... ok
+test tests::exact_hash_match_always_returns_hit ... ok
+test tests::insert_and_lookup_returns_crystal_id ... ok
+test tests::insert_crystal_populates_canonical_index ... ok
+test tests::load_from_crystals_populates_canonical_index ... ok
+test tests::lookup_crystal_canonical_hit_returns_stored_id ... ok
+test tests::lookup_crystal_falls_back_to_cosine_when_no_canonical_hash ... ok
+test tests::lookup_crystal_no_match_returns_none ... ok
+test tests::lru_eviction ... ok
+test tests::signature_for_returns_stored_signature ... ok
+test tests::signature_for_unknown_returns_none ... ok
+test tests::similar_patterns_match_above_threshold ... ok
+test tests::stats_tracking ... ok
+test tests::top_k_does_not_update_stats ... ok
+test tests::top_k_handles_k_larger_than_index ... ok
+test tests::top_k_returns_highest_similarity_first ... ok
+test tests::top_k_zero_returns_empty ... ok
+test tests::load_periodic_table_populates_catalog ... ok
+
+test result: ok. 23 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+running 9 tests
+test hit_rate_is_consistent_with_counts ... ok
+test empty_memory_is_always_miss ... ok
+test index_size_capped_at_max_signatures ... ok
+test load_from_crystals_populates_index ... ok
+test stats_reflect_single_miss ... ok
+test top_k_is_sorted_descending ... ok
+test top_k_bounded_by_index_size ... ok
+test insert_then_lookup_identical_is_hit ... ok
+test top_k_zero_returns_empty ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 118 tests
+test bitgraph::tests::bits_to_adjacency_matches_edges ... ok
+test bitgraph::tests::bit_edge_roundtrip ... ok
+test bitgraph::tests::complement_involution ... ok
+test bitgraph::tests::identity_perm_is_identity_table ... ok
+test bitgraph::tests::mask_for_n_values ... ok
+test bitgraph::tests::max_bit_is_20 ... ok
+test bitgraph::tests::single_edge_orbit_stab ... ok
+test bitgraph::tests::k7_orbit_1_stab_5040 ... ok
+test bitgraph_n::tests::is_canonical_matches_full_orbit_n5 ... ok
+test bitgraph_n::tests::orderly_count_matches_oeis_for_n6 ... ok
+test bitgraph::tests::cache_size_5040 ... ok
+test bitgraph::tests::empty_graph_orbit_1_stab_5040 ... ok
+test bitgraph_n::tests::parallel_enumeration_matches_sequential_n6 ... ok
+test catalog::tests::n2_has_two_graphs ... ok
+test catalog::tests::n1_has_one_graph ... ok
+test bitgraph_n::tests::is_canonical_empty_and_complete ... ok
+test catalog::tests::n3_has_four_graphs ... ok
+test bitgraph_n::tests::sn_counts ... ok
+test complement::tests::complement_of_k3_is_empty ... ok
+test complement::tests::trace_of_identity ... ok
+test complement::tests::mat_pow_0_is_identity ... ok
+test complement::tests::triangle_count_k3 ... ok
+test complement::tests::triangle_count_path ... ok
+test embed::tests::embed_3_in_13 ... ok
+test embed::tests::embed_preserves_adjacency ... ok
+test geometry::tests::canonical_nodes_count ... ok
+test geometry::tests::canonical_nodes_indices ... ok
+test geometry::tests::center_at_origin ... ok
+test geometry::tests::cuboctahedron_all_on_sphere ... ok
+test geometry::tests::cuboctahedron_edge_count ... ok
+test geometry::tests::cuboctahedron_equal_edge_length ... ok
+test geometry::tests::cuboctahedron_vertex_count ... ok
+test geometry::tests::cuboctahedron_vertex_degree_4 ... ok
+test geometry::tests::each_vertex_has_one_zero_coordinate ... ok
+test geometry::tests::no_coordinate_coincidence ... ok
+test group::tests::c6_count ... ok
+test group::tests::c6_identity_first ... ok
+test group::tests::c6_subset_of_s7 ... ok
+test group::tests::conjugate_with_identity ... ok
+test group::tests::d6_all_products_closed_and_inverses_present ... ok
+test group::tests::d6_count ... ok
+test group::tests::d6_order_and_dihedral_relations ... ok
+test group::tests::d6_preserves_hexagon_edges_and_includes_both_axis_types ... ok
+test group::tests::d6_unique_bijections_with_fixed_center ... ok
+test group::tests::identity_permutation_gives_identity_matrix ... ok
+test group::tests::reflection_vertex_axes_and_invalid_indices ... ok
+test group::tests::s7_all_unique ... ok
+test geometry::tests::cuboctahedron_faces_eight_triangles_six_squares ... ok
+test group::tests::s7_count ... ok
+test group::tests::s7_matrix_valid ... ok
+test indexed_signature::tests::boundaries ... ok
+test bitgraph_n::tests::cache_n8_matches ... ok
+test ingest::tests::accept_n_eq_8 ... ok
+test ingest::tests::accept_valid_triangle ... ok
+test ingest::tests::edge_count_empty ... ok
+test ingest::tests::from_adj_list_works ... ok
+test ingest::tests::reject_empty ... ok
+test ingest::tests::reject_n_gt_8 ... ok
+test ingest::tests::reject_non_binary ... ok
+test ingest::tests::reject_non_symmetric ... ok
+test ingest::tests::reject_self_loop ... ok
+test memoized_signature::tests::cache_entries_and_resets_are_thread_local ... ok
+test memoized_signature::tests::colliding_keys_evict_without_returning_the_other_signature ... ok
+test memoized_signature::tests::graph_size_and_labelled_input_are_part_of_identity ... ok
+test catalog::tests::n5_has_thirtyfour_graphs ... ok
+test catalog::tests::build_catalog_to_4_yields_18_entries ... ok
+test memoized_signature::tests::negative_zero_in_any_matrix_part_bypasses_even_a_warm_cache ... ok
+test indexed_signature::tests::sampled_larger_graphs ... ok
+test memoized_signature::tests::validation_precedes_lookup_and_preserves_error_details ... ok
+test memoized_signature::tests::returned_values_cannot_mutate_cached_entries ... ok
+test catalog::tests::ids_are_unique_and_sorted ... ok
+test catalog::tests::n4_includes_self_complementary_p4 ... ok
+test phase_layout::tests::cuboctahedron_phases_are_balanced ... ok
+test phase_layout::tests::first_entry_is_center_with_radius_zero ... ok
+test phase_layout::tests::layout_has_13_entries ... ok
+test catalog::tests::n4_has_eleven_graphs ... ok
+test phase_layout::tests::outer_entries_have_radius_one ... ok
+test phase_layout::tests::outer_phases_are_pairwise_distinct ... ok
+test phase_layout::tests::outer_phases_lie_in_zero_two_pi ... ok
+test phase_layout::tests::phase_layout_is_deterministic ... ok
+test platonic::tests::empty_graph_is_subgraph_of_no_solid ... ok
+test platonic::tests::k333_is_not_octahedron ... ok
+test platonic::tests::k5_contains_tetrahedron_but_is_not ... ok
+test platonic::tests::large_platonic_never_match_in_catalog_range ... ok
+test platonic::tests::octahedron_k222_recognized ... ok
+test platonic::tests::k4_is_tetrahedron ... ok
+test platonic::tests::scaffold_platonic_classification_is_empty ... ok
+test properties::tests::cycle_c6_is_planar_not_threshold ... ok
+test properties::tests::empty_graph_props ... ok
+test properties::tests::c5_is_self_complementary ... ok
+test properties::tests::k3_props ... ok
+test properties::tests::k33_is_not_planar ... ok
+test memoized_signature::tests::sampled_inputs_and_immediate_repeats_match_complete_indexed_signatures ... ok
+test properties::tests::p4_is_self_complementary ... ok
+test properties::tests::k5_is_not_planar ... ok
+test properties::tests::k4_is_planar_and_threshold ... ok
+test properties::tests::star_is_tree_and_bipartite ... ok
+test memoized_signature::tests::more_than_capacity_unique_inputs_remain_bounded_and_clearable ... ok
+test indexed_signature::tests::all_labelled_graphs_through_five_vertices ... ok
+test orbit::tests::complete_k7_orbit_size_1 ... ok
+test orbit::tests::empty_graph_orbit_size_1 ... ok
+test orbit::tests::canonical_hash_is_deterministic ... ok
+test signature::tests::signature_detects_tetrahedron_subgraph ... ok
+test small_signature::tests::inherited_padding_identity_limitation_is_explicit ... ok
+test small_signature::tests::rejects_invalid_or_out_of_scope_graphs ... ok
+test small_signature::tests::sampled_six_and_seven_vertex_graphs_match_indexed_action ... ok
+test spectrum::tests::empty_graph_eigenvalues ... ok
+test spectrum::tests::k3_eigenvalues ... ok
+test spectrum::tests::k3_spectral_radius ... ok
+test signature::tests::empty_graph_has_no_platonic_subgraph ... ok
+test signature::tests::orbit_stabilizer_product_equals_5040 ... ok
+test stabilizer::tests::empty_graph_stabilizer_is_s7 ... ok
+test stabilizer::tests::single_edge_stabilizer ... ok
+test signature::tests::signature_of_triangle_has_correct_basics ... ok
+test signature::tests::signature_is_deterministic ... ok
+test signature::tests::cache_reuse_produces_identical_signature ... ok
+test small_signature::tests::every_simple_graph_through_five_vertices_matches_indexed_action ... ok
+test small_signature::tests::complete_signatures_equal_dense_reference_bytes ... ok
+
+test result: ok. 118 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.61s
+
+
+running 11 tests
+test catalog_counts_match_oeis_a000088_for_n1_to_4 ... ok
+test catalog_ids_are_unique ... ok
+test find_in_catalog_distinguishes_p3_from_k3 ... ok
+test find_in_catalog_locates_triangle ... ok
+test connected_counts_match_oeis_a001349_for_n1_to_4 ... ok
+test all_catalog_entries_have_non_empty_hashes ... ok
+test tree_counts_match_oeis_a000055_for_n1_to_5 ... ok
+test scan_spectrum_is_stable ... ok
+test non_isomorphic_graphs_have_distinct_canonical_hashes ... ok
+test scan_is_deterministic ... ok
+test isomorphic_relabelings_have_same_canonical_hash ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.88s
+
+
+running 18 tests
+test tests::at_nv10_singularity_detection ... ok
+test tests::at_nv15_betti_tetrahedron ... ok
+test tests::at_nv14_incremental_triangulate ... ok
+test tests::at_nv12_fallback_without_triton ... ok
+test tests::at_nv13_spectral_singularity_detection ... ok
+test tests::at_nv11_determinism ... ok
+test tests::at_nv2_knn_edges ... ok
+test tests::at_nv1_mesh_vertex_add ... ok
+test tests::at_nv3_resonance_weight ... ok
+test tests::at_nv6_topology_guard ... ok
+test tests::at_nv7_spectral_gradient ... ok
+test tests::at_nv8_local_entropy ... ok
+test tests::at_nv5_betti_numbers ... ok
+test tests::at_nv4_simplex_detection ... ok
+test tests::at_nv9_triton_integration ... ok
+test tests::at_nv16_triton_navigator_wraps_navigator ... ok
+test tests::at_nv18_topology_events ... ok
+test tests::at_nv17_exploration_coverage ... ok
+
+test result: ok. 18 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+running 15 tests
+test tests::at_sc10_scale_disabled_passthrough ... ok
+test tests::at_sc13_multi_scale_metrics ... ok
+test tests::at_sc12_cross_scale_crystal_validation ... ok
+test tests::at_sc15_policy_determinism ... ok
+test tests::at_sc14_downward_projection ... ok
+test tests::at_sc1_hyperbounds_containment ... ok
+test tests::at_sc2_hyperbounds_subdivision ... ok
+test tests::at_sc3_aggregate_state_conservation ... ok
+test tests::at_sc4_spectral_clustering_determinism ... ok
+test tests::at_sc5_kuramoto_clustering ... ok
+test tests::at_sc7_bridge_coupling_effect ... ok
+test tests::at_sc6_bridge_activation ... ok
+test tests::at_sc8_ladder_lift_project_roundtrip ... ok
+test tests::at_sc9_crystal_provenance ... ok
+test tests::at_sc11_budget_fallback ... ok
+
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 8 tests
+test hyperbounds_subdivision_32_children_volume_conserved ... ok
+test build_universe_contains_all_vertices ... ok
+test kuramoto_phase_cluster_covers_all_vertices ... ok
+test build_universe_is_deterministic ... ok
+test multi_scale_tick_is_deterministic ... ok
+test multi_scale_tick_metrics_are_populated ... ok
+test multi_scale_tick_disabled_is_passthrough ... ok
+test spectral_bisection_covers_all_vertices ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 37 tests
+test conditioned_walk::tests::explicit_zero_edges_still_obey_uniqueness_and_reverse_entry_contract ... ok
+test conditioned_walk::tests::arbitrary_graphs_match_matrix_power_reference ... ok
+test conditioned_walk::tests::edgeless_singleton_and_zero_state_are_supported_without_normalization ... ok
+test conditioned_walk::tests::edge_input_order_does_not_change_validation_or_result ... ok
+test conditioned_walk::tests::clique_retains_rounded_diagonal_constant_space_phase ... ok
+test conditioned_walk::tests::both_backends_match_independent_clique_formula_with_complex_unnormalized_states ... ok
+test conditioned_walk::tests::near_clique_and_nonbinary_degree_mismatch_do_not_use_clique_formula ... ok
+test conditioned_walk::tests::rejects_empty_wrong_dimensions_bad_indices_self_loops_and_degrees ... ok
+test conditioned_walk::tests::full_spectrum_preserves_norm_degenerate_spaces_and_inverse_evolution ... ok
+test conditioned_walk::tests::time_zero_returns_exact_input_bits_including_signed_zero ... ok
+test conditioned_walk::tests::rejects_bad_states_and_nonfinite_times ... ok
+test conditioned_walk::tests::zero_time_can_return_large_finite_states_without_norm_overflow ... ok
+test conditioned_walk::tests::rejects_duplicates_asymmetry_nonfinite_negative_weights_and_inconsistent_degree ... ok
+test conditioned_walk::tests::overflow_is_reported_for_degree_phase_and_state_arithmetic ... ok
+test conditioned_walk::tests::two_vertex_sign_is_positive_laplacian_negative_time_exponent ... ok
+test ctqw_equivalence_tests::ctqw_reference_body_is_source_frozen ... ok
+test ctqw_equivalence_tests::ctqw_hoist_empty_shapes_and_invalid_rank_preserve_return_or_panic ... ok
+test ctqw_equivalence_tests::ctqw_reference_fallback_preserves_exceptional_payload_and_sign_bits ... ok
+test ctqw_equivalence_tests::ctqw_hoist_special_float_inputs_bitwise ... ok
+test ctqw_hoisted::domain_tests::finite_domain_bounds_are_conservative_and_explicit ... ok
+test ctqw_equivalence_tests::ctqw_hoist_threshold_adjacent_probabilities_bitwise ... ok
+test tests::at_t1_laplacian_correctness ... ok
+test tests::at_t12_crystal_signature_enrichment ... ok
+test tests::at_t10_signature_determinism ... ok
+test tests::at_t2_spectral_gap ... ok
+test tests::at_t3_ctqw_self_return ... ok
+test tests::at_t4_ctqw_unitarity ... ok
+test tests::at_t11_budget_fallback ... ok
+test tests::at_t6_kuramoto_incoherence ... ok
+test tests::at_t7_dtl_connected ... ok
+test tests::at_t8_fixpoint_detection ... ok
+test tests::at_t8b_fixpoint_not_yet ... ok
+test tests::at_t5_kuramoto_convergence ... ok
+test tests::at_t9_deduplication ... ok
+test ctqw_equivalence_tests::ctqw_hoist_seeded_synthetic_and_ragged_spectra_bitwise ... ok
+test shared_spectrum_tests::shared_spectrum_retains_identical_decomposition_and_signature ... ok
+test ctqw_equivalence_tests::ctqw_hoist_graph_spectra_all_fields_bitwise ... ok
+
+test result: ok. 37 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.39s
+
+
+running 1 test
+test wall_clock_budget_cannot_change_a_topological_result ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 17 tests
+test tests::btreemap_in_measurement_context ... ok
+test tests::commit_proof_deserializes_without_new_fields ... ok
+test tests::commit_proof_none_fields_are_skipped_in_output ... ok
+test tests::commit_proof_default_has_no_falsification_fields ... ok
+test tests::config_deserializes_without_falsification_section ... ok
+test tests::config_deserializes_without_calibration_section ... ok
+test tests::commit_proof_populated_falsification_roundtrips ... ok
+test tests::content_address_raw_deterministic ... ok
+test tests::crystal_core_hash_independent_of_falsification_fields ... ok
+test tests::content_address_deterministic ... ok
+test tests::preset_anomaly_detection_is_selective ... ok
+test tests::five_d_state_distance ... ok
+test tests::preset_planning_has_lower_thresholds ... ok
+test tests::falsification_config_defaults_are_disabled ... ok
+test tests::kairos_calibration_config_defaults_disabled ... ok
+test tests::preset_streaming_has_adaptive_enabled ... ok
+test tests::null_center_is_unit_struct ... ok
+
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test src/lib.rs - (line 3) ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.16s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test crates/pse-core/src/crystal_adapter.rs - crystal_adapter::CrystalAdapter::payload_for (line 64) ... ignored
+
+test result: ok. 0 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

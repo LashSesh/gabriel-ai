@@ -1,0 +1,16 @@
+{
+  "study": "Bounded persistent errors in affine binary orientation reports",
+  "status": "Saved before benchmark execution, after analytic and small exploratory planning checks; not an external preregistration",
+  "model": "12-cell annulus, 24 fixed sign reports, all 4096 face-flat latent assignments",
+  "noise": "At most one persistent coordinate flip in the frozen 24-bit report; each coordinate can be queried once",
+  "primary_cases": "Every latent assignment crossed with zero error and each of the 24 single-edge errors",
+  "policies": ["ring_minimax", "ring_ec2", "ring_fixed", "lexical_robust_prefix", "full_robust"],
+  "guarantee": "Exact latent inner-ring parity under the declared report model",
+  "primary_metrics": ["wrong_known", "unresolved", "query_count_histogram", "maximum_queries"],
+  "reference_measure": "Uniform finite catalogue only; mean counts are not a deployment noise model",
+  "certificate_tests": "Exhaustive one-error orbit representatives, all single-coordinate omissions, explicit two-error ambiguity and budget-violation witnesses",
+  "generic_oracle": {"seed": 97651, "systems": 80, "n_min": 3, "n_max": 8, "queries_per_system": 20, "budgets": [0, 1, 2]},
+  "neural_core": "Unchanged; no new external classifier fits or accuracy claim",
+  "planning_claim": "Minimax continuation only after the fixed two-ring prefix; compare EC2 and lexical continuation",
+  "arithmetic": "Exact Python integer bit operations and exact Bellman values; no floating tolerance needed for decision evidence"
+}

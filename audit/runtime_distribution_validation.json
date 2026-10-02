@@ -1,0 +1,68 @@
+{
+  "status": "passed",
+  "archive": "/workspace/scratch/657e86c899c9/output/Gabriel_Runtime.zip",
+  "archive_bytes": 780396,
+  "archive_sha256": "1f2f95e78cf1a574ffe8697cd34a4f2321a7507b6aae2ddf6d7c73db34daa812",
+  "zip_crc": "passed",
+  "zip_entries": 55,
+  "manifest_files": 54,
+  "uncompressed_bytes": 6368589,
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "sqlite": "3.53.1",
+  "validation": "Fresh extraction; PYTHONPATH empty; local sources complete. No dependency installation or network request was performed.",
+  "retained_other_checks": "Other included check reports were copied unchanged, not rerun as packaging checks.",
+  "benchmark_scope": "Both synthetic timing drivers, protocols, inputs and recorded outputs included; timings not repeated during packaging.",
+  "source_identity": "All copied code and retained reports match the full research project byte-for-byte.",
+  "executed_checks": {
+    "runtime_checks": {
+      "schema": "gabriel.runtime.executed-checks.v1",
+      "status": "passed",
+      "elapsed_seconds": 1.926
+    },
+    "fast_owner_checks": {
+      "schema": "gabriel.fast-owner.executed-checks.v1",
+      "status": "passed",
+      "elapsed_seconds": 35.606
+    },
+    "fast_owner_cli_checks": {
+      "schema": "gabriel.fast-owner.executed-cli-checks.v1",
+      "status": "passed",
+      "elapsed_seconds": 120.642,
+      "subprocess_commands": 103
+    }
+  },
+  "steps": [
+    {
+      "arguments": [
+        "reproduction/check_runtime.py"
+      ],
+      "returncode": 0
+    },
+    {
+      "arguments": [
+        "reproduction/check_fast_owner.py"
+      ],
+      "returncode": 0
+    },
+    {
+      "arguments": [
+        "reproduction/check_fast_owner_cli.py"
+      ],
+      "returncode": 0
+    },
+    {
+      "arguments": [
+        "reproduction/benchmark_incremental.py",
+        "--help"
+      ],
+      "returncode": 0
+    },
+    {
+      "arguments": [
+        "reproduction/benchmark_fast_owner.py",
+        "--help"
+      ],
+      "returncode": 0
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+% English follow-up insertion; root integrates into the main manuscript.
+% Raw records and limitations: audit/persistence_boundary_review.md.
+% No new bibliography entries are introduced by this insertion.
+The persistence follow-up examined the application boundary and the execution
+environment without changing the original Store or repeating the 32 native
+replays.  Source inspection found synchronous SQLite DELETE/EXTRA transactions,
+commit-before-receipt behavior, and no delayed application writer in the
+reviewed path.  The environment did expose an active workspace synchronization
+service and a writable rsync route to the workspace.  Both the workspace and
+\texttt{/tmp} were on the same overlay mount with
+\texttt{fsync=volatile}; hence the previously observed location contrast was
+not a contrast between filesystem mounts.  As specified by the Linux overlay
+documentation, this mount mode omits synchronization to its upper filesystem.
+Successful SQLite or explicit synchronization calls therefore do not establish
+physical or power-loss durability here.  Neither this mount property nor the
+identified synchronization route proves the cause of the historical prefix
+regressions.
+
+Two bounded experiments compared plain fixed-length files with explicit
+synchronization, ordinary SQLite DELETE/EXTRA databases, and the unchanged
+Store using a pure counter adapter, at both locations.  The paced experiment
+covered 24 files with 14 updates and a 12-second final observation interval;
+the burst experiment covered 36 files with 14 updates within a single
+wall-clock second for each file and a 10-second final interval.  All 60 live
+controls preserved their final bytes, logical state and inode identity,
+including subsequent checks in separate executions.  Measurements retained
+file descriptors to distinguish the original inode from the current pathname,
+and recorded hashes, device/inode identifiers, nanosecond timestamps, explicit
+close/reopen results and filesystem notifications.  A separate synthetic
+positive control deliberately replaced each of three final pathnames with its
+own earlier prefix: all three replacements were detected while the retained
+final inodes remained intact.  This validates the detector, but supplies no
+historical causal attribution.  The original residues and replay failures
+remain preserved; neither live experiment reproduced them.
+
+The operational workflow consequently keeps live databases outside automatic
+file mirroring and publishes only closed, consistently captured snapshots.
+In this environment \texttt{/tmp} separates live work from the observed
+workspace synchronization route, but remains transient and shares the same
+volatile mount; persistent deployment requires a suitable storage durability
+contract.  A published snapshot is sealed by its byte hash and by a final
+journal head/event anchor retained separately, verified after reopening and
+again after transfer.  The sealed artifact is then treated as immutable.
+This external anchor is essential because an internally consistent journal
+may still be a valid earlier prefix.  Hashes and anchors provide integrity
+checks, not authentication unless independently protected.

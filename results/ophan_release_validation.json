@@ -1,0 +1,833 @@
+{
+  "version": "0.30.0",
+  "python": "3.12.14",
+  "platform": "Linux",
+  "passed": true,
+  "validation_scope": "all_python_all_javascript_new_and_affected_profiles_replay_and_new_cli_restart",
+  "visual_browser_review": false,
+  "retained_prior_validation": {
+    "file": "validation_v0_29_0.json",
+    "version": "0.29.0",
+    "sha256": "f1dd83477267e7deac667ca985e8dac904fdd2efaa4c29384f492fb0b3f21ed4",
+    "earlier_process_replays_reexecuted": false,
+    "earlier_cli_gates_reexecuted": false
+  },
+  "python_tests": {
+    "run": 1026,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "reference3d_integration": {
+    "passed": true,
+    "cases": {
+      "qualified_reference": {
+        "transitions": 114,
+        "http_checks": 26,
+        "producer_processes": 2,
+        "native_reference_producers": 1,
+        "calibration_producers": 1,
+        "frames": 19,
+        "recordings": 1,
+        "retained_input_files": 2,
+        "witnesses": 1,
+        "bindings": 1,
+        "raw_reference_bytes": 707,
+        "known_reference_states": 4,
+        "head": "d1a7ddef5dc0ee190e84eff5a1dc45edc15db3a816376577085b9505a2e52342"
+      },
+      "position_bias": {
+        "transitions": 109,
+        "http_checks": 25,
+        "producer_processes": 2,
+        "native_reference_producers": 1,
+        "calibration_producers": 1,
+        "frames": 19,
+        "recordings": 1,
+        "retained_input_files": 2,
+        "witnesses": 0,
+        "bindings": 1,
+        "raw_reference_bytes": 708,
+        "known_reference_states": 0,
+        "head": "c841c843ea4840fad4b008f394b1d16f5b6f43a5d93f847b867f6dd2b866a350"
+      },
+      "time_control": {
+        "transitions": 106,
+        "http_checks": 25,
+        "producer_processes": 2,
+        "native_reference_producers": 1,
+        "calibration_producers": 1,
+        "frames": 18,
+        "recordings": 1,
+        "retained_input_files": 2,
+        "witnesses": 1,
+        "bindings": 1,
+        "raw_reference_bytes": 703,
+        "known_reference_states": 0,
+        "head": "6ca6c9e731c6deb4a1a7221a7b8cb5ea2e902bdf1fbce22abde1f9089285390c"
+      },
+      "position_control": {
+        "transitions": 113,
+        "http_checks": 26,
+        "producer_processes": 2,
+        "native_reference_producers": 1,
+        "calibration_producers": 1,
+        "frames": 20,
+        "recordings": 1,
+        "retained_input_files": 2,
+        "witnesses": 1,
+        "bindings": 1,
+        "raw_reference_bytes": 701,
+        "known_reference_states": 0,
+        "head": "645cae71d100f23ea5d2178824ea3359e4d7a6b3411cb6046b6f5d8b6599244d"
+      },
+      "calibration_horizon": {
+        "transitions": 108,
+        "http_checks": 25,
+        "producer_processes": 2,
+        "native_reference_producers": 1,
+        "calibration_producers": 1,
+        "frames": 18,
+        "recordings": 1,
+        "retained_input_files": 2,
+        "witnesses": 0,
+        "bindings": 1,
+        "raw_reference_bytes": 698,
+        "known_reference_states": 0,
+        "head": "aa3deadc16ae6a660f0a0aec9237d2c5fafd6b323df199fa653dd3327edb5bd8"
+      },
+      "precision_limit": {
+        "transitions": 113,
+        "http_checks": 27,
+        "producer_processes": 2,
+        "native_reference_producers": 1,
+        "calibration_producers": 1,
+        "frames": 19,
+        "recordings": 1,
+        "retained_input_files": 2,
+        "witnesses": 1,
+        "bindings": 1,
+        "raw_reference_bytes": 707,
+        "known_reference_states": 0,
+        "head": "77dd3f65b4c085a67b21dbb0a96390f8c736022591e3978bd709dad6ca24de82"
+      },
+      "missing_pose": {
+        "transitions": 109,
+        "http_checks": 26,
+        "producer_processes": 2,
+        "native_reference_producers": 1,
+        "calibration_producers": 1,
+        "frames": 18,
+        "recordings": 1,
+        "retained_input_files": 2,
+        "witnesses": 0,
+        "bindings": 1,
+        "raw_reference_bytes": 703,
+        "known_reference_states": 0,
+        "head": "fa49f6de12dc57d6a3abaabf7b93b22118cec6224a412e40cd6e332ceef09215"
+      },
+      "next_report": {
+        "transitions": 113,
+        "http_checks": 27,
+        "producer_processes": 2,
+        "native_reference_producers": 1,
+        "calibration_producers": 1,
+        "frames": 19,
+        "recordings": 1,
+        "retained_input_files": 2,
+        "witnesses": 1,
+        "bindings": 1,
+        "raw_reference_bytes": 703,
+        "known_reference_states": 4,
+        "head": "06a3846c0d1dac3940c1066d40aad82a39798f8ae5da10341023c956b448d623"
+      },
+      "reference_reset": {
+        "transitions": 116,
+        "http_checks": 28,
+        "producer_processes": 2,
+        "native_reference_producers": 1,
+        "calibration_producers": 1,
+        "frames": 18,
+        "recordings": 1,
+        "retained_input_files": 2,
+        "witnesses": 1,
+        "bindings": 1,
+        "raw_reference_bytes": 703,
+        "known_reference_states": 4,
+        "head": "ec5c2c9797d4693df9118a6ae9bfb0e37c379cda3a008c44ba640249456139d2"
+      },
+      "duplicate_recording": {
+        "transitions": 109,
+        "http_checks": 25,
+        "producer_processes": 2,
+        "native_reference_producers": 1,
+        "calibration_producers": 1,
+        "frames": 19,
+        "recordings": 1,
+        "retained_input_files": 2,
+        "witnesses": 1,
+        "bindings": 1,
+        "raw_reference_bytes": 707,
+        "known_reference_states": 4,
+        "head": "7d5d04c4c821e620cb0c6c267ac55c43c621f5aa13ecaea2a01dab570e06cf68"
+      },
+      "owner_restart": {
+        "transitions": 145,
+        "http_checks": 34,
+        "producer_processes": 3,
+        "native_reference_producers": 2,
+        "calibration_producers": 1,
+        "frames": 23,
+        "recordings": 2,
+        "retained_input_files": 4,
+        "witnesses": 2,
+        "bindings": 2,
+        "raw_reference_bytes": 1410,
+        "known_reference_states": 10,
+        "head": "a83b20103b3f900d56b46c4c922b6780027243c4279c05a80c0457cd6349a1ba"
+      }
+    },
+    "transitions": 1255,
+    "http_checks": 294,
+    "producer_processes": 23,
+    "native_reference_producers": 12,
+    "calibration_producers": 11,
+    "frames": 210,
+    "recordings": 12,
+    "retained_input_files": 24,
+    "witnesses": 9,
+    "bindings": 12,
+    "raw_reference_bytes": 8450,
+    "known_reference_states": 26,
+    "full_semantic_replay": true,
+    "physical_measurements": false,
+    "native_device_session_executed": false,
+    "scope": "Actual HTTP producers and retained recording files; synthetic instrument observations and calibration declarations. Instrument accuracy and event association are not physically verified."
+  },
+  "carrier_compatibility": {
+    "cases": {
+      "rehearsal": {
+        "transitions": 543,
+        "segments": 34,
+        "requests": 68,
+        "spent": 88,
+        "nodes_spent": 297,
+        "source_records": 185,
+        "frames": 180,
+        "events": 5,
+        "http_checks": 185,
+        "known_geometry_states": 299,
+        "head": "f458b135bece91b3185adbb058d59937510291fb23f899b8ff3e2e589fa387dd",
+        "state_digest": "6845e5eb0c68f419b98863b5b6ea1014de703dec95cc559633bcb9e46643a3a7"
+      },
+      "tracking_loss": {
+        "transitions": 82,
+        "segments": 6,
+        "requests": 11,
+        "spent": 13,
+        "nodes_spent": 54,
+        "source_records": 9,
+        "frames": 8,
+        "events": 1,
+        "http_checks": 42,
+        "known_geometry_states": 4,
+        "head": "095a0d0a2a9c538a5de75a93edcfebd88a070538d94f6a20f14c7466a3e79de5",
+        "state_digest": "da385a9a157f4f6db179bbfdb02d1412000c2b34b6a356bb364493c4836179ba"
+      },
+      "reference_reset": {
+        "transitions": 83,
+        "segments": 6,
+        "requests": 11,
+        "spent": 13,
+        "nodes_spent": 54,
+        "source_records": 10,
+        "frames": 8,
+        "events": 2,
+        "http_checks": 42,
+        "known_geometry_states": 4,
+        "head": "8c5c532f0868a48a79002b1883a2843da99e41b3cff6fe77056429589a39479a",
+        "state_digest": "8a44c0c11b54ffc4865835cff421269c8d417dd0a49a3fb33a8c8bf3af8372b5"
+      },
+      "missing_metrics": {
+        "transitions": 82,
+        "segments": 6,
+        "requests": 11,
+        "spent": 13,
+        "nodes_spent": 54,
+        "source_records": 9,
+        "frames": 8,
+        "events": 1,
+        "http_checks": 42,
+        "known_geometry_states": 4,
+        "head": "bcb3f429a89798ac804f9ca20b1a86f0904028cea795f2f97fe33249ff35e42e",
+        "state_digest": "56614e6497e7e9435c3896f042eedbaf59488673866ca3160a4ed8130799fd2d"
+      },
+      "native_flags": {
+        "transitions": 82,
+        "segments": 6,
+        "requests": 11,
+        "spent": 13,
+        "nodes_spent": 54,
+        "source_records": 9,
+        "frames": 8,
+        "events": 1,
+        "http_checks": 42,
+        "known_geometry_states": 4,
+        "head": "d1832050979511066780957b5e5c80df0c092b13f8b697cdb432c517ffecb1e0",
+        "state_digest": "0cb847b971d36e34131fdb02b78a45a68ebbcfd9021b4f5d0dce1d7f337e7275"
+      },
+      "emulated_webxr": {
+        "transitions": 82,
+        "segments": 6,
+        "requests": 11,
+        "spent": 13,
+        "nodes_spent": 54,
+        "source_records": 9,
+        "frames": 8,
+        "events": 1,
+        "http_checks": 42,
+        "known_geometry_states": 4,
+        "head": "1913f9a14048e51fdf9fabf86305a4d28a902767cfb75fa5a4ce5aa2cafeea10",
+        "state_digest": "2a74cdfae74aff08351912b3b86a8fea55f82c81108408f3147cd1b48c249393"
+      }
+    },
+    "transitions": 954,
+    "http_checks": 395,
+    "source_records": 231,
+    "requests": 123,
+    "spent": 153,
+    "nodes_spent": 567,
+    "full_semantic_replay": true,
+    "physical_measurements": false,
+    "synthetic_inputs": true
+  },
+  "pose3d_compatibility": {
+    "passed": true,
+    "cases": {
+      "qualified_position": {
+        "transitions": 109,
+        "http_checks": 26,
+        "producer_processes": 2,
+        "native_control_producers": 1,
+        "calibration_producers": 1,
+        "frames": 18,
+        "witnesses": 1,
+        "bindings": 1,
+        "raw_pose_bytes": 392,
+        "known_position_states": 4,
+        "head": "580c7ff4d5e1d0ede40546fde3e381c68534c9b1e5e4d8116cff8534e58e1c4d"
+      },
+      "clock_conflict": {
+        "transitions": 112,
+        "http_checks": 27,
+        "producer_processes": 2,
+        "native_control_producers": 1,
+        "calibration_producers": 1,
+        "frames": 18,
+        "witnesses": 1,
+        "bindings": 1,
+        "raw_pose_bytes": 392,
+        "known_position_states": 0,
+        "head": "79c1115841d7a8238f58f6b35c744c5700ad937cc66da4e5b90eb77b85697d04"
+      },
+      "time_control": {
+        "transitions": 107,
+        "http_checks": 26,
+        "producer_processes": 2,
+        "native_control_producers": 1,
+        "calibration_producers": 1,
+        "frames": 18,
+        "witnesses": 1,
+        "bindings": 1,
+        "raw_pose_bytes": 392,
+        "known_position_states": 0,
+        "head": "eddbd321500a074464dc57a3d8650e8712b254e8cea1ce0b14bf5b63dd90d57f"
+      },
+      "position_control": {
+        "transitions": 108,
+        "http_checks": 27,
+        "producer_processes": 2,
+        "native_control_producers": 1,
+        "calibration_producers": 1,
+        "frames": 18,
+        "witnesses": 1,
+        "bindings": 1,
+        "raw_pose_bytes": 394,
+        "known_position_states": 0,
+        "head": "d48a0a938989f075f955f5eb5aa2dccaa752296e2aa55072e712cccdca98cafd"
+      },
+      "time_precision": {
+        "transitions": 107,
+        "http_checks": 26,
+        "producer_processes": 2,
+        "native_control_producers": 1,
+        "calibration_producers": 1,
+        "frames": 18,
+        "witnesses": 1,
+        "bindings": 1,
+        "raw_pose_bytes": 392,
+        "known_position_states": 0,
+        "head": "f076c4aabd9ae8eaf0e34bc3daf8e6fd84a5345d34fe5716626da12bd019d976"
+      },
+      "position_precision": {
+        "transitions": 109,
+        "http_checks": 27,
+        "producer_processes": 2,
+        "native_control_producers": 1,
+        "calibration_producers": 1,
+        "frames": 18,
+        "witnesses": 1,
+        "bindings": 1,
+        "raw_pose_bytes": 392,
+        "known_position_states": 0,
+        "head": "98d2bd134e87041db7323cbf173ca06c284e02ba4268f389120f241948450e09"
+      },
+      "missing_pose": {
+        "transitions": 107,
+        "http_checks": 26,
+        "producer_processes": 2,
+        "native_control_producers": 1,
+        "calibration_producers": 1,
+        "frames": 18,
+        "witnesses": 1,
+        "bindings": 1,
+        "raw_pose_bytes": 392,
+        "known_position_states": 0,
+        "head": "198f6904751857d02239d674168374c7dd4b342bbb4947ccf24a93baabb1b25a"
+      },
+      "next_report": {
+        "transitions": 109,
+        "http_checks": 26,
+        "producer_processes": 2,
+        "native_control_producers": 1,
+        "calibration_producers": 1,
+        "frames": 19,
+        "witnesses": 1,
+        "bindings": 1,
+        "raw_pose_bytes": 392,
+        "known_position_states": 5,
+        "head": "8b0a136178b1e311d5a3590e269266c5270f9141899d79081d66db50783c3c78"
+      },
+      "reference_reset": {
+        "transitions": 115,
+        "http_checks": 28,
+        "producer_processes": 2,
+        "native_control_producers": 1,
+        "calibration_producers": 1,
+        "frames": 19,
+        "witnesses": 1,
+        "bindings": 1,
+        "raw_pose_bytes": 392,
+        "known_position_states": 4,
+        "head": "e34649e0fc93f8ef820a965c4bf1cd267e515cbaa23cce0bf845393dec85c5da"
+      },
+      "duplicate_witness": {
+        "transitions": 106,
+        "http_checks": 25,
+        "producer_processes": 2,
+        "native_control_producers": 1,
+        "calibration_producers": 1,
+        "frames": 18,
+        "witnesses": 1,
+        "bindings": 1,
+        "raw_pose_bytes": 392,
+        "known_position_states": 5,
+        "head": "a75c832c3d950290a9ff2a6755404efccc1226ff850a71c2516632b907f34f52"
+      },
+      "owner_restart": {
+        "transitions": 152,
+        "http_checks": 36,
+        "producer_processes": 3,
+        "native_control_producers": 2,
+        "calibration_producers": 1,
+        "frames": 25,
+        "witnesses": 2,
+        "bindings": 2,
+        "raw_pose_bytes": 784,
+        "known_position_states": 9,
+        "head": "06d39eed9aed27da440645e37e2e6c6051ad4c2be890b0acbd20fae9a7039ed9"
+      }
+    },
+    "transitions": 1241,
+    "http_checks": 300,
+    "producer_processes": 23,
+    "native_control_producers": 12,
+    "calibration_producers": 11,
+    "frames": 207,
+    "witnesses": 12,
+    "bindings": 12,
+    "raw_pose_bytes": 4706,
+    "known_position_states": 27,
+    "full_semantic_replay": true,
+    "physical_measurements": false,
+    "native_device_session_executed": false,
+    "scope": "Actual local HTTP producer processes; synthetic native data, calibration rows and separately generated per-report control intervals. Known is conditional on models and declared error enclosures."
+  },
+  "javascript": {
+    "legacy": {
+      "environment": "minimal DOM / Node.js",
+      "checks": [
+        {
+          "name": "initial_unknown_map",
+          "passed": true
+        },
+        {
+          "name": "conflict_snapshot",
+          "passed": true
+        },
+        {
+          "name": "resolved_snapshot",
+          "passed": true
+        },
+        {
+          "name": "tracking_loss",
+          "passed": true
+        },
+        {
+          "name": "expiry_map",
+          "passed": true
+        },
+        {
+          "name": "reacquired_map",
+          "passed": true
+        },
+        {
+          "name": "previous_next_controls",
+          "passed": true
+        },
+        {
+          "name": "playback_restarts_and_advances",
+          "passed": true
+        }
+      ],
+      "real_browser_layout_tested": false
+    },
+    "files": {
+      "checks": [
+        {
+          "name": "recorded_mode_has_no_network_dependency",
+          "passed": true
+        },
+        {
+          "name": "all_frames_render_from_machine_objects",
+          "passed": true
+        },
+        {
+          "name": "real_removal_displays_known_false",
+          "passed": true
+        },
+        {
+          "name": "paused_expiry_is_unknown",
+          "passed": true
+        },
+        {
+          "name": "request_deadline_is_visible",
+          "passed": true
+        },
+        {
+          "name": "stopped_session_is_explicit",
+          "passed": true
+        },
+        {
+          "name": "navigation_controls_select_adjacent_transactions",
+          "passed": true
+        },
+        {
+          "name": "delta_gap_is_rejected_by_actual_client_function",
+          "passed": true
+        }
+      ],
+      "rendered_browser_review": false
+    },
+    "organs": {
+      "checks": [
+        {
+          "name": "offline_replay_uses_no_network",
+          "passed": true
+        },
+        {
+          "name": "all_frames_preserve_organ_states_and_budget",
+          "passed": true
+        },
+        {
+          "name": "exposure_changes_selected_sector_and_unwrapped_step",
+          "passed": true
+        },
+        {
+          "name": "occluded_beacon_is_unknown",
+          "passed": true
+        },
+        {
+          "name": "known_false_is_visible_after_field_change",
+          "passed": true
+        },
+        {
+          "name": "fault_is_displayed_as_runtime_phase",
+          "passed": true
+        },
+        {
+          "name": "superseded_result_keeps_its_exposure_reference",
+          "passed": true
+        },
+        {
+          "name": "quiescent_expiry_is_distinct_from_retirement",
+          "passed": true
+        },
+        {
+          "name": "adjacent_transition_navigation",
+          "passed": true
+        },
+        {
+          "name": "delta_gap_is_rejected",
+          "passed": true
+        }
+      ],
+      "rendered_browser_review": false
+    },
+    "mapping": {
+      "checks": 10,
+      "passed": true,
+      "visual_browser_review": false
+    },
+    "active": {
+      "checks": 8,
+      "passed": true,
+      "visual_browser_review": false
+    },
+    "bank": {
+      "checks": 10,
+      "passed": true,
+      "visual_browser_review": false
+    },
+    "registered": {
+      "checks": 10,
+      "passed": true,
+      "visual_browser_review": false
+    },
+    "uncertain": {
+      "checks": 18,
+      "passed": true,
+      "visual_browser_review": false
+    },
+    "calibrated": {
+      "checks": 12,
+      "passed": true,
+      "visual_browser_review": false
+    },
+    "certified": {
+      "checks": 15,
+      "passed": true,
+      "visual_browser_review": false
+    },
+    "noisy": {
+      "checks": 20,
+      "passed": true,
+      "visual_browser_review": false
+    },
+    "trace": {
+      "checks": 25,
+      "passed": true,
+      "visual_browser_review": false
+    },
+    "geometry": {
+      "checks": 25,
+      "passed": true,
+      "visual_browser_review": false
+    },
+    "sources": {
+      "checks": 31,
+      "passed": true,
+      "visual_browser_review": false
+    },
+    "carrier": {
+      "checks": 27,
+      "passed": true,
+      "visual_browser_review": false
+    },
+    "webxr_probe": {
+      "checks": 18,
+      "passed": true,
+      "real_webxr_session": false
+    },
+    "registered3d": {
+      "checks": 46,
+      "passed": true,
+      "visual_browser_review": false
+    },
+    "continuous3d": {
+      "checks": 57,
+      "passed": true,
+      "visual_browser_review": false
+    },
+    "epoch3d": {
+      "checks": 61,
+      "passed": true,
+      "visual_browser_review": false
+    },
+    "revision3d": {
+      "checks": 64,
+      "passed": true,
+      "visual_browser_review": false
+    },
+    "acquisition3d": {
+      "checks": 68,
+      "passed": true,
+      "visual_browser_review": false
+    },
+    "producer3d": {
+      "checks": 81,
+      "passed": true,
+      "visual_browser_review": false
+    },
+    "capture3d": {
+      "checks": 48,
+      "passed": true,
+      "visual_browser_review": false
+    },
+    "temporal3d": {
+      "checks": 35,
+      "states": 199,
+      "passed": true,
+      "visual_browser_review": false
+    },
+    "feedback3d": {
+      "checks": 33,
+      "states": 246,
+      "passed": true,
+      "visual_browser_review": false
+    },
+    "stream3d": {
+      "checks": 33,
+      "states": 262,
+      "passed": true,
+      "visual_browser_review": false
+    },
+    "flow3d": {
+      "checks": 36,
+      "states": 292,
+      "passed": true,
+      "visual_browser_review": false
+    },
+    "xr3d": {
+      "checks": 48,
+      "states": 94,
+      "passed": true,
+      "visual_browser_review": false,
+      "native_device_session_executed": false,
+      "capture_page_mock_executed": true
+    },
+    "report3d": {
+      "checks": [
+        "ten_process_cases",
+        "query_domains_qualified_report",
+        "query_domains_failed_control",
+        "query_domains_inconsistent_fit",
+        "query_domains_precision_limit",
+        "query_domains_horizon_expired",
+        "query_domains_callback_gap",
+        "query_domains_reference_reset",
+        "query_domains_null_pose",
+        "query_domains_duplicate_binding",
+        "query_domains_owner_restart",
+        "qualified_report_reference_time_visible",
+        "connection_loss_removes_current_answers",
+        "offline_is_historical",
+        "empty_snapshot_is_unknown",
+        "null_pose_not_false_certainty",
+        "actual_page_draws_qualified_time",
+        "actual_page_draws_physical_unknown",
+        "actual_page_history_navigation",
+        "actual_page_case_selection_failure",
+        "actual_page_slider_initial_state",
+        "offline_capture_link_hidden"
+      ],
+      "passed": true,
+      "gallery_states": 110,
+      "page_code_mock_executed": true,
+      "visual_browser_review": false
+    },
+    "pose3d": {
+      "checks": [
+        "eleven_process_cases",
+        "query_domains_qualified_position",
+        "query_domains_clock_conflict",
+        "query_domains_time_control",
+        "query_domains_position_control",
+        "query_domains_time_precision",
+        "query_domains_position_precision",
+        "query_domains_missing_pose",
+        "query_domains_next_report",
+        "query_domains_reference_reset",
+        "query_domains_duplicate_witness",
+        "query_domains_owner_restart",
+        "qualified_position_reference_time_visible",
+        "connection_loss_removes_current_answers",
+        "offline_is_historical",
+        "empty_snapshot_is_unknown",
+        "missing_pose_not_false_certainty",
+        "later_native_report_removes_pose",
+        "actual_page_draws_qualified_time",
+        "actual_page_draws_physical_known",
+        "actual_page_history_navigation",
+        "actual_page_case_selection_failure",
+        "actual_page_slider_initial_state",
+        "offline_capture_link_hidden"
+      ],
+      "passed": true,
+      "gallery_states": 276,
+      "page_code_mock_executed": true,
+      "visual_browser_review": false
+    },
+    "reference3d": {
+      "checks": [
+        "eleven_process_cases",
+        "query_domains_qualified_reference",
+        "query_domains_position_bias",
+        "query_domains_time_control",
+        "query_domains_position_control",
+        "query_domains_calibration_horizon",
+        "query_domains_precision_limit",
+        "query_domains_missing_pose",
+        "query_domains_next_report",
+        "query_domains_reference_reset",
+        "query_domains_duplicate_recording",
+        "query_domains_owner_restart",
+        "qualified_reference_reference_time_visible",
+        "connection_loss_removes_current_answers",
+        "offline_is_historical",
+        "empty_snapshot_is_unknown",
+        "missing_pose_not_false_certainty",
+        "later_native_report_removes_pose",
+        "known_keeps_instrument_truth_unverified",
+        "pose_without_reference_does_not_promote_assessment",
+        "actual_page_draws_qualified_time",
+        "actual_page_draws_physical_known",
+        "actual_page_history_navigation",
+        "actual_page_case_selection_failure",
+        "actual_page_slider_initial_state",
+        "offline_capture_link_hidden"
+      ],
+      "passed": true,
+      "gallery_states": 282,
+      "page_code_mock_executed": true,
+      "visual_browser_review": false
+    }
+  },
+  "javascript_checks_total": 937,
+  "reference3d_cli_restart": {
+    "passed": true,
+    "owner_processes": 2,
+    "producer_processes": 3,
+    "frames": 24,
+    "bindings": 2,
+    "witnesses": 2,
+    "recordings": 2,
+    "transitions": 199,
+    "prior_certificate_preserved": true,
+    "prior_binding_invalidated": true,
+    "budget_preserved": true,
+    "fresh_binding_qualified": true,
+    "typed_policy_tamper_rejected_without_write": true,
+    "physical_measurements": false
+  }
+}

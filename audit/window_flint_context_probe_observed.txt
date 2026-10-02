@@ -1,0 +1,21 @@
+Provenance: observed development probe executed through the command tool during
+the independent read-only review; stdout below was captured by that tool and
+transcribed into this artifact afterward. This is not a separately archived
+reproduction run, and no exact invocation timestamp is claimed. The accompanying
+window_flint_context_probe.py preserves the same event-coordinated experiment
+with explicit timeout checks. It was not rerun during the manuscript/timing
+freeze.
+
+Environment: Python 3.12.14, python-flint 0.9.0, dependencies at
+/tmp/gabriel_next_phase_e8d6xl0c/deps; working project
+/tmp/gabriel_next_phase_e8d6xl0c/Gabriel.
+
+Observed stdout:
+{'main_expected_workprec': 512, 'main_observed_other_thread_precision': 32}
+{'restored_precision': 53, 'original': 53}
+
+The main thread was inside ctx.workprec(512). The worker entered
+ctx.workprec(32), signaled readiness, and waited until the main thread read
+ctx.prec. Both contexts restored the initial value on exit. This demonstrates
+cross-thread visibility of the context setting. It does not demonstrate an
+incorrect Arb enclosure or an incorrect certificate.

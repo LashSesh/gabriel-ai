@@ -1,0 +1,25 @@
+[package]
+publish = false
+name = "pse-topology"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Laplacian computation, spectral decomposition, Fiedler vector, Betti numbers for PSE"
+rust-version.workspace = true
+
+[features]
+default = []
+phase-hoist = []
+shared-spectrum = []
+
+[dependencies]
+pse-types = { path = "../pse-types", version = "0.1.0" }
+pse-graph = { path = "../pse-graph", version = "0.1.0" }
+nalgebra = { workspace = true }
+serde = { workspace = true }
+tracing = { workspace = true }
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]

@@ -1,0 +1,35 @@
+{
+  "study": "Orientation transport and linear observation; synthetic exact and numerical mechanism study",
+  "scope": "Specified after the source audit; fixed before executing this study; not externally preregistered",
+  "ring_size": 6,
+  "seeds": [
+    97500,
+    97501,
+    97502,
+    97503,
+    97504,
+    97505,
+    97506,
+    97507
+  ],
+  "modes": [
+    "trace_only",
+    "adaptive"
+  ],
+  "steps": 256,
+  "tolerance": 1e-12,
+  "query_profiles": [
+    "unit",
+    "expensive_inner",
+    "inner_unavailable"
+  ],
+  "query_policies": [
+    "optimal_coset",
+    "lexical",
+    "reverse",
+    "random_seed_97599"
+  ],
+  "combinatorial": "Exhaust all 4096 flat sign assignments; all 42504 five-query subsets; all 1152 lifted endpoint pairs",
+  "dynamics": "Zero topology learning; initialized random states; exact coordinate-conjugacy and double-cover controls; old external classifiers unchanged",
+  "source_archive_sha256": "524b35c06df7a2fae04c19ed2f88556b0960d24d2022c725aeecf464b72dc15e"
+}

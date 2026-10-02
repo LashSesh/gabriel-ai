@@ -1,0 +1,366 @@
+{
+  "case_id": "near_clique_n13",
+  "commands": [
+    {
+      "at": 0,
+      "contract": "graph",
+      "expected_head": "51fe44130af8df7b182c078089223e3aa21ebd159eeb6c7db51bd3d397621f71",
+      "id": "task-1",
+      "op": "bind",
+      "payload": {
+        "adapter": "native-graph-observer/v1",
+        "config": {
+          "backend": "spectral_full",
+          "max_batches": 128,
+          "max_nodes": 64,
+          "max_queries": 256
+        }
+      }
+    },
+    {
+      "at": 1,
+      "contract": "graph",
+      "expected_head": "2302ab311d32726c5f074faf74c5d7062a511da4969356d1c904560587bc4e60",
+      "id": "task-2",
+      "op": "append_batch",
+      "payload": {
+        "entities": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ]
+      }
+    },
+    {
+      "at": 2,
+      "contract": "graph",
+      "expected_head": "a08c661136f04180fddef7a9a50e34ca8e40c275977e8faa56e6c3b02750a3d4",
+      "id": "task-3",
+      "op": "append_batch",
+      "payload": {
+        "entities": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          12
+        ]
+      }
+    },
+    {
+      "at": 3,
+      "contract": "graph",
+      "expected_head": "4503ffcfdbb2c713f19284e6f647dcebabd7a2ebd9c549c30c3d7cfb4aec8688",
+      "id": "task-4",
+      "op": "query",
+      "payload": {
+        "deadband_bits": "3e7ad7f29abcaf48",
+        "source": [
+          {
+            "entity": 0,
+            "im_bits": "bfc350a582474186",
+            "re_bits": "bfd1b497b76bfc11"
+          },
+          {
+            "entity": 1,
+            "im_bits": "3fc01889ec90b69b",
+            "re_bits": "3fc350a582474186"
+          },
+          {
+            "entity": 2,
+            "im_bits": "bfc688c117fdcc72",
+            "re_bits": "bfc350a582474186"
+          },
+          {
+            "entity": 3,
+            "im_bits": "3fb9c0dcadb4575e",
+            "re_bits": "3fd1b497b76bfc11"
+          },
+          {
+            "entity": 4,
+            "im_bits": "bfc9c0dcadb4575e",
+            "re_bits": "bf99c0dcadb4575e"
+          },
+          {
+            "entity": 5,
+            "im_bits": "3fb350a582474186",
+            "re_bits": "bfd4ecb34d2286fc"
+          },
+          {
+            "entity": 6,
+            "im_bits": "bfccf8f8436ae24a",
+            "re_bits": "3fb9c0dcadb4575e"
+          },
+          {
+            "entity": 7,
+            "im_bits": "3fa9c0dcadb4575e",
+            "re_bits": "bfc9c0dcadb4575e"
+          },
+          {
+            "entity": 8,
+            "im_bits": "bfd01889ec90b69b",
+            "re_bits": "3fccf8f8436ae24a"
+          },
+          {
+            "entity": 9,
+            "im_bits": "3f99c0dcadb4575e",
+            "re_bits": "bfb350a582474186"
+          },
+          {
+            "entity": 10,
+            "im_bits": "bfd1b497b76bfc11",
+            "re_bits": "3fd688c117fdcc72"
+          },
+          {
+            "entity": 11,
+            "im_bits": "0000000000000000",
+            "re_bits": "3fa9c0dcadb4575e"
+          },
+          {
+            "entity": 12,
+            "im_bits": "3fd1b497b76bfc11",
+            "re_bits": "bfd01889ec90b69b"
+          }
+        ],
+        "targets": [
+          0,
+          2,
+          4,
+          6,
+          8,
+          10,
+          12
+        ],
+        "threshold_bits": "3fe6badbe42636bb",
+        "times_bits": [
+          "3fd0000000000000"
+        ]
+      }
+    }
+  ],
+  "commands_sha256": "6e4bd9b308547ed6e0435b4c381f8568e98a8b8dc63d9e8ccc16e3f93488cece",
+  "database_bytes": 49152,
+  "database_filename": "near_clique_n13_q1_trial1_spectral_full.sqlite",
+  "database_retained": false,
+  "database_sha256": "342a7cb203b3affaf522b519d9bad90986c00c646e99a9ee0727b68e3b7b7227",
+  "elapsed_ns": 189472931,
+  "elapsed_seconds": 0.189472931,
+  "input_fingerprint": "48936f5ab8ae5f2b6323f9e9e109c6b40074471b09d50ea53b633a2a43781dfa",
+  "order_position": 2,
+  "owner_events": 4,
+  "owner_head": "63807e743d1e60f6d027c6194dfa2dfa442ceef4ecb739fae5b2eb1f5acb899d",
+  "phase_ns": {
+    "adapter_and_create": 44619249,
+    "append_all": 87131705,
+    "bind": 14771411,
+    "close": 41963,
+    "query": 42908603
+  },
+  "process_index": 3,
+  "query_count": 1,
+  "query_receipt": {
+    "command_id": "task-4",
+    "contract": "graph",
+    "head": "63807e743d1e60f6d027c6194dfa2dfa442ceef4ecb739fae5b2eb1f5acb899d",
+    "result": {
+      "issue": {
+        "batch_count": 2,
+        "digest": "99cc4e2f591337aea27ae85616b4a5962026c40828978101c5638df775672a2a",
+        "native_result": {
+          "backend": "spectral_full",
+          "engine": {
+            "commits": 0,
+            "edges": 77,
+            "faulted": false,
+            "observations": 24,
+            "ticks": 2,
+            "vertices": 13
+          },
+          "query_results": [
+            {
+              "region_backend": "state_readout",
+              "values": [
+                {
+                  "decision": "below",
+                  "mass_bits": "3fe4ddde54b42391",
+                  "time_bits": "3fd0000000000000"
+                }
+              ]
+            }
+          ],
+          "schema": "gabriel-engine-observer/v1",
+          "snapshot": {
+            "identity": "e04e15db1ec3f647bf91d2a3de5005303c5e2a7a15250159ff829bffa6b64395",
+            "model": "exp(-itL);L=D-A;(W+W^T)/2;inactive-included;selfloops-ignored",
+            "tick": 2,
+            "vertices": [
+              {
+                "entity": 0,
+                "vertex_id": "11570619382924184950"
+              },
+              {
+                "entity": 1,
+                "vertex_id": "11570620482435813161"
+              },
+              {
+                "entity": 2,
+                "vertex_id": "11570617183900928528"
+              },
+              {
+                "entity": 3,
+                "vertex_id": "11570618283412556739"
+              },
+              {
+                "entity": 4,
+                "vertex_id": "11570623780970697794"
+              },
+              {
+                "entity": 5,
+                "vertex_id": "11570624880482326005"
+              },
+              {
+                "entity": 6,
+                "vertex_id": "11570621581947441372"
+              },
+              {
+                "entity": 7,
+                "vertex_id": "11570622681459069583"
+              },
+              {
+                "entity": 8,
+                "vertex_id": "11570628179017210638"
+              },
+              {
+                "entity": 9,
+                "vertex_id": "11570629278528838849"
+              },
+              {
+                "entity": 10,
+                "vertex_id": "5477593069636265851"
+              },
+              {
+                "entity": 11,
+                "vertex_id": "5477591970124637640"
+              },
+              {
+                "entity": 12,
+                "vertex_id": "5477595268659522273"
+              }
+            ],
+            "walk_backend": "spectral"
+          }
+        },
+        "owner_receipt_at": 3,
+        "request": {
+          "deadband_bits": "3e7ad7f29abcaf48",
+          "source": [
+            {
+              "entity": 0,
+              "im_bits": "bfc350a582474186",
+              "re_bits": "bfd1b497b76bfc11"
+            },
+            {
+              "entity": 1,
+              "im_bits": "3fc01889ec90b69b",
+              "re_bits": "3fc350a582474186"
+            },
+            {
+              "entity": 2,
+              "im_bits": "bfc688c117fdcc72",
+              "re_bits": "bfc350a582474186"
+            },
+            {
+              "entity": 3,
+              "im_bits": "3fb9c0dcadb4575e",
+              "re_bits": "3fd1b497b76bfc11"
+            },
+            {
+              "entity": 4,
+              "im_bits": "bfc9c0dcadb4575e",
+              "re_bits": "bf99c0dcadb4575e"
+            },
+            {
+              "entity": 5,
+              "im_bits": "3fb350a582474186",
+              "re_bits": "bfd4ecb34d2286fc"
+            },
+            {
+              "entity": 6,
+              "im_bits": "bfccf8f8436ae24a",
+              "re_bits": "3fb9c0dcadb4575e"
+            },
+            {
+              "entity": 7,
+              "im_bits": "3fa9c0dcadb4575e",
+              "re_bits": "bfc9c0dcadb4575e"
+            },
+            {
+              "entity": 8,
+              "im_bits": "bfd01889ec90b69b",
+              "re_bits": "3fccf8f8436ae24a"
+            },
+            {
+              "entity": 9,
+              "im_bits": "3f99c0dcadb4575e",
+              "re_bits": "bfb350a582474186"
+            },
+            {
+              "entity": 10,
+              "im_bits": "bfd1b497b76bfc11",
+              "re_bits": "3fd688c117fdcc72"
+            },
+            {
+              "entity": 11,
+              "im_bits": "0000000000000000",
+              "re_bits": "3fa9c0dcadb4575e"
+            },
+            {
+              "entity": 12,
+              "im_bits": "3fd1b497b76bfc11",
+              "re_bits": "bfd01889ec90b69b"
+            }
+          ],
+          "targets": [
+            0,
+            2,
+            4,
+            6,
+            8,
+            10,
+            12
+          ],
+          "threshold_bits": "3fe6badbe42636bb",
+          "times_bits": [
+            "3fd0000000000000"
+          ]
+        }
+      },
+      "operation": "query"
+    },
+    "sequence": 4
+  },
+  "query_receipt_sha256": "25626cac61d11306ba09b5b6a685474b9510401e7c66b7518d03f1b744bb58bb",
+  "trial": 1,
+  "variant": "spectral_full",
+  "variant_order": [
+    "auto_full",
+    "auto_region",
+    "spectral_full"
+  ]
+}

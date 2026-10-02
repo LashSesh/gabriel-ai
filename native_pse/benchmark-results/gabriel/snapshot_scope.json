@@ -1,0 +1,39 @@
+{
+  "included_global_fields": [
+    "graph (defined graph_snapshot)",
+    "last_gate",
+    "h5_state",
+    "prev_embeddings",
+    "phase_ladder",
+    "active_carrier",
+    "last_data_helix",
+    "t2",
+    "commit_index",
+    "engine_state (Debug)",
+    "consensus.last_result",
+    "archive.crystals()",
+    "pattern_hits",
+    "last_constraint_count",
+    "scale_state (Debug)",
+    "morph (Debug)",
+    "adaptive (Debug)",
+    "crystals_committed"
+  ],
+  "included_return_value": "complete returned Option<SemanticCrystal> serialized through serde_json",
+  "not_an_all_fields_snapshot": [
+    "candidates",
+    "consensus internal fields besides last_result",
+    "por_fsm",
+    "null_center",
+    "last_gate_passed",
+    "memory",
+    "navigator_state",
+    "last_crystal_commit",
+    "startup_gate_samples",
+    "background_model",
+    "last_crystal_gate",
+    "graph.id_map and other graph internals not listed in graph_snapshot",
+    "archive internals besides crystal values"
+  ],
+  "interpretation": "Direct equality of these specified observations, not a proof of all hidden-state equivalence or cross-platform determinism."
+}

@@ -1,0 +1,84 @@
+{
+  "cases": [
+    {
+      "expected_auto": "complete_graph",
+      "family": "clique",
+      "id": "clique_n13",
+      "n": 13
+    },
+    {
+      "expected_auto": "complete_graph",
+      "family": "clique",
+      "id": "clique_n64",
+      "n": 64
+    },
+    {
+      "expected_auto": "spectral",
+      "family": "path",
+      "id": "path_n13",
+      "n": 13
+    },
+    {
+      "expected_auto": "spectral",
+      "family": "near_clique",
+      "id": "near_clique_n13",
+      "n": 13
+    }
+  ],
+  "collector": "Explicit executable SHA-256, source manifest before/after, optional supplied build metadata, worker stdout/stderr and individual command records. Complete command index is reconstructed from closed individual command files, atomically written and read back; every failure preserves completed evidence.",
+  "deadband": 1e-07,
+  "decision": "above for mass>threshold+1e-7, below for mass<threshold-1e-7, ambiguous otherwise. The bridge spelling ambiguous denotes the native benchmark abstain band. This operational tolerance is not a confidence interval or certified rounding enclosure.",
+  "excluded": "Fixture generation, Python worker process startup, initial source-manifest recording, output record encoding/writes, closed database hashing/removal, and the retained first database semantic replay audit. The native bridge process starts remain included. No optional warmup tasks are executed; each worker runs all paired variants in rotated order.",
+  "executable_identity": "All three variants execute the same production-profile native CLI binary. Exact executable bytes, SHA-256 and optional supplied build-command metadata are retained. This executable differs from the all-features native benchmark build; ratios across the two experiments are never multiplied.",
+  "expected_timed_tasks": 360,
+  "fresh_processes": 5,
+  "input": "Actual public Engine ingestion through the bounded native CLI, owned by a fresh durable Store. Clique uses one all-entity batch; path uses consecutive pair batches; near-clique uses [0,...,n-2] then [0,...,n-3,n-1]. No raw graph mutation. The bridge uses identical sensor-i IDs, zero phase, lambda_decay=0 and min_crystal_tick=u64::MAX.",
+  "mass_absolute_tolerance": 5e-10,
+  "native_executable_profile": {
+    "codegen_units": 1,
+    "debug": false,
+    "features": "default",
+    "lto": false,
+    "opt_level": 3,
+    "overflow_checks": false,
+    "panic": "unwind",
+    "strip": "symbols",
+    "toolchain": "1.95.0"
+  },
+  "native_protocol": "native_pse/benchmark-results/conditioned_engine/protocol.json",
+  "order": "For each case/query-count/trial, rotate variants by (process_index+case_index+query_count_index+trial)%3, reversing on odd process_index+trial. Exactly 3 complete triples per case/query count in each of 5 fresh Python workers, all workers serial.",
+  "query_counts": [
+    1,
+    256
+  ],
+  "query_offsets_denominator": 4096,
+  "query_times": [
+    0.25,
+    0.03125,
+    0.125,
+    0.5,
+    1.0,
+    2.0,
+    4.0,
+    8.0,
+    0.0625,
+    0.375,
+    0.75,
+    1.5,
+    3.0,
+    6.0,
+    10.0,
+    16.0
+  ],
+  "schema": "gabriel.graph-observer-owner.protocol.v1",
+  "source": "Raw real=((17*i+3)%29)-14, imaginary=((11*i+5)%23)-11, divided once by Euclidean norm in entity-index order, then IEEE-754 bit-encoded. The observer additionally applies its declared stable normalization. Targets are even entity indices. Threshold is their initial normalized mass, accumulated in ascending entity order as individual squared magnitude / total squared norm. Query j uses base_times[j%16]+floor(j/16)/4096, giving 256 unique positive times at q=256; q=1 uses 0.25. No repeated-time memoization opportunity is built into the measured batch.",
+  "summary": "Within each worker take median of 3 within-triple ratios; report median and observed minimum/maximum across 5 workers. Ratios are spectral_full/auto_full, spectral_full/auto_region and auto_full/auto_region. No confidence intervals, financial forecast advantage, gain for other Owner profiles, hardware universality or concurrency scaling is inferred.",
+  "timed_boundary": "Start before constructing GraphObserverAdapter; end after Store.close. Includes trusted executable/source identity checks, Store.create with SQLite DELETE journal and synchronous EXTRA, immutable bind, each actual append_batch command and its fresh native process replay, final query, command construction, canonical JSON, receipt materialization, native process starts, and durable transactions. Every task has a new database. All graph history is replayed per append/query because that is the actual adapter contract.",
+  "triples_per_process": 3,
+  "validation": "Every triple requires exact equal decisions, equal snapshot identity and engine metadata, all requested outputs, and pairwise absolute mass differences <=5e-10 versus spectral_full. Errors reject collection. Full command payloads, query receipts, mass bits, source-input fingerprint, closed database hash, and every elapsed nanosecond are retained. One first spectral clique13 q1 database is retained and audited at worker end after all measured tasks; no replay audit is inserted between paired variants. All other database files are removed only after close and hashing.",
+  "variants": [
+    "spectral_full",
+    "auto_full",
+    "auto_region"
+  ]
+}

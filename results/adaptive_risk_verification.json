@@ -1,0 +1,165 @@
+{
+  "schema": "gabriel.adaptive-risk.verification.v1",
+  "status": "passed",
+  "protocol_sha256": "e5723e6f160b37ae552bff2ac11573dfeab7d6d7f4e1f5f4fab3249542285aa9",
+  "source_csv_sha256": "e8136f072d575cb891cb58718fe31602ca2d4feccee67f035106393ed1c4bdbb",
+  "prediction_archive_sha256": "aa363906bc796f529f1542c81f8888c1831cddd744a1763727160c1492d8fd32",
+  "results_sha256": "067dc7e530c653dfa4978112383604018195fa6ec782e425339e3c53b05aabb0",
+  "parent_verification_sha256": "0bebea1bf590e0a67db2d2ec0a4ec85ddfa518309eaf27b771e88d29adb1cb4b",
+  "verifier_sha256": "5425808c41176432e82da97edbabcd233d8892b428ba852d88cd76dc9fa26d5c",
+  "verification_layer": "Independent Fraction controller replay and selection/metric reconstruction from unchanged, previously independently verified parent forecasts; independent final-unit tail reconstruction for pending parent rows.",
+  "reused_parent_verification": "independent extended-precision states and final-unit sorted scenario integration; exact rational finite-tail test cases",
+  "tolerance": {
+    "absolute": 1e-10,
+    "relative": 1e-10
+  },
+  "maximum_absolute_differences": {
+    "realized": 8.881784197001252e-16,
+    "pending_parent_var": 4.440892098500626e-16,
+    "pending_parent_es": 8.881784197001252e-16,
+    "controller_var": 0.0,
+    "controller_es": 0.0,
+    "static_var": 0.0,
+    "static_es": 0.0,
+    "metrics": 3.552713678800501e-15,
+    "selection": 4.6629367034256575e-15
+  },
+  "counts": {
+    "controller_forecast_pairs": 271560,
+    "static_forecast_pairs": 271560,
+    "parent_forecast_pairs_reused": 325728,
+    "pending_parent_forecast_pairs_reconstructed": 144,
+    "metric_records": 1672,
+    "exact_accounting_records": 1640,
+    "pending_contract_cases": 24,
+    "controller_float_values_not_bitwise_equal": 0,
+    "static_float_values_not_bitwise_equal": 0
+  },
+  "period_contract_cases": {
+    "development": 20448,
+    "retrospective": 12280,
+    "temporal_extension": 1480
+  },
+  "period_forecast_pairs": {
+    "development": 143136,
+    "retrospective": 85960,
+    "temporal_extension": 10360
+  },
+  "production_function_tests": {
+    "seed": 2026092603,
+    "prefix_variants": [
+      {
+        "cutoff": "2000-12-08",
+        "variant": "future_perturbation"
+      },
+      {
+        "cutoff": "2000-12-08",
+        "variant": "suffix_truncation"
+      },
+      {
+        "cutoff": "2019-12-31",
+        "variant": "future_perturbation"
+      },
+      {
+        "cutoff": "2019-12-31",
+        "variant": "suffix_truncation"
+      },
+      {
+        "cutoff": "2025-12-31",
+        "variant": "future_perturbation"
+      },
+      {
+        "cutoff": "2025-12-31",
+        "variant": "suffix_truncation"
+      }
+    ],
+    "prefix_controller_forecasts_checked": 379296,
+    "development_selection_rechecks": 16,
+    "maturity_timing_cases": 4,
+    "projection_stress_cases": 8,
+    "zero_eta_cases": 2,
+    "invalid_inputs_rejected": 11
+  },
+  "contracts": [
+    {
+      "currency": "USD",
+      "horizon": 1,
+      "eligible_issuances": 6791,
+      "selected_eta": "1/100",
+      "selected_static_theta": "0",
+      "minimum_eta_selection_gap": 0.0022526348898362913,
+      "minimum_static_selection_gap": 0.0184414679689075
+    },
+    {
+      "currency": "USD",
+      "horizon": 5,
+      "eligible_issuances": 6787,
+      "selected_eta": "1/100",
+      "selected_static_theta": "0",
+      "minimum_eta_selection_gap": 0.004443837346982615,
+      "minimum_static_selection_gap": 0.0012639173611410648
+    },
+    {
+      "currency": "GBP",
+      "horizon": 1,
+      "eligible_issuances": 6791,
+      "selected_eta": "1/100",
+      "selected_static_theta": "0",
+      "minimum_eta_selection_gap": 0.0033741335947138906,
+      "minimum_static_selection_gap": 0.023481173301673763
+    },
+    {
+      "currency": "GBP",
+      "horizon": 5,
+      "eligible_issuances": 6787,
+      "selected_eta": "1/100",
+      "selected_static_theta": "1/5",
+      "minimum_eta_selection_gap": 0.00884031356425119,
+      "minimum_static_selection_gap": 0.020864924066747115
+    },
+    {
+      "currency": "JPY",
+      "horizon": 1,
+      "eligible_issuances": 6791,
+      "selected_eta": "0",
+      "selected_static_theta": "0",
+      "minimum_eta_selection_gap": 0.003559128740538986,
+      "minimum_static_selection_gap": 0.026663972957210014
+    },
+    {
+      "currency": "JPY",
+      "horizon": 5,
+      "eligible_issuances": 6787,
+      "selected_eta": "1/100",
+      "selected_static_theta": "1/5",
+      "minimum_eta_selection_gap": 0.009375749978875803,
+      "minimum_static_selection_gap": 0.0041635401811199735
+    },
+    {
+      "currency": "CHF",
+      "horizon": 1,
+      "eligible_issuances": 6791,
+      "selected_eta": "1/100",
+      "selected_static_theta": "0",
+      "minimum_eta_selection_gap": 8.006222679166411e-06,
+      "minimum_static_selection_gap": 0.0005081540254950924
+    },
+    {
+      "currency": "CHF",
+      "horizon": 5,
+      "eligible_issuances": 6787,
+      "selected_eta": "1/20",
+      "selected_static_theta": "2/5",
+      "minimum_eta_selection_gap": 0.025990953158183228,
+      "minimum_static_selection_gap": 0.02646303336633693
+    }
+  ],
+  "limits": [
+    "Exact state/projection accounting does not certify binary64 exp/log, VaR or ES arithmetic.",
+    "This verifier checks implementation against its frozen protocol, not conditional calibration or population performance.",
+    "The 2020-2025 comparison is retrospective for this design; 2026 is a short descriptive extension.",
+    "Current revised ECB data lack archived original release vintages.",
+    "Candidate and forecast row counts are dependent and are not independent sample sizes."
+  ],
+  "seconds": 11.088486500000272
+}

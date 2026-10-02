@@ -1,0 +1,221 @@
+[
+  {
+    "name": "compiler",
+    "command": [
+      "rustc",
+      "--version",
+      "--verbose"
+    ],
+    "cwd": "/workspace/scratch/657e86c899c9/integration_work/Gabriel/native_pse/benchmark-results/conditioned_engine",
+    "returncode": 0,
+    "failure": null,
+    "wrapper_wall_seconds": 0.0066443489999983285,
+    "wrapper_wall_is_benchmark_metric": false,
+    "stdout": "compiler.stdout",
+    "stderr": "compiler.stderr",
+    "stdout_bytes": 196,
+    "stderr_bytes": 0,
+    "stdout_sha256": "4fdff2578428e9c5c08ddd7a0d3079c1a106b1cdaa46e73e46f7cd32b0fb9cad",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "cargo",
+    "command": [
+      "cargo",
+      "--version",
+      "--verbose"
+    ],
+    "cwd": "/workspace/scratch/657e86c899c9/integration_work/Gabriel/native_pse/benchmark-results/conditioned_engine",
+    "returncode": 0,
+    "failure": null,
+    "wrapper_wall_seconds": 0.010284070000125212,
+    "wrapper_wall_is_benchmark_metric": false,
+    "stdout": "cargo.stdout",
+    "stderr": "cargo.stderr",
+    "stdout_bytes": 336,
+    "stderr_bytes": 0,
+    "stdout_sha256": "bfd735e736b354adabe72cea24bc1b393488223889b6ab95e974fd8fb963552e",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "build",
+    "command": [
+      "cargo",
+      "build",
+      "--release",
+      "--locked",
+      "--offline",
+      "--target-dir",
+      "/workspace/scratch/657e86c899c9/integration_work/Gabriel/native_pse/benchmark-results/conditioned_engine/executed/target"
+    ],
+    "cwd": "/workspace/scratch/657e86c899c9/integration_work/Gabriel/native_pse/benchmark-results/conditioned_engine",
+    "returncode": 0,
+    "failure": null,
+    "wrapper_wall_seconds": 79.68676144699998,
+    "wrapper_wall_is_benchmark_metric": false,
+    "stdout": "build.stdout",
+    "stderr": "build.stderr",
+    "stdout_bytes": 0,
+    "stderr_bytes": 3552,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "b17319643b2db6060c956c98da375ef45539769c9ee40bf0267bbb251d3db7b6"
+  },
+  {
+    "name": "golden",
+    "command": [
+      "/workspace/scratch/657e86c899c9/integration_work/Gabriel/native_pse/benchmark-results/conditioned_engine/executed/executable/pse-conditioned-engine-benchmark",
+      "golden"
+    ],
+    "cwd": "/workspace/scratch/657e86c899c9/integration_work/Gabriel/native_pse/benchmark-results/conditioned_engine",
+    "returncode": 0,
+    "failure": null,
+    "wrapper_wall_seconds": 0.1405221579998397,
+    "wrapper_wall_is_benchmark_metric": false,
+    "stdout": "golden.stdout",
+    "stderr": "golden.stderr",
+    "stdout_bytes": 10947830,
+    "stderr_bytes": 0,
+    "stdout_sha256": "5e414fe4f2ad45384a38ce3647deae52708f1075c66b175c5eeb1e2645760b50",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "process_0",
+    "command": [
+      "/workspace/scratch/657e86c899c9/integration_work/Gabriel/native_pse/benchmark-results/conditioned_engine/executed/executable/pse-conditioned-engine-benchmark",
+      "measure",
+      "--process-index",
+      "0"
+    ],
+    "cwd": "/workspace/scratch/657e86c899c9/integration_work/Gabriel/native_pse/benchmark-results/conditioned_engine",
+    "returncode": 0,
+    "failure": null,
+    "wrapper_wall_seconds": 0.3089159529999961,
+    "wrapper_wall_is_benchmark_metric": false,
+    "stdout": "process_0.stdout",
+    "stderr": "process_0.stderr",
+    "stdout_bytes": 992440,
+    "stderr_bytes": 0,
+    "stdout_sha256": "0a36d5cdb4bab9b3592a48302edae21fdf866db8bd340ef1d2315b839d299958",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "process_1",
+    "command": [
+      "/workspace/scratch/657e86c899c9/integration_work/Gabriel/native_pse/benchmark-results/conditioned_engine/executed/executable/pse-conditioned-engine-benchmark",
+      "measure",
+      "--process-index",
+      "1"
+    ],
+    "cwd": "/workspace/scratch/657e86c899c9/integration_work/Gabriel/native_pse/benchmark-results/conditioned_engine",
+    "returncode": 0,
+    "failure": null,
+    "wrapper_wall_seconds": 0.26430474999983744,
+    "wrapper_wall_is_benchmark_metric": false,
+    "stdout": "process_1.stdout",
+    "stderr": "process_1.stderr",
+    "stdout_bytes": 992232,
+    "stderr_bytes": 0,
+    "stdout_sha256": "0b02141b1a3f4a7c01b83db1f41e3b394e2311ea9ce3f40c172db67fb0abf0bb",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "process_2",
+    "command": [
+      "/workspace/scratch/657e86c899c9/integration_work/Gabriel/native_pse/benchmark-results/conditioned_engine/executed/executable/pse-conditioned-engine-benchmark",
+      "measure",
+      "--process-index",
+      "2"
+    ],
+    "cwd": "/workspace/scratch/657e86c899c9/integration_work/Gabriel/native_pse/benchmark-results/conditioned_engine",
+    "returncode": 0,
+    "failure": null,
+    "wrapper_wall_seconds": 0.2759215870000844,
+    "wrapper_wall_is_benchmark_metric": false,
+    "stdout": "process_2.stdout",
+    "stderr": "process_2.stderr",
+    "stdout_bytes": 992246,
+    "stderr_bytes": 0,
+    "stdout_sha256": "4a21bd717412af58d4068c6930ce73e1073daae4ae878814974ffbc5be37824e",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "process_3",
+    "command": [
+      "/workspace/scratch/657e86c899c9/integration_work/Gabriel/native_pse/benchmark-results/conditioned_engine/executed/executable/pse-conditioned-engine-benchmark",
+      "measure",
+      "--process-index",
+      "3"
+    ],
+    "cwd": "/workspace/scratch/657e86c899c9/integration_work/Gabriel/native_pse/benchmark-results/conditioned_engine",
+    "returncode": 0,
+    "failure": null,
+    "wrapper_wall_seconds": 0.27439797299985,
+    "wrapper_wall_is_benchmark_metric": false,
+    "stdout": "process_3.stdout",
+    "stderr": "process_3.stderr",
+    "stdout_bytes": 992273,
+    "stderr_bytes": 0,
+    "stdout_sha256": "2e0c68dd732583304235da263153b21270c83e0975a75a97682a25cddef8dfbe",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "process_4",
+    "command": [
+      "/workspace/scratch/657e86c899c9/integration_work/Gabriel/native_pse/benchmark-results/conditioned_engine/executed/executable/pse-conditioned-engine-benchmark",
+      "measure",
+      "--process-index",
+      "4"
+    ],
+    "cwd": "/workspace/scratch/657e86c899c9/integration_work/Gabriel/native_pse/benchmark-results/conditioned_engine",
+    "returncode": 0,
+    "failure": null,
+    "wrapper_wall_seconds": 0.2747950509999555,
+    "wrapper_wall_is_benchmark_metric": false,
+    "stdout": "process_4.stdout",
+    "stderr": "process_4.stderr",
+    "stdout_bytes": 992268,
+    "stderr_bytes": 0,
+    "stdout_sha256": "e4826913dd45697684ee453b66401889482fb06ee21c1252eb077dbfade1c4c6",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "process_5",
+    "command": [
+      "/workspace/scratch/657e86c899c9/integration_work/Gabriel/native_pse/benchmark-results/conditioned_engine/executed/executable/pse-conditioned-engine-benchmark",
+      "measure",
+      "--process-index",
+      "5"
+    ],
+    "cwd": "/workspace/scratch/657e86c899c9/integration_work/Gabriel/native_pse/benchmark-results/conditioned_engine",
+    "returncode": 0,
+    "failure": null,
+    "wrapper_wall_seconds": 0.2711194040000464,
+    "wrapper_wall_is_benchmark_metric": false,
+    "stdout": "process_5.stdout",
+    "stderr": "process_5.stderr",
+    "stdout_bytes": 992261,
+    "stderr_bytes": 0,
+    "stdout_sha256": "913b3146ca54b57a1679aec4bc60412cb1188d5cf92acdf0450bf93fd6e925ca",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "process_6",
+    "command": [
+      "/workspace/scratch/657e86c899c9/integration_work/Gabriel/native_pse/benchmark-results/conditioned_engine/executed/executable/pse-conditioned-engine-benchmark",
+      "measure",
+      "--process-index",
+      "6"
+    ],
+    "cwd": "/workspace/scratch/657e86c899c9/integration_work/Gabriel/native_pse/benchmark-results/conditioned_engine",
+    "returncode": 0,
+    "failure": null,
+    "wrapper_wall_seconds": 0.2597744560000592,
+    "wrapper_wall_is_benchmark_metric": false,
+    "stdout": "process_6.stdout",
+    "stderr": "process_6.stderr",
+    "stdout_bytes": 992241,
+    "stderr_bytes": 0,
+    "stdout_sha256": "a30b3a29253b843940ab21f39e121339bae9bea3c9e0ca23049f7abcd282d308",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

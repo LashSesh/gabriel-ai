@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/657e86c899c9/integration_work/Gabriel/reproduction/report_graph_observer_owner_results.py", line 262, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/scratch/657e86c899c9/integration_work/Gabriel/reproduction/report_graph_observer_owner_results.py", line 244, in main
+    rows,evidence=verify(args.executed,protocol,args.executable)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/657e86c899c9/integration_work/Gabriel/reproduction/report_graph_observer_owner_results.py", line 181, in verify
+    require(not db.exists(),'Deleted evidence DB unexpectedly exists')
+  File "/workspace/scratch/657e86c899c9/integration_work/Gabriel/reproduction/report_engine_observer_results.py", line 27, in require
+    raise RuntimeError(message)
+RuntimeError: Deleted evidence DB unexpectedly exists

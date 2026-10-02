@@ -1,0 +1,47 @@
+{
+  "schema": "gabriel.budgeted-regions.checks.v1",
+  "passed": true,
+  "scope": "Synthetic exhaustive finite-table checks, not a financial performance estimate",
+  "counts": {
+    "exhaustive_models": 8192,
+    "state_budget_pairs": 262144,
+    "local_lex_states": 65536,
+    "realized_paths": 144,
+    "invalid_input_rejections": 16,
+    "guard_rejections": 2
+  },
+  "counterexample": {
+    "records": 6,
+    "queries": 5,
+    "prior_weights": [
+      3,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "worst_cost": 4,
+    "local_lex_expected": "13/4",
+    "globally_budgeted_expected": "25/8",
+    "local_soft_worst": 2,
+    "available_soft_budget": 3,
+    "local_soft_expected": "2",
+    "budgeted_soft_expected": "11/6"
+  },
+  "invariants": [
+    "Exact agreement with independent tuple/set Bellman oracle",
+    "Feasible iff positive-support posterior is nonempty and minimax worst cost fits budget",
+    "Expected optimum is nonincreasing in allowed budget",
+    "Chosen query realizes Bellman value with canonical index tie break",
+    "Scaled prior weights preserve normalized identity",
+    "Different normalized prior changes planning identity",
+    "Explicit combined state guard raises and remains failed"
+  ],
+  "source_sha256": {
+    "budgeted_regions.py": "c85ee625d45bb6563b07528b14d07ad8d145bb0d0e3ea8281978194f355ac7d7",
+    "check_budgeted_regions.py": "eaed75c2410977c870226b60e021ff0d4465d339417b6dd829dae79045c69aaf",
+    "benchmark_budgeted_regions.py": "e1fbdcd57f6d25fc044b7d131544065df72e7c8ba93185135411c2b2ca875916"
+  },
+  "elapsed_seconds": 6.082
+}

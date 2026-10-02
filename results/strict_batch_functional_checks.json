@@ -1,0 +1,2520 @@
+{
+  "atomic_rejections": [
+    "invalid-later-member-before-native",
+    "certificate-failure",
+    "executable-change",
+    "new-source-identity-change",
+    "arithmetic-identity-change",
+    "post-native-executable-change-before-preparation",
+    "total-window-cap"
+  ],
+  "executable_sha256": "f47f01b1f14c53184ccd5abdf22e01865d750a7b513f7acd6ec1e1a6a833aa93",
+  "executed_checker_sha256": "2edc6561b971702f6b366b4e3c47ac2c99522e4d0136b80a5f29565837ea8116",
+  "full_replay_for_each_command": true,
+  "generic_out_of_scope_identical": true,
+  "identical_retry_no_work": true,
+  "issued_prefix_immutable": true,
+  "mutation_scope": "copied executable bytes, bound expected source/arithmetic identities; no shared dependency file modified",
+  "new_source_identity_checks": [
+    "gabriel_runtime/batched_reachability.py",
+    "gabriel_runtime/window_batch.py"
+  ],
+  "new_source_sha256": {
+    "gabriel_runtime/batched_reachability.py": "c0dbd7959b3365dd7a7b36de897d4c1e6246b3301e897eb6629066945b4099ac",
+    "gabriel_runtime/window_batch.py": "d61b27e68437eac5e847864cd2a4bc3923b77db88e172e6cc5a7ca7e624112ea"
+  },
+  "post_failure_recovery_at_32_window_cap": true,
+  "preliminary_attempt": {
+    "outcome": "permission_error_before_first_native_execution",
+    "reason": "extracted executable lacked executable mode",
+    "resolution": "chmod u+x; unchanged executable bytes; rerun in fresh directory"
+  },
+  "profiles": {
+    "legacy_scalar": {
+      "check_sites": [
+        "__init__",
+        "fingerprint",
+        "fingerprint",
+        "fingerprint",
+        "_invoke",
+        "_invoke",
+        "apply",
+        "apply"
+      ],
+      "database_sha256": "d892dd0ba727755174050fa4322e0dcaa3c9b1585cfc675c7c64d2a88ac1c3ab",
+      "first_issue": {
+        "batch_count": 1,
+        "certificates": [
+          {
+            "evidence": {
+              "mass": {
+                "lower": "344387036535473258870157592103539/960310005723915779302061322995003",
+                "upper": "344387036535473258870157592103539/960310005723915779302061322995003"
+              },
+              "method": "rational_point",
+              "precision_bits": 128,
+              "time": "0"
+            },
+            "model": {
+              "a": "16716016927221816995596145213287543/47055190280471873185801004826755147",
+              "amplitude_squared": "19832572178615081051217139357995080045146631839141820203830483337524/2214190932331414643492014816979801743731986577592551433059249090991609",
+              "b": "158947863016372689041576799785868/47055190280471873185801004826755147",
+              "c": "-635791452065489042224963297000470/6722170040067410455114429260965021",
+              "degree": "3",
+              "delta": "0",
+              "entities": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "input_sha256": "4450c8838299351f9f6148895fc6a407452d9c704b06d4ad04c272c83853b828",
+              "n": 7,
+              "norm_squared": "960310005723915779302061322995003/324518553658426726783156020576256",
+              "normalization": "exact-raw-source-l2",
+              "omega": "7/2",
+              "profile": "exact-raw-source-represented-clique/v1",
+              "rho": "7/2",
+              "targets": [
+                0,
+                6
+              ],
+              "weight": "1/2"
+            },
+            "model_profile": "exact-raw-source-represented-clique/v1",
+            "query": {
+              "end": "1/8",
+              "start": "0",
+              "threshold": "3602879701896397/18014398509481984"
+            },
+            "resources": {
+              "attempted_precisions": [
+                128
+              ],
+              "max_output_integer_bits": 12288,
+              "max_phase_evaluations": 3,
+              "max_point_evaluations": 9,
+              "max_precision_bits": 128,
+              "phase_evaluations": 0,
+              "point_evaluations": 1,
+              "precision_cap_bits": 512,
+              "precision_ladder": [
+                128,
+                256,
+                512
+              ]
+            },
+            "schema": "gabriel-clique-window-certificate/v1",
+            "status": "reachable"
+          },
+          {
+            "evidence": {
+              "mass": {
+                "lower": "108288293910102379519200882552433156769/340282366920938463463374607431768211456",
+                "upper": "108288293910102379519200882552433156773/340282366920938463463374607431768211456"
+              },
+              "method": "rational_point",
+              "precision_bits": 128,
+              "time": "1/8"
+            },
+            "model": {
+              "a": "16716016927221816995596145213287543/47055190280471873185801004826755147",
+              "amplitude_squared": "19832572178615081051217139357995080045146631839141820203830483337524/2214190932331414643492014816979801743731986577592551433059249090991609",
+              "b": "158947863016372689041576799785868/47055190280471873185801004826755147",
+              "c": "-635791452065489042224963297000470/6722170040067410455114429260965021",
+              "degree": "3",
+              "delta": "0",
+              "entities": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "input_sha256": "4450c8838299351f9f6148895fc6a407452d9c704b06d4ad04c272c83853b828",
+              "n": 7,
+              "norm_squared": "960310005723915779302061322995003/324518553658426726783156020576256",
+              "normalization": "exact-raw-source-l2",
+              "omega": "7/2",
+              "profile": "exact-raw-source-represented-clique/v1",
+              "rho": "7/2",
+              "targets": [
+                0,
+                6
+              ],
+              "weight": "1/2"
+            },
+            "model_profile": "exact-raw-source-represented-clique/v1",
+            "query": {
+              "end": "1/4",
+              "start": "1/8",
+              "threshold": "3602879701896397/18014398509481984"
+            },
+            "resources": {
+              "attempted_precisions": [
+                128
+              ],
+              "max_output_integer_bits": 12288,
+              "max_phase_evaluations": 3,
+              "max_point_evaluations": 9,
+              "max_precision_bits": 128,
+              "phase_evaluations": 0,
+              "point_evaluations": 1,
+              "precision_cap_bits": 512,
+              "precision_ladder": [
+                128,
+                256,
+                512
+              ]
+            },
+            "schema": "gabriel-clique-window-certificate/v1",
+            "status": "reachable"
+          },
+          {
+            "evidence": {
+              "mass": {
+                "lower": "193833523201654257054391682885382031225/680564733841876926926749214863536422912",
+                "upper": "193833523201654257054391682885382031231/680564733841876926926749214863536422912"
+              },
+              "method": "rational_point",
+              "precision_bits": 128,
+              "time": "1/4"
+            },
+            "model": {
+              "a": "16716016927221816995596145213287543/47055190280471873185801004826755147",
+              "amplitude_squared": "19832572178615081051217139357995080045146631839141820203830483337524/2214190932331414643492014816979801743731986577592551433059249090991609",
+              "b": "158947863016372689041576799785868/47055190280471873185801004826755147",
+              "c": "-635791452065489042224963297000470/6722170040067410455114429260965021",
+              "degree": "3",
+              "delta": "0",
+              "entities": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "input_sha256": "4450c8838299351f9f6148895fc6a407452d9c704b06d4ad04c272c83853b828",
+              "n": 7,
+              "norm_squared": "960310005723915779302061322995003/324518553658426726783156020576256",
+              "normalization": "exact-raw-source-l2",
+              "omega": "7/2",
+              "profile": "exact-raw-source-represented-clique/v1",
+              "rho": "7/2",
+              "targets": [
+                0,
+                6
+              ],
+              "weight": "1/2"
+            },
+            "model_profile": "exact-raw-source-represented-clique/v1",
+            "query": {
+              "end": "3/8",
+              "start": "1/4",
+              "threshold": "3602879701896397/18014398509481984"
+            },
+            "resources": {
+              "attempted_precisions": [
+                128
+              ],
+              "max_output_integer_bits": 12288,
+              "max_phase_evaluations": 3,
+              "max_point_evaluations": 9,
+              "max_precision_bits": 128,
+              "phase_evaluations": 0,
+              "point_evaluations": 1,
+              "precision_cap_bits": 512,
+              "precision_ladder": [
+                128,
+                256,
+                512
+              ]
+            },
+            "schema": "gabriel-clique-window-certificate/v1",
+            "status": "reachable"
+          },
+          {
+            "evidence": {
+              "mass": {
+                "lower": "45029892829441407031315580258294082227/170141183460469231731687303715884105728",
+                "upper": "45029892829441407031315580258294082229/170141183460469231731687303715884105728"
+              },
+              "method": "rational_point",
+              "precision_bits": 128,
+              "time": "3/8"
+            },
+            "model": {
+              "a": "16716016927221816995596145213287543/47055190280471873185801004826755147",
+              "amplitude_squared": "19832572178615081051217139357995080045146631839141820203830483337524/2214190932331414643492014816979801743731986577592551433059249090991609",
+              "b": "158947863016372689041576799785868/47055190280471873185801004826755147",
+              "c": "-635791452065489042224963297000470/6722170040067410455114429260965021",
+              "degree": "3",
+              "delta": "0",
+              "entities": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "input_sha256": "4450c8838299351f9f6148895fc6a407452d9c704b06d4ad04c272c83853b828",
+              "n": 7,
+              "norm_squared": "960310005723915779302061322995003/324518553658426726783156020576256",
+              "normalization": "exact-raw-source-l2",
+              "omega": "7/2",
+              "profile": "exact-raw-source-represented-clique/v1",
+              "rho": "7/2",
+              "targets": [
+                0,
+                6
+              ],
+              "weight": "1/2"
+            },
+            "model_profile": "exact-raw-source-represented-clique/v1",
+            "query": {
+              "end": "1/2",
+              "start": "3/8",
+              "threshold": "3602879701896397/18014398509481984"
+            },
+            "resources": {
+              "attempted_precisions": [
+                128
+              ],
+              "max_output_integer_bits": 12288,
+              "max_phase_evaluations": 3,
+              "max_point_evaluations": 9,
+              "max_precision_bits": 128,
+              "phase_evaluations": 0,
+              "point_evaluations": 1,
+              "precision_cap_bits": 512,
+              "precision_ladder": [
+                128,
+                256,
+                512
+              ]
+            },
+            "schema": "gabriel-clique-window-certificate/v1",
+            "status": "reachable"
+          }
+        ],
+        "digest": "59febb726155855d93568176c6c108967bae92cdc0624b692c0576821228bf14",
+        "native_snapshot": {
+          "engine": {
+            "commits": 0,
+            "edges": 21,
+            "faulted": false,
+            "observations": 7,
+            "ticks": 1,
+            "vertices": 7
+          },
+          "schema": "gabriel-engine-snapshot/v1",
+          "snapshot": {
+            "adjacency": [
+              {
+                "from": 0,
+                "to": 1,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 0,
+                "to": 2,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 0,
+                "to": 3,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 0,
+                "to": 4,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 0,
+                "to": 5,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 0,
+                "to": 6,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 1,
+                "to": 0,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 1,
+                "to": 2,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 1,
+                "to": 3,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 1,
+                "to": 4,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 1,
+                "to": 5,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 1,
+                "to": 6,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 2,
+                "to": 0,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 2,
+                "to": 1,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 2,
+                "to": 3,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 2,
+                "to": 4,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 2,
+                "to": 5,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 2,
+                "to": 6,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 3,
+                "to": 0,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 3,
+                "to": 1,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 3,
+                "to": 2,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 3,
+                "to": 4,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 3,
+                "to": 5,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 3,
+                "to": 6,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 4,
+                "to": 0,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 4,
+                "to": 1,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 4,
+                "to": 2,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 4,
+                "to": 3,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 4,
+                "to": 5,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 4,
+                "to": 6,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 5,
+                "to": 0,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 5,
+                "to": 1,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 5,
+                "to": 2,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 5,
+                "to": 3,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 5,
+                "to": 4,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 5,
+                "to": 6,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 6,
+                "to": 0,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 6,
+                "to": 1,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 6,
+                "to": 2,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 6,
+                "to": 3,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 6,
+                "to": 4,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 6,
+                "to": 5,
+                "weight_bits": "3fe0000000000000"
+              }
+            ],
+            "degree_bits": [
+              "4008000000000000",
+              "4008000000000000",
+              "4008000000000000",
+              "4008000000000000",
+              "4008000000000000",
+              "4008000000000000",
+              "4008000000000000"
+            ],
+            "identity": "8f4c6c2f5f8764670cca835f3cf9344d7c5f175ee04c63980225f319995076d7",
+            "model": "exp(-itL);L=D-A;(W+W^T)/2;inactive-included;selfloops-ignored",
+            "tick": 1,
+            "vertices": [
+              {
+                "entity": 0,
+                "vertex_id": "11570619382924184950"
+              },
+              {
+                "entity": 1,
+                "vertex_id": "11570620482435813161"
+              },
+              {
+                "entity": 2,
+                "vertex_id": "11570617183900928528"
+              },
+              {
+                "entity": 3,
+                "vertex_id": "11570618283412556739"
+              },
+              {
+                "entity": 4,
+                "vertex_id": "11570623780970697794"
+              },
+              {
+                "entity": 5,
+                "vertex_id": "11570624880482326005"
+              },
+              {
+                "entity": 6,
+                "vertex_id": "11570621581947441372"
+              }
+            ]
+          }
+        },
+        "owner_receipt_at": 1,
+        "request": {
+          "batches": [
+            [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          ],
+          "source": [
+            {
+              "entity": 0,
+              "im_bits": "bfc2492492492492",
+              "re_bits": "3fc2492492492492"
+            },
+            {
+              "entity": 1,
+              "im_bits": "0000000000000000",
+              "re_bits": "3fd2492492492492"
+            },
+            {
+              "entity": 2,
+              "im_bits": "3fc2492492492492",
+              "re_bits": "3fdb6db6db6db6db"
+            },
+            {
+              "entity": 3,
+              "im_bits": "bfc2492492492492",
+              "re_bits": "3fe2492492492492"
+            },
+            {
+              "entity": 4,
+              "im_bits": "0000000000000000",
+              "re_bits": "3fe6db6db6db6db7"
+            },
+            {
+              "entity": 5,
+              "im_bits": "3fc2492492492492",
+              "re_bits": "3feb6db6db6db6db"
+            },
+            {
+              "entity": 6,
+              "im_bits": "bfc2492492492492",
+              "re_bits": "3ff0000000000000"
+            }
+          ],
+          "targets": [
+            0,
+            6
+          ],
+          "threshold_bits": "3fc999999999999a",
+          "windows": [
+            {
+              "end_bits": "3fc0000000000000",
+              "start_bits": "0000000000000000"
+            },
+            {
+              "end_bits": "3fd0000000000000",
+              "start_bits": "3fc0000000000000"
+            },
+            {
+              "end_bits": "3fd8000000000000",
+              "start_bits": "3fd0000000000000"
+            },
+            {
+              "end_bits": "3fe0000000000000",
+              "start_bits": "3fd8000000000000"
+            }
+          ]
+        }
+      },
+      "preparations_per_four_windows": 4,
+      "replay": {
+        "bytes": 2282,
+        "contracts": 1,
+        "events": 3,
+        "external_anchor_checked": true,
+        "head": "55525d3516011444d1d415d20eb92155f0ff38297c253d69cd08808f65286f61",
+        "journal_mode": "delete",
+        "semantic_replay": true,
+        "status": "passed",
+        "synchronous": 3
+      },
+      "second_issue": {
+        "batch_count": 2,
+        "certificates": [
+          {
+            "evidence": {
+              "mass": {
+                "lower": "344387036535473258870157592103539/960310005723915779302061322995003",
+                "upper": "344387036535473258870157592103539/960310005723915779302061322995003"
+              },
+              "method": "rational_point",
+              "precision_bits": 128,
+              "time": "0"
+            },
+            "model": {
+              "a": "16716016927221816995596145213287543/47055190280471873185801004826755147",
+              "amplitude_squared": "19832572178615081051217139357995080045146631839141820203830483337524/2214190932331414643492014816979801743731986577592551433059249090991609",
+              "b": "158947863016372689041576799785868/47055190280471873185801004826755147",
+              "c": "-635791452065489042224963297000470/6722170040067410455114429260965021",
+              "degree": "3",
+              "delta": "0",
+              "entities": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "input_sha256": "4450c8838299351f9f6148895fc6a407452d9c704b06d4ad04c272c83853b828",
+              "n": 7,
+              "norm_squared": "960310005723915779302061322995003/324518553658426726783156020576256",
+              "normalization": "exact-raw-source-l2",
+              "omega": "7/2",
+              "profile": "exact-raw-source-represented-clique/v1",
+              "rho": "7/2",
+              "targets": [
+                0,
+                6
+              ],
+              "weight": "1/2"
+            },
+            "model_profile": "exact-raw-source-represented-clique/v1",
+            "query": {
+              "end": "1/8",
+              "start": "0",
+              "threshold": "3602879701896397/18014398509481984"
+            },
+            "resources": {
+              "attempted_precisions": [
+                128
+              ],
+              "max_output_integer_bits": 12288,
+              "max_phase_evaluations": 3,
+              "max_point_evaluations": 9,
+              "max_precision_bits": 128,
+              "phase_evaluations": 0,
+              "point_evaluations": 1,
+              "precision_cap_bits": 512,
+              "precision_ladder": [
+                128,
+                256,
+                512
+              ]
+            },
+            "schema": "gabriel-clique-window-certificate/v1",
+            "status": "reachable"
+          },
+          {
+            "evidence": {
+              "mass": {
+                "lower": "108288293910102379519200882552433156769/340282366920938463463374607431768211456",
+                "upper": "108288293910102379519200882552433156773/340282366920938463463374607431768211456"
+              },
+              "method": "rational_point",
+              "precision_bits": 128,
+              "time": "1/8"
+            },
+            "model": {
+              "a": "16716016927221816995596145213287543/47055190280471873185801004826755147",
+              "amplitude_squared": "19832572178615081051217139357995080045146631839141820203830483337524/2214190932331414643492014816979801743731986577592551433059249090991609",
+              "b": "158947863016372689041576799785868/47055190280471873185801004826755147",
+              "c": "-635791452065489042224963297000470/6722170040067410455114429260965021",
+              "degree": "3",
+              "delta": "0",
+              "entities": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "input_sha256": "4450c8838299351f9f6148895fc6a407452d9c704b06d4ad04c272c83853b828",
+              "n": 7,
+              "norm_squared": "960310005723915779302061322995003/324518553658426726783156020576256",
+              "normalization": "exact-raw-source-l2",
+              "omega": "7/2",
+              "profile": "exact-raw-source-represented-clique/v1",
+              "rho": "7/2",
+              "targets": [
+                0,
+                6
+              ],
+              "weight": "1/2"
+            },
+            "model_profile": "exact-raw-source-represented-clique/v1",
+            "query": {
+              "end": "1/4",
+              "start": "1/8",
+              "threshold": "3602879701896397/18014398509481984"
+            },
+            "resources": {
+              "attempted_precisions": [
+                128
+              ],
+              "max_output_integer_bits": 12288,
+              "max_phase_evaluations": 3,
+              "max_point_evaluations": 9,
+              "max_precision_bits": 128,
+              "phase_evaluations": 0,
+              "point_evaluations": 1,
+              "precision_cap_bits": 512,
+              "precision_ladder": [
+                128,
+                256,
+                512
+              ]
+            },
+            "schema": "gabriel-clique-window-certificate/v1",
+            "status": "reachable"
+          },
+          {
+            "evidence": {
+              "mass": {
+                "lower": "193833523201654257054391682885382031225/680564733841876926926749214863536422912",
+                "upper": "193833523201654257054391682885382031231/680564733841876926926749214863536422912"
+              },
+              "method": "rational_point",
+              "precision_bits": 128,
+              "time": "1/4"
+            },
+            "model": {
+              "a": "16716016927221816995596145213287543/47055190280471873185801004826755147",
+              "amplitude_squared": "19832572178615081051217139357995080045146631839141820203830483337524/2214190932331414643492014816979801743731986577592551433059249090991609",
+              "b": "158947863016372689041576799785868/47055190280471873185801004826755147",
+              "c": "-635791452065489042224963297000470/6722170040067410455114429260965021",
+              "degree": "3",
+              "delta": "0",
+              "entities": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "input_sha256": "4450c8838299351f9f6148895fc6a407452d9c704b06d4ad04c272c83853b828",
+              "n": 7,
+              "norm_squared": "960310005723915779302061322995003/324518553658426726783156020576256",
+              "normalization": "exact-raw-source-l2",
+              "omega": "7/2",
+              "profile": "exact-raw-source-represented-clique/v1",
+              "rho": "7/2",
+              "targets": [
+                0,
+                6
+              ],
+              "weight": "1/2"
+            },
+            "model_profile": "exact-raw-source-represented-clique/v1",
+            "query": {
+              "end": "3/8",
+              "start": "1/4",
+              "threshold": "3602879701896397/18014398509481984"
+            },
+            "resources": {
+              "attempted_precisions": [
+                128
+              ],
+              "max_output_integer_bits": 12288,
+              "max_phase_evaluations": 3,
+              "max_point_evaluations": 9,
+              "max_precision_bits": 128,
+              "phase_evaluations": 0,
+              "point_evaluations": 1,
+              "precision_cap_bits": 512,
+              "precision_ladder": [
+                128,
+                256,
+                512
+              ]
+            },
+            "schema": "gabriel-clique-window-certificate/v1",
+            "status": "reachable"
+          },
+          {
+            "evidence": {
+              "mass": {
+                "lower": "45029892829441407031315580258294082227/170141183460469231731687303715884105728",
+                "upper": "45029892829441407031315580258294082229/170141183460469231731687303715884105728"
+              },
+              "method": "rational_point",
+              "precision_bits": 128,
+              "time": "3/8"
+            },
+            "model": {
+              "a": "16716016927221816995596145213287543/47055190280471873185801004826755147",
+              "amplitude_squared": "19832572178615081051217139357995080045146631839141820203830483337524/2214190932331414643492014816979801743731986577592551433059249090991609",
+              "b": "158947863016372689041576799785868/47055190280471873185801004826755147",
+              "c": "-635791452065489042224963297000470/6722170040067410455114429260965021",
+              "degree": "3",
+              "delta": "0",
+              "entities": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "input_sha256": "4450c8838299351f9f6148895fc6a407452d9c704b06d4ad04c272c83853b828",
+              "n": 7,
+              "norm_squared": "960310005723915779302061322995003/324518553658426726783156020576256",
+              "normalization": "exact-raw-source-l2",
+              "omega": "7/2",
+              "profile": "exact-raw-source-represented-clique/v1",
+              "rho": "7/2",
+              "targets": [
+                0,
+                6
+              ],
+              "weight": "1/2"
+            },
+            "model_profile": "exact-raw-source-represented-clique/v1",
+            "query": {
+              "end": "1/2",
+              "start": "3/8",
+              "threshold": "3602879701896397/18014398509481984"
+            },
+            "resources": {
+              "attempted_precisions": [
+                128
+              ],
+              "max_output_integer_bits": 12288,
+              "max_phase_evaluations": 3,
+              "max_point_evaluations": 9,
+              "max_precision_bits": 128,
+              "phase_evaluations": 0,
+              "point_evaluations": 1,
+              "precision_cap_bits": 512,
+              "precision_ladder": [
+                128,
+                256,
+                512
+              ]
+            },
+            "schema": "gabriel-clique-window-certificate/v1",
+            "status": "reachable"
+          }
+        ],
+        "digest": "67511e01419e3e58cb3e3ecf5fa3213ed58e95741e18c989e0f6584d2f5879e1",
+        "native_snapshot": {
+          "engine": {
+            "commits": 0,
+            "edges": 21,
+            "faulted": false,
+            "observations": 14,
+            "ticks": 2,
+            "vertices": 7
+          },
+          "schema": "gabriel-engine-snapshot/v1",
+          "snapshot": {
+            "adjacency": [
+              {
+                "from": 0,
+                "to": 1,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 0,
+                "to": 2,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 0,
+                "to": 3,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 0,
+                "to": 4,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 0,
+                "to": 5,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 0,
+                "to": 6,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 1,
+                "to": 0,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 1,
+                "to": 2,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 1,
+                "to": 3,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 1,
+                "to": 4,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 1,
+                "to": 5,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 1,
+                "to": 6,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 2,
+                "to": 0,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 2,
+                "to": 1,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 2,
+                "to": 3,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 2,
+                "to": 4,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 2,
+                "to": 5,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 2,
+                "to": 6,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 3,
+                "to": 0,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 3,
+                "to": 1,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 3,
+                "to": 2,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 3,
+                "to": 4,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 3,
+                "to": 5,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 3,
+                "to": 6,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 4,
+                "to": 0,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 4,
+                "to": 1,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 4,
+                "to": 2,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 4,
+                "to": 3,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 4,
+                "to": 5,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 4,
+                "to": 6,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 5,
+                "to": 0,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 5,
+                "to": 1,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 5,
+                "to": 2,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 5,
+                "to": 3,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 5,
+                "to": 4,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 5,
+                "to": 6,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 6,
+                "to": 0,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 6,
+                "to": 1,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 6,
+                "to": 2,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 6,
+                "to": 3,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 6,
+                "to": 4,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 6,
+                "to": 5,
+                "weight_bits": "3fe0000000000000"
+              }
+            ],
+            "degree_bits": [
+              "4008000000000000",
+              "4008000000000000",
+              "4008000000000000",
+              "4008000000000000",
+              "4008000000000000",
+              "4008000000000000",
+              "4008000000000000"
+            ],
+            "identity": "998ad0940f1c62a8c9f4f38dcb9ead3e80e883935c938165bdf047f84eee4888",
+            "model": "exp(-itL);L=D-A;(W+W^T)/2;inactive-included;selfloops-ignored",
+            "tick": 2,
+            "vertices": [
+              {
+                "entity": 0,
+                "vertex_id": "11570619382924184950"
+              },
+              {
+                "entity": 1,
+                "vertex_id": "11570620482435813161"
+              },
+              {
+                "entity": 2,
+                "vertex_id": "11570617183900928528"
+              },
+              {
+                "entity": 3,
+                "vertex_id": "11570618283412556739"
+              },
+              {
+                "entity": 4,
+                "vertex_id": "11570623780970697794"
+              },
+              {
+                "entity": 5,
+                "vertex_id": "11570624880482326005"
+              },
+              {
+                "entity": 6,
+                "vertex_id": "11570621581947441372"
+              }
+            ]
+          }
+        },
+        "owner_receipt_at": 2,
+        "request": {
+          "batches": [
+            [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          ],
+          "source": [
+            {
+              "entity": 0,
+              "im_bits": "bfc2492492492492",
+              "re_bits": "3fc2492492492492"
+            },
+            {
+              "entity": 1,
+              "im_bits": "0000000000000000",
+              "re_bits": "3fd2492492492492"
+            },
+            {
+              "entity": 2,
+              "im_bits": "3fc2492492492492",
+              "re_bits": "3fdb6db6db6db6db"
+            },
+            {
+              "entity": 3,
+              "im_bits": "bfc2492492492492",
+              "re_bits": "3fe2492492492492"
+            },
+            {
+              "entity": 4,
+              "im_bits": "0000000000000000",
+              "re_bits": "3fe6db6db6db6db7"
+            },
+            {
+              "entity": 5,
+              "im_bits": "3fc2492492492492",
+              "re_bits": "3feb6db6db6db6db"
+            },
+            {
+              "entity": 6,
+              "im_bits": "bfc2492492492492",
+              "re_bits": "3ff0000000000000"
+            }
+          ],
+          "targets": [
+            0,
+            6
+          ],
+          "threshold_bits": "3fc999999999999a",
+          "windows": [
+            {
+              "end_bits": "3fc0000000000000",
+              "start_bits": "0000000000000000"
+            },
+            {
+              "end_bits": "3fd0000000000000",
+              "start_bits": "3fc0000000000000"
+            },
+            {
+              "end_bits": "3fd8000000000000",
+              "start_bits": "3fd0000000000000"
+            },
+            {
+              "end_bits": "3fe0000000000000",
+              "start_bits": "3fd8000000000000"
+            }
+          ]
+        }
+      },
+      "source_files": 72
+    },
+    "strict_batch": {
+      "check_sites": [
+        "__init__",
+        "fingerprint",
+        "fingerprint",
+        "fingerprint",
+        "_invoke",
+        "_invoke",
+        "apply",
+        "apply"
+      ],
+      "database_sha256": "061ee0c937fa5948a5f36502fe79f8302af4b3477060ba9923208c0a6ed138b3",
+      "first_issue": {
+        "batch_count": 1,
+        "certificates": [
+          {
+            "evidence": {
+              "mass": {
+                "lower": "344387036535473258870157592103539/960310005723915779302061322995003",
+                "upper": "344387036535473258870157592103539/960310005723915779302061322995003"
+              },
+              "method": "rational_point",
+              "precision_bits": 128,
+              "time": "0"
+            },
+            "model": {
+              "a": "16716016927221816995596145213287543/47055190280471873185801004826755147",
+              "amplitude_squared": "19832572178615081051217139357995080045146631839141820203830483337524/2214190932331414643492014816979801743731986577592551433059249090991609",
+              "b": "158947863016372689041576799785868/47055190280471873185801004826755147",
+              "c": "-635791452065489042224963297000470/6722170040067410455114429260965021",
+              "degree": "3",
+              "delta": "0",
+              "entities": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "input_sha256": "4450c8838299351f9f6148895fc6a407452d9c704b06d4ad04c272c83853b828",
+              "n": 7,
+              "norm_squared": "960310005723915779302061322995003/324518553658426726783156020576256",
+              "normalization": "exact-raw-source-l2",
+              "omega": "7/2",
+              "profile": "exact-raw-source-represented-clique/v1",
+              "rho": "7/2",
+              "targets": [
+                0,
+                6
+              ],
+              "weight": "1/2"
+            },
+            "model_profile": "exact-raw-source-represented-clique/v1",
+            "query": {
+              "end": "1/8",
+              "start": "0",
+              "threshold": "3602879701896397/18014398509481984"
+            },
+            "resources": {
+              "attempted_precisions": [
+                128
+              ],
+              "max_output_integer_bits": 12288,
+              "max_phase_evaluations": 3,
+              "max_point_evaluations": 9,
+              "max_precision_bits": 128,
+              "phase_evaluations": 0,
+              "point_evaluations": 1,
+              "precision_cap_bits": 512,
+              "precision_ladder": [
+                128,
+                256,
+                512
+              ]
+            },
+            "schema": "gabriel-clique-window-certificate/v1",
+            "status": "reachable"
+          },
+          {
+            "evidence": {
+              "mass": {
+                "lower": "108288293910102379519200882552433156769/340282366920938463463374607431768211456",
+                "upper": "108288293910102379519200882552433156773/340282366920938463463374607431768211456"
+              },
+              "method": "rational_point",
+              "precision_bits": 128,
+              "time": "1/8"
+            },
+            "model": {
+              "a": "16716016927221816995596145213287543/47055190280471873185801004826755147",
+              "amplitude_squared": "19832572178615081051217139357995080045146631839141820203830483337524/2214190932331414643492014816979801743731986577592551433059249090991609",
+              "b": "158947863016372689041576799785868/47055190280471873185801004826755147",
+              "c": "-635791452065489042224963297000470/6722170040067410455114429260965021",
+              "degree": "3",
+              "delta": "0",
+              "entities": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "input_sha256": "4450c8838299351f9f6148895fc6a407452d9c704b06d4ad04c272c83853b828",
+              "n": 7,
+              "norm_squared": "960310005723915779302061322995003/324518553658426726783156020576256",
+              "normalization": "exact-raw-source-l2",
+              "omega": "7/2",
+              "profile": "exact-raw-source-represented-clique/v1",
+              "rho": "7/2",
+              "targets": [
+                0,
+                6
+              ],
+              "weight": "1/2"
+            },
+            "model_profile": "exact-raw-source-represented-clique/v1",
+            "query": {
+              "end": "1/4",
+              "start": "1/8",
+              "threshold": "3602879701896397/18014398509481984"
+            },
+            "resources": {
+              "attempted_precisions": [
+                128
+              ],
+              "max_output_integer_bits": 12288,
+              "max_phase_evaluations": 3,
+              "max_point_evaluations": 9,
+              "max_precision_bits": 128,
+              "phase_evaluations": 0,
+              "point_evaluations": 1,
+              "precision_cap_bits": 512,
+              "precision_ladder": [
+                128,
+                256,
+                512
+              ]
+            },
+            "schema": "gabriel-clique-window-certificate/v1",
+            "status": "reachable"
+          },
+          {
+            "evidence": {
+              "mass": {
+                "lower": "193833523201654257054391682885382031225/680564733841876926926749214863536422912",
+                "upper": "193833523201654257054391682885382031231/680564733841876926926749214863536422912"
+              },
+              "method": "rational_point",
+              "precision_bits": 128,
+              "time": "1/4"
+            },
+            "model": {
+              "a": "16716016927221816995596145213287543/47055190280471873185801004826755147",
+              "amplitude_squared": "19832572178615081051217139357995080045146631839141820203830483337524/2214190932331414643492014816979801743731986577592551433059249090991609",
+              "b": "158947863016372689041576799785868/47055190280471873185801004826755147",
+              "c": "-635791452065489042224963297000470/6722170040067410455114429260965021",
+              "degree": "3",
+              "delta": "0",
+              "entities": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "input_sha256": "4450c8838299351f9f6148895fc6a407452d9c704b06d4ad04c272c83853b828",
+              "n": 7,
+              "norm_squared": "960310005723915779302061322995003/324518553658426726783156020576256",
+              "normalization": "exact-raw-source-l2",
+              "omega": "7/2",
+              "profile": "exact-raw-source-represented-clique/v1",
+              "rho": "7/2",
+              "targets": [
+                0,
+                6
+              ],
+              "weight": "1/2"
+            },
+            "model_profile": "exact-raw-source-represented-clique/v1",
+            "query": {
+              "end": "3/8",
+              "start": "1/4",
+              "threshold": "3602879701896397/18014398509481984"
+            },
+            "resources": {
+              "attempted_precisions": [
+                128
+              ],
+              "max_output_integer_bits": 12288,
+              "max_phase_evaluations": 3,
+              "max_point_evaluations": 9,
+              "max_precision_bits": 128,
+              "phase_evaluations": 0,
+              "point_evaluations": 1,
+              "precision_cap_bits": 512,
+              "precision_ladder": [
+                128,
+                256,
+                512
+              ]
+            },
+            "schema": "gabriel-clique-window-certificate/v1",
+            "status": "reachable"
+          },
+          {
+            "evidence": {
+              "mass": {
+                "lower": "45029892829441407031315580258294082227/170141183460469231731687303715884105728",
+                "upper": "45029892829441407031315580258294082229/170141183460469231731687303715884105728"
+              },
+              "method": "rational_point",
+              "precision_bits": 128,
+              "time": "3/8"
+            },
+            "model": {
+              "a": "16716016927221816995596145213287543/47055190280471873185801004826755147",
+              "amplitude_squared": "19832572178615081051217139357995080045146631839141820203830483337524/2214190932331414643492014816979801743731986577592551433059249090991609",
+              "b": "158947863016372689041576799785868/47055190280471873185801004826755147",
+              "c": "-635791452065489042224963297000470/6722170040067410455114429260965021",
+              "degree": "3",
+              "delta": "0",
+              "entities": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "input_sha256": "4450c8838299351f9f6148895fc6a407452d9c704b06d4ad04c272c83853b828",
+              "n": 7,
+              "norm_squared": "960310005723915779302061322995003/324518553658426726783156020576256",
+              "normalization": "exact-raw-source-l2",
+              "omega": "7/2",
+              "profile": "exact-raw-source-represented-clique/v1",
+              "rho": "7/2",
+              "targets": [
+                0,
+                6
+              ],
+              "weight": "1/2"
+            },
+            "model_profile": "exact-raw-source-represented-clique/v1",
+            "query": {
+              "end": "1/2",
+              "start": "3/8",
+              "threshold": "3602879701896397/18014398509481984"
+            },
+            "resources": {
+              "attempted_precisions": [
+                128
+              ],
+              "max_output_integer_bits": 12288,
+              "max_phase_evaluations": 3,
+              "max_point_evaluations": 9,
+              "max_precision_bits": 128,
+              "phase_evaluations": 0,
+              "point_evaluations": 1,
+              "precision_cap_bits": 512,
+              "precision_ladder": [
+                128,
+                256,
+                512
+              ]
+            },
+            "schema": "gabriel-clique-window-certificate/v1",
+            "status": "reachable"
+          }
+        ],
+        "digest": "59febb726155855d93568176c6c108967bae92cdc0624b692c0576821228bf14",
+        "native_snapshot": {
+          "engine": {
+            "commits": 0,
+            "edges": 21,
+            "faulted": false,
+            "observations": 7,
+            "ticks": 1,
+            "vertices": 7
+          },
+          "schema": "gabriel-engine-snapshot/v1",
+          "snapshot": {
+            "adjacency": [
+              {
+                "from": 0,
+                "to": 1,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 0,
+                "to": 2,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 0,
+                "to": 3,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 0,
+                "to": 4,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 0,
+                "to": 5,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 0,
+                "to": 6,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 1,
+                "to": 0,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 1,
+                "to": 2,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 1,
+                "to": 3,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 1,
+                "to": 4,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 1,
+                "to": 5,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 1,
+                "to": 6,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 2,
+                "to": 0,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 2,
+                "to": 1,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 2,
+                "to": 3,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 2,
+                "to": 4,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 2,
+                "to": 5,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 2,
+                "to": 6,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 3,
+                "to": 0,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 3,
+                "to": 1,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 3,
+                "to": 2,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 3,
+                "to": 4,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 3,
+                "to": 5,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 3,
+                "to": 6,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 4,
+                "to": 0,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 4,
+                "to": 1,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 4,
+                "to": 2,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 4,
+                "to": 3,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 4,
+                "to": 5,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 4,
+                "to": 6,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 5,
+                "to": 0,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 5,
+                "to": 1,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 5,
+                "to": 2,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 5,
+                "to": 3,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 5,
+                "to": 4,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 5,
+                "to": 6,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 6,
+                "to": 0,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 6,
+                "to": 1,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 6,
+                "to": 2,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 6,
+                "to": 3,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 6,
+                "to": 4,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 6,
+                "to": 5,
+                "weight_bits": "3fe0000000000000"
+              }
+            ],
+            "degree_bits": [
+              "4008000000000000",
+              "4008000000000000",
+              "4008000000000000",
+              "4008000000000000",
+              "4008000000000000",
+              "4008000000000000",
+              "4008000000000000"
+            ],
+            "identity": "8f4c6c2f5f8764670cca835f3cf9344d7c5f175ee04c63980225f319995076d7",
+            "model": "exp(-itL);L=D-A;(W+W^T)/2;inactive-included;selfloops-ignored",
+            "tick": 1,
+            "vertices": [
+              {
+                "entity": 0,
+                "vertex_id": "11570619382924184950"
+              },
+              {
+                "entity": 1,
+                "vertex_id": "11570620482435813161"
+              },
+              {
+                "entity": 2,
+                "vertex_id": "11570617183900928528"
+              },
+              {
+                "entity": 3,
+                "vertex_id": "11570618283412556739"
+              },
+              {
+                "entity": 4,
+                "vertex_id": "11570623780970697794"
+              },
+              {
+                "entity": 5,
+                "vertex_id": "11570624880482326005"
+              },
+              {
+                "entity": 6,
+                "vertex_id": "11570621581947441372"
+              }
+            ]
+          }
+        },
+        "owner_receipt_at": 1,
+        "request": {
+          "batches": [
+            [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          ],
+          "source": [
+            {
+              "entity": 0,
+              "im_bits": "bfc2492492492492",
+              "re_bits": "3fc2492492492492"
+            },
+            {
+              "entity": 1,
+              "im_bits": "0000000000000000",
+              "re_bits": "3fd2492492492492"
+            },
+            {
+              "entity": 2,
+              "im_bits": "3fc2492492492492",
+              "re_bits": "3fdb6db6db6db6db"
+            },
+            {
+              "entity": 3,
+              "im_bits": "bfc2492492492492",
+              "re_bits": "3fe2492492492492"
+            },
+            {
+              "entity": 4,
+              "im_bits": "0000000000000000",
+              "re_bits": "3fe6db6db6db6db7"
+            },
+            {
+              "entity": 5,
+              "im_bits": "3fc2492492492492",
+              "re_bits": "3feb6db6db6db6db"
+            },
+            {
+              "entity": 6,
+              "im_bits": "bfc2492492492492",
+              "re_bits": "3ff0000000000000"
+            }
+          ],
+          "targets": [
+            0,
+            6
+          ],
+          "threshold_bits": "3fc999999999999a",
+          "windows": [
+            {
+              "end_bits": "3fc0000000000000",
+              "start_bits": "0000000000000000"
+            },
+            {
+              "end_bits": "3fd0000000000000",
+              "start_bits": "3fc0000000000000"
+            },
+            {
+              "end_bits": "3fd8000000000000",
+              "start_bits": "3fd0000000000000"
+            },
+            {
+              "end_bits": "3fe0000000000000",
+              "start_bits": "3fd8000000000000"
+            }
+          ]
+        }
+      },
+      "preparations_per_four_windows": 1,
+      "replay": {
+        "bytes": 2295,
+        "contracts": 1,
+        "events": 3,
+        "external_anchor_checked": true,
+        "head": "dfb28da3a7a3fd65bc82e0fca5851fb4eeb407792cf9531c4d177eb080875d76",
+        "journal_mode": "delete",
+        "semantic_replay": true,
+        "status": "passed",
+        "synchronous": 3
+      },
+      "second_issue": {
+        "batch_count": 2,
+        "certificates": [
+          {
+            "evidence": {
+              "mass": {
+                "lower": "344387036535473258870157592103539/960310005723915779302061322995003",
+                "upper": "344387036535473258870157592103539/960310005723915779302061322995003"
+              },
+              "method": "rational_point",
+              "precision_bits": 128,
+              "time": "0"
+            },
+            "model": {
+              "a": "16716016927221816995596145213287543/47055190280471873185801004826755147",
+              "amplitude_squared": "19832572178615081051217139357995080045146631839141820203830483337524/2214190932331414643492014816979801743731986577592551433059249090991609",
+              "b": "158947863016372689041576799785868/47055190280471873185801004826755147",
+              "c": "-635791452065489042224963297000470/6722170040067410455114429260965021",
+              "degree": "3",
+              "delta": "0",
+              "entities": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "input_sha256": "4450c8838299351f9f6148895fc6a407452d9c704b06d4ad04c272c83853b828",
+              "n": 7,
+              "norm_squared": "960310005723915779302061322995003/324518553658426726783156020576256",
+              "normalization": "exact-raw-source-l2",
+              "omega": "7/2",
+              "profile": "exact-raw-source-represented-clique/v1",
+              "rho": "7/2",
+              "targets": [
+                0,
+                6
+              ],
+              "weight": "1/2"
+            },
+            "model_profile": "exact-raw-source-represented-clique/v1",
+            "query": {
+              "end": "1/8",
+              "start": "0",
+              "threshold": "3602879701896397/18014398509481984"
+            },
+            "resources": {
+              "attempted_precisions": [
+                128
+              ],
+              "max_output_integer_bits": 12288,
+              "max_phase_evaluations": 3,
+              "max_point_evaluations": 9,
+              "max_precision_bits": 128,
+              "phase_evaluations": 0,
+              "point_evaluations": 1,
+              "precision_cap_bits": 512,
+              "precision_ladder": [
+                128,
+                256,
+                512
+              ]
+            },
+            "schema": "gabriel-clique-window-certificate/v1",
+            "status": "reachable"
+          },
+          {
+            "evidence": {
+              "mass": {
+                "lower": "108288293910102379519200882552433156769/340282366920938463463374607431768211456",
+                "upper": "108288293910102379519200882552433156773/340282366920938463463374607431768211456"
+              },
+              "method": "rational_point",
+              "precision_bits": 128,
+              "time": "1/8"
+            },
+            "model": {
+              "a": "16716016927221816995596145213287543/47055190280471873185801004826755147",
+              "amplitude_squared": "19832572178615081051217139357995080045146631839141820203830483337524/2214190932331414643492014816979801743731986577592551433059249090991609",
+              "b": "158947863016372689041576799785868/47055190280471873185801004826755147",
+              "c": "-635791452065489042224963297000470/6722170040067410455114429260965021",
+              "degree": "3",
+              "delta": "0",
+              "entities": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "input_sha256": "4450c8838299351f9f6148895fc6a407452d9c704b06d4ad04c272c83853b828",
+              "n": 7,
+              "norm_squared": "960310005723915779302061322995003/324518553658426726783156020576256",
+              "normalization": "exact-raw-source-l2",
+              "omega": "7/2",
+              "profile": "exact-raw-source-represented-clique/v1",
+              "rho": "7/2",
+              "targets": [
+                0,
+                6
+              ],
+              "weight": "1/2"
+            },
+            "model_profile": "exact-raw-source-represented-clique/v1",
+            "query": {
+              "end": "1/4",
+              "start": "1/8",
+              "threshold": "3602879701896397/18014398509481984"
+            },
+            "resources": {
+              "attempted_precisions": [
+                128
+              ],
+              "max_output_integer_bits": 12288,
+              "max_phase_evaluations": 3,
+              "max_point_evaluations": 9,
+              "max_precision_bits": 128,
+              "phase_evaluations": 0,
+              "point_evaluations": 1,
+              "precision_cap_bits": 512,
+              "precision_ladder": [
+                128,
+                256,
+                512
+              ]
+            },
+            "schema": "gabriel-clique-window-certificate/v1",
+            "status": "reachable"
+          },
+          {
+            "evidence": {
+              "mass": {
+                "lower": "193833523201654257054391682885382031225/680564733841876926926749214863536422912",
+                "upper": "193833523201654257054391682885382031231/680564733841876926926749214863536422912"
+              },
+              "method": "rational_point",
+              "precision_bits": 128,
+              "time": "1/4"
+            },
+            "model": {
+              "a": "16716016927221816995596145213287543/47055190280471873185801004826755147",
+              "amplitude_squared": "19832572178615081051217139357995080045146631839141820203830483337524/2214190932331414643492014816979801743731986577592551433059249090991609",
+              "b": "158947863016372689041576799785868/47055190280471873185801004826755147",
+              "c": "-635791452065489042224963297000470/6722170040067410455114429260965021",
+              "degree": "3",
+              "delta": "0",
+              "entities": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "input_sha256": "4450c8838299351f9f6148895fc6a407452d9c704b06d4ad04c272c83853b828",
+              "n": 7,
+              "norm_squared": "960310005723915779302061322995003/324518553658426726783156020576256",
+              "normalization": "exact-raw-source-l2",
+              "omega": "7/2",
+              "profile": "exact-raw-source-represented-clique/v1",
+              "rho": "7/2",
+              "targets": [
+                0,
+                6
+              ],
+              "weight": "1/2"
+            },
+            "model_profile": "exact-raw-source-represented-clique/v1",
+            "query": {
+              "end": "3/8",
+              "start": "1/4",
+              "threshold": "3602879701896397/18014398509481984"
+            },
+            "resources": {
+              "attempted_precisions": [
+                128
+              ],
+              "max_output_integer_bits": 12288,
+              "max_phase_evaluations": 3,
+              "max_point_evaluations": 9,
+              "max_precision_bits": 128,
+              "phase_evaluations": 0,
+              "point_evaluations": 1,
+              "precision_cap_bits": 512,
+              "precision_ladder": [
+                128,
+                256,
+                512
+              ]
+            },
+            "schema": "gabriel-clique-window-certificate/v1",
+            "status": "reachable"
+          },
+          {
+            "evidence": {
+              "mass": {
+                "lower": "45029892829441407031315580258294082227/170141183460469231731687303715884105728",
+                "upper": "45029892829441407031315580258294082229/170141183460469231731687303715884105728"
+              },
+              "method": "rational_point",
+              "precision_bits": 128,
+              "time": "3/8"
+            },
+            "model": {
+              "a": "16716016927221816995596145213287543/47055190280471873185801004826755147",
+              "amplitude_squared": "19832572178615081051217139357995080045146631839141820203830483337524/2214190932331414643492014816979801743731986577592551433059249090991609",
+              "b": "158947863016372689041576799785868/47055190280471873185801004826755147",
+              "c": "-635791452065489042224963297000470/6722170040067410455114429260965021",
+              "degree": "3",
+              "delta": "0",
+              "entities": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "input_sha256": "4450c8838299351f9f6148895fc6a407452d9c704b06d4ad04c272c83853b828",
+              "n": 7,
+              "norm_squared": "960310005723915779302061322995003/324518553658426726783156020576256",
+              "normalization": "exact-raw-source-l2",
+              "omega": "7/2",
+              "profile": "exact-raw-source-represented-clique/v1",
+              "rho": "7/2",
+              "targets": [
+                0,
+                6
+              ],
+              "weight": "1/2"
+            },
+            "model_profile": "exact-raw-source-represented-clique/v1",
+            "query": {
+              "end": "1/2",
+              "start": "3/8",
+              "threshold": "3602879701896397/18014398509481984"
+            },
+            "resources": {
+              "attempted_precisions": [
+                128
+              ],
+              "max_output_integer_bits": 12288,
+              "max_phase_evaluations": 3,
+              "max_point_evaluations": 9,
+              "max_precision_bits": 128,
+              "phase_evaluations": 0,
+              "point_evaluations": 1,
+              "precision_cap_bits": 512,
+              "precision_ladder": [
+                128,
+                256,
+                512
+              ]
+            },
+            "schema": "gabriel-clique-window-certificate/v1",
+            "status": "reachable"
+          }
+        ],
+        "digest": "67511e01419e3e58cb3e3ecf5fa3213ed58e95741e18c989e0f6584d2f5879e1",
+        "native_snapshot": {
+          "engine": {
+            "commits": 0,
+            "edges": 21,
+            "faulted": false,
+            "observations": 14,
+            "ticks": 2,
+            "vertices": 7
+          },
+          "schema": "gabriel-engine-snapshot/v1",
+          "snapshot": {
+            "adjacency": [
+              {
+                "from": 0,
+                "to": 1,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 0,
+                "to": 2,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 0,
+                "to": 3,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 0,
+                "to": 4,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 0,
+                "to": 5,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 0,
+                "to": 6,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 1,
+                "to": 0,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 1,
+                "to": 2,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 1,
+                "to": 3,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 1,
+                "to": 4,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 1,
+                "to": 5,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 1,
+                "to": 6,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 2,
+                "to": 0,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 2,
+                "to": 1,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 2,
+                "to": 3,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 2,
+                "to": 4,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 2,
+                "to": 5,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 2,
+                "to": 6,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 3,
+                "to": 0,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 3,
+                "to": 1,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 3,
+                "to": 2,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 3,
+                "to": 4,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 3,
+                "to": 5,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 3,
+                "to": 6,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 4,
+                "to": 0,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 4,
+                "to": 1,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 4,
+                "to": 2,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 4,
+                "to": 3,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 4,
+                "to": 5,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 4,
+                "to": 6,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 5,
+                "to": 0,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 5,
+                "to": 1,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 5,
+                "to": 2,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 5,
+                "to": 3,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 5,
+                "to": 4,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 5,
+                "to": 6,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 6,
+                "to": 0,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 6,
+                "to": 1,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 6,
+                "to": 2,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 6,
+                "to": 3,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 6,
+                "to": 4,
+                "weight_bits": "3fe0000000000000"
+              },
+              {
+                "from": 6,
+                "to": 5,
+                "weight_bits": "3fe0000000000000"
+              }
+            ],
+            "degree_bits": [
+              "4008000000000000",
+              "4008000000000000",
+              "4008000000000000",
+              "4008000000000000",
+              "4008000000000000",
+              "4008000000000000",
+              "4008000000000000"
+            ],
+            "identity": "998ad0940f1c62a8c9f4f38dcb9ead3e80e883935c938165bdf047f84eee4888",
+            "model": "exp(-itL);L=D-A;(W+W^T)/2;inactive-included;selfloops-ignored",
+            "tick": 2,
+            "vertices": [
+              {
+                "entity": 0,
+                "vertex_id": "11570619382924184950"
+              },
+              {
+                "entity": 1,
+                "vertex_id": "11570620482435813161"
+              },
+              {
+                "entity": 2,
+                "vertex_id": "11570617183900928528"
+              },
+              {
+                "entity": 3,
+                "vertex_id": "11570618283412556739"
+              },
+              {
+                "entity": 4,
+                "vertex_id": "11570623780970697794"
+              },
+              {
+                "entity": 5,
+                "vertex_id": "11570624880482326005"
+              },
+              {
+                "entity": 6,
+                "vertex_id": "11570621581947441372"
+              }
+            ]
+          }
+        },
+        "owner_receipt_at": 2,
+        "request": {
+          "batches": [
+            [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          ],
+          "source": [
+            {
+              "entity": 0,
+              "im_bits": "bfc2492492492492",
+              "re_bits": "3fc2492492492492"
+            },
+            {
+              "entity": 1,
+              "im_bits": "0000000000000000",
+              "re_bits": "3fd2492492492492"
+            },
+            {
+              "entity": 2,
+              "im_bits": "3fc2492492492492",
+              "re_bits": "3fdb6db6db6db6db"
+            },
+            {
+              "entity": 3,
+              "im_bits": "bfc2492492492492",
+              "re_bits": "3fe2492492492492"
+            },
+            {
+              "entity": 4,
+              "im_bits": "0000000000000000",
+              "re_bits": "3fe6db6db6db6db7"
+            },
+            {
+              "entity": 5,
+              "im_bits": "3fc2492492492492",
+              "re_bits": "3feb6db6db6db6db"
+            },
+            {
+              "entity": 6,
+              "im_bits": "bfc2492492492492",
+              "re_bits": "3ff0000000000000"
+            }
+          ],
+          "targets": [
+            0,
+            6
+          ],
+          "threshold_bits": "3fc999999999999a",
+          "windows": [
+            {
+              "end_bits": "3fc0000000000000",
+              "start_bits": "0000000000000000"
+            },
+            {
+              "end_bits": "3fd0000000000000",
+              "start_bits": "3fc0000000000000"
+            },
+            {
+              "end_bits": "3fd8000000000000",
+              "start_bits": "3fd0000000000000"
+            },
+            {
+              "end_bits": "3fe0000000000000",
+              "start_bits": "3fd8000000000000"
+            }
+          ]
+        }
+      },
+      "source_files": 74
+    }
+  },
+  "schema": "gabriel.strict-batch-checks/v1",
+  "semantic_issue_bytes_identical": true,
+  "status": "passed",
+  "timings": "not measured",
+  "unchanged_original_source_closures": true,
+  "unchanged_store_class": true
+}

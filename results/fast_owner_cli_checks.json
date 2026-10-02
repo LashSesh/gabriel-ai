@@ -1,0 +1,1577 @@
+{
+  "schema": "gabriel.fast-owner.executed-cli-checks.v1",
+  "status": "passed",
+  "elapsed_seconds": 148.895,
+  "subprocess_commands": 103,
+  "example_kind": "synthetic",
+  "equality": "exact canonical JSON and exported canonical bytes",
+  "default_owner": "reference",
+  "reference_demos_unchanged": true,
+  "owner_independent_profile_fingerprints": true,
+  "profiles": [
+    {
+      "profile": "legacy",
+      "demo_bundle_exact": true,
+      "retained_demo_exact": true,
+      "cross_owner_open_combinations": 4,
+      "cross_owner_retry_pairs": 1,
+      "accepted_write_pairs": 2,
+      "final_journal_sha256": "b376146fa6b405aec1fa0ba8ce1dccf735e652f51f752f2b17f83bafcf31baca",
+      "final_anchor": {
+        "head": "a5309698e882a6454da9e25a986c78d3d957d1e0b9babb82a9895b4dd38c01d5",
+        "events": 14
+      },
+      "rejected_commands_per_store": 3,
+      "wrong_profile_rejected_by_both_owners": true
+    },
+    {
+      "profile": "stream",
+      "demo_bundle_exact": true,
+      "retained_demo_exact": true,
+      "cross_owner_open_combinations": 4,
+      "cross_owner_retry_pairs": 1,
+      "accepted_write_pairs": 2,
+      "final_journal_sha256": "36b00d6cd452a639661c546ff81072b60580901bbd5351d52b9c9c2308108779",
+      "final_anchor": {
+        "head": "9df4c2b2b0f7c0adc7c31edd615f5a901b358876418194cd415045d745503d48",
+        "events": 324
+      },
+      "rejected_commands_per_store": 3,
+      "wrong_profile_rejected_by_both_owners": true
+    },
+    {
+      "profile": "incremental",
+      "demo_bundle_exact": true,
+      "retained_demo_exact": true,
+      "cross_owner_open_combinations": 4,
+      "cross_owner_retry_pairs": 1,
+      "accepted_write_pairs": 2,
+      "final_journal_sha256": "3b68328232dedd129edd186882a0b498ec44db28c53559ab440b4fd11210ac58",
+      "final_anchor": {
+        "head": "6c09b738a1fc0a206219a3ae20977f4ef9862c7f9d47e9cdebe9806f6a68382b",
+        "events": 324
+      },
+      "rejected_commands_per_store": 3,
+      "wrong_profile_rejected_by_both_owners": true
+    }
+  ],
+  "source_sha256": {
+    "gabriel_runtime/__main__.py": "87b35570b07856f757464228a7848965397c92aff26596ddaf72b885aa00a4f5",
+    "gabriel_runtime/stream_demo.py": "e36850e0732f82b1b49f283121f743b4db39d88dd735b0b196e9863f7f18e430",
+    "gabriel_runtime/fast_owner.py": "708b6d4ce676fa2947c7a1fa303c5ec28d4d370a6370c06214a31da25730865b",
+    "gabriel_runtime/engine.py": "2499574e2e9733665398fc8203f5e2ca1dc22190860344725568667b7a258bc1",
+    "reproduction/check_fast_owner_cli.py": "aa7db33a150d3f8cf4e74ce8645138ca31dd8b54b653ec0a81ffae9693332bcd"
+  },
+  "demo_sha256": "819f7e75fb7a0b0d1548429cfc8870bacb8ee876150affdf90bedc3d520d48aa",
+  "scope": "CLI interchange and rejection behavior; no timing or predictive-performance claim.",
+  "steps": [
+    {
+      "arguments": [
+        "demo",
+        "--out",
+        "$RUN/legacy-reference",
+        "--with-conflict"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "7193581fa97e37116725616dfc8768948f62ac7abe3f3a8da1dd9bee12de15f0",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "demo",
+        "--out",
+        "$RUN/legacy-fast",
+        "--with-conflict",
+        "--owner",
+        "fast"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "7193581fa97e37116725616dfc8768948f62ac7abe3f3a8da1dd9bee12de15f0",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "audit",
+        "$RUN/legacy-reference/owner.sqlite",
+        "--profile",
+        "legacy",
+        "--owner",
+        "reference",
+        "--anchor",
+        "$RUN/legacy-reference/anchor.json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "9008b73b1765e84c926eade870f9c5a63e4e593f85c37ecaca9fd6afcc65d9e6",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "inspect",
+        "$RUN/legacy-reference/owner.sqlite",
+        "--profile",
+        "legacy",
+        "--owner",
+        "reference",
+        "--contract",
+        "risk"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "0a308f0af92e898edefb4bfc21d40c21ca6442d5779f5c7ebc87462675dbd473",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "export",
+        "$RUN/legacy-reference/owner.sqlite",
+        "--profile",
+        "legacy",
+        "--owner",
+        "reference",
+        "--out",
+        "$RUN/legacy-reference-reference.json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "9e2dd93a055faf436683ea726f1063da7958d4e97f2290e7cace99f0395c0af2",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "audit",
+        "$RUN/legacy-reference/owner.sqlite",
+        "--profile",
+        "legacy",
+        "--owner",
+        "fast",
+        "--anchor",
+        "$RUN/legacy-reference/anchor.json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "9008b73b1765e84c926eade870f9c5a63e4e593f85c37ecaca9fd6afcc65d9e6",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "inspect",
+        "$RUN/legacy-reference/owner.sqlite",
+        "--profile",
+        "legacy",
+        "--owner",
+        "fast",
+        "--contract",
+        "risk"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "0a308f0af92e898edefb4bfc21d40c21ca6442d5779f5c7ebc87462675dbd473",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "export",
+        "$RUN/legacy-reference/owner.sqlite",
+        "--profile",
+        "legacy",
+        "--owner",
+        "fast",
+        "--out",
+        "$RUN/legacy-reference-fast.json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "9e2dd93a055faf436683ea726f1063da7958d4e97f2290e7cace99f0395c0af2",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/legacy-reference/owner.sqlite",
+        "--profile",
+        "legacy",
+        "--owner",
+        "fast",
+        "--command",
+        "{\"at\":0,\"contract\":\"perception\",\"expected_head\":\"bc5ddc5f355ea6739b8cc1b2575e6f071cabbe1396df27b687b9ae21e4c9586d\",\"id\":\"demo-1\",\"op\":\"bind\",\"payload\":{\"adapter\":\"finite-observation/v1\",\"config\":{\"contract_id\":\"synthetic-two-query-catalogue\",\"costs\":[1,1],\"labels\":[0,0,0,1],\"query_names\":[\"q0\",\"q1\"],\"rows\":[[\"0\",\"0\"],[\"0\",\"1\"],[\"1\",\"0\"],[\"1\",\"1\"]],\"weights\":[]}}}"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "bd6a30423a2013b283c3323db6115903e74fdf37e14f966c51c9bbe09919fbc3",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "audit",
+        "$RUN/legacy-fast/owner.sqlite",
+        "--profile",
+        "legacy",
+        "--owner",
+        "reference",
+        "--anchor",
+        "$RUN/legacy-fast/anchor.json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "9008b73b1765e84c926eade870f9c5a63e4e593f85c37ecaca9fd6afcc65d9e6",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "inspect",
+        "$RUN/legacy-fast/owner.sqlite",
+        "--profile",
+        "legacy",
+        "--owner",
+        "reference",
+        "--contract",
+        "risk"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "0a308f0af92e898edefb4bfc21d40c21ca6442d5779f5c7ebc87462675dbd473",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "export",
+        "$RUN/legacy-fast/owner.sqlite",
+        "--profile",
+        "legacy",
+        "--owner",
+        "reference",
+        "--out",
+        "$RUN/legacy-fast-reference.json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "9e2dd93a055faf436683ea726f1063da7958d4e97f2290e7cace99f0395c0af2",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "audit",
+        "$RUN/legacy-fast/owner.sqlite",
+        "--profile",
+        "legacy",
+        "--owner",
+        "fast",
+        "--anchor",
+        "$RUN/legacy-fast/anchor.json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "9008b73b1765e84c926eade870f9c5a63e4e593f85c37ecaca9fd6afcc65d9e6",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "inspect",
+        "$RUN/legacy-fast/owner.sqlite",
+        "--profile",
+        "legacy",
+        "--owner",
+        "fast",
+        "--contract",
+        "risk"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "0a308f0af92e898edefb4bfc21d40c21ca6442d5779f5c7ebc87462675dbd473",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "export",
+        "$RUN/legacy-fast/owner.sqlite",
+        "--profile",
+        "legacy",
+        "--owner",
+        "fast",
+        "--out",
+        "$RUN/legacy-fast-fast.json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "9e2dd93a055faf436683ea726f1063da7958d4e97f2290e7cace99f0395c0af2",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/legacy-fast/owner.sqlite",
+        "--profile",
+        "legacy",
+        "--owner",
+        "reference",
+        "--command",
+        "{\"at\":0,\"contract\":\"perception\",\"expected_head\":\"bc5ddc5f355ea6739b8cc1b2575e6f071cabbe1396df27b687b9ae21e4c9586d\",\"id\":\"demo-1\",\"op\":\"bind\",\"payload\":{\"adapter\":\"finite-observation/v1\",\"config\":{\"contract_id\":\"synthetic-two-query-catalogue\",\"costs\":[1,1],\"labels\":[0,0,0,1],\"query_names\":[\"q0\",\"q1\"],\"rows\":[[\"0\",\"0\"],[\"0\",\"1\"],[\"1\",\"0\"],[\"1\",\"1\"]],\"weights\":[]}}}"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "bd6a30423a2013b283c3323db6115903e74fdf37e14f966c51c9bbe09919fbc3",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/legacy-reference/owner.sqlite",
+        "--profile",
+        "legacy",
+        "--owner",
+        "fast",
+        "--command",
+        "{\"at\":5,\"contract\":\"risk\",\"expected_head\":\"cee6433a18f7d8b1ed6c2a9795ed15b43991b0c0b07178df03cd4224bde0ae56\",\"id\":\"cross-owner-new-0\",\"op\":\"query\",\"payload\":{\"event_cutoff\":2,\"operation_cutoff\":null,\"receipt_cutoff\":3}}"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "d1a63da1ce39e6207f7134945b88bd838c8c28f486259f34acbcd1c5c57213db",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/legacy-fast/owner.sqlite",
+        "--profile",
+        "legacy",
+        "--owner",
+        "reference",
+        "--command",
+        "{\"at\":5,\"contract\":\"risk\",\"expected_head\":\"cee6433a18f7d8b1ed6c2a9795ed15b43991b0c0b07178df03cd4224bde0ae56\",\"id\":\"cross-owner-new-0\",\"op\":\"query\",\"payload\":{\"event_cutoff\":2,\"operation_cutoff\":null,\"receipt_cutoff\":3}}"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "d1a63da1ce39e6207f7134945b88bd838c8c28f486259f34acbcd1c5c57213db",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/legacy-reference/owner.sqlite",
+        "--profile",
+        "legacy",
+        "--owner",
+        "reference",
+        "--command",
+        "{\"at\":6,\"contract\":\"risk\",\"expected_head\":\"43c8a8c68addd27368026d36962e708494d84e05fe7492f84facbf2cd9e2db9d\",\"id\":\"cross-owner-new-1\",\"op\":\"query\",\"payload\":{\"event_cutoff\":2,\"operation_cutoff\":null,\"receipt_cutoff\":4}}"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "12b8f8f879c5f8b11e85f3ed05c0afaf10fd7277a73f374d0d2b650905b9b5a6",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/legacy-fast/owner.sqlite",
+        "--profile",
+        "legacy",
+        "--owner",
+        "fast",
+        "--command",
+        "{\"at\":6,\"contract\":\"risk\",\"expected_head\":\"43c8a8c68addd27368026d36962e708494d84e05fe7492f84facbf2cd9e2db9d\",\"id\":\"cross-owner-new-1\",\"op\":\"query\",\"payload\":{\"event_cutoff\":2,\"operation_cutoff\":null,\"receipt_cutoff\":4}}"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "12b8f8f879c5f8b11e85f3ed05c0afaf10fd7277a73f374d0d2b650905b9b5a6",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "audit",
+        "$RUN/legacy-reference/owner.sqlite",
+        "--profile",
+        "legacy",
+        "--owner",
+        "fast",
+        "--anchor",
+        "{\"events\":14,\"head\":\"a5309698e882a6454da9e25a986c78d3d957d1e0b9babb82a9895b4dd38c01d5\"}"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "4361e74e38608bb976d374857b616e5fa92a9002e68d821a6fb20b02fbb01646",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "export",
+        "$RUN/legacy-reference/owner.sqlite",
+        "--profile",
+        "legacy",
+        "--owner",
+        "fast",
+        "--out",
+        "$RUN/legacy-reference-updated.json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "4daccb07d24557a0acb40a4d0fc5a6fed81ce2fb27e9f9e22ac478584bc0cff2",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/legacy-reference/owner.sqlite",
+        "--profile",
+        "legacy",
+        "--owner",
+        "fast",
+        "--command",
+        "{\"at\":6,\"contract\":\"risk\",\"expected_head\":\"43c8a8c68addd27368026d36962e708494d84e05fe7492f84facbf2cd9e2db9d\",\"id\":\"new-command-with-stale-head\",\"op\":\"query\",\"payload\":{\"event_cutoff\":2,\"operation_cutoff\":null,\"receipt_cutoff\":4}}"
+      ],
+      "returncode": 2,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "Gabriel runtime: stale expected journal head\n"
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/legacy-reference/owner.sqlite",
+        "--profile",
+        "legacy",
+        "--owner",
+        "fast",
+        "--command",
+        "{\"at\":7,\"contract\":\"risk\",\"expected_head\":\"43c8a8c68addd27368026d36962e708494d84e05fe7492f84facbf2cd9e2db9d\",\"id\":\"cross-owner-new-1\",\"op\":\"query\",\"payload\":{\"event_cutoff\":2,\"operation_cutoff\":null,\"receipt_cutoff\":4}}"
+      ],
+      "returncode": 2,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "Gabriel runtime: conflicting command id reuse\n"
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/legacy-reference/owner.sqlite",
+        "--profile",
+        "legacy",
+        "--owner",
+        "fast",
+        "--command",
+        "{\"id\":1,\"id\":2}"
+      ],
+      "returncode": 2,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "Gabriel runtime: duplicate JSON object key\n"
+    },
+    {
+      "arguments": [
+        "audit",
+        "$RUN/legacy-reference/owner.sqlite",
+        "--owner",
+        "fast",
+        "--profile",
+        "incremental"
+      ],
+      "returncode": 2,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "Gabriel runtime: header or adapter fingerprint mismatch\n"
+    },
+    {
+      "arguments": [
+        "audit",
+        "$RUN/legacy-reference/owner.sqlite",
+        "--profile",
+        "legacy",
+        "--owner",
+        "fast",
+        "--anchor",
+        "{\"events\":14,\"head\":\"a5309698e882a6454da9e25a986c78d3d957d1e0b9babb82a9895b4dd38c01d5\"}"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "4361e74e38608bb976d374857b616e5fa92a9002e68d821a6fb20b02fbb01646",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "audit",
+        "$RUN/legacy-fast/owner.sqlite",
+        "--profile",
+        "legacy",
+        "--owner",
+        "reference",
+        "--anchor",
+        "{\"events\":14,\"head\":\"a5309698e882a6454da9e25a986c78d3d957d1e0b9babb82a9895b4dd38c01d5\"}"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "4361e74e38608bb976d374857b616e5fa92a9002e68d821a6fb20b02fbb01646",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "export",
+        "$RUN/legacy-fast/owner.sqlite",
+        "--profile",
+        "legacy",
+        "--owner",
+        "reference",
+        "--out",
+        "$RUN/legacy-fast-updated.json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "4daccb07d24557a0acb40a4d0fc5a6fed81ce2fb27e9f9e22ac478584bc0cff2",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/legacy-fast/owner.sqlite",
+        "--profile",
+        "legacy",
+        "--owner",
+        "reference",
+        "--command",
+        "{\"at\":6,\"contract\":\"risk\",\"expected_head\":\"43c8a8c68addd27368026d36962e708494d84e05fe7492f84facbf2cd9e2db9d\",\"id\":\"new-command-with-stale-head\",\"op\":\"query\",\"payload\":{\"event_cutoff\":2,\"operation_cutoff\":null,\"receipt_cutoff\":4}}"
+      ],
+      "returncode": 2,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "Gabriel runtime: stale expected journal head\n"
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/legacy-fast/owner.sqlite",
+        "--profile",
+        "legacy",
+        "--owner",
+        "reference",
+        "--command",
+        "{\"at\":7,\"contract\":\"risk\",\"expected_head\":\"43c8a8c68addd27368026d36962e708494d84e05fe7492f84facbf2cd9e2db9d\",\"id\":\"cross-owner-new-1\",\"op\":\"query\",\"payload\":{\"event_cutoff\":2,\"operation_cutoff\":null,\"receipt_cutoff\":4}}"
+      ],
+      "returncode": 2,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "Gabriel runtime: conflicting command id reuse\n"
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/legacy-fast/owner.sqlite",
+        "--profile",
+        "legacy",
+        "--owner",
+        "reference",
+        "--command",
+        "{\"id\":1,\"id\":2}"
+      ],
+      "returncode": 2,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "Gabriel runtime: duplicate JSON object key\n"
+    },
+    {
+      "arguments": [
+        "audit",
+        "$RUN/legacy-fast/owner.sqlite",
+        "--owner",
+        "reference",
+        "--profile",
+        "incremental"
+      ],
+      "returncode": 2,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "Gabriel runtime: header or adapter fingerprint mismatch\n"
+    },
+    {
+      "arguments": [
+        "audit",
+        "$RUN/legacy-fast/owner.sqlite",
+        "--profile",
+        "legacy",
+        "--owner",
+        "reference",
+        "--anchor",
+        "{\"events\":14,\"head\":\"a5309698e882a6454da9e25a986c78d3d957d1e0b9babb82a9895b4dd38c01d5\"}"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "4361e74e38608bb976d374857b616e5fa92a9002e68d821a6fb20b02fbb01646",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "stream-demo",
+        "--out",
+        "$RUN/stream-reference"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "22f98a18259c7d6c73bf91758a3e2513294e9992affb3f70d8a25bb2d15702b6",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "stream-demo",
+        "--out",
+        "$RUN/stream-fast",
+        "--owner",
+        "fast"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "22f98a18259c7d6c73bf91758a3e2513294e9992affb3f70d8a25bb2d15702b6",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "audit",
+        "$RUN/stream-reference/owner.sqlite",
+        "--profile",
+        "stream",
+        "--owner",
+        "reference",
+        "--anchor",
+        "$RUN/stream-reference/anchor.json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "96f33c5079cabe09fcb81a916f3bff494baffc0727c83019b855090c983b110d",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "inspect",
+        "$RUN/stream-reference/owner.sqlite",
+        "--profile",
+        "stream",
+        "--owner",
+        "reference",
+        "--contract",
+        "stream"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "fc4c149d5cbba8a8ad08d419d5aa575b9b3ca01ec2ccb5725039036608dddbdd",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "export",
+        "$RUN/stream-reference/owner.sqlite",
+        "--profile",
+        "stream",
+        "--owner",
+        "reference",
+        "--out",
+        "$RUN/stream-reference-reference.json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "849c2dfc8e9445c0a2312a3331ae5291a1db157c004e143e21a167229ad4194b",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "audit",
+        "$RUN/stream-reference/owner.sqlite",
+        "--profile",
+        "stream",
+        "--owner",
+        "fast",
+        "--anchor",
+        "$RUN/stream-reference/anchor.json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "96f33c5079cabe09fcb81a916f3bff494baffc0727c83019b855090c983b110d",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "inspect",
+        "$RUN/stream-reference/owner.sqlite",
+        "--profile",
+        "stream",
+        "--owner",
+        "fast",
+        "--contract",
+        "stream"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "fc4c149d5cbba8a8ad08d419d5aa575b9b3ca01ec2ccb5725039036608dddbdd",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "export",
+        "$RUN/stream-reference/owner.sqlite",
+        "--profile",
+        "stream",
+        "--owner",
+        "fast",
+        "--out",
+        "$RUN/stream-reference-fast.json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "849c2dfc8e9445c0a2312a3331ae5291a1db157c004e143e21a167229ad4194b",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/stream-reference/owner.sqlite",
+        "--profile",
+        "stream",
+        "--owner",
+        "fast",
+        "--command",
+        "{\"at\":0,\"contract\":\"stream\",\"expected_head\":\"5dd6b62f0902dcd5afffda7d92a95a8c3710b577ad50fa3960d15131d607bd63\",\"id\":\"stream-demo-1\",\"op\":\"bind\",\"payload\":{\"adapter\":\"stream-risk/v1\",\"config\":{\"horizon\":1,\"max_units\":100,\"risk_budget\":\"10\",\"source_id\":\"synthetic-dyadic-prices\",\"unit_exposure\":\"100\"}}}"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "0018aa9b8a2d6aa49c57056e47cd08c9a04c4294315f503412fa2c4cc9035c5f",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "audit",
+        "$RUN/stream-fast/owner.sqlite",
+        "--profile",
+        "stream",
+        "--owner",
+        "reference",
+        "--anchor",
+        "$RUN/stream-fast/anchor.json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "96f33c5079cabe09fcb81a916f3bff494baffc0727c83019b855090c983b110d",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "inspect",
+        "$RUN/stream-fast/owner.sqlite",
+        "--profile",
+        "stream",
+        "--owner",
+        "reference",
+        "--contract",
+        "stream"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "fc4c149d5cbba8a8ad08d419d5aa575b9b3ca01ec2ccb5725039036608dddbdd",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "export",
+        "$RUN/stream-fast/owner.sqlite",
+        "--profile",
+        "stream",
+        "--owner",
+        "reference",
+        "--out",
+        "$RUN/stream-fast-reference.json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "849c2dfc8e9445c0a2312a3331ae5291a1db157c004e143e21a167229ad4194b",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "audit",
+        "$RUN/stream-fast/owner.sqlite",
+        "--profile",
+        "stream",
+        "--owner",
+        "fast",
+        "--anchor",
+        "$RUN/stream-fast/anchor.json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "96f33c5079cabe09fcb81a916f3bff494baffc0727c83019b855090c983b110d",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "inspect",
+        "$RUN/stream-fast/owner.sqlite",
+        "--profile",
+        "stream",
+        "--owner",
+        "fast",
+        "--contract",
+        "stream"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "fc4c149d5cbba8a8ad08d419d5aa575b9b3ca01ec2ccb5725039036608dddbdd",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "export",
+        "$RUN/stream-fast/owner.sqlite",
+        "--profile",
+        "stream",
+        "--owner",
+        "fast",
+        "--out",
+        "$RUN/stream-fast-fast.json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "849c2dfc8e9445c0a2312a3331ae5291a1db157c004e143e21a167229ad4194b",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/stream-fast/owner.sqlite",
+        "--profile",
+        "stream",
+        "--owner",
+        "reference",
+        "--command",
+        "{\"at\":0,\"contract\":\"stream\",\"expected_head\":\"5dd6b62f0902dcd5afffda7d92a95a8c3710b577ad50fa3960d15131d607bd63\",\"id\":\"stream-demo-1\",\"op\":\"bind\",\"payload\":{\"adapter\":\"stream-risk/v1\",\"config\":{\"horizon\":1,\"max_units\":100,\"risk_budget\":\"10\",\"source_id\":\"synthetic-dyadic-prices\",\"unit_exposure\":\"100\"}}}"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "0018aa9b8a2d6aa49c57056e47cd08c9a04c4294315f503412fa2c4cc9035c5f",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/stream-reference/owner.sqlite",
+        "--profile",
+        "stream",
+        "--owner",
+        "fast",
+        "--command",
+        "{\"at\":321,\"contract\":\"stream\",\"expected_head\":\"5951046f5a15a10189d8416989c28d5f81c5b957ac00aec3c7966ede8afeb81a\",\"id\":\"cross-owner-new-0\",\"op\":\"record\",\"payload\":{\"event_at\":320,\"index\":320,\"rate_hex\":\"0x1.8b00000000000p+6\",\"received_at\":321,\"revision\":0}}"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "812017da14441d836c3a5c9ed98fc796b89298f7aacb5919035e2e6cae502e6b",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/stream-fast/owner.sqlite",
+        "--profile",
+        "stream",
+        "--owner",
+        "reference",
+        "--command",
+        "{\"at\":321,\"contract\":\"stream\",\"expected_head\":\"5951046f5a15a10189d8416989c28d5f81c5b957ac00aec3c7966ede8afeb81a\",\"id\":\"cross-owner-new-0\",\"op\":\"record\",\"payload\":{\"event_at\":320,\"index\":320,\"rate_hex\":\"0x1.8b00000000000p+6\",\"received_at\":321,\"revision\":0}}"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "812017da14441d836c3a5c9ed98fc796b89298f7aacb5919035e2e6cae502e6b",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/stream-reference/owner.sqlite",
+        "--profile",
+        "stream",
+        "--owner",
+        "reference",
+        "--command",
+        "{\"at\":322,\"contract\":\"stream\",\"expected_head\":\"5f83f47e6d4f4378619541b51ecd819d5c49c94343d534cb458a1753b6b02ec8\",\"id\":\"cross-owner-new-1\",\"op\":\"record\",\"payload\":{\"event_at\":321,\"index\":321,\"rate_hex\":\"0x1.8f60000000000p+6\",\"received_at\":322,\"revision\":0}}"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "faee8dd3e3ed95e50bd0b153246c2a756e06f41df5bc873b7f425b40355355aa",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/stream-fast/owner.sqlite",
+        "--profile",
+        "stream",
+        "--owner",
+        "fast",
+        "--command",
+        "{\"at\":322,\"contract\":\"stream\",\"expected_head\":\"5f83f47e6d4f4378619541b51ecd819d5c49c94343d534cb458a1753b6b02ec8\",\"id\":\"cross-owner-new-1\",\"op\":\"record\",\"payload\":{\"event_at\":321,\"index\":321,\"rate_hex\":\"0x1.8f60000000000p+6\",\"received_at\":322,\"revision\":0}}"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "faee8dd3e3ed95e50bd0b153246c2a756e06f41df5bc873b7f425b40355355aa",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "audit",
+        "$RUN/stream-reference/owner.sqlite",
+        "--profile",
+        "stream",
+        "--owner",
+        "fast",
+        "--anchor",
+        "{\"events\":324,\"head\":\"9df4c2b2b0f7c0adc7c31edd615f5a901b358876418194cd415045d745503d48\"}"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "d39d16e34a8d0bf7a8a4dd3a783f81863b6e37596ab938928edea3576e43b5ee",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "export",
+        "$RUN/stream-reference/owner.sqlite",
+        "--profile",
+        "stream",
+        "--owner",
+        "fast",
+        "--out",
+        "$RUN/stream-reference-updated.json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "0a995602347901952344cbe346d785e5e756f211e0a296bbcaf1fb02665c9527",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/stream-reference/owner.sqlite",
+        "--profile",
+        "stream",
+        "--owner",
+        "fast",
+        "--command",
+        "{\"at\":322,\"contract\":\"stream\",\"expected_head\":\"5f83f47e6d4f4378619541b51ecd819d5c49c94343d534cb458a1753b6b02ec8\",\"id\":\"new-command-with-stale-head\",\"op\":\"record\",\"payload\":{\"event_at\":321,\"index\":321,\"rate_hex\":\"0x1.8f60000000000p+6\",\"received_at\":322,\"revision\":0}}"
+      ],
+      "returncode": 2,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "Gabriel runtime: stale expected journal head\n"
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/stream-reference/owner.sqlite",
+        "--profile",
+        "stream",
+        "--owner",
+        "fast",
+        "--command",
+        "{\"at\":323,\"contract\":\"stream\",\"expected_head\":\"5f83f47e6d4f4378619541b51ecd819d5c49c94343d534cb458a1753b6b02ec8\",\"id\":\"cross-owner-new-1\",\"op\":\"record\",\"payload\":{\"event_at\":321,\"index\":321,\"rate_hex\":\"0x1.8f60000000000p+6\",\"received_at\":322,\"revision\":0}}"
+      ],
+      "returncode": 2,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "Gabriel runtime: conflicting command id reuse\n"
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/stream-reference/owner.sqlite",
+        "--profile",
+        "stream",
+        "--owner",
+        "fast",
+        "--command",
+        "{\"id\":1,\"id\":2}"
+      ],
+      "returncode": 2,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "Gabriel runtime: duplicate JSON object key\n"
+    },
+    {
+      "arguments": [
+        "audit",
+        "$RUN/stream-reference/owner.sqlite",
+        "--owner",
+        "fast",
+        "--profile",
+        "incremental"
+      ],
+      "returncode": 2,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "Gabriel runtime: header or adapter fingerprint mismatch\n"
+    },
+    {
+      "arguments": [
+        "audit",
+        "$RUN/stream-reference/owner.sqlite",
+        "--profile",
+        "stream",
+        "--owner",
+        "fast",
+        "--anchor",
+        "{\"events\":324,\"head\":\"9df4c2b2b0f7c0adc7c31edd615f5a901b358876418194cd415045d745503d48\"}"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "d39d16e34a8d0bf7a8a4dd3a783f81863b6e37596ab938928edea3576e43b5ee",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "audit",
+        "$RUN/stream-fast/owner.sqlite",
+        "--profile",
+        "stream",
+        "--owner",
+        "reference",
+        "--anchor",
+        "{\"events\":324,\"head\":\"9df4c2b2b0f7c0adc7c31edd615f5a901b358876418194cd415045d745503d48\"}"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "d39d16e34a8d0bf7a8a4dd3a783f81863b6e37596ab938928edea3576e43b5ee",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "export",
+        "$RUN/stream-fast/owner.sqlite",
+        "--profile",
+        "stream",
+        "--owner",
+        "reference",
+        "--out",
+        "$RUN/stream-fast-updated.json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "0a995602347901952344cbe346d785e5e756f211e0a296bbcaf1fb02665c9527",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/stream-fast/owner.sqlite",
+        "--profile",
+        "stream",
+        "--owner",
+        "reference",
+        "--command",
+        "{\"at\":322,\"contract\":\"stream\",\"expected_head\":\"5f83f47e6d4f4378619541b51ecd819d5c49c94343d534cb458a1753b6b02ec8\",\"id\":\"new-command-with-stale-head\",\"op\":\"record\",\"payload\":{\"event_at\":321,\"index\":321,\"rate_hex\":\"0x1.8f60000000000p+6\",\"received_at\":322,\"revision\":0}}"
+      ],
+      "returncode": 2,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "Gabriel runtime: stale expected journal head\n"
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/stream-fast/owner.sqlite",
+        "--profile",
+        "stream",
+        "--owner",
+        "reference",
+        "--command",
+        "{\"at\":323,\"contract\":\"stream\",\"expected_head\":\"5f83f47e6d4f4378619541b51ecd819d5c49c94343d534cb458a1753b6b02ec8\",\"id\":\"cross-owner-new-1\",\"op\":\"record\",\"payload\":{\"event_at\":321,\"index\":321,\"rate_hex\":\"0x1.8f60000000000p+6\",\"received_at\":322,\"revision\":0}}"
+      ],
+      "returncode": 2,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "Gabriel runtime: conflicting command id reuse\n"
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/stream-fast/owner.sqlite",
+        "--profile",
+        "stream",
+        "--owner",
+        "reference",
+        "--command",
+        "{\"id\":1,\"id\":2}"
+      ],
+      "returncode": 2,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "Gabriel runtime: duplicate JSON object key\n"
+    },
+    {
+      "arguments": [
+        "audit",
+        "$RUN/stream-fast/owner.sqlite",
+        "--owner",
+        "reference",
+        "--profile",
+        "incremental"
+      ],
+      "returncode": 2,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "Gabriel runtime: header or adapter fingerprint mismatch\n"
+    },
+    {
+      "arguments": [
+        "audit",
+        "$RUN/stream-fast/owner.sqlite",
+        "--profile",
+        "stream",
+        "--owner",
+        "reference",
+        "--anchor",
+        "{\"events\":324,\"head\":\"9df4c2b2b0f7c0adc7c31edd615f5a901b358876418194cd415045d745503d48\"}"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "d39d16e34a8d0bf7a8a4dd3a783f81863b6e37596ab938928edea3576e43b5ee",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "incremental-demo",
+        "--out",
+        "$RUN/incremental-reference"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "10ca1cecf66d55d64915bc7d44bde60f1b134c1ca56ee2324b716e267bd023f3",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "incremental-demo",
+        "--out",
+        "$RUN/incremental-fast",
+        "--owner",
+        "fast"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "10ca1cecf66d55d64915bc7d44bde60f1b134c1ca56ee2324b716e267bd023f3",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "audit",
+        "$RUN/incremental-reference/owner.sqlite",
+        "--profile",
+        "incremental",
+        "--owner",
+        "reference",
+        "--anchor",
+        "$RUN/incremental-reference/anchor.json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "c8a905b43eb1b6557b6e84a98e7d4a561edbb96bf371199a327790a4124222a5",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "inspect",
+        "$RUN/incremental-reference/owner.sqlite",
+        "--profile",
+        "incremental",
+        "--owner",
+        "reference",
+        "--contract",
+        "stream"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "fc4c149d5cbba8a8ad08d419d5aa575b9b3ca01ec2ccb5725039036608dddbdd",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "export",
+        "$RUN/incremental-reference/owner.sqlite",
+        "--profile",
+        "incremental",
+        "--owner",
+        "reference",
+        "--out",
+        "$RUN/incremental-reference-reference.json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "849c2dfc8e9445c0a2312a3331ae5291a1db157c004e143e21a167229ad4194b",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "audit",
+        "$RUN/incremental-reference/owner.sqlite",
+        "--profile",
+        "incremental",
+        "--owner",
+        "fast",
+        "--anchor",
+        "$RUN/incremental-reference/anchor.json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "c8a905b43eb1b6557b6e84a98e7d4a561edbb96bf371199a327790a4124222a5",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "inspect",
+        "$RUN/incremental-reference/owner.sqlite",
+        "--profile",
+        "incremental",
+        "--owner",
+        "fast",
+        "--contract",
+        "stream"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "fc4c149d5cbba8a8ad08d419d5aa575b9b3ca01ec2ccb5725039036608dddbdd",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "export",
+        "$RUN/incremental-reference/owner.sqlite",
+        "--profile",
+        "incremental",
+        "--owner",
+        "fast",
+        "--out",
+        "$RUN/incremental-reference-fast.json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "849c2dfc8e9445c0a2312a3331ae5291a1db157c004e143e21a167229ad4194b",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/incremental-reference/owner.sqlite",
+        "--profile",
+        "incremental",
+        "--owner",
+        "fast",
+        "--command",
+        "{\"at\":0,\"contract\":\"stream\",\"expected_head\":\"93f21e7f48372aa8d9fef9725250639d36df34e5d0f71deaf2a8da88eb32c971\",\"id\":\"stream-demo-1\",\"op\":\"bind\",\"payload\":{\"adapter\":\"stream-risk/v1\",\"config\":{\"horizon\":1,\"max_units\":100,\"risk_budget\":\"10\",\"source_id\":\"synthetic-dyadic-prices\",\"unit_exposure\":\"100\"}}}"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "b3d0aabacb389425cc25f366ad872e89b218721e094b2b376c6794f8fa4bce46",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "audit",
+        "$RUN/incremental-fast/owner.sqlite",
+        "--profile",
+        "incremental",
+        "--owner",
+        "reference",
+        "--anchor",
+        "$RUN/incremental-fast/anchor.json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "c8a905b43eb1b6557b6e84a98e7d4a561edbb96bf371199a327790a4124222a5",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "inspect",
+        "$RUN/incremental-fast/owner.sqlite",
+        "--profile",
+        "incremental",
+        "--owner",
+        "reference",
+        "--contract",
+        "stream"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "fc4c149d5cbba8a8ad08d419d5aa575b9b3ca01ec2ccb5725039036608dddbdd",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "export",
+        "$RUN/incremental-fast/owner.sqlite",
+        "--profile",
+        "incremental",
+        "--owner",
+        "reference",
+        "--out",
+        "$RUN/incremental-fast-reference.json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "849c2dfc8e9445c0a2312a3331ae5291a1db157c004e143e21a167229ad4194b",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "audit",
+        "$RUN/incremental-fast/owner.sqlite",
+        "--profile",
+        "incremental",
+        "--owner",
+        "fast",
+        "--anchor",
+        "$RUN/incremental-fast/anchor.json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "c8a905b43eb1b6557b6e84a98e7d4a561edbb96bf371199a327790a4124222a5",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "inspect",
+        "$RUN/incremental-fast/owner.sqlite",
+        "--profile",
+        "incremental",
+        "--owner",
+        "fast",
+        "--contract",
+        "stream"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "fc4c149d5cbba8a8ad08d419d5aa575b9b3ca01ec2ccb5725039036608dddbdd",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "export",
+        "$RUN/incremental-fast/owner.sqlite",
+        "--profile",
+        "incremental",
+        "--owner",
+        "fast",
+        "--out",
+        "$RUN/incremental-fast-fast.json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "849c2dfc8e9445c0a2312a3331ae5291a1db157c004e143e21a167229ad4194b",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/incremental-fast/owner.sqlite",
+        "--profile",
+        "incremental",
+        "--owner",
+        "reference",
+        "--command",
+        "{\"at\":0,\"contract\":\"stream\",\"expected_head\":\"93f21e7f48372aa8d9fef9725250639d36df34e5d0f71deaf2a8da88eb32c971\",\"id\":\"stream-demo-1\",\"op\":\"bind\",\"payload\":{\"adapter\":\"stream-risk/v1\",\"config\":{\"horizon\":1,\"max_units\":100,\"risk_budget\":\"10\",\"source_id\":\"synthetic-dyadic-prices\",\"unit_exposure\":\"100\"}}}"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "b3d0aabacb389425cc25f366ad872e89b218721e094b2b376c6794f8fa4bce46",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/incremental-reference/owner.sqlite",
+        "--profile",
+        "incremental",
+        "--owner",
+        "fast",
+        "--command",
+        "{\"at\":321,\"contract\":\"stream\",\"expected_head\":\"8d4e65ad1fbbf99d373282f96256c7e725d3079e779cc43a621328fcbf3c1522\",\"id\":\"cross-owner-new-0\",\"op\":\"record\",\"payload\":{\"event_at\":320,\"index\":320,\"rate_hex\":\"0x1.8b00000000000p+6\",\"received_at\":321,\"revision\":0}}"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "4ee28fd8891ad90703f3a714f5c239184cfcd7433d27e66e6ebd7a9c2a4d5341",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/incremental-fast/owner.sqlite",
+        "--profile",
+        "incremental",
+        "--owner",
+        "reference",
+        "--command",
+        "{\"at\":321,\"contract\":\"stream\",\"expected_head\":\"8d4e65ad1fbbf99d373282f96256c7e725d3079e779cc43a621328fcbf3c1522\",\"id\":\"cross-owner-new-0\",\"op\":\"record\",\"payload\":{\"event_at\":320,\"index\":320,\"rate_hex\":\"0x1.8b00000000000p+6\",\"received_at\":321,\"revision\":0}}"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "4ee28fd8891ad90703f3a714f5c239184cfcd7433d27e66e6ebd7a9c2a4d5341",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/incremental-reference/owner.sqlite",
+        "--profile",
+        "incremental",
+        "--owner",
+        "reference",
+        "--command",
+        "{\"at\":322,\"contract\":\"stream\",\"expected_head\":\"29045b6f4f8c1bfea68437066dda761159454ff19d93fb035a22b457369f8eb6\",\"id\":\"cross-owner-new-1\",\"op\":\"record\",\"payload\":{\"event_at\":321,\"index\":321,\"rate_hex\":\"0x1.8f60000000000p+6\",\"received_at\":322,\"revision\":0}}"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "40cf0cba258b6a61171b174c3d5cba015119ac633f12cd94bb06fd934bcab96b",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/incremental-fast/owner.sqlite",
+        "--profile",
+        "incremental",
+        "--owner",
+        "fast",
+        "--command",
+        "{\"at\":322,\"contract\":\"stream\",\"expected_head\":\"29045b6f4f8c1bfea68437066dda761159454ff19d93fb035a22b457369f8eb6\",\"id\":\"cross-owner-new-1\",\"op\":\"record\",\"payload\":{\"event_at\":321,\"index\":321,\"rate_hex\":\"0x1.8f60000000000p+6\",\"received_at\":322,\"revision\":0}}"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "40cf0cba258b6a61171b174c3d5cba015119ac633f12cd94bb06fd934bcab96b",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "audit",
+        "$RUN/incremental-reference/owner.sqlite",
+        "--profile",
+        "incremental",
+        "--owner",
+        "fast",
+        "--anchor",
+        "{\"events\":324,\"head\":\"6c09b738a1fc0a206219a3ae20977f4ef9862c7f9d47e9cdebe9806f6a68382b\"}"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "60a677547c79d7e557a7f11c18e5fc541518d44f0c2e975f2ed2f6f4eb1e4c17",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "export",
+        "$RUN/incremental-reference/owner.sqlite",
+        "--profile",
+        "incremental",
+        "--owner",
+        "fast",
+        "--out",
+        "$RUN/incremental-reference-updated.json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "0a995602347901952344cbe346d785e5e756f211e0a296bbcaf1fb02665c9527",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/incremental-reference/owner.sqlite",
+        "--profile",
+        "incremental",
+        "--owner",
+        "fast",
+        "--command",
+        "{\"at\":322,\"contract\":\"stream\",\"expected_head\":\"29045b6f4f8c1bfea68437066dda761159454ff19d93fb035a22b457369f8eb6\",\"id\":\"new-command-with-stale-head\",\"op\":\"record\",\"payload\":{\"event_at\":321,\"index\":321,\"rate_hex\":\"0x1.8f60000000000p+6\",\"received_at\":322,\"revision\":0}}"
+      ],
+      "returncode": 2,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "Gabriel runtime: stale expected journal head\n"
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/incremental-reference/owner.sqlite",
+        "--profile",
+        "incremental",
+        "--owner",
+        "fast",
+        "--command",
+        "{\"at\":323,\"contract\":\"stream\",\"expected_head\":\"29045b6f4f8c1bfea68437066dda761159454ff19d93fb035a22b457369f8eb6\",\"id\":\"cross-owner-new-1\",\"op\":\"record\",\"payload\":{\"event_at\":321,\"index\":321,\"rate_hex\":\"0x1.8f60000000000p+6\",\"received_at\":322,\"revision\":0}}"
+      ],
+      "returncode": 2,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "Gabriel runtime: conflicting command id reuse\n"
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/incremental-reference/owner.sqlite",
+        "--profile",
+        "incremental",
+        "--owner",
+        "fast",
+        "--command",
+        "{\"id\":1,\"id\":2}"
+      ],
+      "returncode": 2,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "Gabriel runtime: duplicate JSON object key\n"
+    },
+    {
+      "arguments": [
+        "audit",
+        "$RUN/incremental-reference/owner.sqlite",
+        "--owner",
+        "fast",
+        "--profile",
+        "stream"
+      ],
+      "returncode": 2,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "Gabriel runtime: header or adapter fingerprint mismatch\n"
+    },
+    {
+      "arguments": [
+        "audit",
+        "$RUN/incremental-reference/owner.sqlite",
+        "--profile",
+        "incremental",
+        "--owner",
+        "fast",
+        "--anchor",
+        "{\"events\":324,\"head\":\"6c09b738a1fc0a206219a3ae20977f4ef9862c7f9d47e9cdebe9806f6a68382b\"}"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "60a677547c79d7e557a7f11c18e5fc541518d44f0c2e975f2ed2f6f4eb1e4c17",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "audit",
+        "$RUN/incremental-fast/owner.sqlite",
+        "--profile",
+        "incremental",
+        "--owner",
+        "reference",
+        "--anchor",
+        "{\"events\":324,\"head\":\"6c09b738a1fc0a206219a3ae20977f4ef9862c7f9d47e9cdebe9806f6a68382b\"}"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "60a677547c79d7e557a7f11c18e5fc541518d44f0c2e975f2ed2f6f4eb1e4c17",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "export",
+        "$RUN/incremental-fast/owner.sqlite",
+        "--profile",
+        "incremental",
+        "--owner",
+        "reference",
+        "--out",
+        "$RUN/incremental-fast-updated.json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "0a995602347901952344cbe346d785e5e756f211e0a296bbcaf1fb02665c9527",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/incremental-fast/owner.sqlite",
+        "--profile",
+        "incremental",
+        "--owner",
+        "reference",
+        "--command",
+        "{\"at\":322,\"contract\":\"stream\",\"expected_head\":\"29045b6f4f8c1bfea68437066dda761159454ff19d93fb035a22b457369f8eb6\",\"id\":\"new-command-with-stale-head\",\"op\":\"record\",\"payload\":{\"event_at\":321,\"index\":321,\"rate_hex\":\"0x1.8f60000000000p+6\",\"received_at\":322,\"revision\":0}}"
+      ],
+      "returncode": 2,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "Gabriel runtime: stale expected journal head\n"
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/incremental-fast/owner.sqlite",
+        "--profile",
+        "incremental",
+        "--owner",
+        "reference",
+        "--command",
+        "{\"at\":323,\"contract\":\"stream\",\"expected_head\":\"29045b6f4f8c1bfea68437066dda761159454ff19d93fb035a22b457369f8eb6\",\"id\":\"cross-owner-new-1\",\"op\":\"record\",\"payload\":{\"event_at\":321,\"index\":321,\"rate_hex\":\"0x1.8f60000000000p+6\",\"received_at\":322,\"revision\":0}}"
+      ],
+      "returncode": 2,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "Gabriel runtime: conflicting command id reuse\n"
+    },
+    {
+      "arguments": [
+        "submit",
+        "$RUN/incremental-fast/owner.sqlite",
+        "--profile",
+        "incremental",
+        "--owner",
+        "reference",
+        "--command",
+        "{\"id\":1,\"id\":2}"
+      ],
+      "returncode": 2,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "Gabriel runtime: duplicate JSON object key\n"
+    },
+    {
+      "arguments": [
+        "audit",
+        "$RUN/incremental-fast/owner.sqlite",
+        "--owner",
+        "reference",
+        "--profile",
+        "stream"
+      ],
+      "returncode": 2,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "Gabriel runtime: header or adapter fingerprint mismatch\n"
+    },
+    {
+      "arguments": [
+        "audit",
+        "$RUN/incremental-fast/owner.sqlite",
+        "--profile",
+        "incremental",
+        "--owner",
+        "reference",
+        "--anchor",
+        "{\"events\":324,\"head\":\"6c09b738a1fc0a206219a3ae20977f4ef9862c7f9d47e9cdebe9806f6a68382b\"}"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "60a677547c79d7e557a7f11c18e5fc541518d44f0c2e975f2ed2f6f4eb1e4c17",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "demo",
+        "--out",
+        "$RUN/invalid",
+        "--owner",
+        "guess"
+      ],
+      "returncode": 2,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "usage: __main__.py demo [-h] --out DIR [--with-conflict]\n                        [--owner {reference,fast}]\n__main__.py demo: error: argument --owner: invalid choice: 'guess' (choose from reference, fast)\n"
+    }
+  ]
+}

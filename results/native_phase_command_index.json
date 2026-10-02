@@ -1,0 +1,985 @@
+{
+  "schema": 1,
+  "status": "DERIVED index of original individually captured command records; not a historical wrapper output",
+  "provenance": {
+    "original_individual_command_records": 44,
+    "original_aggregate_index_records": 43,
+    "original_aggregate_index_complete": false,
+    "original_aggregate_index_is_exact_prefix": true,
+    "original_aggregate_index_sha256": "c62e95905284d05c77bed0d0b46c2f09e4e20251234cc9679d22bf456878b834",
+    "missing_aggregate_index_names": [
+      "engine_memoized_vs_shared_4_memoized"
+    ],
+    "individual_command_records_complete": true,
+    "aggregate_incompleteness_cause": "Undetermined",
+    "original_aggregate_index_modified_by_reporter": false
+  },
+  "commands": [
+    {
+      "source_file": "compiler.command.json",
+      "source_sha256": "5cd90d70960432db93396e8c7641e426889792c191d99c8f627168fffed3054f",
+      "record": {
+        "command": [
+          "rustc",
+          "--version",
+          "--verbose"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 0.01935270399917499,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "compiler.stdout",
+        "stderr": "compiler.stderr",
+        "stdout_bytes": 196,
+        "stderr_bytes": 0,
+        "stdout_sha256": "4fdff2578428e9c5c08ddd7a0d3079c1a106b1cdaa46e73e46f7cd32b0fb9cad",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "cargo.command.json",
+      "source_sha256": "3f02010215c8cbbfef1aea4af8793d103339c2ad32dd1ac0d798227dc6178fcc",
+      "record": {
+        "command": [
+          "cargo",
+          "--version",
+          "--verbose"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 0.030342005000420613,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "cargo.stdout",
+        "stderr": "cargo.stderr",
+        "stdout_bytes": 336,
+        "stderr_bytes": 0,
+        "stdout_sha256": "bfd735e736b354adabe72cea24bc1b393488223889b6ab95e974fd8fb963552e",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "build_indexed.command.json",
+      "source_sha256": "27d8effe116742af01476ee5b86dbcdd7b2477b8e7d8910bf89a49d26da846c5",
+      "record": {
+        "command": [
+          "cargo",
+          "build",
+          "--locked",
+          "--release",
+          "--jobs",
+          "1",
+          "--manifest-path",
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/Cargo.toml",
+          "--target-dir",
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/build",
+          "--features",
+          "indexed-engine"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 123.71916877900003,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "build_indexed.stdout",
+        "stderr": "build_indexed.stderr",
+        "stdout_bytes": 0,
+        "stderr_bytes": 3459,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "4ef80ac78b0b457b9f84cb6a8e51b9e845fa023cb37a253f6a45a6025c232af2"
+      }
+    },
+    {
+      "source_file": "build_hoisted.command.json",
+      "source_sha256": "845640ebcf655dce5963d5162fa4b5b423a53982459aeaa390d62bc63e6a172b",
+      "record": {
+        "command": [
+          "cargo",
+          "build",
+          "--locked",
+          "--release",
+          "--jobs",
+          "1",
+          "--manifest-path",
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/Cargo.toml",
+          "--target-dir",
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/build",
+          "--features",
+          "hoisted-engine"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 40.537425025999255,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "build_hoisted.stdout",
+        "stderr": "build_hoisted.stderr",
+        "stdout_bytes": 0,
+        "stderr_bytes": 708,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "0f2bd72bcbcdc1c0e49a9e0c96e789a73f37db151e06b5b1a01f99a0153ed38a"
+      }
+    },
+    {
+      "source_file": "build_shared.command.json",
+      "source_sha256": "8d0985e25702547f922f05da05977acee2b911854165c1360340de2f53658163",
+      "record": {
+        "command": [
+          "cargo",
+          "build",
+          "--locked",
+          "--release",
+          "--jobs",
+          "1",
+          "--manifest-path",
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/Cargo.toml",
+          "--target-dir",
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/build",
+          "--features",
+          "shared-engine"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 42.51061421399936,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "build_shared.stdout",
+        "stderr": "build_shared.stderr",
+        "stdout_bytes": 0,
+        "stderr_bytes": 708,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "564a12c108a0f44f479c4a801a87377a116dfe77f6422770893f17c402bc8c4c"
+      }
+    },
+    {
+      "source_file": "build_memoized.command.json",
+      "source_sha256": "d9dcddfc9bf24f8e5077db1bba724da49351ebd662725415c2af316d18fb4d1c",
+      "record": {
+        "command": [
+          "cargo",
+          "build",
+          "--locked",
+          "--release",
+          "--jobs",
+          "1",
+          "--manifest-path",
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/Cargo.toml",
+          "--target-dir",
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/build",
+          "--features",
+          "memoized-engine"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 31.14951734100032,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "build_memoized.stdout",
+        "stderr": "build_memoized.stderr",
+        "stdout_bytes": 0,
+        "stderr_bytes": 706,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "71de40cf026365e3dafe9723659fbc1b19cba8936d0d765178968ce4ff889dcc"
+      }
+    },
+    {
+      "source_file": "configuration_indexed.command.json",
+      "source_sha256": "e521272b2e5f8b5edbec1630258e6a981e660a4df6ce8c193760ad82d3f4d0ff",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/indexed",
+          "configuration"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 0.004611796999597573,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "configuration_indexed.stdout",
+        "stderr": "configuration_indexed.stderr",
+        "stdout_bytes": 1590,
+        "stderr_bytes": 0,
+        "stdout_sha256": "016f28b01ba2dfe97f81d0a9a9fa0b41a9e0c358980b78efab74d62750859e78",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "configuration_hoisted.command.json",
+      "source_sha256": "007999c17f15488f43b2e3621057d38c40889710b053ed61cf2e8bd4940ef846",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/hoisted",
+          "configuration"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 0.003138332000162336,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "configuration_hoisted.stdout",
+        "stderr": "configuration_hoisted.stderr",
+        "stdout_bytes": 1590,
+        "stderr_bytes": 0,
+        "stdout_sha256": "016f28b01ba2dfe97f81d0a9a9fa0b41a9e0c358980b78efab74d62750859e78",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "configuration_shared.command.json",
+      "source_sha256": "4c26e370f7a83a6721331b52822cd194438fc34126e209725f7fe2865fc4a81e",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/shared",
+          "configuration"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 0.0071795650001149625,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "configuration_shared.stdout",
+        "stderr": "configuration_shared.stderr",
+        "stdout_bytes": 1590,
+        "stderr_bytes": 0,
+        "stdout_sha256": "016f28b01ba2dfe97f81d0a9a9fa0b41a9e0c358980b78efab74d62750859e78",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "configuration_memoized.command.json",
+      "source_sha256": "3674d5f2dbec2d6675299fb0b2e2815d226aa888191218f394431667c0a8a449",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/memoized",
+          "configuration"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 0.0027687090005201753,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "configuration_memoized.stdout",
+        "stderr": "configuration_memoized.stderr",
+        "stdout_bytes": 1590,
+        "stderr_bytes": 0,
+        "stdout_sha256": "016f28b01ba2dfe97f81d0a9a9fa0b41a9e0c358980b78efab74d62750859e78",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "golden_indexed.command.json",
+      "source_sha256": "5accaeeb59c3449caabb40944be6a55eb98653d65f502b0aceef6b8ba222f8c8",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/indexed",
+          "golden"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 1.3867593520008086,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "golden_indexed.stdout",
+        "stderr": "golden_indexed.stderr",
+        "stdout_bytes": 19658993,
+        "stderr_bytes": 0,
+        "stdout_sha256": "806ec8f78cbd6c0aa61070a54bce3753b0830c95616e6c30ef4ced54afb62984",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "golden_hoisted.command.json",
+      "source_sha256": "28f30bda72fc990e70d212b4738d26c508c5fe9bbb0fd8350d01976a151f92c5",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/hoisted",
+          "golden"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 0.6129968280001776,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "golden_hoisted.stdout",
+        "stderr": "golden_hoisted.stderr",
+        "stdout_bytes": 19658993,
+        "stderr_bytes": 0,
+        "stdout_sha256": "806ec8f78cbd6c0aa61070a54bce3753b0830c95616e6c30ef4ced54afb62984",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "golden_shared.command.json",
+      "source_sha256": "e67c8bbf49e03ee704a25e813a2248d4c93f31ef0a63d850957c609cfe95c301",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/shared",
+          "golden"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 1.3039093210009014,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "golden_shared.stdout",
+        "stderr": "golden_shared.stderr",
+        "stdout_bytes": 19658993,
+        "stderr_bytes": 0,
+        "stdout_sha256": "806ec8f78cbd6c0aa61070a54bce3753b0830c95616e6c30ef4ced54afb62984",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "golden_memoized.command.json",
+      "source_sha256": "2be1e7990ed3fd8a902d2f7d0dbf465c06d606483396fab3f7d05bdc94e03623",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/memoized",
+          "golden"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 1.9019772930005274,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "golden_memoized.stdout",
+        "stderr": "golden_memoized.stderr",
+        "stdout_bytes": 19658993,
+        "stderr_bytes": 0,
+        "stdout_sha256": "806ec8f78cbd6c0aa61070a54bce3753b0830c95616e6c30ef4ced54afb62984",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "engine_hoisted_vs_indexed_0_indexed.command.json",
+      "source_sha256": "af639488bc33c4b1531ed3967a75891b2842bb8242a2205339f5312556deef2f",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/indexed",
+          "engine"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 3.7088948680011526,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "engine_hoisted_vs_indexed_0_indexed.stdout",
+        "stderr": "engine_hoisted_vs_indexed_0_indexed.stderr",
+        "stdout_bytes": 32211,
+        "stderr_bytes": 0,
+        "stdout_sha256": "26cb5750e80743267ebb2dcfd65637d1a3a6cb0c4fbeb1a03b8f99dd5f8db745",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "engine_hoisted_vs_indexed_0_hoisted.command.json",
+      "source_sha256": "c262309c4959bb947377ebf84b2bdc870d3b2372cbd28c08aed689f147258d25",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/hoisted",
+          "engine"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 1.5382710180001595,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "engine_hoisted_vs_indexed_0_hoisted.stdout",
+        "stderr": "engine_hoisted_vs_indexed_0_hoisted.stderr",
+        "stdout_bytes": 32195,
+        "stderr_bytes": 0,
+        "stdout_sha256": "c852156d0d5c7c4b730a1e6471954569e28e261d7909241146111b54691a9cc9",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "engine_hoisted_vs_indexed_1_hoisted.command.json",
+      "source_sha256": "41870867a1ef4f23a03292aaef97711c04d65d34656149a612cb910c585747e7",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/hoisted",
+          "engine"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 1.1723055809998186,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "engine_hoisted_vs_indexed_1_hoisted.stdout",
+        "stderr": "engine_hoisted_vs_indexed_1_hoisted.stderr",
+        "stdout_bytes": 32209,
+        "stderr_bytes": 0,
+        "stdout_sha256": "80ac434022ef5f283c1a962f566ea312b549006d244df40859aa982a7b994827",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "engine_hoisted_vs_indexed_1_indexed.command.json",
+      "source_sha256": "2b6801c617eea129b263ba78a1b7ed62cd8a01146ec5d08bb133613adc4350bf",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/indexed",
+          "engine"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 3.7049395059984818,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "engine_hoisted_vs_indexed_1_indexed.stdout",
+        "stderr": "engine_hoisted_vs_indexed_1_indexed.stderr",
+        "stdout_bytes": 32207,
+        "stderr_bytes": 0,
+        "stdout_sha256": "d963963dcafc44f07abd668a9986ff044e79712fa1b899a09abb5ef842351650",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "engine_hoisted_vs_indexed_2_indexed.command.json",
+      "source_sha256": "5ed28b380e35afa1ff54ccf7465f32aaa84a1fc46b4736a484fa2c397d2c0836",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/indexed",
+          "engine"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 3.644932933999371,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "engine_hoisted_vs_indexed_2_indexed.stdout",
+        "stderr": "engine_hoisted_vs_indexed_2_indexed.stderr",
+        "stdout_bytes": 32191,
+        "stderr_bytes": 0,
+        "stdout_sha256": "855a9f8879edc497211fcd93d777ebf485f948dcca320d87df50f233561b4475",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "engine_hoisted_vs_indexed_2_hoisted.command.json",
+      "source_sha256": "6f1e1b3042de9c8ebe68967ff01f1a5d4f28d952ade82f0ea089b338e10d3c2a",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/hoisted",
+          "engine"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 0.9212980410011369,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "engine_hoisted_vs_indexed_2_hoisted.stdout",
+        "stderr": "engine_hoisted_vs_indexed_2_hoisted.stderr",
+        "stdout_bytes": 32127,
+        "stderr_bytes": 0,
+        "stdout_sha256": "3358511080f410eb03ffe1f0784ee085bd0a9c4a41182d7f790695510b1886cd",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "engine_hoisted_vs_indexed_3_hoisted.command.json",
+      "source_sha256": "e724d229de5293fd4dc65b92b618eaa104e9cc8992136b9571b16bc3a0c3d4bf",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/hoisted",
+          "engine"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 0.9310600360004173,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "engine_hoisted_vs_indexed_3_hoisted.stdout",
+        "stderr": "engine_hoisted_vs_indexed_3_hoisted.stderr",
+        "stdout_bytes": 32151,
+        "stderr_bytes": 0,
+        "stdout_sha256": "ea353acc0924e06e8157c0c9e97c7015d7b04cfc33b2d5ca1824e0c0f66f2f73",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "engine_hoisted_vs_indexed_3_indexed.command.json",
+      "source_sha256": "a7aa2f5a8bb9a3180fe73592d2f4154723e4fb223e2c32f878d21c830ad84b05",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/indexed",
+          "engine"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 4.73249796699929,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "engine_hoisted_vs_indexed_3_indexed.stdout",
+        "stderr": "engine_hoisted_vs_indexed_3_indexed.stderr",
+        "stdout_bytes": 32253,
+        "stderr_bytes": 0,
+        "stdout_sha256": "d642ada73d52682475eb751318e859cf4cffe74ecf88a9240c98786ec2f4da19",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "engine_hoisted_vs_indexed_4_indexed.command.json",
+      "source_sha256": "ff4d84dc238a0eb5c150b703940516fe380172128ffaef10a2dcd3d404fc2e3f",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/indexed",
+          "engine"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 3.689548084999842,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "engine_hoisted_vs_indexed_4_indexed.stdout",
+        "stderr": "engine_hoisted_vs_indexed_4_indexed.stderr",
+        "stdout_bytes": 32268,
+        "stderr_bytes": 0,
+        "stdout_sha256": "b33b7ae4db19d8a5ae7308b64c29de22530b9f89065fd3021f6190c87fba620b",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "engine_hoisted_vs_indexed_4_hoisted.command.json",
+      "source_sha256": "8fd20f211d2c925491b808bc0f67955c27632fb70d9e7fc57070765caeb1ab5d",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/hoisted",
+          "engine"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 0.9485344889999396,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "engine_hoisted_vs_indexed_4_hoisted.stdout",
+        "stderr": "engine_hoisted_vs_indexed_4_hoisted.stderr",
+        "stdout_bytes": 32149,
+        "stderr_bytes": 0,
+        "stdout_sha256": "10f13dea1a142720430387568ca924424fd26b1d90981b819dce3f2bd6d23f7d",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "engine_shared_vs_hoisted_0_hoisted.command.json",
+      "source_sha256": "797c36e5f8ca7c49aa8844a5fc29db80ec5beebb3b4c112999ac0d098f12705f",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/hoisted",
+          "engine"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 0.9836100689990417,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "engine_shared_vs_hoisted_0_hoisted.stdout",
+        "stderr": "engine_shared_vs_hoisted_0_hoisted.stderr",
+        "stdout_bytes": 32155,
+        "stderr_bytes": 0,
+        "stdout_sha256": "1861bab2751ee99ca938364b8f9b53e100a510bce0a065a69081d9ddc0bd7bdc",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "engine_shared_vs_hoisted_0_shared.command.json",
+      "source_sha256": "25d94b09e0418170483cbc99bd550923aa39682702f8058dae9c33da1ebf6c1d",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/shared",
+          "engine"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 0.9155590869995649,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "engine_shared_vs_hoisted_0_shared.stdout",
+        "stderr": "engine_shared_vs_hoisted_0_shared.stderr",
+        "stdout_bytes": 32108,
+        "stderr_bytes": 0,
+        "stdout_sha256": "19537755f87ac114f83727a69c380fd35200d19ba1b6d6013c457ab1e7b8f904",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "engine_shared_vs_hoisted_1_shared.command.json",
+      "source_sha256": "4692ec9f8a02fcfb38f2434d1ef4ed38593f96444fdfc340f1728800912cc6d3",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/shared",
+          "engine"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 0.9005139300006704,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "engine_shared_vs_hoisted_1_shared.stdout",
+        "stderr": "engine_shared_vs_hoisted_1_shared.stderr",
+        "stdout_bytes": 32160,
+        "stderr_bytes": 0,
+        "stdout_sha256": "1f65631109348ee8454c1921c79d5c030c6a1ecf2cd37ead36ad2d8d44512fb5",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "engine_shared_vs_hoisted_1_hoisted.command.json",
+      "source_sha256": "bb90cc3a39e3ddb3fca27f59c14efa98e6422125edf251814b1b2f32ab85c222",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/hoisted",
+          "engine"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 0.93777695999961,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "engine_shared_vs_hoisted_1_hoisted.stdout",
+        "stderr": "engine_shared_vs_hoisted_1_hoisted.stderr",
+        "stdout_bytes": 32138,
+        "stderr_bytes": 0,
+        "stdout_sha256": "80922ec22c3256d20f42fec23e339208ce13505a1f4768cb4ac827bfa3f00656",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "engine_shared_vs_hoisted_2_hoisted.command.json",
+      "source_sha256": "d23dc95975605089d4038240bd207ea658359f654955a55eefd65d64ee1a6d00",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/hoisted",
+          "engine"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 0.9295781219989294,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "engine_shared_vs_hoisted_2_hoisted.stdout",
+        "stderr": "engine_shared_vs_hoisted_2_hoisted.stderr",
+        "stdout_bytes": 32175,
+        "stderr_bytes": 0,
+        "stdout_sha256": "f01ce1ebb7d7cdfafa8f3ac6b7ef0161d39c924f7d3256a073531a5427bbad67",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "engine_shared_vs_hoisted_2_shared.command.json",
+      "source_sha256": "212399b06a23e6a14fb7fb257081185fe6ddd395075d054f22b08d41904329aa",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/shared",
+          "engine"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 0.8819662860005337,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "engine_shared_vs_hoisted_2_shared.stdout",
+        "stderr": "engine_shared_vs_hoisted_2_shared.stderr",
+        "stdout_bytes": 32119,
+        "stderr_bytes": 0,
+        "stdout_sha256": "e841227cc2bb7b5b17c999078c3e0ab11e2e21b1752c65927544112f030e20fa",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "engine_shared_vs_hoisted_3_shared.command.json",
+      "source_sha256": "b24d2506010dde505d4c736e0db30e1443e99929ed7211a36175fdb3db0d3c6e",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/shared",
+          "engine"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 0.9001113009999244,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "engine_shared_vs_hoisted_3_shared.stdout",
+        "stderr": "engine_shared_vs_hoisted_3_shared.stderr",
+        "stdout_bytes": 32162,
+        "stderr_bytes": 0,
+        "stdout_sha256": "51a3807decaa23bf0358fe4fc6357b1ebabd846e1cba6501d3ee8f4eebcb144e",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "engine_shared_vs_hoisted_3_hoisted.command.json",
+      "source_sha256": "a7d887f8b2552d1e7cdae10be24a490d9aa862b2690bea45ec2a1928f0ca5ccc",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/hoisted",
+          "engine"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 0.9782964169990009,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "engine_shared_vs_hoisted_3_hoisted.stdout",
+        "stderr": "engine_shared_vs_hoisted_3_hoisted.stderr",
+        "stdout_bytes": 32149,
+        "stderr_bytes": 0,
+        "stdout_sha256": "d521e911ebd4ebbf8c8b2f7d1c187105f34ae36a5986031bf6d73b2f1a088470",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "engine_shared_vs_hoisted_4_hoisted.command.json",
+      "source_sha256": "a08733f9d39abc8520fd265634976df66650e5ad19e589600f27ec9e038fe78a",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/hoisted",
+          "engine"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 0.9317089149990352,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "engine_shared_vs_hoisted_4_hoisted.stdout",
+        "stderr": "engine_shared_vs_hoisted_4_hoisted.stderr",
+        "stdout_bytes": 32206,
+        "stderr_bytes": 0,
+        "stdout_sha256": "2e5f965416132068abb032aa543f38b4a90c0579a6f2f2aa7a5a1271abd517ca",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "engine_shared_vs_hoisted_4_shared.command.json",
+      "source_sha256": "39fd4ae9493688f7fdbd465e64be1ba992f4df3b537ce12c6a78f6b98633a395",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/shared",
+          "engine"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 0.8873470110011112,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "engine_shared_vs_hoisted_4_shared.stdout",
+        "stderr": "engine_shared_vs_hoisted_4_shared.stderr",
+        "stdout_bytes": 32143,
+        "stderr_bytes": 0,
+        "stdout_sha256": "c3e415a014de201813e5ea4789e6b2d0fe557722f3617cd36cd464340102a625",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "engine_memoized_vs_shared_0_shared.command.json",
+      "source_sha256": "b06c6d5a3e6920fed3826fda500dd15bc2ecacaffb20e069d5a52ad727f9db46",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/shared",
+          "engine"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 0.981069669000135,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "engine_memoized_vs_shared_0_shared.stdout",
+        "stderr": "engine_memoized_vs_shared_0_shared.stderr",
+        "stdout_bytes": 32196,
+        "stderr_bytes": 0,
+        "stdout_sha256": "2f96bd33f8eb50b5d314146dedd68ee03fbfae2375acfe25ab23aa10b14f4267",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "engine_memoized_vs_shared_0_memoized.command.json",
+      "source_sha256": "a1fb604a7a7b734041c5237950313b21fc88b07b8d216f2d567935ef133955e5",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/memoized",
+          "engine"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 0.8926164429994969,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "engine_memoized_vs_shared_0_memoized.stdout",
+        "stderr": "engine_memoized_vs_shared_0_memoized.stderr",
+        "stdout_bytes": 45849,
+        "stderr_bytes": 0,
+        "stdout_sha256": "1493dc225ebbddacd8c7402a5e4ebacc2fcffb45ea1e6fa00c5b5eb5d1b8c7e7",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "engine_memoized_vs_shared_1_memoized.command.json",
+      "source_sha256": "a6fdbedec7478e79c0f16ebfe5820a722ae75f298727f6c231b2deedd3b9d421",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/memoized",
+          "engine"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 0.9001793600000383,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "engine_memoized_vs_shared_1_memoized.stdout",
+        "stderr": "engine_memoized_vs_shared_1_memoized.stderr",
+        "stdout_bytes": 45797,
+        "stderr_bytes": 0,
+        "stdout_sha256": "9f23076b034c8645fec9f48ddaf070d732704eda6da373880059ab227d9039f2",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "engine_memoized_vs_shared_1_shared.command.json",
+      "source_sha256": "904bdc0c9db82b6b1c270a48d3d020aa969ece6ebfd086391906f5015eb81244",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/shared",
+          "engine"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 0.9054906019991904,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "engine_memoized_vs_shared_1_shared.stdout",
+        "stderr": "engine_memoized_vs_shared_1_shared.stderr",
+        "stdout_bytes": 32184,
+        "stderr_bytes": 0,
+        "stdout_sha256": "66fc2d95e57de6fc806d9e4b02971af075fb518cfb7d57fd9189988da3956777",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "engine_memoized_vs_shared_2_shared.command.json",
+      "source_sha256": "813d9d8f1958351fecbeba7710854bb88f41d19d36f8b353ca90d4c0077b1a59",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/shared",
+          "engine"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 0.9530148849989928,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "engine_memoized_vs_shared_2_shared.stdout",
+        "stderr": "engine_memoized_vs_shared_2_shared.stderr",
+        "stdout_bytes": 32168,
+        "stderr_bytes": 0,
+        "stdout_sha256": "0e369d7db01372b2ce6af4d3675dfd70a496e8d1d3d2c87c78bdc5b9f681ccdf",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "engine_memoized_vs_shared_2_memoized.command.json",
+      "source_sha256": "93bfd5857955e285c05efdb41de53dc7e90dce6b5454a58bfa6bff5f14a691bb",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/memoized",
+          "engine"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 0.8654773759990348,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "engine_memoized_vs_shared_2_memoized.stdout",
+        "stderr": "engine_memoized_vs_shared_2_memoized.stderr",
+        "stdout_bytes": 45854,
+        "stderr_bytes": 0,
+        "stdout_sha256": "adc068b1305df47f6c2131fb8f8b5521dbdf573ea797bcfc9c0bdd7a0a20fc98",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "engine_memoized_vs_shared_3_memoized.command.json",
+      "source_sha256": "89387970fbcdd8b8a991046d117bbfc08ff8662c313e8f8146532f1836fd314e",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/memoized",
+          "engine"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 0.9082650519994786,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "engine_memoized_vs_shared_3_memoized.stdout",
+        "stderr": "engine_memoized_vs_shared_3_memoized.stderr",
+        "stdout_bytes": 45783,
+        "stderr_bytes": 0,
+        "stdout_sha256": "2f6e1fa68f5cc1a1b4c2f3535a4f28dc0c88b5765080da0c2010d8bd4c479651",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "engine_memoized_vs_shared_3_shared.command.json",
+      "source_sha256": "1334a38378311a0469aa58337c27d41cbae6a8c2750430992e745b483f319f36",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/shared",
+          "engine"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 0.9186901379998744,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "engine_memoized_vs_shared_3_shared.stdout",
+        "stderr": "engine_memoized_vs_shared_3_shared.stderr",
+        "stdout_bytes": 32152,
+        "stderr_bytes": 0,
+        "stdout_sha256": "350580222aa894bad12c34e4717598a987d339d70059feabbfd0cc4db4feb4af",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "engine_memoized_vs_shared_4_shared.command.json",
+      "source_sha256": "e54a2fb6f118ea9b0462dd97052a43d21f1a9e56dfc9f96e2cd354bb0665e37e",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/shared",
+          "engine"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 0.9020051780007634,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "engine_memoized_vs_shared_4_shared.stdout",
+        "stderr": "engine_memoized_vs_shared_4_shared.stderr",
+        "stdout_bytes": 32223,
+        "stderr_bytes": 0,
+        "stdout_sha256": "a6f96826275edabd79fc62acbde41b0ce8146ef1399dc92075b5548230c90caf",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "source_file": "engine_memoized_vs_shared_4_memoized.command.json",
+      "source_sha256": "bbdbc1825d15226c969ce8287a49be6dd06642974d83920a278ae5420f5338f3",
+      "record": {
+        "command": [
+          "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine/executed/target/binaries/memoized",
+          "engine"
+        ],
+        "cwd": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/benchmark-results/phase_engine",
+        "returncode": 0,
+        "failure": null,
+        "wrapper_wall_seconds": 0.8694265570011339,
+        "wrapper_wall_is_benchmark_metric": false,
+        "stdout": "engine_memoized_vs_shared_4_memoized.stdout",
+        "stderr": "engine_memoized_vs_shared_4_memoized.stderr",
+        "stdout_bytes": 45814,
+        "stderr_bytes": 0,
+        "stdout_sha256": "06d0d0bb85c2d2d576ef149bd7334d048772983181cdbafa07a77b9c63c59f93",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ]
+}

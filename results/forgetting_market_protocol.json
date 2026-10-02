@@ -1,0 +1,161 @@
+{
+  "currencies": [
+    "NZD",
+    "SGD",
+    "KRW",
+    "ZAR"
+  ],
+  "horizons": [
+    1,
+    5
+  ],
+  "development": [
+    "2010-01-01",
+    "2019-12-31"
+  ],
+  "online_start": "2010-01-01",
+  "test_origin_start": "2020-01-01",
+  "common_end": "last_source_index - 5",
+  "new_columns_uninspected": true,
+  "comparators": [
+    "cumulative",
+    "arithmetic_fit",
+    "arithmetic_uniform",
+    "selected_expert",
+    "transformed_fit"
+  ],
+  "bootstrap": {
+    "replicates": 5000,
+    "lengths": [
+      20,
+      60
+    ],
+    "seed": 2026092621,
+    "upper_quantile": 0.95
+  },
+  "success": "ALL five upper95 limits below0 at BOTH lengths; if fallback=cumulative no new primary superiority can pass by definition",
+  "controls": "same8-expert bank and ridge=.01,9startsSLSQP as previous aggregation study",
+  "scope": "new asset columns in same previously examined market calendar; current ECB vintage, no independent prospective replication",
+  "schema": "gabriel.forgetting.market-protocol.v1",
+  "selection_sha256": "4461a948ded80e2acdd58e8a32f9e2eb81380a9e74cdd238cced420240f16224",
+  "primary_model": "cumulative",
+  "variants": [
+    {
+      "name": "cumulative",
+      "kind": "cumulative",
+      "memory": 0,
+      "c": 0.1
+    },
+    {
+      "name": "discount_125",
+      "kind": "discount",
+      "memory": 125,
+      "c": 0.1
+    },
+    {
+      "name": "discount_500",
+      "kind": "discount",
+      "memory": 500,
+      "c": 0.1
+    },
+    {
+      "name": "window_125",
+      "kind": "window",
+      "memory": 125,
+      "c": 0.1
+    },
+    {
+      "name": "window_500",
+      "kind": "window",
+      "memory": 500,
+      "c": 0.1
+    },
+    {
+      "name": "restart_125",
+      "kind": "restart",
+      "memory": 125,
+      "c": 0.1
+    },
+    {
+      "name": "restart_500",
+      "kind": "restart",
+      "memory": 500,
+      "c": 0.1
+    },
+    {
+      "name": "discount_125_c0p025",
+      "kind": "discount",
+      "memory": 125,
+      "c": 0.025
+    },
+    {
+      "name": "discount_125_c0p05",
+      "kind": "discount",
+      "memory": 125,
+      "c": 0.05
+    },
+    {
+      "name": "discount_125_c0p2",
+      "kind": "discount",
+      "memory": 125,
+      "c": 0.2
+    },
+    {
+      "name": "discount_500_c0p025",
+      "kind": "discount",
+      "memory": 500,
+      "c": 0.025
+    },
+    {
+      "name": "discount_500_c0p05",
+      "kind": "discount",
+      "memory": 500,
+      "c": 0.05
+    },
+    {
+      "name": "discount_500_c0p2",
+      "kind": "discount",
+      "memory": 500,
+      "c": 0.2
+    },
+    {
+      "name": "window_125_c0p025",
+      "kind": "window",
+      "memory": 125,
+      "c": 0.025
+    },
+    {
+      "name": "window_125_c0p05",
+      "kind": "window",
+      "memory": 125,
+      "c": 0.05
+    },
+    {
+      "name": "window_125_c0p2",
+      "kind": "window",
+      "memory": 125,
+      "c": 0.2
+    },
+    {
+      "name": "window_500_c0p025",
+      "kind": "window",
+      "memory": 500,
+      "c": 0.025
+    },
+    {
+      "name": "window_500_c0p05",
+      "kind": "window",
+      "memory": 500,
+      "c": 0.05
+    },
+    {
+      "name": "window_500_c0p2",
+      "kind": "window",
+      "memory": 500,
+      "c": 0.2
+    }
+  ],
+  "source_csv_sha256": "e8136f072d575cb891cb58718fe31602ca2d4feccee67f035106393ed1c4bdbb",
+  "frozen_utc": "2026-09-26T12:12:39.390832+00:00",
+  "gate": "When primary is unchanged cumulative, skip transfer entirely and retain unused data for a later scientifically distinct candidate."
+}

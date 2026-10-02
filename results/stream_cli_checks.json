@@ -1,0 +1,205 @@
+{
+  "status": "passed",
+  "subprocess_commands": 14,
+  "synthetic_demo": {
+    "correction_without_historical_reissue": true,
+    "current_feedback_changed": true,
+    "events": 322,
+    "example_kind": "synthetic",
+    "head": "5951046f5a15a10189d8416989c28d5f81c5b957ac00aec3c7966ede8afeb81a",
+    "issued_count": 10,
+    "last_issued_digest": "b7c3d5dca58966aa16885c4a689e7e400b387ad1e2f338fe2d857271bc22c734",
+    "pending_count": 1,
+    "prediction_basis": "next_unreceived_observation",
+    "profile": "stream",
+    "proposal": {
+      "budget_satisfied": true,
+      "es_exact": "1183636096777679/562949953421312",
+      "kind": "read_only_log_loss_proxy",
+      "max_units": 100,
+      "maximum_feasible": true,
+      "next_unit_proxy_loss": "5918180483888395/562949953421312",
+      "proxy_loss": "1183636096777679/140737488355328",
+      "risk_budget": "10",
+      "unit_exposure": "100",
+      "units": 4
+    },
+    "published_prefix_unchanged_after_correction": true,
+    "revision_count": 321,
+    "source_count": 320,
+    "status": "passed"
+  },
+  "profile_selection": "Explicit fixed registry; legacy default. Wrong profile rejected in both directions.",
+  "old_issued_prefix_preserved": true,
+  "current_feedback_changed": true,
+  "new_issue_digest": "b7c3d5dca58966aa16885c4a689e7e400b387ad1e2f338fe2d857271bc22c734",
+  "steps": [
+    {
+      "arguments": [
+        "stream-demo",
+        "--out",
+        "/tmp/gabriel-stream-cli-502kd98m/stream"
+      ],
+      "returncode": 0,
+      "stdout": "{\"correction_without_historical_reissue\":true,\"current_feedback_changed\":true,\"events\":322,\"example_kind\":\"synthetic\",\"head\":\"5951046f5a15a10189d8416989c28d5f81c5b957ac00aec3c7966ede8afeb81a\",\"issued_count\":10,\"last_issued_digest\":\"b7c3d5dca58966aa16885c4a689e7e400b387ad1e2f338fe2d857271bc22c734\",\"pending_count\":1,\"prediction_basis\":\"next_unreceived_observation\",\"profile\":\"stream\",\"proposal\":{\"budget_satisfied\":true,\"es_exact\":\"1183636096777679/562949953421312\",\"kind\":\"read_only_log_loss_proxy\",\"max_units\":100,\"maximum_feasible\":true,\"next_unit_proxy_loss\":\"5918180483888395/562949953421312\",\"proxy_loss\":\"1183636096777679/140737488355328\",\"risk_budget\":\"10\",\"unit_exposure\":\"100\",\"units\":4},\"published_prefix_unchanged_after_correction\":true,\"revision_count\":321,\"source_count\":320,\"status\":\"passed\"}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "audit",
+        "/tmp/gabriel-stream-cli-502kd98m/stream/owner.sqlite",
+        "--profile",
+        "stream",
+        "--anchor",
+        "/tmp/gabriel-stream-cli-502kd98m/stream/anchor.json"
+      ],
+      "returncode": 0,
+      "stdout": "{\"bytes\":81289,\"contracts\":1,\"events\":322,\"external_anchor_checked\":true,\"head\":\"5951046f5a15a10189d8416989c28d5f81c5b957ac00aec3c7966ede8afeb81a\",\"journal_mode\":\"delete\",\"semantic_replay\":true,\"status\":\"passed\",\"synchronous\":3}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "inspect",
+        "/tmp/gabriel-stream-cli-502kd98m/stream/owner.sqlite",
+        "--profile",
+        "stream",
+        "--contract",
+        "stream"
+      ],
+      "returncode": 0,
+      "stdout": "{\"arithmetic\":\"binary64\",\"horizon\":1,\"issued_count\":10,\"last_issued_digest\":\"b7c3d5dca58966aa16885c4a689e7e400b387ad1e2f338fe2d857271bc22c734\",\"learner\":{\"active_feedback\":[{\"accumulator_after_hex\":\"0x1.9602a42bacf5dp-6\",\"accumulator_before_hex\":\"0x0.0p+0\",\"centered_gradient_hex\":[\"-0x1.7a5c15d86c25bp-4\",\"0x1.fbc48bca1b29ap-5\",\"0x1.da5d63fe4f2eap-5\",\"0x1.5cb42963f8ecap-5\",\"0x1.9498992056e5ap-5\",\"-0x1.19d37d8cf28c6p-5\",\"-0x1.5c71848777a96p-5\",\"-0x1.5c71848777a96p-5\"],\"first_matured_at\":311,\"forecast_id\":\"synthetic-dyadic-prices:h1:i310\",\"gradient_hex\":[\"-0x1.127f00a432d70p-5\",\"0x1.eefedb6b604f0p-4\",\"0x1.de4b47857a518p-4\",\"0x1.9f76aa384f308p-4\",\"0x1.bb68e2167e2d0p-4\",\"0x1.90cb5aff65d00p-6\",\"0x1.0b8f4d0a5b960p-6\",\"0x1.0b8f4d0a5b960p-6\"],\"gradient_norm_squared_hex\":\"0x1.9602a42bacf5dp-6\",\"lane\":0,\"loss_hex\":\"0x1.5ca1bf5c5d387p+0\",\"post_weights_hex\":[\"0x1.782cf484b513cp-3\",\"0x1.5eb8b22c9800cp-4\",\"0x1.6954bc8a665a3p-4\",\"0x1.913e695f9ea70p-4\",\"0x1.7f7dba76f68d6p-4\",\"0x1.2cc1d67e891e1p-3\",\"0x1.375635dafc034p-3\",\"0x1.375635dafc034p-3\"],\"pre_weights_hex\":[\"0x1.0000000000000p-3\",\"0x1.0000000000000p-3\",\"0x1.0000000000000p-3\",\"0x1.0000000000000p-3\",\"0x1.0000000000000p-3\",\"0x1.0000000000000p-3\",\"0x1.0000000000000p-3\",\"0x1.0000000000000p-3\"],\"staleness_l2_hex\":\"0x0.0p+0\",\"step_hex\":\"0x1.453eddf3c5cabp-1\",\"target_after_issue\":true,\"target_event_at\":311,\"target_index\":311},{\"accumulator_after_hex\":\"0x1.b9f21f7febcd8p-6\",\"accumulator_before_hex\":\"0x1.9602a42bacf5dp-6\",\"centered_gradient_hex\":[\"-0x1.611ce09901d00p-8\",\"-0x1.4912a1a62e6c0p-7\",\"-0x1.54c09e0321800p-7\",\"-0x1.60c159c533980p-7\",\"-0x1.65b2ba1a05800p-7\",\"-0x1.39661c2775200p-7\",\"0x1.d2e3fb84b6ea0p-6\",\"0x1.d439f479889c0p-6\"],\"first_matured_at\":312,\"forecast_id\":\"synthetic-dyadic-prices:h1:i311\",\"gradient_hex\":[\"-0x1.c58322273c6f8p-4\",\"-0x1.d893a85272200p-4\",\"-0x1.da0967de10828p-4\",\"-0x1.db897f5652c58p-4\",\"-0x1.dc27ab60ed028p-4\",\"-0x1.d69e17a29af68p-4\",\"-0x1.3ab8553c7e980p-4\",\"-0x1.3a62d6ff4a2b8p-4\"],\"gradient_norm_squared_hex\":\"0x1.1f7bdaa1f6bd6p-9\",\"lane\":0,\"loss_hex\":\"-0x1.f25a0829cf3f7p+0\",\"post_weights_hex\":[\"0x1.7ee4f4fee6e48p-3\",\"0x1.77c44f7ebe740p-4\",\"0x1.8343ea62c9715p-4\",\"0x1.ac1773fcf83dcp-4\",\"0x1.9ab71384ea9bbp-4\",\"0x1.38aef3695113bp-3\",\"0x1.13cd5eecbf6bdp-3\",\"0x1.13b357f9533c9p-3\"],\"pre_weights_hex\":[\"0x1.782cf484b513cp-3\",\"0x1.5eb8b22c9800cp-4\",\"0x1.6954bc8a665a3p-4\",\"0x1.913e695f9ea70p-4\",\"0x1.7f7dba76f68d6p-4\",\"0x1.2cc1d67e891e1p-3\",\"0x1.375635dafc034p-3\",\"0x1.375635dafc034p-3\"],\"staleness_l2_hex\":\"0x0.0p+0\",\"step_hex\":\"0x1.37bdf8f142e34p-1\",\"target_after_issue\":true,\"target_event_at\":312,\"target_index\":312},{\"accumulator_after_hex\":\"0x1.e069bdfa72377p-6\",\"accumulator_before_hex\":\"0x1.b9f21f7febcd8p-6\",\"centered_gradient_hex\":[\"-0x1.9d2985e7c90f8p-7\",\"-0x1.e68761f81dbf8p-7\",\"-0x1.8ed7b07650c38p-7\",\"-0x1.37567b62b3ef8p-7\",\"-0x1.b1d813becd7f0p-8\",\"-0x1.251b4f14d0de0p-9\",\"0x1.d9c14c50039c4p-6\",\"0x1.dc47ac5ebfa04p-6\"],\"first_matured_at\":313,\"forecast_id\":\"synthetic-dyadic-prices:h1:i312\",\"gradient_hex\":[\"-0x1.ad1cb1ba0a9c8p-4\",\"-0x1.b6486d3c15328p-4\",\"-0x1.ab52770bdb930p-4\",\"-0x1.a062506967f88p-4\",\"-0x1.94950238fe528p-4\",\"-0x1.82a05b75b8018p-4\",\"-0x1.03072de910938p-4\",\"-0x1.026595e561928p-4\"],\"gradient_norm_squared_hex\":\"0x1.33bcf3d4334f7p-9\",\"lane\":0,\"loss_hex\":\"0x1.1a84def1e4800p+0\",\"post_weights_hex\":[\"0x1.8df97407d5f98p-3\",\"0x1.9b4858a6b11d7p-4\",\"0x1.a0614ef9beb1bp-4\",\"0x1.c2d198b8eb234p-4\",\"0x1.aa8cd1b24cb9cp-4\",\"0x1.3b5ba1beb1c77p-3\",\"0x1.e2701753b1fdep-4\",\"0x1.e1ddab1396d3ep-4\"],\"pre_weights_hex\":[\"0x1.7ee4f4fee6e48p-3\",\"0x1.77c44f7ebe740p-4\",\"0x1.8343ea62c9715p-4\",\"0x1.ac1773fcf83dcp-4\",\"0x1.9ab71384ea9bbp-4\",\"0x1.38aef3695113bp-3\",\"0x1.13cd5eecbf6bdp-3\",\"0x1.13b357f9533c9p-3\"],\"staleness_l2_hex\":\"0x0.0p+0\",\"step_hex\":\"0x1.2b003c8c4d449p-1\",\"target_after_issue\":true,\"target_event_at\":313,\"target_index\":313},{\"accumulator_after_hex\":\"0x1.f84c0b24db4dbp-6\",\"accumulator_before_hex\":\"0x1.e069bdfa72377p-6\",\"centered_gradient_hex\":[\"-0x1.b50f7327e4a60p-8\",\"-0x1.4f622ae6e4db0p-7\",\"-0x1.30cd8b43c67b0p-7\",\"-0x1.1278a7cb8d330p-7\",\"-0x1.dacb8d5796760p-8\",\"-0x1.2dfd209132560p-8\",\"0x1.7aa1ac12ad788p-6\",\"0x1.7e288b2c9a288p-6\"],\"first_matured_at\":314,\"forecast_id\":\"synthetic-dyadic-prices:h1:i313\",\"gradient_hex\":[\"-0x1.61bbc50414d28p-4\",\"-0x1.7057132e73238p-4\",\"-0x1.6c847f3a0f578p-4\",\"-0x1.68b9e2cb082e8p-4\",\"-0x1.641786a70fef8p-4\",\"-0x1.594a9fdaa9ad8p-4\",\"-0x1.cf84c599d6540p-5\",\"-0x1.cdc1560cdffc0p-5\"],\"gradient_norm_squared_hex\":\"0x1.7e24d2a691645p-10\",\"lane\":0,\"loss_hex\":\"0x1.176f67c8ed1a9p+0\",\"post_weights_hex\":[\"0x1.95c26949eba3ep-3\",\"0x1.b32da06d937a9p-4\",\"0x1.b618cf521e87ap-4\",\"0x1.d65fdc242155dp-4\",\"0x1.bb76deb3f6c06p-4\",\"0x1.40bcaccaba4c0p-3\",\"0x1.ac7bded12648ap-4\",\"0x1.ab68ca6dc3bf1p-4\"],\"pre_weights_hex\":[\"0x1.8df97407d5f98p-3\",\"0x1.9b4858a6b11d7p-4\",\"0x1.a0614ef9beb1bp-4\",\"0x1.c2d198b8eb234p-4\",\"0x1.aa8cd1b24cb9cp-4\",\"0x1.3b5ba1beb1c77p-3\",\"0x1.e2701753b1fdep-4\",\"0x1.e1ddab1396d3ep-4\"],\"staleness_l2_hex\":\"0x0.0p+0\",\"step_hex\":\"0x1.23d5a5a01445dp-1\",\"target_after_issue\":true,\"target_event_at\":314,\"target_index\":314},{\"accumulator_after_hex\":\"0x1.03b7036aaf15dp-5\",\"accumulator_before_hex\":\"0x1.f84c0b24db4dbp-6\",\"centered_gradient_hex\":[\"-0x1.2c1065a8e5b40p-10\",\"-0x1.864e74cc1e3d0p-8\",\"-0x1.b7ca8fdd778d0p-8\",\"-0x1.eae6a95a38350p-8\",\"-0x1.08e59cf9d28a8p-7\",\"-0x1.d6def12d40850p-8\",\"0x1.29628ab7bce2cp-6\",\"0x1.2dc8f1ebfe5ecp-6\"],\"first_matured_at\":315,\"forecast_id\":\"synthetic-dyadic-prices:h1:i314\",\"gradient_hex\":[\"-0x1.240f414c9f568p-4\",\"-0x1.37c3e702bda38p-4\",\"-0x1.3adba8b3d3388p-4\",\"-0x1.3e0d6a4b9f430p-4\",\"-0x1.407bb35536110p-4\",\"-0x1.3ccceec8cfc80p-4\",\"-0x1.aa0cba10190e0p-5\",\"-0x1.a7d98675f8500p-5\"],\"gradient_norm_squared_hex\":\"0x1.e43f76105bbcdp-11\",\"lane\":0,\"loss_hex\":\"-0x1.ac60ccc39e0ccp+0\",\"post_weights_hex\":[\"0x1.971375542af5ap-3\",\"0x1.c0e0ebe78c8f0p-4\",\"0x1.c588c66ca238dp-4\",\"0x1.e79b18fe48ab9p-4\",\"0x1.ce0f994504488p-4\",\"0x1.49004c5e62973p-3\",\"0x1.82baa9ec55974p-4\",\"0x1.81096e1713932p-4\"],\"pre_weights_hex\":[\"0x1.95c26949eba3ep-3\",\"0x1.b32da06d937a9p-4\",\"0x1.b618cf521e87ap-4\",\"0x1.d65fdc242155dp-4\",\"0x1.bb76deb3f6c06p-4\",\"0x1.40bcaccaba4c0p-3\",\"0x1.ac7bded12648ap-4\",\"0x1.ab68ca6dc3bf1p-4\"],\"staleness_l2_hex\":\"0x0.0p+0\",\"step_hex\":\"0x1.1f8d54abfe289p-1\",\"target_after_issue\":true,\"target_event_at\":315,\"target_index\":315},{\"accumulator_after_hex\":\"0x1.180ca4ba5841cp+10\",\"accumulator_before_hex\":\"0x1.03b7036aaf15dp-5\",\"centered_gradient_hex\":[\"0x1.a636fe62e8590p+2\",\"0x1.c07223d8c72a0p+2\",\"0x1.beadec25e21b0p+2\",\"0x1.bb9c359f54ef0p+2\",\"0x1.b4c9d623d6450p+2\",\"0x1.a96ba2ea97e10p+2\",\"-0x1.44fe97b117c30p+4\",\"-0x1.4acb9792bd694p+4\"],\"first_matured_at\":316,\"forecast_id\":\"synthetic-dyadic-prices:h1:i315\",\"gradient_hex\":[\"0x1.4a3c1ca08f71ap+6\",\"0x1.4bdfcef7ed5ebp+6\",\"0x1.4bc38b7cbf0dcp+6\",\"0x1.4b927014563b0p+6\",\"0x1.4b254a1c9e506p+6\",\"0x1.4a6f66e90a6a2p+6\",\"0x1.bd320d9c35f6ap+5\",\"0x1.ba4b8dab63238p+5\"],\"gradient_norm_squared_hex\":\"0x1.180a9d4c516c6p+10\",\"lane\":0,\"loss_hex\":\"0x1.0b33eb4f864f0p+2\",\"post_weights_hex\":[\"0x1.6eb546bc7a964p-3\",\"0x1.6b207d3828b8ep-4\",\"0x1.701ed0ce33549p-4\",\"0x1.92c761ca64d14p-4\",\"0x1.7a89d2f2a5063p-4\",\"0x1.2053a79fd22b9p-3\",\"0x1.3da7c105ff61fp-3\",\"0x1.3f070f3c00e99p-3\"],\"pre_weights_hex\":[\"0x1.971375542af5ap-3\",\"0x1.c0e0ebe78c8f0p-4\",\"0x1.c588c66ca238dp-4\",\"0x1.e79b18fe48ab9p-4\",\"0x1.ce0f994504488p-4\",\"0x1.49004c5e62973p-3\",\"0x1.82baa9ec55974p-4\",\"0x1.81096e1713932p-4\"],\"staleness_l2_hex\":\"0x0.0p+0\",\"step_hex\":\"0x1.879e338a3dac8p-9\",\"target_after_issue\":true,\"target_event_at\":316,\"target_index\":316},{\"accumulator_after_hex\":\"0x1.180cadf49e221p+10\",\"accumulator_before_hex\":\"0x1.180ca4ba5841cp+10\",\"centered_gradient_hex\":[\"0x1.586c825beb300p-10\",\"-0x1.fd30c2cf71480p-9\",\"-0x1.498a6e395f3c0p-8\",\"-0x1.96bf2467d6340p-8\",\"-0x1.d8b9f6101d640p-8\",\"-0x1.b9616994c1340p-8\",\"0x1.c141da4880aa0p-7\",\"0x1.cc2f3f42e8460p-7\"],\"first_matured_at\":317,\"forecast_id\":\"synthetic-dyadic-prices:h1:i316\",\"gradient_hex\":[\"-0x1.c134d075399d0p-5\",\"-0x1.ebcb40b5100b0p-5\",\"-0x1.f529824f44de0p-5\",\"-0x1.fed0191513bd0p-5\",\"-0x1.0387b9a50e518p-4\",\"-0x1.019230dd588e8p-4\",\"-0x1.5ba7bdf5f8cc0p-5\",\"-0x1.58ec64b75ee50p-5\"],\"gradient_norm_squared_hex\":\"0x1.2748bc098afd7p-11\",\"lane\":0,\"loss_hex\":\"-0x1.fdbff75ca5e5bp+0\",\"post_weights_hex\":[\"0x1.6eb337d9efda0p-3\",\"0x1.6b2ca8f885feep-4\",\"0x1.702e91be91f4cp-4\",\"0x1.92dad39476854p-4\",\"0x1.7aa06c338bdcbp-4\",\"0x1.205e3471d2a51p-3\",\"0x1.3d9246fcae151p-3\",\"0x1.3ef10f780240fp-3\"],\"pre_weights_hex\":[\"0x1.6eb546bc7a964p-3\",\"0x1.6b207d3828b8ep-4\",\"0x1.701ed0ce33549p-4\",\"0x1.92c761ca64d14p-4\",\"0x1.7a89d2f2a5063p-4\",\"0x1.2053a79fd22b9p-3\",\"0x1.3da7c105ff61fp-3\",\"0x1.3f070f3c00e99p-3\"],\"staleness_l2_hex\":\"0x1.dc23c839b4b0cp-4\",\"step_hex\":\"0x1.879e2d168da69p-9\",\"target_after_issue\":true,\"target_event_at\":317,\"target_index\":317},{\"accumulator_after_hex\":\"0x1.180cb57220d39p+10\",\"accumulator_before_hex\":\"0x1.180cadf49e221p+10\",\"centered_gradient_hex\":[\"0x1.9e0773021d280p-8\",\"-0x1.b7277b7432000p-13\",\"-0x1.81a259fed0b00p-9\",\"-0x1.786421333c380p-8\",\"-0x1.13837100092c0p-7\",\"-0x1.3b34f6db01840p-7\",\"0x1.4b61e71207600p-7\",\"0x1.57ca0c4f17cc0p-7\"],\"first_matured_at\":318,\"forecast_id\":\"synthetic-dyadic-prices:h1:i317\",\"gradient_hex\":[\"-0x1.707f90e433d50p-5\",\"-0x1.a5f7a6bfebac0p-5\",\"-0x1.bc5aa4e464850p-5\",\"-0x1.d34d036adf010p-5\",\"-0x1.e9215b8479c50p-5\",\"-0x1.f30dbcfb37db0p-5\",\"-0x1.5168057ff5a20p-5\",\"-0x1.4e4dfc30b1870p-5\"],\"gradient_norm_squared_hex\":\"0x1.df60ac5f851f9p-12\",\"lane\":0,\"loss_hex\":\"-0x1.ee8c17cd1b572p+0\",\"post_weights_hex\":[\"0x1.6ea9526549076p-3\",\"0x1.6b2d50ebad114p-4\",\"0x1.7037c97368b34p-4\",\"0x1.92ecd1e02f4f9p-4\",\"0x1.7abac3b305810p-4\",\"0x1.206d45f6d8f64p-3\",\"0x1.3d826f829e9cap-3\",\"0x1.3ee0a0281a1b2p-3\"],\"pre_weights_hex\":[\"0x1.6eb337d9efda0p-3\",\"0x1.6b2ca8f885feep-4\",\"0x1.702e91be91f4cp-4\",\"0x1.92dad39476854p-4\",\"0x1.7aa06c338bdcbp-4\",\"0x1.205e3471d2a51p-3\",\"0x1.3d9246fcae151p-3\",\"0x1.3ef10f780240fp-3\"],\"staleness_l2_hex\":\"0x1.079c239103261p-3\",\"step_hex\":\"0x1.879e27d9d78b7p-9\",\"target_after_issue\":true,\"target_event_at\":318,\"target_index\":318},{\"accumulator_after_hex\":\"0x1.180e3b3509361p+10\",\"accumulator_before_hex\":\"0x1.180cb57220d39p+10\",\"centered_gradient_hex\":[\"-0x1.9a0de10534faep-4\",\"0x1.f9a39db105924p-5\",\"0x1.bcc154bf21ed4p-5\",\"0x1.8ada91b7c3514p-5\",\"0x1.29dc1f1e2fd04p-5\",\"-0x1.12e8b51dfd55cp-5\",\"-0x1.120e002e6016cp-5\",\"-0x1.12092bef533ecp-5\"],\"first_matured_at\":320,\"forecast_id\":\"synthetic-dyadic-prices:h1:i318\",\"gradient_hex\":[\"-0x1.11ec67d408218p-4\",\"0x1.84f34809afa28p-4\",\"0x1.66822390bdd00p-4\",\"0x1.4d8ec20d0e820p-4\",\"0x1.1d0f88c044c18p-4\",\"-0x1.52e15dd1d1800p-12\",\"-0x1.cb0dcc0664000p-13\",\"-0x1.c6398cf98c000p-13\"],\"gradient_norm_squared_hex\":\"0x1.85c2e86281266p-6\",\"lane\":0,\"loss_hex\":\"0x1.5bfa69821abd4p+0\",\"post_weights_hex\":[\"0x1.6f462419edd78p-3\",\"0x1.6a6bf1205ad05p-4\",\"0x1.6f8db26685b31p-4\",\"0x1.9255d05808e8cp-4\",\"0x1.7a48da345a314p-4\",\"0x1.20a1d73aa5e12p-3\",\"0x1.3db6d6f459ab8p-3\",\"0x1.3f1506ad70cd0p-3\"],\"pre_weights_hex\":[\"0x1.6ea9526549076p-3\",\"0x1.6b2d50ebad114p-4\",\"0x1.7037c97368b34p-4\",\"0x1.92ecd1e02f4f9p-4\",\"0x1.7abac3b305810p-4\",\"0x1.206d45f6d8f64p-3\",\"0x1.3d826f829e9cap-3\",\"0x1.3ee0a0281a1b2p-3\"],\"staleness_l2_hex\":\"0x1.1b1a40ab8c28ep-3\",\"step_hex\":\"0x1.879d17562fd1ap-9\",\"target_after_issue\":true,\"target_event_at\":319,\"target_index\":319}],\"lane_accumulators_hex\":[\"0x1.180e3b3509361p+10\"],\"lane_weights_hex\":[[\"0x1.6f462419edd78p-3\",\"0x1.6a6bf1205ad05p-4\",\"0x1.6f8db26685b31p-4\",\"0x1.9255d05808e8cp-4\",\"0x1.7a48da345a314p-4\",\"0x1.20a1d73aa5e12p-3\",\"0x1.3db6d6f459ab8p-3\",\"0x1.3f1506ad70cd0p-3\"]],\"severity_raw_ratio_hex\":[\"0x1.ed4c59394ef32p+0\",\"0x1.9bb827a528cbcp+0\"]},\"pending_count\":1,\"prediction_basis\":\"next_unreceived_observation\",\"reason\":null,\"revision_count\":321,\"semantic_profile\":\"stream-risk/v1\",\"source_count\":320,\"source_id\":\"synthetic-dyadic-prices\",\"status\":\"issued\"}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "export",
+        "/tmp/gabriel-stream-cli-502kd98m/stream/owner.sqlite",
+        "--profile",
+        "stream",
+        "--out",
+        "/tmp/gabriel-stream-cli-502kd98m/export.json"
+      ],
+      "returncode": 0,
+      "stdout": "{\"events\":322,\"status\":\"exported\"}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "submit",
+        "/tmp/gabriel-stream-cli-502kd98m/stream/owner.sqlite",
+        "--profile",
+        "stream",
+        "--command",
+        "{\"at\": 0, \"contract\": \"stream\", \"expected_head\": \"5dd6b62f0902dcd5afffda7d92a95a8c3710b577ad50fa3960d15131d607bd63\", \"id\": \"stream-demo-1\", \"op\": \"bind\", \"payload\": {\"adapter\": \"stream-risk/v1\", \"config\": {\"horizon\": 1, \"max_units\": 100, \"risk_budget\": \"10\", \"source_id\": \"synthetic-dyadic-prices\", \"unit_exposure\": \"100\"}}}"
+      ],
+      "returncode": 0,
+      "stdout": "{\"command_id\":\"stream-demo-1\",\"contract\":\"stream\",\"head\":\"0b40b225ae665ccabed6608b70b4244946342de028599702abbbf8aef60c0066\",\"result\":{\"arithmetic\":\"binary64\",\"horizon\":1,\"issued_count\":0,\"last_issued_digest\":null,\"learner\":{\"active_feedback\":[],\"lane_accumulators_hex\":[\"0x0.0p+0\"],\"lane_weights_hex\":[[\"0x1.0000000000000p-3\",\"0x1.0000000000000p-3\",\"0x1.0000000000000p-3\",\"0x1.0000000000000p-3\",\"0x1.0000000000000p-3\",\"0x1.0000000000000p-3\",\"0x1.0000000000000p-3\",\"0x1.0000000000000p-3\"]],\"severity_raw_ratio_hex\":[\"0x1.8000000000000p+0\",\"0x1.8000000000000p+0\"]},\"pending_count\":0,\"prediction_basis\":\"next_unreceived_observation\",\"reason\":\"no_source_records\",\"revision_count\":0,\"semantic_profile\":\"stream-risk/v1\",\"source_count\":0,\"source_id\":\"synthetic-dyadic-prices\",\"status\":\"empty\"},\"sequence\":1}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "audit",
+        "/tmp/gabriel-stream-cli-502kd98m/stream/owner.sqlite",
+        "--profile",
+        "stream",
+        "--anchor",
+        "/tmp/gabriel-stream-cli-502kd98m/stream/anchor.json"
+      ],
+      "returncode": 0,
+      "stdout": "{\"bytes\":81289,\"contracts\":1,\"events\":322,\"external_anchor_checked\":true,\"head\":\"5951046f5a15a10189d8416989c28d5f81c5b957ac00aec3c7966ede8afeb81a\",\"journal_mode\":\"delete\",\"semantic_replay\":true,\"status\":\"passed\",\"synchronous\":3}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "audit",
+        "/tmp/gabriel-stream-cli-502kd98m/stream/owner.sqlite"
+      ],
+      "returncode": 2,
+      "stdout": "",
+      "stderr": "Gabriel runtime: header or adapter fingerprint mismatch\n"
+    },
+    {
+      "arguments": [
+        "inspect",
+        "/tmp/gabriel-stream-cli-502kd98m/stream/owner.sqlite",
+        "--profile",
+        "legacy",
+        "--contract",
+        "stream"
+      ],
+      "returncode": 2,
+      "stdout": "",
+      "stderr": "Gabriel runtime: header or adapter fingerprint mismatch\n"
+    },
+    {
+      "arguments": [
+        "stream-demo",
+        "--out",
+        "/tmp/gabriel-stream-cli-502kd98m/stream"
+      ],
+      "returncode": 2,
+      "stdout": "",
+      "stderr": "Gabriel runtime: [Errno 17] File exists: '/tmp/gabriel-stream-cli-502kd98m/stream'\n"
+    },
+    {
+      "arguments": [
+        "audit",
+        "/tmp/gabriel-stream-cli-502kd98m/stream/owner.sqlite",
+        "--profile",
+        "stream",
+        "--anchor",
+        "{\"events\": 323, \"head\": \"5951046f5a15a10189d8416989c28d5f81c5b957ac00aec3c7966ede8afeb81a\"}"
+      ],
+      "returncode": 2,
+      "stdout": "",
+      "stderr": "Gabriel runtime: external expected event count mismatch\n"
+    },
+    {
+      "arguments": [
+        "demo",
+        "--out",
+        "/tmp/gabriel-stream-cli-502kd98m/legacy"
+      ],
+      "returncode": 0,
+      "stdout": "{\"events\":9,\"example_kind\":\"synthetic\",\"finite_result\":{\"compatible_count\":1,\"compatible_weight\":1,\"cutoff\":2,\"label\":0,\"status\":\"decided\"},\"head\":\"fddfa2b0c99007b4b2a11c0da4b1c6b4b89bec987142ec6f6f56cd9f0cc7f5db\",\"risk_after_correction\":{\"0\":{\"theta_units\":-1,\"updates\":1}},\"risk_after_maturity\":{\"0\":{\"theta_units\":39,\"updates\":1}},\"risk_as_of_first_maturity\":{\"0\":{\"theta_units\":39,\"updates\":1}},\"separate_conflict_included\":false,\"status\":\"passed\"}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "audit",
+        "/tmp/gabriel-stream-cli-502kd98m/legacy/owner.sqlite",
+        "--profile",
+        "legacy",
+        "--anchor",
+        "/tmp/gabriel-stream-cli-502kd98m/legacy/anchor.json"
+      ],
+      "returncode": 0,
+      "stdout": "{\"bytes\":2989,\"contracts\":2,\"events\":9,\"external_anchor_checked\":true,\"head\":\"fddfa2b0c99007b4b2a11c0da4b1c6b4b89bec987142ec6f6f56cd9f0cc7f5db\",\"journal_mode\":\"delete\",\"semantic_replay\":true,\"status\":\"passed\",\"synchronous\":3}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "audit",
+        "/tmp/gabriel-stream-cli-502kd98m/legacy/owner.sqlite",
+        "--profile",
+        "stream"
+      ],
+      "returncode": 2,
+      "stdout": "",
+      "stderr": "Gabriel runtime: header or adapter fingerprint mismatch\n"
+    },
+    {
+      "arguments": [
+        "audit",
+        "/workspace/scratch/657e86c899c9/tmp/gabriel_os/cli_demo/owner.sqlite",
+        "--profile",
+        "legacy",
+        "--anchor",
+        "/workspace/scratch/657e86c899c9/tmp/gabriel_os/cli_demo/anchor.json"
+      ],
+      "returncode": 0,
+      "stdout": "{\"bytes\":3973,\"contracts\":3,\"events\":12,\"external_anchor_checked\":true,\"head\":\"cee6433a18f7d8b1ed6c2a9795ed15b43991b0c0b07178df03cd4224bde0ae56\",\"journal_mode\":\"delete\",\"semantic_replay\":true,\"status\":\"passed\",\"synchronous\":3}\n",
+      "stderr": ""
+    }
+  ]
+}

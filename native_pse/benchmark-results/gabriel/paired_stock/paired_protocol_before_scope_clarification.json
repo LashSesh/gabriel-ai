@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "experiment": "PSE current Linux reference versus Gabriel small-signature fork",
+  "versions": {
+    "original_executable": "/workspace/scratch/657e86c899c9/tmp/gabriel_pse/build/target/release/deps/engine-15471ebf6c9738fa",
+    "fork_executable": "/workspace/scratch/657e86c899c9/tmp/gabriel_pse/fork-target/release/deps/engine-15471ebf6c9738fa"
+  },
+  "repetitions_external": 3,
+  "inner_harness_repetitions_per_workload": 5,
+  "pair_orders": [
+    [
+      "original",
+      "fork"
+    ],
+    [
+      "fork",
+      "original"
+    ],
+    [
+      "original",
+      "fork"
+    ]
+  ],
+  "metric": "paired ratio of per-invocation medians of observation throughput; latency per tick",
+  "platform_counters": "unavailable on Linux; do not interpret zero as measurement",
+  "inputs": "unchanged supplied benches/engine.rs deterministic batches; each invocation creates new process/state",
+  "source_harness_equal": true,
+  "state_comparison": "complete current-run golden JSON stdout exact bytes (contains hashes and scalar trace metadata, not raw full states)",
+  "limits": [
+    "synthetic fixed-order workloads",
+    "three external pairs, no inferential CI",
+    "reference and fork same host/compiler, no CPU affinity/frequency lock",
+    "does not time Gabriel persistence or forecasting",
+    "golden state hashes are collision-resistant comparisons, not direct raw state bytes"
+  ],
+  "cpu_model": "AMD EPYC 9V74 80-Core Processor",
+  "suite": "stock"
+}

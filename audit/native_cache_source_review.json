@@ -1,0 +1,259 @@
+{
+  "schema": 1,
+  "review_type": "mechanical source-byte comparison; no build or tests",
+  "reviewed_at_utc": "2026-09-26T19:18:41.018713+00:00",
+  "baseline": {
+    "archive": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel_Research_Project.zip",
+    "archive_bytes": 394747799,
+    "archive_mtime_utc": "2026-09-26T18:32:39.046345+00:00",
+    "entry_prefix": "Gabriel/",
+    "description": "Prior delivered archive, inspected before its planned rebuild; entry hashes bind the compared baseline bytes."
+  },
+  "current_root": "/workspace/scratch/657e86c899c9/recovered/project/Gabriel",
+  "scope": {
+    "native_extensions": [
+      ".rs",
+      ".toml",
+      ".lock"
+    ],
+    "runtime": "gabriel_runtime/**/*.py",
+    "excluded": [
+      "manuscript and documentation",
+      "build targets",
+      "native Python benchmark helpers and other extensions unless explicitly listed as protected"
+    ],
+    "pruned_local_build_directories": [
+      "native_pse/benchmark-results/indexed_engine/executed/target",
+      "native_pse/target"
+    ],
+    "notes": "New executed/frozen_*.rs/.toml/.lock files are recorded as benchmark snapshots, not hand-edited implementation source. Only changed/new/removed paths appear in the change lists."
+  },
+  "native": {
+    "baseline_file_count": 68,
+    "current_file_count": 75,
+    "changed_count": 7,
+    "new_count": 7,
+    "removed_count": 0,
+    "files": [
+      {
+        "path": "native_pse/Cargo.toml",
+        "change": "changed",
+        "category": "native_source",
+        "baseline_sha256": "d82e3a86eb5d901c641e639f7f6c23edc010fd8799dc332b51c48a6cfb90e2a4",
+        "current_sha256": "29371d11e5df0d7f6ceca3c33ae75aea025cb728f9ac3622b25357754ebd67d9",
+        "baseline_bytes": 1278,
+        "current_bytes": 1561,
+        "added_lines": 7,
+        "removed_lines": 1,
+        "changed_lines_only_blank_or_line_comments": false
+      },
+      {
+        "path": "native_pse/benchmark-results/indexed_engine/Cargo.lock",
+        "change": "new",
+        "category": "benchmark_source",
+        "baseline_sha256": null,
+        "current_sha256": "1acdbbf41d4e1db67c006121920208642d39d037f4a90002ffdc9734ee4d5157",
+        "baseline_bytes": null,
+        "current_bytes": 16668
+      },
+      {
+        "path": "native_pse/benchmark-results/indexed_engine/Cargo.toml",
+        "change": "new",
+        "category": "benchmark_source",
+        "baseline_sha256": null,
+        "current_sha256": "8a1a9ff88b27ddee41783e1f7fa807aadd75cce0b1e3509bae569cba46a87555",
+        "baseline_bytes": null,
+        "current_bytes": 691
+      },
+      {
+        "path": "native_pse/benchmark-results/indexed_engine/executed/frozen_Cargo.lock",
+        "change": "new",
+        "category": "generated_benchmark_snapshot",
+        "baseline_sha256": null,
+        "current_sha256": "1acdbbf41d4e1db67c006121920208642d39d037f4a90002ffdc9734ee4d5157",
+        "baseline_bytes": null,
+        "current_bytes": 16668
+      },
+      {
+        "path": "native_pse/benchmark-results/indexed_engine/executed/frozen_Cargo.toml",
+        "change": "new",
+        "category": "generated_benchmark_snapshot",
+        "baseline_sha256": null,
+        "current_sha256": "8a1a9ff88b27ddee41783e1f7fa807aadd75cce0b1e3509bae569cba46a87555",
+        "baseline_bytes": null,
+        "current_bytes": 691
+      },
+      {
+        "path": "native_pse/benchmark-results/indexed_engine/executed/frozen_main.rs",
+        "change": "new",
+        "category": "generated_benchmark_snapshot",
+        "baseline_sha256": null,
+        "current_sha256": "7e6b679a3f343269e5a8ef3dadec45c959126fba9fd9fea28c915b74604ffae2",
+        "baseline_bytes": null,
+        "current_bytes": 15672
+      },
+      {
+        "path": "native_pse/benchmark-results/indexed_engine/src/main.rs",
+        "change": "new",
+        "category": "benchmark_source",
+        "baseline_sha256": null,
+        "current_sha256": "7e6b679a3f343269e5a8ef3dadec45c959126fba9fd9fea28c915b74604ffae2",
+        "baseline_bytes": null,
+        "current_bytes": 15672
+      },
+      {
+        "path": "native_pse/crates/pse-core/Cargo.toml",
+        "change": "changed",
+        "category": "native_source",
+        "baseline_sha256": "7c4fc187b0dbac5bd6a53525bc1f8a5300443d10172cc38ca38a57da1db4d69d",
+        "current_sha256": "089d61c4c5ae41e7ec6ac77a27c4ee70ab1f402d159526be15f4f26dead24f0f",
+        "baseline_bytes": 1208,
+        "current_bytes": 1286,
+        "added_lines": 1,
+        "removed_lines": 0,
+        "changed_lines_only_blank_or_line_comments": false
+      },
+      {
+        "path": "native_pse/crates/pse-core/src/metatron_attach.rs",
+        "change": "changed",
+        "category": "native_source",
+        "baseline_sha256": "efcb8df507c068080bdc7a76d3665911ede4e88a1830533dc22590d2d0317941",
+        "current_sha256": "8b033de4532c4a8009f33b5a001e0ff0295db335044e4c676420fdb2e797003f",
+        "baseline_bytes": 8989,
+        "current_bytes": 9212,
+        "added_lines": 5,
+        "removed_lines": 3,
+        "changed_lines_only_blank_or_line_comments": false
+      },
+      {
+        "path": "native_pse/crates/pse-metatron/Cargo.toml",
+        "change": "changed",
+        "category": "native_source",
+        "baseline_sha256": "008191688f15d89d8e5896d63019205d7a97911be14b9d4f8f45f6288aea071b",
+        "current_sha256": "b4b5516bd15d9681df892946b3f8678e99afce521f2cda413001513c3d39a903",
+        "baseline_bytes": 718,
+        "current_bytes": 761,
+        "added_lines": 1,
+        "removed_lines": 0,
+        "changed_lines_only_blank_or_line_comments": false
+      },
+      {
+        "path": "native_pse/crates/pse-metatron/src/indexed_signature.rs",
+        "change": "changed",
+        "category": "native_source",
+        "baseline_sha256": "a3a81793ba8053bc430ce148ebc4537b144a1f93ef1310dea0565a793cd28d77",
+        "current_sha256": "745fbe58c3a2cd1600e6f45d4684ab9ae71dc231380f6bed3d879b187097f8e0",
+        "baseline_bytes": 4410,
+        "current_bytes": 4998,
+        "added_lines": 14,
+        "removed_lines": 0,
+        "changed_lines_only_blank_or_line_comments": false
+      },
+      {
+        "path": "native_pse/crates/pse-metatron/src/lib.rs",
+        "change": "changed",
+        "category": "native_source",
+        "baseline_sha256": "ceec02f301b96d851a5fd68d43e06577f497cc83979a8722044e6b7ab60f48ff",
+        "current_sha256": "52d11ab04febed18dc648b96facff2289fdf1874a25fd388d20888431c167a41",
+        "baseline_bytes": 1572,
+        "current_bytes": 1640,
+        "added_lines": 3,
+        "removed_lines": 0,
+        "changed_lines_only_blank_or_line_comments": false
+      },
+      {
+        "path": "native_pse/crates/pse-metatron/src/memoized_signature.rs",
+        "change": "new",
+        "category": "native_source",
+        "baseline_sha256": null,
+        "current_sha256": "a5c4f58ffe20f69149b29beda5d627fb1195dd17b37820f8d040a2043f4aa790",
+        "baseline_bytes": null,
+        "current_bytes": 14689
+      },
+      {
+        "path": "native_pse/crates/pse-types/src/lib.rs",
+        "change": "changed",
+        "category": "native_source",
+        "baseline_sha256": "92c6f429f89efc484b8688a44ca1168c85faba5783d5a94ea21e06b170814fe2",
+        "current_sha256": "c5199094d2fada729cc110bfba7adef37c98d04eb2cdfe5a6cceda8b2f9c9ef7",
+        "baseline_bytes": 47878,
+        "current_bytes": 47534,
+        "added_lines": 11,
+        "removed_lines": 20,
+        "changed_lines_only_blank_or_line_comments": true
+      }
+    ]
+  },
+  "python_runtime": {
+    "baseline_file_count": 10,
+    "current_file_count": 10,
+    "all_bytes_unchanged": true,
+    "changes": [],
+    "manifest_encoding": "SHA-256 of UTF-8 JSON compact sorted [relative_path, file_sha256] pairs",
+    "baseline_manifest_sha256": "74d580d886b353ae7a6f6f67a8a691be5f37c7133ed9e9f1f71bf306cfdfcb0b",
+    "current_manifest_sha256": "74d580d886b353ae7a6f6f67a8a691be5f37c7133ed9e9f1f71bf306cfdfcb0b"
+  },
+  "protected_calculation_sources": {
+    "all_bytes_unchanged": true,
+    "files": [
+      {
+        "path": "native_pse/crates/pse-metatron/src/spectrum.rs",
+        "byte_identical": true,
+        "baseline_sha256": "6e1965464f34b9c3d2864da9058963cbcec29571f443ec031e5d6d60c5670161",
+        "current_sha256": "6e1965464f34b9c3d2864da9058963cbcec29571f443ec031e5d6d60c5670161"
+      },
+      {
+        "path": "native_pse/crates/pse-metatron/src/platonic.rs",
+        "byte_identical": true,
+        "baseline_sha256": "9f11491e7401c58804f9888b1d42bde68f2ab2301bfeecb3aa485c6604fbed9f",
+        "current_sha256": "9f11491e7401c58804f9888b1d42bde68f2ab2301bfeecb3aa485c6604fbed9f"
+      },
+      {
+        "path": "native_pse/crates/pse-metatron/src/embed.rs",
+        "byte_identical": true,
+        "baseline_sha256": "06d59b236b80355fb1677272ad3e9564c67d4646eda8c34cabc023fbb8671aba",
+        "current_sha256": "06d59b236b80355fb1677272ad3e9564c67d4646eda8c34cabc023fbb8671aba"
+      },
+      {
+        "path": "native_pse/crates/pse-metatron/src/complement.rs",
+        "byte_identical": true,
+        "baseline_sha256": "5caafb59a57fe36c3984cc54d7aa5ef3785f090d55ea8a786398ba7f8c9d88cc",
+        "current_sha256": "5caafb59a57fe36c3984cc54d7aa5ef3785f090d55ea8a786398ba7f8c9d88cc"
+      },
+      {
+        "path": "native_pse/crates/pse-metatron/src/group.rs",
+        "byte_identical": true,
+        "baseline_sha256": "ca44f1648ab00d770bf6de70c52ec62ee964ac14785a4f9511e1f36e292271b7",
+        "current_sha256": "ca44f1648ab00d770bf6de70c52ec62ee964ac14785a4f9511e1f36e292271b7"
+      },
+      {
+        "path": "native_pse/crates/pse-metatron/src/scan.rs",
+        "byte_identical": true,
+        "baseline_sha256": "ae110263b2dc05a233f8bf528584dc8af579740883972ed7089f67d4a8877e3e",
+        "current_sha256": "ae110263b2dc05a233f8bf528584dc8af579740883972ed7089f67d4a8877e3e"
+      },
+      {
+        "path": "native_pse/crates/pse-metatron/src/small_signature.rs",
+        "byte_identical": true,
+        "baseline_sha256": "9f388c4aedb505983dca9c6917f56a648098b341b2735ef03f6392dd80008ba0",
+        "current_sha256": "9f388c4aedb505983dca9c6917f56a648098b341b2735ef03f6392dd80008ba0"
+      }
+    ]
+  },
+  "indexed_helper_extraction": {
+    "suffix_start_marker": "let mut bits = 0;",
+    "calculation_body_and_following_tests_byte_identical_from_marker": true
+  },
+  "historical_fixture": {
+    "path": "native_pse/tests/fixtures/original.json",
+    "byte_identical": true,
+    "baseline_sha256": "5525eefc2fe1f14b7b605c9ef3d6f5c253b4380f2d515a89798cbca802557279",
+    "current_sha256": "5525eefc2fe1f14b7b605c9ef3d6f5c253b4380f2d515a89798cbca802557279"
+  },
+  "interpretation": [
+    "A byte comparison establishes source scope, not functional equivalence or performance.",
+    "The root release manifest now selects lto=false; this is a build-profile change distinct from the optional signature algorithms.",
+    "pse-types source differences consist only of blank lines or line/doc comments, according to the recorded line-diff check.",
+    "The runtime and preserved fixture checks do not resolve the inherited cross-platform golden mismatch."
+  ]
+}

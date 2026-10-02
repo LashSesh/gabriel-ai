@@ -1,0 +1,69 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=24mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[provide=*,ngerman]{babel}
+\usepackage{lmodern,microtype,parskip,booktabs,tabularx,hyperref}
+\setlength{\parindent}{0pt}
+\hypersetup{hidelinks,pdftitle={Gabriel: Entwicklungs- und Prüfbericht}}
+\begin{document}
+\begin{center}
+{\LARGE\bfseries Gabriel}\par\vspace{5pt}
+{\large Entwicklungs- und Prüfbericht}\par\vspace{5pt}
+27. September 2026
+\end{center}
+\section*{Ergebnis dieser Phase}
+Gabriel besitzt nun einen integrierten Prüfpfad für kontinuierliche Zeitintervalle: Überschreitet die regionale Masse eines festgelegten Graphmodells irgendwo im Intervall eine Schwelle? Eine positive Antwort enthält einen überprüfbaren Zeugen; eine negative Antwort begrenzt das gesamte Intervall. Endliche Stichproben ohne Überschreitung gelten nicht als Ausschlussnachweis.
+
+Die Fähigkeit ist mathematisch hergeleitet, implementiert, an tatsächliche Engine-Snapshots und den vorhandenen transaktionalen Store angeschlossen und unabhängig geprüft. Der ursprüngliche Zielpunkt bleibt ein nachgewiesener Aufgabenvorteil. \textbf{Das vorab festgelegte Überlegenheitskriterium dieser Phase ist nicht erfüllt.} Gegenüber einer validierten adaptiven Suche entsteht im Hauptversuch weder ein Entscheidungsvorteil noch der verlangte Zeitvorteil.
+
+\section*{Tragender Beitrag und Reichweite}
+Der neue Vertrag verwendet exakt interpretierte Binärwerte der Rohquelle und des dargestellten Laplace-Operators. Normierung erfolgt mathematisch über rational berechnete Quadrate. Bei exakt gleichen Diagonalen und einheitlichen nichtnegativen Kantengewichten reduziert sich die regionale Masse auf eine harmonische Funktion. Deren Endpunkte und eingeschlossene Phasenmaxima ermöglichen Nachweise für ganze Zeitfenster. Arb liefert gerichtete Einschließungen; eine begrenzte Präzisionsleiter führt bei Unentscheidbarkeit zu \texttt{unknown}.
+
+Dies ist eine überprüfbare Spezialisierung bekannter harmonischer Optimierung und validierter Arithmetik. Es wird kein neuer allgemeiner mathematischer Satz und keine umfassende Neuheit gegenüber allen Verifikationsmethoden beansprucht. Der Beitrag liegt im expliziten Eingabevertrag, den überprüfbaren Nachweisen, der begrenzten Implementierung und ihrer tatsächlich ausgeführten Systemintegration.
+
+Der neue Adapter ist optional. Andere Graphen liefern eine ausdrücklich nicht unterstützte Modellklasse; ungültige Eingaben verwerfen den gesamten Befehl. Grenzen sind 64 Knoten, 128 gespeicherte Batches und insgesamt höchstens 32 ausgestellte Zeitfenster je gebundenem Vertrag, jeweils gegebenenfalls niedriger konfiguriert. Die neue exakte Normierung ist von der älteren gerundeten Punktbeobachtung getrennt. Ein modellinterner regionaler Wert ist keine extern kalibrierte Ereigniswahrscheinlichkeit.
+
+\section*{Vergleich mit geeigneten Kontrollen}
+Der vor der ersten Kohortenausführung fixierte Versuch umfasst 256 synthetische Hauptfälle, 24 stationäre Kontrollen und vier gesonderte Stressfälle. Analytik, adaptive Intervallteilung und gleichmäßige Abtastung verwenden dasselbe exakte Modell. Beide Kontrollen besitzen gültige Schranken zwischen den Stützstellen; die adaptive Kontrolle ist damit keine absichtlich schwache Stichprobensuche.
+
+Alle drei Verfahren lösen die 256 Hauptfälle identisch: 180 Überschreitungen und 76 Ausschlüsse. Analytik und adaptive Suche lösen zusätzlich alle vier Stressfälle. Gleichmäßige Abtastung bleibt bei zwei davon korrekt unentschieden. Ein zusätzlicher Auflösungsvorteil gegenüber der adaptiven Suche ist nicht belegt.
+
+\newpage
+\section*{Zeitmessung und vollständiger Ablauf}
+Fünf frische Prozesse mit drei rotierten Verfahrensreihenfolgen erfassen 11520 vollständige Zertifikatsaufrufe einschließlich exakter Modellvorbereitung. Der festgelegte Medianvergleich adaptiv/analytisch beträgt \textbf{0,9924}, mit Prozessmedianen von 0,9864 bis 0,9953. Ein Wert über eins wäre zugunsten der Analytik. Alle fünf liegen darunter. Auch das zusätzliche Ziel eines Auflösungsgewinns von zehn Prozentpunkten wird verfehlt.
+
+Die aufsummierten Aufrufzeiten sind nahezu gleich: 13,581\,s analytisch und 13,669\,s adaptiv. Diese andere Aggregation ersetzt das negative Hauptkriterium nicht. Weniger Punktaufrufe allein belegen ebenfalls keine Beschleunigung, weil zusätzliche Phasenrechnung anfällt und Modellvorbereitung mitgemessen wird.
+
+24 vollständige Store-Aufträge in drei frischen Prozessen enthalten jeweils vier Fenster. Sie schließen Adapteraufbau, native Rekonstruktion, Identitätsprüfungen und Speicherung ein. Mediane liegen je Anfrage bei 332--531\,ms. Die medianen Anteile der Zertifikatsaufrufe innerhalb eines Auftrags betragen nur 0,45--8,90\,\%. Separates Wiederöffnen benötigt median 255--473\,ms. Hier wurde kein konkurrierender Store-Pfad gemessen, folglich wird kein Gesamtbeschleunigungsfaktor behauptet. Wiederholte Quell-, Paket- und Programmprüfungen sind ein wesentlicher Kostenblock; ihre Entfernung würde den bisherigen Vertrag ändern.
+
+\section*{Tatsächlich ausgeführte Prüfungen}
+Der unabhängige Prüfer bestätigt alle 852 Verfahrensdatensätze: 850 Entscheidungen und zwei offene Fälle. Er leitet Koeffizienten über andere exakte Zustände her und prüft Punktwerte mit komplexer Evolution, Phasenindizes, Schranken und lückenlose Intervallabdeckungen. Zwölf vollständige Acb-Matrixexponentialrechnungen dienen als zusätzliche Referenz. Neun absichtlich verfälschte Nachweise werden erkannt.
+
+Die separate Regressionsprüfung besteht 825 Checks einschließlich 30 Referenzrechnungen mit Acb und 21 gespeicherter Randfälle. Fünf weitere Extremfälle prüfen sehr große und subnormale Werte, extrem nahe Schwellen und die Ausgabebegrenzung. Der unabhängige Prüfer kontrolliert zusätzlich alle 26 gespeicherten Randfälle, darunter zwei explizite Fälle außerhalb der Modellklasse. Gemeinsame Vertrauensbasis sind die ganzzahlige Arithmetik von Python und Arb. Die Nachweise wurden nicht mit einem Beweisassistenten verifiziert.
+
+Die funktionale Integration besteht 17 ungültige Befehle, fünf injizierte Ausführungsfehler mit Rollback sowie acht direkte fehlerhafte native Anfragen. Wiederholung, Kopfkonflikt, unveränderte frühere Ergebnisse, niedrigere Kapazitäten, vertauschte Entitätsnamen und Snapshot-Manipulation sind geprüft. Drei neue Datenbanken und drei historische Backend-Datenbanken bestehen separate Wiedergabe gegen gespeicherte Kopfanker. Alle 69 alten produktiven Fingerprint-Quellen sind unverändert.
+
+Sämtliche 24 gemessenen neuen Datenbanken und ihre 96 Zertifikate werden zusätzlich gegen die eingefrorenen Ergebnisse, Dateihashes und Befehlsidentitäten geprüft. Alle acht Kostentabellenzeilen werden unabhängig rekonstruiert. Die frühere historische native Fixture bleibt offen; ihre Sollwerte wurden nicht verändert und ein neuer vollständiger nativer Testlauf wird nicht behauptet.
+
+\newpage
+\section*{Persistenzbefund und neue Eingrenzung}
+Die früher beobachteten Rücksprünge auf gültige Journalpräfixe bleiben dokumentiert. Die neue Untersuchung findet einen aktiven externen Schreibweg durch automatische Dateisynchronisierung. Beide verglichenen Speicherorte liegen auf demselben Overlay mit der Option \texttt{fsync=volatile}. Der beobachtete Unterschied betrifft daher keine verschiedenen Dateisystem-Mounts. Erfolgreiche Sync-Aufrufe belegen hier keine physische Stromausfallsicherheit.
+
+24 zeitlich verteilte und 36 schnelle Kontrollfälle mit normalen Dateien, SQLite und dem unveränderten Store bleiben bis zur getrennten Nachkontrolle unverändert. Drei bewusst injizierte Pfadersetzungen werden erkannt; gehaltene Dateideskriptoren behalten dabei den finalen Inode. Diese positiven Kontrollen prüfen den Detektor. Die Ursache der historischen Fehler ist weiterhin nicht bewiesen.
+
+Neue laufende Datenbanken bleiben außerhalb automatischer Spiegelung. Erst geschlossene, gegen unabhängige Kopfanker geprüfte Abbilder werden versiegelt und weitergegeben. Diese Maßnahme trennt einen beobachteten externen Schreibweg ab; sie repariert weder nachweislich die unbekannte historische Ursache noch macht sie den transienten Speicher produktionsgeeignet.
+
+\section*{Änderungen am Gesamtwerk und Herkunft}
+Die englische Monographie ergänzt den Abschnitt zur kontinuierlichen regionalen Erreichbarkeit, den vollständigen Vergleichsplan, Ergebnisse, Systemkosten und Reproduktion. Abstract, Einleitung, Grenzen und Schluss stimmen mit dem negativen Hauptvergleich überein. Die bisherigen Resultate und Finanzprognosen bleiben in ihrer jeweiligen Quellenbindung erhalten. Das neue Projekt enthält sämtliche Dateien des vorherigen Archivs sowie die neue Implementierung und Belege.
+
+Eine vor der Zeitmessung erkannte Unfairness der Baseline wurde behoben: unnötige zweite Eingabe-Hashbildung entfällt; Intervallschranken werden erst berechnet, wenn gemeinsame Endpunktprüfungen nicht ausreichen. Die Änderung geschah nach den ersten ungemessenen Entscheidungsergebnissen. Zeitpunkt, alte Quellen und alte Ausgaben sind erhalten. Fälle, Algorithmen, Budgets, alle 852 Statuswerte und Akzeptanzkriterien blieben unverändert; finale Quellen wurden erneut ausgewertet.
+
+Die Literaturprüfung dieser Phase betrifft die offizielle Arb/Python-Flint-Dokumentation sowie SQLite- und Linux-Overlay-Synchronisationsregeln. Die neue Herleitung beansprucht keine Priorität für harmonische Extremwertberechnung. Eine erschöpfende Neuheitssuche über alle zeitkontinuierlichen Verifikationsverfahren wurde nicht durchgeführt. Das vorherige Literaturkorpus wird nicht als in dieser Phase vollständig neu geprüft ausgegeben.
+
+\section*{Verbleibende Grenzen und Lieferung}
+Der Arb-Präzisionskontext ist prozessglobal. Frische Interpreter, unveränderte Quelldateien und ein kontrollierter Arithmetikkontext sind Ausführungsvoraussetzungen; Dateihashes authentifizieren keinen bereits geladenen Code. Nicht alle Systembibliotheken sind in der Identitätsbindung enthalten. Ein nativer Ausgabelimitcheck nach Prozessende ist keine harte Festplattenbegrenzung. Diese Grenzen sind im Manuskript und im Schnittstellenvertrag benannt.
+
+Die Lieferung umfasst die zusammenhängende englische PDF, das vollständige LaTeX-/Code-/Datenprojekt mit tatsächlich ausgeführten Rohmessungen sowie diesen Bericht. Deklarierte Compiler- und Paketabhängigkeiten sind externe Voraussetzungen. Die PDF enthält keine eingebetteten Projektdateien. Kompilation, Layout, Archivvollständigkeit und Reproduktion nach frischem Entpacken werden im beigefügten Freigabeprotokoll dokumentiert.
+
+\end{document}

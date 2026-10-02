@@ -1,0 +1,64 @@
+{
+  "status": "Actual independent reader executions; no new performance measurement",
+  "environment": {
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1"
+  },
+  "executions": [
+    {
+      "argv": [
+        "python3",
+        "reproduction/report_engine_observer_results.py"
+      ],
+      "exit_code": 0,
+      "log": "engine_observer_independent.log"
+    },
+    {
+      "argv": [
+        "python3",
+        "reproduction/report_graph_observer_owner_results.py",
+        "--executed",
+        "native_pse/benchmark-results/graph_observer_owner/executed",
+        "--executable",
+        "native_pse/benchmark-results/graph_observer_owner/executable/engine_observer_linux_x86_64.bin"
+      ],
+      "exit_code": 1,
+      "log": "graph_observer_owner_independent.log",
+      "reason": "Unexpected databases marked unretained; first reader deliberately rejected absence mismatch."
+    },
+    {
+      "argv": [
+        "python3",
+        "reproduction/report_graph_observer_owner_results.py",
+        "--executed",
+        "native_pse/benchmark-results/graph_observer_owner/executed",
+        "--executable",
+        "native_pse/benchmark-results/graph_observer_owner/executable/engine_observer_linux_x86_64.bin"
+      ],
+      "exit_code": 0,
+      "log": "graph_observer_owner_independent_with_residues.log",
+      "qualification": "Independent read-only residue inspection records and excludes strict prefixes from final database evidence; complete raw measurements unchanged."
+    }
+  ],
+  "streams": [
+    {
+      "file": "engine_observer_independent.log",
+      "bytes": 7178,
+      "sha256": "45aacf710d80a455795bf40513433dc339fe73784a6a263ca2a7688db53375e9"
+    },
+    {
+      "file": "graph_observer_owner_independent.log",
+      "bytes": 943,
+      "sha256": "fe07f74f6173d653c9fa540dfc59e7da1db0ecd6ec01d19bea693540e5c9cb9a"
+    },
+    {
+      "file": "graph_observer_owner_independent_with_residues.log",
+      "bytes": 19096,
+      "sha256": "fae8017785148c9daa20c97bf8f625f65612e9ea04dc909fd91d5339b8492aed"
+    }
+  ],
+  "reader_source_sha256": {
+    "reproduction/report_engine_observer_results.py": "2e51b56406f95a10401d70adb6c944acb9acc5fbeceb2d2e2cfda32a1d13964b",
+    "reproduction/report_graph_observer_owner_results.py": "aee76866140426bc8016e458205886876dae245db78349179c4dcbfc773032a2"
+  }
+}

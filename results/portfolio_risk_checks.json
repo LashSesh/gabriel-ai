@@ -1,0 +1,174 @@
+{
+  "status": "pass",
+  "scope": "exact finite risk arithmetic and certificate verification",
+  "counts": {
+    "exact_single_distribution_cases": 504,
+    "exact_hull_cases": 2910,
+    "mixture_grid_lower_checks": 13750,
+    "invariance_checks": 960,
+    "invalid_input_rejections": 14,
+    "tamper_rejections": 19
+  },
+  "grid_two_model_witnesses": 2,
+  "random_seed": 20260925,
+  "random_multi_model_cases": 160,
+  "counterexample": {
+    "losses": [
+      "-100",
+      "0",
+      "100"
+    ],
+    "models": [
+      [
+        "0",
+        "1",
+        "0"
+      ],
+      [
+        "99/100",
+        "0",
+        "1/100"
+      ]
+    ],
+    "alpha": "1/2",
+    "value": "100/99",
+    "eta": "-100/99",
+    "model_objectives": [
+      "100/99",
+      "100/99"
+    ],
+    "active_models": [
+      0,
+      1
+    ],
+    "model_subgradients": [
+      [
+        "-1",
+        "-1"
+      ],
+      [
+        "49/50",
+        "49/50"
+      ]
+    ],
+    "mixture_weights": [
+      "49/99",
+      "50/99"
+    ],
+    "mixture_probabilities": [
+      "1/2",
+      "49/99",
+      "1/198"
+    ],
+    "lower_certificate": {
+      "losses": [
+        "-100",
+        "0",
+        "100"
+      ],
+      "probabilities": [
+        "1/2",
+        "49/99",
+        "1/198"
+      ],
+      "alpha": "1/2",
+      "value": "100/99",
+      "eta": "-100/99",
+      "excesses": [
+        "0",
+        "100/99",
+        "10000/99"
+      ],
+      "tail_capacities": [
+        "1",
+        "98/99",
+        "1/99"
+      ],
+      "tail_weights": [
+        "0",
+        "98/99",
+        "1/99"
+      ]
+    },
+    "listed_values": [
+      "0",
+      "-96"
+    ],
+    "listed_value": "0",
+    "listed_certificates": [
+      {
+        "losses": [
+          "-100",
+          "0",
+          "100"
+        ],
+        "probabilities": [
+          "0",
+          "1",
+          "0"
+        ],
+        "alpha": "1/2",
+        "value": "0",
+        "eta": "0",
+        "excesses": [
+          "0",
+          "0",
+          "100"
+        ],
+        "tail_capacities": [
+          "0",
+          "2",
+          "0"
+        ],
+        "tail_weights": [
+          "0",
+          "1",
+          "0"
+        ]
+      },
+      {
+        "losses": [
+          "-100",
+          "0",
+          "100"
+        ],
+        "probabilities": [
+          "99/100",
+          "0",
+          "1/100"
+        ],
+        "alpha": "1/2",
+        "value": "-96",
+        "eta": "-100",
+        "excesses": [
+          "0",
+          "100",
+          "200"
+        ],
+        "tail_capacities": [
+          "99/50",
+          "0",
+          "1/50"
+        ],
+        "tail_weights": [
+          "49/50",
+          "0",
+          "1/50"
+        ]
+      }
+    ],
+    "candidate_count": 4
+  },
+  "linear_program_diagnostic": {
+    "status": "pass",
+    "cases": 95,
+    "scope": "floating diagnostic; not an exact proof",
+    "max_absolute_error": 4.440892098500626e-16,
+    "scipy_version": "1.17.0"
+  },
+  "certificate_basis": "exact feasible tail dual equals threshold primal; hull upper equals attained mixture lower",
+  "source_sha256": {
+    "portfolio_risk.py": "0573bf2acd580e9a717ee1298a20eafe2386507bfe1571d092432b22a64b08ab",
+    "check_portfolio_risk.py": "13315c3a27f5d5d1f3e91c56f41ee5a3c777a42942be8bb250679699f6fc2a28"
+  }
+}

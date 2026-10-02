@@ -1,0 +1,46 @@
+{
+  "status": "passed",
+  "counts": {
+    "synthetic_replication_model_latency_cases": 9856,
+    "synthetic_metrics": 59136,
+    "saved_trace_arrays": 882,
+    "seed_reconstructions": 224,
+    "development_cases": 176
+  },
+  "max_absolute_differences": {
+    "metrics": 1.8207657603852567e-14,
+    "traces": 8.902503623176017e-09,
+    "development": 2.220446049250313e-16
+  },
+  "generic_checks": {
+    "replays": 16,
+    "causal_variants": 32,
+    "unit_scalings": 48,
+    "regret_checks": 675,
+    "old_controller_matches": 2,
+    "nonmonotone_counterexample": {
+      "regret": 1.0000008,
+      "invalid_final_step_bound": 0.10002010000431513,
+      "valid_variation_bound": 20.100020081377863
+    }
+  },
+  "selection": "unchanged cumulative learner; no candidate eligible",
+  "market": {
+    "status": "not_executed",
+    "reason": "No new candidate passed development selection; unused currency outcomes not accessed",
+    "currencies": [
+      "NZD",
+      "SGD",
+      "KRW",
+      "ZAR"
+    ],
+    "protocol_sha256": "8b17c7672f87d6b4111b63b43f10ae933313e1bdaf51a3ad4ca7bb91794fc2bd",
+    "selection_sha256": "4461a948ded80e2acdd58e8a32f9e2eb81380a9e74cdd238cced420240f16224"
+  },
+  "arithmetic": "Independent extended-precision cross-check, not directed-rounding validation.",
+  "execution_seconds": 236.19699983600003,
+  "source_sha256": {
+    "forgetting_risk.py": "2835c031b06242d8cf8f475cf15928f2949f63d98c0416eec39d2c0e7ee936c7",
+    "verify_forgetting.py": "4b498c54fe1d1f7a11c26053555e8f93f42eef3f655739dff87263ab015201cc"
+  }
+}

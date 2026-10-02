@@ -1,0 +1,141 @@
+{
+  "schema": "gabriel.aggregate.protocol.v1",
+  "frozen_utc": "2026-09-26T11:36:50.142566+00:00",
+  "primary_model": "adagrad_c0p1",
+  "source_file": "data/ecb_eurofxref-hist_20260926.csv",
+  "source_csv_sha256": "e8136f072d575cb891cb58718fe31602ca2d4feccee67f035106393ed1c4bdbb",
+  "source_observations": 7101,
+  "source_last_date": "2026-09-25",
+  "primary_selection_file": "results/aggregate_development_screen.json",
+  "primary_selection_sha256": "8690b68aa7ff408ad10ae3f5070e2ed8df370a818440cd92874e53fb61ccf376",
+  "new_assets": {
+    "currencies": [
+      "AUD",
+      "CAD",
+      "NOK",
+      "SEK"
+    ],
+    "horizons": [
+      1,
+      5
+    ],
+    "development": [
+      "2010-01-01",
+      "2019-12-31"
+    ],
+    "test_origin_start": "2020-01-01",
+    "common_origin_end": "last_source_index - max(horizons)",
+    "secondary_periods": {
+      "test_2020_2025": [
+        "2020-01-01",
+        "2025-12-31"
+      ],
+      "test_2026": [
+        "2026-01-01",
+        "2026-09-25"
+      ]
+    }
+  },
+  "bank": {
+    "parent_protocol_file": "results/ecb_risk_protocol.json",
+    "parent_protocol_sha256": "04f39c50fb6d7eab9d59bad70548fa23dc15cc964816e37db7cad8baf73bde93",
+    "experts": [
+      "raw_hs",
+      "fhs_w0",
+      "fhs_w025",
+      "fhs_w05",
+      "fhs_w075",
+      "fast_fhs",
+      "fast_severity_125",
+      "fast_severity_500"
+    ],
+    "severity_half_lives": [
+      125,
+      500
+    ],
+    "initial_ratio": 1.5,
+    "ratio_cap": 20
+  },
+  "aggregation": {
+    "eta_scales": [
+      0.1,
+      0.3,
+      1.0
+    ],
+    "primary_c": 0.1,
+    "primary_model": "adagrad_c0p1",
+    "ridge": 0.01,
+    "online_start_date": "2010-01-01",
+    "lane": "source_origin_index modulo horizon; mature same-lane forecast before next issuance",
+    "optimizer": {
+      "method": "SLSQP",
+      "ftol": 1e-12,
+      "maxiter": 2000,
+      "starts": "uniform and eight vertices",
+      "selection": "smallest achieved feasible objective; numerical convex lower bound for transformed fit only"
+    },
+    "invalid_inputs": "stop; no epsilon replacement"
+  },
+  "selection": {
+    "currencies": [
+      "USD",
+      "GBP",
+      "JPY",
+      "CHF"
+    ],
+    "horizons": [
+      1,
+      5
+    ],
+    "fit": [
+      "2010-01-01",
+      "2014-12-31"
+    ],
+    "validation": [
+      "2015-01-01",
+      "2019-12-31"
+    ],
+    "candidate_tie_order": [
+      "static_transformed",
+      "uniform_transformed",
+      "online_c0.1",
+      "online_c0.3",
+      "online_c1.0"
+    ],
+    "criterion": "minimum equal-contract mean validation FZ0 among these five transformed candidates",
+    "winner_validation_fz0": 0.6618758907,
+    "strong_control_uniform_arithmetic_fz0": 0.6438641558
+  },
+  "comparison": {
+    "comparators": [
+      "arithmetic_fit",
+      "arithmetic_uniform",
+      "selected_expert",
+      "transformed_fit"
+    ],
+    "estimator": "common origin dates, equal arithmetic mean of eight contract FZ0 differences; negative is better",
+    "bootstrap": {
+      "type": "paired fixed-length circular origin-date blocks, shared across all contracts and comparators",
+      "replicates": 5000,
+      "block_lengths": [
+        20,
+        60
+      ],
+      "seed": 2026092608,
+      "seed_sequence": "[seed, block_length]",
+      "upper_quantile": 0.95,
+      "quantile_method": "linear"
+    },
+    "success": "all four one-sided 95% percentile upper limits strictly below zero at BOTH block lengths",
+    "multiplicity": "conjunctive intersection-union claim only; no subset cherry-picking",
+    "interpretation": "approximate dependent historical resampling diagnostic; not finite-sample validity under arbitrary nonstationarity"
+  },
+  "design_history": "Method family, old assets and dates had already been examined in preceding research. This primary was chosen using only the old four currencies through 2019. An earlier design-only replay with about-2000 weight warmup was retained but superseded by the common 2010-start rule before new-asset evaluation. No AUD/CAD/NOK/SEK outcomes were inspected or evaluated before this file was frozen. Their header availability alone was checked. New-asset test dates overlap prior market dates and share a correlated current-vintage ECB source; this is asset transfer, not independent external or prospective temporal replication.",
+  "reporting": "retain every model, contract, comparator and secondary window; four extra matured one-step origins per currency outside common date window are separate; do not retune on test outcomes",
+  "implementation_sha256": {
+    "aggregate_risk.py": "2c28812217fa8ee71938d8959490e2eeb2f9de2fbf7a656cee3fdc4716dd3d1c",
+    "benchmark_aggregate_risk.py": "01159468b48c2bea976fd4d1d3620b9a38af0250ef7b13febe9cbae15ff1b2e2",
+    "summarize_aggregate_risk.py": "8f5e1b3fdf3bdc69fbdbbf03c41417eeb97ec31dbafd18279590ffec22f1971d",
+    "screen_aggregate_development.py": "36cf40b08a7ed7a19c8f8704a06d2b431aa3373bdc834156dbd607bc27f5eabe"
+  }
+}

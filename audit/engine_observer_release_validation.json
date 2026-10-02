@@ -1,0 +1,83 @@
+{
+  "schema": "gabriel.engine-observer.release-validation.v1",
+  "status": "passed",
+  "candidate_archive_sha256": "b7366dd2197ea7c5087f6dce645fc4b08963406a6e974919a5a02300ff8ae066",
+  "candidate_archive_bytes": 450899392,
+  "manifest_files_verified": 2045,
+  "all_previous_release_paths_retained": true,
+  "previous_paths": 1478,
+  "fresh_directory": "/tmp/gabriel_integration_release_qa_gvyv9cf2/Gabriel",
+  "commands": [
+    {
+      "command": [
+        "latexmk",
+        "-pdf",
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        "main.tex"
+      ],
+      "returncode": 0,
+      "log_sha256": "3b856ef1f69d133c1cded6ff2290e6f7a9094913b145827334648fc11483cda3",
+      "elapsed_seconds": 4.772314548492432
+    },
+    {
+      "command": [
+        "latexmk",
+        "-pdf",
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        "development_report.tex"
+      ],
+      "returncode": 0,
+      "log_sha256": "4a24093d26196899e5faf1d0922833919d228e84b54b4eff7bba7fa293ee8d21",
+      "elapsed_seconds": 0.7532353401184082
+    },
+    {
+      "command": [
+        "python",
+        "reproduction/report_engine_observer_results.py",
+        "--output-dir",
+        "/tmp/gabriel_integration_release_qa_gvyv9cf2/derived"
+      ],
+      "returncode": 0,
+      "log_sha256": "ce010ff79498a6ccdf0bd7b46e8e3f7ecb6d593c3e07865042cc4c6bbe1f4545",
+      "elapsed_seconds": 2.0557937622070312
+    },
+    {
+      "command": [
+        "python",
+        "reproduction/report_graph_observer_owner_results.py",
+        "--executed",
+        "/tmp/gabriel_integration_release_qa_gvyv9cf2/Gabriel/native_pse/benchmark-results/graph_observer_owner/executed",
+        "--executable",
+        "/tmp/gabriel_integration_release_qa_gvyv9cf2/Gabriel/native_pse/benchmark-results/graph_observer_owner/executable/engine_observer_linux_x86_64.bin",
+        "--output-dir",
+        "/tmp/gabriel_integration_release_qa_gvyv9cf2/derived"
+      ],
+      "returncode": 0,
+      "log_sha256": "fae8017785148c9daa20c97bf8f625f65612e9ea04dc909fd91d5339b8492aed",
+      "elapsed_seconds": 1.2377676963806152
+    },
+    {
+      "command": [
+        "python",
+        "reproduction/report_native_conditioned_results.py",
+        "--output-dir",
+        "/tmp/gabriel_integration_release_qa_gvyv9cf2/derived/historical"
+      ],
+      "returncode": 0,
+      "log_sha256": "110266597774823139d530d25d4492bbf4f437645ea03f9cc55c83b5e91c9f70",
+      "elapsed_seconds": 1.2352497577667236
+    }
+  ],
+  "both_pdfs_freshly_compiled": true,
+  "both_pdf_page_texts_equal_to_delivery": true,
+  "main_pages": 178,
+  "report_pages": 3,
+  "embedded_files": 0,
+  "native_and_durable_tables_exactly_reproduced": true,
+  "historical_conditioned_table_exactly_reproduced": true,
+  "packaged_sqlite_files_unchanged_after_checks": 37,
+  "three_persistence_seals_verified": true,
+  "note": "Release validation records are added after checking this candidate; final packaging repeats file-byte and CRC verification without changing checked scientific content."
+}

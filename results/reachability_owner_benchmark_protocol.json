@@ -1,0 +1,33 @@
+{
+  "certificate_scope": "each actual certify_window call including prepare_model and Arb; measured inside observe; no instrumentation overhead subtraction",
+  "code_derived_work_per_complete_task": {
+    "arithmetic_bytes_per_sweep": 25651875,
+    "arithmetic_hash_sweeps": 9,
+    "certificate_calls": 4,
+    "engine_steps": 1,
+    "executable_bytes_per_sweep": 1323024,
+    "executable_hash_sweeps": 8,
+    "interpretation": "logical bytes hashed, not physical storage reads",
+    "native_launches": 1,
+    "source_bytes_per_sweep": 13537704,
+    "source_hash_sweeps": 9,
+    "sqlite_commits": 3
+  },
+  "cohort_digest": "0edec494f8ea6c9f4ff4009712fabc10bca0d9b0a767a93a7939d5d2e4c23256",
+  "cold_replay_scope": "before new adapter construction through Store.open full semantic replay and close; excludes Python startup/import and final closed-database hashing; no cold-cache claim",
+  "collector_sha256": "c758027d9e8af2ac217f37afa2cd260bbb33854dc1f5c109355e4f0cd573400f",
+  "comparison": "absolute costs only; no baseline Store ratio or overall speedup claim",
+  "complete_task_scope": "before fresh GraphReachabilityAdapter construction through Store.close; includes source/arithmetic/executable hashes, create, bind, command construction, one observe, native full replay, all certificates, canonical JSON, receipt construction and SQLite EXTRA commits",
+  "environment": {
+    "platform": "linux",
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]"
+  },
+  "excluded_from_complete_task": "Python process startup/import, fixture selection, result validation, closed database hashes, evidence writes, separate cold replay",
+  "input_file_sha256": "68e3da5e5d711e1af1c0a85618e7f48fbbad7b5b8d57d2ca121ebdac619abbf6",
+  "order": "rotate eight tasks by worker index; reverse odd worker",
+  "schema": "gabriel.reachability-owner-benchmark/v1",
+  "selection": "n=7,13,32,64; seed=20260927; regions=0,1; primary q=1/4; windows=0,1,2,3",
+  "tasks_per_worker": 8,
+  "windows_per_task": 4,
+  "workers": 3
+}

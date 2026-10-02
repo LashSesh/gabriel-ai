@@ -1,0 +1,5530 @@
+{
+  "environment": {
+    "logical_cpus": 9,
+    "numpy": "2.3.5",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "processor": "AMD EPYC 9V74 80-Core Processor",
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "sqlite": "3.53.1",
+    "threads": {
+      "MKL_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1"
+    }
+  },
+  "finished_at_utc": "2026-09-26T16:20:11.680456+00:00",
+  "inputs_file_sha256": "5a70afa2cdedb0632a902f9852fdd8576dcd57a164ddb11987855597475ff061",
+  "protocol": {
+    "clocks": "event_at=index; each accepted record received_at=owner_at=next owner command ordinal, including corrections; bind at0.",
+    "cold_open_repetitions": {
+      "360": 5,
+      "500": 1,
+      "800": 1
+    },
+    "cold_open_scope": "Fresh owner and fresh adapter over each existing live-owner database, complete semantic replay in Store.open; OS page cache not flushed; close outside timer. Report warm filesystem/cold adapter distinction.",
+    "durability": "Both owners SQLite DELETE journal, synchronous EXTRA; one transaction and commit per accepted command; same registry fingerprint, header, commands, receipts and stored canonical state.",
+    "exactness": "Direct canonical receipt-string comparison after every paired command; direct SQL canonical-state-string/meta comparison at checkpoint and branch boundaries; journal rows compared byte for byte; actual export API compared for register endpoints and stream n360.",
+    "format": "gabriel-fast-owner-benchmark/v1",
+    "implementations": [
+      "reference_owner",
+      "fast_owner"
+    ],
+    "limits": "Synthetic bounded workloads; seven sequential paired trials are descriptive, correlated observations, not independent samples or confidence intervals. No universal throughput, predictive gain or external product comparison.",
+    "owner_classes": [
+      "gabriel_runtime.engine.Store",
+      "gabriel_runtime.fast_owner.FastStore"
+    ],
+    "paired_order": "reference then fast for even pair index, reverse for odd; same command exact bytes supplied to both",
+    "profiling": "After last neighborhood, one matched additional append per horizon under cProfile. These profiled wall times are excluded from efficiency summaries; record Python call counts and top cumulative functions.",
+    "register_commands_per_trial": 100,
+    "register_prefix_commands": 100,
+    "register_rule": "Initialize width integer registers to zero; event i adds 1+(i mod 19) to register (37*i mod width), returns count,total; bounded exact JSON state.",
+    "register_trials": 7,
+    "register_widths": [
+      32,
+      256,
+      2048
+    ],
+    "seed": 2026092603,
+    "status": "frozen_before_timing",
+    "stream_config": {
+      "max_units": 100,
+      "risk_budget": "10",
+      "source_id": "fast-owner-synthetic",
+      "unit_exposure": "100"
+    },
+    "stream_corrections": "Early index320, alternating factors33/32 and31/32 by successive revision parity; recent index current_source_length-3, factor65/64. Revision increments per index. Correction and immediately following append timed separately and summed.",
+    "stream_horizons": [
+      1,
+      5
+    ],
+    "stream_neighborhood": "Seven successive live trials, each accepting three new observations and two corrections. Start lengths n,n+3,...,n+18; final length n+21. Both implementations have identical evolving state; these are neighborhoods, not independent repetitions of one state.",
+    "stream_neighborhood_starts": [
+      360,
+      500,
+      800
+    ],
+    "stream_profile": "Both owners use fresh IncrementalStreamRiskAdapter with same fingerprint and numerical caches; this measures owner change only, not incremental-vs-baseline forecasting.",
+    "stream_source": "NumPy default_rng(seed), r_i=.006*(1+.3*sin(i/31))*Z_i, price_i=100*exp(cumsum(r)_i), 823 observations encoded binary64 hex.",
+    "stream_trial_order": [
+      "append",
+      "early_correction_then_append",
+      "recent_correction_then_append"
+    ],
+    "stream_trials": 7,
+    "thread_environment": {
+      "MKL_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1"
+    },
+    "timing_exclusions": "Imports, database creation/bind, input generation, command construction, exactness checks, report writing, cProfile diagnostics; no transaction batching and no bypass of audit on open.",
+    "trajectory_measurement": "Sum submit wall times for all source/correction commands; prefix checkpoints360,500,800 include earlier benchmark-neighborhood corrections. Equality checks, view/audit/open, profiler and source generation excluded.",
+    "views": "One full view per owner per stream trial, timed separately, after all five commands; state and forecast history materialized in both.",
+    "warm_audit_repetitions": 1,
+    "warmup": "32 fixed-width accumulator commands per owner outside timing before any measured runs"
+  },
+  "protocol_file_sha256": "5b36cf3f8d13f226408b70238dc48b2d0c4016244015d4f6eae34364aa2b22d6",
+  "register": [
+    {
+      "commands_per_trial": 100,
+      "samples": [
+        {
+          "fast_owner": {
+            "seconds": 0.024487519996910123
+          },
+          "reference_owner": {
+            "seconds": 0.03300805697290343
+          }
+        },
+        {
+          "fast_owner": {
+            "seconds": 0.023481745010940358
+          },
+          "reference_owner": {
+            "seconds": 0.030721810024260776
+          }
+        },
+        {
+          "fast_owner": {
+            "seconds": 0.024706776992388768
+          },
+          "reference_owner": {
+            "seconds": 0.03237923400229192
+          }
+        },
+        {
+          "fast_owner": {
+            "seconds": 0.023565309995319694
+          },
+          "reference_owner": {
+            "seconds": 0.0322327110079641
+          }
+        },
+        {
+          "fast_owner": {
+            "seconds": 0.022782601005019387
+          },
+          "reference_owner": {
+            "seconds": 0.03188462402613368
+          }
+        },
+        {
+          "fast_owner": {
+            "seconds": 0.025409011999727227
+          },
+          "reference_owner": {
+            "seconds": 0.034118522991775535
+          }
+        },
+        {
+          "fast_owner": {
+            "seconds": 0.02483549500902882
+          },
+          "reference_owner": {
+            "seconds": 0.030709606988239102
+          }
+        }
+      ],
+      "summary": {
+        "fast_owner": {
+          "maximum": 0.025409011999727227,
+          "median": 0.024487519996910123,
+          "minimum": 0.022782601005019387,
+          "samples": [
+            0.024487519996910123,
+            0.023481745010940358,
+            0.024706776992388768,
+            0.023565309995319694,
+            0.022782601005019387,
+            0.025409011999727227,
+            0.02483549500902882
+          ]
+        },
+        "paired_speedup": {
+          "maximum": 1.3995164125074642,
+          "median": 1.342772516780338,
+          "minimum": 1.2365208334713997,
+          "samples": [
+            1.347954263113147,
+            1.3083273840997425,
+            1.3105405861827608,
+            1.3678033946663903,
+            1.3995164125074642,
+            1.342772516780338,
+            1.2365208334713997
+          ]
+        },
+        "reference_owner": {
+          "maximum": 0.034118522991775535,
+          "median": 0.0322327110079641,
+          "minimum": 0.030709606988239102,
+          "samples": [
+            0.03300805697290343,
+            0.030721810024260776,
+            0.03237923400229192,
+            0.0322327110079641,
+            0.03188462402613368,
+            0.034118522991775535,
+            0.030709606988239102
+          ]
+        }
+      },
+      "verification": {
+        "accepted_commands": 801,
+        "database_bytes": {
+          "fast_owner": 864256,
+          "reference_owner": 864256
+        },
+        "export_api_byte_comparisons": 1,
+        "journal_rows_byte_compared": 801,
+        "receipt_byte_comparisons": 801,
+        "state_byte_comparisons": 8,
+        "submit_seconds": {
+          "fast_owner": 0.16926846000933438,
+          "reference_owner": 0.22505456601356855
+        }
+      },
+      "width": 32
+    },
+    {
+      "commands_per_trial": 100,
+      "samples": [
+        {
+          "fast_owner": {
+            "seconds": 0.04320317400924978
+          },
+          "reference_owner": {
+            "seconds": 0.06741208797757281
+          }
+        },
+        {
+          "fast_owner": {
+            "seconds": 0.04259808102142415
+          },
+          "reference_owner": {
+            "seconds": 0.06883380199360545
+          }
+        },
+        {
+          "fast_owner": {
+            "seconds": 0.044221548007044476
+          },
+          "reference_owner": {
+            "seconds": 0.07091075401331182
+          }
+        },
+        {
+          "fast_owner": {
+            "seconds": 0.045750289002171485
+          },
+          "reference_owner": {
+            "seconds": 0.07031316402208176
+          }
+        },
+        {
+          "fast_owner": {
+            "seconds": 0.04560224102169741
+          },
+          "reference_owner": {
+            "seconds": 0.07704497900340357
+          }
+        },
+        {
+          "fast_owner": {
+            "seconds": 0.04224774499380146
+          },
+          "reference_owner": {
+            "seconds": 0.06779778699274175
+          }
+        },
+        {
+          "fast_owner": {
+            "seconds": 0.041038102008315036
+          },
+          "reference_owner": {
+            "seconds": 0.06691344200226013
+          }
+        }
+      ],
+      "summary": {
+        "fast_owner": {
+          "maximum": 0.045750289002171485,
+          "median": 0.04320317400924978,
+          "minimum": 0.041038102008315036,
+          "samples": [
+            0.04320317400924978,
+            0.04259808102142415,
+            0.044221548007044476,
+            0.045750289002171485,
+            0.04560224102169741,
+            0.04224774499380146,
+            0.041038102008315036
+          ]
+        },
+        "paired_speedup": {
+          "maximum": 1.6894998420526264,
+          "median": 1.6047670000538243,
+          "minimum": 1.5368900515304817,
+          "samples": [
+            1.5603503567386026,
+            1.6158897382956379,
+            1.6035339604578238,
+            1.5368900515304817,
+            1.6894998420526264,
+            1.6047670000538243,
+            1.630519900474498
+          ]
+        },
+        "reference_owner": {
+          "maximum": 0.07704497900340357,
+          "median": 0.06883380199360545,
+          "minimum": 0.06691344200226013,
+          "samples": [
+            0.06741208797757281,
+            0.06883380199360545,
+            0.07091075401331182,
+            0.07031316402208176,
+            0.07704497900340357,
+            0.06779778699274175,
+            0.06691344200226013
+          ]
+        }
+      },
+      "verification": {
+        "accepted_commands": 801,
+        "database_bytes": {
+          "fast_owner": 864256,
+          "reference_owner": 864256
+        },
+        "export_api_byte_comparisons": 1,
+        "journal_rows_byte_compared": 801,
+        "receipt_byte_comparisons": 801,
+        "state_byte_comparisons": 8,
+        "submit_seconds": {
+          "fast_owner": 0.3046611800637038,
+          "reference_owner": 0.4892260160049773
+        }
+      },
+      "width": 256
+    },
+    {
+      "commands_per_trial": 100,
+      "samples": [
+        {
+          "fast_owner": {
+            "seconds": 0.164075420005247
+          },
+          "reference_owner": {
+            "seconds": 0.31397353802094585
+          }
+        },
+        {
+          "fast_owner": {
+            "seconds": 0.17935999602195807
+          },
+          "reference_owner": {
+            "seconds": 0.34606658201664686
+          }
+        },
+        {
+          "fast_owner": {
+            "seconds": 0.17363485200621653
+          },
+          "reference_owner": {
+            "seconds": 0.33407108399114804
+          }
+        },
+        {
+          "fast_owner": {
+            "seconds": 0.18254082697967533
+          },
+          "reference_owner": {
+            "seconds": 0.3495787109786761
+          }
+        },
+        {
+          "fast_owner": {
+            "seconds": 0.18182902601984097
+          },
+          "reference_owner": {
+            "seconds": 0.3470850829799019
+          }
+        },
+        {
+          "fast_owner": {
+            "seconds": 0.17948615101340692
+          },
+          "reference_owner": {
+            "seconds": 0.3377460609845002
+          }
+        },
+        {
+          "fast_owner": {
+            "seconds": 0.17451496900685015
+          },
+          "reference_owner": {
+            "seconds": 0.3538453860019217
+          }
+        }
+      ],
+      "summary": {
+        "fast_owner": {
+          "maximum": 0.18254082697967533,
+          "median": 0.17935999602195807,
+          "minimum": 0.164075420005247,
+          "samples": [
+            0.164075420005247,
+            0.17935999602195807,
+            0.17363485200621653,
+            0.18254082697967533,
+            0.18182902601984097,
+            0.17948615101340692,
+            0.17451496900685015
+          ]
+        },
+        "paired_speedup": {
+          "maximum": 2.0275933234588743,
+          "median": 1.9150713665694048,
+          "minimum": 1.8817388365482965,
+          "samples": [
+            1.913592773438613,
+            1.9294524402993398,
+            1.923986343359152,
+            1.9150713665694048,
+            1.9088541063956885,
+            1.8817388365482965,
+            2.0275933234588743
+          ]
+        },
+        "reference_owner": {
+          "maximum": 0.3538453860019217,
+          "median": 0.34606658201664686,
+          "minimum": 0.31397353802094585,
+          "samples": [
+            0.31397353802094585,
+            0.34606658201664686,
+            0.33407108399114804,
+            0.3495787109786761,
+            0.3470850829799019,
+            0.3377460609845002,
+            0.3538453860019217
+          ]
+        }
+      },
+      "verification": {
+        "accepted_commands": 801,
+        "database_bytes": {
+          "fast_owner": 868352,
+          "reference_owner": 868352
+        },
+        "export_api_byte_comparisons": 1,
+        "journal_rows_byte_compared": 801,
+        "receipt_byte_comparisons": 801,
+        "state_byte_comparisons": 8,
+        "submit_seconds": {
+          "fast_owner": 1.235441241053195,
+          "reference_owner": 2.3823664449737407
+        }
+      },
+      "width": 2048
+    }
+  ],
+  "source_sha256": {
+    "gabriel_runtime/canonical.py": "f5237347101531a0c64e41fdae65adc66aa5b731b42d474ff4f68e83e85695dc",
+    "gabriel_runtime/engine.py": "2499574e2e9733665398fc8203f5e2ca1dc22190860344725568667b7a258bc1",
+    "gabriel_runtime/fast_owner.py": "708b6d4ce676fa2947c7a1fa303c5ec28d4d370a6370c06214a31da25730865b",
+    "gabriel_runtime/incremental.py": "587a39b94df8121bee18820fc466b38a20f87352e69892c3e1446368d6686b36",
+    "gabriel_runtime/stream.py": "fc6d8a9bb280bc80aaa64d453ea79414ebc45eec56ac1b64bf9c606fc1667ccd",
+    "reproduction/benchmark_fast_owner.py": "d77fc6e13b909b15c9407dfc63a4bf666d939fe28563acade48a8d95af63659a"
+  },
+  "started_at_utc": "2026-09-26T16:04:56.272512+00:00",
+  "status": "passed",
+  "stream": [
+    {
+      "checkpoints": [
+        {
+          "cold_open_samples": [
+            {
+              "fast_owner": {
+                "seconds": 1.5438770379987545
+              },
+              "reference_owner": {
+                "seconds": 2.0717007539969927
+              }
+            },
+            {
+              "fast_owner": {
+                "seconds": 1.5120184920015163
+              },
+              "reference_owner": {
+                "seconds": 2.0300102429973776
+              }
+            },
+            {
+              "fast_owner": {
+                "seconds": 1.5986743950015807
+              },
+              "reference_owner": {
+                "seconds": 2.093280039000092
+              }
+            },
+            {
+              "fast_owner": {
+                "seconds": 1.63638317799996
+              },
+              "reference_owner": {
+                "seconds": 2.0516594879991317
+              }
+            },
+            {
+              "fast_owner": {
+                "seconds": 1.5434033290002844
+              },
+              "reference_owner": {
+                "seconds": 1.9592741009983001
+              }
+            }
+          ],
+          "cold_open_summary": {
+            "fast_owner": {
+              "maximum": 1.63638317799996,
+              "median": 1.5438770379987545,
+              "minimum": 1.5120184920015163,
+              "samples": [
+                1.5438770379987545,
+                1.5120184920015163,
+                1.5986743950015807,
+                1.63638317799996,
+                1.5434033290002844
+              ]
+            },
+            "paired_speedup": {
+              "maximum": 1.3425829470578603,
+              "median": 1.309384853816979,
+              "minimum": 1.253776936589348,
+              "samples": [
+                1.3418819653425431,
+                1.3425829470578603,
+                1.309384853816979,
+                1.253776936589348,
+                1.2694504826987703
+              ]
+            },
+            "reference_owner": {
+              "maximum": 2.093280039000092,
+              "median": 2.0516594879991317,
+              "minimum": 1.9592741009983001,
+              "samples": [
+                2.0717007539969927,
+                2.0300102429973776,
+                2.093280039000092,
+                2.0516594879991317,
+                1.9592741009983001
+              ]
+            }
+          },
+          "prefix_submit_seconds": {
+            "fast_owner": 1.8791414730076212,
+            "reference_owner": 2.6755574829221587
+          },
+          "prefix_verification": {
+            "accepted_commands": 361,
+            "database_bytes": {
+              "fast_owner": 4620288,
+              "reference_owner": 4620288
+            },
+            "export_api_byte_comparisons": 1,
+            "journal_rows_byte_compared": 361,
+            "receipt_byte_comparisons": 361,
+            "state_byte_comparisons": 1,
+            "submit_seconds": {
+              "fast_owner": 1.8791414730076212,
+              "reference_owner": 2.6755574829221587
+            }
+          },
+          "source_length": 360,
+          "transition_samples": {
+            "append": [
+              {
+                "fast_owner": {
+                  "seconds": 0.022950562997721136
+                },
+                "reference_owner": {
+                  "seconds": 0.03198048700141953
+                },
+                "source_length_after": 361,
+                "source_length_before": 360,
+                "trial": 0
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.023761607000778895
+                },
+                "reference_owner": {
+                  "seconds": 0.03409844399720896
+                },
+                "source_length_after": 364,
+                "source_length_before": 363,
+                "trial": 1
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.02592150800046511
+                },
+                "reference_owner": {
+                  "seconds": 0.040524956999433925
+                },
+                "source_length_after": 367,
+                "source_length_before": 366,
+                "trial": 2
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.025714871000673156
+                },
+                "reference_owner": {
+                  "seconds": 0.03901403799682157
+                },
+                "source_length_after": 370,
+                "source_length_before": 369,
+                "trial": 3
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.02631337400089251
+                },
+                "reference_owner": {
+                  "seconds": 0.03992796700185863
+                },
+                "source_length_after": 373,
+                "source_length_before": 372,
+                "trial": 4
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.030455505999270827
+                },
+                "reference_owner": {
+                  "seconds": 0.04094756400081678
+                },
+                "source_length_after": 376,
+                "source_length_before": 375,
+                "trial": 5
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.02763342899925192
+                },
+                "reference_owner": {
+                  "seconds": 0.039625189998332644
+                },
+                "source_length_after": 379,
+                "source_length_before": 378,
+                "trial": 6
+              }
+            ],
+            "early_correction_then_append": [
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.022666192999167833,
+                  "correction_seconds": 0.023264185998414177,
+                  "seconds": 0.04593037899758201
+                },
+                "reference_owner": {
+                  "append_seconds": 0.03305168399674585,
+                  "correction_seconds": 0.03259966199766495,
+                  "seconds": 0.0656513459944108
+                },
+                "source_length_after": 362,
+                "source_length_before": 361,
+                "trial": 0
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.024823159001243766,
+                  "correction_seconds": 0.026450727000337793,
+                  "seconds": 0.05127388600158156
+                },
+                "reference_owner": {
+                  "append_seconds": 0.03324219200294465,
+                  "correction_seconds": 0.034349492998444475,
+                  "seconds": 0.06759168500138912
+                },
+                "source_length_after": 365,
+                "source_length_before": 364,
+                "trial": 1
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.030943577003199607,
+                  "correction_seconds": 0.02716761199917528,
+                  "seconds": 0.058111189002374886
+                },
+                "reference_owner": {
+                  "append_seconds": 0.038163285000337055,
+                  "correction_seconds": 0.03827620999800274,
+                  "seconds": 0.0764394949983398
+                },
+                "source_length_after": 368,
+                "source_length_before": 367,
+                "trial": 2
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.026812316998984898,
+                  "correction_seconds": 0.02549000200087903,
+                  "seconds": 0.05230231899986393
+                },
+                "reference_owner": {
+                  "append_seconds": 0.03719927000202006,
+                  "correction_seconds": 0.03641996499936795,
+                  "seconds": 0.073619235001388
+                },
+                "source_length_after": 371,
+                "source_length_before": 370,
+                "trial": 3
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.027534799999557436,
+                  "correction_seconds": 0.02852584400170599,
+                  "seconds": 0.05606064400126343
+                },
+                "reference_owner": {
+                  "append_seconds": 0.03833472299811547,
+                  "correction_seconds": 0.03831201800130657,
+                  "seconds": 0.07664674099942204
+                },
+                "source_length_after": 374,
+                "source_length_before": 373,
+                "trial": 4
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.028130457998486236,
+                  "correction_seconds": 0.02869339699827833,
+                  "seconds": 0.05682385499676457
+                },
+                "reference_owner": {
+                  "append_seconds": 0.04031112399752601,
+                  "correction_seconds": 0.040061307001451496,
+                  "seconds": 0.0803724309989775
+                },
+                "source_length_after": 377,
+                "source_length_before": 376,
+                "trial": 5
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.027918308001972036,
+                  "correction_seconds": 0.031986785998014966,
+                  "seconds": 0.059905093999987
+                },
+                "reference_owner": {
+                  "append_seconds": 0.04256332200020552,
+                  "correction_seconds": 0.04003467599977739,
+                  "seconds": 0.08259799799998291
+                },
+                "source_length_after": 380,
+                "source_length_before": 379,
+                "trial": 6
+              }
+            ],
+            "recent_correction_then_append": [
+              {
+                "correction_index": 359,
+                "fast_owner": {
+                  "append_seconds": 0.023538209999969695,
+                  "correction_seconds": 0.03419531100007589,
+                  "seconds": 0.057733521000045585
+                },
+                "reference_owner": {
+                  "append_seconds": 0.03561967100176844,
+                  "correction_seconds": 0.03148624000095879,
+                  "seconds": 0.06710591100272723
+                },
+                "source_length_after": 363,
+                "source_length_before": 362,
+                "trial": 0
+              },
+              {
+                "correction_index": 362,
+                "fast_owner": {
+                  "append_seconds": 0.02436821300216252,
+                  "correction_seconds": 0.021687946002202807,
+                  "seconds": 0.04605615900436533
+                },
+                "reference_owner": {
+                  "append_seconds": 0.033891992999997456,
+                  "correction_seconds": 0.03196003599805408,
+                  "seconds": 0.06585202899805154
+                },
+                "source_length_after": 366,
+                "source_length_before": 365,
+                "trial": 1
+              },
+              {
+                "correction_index": 365,
+                "fast_owner": {
+                  "append_seconds": 0.04163519100256963,
+                  "correction_seconds": 0.024014657003135653,
+                  "seconds": 0.06564984800570528
+                },
+                "reference_owner": {
+                  "append_seconds": 0.037495347001822665,
+                  "correction_seconds": 0.036468969999987166,
+                  "seconds": 0.07396431700180983
+                },
+                "source_length_after": 369,
+                "source_length_before": 368,
+                "trial": 2
+              },
+              {
+                "correction_index": 368,
+                "fast_owner": {
+                  "append_seconds": 0.029553831001976505,
+                  "correction_seconds": 0.024342751999938628,
+                  "seconds": 0.05389658300191513
+                },
+                "reference_owner": {
+                  "append_seconds": 0.04057043499778956,
+                  "correction_seconds": 0.036316869998699985,
+                  "seconds": 0.07688730499648955
+                },
+                "source_length_after": 372,
+                "source_length_before": 371,
+                "trial": 3
+              },
+              {
+                "correction_index": 371,
+                "fast_owner": {
+                  "append_seconds": 0.028095966001274064,
+                  "correction_seconds": 0.024653943000885192,
+                  "seconds": 0.052749909002159256
+                },
+                "reference_owner": {
+                  "append_seconds": 0.05316752900034771,
+                  "correction_seconds": 0.03607082199960132,
+                  "seconds": 0.08923835099994903
+                },
+                "source_length_after": 375,
+                "source_length_before": 374,
+                "trial": 4
+              },
+              {
+                "correction_index": 374,
+                "fast_owner": {
+                  "append_seconds": 0.02912064200063469,
+                  "correction_seconds": 0.025497435999568552,
+                  "seconds": 0.05461807800020324
+                },
+                "reference_owner": {
+                  "append_seconds": 0.04196829500142485,
+                  "correction_seconds": 0.037892193999141455,
+                  "seconds": 0.0798604890005663
+                },
+                "source_length_after": 378,
+                "source_length_before": 377,
+                "trial": 5
+              },
+              {
+                "correction_index": 377,
+                "fast_owner": {
+                  "append_seconds": 0.03445698300129152,
+                  "correction_seconds": 0.03950237499884679,
+                  "seconds": 0.07395935800013831
+                },
+                "reference_owner": {
+                  "append_seconds": 0.04306392700163997,
+                  "correction_seconds": 0.0398038289968099,
+                  "seconds": 0.08286775599844987
+                },
+                "source_length_after": 381,
+                "source_length_before": 380,
+                "trial": 6
+              }
+            ]
+          },
+          "transition_summaries": {
+            "append": {
+              "fast_owner": {
+                "maximum": 0.030455505999270827,
+                "median": 0.02592150800046511,
+                "minimum": 0.022950562997721136,
+                "samples": [
+                  0.022950562997721136,
+                  0.023761607000778895,
+                  0.02592150800046511,
+                  0.025714871000673156,
+                  0.02631337400089251,
+                  0.030455505999270827,
+                  0.02763342899925192
+                ]
+              },
+              "paired_speedup": {
+                "maximum": 1.5633718917397392,
+                "median": 1.4350226395079773,
+                "minimum": 1.3445044715985728,
+                "samples": [
+                  1.3934510889599971,
+                  1.4350226395079773,
+                  1.5633718917397392,
+                  1.5171780560672568,
+                  1.5174020253162646,
+                  1.3445044715985728,
+                  1.433958485550431
+                ]
+              },
+              "reference_owner": {
+                "maximum": 0.04094756400081678,
+                "median": 0.039625189998332644,
+                "minimum": 0.03198048700141953,
+                "samples": [
+                  0.03198048700141953,
+                  0.03409844399720896,
+                  0.040524956999433925,
+                  0.03901403799682157,
+                  0.03992796700185863,
+                  0.04094756400081678,
+                  0.039625189998332644
+                ]
+              }
+            },
+            "early_correction_then_append": {
+              "fast_owner": {
+                "maximum": 0.059905093999987,
+                "median": 0.05606064400126343,
+                "minimum": 0.04593037899758201,
+                "samples": [
+                  0.04593037899758201,
+                  0.05127388600158156,
+                  0.058111189002374886,
+                  0.05230231899986393,
+                  0.05606064400126343,
+                  0.05682385499676457,
+                  0.059905093999987
+                ]
+              },
+              "paired_speedup": {
+                "maximum": 1.4293665200948373,
+                "median": 1.3788142624398658,
+                "minimum": 1.3154006364456916,
+                "samples": [
+                  1.4293665200948373,
+                  1.3182477528483845,
+                  1.3154006364456916,
+                  1.407571144246578,
+                  1.3672112114462094,
+                  1.4144135592974771,
+                  1.3788142624398658
+                ]
+              },
+              "reference_owner": {
+                "maximum": 0.08259799799998291,
+                "median": 0.0764394949983398,
+                "minimum": 0.0656513459944108,
+                "samples": [
+                  0.0656513459944108,
+                  0.06759168500138912,
+                  0.0764394949983398,
+                  0.073619235001388,
+                  0.07664674099942204,
+                  0.0803724309989775,
+                  0.08259799799998291
+                ]
+              }
+            },
+            "recent_correction_then_append": {
+              "fast_owner": {
+                "maximum": 0.07395935800013831,
+                "median": 0.05461807800020324,
+                "minimum": 0.04605615900436533,
+                "samples": [
+                  0.057733521000045585,
+                  0.04605615900436533,
+                  0.06564984800570528,
+                  0.05389658300191513,
+                  0.052749909002159256,
+                  0.05461807800020324,
+                  0.07395935800013831
+                ]
+              },
+              "paired_speedup": {
+                "maximum": 1.69172521219508,
+                "median": 1.426571049852223,
+                "minimum": 1.1204499097774063,
+                "samples": [
+                  1.162338791058218,
+                  1.4298202546983978,
+                  1.1266487166182317,
+                  1.426571049852223,
+                  1.69172521219508,
+                  1.4621621983891329,
+                  1.1204499097774063
+                ]
+              },
+              "reference_owner": {
+                "maximum": 0.08923835099994903,
+                "median": 0.07688730499648955,
+                "minimum": 0.06585202899805154,
+                "samples": [
+                  0.06710591100272723,
+                  0.06585202899805154,
+                  0.07396431700180983,
+                  0.07688730499648955,
+                  0.08923835099994903,
+                  0.0798604890005663,
+                  0.08286775599844987
+                ]
+              }
+            }
+          },
+          "verification_after": {
+            "accepted_commands": 396,
+            "database_bytes": {
+              "fast_owner": 9965568,
+              "reference_owner": 9965568
+            },
+            "export_api_byte_comparisons": 1,
+            "journal_rows_byte_compared": 361,
+            "receipt_byte_comparisons": 396,
+            "state_byte_comparisons": 22,
+            "submit_seconds": {
+              "fast_owner": 2.8469631530206243,
+              "reference_owner": 4.000371218910004
+            }
+          },
+          "view_samples": [
+            {
+              "canonical_view_bytes": 64460,
+              "fast_owner": {
+                "seconds": 0.007465663002221845
+              },
+              "reference_owner": {
+                "seconds": 0.010693926000385545
+              }
+            },
+            {
+              "canonical_view_bytes": 67655,
+              "fast_owner": {
+                "seconds": 0.007429977998981485
+              },
+              "reference_owner": {
+                "seconds": 0.011839576000056695
+              }
+            },
+            {
+              "canonical_view_bytes": 71854,
+              "fast_owner": {
+                "seconds": 0.007929558996693231
+              },
+              "reference_owner": {
+                "seconds": 0.01199600100153475
+              }
+            },
+            {
+              "canonical_view_bytes": 75052,
+              "fast_owner": {
+                "seconds": 0.008598467000410892
+              },
+              "reference_owner": {
+                "seconds": 0.012350835997494869
+              }
+            },
+            {
+              "canonical_view_bytes": 79238,
+              "fast_owner": {
+                "seconds": 0.008802360000117915
+              },
+              "reference_owner": {
+                "seconds": 0.013076167000690475
+              }
+            },
+            {
+              "canonical_view_bytes": 82454,
+              "fast_owner": {
+                "seconds": 0.009108551999815973
+              },
+              "reference_owner": {
+                "seconds": 0.012997799000004306
+              }
+            },
+            {
+              "canonical_view_bytes": 86617,
+              "fast_owner": {
+                "seconds": 0.009836018001806224
+              },
+              "reference_owner": {
+                "seconds": 0.0133082070024102
+              }
+            }
+          ],
+          "view_summary": {
+            "fast_owner": {
+              "maximum": 0.009836018001806224,
+              "median": 0.008598467000410892,
+              "minimum": 0.007429977998981485,
+              "samples": [
+                0.007465663002221845,
+                0.007429977998981485,
+                0.007929558996693231,
+                0.008598467000410892,
+                0.008802360000117915,
+                0.009108551999815973,
+                0.009836018001806224
+              ]
+            },
+            "paired_speedup": {
+              "maximum": 1.5934873564470426,
+              "median": 1.436399767179971,
+              "minimum": 1.3530075890432862,
+              "samples": [
+                1.432414776450925,
+                1.5934873564470426,
+                1.512820701193761,
+                1.436399767179971,
+                1.485529676190852,
+                1.4269885048981343,
+                1.3530075890432862
+              ]
+            },
+            "reference_owner": {
+              "maximum": 0.0133082070024102,
+              "median": 0.012350835997494869,
+              "minimum": 0.010693926000385545,
+              "samples": [
+                0.010693926000385545,
+                0.011839576000056695,
+                0.01199600100153475,
+                0.012350835997494869,
+                0.013076167000690475,
+                0.012997799000004306,
+                0.0133082070024102
+              ]
+            }
+          },
+          "warm_audit": {
+            "fast_owner": {
+              "seconds": 1.6296728650013392
+            },
+            "outcome": {
+              "bytes": 88777,
+              "contracts": 1,
+              "events": 361,
+              "external_anchor_checked": false,
+              "head": "f2ea1c6a2b314b21739d145fb571a387c757b844d15e99cac1cf2f0914c6c542",
+              "journal_mode": "delete",
+              "semantic_replay": true,
+              "status": "passed",
+              "synchronous": 3
+            },
+            "reference_owner": {
+              "seconds": 2.115990694001084
+            }
+          }
+        },
+        {
+          "cold_open_samples": [
+            {
+              "fast_owner": {
+                "seconds": 9.577795262997824
+              },
+              "reference_owner": {
+                "seconds": 12.261407379999582
+              }
+            }
+          ],
+          "cold_open_summary": {
+            "fast_owner": {
+              "maximum": 9.577795262997824,
+              "median": 9.577795262997824,
+              "minimum": 9.577795262997824,
+              "samples": [
+                9.577795262997824
+              ]
+            },
+            "paired_speedup": {
+              "maximum": 1.2801910088190582,
+              "median": 1.2801910088190582,
+              "minimum": 1.2801910088190582,
+              "samples": [
+                1.2801910088190582
+              ]
+            },
+            "reference_owner": {
+              "maximum": 12.261407379999582,
+              "median": 12.261407379999582,
+              "minimum": 12.261407379999582,
+              "samples": [
+                12.261407379999582
+              ]
+            }
+          },
+          "prefix_submit_seconds": {
+            "fast_owner": 9.367095973022515,
+            "reference_owner": 12.932265182913397
+          },
+          "prefix_verification": {
+            "accepted_commands": 515,
+            "database_bytes": {
+              "fast_owner": 48939008,
+              "reference_owner": 48939008
+            },
+            "export_api_byte_comparisons": 1,
+            "journal_rows_byte_compared": 876,
+            "receipt_byte_comparisons": 515,
+            "state_byte_comparisons": 23,
+            "submit_seconds": {
+              "fast_owner": 9.367095973022515,
+              "reference_owner": 12.932265182913397
+            }
+          },
+          "source_length": 500,
+          "transition_samples": {
+            "append": [
+              {
+                "fast_owner": {
+                  "seconds": 0.07602815300197108
+                },
+                "reference_owner": {
+                  "seconds": 0.11224433799725375
+                },
+                "source_length_after": 501,
+                "source_length_before": 500,
+                "trial": 0
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.07608436800001073
+                },
+                "reference_owner": {
+                  "seconds": 0.10709160599799361
+                },
+                "source_length_after": 504,
+                "source_length_before": 503,
+                "trial": 1
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.07867964300021413
+                },
+                "reference_owner": {
+                  "seconds": 0.12158072800230002
+                },
+                "source_length_after": 507,
+                "source_length_before": 506,
+                "trial": 2
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.07838846799859311
+                },
+                "reference_owner": {
+                  "seconds": 0.12204191800265107
+                },
+                "source_length_after": 510,
+                "source_length_before": 509,
+                "trial": 3
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.08295865200125263
+                },
+                "reference_owner": {
+                  "seconds": 0.12438398700032849
+                },
+                "source_length_after": 513,
+                "source_length_before": 512,
+                "trial": 4
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.08347036299892352
+                },
+                "reference_owner": {
+                  "seconds": 0.11246234300051583
+                },
+                "source_length_after": 516,
+                "source_length_before": 515,
+                "trial": 5
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.07655347000036272
+                },
+                "reference_owner": {
+                  "seconds": 0.116625672999362
+                },
+                "source_length_after": 519,
+                "source_length_before": 518,
+                "trial": 6
+              }
+            ],
+            "early_correction_then_append": [
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.07193786400239333,
+                  "correction_seconds": 0.09378658900095616,
+                  "seconds": 0.16572445300334948
+                },
+                "reference_owner": {
+                  "append_seconds": 0.10623848999966867,
+                  "correction_seconds": 0.10525519599832478,
+                  "seconds": 0.21149368599799345
+                },
+                "source_length_after": 502,
+                "source_length_before": 501,
+                "trial": 0
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.07665865499802749,
+                  "correction_seconds": 0.07753557700198144,
+                  "seconds": 0.15419423200000892
+                },
+                "reference_owner": {
+                  "append_seconds": 0.10017439399962313,
+                  "correction_seconds": 0.1147693060011079,
+                  "seconds": 0.21494370000073104
+                },
+                "source_length_after": 505,
+                "source_length_before": 504,
+                "trial": 1
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.07255018200157792,
+                  "correction_seconds": 0.07994619799865177,
+                  "seconds": 0.1524963800002297
+                },
+                "reference_owner": {
+                  "append_seconds": 0.10868078999919817,
+                  "correction_seconds": 0.12254515300082858,
+                  "seconds": 0.23122594300002675
+                },
+                "source_length_after": 508,
+                "source_length_before": 507,
+                "trial": 2
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.09096277500066208,
+                  "correction_seconds": 0.08311889299875475,
+                  "seconds": 0.17408166799941682
+                },
+                "reference_owner": {
+                  "append_seconds": 0.10603555000125198,
+                  "correction_seconds": 0.11102590700102155,
+                  "seconds": 0.21706145700227353
+                },
+                "source_length_after": 511,
+                "source_length_before": 510,
+                "trial": 3
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.07747671300239745,
+                  "correction_seconds": 0.08159270100077265,
+                  "seconds": 0.1590694140031701
+                },
+                "reference_owner": {
+                  "append_seconds": 0.11186930899930303,
+                  "correction_seconds": 0.11609222900005989,
+                  "seconds": 0.22796153799936292
+                },
+                "source_length_after": 514,
+                "source_length_before": 513,
+                "trial": 4
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.07667865899929893,
+                  "correction_seconds": 0.0833281490013178,
+                  "seconds": 0.16000680800061673
+                },
+                "reference_owner": {
+                  "append_seconds": 0.10748514700026135,
+                  "correction_seconds": 0.13128584699734347,
+                  "seconds": 0.23877099399760482
+                },
+                "source_length_after": 517,
+                "source_length_before": 516,
+                "trial": 5
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.08301407099861535,
+                  "correction_seconds": 0.08150939499682863,
+                  "seconds": 0.16452346599544398
+                },
+                "reference_owner": {
+                  "append_seconds": 0.10786197400011588,
+                  "correction_seconds": 0.1158561229967745,
+                  "seconds": 0.22371809699689038
+                },
+                "source_length_after": 520,
+                "source_length_before": 519,
+                "trial": 6
+              }
+            ],
+            "recent_correction_then_append": [
+              {
+                "correction_index": 499,
+                "fast_owner": {
+                  "append_seconds": 0.06859070599966799,
+                  "correction_seconds": 0.06796556299741496,
+                  "seconds": 0.13655626899708295
+                },
+                "reference_owner": {
+                  "append_seconds": 0.10248963599951821,
+                  "correction_seconds": 0.09816914900147822,
+                  "seconds": 0.20065878500099643
+                },
+                "source_length_after": 503,
+                "source_length_before": 502,
+                "trial": 0
+              },
+              {
+                "correction_index": 502,
+                "fast_owner": {
+                  "append_seconds": 0.07546932100012782,
+                  "correction_seconds": 0.08518856999944546,
+                  "seconds": 0.16065789099957328
+                },
+                "reference_owner": {
+                  "append_seconds": 0.09957629199925577,
+                  "correction_seconds": 0.10104907200002344,
+                  "seconds": 0.20062536399927922
+                },
+                "source_length_after": 506,
+                "source_length_before": 505,
+                "trial": 1
+              },
+              {
+                "correction_index": 505,
+                "fast_owner": {
+                  "append_seconds": 0.07127270500131999,
+                  "correction_seconds": 0.07007764199806843,
+                  "seconds": 0.14135034699938842
+                },
+                "reference_owner": {
+                  "append_seconds": 0.13189932199748,
+                  "correction_seconds": 0.10407898899939028,
+                  "seconds": 0.23597831099687028
+                },
+                "source_length_after": 509,
+                "source_length_before": 508,
+                "trial": 2
+              },
+              {
+                "correction_index": 508,
+                "fast_owner": {
+                  "append_seconds": 0.07298471799731487,
+                  "correction_seconds": 0.07309481300035259,
+                  "seconds": 0.14607953099766746
+                },
+                "reference_owner": {
+                  "append_seconds": 0.10811796099733328,
+                  "correction_seconds": 0.10105447699970682,
+                  "seconds": 0.2091724379970401
+                },
+                "source_length_after": 512,
+                "source_length_before": 511,
+                "trial": 3
+              },
+              {
+                "correction_index": 511,
+                "fast_owner": {
+                  "append_seconds": 0.09299749400088331,
+                  "correction_seconds": 0.08002436600145302,
+                  "seconds": 0.17302186000233633
+                },
+                "reference_owner": {
+                  "append_seconds": 0.11023811899940483,
+                  "correction_seconds": 0.10809186199912801,
+                  "seconds": 0.21832998099853285
+                },
+                "source_length_after": 515,
+                "source_length_before": 514,
+                "trial": 4
+              },
+              {
+                "correction_index": 514,
+                "fast_owner": {
+                  "append_seconds": 0.08306331399944611,
+                  "correction_seconds": 0.07254432300032931,
+                  "seconds": 0.15560763699977542
+                },
+                "reference_owner": {
+                  "append_seconds": 0.10618747899934533,
+                  "correction_seconds": 0.10782597099751001,
+                  "seconds": 0.21401344999685534
+                },
+                "source_length_after": 518,
+                "source_length_before": 517,
+                "trial": 5
+              },
+              {
+                "correction_index": 517,
+                "fast_owner": {
+                  "append_seconds": 0.09034539300046163,
+                  "correction_seconds": 0.07767514199804282,
+                  "seconds": 0.16802053499850444
+                },
+                "reference_owner": {
+                  "append_seconds": 0.12083932400128106,
+                  "correction_seconds": 0.12515027200061013,
+                  "seconds": 0.2459895960018912
+                },
+                "source_length_after": 521,
+                "source_length_before": 520,
+                "trial": 6
+              }
+            ]
+          },
+          "transition_summaries": {
+            "append": {
+              "fast_owner": {
+                "maximum": 0.08347036299892352,
+                "median": 0.07838846799859311,
+                "minimum": 0.07602815300197108,
+                "samples": [
+                  0.07602815300197108,
+                  0.07608436800001073,
+                  0.07867964300021413,
+                  0.07838846799859311,
+                  0.08295865200125263,
+                  0.08347036299892352,
+                  0.07655347000036272
+                ]
+              },
+              "paired_speedup": {
+                "maximum": 1.5568861226480588,
+                "median": 1.4993491817881799,
+                "minimum": 1.3473326215433639,
+                "samples": [
+                  1.476352292740082,
+                  1.4075375640628114,
+                  1.5452628324961915,
+                  1.5568861226480588,
+                  1.4993491817881799,
+                  1.3473326215433639,
+                  1.523453776802141
+                ]
+              },
+              "reference_owner": {
+                "maximum": 0.12438398700032849,
+                "median": 0.116625672999362,
+                "minimum": 0.10709160599799361,
+                "samples": [
+                  0.11224433799725375,
+                  0.10709160599799361,
+                  0.12158072800230002,
+                  0.12204191800265107,
+                  0.12438398700032849,
+                  0.11246234300051583,
+                  0.116625672999362
+                ]
+              }
+            },
+            "early_correction_then_append": {
+              "fast_owner": {
+                "maximum": 0.17408166799941682,
+                "median": 0.16000680800061673,
+                "minimum": 0.1524963800002297,
+                "samples": [
+                  0.16572445300334948,
+                  0.15419423200000892,
+                  0.1524963800002297,
+                  0.17408166799941682,
+                  0.1590694140031701,
+                  0.16000680800061673,
+                  0.16452346599544398
+                ]
+              },
+              "paired_speedup": {
+                "maximum": 1.5162716846109952,
+                "median": 1.393980158743672,
+                "minimum": 1.2468944001788902,
+                "samples": [
+                  1.27617670274476,
+                  1.393980158743672,
+                  1.5162716846109952,
+                  1.2468944001788902,
+                  1.4330947242618237,
+                  1.492255217019794,
+                  1.3597944563305373
+                ]
+              },
+              "reference_owner": {
+                "maximum": 0.23877099399760482,
+                "median": 0.22371809699689038,
+                "minimum": 0.21149368599799345,
+                "samples": [
+                  0.21149368599799345,
+                  0.21494370000073104,
+                  0.23122594300002675,
+                  0.21706145700227353,
+                  0.22796153799936292,
+                  0.23877099399760482,
+                  0.22371809699689038
+                ]
+              }
+            },
+            "recent_correction_then_append": {
+              "fast_owner": {
+                "maximum": 0.17302186000233633,
+                "median": 0.15560763699977542,
+                "minimum": 0.13655626899708295,
+                "samples": [
+                  0.13655626899708295,
+                  0.16065789099957328,
+                  0.14135034699938842,
+                  0.14607953099766746,
+                  0.17302186000233633,
+                  0.15560763699977542,
+                  0.16802053499850444
+                ]
+              },
+              "paired_speedup": {
+                "maximum": 1.669456892085955,
+                "median": 1.4319079241867232,
+                "minimum": 1.2487737935002028,
+                "samples": [
+                  1.469421993400265,
+                  1.2487737935002028,
+                  1.669456892085955,
+                  1.4319079241867232,
+                  1.2618635644974845,
+                  1.3753402732872566,
+                  1.4640448324014725
+                ]
+              },
+              "reference_owner": {
+                "maximum": 0.2459895960018912,
+                "median": 0.21401344999685534,
+                "minimum": 0.20062536399927922,
+                "samples": [
+                  0.20065878500099643,
+                  0.20062536399927922,
+                  0.23597831099687028,
+                  0.2091724379970401,
+                  0.21832998099853285,
+                  0.21401344999685534,
+                  0.2459895960018912
+                ]
+              }
+            }
+          },
+          "verification_after": {
+            "accepted_commands": 550,
+            "database_bytes": {
+              "fast_owner": 66359296,
+              "reference_owner": 66359296
+            },
+            "export_api_byte_comparisons": 1,
+            "journal_rows_byte_compared": 876,
+            "receipt_byte_comparisons": 550,
+            "state_byte_comparisons": 44,
+            "submit_seconds": {
+              "fast_owner": 12.130649581020407,
+              "reference_owner": 16.83863911590015
+            }
+          },
+          "view_samples": [
+            {
+              "canonical_view_bytes": 236993,
+              "fast_owner": {
+                "seconds": 0.023913117998745292
+              },
+              "reference_owner": {
+                "seconds": 0.048781907997181406
+              }
+            },
+            {
+              "canonical_view_bytes": 239710,
+              "fast_owner": {
+                "seconds": 0.024882549998437753
+              },
+              "reference_owner": {
+                "seconds": 0.03495669600306428
+              }
+            },
+            {
+              "canonical_view_bytes": 244386,
+              "fast_owner": {
+                "seconds": 0.02507586299907416
+              },
+              "reference_owner": {
+                "seconds": 0.03443167600198649
+              }
+            },
+            {
+              "canonical_view_bytes": 247091,
+              "fast_owner": {
+                "seconds": 0.023943650998262456
+              },
+              "reference_owner": {
+                "seconds": 0.038300641001114855
+              }
+            },
+            {
+              "canonical_view_bytes": 251779,
+              "fast_owner": {
+                "seconds": 0.027705149001121754
+              },
+              "reference_owner": {
+                "seconds": 0.041403470997465774
+              }
+            },
+            {
+              "canonical_view_bytes": 254468,
+              "fast_owner": {
+                "seconds": 0.028409391998138744
+              },
+              "reference_owner": {
+                "seconds": 0.05758454900205834
+              }
+            },
+            {
+              "canonical_view_bytes": 259156,
+              "fast_owner": {
+                "seconds": 0.026958522998029366
+              },
+              "reference_owner": {
+                "seconds": 0.03719624599762028
+              }
+            }
+          ],
+          "view_summary": {
+            "fast_owner": {
+              "maximum": 0.028409391998138744,
+              "median": 0.02507586299907416,
+              "minimum": 0.023913117998745292,
+              "samples": [
+                0.023913117998745292,
+                0.024882549998437753,
+                0.02507586299907416,
+                0.023943650998262456,
+                0.027705149001121754,
+                0.028409391998138744,
+                0.026958522998029366
+              ]
+            },
+            "paired_speedup": {
+              "maximum": 2.0399643409002945,
+              "median": 1.4944323524767684,
+              "minimum": 1.3731003396875217,
+              "samples": [
+                2.0399643409002945,
+                1.4048679096498964,
+                1.3731003396875217,
+                1.5996157396336197,
+                1.4944323524767684,
+                2.0269546425291685,
+                1.3797583050206155
+              ]
+            },
+            "reference_owner": {
+              "maximum": 0.05758454900205834,
+              "median": 0.038300641001114855,
+              "minimum": 0.03443167600198649,
+              "samples": [
+                0.048781907997181406,
+                0.03495669600306428,
+                0.03443167600198649,
+                0.038300641001114855,
+                0.041403470997465774,
+                0.05758454900205834,
+                0.03719624599762028
+              ]
+            }
+          },
+          "warm_audit": {
+            "fast_owner": {
+              "seconds": 9.426257916002214
+            },
+            "outcome": {
+              "bytes": 126815,
+              "contracts": 1,
+              "events": 515,
+              "external_anchor_checked": false,
+              "head": "859e8825e080f7d97f98260c040e3ae850ec6f1d546dd7239e213f0dda2afe32",
+              "journal_mode": "delete",
+              "semantic_replay": true,
+              "status": "passed",
+              "synchronous": 3
+            },
+            "reference_owner": {
+              "seconds": 11.691073691999918
+            }
+          }
+        },
+        {
+          "cold_open_samples": [
+            {
+              "fast_owner": {
+                "seconds": 56.80766092799968
+              },
+              "reference_owner": {
+                "seconds": 68.81156088699936
+              }
+            }
+          ],
+          "cold_open_summary": {
+            "fast_owner": {
+              "maximum": 56.80766092799968,
+              "median": 56.80766092799968,
+              "minimum": 56.80766092799968,
+              "samples": [
+                56.80766092799968
+              ]
+            },
+            "paired_speedup": {
+              "maximum": 1.2113077666446064,
+              "median": 1.2113077666446064,
+              "minimum": 1.2113077666446064,
+              "samples": [
+                1.2113077666446064
+              ]
+            },
+            "reference_owner": {
+              "maximum": 68.81156088699936,
+              "median": 68.81156088699936,
+              "minimum": 68.81156088699936,
+              "samples": [
+                68.81156088699936
+              ]
+            }
+          },
+          "prefix_submit_seconds": {
+            "fast_owner": 49.676523602116504,
+            "reference_owner": 70.68490524892331
+          },
+          "prefix_verification": {
+            "accepted_commands": 829,
+            "database_bytes": {
+              "fast_owner": 308817920,
+              "reference_owner": 308817920
+            },
+            "export_api_byte_comparisons": 1,
+            "journal_rows_byte_compared": 1705,
+            "receipt_byte_comparisons": 829,
+            "state_byte_comparisons": 45,
+            "submit_seconds": {
+              "fast_owner": 49.676523602116504,
+              "reference_owner": 70.68490524892331
+            }
+          },
+          "source_length": 800,
+          "transition_samples": {
+            "append": [
+              {
+                "fast_owner": {
+                  "seconds": 0.17631416999938665
+                },
+                "reference_owner": {
+                  "seconds": 0.27434548900055233
+                },
+                "source_length_after": 801,
+                "source_length_before": 800,
+                "trial": 0
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.20258273199942778
+                },
+                "reference_owner": {
+                  "seconds": 0.26300866400197265
+                },
+                "source_length_after": 804,
+                "source_length_before": 803,
+                "trial": 1
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.1766090359997179
+                },
+                "reference_owner": {
+                  "seconds": 0.3032685680009308
+                },
+                "source_length_after": 807,
+                "source_length_before": 806,
+                "trial": 2
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.17405665099795442
+                },
+                "reference_owner": {
+                  "seconds": 0.242702654999448
+                },
+                "source_length_after": 810,
+                "source_length_before": 809,
+                "trial": 3
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.1803041809980641
+                },
+                "reference_owner": {
+                  "seconds": 0.2746610670001246
+                },
+                "source_length_after": 813,
+                "source_length_before": 812,
+                "trial": 4
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.18373089699889533
+                },
+                "reference_owner": {
+                  "seconds": 0.25954302399986773
+                },
+                "source_length_after": 816,
+                "source_length_before": 815,
+                "trial": 5
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.1872681399981957
+                },
+                "reference_owner": {
+                  "seconds": 0.2582764050021069
+                },
+                "source_length_after": 819,
+                "source_length_before": 818,
+                "trial": 6
+              }
+            ],
+            "early_correction_then_append": [
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.17541337099828525,
+                  "correction_seconds": 0.21163791800063336,
+                  "seconds": 0.3870512889989186
+                },
+                "reference_owner": {
+                  "append_seconds": 0.24759526100024232,
+                  "correction_seconds": 0.2688025610004843,
+                  "seconds": 0.5163978220007266
+                },
+                "source_length_after": 802,
+                "source_length_before": 801,
+                "trial": 0
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.17571966300238273,
+                  "correction_seconds": 0.2051317650002602,
+                  "seconds": 0.38085142800264293
+                },
+                "reference_owner": {
+                  "append_seconds": 0.2837439920003817,
+                  "correction_seconds": 0.2768354840009124,
+                  "seconds": 0.5605794760012941
+                },
+                "source_length_after": 805,
+                "source_length_before": 804,
+                "trial": 1
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.19395211200026097,
+                  "correction_seconds": 0.19672873199669993,
+                  "seconds": 0.3906808439969609
+                },
+                "reference_owner": {
+                  "append_seconds": 0.2537989270022081,
+                  "correction_seconds": 0.28062347499871976,
+                  "seconds": 0.5344224020009278
+                },
+                "source_length_after": 808,
+                "source_length_before": 807,
+                "trial": 2
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.17307764399811276,
+                  "correction_seconds": 0.20942333100174437,
+                  "seconds": 0.38250097499985714
+                },
+                "reference_owner": {
+                  "append_seconds": 0.28404554900043877,
+                  "correction_seconds": 0.26852379200136056,
+                  "seconds": 0.5525693410017993
+                },
+                "source_length_after": 811,
+                "source_length_before": 810,
+                "trial": 3
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.21172529199975543,
+                  "correction_seconds": 0.2075059999988298,
+                  "seconds": 0.4192312919985852
+                },
+                "reference_owner": {
+                  "append_seconds": 0.26579261799997767,
+                  "correction_seconds": 0.29165373100113356,
+                  "seconds": 0.5574463490011112
+                },
+                "source_length_after": 814,
+                "source_length_before": 813,
+                "trial": 4
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.20287485199878574,
+                  "correction_seconds": 0.22202004799692077,
+                  "seconds": 0.4248948999957065
+                },
+                "reference_owner": {
+                  "append_seconds": 0.25371540800188086,
+                  "correction_seconds": 0.2916104699979769,
+                  "seconds": 0.5453258779998578
+                },
+                "source_length_after": 817,
+                "source_length_before": 816,
+                "trial": 5
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.184746647002612,
+                  "correction_seconds": 0.2007411670019792,
+                  "seconds": 0.3854878140045912
+                },
+                "reference_owner": {
+                  "append_seconds": 0.2760253409978759,
+                  "correction_seconds": 0.30431469100221875,
+                  "seconds": 0.5803400320000947
+                },
+                "source_length_after": 820,
+                "source_length_before": 819,
+                "trial": 6
+              }
+            ],
+            "recent_correction_then_append": [
+              {
+                "correction_index": 799,
+                "fast_owner": {
+                  "append_seconds": 0.18577860100049293,
+                  "correction_seconds": 0.17215474199838354,
+                  "seconds": 0.35793334299887647
+                },
+                "reference_owner": {
+                  "append_seconds": 0.2911686090010335,
+                  "correction_seconds": 0.2648108420034987,
+                  "seconds": 0.5559794510045322
+                },
+                "source_length_after": 803,
+                "source_length_before": 802,
+                "trial": 0
+              },
+              {
+                "correction_index": 802,
+                "fast_owner": {
+                  "append_seconds": 0.22176807099822327,
+                  "correction_seconds": 0.18888028800211032,
+                  "seconds": 0.4106483590003336
+                },
+                "reference_owner": {
+                  "append_seconds": 0.29158916199958185,
+                  "correction_seconds": 0.2869376380003814,
+                  "seconds": 0.5785267999999633
+                },
+                "source_length_after": 806,
+                "source_length_before": 805,
+                "trial": 1
+              },
+              {
+                "correction_index": 805,
+                "fast_owner": {
+                  "append_seconds": 0.2058339889990748,
+                  "correction_seconds": 0.1895184259992675,
+                  "seconds": 0.3953524149983423
+                },
+                "reference_owner": {
+                  "append_seconds": 0.26380778000020655,
+                  "correction_seconds": 0.2465577589973691,
+                  "seconds": 0.5103655389975756
+                },
+                "source_length_after": 809,
+                "source_length_before": 808,
+                "trial": 2
+              },
+              {
+                "correction_index": 808,
+                "fast_owner": {
+                  "append_seconds": 0.184613329001877,
+                  "correction_seconds": 0.18717041499985498,
+                  "seconds": 0.371783744001732
+                },
+                "reference_owner": {
+                  "append_seconds": 0.2714050379981927,
+                  "correction_seconds": 0.31103997500031255,
+                  "seconds": 0.5824450129985053
+                },
+                "source_length_after": 812,
+                "source_length_before": 811,
+                "trial": 3
+              },
+              {
+                "correction_index": 811,
+                "fast_owner": {
+                  "append_seconds": 0.1790995249975822,
+                  "correction_seconds": 0.19782812600169564,
+                  "seconds": 0.37692765099927783
+                },
+                "reference_owner": {
+                  "append_seconds": 0.2551865710011043,
+                  "correction_seconds": 0.24764792199857766,
+                  "seconds": 0.502834492999682
+                },
+                "source_length_after": 815,
+                "source_length_before": 814,
+                "trial": 4
+              },
+              {
+                "correction_index": 814,
+                "fast_owner": {
+                  "append_seconds": 0.1800839880015701,
+                  "correction_seconds": 0.17876054299995303,
+                  "seconds": 0.35884453100152314
+                },
+                "reference_owner": {
+                  "append_seconds": 0.2572556170016469,
+                  "correction_seconds": 0.2911565120011801,
+                  "seconds": 0.548412129002827
+                },
+                "source_length_after": 818,
+                "source_length_before": 817,
+                "trial": 5
+              },
+              {
+                "correction_index": 817,
+                "fast_owner": {
+                  "append_seconds": 0.18453007100106333,
+                  "correction_seconds": 0.20851667099850602,
+                  "seconds": 0.39304674199956935
+                },
+                "reference_owner": {
+                  "append_seconds": 0.26237601799948607,
+                  "correction_seconds": 0.2580169050015684,
+                  "seconds": 0.5203929230010544
+                },
+                "source_length_after": 821,
+                "source_length_before": 820,
+                "trial": 6
+              }
+            ]
+          },
+          "transition_summaries": {
+            "append": {
+              "fast_owner": {
+                "maximum": 0.20258273199942778,
+                "median": 0.1803041809980641,
+                "minimum": 0.17405665099795442,
+                "samples": [
+                  0.17631416999938665,
+                  0.20258273199942778,
+                  0.1766090359997179,
+                  0.17405665099795442,
+                  0.1803041809980641,
+                  0.18373089699889533,
+                  0.1872681399981957
+                ]
+              },
+              "paired_speedup": {
+                "maximum": 1.7171746976831652,
+                "median": 1.4126259014640756,
+                "minimum": 1.2982778018943666,
+                "samples": [
+                  1.5560036326150457,
+                  1.2982778018943666,
+                  1.7171746976831652,
+                  1.3943888590749705,
+                  1.5233205657226194,
+                  1.4126259014640756,
+                  1.379179635172301
+                ]
+              },
+              "reference_owner": {
+                "maximum": 0.3032685680009308,
+                "median": 0.26300866400197265,
+                "minimum": 0.242702654999448,
+                "samples": [
+                  0.27434548900055233,
+                  0.26300866400197265,
+                  0.3032685680009308,
+                  0.242702654999448,
+                  0.2746610670001246,
+                  0.25954302399986773,
+                  0.2582764050021069
+                ]
+              }
+            },
+            "early_correction_then_append": {
+              "fast_owner": {
+                "maximum": 0.4248948999957065,
+                "median": 0.3870512889989186,
+                "minimum": 0.38085142800264293,
+                "samples": [
+                  0.3870512889989186,
+                  0.38085142800264293,
+                  0.3906808439969609,
+                  0.38250097499985714,
+                  0.4192312919985852,
+                  0.4248948999957065,
+                  0.3854878140045912
+                ]
+              },
+              "paired_speedup": {
+                "maximum": 1.5054692027000955,
+                "median": 1.367925789586666,
+                "minimum": 1.2834370993988589,
+                "samples": [
+                  1.3341844780735748,
+                  1.4719111831645908,
+                  1.367925789586666,
+                  1.4446220457398984,
+                  1.329686880823277,
+                  1.2834370993988589,
+                  1.5054692027000955
+                ]
+              },
+              "reference_owner": {
+                "maximum": 0.5803400320000947,
+                "median": 0.5525693410017993,
+                "minimum": 0.5163978220007266,
+                "samples": [
+                  0.5163978220007266,
+                  0.5605794760012941,
+                  0.5344224020009278,
+                  0.5525693410017993,
+                  0.5574463490011112,
+                  0.5453258779998578,
+                  0.5803400320000947
+                ]
+              }
+            },
+            "recent_correction_then_append": {
+              "fast_owner": {
+                "maximum": 0.4106483590003336,
+                "median": 0.37692765099927783,
+                "minimum": 0.35793334299887647,
+                "samples": [
+                  0.35793334299887647,
+                  0.4106483590003336,
+                  0.3953524149983423,
+                  0.371783744001732,
+                  0.37692765099927783,
+                  0.35884453100152314,
+                  0.39304674199956935
+                ]
+              },
+              "paired_speedup": {
+                "maximum": 1.5666231307730116,
+                "median": 1.4088131300665767,
+                "minimum": 1.2909129162641275,
+                "samples": [
+                  1.553304440280316,
+                  1.4088131300665767,
+                  1.2909129162641275,
+                  1.5666231307730116,
+                  1.33403450679888,
+                  1.528272222715021,
+                  1.3239975488758144
+                ]
+              },
+              "reference_owner": {
+                "maximum": 0.5824450129985053,
+                "median": 0.548412129002827,
+                "minimum": 0.502834492999682,
+                "samples": [
+                  0.5559794510045322,
+                  0.5785267999999633,
+                  0.5103655389975756,
+                  0.5824450129985053,
+                  0.502834492999682,
+                  0.548412129002827,
+                  0.5203929230010544
+                ]
+              }
+            }
+          },
+          "verification_after": {
+            "accepted_commands": 864,
+            "database_bytes": {
+              "fast_owner": 352112640,
+              "reference_owner": 352112640
+            },
+            "export_api_byte_comparisons": 1,
+            "journal_rows_byte_compared": 1705,
+            "receipt_byte_comparisons": 864,
+            "state_byte_comparisons": 66,
+            "submit_seconds": {
+              "fast_owner": 56.39262473610506,
+              "reference_owner": 80.20674876893827
+            }
+          },
+          "view_samples": [
+            {
+              "canonical_view_bytes": 606750,
+              "fast_owner": {
+                "seconds": 0.06179605799843557
+              },
+              "reference_owner": {
+                "seconds": 0.10421020299691008
+              }
+            },
+            {
+              "canonical_view_bytes": 608366,
+              "fast_owner": {
+                "seconds": 0.06718863899732241
+              },
+              "reference_owner": {
+                "seconds": 0.09212379599921405
+              }
+            },
+            {
+              "canonical_view_bytes": 614095,
+              "fast_owner": {
+                "seconds": 0.059839264999027364
+              },
+              "reference_owner": {
+                "seconds": 0.10190338600295945
+              }
+            },
+            {
+              "canonical_view_bytes": 615715,
+              "fast_owner": {
+                "seconds": 0.08176161300070817
+              },
+              "reference_owner": {
+                "seconds": 0.09935956999834161
+              }
+            },
+            {
+              "canonical_view_bytes": 621456,
+              "fast_owner": {
+                "seconds": 0.10655417000089074
+              },
+              "reference_owner": {
+                "seconds": 0.09305680000034044
+              }
+            },
+            {
+              "canonical_view_bytes": 623046,
+              "fast_owner": {
+                "seconds": 0.06928364499981399
+              },
+              "reference_owner": {
+                "seconds": 0.10947729799954686
+              }
+            },
+            {
+              "canonical_view_bytes": 628773,
+              "fast_owner": {
+                "seconds": 0.08090493000054266
+              },
+              "reference_owner": {
+                "seconds": 0.08890175899796304
+              }
+            }
+          ],
+          "view_summary": {
+            "fast_owner": {
+              "maximum": 0.10655417000089074,
+              "median": 0.06928364499981399,
+              "minimum": 0.059839264999027364,
+              "samples": [
+                0.06179605799843557,
+                0.06718863899732241,
+                0.059839264999027364,
+                0.08176161300070817,
+                0.10655417000089074,
+                0.06928364499981399,
+                0.08090493000054266
+              ]
+            },
+            "paired_speedup": {
+              "maximum": 1.7029518327909912,
+              "median": 1.3711216267215258,
+              "minimum": 0.8733285614215055,
+              "samples": [
+                1.6863568061177667,
+                1.3711216267215258,
+                1.7029518327909912,
+                1.215234953809938,
+                0.8733285614215055,
+                1.5801319055866763,
+                1.098842295486403
+              ]
+            },
+            "reference_owner": {
+              "maximum": 0.10947729799954686,
+              "median": 0.09935956999834161,
+              "minimum": 0.08890175899796304,
+              "samples": [
+                0.10421020299691008,
+                0.09212379599921405,
+                0.10190338600295945,
+                0.09935956999834161,
+                0.09305680000034044,
+                0.10947729799954686,
+                0.08890175899796304
+              ]
+            }
+          },
+          "warm_audit": {
+            "fast_owner": {
+              "seconds": 55.8922158480018
+            },
+            "outcome": {
+              "bytes": 204378,
+              "contracts": 1,
+              "events": 829,
+              "external_anchor_checked": false,
+              "head": "88766778efea22386674bc66d9845793886f5dd10bd36a4499d4b35b4dc971d2",
+              "journal_mode": "delete",
+              "semantic_replay": true,
+              "status": "passed",
+              "synchronous": 3
+            },
+            "reference_owner": {
+              "seconds": 69.35016467600144
+            }
+          }
+        }
+      ],
+      "horizon": 1,
+      "profile": {
+        "fast_owner": {
+          "selected_functions": [
+            {
+              "calls": 11,
+              "file": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py",
+              "function": "loads",
+              "inline_seconds": 5.7502000000000006e-05,
+              "line": 299,
+              "recursive_calls": 0,
+              "total_seconds": 0.030062493000000003
+            },
+            {
+              "calls": 502486,
+              "file": "gabriel_runtime/canonical.py",
+              "function": "_check",
+              "inline_seconds": 0.21642433400000002,
+              "line": 13,
+              "recursive_calls": 501940,
+              "total_seconds": 0.262084486
+            },
+            {
+              "calls": 11,
+              "file": "gabriel_runtime/canonical.py",
+              "function": "loads",
+              "inline_seconds": 3.8025e-05,
+              "line": 63,
+              "recursive_calls": 0,
+              "total_seconds": 0.136456205
+            },
+            {
+              "calls": 2,
+              "file": "gabriel_runtime/canonical.py",
+              "function": "digest",
+              "inline_seconds": 6.35e-06,
+              "line": 76,
+              "recursive_calls": 0,
+              "total_seconds": 0.003536333
+            },
+            {
+              "calls": 3,
+              "file": "gabriel_runtime/fast_owner.py",
+              "function": "_text_digest",
+              "inline_seconds": 1.3109000000000001e-05,
+              "line": 52,
+              "recursive_calls": 0,
+              "total_seconds": 0.001838493
+            },
+            {
+              "calls": 1,
+              "file": "gabriel_runtime/engine.py",
+              "function": "_clone",
+              "inline_seconds": 1.052e-06,
+              "line": 20,
+              "recursive_calls": 0,
+              "total_seconds": 0.000141884
+            },
+            {
+              "calls": 3,
+              "file": "gabriel_runtime/engine.py",
+              "function": "_stored",
+              "inline_seconds": 4.9574000000000003e-05,
+              "line": 80,
+              "recursive_calls": 0,
+              "total_seconds": 0.058953258
+            },
+            {
+              "calls": 546,
+              "file": "gabriel_runtime/canonical.py",
+              "function": "canonical",
+              "inline_seconds": 0.00037870600000000003,
+              "line": 40,
+              "recursive_calls": 0,
+              "total_seconds": 0.32342322100000004
+            },
+            {
+              "calls": 6,
+              "file": "gabriel_runtime/fast_owner.py",
+              "function": "checked_clone",
+              "inline_seconds": 2.0543e-05,
+              "line": 16,
+              "recursive_calls": 0,
+              "total_seconds": 0.078557391
+            },
+            {
+              "calls": 546,
+              "file": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py",
+              "function": "dumps",
+              "inline_seconds": 0.000670839,
+              "line": 183,
+              "recursive_calls": 0,
+              "total_seconds": 0.060960029000000006
+            }
+          ],
+          "top_cumulative_functions": [
+            {
+              "calls": 1,
+              "file": "gabriel_runtime/fast_owner.py",
+              "function": "submit",
+              "inline_seconds": 0.001083814,
+              "line": 108,
+              "recursive_calls": 0,
+              "total_seconds": 0.44729527500000005
+            },
+            {
+              "calls": 546,
+              "file": "gabriel_runtime/canonical.py",
+              "function": "canonical",
+              "inline_seconds": 0.00037870600000000003,
+              "line": 40,
+              "recursive_calls": 0,
+              "total_seconds": 0.32342322100000004
+            },
+            {
+              "calls": 1,
+              "file": "gabriel_runtime/fast_owner.py",
+              "function": "_transition_with_text",
+              "inline_seconds": 0.003825287,
+              "line": 67,
+              "recursive_calls": 0,
+              "total_seconds": 0.29697464
+            },
+            {
+              "calls": 502486,
+              "file": "gabriel_runtime/canonical.py",
+              "function": "_check",
+              "inline_seconds": 0.21642433400000002,
+              "line": 13,
+              "recursive_calls": 501940,
+              "total_seconds": 0.262084486
+            },
+            {
+              "calls": 1,
+              "file": "gabriel_runtime/stream.py",
+              "function": "apply",
+              "inline_seconds": 0.000360823,
+              "line": 278,
+              "recursive_calls": 0,
+              "total_seconds": 0.22879063300000002
+            },
+            {
+              "calls": 6,
+              "file": "gabriel_runtime/stream.py",
+              "function": "_copy",
+              "inline_seconds": 1.6314e-05,
+              "line": 57,
+              "recursive_calls": 0,
+              "total_seconds": 0.18972096700000002
+            },
+            {
+              "calls": 11,
+              "file": "gabriel_runtime/canonical.py",
+              "function": "loads",
+              "inline_seconds": 3.8025e-05,
+              "line": 63,
+              "recursive_calls": 0,
+              "total_seconds": 0.136456205
+            },
+            {
+              "calls": 6,
+              "file": "gabriel_runtime/fast_owner.py",
+              "function": "checked_clone",
+              "inline_seconds": 2.0543e-05,
+              "line": 16,
+              "recursive_calls": 0,
+              "total_seconds": 0.078557391
+            },
+            {
+              "calls": 130229,
+              "file": "gabriel_runtime/fast_owner.py",
+              "function": "visit",
+              "inline_seconds": 0.06551037400000001,
+              "line": 24,
+              "recursive_calls": 130223,
+              "total_seconds": 0.078536848
+            },
+            {
+              "calls": 1,
+              "file": "gabriel_runtime/incremental.py",
+              "function": "_learner",
+              "inline_seconds": 0.0005164480000000001,
+              "line": 176,
+              "recursive_calls": 0,
+              "total_seconds": 0.06757790400000001
+            },
+            {
+              "calls": 546,
+              "file": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py",
+              "function": "dumps",
+              "inline_seconds": 0.000670839,
+              "line": 183,
+              "recursive_calls": 0,
+              "total_seconds": 0.060960029000000006
+            },
+            {
+              "calls": 546,
+              "file": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/encoder.py",
+              "function": "encode",
+              "inline_seconds": 0.0005058090000000001,
+              "line": 183,
+              "recursive_calls": 0,
+              "total_seconds": 0.060163995000000005
+            },
+            {
+              "calls": 546,
+              "file": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/encoder.py",
+              "function": "iterencode",
+              "inline_seconds": 0.059420179000000004,
+              "line": 205,
+              "recursive_calls": 0,
+              "total_seconds": 0.059420179000000004
+            },
+            {
+              "calls": 3,
+              "file": "gabriel_runtime/engine.py",
+              "function": "_stored",
+              "inline_seconds": 4.9574000000000003e-05,
+              "line": 80,
+              "recursive_calls": 0,
+              "total_seconds": 0.058953258
+            },
+            {
+              "calls": 728100,
+              "file": "",
+              "function": "<method 'isascii' of 'str' objects>",
+              "inline_seconds": 0.054643481,
+              "line": 0,
+              "recursive_calls": 0,
+              "total_seconds": 0.054643481
+            },
+            {
+              "calls": 511,
+              "file": "gabriel_runtime/incremental.py",
+              "function": "_feedback_token",
+              "inline_seconds": 0.000232625,
+              "line": 167,
+              "recursive_calls": 0,
+              "total_seconds": 0.030890071
+            },
+            {
+              "calls": 11,
+              "file": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py",
+              "function": "loads",
+              "inline_seconds": 5.7502000000000006e-05,
+              "line": 299,
+              "recursive_calls": 0,
+              "total_seconds": 0.030062493000000003
+            },
+            {
+              "calls": 11,
+              "file": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py",
+              "function": "decode",
+              "inline_seconds": 4.2482000000000004e-05,
+              "line": 333,
+              "recursive_calls": 0,
+              "total_seconds": 0.029917902000000003
+            },
+            {
+              "calls": 11,
+              "file": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py",
+              "function": "raw_decode",
+              "inline_seconds": 0.021900264000000003,
+              "line": 344,
+              "recursive_calls": 0,
+              "total_seconds": 0.029836953000000003
+            },
+            {
+              "calls": 8241,
+              "file": "gabriel_runtime/canonical.py",
+              "function": "_object",
+              "inline_seconds": 0.007936689,
+              "line": 50,
+              "recursive_calls": 0,
+              "total_seconds": 0.007936689
+            }
+          ]
+        },
+        "reference_owner": {
+          "selected_functions": [
+            {
+              "calls": 17,
+              "file": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py",
+              "function": "loads",
+              "inline_seconds": 9.736e-05,
+              "line": 299,
+              "recursive_calls": 0,
+              "total_seconds": 0.055000839
+            },
+            {
+              "calls": 842886,
+              "file": "gabriel_runtime/canonical.py",
+              "function": "_check",
+              "inline_seconds": 0.36574427400000004,
+              "line": 13,
+              "recursive_calls": 842326,
+              "total_seconds": 0.44251003800000005
+            },
+            {
+              "calls": 17,
+              "file": "gabriel_runtime/canonical.py",
+              "function": "loads",
+              "inline_seconds": 4.1094e-05,
+              "line": 63,
+              "recursive_calls": 0,
+              "total_seconds": 0.23963598000000003
+            },
+            {
+              "calls": 5,
+              "file": "gabriel_runtime/canonical.py",
+              "function": "digest",
+              "inline_seconds": 2.6257000000000003e-05,
+              "line": 76,
+              "recursive_calls": 0,
+              "total_seconds": 0.07542588700000001
+            },
+            {
+              "calls": 7,
+              "file": "gabriel_runtime/engine.py",
+              "function": "_clone",
+              "inline_seconds": 1.5674e-05,
+              "line": 20,
+              "recursive_calls": 0,
+              "total_seconds": 0.183433698
+            },
+            {
+              "calls": 3,
+              "file": "gabriel_runtime/engine.py",
+              "function": "_stored",
+              "inline_seconds": 4.3935000000000005e-05,
+              "line": 80,
+              "recursive_calls": 0,
+              "total_seconds": 0.056178613
+            },
+            {
+              "calls": 560,
+              "file": "gabriel_runtime/canonical.py",
+              "function": "canonical",
+              "inline_seconds": 0.00040986200000000004,
+              "line": 40,
+              "recursive_calls": 0,
+              "total_seconds": 0.540872492
+            },
+            {
+              "calls": 560,
+              "file": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py",
+              "function": "dumps",
+              "inline_seconds": 0.000709814,
+              "line": 183,
+              "recursive_calls": 0,
+              "total_seconds": 0.097952592
+            }
+          ],
+          "top_cumulative_functions": [
+            {
+              "calls": 1,
+              "file": "gabriel_runtime/engine.py",
+              "function": "submit",
+              "inline_seconds": 0.0019098000000000001,
+              "line": 226,
+              "recursive_calls": 0,
+              "total_seconds": 0.613778923
+            },
+            {
+              "calls": 560,
+              "file": "gabriel_runtime/canonical.py",
+              "function": "canonical",
+              "inline_seconds": 0.00040986200000000004,
+              "line": 40,
+              "recursive_calls": 0,
+              "total_seconds": 0.540872492
+            },
+            {
+              "calls": 842886,
+              "file": "gabriel_runtime/canonical.py",
+              "function": "_check",
+              "inline_seconds": 0.36574427400000004,
+              "line": 13,
+              "recursive_calls": 842326,
+              "total_seconds": 0.44251003800000005
+            },
+            {
+              "calls": 1,
+              "file": "gabriel_runtime/engine.py",
+              "function": "_transition",
+              "inline_seconds": 0.004099272,
+              "line": 193,
+              "recursive_calls": 0,
+              "total_seconds": 0.41208354900000005
+            },
+            {
+              "calls": 17,
+              "file": "gabriel_runtime/canonical.py",
+              "function": "loads",
+              "inline_seconds": 4.1094e-05,
+              "line": 63,
+              "recursive_calls": 0,
+              "total_seconds": 0.23963598000000003
+            },
+            {
+              "calls": 1,
+              "file": "gabriel_runtime/stream.py",
+              "function": "apply",
+              "inline_seconds": 0.000380791,
+              "line": 278,
+              "recursive_calls": 0,
+              "total_seconds": 0.232205603
+            },
+            {
+              "calls": 6,
+              "file": "gabriel_runtime/stream.py",
+              "function": "_copy",
+              "inline_seconds": 1.3016e-05,
+              "line": 57,
+              "recursive_calls": 0,
+              "total_seconds": 0.191202701
+            },
+            {
+              "calls": 7,
+              "file": "gabriel_runtime/engine.py",
+              "function": "_clone",
+              "inline_seconds": 1.5674e-05,
+              "line": 20,
+              "recursive_calls": 0,
+              "total_seconds": 0.183433698
+            },
+            {
+              "calls": 560,
+              "file": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py",
+              "function": "dumps",
+              "inline_seconds": 0.000709814,
+              "line": 183,
+              "recursive_calls": 0,
+              "total_seconds": 0.097952592
+            },
+            {
+              "calls": 560,
+              "file": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/encoder.py",
+              "function": "encode",
+              "inline_seconds": 0.000509497,
+              "line": 183,
+              "recursive_calls": 0,
+              "total_seconds": 0.097111922
+            },
+            {
+              "calls": 560,
+              "file": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/encoder.py",
+              "function": "iterencode",
+              "inline_seconds": 0.09636510000000001,
+              "line": 205,
+              "recursive_calls": 0,
+              "total_seconds": 0.09636510000000001
+            },
+            {
+              "calls": 5,
+              "file": "gabriel_runtime/canonical.py",
+              "function": "digest",
+              "inline_seconds": 2.6257000000000003e-05,
+              "line": 76,
+              "recursive_calls": 0,
+              "total_seconds": 0.07542588700000001
+            },
+            {
+              "calls": 971054,
+              "file": "",
+              "function": "<method 'isascii' of 'str' objects>",
+              "inline_seconds": 0.07304822600000001,
+              "line": 0,
+              "recursive_calls": 0,
+              "total_seconds": 0.07304822600000001
+            },
+            {
+              "calls": 1,
+              "file": "gabriel_runtime/incremental.py",
+              "function": "_learner",
+              "inline_seconds": 0.0006460460000000001,
+              "line": 176,
+              "recursive_calls": 0,
+              "total_seconds": 0.06922806100000001
+            },
+            {
+              "calls": 3,
+              "file": "gabriel_runtime/engine.py",
+              "function": "_stored",
+              "inline_seconds": 4.3935000000000005e-05,
+              "line": 80,
+              "recursive_calls": 0,
+              "total_seconds": 0.056178613
+            },
+            {
+              "calls": 17,
+              "file": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py",
+              "function": "loads",
+              "inline_seconds": 9.736e-05,
+              "line": 299,
+              "recursive_calls": 0,
+              "total_seconds": 0.055000839
+            },
+            {
+              "calls": 17,
+              "file": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py",
+              "function": "decode",
+              "inline_seconds": 6.3694e-05,
+              "line": 333,
+              "recursive_calls": 0,
+              "total_seconds": 0.054795536000000006
+            },
+            {
+              "calls": 17,
+              "file": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py",
+              "function": "raw_decode",
+              "inline_seconds": 0.040389306,
+              "line": 344,
+              "recursive_calls": 0,
+              "total_seconds": 0.054664502000000004
+            },
+            {
+              "calls": 511,
+              "file": "gabriel_runtime/incremental.py",
+              "function": "_feedback_token",
+              "inline_seconds": 0.000249112,
+              "line": 167,
+              "recursive_calls": 0,
+              "total_seconds": 0.030890736000000002
+            },
+            {
+              "calls": 14076,
+              "file": "gabriel_runtime/canonical.py",
+              "function": "_object",
+              "inline_seconds": 0.014275196,
+              "line": 50,
+              "recursive_calls": 0,
+              "total_seconds": 0.014275196
+            }
+          ]
+        }
+      },
+      "profiled_append_source_length_before": 821,
+      "verification": {
+        "accepted_commands": 865,
+        "database_bytes": {
+          "fast_owner": 353382400,
+          "reference_owner": 353382400
+        },
+        "export_api_byte_comparisons": 1,
+        "journal_rows_byte_compared": 2570,
+        "receipt_byte_comparisons": 865,
+        "state_byte_comparisons": 68,
+        "submit_seconds": {
+          "fast_owner": 56.39262473610506,
+          "reference_owner": 80.20674876893827
+        }
+      }
+    },
+    {
+      "checkpoints": [
+        {
+          "cold_open_samples": [
+            {
+              "fast_owner": {
+                "seconds": 1.5343532629995025
+              },
+              "reference_owner": {
+                "seconds": 1.9836922920003417
+              }
+            },
+            {
+              "fast_owner": {
+                "seconds": 1.5857574900001055
+              },
+              "reference_owner": {
+                "seconds": 1.974342458001047
+              }
+            },
+            {
+              "fast_owner": {
+                "seconds": 1.4945442989992443
+              },
+              "reference_owner": {
+                "seconds": 1.9315830150007969
+              }
+            },
+            {
+              "fast_owner": {
+                "seconds": 1.4970615679994808
+              },
+              "reference_owner": {
+                "seconds": 1.9564474190010515
+              }
+            },
+            {
+              "fast_owner": {
+                "seconds": 1.5070028189984441
+              },
+              "reference_owner": {
+                "seconds": 1.955228206999891
+              }
+            }
+          ],
+          "cold_open_summary": {
+            "fast_owner": {
+              "maximum": 1.5857574900001055,
+              "median": 1.5070028189984441,
+              "minimum": 1.4945442989992443,
+              "samples": [
+                1.5343532629995025,
+                1.5857574900001055,
+                1.4945442989992443,
+                1.4970615679994808,
+                1.5070028189984441
+              ]
+            },
+            "paired_speedup": {
+              "maximum": 1.306858355608879,
+              "median": 1.2928523957530014,
+              "minimum": 1.2450469068892216,
+              "samples": [
+                1.2928523957530014,
+                1.2450469068892216,
+                1.2924227246353261,
+                1.306858355608879,
+                1.2974283673200677
+              ]
+            },
+            "reference_owner": {
+              "maximum": 1.9836922920003417,
+              "median": 1.9564474190010515,
+              "minimum": 1.9315830150007969,
+              "samples": [
+                1.9836922920003417,
+                1.974342458001047,
+                1.9315830150007969,
+                1.9564474190010515,
+                1.955228206999891
+              ]
+            }
+          },
+          "prefix_submit_seconds": {
+            "fast_owner": 1.8243311459809775,
+            "reference_owner": 2.5347116680095496
+          },
+          "prefix_verification": {
+            "accepted_commands": 361,
+            "database_bytes": {
+              "fast_owner": 3883008,
+              "reference_owner": 3883008
+            },
+            "export_api_byte_comparisons": 1,
+            "journal_rows_byte_compared": 361,
+            "receipt_byte_comparisons": 361,
+            "state_byte_comparisons": 1,
+            "submit_seconds": {
+              "fast_owner": 1.8243311459809775,
+              "reference_owner": 2.5347116680095496
+            }
+          },
+          "source_length": 360,
+          "transition_samples": {
+            "append": [
+              {
+                "fast_owner": {
+                  "seconds": 0.021002008998038946
+                },
+                "reference_owner": {
+                  "seconds": 0.029339030999835813
+                },
+                "source_length_after": 361,
+                "source_length_before": 360,
+                "trial": 0
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.021849397002370097
+                },
+                "reference_owner": {
+                  "seconds": 0.03290245400057756
+                },
+                "source_length_after": 364,
+                "source_length_before": 363,
+                "trial": 1
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.022962205999647267
+                },
+                "reference_owner": {
+                  "seconds": 0.045727444001386175
+                },
+                "source_length_after": 367,
+                "source_length_before": 366,
+                "trial": 2
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.024267063003208023
+                },
+                "reference_owner": {
+                  "seconds": 0.03459792099965853
+                },
+                "source_length_after": 370,
+                "source_length_before": 369,
+                "trial": 3
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.02473028199892724
+                },
+                "reference_owner": {
+                  "seconds": 0.03571611799998209
+                },
+                "source_length_after": 373,
+                "source_length_before": 372,
+                "trial": 4
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.026604687998769805
+                },
+                "reference_owner": {
+                  "seconds": 0.03957142199942609
+                },
+                "source_length_after": 376,
+                "source_length_before": 375,
+                "trial": 5
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.02742812999713351
+                },
+                "reference_owner": {
+                  "seconds": 0.03864766799961217
+                },
+                "source_length_after": 379,
+                "source_length_before": 378,
+                "trial": 6
+              }
+            ],
+            "early_correction_then_append": [
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.02255720500033931,
+                  "correction_seconds": 0.020592442000634037,
+                  "seconds": 0.043149647000973346
+                },
+                "reference_owner": {
+                  "append_seconds": 0.03044323599897325,
+                  "correction_seconds": 0.02928347800116171,
+                  "seconds": 0.05972671400013496
+                },
+                "source_length_after": 362,
+                "source_length_before": 361,
+                "trial": 0
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.025041040000360226,
+                  "correction_seconds": 0.02094024599864497,
+                  "seconds": 0.045981285999005195
+                },
+                "reference_owner": {
+                  "append_seconds": 0.031504416998359375,
+                  "correction_seconds": 0.03131271799793467,
+                  "seconds": 0.06281713499629404
+                },
+                "source_length_after": 365,
+                "source_length_before": 364,
+                "trial": 1
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.02328321000095457,
+                  "correction_seconds": 0.023455529000784736,
+                  "seconds": 0.046738739001739305
+                },
+                "reference_owner": {
+                  "append_seconds": 0.03314150499863899,
+                  "correction_seconds": 0.03198029399936786,
+                  "seconds": 0.06512179899800685
+                },
+                "source_length_after": 368,
+                "source_length_before": 367,
+                "trial": 2
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.024044136000156868,
+                  "correction_seconds": 0.022904818997631082,
+                  "seconds": 0.04694895499778795
+                },
+                "reference_owner": {
+                  "append_seconds": 0.0338736699995934,
+                  "correction_seconds": 0.03287800799807883,
+                  "seconds": 0.06675167799767223
+                },
+                "source_length_after": 371,
+                "source_length_before": 370,
+                "trial": 3
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.024925395999161992,
+                  "correction_seconds": 0.02395360100126709,
+                  "seconds": 0.04887899700042908
+                },
+                "reference_owner": {
+                  "append_seconds": 0.03901932400185615,
+                  "correction_seconds": 0.0458379400006379,
+                  "seconds": 0.08485726400249405
+                },
+                "source_length_after": 374,
+                "source_length_before": 373,
+                "trial": 4
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.02688616299928981,
+                  "correction_seconds": 0.029416598001262173,
+                  "seconds": 0.05630276100055198
+                },
+                "reference_owner": {
+                  "append_seconds": 0.037566457998764236,
+                  "correction_seconds": 0.036749316001078114,
+                  "seconds": 0.07431577399984235
+                },
+                "source_length_after": 377,
+                "source_length_before": 376,
+                "trial": 5
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.028210049000335857,
+                  "correction_seconds": 0.026366338999650907,
+                  "seconds": 0.054576387999986764
+                },
+                "reference_owner": {
+                  "append_seconds": 0.045587754000735004,
+                  "correction_seconds": 0.0490325880018645,
+                  "seconds": 0.0946203420025995
+                },
+                "source_length_after": 380,
+                "source_length_before": 379,
+                "trial": 6
+              }
+            ],
+            "recent_correction_then_append": [
+              {
+                "correction_index": 359,
+                "fast_owner": {
+                  "append_seconds": 0.023538434001238784,
+                  "correction_seconds": 0.019528107000951422,
+                  "seconds": 0.043066541002190206
+                },
+                "reference_owner": {
+                  "append_seconds": 0.03379427999971085,
+                  "correction_seconds": 0.028923694997502025,
+                  "seconds": 0.06271797499721288
+                },
+                "source_length_after": 363,
+                "source_length_before": 362,
+                "trial": 0
+              },
+              {
+                "correction_index": 362,
+                "fast_owner": {
+                  "append_seconds": 0.022291214001597837,
+                  "correction_seconds": 0.02029027700336883,
+                  "seconds": 0.042581491004966665
+                },
+                "reference_owner": {
+                  "append_seconds": 0.031512738998571876,
+                  "correction_seconds": 0.030305618998681894,
+                  "seconds": 0.06181835799725377
+                },
+                "source_length_after": 366,
+                "source_length_before": 365,
+                "trial": 1
+              },
+              {
+                "correction_index": 365,
+                "fast_owner": {
+                  "append_seconds": 0.02485540999987279,
+                  "correction_seconds": 0.02345436700124992,
+                  "seconds": 0.04830977700112271
+                },
+                "reference_owner": {
+                  "append_seconds": 0.03509774499980267,
+                  "correction_seconds": 0.03697349300273345,
+                  "seconds": 0.07207123800253612
+                },
+                "source_length_after": 369,
+                "source_length_before": 368,
+                "trial": 2
+              },
+              {
+                "correction_index": 368,
+                "fast_owner": {
+                  "append_seconds": 0.02496884200081695,
+                  "correction_seconds": 0.022413398000935558,
+                  "seconds": 0.04738224000175251
+                },
+                "reference_owner": {
+                  "append_seconds": 0.03405920899967896,
+                  "correction_seconds": 0.03220271899772342,
+                  "seconds": 0.06626192799740238
+                },
+                "source_length_after": 372,
+                "source_length_before": 371,
+                "trial": 3
+              },
+              {
+                "correction_index": 371,
+                "fast_owner": {
+                  "append_seconds": 0.026379890001408057,
+                  "correction_seconds": 0.025806654997722944,
+                  "seconds": 0.052186544999131
+                },
+                "reference_owner": {
+                  "append_seconds": 0.03756191000138642,
+                  "correction_seconds": 0.04038665000189212,
+                  "seconds": 0.07794856000327854
+                },
+                "source_length_after": 375,
+                "source_length_before": 374,
+                "trial": 4
+              },
+              {
+                "correction_index": 374,
+                "fast_owner": {
+                  "append_seconds": 0.027452236001408892,
+                  "correction_seconds": 0.026501463002205128,
+                  "seconds": 0.05395369900361402
+                },
+                "reference_owner": {
+                  "append_seconds": 0.038477631998830475,
+                  "correction_seconds": 0.03749520999917877,
+                  "seconds": 0.07597284199800924
+                },
+                "source_length_after": 378,
+                "source_length_before": 377,
+                "trial": 5
+              },
+              {
+                "correction_index": 377,
+                "fast_owner": {
+                  "append_seconds": 0.028794429999834392,
+                  "correction_seconds": 0.025608656000258634,
+                  "seconds": 0.054403086000093026
+                },
+                "reference_owner": {
+                  "append_seconds": 0.04193723799835425,
+                  "correction_seconds": 0.03978602399729425,
+                  "seconds": 0.0817232619956485
+                },
+                "source_length_after": 381,
+                "source_length_before": 380,
+                "trial": 6
+              }
+            ]
+          },
+          "transition_summaries": {
+            "append": {
+              "fast_owner": {
+                "maximum": 0.02742812999713351,
+                "median": 0.024267063003208023,
+                "minimum": 0.021002008998038946,
+                "samples": [
+                  0.021002008998038946,
+                  0.021849397002370097,
+                  0.022962205999647267,
+                  0.024267063003208023,
+                  0.02473028199892724,
+                  0.026604687998769805,
+                  0.02742812999713351
+                ]
+              },
+              "paired_speedup": {
+                "maximum": 1.9914220786142505,
+                "median": 1.4442260707553354,
+                "minimum": 1.396963071607832,
+                "samples": [
+                  1.396963071607832,
+                  1.5058746928809292,
+                  1.9914220786142505,
+                  1.4257152171684229,
+                  1.4442260707553354,
+                  1.4873853059752427,
+                  1.4090522395675973
+                ]
+              },
+              "reference_owner": {
+                "maximum": 0.045727444001386175,
+                "median": 0.03571611799998209,
+                "minimum": 0.029339030999835813,
+                "samples": [
+                  0.029339030999835813,
+                  0.03290245400057756,
+                  0.045727444001386175,
+                  0.03459792099965853,
+                  0.03571611799998209,
+                  0.03957142199942609,
+                  0.03864766799961217
+                ]
+              }
+            },
+            "early_correction_then_append": {
+              "fast_owner": {
+                "maximum": 0.05630276100055198,
+                "median": 0.04694895499778795,
+                "minimum": 0.043149647000973346,
+                "samples": [
+                  0.043149647000973346,
+                  0.045981285999005195,
+                  0.046738739001739305,
+                  0.04694895499778795,
+                  0.04887899700042908,
+                  0.05630276100055198,
+                  0.054576387999986764
+                ]
+              },
+              "paired_speedup": {
+                "maximum": 1.7360680294186301,
+                "median": 1.3933152752705513,
+                "minimum": 1.3199312552205702,
+                "samples": [
+                  1.38417619033564,
+                  1.3661456749524816,
+                  1.3933152752705513,
+                  1.4217926256466689,
+                  1.7360680294186301,
+                  1.3199312552205702,
+                  1.7337230525886478
+                ]
+              },
+              "reference_owner": {
+                "maximum": 0.0946203420025995,
+                "median": 0.06675167799767223,
+                "minimum": 0.05972671400013496,
+                "samples": [
+                  0.05972671400013496,
+                  0.06281713499629404,
+                  0.06512179899800685,
+                  0.06675167799767223,
+                  0.08485726400249405,
+                  0.07431577399984235,
+                  0.0946203420025995
+                ]
+              }
+            },
+            "recent_correction_then_append": {
+              "fast_owner": {
+                "maximum": 0.054403086000093026,
+                "median": 0.04830977700112271,
+                "minimum": 0.042581491004966665,
+                "samples": [
+                  0.043066541002190206,
+                  0.042581491004966665,
+                  0.04830977700112271,
+                  0.04738224000175251,
+                  0.052186544999131,
+                  0.05395369900361402,
+                  0.054403086000093026
+                ]
+              },
+              "paired_speedup": {
+                "maximum": 1.5021806298912668,
+                "median": 1.456303978395276,
+                "minimum": 1.3984549484142492,
+                "samples": [
+                  1.456303978395276,
+                  1.4517659325278989,
+                  1.4918561516204307,
+                  1.3984549484142492,
+                  1.493652434829256,
+                  1.408111832942544,
+                  1.5021806298912668
+                ]
+              },
+              "reference_owner": {
+                "maximum": 0.0817232619956485,
+                "median": 0.07207123800253612,
+                "minimum": 0.06181835799725377,
+                "samples": [
+                  0.06271797499721288,
+                  0.06181835799725377,
+                  0.07207123800253612,
+                  0.06626192799740238,
+                  0.07794856000327854,
+                  0.07597284199800924,
+                  0.0817232619956485
+                ]
+              }
+            }
+          },
+          "verification_after": {
+            "accepted_commands": 396,
+            "database_bytes": {
+              "fast_owner": 8531968,
+              "reference_owner": 8531968
+            },
+            "export_api_byte_comparisons": 1,
+            "journal_rows_byte_compared": 361,
+            "receipt_byte_comparisons": 396,
+            "state_byte_comparisons": 22,
+            "submit_seconds": {
+              "fast_owner": 2.677635072992416,
+              "reference_owner": 3.7979385949984135
+            }
+          },
+          "view_samples": [
+            {
+              "canonical_view_bytes": 54392,
+              "fast_owner": {
+                "seconds": 0.007180486998549895
+              },
+              "reference_owner": {
+                "seconds": 0.010150395999517059
+              }
+            },
+            {
+              "canonical_view_bytes": 58264,
+              "fast_owner": {
+                "seconds": 0.006918833001691382
+              },
+              "reference_owner": {
+                "seconds": 0.010130335002031643
+              }
+            },
+            {
+              "canonical_view_bytes": 61635,
+              "fast_owner": {
+                "seconds": 0.0073634639993542805
+              },
+              "reference_owner": {
+                "seconds": 0.010899376000452321
+              }
+            },
+            {
+              "canonical_view_bytes": 65596,
+              "fast_owner": {
+                "seconds": 0.007534981999924639
+              },
+              "reference_owner": {
+                "seconds": 0.011320952002279228
+              }
+            },
+            {
+              "canonical_view_bytes": 68985,
+              "fast_owner": {
+                "seconds": 0.008060936001129448
+              },
+              "reference_owner": {
+                "seconds": 0.012217864001286216
+              }
+            },
+            {
+              "canonical_view_bytes": 72884,
+              "fast_owner": {
+                "seconds": 0.008422019996942254
+              },
+              "reference_owner": {
+                "seconds": 0.0122515850016498
+              }
+            },
+            {
+              "canonical_view_bytes": 76303,
+              "fast_owner": {
+                "seconds": 0.008935995003412245
+              },
+              "reference_owner": {
+                "seconds": 0.01282297600118909
+              }
+            }
+          ],
+          "view_summary": {
+            "fast_owner": {
+              "maximum": 0.008935995003412245,
+              "median": 0.007534981999924639,
+              "minimum": 0.006918833001691382,
+              "samples": [
+                0.007180486998549895,
+                0.006918833001691382,
+                0.0073634639993542805,
+                0.007534981999924639,
+                0.008060936001129448,
+                0.008422019996942254,
+                0.008935995003412245
+              ]
+            },
+            "paired_speedup": {
+              "maximum": 1.5156880044171452,
+              "median": 1.4641681623989442,
+              "minimum": 1.4136082972599127,
+              "samples": [
+                1.4136082972599127,
+                1.4641681623989442,
+                1.4801968206007543,
+                1.5024524282065244,
+                1.5156880044171452,
+                1.4547086098225759,
+                1.4349802116376058
+              ]
+            },
+            "reference_owner": {
+              "maximum": 0.01282297600118909,
+              "median": 0.011320952002279228,
+              "minimum": 0.010130335002031643,
+              "samples": [
+                0.010150395999517059,
+                0.010130335002031643,
+                0.010899376000452321,
+                0.011320952002279228,
+                0.012217864001286216,
+                0.0122515850016498,
+                0.01282297600118909
+              ]
+            }
+          },
+          "warm_audit": {
+            "fast_owner": {
+              "seconds": 1.4928990670014173
+            },
+            "outcome": {
+              "bytes": 88777,
+              "contracts": 1,
+              "events": 361,
+              "external_anchor_checked": false,
+              "head": "828756d67d22a9a6c22b44cc2e6010ea96d05d4c7bdd89d973d283bbb8c3bee6",
+              "journal_mode": "delete",
+              "semantic_replay": true,
+              "status": "passed",
+              "synchronous": 3
+            },
+            "reference_owner": {
+              "seconds": 1.9131748670006345
+            }
+          }
+        },
+        {
+          "cold_open_samples": [
+            {
+              "fast_owner": {
+                "seconds": 9.038815674000944
+              },
+              "reference_owner": {
+                "seconds": 10.934137800999451
+              }
+            }
+          ],
+          "cold_open_summary": {
+            "fast_owner": {
+              "maximum": 9.038815674000944,
+              "median": 9.038815674000944,
+              "minimum": 9.038815674000944,
+              "samples": [
+                9.038815674000944
+              ]
+            },
+            "paired_speedup": {
+              "maximum": 1.209686998314411,
+              "median": 1.209686998314411,
+              "minimum": 1.209686998314411,
+              "samples": [
+                1.209686998314411
+              ]
+            },
+            "reference_owner": {
+              "maximum": 10.934137800999451,
+              "median": 10.934137800999451,
+              "minimum": 10.934137800999451,
+              "samples": [
+                10.934137800999451
+              ]
+            }
+          },
+          "prefix_submit_seconds": {
+            "fast_owner": 8.61686386898873,
+            "reference_owner": 12.258075802001258
+          },
+          "prefix_verification": {
+            "accepted_commands": 515,
+            "database_bytes": {
+              "fast_owner": 44965888,
+              "reference_owner": 44965888
+            },
+            "export_api_byte_comparisons": 1,
+            "journal_rows_byte_compared": 876,
+            "receipt_byte_comparisons": 515,
+            "state_byte_comparisons": 23,
+            "submit_seconds": {
+              "fast_owner": 8.61686386898873,
+              "reference_owner": 12.258075802001258
+            }
+          },
+          "source_length": 500,
+          "transition_samples": {
+            "append": [
+              {
+                "fast_owner": {
+                  "seconds": 0.06795633400179213
+                },
+                "reference_owner": {
+                  "seconds": 0.11183144399910816
+                },
+                "source_length_after": 501,
+                "source_length_before": 500,
+                "trial": 0
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.06872614399981103
+                },
+                "reference_owner": {
+                  "seconds": 0.10200062000149046
+                },
+                "source_length_after": 504,
+                "source_length_before": 503,
+                "trial": 1
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.07374163699932978
+                },
+                "reference_owner": {
+                  "seconds": 0.12252107300082571
+                },
+                "source_length_after": 507,
+                "source_length_before": 506,
+                "trial": 2
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.0752457359994878
+                },
+                "reference_owner": {
+                  "seconds": 0.1047026950000145
+                },
+                "source_length_after": 510,
+                "source_length_before": 509,
+                "trial": 3
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.08999209199828329
+                },
+                "reference_owner": {
+                  "seconds": 0.10052527600055328
+                },
+                "source_length_after": 513,
+                "source_length_before": 512,
+                "trial": 4
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.07170960299845319
+                },
+                "reference_owner": {
+                  "seconds": 0.10745031799888238
+                },
+                "source_length_after": 516,
+                "source_length_before": 515,
+                "trial": 5
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.07527737300188164
+                },
+                "reference_owner": {
+                  "seconds": 0.10504232599851093
+                },
+                "source_length_after": 519,
+                "source_length_before": 518,
+                "trial": 6
+              }
+            ],
+            "early_correction_then_append": [
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.0677254959991842,
+                  "correction_seconds": 0.06697363100101938,
+                  "seconds": 0.1346991270002036
+                },
+                "reference_owner": {
+                  "append_seconds": 0.10127745900172158,
+                  "correction_seconds": 0.10107666600015364,
+                  "seconds": 0.20235412500187522
+                },
+                "source_length_after": 502,
+                "source_length_before": 501,
+                "trial": 0
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.08165085399741656,
+                  "correction_seconds": 0.07394374200157472,
+                  "seconds": 0.15559459599899128
+                },
+                "reference_owner": {
+                  "append_seconds": 0.09512888800236396,
+                  "correction_seconds": 0.09705129599751672,
+                  "seconds": 0.19218018399988068
+                },
+                "source_length_after": 505,
+                "source_length_before": 504,
+                "trial": 1
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.07901894500173512,
+                  "correction_seconds": 0.07322025099711027,
+                  "seconds": 0.1522391959988454
+                },
+                "reference_owner": {
+                  "append_seconds": 0.10072465600023861,
+                  "correction_seconds": 0.1047279120029998,
+                  "seconds": 0.2054525680032384
+                },
+                "source_length_after": 508,
+                "source_length_before": 507,
+                "trial": 2
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.07423396000012872,
+                  "correction_seconds": 0.07273033299861709,
+                  "seconds": 0.1469642929987458
+                },
+                "reference_owner": {
+                  "append_seconds": 0.11911103100283071,
+                  "correction_seconds": 0.10558910100007779,
+                  "seconds": 0.2247001320029085
+                },
+                "source_length_after": 511,
+                "source_length_before": 510,
+                "trial": 3
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.07150933099910617,
+                  "correction_seconds": 0.07139561899748514,
+                  "seconds": 0.1429049499965913
+                },
+                "reference_owner": {
+                  "append_seconds": 0.10415564999857452,
+                  "correction_seconds": 0.10053718400013167,
+                  "seconds": 0.2046928339987062
+                },
+                "source_length_after": 514,
+                "source_length_before": 513,
+                "trial": 4
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.07397292599853245,
+                  "correction_seconds": 0.07322272500096005,
+                  "seconds": 0.1471956509994925
+                },
+                "reference_owner": {
+                  "append_seconds": 0.10284992100059753,
+                  "correction_seconds": 0.12202039799740305,
+                  "seconds": 0.22487031899800058
+                },
+                "source_length_after": 517,
+                "source_length_before": 516,
+                "trial": 5
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.08006044599824236,
+                  "correction_seconds": 0.07384473300044192,
+                  "seconds": 0.15390517899868428
+                },
+                "reference_owner": {
+                  "append_seconds": 0.11707725499945809,
+                  "correction_seconds": 0.10706263300016872,
+                  "seconds": 0.2241398879996268
+                },
+                "source_length_after": 520,
+                "source_length_before": 519,
+                "trial": 6
+              }
+            ],
+            "recent_correction_then_append": [
+              {
+                "correction_index": 499,
+                "fast_owner": {
+                  "append_seconds": 0.08085915999981808,
+                  "correction_seconds": 0.06503864399928716,
+                  "seconds": 0.14589780399910524
+                },
+                "reference_owner": {
+                  "append_seconds": 0.09571568300088984,
+                  "correction_seconds": 0.09442941299857921,
+                  "seconds": 0.19014509599946905
+                },
+                "source_length_after": 503,
+                "source_length_before": 502,
+                "trial": 0
+              },
+              {
+                "correction_index": 502,
+                "fast_owner": {
+                  "append_seconds": 0.07051813599900925,
+                  "correction_seconds": 0.06644155899994075,
+                  "seconds": 0.13695969499895
+                },
+                "reference_owner": {
+                  "append_seconds": 0.099824108001485,
+                  "correction_seconds": 0.09369058900119853,
+                  "seconds": 0.19351469700268353
+                },
+                "source_length_after": 506,
+                "source_length_before": 505,
+                "trial": 1
+              },
+              {
+                "correction_index": 505,
+                "fast_owner": {
+                  "append_seconds": 0.08651245500004734,
+                  "correction_seconds": 0.06966186600038782,
+                  "seconds": 0.15617432100043516
+                },
+                "reference_owner": {
+                  "append_seconds": 0.09913615000186837,
+                  "correction_seconds": 0.0997258690003946,
+                  "seconds": 0.19886201900226297
+                },
+                "source_length_after": 509,
+                "source_length_before": 508,
+                "trial": 2
+              },
+              {
+                "correction_index": 508,
+                "fast_owner": {
+                  "append_seconds": 0.06988147700030822,
+                  "correction_seconds": 0.08061118600016925,
+                  "seconds": 0.15049266300047748
+                },
+                "reference_owner": {
+                  "append_seconds": 0.10054244099956122,
+                  "correction_seconds": 0.1007092020008713,
+                  "seconds": 0.20125164300043252
+                },
+                "source_length_after": 512,
+                "source_length_before": 511,
+                "trial": 3
+              },
+              {
+                "correction_index": 511,
+                "fast_owner": {
+                  "append_seconds": 0.07224354899881291,
+                  "correction_seconds": 0.09211367099851486,
+                  "seconds": 0.16435721999732777
+                },
+                "reference_owner": {
+                  "append_seconds": 0.10884953799904906,
+                  "correction_seconds": 0.10010493200024939,
+                  "seconds": 0.20895446999929845
+                },
+                "source_length_after": 515,
+                "source_length_before": 514,
+                "trial": 4
+              },
+              {
+                "correction_index": 514,
+                "fast_owner": {
+                  "append_seconds": 0.07639207400279702,
+                  "correction_seconds": 0.07123279399820603,
+                  "seconds": 0.14762486800100305
+                },
+                "reference_owner": {
+                  "append_seconds": 0.10622650199729833,
+                  "correction_seconds": 0.1046460190009384,
+                  "seconds": 0.21087252099823672
+                },
+                "source_length_after": 518,
+                "source_length_before": 517,
+                "trial": 5
+              },
+              {
+                "correction_index": 517,
+                "fast_owner": {
+                  "append_seconds": 0.07820919400182902,
+                  "correction_seconds": 0.08323695000217413,
+                  "seconds": 0.16144614400400314
+                },
+                "reference_owner": {
+                  "append_seconds": 0.11164462200031267,
+                  "correction_seconds": 0.12936198000170407,
+                  "seconds": 0.24100660200201673
+                },
+                "source_length_after": 521,
+                "source_length_before": 520,
+                "trial": 6
+              }
+            ]
+          },
+          "transition_summaries": {
+            "append": {
+              "fast_owner": {
+                "maximum": 0.08999209199828329,
+                "median": 0.07374163699932978,
+                "minimum": 0.06795633400179213,
+                "samples": [
+                  0.06795633400179213,
+                  0.06872614399981103,
+                  0.07374163699932978,
+                  0.0752457359994878,
+                  0.08999209199828329,
+                  0.07170960299845319,
+                  0.07527737300188164
+                ]
+              },
+              "paired_speedup": {
+                "maximum": 1.6614910922297434,
+                "median": 1.4841603800988883,
+                "minimum": 1.1170456622174194,
+                "samples": [
+                  1.6456367995977972,
+                  1.4841603800988883,
+                  1.6614910922297434,
+                  1.3914767874783922,
+                  1.1170456622174194,
+                  1.4984090485231125,
+                  1.3954037157471646
+                ]
+              },
+              "reference_owner": {
+                "maximum": 0.12252107300082571,
+                "median": 0.10504232599851093,
+                "minimum": 0.10052527600055328,
+                "samples": [
+                  0.11183144399910816,
+                  0.10200062000149046,
+                  0.12252107300082571,
+                  0.1047026950000145,
+                  0.10052527600055328,
+                  0.10745031799888238,
+                  0.10504232599851093
+                ]
+              }
+            },
+            "early_correction_then_append": {
+              "fast_owner": {
+                "maximum": 0.15559459599899128,
+                "median": 0.1471956509994925,
+                "minimum": 0.1346991270002036,
+                "samples": [
+                  0.1346991270002036,
+                  0.15559459599899128,
+                  0.1522391959988454,
+                  0.1469642929987458,
+                  0.1429049499965913,
+                  0.1471956509994925,
+                  0.15390517899868428
+                ]
+              },
+              "paired_speedup": {
+                "maximum": 1.528943714272324,
+                "median": 1.4563505234709675,
+                "minimum": 1.235134053120499,
+                "samples": [
+                  1.5022675314114646,
+                  1.235134053120499,
+                  1.3495379206074933,
+                  1.528943714272324,
+                  1.4323704952388892,
+                  1.5276967591846575,
+                  1.4563505234709675
+                ]
+              },
+              "reference_owner": {
+                "maximum": 0.22487031899800058,
+                "median": 0.2054525680032384,
+                "minimum": 0.19218018399988068,
+                "samples": [
+                  0.20235412500187522,
+                  0.19218018399988068,
+                  0.2054525680032384,
+                  0.2247001320029085,
+                  0.2046928339987062,
+                  0.22487031899800058,
+                  0.2241398879996268
+                ]
+              }
+            },
+            "recent_correction_then_append": {
+              "fast_owner": {
+                "maximum": 0.16435721999732777,
+                "median": 0.15049266300047748,
+                "minimum": 0.13695969499895,
+                "samples": [
+                  0.14589780399910524,
+                  0.13695969499895,
+                  0.15617432100043516,
+                  0.15049266300047748,
+                  0.16435721999732777,
+                  0.14762486800100305,
+                  0.16144614400400314
+                ]
+              },
+              "paired_speedup": {
+                "maximum": 1.4927987502509867,
+                "median": 1.3372854130423222,
+                "minimum": 1.2713434189425676,
+                "samples": [
+                  1.3032759286811142,
+                  1.4129317169125348,
+                  1.2733336551641474,
+                  1.3372854130423222,
+                  1.2713434189425676,
+                  1.4284349503825056,
+                  1.4927987502509867
+                ]
+              },
+              "reference_owner": {
+                "maximum": 0.24100660200201673,
+                "median": 0.20125164300043252,
+                "minimum": 0.19014509599946905,
+                "samples": [
+                  0.19014509599946905,
+                  0.19351469700268353,
+                  0.19886201900226297,
+                  0.20125164300043252,
+                  0.20895446999929845,
+                  0.21087252099823672,
+                  0.24100660200201673
+                ]
+              }
+            }
+          },
+          "verification_after": {
+            "accepted_commands": 550,
+            "database_bytes": {
+              "fast_owner": 61603840,
+              "reference_owner": 61603840
+            },
+            "export_api_byte_comparisons": 1,
+            "journal_rows_byte_compared": 876,
+            "receipt_byte_comparisons": 550,
+            "state_byte_comparisons": 44,
+            "submit_seconds": {
+              "fast_owner": 11.235968494980625,
+              "reference_owner": 15.93514665200928
+            }
+          },
+          "view_samples": [
+            {
+              "canonical_view_bytes": 225647,
+              "fast_owner": {
+                "seconds": 0.0236342579992197
+              },
+              "reference_owner": {
+                "seconds": 0.03854153800057247
+              }
+            },
+            {
+              "canonical_view_bytes": 228754,
+              "fast_owner": {
+                "seconds": 0.02330506300131674
+              },
+              "reference_owner": {
+                "seconds": 0.03440991800016491
+              }
+            },
+            {
+              "canonical_view_bytes": 233008,
+              "fast_owner": {
+                "seconds": 0.024831143997289473
+              },
+              "reference_owner": {
+                "seconds": 0.034233721999044064
+              }
+            },
+            {
+              "canonical_view_bytes": 236110,
+              "fast_owner": {
+                "seconds": 0.02393330900304136
+              },
+              "reference_owner": {
+                "seconds": 0.03720581400193623
+              }
+            },
+            {
+              "canonical_view_bytes": 240361,
+              "fast_owner": {
+                "seconds": 0.024533104999136413
+              },
+              "reference_owner": {
+                "seconds": 0.03485887399801868
+              }
+            },
+            {
+              "canonical_view_bytes": 243449,
+              "fast_owner": {
+                "seconds": 0.026099376002093777
+              },
+              "reference_owner": {
+                "seconds": 0.050554483001178596
+              }
+            },
+            {
+              "canonical_view_bytes": 247711,
+              "fast_owner": {
+                "seconds": 0.02588663499773247
+              },
+              "reference_owner": {
+                "seconds": 0.041112083999905735
+              }
+            }
+          ],
+          "view_summary": {
+            "fast_owner": {
+              "maximum": 0.026099376002093777,
+              "median": 0.024533104999136413,
+              "minimum": 0.02330506300131674,
+              "samples": [
+                0.0236342579992197,
+                0.02330506300131674,
+                0.024831143997289473,
+                0.02393330900304136,
+                0.024533104999136413,
+                0.026099376002093777,
+                0.02588663499773247
+              ]
+            },
+            "paired_speedup": {
+              "maximum": 1.9369996814147186,
+              "median": 1.5545620539645502,
+              "minimum": 1.3786606852580356,
+              "samples": [
+                1.630748805477411,
+                1.4764996772684433,
+                1.3786606852580356,
+                1.5545620539645502,
+                1.4208912406010468,
+                1.9369996814147186,
+                1.5881586773834038
+              ]
+            },
+            "reference_owner": {
+              "maximum": 0.050554483001178596,
+              "median": 0.03720581400193623,
+              "minimum": 0.034233721999044064,
+              "samples": [
+                0.03854153800057247,
+                0.03440991800016491,
+                0.034233721999044064,
+                0.03720581400193623,
+                0.03485887399801868,
+                0.050554483001178596,
+                0.041112083999905735
+              ]
+            }
+          },
+          "warm_audit": {
+            "fast_owner": {
+              "seconds": 8.758636742000817
+            },
+            "outcome": {
+              "bytes": 126815,
+              "contracts": 1,
+              "events": 515,
+              "external_anchor_checked": false,
+              "head": "1b23e818956ad44131c6047cffe452c258db98a928c11d3860de17a4b9a92162",
+              "journal_mode": "delete",
+              "semantic_replay": true,
+              "status": "passed",
+              "synchronous": 3
+            },
+            "reference_owner": {
+              "seconds": 11.019957784003054
+            }
+          }
+        },
+        {
+          "cold_open_samples": [
+            {
+              "fast_owner": {
+                "seconds": 56.08160252000016
+              },
+              "reference_owner": {
+                "seconds": 65.69521286099916
+              }
+            }
+          ],
+          "cold_open_summary": {
+            "fast_owner": {
+              "maximum": 56.08160252000016,
+              "median": 56.08160252000016,
+              "minimum": 56.08160252000016,
+              "samples": [
+                56.08160252000016
+              ]
+            },
+            "paired_speedup": {
+              "maximum": 1.1714218194383896,
+              "median": 1.1714218194383896,
+              "minimum": 1.1714218194383896,
+              "samples": [
+                1.1714218194383896
+              ]
+            },
+            "reference_owner": {
+              "maximum": 65.69521286099916,
+              "median": 65.69521286099916,
+              "minimum": 65.69521286099916,
+              "samples": [
+                65.69521286099916
+              ]
+            }
+          },
+          "prefix_submit_seconds": {
+            "fast_owner": 48.548198876967945,
+            "reference_owner": 69.08583583296422
+          },
+          "prefix_verification": {
+            "accepted_commands": 829,
+            "database_bytes": {
+              "fast_owner": 297373696,
+              "reference_owner": 297373696
+            },
+            "export_api_byte_comparisons": 1,
+            "journal_rows_byte_compared": 1705,
+            "receipt_byte_comparisons": 829,
+            "state_byte_comparisons": 45,
+            "submit_seconds": {
+              "fast_owner": 48.548198876967945,
+              "reference_owner": 69.08583583296422
+            }
+          },
+          "source_length": 800,
+          "transition_samples": {
+            "append": [
+              {
+                "fast_owner": {
+                  "seconds": 0.18585821599845076
+                },
+                "reference_owner": {
+                  "seconds": 0.2834837880000123
+                },
+                "source_length_after": 801,
+                "source_length_before": 800,
+                "trial": 0
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.20495495700015454
+                },
+                "reference_owner": {
+                  "seconds": 0.25993057300001965
+                },
+                "source_length_after": 804,
+                "source_length_before": 803,
+                "trial": 1
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.20385196899951552
+                },
+                "reference_owner": {
+                  "seconds": 0.2971171030003461
+                },
+                "source_length_after": 807,
+                "source_length_before": 806,
+                "trial": 2
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.18832412399933673
+                },
+                "reference_owner": {
+                  "seconds": 0.2805694999988191
+                },
+                "source_length_after": 810,
+                "source_length_before": 809,
+                "trial": 3
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.21254117699936614
+                },
+                "reference_owner": {
+                  "seconds": 0.2791294260023278
+                },
+                "source_length_after": 813,
+                "source_length_before": 812,
+                "trial": 4
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.191580390001036
+                },
+                "reference_owner": {
+                  "seconds": 0.29275775800124393
+                },
+                "source_length_after": 816,
+                "source_length_before": 815,
+                "trial": 5
+              },
+              {
+                "fast_owner": {
+                  "seconds": 0.21736941799827036
+                },
+                "reference_owner": {
+                  "seconds": 0.27397308299987344
+                },
+                "source_length_after": 819,
+                "source_length_before": 818,
+                "trial": 6
+              }
+            ],
+            "early_correction_then_append": [
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.20454099799826508,
+                  "correction_seconds": 0.1938508079983876,
+                  "seconds": 0.3983918059966527
+                },
+                "reference_owner": {
+                  "append_seconds": 0.2570900699975027,
+                  "correction_seconds": 0.26546983499792987,
+                  "seconds": 0.5225599049954326
+                },
+                "source_length_after": 802,
+                "source_length_before": 801,
+                "trial": 0
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.20742557699850295,
+                  "correction_seconds": 0.2063316579988168,
+                  "seconds": 0.41375723499731976
+                },
+                "reference_owner": {
+                  "append_seconds": 0.31223060800039093,
+                  "correction_seconds": 0.2918124089992489,
+                  "seconds": 0.6040430169996398
+                },
+                "source_length_after": 805,
+                "source_length_before": 804,
+                "trial": 1
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.20523112899900298,
+                  "correction_seconds": 0.21364276399981463,
+                  "seconds": 0.4188738929988176
+                },
+                "reference_owner": {
+                  "append_seconds": 0.35552802700112807,
+                  "correction_seconds": 0.30901448400254594,
+                  "seconds": 0.664542511003674
+                },
+                "source_length_after": 808,
+                "source_length_before": 807,
+                "trial": 2
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.21194539399948553,
+                  "correction_seconds": 0.22084686800008058,
+                  "seconds": 0.4327922619995661
+                },
+                "reference_owner": {
+                  "append_seconds": 0.27140569100083667,
+                  "correction_seconds": 0.28206891100126086,
+                  "seconds": 0.5534746020020975
+                },
+                "source_length_after": 811,
+                "source_length_before": 810,
+                "trial": 3
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.20561949500188348,
+                  "correction_seconds": 0.19868471799782128,
+                  "seconds": 0.40430421299970476
+                },
+                "reference_owner": {
+                  "append_seconds": 0.2984109909994004,
+                  "correction_seconds": 0.31045236000136356,
+                  "seconds": 0.6088633510007639
+                },
+                "source_length_after": 814,
+                "source_length_before": 813,
+                "trial": 4
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.19671086599919363,
+                  "correction_seconds": 0.2032215149993135,
+                  "seconds": 0.39993238099850714
+                },
+                "reference_owner": {
+                  "append_seconds": 0.2684933300006378,
+                  "correction_seconds": 0.299929062002775,
+                  "seconds": 0.5684223920034128
+                },
+                "source_length_after": 817,
+                "source_length_before": 816,
+                "trial": 5
+              },
+              {
+                "correction_index": 320,
+                "fast_owner": {
+                  "append_seconds": 0.2039687500000582,
+                  "correction_seconds": 0.24085767699943972,
+                  "seconds": 0.4448264269994979
+                },
+                "reference_owner": {
+                  "append_seconds": 0.2698109070006467,
+                  "correction_seconds": 0.282549334999203,
+                  "seconds": 0.5523602419998497
+                },
+                "source_length_after": 820,
+                "source_length_before": 819,
+                "trial": 6
+              }
+            ],
+            "recent_correction_then_append": [
+              {
+                "correction_index": 799,
+                "fast_owner": {
+                  "append_seconds": 0.18299190199832083,
+                  "correction_seconds": 0.17526354899746366,
+                  "seconds": 0.3582554509957845
+                },
+                "reference_owner": {
+                  "append_seconds": 0.2787115729988727,
+                  "correction_seconds": 0.2714750910017756,
+                  "seconds": 0.5501866640006483
+                },
+                "source_length_after": 803,
+                "source_length_before": 802,
+                "trial": 0
+              },
+              {
+                "correction_index": 802,
+                "fast_owner": {
+                  "append_seconds": 0.2076592699995672,
+                  "correction_seconds": 0.1864316500032146,
+                  "seconds": 0.3940909200027818
+                },
+                "reference_owner": {
+                  "append_seconds": 0.2777803019998828,
+                  "correction_seconds": 0.3070835660000739,
+                  "seconds": 0.5848638679999567
+                },
+                "source_length_after": 806,
+                "source_length_before": 805,
+                "trial": 1
+              },
+              {
+                "correction_index": 805,
+                "fast_owner": {
+                  "append_seconds": 0.2066131729989138,
+                  "correction_seconds": 0.2296003479968931,
+                  "seconds": 0.4362135209958069
+                },
+                "reference_owner": {
+                  "append_seconds": 0.2781227890009177,
+                  "correction_seconds": 0.3314247289999912,
+                  "seconds": 0.6095475180009089
+                },
+                "source_length_after": 809,
+                "source_length_before": 808,
+                "trial": 2
+              },
+              {
+                "correction_index": 808,
+                "fast_owner": {
+                  "append_seconds": 0.19732142099746852,
+                  "correction_seconds": 0.1903539240011014,
+                  "seconds": 0.3876753449985699
+                },
+                "reference_owner": {
+                  "append_seconds": 0.3041473749981378,
+                  "correction_seconds": 0.2850674320034159,
+                  "seconds": 0.5892148070015537
+                },
+                "source_length_after": 812,
+                "source_length_before": 811,
+                "trial": 3
+              },
+              {
+                "correction_index": 811,
+                "fast_owner": {
+                  "append_seconds": 0.23661113300113357,
+                  "correction_seconds": 0.20110371000191662,
+                  "seconds": 0.4377148430030502
+                },
+                "reference_owner": {
+                  "append_seconds": 0.29320503400231246,
+                  "correction_seconds": 0.26493688199843746,
+                  "seconds": 0.5581419160007499
+                },
+                "source_length_after": 815,
+                "source_length_before": 814,
+                "trial": 4
+              },
+              {
+                "correction_index": 814,
+                "fast_owner": {
+                  "append_seconds": 0.19831885100211366,
+                  "correction_seconds": 0.2136426789984398,
+                  "seconds": 0.41196153000055347
+                },
+                "reference_owner": {
+                  "append_seconds": 0.3014335419975396,
+                  "correction_seconds": 0.2756858350003313,
+                  "seconds": 0.5771193769978709
+                },
+                "source_length_after": 818,
+                "source_length_before": 817,
+                "trial": 5
+              },
+              {
+                "correction_index": 817,
+                "fast_owner": {
+                  "append_seconds": 0.19783777999691665,
+                  "correction_seconds": 0.21069521300159977,
+                  "seconds": 0.4085329929985164
+                },
+                "reference_owner": {
+                  "append_seconds": 0.28547466700183577,
+                  "correction_seconds": 0.32549065800048993,
+                  "seconds": 0.6109653250023257
+                },
+                "source_length_after": 821,
+                "source_length_before": 820,
+                "trial": 6
+              }
+            ]
+          },
+          "transition_summaries": {
+            "append": {
+              "fast_owner": {
+                "maximum": 0.21736941799827036,
+                "median": 0.20385196899951552,
+                "minimum": 0.18585821599845076,
+                "samples": [
+                  0.18585821599845076,
+                  0.20495495700015454,
+                  0.20385196899951552,
+                  0.18832412399933673,
+                  0.21254117699936614,
+                  0.191580390001036,
+                  0.21736941799827036
+                ]
+              },
+              "paired_speedup": {
+                "maximum": 1.528119647317039,
+                "median": 1.4575140208778274,
+                "minimum": 1.260403075661975,
+                "samples": [
+                  1.5252690685590962,
+                  1.26823267319084,
+                  1.4575140208778274,
+                  1.48982240851845,
+                  1.3132957572882937,
+                  1.528119647317039,
+                  1.260403075661975
+                ]
+              },
+              "reference_owner": {
+                "maximum": 0.2971171030003461,
+                "median": 0.2805694999988191,
+                "minimum": 0.25993057300001965,
+                "samples": [
+                  0.2834837880000123,
+                  0.25993057300001965,
+                  0.2971171030003461,
+                  0.2805694999988191,
+                  0.2791294260023278,
+                  0.29275775800124393,
+                  0.27397308299987344
+                ]
+              }
+            },
+            "early_correction_then_append": {
+              "fast_owner": {
+                "maximum": 0.4448264269994979,
+                "median": 0.41375723499731976,
+                "minimum": 0.3983918059966527,
+                "samples": [
+                  0.3983918059966527,
+                  0.41375723499731976,
+                  0.4188738929988176,
+                  0.4327922619995661,
+                  0.40430421299970476,
+                  0.39993238099850714,
+                  0.4448264269994979
+                ]
+              },
+              "paired_speedup": {
+                "maximum": 1.5864978030644412,
+                "median": 1.4212962465910821,
+                "minimum": 1.2417433148603672,
+                "samples": [
+                  1.3116733254293467,
+                  1.4598971713535176,
+                  1.5864978030644412,
+                  1.2788458819595356,
+                  1.505953515753269,
+                  1.4212962465910821,
+                  1.2417433148603672
+                ]
+              },
+              "reference_owner": {
+                "maximum": 0.664542511003674,
+                "median": 0.5684223920034128,
+                "minimum": 0.5225599049954326,
+                "samples": [
+                  0.5225599049954326,
+                  0.6040430169996398,
+                  0.664542511003674,
+                  0.5534746020020975,
+                  0.6088633510007639,
+                  0.5684223920034128,
+                  0.5523602419998497
+                ]
+              }
+            },
+            "recent_correction_then_append": {
+              "fast_owner": {
+                "maximum": 0.4377148430030502,
+                "median": 0.4085329929985164,
+                "minimum": 0.3582554509957845,
+                "samples": [
+                  0.3582554509957845,
+                  0.3940909200027818,
+                  0.4362135209958069,
+                  0.3876753449985699,
+                  0.4377148430030502,
+                  0.41196153000055347,
+                  0.4085329929985164
+                ]
+              },
+              "paired_speedup": {
+                "maximum": 1.5357384304171333,
+                "median": 1.4840835916641477,
+                "minimum": 1.2751267747090325,
+                "samples": [
+                  1.5357384304171333,
+                  1.4840835916641477,
+                  1.397360440844217,
+                  1.5198665961172415,
+                  1.2751267747090325,
+                  1.4009059947832885,
+                  1.4955103638460465
+                ]
+              },
+              "reference_owner": {
+                "maximum": 0.6109653250023257,
+                "median": 0.5848638679999567,
+                "minimum": 0.5501866640006483,
+                "samples": [
+                  0.5501866640006483,
+                  0.5848638679999567,
+                  0.6095475180009089,
+                  0.5892148070015537,
+                  0.5581419160007499,
+                  0.5771193769978709,
+                  0.6109653250023257
+                ]
+              }
+            }
+          },
+          "verification_after": {
+            "accepted_commands": 864,
+            "database_bytes": {
+              "fast_owner": 339714048,
+              "reference_owner": 339714048
+            },
+            "export_api_byte_comparisons": 1,
+            "journal_rows_byte_compared": 1705,
+            "receipt_byte_comparisons": 864,
+            "state_byte_comparisons": 66,
+            "submit_seconds": {
+              "fast_owner": 55.700001947949204,
+              "reference_owner": 79.20710255897575
+            }
+          },
+          "view_samples": [
+            {
+              "canonical_view_bytes": 592390,
+              "fast_owner": {
+                "seconds": 0.06179922000228544
+              },
+              "reference_owner": {
+                "seconds": 0.08897090399841545
+              }
+            },
+            {
+              "canonical_view_bytes": 595959,
+              "fast_owner": {
+                "seconds": 0.08444006500212708
+              },
+              "reference_owner": {
+                "seconds": 0.11052949900113163
+              }
+            },
+            {
+              "canonical_view_bytes": 599735,
+              "fast_owner": {
+                "seconds": 0.08666099499896518
+              },
+              "reference_owner": {
+                "seconds": 0.0939317789998313
+              }
+            },
+            {
+              "canonical_view_bytes": 603308,
+              "fast_owner": {
+                "seconds": 0.0643479770005797
+              },
+              "reference_owner": {
+                "seconds": 0.0971986160002416
+              }
+            },
+            {
+              "canonical_view_bytes": 607092,
+              "fast_owner": {
+                "seconds": 0.06542525699842372
+              },
+              "reference_owner": {
+                "seconds": 0.0929199879974476
+              }
+            },
+            {
+              "canonical_view_bytes": 610658,
+              "fast_owner": {
+                "seconds": 0.06512745700092637
+              },
+              "reference_owner": {
+                "seconds": 0.1016793550006696
+              }
+            },
+            {
+              "canonical_view_bytes": 614445,
+              "fast_owner": {
+                "seconds": 0.0651335670008848
+              },
+              "reference_owner": {
+                "seconds": 0.09070597800018732
+              }
+            }
+          ],
+          "view_summary": {
+            "fast_owner": {
+              "maximum": 0.08666099499896518,
+              "median": 0.0651335670008848,
+              "minimum": 0.06179922000228544,
+              "samples": [
+                0.06179922000228544,
+                0.08444006500212708,
+                0.08666099499896518,
+                0.0643479770005797,
+                0.06542525699842372,
+                0.06512745700092637,
+                0.0651335670008848
+              ]
+            },
+            "paired_speedup": {
+              "maximum": 1.5612363768360142,
+              "median": 1.4202464347933141,
+              "minimum": 1.0838991521035841,
+              "samples": [
+                1.4396768113760199,
+                1.3089698474100813,
+                1.0838991521035841,
+                1.5105154898555078,
+                1.4202464347933141,
+                1.5612363768360142,
+                1.3926149323121693
+              ]
+            },
+            "reference_owner": {
+              "maximum": 0.11052949900113163,
+              "median": 0.0939317789998313,
+              "minimum": 0.08897090399841545,
+              "samples": [
+                0.08897090399841545,
+                0.11052949900113163,
+                0.0939317789998313,
+                0.0971986160002416,
+                0.0929199879974476,
+                0.1016793550006696,
+                0.09070597800018732
+              ]
+            }
+          },
+          "warm_audit": {
+            "fast_owner": {
+              "seconds": 55.94244809000156
+            },
+            "outcome": {
+              "bytes": 204378,
+              "contracts": 1,
+              "events": 829,
+              "external_anchor_checked": false,
+              "head": "cddad11274ba4d632464f285abe5c1c307179f6897725fbba8485110eca2591b",
+              "journal_mode": "delete",
+              "semantic_replay": true,
+              "status": "passed",
+              "synchronous": 3
+            },
+            "reference_owner": {
+              "seconds": 69.51126972600105
+            }
+          }
+        }
+      ],
+      "horizon": 5,
+      "profile": {
+        "fast_owner": {
+          "selected_functions": [
+            {
+              "calls": 11,
+              "file": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py",
+              "function": "loads",
+              "inline_seconds": 5.5151e-05,
+              "line": 299,
+              "recursive_calls": 0,
+              "total_seconds": 0.032786211
+            },
+            {
+              "calls": 497358,
+              "file": "gabriel_runtime/canonical.py",
+              "function": "_check",
+              "inline_seconds": 0.214586261,
+              "line": 13,
+              "recursive_calls": 496820,
+              "total_seconds": 0.259571755
+            },
+            {
+              "calls": 11,
+              "file": "gabriel_runtime/canonical.py",
+              "function": "loads",
+              "inline_seconds": 2.7674000000000003e-05,
+              "line": 63,
+              "recursive_calls": 0,
+              "total_seconds": 0.138257064
+            },
+            {
+              "calls": 2,
+              "file": "gabriel_runtime/canonical.py",
+              "function": "digest",
+              "inline_seconds": 5.8410000000000005e-06,
+              "line": 76,
+              "recursive_calls": 0,
+              "total_seconds": 0.003663856
+            },
+            {
+              "calls": 3,
+              "file": "gabriel_runtime/fast_owner.py",
+              "function": "_text_digest",
+              "inline_seconds": 1.2169000000000002e-05,
+              "line": 52,
+              "recursive_calls": 0,
+              "total_seconds": 0.0016127810000000002
+            },
+            {
+              "calls": 1,
+              "file": "gabriel_runtime/engine.py",
+              "function": "_clone",
+              "inline_seconds": 7.410000000000001e-07,
+              "line": 20,
+              "recursive_calls": 0,
+              "total_seconds": 0.000122605
+            },
+            {
+              "calls": 3,
+              "file": "gabriel_runtime/engine.py",
+              "function": "_stored",
+              "inline_seconds": 4.6670000000000005e-05,
+              "line": 80,
+              "recursive_calls": 0,
+              "total_seconds": 0.05854351000000001
+            },
+            {
+              "calls": 538,
+              "file": "gabriel_runtime/canonical.py",
+              "function": "canonical",
+              "inline_seconds": 0.00036246200000000003,
+              "line": 40,
+              "recursive_calls": 0,
+              "total_seconds": 0.319333097
+            },
+            {
+              "calls": 6,
+              "file": "gabriel_runtime/fast_owner.py",
+              "function": "checked_clone",
+              "inline_seconds": 1.6576000000000002e-05,
+              "line": 16,
+              "recursive_calls": 0,
+              "total_seconds": 0.07508047600000001
+            },
+            {
+              "calls": 538,
+              "file": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py",
+              "function": "dumps",
+              "inline_seconds": 0.000608907,
+              "line": 183,
+              "recursive_calls": 0,
+              "total_seconds": 0.05939888
+            }
+          ],
+          "top_cumulative_functions": [
+            {
+              "calls": 1,
+              "file": "gabriel_runtime/fast_owner.py",
+              "function": "submit",
+              "inline_seconds": 0.0010134970000000001,
+              "line": 108,
+              "recursive_calls": 0,
+              "total_seconds": 0.44208898
+            },
+            {
+              "calls": 538,
+              "file": "gabriel_runtime/canonical.py",
+              "function": "canonical",
+              "inline_seconds": 0.00036246200000000003,
+              "line": 40,
+              "recursive_calls": 0,
+              "total_seconds": 0.319333097
+            },
+            {
+              "calls": 1,
+              "file": "gabriel_runtime/fast_owner.py",
+              "function": "_transition_with_text",
+              "inline_seconds": 0.0034608900000000003,
+              "line": 67,
+              "recursive_calls": 0,
+              "total_seconds": 0.292258205
+            },
+            {
+              "calls": 497358,
+              "file": "gabriel_runtime/canonical.py",
+              "function": "_check",
+              "inline_seconds": 0.214586261,
+              "line": 13,
+              "recursive_calls": 496820,
+              "total_seconds": 0.259571755
+            },
+            {
+              "calls": 1,
+              "file": "gabriel_runtime/stream.py",
+              "function": "apply",
+              "inline_seconds": 0.00035639600000000003,
+              "line": 278,
+              "recursive_calls": 0,
+              "total_seconds": 0.227487876
+            },
+            {
+              "calls": 6,
+              "file": "gabriel_runtime/stream.py",
+              "function": "_copy",
+              "inline_seconds": 1.4054000000000001e-05,
+              "line": 57,
+              "recursive_calls": 0,
+              "total_seconds": 0.19020819300000003
+            },
+            {
+              "calls": 11,
+              "file": "gabriel_runtime/canonical.py",
+              "function": "loads",
+              "inline_seconds": 2.7674000000000003e-05,
+              "line": 63,
+              "recursive_calls": 0,
+              "total_seconds": 0.138257064
+            },
+            {
+              "calls": 6,
+              "file": "gabriel_runtime/fast_owner.py",
+              "function": "checked_clone",
+              "inline_seconds": 1.6576000000000002e-05,
+              "line": 16,
+              "recursive_calls": 0,
+              "total_seconds": 0.07508047600000001
+            },
+            {
+              "calls": 128949,
+              "file": "gabriel_runtime/fast_owner.py",
+              "function": "visit",
+              "inline_seconds": 0.063010756,
+              "line": 24,
+              "recursive_calls": 128943,
+              "total_seconds": 0.0750639
+            },
+            {
+              "calls": 1,
+              "file": "gabriel_runtime/incremental.py",
+              "function": "_learner",
+              "inline_seconds": 0.0005378960000000001,
+              "line": 176,
+              "recursive_calls": 0,
+              "total_seconds": 0.066176539
+            },
+            {
+              "calls": 538,
+              "file": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py",
+              "function": "dumps",
+              "inline_seconds": 0.000608907,
+              "line": 183,
+              "recursive_calls": 0,
+              "total_seconds": 0.05939888
+            },
+            {
+              "calls": 538,
+              "file": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/encoder.py",
+              "function": "encode",
+              "inline_seconds": 0.00045244800000000004,
+              "line": 183,
+              "recursive_calls": 0,
+              "total_seconds": 0.058671308000000005
+            },
+            {
+              "calls": 3,
+              "file": "gabriel_runtime/engine.py",
+              "function": "_stored",
+              "inline_seconds": 4.6670000000000005e-05,
+              "line": 80,
+              "recursive_calls": 0,
+              "total_seconds": 0.05854351000000001
+            },
+            {
+              "calls": 538,
+              "file": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/encoder.py",
+              "function": "iterencode",
+              "inline_seconds": 0.058032453000000005,
+              "line": 205,
+              "recursive_calls": 0,
+              "total_seconds": 0.058032453000000005
+            },
+            {
+              "calls": 720636,
+              "file": "",
+              "function": "<method 'isascii' of 'str' objects>",
+              "inline_seconds": 0.053396542000000005,
+              "line": 0,
+              "recursive_calls": 0,
+              "total_seconds": 0.053396542000000005
+            },
+            {
+              "calls": 11,
+              "file": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py",
+              "function": "loads",
+              "inline_seconds": 5.5151e-05,
+              "line": 299,
+              "recursive_calls": 0,
+              "total_seconds": 0.032786211
+            },
+            {
+              "calls": 11,
+              "file": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py",
+              "function": "decode",
+              "inline_seconds": 3.8386e-05,
+              "line": 333,
+              "recursive_calls": 0,
+              "total_seconds": 0.032670155
+            },
+            {
+              "calls": 11,
+              "file": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py",
+              "function": "raw_decode",
+              "inline_seconds": 0.024667959000000003,
+              "line": 344,
+              "recursive_calls": 0,
+              "total_seconds": 0.032592696000000004
+            },
+            {
+              "calls": 503,
+              "file": "gabriel_runtime/incremental.py",
+              "function": "_feedback_token",
+              "inline_seconds": 0.000224359,
+              "line": 167,
+              "recursive_calls": 0,
+              "total_seconds": 0.028943624
+            },
+            {
+              "calls": 8177,
+              "file": "gabriel_runtime/canonical.py",
+              "function": "_object",
+              "inline_seconds": 0.007924737000000001,
+              "line": 50,
+              "recursive_calls": 0,
+              "total_seconds": 0.007924737000000001
+            }
+          ]
+        },
+        "reference_owner": {
+          "selected_functions": [
+            {
+              "calls": 17,
+              "file": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py",
+              "function": "loads",
+              "inline_seconds": 9.963e-05,
+              "line": 299,
+              "recursive_calls": 0,
+              "total_seconds": 0.059234612000000006
+            },
+            {
+              "calls": 834622,
+              "file": "gabriel_runtime/canonical.py",
+              "function": "_check",
+              "inline_seconds": 0.374909023,
+              "line": 13,
+              "recursive_calls": 834070,
+              "total_seconds": 0.45237805400000003
+            },
+            {
+              "calls": 17,
+              "file": "gabriel_runtime/canonical.py",
+              "function": "loads",
+              "inline_seconds": 0.000105239,
+              "line": 63,
+              "recursive_calls": 0,
+              "total_seconds": 0.24861074800000002
+            },
+            {
+              "calls": 5,
+              "file": "gabriel_runtime/canonical.py",
+              "function": "digest",
+              "inline_seconds": 2.5710000000000003e-05,
+              "line": 76,
+              "recursive_calls": 0,
+              "total_seconds": 0.07846736400000001
+            },
+            {
+              "calls": 7,
+              "file": "gabriel_runtime/engine.py",
+              "function": "_clone",
+              "inline_seconds": 2.9023000000000003e-05,
+              "line": 20,
+              "recursive_calls": 0,
+              "total_seconds": 0.191427219
+            },
+            {
+              "calls": 3,
+              "file": "gabriel_runtime/engine.py",
+              "function": "_stored",
+              "inline_seconds": 4.7010000000000006e-05,
+              "line": 80,
+              "recursive_calls": 0,
+              "total_seconds": 0.057107874
+            },
+            {
+              "calls": 552,
+              "file": "gabriel_runtime/canonical.py",
+              "function": "canonical",
+              "inline_seconds": 0.000496571,
+              "line": 40,
+              "recursive_calls": 0,
+              "total_seconds": 0.5588691880000001
+            },
+            {
+              "calls": 552,
+              "file": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py",
+              "function": "dumps",
+              "inline_seconds": 0.0007812310000000001,
+              "line": 183,
+              "recursive_calls": 0,
+              "total_seconds": 0.105994563
+            }
+          ],
+          "top_cumulative_functions": [
+            {
+              "calls": 1,
+              "file": "gabriel_runtime/engine.py",
+              "function": "submit",
+              "inline_seconds": 0.002291314,
+              "line": 226,
+              "recursive_calls": 0,
+              "total_seconds": 0.63691925
+            },
+            {
+              "calls": 552,
+              "file": "gabriel_runtime/canonical.py",
+              "function": "canonical",
+              "inline_seconds": 0.000496571,
+              "line": 40,
+              "recursive_calls": 0,
+              "total_seconds": 0.5588691880000001
+            },
+            {
+              "calls": 834622,
+              "file": "gabriel_runtime/canonical.py",
+              "function": "_check",
+              "inline_seconds": 0.374909023,
+              "line": 13,
+              "recursive_calls": 834070,
+              "total_seconds": 0.45237805400000003
+            },
+            {
+              "calls": 1,
+              "file": "gabriel_runtime/engine.py",
+              "function": "_transition",
+              "inline_seconds": 0.004736692000000001,
+              "line": 193,
+              "recursive_calls": 0,
+              "total_seconds": 0.434438674
+            },
+            {
+              "calls": 17,
+              "file": "gabriel_runtime/canonical.py",
+              "function": "loads",
+              "inline_seconds": 0.000105239,
+              "line": 63,
+              "recursive_calls": 0,
+              "total_seconds": 0.24861074800000002
+            },
+            {
+              "calls": 1,
+              "file": "gabriel_runtime/stream.py",
+              "function": "apply",
+              "inline_seconds": 0.00042618100000000003,
+              "line": 278,
+              "recursive_calls": 0,
+              "total_seconds": 0.24448682000000002
+            },
+            {
+              "calls": 6,
+              "file": "gabriel_runtime/stream.py",
+              "function": "_copy",
+              "inline_seconds": 1.9448e-05,
+              "line": 57,
+              "recursive_calls": 0,
+              "total_seconds": 0.202779187
+            },
+            {
+              "calls": 7,
+              "file": "gabriel_runtime/engine.py",
+              "function": "_clone",
+              "inline_seconds": 2.9023000000000003e-05,
+              "line": 20,
+              "recursive_calls": 0,
+              "total_seconds": 0.191427219
+            },
+            {
+              "calls": 552,
+              "file": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py",
+              "function": "dumps",
+              "inline_seconds": 0.0007812310000000001,
+              "line": 183,
+              "recursive_calls": 0,
+              "total_seconds": 0.105994563
+            },
+            {
+              "calls": 552,
+              "file": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/encoder.py",
+              "function": "encode",
+              "inline_seconds": 0.0005239880000000001,
+              "line": 183,
+              "recursive_calls": 0,
+              "total_seconds": 0.105082934
+            },
+            {
+              "calls": 552,
+              "file": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/encoder.py",
+              "function": "iterencode",
+              "inline_seconds": 0.104342952,
+              "line": 205,
+              "recursive_calls": 0,
+              "total_seconds": 0.104342952
+            },
+            {
+              "calls": 5,
+              "file": "gabriel_runtime/canonical.py",
+              "function": "digest",
+              "inline_seconds": 2.5710000000000003e-05,
+              "line": 76,
+              "recursive_calls": 0,
+              "total_seconds": 0.07846736400000001
+            },
+            {
+              "calls": 1,
+              "file": "gabriel_runtime/incremental.py",
+              "function": "_learner",
+              "inline_seconds": 0.000632638,
+              "line": 176,
+              "recursive_calls": 0,
+              "total_seconds": 0.076058792
+            },
+            {
+              "calls": 961422,
+              "file": "",
+              "function": "<method 'isascii' of 'str' objects>",
+              "inline_seconds": 0.073536533,
+              "line": 0,
+              "recursive_calls": 0,
+              "total_seconds": 0.073536533
+            },
+            {
+              "calls": 17,
+              "file": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py",
+              "function": "loads",
+              "inline_seconds": 9.963e-05,
+              "line": 299,
+              "recursive_calls": 0,
+              "total_seconds": 0.059234612000000006
+            },
+            {
+              "calls": 17,
+              "file": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py",
+              "function": "decode",
+              "inline_seconds": 7.4362e-05,
+              "line": 333,
+              "recursive_calls": 0,
+              "total_seconds": 0.058995383000000005
+            },
+            {
+              "calls": 17,
+              "file": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py",
+              "function": "raw_decode",
+              "inline_seconds": 0.043391498,
+              "line": 344,
+              "recursive_calls": 0,
+              "total_seconds": 0.05884629500000001
+            },
+            {
+              "calls": 3,
+              "file": "gabriel_runtime/engine.py",
+              "function": "_stored",
+              "inline_seconds": 4.7010000000000006e-05,
+              "line": 80,
+              "recursive_calls": 0,
+              "total_seconds": 0.057107874
+            },
+            {
+              "calls": 503,
+              "file": "gabriel_runtime/incremental.py",
+              "function": "_feedback_token",
+              "inline_seconds": 0.000255613,
+              "line": 167,
+              "recursive_calls": 0,
+              "total_seconds": 0.032169448
+            },
+            {
+              "calls": 13964,
+              "file": "gabriel_runtime/canonical.py",
+              "function": "_object",
+              "inline_seconds": 0.015454797000000001,
+              "line": 50,
+              "recursive_calls": 0,
+              "total_seconds": 0.015454797000000001
+            }
+          ]
+        }
+      },
+      "profiled_append_source_length_before": 821,
+      "verification": {
+        "accepted_commands": 865,
+        "database_bytes": {
+          "fast_owner": 340955136,
+          "reference_owner": 340955136
+        },
+        "export_api_byte_comparisons": 1,
+        "journal_rows_byte_compared": 2570,
+        "receipt_byte_comparisons": 865,
+        "state_byte_comparisons": 68,
+        "submit_seconds": {
+          "fast_owner": 55.700001947949204,
+          "reference_owner": 79.20710255897575
+        }
+      }
+    }
+  ]
+}

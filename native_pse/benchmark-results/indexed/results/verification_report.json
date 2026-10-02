@@ -1,0 +1,308 @@
+{
+  "status": "passed",
+  "generator": {
+    "graphs": 2097152,
+    "classes": 1044,
+    "runtime_bytes": 4211008,
+    "witness_bytes": 8388608
+  },
+  "independent_verification": {
+    "status": "passed",
+    "graphs": 2097152,
+    "classes": 1044,
+    "witness_checks": 2097152,
+    "generator_closure_checks": 12582912,
+    "minimum_checks": 1044
+  },
+  "invalid_certificates": [
+    {
+      "case": "class-range",
+      "rejected": true,
+      "reason": "class range"
+    },
+    {
+      "case": "wrong-class",
+      "rejected": true,
+      "reason": "witness image"
+    },
+    {
+      "case": "witness-range",
+      "rejected": true,
+      "reason": "witness high bits"
+    },
+    {
+      "case": "nonbijection",
+      "rejected": true,
+      "reason": "witness bijection"
+    },
+    {
+      "case": "wrong-representative",
+      "rejected": true,
+      "reason": "witness image"
+    },
+    {
+      "case": "wrong-minimum",
+      "rejected": true,
+      "reason": "canonical minimum"
+    },
+    {
+      "case": "wrong-orbit",
+      "rejected": true,
+      "reason": "orbit cardinality metadata"
+    },
+    {
+      "case": "wrong-stabilizer",
+      "rejected": true,
+      "reason": "stabilizer metadata"
+    },
+    {
+      "case": "witness-high-bit",
+      "rejected": true,
+      "reason": "witness high bits"
+    },
+    {
+      "case": "witness-digit-seven",
+      "rejected": true,
+      "reason": "witness bijection"
+    },
+    {
+      "case": "split-single-edge-orbit",
+      "rejected": true,
+      "reason": "generator closure"
+    },
+    {
+      "case": "truncated-s7_classes.bin",
+      "rejected": true,
+      "reason": "table length"
+    },
+    {
+      "case": "truncated-s7_metadata.bin",
+      "rejected": true,
+      "reason": "metadata length"
+    },
+    {
+      "case": "truncated-s7_witnesses.bin",
+      "rejected": true,
+      "reason": "table length"
+    }
+  ],
+  "valid_alternative_witness_accepted": true,
+  "regenerated_files_byte_identical": true,
+  "data_sha256": {
+    "s7_classes.bin": "2ba3e962802ea1654650f05d2e9e23c6419ac3f9569c2fe0031bb9bf6162fa67",
+    "s7_metadata.bin": "e37aa6716d18921681ee233590f157f7de9685333d46ff9f867fdc0df2e02083",
+    "s7_witnesses.bin": "9f144075476e5cae3b68abec340951019db14233074e53e6dd3fe5d3c3ce214c"
+  },
+  "source_sha256": {
+    "reproduce_graph_index.py": "6ebb719aa14b0486b25106efad8e0d3815dd37dda30c8f3744a40cba2000994f",
+    "build_graph_index.cpp": "51f03e5698b9d6832108eec3261969c8892c7f93ee093f6a5ba113037f19dff5",
+    "verify_graph_index.cpp": "b32f32d9a625ffe852d70bdcd28340422cdc8dab3882a81b754b3696ab1100d6"
+  },
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "steps": [
+    {
+      "command": [
+        "g++",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "g++",
+        "-std=c++17",
+        "-O3",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/tools/build_graph_index.cpp",
+        "-o",
+        "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/tmp_index_reviewed/build_graph_index"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "g++",
+        "-std=c++17",
+        "-O3",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/tools/verify_graph_index.cpp",
+        "-o",
+        "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/tmp_index_reviewed/verify_graph_index"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/tmp_index_reviewed/build_graph_index",
+        "/tmp/gabriel-index-checks-veikbkcj/data"
+      ],
+      "returncode": 0,
+      "stdout": "{\"graphs\":2097152,\"classes\":1044,\"runtime_bytes\":4211008,\"witness_bytes\":8388608}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/tmp_index_reviewed/verify_graph_index",
+        "/tmp/gabriel-index-checks-veikbkcj/data"
+      ],
+      "returncode": 0,
+      "stdout": "{\"status\":\"passed\",\"graphs\":2097152,\"classes\":1044,\"witness_checks\":2097152,\"generator_closure_checks\":12582912,\"minimum_checks\":1044}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/tmp_index_reviewed/build_graph_index",
+        "/tmp/gabriel-index-checks-veikbkcj/again"
+      ],
+      "returncode": 0,
+      "stdout": "{\"graphs\":2097152,\"classes\":1044,\"runtime_bytes\":4211008,\"witness_bytes\":8388608}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/tmp_index_reviewed/verify_graph_index",
+        "/tmp/gabriel-index-checks-veikbkcj/class-range"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "class range\n"
+    },
+    {
+      "command": [
+        "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/tmp_index_reviewed/verify_graph_index",
+        "/tmp/gabriel-index-checks-veikbkcj/wrong-class"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "witness image\n"
+    },
+    {
+      "command": [
+        "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/tmp_index_reviewed/verify_graph_index",
+        "/tmp/gabriel-index-checks-veikbkcj/witness-range"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "witness high bits\n"
+    },
+    {
+      "command": [
+        "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/tmp_index_reviewed/verify_graph_index",
+        "/tmp/gabriel-index-checks-veikbkcj/nonbijection"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "witness bijection\n"
+    },
+    {
+      "command": [
+        "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/tmp_index_reviewed/verify_graph_index",
+        "/tmp/gabriel-index-checks-veikbkcj/wrong-representative"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "witness image\n"
+    },
+    {
+      "command": [
+        "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/tmp_index_reviewed/verify_graph_index",
+        "/tmp/gabriel-index-checks-veikbkcj/wrong-minimum"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "canonical minimum\n"
+    },
+    {
+      "command": [
+        "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/tmp_index_reviewed/verify_graph_index",
+        "/tmp/gabriel-index-checks-veikbkcj/wrong-orbit"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "orbit cardinality metadata\n"
+    },
+    {
+      "command": [
+        "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/tmp_index_reviewed/verify_graph_index",
+        "/tmp/gabriel-index-checks-veikbkcj/wrong-stabilizer"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "stabilizer metadata\n"
+    },
+    {
+      "command": [
+        "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/tmp_index_reviewed/verify_graph_index",
+        "/tmp/gabriel-index-checks-veikbkcj/witness-high-bit"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "witness high bits\n"
+    },
+    {
+      "command": [
+        "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/tmp_index_reviewed/verify_graph_index",
+        "/tmp/gabriel-index-checks-veikbkcj/witness-digit-seven"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "witness bijection\n"
+    },
+    {
+      "command": [
+        "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/tmp_index_reviewed/verify_graph_index",
+        "/tmp/gabriel-index-checks-veikbkcj/split-single-edge-orbit"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "generator closure\n"
+    },
+    {
+      "command": [
+        "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/tmp_index_reviewed/verify_graph_index",
+        "/tmp/gabriel-index-checks-veikbkcj/truncated-s7_classes.bin"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "table length\n"
+    },
+    {
+      "command": [
+        "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/tmp_index_reviewed/verify_graph_index",
+        "/tmp/gabriel-index-checks-veikbkcj/truncated-s7_metadata.bin"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "metadata length\n"
+    },
+    {
+      "command": [
+        "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/tmp_index_reviewed/verify_graph_index",
+        "/tmp/gabriel-index-checks-veikbkcj/truncated-s7_witnesses.bin"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "table length\n"
+    },
+    {
+      "command": [
+        "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/tmp_index_reviewed/verify_graph_index",
+        "/tmp/gabriel-index-checks-veikbkcj/valid-alternative"
+      ],
+      "returncode": 0,
+      "stdout": "{\"status\":\"passed\",\"graphs\":2097152,\"classes\":1044,\"witness_checks\":2097152,\"generator_closure_checks\":12582912,\"minimum_checks\":1044}\n",
+      "stderr": ""
+    }
+  ],
+  "rust_integration": "Not compiled or executed by this script."
+}

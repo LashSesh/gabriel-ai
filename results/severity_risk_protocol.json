@@ -1,0 +1,133 @@
+{
+  "schema": "gabriel.severity-risk.protocol.v1",
+  "fixed_before_first_execution": "2026-09-26",
+  "parent_adaptive_protocol_sha256": "e5723e6f160b37ae552bff2ac11573dfeab7d6d7f4e1f5f4fab3249542285aa9",
+  "parent_predictions_sha256": "aa363906bc796f529f1542c81f8888c1831cddd744a1763727160c1492d8fd32",
+  "beta": "1/40",
+  "ratio_cap": 20,
+  "initial_ratio": 1.5,
+  "half_lives_completed_observations": [
+    125,
+    500
+  ],
+  "primary_half_life": 125,
+  "update": "Maintain uncapped m <- lambda*m+(1-lambda)*R, R=1+max(Y-issued_Q,0)/(beta*issued_Q), lambda=2**(-1/d). Emit E=issued_Q*clip(m,1,K). The initial m is a decaying pseudo-observation of mass1; real-update weights are (1-lambda)*lambda**age. Never clip the accumulator.",
+  "feedback_order": "Pooled severity sufficient statistic per contract: at origin t first process target issued at t-h, using that immutable issued Q, then issue at t. This is a discounted empirical objective, not a stale gradient update. All feedback must have matured.",
+  "quantile_streams": [
+    "fast_base",
+    "primary_frequency_eta_1/20_horizon_lanes"
+  ],
+  "models": [
+    "fast_base",
+    "frequency_only",
+    "severity_125",
+    "joint_125",
+    "severity_500",
+    "joint_500",
+    "static_severity",
+    "static_joint"
+  ],
+  "static_rule": "For each quantile stream minimize common-ratio FZ0 on development: k=clip(mean(R),1,K); freeze k thereafter. No development rows reported as independent performance.",
+  "market": {
+    "source": "unchanged archived ECB observations and adaptive forecast archive",
+    "development": [
+      "2010-01-01",
+      "2019-12-31"
+    ],
+    "retrospective_2020_2025": [
+      "2020-01-01",
+      "2025-12-31"
+    ],
+    "retrospective_2026": [
+      "2026-01-01",
+      "2026-09-25"
+    ],
+    "design_history": "All financial evaluation periods were inspected in earlier phases; all new financial comparisons are retrospective. No untouched market test remains in this snapshot.",
+    "currencies": [
+      "USD",
+      "GBP",
+      "JPY",
+      "CHF"
+    ],
+    "horizons": [
+      1,
+      5
+    ],
+    "endpoint_rule": "Both origin and target in each period. All matured rows update continuously before and across these periods.",
+    "archive": "Retain all market forecasts, R, uncapped states, cap flags and static development means."
+  },
+  "synthetic": {
+    "replicates": 32,
+    "origins": 8000,
+    "warmup": 2000,
+    "latencies": [
+      1,
+      5
+    ],
+    "seed_components": [
+      2026092604,
+      "case_index",
+      "replicate_index"
+    ],
+    "rng": "numpy Generator(PCG64(SeedSequence(seed_components)))",
+    "scale": "s_t=1+0.25*sin(2*pi*t/800), t=0,...,7999",
+    "distribution": "With probability alpha=39/40, Y=s_t*Uniform[-1,1]; otherwise Y=s_t*(1+Z). Z=Uniform[0,2*d_t] for bounded cases; Exp(mean=d_t) for exponential case. Generate independent U,V arrays (length8000) in that order; hit=(U>=alpha); body=-1+2*V, bounded tail=1+2*d*V, exponential tail=1-d*log1p(-V).",
+    "true_quantile": "q*_t=s_t",
+    "true_ES": "e*_t=s_t*(1+d_t)",
+    "cases": [
+      {
+        "name": "stationary_bounded",
+        "tail": "bounded",
+        "d": "0.5",
+        "q_factor": 1.0
+      },
+      {
+        "name": "sustained_shift",
+        "tail": "bounded",
+        "d": "0.5 if t<4000 else 3",
+        "q_factor": 1.0
+      },
+      {
+        "name": "recurrent_shift",
+        "tail": "bounded",
+        "d": "0.5 if (t//1000)%2==0 else 3",
+        "q_factor": 1.0
+      },
+      {
+        "name": "exponential_shift",
+        "tail": "exponential",
+        "d": "0.5 if t<4000 else 3",
+        "q_factor": 1.0
+      },
+      {
+        "name": "underestimated_quantile",
+        "tail": "bounded",
+        "d": "0.5 if t<4000 else 3",
+        "q_factor": 0.8
+      }
+    ],
+    "base": "issued base q=q_factor*q*, base e=1.5*base q. This is an intentionally misspecified severity reference after shifts, not a trained financial model.",
+    "frequency": "same frozen eta1/20 integer-lattice lane recursion as previous study, initialized at zero, applied to base q/e",
+    "static_rule": "same exact minimizer, fitted only to matured origins before warmup=2000; q stream is that model own immutable issued q.",
+    "scoring": "origins2000 through7999-latency inclusive; all, early2000:3999, late4000:7999-latency; truth reference forecasts q*,e* additionally scored",
+    "metrics": [
+      "realized_mean_FZ0",
+      "analytic_conditional_expected_FZ0",
+      "relative_ES_absolute_error",
+      "breach_fraction",
+      "normalized_ES_residual",
+      "cap_fraction"
+    ],
+    "uncertainty": "Paired differences and t-based95% Monte Carlo intervals across32 independent replications, separately per DGP and latency; not uncertainty for observed market periods. Report all cases.",
+    "retention": "All replicate aggregate metrics plus full exemplar traces replicate0 per case/latency; exact seeds and code reproduce other full traces."
+  },
+  "claim_limits": [
+    "No universal superiority or conditional calibration theorem",
+    "An optimal retrospective ratio is not an optimal future forecast",
+    "Moving or wrong Q changes the tail functional; separate VaR error from ES error",
+    "Bounded emitted ratios do not bound the uncapped accumulator under unbounded losses",
+    "Binary64 computation, no interval-rounding proof",
+    "Synthetic latency5 means delayed individual targets, not aggregated five-step losses",
+    "No market parameter retuning after this protocol"
+  ]
+}

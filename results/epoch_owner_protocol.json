@@ -1,0 +1,154 @@
+{
+  "schema": "gabriel.epoch-owner.protocol.v1",
+  "frozen_before_timings": true,
+  "scope": "Complete exact-model regional window queries through the actual native Engine and SQLite Store, comparing shared exact-model preparation with an unchanged identity-check schedule. No predictive or domain-wide superiority claim.",
+  "primary": {
+    "nodes": [
+      7,
+      13,
+      32,
+      64
+    ],
+    "source_seeds": [
+      20260927,
+      20261003
+    ],
+    "seed_interpretation": "20260927 retains the previous fixture family; 20261003 is fixed here without prior outcome or timing screening. Integers are deterministic seed labels, not observation dates.",
+    "windows_per_task": [
+      1,
+      4,
+      16,
+      32
+    ],
+    "tasks": 32,
+    "batches": "one batch [0,...,n-1], executed by the bundled Engine snapshot executable",
+    "source": "SHA256 ASCII 'gabriel-window-source/v1:{seed}:{n}:{entity}'; re=3+(first eight digest bytes, big endian, mod 17)-8; im=1+(next eight digest bytes, big endian, mod 19)-9; integer values encoded as binary64 bits",
+    "targets": "even-numbered entities",
+    "threshold": "clip exact a+(abs(b)+abs(c))/4 to [0,1] and round once to binary64; this deterministic synthetic coverage rule is not an external-data distribution",
+    "phase_windows": [
+      [
+        "0",
+        "1/8"
+      ],
+      [
+        "1/7",
+        "17/7"
+      ],
+      [
+        "2",
+        "4"
+      ],
+      [
+        "0",
+        "8"
+      ]
+    ],
+    "window_construction": "For zero-based window j, add the exact rational integer 9*floor(j/4) to both endpoints of phase_windows[j mod 4], divide by exact model omega, then round each endpoint once to binary64. Longer requests use prefixes of the same 32-window sequence; windows are not selected from measured outcomes.",
+    "selection": "Full Cartesian product, retain every task. Reject rather than substitute a nonclique or zero-frequency primary snapshot."
+  },
+  "controls": {
+    "nodes": [
+      7,
+      13
+    ],
+    "source_seeds": [
+      20260927,
+      20261003
+    ],
+    "windows_per_task": [
+      1,
+      32
+    ],
+    "tasks": 8,
+    "batches": "path edge batches [0,1], [1,2], ..., [n-2,n-1]",
+    "targets": "even-numbered entities",
+    "threshold_bits": "3fe0000000000000",
+    "windows": "Window j is exact binary64 [j,j+1].",
+    "expected": "out_of_scope for every certificate, after the actual Engine export confirms a nonclique represented matrix",
+    "excluded_from_primary_speed_gate": true,
+    "purpose": "Preserve truthful unsupported-model behavior and expose complete control-path costs. No generic spectral solver is claimed."
+  },
+  "variants": [
+    {
+      "name": "legacy_scalar",
+      "batch_model": false,
+      "implementation": "Unmodified GraphReachabilityAdapter and Store"
+    },
+    {
+      "name": "strict_batch",
+      "batch_model": true,
+      "implementation": "Prepare the exact shared harmonic model once while retaining all legacy verification boundaries and the unmodified Store"
+    }
+  ],
+  "contract": {
+    "condition": "Same trusted local Python execution environment and deterministic native Engine. Sources, arithmetic and native executable retain all legacy identity-check boundaries. Hashes identify bytes and do not defeat replacement followed by restoration between observations.",
+    "integrity_policy": "No verification coalescing or epoch shortcut is used. The strict batch profile binds its additional production module bytes and retains every inherited guard site. Adapter fingerprints and journal heads may differ because the implementations differ.",
+    "preserved_work": [
+      "same exact Engine input and new native process",
+      "same native full-batch replay",
+      "same represented matrix and exact dyadic source",
+      "same caps and precision ladder",
+      "same complete certificate JSON",
+      "same SQLite journal and synchronization setting",
+      "same fresh Store creation and bind/observe transactions",
+      "same atomic rejection and external head/event anchors",
+      "same legacy identity-check schedule"
+    ],
+    "cross_variant_equivalence": "Canonical complete issue bytes, including request, owner receipt time, native snapshot and full certificates, must match. Profiles have different fingerprints, adapter labels and consequently journal heads; receipts must replay exactly within their own profile.",
+    "nonclaims": [
+      "cold filesystem caches",
+      "physical power-loss durability",
+      "quantum speedup",
+      "external forecasting advantage"
+    ]
+  },
+  "timing": {
+    "fresh_processes": 3,
+    "repetitions_per_process": 1,
+    "tasks_per_process": 80,
+    "total_complete_tasks": 240,
+    "total_separate_replays": 240,
+    "serial_execution": true,
+    "task_order": "Rotate the canonical 40-task list by worker index, reverse the resulting list for odd worker indices.",
+    "variant_order": "Rotate [legacy_scalar,strict_batch] by (worker index + canonical task index) mod 2. Do not reverse this profile order; alternate the first profile across adjacent canonical tasks.",
+    "warmup": "One fixed n=3 constant-source singleton-window task per profile before measurements; retain outputs. No primary or control task used for tuning or warmup.",
+    "complete_task_scope": "Start before fresh adapter construction, include full initial identity checks, Store.create, command construction, bind, observe, actual native subprocess and full history, certificate generation, canonical serialization, receipt construction, SQLite EXTRA commits, and Store.close. All inherited identity checks remain included.",
+    "replay_scope": "Start before a new adapter, include Store.open full semantic replay with independent expected head and expected event count, every inherited identity check, and Store.close. This is revalidation replay, not a cold-cache claim.",
+    "excluded": "Python process startup and module imports; input generation; external fixture validation; output evidence writing; final closed-database byte hashing; independent verification.",
+    "no_overhead_subtraction": true,
+    "no_component_factor_multiplication": true,
+    "clock": "time.perf_counter_ns",
+    "execution_requires_run_flag": true
+  },
+  "acceptance": {
+    "correctness": "All 240 full issue bytes match their task's legacy result; all 240 separately reopened journals reproduce their own stored semantic records, preserve closed database hashes and satisfy independently retained head/event anchors; required negative controls pass.",
+    "primary_speed": "For every primary task and process, divide legacy_scalar complete-task nanoseconds by strict_batch nanoseconds. Require overall median paired ratio > 1.10 and median paired ratio > 1 in each node-size subgroup. Do not remove slow or ambiguous cases.",
+    "report": "Report both profiles, every task's absolute complete and replay times, process medians, window-count/node-size/seed groups, extrema and maximum regression. No pooling controls into the primary gate.",
+    "failure": "Keep all results and report unmet or unassessed criteria. No retuning of cohort, ordering, budget or success condition after measurements.",
+    "scope": "A passed criterion establishes a finite synthetic complete-task engineering advantage with the legacy integrity-check schedule. It does not satisfy the broader Gabriel superiority goal.",
+    "demanding_subgroup": "Predeclared primary tasks with nodes in {32,64} AND windows in {16,32}: require median paired legacy_scalar/strict_batch ratio > 1.10. Report this workload-specific criterion separately from the all-primary gate, even if one fails."
+  },
+  "required_guards": [
+    "invalid input leaves owner bytes and anchors unchanged",
+    "source/executable mutation observed at legacy boundary rejects",
+    "injected certification failure rolls back observe",
+    "duplicate id returns identical receipt",
+    "conflicting id rejects",
+    "stale head rejects",
+    "reopen with wrong external head/event anchors rejects",
+    "valid prefix rollback detected by saved final anchors",
+    "ordinary and strict-batch replay reconstruct stored records",
+    "unmodified v1 closure hashes remain unchanged"
+  ],
+  "evidence": [
+    "this protocol and digest frozen before timing",
+    "collector and all production source digests before and after each worker",
+    "native executable and arithmetic identities",
+    "all 40 exact task inputs and actual Engine outputs",
+    "all timed receipts/issues and full raw nanosecond records",
+    "worker commands, stdout, stderr and process provenance",
+    "closed SQLite databases sealed outside automatic workspace mirroring",
+    "independent equivalence, replay and aggregate verification"
+  ],
+  "protocol_revision_before_measurements": "The initial four-profile proposal was reduced to two profiles before any new timings: only exact-model batching is tested, retaining all legacy guard sites. No measured outcome informed this decision."
+}

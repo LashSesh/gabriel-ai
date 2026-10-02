@@ -1,0 +1,69 @@
+{
+  "clocks": "event_at=index; each accepted record received_at=owner_at=next owner command ordinal, including corrections; bind at0.",
+  "cold_open_repetitions": {
+    "360": 5,
+    "500": 1,
+    "800": 1
+  },
+  "cold_open_scope": "Fresh owner and fresh adapter over each existing live-owner database, complete semantic replay in Store.open; OS page cache not flushed; close outside timer. Report warm filesystem/cold adapter distinction.",
+  "durability": "Both owners SQLite DELETE journal, synchronous EXTRA; one transaction and commit per accepted command; same registry fingerprint, header, commands, receipts and stored canonical state.",
+  "exactness": "Direct canonical receipt-string comparison after every paired command; direct SQL canonical-state-string/meta comparison at checkpoint and branch boundaries; journal rows compared byte for byte; actual export API compared for register endpoints and stream n360.",
+  "format": "gabriel-fast-owner-benchmark/v1",
+  "implementations": [
+    "reference_owner",
+    "fast_owner"
+  ],
+  "limits": "Synthetic bounded workloads; seven sequential paired trials are descriptive, correlated observations, not independent samples or confidence intervals. No universal throughput, predictive gain or external product comparison.",
+  "owner_classes": [
+    "gabriel_runtime.engine.Store",
+    "gabriel_runtime.fast_owner.FastStore"
+  ],
+  "paired_order": "reference then fast for even pair index, reverse for odd; same command exact bytes supplied to both",
+  "profiling": "After last neighborhood, one matched additional append per horizon under cProfile. These profiled wall times are excluded from efficiency summaries; record Python call counts and top cumulative functions.",
+  "register_commands_per_trial": 100,
+  "register_prefix_commands": 100,
+  "register_rule": "Initialize width integer registers to zero; event i adds 1+(i mod 19) to register (37*i mod width), returns count,total; bounded exact JSON state.",
+  "register_trials": 7,
+  "register_widths": [
+    32,
+    256,
+    2048
+  ],
+  "seed": 2026092603,
+  "status": "frozen_before_timing",
+  "stream_config": {
+    "max_units": 100,
+    "risk_budget": "10",
+    "source_id": "fast-owner-synthetic",
+    "unit_exposure": "100"
+  },
+  "stream_corrections": "Early index320, alternating factors33/32 and31/32 by successive revision parity; recent index current_source_length-3, factor65/64. Revision increments per index. Correction and immediately following append timed separately and summed.",
+  "stream_horizons": [
+    1,
+    5
+  ],
+  "stream_neighborhood": "Seven successive live trials, each accepting three new observations and two corrections. Start lengths n,n+3,...,n+18; final length n+21. Both implementations have identical evolving state; these are neighborhoods, not independent repetitions of one state.",
+  "stream_neighborhood_starts": [
+    360,
+    500,
+    800
+  ],
+  "stream_profile": "Both owners use fresh IncrementalStreamRiskAdapter with same fingerprint and numerical caches; this measures owner change only, not incremental-vs-baseline forecasting.",
+  "stream_source": "NumPy default_rng(seed), r_i=.006*(1+.3*sin(i/31))*Z_i, price_i=100*exp(cumsum(r)_i), 823 observations encoded binary64 hex.",
+  "stream_trial_order": [
+    "append",
+    "early_correction_then_append",
+    "recent_correction_then_append"
+  ],
+  "stream_trials": 7,
+  "thread_environment": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+  },
+  "timing_exclusions": "Imports, database creation/bind, input generation, command construction, exactness checks, report writing, cProfile diagnostics; no transaction batching and no bypass of audit on open.",
+  "trajectory_measurement": "Sum submit wall times for all source/correction commands; prefix checkpoints360,500,800 include earlier benchmark-neighborhood corrections. Equality checks, view/audit/open, profiler and source generation excluded.",
+  "views": "One full view per owner per stream trial, timed separately, after all five commands; state and forecast history materialized in both.",
+  "warm_audit_repetitions": 1,
+  "warmup": "32 fixed-width accumulator commands per owner outside timing before any measured runs"
+}

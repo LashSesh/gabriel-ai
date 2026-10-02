@@ -1,0 +1,117 @@
+{
+  "commands": [
+    {
+      "arguments": [
+        "demo",
+        "--out",
+        "/tmp/gabriel-cli-rbcgq3u0/demo",
+        "--with-conflict"
+      ],
+      "returncode": 0
+    },
+    {
+      "arguments": [
+        "audit",
+        "/tmp/gabriel-cli-rbcgq3u0/demo/owner.sqlite",
+        "--anchor",
+        "/tmp/gabriel-cli-rbcgq3u0/demo/anchor.json"
+      ],
+      "returncode": 0
+    },
+    {
+      "arguments": [
+        "inspect",
+        "/tmp/gabriel-cli-rbcgq3u0/demo/owner.sqlite",
+        "--contract",
+        "conflict-example"
+      ],
+      "returncode": 0
+    },
+    {
+      "arguments": [
+        "export",
+        "/tmp/gabriel-cli-rbcgq3u0/demo/owner.sqlite",
+        "--out",
+        "/tmp/gabriel-cli-rbcgq3u0/export.json"
+      ],
+      "returncode": 0
+    },
+    {
+      "arguments": [
+        "submit",
+        "/tmp/gabriel-cli-rbcgq3u0/demo/owner.sqlite",
+        "--command",
+        "{\"at\": 0, \"contract\": \"perception\", \"expected_head\": \"bc5ddc5f355ea6739b8cc1b2575e6f071cabbe1396df27b687b9ae21e4c9586d\", \"id\": \"demo-1\", \"op\": \"bind\", \"payload\": {\"adapter\": \"finite-observation/v1\", \"config\": {\"contract_id\": \"synthetic-two-query-catalogue\", \"costs\": [1, 1], \"labels\": [0, 0, 0, 1], \"query_names\": [\"q0\", \"q1\"], \"rows\": [[\"0\", \"0\"], [\"0\", \"1\"], [\"1\", \"0\"], [\"1\", \"1\"]], \"weights\": []}}}"
+      ],
+      "returncode": 0
+    },
+    {
+      "arguments": [
+        "audit",
+        "/tmp/gabriel-cli-rbcgq3u0/demo/owner.sqlite",
+        "--anchor",
+        "/tmp/gabriel-cli-rbcgq3u0/demo/anchor.json"
+      ],
+      "returncode": 0
+    },
+    {
+      "arguments": [
+        "submit",
+        "/tmp/gabriel-cli-rbcgq3u0/demo/owner.sqlite",
+        "--command",
+        "{\"at\": 0, \"contract\": \"perception\", \"expected_head\": \"bc5ddc5f355ea6739b8cc1b2575e6f071cabbe1396df27b687b9ae21e4c9586d\", \"id\": \"demo-1\", \"op\": \"bind\", \"payload\": {\"adapter\": \"finite-observation/v1\", \"config\": {}}}"
+      ],
+      "returncode": 2
+    },
+    {
+      "arguments": [
+        "demo",
+        "--out",
+        "/tmp/gabriel-cli-rbcgq3u0/demo"
+      ],
+      "returncode": 2
+    },
+    {
+      "arguments": [
+        "export",
+        "/tmp/gabriel-cli-rbcgq3u0/demo/owner.sqlite",
+        "--out",
+        "/tmp/gabriel-cli-rbcgq3u0/export.json"
+      ],
+      "returncode": 2
+    },
+    {
+      "arguments": [
+        "audit",
+        "/tmp/gabriel-cli-rbcgq3u0/demo/owner.sqlite",
+        "--anchor",
+        "{\"events\": 12, \"head\": \"0000000000000000000000000000000000000000000000000000000000000000\"}"
+      ],
+      "returncode": 2
+    },
+    {
+      "arguments": [
+        "submit",
+        "/tmp/gabriel-cli-rbcgq3u0/demo/owner.sqlite",
+        "--command",
+        "{\"id\":1,\"id\":2}"
+      ],
+      "returncode": 2
+    }
+  ],
+  "coverage": [
+    "synthetic two-adapter shared store",
+    "finite decided and separate conflict",
+    "first maturity and correction",
+    "as-of controller replay",
+    "exact retry",
+    "anchored reopen/audit",
+    "byte-identical export",
+    "conflicting ID",
+    "duplicate JSON keys",
+    "refused directory/export overwrite",
+    "wrong external anchor"
+  ],
+  "status": "passed",
+  "subprocess_commands": 11
+}

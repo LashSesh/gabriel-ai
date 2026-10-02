@@ -1,0 +1,69 @@
+{
+  "archive": {
+    "bytes": 31548,
+    "file": "audit/graph_reachability_functional_pre_final.zip",
+    "sha256": "2f302430d26984bb4355dca6743a5889e62375b6f5e590d86b099b787336df3d"
+  },
+  "changed_bound_sources": {
+    "gabriel_runtime/window_certificate.py": {
+      "bound": "ac7e5cdcef2c70cc9c7f9d06670ae2dd1a6398de8d3621da5daa1a0a842b315e",
+      "current": "b344b7282c8c28262236e680d68fe58bfda67ecc45073c3b8d38f0b11214925c"
+    }
+  },
+  "checker_results": {
+    "anchor": {
+      "events": 4,
+      "head": "5dd0918fe8f84442e86aa034a7df977836a7861fb9b55e6f220cbafd54307890"
+    },
+    "cold_replay": {
+      "bytes": 1909,
+      "contracts": 1,
+      "events": 4,
+      "external_anchor_checked": true,
+      "head": "5dd0918fe8f84442e86aa034a7df977836a7861fb9b55e6f220cbafd54307890",
+      "journal_mode": "delete",
+      "semantic_replay": true,
+      "status": "passed",
+      "synchronous": 3
+    },
+    "database_sha256": "dd829b6e9aad40afc3d8e66c0c77cea9236d86657c85d90551287afa7752ad50",
+    "direct_native_rejections": [
+      "unknown-field",
+      "duplicate-entity",
+      "empty-batch",
+      "batch-cap",
+      "out-of-range",
+      "duplicate-key",
+      "noncanonical",
+      "oversize"
+    ],
+    "execution_failure_rollbacks": [
+      "timeout",
+      "nonzero",
+      "malformed",
+      "oversize-output",
+      "certificate"
+    ],
+    "generic_out_of_scope": true,
+    "identical_retry": true,
+    "invalid_atomic_commands": 17,
+    "invalid_members_no_native_work": true,
+    "issued_prefix_immutable": true,
+    "same_binary_relocation": true,
+    "schema": "gabriel.graph-reachability.checks.v1",
+    "snapshot_digest_reconstructed": true,
+    "soft_cap_rollbacks": 2,
+    "source_and_executable_identity_rejected": true,
+    "stale_head_rejected": true,
+    "status": "passed",
+    "swapped_entity_labels_rejected": true,
+    "timings": "not measured",
+    "v1_source_closure_unchanged_during_checks": true
+  },
+  "final_candidate_evidence": false,
+  "fresh_recheck_error": "header or adapter fingerprint mismatch",
+  "status": "first_functional_run_passed_then_replay_rejected_changed_source",
+  "timings": "not measured",
+  "v1_original_source_files": 69,
+  "v1_original_sources_identical": true
+}

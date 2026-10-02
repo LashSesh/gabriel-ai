@@ -1,0 +1,418 @@
+{
+  "schema": "gabriel.window-independent-verification.v1",
+  "passed": true,
+  "inputs_sha256": "68e3da5e5d711e1af1c0a85618e7f48fbbad7b5b8d57d2ca121ebdac619abbf6",
+  "evaluation_sha256": "06404930c6012de44965cf307b6fa34e5b5e5eff9e168e736a9a8d52d65ae88a",
+  "verifier_sha256": "23988e2e590307eab3300963f4c9bd32c7d7142327577e9d466be12bb9314c45",
+  "certificates": 852,
+  "decisive_certificates": 850,
+  "unknown_certificates": 2,
+  "counts": [
+    {
+      "cohort": "control",
+      "method": "adaptive",
+      "status": "excluded",
+      "count": 16
+    },
+    {
+      "cohort": "control",
+      "method": "adaptive",
+      "status": "reachable",
+      "count": 8
+    },
+    {
+      "cohort": "control",
+      "method": "analytic",
+      "status": "excluded",
+      "count": 16
+    },
+    {
+      "cohort": "control",
+      "method": "analytic",
+      "status": "reachable",
+      "count": 8
+    },
+    {
+      "cohort": "control",
+      "method": "uniform",
+      "status": "excluded",
+      "count": 16
+    },
+    {
+      "cohort": "control",
+      "method": "uniform",
+      "status": "reachable",
+      "count": 8
+    },
+    {
+      "cohort": "primary",
+      "method": "adaptive",
+      "status": "excluded",
+      "count": 76
+    },
+    {
+      "cohort": "primary",
+      "method": "adaptive",
+      "status": "reachable",
+      "count": 180
+    },
+    {
+      "cohort": "primary",
+      "method": "analytic",
+      "status": "excluded",
+      "count": 76
+    },
+    {
+      "cohort": "primary",
+      "method": "analytic",
+      "status": "reachable",
+      "count": 180
+    },
+    {
+      "cohort": "primary",
+      "method": "uniform",
+      "status": "excluded",
+      "count": 76
+    },
+    {
+      "cohort": "primary",
+      "method": "uniform",
+      "status": "reachable",
+      "count": 180
+    },
+    {
+      "cohort": "stress",
+      "method": "adaptive",
+      "status": "excluded",
+      "count": 1
+    },
+    {
+      "cohort": "stress",
+      "method": "adaptive",
+      "status": "reachable",
+      "count": 3
+    },
+    {
+      "cohort": "stress",
+      "method": "analytic",
+      "status": "excluded",
+      "count": 1
+    },
+    {
+      "cohort": "stress",
+      "method": "analytic",
+      "status": "reachable",
+      "count": 3
+    },
+    {
+      "cohort": "stress",
+      "method": "uniform",
+      "status": "excluded",
+      "count": 1
+    },
+    {
+      "cohort": "stress",
+      "method": "uniform",
+      "status": "reachable",
+      "count": 1
+    },
+    {
+      "cohort": "stress",
+      "method": "uniform",
+      "status": "unknown",
+      "count": 2
+    }
+  ],
+  "assertions": {
+    "cohort_digest": 1,
+    "evaluation_binding": 1,
+    "evaluated_source_current": 4,
+    "native_entity_mapping": 116,
+    "native_snapshot_digest": 4,
+    "native_matrix_binding": 4,
+    "unique_result": 852,
+    "declared_method": 852,
+    "cohort_label_binding": 852,
+    "valid_entities": 889,
+    "matrix_shape": 889,
+    "unique_source_records": 889,
+    "valid_target_set": 889,
+    "exact_represented_clique": 889,
+    "source_coverage": 889,
+    "nonzero_exact_norm": 889,
+    "valid_analytic_query": 314,
+    "analytic_query_binding": 313,
+    "independent_quadrature_coefficients": 1250,
+    "analytic_input_binding": 311,
+    "exact_norm_binding": 311,
+    "represented_delta_binding": 311,
+    "represented_rho_binding": 311,
+    "amplitude_binding": 311,
+    "analytic_resource_caps": 311,
+    "witness_inside_window": 189,
+    "independent_complex_mass_contained": 14539,
+    "strict_witness": 188,
+    "decisive_methods_agree": 850,
+    "baseline_method_binding": 568,
+    "valid_baseline_query": 571,
+    "baseline_query_binding": 571,
+    "baseline_input_binding": 571,
+    "baseline_coefficients": 571,
+    "no_cover_without_bounds": 444,
+    "baseline_point_cap": 570,
+    "sample_inside_window": 13890,
+    "baseline_point_witness_kind": 364,
+    "baseline_witness_time": 364,
+    "baseline_strict_witness": 364,
+    "finite_reference_ball": 8130,
+    "exact_arb_endpoint": 16260,
+    "endpoint_exclusion_status": 50,
+    "endpoint_coverage": 50,
+    "endpoint_below_threshold": 97,
+    "endpoint_supremum": 50,
+    "phase_enclosure_valid": 51,
+    "start_phase_quotient_valid": 51,
+    "end_phase_quotient_valid": 51,
+    "first_index_bound": 50,
+    "last_index_bound": 50,
+    "no_interior_maximum": 46,
+    "derivative_bounds": 126,
+    "gapless_interval_cover": 11800,
+    "certified_interval_upper": 11799,
+    "whole_interval_exclusion": 11289,
+    "complete_closed_window_cover": 90,
+    "baseline_cover_kind": 88,
+    "global_exclusion": 36,
+    "global_evidence": 35,
+    "baseline_global_exclusion": 66,
+    "stationary_condition": 30,
+    "stationary_evidence": 30,
+    "stationary_decision": 30,
+    "baseline_stationary_condition": 48,
+    "baseline_stationary_decision": 48,
+    "complete_method_coverage": 1,
+    "full_acb_matrix_reference_overlap": 12,
+    "full_matrix_reference_width": 12,
+    "singleton_window": 3,
+    "critical_witness_status": 4,
+    "critical_time_inside_window": 4,
+    "critical_root_contained": 4,
+    "critical_peak_value": 4,
+    "critical_strict_margin": 4,
+    "critical_peak_bounds": 4,
+    "unknown_has_no_decision": 2,
+    "out_of_scope_structure_control": 2
+  },
+  "complex_reference_cache": {
+    "hits": 6151,
+    "misses": 7961,
+    "maxsize": 40000,
+    "currsize": 7961
+  },
+  "matrix_references": [
+    {
+      "nodes": 7,
+      "seed": 20260927,
+      "time": "0"
+    },
+    {
+      "nodes": 7,
+      "seed": 20260927,
+      "time": "2/21"
+    },
+    {
+      "nodes": 7,
+      "seed": 20260927,
+      "time": "2/3"
+    },
+    {
+      "nodes": 7,
+      "seed": 20260928,
+      "time": "0"
+    },
+    {
+      "nodes": 7,
+      "seed": 20260928,
+      "time": "2/21"
+    },
+    {
+      "nodes": 7,
+      "seed": 20260928,
+      "time": "2/3"
+    },
+    {
+      "nodes": 13,
+      "seed": 20260927,
+      "time": "0"
+    },
+    {
+      "nodes": 13,
+      "seed": 20260927,
+      "time": "2/39"
+    },
+    {
+      "nodes": 13,
+      "seed": 20260927,
+      "time": "14/39"
+    },
+    {
+      "nodes": 13,
+      "seed": 20260928,
+      "time": "0"
+    },
+    {
+      "nodes": 13,
+      "seed": 20260928,
+      "time": "2/39"
+    },
+    {
+      "nodes": 13,
+      "seed": 20260928,
+      "time": "14/39"
+    }
+  ],
+  "detected_mutations": [
+    "wrong source binding",
+    "wrong coefficient",
+    "wrong query",
+    "invalid point mass",
+    "wrong phase index",
+    "cover gap",
+    "false interval upper",
+    "invalid derivative bound",
+    "false global upper"
+  ],
+  "supplementary_certificates": [
+    {
+      "name": "interior_peak",
+      "status": "reachable",
+      "source": "results/window_certificate_checks.json"
+    },
+    {
+      "name": "endpoint_peak_free_exclusion",
+      "status": "excluded",
+      "source": "results/window_certificate_checks.json"
+    },
+    {
+      "name": "negative_window",
+      "status": "reachable",
+      "source": "results/window_certificate_checks.json"
+    },
+    {
+      "name": "equality_global_peak",
+      "status": "excluded",
+      "source": "results/window_certificate_checks.json"
+    },
+    {
+      "name": "singleton_zero_equality",
+      "status": "excluded",
+      "source": "results/window_certificate_checks.json"
+    },
+    {
+      "name": "empty_target",
+      "status": "excluded",
+      "source": "results/window_certificate_checks.json"
+    },
+    {
+      "name": "full_target_reachable",
+      "status": "reachable",
+      "source": "results/window_certificate_checks.json"
+    },
+    {
+      "name": "full_target_equality",
+      "status": "excluded",
+      "source": "results/window_certificate_checks.json"
+    },
+    {
+      "name": "zero_frequency",
+      "status": "reachable",
+      "source": "results/window_certificate_checks.json"
+    },
+    {
+      "name": "singleton_graph",
+      "status": "excluded",
+      "source": "results/window_certificate_checks.json"
+    },
+    {
+      "name": "uniform_source_stationary",
+      "status": "excluded",
+      "source": "results/window_certificate_checks.json"
+    },
+    {
+      "name": "imaginary_sign_positive_time",
+      "status": "reachable",
+      "source": "results/window_certificate_checks.json"
+    },
+    {
+      "name": "imaginary_sign_negative_time",
+      "status": "excluded",
+      "source": "results/window_certificate_checks.json"
+    },
+    {
+      "name": "subnormal_source",
+      "status": "reachable",
+      "source": "results/window_certificate_checks.json"
+    },
+    {
+      "name": "huge_source",
+      "status": "reachable",
+      "source": "results/window_certificate_checks.json"
+    },
+    {
+      "name": "one_ulp_peak_window",
+      "status": "reachable",
+      "source": "results/window_certificate_checks.json"
+    },
+    {
+      "name": "huge_phase_window",
+      "status": "reachable",
+      "source": "results/window_certificate_checks.json"
+    },
+    {
+      "name": "precision_escalates_only_on_overlap",
+      "status": "excluded",
+      "source": "results/window_certificate_checks.json"
+    },
+    {
+      "name": "precision_cap_abstains",
+      "status": "unknown",
+      "source": "results/window_certificate_checks.json"
+    },
+    {
+      "name": "near_clique_weight",
+      "status": "out_of_scope",
+      "source": "results/window_certificate_checks.json"
+    },
+    {
+      "name": "unequal_degree",
+      "status": "out_of_scope",
+      "source": "results/window_certificate_checks.json"
+    },
+    {
+      "name": "serialization_cap_tiny_singleton",
+      "status": "unknown",
+      "source": "audit/window_extreme_cap_supplement.json"
+    },
+    {
+      "name": "extremely_close_peak",
+      "status": "reachable",
+      "source": "audit/window_extreme_cap_supplement.json"
+    },
+    {
+      "name": "mixed_extreme_raw_source",
+      "status": "excluded",
+      "source": "audit/window_extreme_cap_supplement.json"
+    },
+    {
+      "name": "max_weight_large_window",
+      "status": "reachable",
+      "source": "audit/window_extreme_cap_supplement.json"
+    },
+    {
+      "name": "min_weight_large_window",
+      "status": "excluded",
+      "source": "audit/window_extreme_cap_supplement.json"
+    }
+  ],
+  "trust_boundary": "Independent algebra and aggregation, shared Python integer and Arb/acb arithmetic; not machine-checked formal proof."
+}

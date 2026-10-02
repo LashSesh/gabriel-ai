@@ -1,0 +1,1858 @@
+{
+  "schema": "gabriel.conditioned-walk.summary.v1",
+  "fresh_processes": 7,
+  "cases": [
+    {
+      "case": {
+        "id": "clique_n7_w025",
+        "family": "clique",
+        "n": 7,
+        "weight": 0.25,
+        "expected_auto": "complete_graph",
+        "queries_per_batch": 16384
+      },
+      "input_fingerprint": "fnv1a64:8d09b9925068b510",
+      "phases": {
+        "plan_setup": {
+          "processes": [
+            {
+              "process_index": 0,
+              "median_paired_spectral_over_auto": 3.6994949494949494,
+              "median_spectral_ns": 1465,
+              "median_auto_ns": 396
+            },
+            {
+              "process_index": 1,
+              "median_paired_spectral_over_auto": 3.7242921013412817,
+              "median_spectral_ns": 1412,
+              "median_auto_ns": 383
+            },
+            {
+              "process_index": 2,
+              "median_paired_spectral_over_auto": 3.460624071322437,
+              "median_spectral_ns": 2329,
+              "median_auto_ns": 707
+            },
+            {
+              "process_index": 3,
+              "median_paired_spectral_over_auto": 3.7468531468531467,
+              "median_spectral_ns": 1424,
+              "median_auto_ns": 370
+            },
+            {
+              "process_index": 4,
+              "median_paired_spectral_over_auto": 3.2817551963048497,
+              "median_spectral_ns": 1421,
+              "median_auto_ns": 433
+            },
+            {
+              "process_index": 5,
+              "median_paired_spectral_over_auto": 3.7645429362880884,
+              "median_spectral_ns": 1359,
+              "median_auto_ns": 393
+            },
+            {
+              "process_index": 6,
+              "median_paired_spectral_over_auto": 3.4679144385026737,
+              "median_spectral_ns": 1492,
+              "median_auto_ns": 407
+            }
+          ],
+          "median_process_paired_ratio": 3.6994949494949494,
+          "minimum_process_paired_ratio": 3.2817551963048497,
+          "maximum_process_paired_ratio": 3.7645429362880884,
+          "median_process_spectral_ns_per_operation": 1424.0,
+          "median_process_auto_ns_per_operation": 396.0
+        },
+        "state_preparation": {
+          "processes": [
+            {
+              "process_index": 0,
+              "median_paired_spectral_over_auto": 1.9411764705882353,
+              "median_spectral_ns": 121,
+              "median_auto_ns": 68
+            },
+            {
+              "process_index": 1,
+              "median_paired_spectral_over_auto": 1.9130434782608696,
+              "median_spectral_ns": 123,
+              "median_auto_ns": 69
+            },
+            {
+              "process_index": 2,
+              "median_paired_spectral_over_auto": 2.2711864406779663,
+              "median_spectral_ns": 134,
+              "median_auto_ns": 63
+            },
+            {
+              "process_index": 3,
+              "median_paired_spectral_over_auto": 2.0526315789473686,
+              "median_spectral_ns": 131,
+              "median_auto_ns": 58
+            },
+            {
+              "process_index": 4,
+              "median_paired_spectral_over_auto": 2.0344827586206895,
+              "median_spectral_ns": 124,
+              "median_auto_ns": 68
+            },
+            {
+              "process_index": 5,
+              "median_paired_spectral_over_auto": 2.2027027027027026,
+              "median_spectral_ns": 135,
+              "median_auto_ns": 70
+            },
+            {
+              "process_index": 6,
+              "median_paired_spectral_over_auto": 2.4925373134328357,
+              "median_spectral_ns": 144,
+              "median_auto_ns": 67
+            }
+          ],
+          "median_process_paired_ratio": 2.0526315789473686,
+          "minimum_process_paired_ratio": 1.9130434782608696,
+          "maximum_process_paired_ratio": 2.4925373134328357,
+          "median_process_spectral_ns_per_operation": 131.0,
+          "median_process_auto_ns_per_operation": 68.0
+        },
+        "query_measurements": {
+          "processes": [
+            {
+              "process_index": 0,
+              "median_paired_spectral_over_auto": 3.3766859396446316,
+              "median_spectral_ns": 2575637,
+              "median_auto_ns": 777439
+            },
+            {
+              "process_index": 1,
+              "median_paired_spectral_over_auto": 3.2193752660020376,
+              "median_spectral_ns": 2703278,
+              "median_auto_ns": 775370
+            },
+            {
+              "process_index": 2,
+              "median_paired_spectral_over_auto": 3.6602590785727367,
+              "median_spectral_ns": 3077641,
+              "median_auto_ns": 840826
+            },
+            {
+              "process_index": 3,
+              "median_paired_spectral_over_auto": 3.320054000390687,
+              "median_spectral_ns": 2564591,
+              "median_auto_ns": 805113
+            },
+            {
+              "process_index": 4,
+              "median_paired_spectral_over_auto": 3.552322002169352,
+              "median_spectral_ns": 2544681,
+              "median_auto_ns": 748865
+            },
+            {
+              "process_index": 5,
+              "median_paired_spectral_over_auto": 3.5917050716370262,
+              "median_spectral_ns": 2634979,
+              "median_auto_ns": 737201
+            },
+            {
+              "process_index": 6,
+              "median_paired_spectral_over_auto": 3.4206934793156263,
+              "median_spectral_ns": 2549347,
+              "median_auto_ns": 739134
+            }
+          ],
+          "median_process_paired_ratio": 3.4206934793156263,
+          "minimum_process_paired_ratio": 3.2193752660020376,
+          "maximum_process_paired_ratio": 3.6602590785727367,
+          "median_process_spectral_ns_per_operation": 157.20440673828125,
+          "median_process_auto_ns_per_operation": 47.3248291015625
+        }
+      },
+      "max_component_difference": 8.105321969154033e-14,
+      "max_norm_error": 4.440892098500626e-16
+    },
+    {
+      "case": {
+        "id": "clique_n13_w025",
+        "family": "clique",
+        "n": 13,
+        "weight": 0.25,
+        "expected_auto": "complete_graph",
+        "queries_per_batch": 8192
+      },
+      "input_fingerprint": "fnv1a64:c5090dd4ddad826b",
+      "phases": {
+        "plan_setup": {
+          "processes": [
+            {
+              "process_index": 0,
+              "median_paired_spectral_over_auto": 3.837905236907731,
+              "median_spectral_ns": 4662,
+              "median_auto_ns": 1252
+            },
+            {
+              "process_index": 1,
+              "median_paired_spectral_over_auto": 4.216503267973856,
+              "median_spectral_ns": 5161,
+              "median_auto_ns": 1230
+            },
+            {
+              "process_index": 2,
+              "median_paired_spectral_over_auto": 3.9022687609075044,
+              "median_spectral_ns": 4713,
+              "median_auto_ns": 1225
+            },
+            {
+              "process_index": 3,
+              "median_paired_spectral_over_auto": 4.1464019851116625,
+              "median_spectral_ns": 5013,
+              "median_auto_ns": 1209
+            },
+            {
+              "process_index": 4,
+              "median_paired_spectral_over_auto": 4.214159292035398,
+              "median_spectral_ns": 4762,
+              "median_auto_ns": 1249
+            },
+            {
+              "process_index": 5,
+              "median_paired_spectral_over_auto": 4.033751962323391,
+              "median_spectral_ns": 5139,
+              "median_auto_ns": 1274
+            },
+            {
+              "process_index": 6,
+              "median_paired_spectral_over_auto": 4.175761871013465,
+              "median_spectral_ns": 5131,
+              "median_auto_ns": 1239
+            }
+          ],
+          "median_process_paired_ratio": 4.1464019851116625,
+          "minimum_process_paired_ratio": 3.837905236907731,
+          "maximum_process_paired_ratio": 4.216503267973856,
+          "median_process_spectral_ns_per_operation": 5013.0,
+          "median_process_auto_ns_per_operation": 1239.0
+        },
+        "state_preparation": {
+          "processes": [
+            {
+              "process_index": 0,
+              "median_paired_spectral_over_auto": 3.1358024691358026,
+              "median_spectral_ns": 266,
+              "median_auto_ns": 81
+            },
+            {
+              "process_index": 1,
+              "median_paired_spectral_over_auto": 3.3125,
+              "median_spectral_ns": 290,
+              "median_auto_ns": 84
+            },
+            {
+              "process_index": 2,
+              "median_paired_spectral_over_auto": 3.3125,
+              "median_spectral_ns": 269,
+              "median_auto_ns": 80
+            },
+            {
+              "process_index": 3,
+              "median_paired_spectral_over_auto": 3.1951219512195124,
+              "median_spectral_ns": 282,
+              "median_auto_ns": 82
+            },
+            {
+              "process_index": 4,
+              "median_paired_spectral_over_auto": 2.881720430107527,
+              "median_spectral_ns": 265,
+              "median_auto_ns": 88
+            },
+            {
+              "process_index": 5,
+              "median_paired_spectral_over_auto": 3.5925925925925926,
+              "median_spectral_ns": 273,
+              "median_auto_ns": 80
+            },
+            {
+              "process_index": 6,
+              "median_paired_spectral_over_auto": 3.104651162790698,
+              "median_spectral_ns": 267,
+              "median_auto_ns": 86
+            }
+          ],
+          "median_process_paired_ratio": 3.1951219512195124,
+          "minimum_process_paired_ratio": 2.881720430107527,
+          "maximum_process_paired_ratio": 3.5925925925925926,
+          "median_process_spectral_ns_per_operation": 269.0,
+          "median_process_auto_ns_per_operation": 82.0
+        },
+        "query_measurements": {
+          "processes": [
+            {
+              "process_index": 0,
+              "median_paired_spectral_over_auto": 5.952088485304793,
+              "median_spectral_ns": 2992172,
+              "median_auto_ns": 477412
+            },
+            {
+              "process_index": 1,
+              "median_paired_spectral_over_auto": 6.222580037664783,
+              "median_spectral_ns": 2839165,
+              "median_auto_ns": 477900
+            },
+            {
+              "process_index": 2,
+              "median_paired_spectral_over_auto": 5.980003356182124,
+              "median_spectral_ns": 3371322,
+              "median_auto_ns": 548242
+            },
+            {
+              "process_index": 3,
+              "median_paired_spectral_over_auto": 5.96889972297303,
+              "median_spectral_ns": 2857412,
+              "median_auto_ns": 487740
+            },
+            {
+              "process_index": 4,
+              "median_paired_spectral_over_auto": 6.304179354688113,
+              "median_spectral_ns": 2970813,
+              "median_auto_ns": 479016
+            },
+            {
+              "process_index": 5,
+              "median_paired_spectral_over_auto": 5.48754543105843,
+              "median_spectral_ns": 2984065,
+              "median_auto_ns": 514791
+            },
+            {
+              "process_index": 6,
+              "median_paired_spectral_over_auto": 6.306517435306202,
+              "median_spectral_ns": 2912207,
+              "median_auto_ns": 469249
+            }
+          ],
+          "median_process_paired_ratio": 5.980003356182124,
+          "minimum_process_paired_ratio": 5.48754543105843,
+          "maximum_process_paired_ratio": 6.306517435306202,
+          "median_process_spectral_ns_per_operation": 362.6480712890625,
+          "median_process_auto_ns_per_operation": 58.4736328125
+        }
+      },
+      "max_component_difference": 6.156186671546493e-14,
+      "max_norm_error": 8.881784197001252e-16
+    },
+    {
+      "case": {
+        "id": "clique_n32_w025",
+        "family": "clique",
+        "n": 32,
+        "weight": 0.25,
+        "expected_auto": "complete_graph",
+        "queries_per_batch": 4096
+      },
+      "input_fingerprint": "fnv1a64:8390d096852116a9",
+      "phases": {
+        "plan_setup": {
+          "processes": [
+            {
+              "process_index": 0,
+              "median_paired_spectral_over_auto": 5.089121516480407,
+              "median_spectral_ns": 35975,
+              "median_auto_ns": 6782
+            },
+            {
+              "process_index": 1,
+              "median_paired_spectral_over_auto": 4.776850886339937,
+              "median_spectral_ns": 32067,
+              "median_auto_ns": 6713
+            },
+            {
+              "process_index": 2,
+              "median_paired_spectral_over_auto": 4.714928732183046,
+              "median_spectral_ns": 39181,
+              "median_auto_ns": 10531
+            },
+            {
+              "process_index": 3,
+              "median_paired_spectral_over_auto": 4.771341925701289,
+              "median_spectral_ns": 31467,
+              "median_auto_ns": 6605
+            },
+            {
+              "process_index": 4,
+              "median_paired_spectral_over_auto": 4.759281801582471,
+              "median_spectral_ns": 31323,
+              "median_auto_ns": 6695
+            },
+            {
+              "process_index": 5,
+              "median_paired_spectral_over_auto": 5.252717391304348,
+              "median_spectral_ns": 36312,
+              "median_auto_ns": 6912
+            },
+            {
+              "process_index": 6,
+              "median_paired_spectral_over_auto": 5.178822824621836,
+              "median_spectral_ns": 34579,
+              "median_auto_ns": 6721
+            }
+          ],
+          "median_process_paired_ratio": 4.776850886339937,
+          "minimum_process_paired_ratio": 4.714928732183046,
+          "maximum_process_paired_ratio": 5.252717391304348,
+          "median_process_spectral_ns_per_operation": 34579.0,
+          "median_process_auto_ns_per_operation": 6721.0
+        },
+        "state_preparation": {
+          "processes": [
+            {
+              "process_index": 0,
+              "median_paired_spectral_over_auto": 15.522522522522523,
+              "median_spectral_ns": 1732,
+              "median_auto_ns": 111
+            },
+            {
+              "process_index": 1,
+              "median_paired_spectral_over_auto": 14.609375,
+              "median_spectral_ns": 1779,
+              "median_auto_ns": 128
+            },
+            {
+              "process_index": 2,
+              "median_paired_spectral_over_auto": 15.902097902097902,
+              "median_spectral_ns": 2297,
+              "median_auto_ns": 145
+            },
+            {
+              "process_index": 3,
+              "median_paired_spectral_over_auto": 14.858333333333333,
+              "median_spectral_ns": 1805,
+              "median_auto_ns": 120
+            },
+            {
+              "process_index": 4,
+              "median_paired_spectral_over_auto": 14.928571428571429,
+              "median_spectral_ns": 1725,
+              "median_auto_ns": 112
+            },
+            {
+              "process_index": 5,
+              "median_paired_spectral_over_auto": 14.274193548387096,
+              "median_spectral_ns": 1772,
+              "median_auto_ns": 124
+            },
+            {
+              "process_index": 6,
+              "median_paired_spectral_over_auto": 15.026315789473685,
+              "median_spectral_ns": 1777,
+              "median_auto_ns": 114
+            }
+          ],
+          "median_process_paired_ratio": 14.928571428571429,
+          "minimum_process_paired_ratio": 14.274193548387096,
+          "maximum_process_paired_ratio": 15.902097902097902,
+          "median_process_spectral_ns_per_operation": 1777.0,
+          "median_process_auto_ns_per_operation": 120.0
+        },
+        "query_measurements": {
+          "processes": [
+            {
+              "process_index": 0,
+              "median_paired_spectral_over_auto": 15.908357903429346,
+              "median_spectral_ns": 5497265,
+              "median_auto_ns": 344971
+            },
+            {
+              "process_index": 1,
+              "median_paired_spectral_over_auto": 15.41476718416462,
+              "median_spectral_ns": 5718302,
+              "median_auto_ns": 361324
+            },
+            {
+              "process_index": 2,
+              "median_paired_spectral_over_auto": 16.884630066459817,
+              "median_spectral_ns": 6325369,
+              "median_auto_ns": 407935
+            },
+            {
+              "process_index": 3,
+              "median_paired_spectral_over_auto": 16.4505636725041,
+              "median_spectral_ns": 5900037,
+              "median_auto_ns": 360548
+            },
+            {
+              "process_index": 4,
+              "median_paired_spectral_over_auto": 14.484065538845053,
+              "median_spectral_ns": 5401170,
+              "median_auto_ns": 364242
+            },
+            {
+              "process_index": 5,
+              "median_paired_spectral_over_auto": 16.332506738544474,
+              "median_spectral_ns": 5681448,
+              "median_auto_ns": 359668
+            },
+            {
+              "process_index": 6,
+              "median_paired_spectral_over_auto": 15.820561968695472,
+              "median_spectral_ns": 5581710,
+              "median_auto_ns": 349023
+            }
+          ],
+          "median_process_paired_ratio": 15.908357903429346,
+          "minimum_process_paired_ratio": 14.484065538845053,
+          "maximum_process_paired_ratio": 16.884630066459817,
+          "median_process_spectral_ns_per_operation": 1387.072265625,
+          "median_process_auto_ns_per_operation": 88.0244140625
+        }
+      },
+      "max_component_difference": 4.1668751782353297e-13,
+      "max_norm_error": 6.661338147750939e-16
+    },
+    {
+      "case": {
+        "id": "clique_n64_w025",
+        "family": "clique",
+        "n": 64,
+        "weight": 0.25,
+        "expected_auto": "complete_graph",
+        "queries_per_batch": 2048
+      },
+      "input_fingerprint": "fnv1a64:eafd24cd3df97e28",
+      "phases": {
+        "plan_setup": {
+          "processes": [
+            {
+              "process_index": 0,
+              "median_paired_spectral_over_auto": 6.0546869370992145,
+              "median_spectral_ns": 168207,
+              "median_auto_ns": 28452
+            },
+            {
+              "process_index": 1,
+              "median_paired_spectral_over_auto": 5.802824939363675,
+              "median_spectral_ns": 164048,
+              "median_auto_ns": 28448
+            },
+            {
+              "process_index": 2,
+              "median_paired_spectral_over_auto": 6.0497231686541735,
+              "median_spectral_ns": 219866,
+              "median_auto_ns": 29428
+            },
+            {
+              "process_index": 3,
+              "median_paired_spectral_over_auto": 6.117620007782376,
+              "median_spectral_ns": 172939,
+              "median_auto_ns": 28214
+            },
+            {
+              "process_index": 4,
+              "median_paired_spectral_over_auto": 6.000218738607364,
+              "median_spectral_ns": 164586,
+              "median_auto_ns": 27627
+            },
+            {
+              "process_index": 5,
+              "median_paired_spectral_over_auto": 6.280390292014513,
+              "median_spectral_ns": 178294,
+              "median_auto_ns": 28389
+            },
+            {
+              "process_index": 6,
+              "median_paired_spectral_over_auto": 5.885746198746126,
+              "median_spectral_ns": 163353,
+              "median_auto_ns": 27877
+            }
+          ],
+          "median_process_paired_ratio": 6.0497231686541735,
+          "minimum_process_paired_ratio": 5.802824939363675,
+          "maximum_process_paired_ratio": 6.280390292014513,
+          "median_process_spectral_ns_per_operation": 168207.0,
+          "median_process_auto_ns_per_operation": 28389.0
+        },
+        "state_preparation": {
+          "processes": [
+            {
+              "process_index": 0,
+              "median_paired_spectral_over_auto": 45.21,
+              "median_spectral_ns": 8948,
+              "median_auto_ns": 197
+            },
+            {
+              "process_index": 1,
+              "median_paired_spectral_over_auto": 44.5,
+              "median_spectral_ns": 8931,
+              "median_auto_ns": 200
+            },
+            {
+              "process_index": 2,
+              "median_paired_spectral_over_auto": 45.18181818181818,
+              "median_spectral_ns": 8946,
+              "median_auto_ns": 198
+            },
+            {
+              "process_index": 3,
+              "median_paired_spectral_over_auto": 45.98979591836735,
+              "median_spectral_ns": 8978,
+              "median_auto_ns": 196
+            },
+            {
+              "process_index": 4,
+              "median_paired_spectral_over_auto": 44.111111111111114,
+              "median_spectral_ns": 8743,
+              "median_auto_ns": 198
+            },
+            {
+              "process_index": 5,
+              "median_paired_spectral_over_auto": 42.8,
+              "median_spectral_ns": 8782,
+              "median_auto_ns": 210
+            },
+            {
+              "process_index": 6,
+              "median_paired_spectral_over_auto": 45.735449735449734,
+              "median_spectral_ns": 8644,
+              "median_auto_ns": 189
+            }
+          ],
+          "median_process_paired_ratio": 45.18181818181818,
+          "minimum_process_paired_ratio": 42.8,
+          "maximum_process_paired_ratio": 45.98979591836735,
+          "median_process_spectral_ns_per_operation": 8931.0,
+          "median_process_auto_ns_per_operation": 198.0
+        },
+        "query_measurements": {
+          "processes": [
+            {
+              "process_index": 0,
+              "median_paired_spectral_over_auto": 33.45078184074988,
+              "median_spectral_ns": 9375473,
+              "median_auto_ns": 287000
+            },
+            {
+              "process_index": 1,
+              "median_paired_spectral_over_auto": 29.473914555677933,
+              "median_spectral_ns": 9366355,
+              "median_auto_ns": 310518
+            },
+            {
+              "process_index": 2,
+              "median_paired_spectral_over_auto": 32.16506786129886,
+              "median_spectral_ns": 10439038,
+              "median_auto_ns": 331706
+            },
+            {
+              "process_index": 3,
+              "median_paired_spectral_over_auto": 32.7366160573467,
+              "median_spectral_ns": 9672557,
+              "median_auto_ns": 282574
+            },
+            {
+              "process_index": 4,
+              "median_paired_spectral_over_auto": 30.356060706518857,
+              "median_spectral_ns": 9356240,
+              "median_auto_ns": 301648
+            },
+            {
+              "process_index": 5,
+              "median_paired_spectral_over_auto": 31.171860939871337,
+              "median_spectral_ns": 9283853,
+              "median_auto_ns": 297828
+            },
+            {
+              "process_index": 6,
+              "median_paired_spectral_over_auto": 27.840317792632987,
+              "median_spectral_ns": 8951251,
+              "median_auto_ns": 317565
+            }
+          ],
+          "median_process_paired_ratio": 31.171860939871337,
+          "minimum_process_paired_ratio": 27.840317792632987,
+          "maximum_process_paired_ratio": 33.45078184074988,
+          "median_process_spectral_ns_per_operation": 4573.41552734375,
+          "median_process_auto_ns_per_operation": 147.2890625
+        }
+      },
+      "max_component_difference": 5.538087349821197e-13,
+      "max_norm_error": 1.3322676295501878e-15
+    },
+    {
+      "case": {
+        "id": "clique_n128_w025",
+        "family": "clique",
+        "n": 128,
+        "weight": 0.25,
+        "expected_auto": "complete_graph",
+        "queries_per_batch": 1024
+      },
+      "input_fingerprint": "fnv1a64:aceb77d9a8f4c65b",
+      "phases": {
+        "plan_setup": {
+          "processes": [
+            {
+              "process_index": 0,
+              "median_paired_spectral_over_auto": 11.41564312093715,
+              "median_spectral_ns": 1366247,
+              "median_auto_ns": 117615
+            },
+            {
+              "process_index": 1,
+              "median_paired_spectral_over_auto": 10.434634308567336,
+              "median_spectral_ns": 1226070,
+              "median_auto_ns": 117271
+            },
+            {
+              "process_index": 2,
+              "median_paired_spectral_over_auto": 7.320749263520649,
+              "median_spectral_ns": 1265676,
+              "median_auto_ns": 176090
+            },
+            {
+              "process_index": 3,
+              "median_paired_spectral_over_auto": 10.16473141713857,
+              "median_spectral_ns": 1394430,
+              "median_auto_ns": 116209
+            },
+            {
+              "process_index": 4,
+              "median_paired_spectral_over_auto": 10.065346907027036,
+              "median_spectral_ns": 1177555,
+              "median_auto_ns": 115472
+            },
+            {
+              "process_index": 5,
+              "median_paired_spectral_over_auto": 11.926109782721698,
+              "median_spectral_ns": 1384112,
+              "median_auto_ns": 119978
+            },
+            {
+              "process_index": 6,
+              "median_paired_spectral_over_auto": 10.323028658346873,
+              "median_spectral_ns": 1194457,
+              "median_auto_ns": 116460
+            }
+          ],
+          "median_process_paired_ratio": 10.323028658346873,
+          "minimum_process_paired_ratio": 7.320749263520649,
+          "maximum_process_paired_ratio": 11.926109782721698,
+          "median_process_spectral_ns_per_operation": 1265676.0,
+          "median_process_auto_ns_per_operation": 117271.0
+        },
+        "state_preparation": {
+          "processes": [
+            {
+              "process_index": 0,
+              "median_paired_spectral_over_auto": 103.08483290488432,
+              "median_spectral_ns": 40065,
+              "median_auto_ns": 389
+            },
+            {
+              "process_index": 1,
+              "median_paired_spectral_over_auto": 95.91346153846153,
+              "median_spectral_ns": 40029,
+              "median_auto_ns": 416
+            },
+            {
+              "process_index": 2,
+              "median_paired_spectral_over_auto": 103.86021505376344,
+              "median_spectral_ns": 38818,
+              "median_auto_ns": 373
+            },
+            {
+              "process_index": 3,
+              "median_paired_spectral_over_auto": 96.4325,
+              "median_spectral_ns": 38684,
+              "median_auto_ns": 408
+            },
+            {
+              "process_index": 4,
+              "median_paired_spectral_over_auto": 97.54257907542579,
+              "median_spectral_ns": 40090,
+              "median_auto_ns": 411
+            },
+            {
+              "process_index": 5,
+              "median_paired_spectral_over_auto": 100.5513784461153,
+              "median_spectral_ns": 40120,
+              "median_auto_ns": 418
+            },
+            {
+              "process_index": 6,
+              "median_paired_spectral_over_auto": 103.48663101604278,
+              "median_spectral_ns": 40134,
+              "median_auto_ns": 380
+            }
+          ],
+          "median_process_paired_ratio": 100.5513784461153,
+          "minimum_process_paired_ratio": 95.91346153846153,
+          "maximum_process_paired_ratio": 103.86021505376344,
+          "median_process_spectral_ns_per_operation": 40065.0,
+          "median_process_auto_ns_per_operation": 408.0
+        },
+        "query_measurements": {
+          "processes": [
+            {
+              "process_index": 0,
+              "median_paired_spectral_over_auto": 68.35513645388293,
+              "median_spectral_ns": 17455236,
+              "median_auto_ns": 255851
+            },
+            {
+              "process_index": 1,
+              "median_paired_spectral_over_auto": 68.41952873527298,
+              "median_spectral_ns": 17221126,
+              "median_auto_ns": 302203
+            },
+            {
+              "process_index": 2,
+              "median_paired_spectral_over_auto": 65.17444001051946,
+              "median_spectral_ns": 18824322,
+              "median_auto_ns": 269458
+            },
+            {
+              "process_index": 3,
+              "median_paired_spectral_over_auto": 63.878845792942855,
+              "median_spectral_ns": 16671214,
+              "median_auto_ns": 261097
+            },
+            {
+              "process_index": 4,
+              "median_paired_spectral_over_auto": 62.29323547192039,
+              "median_spectral_ns": 16074894,
+              "median_auto_ns": 258052
+            },
+            {
+              "process_index": 5,
+              "median_paired_spectral_over_auto": 61.05668800203079,
+              "median_spectral_ns": 17388896,
+              "median_auto_ns": 275755
+            },
+            {
+              "process_index": 6,
+              "median_paired_spectral_over_auto": 59.19778218337975,
+              "median_spectral_ns": 16967300,
+              "median_auto_ns": 291548
+            }
+          ],
+          "median_process_paired_ratio": 63.878845792942855,
+          "minimum_process_paired_ratio": 59.19778218337975,
+          "maximum_process_paired_ratio": 68.41952873527298,
+          "median_process_spectral_ns_per_operation": 16817.505859375,
+          "median_process_auto_ns_per_operation": 263.142578125
+        }
+      },
+      "max_component_difference": 1.1533621280257478e-12,
+      "max_norm_error": 1.4432899320127035e-15
+    },
+    {
+      "case": {
+        "id": "clique_n13_w1",
+        "family": "clique",
+        "n": 13,
+        "weight": 1.0,
+        "expected_auto": "complete_graph",
+        "queries_per_batch": 8192
+      },
+      "input_fingerprint": "fnv1a64:521dad67ef96c70b",
+      "phases": {
+        "plan_setup": {
+          "processes": [
+            {
+              "process_index": 0,
+              "median_paired_spectral_over_auto": 4.0,
+              "median_spectral_ns": 4900,
+              "median_auto_ns": 1233
+            },
+            {
+              "process_index": 1,
+              "median_paired_spectral_over_auto": 3.9866888519134775,
+              "median_spectral_ns": 5127,
+              "median_auto_ns": 1288
+            },
+            {
+              "process_index": 2,
+              "median_paired_spectral_over_auto": 4.212962962962963,
+              "median_spectral_ns": 5460,
+              "median_auto_ns": 1226
+            },
+            {
+              "process_index": 3,
+              "median_paired_spectral_over_auto": 3.755412991178829,
+              "median_spectral_ns": 4980,
+              "median_auto_ns": 1329
+            },
+            {
+              "process_index": 4,
+              "median_paired_spectral_over_auto": 4.017719568567026,
+              "median_spectral_ns": 4795,
+              "median_auto_ns": 1220
+            },
+            {
+              "process_index": 5,
+              "median_paired_spectral_over_auto": 4.516475095785441,
+              "median_spectral_ns": 5894,
+              "median_auto_ns": 1289
+            },
+            {
+              "process_index": 6,
+              "median_paired_spectral_over_auto": 4.264435146443515,
+              "median_spectral_ns": 5096,
+              "median_auto_ns": 1258
+            }
+          ],
+          "median_process_paired_ratio": 4.017719568567026,
+          "minimum_process_paired_ratio": 3.755412991178829,
+          "maximum_process_paired_ratio": 4.516475095785441,
+          "median_process_spectral_ns_per_operation": 5096.0,
+          "median_process_auto_ns_per_operation": 1258.0
+        },
+        "state_preparation": {
+          "processes": [
+            {
+              "process_index": 0,
+              "median_paired_spectral_over_auto": 4.012345679012346,
+              "median_spectral_ns": 388,
+              "median_auto_ns": 100
+            },
+            {
+              "process_index": 1,
+              "median_paired_spectral_over_auto": 3.5757575757575757,
+              "median_spectral_ns": 275,
+              "median_auto_ns": 87
+            },
+            {
+              "process_index": 2,
+              "median_paired_spectral_over_auto": 3.157303370786517,
+              "median_spectral_ns": 279,
+              "median_auto_ns": 82
+            },
+            {
+              "process_index": 3,
+              "median_paired_spectral_over_auto": 3.73972602739726,
+              "median_spectral_ns": 273,
+              "median_auto_ns": 78
+            },
+            {
+              "process_index": 4,
+              "median_paired_spectral_over_auto": 3.234567901234568,
+              "median_spectral_ns": 262,
+              "median_auto_ns": 80
+            },
+            {
+              "process_index": 5,
+              "median_paired_spectral_over_auto": 3.125,
+              "median_spectral_ns": 266,
+              "median_auto_ns": 80
+            },
+            {
+              "process_index": 6,
+              "median_paired_spectral_over_auto": 3.0,
+              "median_spectral_ns": 295,
+              "median_auto_ns": 93
+            }
+          ],
+          "median_process_paired_ratio": 3.234567901234568,
+          "minimum_process_paired_ratio": 3.0,
+          "maximum_process_paired_ratio": 4.012345679012346,
+          "median_process_spectral_ns_per_operation": 275.0,
+          "median_process_auto_ns_per_operation": 82.0
+        },
+        "query_measurements": {
+          "processes": [
+            {
+              "process_index": 0,
+              "median_paired_spectral_over_auto": 6.617131811965681,
+              "median_spectral_ns": 3190436,
+              "median_auto_ns": 482625
+            },
+            {
+              "process_index": 1,
+              "median_paired_spectral_over_auto": 6.51110492458937,
+              "median_spectral_ns": 3095911,
+              "median_auto_ns": 488480
+            },
+            {
+              "process_index": 2,
+              "median_paired_spectral_over_auto": 7.749458509819022,
+              "median_spectral_ns": 8040041,
+              "median_auto_ns": 515029
+            },
+            {
+              "process_index": 3,
+              "median_paired_spectral_over_auto": 6.324572989096643,
+              "median_spectral_ns": 3133102,
+              "median_auto_ns": 481362
+            },
+            {
+              "process_index": 4,
+              "median_paired_spectral_over_auto": 6.119022648850284,
+              "median_spectral_ns": 2998268,
+              "median_auto_ns": 488557
+            },
+            {
+              "process_index": 5,
+              "median_paired_spectral_over_auto": 6.676624011989274,
+              "median_spectral_ns": 3292095,
+              "median_auto_ns": 585688
+            },
+            {
+              "process_index": 6,
+              "median_paired_spectral_over_auto": 6.044636021903929,
+              "median_spectral_ns": 2957594,
+              "median_auto_ns": 495071
+            }
+          ],
+          "median_process_paired_ratio": 6.51110492458937,
+          "minimum_process_paired_ratio": 6.044636021903929,
+          "maximum_process_paired_ratio": 7.749458509819022,
+          "median_process_spectral_ns_per_operation": 382.458740234375,
+          "median_process_auto_ns_per_operation": 59.6383056640625
+        }
+      },
+      "max_component_difference": 2.738920201750261e-13,
+      "max_norm_error": 8.881784197001252e-16
+    },
+    {
+      "case": {
+        "id": "clique_n13_w17_guard",
+        "family": "clique",
+        "n": 13,
+        "weight": 1.7,
+        "expected_auto": "spectral",
+        "queries_per_batch": 8192
+      },
+      "input_fingerprint": "fnv1a64:50b23b4ee276f2e0",
+      "phases": {
+        "plan_setup": {
+          "processes": [
+            {
+              "process_index": 0,
+              "median_paired_spectral_over_auto": 0.961298125377948,
+              "median_spectral_ns": 4482,
+              "median_auto_ns": 4730
+            },
+            {
+              "process_index": 1,
+              "median_paired_spectral_over_auto": 0.932001699957501,
+              "median_spectral_ns": 4494,
+              "median_auto_ns": 4706
+            },
+            {
+              "process_index": 2,
+              "median_paired_spectral_over_auto": 0.9481371718882303,
+              "median_spectral_ns": 4461,
+              "median_auto_ns": 4724
+            },
+            {
+              "process_index": 3,
+              "median_paired_spectral_over_auto": 0.9445624468988955,
+              "median_spectral_ns": 4498,
+              "median_auto_ns": 4708
+            },
+            {
+              "process_index": 4,
+              "median_paired_spectral_over_auto": 0.9751998360319738,
+              "median_spectral_ns": 4758,
+              "median_auto_ns": 4815
+            },
+            {
+              "process_index": 5,
+              "median_paired_spectral_over_auto": 0.9568928723858301,
+              "median_spectral_ns": 4484,
+              "median_auto_ns": 4718
+            },
+            {
+              "process_index": 6,
+              "median_paired_spectral_over_auto": 0.96621476221218,
+              "median_spectral_ns": 4546,
+              "median_auto_ns": 4721
+            }
+          ],
+          "median_process_paired_ratio": 0.9568928723858301,
+          "minimum_process_paired_ratio": 0.932001699957501,
+          "maximum_process_paired_ratio": 0.9751998360319738,
+          "median_process_spectral_ns_per_operation": 4494.0,
+          "median_process_auto_ns_per_operation": 4721.0
+        },
+        "state_preparation": {
+          "processes": [
+            {
+              "process_index": 0,
+              "median_paired_spectral_over_auto": 1.0202429149797572,
+              "median_spectral_ns": 252,
+              "median_auto_ns": 249
+            },
+            {
+              "process_index": 1,
+              "median_paired_spectral_over_auto": 1.0421455938697317,
+              "median_spectral_ns": 264,
+              "median_auto_ns": 261
+            },
+            {
+              "process_index": 2,
+              "median_paired_spectral_over_auto": 0.9841269841269841,
+              "median_spectral_ns": 251,
+              "median_auto_ns": 252
+            },
+            {
+              "process_index": 3,
+              "median_paired_spectral_over_auto": 0.9885496183206107,
+              "median_spectral_ns": 258,
+              "median_auto_ns": 262
+            },
+            {
+              "process_index": 4,
+              "median_paired_spectral_over_auto": 1.0080645161290323,
+              "median_spectral_ns": 258,
+              "median_auto_ns": 260
+            },
+            {
+              "process_index": 5,
+              "median_paired_spectral_over_auto": 0.9960629921259843,
+              "median_spectral_ns": 253,
+              "median_auto_ns": 254
+            },
+            {
+              "process_index": 6,
+              "median_paired_spectral_over_auto": 0.9765625,
+              "median_spectral_ns": 258,
+              "median_auto_ns": 264
+            }
+          ],
+          "median_process_paired_ratio": 0.9960629921259843,
+          "minimum_process_paired_ratio": 0.9765625,
+          "maximum_process_paired_ratio": 1.0421455938697317,
+          "median_process_spectral_ns_per_operation": 258.0,
+          "median_process_auto_ns_per_operation": 260.0
+        },
+        "query_measurements": {
+          "processes": [
+            {
+              "process_index": 0,
+              "median_paired_spectral_over_auto": 0.9620609998150468,
+              "median_spectral_ns": 3047373,
+              "median_auto_ns": 3142458
+            },
+            {
+              "process_index": 1,
+              "median_paired_spectral_over_auto": 1.0296733339161832,
+              "median_spectral_ns": 3308102,
+              "median_auto_ns": 3134026
+            },
+            {
+              "process_index": 2,
+              "median_paired_spectral_over_auto": 1.1106013825460466,
+              "median_spectral_ns": 3378365,
+              "median_auto_ns": 3079945
+            },
+            {
+              "process_index": 3,
+              "median_paired_spectral_over_auto": 1.0532865393246889,
+              "median_spectral_ns": 3245514,
+              "median_auto_ns": 3182430
+            },
+            {
+              "process_index": 4,
+              "median_paired_spectral_over_auto": 1.0209239392451714,
+              "median_spectral_ns": 3239945,
+              "median_auto_ns": 3091040
+            },
+            {
+              "process_index": 5,
+              "median_paired_spectral_over_auto": 1.039368869803357,
+              "median_spectral_ns": 3386601,
+              "median_auto_ns": 3103897
+            },
+            {
+              "process_index": 6,
+              "median_paired_spectral_over_auto": 0.9968084755151377,
+              "median_spectral_ns": 3260724,
+              "median_auto_ns": 3219389
+            }
+          ],
+          "median_process_paired_ratio": 1.0296733339161832,
+          "minimum_process_paired_ratio": 0.9620609998150468,
+          "maximum_process_paired_ratio": 1.1106013825460466,
+          "median_process_spectral_ns_per_operation": 398.03759765625,
+          "median_process_auto_ns_per_operation": 382.571533203125
+        }
+      },
+      "max_component_difference": 0.0,
+      "max_norm_error": 6.661338147750939e-16
+    },
+    {
+      "case": {
+        "id": "near_clique_n13_w025",
+        "family": "near_clique",
+        "n": 13,
+        "weight": 0.25,
+        "expected_auto": "spectral",
+        "queries_per_batch": 8192
+      },
+      "input_fingerprint": "fnv1a64:47f2506fef76660b",
+      "phases": {
+        "plan_setup": {
+          "processes": [
+            {
+              "process_index": 0,
+              "median_paired_spectral_over_auto": 0.9761651415194722,
+              "median_spectral_ns": 4807,
+              "median_auto_ns": 4791
+            },
+            {
+              "process_index": 1,
+              "median_paired_spectral_over_auto": 1.0449561403508771,
+              "median_spectral_ns": 4765,
+              "median_auto_ns": 4785
+            },
+            {
+              "process_index": 2,
+              "median_paired_spectral_over_auto": 0.9757383966244726,
+              "median_spectral_ns": 4786,
+              "median_auto_ns": 4818
+            },
+            {
+              "process_index": 3,
+              "median_paired_spectral_over_auto": 1.0311464546056992,
+              "median_spectral_ns": 4668,
+              "median_auto_ns": 4706
+            },
+            {
+              "process_index": 4,
+              "median_paired_spectral_over_auto": 0.9807773553020701,
+              "median_spectral_ns": 4643,
+              "median_auto_ns": 4710
+            },
+            {
+              "process_index": 5,
+              "median_paired_spectral_over_auto": 1.0460380699424525,
+              "median_spectral_ns": 4726,
+              "median_auto_ns": 4593
+            },
+            {
+              "process_index": 6,
+              "median_paired_spectral_over_auto": 0.9982810485603781,
+              "median_spectral_ns": 4642,
+              "median_auto_ns": 4654
+            }
+          ],
+          "median_process_paired_ratio": 0.9982810485603781,
+          "minimum_process_paired_ratio": 0.9757383966244726,
+          "maximum_process_paired_ratio": 1.0460380699424525,
+          "median_process_spectral_ns_per_operation": 4726.0,
+          "median_process_auto_ns_per_operation": 4710.0
+        },
+        "state_preparation": {
+          "processes": [
+            {
+              "process_index": 0,
+              "median_paired_spectral_over_auto": 1.0040160642570282,
+              "median_spectral_ns": 254,
+              "median_auto_ns": 249
+            },
+            {
+              "process_index": 1,
+              "median_paired_spectral_over_auto": 1.0077519379844961,
+              "median_spectral_ns": 251,
+              "median_auto_ns": 251
+            },
+            {
+              "process_index": 2,
+              "median_paired_spectral_over_auto": 1.0040160642570282,
+              "median_spectral_ns": 252,
+              "median_auto_ns": 253
+            },
+            {
+              "process_index": 3,
+              "median_paired_spectral_over_auto": 1.0080321285140563,
+              "median_spectral_ns": 255,
+              "median_auto_ns": 249
+            },
+            {
+              "process_index": 4,
+              "median_paired_spectral_over_auto": 0.9188191881918819,
+              "median_spectral_ns": 250,
+              "median_auto_ns": 271
+            },
+            {
+              "process_index": 5,
+              "median_paired_spectral_over_auto": 1.0,
+              "median_spectral_ns": 259,
+              "median_auto_ns": 255
+            },
+            {
+              "process_index": 6,
+              "median_paired_spectral_over_auto": 0.9728682170542635,
+              "median_spectral_ns": 254,
+              "median_auto_ns": 258
+            }
+          ],
+          "median_process_paired_ratio": 1.0040160642570282,
+          "minimum_process_paired_ratio": 0.9188191881918819,
+          "maximum_process_paired_ratio": 1.0080321285140563,
+          "median_process_spectral_ns_per_operation": 254.0,
+          "median_process_auto_ns_per_operation": 253.0
+        },
+        "query_measurements": {
+          "processes": [
+            {
+              "process_index": 0,
+              "median_paired_spectral_over_auto": 1.0329905862521387,
+              "median_spectral_ns": 3673763,
+              "median_auto_ns": 3638286
+            },
+            {
+              "process_index": 1,
+              "median_paired_spectral_over_auto": 1.0164195773286457,
+              "median_spectral_ns": 3018553,
+              "median_auto_ns": 2988697
+            },
+            {
+              "process_index": 2,
+              "median_paired_spectral_over_auto": 0.9141000727480864,
+              "median_spectral_ns": 2972860,
+              "median_auto_ns": 3617673
+            },
+            {
+              "process_index": 3,
+              "median_paired_spectral_over_auto": 1.0035969162621772,
+              "median_spectral_ns": 2961964,
+              "median_auto_ns": 3156704
+            },
+            {
+              "process_index": 4,
+              "median_paired_spectral_over_auto": 1.0683124891451687,
+              "median_spectral_ns": 3165699,
+              "median_auto_ns": 2962174
+            },
+            {
+              "process_index": 5,
+              "median_paired_spectral_over_auto": 0.9925960947276854,
+              "median_spectral_ns": 3058201,
+              "median_auto_ns": 3159556
+            },
+            {
+              "process_index": 6,
+              "median_paired_spectral_over_auto": 1.0709749479938562,
+              "median_spectral_ns": 3108749,
+              "median_auto_ns": 2915899
+            }
+          ],
+          "median_process_paired_ratio": 1.0164195773286457,
+          "minimum_process_paired_ratio": 0.9141000727480864,
+          "maximum_process_paired_ratio": 1.0709749479938562,
+          "median_process_spectral_ns_per_operation": 373.3155517578125,
+          "median_process_auto_ns_per_operation": 385.33984375
+        }
+      },
+      "max_component_difference": 0.0,
+      "max_norm_error": 6.661338147750939e-16
+    },
+    {
+      "case": {
+        "id": "near_clique_n64_w025",
+        "family": "near_clique",
+        "n": 64,
+        "weight": 0.25,
+        "expected_auto": "spectral",
+        "queries_per_batch": 2048
+      },
+      "input_fingerprint": "fnv1a64:7ee0518a354eeb68",
+      "phases": {
+        "plan_setup": {
+          "processes": [
+            {
+              "process_index": 0,
+              "median_paired_spectral_over_auto": 1.1152483475443489,
+              "median_spectral_ns": 180368,
+              "median_auto_ns": 161729
+            },
+            {
+              "process_index": 1,
+              "median_paired_spectral_over_auto": 1.056734039286161,
+              "median_spectral_ns": 185814,
+              "median_auto_ns": 160760
+            },
+            {
+              "process_index": 2,
+              "median_paired_spectral_over_auto": 0.9958695022912879,
+              "median_spectral_ns": 304517,
+              "median_auto_ns": 289716
+            },
+            {
+              "process_index": 3,
+              "median_paired_spectral_over_auto": 0.8989001387959589,
+              "median_spectral_ns": 165013,
+              "median_auto_ns": 180841
+            },
+            {
+              "process_index": 4,
+              "median_paired_spectral_over_auto": 1.0040824723709842,
+              "median_spectral_ns": 165994,
+              "median_auto_ns": 162010
+            },
+            {
+              "process_index": 5,
+              "median_paired_spectral_over_auto": 0.8826487985830298,
+              "median_spectral_ns": 162792,
+              "median_auto_ns": 179538
+            },
+            {
+              "process_index": 6,
+              "median_paired_spectral_over_auto": 1.0230811783482014,
+              "median_spectral_ns": 160901,
+              "median_auto_ns": 157529
+            }
+          ],
+          "median_process_paired_ratio": 1.0040824723709842,
+          "minimum_process_paired_ratio": 0.8826487985830298,
+          "maximum_process_paired_ratio": 1.1152483475443489,
+          "median_process_spectral_ns_per_operation": 165994.0,
+          "median_process_auto_ns_per_operation": 162010.0
+        },
+        "state_preparation": {
+          "processes": [
+            {
+              "process_index": 0,
+              "median_paired_spectral_over_auto": 1.013927902621723,
+              "median_spectral_ns": 8684,
+              "median_auto_ns": 8544
+            },
+            {
+              "process_index": 1,
+              "median_paired_spectral_over_auto": 0.9474383091733982,
+              "median_spectral_ns": 8592,
+              "median_auto_ns": 9037
+            },
+            {
+              "process_index": 2,
+              "median_paired_spectral_over_auto": 0.9960847975553858,
+              "median_spectral_ns": 10395,
+              "median_auto_ns": 10418
+            },
+            {
+              "process_index": 3,
+              "median_paired_spectral_over_auto": 0.975455978383247,
+              "median_spectral_ns": 8664,
+              "median_auto_ns": 8859
+            },
+            {
+              "process_index": 4,
+              "median_paired_spectral_over_auto": 1.0152743508400892,
+              "median_spectral_ns": 8641,
+              "median_auto_ns": 8583
+            },
+            {
+              "process_index": 5,
+              "median_paired_spectral_over_auto": 0.9618568232662192,
+              "median_spectral_ns": 8599,
+              "median_auto_ns": 8940
+            },
+            {
+              "process_index": 6,
+              "median_paired_spectral_over_auto": 1.042074592074592,
+              "median_spectral_ns": 8941,
+              "median_auto_ns": 8625
+            }
+          ],
+          "median_process_paired_ratio": 0.9960847975553858,
+          "minimum_process_paired_ratio": 0.9474383091733982,
+          "maximum_process_paired_ratio": 1.042074592074592,
+          "median_process_spectral_ns_per_operation": 8664.0,
+          "median_process_auto_ns_per_operation": 8859.0
+        },
+        "query_measurements": {
+          "processes": [
+            {
+              "process_index": 0,
+              "median_paired_spectral_over_auto": 0.9584672849107837,
+              "median_spectral_ns": 9091801,
+              "median_auto_ns": 9438671
+            },
+            {
+              "process_index": 1,
+              "median_paired_spectral_over_auto": 1.0125533166716003,
+              "median_spectral_ns": 9074759,
+              "median_auto_ns": 10655921
+            },
+            {
+              "process_index": 2,
+              "median_paired_spectral_over_auto": 0.9822566302847331,
+              "median_spectral_ns": 16280359,
+              "median_auto_ns": 16301864
+            },
+            {
+              "process_index": 3,
+              "median_paired_spectral_over_auto": 1.0148160491692604,
+              "median_spectral_ns": 9238453,
+              "median_auto_ns": 9103574
+            },
+            {
+              "process_index": 4,
+              "median_paired_spectral_over_auto": 1.0441559002082372,
+              "median_spectral_ns": 9311789,
+              "median_auto_ns": 9036156
+            },
+            {
+              "process_index": 5,
+              "median_paired_spectral_over_auto": 1.0241765860519167,
+              "median_spectral_ns": 9407022,
+              "median_auto_ns": 10008839
+            },
+            {
+              "process_index": 6,
+              "median_paired_spectral_over_auto": 1.0234801384062413,
+              "median_spectral_ns": 9224207,
+              "median_auto_ns": 9111372
+            }
+          ],
+          "median_process_paired_ratio": 1.0148160491692604,
+          "minimum_process_paired_ratio": 0.9584672849107837,
+          "maximum_process_paired_ratio": 1.0441559002082372,
+          "median_process_spectral_ns_per_operation": 4510.96337890625,
+          "median_process_auto_ns_per_operation": 4608.72607421875
+        }
+      },
+      "max_component_difference": 0.0,
+      "max_norm_error": 8.881784197001252e-16
+    },
+    {
+      "case": {
+        "id": "path_n13_w025",
+        "family": "path",
+        "n": 13,
+        "weight": 0.25,
+        "expected_auto": "spectral",
+        "queries_per_batch": 8192
+      },
+      "input_fingerprint": "fnv1a64:7318bea8f5d4fd8e",
+      "phases": {
+        "plan_setup": {
+          "processes": [
+            {
+              "process_index": 0,
+              "median_paired_spectral_over_auto": 0.9738397442108323,
+              "median_spectral_ns": 10152,
+              "median_auto_ns": 10321
+            },
+            {
+              "process_index": 1,
+              "median_paired_spectral_over_auto": 1.021210914160526,
+              "median_spectral_ns": 10255,
+              "median_auto_ns": 10434
+            },
+            {
+              "process_index": 2,
+              "median_paired_spectral_over_auto": 0.9877919830818033,
+              "median_spectral_ns": 10331,
+              "median_auto_ns": 10403
+            },
+            {
+              "process_index": 3,
+              "median_paired_spectral_over_auto": 1.0195262166716226,
+              "median_spectral_ns": 10390,
+              "median_auto_ns": 10380
+            },
+            {
+              "process_index": 4,
+              "median_paired_spectral_over_auto": 0.9811799122379327,
+              "median_spectral_ns": 10301,
+              "median_auto_ns": 10308
+            },
+            {
+              "process_index": 5,
+              "median_paired_spectral_over_auto": 1.0177374852187624,
+              "median_spectral_ns": 10328,
+              "median_auto_ns": 10305
+            },
+            {
+              "process_index": 6,
+              "median_paired_spectral_over_auto": 0.9671052631578947,
+              "median_spectral_ns": 9826,
+              "median_auto_ns": 10032
+            }
+          ],
+          "median_process_paired_ratio": 0.9877919830818033,
+          "minimum_process_paired_ratio": 0.9671052631578947,
+          "maximum_process_paired_ratio": 1.021210914160526,
+          "median_process_spectral_ns_per_operation": 10301.0,
+          "median_process_auto_ns_per_operation": 10321.0
+        },
+        "state_preparation": {
+          "processes": [
+            {
+              "process_index": 0,
+              "median_paired_spectral_over_auto": 0.9841269841269841,
+              "median_spectral_ns": 248,
+              "median_auto_ns": 252
+            },
+            {
+              "process_index": 1,
+              "median_paired_spectral_over_auto": 0.9841269841269841,
+              "median_spectral_ns": 250,
+              "median_auto_ns": 260
+            },
+            {
+              "process_index": 2,
+              "median_paired_spectral_over_auto": 1.004,
+              "median_spectral_ns": 280,
+              "median_auto_ns": 257
+            },
+            {
+              "process_index": 3,
+              "median_paired_spectral_over_auto": 1.0158730158730158,
+              "median_spectral_ns": 251,
+              "median_auto_ns": 253
+            },
+            {
+              "process_index": 4,
+              "median_paired_spectral_over_auto": 0.9847908745247148,
+              "median_spectral_ns": 259,
+              "median_auto_ns": 263
+            },
+            {
+              "process_index": 5,
+              "median_paired_spectral_over_auto": 1.007936507936508,
+              "median_spectral_ns": 254,
+              "median_auto_ns": 253
+            },
+            {
+              "process_index": 6,
+              "median_paired_spectral_over_auto": 0.9839357429718876,
+              "median_spectral_ns": 245,
+              "median_auto_ns": 248
+            }
+          ],
+          "median_process_paired_ratio": 0.9847908745247148,
+          "minimum_process_paired_ratio": 0.9839357429718876,
+          "maximum_process_paired_ratio": 1.0158730158730158,
+          "median_process_spectral_ns_per_operation": 251.0,
+          "median_process_auto_ns_per_operation": 253.0
+        },
+        "query_measurements": {
+          "processes": [
+            {
+              "process_index": 0,
+              "median_paired_spectral_over_auto": 1.0002661165085671,
+              "median_spectral_ns": 2654231,
+              "median_auto_ns": 2595140
+            },
+            {
+              "process_index": 1,
+              "median_paired_spectral_over_auto": 1.0064354053791926,
+              "median_spectral_ns": 2646125,
+              "median_auto_ns": 2644047
+            },
+            {
+              "process_index": 2,
+              "median_paired_spectral_over_auto": 0.8939417896231887,
+              "median_spectral_ns": 2606374,
+              "median_auto_ns": 2915597
+            },
+            {
+              "process_index": 3,
+              "median_paired_spectral_over_auto": 1.0311729322257697,
+              "median_spectral_ns": 2656782,
+              "median_auto_ns": 2625287
+            },
+            {
+              "process_index": 4,
+              "median_paired_spectral_over_auto": 1.0114279200218559,
+              "median_spectral_ns": 2731781,
+              "median_auto_ns": 2707580
+            },
+            {
+              "process_index": 5,
+              "median_paired_spectral_over_auto": 1.0458300228218882,
+              "median_spectral_ns": 2723424,
+              "median_auto_ns": 2775032
+            },
+            {
+              "process_index": 6,
+              "median_paired_spectral_over_auto": 0.99388349799502,
+              "median_spectral_ns": 2695929,
+              "median_auto_ns": 2589552
+            }
+          ],
+          "median_process_paired_ratio": 1.0064354053791926,
+          "minimum_process_paired_ratio": 0.8939417896231887,
+          "maximum_process_paired_ratio": 1.0458300228218882,
+          "median_process_spectral_ns_per_operation": 324.314208984375,
+          "median_process_auto_ns_per_operation": 322.7596435546875
+        }
+      },
+      "max_component_difference": 0.0,
+      "max_norm_error": 4.440892098500626e-16
+    },
+    {
+      "case": {
+        "id": "path_n64_w025",
+        "family": "path",
+        "n": 64,
+        "weight": 0.25,
+        "expected_auto": "spectral",
+        "queries_per_batch": 2048
+      },
+      "input_fingerprint": "fnv1a64:782481d43c7079bc",
+      "phases": {
+        "plan_setup": {
+          "processes": [
+            {
+              "process_index": 0,
+              "median_paired_spectral_over_auto": 0.9566800048177937,
+              "median_spectral_ns": 378329,
+              "median_auto_ns": 373615
+            },
+            {
+              "process_index": 1,
+              "median_paired_spectral_over_auto": 1.0181921591874008,
+              "median_spectral_ns": 381315,
+              "median_auto_ns": 374502
+            },
+            {
+              "process_index": 2,
+              "median_paired_spectral_over_auto": 0.9538421273031826,
+              "median_spectral_ns": 364444,
+              "median_auto_ns": 382080
+            },
+            {
+              "process_index": 3,
+              "median_paired_spectral_over_auto": 1.0011571027463368,
+              "median_spectral_ns": 368898,
+              "median_auto_ns": 368996
+            },
+            {
+              "process_index": 4,
+              "median_paired_spectral_over_auto": 0.9512105998983224,
+              "median_spectral_ns": 367850,
+              "median_auto_ns": 377664
+            },
+            {
+              "process_index": 5,
+              "median_paired_spectral_over_auto": 1.0085717210676746,
+              "median_spectral_ns": 382063,
+              "median_auto_ns": 376739
+            },
+            {
+              "process_index": 6,
+              "median_paired_spectral_over_auto": 1.045453560497305,
+              "median_spectral_ns": 382587,
+              "median_auto_ns": 369190
+            }
+          ],
+          "median_process_paired_ratio": 1.0011571027463368,
+          "minimum_process_paired_ratio": 0.9512105998983224,
+          "maximum_process_paired_ratio": 1.045453560497305,
+          "median_process_spectral_ns_per_operation": 378329.0,
+          "median_process_auto_ns_per_operation": 374502.0
+        },
+        "state_preparation": {
+          "processes": [
+            {
+              "process_index": 0,
+              "median_paired_spectral_over_auto": 0.9865036336370977,
+              "median_spectral_ns": 8552,
+              "median_auto_ns": 8669
+            },
+            {
+              "process_index": 1,
+              "median_paired_spectral_over_auto": 1.0289637664435727,
+              "median_spectral_ns": 8917,
+              "median_auto_ns": 8918
+            },
+            {
+              "process_index": 2,
+              "median_paired_spectral_over_auto": 0.9969834087481146,
+              "median_spectral_ns": 8593,
+              "median_auto_ns": 8653
+            },
+            {
+              "process_index": 3,
+              "median_paired_spectral_over_auto": 0.9842949812222601,
+              "median_spectral_ns": 8695,
+              "median_auto_ns": 8766
+            },
+            {
+              "process_index": 4,
+              "median_paired_spectral_over_auto": 0.9947904607548044,
+              "median_spectral_ns": 8593,
+              "median_auto_ns": 8638
+            },
+            {
+              "process_index": 5,
+              "median_paired_spectral_over_auto": 0.9829436349260138,
+              "median_spectral_ns": 8710,
+              "median_auto_ns": 8853
+            },
+            {
+              "process_index": 6,
+              "median_paired_spectral_over_auto": 0.9940917516218721,
+              "median_spectral_ns": 8581,
+              "median_auto_ns": 8632
+            }
+          ],
+          "median_process_paired_ratio": 0.9940917516218721,
+          "minimum_process_paired_ratio": 0.9829436349260138,
+          "maximum_process_paired_ratio": 1.0289637664435727,
+          "median_process_spectral_ns_per_operation": 8593.0,
+          "median_process_auto_ns_per_operation": 8669.0
+        },
+        "query_measurements": {
+          "processes": [
+            {
+              "process_index": 0,
+              "median_paired_spectral_over_auto": 0.9648914218886339,
+              "median_spectral_ns": 9121795,
+              "median_auto_ns": 9345384
+            },
+            {
+              "process_index": 1,
+              "median_paired_spectral_over_auto": 1.058933361002705,
+              "median_spectral_ns": 9408397,
+              "median_auto_ns": 9454029
+            },
+            {
+              "process_index": 2,
+              "median_paired_spectral_over_auto": 1.0246175655917578,
+              "median_spectral_ns": 9793474,
+              "median_auto_ns": 9196251
+            },
+            {
+              "process_index": 3,
+              "median_paired_spectral_over_auto": 1.0042601228607597,
+              "median_spectral_ns": 9163020,
+              "median_auto_ns": 9266903
+            },
+            {
+              "process_index": 4,
+              "median_paired_spectral_over_auto": 1.0248492573489105,
+              "median_spectral_ns": 9273572,
+              "median_auto_ns": 9122110
+            },
+            {
+              "process_index": 5,
+              "median_paired_spectral_over_auto": 0.9930551046462969,
+              "median_spectral_ns": 9382807,
+              "median_auto_ns": 9385651
+            },
+            {
+              "process_index": 6,
+              "median_paired_spectral_over_auto": 1.007467090035222,
+              "median_spectral_ns": 9248133,
+              "median_auto_ns": 9059613
+            }
+          ],
+          "median_process_paired_ratio": 1.007467090035222,
+          "minimum_process_paired_ratio": 0.9648914218886339,
+          "maximum_process_paired_ratio": 1.058933361002705,
+          "median_process_spectral_ns_per_operation": 4528.111328125,
+          "median_process_auto_ns_per_operation": 4524.85498046875
+        }
+      },
+      "max_component_difference": 0.0,
+      "max_norm_error": 1.2212453270876722e-15
+    }
+  ],
+  "total_real_component_pairs_checked": 94976,
+  "total_timed_queries_per_backend": 2401280,
+  "interpretation": "For each case and fresh process, take median(Spectral_ns / Auto_ns) across paired query batches. Across processes report the median and observed minimum/maximum. Also retain setup and preparation pairs. No confidence interval, statistical significance, cross-machine prediction or whole-engine improvement is claimed.",
+  "scope": "Same-output conditioned full-vector API. No comparison to historical all-pairs CTQW, no whole-engine speed claim."
+}

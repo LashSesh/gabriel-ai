@@ -1,0 +1,50 @@
+{
+  "datasets": [
+    "RacketSports",
+    "BasicMotions"
+  ],
+  "selection": "Chosen for genuine multichannel measurements, public fixed splits and manageable lengths before inspecting test performance.",
+  "training": "5 stratified folds on original training set only; fold seed 93400+dataset index; all normalization fitted within fold",
+  "normalization": "per-channel training mean and SD; tanh((x-mu)/(3*sd))",
+  "time": "0.1 s per sample; piecewise constant model interpolation",
+  "taus_relative_to_record": [
+    0.0625,
+    0.25,
+    1,
+    4
+  ],
+  "models": [
+    "raw_ridge",
+    "mean_memory",
+    "ordered_memory",
+    "trace_observer",
+    "euclidean_1nn"
+  ],
+  "penalties": [
+    0.0001,
+    0.001,
+    0.01,
+    0.1,
+    1.0,
+    10.0,
+    100.0,
+    1000.0
+  ],
+  "tie": "strongest ridge penalty among identical mean CV balanced accuracies",
+  "initial_state": "zero at each record",
+  "acquisition_model": "ordered_memory, fixed before test acquisition",
+  "policies": [
+    "random",
+    "recent",
+    "coefficient"
+  ],
+  "masks": [
+    "random_half",
+    "middle_half"
+  ],
+  "query_cost": 1,
+  "query_noise": 0,
+  "decision_margin": 1e-10,
+  "scope": "model-decision preservation; external-label accuracy evaluated separately",
+  "no_test_refit": true
+}

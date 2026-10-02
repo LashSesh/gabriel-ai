@@ -1,0 +1,22 @@
+\begin{table}[htbp]\centering\small
+\caption{Complete native--Store tasks with scalar and shared model preparation. Each row pools two fixed sources across three workers. Times are profile medians; ratios are medians of paired times, not ratios of medians. Replay is separately timed full semantic reopening. Values above one favor batching.}\label{tab:batchowner}
+\begin{tabular}{rr rrrr}\toprule
+$n$ & Windows & Scalar (ms) & Batch (ms) & Task ratio & Replay ratio\\\midrule
+7 & 1 & 332.69 & 338.59 & 1.019 & 0.984 \\
+7 & 4 & 323.44 & 323.05 & 0.997 & 1.009 \\
+7 & 16 & 347.81 & 347.30 & 1.018 & 1.011 \\
+7 & 32 & 344.19 & 345.79 & 0.994 & 1.028 \\
+13 & 1 & 338.36 & 351.19 & 0.972 & 0.988 \\
+13 & 4 & 341.86 & 346.24 & 1.006 & 0.993 \\
+13 & 16 & 349.85 & 355.05 & 0.982 & 1.066 \\
+13 & 32 & 370.53 & 360.95 & 1.050 & 1.064 \\
+32 & 1 & 375.92 & 379.75 & 0.990 & 0.982 \\
+32 & 4 & 379.35 & 376.96 & 1.009 & 1.014 \\
+32 & 16 & 431.66 & 389.56 & 1.074 & 1.164 \\
+32 & 32 & 471.04 & 410.39 & 1.150 & 1.239 \\
+64 & 1 & 498.11 & 484.49 & 1.046 & 0.998 \\
+64 & 4 & 523.45 & 499.79 & 1.026 & 1.070 \\
+64 & 16 & 662.79 & 497.83 & 1.299 & 1.354 \\
+64 & 32 & 855.45 & 502.43 & 1.661 & 1.698 \\
+\bottomrule\end{tabular}
+\end{table}

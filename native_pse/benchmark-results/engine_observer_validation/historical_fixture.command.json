@@ -1,0 +1,38 @@
+{
+  "name": "historical_fixture",
+  "command": [
+    "cargo",
+    "test",
+    "--locked",
+    "--offline",
+    "--release",
+    "--manifest-path",
+    "/workspace/scratch/657e86c899c9/integration_work/Gabriel/native_pse/Cargo.toml",
+    "--target-dir",
+    "/workspace/scratch/657e86c899c9/integration_work/Gabriel/native_pse/target/observer_validation",
+    "--jobs",
+    "1",
+    "-p",
+    "pse",
+    "--all-features",
+    "full_state_matches_original_golden_fixture"
+  ],
+  "cwd": "/workspace/scratch/657e86c899c9/integration_work/Gabriel",
+  "returncode": 101,
+  "wall_seconds": 7.129801643000064,
+  "environment_overrides": {
+    "CARGO_HOME": "/workspace/scratch/657e86c899c9/tmp/integration_toolchain/cargo",
+    "CARGO_PROFILE_RELEASE_LTO": "false",
+    "CARGO_PROFILE_RELEASE_CODEGEN_UNITS": "1",
+    "CARGO_BUILD_JOBS": "1",
+    "CARGO_PROFILE_RELEASE_DEBUG": "true",
+    "CARGO_PROFILE_RELEASE_STRIP": "none",
+    "CARGO_INCREMENTAL": "0"
+  },
+  "stdout": "historical_fixture.stdout",
+  "stderr": "historical_fixture.stderr",
+  "stdout_bytes": 49624,
+  "stdout_sha256": "ef135c0b97e51ef9a9e8e90d60e3f764e5a110eccc8ce8a11ec3d5604c17822f",
+  "stderr_bytes": 587,
+  "stderr_sha256": "bc36cec3960a64bdb47ab7f373713df9fb592789684d425f51bda22f30d5b9cb"
+}

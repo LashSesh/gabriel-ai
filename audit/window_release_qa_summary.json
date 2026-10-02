@@ -1,0 +1,157 @@
+{
+  "bundle_policy": "Includes commands, streams, detailed JSON, TeX pass artifacts, and closed functional databases. Excludes duplicate extracted project, copied executable, and compiled PDFs, which remain available at their listed QA paths.",
+  "candidate_archive": {
+    "archive": "/tmp/gabriel_next_phase_e8d6xl0c/Gabriel_Research_Project.zip",
+    "bytes": 456853937,
+    "entries": 2142,
+    "extra_paths": 90,
+    "extracted_roots": [
+      "/tmp/gabriel_release_qa_g9d81q2k/extracted/Gabriel"
+    ],
+    "missing_original_paths": [],
+    "original_entries": 2052,
+    "qa_root": "/tmp/gabriel_release_qa_g9d81q2k",
+    "sha256": "989439fae3e0c5f833ac88415bac9b3329e2fe4f1d1dcddd7fadd771b365c3b8"
+  },
+  "declared_final_editorial_delta": {
+    "files": [
+      {
+        "candidate_sha256": "8197b3c6085fa2db14f669abef7aec179dba15ba42689074590b5ab36c826f31",
+        "changed": true,
+        "declared_final_sha256": "6aa16b9a881d61395f3cf0abc31bbeec98f394c3fba1ce7a1a0568bf8a600cc1",
+        "file": "main.tex"
+      },
+      {
+        "candidate_sha256": "7168e9831fb313abbb5447f14caf0121600229f72aecbd6955bf76075e5aab81",
+        "changed": true,
+        "declared_final_sha256": "725178a6942d671952cb9772a25112b55d0f6a874134214b1b5fba3fcd2b8b39",
+        "file": "README.md"
+      },
+      {
+        "candidate_sha256": "ad4ca87c7a580655b2729074749b1c4ac0c7dd708ddf4ac037fdfb9b652dd1f0",
+        "changed": true,
+        "declared_final_sha256": "c9af243a1e040114495d71053f5a7fe448898eab1cbcc6b031652a61f1e77958",
+        "file": "RUNTIME_PROVENANCE.md"
+      }
+    ],
+    "scope": "three final editorial files copied by root instruction; no measured source or evidence changes"
+  },
+  "initial_manifest": {
+    "entries": 2141,
+    "failures": [],
+    "manifest_sha256": "a72ce71cfcd96c0195a94d69e14b11fd7df104d7b71f317877a5716c52eec8c9",
+    "status": "passed",
+    "verified": 2141
+  },
+  "new_timings_executed": false,
+  "numerical_and_runtime": {
+    "all_changes_declared_editorial_only": true,
+    "core_certificates": 21,
+    "core_checks": 825,
+    "functional_anchor": {
+      "events": 4,
+      "head": "87861577b41ce3eb5ffa8c472cca3810a88f42a24cca12c5ae2637ab647d2545"
+    },
+    "functional_archived_head_and_database_exact": true,
+    "functional_status": "passed",
+    "independent_certificates": 852,
+    "independent_decisive": 850,
+    "independent_mutations_detected": 9,
+    "independent_unknown": 2,
+    "new_timings_executed": false,
+    "owner_certificates": 96,
+    "owner_database_byte_checks": 24,
+    "owner_records": 24,
+    "post_checks_changes": [
+      {
+        "candidate_sha256": "7168e9831fb313abbb5447f14caf0121600229f72aecbd6955bf76075e5aab81",
+        "current_sha256": "725178a6942d671952cb9772a25112b55d0f6a874134214b1b5fba3fcd2b8b39",
+        "file": "README.md"
+      },
+      {
+        "candidate_sha256": "ad4ca87c7a580655b2729074749b1c4ac0c7dd708ddf4ac037fdfb9b652dd1f0",
+        "current_sha256": "c9af243a1e040114495d71053f5a7fe448898eab1cbcc6b031652a61f1e77958",
+        "file": "RUNTIME_PROVENANCE.md"
+      },
+      {
+        "candidate_sha256": "8197b3c6085fa2db14f669abef7aec179dba15ba42689074590b5ab36c826f31",
+        "current_sha256": "6aa16b9a881d61395f3cf0abc31bbeec98f394c3fba1ce7a1a0568bf8a600cc1",
+        "file": "main.tex"
+      }
+    ],
+    "supplementary_certificates": 26
+  },
+  "publication_visual_review": "Completed separately by root; root also compared all 186+3 freshly compiled page texts with final working PDFs.",
+  "qa_root": "/tmp/gabriel_release_qa_g9d81q2k",
+  "regeneration": {
+    "commands": [
+      {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+          "-B",
+          "audit/report_window_reachability_timing.py"
+        ],
+        "cwd": "/tmp/gabriel_release_qa_g9d81q2k/extracted/Gabriel",
+        "label": "timing_aggregation",
+        "returncode": 0,
+        "stderr": "timing_aggregation.stderr",
+        "stdout": "timing_aggregation.stdout"
+      },
+      {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+          "-B",
+          "reproduction/report_window_tables.py"
+        ],
+        "cwd": "/tmp/gabriel_release_qa_g9d81q2k/extracted/Gabriel",
+        "label": "tables",
+        "returncode": 0,
+        "stderr": "tables.stderr",
+        "stdout": "tables.stdout"
+      }
+    ],
+    "new_timings_executed": false,
+    "regenerated_files": [
+      {
+        "after": "d3018c8678b995303aa224e21a5b76094a51cf58338b8a831f0358b1d8b519a2",
+        "before": "d3018c8678b995303aa224e21a5b76094a51cf58338b8a831f0358b1d8b519a2",
+        "byte_identical": true,
+        "file": "results/window_reachability_study/verified_timing_audit.json"
+      },
+      {
+        "after": "96af1a14edb08ec117fdc4495cdad5723956ba2465f176a5e7c0f4eec7f325ad",
+        "before": "96af1a14edb08ec117fdc4495cdad5723956ba2465f176a5e7c0f4eec7f325ad",
+        "byte_identical": true,
+        "file": "results/window_reachability_tables.tex"
+      },
+      {
+        "after": "c5fddb99cf98f953de41364eb8811a652b16e87b7d60b72d9af22148a6e5253a",
+        "before": "c5fddb99cf98f953de41364eb8811a652b16e87b7d60b72d9af22148a6e5253a",
+        "byte_identical": true,
+        "file": "results/reachability_owner_tables.tex"
+      }
+    ],
+    "status": "passed"
+  },
+  "remaining_release_steps": [
+    "Root must regenerate and verify the final archive manifest after adding QA and the three declared editorial files."
+  ],
+  "runtime_boundary": "Tests used external python-flint dependencies at /tmp/gabriel_next_phase_e8d6xl0c/deps and the bundled native executable copied with execute permission; no cross-platform or power-loss durability claim is added.",
+  "schema": "gabriel.final-release-fresh-extraction-qa.v1",
+  "status": "passed",
+  "tex": {
+    "detailed_report": "tex_qa/tex_qa_report.json",
+    "development_report_pages": 3,
+    "development_report_pdf": "/tmp/gabriel_release_qa_g9d81q2k/tex_qa/development_report.pdf",
+    "final_log_warnings": 0,
+    "main_pages": 186,
+    "main_passes": 3,
+    "main_pdf": "/tmp/gabriel_release_qa_g9d81q2k/tex_qa/main.pdf",
+    "overfull_or_underfull_boxes": 0,
+    "passed": true,
+    "report_passes": 2,
+    "rerun_notices": 0,
+    "unresolved_citations_or_references": 0
+  },
+  "working_root_modified_by_this_qa": false
+}

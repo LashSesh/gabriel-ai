@@ -1,0 +1,23 @@
+\begin{table}[H]\centering\small
+\caption{Public-Engine observation tasks. Median elapsed-time ratios of seven process medians (five paired batches each). Each task creates an Engine, ingests the graph, constructs one snapshot and prepares a source/region before $q$ scalar queries. The two total columns compare the full spectral baseline with automatic full-state and direct-region consumers. Query-only ratios exclude ingestion and preparation. Ranges are observed process ranges, not confidence intervals.}
+\label{tab:engineobserver}
+\resizebox{\textwidth}{!}{\begin{tabular}{lrrrrr}\toprule
+Graph & $q$ & Total/full & Total/region [range] & Query/region & Total region ($\mu$s)\\\midrule
+Clique 7 & 1 & 1.06 & $1.06\,[1.02,\,1.12]$ & 2.45 & 22.6\\
+Clique 7 & 256 & 1.40 & $2.03\,[1.65,\,2.08]$ & 2.93 & 45.2\\
+Clique 13 & 1 & 1.09 & $1.09\,[1.07,\,1.12]$ & 3.65 & 38.7\\
+Clique 13 & 256 & 1.84 & $2.73\,[2.60,\,2.94]$ & 5.46 & 62.0\\
+Clique 32 & 1 & 1.18 & $1.19\,[1.10,\,1.23]$ & 9.64 & 155.6\\
+Clique 32 & 256 & 2.51 & $3.11\,[2.94,\,3.36]$ & 18.66 & 202.6\\
+Clique 64 & 1 & 1.20 & $1.19\,[1.16,\,1.27]$ & 10.96 & 880.4\\
+Clique 64 & 256 & 2.39 & $2.59\,[2.53,\,2.65]$ & 50.98 & 894.1\\
+Path 13 & 1 & 1.00 & $1.00\,[0.98,\,1.04]$ & 1.00 & 52.7\\
+Path 13 & 256 & 1.00 & $1.01\,[0.89,\,1.03]$ & 1.02 & 168.8\\
+Path 64 & 1 & 1.00 & $1.01\,[0.92,\,1.06]$ & 1.00 & 658.5\\
+Path 64 & 256 & 1.00 & $1.01\,[0.95,\,1.03]$ & 1.00 & 1833.3\\
+Near-clique 13 & 1 & 1.00 & $1.00\,[0.98,\,1.06]$ & 0.98 & 53.4\\
+Near-clique 13 & 256 & 1.01 & $1.01\,[0.97,\,1.03]$ & 1.00 & 178.3\\
+Near-clique 64 & 1 & 0.99 & $0.98\,[0.89,\,1.02]$ & 1.00 & 1397.9\\
+Near-clique 64 & 256 & 1.00 & $0.99\,[0.99,\,1.03]$ & 1.00 & 2623.8\\
+\bottomrule\end{tabular}}
+\end{table}

@@ -1,0 +1,505 @@
+   Compiling syn v2.0.117
+   Compiling hashbrown v0.17.0
+   Compiling foldhash v0.1.5
+   Compiling equivalent v1.0.2
+   Compiling fixedbitset v0.5.7
+   Compiling once_cell v1.21.4
+   Compiling pin-project-lite v0.2.17
+   Compiling hashbrown v0.15.5
+   Compiling tracing-core v0.1.36
+   Compiling indexmap v2.14.0
+   Compiling petgraph v0.8.3
+   Compiling serde_derive v1.0.228
+   Compiling thiserror-impl v2.0.18
+   Compiling nalgebra-macros v0.3.0
+   Compiling tracing-attributes v0.1.31
+   Compiling nalgebra v0.35.0
+   Compiling tracing v0.1.44
+   Compiling thiserror v2.0.18
+   Compiling serde v1.0.228
+   Compiling serde_jcs v0.2.0
+   Compiling ordered-float v5.3.0
+   Compiling pse-types v0.1.0 (/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/crates/pse-types)
+   Compiling pse-graph v0.1.0 (/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/crates/pse-graph)
+   Compiling pse-evidence v0.1.0 (/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/crates/pse-evidence)
+   Compiling pse-constraint v0.1.0 (/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/crates/pse-constraint)
+   Compiling pse-extract v0.1.0 (/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/crates/pse-extract)
+   Compiling pse-topology v0.1.0 (/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/crates/pse-topology)
+   Compiling pse-metatron v0.1.0 (/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/crates/pse-metatron)
+   Compiling pse-memory v0.1.0 (/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/crates/pse-memory)
+   Compiling pse-scale v0.1.0 (/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/crates/pse-scale)
+   Compiling pse-cascade v0.1.0 (/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/crates/pse-cascade)
+   Compiling pse-navigator v0.1.0 (/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/crates/pse-navigator)
+   Compiling pse-core v0.1.0 (/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/crates/pse-core)
+   Compiling pse v0.1.0 (/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse)
+error: linking with `cc` failed: exit status: 1
+  |
+  = note:  "cc" "-m64" "<68 object files omitted>" "-Wl,--as-needed" "-Wl,-Bstatic" "<sysroot>/lib/rustlib/x86_64-unknown-linux-gnu/lib/libcompiler_builtins-*.rlib" "-Wl,-Bdynamic" "-lgcc_s" "-lutil" "-lrt" "-lpthread" "-lm" "-ldl" "-lc" "-L" "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/rustcPLaopo/raw-dylibs" "-B<sysroot>/lib/rustlib/x86_64-unknown-linux-gnu/bin/gcc-ld" "-fuse-ld=lld" "-Wl,--eh-frame-hdr" "-Wl,-z,noexecstack" "-L" "<sysroot>/lib/rustlib/x86_64-unknown-linux-gnu/lib" "-o" "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd" "-Wl,--gc-sections" "-pie" "-Wl,-z,relro,-z,now" "-Wl,-O1" "-Wl,--strip-all" "-nodefaultlibs"
+  = note: some arguments are omitted. use `--verbose` to show all linker arguments
+  = note: rust-lld: error: undefined symbol: core::panicking::panic_bounds_check
+          >>> referenced by addr2line.39b02397e671b2d1-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.addr2line-a79a8816d9fd6004.addr2line.39b02397e671b2d1-cgu.0.rcgu.o.rcgu.o:(<addr2line::line::Lines>::find_location)
+          >>> referenced by index.rs:272 (/rustc/59807616e1fa2540724bfbac14d7976d7e4a3860/library/core/src/slice/index.rs:272)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.getopts-e6d22c100c4f8a03.getopts.d8d20304923dd620-cgu.0.rcgu.o.rcgu.o:(<getopts::Matches>::opt_vals)
+          >>> referenced by gimli.9d272e8433f81454-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.gimli-46dc78dc6a8cb06a.gimli.9d272e8433f81454-cgu.0.rcgu.o.rcgu.o:(<gimli::read::abbrev::Attributes>::push)
+          >>> referenced 74 more times
+          
+          rust-lld: error: undefined symbol: <core::str::lossy::Utf8Chunks as core::iter::traits::iterator::Iterator>::next
+          >>> referenced by string.rs:622 (library/alloc/src/string.rs:622)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.alloc-6e6df4ffe0af4d15.alloc.fdfd2bd8633a6659-cgu.0.rcgu.o.rcgu.o:(<alloc::string::String>::from_utf8_lossy)
+          >>> referenced by string.rs:637 (library/alloc/src/string.rs:637)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.alloc-6e6df4ffe0af4d15.alloc.fdfd2bd8633a6659-cgu.0.rcgu.o.rcgu.o:(<alloc::string::String>::from_utf8_lossy)
+          
+          rust-lld: error: undefined symbol: core::panicking::panic_fmt
+          >>> referenced by mod.rs:28 (library/alloc/src/raw_vec/mod.rs:28)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.alloc-6e6df4ffe0af4d15.alloc.fdfd2bd8633a6659-cgu.0.rcgu.o.rcgu.o:(alloc::raw_vec::capacity_overflow)
+          >>> referenced by mod.rs:2347 (library/alloc/src/vec/mod.rs:2347)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.alloc-6e6df4ffe0af4d15.alloc.fdfd2bd8633a6659-cgu.0.rcgu.o.rcgu.o:(<alloc::vec::Vec<_, _>>::remove::assert_failed)
+          >>> referenced by mod.rs:1989 (/rustc/59807616e1fa2540724bfbac14d7976d7e4a3860/library/core/src/slice/mod.rs:1989)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.getopts-e6d22c100c4f8a03.getopts.d8d20304923dd620-cgu.0.rcgu.o.rcgu.o:(alloc::str::join_generic_copy::<str, u8, alloc::string::String>)
+          >>> referenced 136 more times
+          
+          rust-lld: error: undefined symbol: <usize as core::fmt::Display>::fmt
+          >>> referenced by mod.rs:2347 (library/alloc/src/vec/mod.rs:2347)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.alloc-6e6df4ffe0af4d15.alloc.fdfd2bd8633a6659-cgu.0.rcgu.o.rcgu.o:(<alloc::vec::Vec<_, _>>::remove::assert_failed)
+          >>> referenced by pse_navigator.d9af592406f1bd9-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.pse_navigator.d9af592406f1bd9-cgu.0.rcgu.o:(pse_navigator::tests::at_nv2_knn_edges::h6613af4400c83acf)
+          >>> referenced by pse_navigator.d9af592406f1bd9-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.pse_navigator.d9af592406f1bd9-cgu.0.rcgu.o:(pse_navigator::tests::at_nv5_betti_numbers::hf23a12f1c5ff9365)
+          >>> referenced 35 more times
+          
+          rust-lld: error: undefined symbol: core::fmt::write
+          >>> referenced by mod.rs:236 (library/core/src/fmt/mod.rs:236)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.alloc-6e6df4ffe0af4d15.alloc.fdfd2bd8633a6659-cgu.0.rcgu.o.rcgu.o:(alloc::fmt::format::format_inner)
+          >>> referenced by mod.rs:236 (library/core/src/fmt/mod.rs:236)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.alloc-6e6df4ffe0af4d15.alloc.fdfd2bd8633a6659-cgu.0.rcgu.o.rcgu.o:(<alloc::string::String as core::fmt::Write>::write_fmt)
+          >>> referenced by mod.rs:2125 (/rustc/59807616e1fa2540724bfbac14d7976d7e4a3860/library/core/src/fmt/mod.rs:2125)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.getopts-e6d22c100c4f8a03.getopts.d8d20304923dd620-cgu.0.rcgu.o.rcgu.o:(<getopts::Fail as core::fmt::Display>::fmt)
+          >>> referenced 38 more times
+          
+          rust-lld: error: undefined symbol: core::result::unwrap_failed
+          >>> referenced by result.rs:1185 (library/core/src/result.rs:1185)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.alloc-6e6df4ffe0af4d15.alloc.fdfd2bd8633a6659-cgu.0.rcgu.o.rcgu.o:(alloc::fmt::format::format_inner)
+          >>> referenced by rustc_demangle.c5a78273c295e539-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.rustc_demangle-146c3f1190dee2e2.rustc_demangle.c5a78273c295e539-cgu.0.rcgu.o.rcgu.o:(<rustc_demangle::v0::Printer>::skipping_printing::<<rustc_demangle::v0::Printer>::print_path::{closure#0}>)
+          >>> referenced by rustc_demangle.c5a78273c295e539-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.rustc_demangle-146c3f1190dee2e2.rustc_demangle.c5a78273c295e539-cgu.0.rcgu.o.rcgu.o:(rustc_demangle::demangle)
+          >>> referenced 60 more times
+          
+          rust-lld: error: undefined symbol: <str as core::fmt::Debug>::fmt
+          >>> referenced by string.rs:2720 (library/alloc/src/string.rs:2720)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.alloc-6e6df4ffe0af4d15.alloc.fdfd2bd8633a6659-cgu.0.rcgu.o.rcgu.o:(<<alloc::boxed::Box<dyn core::error::Error + core::marker::Sync + core::marker::Send> as core::convert::From<alloc::string::String>>::from::StringError as core::fmt::Debug>::fmt)
+          >>> referenced by rustc_demangle.c5a78273c295e539-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.rustc_demangle-146c3f1190dee2e2.rustc_demangle.c5a78273c295e539-cgu.0.rcgu.o.rcgu.o:(<&str as core::fmt::Debug>::fmt)
+          >>> referenced by mod.rs:2865 (library/core/src/fmt/mod.rs:2865)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.test-3710056540f41481.test.273d7611820c9051-cgu.0.rcgu.o.rcgu.o:(<&str as core::fmt::Debug>::fmt)
+          >>> referenced 2 more times
+          
+          rust-lld: error: undefined symbol: <core::fmt::Formatter>::pad
+          >>> referenced by mod.rs:2960 (library/core/src/fmt/mod.rs:2960)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.alloc-6e6df4ffe0af4d15.alloc.fdfd2bd8633a6659-cgu.0.rcgu.o.rcgu.o:(<<alloc::boxed::Box<dyn core::error::Error + core::marker::Sync + core::marker::Send> as core::convert::From<alloc::string::String>>::from::StringError as core::fmt::Display>::fmt)
+          >>> referenced by mod.rs:2960 (/rustc/59807616e1fa2540724bfbac14d7976d7e4a3860/library/core/src/fmt/mod.rs:2960)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.getopts-e6d22c100c4f8a03.getopts.d8d20304923dd620-cgu.0.rcgu.o.rcgu.o:(<&str as core::fmt::Display>::fmt)
+          >>> referenced by mod.rs:2960 (/rustc/59807616e1fa2540724bfbac14d7976d7e4a3860/library/core/src/fmt/mod.rs:2960)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.getopts-e6d22c100c4f8a03.getopts.d8d20304923dd620-cgu.0.rcgu.o.rcgu.o:(<alloc::string::String as core::fmt::Display>::fmt (.llvm.9507905816844653423))
+          >>> referenced 134 more times
+          
+          rust-lld: error: undefined symbol: core::option::expect_failed
+          >>> referenced by option.rs:971 (/rustc/59807616e1fa2540724bfbac14d7976d7e4a3860/library/core/src/option.rs:971)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.getopts-e6d22c100c4f8a03.getopts.d8d20304923dd620-cgu.0.rcgu.o.rcgu.o:(alloc::str::join_generic_copy::<str, u8, alloc::string::String>)
+          >>> referenced by lib.rs:0 (library/test/src/lib.rs:0)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.test-3710056540f41481.test.273d7611820c9051-cgu.0.rcgu.o.rcgu.o:(test::test_main_with_exit_callback::<test::test_main::{closure#0}>::{closure#0})
+          >>> referenced by option.rs:971 (library/core/src/option.rs:971)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.std-d1237ef7159db0a2.std.e28293b1aa0f68bd-cgu.0.rcgu.o.rcgu.o:(<std::sys::pal::unix::time::Timespec>::sub_timespec (.llvm.3643936799275306673))
+          >>> referenced 14 more times
+          
+          rust-lld: error: undefined symbol: core::unicode::unicode_data::white_space::WHITESPACE_MAP
+          >>> referenced by macros.rs:0 (/rustc/59807616e1fa2540724bfbac14d7976d7e4a3860/library/core/src/slice/iter/macros.rs:0)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.getopts-e6d22c100c4f8a03.getopts.d8d20304923dd620-cgu.0.rcgu.o.rcgu.o:(<getopts::Options>::usage_items::{closure#1})
+          >>> referenced by non_null.rs:0 (/rustc/59807616e1fa2540724bfbac14d7976d7e4a3860/library/core/src/ptr/non_null.rs:0)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.getopts-e6d22c100c4f8a03.getopts.d8d20304923dd620-cgu.0.rcgu.o.rcgu.o:(<getopts::Options>::usage_items::{closure#1})
+          >>> referenced by unicode_data.rs:750 (/rustc/59807616e1fa2540724bfbac14d7976d7e4a3860/library/core/src/unicode/unicode_data.rs:750)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.getopts-e6d22c100c4f8a03.getopts.d8d20304923dd620-cgu.0.rcgu.o.rcgu.o:(<getopts::Options>::usage_items::{closure#1})
+          >>> referenced 5 more times
+          
+          rust-lld: error: undefined symbol: core::str::slice_error_fail
+          >>> referenced by traits.rs:241 (/rustc/59807616e1fa2540724bfbac14d7976d7e4a3860/library/core/src/str/traits.rs:241)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.getopts-e6d22c100c4f8a03.getopts.d8d20304923dd620-cgu.0.rcgu.o.rcgu.o:(<getopts::Options>::usage_items::{closure#1})
+          >>> referenced by traits.rs:241 (/rustc/59807616e1fa2540724bfbac14d7976d7e4a3860/library/core/src/str/traits.rs:241)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.getopts-e6d22c100c4f8a03.getopts.d8d20304923dd620-cgu.0.rcgu.o.rcgu.o:(<getopts::Options>::usage_items::{closure#1})
+          >>> referenced by rustc_demangle.c5a78273c295e539-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.rustc_demangle-146c3f1190dee2e2.rustc_demangle.c5a78273c295e539-cgu.0.rcgu.o.rcgu.o:(rustc_demangle::demangle)
+          >>> referenced 26 more times
+          
+          rust-lld: error: undefined symbol: core::option::unwrap_failed
+          >>> referenced by gimli.9d272e8433f81454-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.gimli-46dc78dc6a8cb06a.gimli.9d272e8433f81454-cgu.0.rcgu.o.rcgu.o:(<alloc::collections::btree::node::NodeRef<alloc::collections::btree::node::marker::Owned, u64, gimli::read::abbrev::Abbreviation, alloc::collections::btree::node::marker::Internal>>::new_internal::<alloc::alloc::Global>)
+          >>> referenced by gimli.9d272e8433f81454-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.gimli-46dc78dc6a8cb06a.gimli.9d272e8433f81454-cgu.0.rcgu.o.rcgu.o:(<alloc::collections::btree::node::Handle<alloc::collections::btree::node::NodeRef<alloc::collections::btree::node::marker::Mut, u64, gimli::read::abbrev::Abbreviation, alloc::collections::btree::node::marker::Leaf>, alloc::collections::btree::node::marker::Edge>>::insert_recursing::<alloc::alloc::Global, <alloc::collections::btree::map::entry::VacantEntry<u64, gimli::read::abbrev::Abbreviation>>::insert_entry::{closure#0}>)
+          >>> referenced by pse_topology.cf1ebded7ffbfef7-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.pse_topology-6f2f5c6e6b28f387.pse_topology.cf1ebded7ffbfef7-cgu.0.rcgu.o.rcgu.o:(nalgebra::linalg::symmetric_eigen::SymmetricEigen$LT$T$C$D$GT$::new::hd04e8acdc57d1207)
+          >>> referenced 71 more times
+          
+          rust-lld: error: undefined symbol: core::panicking::panic
+          >>> referenced by gimli.9d272e8433f81454-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.gimli-46dc78dc6a8cb06a.gimli.9d272e8433f81454-cgu.0.rcgu.o.rcgu.o:(<alloc::collections::btree::node::Handle<alloc::collections::btree::node::NodeRef<alloc::collections::btree::node::marker::Mut, u64, gimli::read::abbrev::Abbreviation, alloc::collections::btree::node::marker::Internal>, alloc::collections::btree::node::marker::Edge>>::insert::<alloc::alloc::Global>)
+          >>> referenced by gimli.9d272e8433f81454-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.gimli-46dc78dc6a8cb06a.gimli.9d272e8433f81454-cgu.0.rcgu.o.rcgu.o:(<alloc::collections::btree::node::Handle<alloc::collections::btree::node::NodeRef<alloc::collections::btree::node::marker::Mut, u64, gimli::read::abbrev::Abbreviation, alloc::collections::btree::node::marker::Internal>, alloc::collections::btree::node::marker::KV>>::split::<alloc::alloc::Global>)
+          >>> referenced by gimli.9d272e8433f81454-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.gimli-46dc78dc6a8cb06a.gimli.9d272e8433f81454-cgu.0.rcgu.o.rcgu.o:(<alloc::collections::btree::node::NodeRef<alloc::collections::btree::node::marker::Mut, u64, gimli::read::abbrev::Abbreviation, alloc::collections::btree::node::marker::Leaf>>::push_with_handle)
+          >>> referenced 75 more times
+          
+          rust-lld: error: undefined symbol: core::slice::index::slice_index_fail
+          >>> referenced by gimli.9d272e8433f81454-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.gimli-46dc78dc6a8cb06a.gimli.9d272e8433f81454-cgu.0.rcgu.o.rcgu.o:(<alloc::collections::btree::node::Handle<alloc::collections::btree::node::NodeRef<alloc::collections::btree::node::marker::Mut, u64, gimli::read::abbrev::Abbreviation, alloc::collections::btree::node::marker::Internal>, alloc::collections::btree::node::marker::KV>>::split::<alloc::alloc::Global>)
+          >>> referenced by gimli.9d272e8433f81454-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.gimli-46dc78dc6a8cb06a.gimli.9d272e8433f81454-cgu.0.rcgu.o.rcgu.o:(<alloc::collections::btree::node::Handle<alloc::collections::btree::node::NodeRef<alloc::collections::btree::node::marker::Mut, u64, gimli::read::abbrev::Abbreviation, alloc::collections::btree::node::marker::Leaf>, alloc::collections::btree::node::marker::KV>>::split_leaf_data)
+          >>> referenced by gimli.9d272e8433f81454-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.gimli-46dc78dc6a8cb06a.gimli.9d272e8433f81454-cgu.0.rcgu.o.rcgu.o:(<gimli::read::abbrev::Attributes as core::ops::deref::Deref>::deref)
+          >>> referenced 114 more times
+          
+          rust-lld: error: undefined symbol: core::panicking::assert_failed::<u64, u64>
+          >>> referenced by gimli.9d272e8433f81454-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.gimli-46dc78dc6a8cb06a.gimli.9d272e8433f81454-cgu.0.rcgu.o.rcgu.o:(<gimli::read::abbrev::Abbreviation>::new)
+          
+          rust-lld: error: undefined symbol: core::slice::copy_from_slice_impl::len_mismatch_fail
+          >>> referenced by miniz_oxide.b662226d77c6ee8e-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.miniz_oxide-5ad929a15a8e6727.miniz_oxide.b662226d77c6ee8e-cgu.0.rcgu.o.rcgu.o:(miniz_oxide::inflate::core::decompress)
+          
+          rust-lld: error: undefined symbol: core::slice::sort::shared::smallsort::panic_on_ord_violation
+          >>> referenced by pse_topology.cf1ebded7ffbfef7-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.pse_topology-6f2f5c6e6b28f387.pse_topology.cf1ebded7ffbfef7-cgu.0.rcgu.o.rcgu.o:(core::slice::sort::shared::smallsort::sort8_stable::h0dab89ceb3aa8139)
+          >>> referenced by pse_topology.cf1ebded7ffbfef7-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.pse_topology-6f2f5c6e6b28f387.pse_topology.cf1ebded7ffbfef7-cgu.0.rcgu.o.rcgu.o:(core::slice::sort::stable::quicksort::quicksort::hd5219da1d63faa09)
+          >>> referenced by pse_topology.cf1ebded7ffbfef7-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.pse_topology-6f2f5c6e6b28f387.pse_topology.cf1ebded7ffbfef7-cgu.0.rcgu.o.rcgu.o:(core::slice::sort::stable::quicksort::quicksort::hebd4787668de2b51)
+          >>> referenced 15 more times
+          
+          rust-lld: error: undefined symbol: <core::str::pattern::StrSearcher>::new
+          >>> referenced by rustc_demangle.c5a78273c295e539-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.rustc_demangle-146c3f1190dee2e2.rustc_demangle.c5a78273c295e539-cgu.0.rcgu.o.rcgu.o:(<str>::trim_start_matches::<&str>)
+          >>> referenced by rustc_demangle.c5a78273c295e539-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.rustc_demangle-146c3f1190dee2e2.rustc_demangle.c5a78273c295e539-cgu.0.rcgu.o.rcgu.o:(rustc_demangle::demangle)
+          >>> referenced by pattern.rs:976 (library/core/src/str/pattern.rs:976)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.test-3710056540f41481.test.273d7611820c9051-cgu.0.rcgu.o.rcgu.o:(<str>::replace::<&str>)
+          >>> referenced 4 more times
+          
+          rust-lld: error: undefined symbol: core::panicking::panic_in_cleanup
+          >>> referenced by pse_navigator.d9af592406f1bd9-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.pse_navigator.d9af592406f1bd9-cgu.0.rcgu.o:(pse_navigator::SimplexMesh::betti_numbers::h364e616ad914a24d)
+          >>> referenced by pse_navigator.d9af592406f1bd9-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.pse_navigator.d9af592406f1bd9-cgu.0.rcgu.o:(pse_navigator::SimplexMesh::detect_simplices::h6d8486774f21d256)
+          >>> referenced by pse_navigator.d9af592406f1bd9-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.pse_navigator.d9af592406f1bd9-cgu.0.rcgu.o:(pse_navigator::SimplexMesh::detect_simplices::h6d8486774f21d256)
+          >>> referenced 180 more times
+          
+          rust-lld: error: undefined symbol: core::unicode::unicode_data::grapheme_extend::lookup_slow
+          >>> referenced by rustc_demangle.c5a78273c295e539-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.rustc_demangle-146c3f1190dee2e2.rustc_demangle.c5a78273c295e539-cgu.0.rcgu.o.rcgu.o:(<rustc_demangle::v0::Printer>::print_quoted_escaped_chars::<core::iter::sources::once::Once<char>>)
+          >>> referenced by rustc_demangle.c5a78273c295e539-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_navigator-9b31ef7e23d568bd.rustc_demangle-146c3f1190dee2e2.rustc_demangle.c5a78273c295e539-cgu.0.rcgu.o.rcgu.o:(<rustc_demangle::v0::Printer>::print_const_str_literal)
+          
+          rust-lld: error: too many errors emitted, stopping now (use --error-limit=0 to see all errors)
+          collect2: error: ld returned 1 exit status
+          
+
+error: could not compile `pse-navigator` (lib test) due to 1 previous error
+warning: build failed, waiting for other jobs to finish...
+error: linking with `cc` failed: exit status: 1
+  |
+  = note:  "cc" "-m64" "<82 object files omitted>" "-Wl,--as-needed" "-Wl,-Bstatic" "<sysroot>/lib/rustlib/x86_64-unknown-linux-gnu/lib/libcompiler_builtins-*.rlib" "-Wl,-Bdynamic" "-lgcc_s" "-lutil" "-lrt" "-lpthread" "-lm" "-ldl" "-lc" "-L" "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/rustcoalbS7/raw-dylibs" "-B<sysroot>/lib/rustlib/x86_64-unknown-linux-gnu/bin/gcc-ld" "-fuse-ld=lld" "-Wl,--eh-frame-hdr" "-Wl,-z,noexecstack" "-L" "<sysroot>/lib/rustlib/x86_64-unknown-linux-gnu/lib" "-o" "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_core-15d6a45d79f4956b" "-Wl,--gc-sections" "-pie" "-Wl,-z,relro,-z,now" "-Wl,-O1" "-Wl,--strip-all" "-nodefaultlibs"
+  = note: some arguments are omitted. use `--verbose` to show all linker arguments
+  = note: rust-lld: error: undefined symbol: pse_navigator::NavigatorSpiral::next_point::h2c540da51ce19aea
+          >>> referenced by pse_core.61f6953c3db0be36-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_core-15d6a45d79f4956b.pse_core.61f6953c3db0be36-cgu.0.rcgu.o:(pse_core::explore::resonance_landscape_explorer::h3f82853ceda23800)
+          
+          rust-lld: error: undefined symbol: alloc::raw_vec::RawVec$LT$T$C$A$GT$::grow_one::hbf16aa0cc452c26c
+          >>> referenced by pse_core.61f6953c3db0be36-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_core-15d6a45d79f4956b.pse_core.61f6953c3db0be36-cgu.0.rcgu.o:(pse_core::explore::resonance_landscape_explorer::h3f82853ceda23800)
+          
+          rust-lld: error: undefined symbol: pse_navigator::SimplexMesh::connect_knn::h4b9758e934a59bcf
+          >>> referenced by pse_core.61f6953c3db0be36-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_core-15d6a45d79f4956b.pse_core.61f6953c3db0be36-cgu.0.rcgu.o:(pse_core::explore::resonance_landscape_explorer::h3f82853ceda23800)
+          
+          rust-lld: error: undefined symbol: pse_navigator::SimplexMesh::weight_edges_by_resonance::h7082a1a9c9a9005b
+          >>> referenced by pse_core.61f6953c3db0be36-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_core-15d6a45d79f4956b.pse_core.61f6953c3db0be36-cgu.0.rcgu.o:(pse_core::explore::resonance_landscape_explorer::h3f82853ceda23800)
+          
+          rust-lld: error: undefined symbol: pse_navigator::SimplexMesh::detect_simplices::ha8244189fba0ee85
+          >>> referenced by pse_core.61f6953c3db0be36-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_core-15d6a45d79f4956b.pse_core.61f6953c3db0be36-cgu.0.rcgu.o:(pse_core::explore::resonance_landscape_explorer::h3f82853ceda23800)
+          
+          rust-lld: error: undefined symbol: pse_navigator::SimplexMesh::betti_numbers::ha74c5e26234f4eb6
+          >>> referenced by pse_core.61f6953c3db0be36-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_core-15d6a45d79f4956b.pse_core.61f6953c3db0be36-cgu.0.rcgu.o:(pse_core::explore::resonance_landscape_explorer::h3f82853ceda23800)
+          >>> referenced by pse_core.61f6953c3db0be36-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_core-15d6a45d79f4956b.pse_core.61f6953c3db0be36-cgu.0.rcgu.o:(pse_core::explore::resonance_landscape_explorer::h3f82853ceda23800)
+          >>> referenced by pse_core.61f6953c3db0be36-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_core-15d6a45d79f4956b.pse_core.61f6953c3db0be36-cgu.0.rcgu.o:(pse_core::explore::resonance_landscape_explorer::h3f82853ceda23800)
+          >>> referenced 1 more times
+          
+          rust-lld: error: undefined symbol: pse_navigator::SimplexMesh::add_simplices::h62e3fc7810f4ab61
+          >>> referenced by pse_core.61f6953c3db0be36-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_core-15d6a45d79f4956b.pse_core.61f6953c3db0be36-cgu.0.rcgu.o:(pse_core::explore::resonance_landscape_explorer::h3f82853ceda23800)
+          
+          rust-lld: error: undefined symbol: pse_navigator::SimplexMesh::remove_simplices::h0d8a8db077942fee
+          >>> referenced by pse_core.61f6953c3db0be36-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_core-15d6a45d79f4956b.pse_core.61f6953c3db0be36-cgu.0.rcgu.o:(pse_core::explore::resonance_landscape_explorer::h3f82853ceda23800)
+          
+          rust-lld: error: undefined symbol: pse_navigator::SimplexMesh::laplacian_matrix::hbe89b14e17a18df4
+          >>> referenced by pse_core.61f6953c3db0be36-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_core-15d6a45d79f4956b.pse_core.61f6953c3db0be36-cgu.0.rcgu.o:(pse_core::explore::resonance_landscape_explorer::h3f82853ceda23800)
+          
+          rust-lld: error: undefined symbol: pse_navigator::SimplexMesh::spectral_gradient_and_gap::h59c01318b4cb2453
+          >>> referenced by pse_core.61f6953c3db0be36-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_core-15d6a45d79f4956b.pse_core.61f6953c3db0be36-cgu.0.rcgu.o:(pse_core::explore::resonance_landscape_explorer::h3f82853ceda23800)
+          
+          rust-lld: error: undefined symbol: pse_navigator::SimplexMesh::local_entropy::hda93aa5532453d75
+          >>> referenced by pse_core.61f6953c3db0be36-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_core-15d6a45d79f4956b.pse_core.61f6953c3db0be36-cgu.0.rcgu.o:(pse_core::explore::resonance_landscape_explorer::h3f82853ceda23800)
+          
+          rust-lld: error: undefined hidden symbol: anon.6c33f22da8ae414ec69ed6cab0b28b44.41.llvm.10513648087662038550
+          >>> referenced by pse_core.61f6953c3db0be36-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_core-15d6a45d79f4956b.pse_core.61f6953c3db0be36-cgu.0.rcgu.o:(pse_core::explore::resonance_landscape_explorer::h3f82853ceda23800)
+          
+          rust-lld: error: undefined symbol: <getopts::Matches>::opt_vals
+          >>> referenced by lib.rs:901 (/rust/deps/getopts-0.2.24/src/lib.rs:901)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_core-15d6a45d79f4956b.test-3710056540f41481.test.273d7611820c9051-cgu.0.rcgu.o.rcgu.o:(test::cli::get_format)
+          >>> referenced by lib.rs:914 (/rust/deps/getopts-0.2.24/src/lib.rs:914)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_core-15d6a45d79f4956b.test-3710056540f41481.test.273d7611820c9051-cgu.0.rcgu.o.rcgu.o:(test::cli::parse_opts)
+          >>> referenced by lib.rs:901 (/rust/deps/getopts-0.2.24/src/lib.rs:901)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_core-15d6a45d79f4956b.test-3710056540f41481.test.273d7611820c9051-cgu.0.rcgu.o.rcgu.o:(test::cli::parse_opts)
+          >>> referenced 8 more times
+          
+          rust-lld: error: undefined symbol: <getopts::Options>::optflag
+          >>> referenced by cli.rs:204 (library/test/src/cli.rs:204)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_core-15d6a45d79f4956b.test-3710056540f41481.test.273d7611820c9051-cgu.0.rcgu.o.rcgu.o:(test::cli::parse_opts)
+          >>> referenced by cli.rs:53 (library/test/src/cli.rs:53)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_core-15d6a45d79f4956b.test-3710056540f41481.test.273d7611820c9051-cgu.0.rcgu.o.rcgu.o:(test::cli::optgroups)
+          >>> referenced by cli.rs:54 (library/test/src/cli.rs:54)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_core-15d6a45d79f4956b.test-3710056540f41481.test.273d7611820c9051-cgu.0.rcgu.o.rcgu.o:(test::cli::optgroups)
+          >>> referenced 14 more times
+          
+          rust-lld: error: undefined symbol: <getopts::OptGroup>::long_to_short
+          >>> referenced by mod.rs:965 (library/alloc/src/vec/mod.rs:965)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_core-15d6a45d79f4956b.test-3710056540f41481.test.273d7611820c9051-cgu.0.rcgu.o.rcgu.o:(test::cli::parse_opts)
+          
+          rust-lld: error: undefined symbol: getopts::find_opt
+          >>> referenced by lib.rs:495 (/rust/deps/getopts-0.2.24/src/lib.rs:495)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_core-15d6a45d79f4956b.test-3710056540f41481.test.273d7611820c9051-cgu.0.rcgu.o.rcgu.o:(test::cli::parse_opts)
+          >>> referenced by lib.rs:523 (/rust/deps/getopts-0.2.24/src/lib.rs:523)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_core-15d6a45d79f4956b.test-3710056540f41481.test.273d7611820c9051-cgu.0.rcgu.o.rcgu.o:(test::cli::parse_opts)
+          
+          rust-lld: error: undefined symbol: <getopts::Name>::to_string
+          >>> referenced by lib.rs:497 (/rust/deps/getopts-0.2.24/src/lib.rs:497)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_core-15d6a45d79f4956b.test-3710056540f41481.test.273d7611820c9051-cgu.0.rcgu.o.rcgu.o:(test::cli::parse_opts)
+          >>> referenced by lib.rs:569 (/rust/deps/getopts-0.2.24/src/lib.rs:569)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_core-15d6a45d79f4956b.test-3710056540f41481.test.273d7611820c9051-cgu.0.rcgu.o.rcgu.o:(test::cli::parse_opts)
+          >>> referenced by lib.rs:566 (/rust/deps/getopts-0.2.24/src/lib.rs:566)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_core-15d6a45d79f4956b.test-3710056540f41481.test.273d7611820c9051-cgu.0.rcgu.o.rcgu.o:(test::cli::parse_opts)
+          >>> referenced 3 more times
+          
+          rust-lld: error: undefined symbol: <getopts::Options>::usage
+          >>> referenced by cli.rs:192 (library/test/src/cli.rs:192)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_core-15d6a45d79f4956b.test-3710056540f41481.test.273d7611820c9051-cgu.0.rcgu.o.rcgu.o:(test::cli::parse_opts)
+          
+          rust-lld: error: undefined symbol: <getopts::Fail as core::fmt::Display>::fmt
+          >>> referenced by string.rs:2915 (library/alloc/src/string.rs:2915)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_core-15d6a45d79f4956b.test-3710056540f41481.test.273d7611820c9051-cgu.0.rcgu.o.rcgu.o:(test::cli::parse_opts)
+          
+          rust-lld: error: undefined symbol: <getopts::Matches>::opt_present
+          >>> referenced by cli.rs:229 (library/test/src/cli.rs:229)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_core-15d6a45d79f4956b.test-3710056540f41481.test.273d7611820c9051-cgu.0.rcgu.o.rcgu.o:(test::cli::parse_opts)
+          >>> referenced by cli.rs:229 (library/test/src/cli.rs:229)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_core-15d6a45d79f4956b.test-3710056540f41481.test.273d7611820c9051-cgu.0.rcgu.o.rcgu.o:(test::cli::parse_opts)
+          >>> referenced by cli.rs:229 (library/test/src/cli.rs:229)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_core-15d6a45d79f4956b.test-3710056540f41481.test.273d7611820c9051-cgu.0.rcgu.o.rcgu.o:(test::cli::parse_opts)
+          >>> referenced 10 more times
+          
+          rust-lld: error: too many errors emitted, stopping now (use --error-limit=0 to see all errors)
+          collect2: error: ld returned 1 exit status
+          
+
+error: could not compile `pse-core` (lib test) due to 1 previous error
+error: linking with `cc` failed: exit status: 1
+  |
+  = note:  "cc" "-m64" "<61 object files omitted>" "-Wl,--as-needed" "-Wl,-Bstatic" "<sysroot>/lib/rustlib/x86_64-unknown-linux-gnu/lib/libcompiler_builtins-*.rlib" "-Wl,-Bdynamic" "-lgcc_s" "-lutil" "-lrt" "-lpthread" "-lm" "-ldl" "-lc" "-L" "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/rustcF6GSyJ/raw-dylibs" "-B<sysroot>/lib/rustlib/x86_64-unknown-linux-gnu/bin/gcc-ld" "-fuse-ld=lld" "-Wl,--eh-frame-hdr" "-Wl,-z,noexecstack" "-L" "<sysroot>/lib/rustlib/x86_64-unknown-linux-gnu/lib" "-o" "/workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00" "-Wl,--gc-sections" "-pie" "-Wl,-z,relro,-z,now" "-Wl,-O1" "-Wl,--strip-all" "-nodefaultlibs"
+  = note: some arguments are omitted. use `--verbose` to show all linker arguments
+  = note: rust-lld: error: undefined symbol: core::panicking::panic_bounds_check
+          >>> referenced by addr2line.39b02397e671b2d1-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.addr2line-a79a8816d9fd6004.addr2line.39b02397e671b2d1-cgu.0.rcgu.o.rcgu.o:(<addr2line::line::Lines>::find_location)
+          >>> referenced by itoa.efd3060c8b436e46-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.itoa-90f464f672079907.itoa.efd3060c8b436e46-cgu.0.rcgu.o.rcgu.o:(_$LT$u64$u20$as$u20$itoa..Unsigned$GT$::fmt::h93e6711fe93ecc21)
+          >>> referenced by gimli.9d272e8433f81454-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.gimli-46dc78dc6a8cb06a.gimli.9d272e8433f81454-cgu.0.rcgu.o.rcgu.o:(<gimli::read::abbrev::Attributes>::push)
+          >>> referenced 173 more times
+          
+          rust-lld: error: undefined symbol: <core::str::lossy::Utf8Chunks as core::iter::traits::iterator::Iterator>::next
+          >>> referenced by string.rs:622 (library/alloc/src/string.rs:622)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.alloc-6e6df4ffe0af4d15.alloc.fdfd2bd8633a6659-cgu.0.rcgu.o.rcgu.o:(<alloc::string::String>::from_utf8_lossy)
+          >>> referenced by string.rs:637 (library/alloc/src/string.rs:637)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.alloc-6e6df4ffe0af4d15.alloc.fdfd2bd8633a6659-cgu.0.rcgu.o.rcgu.o:(<alloc::string::String>::from_utf8_lossy)
+          
+          rust-lld: error: undefined symbol: core::panicking::panic_fmt
+          >>> referenced by mod.rs:28 (library/alloc/src/raw_vec/mod.rs:28)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.alloc-6e6df4ffe0af4d15.alloc.fdfd2bd8633a6659-cgu.0.rcgu.o.rcgu.o:(alloc::raw_vec::capacity_overflow)
+          >>> referenced by mod.rs:2347 (library/alloc/src/vec/mod.rs:2347)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.alloc-6e6df4ffe0af4d15.alloc.fdfd2bd8633a6659-cgu.0.rcgu.o.rcgu.o:(<alloc::vec::Vec<_, _>>::remove::assert_failed)
+          >>> referenced by mod.rs:1989 (/rustc/59807616e1fa2540724bfbac14d7976d7e4a3860/library/core/src/slice/mod.rs:1989)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.getopts-e6d22c100c4f8a03.getopts.d8d20304923dd620-cgu.0.rcgu.o.rcgu.o:(alloc::str::join_generic_copy::<str, u8, alloc::string::String>)
+          >>> referenced 152 more times
+          
+          rust-lld: error: undefined symbol: <usize as core::fmt::Display>::fmt
+          >>> referenced by mod.rs:2347 (library/alloc/src/vec/mod.rs:2347)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.alloc-6e6df4ffe0af4d15.alloc.fdfd2bd8633a6659-cgu.0.rcgu.o.rcgu.o:(<alloc::vec::Vec<_, _>>::remove::assert_failed)
+          >>> referenced by pse_metatron.dfb147e2a916c355-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.pse_metatron.dfb147e2a916c355-cgu.0.rcgu.o:(pse_metatron::catalog::build_catalog::h8480617ef5dbd336)
+          >>> referenced by pse_metatron.dfb147e2a916c355-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.pse_metatron.dfb147e2a916c355-cgu.0.rcgu.o:(pse_metatron::catalog::build_catalog_for_n::h9606496d041844e9)
+          >>> referenced 55 more times
+          
+          rust-lld: error: undefined symbol: core::fmt::write
+          >>> referenced by mod.rs:236 (library/core/src/fmt/mod.rs:236)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.alloc-6e6df4ffe0af4d15.alloc.fdfd2bd8633a6659-cgu.0.rcgu.o.rcgu.o:(alloc::fmt::format::format_inner)
+          >>> referenced by mod.rs:236 (library/core/src/fmt/mod.rs:236)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.alloc-6e6df4ffe0af4d15.alloc.fdfd2bd8633a6659-cgu.0.rcgu.o.rcgu.o:(<alloc::string::String as core::fmt::Write>::write_fmt)
+          >>> referenced by mod.rs:2125 (/rustc/59807616e1fa2540724bfbac14d7976d7e4a3860/library/core/src/fmt/mod.rs:2125)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.getopts-e6d22c100c4f8a03.getopts.d8d20304923dd620-cgu.0.rcgu.o.rcgu.o:(<getopts::Fail as core::fmt::Display>::fmt)
+          >>> referenced 47 more times
+          
+          rust-lld: error: undefined symbol: core::result::unwrap_failed
+          >>> referenced by result.rs:1185 (library/core/src/result.rs:1185)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.alloc-6e6df4ffe0af4d15.alloc.fdfd2bd8633a6659-cgu.0.rcgu.o.rcgu.o:(alloc::fmt::format::format_inner)
+          >>> referenced by pse_metatron.dfb147e2a916c355-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.pse_metatron.dfb147e2a916c355-cgu.0.rcgu.o:(pse_metatron::memoized_signature::tests::assert_exact::hfa9948e8308a1189)
+          >>> referenced by pse_metatron.dfb147e2a916c355-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.pse_metatron.dfb147e2a916c355-cgu.0.rcgu.o:(pse_metatron::memoized_signature::tests::assert_exact::hfa9948e8308a1189)
+          >>> referenced 161 more times
+          
+          rust-lld: error: undefined symbol: <str as core::fmt::Debug>::fmt
+          >>> referenced by string.rs:2720 (library/alloc/src/string.rs:2720)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.alloc-6e6df4ffe0af4d15.alloc.fdfd2bd8633a6659-cgu.0.rcgu.o.rcgu.o:(<<alloc::boxed::Box<dyn core::error::Error + core::marker::Sync + core::marker::Send> as core::convert::From<alloc::string::String>>::from::StringError as core::fmt::Debug>::fmt)
+          >>> referenced by pse_metatron.dfb147e2a916c355-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.pse_metatron.dfb147e2a916c355-cgu.0.rcgu.o:(<alloc::string::String as core::fmt::Debug>::fmt)
+          >>> referenced by pse_metatron.dfb147e2a916c355-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.pse_metatron.dfb147e2a916c355-cgu.0.rcgu.o:(_$LT$$RF$T$u20$as$u20$core..fmt..Debug$GT$::fmt::he2bac40b850f44fb)
+          >>> referenced 10 more times
+          
+          rust-lld: error: undefined symbol: <core::fmt::Formatter>::pad
+          >>> referenced by mod.rs:2960 (library/core/src/fmt/mod.rs:2960)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.alloc-6e6df4ffe0af4d15.alloc.fdfd2bd8633a6659-cgu.0.rcgu.o.rcgu.o:(<<alloc::boxed::Box<dyn core::error::Error + core::marker::Sync + core::marker::Send> as core::convert::From<alloc::string::String>>::from::StringError as core::fmt::Display>::fmt)
+          >>> referenced by mod.rs:2960 (/rustc/59807616e1fa2540724bfbac14d7976d7e4a3860/library/core/src/fmt/mod.rs:2960)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.getopts-e6d22c100c4f8a03.getopts.d8d20304923dd620-cgu.0.rcgu.o.rcgu.o:(<&str as core::fmt::Display>::fmt)
+          >>> referenced by mod.rs:2960 (/rustc/59807616e1fa2540724bfbac14d7976d7e4a3860/library/core/src/fmt/mod.rs:2960)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.getopts-e6d22c100c4f8a03.getopts.d8d20304923dd620-cgu.0.rcgu.o.rcgu.o:(<alloc::string::String as core::fmt::Display>::fmt (.llvm.9507905816844653423))
+          >>> referenced 141 more times
+          
+          rust-lld: error: undefined symbol: core::panicking::assert_failed::<usize, usize>
+          >>> referenced by crossbeam_epoch.59f71684661efdab-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.crossbeam_epoch-09386fa1862e879a.crossbeam_epoch.59f71684661efdab-cgu.0.rcgu.o.rcgu.o:(_$LT$crossbeam_epoch..internal..Local$u20$as$u20$crossbeam_epoch..sync..list..IsElement$LT$crossbeam_epoch..internal..Local$GT$$GT$::finalize::h12402ea8673ba828)
+          >>> referenced by crossbeam_epoch.59f71684661efdab-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.crossbeam_epoch-09386fa1862e879a.crossbeam_epoch.59f71684661efdab-cgu.0.rcgu.o.rcgu.o:(core::ptr::drop_in_place$LT$crossbeam_epoch..internal..Global$GT$::h88fe49078e0562ba)
+          >>> referenced by crossbeam_epoch.59f71684661efdab-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.crossbeam_epoch-09386fa1862e879a.crossbeam_epoch.59f71684661efdab-cgu.0.rcgu.o.rcgu.o:(core::ptr::drop_in_place$LT$crossbeam_epoch..sync..list..List$LT$crossbeam_epoch..internal..Local$GT$$GT$::h499bbce3c83ff135)
+          >>> referenced 66 more times
+          
+          rust-lld: error: undefined symbol: core::slice::index::slice_index_fail
+          >>> referenced by crossbeam_epoch.59f71684661efdab-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.crossbeam_epoch-09386fa1862e879a.crossbeam_epoch.59f71684661efdab-cgu.0.rcgu.o.rcgu.o:(_$LT$crossbeam_epoch..internal..Local$u20$as$u20$crossbeam_epoch..sync..list..IsElement$LT$crossbeam_epoch..internal..Local$GT$$GT$::finalize::h12402ea8673ba828)
+          >>> referenced by crossbeam_epoch.59f71684661efdab-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.crossbeam_epoch-09386fa1862e879a.crossbeam_epoch.59f71684661efdab-cgu.0.rcgu.o.rcgu.o:(crossbeam_epoch::deferred::Deferred::new::call::ha786a67067977141)
+          >>> referenced by crossbeam_epoch.59f71684661efdab-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.crossbeam_epoch-09386fa1862e879a.crossbeam_epoch.59f71684661efdab-cgu.0.rcgu.o.rcgu.o:(crossbeam_epoch::internal::Global::collect::hc224cdcf7ae4ae24)
+          >>> referenced 160 more times
+          
+          rust-lld: error: undefined symbol: core::option::unwrap_failed
+          >>> referenced by crossbeam_epoch.59f71684661efdab-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.crossbeam_epoch-09386fa1862e879a.crossbeam_epoch.59f71684661efdab-cgu.0.rcgu.o.rcgu.o:(crossbeam_epoch::internal::Local::finalize::h8b7ed8c5e849938c)
+          >>> referenced by crossbeam_epoch.59f71684661efdab-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.crossbeam_epoch-09386fa1862e879a.crossbeam_epoch.59f71684661efdab-cgu.0.rcgu.o.rcgu.o:(std::sync::once::Once::call_once::_$u7b$$u7b$closure$u7d$$u7d$::h093c201d453deea6 (.llvm.14960878787301256821))
+          >>> referenced by crossbeam_epoch.59f71684661efdab-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.crossbeam_epoch-09386fa1862e879a.crossbeam_epoch.59f71684661efdab-cgu.0.rcgu.o.rcgu.o:(core::ops::function::FnOnce::call_once$u7b$$u7b$vtable.shim$u7d$$u7d$::h7eda0da1f2a903f7 (.llvm.14960878787301256821))
+          >>> referenced 140 more times
+          
+          rust-lld: error: undefined symbol: core::panicking::panic_in_cleanup
+          >>> referenced by crossbeam_epoch.59f71684661efdab-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.crossbeam_epoch-09386fa1862e879a.crossbeam_epoch.59f71684661efdab-cgu.0.rcgu.o.rcgu.o:(crossbeam_epoch::internal::Local::finalize::h8b7ed8c5e849938c)
+          >>> referenced by crossbeam_epoch.59f71684661efdab-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.crossbeam_epoch-09386fa1862e879a.crossbeam_epoch.59f71684661efdab-cgu.0.rcgu.o.rcgu.o:(crossbeam_epoch::internal::Local::finalize::h8b7ed8c5e849938c)
+          >>> referenced by crossbeam_epoch.59f71684661efdab-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.crossbeam_epoch-09386fa1862e879a.crossbeam_epoch.59f71684661efdab-cgu.0.rcgu.o.rcgu.o:(crossbeam_epoch::collector::Collector::register::he39fb1fb6927a423)
+          >>> referenced 453 more times
+          
+          rust-lld: error: undefined symbol: core::panicking::panic
+          >>> referenced by gimli.9d272e8433f81454-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.gimli-46dc78dc6a8cb06a.gimli.9d272e8433f81454-cgu.0.rcgu.o.rcgu.o:(<alloc::collections::btree::node::Handle<alloc::collections::btree::node::NodeRef<alloc::collections::btree::node::marker::Mut, u64, gimli::read::abbrev::Abbreviation, alloc::collections::btree::node::marker::Internal>, alloc::collections::btree::node::marker::Edge>>::insert::<alloc::alloc::Global>)
+          >>> referenced by gimli.9d272e8433f81454-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.gimli-46dc78dc6a8cb06a.gimli.9d272e8433f81454-cgu.0.rcgu.o.rcgu.o:(<alloc::collections::btree::node::Handle<alloc::collections::btree::node::NodeRef<alloc::collections::btree::node::marker::Mut, u64, gimli::read::abbrev::Abbreviation, alloc::collections::btree::node::marker::Internal>, alloc::collections::btree::node::marker::KV>>::split::<alloc::alloc::Global>)
+          >>> referenced by gimli.9d272e8433f81454-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.gimli-46dc78dc6a8cb06a.gimli.9d272e8433f81454-cgu.0.rcgu.o.rcgu.o:(<alloc::collections::btree::node::NodeRef<alloc::collections::btree::node::marker::Mut, u64, gimli::read::abbrev::Abbreviation, alloc::collections::btree::node::marker::Leaf>>::push_with_handle)
+          >>> referenced 138 more times
+          
+          rust-lld: error: undefined symbol: core::panicking::assert_failed::<u64, u64>
+          >>> referenced by gimli.9d272e8433f81454-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.gimli-46dc78dc6a8cb06a.gimli.9d272e8433f81454-cgu.0.rcgu.o.rcgu.o:(<gimli::read::abbrev::Abbreviation>::new)
+          >>> referenced by pse_metatron.dfb147e2a916c355-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.pse_metatron.dfb147e2a916c355-cgu.0.rcgu.o:(pse_metatron::memoized_signature::tests::assert_exact::hfa9948e8308a1189)
+          >>> referenced by pse_metatron.dfb147e2a916c355-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.pse_metatron.dfb147e2a916c355-cgu.0.rcgu.o:(pse_metatron::memoized_signature::tests::assert_exact::hfa9948e8308a1189)
+          >>> referenced 3 more times
+          
+          rust-lld: error: undefined symbol: core::option::expect_failed
+          >>> referenced by option.rs:971 (/rustc/59807616e1fa2540724bfbac14d7976d7e4a3860/library/core/src/option.rs:971)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.getopts-e6d22c100c4f8a03.getopts.d8d20304923dd620-cgu.0.rcgu.o.rcgu.o:(alloc::str::join_generic_copy::<str, u8, alloc::string::String>)
+          >>> referenced by pse_metatron.dfb147e2a916c355-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.pse_metatron.dfb147e2a916c355-cgu.0.rcgu.o:(pse_metatron::indexed_signature::compute_validated_indexed_signature::h57257256c31e56e6)
+          >>> referenced by pse_metatron.dfb147e2a916c355-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.pse_metatron.dfb147e2a916c355-cgu.0.rcgu.o:(core::ops::function::FnOnce::call_once::hae7cc53ca20bcda1)
+          >>> referenced 17 more times
+          
+          rust-lld: error: undefined symbol: core::unicode::unicode_data::white_space::WHITESPACE_MAP
+          >>> referenced by macros.rs:0 (/rustc/59807616e1fa2540724bfbac14d7976d7e4a3860/library/core/src/slice/iter/macros.rs:0)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.getopts-e6d22c100c4f8a03.getopts.d8d20304923dd620-cgu.0.rcgu.o.rcgu.o:(<getopts::Options>::usage_items::{closure#1})
+          >>> referenced by non_null.rs:0 (/rustc/59807616e1fa2540724bfbac14d7976d7e4a3860/library/core/src/ptr/non_null.rs:0)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.getopts-e6d22c100c4f8a03.getopts.d8d20304923dd620-cgu.0.rcgu.o.rcgu.o:(<getopts::Options>::usage_items::{closure#1})
+          >>> referenced by unicode_data.rs:750 (/rustc/59807616e1fa2540724bfbac14d7976d7e4a3860/library/core/src/unicode/unicode_data.rs:750)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.getopts-e6d22c100c4f8a03.getopts.d8d20304923dd620-cgu.0.rcgu.o.rcgu.o:(<getopts::Options>::usage_items::{closure#1})
+          >>> referenced 5 more times
+          
+          rust-lld: error: undefined symbol: core::str::slice_error_fail
+          >>> referenced by traits.rs:241 (/rustc/59807616e1fa2540724bfbac14d7976d7e4a3860/library/core/src/str/traits.rs:241)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.getopts-e6d22c100c4f8a03.getopts.d8d20304923dd620-cgu.0.rcgu.o.rcgu.o:(<getopts::Options>::usage_items::{closure#1})
+          >>> referenced by traits.rs:241 (/rustc/59807616e1fa2540724bfbac14d7976d7e4a3860/library/core/src/str/traits.rs:241)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.getopts-e6d22c100c4f8a03.getopts.d8d20304923dd620-cgu.0.rcgu.o.rcgu.o:(<getopts::Options>::usage_items::{closure#1})
+          >>> referenced by rustc_demangle.c5a78273c295e539-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.rustc_demangle-146c3f1190dee2e2.rustc_demangle.c5a78273c295e539-cgu.0.rcgu.o.rcgu.o:(rustc_demangle::demangle)
+          >>> referenced 26 more times
+          
+          rust-lld: error: undefined symbol: core::slice::copy_from_slice_impl::len_mismatch_fail
+          >>> referenced by miniz_oxide.b662226d77c6ee8e-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.miniz_oxide-5ad929a15a8e6727.miniz_oxide.b662226d77c6ee8e-cgu.0.rcgu.o.rcgu.o:(miniz_oxide::inflate::core::decompress)
+          
+          rust-lld: error: undefined symbol: core::panicking::panic_cannot_unwind
+          >>> referenced by gcc.rs:74 (library/panic_unwind/src/gcc.rs:74)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.panic_unwind-4be5972b22d3a6da.panic_unwind.d9b2f7d287d2f9d2-cgu.0.rcgu.o.rcgu.o:(panic_unwind::imp::panic::exception_cleanup (.llvm.5566994946562375346))
+          >>> referenced by panicking.rs:74 (library/std/src/panicking.rs:74)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.std-d1237ef7159db0a2.std.e28293b1aa0f68bd-cgu.0.rcgu.o.rcgu.o:(__rustc::__rust_drop_panic)
+          >>> referenced by panicking.rs:82 (library/std/src/panicking.rs:82)
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.std-d1237ef7159db0a2.std.e28293b1aa0f68bd-cgu.0.rcgu.o.rcgu.o:(__rustc::__rust_foreign_exception)
+          >>> referenced 11 more times
+          
+          rust-lld: error: undefined hidden symbol: anon.58baeeae7d5fe476157d296c9f08f803.147.llvm.5844774155465566772
+          >>> referenced by pse_metatron.dfb147e2a916c355-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.pse_metatron.dfb147e2a916c355-cgu.0.rcgu.o:(<u32 as core::fmt::Debug>::fmt)
+          >>> referenced by pse_metatron.dfb147e2a916c355-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.pse_metatron.dfb147e2a916c355-cgu.0.rcgu.o:(<u64 as core::fmt::Debug>::fmt)
+          >>> referenced by pse_metatron.dfb147e2a916c355-cgu.0
+          >>>               /workspace/scratch/657e86c899c9/recovered/project/Gabriel/native_pse/target/release/deps/pse_metatron-c4777864910f0d00.pse_metatron.dfb147e2a916c355-cgu.0.rcgu.o:(_$LT$$RF$T$u20$as$u20$core..fmt..Debug$GT$::fmt::h39ed284e85d36c57)
+          >>> referenced 12 more times
+          
+          rust-lld: error: too many errors emitted, stopping now (use --error-limit=0 to see all errors)
+          collect2: error: ld returned 1 exit status
+          
+
+error: could not compile `pse-metatron` (lib test) due to 1 previous error

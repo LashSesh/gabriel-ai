@@ -1,0 +1,433 @@
+{
+  "schema": "gabriel.portfolio-summary.v1",
+  "scope": "Synthetic finite current-record studies; uniformly weighted catalogue summaries",
+  "protocol_sha256": "b1a36f8f5d6d09b09a7807e9eb4435d077aa415681d66d4265a05f1df7fbf247",
+  "results_sha256": "83acbfac6c17e2409966c679429f0b816fc135cc2cb467af4e7590c6748be794",
+  "verification_sha256": "8e592ace16a01210e02a1800c79b5a8cb88946a607156bcd9beb367eb537b418",
+  "counts": {
+    "portfolio_records": 128,
+    "inspection_records": 16,
+    "studies": 5,
+    "policies_per_study": 7,
+    "policy_case_paths": 3696,
+    "passive_observations": 14756,
+    "risk_witnesses": 768,
+    "scenarios": 8,
+    "horizons": 2,
+    "probability_models": 3
+  },
+  "comparison_notes": [
+    "Strict minimax and strict EC2 identify the first minimum-feasible-action label, a stronger stopping objective.",
+    "Full book acquires a minimum-cost fixed query set identifying every modeled semantic current book.",
+    "Exact minimax optimizes worst cost; ties are broken by query index, not expected cost.",
+    "Cost scales are adapter-specific constructed units, not measured time, money or latency.",
+    "No quantitative comparison with Aladdin or any external platform is performed."
+  ],
+  "studies": [
+    {
+      "scope": "portfolio-primary",
+      "epsilon": "2",
+      "risk_limit": "25",
+      "records": 128,
+      "optimal_worst_cost": 9,
+      "strict_optimal_worst_cost": 9,
+      "full_book_cost": 10,
+      "policies": {
+        "minimax": {
+          "mean_cost": "8",
+          "worst_cost": 9,
+          "mean_queries": "11/4",
+          "known": 96,
+          "blocked": 32,
+          "nuisance_queries": 0,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": false
+        },
+        "fixed": {
+          "mean_cost": "69/8",
+          "worst_cost": 12,
+          "mean_queries": "45/8",
+          "known": 96,
+          "blocked": 32,
+          "nuisance_queries": 128,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": false
+        },
+        "reverse": {
+          "mean_cost": "23/4",
+          "worst_cost": 9,
+          "mean_queries": "13/8",
+          "known": 96,
+          "blocked": 32,
+          "nuisance_queries": 0,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": false
+        },
+        "hypothesis_entropy": {
+          "mean_cost": "69/8",
+          "worst_cost": 12,
+          "mean_queries": "45/8",
+          "known": 96,
+          "blocked": 32,
+          "nuisance_queries": 128,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": false
+        },
+        "strict_minimax": {
+          "mean_cost": "8",
+          "worst_cost": 9,
+          "mean_queries": "11/4",
+          "known": 96,
+          "blocked": 32,
+          "nuisance_queries": 0,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": true
+        },
+        "strict_ec2": {
+          "mean_cost": "153/16",
+          "worst_cost": 12,
+          "mean_queries": "97/16",
+          "known": 96,
+          "blocked": 32,
+          "nuisance_queries": 128,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": true
+        },
+        "full_book": {
+          "mean_cost": "10",
+          "worst_cost": 10,
+          "mean_queries": "4",
+          "known": 96,
+          "blocked": 32,
+          "nuisance_queries": 0,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": false
+        }
+      }
+    },
+    {
+      "scope": "portfolio-control-1",
+      "epsilon": "0",
+      "risk_limit": "25",
+      "records": 128,
+      "optimal_worst_cost": 9,
+      "strict_optimal_worst_cost": 9,
+      "full_book_cost": 10,
+      "policies": {
+        "minimax": {
+          "mean_cost": "8",
+          "worst_cost": 9,
+          "mean_queries": "11/4",
+          "known": 96,
+          "blocked": 32,
+          "nuisance_queries": 0,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": false
+        },
+        "fixed": {
+          "mean_cost": "153/16",
+          "worst_cost": 12,
+          "mean_queries": "97/16",
+          "known": 96,
+          "blocked": 32,
+          "nuisance_queries": 128,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": false
+        },
+        "reverse": {
+          "mean_cost": "25/4",
+          "worst_cost": 9,
+          "mean_queries": "29/16",
+          "known": 96,
+          "blocked": 32,
+          "nuisance_queries": 0,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": false
+        },
+        "hypothesis_entropy": {
+          "mean_cost": "153/16",
+          "worst_cost": 12,
+          "mean_queries": "97/16",
+          "known": 96,
+          "blocked": 32,
+          "nuisance_queries": 128,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": false
+        },
+        "strict_minimax": {
+          "mean_cost": "8",
+          "worst_cost": 9,
+          "mean_queries": "11/4",
+          "known": 96,
+          "blocked": 32,
+          "nuisance_queries": 0,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": true
+        },
+        "strict_ec2": {
+          "mean_cost": "153/16",
+          "worst_cost": 12,
+          "mean_queries": "97/16",
+          "known": 96,
+          "blocked": 32,
+          "nuisance_queries": 128,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": true
+        },
+        "full_book": {
+          "mean_cost": "10",
+          "worst_cost": 10,
+          "mean_queries": "4",
+          "known": 96,
+          "blocked": 32,
+          "nuisance_queries": 0,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": false
+        }
+      }
+    },
+    {
+      "scope": "portfolio-control-2",
+      "epsilon": "6",
+      "risk_limit": "25",
+      "records": 128,
+      "optimal_worst_cost": 9,
+      "strict_optimal_worst_cost": 9,
+      "full_book_cost": 10,
+      "policies": {
+        "minimax": {
+          "mean_cost": "8",
+          "worst_cost": 9,
+          "mean_queries": "11/4",
+          "known": 96,
+          "blocked": 32,
+          "nuisance_queries": 0,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": false
+        },
+        "fixed": {
+          "mean_cost": "69/8",
+          "worst_cost": 12,
+          "mean_queries": "45/8",
+          "known": 96,
+          "blocked": 32,
+          "nuisance_queries": 128,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": false
+        },
+        "reverse": {
+          "mean_cost": "23/4",
+          "worst_cost": 9,
+          "mean_queries": "13/8",
+          "known": 96,
+          "blocked": 32,
+          "nuisance_queries": 0,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": false
+        },
+        "hypothesis_entropy": {
+          "mean_cost": "69/8",
+          "worst_cost": 12,
+          "mean_queries": "45/8",
+          "known": 96,
+          "blocked": 32,
+          "nuisance_queries": 128,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": false
+        },
+        "strict_minimax": {
+          "mean_cost": "8",
+          "worst_cost": 9,
+          "mean_queries": "11/4",
+          "known": 96,
+          "blocked": 32,
+          "nuisance_queries": 0,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": true
+        },
+        "strict_ec2": {
+          "mean_cost": "153/16",
+          "worst_cost": 12,
+          "mean_queries": "97/16",
+          "known": 96,
+          "blocked": 32,
+          "nuisance_queries": 128,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": true
+        },
+        "full_book": {
+          "mean_cost": "10",
+          "worst_cost": 10,
+          "mean_queries": "4",
+          "known": 96,
+          "blocked": 32,
+          "nuisance_queries": 0,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": false
+        }
+      }
+    },
+    {
+      "scope": "portfolio-control-3",
+      "epsilon": "2",
+      "risk_limit": "15",
+      "records": 128,
+      "optimal_worst_cost": 9,
+      "strict_optimal_worst_cost": 9,
+      "full_book_cost": 10,
+      "policies": {
+        "minimax": {
+          "mean_cost": "55/8",
+          "worst_cost": 9,
+          "mean_queries": "23/8",
+          "known": 24,
+          "blocked": 104,
+          "nuisance_queries": 0,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": false
+        },
+        "fixed": {
+          "mean_cost": "15/2",
+          "worst_cost": 12,
+          "mean_queries": "41/8",
+          "known": 24,
+          "blocked": 104,
+          "nuisance_queries": 128,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": false
+        },
+        "reverse": {
+          "mean_cost": "43/8",
+          "worst_cost": 9,
+          "mean_queries": "3/2",
+          "known": 24,
+          "blocked": 104,
+          "nuisance_queries": 0,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": false
+        },
+        "hypothesis_entropy": {
+          "mean_cost": "15/2",
+          "worst_cost": 12,
+          "mean_queries": "41/8",
+          "known": 24,
+          "blocked": 104,
+          "nuisance_queries": 128,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": false
+        },
+        "strict_minimax": {
+          "mean_cost": "55/8",
+          "worst_cost": 9,
+          "mean_queries": "23/8",
+          "known": 24,
+          "blocked": 104,
+          "nuisance_queries": 0,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": true
+        },
+        "strict_ec2": {
+          "mean_cost": "123/16",
+          "worst_cost": 12,
+          "mean_queries": "83/16",
+          "known": 24,
+          "blocked": 104,
+          "nuisance_queries": 128,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": true
+        },
+        "full_book": {
+          "mean_cost": "10",
+          "worst_cost": 10,
+          "mean_queries": "4",
+          "known": 24,
+          "blocked": 104,
+          "nuisance_queries": 0,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": false
+        }
+      }
+    },
+    {
+      "scope": "industrial-inspection",
+      "epsilon": "1",
+      "risk_limit": "12",
+      "records": 16,
+      "optimal_worst_cost": 3,
+      "strict_optimal_worst_cost": 5,
+      "full_book_cost": 5,
+      "policies": {
+        "minimax": {
+          "mean_cost": "5/2",
+          "worst_cost": 3,
+          "mean_queries": "3/2",
+          "known": 16,
+          "blocked": 0,
+          "nuisance_queries": 0,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": false
+        },
+        "fixed": {
+          "mean_cost": "17/4",
+          "worst_cost": 6,
+          "mean_queries": "11/4",
+          "known": 16,
+          "blocked": 0,
+          "nuisance_queries": 16,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": false
+        },
+        "reverse": {
+          "mean_cost": "7/2",
+          "worst_cost": 5,
+          "mean_queries": "9/4",
+          "known": 16,
+          "blocked": 0,
+          "nuisance_queries": 0,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": false
+        },
+        "hypothesis_entropy": {
+          "mean_cost": "4",
+          "worst_cost": 4,
+          "mean_queries": "3",
+          "known": 16,
+          "blocked": 0,
+          "nuisance_queries": 16,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": false
+        },
+        "strict_minimax": {
+          "mean_cost": "7/2",
+          "worst_cost": 5,
+          "mean_queries": "2",
+          "known": 16,
+          "blocked": 0,
+          "nuisance_queries": 0,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": true
+        },
+        "strict_ec2": {
+          "mean_cost": "9/2",
+          "worst_cost": 6,
+          "mean_queries": "13/4",
+          "known": 16,
+          "blocked": 0,
+          "nuisance_queries": 16,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": true
+        },
+        "full_book": {
+          "mean_cost": "5",
+          "worst_cost": 5,
+          "mean_queries": "3",
+          "known": 16,
+          "blocked": 0,
+          "nuisance_queries": 0,
+          "wrong_decisions": 0,
+          "stronger_strict_objective": false
+        }
+      }
+    }
+  ]
+}

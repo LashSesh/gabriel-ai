@@ -1,0 +1,1574 @@
+{
+  "schema": "gabriel.runtime-demo.v1",
+  "kind": "synthetic executable example",
+  "reproduce": "python -m gabriel_runtime demo --out NEW_DIRECTORY --with-conflict",
+  "commands": [
+    {
+      "at": 0,
+      "contract": "perception",
+      "expected_head": "bc5ddc5f355ea6739b8cc1b2575e6f071cabbe1396df27b687b9ae21e4c9586d",
+      "id": "demo-1",
+      "op": "bind",
+      "payload": {
+        "adapter": "finite-observation/v1",
+        "config": {
+          "contract_id": "synthetic-two-query-catalogue",
+          "costs": [
+            1,
+            1
+          ],
+          "labels": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "query_names": [
+            "q0",
+            "q1"
+          ],
+          "rows": [
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "1",
+              "0"
+            ],
+            [
+              "1",
+              "1"
+            ]
+          ],
+          "weights": []
+        }
+      }
+    },
+    {
+      "at": 0,
+      "contract": "risk",
+      "expected_head": "4be1722099f81ab6bfa342dab3430bb2e3b0079e3117f58652e34278f29e6a25",
+      "id": "demo-2",
+      "op": "bind",
+      "payload": {
+        "adapter": "maturity-risk/v1",
+        "config": {
+          "availability_mode": "declared_observed_receipts",
+          "initial_states": {
+            "0": {
+              "theta_units": 0,
+              "updates": 0
+            }
+          },
+          "scoring_rule_id": "binary64-upper-loss-hit-primary-v1"
+        }
+      }
+    },
+    {
+      "at": 0,
+      "contract": "risk",
+      "expected_head": "81a134eaa49ca34714b1a019b36ede49929e72ece89d5ccdb4c29a1c16596947",
+      "id": "demo-3",
+      "op": "issue",
+      "payload": {
+        "forecast_id": "synthetic-f0",
+        "issued_at": 0,
+        "lane_id": "0",
+        "origin": 0,
+        "prediction": {
+          "es_hex": "0x1.0000000000000p+1",
+          "var_hex": "0x1.0000000000000p+0"
+        },
+        "provenance": {
+          "purpose": "synthetic-runtime-demonstration"
+        },
+        "requirements": [
+          {
+            "event_end": 0,
+            "event_start": 0,
+            "record_id": "p0",
+            "source_id": "synthetic-price"
+          },
+          {
+            "event_end": 2,
+            "event_start": 2,
+            "record_id": "p2",
+            "source_id": "synthetic-price"
+          }
+        ],
+        "target_end": 2
+      }
+    },
+    {
+      "at": 1,
+      "contract": "perception",
+      "expected_head": "f9280ff53d2a9e032765d7f507a3281f21b05970cdf5b937db487f8d0632e777",
+      "id": "demo-4",
+      "op": "observe",
+      "payload": {
+        "cutoff": 1,
+        "event_interval": [
+          0,
+          0
+        ],
+        "kind": "passive",
+        "outcome": "1",
+        "query": 0,
+        "received_at": 1,
+        "source_id": "synthetic-q0",
+        "status": "observed"
+      }
+    },
+    {
+      "at": 1,
+      "contract": "risk",
+      "expected_head": "565f02f364ad7cbc76c37d4343491fd0316a73bc032f30c99780a4185dc31a73",
+      "id": "demo-5",
+      "op": "outcome",
+      "payload": {
+        "event_interval": [
+          0,
+          0
+        ],
+        "payload": {
+          "rate_hex": "0x1.9000000000000p+6"
+        },
+        "received_at": 1,
+        "record_id": "p0",
+        "revision": 0,
+        "source_id": "synthetic-price",
+        "vintage_id": "v0"
+      }
+    },
+    {
+      "at": 2,
+      "contract": "perception",
+      "expected_head": "de2cb05925e74f76ddac821190b92968b4673852233561378a57fe51517da8a5",
+      "id": "demo-6",
+      "op": "observe",
+      "payload": {
+        "cutoff": 2,
+        "event_interval": [
+          0,
+          0
+        ],
+        "kind": "passive",
+        "outcome": "0",
+        "query": 1,
+        "received_at": 2,
+        "source_id": "synthetic-q1",
+        "status": "observed"
+      }
+    },
+    {
+      "at": 3,
+      "contract": "risk",
+      "expected_head": "19a42566728ea30072930a33b4947d05dbd90340efaae0e8971532b432ba9957",
+      "id": "demo-7",
+      "op": "outcome",
+      "payload": {
+        "event_interval": [
+          2,
+          2
+        ],
+        "payload": {
+          "rate_hex": "0x1.a000000000000p+6"
+        },
+        "received_at": 3,
+        "record_id": "p2",
+        "revision": 0,
+        "source_id": "synthetic-price",
+        "vintage_id": "v0"
+      }
+    },
+    {
+      "at": 4,
+      "contract": "risk",
+      "expected_head": "9157adbb18dbca2f2db5309c25a5b9c752018b5339caacec2b4847dd08529d0a",
+      "id": "demo-8",
+      "op": "outcome",
+      "payload": {
+        "event_interval": [
+          2,
+          2
+        ],
+        "payload": {
+          "rate_hex": "0x1.9200000000000p+6"
+        },
+        "received_at": 4,
+        "record_id": "p2",
+        "revision": 1,
+        "source_id": "synthetic-price",
+        "vintage_id": "v1"
+      }
+    },
+    {
+      "at": 4,
+      "contract": "risk",
+      "expected_head": "267c465cb376834611236ba872c086a00764ba0f50892acb4ee75a1d961f03f3",
+      "id": "demo-9",
+      "op": "query",
+      "payload": {
+        "event_cutoff": 2,
+        "operation_cutoff": null,
+        "receipt_cutoff": 3
+      }
+    },
+    {
+      "at": 4,
+      "contract": "conflict-example",
+      "expected_head": "fddfa2b0c99007b4b2a11c0da4b1c6b4b89bec987142ec6f6f56cd9f0cc7f5db",
+      "id": "demo-10",
+      "op": "bind",
+      "payload": {
+        "adapter": "finite-observation/v1",
+        "config": {
+          "contract_id": "synthetic-two-query-catalogue",
+          "costs": [
+            1,
+            1
+          ],
+          "labels": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "query_names": [
+            "q0",
+            "q1"
+          ],
+          "rows": [
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "1",
+              "0"
+            ],
+            [
+              "1",
+              "1"
+            ]
+          ],
+          "weights": []
+        }
+      }
+    },
+    {
+      "at": 4,
+      "contract": "conflict-example",
+      "expected_head": "99a7b936f9c91adbb67dcadcb88caff6274deda458dd712eda3dc08a7df5b7ba",
+      "id": "demo-11",
+      "op": "observe",
+      "payload": {
+        "cutoff": 4,
+        "event_interval": [
+          0,
+          0
+        ],
+        "kind": "passive",
+        "outcome": "0",
+        "query": 0,
+        "received_at": 4,
+        "source_id": "conflict-source-a",
+        "status": "observed"
+      }
+    },
+    {
+      "at": 4,
+      "contract": "conflict-example",
+      "expected_head": "3f136e16307120294694be6d13255c08bbf66065a939fb7047a239dea1060ec9",
+      "id": "demo-12",
+      "op": "observe",
+      "payload": {
+        "cutoff": 4,
+        "event_interval": [
+          0,
+          0
+        ],
+        "kind": "passive",
+        "outcome": "1",
+        "query": 0,
+        "received_at": 4,
+        "source_id": "conflict-source-b",
+        "status": "observed"
+      }
+    }
+  ],
+  "journal": {
+    "header": {
+      "format": "gabriel-runtime/v1",
+      "limits": {
+        "max_bytes": 10000000,
+        "max_command_bytes": 65536,
+        "max_events": 10000
+      },
+      "registry": {
+        "finite-observation/v1": {
+          "adapter": "finite-observation/v1",
+          "max_history_operations": 256,
+          "max_queries": 12,
+          "max_rows": 32,
+          "query_policy": "minimax",
+          "source_sha256": {
+            "gabriel_runtime/adapters.py": "832978f5b5fa2ed6df9d51a797b702cbfa020531084d7d6e9f0e8857f6e2ece9",
+            "gabriel_runtime/canonical.py": "f5237347101531a0c64e41fdae65adc66aa5b731b42d474ff4f68e83e85695dc",
+            "gabriel_runtime/engine.py": "2499574e2e9733665398fc8203f5e2ca1dc22190860344725568667b7a258bc1",
+            "reproduction/finite_observation.py": "a1549c4f309f6f7d6315be7a9e9f64ef7745cf92576733ab19dde36535e9fadc"
+          }
+        },
+        "maturity-risk/v1": {
+          "adapter": "maturity-risk/v1",
+          "controller_bounds": [
+            -800,
+            800
+          ],
+          "controller_denominator": 800,
+          "max_history_operations": 256,
+          "numpy_version": "2.3.5",
+          "scoring_rule_id": "binary64-upper-loss-hit-primary-v1",
+          "source_sha256": {
+            "gabriel_runtime/adapters.py": "832978f5b5fa2ed6df9d51a797b702cbfa020531084d7d6e9f0e8857f6e2ece9",
+            "gabriel_runtime/canonical.py": "f5237347101531a0c64e41fdae65adc66aa5b731b42d474ff4f68e83e85695dc",
+            "gabriel_runtime/engine.py": "2499574e2e9733665398fc8203f5e2ca1dc22190860344725568667b7a258bc1",
+            "reproduction/decision_regions.py": "4e6cc2582ce77b6fd31d5230dd0f2399b4ba4ad7f80b74839d3a696924ac8246",
+            "reproduction/ecb_risk.py": "6665aecf956f8e9885a4bd269b9d2ab447b90050bb34f9c8503daa73057b8a8d",
+            "reproduction/finite_observation.py": "a1549c4f309f6f7d6315be7a9e9f64ef7745cf92576733ab19dde36535e9fadc",
+            "reproduction/maturity_ledger.py": "c87d7e7b29c5f49f963786302fa96933338c4b83d1f5e8b1e3c0c337309ee6e3",
+            "reproduction/replay_adaptive_maturity.py": "31dc69f24d2c4cebc671a694d6a664cd6a87d5da9009eeac5b1ade45a4d7b2bf",
+            "reproduction/sequential_contract.py": "71a2d49cb89e1831d777a8683a43e7c077e4d5824f3e1525512cc00e5c2fe441"
+          }
+        }
+      }
+    },
+    "records": [
+      {
+        "command": {
+          "at": 0,
+          "contract": "perception",
+          "expected_head": "bc5ddc5f355ea6739b8cc1b2575e6f071cabbe1396df27b687b9ae21e4c9586d",
+          "id": "demo-1",
+          "op": "bind",
+          "payload": {
+            "adapter": "finite-observation/v1",
+            "config": {
+              "contract_id": "synthetic-two-query-catalogue",
+              "costs": [
+                1,
+                1
+              ],
+              "labels": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "query_names": [
+                "q0",
+                "q1"
+              ],
+              "rows": [
+                [
+                  "0",
+                  "0"
+                ],
+                [
+                  "0",
+                  "1"
+                ],
+                [
+                  "1",
+                  "0"
+                ],
+                [
+                  "1",
+                  "1"
+                ]
+              ],
+              "weights": []
+            }
+          }
+        },
+        "hash": "4be1722099f81ab6bfa342dab3430bb2e3b0079e3117f58652e34278f29e6a25",
+        "post_state_hash": "5162e5ebbabd67bef46ddbec700f313a272f1b6333f1ba2df93a2b50905d6b52",
+        "pre_state_hash": null,
+        "prior_head": "bc5ddc5f355ea6739b8cc1b2575e6f071cabbe1396df27b687b9ae21e4c9586d",
+        "result": {
+          "catalogue_digest": "c23e778a642d9765298f458a7bd1ea7e00dfeb60c624d35d257a8a0ec7258702",
+          "compatible_mask": "0xf",
+          "cost_status": "finite",
+          "evidence_count": 0,
+          "next_query": 0,
+          "result": {
+            "compatible_count": 4,
+            "compatible_weight": 4,
+            "cutoff": null,
+            "label": null,
+            "status": "unresolved"
+          },
+          "semantic_profile": "finite-catalogue/v1",
+          "worst_case_cost": 2
+        },
+        "sequence": 1
+      },
+      {
+        "command": {
+          "at": 0,
+          "contract": "risk",
+          "expected_head": "4be1722099f81ab6bfa342dab3430bb2e3b0079e3117f58652e34278f29e6a25",
+          "id": "demo-2",
+          "op": "bind",
+          "payload": {
+            "adapter": "maturity-risk/v1",
+            "config": {
+              "availability_mode": "declared_observed_receipts",
+              "initial_states": {
+                "0": {
+                  "theta_units": 0,
+                  "updates": 0
+                }
+              },
+              "scoring_rule_id": "binary64-upper-loss-hit-primary-v1"
+            }
+          }
+        },
+        "hash": "81a134eaa49ca34714b1a019b36ede49929e72ece89d5ccdb4c29a1c16596947",
+        "post_state_hash": "80105d1adb833b22a0e719bf0b06302c3a93187281db9cae5f6ce8d6d6ab398d",
+        "pre_state_hash": null,
+        "prior_head": "4be1722099f81ab6bfa342dab3430bb2e3b0079e3117f58652e34278f29e6a25",
+        "result": {
+          "arithmetic": "binary64",
+          "controller_states": {
+            "0": {
+              "theta_units": 0,
+              "updates": 0
+            }
+          },
+          "feedback": null,
+          "feedback_digest": null,
+          "issuance_basis": "declared_owner_receipt",
+          "module_operation_count": 0,
+          "semantic_profile": "maturity-risk/v1"
+        },
+        "sequence": 2
+      },
+      {
+        "command": {
+          "at": 0,
+          "contract": "risk",
+          "expected_head": "81a134eaa49ca34714b1a019b36ede49929e72ece89d5ccdb4c29a1c16596947",
+          "id": "demo-3",
+          "op": "issue",
+          "payload": {
+            "forecast_id": "synthetic-f0",
+            "issued_at": 0,
+            "lane_id": "0",
+            "origin": 0,
+            "prediction": {
+              "es_hex": "0x1.0000000000000p+1",
+              "var_hex": "0x1.0000000000000p+0"
+            },
+            "provenance": {
+              "purpose": "synthetic-runtime-demonstration"
+            },
+            "requirements": [
+              {
+                "event_end": 0,
+                "event_start": 0,
+                "record_id": "p0",
+                "source_id": "synthetic-price"
+              },
+              {
+                "event_end": 2,
+                "event_start": 2,
+                "record_id": "p2",
+                "source_id": "synthetic-price"
+              }
+            ],
+            "target_end": 2
+          }
+        },
+        "hash": "f9280ff53d2a9e032765d7f507a3281f21b05970cdf5b937db487f8d0632e777",
+        "post_state_hash": "5f4389e4037f6dd24abdf4c356cabd09bef35db961a635d47bad07041a256c9e",
+        "pre_state_hash": "80105d1adb833b22a0e719bf0b06302c3a93187281db9cae5f6ce8d6d6ab398d",
+        "prior_head": "81a134eaa49ca34714b1a019b36ede49929e72ece89d5ccdb4c29a1c16596947",
+        "result": {
+          "accepted": true,
+          "view": {
+            "arithmetic": "binary64",
+            "controller_states": {
+              "0": {
+                "theta_units": 0,
+                "updates": 0
+              }
+            },
+            "feedback": {
+              "active": [],
+              "availability_mode": "declared_observed_receipts",
+              "event_cutoff": 0,
+              "forecasts": [
+                {
+                  "forecast_id": "synthetic-f0",
+                  "issued_at": 0,
+                  "lane_id": "0",
+                  "origin": 0,
+                  "prediction_json": "{\"es_hex\":\"0x1.0000000000000p+1\",\"var_hex\":\"0x1.0000000000000p+0\"}",
+                  "provenance_json": "{\"purpose\":\"synthetic-runtime-demonstration\"}",
+                  "requirements": [
+                    {
+                      "event_end": 0,
+                      "event_start": 0,
+                      "record_id": "p0",
+                      "source_id": "synthetic-price"
+                    },
+                    {
+                      "event_end": 2,
+                      "event_start": 2,
+                      "record_id": "p2",
+                      "source_id": "synthetic-price"
+                    }
+                  ],
+                  "target_end": 2
+                }
+              ],
+              "operation_cutoff": 1,
+              "pending": [
+                "synthetic-f0"
+              ],
+              "receipt_cutoff": 0,
+              "scoring_rule_id": "binary64-upper-loss-hit-primary-v1"
+            },
+            "feedback_digest": "0365d4661acc9c34ab1d8f6f612322ff6cc2c9046a45b927390033ccda0d080b",
+            "issuance_basis": "declared_owner_receipt",
+            "module_operation_count": 1,
+            "semantic_profile": "maturity-risk/v1"
+          }
+        },
+        "sequence": 3
+      },
+      {
+        "command": {
+          "at": 1,
+          "contract": "perception",
+          "expected_head": "f9280ff53d2a9e032765d7f507a3281f21b05970cdf5b937db487f8d0632e777",
+          "id": "demo-4",
+          "op": "observe",
+          "payload": {
+            "cutoff": 1,
+            "event_interval": [
+              0,
+              0
+            ],
+            "kind": "passive",
+            "outcome": "1",
+            "query": 0,
+            "received_at": 1,
+            "source_id": "synthetic-q0",
+            "status": "observed"
+          }
+        },
+        "hash": "565f02f364ad7cbc76c37d4343491fd0316a73bc032f30c99780a4185dc31a73",
+        "post_state_hash": "ba2c10879122e19d7e8df33797fc628fade71b35076e434b8e6e21f95cea5062",
+        "pre_state_hash": "5162e5ebbabd67bef46ddbec700f313a272f1b6333f1ba2df93a2b50905d6b52",
+        "prior_head": "f9280ff53d2a9e032765d7f507a3281f21b05970cdf5b937db487f8d0632e777",
+        "result": {
+          "accepted": true,
+          "view": {
+            "catalogue_digest": "c23e778a642d9765298f458a7bd1ea7e00dfeb60c624d35d257a8a0ec7258702",
+            "compatible_mask": "0xc",
+            "cost_status": "finite",
+            "evidence_count": 1,
+            "next_query": 1,
+            "result": {
+              "compatible_count": 2,
+              "compatible_weight": 2,
+              "cutoff": 1,
+              "label": null,
+              "status": "unresolved"
+            },
+            "semantic_profile": "finite-catalogue/v1",
+            "worst_case_cost": 1
+          }
+        },
+        "sequence": 4
+      },
+      {
+        "command": {
+          "at": 1,
+          "contract": "risk",
+          "expected_head": "565f02f364ad7cbc76c37d4343491fd0316a73bc032f30c99780a4185dc31a73",
+          "id": "demo-5",
+          "op": "outcome",
+          "payload": {
+            "event_interval": [
+              0,
+              0
+            ],
+            "payload": {
+              "rate_hex": "0x1.9000000000000p+6"
+            },
+            "received_at": 1,
+            "record_id": "p0",
+            "revision": 0,
+            "source_id": "synthetic-price",
+            "vintage_id": "v0"
+          }
+        },
+        "hash": "de2cb05925e74f76ddac821190b92968b4673852233561378a57fe51517da8a5",
+        "post_state_hash": "c3858d14c8182d3eaf151479d82443d11c26d609ed73b2723a1cf7f48c2fef2b",
+        "pre_state_hash": "5f4389e4037f6dd24abdf4c356cabd09bef35db961a635d47bad07041a256c9e",
+        "prior_head": "565f02f364ad7cbc76c37d4343491fd0316a73bc032f30c99780a4185dc31a73",
+        "result": {
+          "accepted": true,
+          "view": {
+            "arithmetic": "binary64",
+            "controller_states": {
+              "0": {
+                "theta_units": 0,
+                "updates": 0
+              }
+            },
+            "feedback": {
+              "active": [],
+              "availability_mode": "declared_observed_receipts",
+              "event_cutoff": 1,
+              "forecasts": [
+                {
+                  "forecast_id": "synthetic-f0",
+                  "issued_at": 0,
+                  "lane_id": "0",
+                  "origin": 0,
+                  "prediction_json": "{\"es_hex\":\"0x1.0000000000000p+1\",\"var_hex\":\"0x1.0000000000000p+0\"}",
+                  "provenance_json": "{\"purpose\":\"synthetic-runtime-demonstration\"}",
+                  "requirements": [
+                    {
+                      "event_end": 0,
+                      "event_start": 0,
+                      "record_id": "p0",
+                      "source_id": "synthetic-price"
+                    },
+                    {
+                      "event_end": 2,
+                      "event_start": 2,
+                      "record_id": "p2",
+                      "source_id": "synthetic-price"
+                    }
+                  ],
+                  "target_end": 2
+                }
+              ],
+              "operation_cutoff": 2,
+              "pending": [
+                "synthetic-f0"
+              ],
+              "receipt_cutoff": 1,
+              "scoring_rule_id": "binary64-upper-loss-hit-primary-v1"
+            },
+            "feedback_digest": "4492deb8bbfb854c12caafccdfcf6d4b5f5efe76c143b06ed1d85d81c4ff1f05",
+            "issuance_basis": "declared_owner_receipt",
+            "module_operation_count": 2,
+            "semantic_profile": "maturity-risk/v1"
+          }
+        },
+        "sequence": 5
+      },
+      {
+        "command": {
+          "at": 2,
+          "contract": "perception",
+          "expected_head": "de2cb05925e74f76ddac821190b92968b4673852233561378a57fe51517da8a5",
+          "id": "demo-6",
+          "op": "observe",
+          "payload": {
+            "cutoff": 2,
+            "event_interval": [
+              0,
+              0
+            ],
+            "kind": "passive",
+            "outcome": "0",
+            "query": 1,
+            "received_at": 2,
+            "source_id": "synthetic-q1",
+            "status": "observed"
+          }
+        },
+        "hash": "19a42566728ea30072930a33b4947d05dbd90340efaae0e8971532b432ba9957",
+        "post_state_hash": "13a0dd0ad28eb351aae0f3450739c8b7e6caec37e2549cbd74976c4d2768088b",
+        "pre_state_hash": "ba2c10879122e19d7e8df33797fc628fade71b35076e434b8e6e21f95cea5062",
+        "prior_head": "de2cb05925e74f76ddac821190b92968b4673852233561378a57fe51517da8a5",
+        "result": {
+          "accepted": true,
+          "view": {
+            "catalogue_digest": "c23e778a642d9765298f458a7bd1ea7e00dfeb60c624d35d257a8a0ec7258702",
+            "compatible_mask": "0x4",
+            "cost_status": "finite",
+            "evidence_count": 2,
+            "next_query": null,
+            "result": {
+              "compatible_count": 1,
+              "compatible_weight": 1,
+              "cutoff": 2,
+              "label": 0,
+              "status": "decided"
+            },
+            "semantic_profile": "finite-catalogue/v1",
+            "worst_case_cost": 0
+          }
+        },
+        "sequence": 6
+      },
+      {
+        "command": {
+          "at": 3,
+          "contract": "risk",
+          "expected_head": "19a42566728ea30072930a33b4947d05dbd90340efaae0e8971532b432ba9957",
+          "id": "demo-7",
+          "op": "outcome",
+          "payload": {
+            "event_interval": [
+              2,
+              2
+            ],
+            "payload": {
+              "rate_hex": "0x1.a000000000000p+6"
+            },
+            "received_at": 3,
+            "record_id": "p2",
+            "revision": 0,
+            "source_id": "synthetic-price",
+            "vintage_id": "v0"
+          }
+        },
+        "hash": "9157adbb18dbca2f2db5309c25a5b9c752018b5339caacec2b4847dd08529d0a",
+        "post_state_hash": "8663da9853af0ebea9ec577deda255e0bd9fd7017b8a49f615791314a110f977",
+        "pre_state_hash": "c3858d14c8182d3eaf151479d82443d11c26d609ed73b2723a1cf7f48c2fef2b",
+        "prior_head": "19a42566728ea30072930a33b4947d05dbd90340efaae0e8971532b432ba9957",
+        "result": {
+          "accepted": true,
+          "view": {
+            "arithmetic": "binary64",
+            "controller_states": {
+              "0": {
+                "theta_units": 39,
+                "updates": 1
+              }
+            },
+            "feedback": {
+              "active": [
+                {
+                  "evidence": [
+                    {
+                      "event_end": 0,
+                      "event_start": 0,
+                      "payload_json": "{\"rate_hex\":\"0x1.9000000000000p+6\"}",
+                      "received_at": 1,
+                      "record_id": "p0",
+                      "revision": 0,
+                      "source_id": "synthetic-price",
+                      "vintage_id": "v0"
+                    },
+                    {
+                      "event_end": 2,
+                      "event_start": 2,
+                      "payload_json": "{\"rate_hex\":\"0x1.a000000000000p+6\"}",
+                      "received_at": 3,
+                      "record_id": "p2",
+                      "revision": 0,
+                      "source_id": "synthetic-price",
+                      "vintage_id": "v0"
+                    }
+                  ],
+                  "first_matured_at": 3,
+                  "forecast_digest": "1c0a2e1a18ac2dd6d763cbb1394264b19ff65834665d655121da9300916f957a",
+                  "forecast_id": "synthetic-f0",
+                  "issued_at": 0,
+                  "lane_id": "0",
+                  "score_json": "{\"hit\":true,\"realized_log_loss_hex\":\"0x1.f6066ecff4ff1p+1\"}",
+                  "target_end": 2
+                }
+              ],
+              "availability_mode": "declared_observed_receipts",
+              "event_cutoff": 3,
+              "forecasts": [
+                {
+                  "forecast_id": "synthetic-f0",
+                  "issued_at": 0,
+                  "lane_id": "0",
+                  "origin": 0,
+                  "prediction_json": "{\"es_hex\":\"0x1.0000000000000p+1\",\"var_hex\":\"0x1.0000000000000p+0\"}",
+                  "provenance_json": "{\"purpose\":\"synthetic-runtime-demonstration\"}",
+                  "requirements": [
+                    {
+                      "event_end": 0,
+                      "event_start": 0,
+                      "record_id": "p0",
+                      "source_id": "synthetic-price"
+                    },
+                    {
+                      "event_end": 2,
+                      "event_start": 2,
+                      "record_id": "p2",
+                      "source_id": "synthetic-price"
+                    }
+                  ],
+                  "target_end": 2
+                }
+              ],
+              "operation_cutoff": 3,
+              "pending": [],
+              "receipt_cutoff": 3,
+              "scoring_rule_id": "binary64-upper-loss-hit-primary-v1"
+            },
+            "feedback_digest": "52effd597623d8fa4cc3bd081a1640cbe365f3c8dc2905e219ef122e1316fe36",
+            "issuance_basis": "declared_owner_receipt",
+            "module_operation_count": 3,
+            "semantic_profile": "maturity-risk/v1"
+          }
+        },
+        "sequence": 7
+      },
+      {
+        "command": {
+          "at": 4,
+          "contract": "risk",
+          "expected_head": "9157adbb18dbca2f2db5309c25a5b9c752018b5339caacec2b4847dd08529d0a",
+          "id": "demo-8",
+          "op": "outcome",
+          "payload": {
+            "event_interval": [
+              2,
+              2
+            ],
+            "payload": {
+              "rate_hex": "0x1.9200000000000p+6"
+            },
+            "received_at": 4,
+            "record_id": "p2",
+            "revision": 1,
+            "source_id": "synthetic-price",
+            "vintage_id": "v1"
+          }
+        },
+        "hash": "267c465cb376834611236ba872c086a00764ba0f50892acb4ee75a1d961f03f3",
+        "post_state_hash": "1d38019f6368c4b16c46aa07ee1d61a1a933c98ede769f8ad0a3035d68d1b12f",
+        "pre_state_hash": "8663da9853af0ebea9ec577deda255e0bd9fd7017b8a49f615791314a110f977",
+        "prior_head": "9157adbb18dbca2f2db5309c25a5b9c752018b5339caacec2b4847dd08529d0a",
+        "result": {
+          "accepted": true,
+          "view": {
+            "arithmetic": "binary64",
+            "controller_states": {
+              "0": {
+                "theta_units": -1,
+                "updates": 1
+              }
+            },
+            "feedback": {
+              "active": [
+                {
+                  "evidence": [
+                    {
+                      "event_end": 0,
+                      "event_start": 0,
+                      "payload_json": "{\"rate_hex\":\"0x1.9000000000000p+6\"}",
+                      "received_at": 1,
+                      "record_id": "p0",
+                      "revision": 0,
+                      "source_id": "synthetic-price",
+                      "vintage_id": "v0"
+                    },
+                    {
+                      "event_end": 2,
+                      "event_start": 2,
+                      "payload_json": "{\"rate_hex\":\"0x1.9200000000000p+6\"}",
+                      "received_at": 4,
+                      "record_id": "p2",
+                      "revision": 1,
+                      "source_id": "synthetic-price",
+                      "vintage_id": "v1"
+                    }
+                  ],
+                  "first_matured_at": 3,
+                  "forecast_digest": "1c0a2e1a18ac2dd6d763cbb1394264b19ff65834665d655121da9300916f957a",
+                  "forecast_id": "synthetic-f0",
+                  "issued_at": 0,
+                  "lane_id": "0",
+                  "score_json": "{\"hit\":false,\"realized_log_loss_hex\":\"0x1.feb9687ef1217p-2\"}",
+                  "target_end": 2
+                }
+              ],
+              "availability_mode": "declared_observed_receipts",
+              "event_cutoff": 4,
+              "forecasts": [
+                {
+                  "forecast_id": "synthetic-f0",
+                  "issued_at": 0,
+                  "lane_id": "0",
+                  "origin": 0,
+                  "prediction_json": "{\"es_hex\":\"0x1.0000000000000p+1\",\"var_hex\":\"0x1.0000000000000p+0\"}",
+                  "provenance_json": "{\"purpose\":\"synthetic-runtime-demonstration\"}",
+                  "requirements": [
+                    {
+                      "event_end": 0,
+                      "event_start": 0,
+                      "record_id": "p0",
+                      "source_id": "synthetic-price"
+                    },
+                    {
+                      "event_end": 2,
+                      "event_start": 2,
+                      "record_id": "p2",
+                      "source_id": "synthetic-price"
+                    }
+                  ],
+                  "target_end": 2
+                }
+              ],
+              "operation_cutoff": 4,
+              "pending": [],
+              "receipt_cutoff": 4,
+              "scoring_rule_id": "binary64-upper-loss-hit-primary-v1"
+            },
+            "feedback_digest": "ab53998ac3f190625e0b7322a1d71c1d4759d81006b5171f0e1f79deabd08e53",
+            "issuance_basis": "declared_owner_receipt",
+            "module_operation_count": 4,
+            "semantic_profile": "maturity-risk/v1"
+          }
+        },
+        "sequence": 8
+      },
+      {
+        "command": {
+          "at": 4,
+          "contract": "risk",
+          "expected_head": "267c465cb376834611236ba872c086a00764ba0f50892acb4ee75a1d961f03f3",
+          "id": "demo-9",
+          "op": "query",
+          "payload": {
+            "event_cutoff": 2,
+            "operation_cutoff": null,
+            "receipt_cutoff": 3
+          }
+        },
+        "hash": "fddfa2b0c99007b4b2a11c0da4b1c6b4b89bec987142ec6f6f56cd9f0cc7f5db",
+        "post_state_hash": "33399843e67a07f7961d4a09284f21b2243782fc4baa4bd0d71a9af587a1c778",
+        "pre_state_hash": "1d38019f6368c4b16c46aa07ee1d61a1a933c98ede769f8ad0a3035d68d1b12f",
+        "prior_head": "267c465cb376834611236ba872c086a00764ba0f50892acb4ee75a1d961f03f3",
+        "result": {
+          "arithmetic": "binary64",
+          "controller_states": {
+            "0": {
+              "theta_units": 39,
+              "updates": 1
+            }
+          },
+          "feedback": {
+            "active": [
+              {
+                "evidence": [
+                  {
+                    "event_end": 0,
+                    "event_start": 0,
+                    "payload_json": "{\"rate_hex\":\"0x1.9000000000000p+6\"}",
+                    "received_at": 1,
+                    "record_id": "p0",
+                    "revision": 0,
+                    "source_id": "synthetic-price",
+                    "vintage_id": "v0"
+                  },
+                  {
+                    "event_end": 2,
+                    "event_start": 2,
+                    "payload_json": "{\"rate_hex\":\"0x1.a000000000000p+6\"}",
+                    "received_at": 3,
+                    "record_id": "p2",
+                    "revision": 0,
+                    "source_id": "synthetic-price",
+                    "vintage_id": "v0"
+                  }
+                ],
+                "first_matured_at": 3,
+                "forecast_digest": "1c0a2e1a18ac2dd6d763cbb1394264b19ff65834665d655121da9300916f957a",
+                "forecast_id": "synthetic-f0",
+                "issued_at": 0,
+                "lane_id": "0",
+                "score_json": "{\"hit\":true,\"realized_log_loss_hex\":\"0x1.f6066ecff4ff1p+1\"}",
+                "target_end": 2
+              }
+            ],
+            "availability_mode": "declared_observed_receipts",
+            "event_cutoff": 2,
+            "forecasts": [
+              {
+                "forecast_id": "synthetic-f0",
+                "issued_at": 0,
+                "lane_id": "0",
+                "origin": 0,
+                "prediction_json": "{\"es_hex\":\"0x1.0000000000000p+1\",\"var_hex\":\"0x1.0000000000000p+0\"}",
+                "provenance_json": "{\"purpose\":\"synthetic-runtime-demonstration\"}",
+                "requirements": [
+                  {
+                    "event_end": 0,
+                    "event_start": 0,
+                    "record_id": "p0",
+                    "source_id": "synthetic-price"
+                  },
+                  {
+                    "event_end": 2,
+                    "event_start": 2,
+                    "record_id": "p2",
+                    "source_id": "synthetic-price"
+                  }
+                ],
+                "target_end": 2
+              }
+            ],
+            "operation_cutoff": 4,
+            "pending": [],
+            "receipt_cutoff": 3,
+            "scoring_rule_id": "binary64-upper-loss-hit-primary-v1"
+          },
+          "feedback_digest": "b4e1c130a681917ba6b486c4fd37c7ae2ed2821e7a79fdc46cd7e249f6085101",
+          "issuance_basis": "declared_owner_receipt",
+          "module_operation_count": 4,
+          "semantic_profile": "maturity-risk/v1"
+        },
+        "sequence": 9
+      },
+      {
+        "command": {
+          "at": 4,
+          "contract": "conflict-example",
+          "expected_head": "fddfa2b0c99007b4b2a11c0da4b1c6b4b89bec987142ec6f6f56cd9f0cc7f5db",
+          "id": "demo-10",
+          "op": "bind",
+          "payload": {
+            "adapter": "finite-observation/v1",
+            "config": {
+              "contract_id": "synthetic-two-query-catalogue",
+              "costs": [
+                1,
+                1
+              ],
+              "labels": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "query_names": [
+                "q0",
+                "q1"
+              ],
+              "rows": [
+                [
+                  "0",
+                  "0"
+                ],
+                [
+                  "0",
+                  "1"
+                ],
+                [
+                  "1",
+                  "0"
+                ],
+                [
+                  "1",
+                  "1"
+                ]
+              ],
+              "weights": []
+            }
+          }
+        },
+        "hash": "99a7b936f9c91adbb67dcadcb88caff6274deda458dd712eda3dc08a7df5b7ba",
+        "post_state_hash": "5162e5ebbabd67bef46ddbec700f313a272f1b6333f1ba2df93a2b50905d6b52",
+        "pre_state_hash": null,
+        "prior_head": "fddfa2b0c99007b4b2a11c0da4b1c6b4b89bec987142ec6f6f56cd9f0cc7f5db",
+        "result": {
+          "catalogue_digest": "c23e778a642d9765298f458a7bd1ea7e00dfeb60c624d35d257a8a0ec7258702",
+          "compatible_mask": "0xf",
+          "cost_status": "finite",
+          "evidence_count": 0,
+          "next_query": 0,
+          "result": {
+            "compatible_count": 4,
+            "compatible_weight": 4,
+            "cutoff": null,
+            "label": null,
+            "status": "unresolved"
+          },
+          "semantic_profile": "finite-catalogue/v1",
+          "worst_case_cost": 2
+        },
+        "sequence": 10
+      },
+      {
+        "command": {
+          "at": 4,
+          "contract": "conflict-example",
+          "expected_head": "99a7b936f9c91adbb67dcadcb88caff6274deda458dd712eda3dc08a7df5b7ba",
+          "id": "demo-11",
+          "op": "observe",
+          "payload": {
+            "cutoff": 4,
+            "event_interval": [
+              0,
+              0
+            ],
+            "kind": "passive",
+            "outcome": "0",
+            "query": 0,
+            "received_at": 4,
+            "source_id": "conflict-source-a",
+            "status": "observed"
+          }
+        },
+        "hash": "3f136e16307120294694be6d13255c08bbf66065a939fb7047a239dea1060ec9",
+        "post_state_hash": "312b9efda01e07eed5aadc8d48518cd208fb62d3762ad340777779a7252b8f63",
+        "pre_state_hash": "5162e5ebbabd67bef46ddbec700f313a272f1b6333f1ba2df93a2b50905d6b52",
+        "prior_head": "99a7b936f9c91adbb67dcadcb88caff6274deda458dd712eda3dc08a7df5b7ba",
+        "result": {
+          "accepted": true,
+          "view": {
+            "catalogue_digest": "c23e778a642d9765298f458a7bd1ea7e00dfeb60c624d35d257a8a0ec7258702",
+            "compatible_mask": "0x3",
+            "cost_status": "finite",
+            "evidence_count": 1,
+            "next_query": null,
+            "result": {
+              "compatible_count": 2,
+              "compatible_weight": 2,
+              "cutoff": 4,
+              "label": 0,
+              "status": "decided"
+            },
+            "semantic_profile": "finite-catalogue/v1",
+            "worst_case_cost": 0
+          }
+        },
+        "sequence": 11
+      },
+      {
+        "command": {
+          "at": 4,
+          "contract": "conflict-example",
+          "expected_head": "3f136e16307120294694be6d13255c08bbf66065a939fb7047a239dea1060ec9",
+          "id": "demo-12",
+          "op": "observe",
+          "payload": {
+            "cutoff": 4,
+            "event_interval": [
+              0,
+              0
+            ],
+            "kind": "passive",
+            "outcome": "1",
+            "query": 0,
+            "received_at": 4,
+            "source_id": "conflict-source-b",
+            "status": "observed"
+          }
+        },
+        "hash": "cee6433a18f7d8b1ed6c2a9795ed15b43991b0c0b07178df03cd4224bde0ae56",
+        "post_state_hash": "a99dbd6e21eef31c3742efe849302510c117f97e7578b43d1827863c6451fa6c",
+        "pre_state_hash": "312b9efda01e07eed5aadc8d48518cd208fb62d3762ad340777779a7252b8f63",
+        "prior_head": "3f136e16307120294694be6d13255c08bbf66065a939fb7047a239dea1060ec9",
+        "result": {
+          "accepted": true,
+          "view": {
+            "catalogue_digest": "c23e778a642d9765298f458a7bd1ea7e00dfeb60c624d35d257a8a0ec7258702",
+            "compatible_mask": "0x0",
+            "cost_status": "infinite",
+            "evidence_count": 2,
+            "next_query": null,
+            "result": {
+              "compatible_count": 0,
+              "compatible_weight": 0,
+              "cutoff": 4,
+              "label": null,
+              "status": "conflict"
+            },
+            "semantic_profile": "finite-catalogue/v1",
+            "worst_case_cost": null
+          }
+        },
+        "sequence": 12
+      }
+    ]
+  },
+  "anchor": {
+    "events": 12,
+    "head": "cee6433a18f7d8b1ed6c2a9795ed15b43991b0c0b07178df03cd4224bde0ae56"
+  },
+  "summary": {
+    "anchor": {
+      "events": 12,
+      "head": "cee6433a18f7d8b1ed6c2a9795ed15b43991b0c0b07178df03cd4224bde0ae56"
+    },
+    "audit": {
+      "bytes": 3973,
+      "contracts": 3,
+      "events": 12,
+      "external_anchor_checked": true,
+      "head": "cee6433a18f7d8b1ed6c2a9795ed15b43991b0c0b07178df03cd4224bde0ae56",
+      "journal_mode": "delete",
+      "semantic_replay": true,
+      "status": "passed",
+      "synchronous": 3
+    },
+    "claim": "local operational trace; no predictive performance experiment",
+    "example_kind": "synthetic",
+    "identical_retry_without_new_charge": true,
+    "snapshots": {
+      "finite_after_first_query": {
+        "catalogue_digest": "c23e778a642d9765298f458a7bd1ea7e00dfeb60c624d35d257a8a0ec7258702",
+        "compatible_mask": "0xc",
+        "cost_status": "finite",
+        "evidence_count": 1,
+        "next_query": 1,
+        "result": {
+          "compatible_count": 2,
+          "compatible_weight": 2,
+          "cutoff": 1,
+          "label": null,
+          "status": "unresolved"
+        },
+        "semantic_profile": "finite-catalogue/v1",
+        "worst_case_cost": 1
+      },
+      "finite_after_second_query": {
+        "catalogue_digest": "c23e778a642d9765298f458a7bd1ea7e00dfeb60c624d35d257a8a0ec7258702",
+        "compatible_mask": "0x4",
+        "cost_status": "finite",
+        "evidence_count": 2,
+        "next_query": null,
+        "result": {
+          "compatible_count": 1,
+          "compatible_weight": 1,
+          "cutoff": 2,
+          "label": 0,
+          "status": "decided"
+        },
+        "semantic_profile": "finite-catalogue/v1",
+        "worst_case_cost": 0
+      },
+      "finite_separate_conflict": {
+        "catalogue_digest": "c23e778a642d9765298f458a7bd1ea7e00dfeb60c624d35d257a8a0ec7258702",
+        "compatible_mask": "0x0",
+        "cost_status": "infinite",
+        "evidence_count": 2,
+        "next_query": null,
+        "result": {
+          "compatible_count": 0,
+          "compatible_weight": 0,
+          "cutoff": 4,
+          "label": null,
+          "status": "conflict"
+        },
+        "semantic_profile": "finite-catalogue/v1",
+        "worst_case_cost": null
+      },
+      "risk_after_correction": {
+        "arithmetic": "binary64",
+        "controller_states": {
+          "0": {
+            "theta_units": -1,
+            "updates": 1
+          }
+        },
+        "feedback": {
+          "active": [
+            {
+              "evidence": [
+                {
+                  "event_end": 0,
+                  "event_start": 0,
+                  "payload_json": "{\"rate_hex\":\"0x1.9000000000000p+6\"}",
+                  "received_at": 1,
+                  "record_id": "p0",
+                  "revision": 0,
+                  "source_id": "synthetic-price",
+                  "vintage_id": "v0"
+                },
+                {
+                  "event_end": 2,
+                  "event_start": 2,
+                  "payload_json": "{\"rate_hex\":\"0x1.9200000000000p+6\"}",
+                  "received_at": 4,
+                  "record_id": "p2",
+                  "revision": 1,
+                  "source_id": "synthetic-price",
+                  "vintage_id": "v1"
+                }
+              ],
+              "first_matured_at": 3,
+              "forecast_digest": "1c0a2e1a18ac2dd6d763cbb1394264b19ff65834665d655121da9300916f957a",
+              "forecast_id": "synthetic-f0",
+              "issued_at": 0,
+              "lane_id": "0",
+              "score_json": "{\"hit\":false,\"realized_log_loss_hex\":\"0x1.feb9687ef1217p-2\"}",
+              "target_end": 2
+            }
+          ],
+          "availability_mode": "declared_observed_receipts",
+          "event_cutoff": 4,
+          "forecasts": [
+            {
+              "forecast_id": "synthetic-f0",
+              "issued_at": 0,
+              "lane_id": "0",
+              "origin": 0,
+              "prediction_json": "{\"es_hex\":\"0x1.0000000000000p+1\",\"var_hex\":\"0x1.0000000000000p+0\"}",
+              "provenance_json": "{\"purpose\":\"synthetic-runtime-demonstration\"}",
+              "requirements": [
+                {
+                  "event_end": 0,
+                  "event_start": 0,
+                  "record_id": "p0",
+                  "source_id": "synthetic-price"
+                },
+                {
+                  "event_end": 2,
+                  "event_start": 2,
+                  "record_id": "p2",
+                  "source_id": "synthetic-price"
+                }
+              ],
+              "target_end": 2
+            }
+          ],
+          "operation_cutoff": 4,
+          "pending": [],
+          "receipt_cutoff": 4,
+          "scoring_rule_id": "binary64-upper-loss-hit-primary-v1"
+        },
+        "feedback_digest": "ab53998ac3f190625e0b7322a1d71c1d4759d81006b5171f0e1f79deabd08e53",
+        "issuance_basis": "declared_owner_receipt",
+        "module_operation_count": 4,
+        "semantic_profile": "maturity-risk/v1"
+      },
+      "risk_after_first_maturity": {
+        "arithmetic": "binary64",
+        "controller_states": {
+          "0": {
+            "theta_units": 39,
+            "updates": 1
+          }
+        },
+        "feedback": {
+          "active": [
+            {
+              "evidence": [
+                {
+                  "event_end": 0,
+                  "event_start": 0,
+                  "payload_json": "{\"rate_hex\":\"0x1.9000000000000p+6\"}",
+                  "received_at": 1,
+                  "record_id": "p0",
+                  "revision": 0,
+                  "source_id": "synthetic-price",
+                  "vintage_id": "v0"
+                },
+                {
+                  "event_end": 2,
+                  "event_start": 2,
+                  "payload_json": "{\"rate_hex\":\"0x1.a000000000000p+6\"}",
+                  "received_at": 3,
+                  "record_id": "p2",
+                  "revision": 0,
+                  "source_id": "synthetic-price",
+                  "vintage_id": "v0"
+                }
+              ],
+              "first_matured_at": 3,
+              "forecast_digest": "1c0a2e1a18ac2dd6d763cbb1394264b19ff65834665d655121da9300916f957a",
+              "forecast_id": "synthetic-f0",
+              "issued_at": 0,
+              "lane_id": "0",
+              "score_json": "{\"hit\":true,\"realized_log_loss_hex\":\"0x1.f6066ecff4ff1p+1\"}",
+              "target_end": 2
+            }
+          ],
+          "availability_mode": "declared_observed_receipts",
+          "event_cutoff": 3,
+          "forecasts": [
+            {
+              "forecast_id": "synthetic-f0",
+              "issued_at": 0,
+              "lane_id": "0",
+              "origin": 0,
+              "prediction_json": "{\"es_hex\":\"0x1.0000000000000p+1\",\"var_hex\":\"0x1.0000000000000p+0\"}",
+              "provenance_json": "{\"purpose\":\"synthetic-runtime-demonstration\"}",
+              "requirements": [
+                {
+                  "event_end": 0,
+                  "event_start": 0,
+                  "record_id": "p0",
+                  "source_id": "synthetic-price"
+                },
+                {
+                  "event_end": 2,
+                  "event_start": 2,
+                  "record_id": "p2",
+                  "source_id": "synthetic-price"
+                }
+              ],
+              "target_end": 2
+            }
+          ],
+          "operation_cutoff": 3,
+          "pending": [],
+          "receipt_cutoff": 3,
+          "scoring_rule_id": "binary64-upper-loss-hit-primary-v1"
+        },
+        "feedback_digest": "52effd597623d8fa4cc3bd081a1640cbe365f3c8dc2905e219ef122e1316fe36",
+        "issuance_basis": "declared_owner_receipt",
+        "module_operation_count": 3,
+        "semantic_profile": "maturity-risk/v1"
+      },
+      "risk_as_of_first_maturity": {
+        "arithmetic": "binary64",
+        "controller_states": {
+          "0": {
+            "theta_units": 39,
+            "updates": 1
+          }
+        },
+        "feedback": {
+          "active": [
+            {
+              "evidence": [
+                {
+                  "event_end": 0,
+                  "event_start": 0,
+                  "payload_json": "{\"rate_hex\":\"0x1.9000000000000p+6\"}",
+                  "received_at": 1,
+                  "record_id": "p0",
+                  "revision": 0,
+                  "source_id": "synthetic-price",
+                  "vintage_id": "v0"
+                },
+                {
+                  "event_end": 2,
+                  "event_start": 2,
+                  "payload_json": "{\"rate_hex\":\"0x1.a000000000000p+6\"}",
+                  "received_at": 3,
+                  "record_id": "p2",
+                  "revision": 0,
+                  "source_id": "synthetic-price",
+                  "vintage_id": "v0"
+                }
+              ],
+              "first_matured_at": 3,
+              "forecast_digest": "1c0a2e1a18ac2dd6d763cbb1394264b19ff65834665d655121da9300916f957a",
+              "forecast_id": "synthetic-f0",
+              "issued_at": 0,
+              "lane_id": "0",
+              "score_json": "{\"hit\":true,\"realized_log_loss_hex\":\"0x1.f6066ecff4ff1p+1\"}",
+              "target_end": 2
+            }
+          ],
+          "availability_mode": "declared_observed_receipts",
+          "event_cutoff": 2,
+          "forecasts": [
+            {
+              "forecast_id": "synthetic-f0",
+              "issued_at": 0,
+              "lane_id": "0",
+              "origin": 0,
+              "prediction_json": "{\"es_hex\":\"0x1.0000000000000p+1\",\"var_hex\":\"0x1.0000000000000p+0\"}",
+              "provenance_json": "{\"purpose\":\"synthetic-runtime-demonstration\"}",
+              "requirements": [
+                {
+                  "event_end": 0,
+                  "event_start": 0,
+                  "record_id": "p0",
+                  "source_id": "synthetic-price"
+                },
+                {
+                  "event_end": 2,
+                  "event_start": 2,
+                  "record_id": "p2",
+                  "source_id": "synthetic-price"
+                }
+              ],
+              "target_end": 2
+            }
+          ],
+          "operation_cutoff": 4,
+          "pending": [],
+          "receipt_cutoff": 3,
+          "scoring_rule_id": "binary64-upper-loss-hit-primary-v1"
+        },
+        "feedback_digest": "b4e1c130a681917ba6b486c4fd37c7ae2ed2821e7a79fdc46cd7e249f6085101",
+        "issuance_basis": "declared_owner_receipt",
+        "module_operation_count": 4,
+        "semantic_profile": "maturity-risk/v1"
+      },
+      "risk_pending": {
+        "arithmetic": "binary64",
+        "controller_states": {
+          "0": {
+            "theta_units": 0,
+            "updates": 0
+          }
+        },
+        "feedback": {
+          "active": [],
+          "availability_mode": "declared_observed_receipts",
+          "event_cutoff": 1,
+          "forecasts": [
+            {
+              "forecast_id": "synthetic-f0",
+              "issued_at": 0,
+              "lane_id": "0",
+              "origin": 0,
+              "prediction_json": "{\"es_hex\":\"0x1.0000000000000p+1\",\"var_hex\":\"0x1.0000000000000p+0\"}",
+              "provenance_json": "{\"purpose\":\"synthetic-runtime-demonstration\"}",
+              "requirements": [
+                {
+                  "event_end": 0,
+                  "event_start": 0,
+                  "record_id": "p0",
+                  "source_id": "synthetic-price"
+                },
+                {
+                  "event_end": 2,
+                  "event_start": 2,
+                  "record_id": "p2",
+                  "source_id": "synthetic-price"
+                }
+              ],
+              "target_end": 2
+            }
+          ],
+          "operation_cutoff": 2,
+          "pending": [
+            "synthetic-f0"
+          ],
+          "receipt_cutoff": 1,
+          "scoring_rule_id": "binary64-upper-loss-hit-primary-v1"
+        },
+        "feedback_digest": "4492deb8bbfb854c12caafccdfcf6d4b5f5efe76c143b06ed1d85d81c4ff1f05",
+        "issuance_basis": "declared_owner_receipt",
+        "module_operation_count": 2,
+        "semantic_profile": "maturity-risk/v1"
+      }
+    },
+    "status": "passed"
+  }
+}

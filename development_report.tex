@@ -1,0 +1,62 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=24mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[provide=*,ngerman]{babel}
+\usepackage{lmodern,microtype,parskip,booktabs,tabularx,hyperref}
+\setlength{\parindent}{0pt}
+\hypersetup{hidelinks,pdftitle={Gabriel: Entwicklungs- und Prüfbericht}}
+\begin{document}
+\begin{center}
+{\LARGE\bfseries Gabriel}\par\vspace{5pt}
+{\large Entwicklungs- und Prüfbericht}\par\vspace{5pt}
+27. September 2026
+\end{center}
+\section*{Beitrag dieser Phase}
+Gabriel bereitet das exakte Graphmodell nun einmal pro Beobachtungsbefehl vor und verwendet es für alle darin angefragten Zeitfenster. Jedes Fenster erhält weiterhin einen eigenständigen vollständigen Nachweis. Es gibt keinen Cache über Befehlsgrenzen hinweg. Die Änderung ist an die tatsächliche native Engine und den unveränderten transaktionalen Store angeschlossen.
+
+Das Erhaltungsargument trennt modellabhängige exakte Größen von der fensterabhängigen numerischen Entscheidung. Für gültige Eingaben entstehen dieselben vollständigen Zertifikatsbytes, einschließlich Schranken, Zeugen, offenen Fällen und Rechenzählern. Alle bisherigen Integritätsprüfpunkte bleiben erhalten. Das neue Profil bindet zusätzlich seine beiden neuen Quellmodule und hat deshalb eine andere Registry-Identität. Vollständige Ausstellungsinhalte stimmen profilübergreifend überein; Journal-Köpfe und profilabhängige Ansichten werden nur innerhalb ihres eigenen Profils verglichen.
+
+Dies ist eine konkrete Implementierungs- und Systemleistung. Die Wiederverwendung unveränderlicher Vorberechnungen wird nicht als neue allgemeine mathematische Methode ausgegeben. Der ursprüngliche Zielpunkt bleibt ein belastbar demonstrierter Aufgabenvorteil. Eine Beschleunigung dieser Modellprüfung ist von besserer Prognosequalität oder einer Überlegenheit gegenüber Aladdin zu unterscheiden.
+
+\section*{Gemessener Nutzen}
+Der vor jeder Zeitmessung fixierte Vergleich enthält 32 Hauptaufgaben: 7, 13, 32 oder 64 Knoten, zwei feste Quellseeds und 1, 4, 16 oder 32 verschiedene Zeitfenster. Acht weitere Aufgaben prüfen nicht unterstützte Pfadgraphen. Drei frische, nacheinander ausgeführte Prozesse messen insgesamt 240 vollständige Aufträge und 240 getrennte Wiedergaben. Adapteraufbau, native Rekonstruktion, sämtliche Identitätsprüfungen, Zertifikate, Serialisierung und Store-Abschluss sind enthalten. Interpreterstart und Ergebnisdateien sind ausgeschlossen; es wird kein Overhead abgezogen.
+
+\textbf{Das allgemeine Zehn-Prozent-Kriterium wird verfehlt.} Der Median der 96 gepaarten Hauptquotienten beträgt 1,0213; bei 13 Knoten liegt er bei 0,9909. Die drei Prozessmediane lauten 1,0249, 1,0233 und 0,9989. Kleine Anfragen zeigen keinen belastbaren durchgängigen Vorteil.
+
+\textbf{Die zuvor festgelegte anspruchsvollere Teilgruppe besteht ihr eigenes Kriterium.} Für 32/64 Knoten mit 16/32 Fenstern beträgt der Median 1,2661. Bei 64 Knoten und 32 Fenstern ergibt sich ein medianer gepaarter Faktor von 1,6613; alle sechs Einzelquotienten liegen zwischen 1,6043 und 1,7806. Die mediane vollständige Auftragszeit sinkt hier von 855,45 auf 502,43\,ms. Die getrennte vollständige Wiedergabe erreicht in dieser Zelle einen medianen Faktor von 1,6978.
+
+Dies ist ein gemessener Vorteil vollständiger Aufträge bei klar benannter Last. Die Auftragszeit-Mediane sind nicht die Grundlage des gepaarten Quotienten; die Tabelle erklärt beide Aggregationen. Der langsamste Hauptquotient von 0,7904 bleibt erhalten, ebenso Rückschritte innerhalb der anspruchsvolleren Teilgruppe. Betriebssystemcache und CPU-Takt waren nicht kontrolliert. Es folgt keine allgemeine Latenzgarantie.
+
+\newpage
+\section*{Tatsächlich ausgeführte Prüfung}
+Die Modulprüfung besteht 1004 Assertions und 311 vollständige Zertifikatsvergleiche. Sie umfasst die vorhandene Kohorte, gespeicherte Randfälle, ungültige Eingaben, getrennte Ergebnisobjekte, Präzisionsleitern und gemeinsame Verwendung der unveränderlichen Vorbereitung. Ein Quellstrukturvergleich bestätigt dieselbe Entscheidungslogik außerhalb der ausgetauschten Vorbereitung.
+
+Die Integration prüft tatsächliche Engine-/Store-Aufträge, identische Wiederholungen, neue Quellen und Zielregionen zwischen Befehlen, unveränderte frühere Ausstellungen, nicht unterstützte Graphen und die kumulative Grenze von 32 Fenstern. Sie behält dieselben acht Identitätsprüfaufrufe; einschließlich anfänglicher Erfassung bleiben neun Quell- und Arithmetikprüfungen sowie acht Programmprüfungen pro vollständigem Auftrag. Vier Fenster benötigen eine statt vier exakte Vorbereitungen. Alle 72 ursprünglichen produktiven Quellen stimmen bytegenau mit dem Eingangsarchiv überein; das neue Profil bindet 74 Dateien.
+
+Sieben Ausführungs- und Eingabefehler prüfen atomaren Rollback, darunter Fehler nach nativer Ausführung und während der Zertifizierung. Sieben zusätzliche Kontrollen behandeln ID-Konflikte, veraltete erwartete Köpfe, falsche externe Kopf-/Ereignisanker und absichtlich wiederhergestellte gültige Präfixe. Ein gültiges Präfix besteht erwartungsgemäß eine Prüfung ohne externen Anker, wird aber gegen die endgültigen Anker verworfen. Sämtliche Verwerfungen erhalten die vorherigen Datenbankbytes.
+
+Der unabhängige Prüfer rekonstruiert alle 40 Eingaberegeln. Er kontrolliert 424 unterstützte Fensterantworten durch separat hergeleitete Koeffizienten, komplexe Evolution und Intervallschranken; 132 nicht unterstützte Antworten werden an der Matrixstruktur geprüft. Diese Einträge enthalten verschachtelte Fensterpräfixe. Alle 3336 gemessenen Ausgaben werden an die vollständigen geprüften Objekte gebunden: 1830 Überschreitungen, 714 Ausschlüsse und 792 Antworten außerhalb der Modellklasse.
+
+Alle 240 geschlossenen Datenbanken bestehen zusätzlich Hash-, Journal-, Zustands- und Quittungsprüfungen sowie \textbf{240 weitere tatsächlich ausgeführte native Wiedergaben}. Die unabhängige Aggregation bestätigt beide Zeitkriterien. Diese Nachprüfungen gehören nicht zu den gemessenen Auftragszeiten. Gemeinsame Vertrauensbasis bleiben Python-Ganzzahlarithmetik und Arb; ein Beweisassistent wurde nicht eingesetzt.
+
+\section*{Wesentliche Entscheidungen und Änderungen}
+Ausgangspunkt war das vollständige Projektarchiv mit SHA-256-Anfang \texttt{74a17ecca77703e08}. Alle 2150 dort manifestierten Dateien wurden beim Entpacken geprüft. Die maßgeblichen Fundstellen der vorausgehenden Fassung sind die Abschnitte \emph{Native and transactional integration}, \emph{Continuous-window verification protocol} und \emph{Continuous-window certificates and matched task costs}. Deren skalarer Vertrag und negative Analytik-/Adaptiv-Bewertung bleiben erhalten.
+
+Die neue Fassung ergänzt Herleitung und Vertrag der Modellwiederverwendung, einen eigenständigen vollständigen Auftragsvergleich und seine positiven wie negativen Ergebnisse. Abstract, Einleitung, Diskussion, Schluss und Reproduktion wurden abgeglichen. Die vorausgehenden LaTeX-Haupttexte und der frühere Bericht sind zur Nachvollziehbarkeit im internen Prüfmaterial gesichert. Die Prognoseexperimente und frühere Resultate wurden weder verändert noch als erneut ausgeführt ausgegeben.
+
+\newpage
+Ein zunächst erwogenes Zusammenfassen von Integritätsprüfungen wurde vor jeder Zeitmessung ausgeschlossen, weil es deren Beobachtungszeitpunkte ändern würde. Es wird daher kein größerer Faktor durch weniger Prüfungen beansprucht. Ebenfalls vor der Messung wurde die Reihenfolgeplanung der beiden Profile korrigiert, damit ihre Startposition innerhalb jedes Prozesses alterniert. Keine Messung wurde zur nachträglichen Auswahl von Lasten, Schwellen oder Erfolgskriterien verwendet.
+
+Der erste funktionale Aufruf scheiterte an fehlender Ausführungsberechtigung des aus dem ZIP entpackten Programms. Die Berechtigung wurde wiederhergestellt, ohne Programmbytes zu ändern; der vollständige erneute Lauf bestand. Der technische Fehlversuch ist gesichert. Eine unabhängige Begutachtung fand eine Lücke im Umfang der neuen negativen Protokolltests; die oben genannten sieben zusätzlichen Tests schließen sie vor der Abgabe.
+
+\section*{Grenzen und Status}
+Das unterstützte Modell bleibt die exakt erkannte Klasse gleichgewichteter vollständiger Graphen mit den bisherigen Obergrenzen. Modellinterne Ereignisse sind keine extern kalibrierten Wahrscheinlichkeiten. Vorbereitung außerhalb des Stores validiert Modelle vor einzelnen Abfragen; bei gleichzeitig ungültigem Modell und ungültiger Abfrage kann deshalb die zuerst gemeldete Ausnahme anders ausfallen. Die Zurückweisung bleibt erhalten.
+
+Die neue Vorbereitung ist unter ihrer öffentlichen Schnittstelle unveränderlich, aber keine Sicherheitsgrenze gegen beliebigen Python-Code im selben Prozess. Ein kontrollierter Arb-Kontext und unveränderte Abhängigkeiten bleiben Voraussetzungen. Dateihashes authentifizieren keinen bereits geladenen Code und schließen nicht sämtliche Systembibliotheken ein. Die frühere ungeklärte Persistenzabweichung und die volatile Dateisystemumgebung bleiben offen. Laufende Datenbanken wurden außerhalb automatischer Spiegelung gehalten; dies belegt keine Stromausfallsicherheit.
+
+Die frühere historische native Fixture ist unverändert offen. In dieser Phase wurde weder ein neuer vollständiger nativer Testlauf noch eine neue Prognoseevaluation behauptet. Die Literaturbasis der bestehenden Monographie bleibt erhalten; für die hier hinzugefügte Implementierungsoptimierung wird keine allgemeine wissenschaftliche Priorität beansprucht. Eine neue erschöpfende Literaturprüfung wurde nicht durchgeführt.
+
+Das Ergebnis ist eine reproduzierbare Forschungsfassung mit einem überprüften, lastabhängigen Vorteil des vollständigen Ablaufs. Es ist weder eine Demonstration allgemeiner Gabriel-Überlegenheit noch ein Nachweis gegen ein kommerzielles Finanzsystem. Die zusammenhängende englische Monographie, das vollständige LaTeX-/Code-/Datenprojekt und dieser separate Bericht werden gemeinsam geliefert. Ausführbare Nachweise, Rohmessungen, Abbildungen und Parameter sind enthalten; die deklarierten Compiler- und Paketabhängigkeiten bleiben externe Voraussetzungen. Die PDFs enthalten keine eingebetteten Projektarchive.
+
+\end{document}

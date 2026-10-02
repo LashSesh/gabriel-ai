@@ -1,0 +1,151 @@
+{
+  "schema": 1,
+  "toolchain": "1.95.0",
+  "build_jobs": 1,
+  "scope": "Synthetic in-memory complete native macro_step; explicit controlled sparse and acquisition fixtures, no durable owner or real workload performance claim",
+  "variants": [
+    "indexed",
+    "hoisted",
+    "shared",
+    "memoized"
+  ],
+  "features": {
+    "indexed": [
+      "indexed-engine"
+    ],
+    "hoisted": [
+      "hoisted-engine"
+    ],
+    "shared": [
+      "shared-engine"
+    ],
+    "memoized": [
+      "memoized-engine"
+    ]
+  },
+  "profile": {
+    "opt-level": 3,
+    "lto": false,
+    "codegen-units": 1,
+    "debug": true,
+    "strip": "none",
+    "overflow-checks": false,
+    "panic": "unwind"
+  },
+  "comparisons": [
+    {
+      "name": "hoisted_vs_indexed",
+      "variants": [
+        "indexed",
+        "hoisted"
+      ],
+      "orders": [
+        [
+          "indexed",
+          "hoisted"
+        ],
+        [
+          "hoisted",
+          "indexed"
+        ],
+        [
+          "indexed",
+          "hoisted"
+        ],
+        [
+          "hoisted",
+          "indexed"
+        ],
+        [
+          "indexed",
+          "hoisted"
+        ]
+      ]
+    },
+    {
+      "name": "shared_vs_hoisted",
+      "variants": [
+        "hoisted",
+        "shared"
+      ],
+      "orders": [
+        [
+          "hoisted",
+          "shared"
+        ],
+        [
+          "shared",
+          "hoisted"
+        ],
+        [
+          "hoisted",
+          "shared"
+        ],
+        [
+          "shared",
+          "hoisted"
+        ],
+        [
+          "hoisted",
+          "shared"
+        ]
+      ]
+    },
+    {
+      "name": "memoized_vs_shared",
+      "variants": [
+        "shared",
+        "memoized"
+      ],
+      "orders": [
+        [
+          "shared",
+          "memoized"
+        ],
+        [
+          "memoized",
+          "shared"
+        ],
+        [
+          "shared",
+          "memoized"
+        ],
+        [
+          "memoized",
+          "shared"
+        ],
+        [
+          "shared",
+          "memoized"
+        ]
+      ]
+    }
+  ],
+  "engine": {
+    "entities": [
+      3,
+      5,
+      7,
+      8,
+      16
+    ],
+    "workloads": [
+      "repeated_path",
+      "cold_acquisition"
+    ],
+    "inner_repetitions": 12,
+    "external_pairs": 5,
+    "warmup_episodes_per_case": 1,
+    "repeated_path_ticks": 12,
+    "cold_acquisition_ticks": "min(16,n(n-1)/2)",
+    "timer": "Measured macro_steps only; config, input/state construction, singleton/path bootstrap, cache clear, assertions, serialization and process launch excluded",
+    "cache": "repeated_path retains cache after path bootstrap; cold_acquisition resets current-thread memoizer after singleton bootstrap for every episode",
+    "configuration": "force-commit thresholds plus extraction convergence_tau=1, adaptation split_threshold=3, merge_distance=0",
+    "golden": "Complete serialized SemanticCrystal values plus prior selected-state fields at EVERY bootstrap and measured tick, exact four-way bytes before timing",
+    "shape": "actual full graph vertex and edge counts; full crystal regions; presence/absence and n,m of signature; every tick commits",
+    "actual_keys": "Golden trace independently records crystal region order and induced adjacency bits, not inferred from requested workload name"
+  },
+  "primary_metric": "ticks_per_s = measured committed ticks / measured elapsed interval; paired ratio of per-process median ticks/s",
+  "measurements_are_synthetic": true,
+  "statistics": "Five paired process ratios with alternating order; median,min,max only, no population-level confidence claim"
+}

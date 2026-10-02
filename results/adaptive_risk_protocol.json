@@ -1,0 +1,84 @@
+{
+  "schema": "gabriel.adaptive-risk.protocol.v1",
+  "fixed_before_first_adaptive_execution": "2026-09-26",
+  "parent_protocol_sha256": "04f39c50fb6d7eab9d59bad70548fa23dc15cc964816e37db7cad8baf73bde93",
+  "source_csv_sha256": "e8136f072d575cb891cb58718fe31602ca2d4feccee67f035106393ed1c4bdbb",
+  "currencies": [
+    "USD",
+    "GBP",
+    "JPY",
+    "CHF"
+  ],
+  "horizons_observed_intervals": [
+    1,
+    5
+  ],
+  "development": [
+    "2010-01-01",
+    "2019-12-31"
+  ],
+  "retrospective": [
+    "2020-01-01",
+    "2025-12-31"
+  ],
+  "temporal_extension": [
+    "2026-01-01",
+    "2026-09-25"
+  ],
+  "design_history": "The 2020-2025 results motivated the fast-base choice and calibration question. This is a retrospective comparison, not an untouched outer test for the new design. The 2026 outcomes were not used in prior reported comparisons or this new parameter selection; the short extension is descriptive, not independent replication.",
+  "endpoint_rule": "origin and target endpoint both in the same evaluation period",
+  "base_forecaster": "fast_fhs from unchanged ECB protocol; candidate index5, variance half-life20,250 completed scenarios,alpha39/40",
+  "beta": "1/40",
+  "theta_bounds": [
+    "-1",
+    "1"
+  ],
+  "theta_initial": "0",
+  "eta_grid": [
+    "0",
+    "1/100",
+    "1/20",
+    "1/5"
+  ],
+  "primary_eta": "1/20",
+  "update": "theta_new=clip(theta+eta*(hit-beta),[-1,1]); hit=1{realized_loss>issued_scaled_VaR}; all state and projection accounting exact rational",
+  "projection": "p=theta_new-(theta_old+eta*(hit-beta)); retain signed correction per matured target",
+  "forecast": "Q=exp(theta)*base_VaR; E=exp(theta)*base_ES; binary64 exp/log forecasts, no interval arithmetic guarantee; require finite 0<Q<=E",
+  "lanes": "primary:origin_index modulo horizon; pooled ablation:one controller per currency/horizon with delayed feedback",
+  "ordering": "At index t, ingest outcome of forecast at t-h if issued, update its original lane using immutable issued forecast, then issue new forecast. Never use outcomes before target endpoint.",
+  "warmup": "Initialize each controller at first eligible parent forecast; update on every subsequently matured target, without reset across reporting periods.",
+  "static_theta_grid": [
+    "-2/5",
+    "-1/5",
+    "0",
+    "1/5",
+    "2/5"
+  ],
+  "selection": "Per currency/horizon choose lane eta and separately static theta by lowest development mean FZ0. Ordered-grid ties. Freeze both for subsequent periods; no retuning on retrospective or extension results.",
+  "reported_models": [
+    "raw_hs",
+    "fast_fhs",
+    "multiscale_fhs",
+    "static_selected",
+    "lane_primary",
+    "lane_selected",
+    "pooled_primary"
+  ],
+  "metrics": [
+    "mean_fz0",
+    "exceedance_count",
+    "exceedance_fraction",
+    "absolute_frequency_gap_from_beta",
+    "mean_ES_identification_residual",
+    "mean_VaR",
+    "mean_ES",
+    "projection_count",
+    "signed_projection",
+    "exact_controller_accounting"
+  ],
+  "stratification": "yearly summaries and two predictable risk-level strata: issued unscaled fast VaR above versus at-or-below median of previous250 eligible fast VaR forecasts, excluding current value; use available preceding values during start, first origin unclassified",
+  "uncertainty": "All comparisons descriptive. No iid confidence intervals, tail calibration proof, conditional coverage claim, return simulation or Aladdin performance comparison.",
+  "scope": "Common scaling targets VaR breach frequency only; it preserves order and positivity but does not separately calibrate ES. Clipping invalidates an unqualified telescoping coverage bound; its residual is retained.",
+  "verification_seed": 2026092603,
+  "data_vintage": "current revised ECB snapshot, assumed same-day availability, no original historical release vintages"
+}

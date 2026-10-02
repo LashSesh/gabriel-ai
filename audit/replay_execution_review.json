@@ -1,0 +1,110 @@
+{
+  "status": "passed",
+  "timed_opens": 66,
+  "longest_histories": [
+    {
+      "horizon": 1,
+      "fast_seconds": 61.16426011599992,
+      "replay_seconds": 45.860220517000016,
+      "time_reduction_percent": 25.0212126656569,
+      "paired_ratio": 1.3387087890505323,
+      "database_bytes": 303099904
+    },
+    {
+      "horizon": 5,
+      "fast_seconds": 63.34067796699992,
+      "replay_seconds": 46.59710553800005,
+      "time_reduction_percent": 26.43415411139609,
+      "paired_ratio": 1.3379217710242803,
+      "database_bytes": 293625856
+    }
+  ],
+  "runtime_checks": {
+    "corrupted_databases_rejected": 53,
+    "cli_commands": 103,
+    "counts": {
+      "probe_receipt_exact": 2,
+      "database_all_rows_exact": 1346,
+      "probe_view_exact": 2,
+      "adapter_and_caller_retention_cannot_mutate_database": 1,
+      "mutated_caller_receipt_retry_exact": 1,
+      "invalid_reducer_atomic_rejection": 14,
+      "invalid_reducer_preserves_all_rows_and_caller": 7,
+      "probe_full_audit_exact": 1,
+      "live_storage_invalid_canonical_rejected": 6,
+      "live_view_invalid_canonical_rejected": 6,
+      "profile_receipt_exact": 1344,
+      "profile_terminal_view_exact": 6,
+      "profile_retry_receipt_exact": 5,
+      "profile_full_semantic_audit_exact": 5,
+      "profile_export_direct_bytes_exact": 5,
+      "opposite_owner_open_all_rows_exact": 5,
+      "opposite_owner_open_export_exact": 5,
+      "mixed_owner_stale_frontier_rejected": 1,
+      "cross_owner_duplicate_exact": 1,
+      "mixed_owner_reads_latest_committed_state": 1,
+      "concurrent_cross_owner_CAS_single_winner": 1
+    }
+  },
+  "finite_index": {
+    "status": "passed",
+    "graphs": 2097152,
+    "classes": 1044,
+    "witness_checks": 2097152,
+    "generator_closure_checks": 12582912,
+    "minimum_checks": 1044
+  },
+  "invalid_index_certificates_rejected": 14,
+  "regenerated_index_bytes_identical": true,
+  "rust_integration": "Reconstructed optional feature; not compiled or run in recovered environment. Default path remains packed.",
+  "lost_previous_raw_results": "Earlier unarchived timing summaries are not used as reproduced numerical evidence.",
+  "source_preservation": {
+    "status": "passed",
+    "runtime_existing_sources": {
+      "gabriel_runtime/stream.py": {
+        "same_as_saved_baseline": true,
+        "sha256": "fc6d8a9bb280bc80aaa64d453ea79414ebc45eec56ac1b64bf9c606fc1667ccd"
+      },
+      "gabriel_runtime/adapters.py": {
+        "same_as_saved_baseline": true,
+        "sha256": "832978f5b5fa2ed6df9d51a797b702cbfa020531084d7d6e9f0e8857f6e2ece9"
+      },
+      "gabriel_runtime/stream_demo.py": {
+        "same_as_saved_baseline": true,
+        "sha256": "e36850e0732f82b1b49f283121f743b4db39d88dd735b0b196e9863f7f18e430"
+      },
+      "gabriel_runtime/fast_owner.py": {
+        "same_as_saved_baseline": true,
+        "sha256": "708b6d4ce676fa2947c7a1fa303c5ec28d4d370a6370c06214a31da25730865b"
+      },
+      "gabriel_runtime/__main__.py": {
+        "same_as_saved_baseline": false,
+        "sha256": "14f9f37324b9f0437b0d91afccc90585d220475862e39df4fa9dff8604edd117"
+      },
+      "gabriel_runtime/incremental.py": {
+        "same_as_saved_baseline": true,
+        "sha256": "587a39b94df8121bee18820fc466b38a20f87352e69892c3e1446368d6686b36"
+      },
+      "gabriel_runtime/__init__.py": {
+        "same_as_saved_baseline": true,
+        "sha256": "a26aa646ebf84297705d761216ab161151a2cd7e185d61fe95a2447e940084a2"
+      },
+      "gabriel_runtime/engine.py": {
+        "same_as_saved_baseline": true,
+        "sha256": "2499574e2e9733665398fc8203f5e2ca1dc22190860344725568667b7a258bc1"
+      },
+      "gabriel_runtime/canonical.py": {
+        "same_as_saved_baseline": true,
+        "sha256": "f5237347101531a0c64e41fdae65adc66aa5b731b42d474ff4f68e83e85695dc"
+      }
+    },
+    "changed_existing_runtime_sources": [
+      "gabriel_runtime/__main__.py"
+    ],
+    "unchanged_native_functions": [
+      "small_signature.rs",
+      "spectrum.rs",
+      "platonic.rs"
+    ]
+  }
+}

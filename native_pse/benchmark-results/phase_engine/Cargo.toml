@@ -1,0 +1,32 @@
+[package]
+name = "pse-phase-engine-benchmark"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+# Isolate the measured profile from the containing workspace's release profile.
+[workspace]
+resolver = "2"
+
+[features]
+default = []
+indexed-engine = ["pse-core/indexed-signature"]
+hoisted-engine = ["indexed-engine", "pse-core/phase-hoist"]
+shared-engine = ["hoisted-engine", "pse-core/shared-spectrum"]
+memoized-engine = ["shared-engine", "pse-core/memoized-signature"]
+
+[dependencies]
+pse-core = { path = "../../crates/pse-core" }
+pse-graph = { path = "../../crates/pse-graph" }
+pse-types = { path = "../../crates/pse-types" }
+pse-metatron = { path = "../../crates/pse-metatron" }
+serde_json = "1"
+
+[profile.release]
+opt-level = 3
+lto = false
+codegen-units = 1
+debug = true
+strip = "none"
+overflow-checks = false
+panic = "unwind"

@@ -1,0 +1,46 @@
+{
+  "clocks": "Bind at0; owner receipt time equals next command ordinal. Source event_at=index; corrected records keep event_at.",
+  "corrections": "At each length checkpoint: revise index320 by33/32 and length-3 by65/64. Each revision increments. Later checkpoints retain earlier revisions.",
+  "durability": "Unchanged SQLite v1, DELETE/EXTRA; every live unique command uses one durable transaction. No checkpoints.",
+  "equality": "Exact canonical head/budget/view after every open; database SHA256 before/after each group; source hashes before/after each case.",
+  "horizons": [
+    1,
+    5
+  ],
+  "limits": "Synthetic, one host; alternating paired repetitions are descriptive, no confidence intervals, no affinity/frequency lock, no forecast change.",
+  "owners": [
+    "fast",
+    "replay"
+  ],
+  "paired_order": "fast then replay for even pair, reverse for odd; same unchanged database; fresh adapter and owner each open.",
+  "recovery": "This is a fresh executed experiment. Lost raw outputs from the interrupted earlier run are not reconstructed from summary statistics.",
+  "register_pairs": 5,
+  "register_updates": 1000,
+  "register_widths": [
+    32,
+    256,
+    2048
+  ],
+  "schema": "gabriel-replay-open-benchmark/v2-reconstructed",
+  "seed": 2026092617,
+  "source": "NumPy default_rng(seed); 801 prices, 100*exp(cumsum(.006*(1+.3*sin(i/31))*Z_i)); binary64 hex archived.",
+  "source_lengths": [
+    360,
+    500,
+    800
+  ],
+  "status": "frozen_before_timing",
+  "stream_config": {
+    "max_units": 100,
+    "risk_budget": "10",
+    "source_id": "replay-owner-synthetic",
+    "unit_exposure": "100"
+  },
+  "stream_pairs": 3,
+  "threads": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+  },
+  "timed": "Store.open including connect/header checks and complete semantic replay. Filesystem warm; no page-cache flush. Close, equality checks, full view, input/database construction excluded."
+}

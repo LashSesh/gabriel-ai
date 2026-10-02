@@ -1,0 +1,1912 @@
+{
+  "check_count": 1004,
+  "checker_sha256": "36b693d8544d094f824bbafdb590e972d72dd3647b9ff13fbb31c1107a58647d",
+  "checks": {
+    "all_resource_counters_identical": 311,
+    "batch_inclusive_cap": 1,
+    "batch_order_duplicates_and_certificates_preserved": 1,
+    "batch_shape_or_cap_rejected": 6,
+    "caller_mutation_preserves_binding": 1,
+    "duplicate_windows_have_independent_output_objects": 1,
+    "forged_prepared_object_rejected": 4,
+    "frozen_reference_source_hash": 1,
+    "full_certificate_bytes_identical": 311,
+    "full_decision_body_ast_identical": 1,
+    "insertion_order_and_default_json_identical": 311,
+    "late_invalid_query_returns_no_partial_batch": 1,
+    "model_validation_type_and_message_identical": 6,
+    "prior_saved_certificate_reproduced": 21,
+    "public_mutation_or_direct_construction_rejected": 4,
+    "query_validation_and_resource_initialization_ast_identical": 1,
+    "query_validation_type_and_message_identical": 14,
+    "shared_model_threaded_equivalence": 1,
+    "shared_threshold_batch_shape_or_cap_rejected": 4,
+    "unsupported_graph_has_distinct_binding": 1,
+    "unsupported_query_validation_precedence": 1,
+    "valid_unsupported_preparation": 1
+  },
+  "comparison_digest": "903a5ffa4e6c228845124bff14cbb2dd7fb6e775bee394db6c7b8dac9473149d",
+  "comparisons": [
+    {
+      "method": "rational_point",
+      "name": "prior-adversarial-interior_peak",
+      "sha256": "11801287cd5610257a786f386f438c71e40dfb7ac973a4429ee1dfa4b5a4d886",
+      "status": "reachable"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "prior-adversarial-endpoint_peak_free_exclusion",
+      "sha256": "12ffd4b041709235f549ae48680acc328b44365b1c8b7ed6abed99f180b4cbd0",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "prior-adversarial-negative_window",
+      "sha256": "ae118842c2330b22bd6a4f79a52a0c0259af736aa1e0a95b07b5dccb98e8c42d",
+      "status": "reachable"
+    },
+    {
+      "method": "global_amplitude_exact",
+      "name": "prior-adversarial-equality_global_peak",
+      "sha256": "f49977c219b68497cdb8a9afe76fd38af02371de42f1951b9b6b6154c5af72d1",
+      "status": "excluded"
+    },
+    {
+      "method": "singleton_point",
+      "name": "prior-adversarial-singleton_zero_equality",
+      "sha256": "82688c0e8c0528539f426e13b402eb0fdd119b35f1c8f978c5c4d2fd62c9f5d6",
+      "status": "excluded"
+    },
+    {
+      "method": "stationary_exact",
+      "name": "prior-adversarial-empty_target",
+      "sha256": "fa68f1da06a1db05967001785739335fb51bd30e057b56f25813fa9ee0ad8e95",
+      "status": "excluded"
+    },
+    {
+      "method": "stationary_exact",
+      "name": "prior-adversarial-full_target_reachable",
+      "sha256": "ebe6faa289e6db54f5ccf1cbaa56f0857221604b4e06c9ad565aa7d41a4e04a5",
+      "status": "reachable"
+    },
+    {
+      "method": "stationary_exact",
+      "name": "prior-adversarial-full_target_equality",
+      "sha256": "deaad0736197161c0838270f9e160a1a6bda1ec6fe9c7bb33588a93fbcd3d78f",
+      "status": "excluded"
+    },
+    {
+      "method": "stationary_exact",
+      "name": "prior-adversarial-zero_frequency",
+      "sha256": "65ac512c0863cb22c2da7c88cfe14e42f6190f8dad3644731c103c456d57ea76",
+      "status": "reachable"
+    },
+    {
+      "method": "stationary_exact",
+      "name": "prior-adversarial-singleton_graph",
+      "sha256": "ade0f028de530ca7f89fe7f586a4b85bd0959f6e39249f237cbb1a9b84bd3d7a",
+      "status": "excluded"
+    },
+    {
+      "method": "stationary_exact",
+      "name": "prior-adversarial-uniform_source_stationary",
+      "sha256": "14b97813e1c46776a6260c03bdef7f4f441b63af1511bd600b79af6972420bab",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "prior-adversarial-imaginary_sign_positive_time",
+      "sha256": "9ae2fb99033a036bff02e03b4161ac0ef369c60cce6f46e590dab0a643561adb",
+      "status": "reachable"
+    },
+    {
+      "method": "singleton_point",
+      "name": "prior-adversarial-imaginary_sign_negative_time",
+      "sha256": "3f1becfc1367ccb4c4eaeaab678c7ab2dd6464331399f90638930e7c44f3fef4",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "prior-adversarial-subnormal_source",
+      "sha256": "6aafefe388da7214a953981f35e8add7d0f0eae9eb91bd17b7c14f8d1d564c9c",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "prior-adversarial-huge_source",
+      "sha256": "60372c84750e58e314e0748b7459fe8acf93ffb11da6a3f789c5ea2687687061",
+      "status": "reachable"
+    },
+    {
+      "method": "critical_point",
+      "name": "prior-adversarial-one_ulp_peak_window",
+      "sha256": "729e06f396b31d7b1c2187f24cee89262bf4c586f6fd2ca550c34d5ac73acb35",
+      "status": "reachable"
+    },
+    {
+      "method": "critical_point",
+      "name": "prior-adversarial-huge_phase_window",
+      "sha256": "3298d5323c68eefc7ac547df3b2264e708af852c692da98bd580da15ed90b65e",
+      "status": "reachable"
+    },
+    {
+      "method": "singleton_point",
+      "name": "prior-adversarial-precision_escalates_only_on_overlap",
+      "sha256": "a0e0c51fddea0b88b0422aafacb5620c9e28af7b3b0503cec35210df555ec9a6",
+      "status": "excluded"
+    },
+    {
+      "method": "precision_cap",
+      "name": "prior-adversarial-precision_cap_abstains",
+      "sha256": "3bccdfed2bdc06a34736890681bc0daed72474799152911eaa2d33bb31679ec9",
+      "status": "unknown"
+    },
+    {
+      "method": null,
+      "name": "prior-adversarial-near_clique_weight",
+      "sha256": "c5a66b135841f854bf3d0b9e519dfda4ba72cd3345da4ae9f3239ff41d9c5a22",
+      "status": "out_of_scope"
+    },
+    {
+      "method": null,
+      "name": "prior-adversarial-unequal_degree",
+      "sha256": "c5a66b135841f854bf3d0b9e519dfda4ba72cd3345da4ae9f3239ff41d9c5a22",
+      "status": "out_of_scope"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260927-r0-q-3/4-w0",
+      "sha256": "4b3418690081517fc0d7435c61062ced4738deaa11900358e21eb364dde5e83f",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260927-r0-q-3/4-w1",
+      "sha256": "9a16fd221709614dd440470cc2d0b31e9d976761c17b295a917c32705a5caf47",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260927-r0-q-3/4-w2",
+      "sha256": "9c05f153ab1697dc068a5f99bc6b99926f2bd23be065618dbedc606b9ea0297e",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260927-r0-q-3/4-w3",
+      "sha256": "afd84bf8ac16827a44aa61029d69e9fe17034c6f5c70dffbdd3893398c78df80",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260927-r0-q-1/4-w0",
+      "sha256": "c976c88ae7970f1027a249d2db55b0db09466794d3abddc60c799b6c4c359909",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260927-r0-q-1/4-w1",
+      "sha256": "0bbfc4318f057079ad8ad613e282f853f77532cec911f1be520f180e3e61fe83",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260927-r0-q-1/4-w2",
+      "sha256": "23e86fc5330a3842a9701bbb0489b1785fc943bd45403efac3204a85e92f5807",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260927-r0-q-1/4-w3",
+      "sha256": "15c399909204be0a8657ccda6c37ba3f613e630aae96be206fb5736ec9f1f12b",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260927-r0-q1/4-w0",
+      "sha256": "a2d4ece84597841cd360dc2a7999decd40efe3520151e44efc8efea9e3f2823d",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260927-r0-q1/4-w1",
+      "sha256": "28169b7aa283364c0b00e7a4c2850ba9513740121a37fdf1c0a1a62c8a4b8f6f",
+      "status": "reachable"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n7-s20260927-r0-q1/4-w2",
+      "sha256": "a2d158e2901940c9c0ef792fd69f596ab4482319431f2521e73d9e82b399dd0a",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260927-r0-q1/4-w3",
+      "sha256": "560d55b165cc7a7cca59e52e6d2683e9f0af390bf2e5807cb5de3e85a9f38ca2",
+      "status": "reachable"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n7-s20260927-r0-q3/4-w0",
+      "sha256": "5690b1af20264ec165aa0a819425957330baa0939de590a87519c32811143109",
+      "status": "excluded"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n7-s20260927-r0-q3/4-w1",
+      "sha256": "0ae58fb1f7b3590d10efe6509ccbff2eed08c978e45893578ec61b42b1b3edb2",
+      "status": "excluded"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n7-s20260927-r0-q3/4-w2",
+      "sha256": "d307ff066153ceffd7c05b3c7205b270bad2efe43b763f9f5f665088bd137681",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260927-r0-q3/4-w3",
+      "sha256": "c0da3c25e57a4201b057748d454d3f2135d0d859b7bdae845fc148f91040db2d",
+      "status": "reachable"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n7-s20260927-r1-q-3/4-w0",
+      "sha256": "070b01cc18524698a1e487771e3ff1accce36f9bfaaf33547b46d01212485389",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260927-r1-q-3/4-w1",
+      "sha256": "9c1ed113d3240a2b9b42226731f60b031896e91039406d50f0cb66a64d90da8a",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260927-r1-q-3/4-w2",
+      "sha256": "56b2ede26870e020ed9ca332f2aa33c49edcdc59bbaf4ca374768de135d22bf4",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260927-r1-q-3/4-w3",
+      "sha256": "4e3e3f757939df1835d5dfdd54d1b1c1125465acf375ad93f5d80823718c70ca",
+      "status": "reachable"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n7-s20260927-r1-q-1/4-w0",
+      "sha256": "069286aaf17ec9a13f7b39c587cfc92c70c664190693332a6c85019c507bf3fd",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260927-r1-q-1/4-w1",
+      "sha256": "35c7d755c8e2f7161794a10289a9950685b30f46d997962f3419c1e1ef829e79",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260927-r1-q-1/4-w2",
+      "sha256": "4fc6547a2322517354f0ed8da142592ae956ffdf7d3c5b160b7a48198a0b4bb6",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260927-r1-q-1/4-w3",
+      "sha256": "fffe50117c5fde9b6adb0b289bd529e2eb94820213f448e0db009fff7933ff7f",
+      "status": "reachable"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n7-s20260927-r1-q1/4-w0",
+      "sha256": "0353b3b44515920b0cde2c41ca73090c65f754db465faa3ff19c92bf85f3fe06",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260927-r1-q1/4-w1",
+      "sha256": "2c16d6cff5e214d8e228a925116c51102e643ed05cff1fd673c71d3536899bee",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260927-r1-q1/4-w2",
+      "sha256": "4f33a1d0b3885c52068a2c303fec217ee541ea72e3a306c2baa4babcaf7f1c18",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260927-r1-q1/4-w3",
+      "sha256": "7eb9ace3295e8776ac02885d166d7d1a0cd0bffdf70deea6e5dccdca8340f68a",
+      "status": "reachable"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n7-s20260927-r1-q3/4-w0",
+      "sha256": "2706653d695745641463f08407a59add1f54fb1a39bd5a6d1b08800bb1fede23",
+      "status": "excluded"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n7-s20260927-r1-q3/4-w1",
+      "sha256": "334964903864b0aeb531860819b6bdc867bce08988ea17ca0fcb9e2be04f873d",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260927-r1-q3/4-w2",
+      "sha256": "72d902ae9c956283be89fb819ab738890aa91cc80b3c4681fde62fb46c3015be",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260927-r1-q3/4-w3",
+      "sha256": "d8a47bfbaf90ab40edb36d950e468c43c7fff35812c4f0e25ba0a5bd6480a7de",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260928-r0-q-3/4-w0",
+      "sha256": "0a502e3f534784ce2d525883db95a81930f2e35905949fa10594547230af4023",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260928-r0-q-3/4-w1",
+      "sha256": "1b105c71c7ea2d165a9ace683f53f25df67ab9281f769d16c0f4615053c7129c",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260928-r0-q-3/4-w2",
+      "sha256": "8e9fa9a16c111cee144ad83efb4e3f411024c6bc5aeb8b577b2f1a57affa1263",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260928-r0-q-3/4-w3",
+      "sha256": "ff5b5dd12b6248713881bba50492f4629d1a9b249106df179de9a1e58023de9a",
+      "status": "reachable"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n7-s20260928-r0-q-1/4-w0",
+      "sha256": "5b96938559c6cfb3ecbe4cccf9355237fc2ea0ca3cd41f0da37b148c52d2fbc4",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260928-r0-q-1/4-w1",
+      "sha256": "20887b3279d1def62d8fad1908980338c9dd814a3cf3ed35abcece0e02fb7eab",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260928-r0-q-1/4-w2",
+      "sha256": "c577c9ea1919b5898d27cb7e6ae764990b7e82381bc5a09bf736252444e328d9",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260928-r0-q-1/4-w3",
+      "sha256": "10131de8eb459c930af4517b268f2ca28f30366f098532182e5e7681957d3f93",
+      "status": "reachable"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n7-s20260928-r0-q1/4-w0",
+      "sha256": "9223d7fa0eb4aa17b83b8fccabbc108fd4ab7831b515e625026362faecf683df",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260928-r0-q1/4-w1",
+      "sha256": "5b79dcb85564b5effe794c6983f648d5a3b4d089939b40d9b0c77f87d5c9a1ae",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260928-r0-q1/4-w2",
+      "sha256": "82fb78f9064975883ec829d13462b085ccb951ef741582b86da1f016f832d816",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260928-r0-q1/4-w3",
+      "sha256": "ad6814cfbc84f3c7348991d1f9734469eb004a4a92e0601d9fcaa80fe6cd7134",
+      "status": "reachable"
+    },
+    {
+      "method": "global_amplitude_exact",
+      "name": "primary-n7-s20260928-r0-q3/4-w0",
+      "sha256": "1f7b62584a1126eafd79df835050407a8b6ec883cbfa3296ef0864e364315b5b",
+      "status": "excluded"
+    },
+    {
+      "method": "global_amplitude_exact",
+      "name": "primary-n7-s20260928-r0-q3/4-w1",
+      "sha256": "74383569d937b9e529245a0c1c00fa6946532c45ed7f4f807506a9a4cfb609b4",
+      "status": "excluded"
+    },
+    {
+      "method": "global_amplitude_exact",
+      "name": "primary-n7-s20260928-r0-q3/4-w2",
+      "sha256": "ae77e6cc1e5bb83e11333041d7872b23a2904622d867ee2230282094392490f0",
+      "status": "excluded"
+    },
+    {
+      "method": "global_amplitude_exact",
+      "name": "primary-n7-s20260928-r0-q3/4-w3",
+      "sha256": "f50224f4c52b34db77910650b87b8119ba535f8a2fc1dc78c8f7c91c8007c36b",
+      "status": "excluded"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n7-s20260928-r1-q-3/4-w0",
+      "sha256": "c850077980af7278f98c48fc350e2dfb406889ca3d53b0b158c86a724816f58d",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260928-r1-q-3/4-w1",
+      "sha256": "ba167c538cdc8022110be29150ca458066e7d131c2518901ea6d72c9fcf1c67d",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260928-r1-q-3/4-w2",
+      "sha256": "55a9f98aabe8617d7b0b9c8f2cc46831e531b3c3cf218b16a7d39200b8e13e86",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260928-r1-q-3/4-w3",
+      "sha256": "db4dbe18127bcedc970f24009674396cedd305a8399332b4800677fcb265658e",
+      "status": "reachable"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n7-s20260928-r1-q-1/4-w0",
+      "sha256": "0ff18ffe2dc165c35f8fd1c471e8bad468bed11dcb1e606ca76b684f228b53a5",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260928-r1-q-1/4-w1",
+      "sha256": "483ecc3f08a3a6f6a886bb21991cc8404ddbb2c2f911592a5da38c6174aadb78",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260928-r1-q-1/4-w2",
+      "sha256": "4fb1df848f836483dd47d728be65de4d3b426e7ed40bc3feaee744443d760259",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260928-r1-q-1/4-w3",
+      "sha256": "4f40fc0ec3a3b64d110a30d5899cdc34db93350586c906f018c15e4a32d30652",
+      "status": "reachable"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n7-s20260928-r1-q1/4-w0",
+      "sha256": "e2e68973fc1b2b4b29e5f455d0149efc8ff479ace8f75c09bf6d8b44abd73581",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260928-r1-q1/4-w1",
+      "sha256": "d5afc635afdb281d639d1f2596c1e6b6313361952d474d52a639272de2b53339",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260928-r1-q1/4-w2",
+      "sha256": "fd1f51b7f428ebc334114017feb615f2689c6975eca998854719448f1b7eee84",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260928-r1-q1/4-w3",
+      "sha256": "f79ea8ce0157978ec220ac47116e8950e342a707c549f193677d8fcae856f1f8",
+      "status": "reachable"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n7-s20260928-r1-q3/4-w0",
+      "sha256": "cb3ceafeced8acbb173ddf7ed166a590a5deb68d53583cf41825205d8f0038c5",
+      "status": "excluded"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n7-s20260928-r1-q3/4-w1",
+      "sha256": "753ee55b71cd5315153e44506111be95342fdf489066c3b63a2c24c53662c819",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260928-r1-q3/4-w2",
+      "sha256": "3551f76c760cbdd110a4983f5d92cbc543a36aa44c219d389da09401eae8d055",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n7-s20260928-r1-q3/4-w3",
+      "sha256": "8782185a283bc5c497ee1aecc803cbfcf711316884f5715cc81df78415056798",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260927-r0-q-3/4-w0",
+      "sha256": "b12c3028fb37a2941ae8f59fb8726374f0458eb5827b2ad14297b82407658072",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260927-r0-q-3/4-w1",
+      "sha256": "cbf1f8702e6cf597caded9d73b77dae6afe9fcc6446fb89212152f62ad067627",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260927-r0-q-3/4-w2",
+      "sha256": "72ef2a30291a894879c517ba92a717672ec14abd92aebfda11f3d2e82475123d",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260927-r0-q-3/4-w3",
+      "sha256": "9b4b219877b19aa8f0ed3b45c2d53b817b4f24b4fa1f87c9f361cec9834ebd03",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260927-r0-q-1/4-w0",
+      "sha256": "a747b3c827ca17b15cee8e407d78041641fc50fe3ac3db9f52288b38d3e42937",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260927-r0-q-1/4-w1",
+      "sha256": "2f17f4c6f5d70abcfdbaf375af68a7019004660a0cf37f06176ce455b0c45ac6",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260927-r0-q-1/4-w2",
+      "sha256": "4adc9ea91c5d3bda7996e8cf5d54c1d03575a1eaa0f1770a1550319abd903675",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260927-r0-q-1/4-w3",
+      "sha256": "d90fffe20daf8311489e7bd448c946643ef606a9363c59e015e64d3c3d1ca18a",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260927-r0-q1/4-w0",
+      "sha256": "36ea5dccffa9b5f520203eb6bd30f9226055a18d6590b37f791e9c4bfb936e4e",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260927-r0-q1/4-w1",
+      "sha256": "cdcd33ec21a1706da756dafa683ec6a0d1e85a206bd5a9070a289815921bbecd",
+      "status": "reachable"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n13-s20260927-r0-q1/4-w2",
+      "sha256": "2e9bc807f6ed786b2d2f4ea98988789ccff0ce3b3caa7c9cd4db9418861116eb",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260927-r0-q1/4-w3",
+      "sha256": "093cc02e63211a8b55a3fb9addcbf5aae9907b983b1fa8634738a67845488295",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260927-r0-q3/4-w0",
+      "sha256": "922a876bdfb0b9832d828a37099fddca111bd215a0169977395837a0863fec3d",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260927-r0-q3/4-w1",
+      "sha256": "1baac32f340e60c60a0c3470f366052641db2c19bc84c50b62550564511bcae9",
+      "status": "reachable"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n13-s20260927-r0-q3/4-w2",
+      "sha256": "832decc3bea1af44b8276288b65ab27d04a8306e9ea4205c661cc26dfd70f465",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260927-r0-q3/4-w3",
+      "sha256": "36e87e05b5f4cad376e559a1aa2e89bfb2ec8dc8f05911945c68139b13a94410",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260927-r1-q-3/4-w0",
+      "sha256": "e3acd5a8858a2015be121caeaa55548721739423ce9462cbfd5e98d5f0eda540",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260927-r1-q-3/4-w1",
+      "sha256": "c78f14a0d6a393bacb2850b54ccc850fc9eb323f2477f02107b86f2ec65a3f48",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260927-r1-q-3/4-w2",
+      "sha256": "227bf382c2ae384a90101963f595e50b8e83b56d6536fe52afa2693b14a326fe",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260927-r1-q-3/4-w3",
+      "sha256": "e97a7c31eb8b4c6d4b0723cd4f19316879dd2171f11576ca2ec4e5eff358f030",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260927-r1-q-1/4-w0",
+      "sha256": "4aa5d4cd91f2e581330e3d7c9f9b5c1c982893c938383552d0a434177f4b7351",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260927-r1-q-1/4-w1",
+      "sha256": "fa1f1e9ed2ff8bf367b92be99ab85fd9bed21ac1a507841976ffd5fd879298ca",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260927-r1-q-1/4-w2",
+      "sha256": "7b8d28a09e8104ffe79acbb02a4ed6589e5d33c5bb3f06651dac06e1f21960fb",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260927-r1-q-1/4-w3",
+      "sha256": "dcbc31005c6f84b79920fef4f537756be215d31511cf6473c96b1d5ed6cedd22",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260927-r1-q1/4-w0",
+      "sha256": "75b41cc18b28e5ac7b043c34978df64a0b716283dc60779dc808b988d9d90c65",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260927-r1-q1/4-w1",
+      "sha256": "6935bbb9291d536e28e17051a734dc7bae62c0cd1609e617f80196b6c2e759ca",
+      "status": "reachable"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n13-s20260927-r1-q1/4-w2",
+      "sha256": "eca14c6dbd90dc64b6382b4ecc8898c86ea4aa7af0edbf61c28879d02f561444",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260927-r1-q1/4-w3",
+      "sha256": "8ddca105eaa8887f83f52a58c01fdb84c3ce2a0275c1d95476a9a00559867282",
+      "status": "reachable"
+    },
+    {
+      "method": "global_amplitude_exact",
+      "name": "primary-n13-s20260927-r1-q3/4-w0",
+      "sha256": "294ddfe897574cb03932cf370819cb1230f6945d4c57bb8197c9adfd7b1d11bf",
+      "status": "excluded"
+    },
+    {
+      "method": "global_amplitude_exact",
+      "name": "primary-n13-s20260927-r1-q3/4-w1",
+      "sha256": "658026ad15edcb9f09db277040dbd27ba2548425f649a95cc2a9d5fcb9b2307d",
+      "status": "excluded"
+    },
+    {
+      "method": "global_amplitude_exact",
+      "name": "primary-n13-s20260927-r1-q3/4-w2",
+      "sha256": "7de27fe792d122debf5f73f912b5c162ead9dc02d700507e01239e3edf48ac28",
+      "status": "excluded"
+    },
+    {
+      "method": "global_amplitude_exact",
+      "name": "primary-n13-s20260927-r1-q3/4-w3",
+      "sha256": "6c4007fe592ed5e2df5054760d861675249a3dc34e6ebb03dee8dc9fe0ceb477",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260928-r0-q-3/4-w0",
+      "sha256": "7591a38da89bfd14a363bd2ad5adc592dd5da219b853d1243ef2cfed50abee1a",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260928-r0-q-3/4-w1",
+      "sha256": "72f9b99f3fc38b8b85a4aa0e776a76c330f62308303d475956dfe9893100c0df",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260928-r0-q-3/4-w2",
+      "sha256": "19bd872125a16fc401314e3b6355d05216e11b7d5f860d22a106bd0475f87800",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260928-r0-q-3/4-w3",
+      "sha256": "928297a06791a34b4477a7a41748ef9a76423d3c28a2af1e91f21d97b865dd1d",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260928-r0-q-1/4-w0",
+      "sha256": "3d2dd7ab59d6ce4ff76aaf00e61e70ebf755b46f725af92e05fb87a633785ffb",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260928-r0-q-1/4-w1",
+      "sha256": "ca3399fd8e505874fdbb13194083e84a1a4f7e876b203eeee69282c1cad71835",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260928-r0-q-1/4-w2",
+      "sha256": "8cb945d68e97f7c0a7550ebffcbb32b5e22b93c930cea69b09fdf90a09e9efbd",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260928-r0-q-1/4-w3",
+      "sha256": "7d700f95ac83f0f564f19150854f4b7abd6ee040b5e3e61cbbc265510bb9c1dd",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260928-r0-q1/4-w0",
+      "sha256": "f53b941fcb126095c0584c49ba72fb879d895036553e2db1f57abe062d280489",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260928-r0-q1/4-w1",
+      "sha256": "56247c74fe595b82cf53d1263ec4e3c2d60b1d8d188c912fd1253af0af5d7f39",
+      "status": "reachable"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n13-s20260928-r0-q1/4-w2",
+      "sha256": "e0046e51eb7fd70a8095a77a0ef97389137acdab4a2ee4395626cfab09588932",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260928-r0-q1/4-w3",
+      "sha256": "2428f7f8261595f232facad784f650218210d2de4cf2d4eea268f2a3b80681ca",
+      "status": "reachable"
+    },
+    {
+      "method": "global_amplitude_exact",
+      "name": "primary-n13-s20260928-r0-q3/4-w0",
+      "sha256": "4b38af9fdf48e94b09177b7d7e4d719b2c25e3d9a1234e65150f1ce7785ec5d9",
+      "status": "excluded"
+    },
+    {
+      "method": "global_amplitude_exact",
+      "name": "primary-n13-s20260928-r0-q3/4-w1",
+      "sha256": "d4b0c95358f7f88a3b276024abad80240037da602ed25408b04ac9c7d6ca9959",
+      "status": "excluded"
+    },
+    {
+      "method": "global_amplitude_exact",
+      "name": "primary-n13-s20260928-r0-q3/4-w2",
+      "sha256": "2a79ba975d94780d029090be5a7aa8fee9653de00d30bfd200507c569f6a56d8",
+      "status": "excluded"
+    },
+    {
+      "method": "global_amplitude_exact",
+      "name": "primary-n13-s20260928-r0-q3/4-w3",
+      "sha256": "28afe2cd5b761fc48c21c092948ba56a0d6e3d1965faafb003a916f92c36e7bd",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260928-r1-q-3/4-w0",
+      "sha256": "eb1282a79ebddec17db85a47b986501b4b29300141faff40580e3e89c7e13fda",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260928-r1-q-3/4-w1",
+      "sha256": "e117323c68598dbfa9c0d04ac44acb23da0ebaf3f2e64719fc4f2ae6af051104",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260928-r1-q-3/4-w2",
+      "sha256": "8527a25c4a0b51f7cb15f49dca9e00d6d18a936a66a08ca16313a67ff9d923bd",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260928-r1-q-3/4-w3",
+      "sha256": "eef43d8cd34a23c8f0bd5b3f0de2060898fde5668f82f568b85c83f3d66b367d",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260928-r1-q-1/4-w0",
+      "sha256": "ade7c1a692228afaa3c469452e10ac6506de1d9132825a28295c0f5a2430a743",
+      "status": "reachable"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n13-s20260928-r1-q-1/4-w1",
+      "sha256": "3db37350096730946cad009b5cd189aa03136c72d0ae904f3c7833a2e855992b",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260928-r1-q-1/4-w2",
+      "sha256": "7191d6e34a8d645dbd4351c3e924700ea24fe1a9fe6fdf90a576c801cf52003c",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260928-r1-q-1/4-w3",
+      "sha256": "c6524feedccef8556974669a965b5c6555a4273cdbfa08f15f9218df1593927e",
+      "status": "reachable"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n13-s20260928-r1-q1/4-w0",
+      "sha256": "647434d7f65f3faba02182009fb40b6f69943cb4939da932f9a0d2cab160ef6d",
+      "status": "excluded"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n13-s20260928-r1-q1/4-w1",
+      "sha256": "05827430aa20c899e3126cd87b1f91b109a712de5794fbff3f1ed7202a05b846",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260928-r1-q1/4-w2",
+      "sha256": "c76c6b55aaf5667c7fa7af864c13b079b16d4c29e54709f6b649e1ab53fc2354",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260928-r1-q1/4-w3",
+      "sha256": "ad88b353f3840b37428bcabb950867f95a2c45cc7f44642e71c9e67885284fa7",
+      "status": "reachable"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n13-s20260928-r1-q3/4-w0",
+      "sha256": "4af5b54f813a9a91027c1d9f483b77299755b82c79ad828a2c1d3ac3fd2a7dbf",
+      "status": "excluded"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n13-s20260928-r1-q3/4-w1",
+      "sha256": "b9d6ccb8ef63bae5dc0e18d3152ebda8b1994950b2d9d0be1b88311b48d03313",
+      "status": "excluded"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n13-s20260928-r1-q3/4-w2",
+      "sha256": "5d71fb61601fb5a824065a3543b1af6f5d799c7e91a8998954e4c55b5459237b",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n13-s20260928-r1-q3/4-w3",
+      "sha256": "30c18658f918e97135ea7d2527403a27627b9792f6bc86d5c49092e66a291c6f",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260927-r0-q-3/4-w0",
+      "sha256": "5d5dfb11350919a05b01641ccd3237cf1d19c52733f1f6d756cb907fac3200cc",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260927-r0-q-3/4-w1",
+      "sha256": "2b6dd76cdef269ca716e78162ba2dc8073778f35b0f464eb60b5d09cfd7d110a",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260927-r0-q-3/4-w2",
+      "sha256": "0eb72c4a15bbd1ad5d3df098a877655aef4311708c7dc6443cdea6b5c76b724a",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260927-r0-q-3/4-w3",
+      "sha256": "c0580503e5d44c8bd1fb7af264f2ab702f56ac85fb7da63451f5f72b449c80cb",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260927-r0-q-1/4-w0",
+      "sha256": "135c769c8aa9f44bac3ad0cfbde62a8db519b5ce2fd6e1645cf3e6314bac4d1f",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260927-r0-q-1/4-w1",
+      "sha256": "43696ea3e2ce858243f0ebff2a044964f8c27519103b183e8b5afd7dbd3fd9fe",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260927-r0-q-1/4-w2",
+      "sha256": "abdfc8b34a03d2bff2999da4d6b7111128d50fb7519beb51f5f3ae4e1bbbd444",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260927-r0-q-1/4-w3",
+      "sha256": "66f75e96943c39dcc621366133a3668974c78d5ccb6df9b9e8f1ce6aab5cc584",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260927-r0-q1/4-w0",
+      "sha256": "28a10edbf2a26519365c6744f16100b7de4a92c8cecc0aed0bd327e0a4a9f722",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260927-r0-q1/4-w1",
+      "sha256": "e278b85b33ad00e12bb07c18cc2031fce1b8d90364570c9b32cccdd1a2e03f81",
+      "status": "reachable"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n32-s20260927-r0-q1/4-w2",
+      "sha256": "4a5e277d1e7e4b9ac7b395ee4d2c18554424944f7817a2ec3a1972578cbae3bc",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260927-r0-q1/4-w3",
+      "sha256": "b1f5e0d332e883d0a3ae7e3b6a20dbaea4ee4ae2c707a5613e8e1a07ad1e3eab",
+      "status": "reachable"
+    },
+    {
+      "method": "global_amplitude_exact",
+      "name": "primary-n32-s20260927-r0-q3/4-w0",
+      "sha256": "22bdd8b0a5705fc158043a4d0f026c9ea479c835bc88d45af9eb6de87358c0a4",
+      "status": "excluded"
+    },
+    {
+      "method": "global_amplitude_exact",
+      "name": "primary-n32-s20260927-r0-q3/4-w1",
+      "sha256": "59504e027bc2595e12cfe98a83b789fed1971007fae1a04f07e3f8cee9d44eac",
+      "status": "excluded"
+    },
+    {
+      "method": "global_amplitude_exact",
+      "name": "primary-n32-s20260927-r0-q3/4-w2",
+      "sha256": "ac26a490ac9214064d8144377f1d727bb6c529964e9cd080e3c304f3a378b101",
+      "status": "excluded"
+    },
+    {
+      "method": "global_amplitude_exact",
+      "name": "primary-n32-s20260927-r0-q3/4-w3",
+      "sha256": "eaf130f93661bde8ef2bfa1e698d70e3089c566cb2731b541ce0ea35a869568a",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260927-r1-q-3/4-w0",
+      "sha256": "67557b1e912159b966ef5c304530cc46476742057378540dc1abe5013e1406dd",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260927-r1-q-3/4-w1",
+      "sha256": "e8fdc949ddc0afd219ab92cec122d8a890914d08ef27a618f7fb5f98e7682ae4",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260927-r1-q-3/4-w2",
+      "sha256": "25d1439955ef72b5a69b9fcc1b7f1d27e74de9af75ede78375671814dadcd6f6",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260927-r1-q-3/4-w3",
+      "sha256": "8372b09e9c85ce40e0bb4170dbb0b1d09dcc42d5a1be2018c0be52db7f923145",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260927-r1-q-1/4-w0",
+      "sha256": "dcdbf83d6b9e42ecdfa80d2bc8cccce41b1da132d2a5fe7839db068455099989",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260927-r1-q-1/4-w1",
+      "sha256": "e97f2cec5f3d020a3f91f211cca056837cb9eb4af777e654fe43b0ee782b406a",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260927-r1-q-1/4-w2",
+      "sha256": "b4ad41835ae498be96dc8b4c22083bb5711d70aedf90044312cbd6fb9802d4ef",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260927-r1-q-1/4-w3",
+      "sha256": "91aa0fdfd66a56e9cfc632b0ac8bc431ead4d12622f98e7df583b5d4964ae5ca",
+      "status": "reachable"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n32-s20260927-r1-q1/4-w0",
+      "sha256": "137dfe38cae4944131986155d11eed4ca7e36fb18b00d87d16d04304a560875d",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260927-r1-q1/4-w1",
+      "sha256": "80b9225327b6918ec81605340826685eaad7a8cde8840747957ddb929348d2ca",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260927-r1-q1/4-w2",
+      "sha256": "4a7492c8145975575eed875b0b00c70bb253569fb657044cc71e412eb6f39cf1",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260927-r1-q1/4-w3",
+      "sha256": "37f32220e846b54b3cb92c75b1cefaa290b723d276be02c77175175d0fdf793e",
+      "status": "reachable"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n32-s20260927-r1-q3/4-w0",
+      "sha256": "a694ce62b23e2fcca2d6f0f9fc2de2524bf3f2c76592c9e5289b3e463fd39412",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260927-r1-q3/4-w1",
+      "sha256": "e7af89b2dc938cb6d1962cda55818de4567a5089d901241833f59d40b3b3e653",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260927-r1-q3/4-w2",
+      "sha256": "6f6e873a894f267cc37f2eff4bf66ca77a81ffc91b3029ddae5c41b7bbeca1e6",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260927-r1-q3/4-w3",
+      "sha256": "b17ee0846d853f8abc4322999b6781821b8d254ead528713a3735dadf6c999b2",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260928-r0-q-3/4-w0",
+      "sha256": "9fd789f01e209eec1dd3407603eba122f2902a7dde7a7c984744a540d3361cd9",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260928-r0-q-3/4-w1",
+      "sha256": "f4eb268c1607cad6d3026c59f0011b70574844887f11182534fed93db7e3f80e",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260928-r0-q-3/4-w2",
+      "sha256": "4addce279a476455cc008642e6a004fa49307d34aa5dc3061a4f68516ce6386a",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260928-r0-q-3/4-w3",
+      "sha256": "84aa4882732d5cc42850ef1795af1a9d0921c972ffe19b85b6e31a94360a86ec",
+      "status": "reachable"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n32-s20260928-r0-q-1/4-w0",
+      "sha256": "e1e5836ce3d7ab02925eeb6035616519104f2dbb40af32ac08b6242d79ebc8b1",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260928-r0-q-1/4-w1",
+      "sha256": "04839ad6223b41581c9387142bf4a59b6d6956afdc6505c483941c21165294c1",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260928-r0-q-1/4-w2",
+      "sha256": "95057269759924935d85d79f3d8ea2dbf986f0855408fac9d42410263a9a1287",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260928-r0-q-1/4-w3",
+      "sha256": "a040a94e750abb51aee568931dab949174d4d5d9c8280fb998aecb65b9ba823c",
+      "status": "reachable"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n32-s20260928-r0-q1/4-w0",
+      "sha256": "4abe901c59b9571454526e5dfdac3e2a5ac2f6b410b24e952af737b2542b5c55",
+      "status": "excluded"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n32-s20260928-r0-q1/4-w1",
+      "sha256": "b70bb26f539da52fe9bbc8a77b5f0f9fca843ed37e84b152f10fe03f48afb649",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260928-r0-q1/4-w2",
+      "sha256": "eac0a8a65785282f0900a5464caa7dc29bce0fc5ab979494969a3952e0b70ef7",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260928-r0-q1/4-w3",
+      "sha256": "7c98f3cb4ff519ba92f4911c9c9aa8826ce0726237cf593e5118128083b4d61b",
+      "status": "reachable"
+    },
+    {
+      "method": "global_amplitude_exact",
+      "name": "primary-n32-s20260928-r0-q3/4-w0",
+      "sha256": "b76c92f90ef18260bcf1c906a5a0de44aa68e1a8e363b8ea66d30e8624870b6f",
+      "status": "excluded"
+    },
+    {
+      "method": "global_amplitude_exact",
+      "name": "primary-n32-s20260928-r0-q3/4-w1",
+      "sha256": "7943bee6e7bae7a690571bd032598b7075f8bf5986d134d0cfbf318a7b5e8a78",
+      "status": "excluded"
+    },
+    {
+      "method": "global_amplitude_exact",
+      "name": "primary-n32-s20260928-r0-q3/4-w2",
+      "sha256": "9bf8904a2ef3f0b82ea6fe5f38f63eeccadd59c5f7df142adc147a7524460951",
+      "status": "excluded"
+    },
+    {
+      "method": "global_amplitude_exact",
+      "name": "primary-n32-s20260928-r0-q3/4-w3",
+      "sha256": "15c78236e0a32aa1825b6b6da49bb3d2ad2438754dda9dbafe9d87328af869a1",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260928-r1-q-3/4-w0",
+      "sha256": "012c0d4f95c55c2515ff9e7fd14425f266fac86aad5880960cbf23a8bbdb4651",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260928-r1-q-3/4-w1",
+      "sha256": "54b96b36ab449e629397b375b57af6fe5f577563624febeb748a12c7b3287ff2",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260928-r1-q-3/4-w2",
+      "sha256": "4331d86825bf76e3d4000bd05fda1c87a69666376b261720b464a2af16435200",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260928-r1-q-3/4-w3",
+      "sha256": "8a9474058e0135052f4956e7d4dd822c3380bdc39174d65da73434649c6cb123",
+      "status": "reachable"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n32-s20260928-r1-q-1/4-w0",
+      "sha256": "bd757d0f1b1a944bf908a25363b954ccdad562c30534bfd7bbc4b9358b624f53",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260928-r1-q-1/4-w1",
+      "sha256": "c7528794be030d6a8dfdf30c31282890e520006057c947a8d3d15af0d8442c3c",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260928-r1-q-1/4-w2",
+      "sha256": "4aa745b025290d95e00fe6f0df7b1ed22316545244ddc369c2a31262ef41c5b9",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260928-r1-q-1/4-w3",
+      "sha256": "3a201a0d83dc363a983de9ab34c15ec2dc00935f622004e9c5297532126f4ffc",
+      "status": "reachable"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n32-s20260928-r1-q1/4-w0",
+      "sha256": "e9c9b22fc3c1b10dc7d0e19d30da9ebdda526862eacc3e107547b47c3219ecc0",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260928-r1-q1/4-w1",
+      "sha256": "089bc389a7cdf501581e34b2217332ca8915d8fb6fe5a30865fe8f6bcc5000c7",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260928-r1-q1/4-w2",
+      "sha256": "44fe4dafafbac13e2c382c396c3bde828826f326e22906af6c9e1344053e1a62",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n32-s20260928-r1-q1/4-w3",
+      "sha256": "952a2757ae757d13a469756bf633558dcbf154dee22253964e0d5db9e32edbdf",
+      "status": "reachable"
+    },
+    {
+      "method": "global_amplitude_exact",
+      "name": "primary-n32-s20260928-r1-q3/4-w0",
+      "sha256": "349d454d6fb05cfad5ad4c1170273d00e5b030e9110afaa87b04a81b8c6afd33",
+      "status": "excluded"
+    },
+    {
+      "method": "global_amplitude_exact",
+      "name": "primary-n32-s20260928-r1-q3/4-w1",
+      "sha256": "1d75324c3b2192021fd3e5e45740436ea3a0dd3d9ba2d3a041d6838618616f36",
+      "status": "excluded"
+    },
+    {
+      "method": "global_amplitude_exact",
+      "name": "primary-n32-s20260928-r1-q3/4-w2",
+      "sha256": "3880f624b52b38e857b3b679bb8dd88844066d3cb76eefacdadf293388e3d48e",
+      "status": "excluded"
+    },
+    {
+      "method": "global_amplitude_exact",
+      "name": "primary-n32-s20260928-r1-q3/4-w3",
+      "sha256": "d90170d38144b011adebdc28229c7bd4c884ac55cc21b666570c1204a30cca84",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260927-r0-q-3/4-w0",
+      "sha256": "d136ec79e7e671008eea01e71a5c57b13a481463c2cd6820332172e3b694ce03",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260927-r0-q-3/4-w1",
+      "sha256": "7507dca94b69f4e4c2a7fb41e402ad6e4de8cd1b9565b62833aa3642adf005ba",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260927-r0-q-3/4-w2",
+      "sha256": "733e4f953e2532ed052e232746998a52787aeec4c2a539a7d8fa093917893521",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260927-r0-q-3/4-w3",
+      "sha256": "a580656ccfd509fab7570b9d641c6e969dfac2ef86eb2c812e4982d5f6b0016a",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260927-r0-q-1/4-w0",
+      "sha256": "8ca94bee8b722237f5457093f324630d578b3e23fed963cfdf2d66e667ba5079",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260927-r0-q-1/4-w1",
+      "sha256": "18f4beeebae0a75b4d750db8dcb542e5f2b13487abfa775b15cc9afa4ccb273b",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260927-r0-q-1/4-w2",
+      "sha256": "6581f3926d79858c692be4d9702e3c675080df8822e4865a899e427470bcac26",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260927-r0-q-1/4-w3",
+      "sha256": "98b7977f0ea6d7c0657579f9f3758b22729353e8fb523b0c5cee436ab425719a",
+      "status": "reachable"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n64-s20260927-r0-q1/4-w0",
+      "sha256": "e72890ceb896190d50edb69d5a70c69f673cf225a52d957eb21e1a3a6652b1a2",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260927-r0-q1/4-w1",
+      "sha256": "449212693f85113dfe7db8dd577241b8f0219a3a894ecd92c90d5f36d38bccb7",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260927-r0-q1/4-w2",
+      "sha256": "7a4e056cade2248d3e796c772b2900fb5ee7ad73a8ec2b700caaceb1a5568e63",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260927-r0-q1/4-w3",
+      "sha256": "b0635ccda0d67d79469e03ab78b40781e94a723ecd77fa7895b43be2b410f655",
+      "status": "reachable"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n64-s20260927-r0-q3/4-w0",
+      "sha256": "199521d6d8d376cd9286185d931336685f7a940c552220874f9862a2546d3b50",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260927-r0-q3/4-w1",
+      "sha256": "e34d544ab31218e7cf67a77ed626c93a11d8065bce5c7b39d3a6b289ae41112f",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260927-r0-q3/4-w2",
+      "sha256": "bdc141e39b3fc7a3f3ed4800b9d31d3feedce22570850d9f3663f4fd214bc308",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260927-r0-q3/4-w3",
+      "sha256": "ff2cb5ae152b8e0a355994fcb96148ec196d4bb68bc403fa2c495905a2021a2c",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260927-r1-q-3/4-w0",
+      "sha256": "7cbbc2218e19fdc610d4efcf8dae8c3b76b14e32c4fba9c05066ed0663517af1",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260927-r1-q-3/4-w1",
+      "sha256": "0cdfbf6acc3a30b30adfba9c80bf548e3894a8e8c74a4e37623937263f0b0041",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260927-r1-q-3/4-w2",
+      "sha256": "d17ba2fd5af62d7e1dd8cc9be9faa5374ac17cd23c1808ebda2aa9bd5190854c",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260927-r1-q-3/4-w3",
+      "sha256": "956cd0683f2d92df08eb9bb60c089bb8a9d0e5db771722dd769633cce4baeef2",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260927-r1-q-1/4-w0",
+      "sha256": "3fb1caae3bbbeb1c96843a92a2e9789da28e2c1c93dc8dfefaa9213c30657111",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260927-r1-q-1/4-w1",
+      "sha256": "446318a26559a644e0e52454644d70a2765e715a191aedcdd17c219533cfaa96",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260927-r1-q-1/4-w2",
+      "sha256": "98ed6ba815af148b76c7af318c83fac3345c910202d6b2edca622a2d1d72a074",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260927-r1-q-1/4-w3",
+      "sha256": "77d506b3bb6118f9ee06f31ea9f552878e3d158ff43bd4b1532efbb43bcb9372",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260927-r1-q1/4-w0",
+      "sha256": "2ff380963d74a890a853adf9e62f06d25744c4bf5d6724c0dce99df2f902e425",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260927-r1-q1/4-w1",
+      "sha256": "d6613de1a89a0d646d2b2da5e99181c94a545e2c6e9924fd9785bbf9232d85fd",
+      "status": "reachable"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n64-s20260927-r1-q1/4-w2",
+      "sha256": "acc08e90b60b8e95841477bf18b6fea05908730bcb62f92baa7121748b48d060",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260927-r1-q1/4-w3",
+      "sha256": "de1cdc8963e8053b0bb1a9d016ff6801608e9b00756b0450028b7fbdfee33d25",
+      "status": "reachable"
+    },
+    {
+      "method": "global_amplitude_exact",
+      "name": "primary-n64-s20260927-r1-q3/4-w0",
+      "sha256": "79313772055821ac3c7ce4895e47713e5651d8f89863530577a9603e92c48925",
+      "status": "excluded"
+    },
+    {
+      "method": "global_amplitude_exact",
+      "name": "primary-n64-s20260927-r1-q3/4-w1",
+      "sha256": "788834d4a1a49cf96cc9a041e6d198498ebdc06f2fb07565a5f5653d5c021628",
+      "status": "excluded"
+    },
+    {
+      "method": "global_amplitude_exact",
+      "name": "primary-n64-s20260927-r1-q3/4-w2",
+      "sha256": "ba36cf3f25a50a76d54e1d9e2dd059147320f8834c9687be2905feed1c83b6ee",
+      "status": "excluded"
+    },
+    {
+      "method": "global_amplitude_exact",
+      "name": "primary-n64-s20260927-r1-q3/4-w3",
+      "sha256": "796844aa4dea0632f4f6fd2ce85a949a8e75c75a5c53620d856580b4bc9a6687",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260928-r0-q-3/4-w0",
+      "sha256": "691b237ebe2cd8d1ab624feff27c26675f27f4106739d637be7a2f50ee4d51ae",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260928-r0-q-3/4-w1",
+      "sha256": "8eb326b78f47781d69327817d371a06fc414a0140c30b0cc94abafc11bd3ffd3",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260928-r0-q-3/4-w2",
+      "sha256": "e93592ed881981760b92748a704d0d3f2470ba21522abf4d01d8a13affcc522a",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260928-r0-q-3/4-w3",
+      "sha256": "cdc088973fc463aedb2f43ec44a20992db9ad56a8d8945bbaf14573399f32101",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260928-r0-q-1/4-w0",
+      "sha256": "bb81658c0beeca3702e2739e8b6563b60c81f754b3bddee6e6993bbc4f4dfe08",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260928-r0-q-1/4-w1",
+      "sha256": "c442cf124770dd8520d4db18005a483debfe004f4ffe0b1bd2c0c871106db9e0",
+      "status": "reachable"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n64-s20260928-r0-q-1/4-w2",
+      "sha256": "313c918641852b1c6031beeb60bdf78b2908fe36cabf83424bfa7a4f5ef59c20",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260928-r0-q-1/4-w3",
+      "sha256": "2dfc5cee16fdbaa1caad1d7e676899abf2002d48cd8bd12932e417a7b2c26a59",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260928-r0-q1/4-w0",
+      "sha256": "b24f4a6ec5bdfa1c70996776bbd299640ea25d91d65630abd4ca106f2bed2071",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260928-r0-q1/4-w1",
+      "sha256": "43f0fe88dcd3e6ff7545f49dc52a2b0d0dccfdda4e1a00ac842873b259b9afc9",
+      "status": "reachable"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n64-s20260928-r0-q1/4-w2",
+      "sha256": "ff1c2d5a057bf3f41d00d8ef8111b060e088fa6ec7c3fd7259807477db1958c6",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260928-r0-q1/4-w3",
+      "sha256": "9a3417a6549a51cbc2826bbce845d2dabfda0b8c2a67813cb39afaea6d7f35d2",
+      "status": "reachable"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n64-s20260928-r0-q3/4-w0",
+      "sha256": "cf1c5673998f68bd324032feecf8c69a1ff5fe0ac6ed23decbb4625179873e4a",
+      "status": "excluded"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n64-s20260928-r0-q3/4-w1",
+      "sha256": "8ab30b6c61132baa8cf6fa082c1c7ab0c198c298b6182259f1f9e01206019536",
+      "status": "excluded"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n64-s20260928-r0-q3/4-w2",
+      "sha256": "abaf0791a731295a262114eaafbdaa05d7950a63bdde655503978412a2cfc7ad",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260928-r0-q3/4-w3",
+      "sha256": "e6c7f2f5f3fec3ce714e7c4f9a8eb38d05c0be9b951e81349d0d5a72b704fad9",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260928-r1-q-3/4-w0",
+      "sha256": "83df1d1a048eb761e67e10094f7b673521e52cf770d2989937f215b86b187fb4",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260928-r1-q-3/4-w1",
+      "sha256": "cd59802f7315c4a6723c33478a8289cd1a5a7cb0a5f8e3fe4b9ec72296fcb59d",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260928-r1-q-3/4-w2",
+      "sha256": "f900070af433eec678274fb21a49875b0770a82608a74748c672935964af693f",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260928-r1-q-3/4-w3",
+      "sha256": "dee05292cdb25f7994b97aded59f0216390d48f8ba9d4bebae71d7b30f057b78",
+      "status": "reachable"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n64-s20260928-r1-q-1/4-w0",
+      "sha256": "c00424b54ef35ad6de72f68a31e29c08d92583374870e4ae9ef28453614c5e04",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260928-r1-q-1/4-w1",
+      "sha256": "101d9b63e4678c1e52c8aab1e23e722ad07fa94e9c5c23b04062aec877a9b64a",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260928-r1-q-1/4-w2",
+      "sha256": "aec84316cc635d284796d00d558b0120914c866cf536aba53cb09b8413b80d7f",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260928-r1-q-1/4-w3",
+      "sha256": "79c40ca4e13ebb5a00b39d881307101cfd70691eb646dcf67c0612bb01d4a0d9",
+      "status": "reachable"
+    },
+    {
+      "method": "endpoint_maximum",
+      "name": "primary-n64-s20260928-r1-q1/4-w0",
+      "sha256": "f4c4441e3102b4a370bfe73223587fe30281b00a5d101be286a1d83c6fc0b5b6",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260928-r1-q1/4-w1",
+      "sha256": "3d492f7f93e630daca6aa0487941252141782f9b2e8a07b6a089aa46e5d9d885",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260928-r1-q1/4-w2",
+      "sha256": "2756ef7cbc5eee9b7657c8c79c71b78920c667ac50d5e7da084ea29cefbaaba1",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "primary-n64-s20260928-r1-q1/4-w3",
+      "sha256": "1787dc449b9aad30155d7591f20fdc6bb8fa59e608f4d0506e05870d29cb25ee",
+      "status": "reachable"
+    },
+    {
+      "method": "global_amplitude_exact",
+      "name": "primary-n64-s20260928-r1-q3/4-w0",
+      "sha256": "4aa3dbc5215b458ad9fce4981f910953e1df51ad771133c53e0ecd8c432a546e",
+      "status": "excluded"
+    },
+    {
+      "method": "global_amplitude_exact",
+      "name": "primary-n64-s20260928-r1-q3/4-w1",
+      "sha256": "d4d8bb53a2fd7a56dd6088f6ae2f1a8793ec4405953ca5e09d520916ad95050e",
+      "status": "excluded"
+    },
+    {
+      "method": "global_amplitude_exact",
+      "name": "primary-n64-s20260928-r1-q3/4-w2",
+      "sha256": "54c0c0e0f76755ccf03915eff63aa36c840ca2b77a526b2929da1ad252b49d51",
+      "status": "excluded"
+    },
+    {
+      "method": "global_amplitude_exact",
+      "name": "primary-n64-s20260928-r1-q3/4-w3",
+      "sha256": "cb9eec033106304e91bfb01b53e0a7f904ad99ad2daf185578fbc261793c6b89",
+      "status": "excluded"
+    },
+    {
+      "method": "stationary_exact",
+      "name": "control-n7-uniform-q-1/8",
+      "sha256": "26d91c443e84db0dddcf002e678e7bae65ade1aef7f7f832c8eb9139e5be4609",
+      "status": "reachable"
+    },
+    {
+      "method": "stationary_exact",
+      "name": "control-n7-uniform-q0",
+      "sha256": "ca590a71252993ebdea8f83e08b3d0640783b14b4c9ce8bed83223542f5a02b5",
+      "status": "excluded"
+    },
+    {
+      "method": "stationary_exact",
+      "name": "control-n7-uniform-q1/8",
+      "sha256": "d9c4875ee62792f15e4409ead8a4dba379f882ac31740da3db4c8ba59794b82b",
+      "status": "excluded"
+    },
+    {
+      "method": "stationary_exact",
+      "name": "control-n7-zero_sum-q-1/8",
+      "sha256": "6dd231dfb864d23ee21a0eb4df1b027857de8ba023aeab771cfe3016dbf55b33",
+      "status": "reachable"
+    },
+    {
+      "method": "stationary_exact",
+      "name": "control-n7-zero_sum-q0",
+      "sha256": "5c4248e5bb50a999c0d0724635a161636acffa09b69233b372912f193d65c4a6",
+      "status": "excluded"
+    },
+    {
+      "method": "stationary_exact",
+      "name": "control-n7-zero_sum-q1/8",
+      "sha256": "1732901b991f1e05c9e3d0fdf2486f91b11b6e25803913982e4420b51cd3ff15",
+      "status": "excluded"
+    },
+    {
+      "method": "stationary_exact",
+      "name": "control-n13-uniform-q-1/8",
+      "sha256": "0adbfcbe5154b3c07bfaceaaeb3a4d7bba04c2a9e6a8055570d97c932e848fea",
+      "status": "reachable"
+    },
+    {
+      "method": "stationary_exact",
+      "name": "control-n13-uniform-q0",
+      "sha256": "4eb215ed7a40e1d9d82ff4bb6c22bf9d6c9092d7f37808628537061e89d1fb18",
+      "status": "excluded"
+    },
+    {
+      "method": "stationary_exact",
+      "name": "control-n13-uniform-q1/8",
+      "sha256": "116c20e0eb622bddc6946ddacd62803590320fb379968a0439bab991897191a8",
+      "status": "excluded"
+    },
+    {
+      "method": "stationary_exact",
+      "name": "control-n13-zero_sum-q-1/8",
+      "sha256": "972b1e10242ea8d49f65415f205ed289ba7287ba8384b2e1e9357fab268ae310",
+      "status": "reachable"
+    },
+    {
+      "method": "stationary_exact",
+      "name": "control-n13-zero_sum-q0",
+      "sha256": "cd7bcca63fcb7b876cbf84c4faa39687e5c4eadc8b9bd495de831fba00ac9c9e",
+      "status": "excluded"
+    },
+    {
+      "method": "stationary_exact",
+      "name": "control-n13-zero_sum-q1/8",
+      "sha256": "ab4aad5cf0c3af6da16d45caf2799fd503d8c571b48f46384ed1994b0e644c00",
+      "status": "excluded"
+    },
+    {
+      "method": "stationary_exact",
+      "name": "control-n32-uniform-q-1/8",
+      "sha256": "9bb645703d186fe938db6acb414d97d421ab0e91c5b57a9d50e2d1f23f5070c4",
+      "status": "reachable"
+    },
+    {
+      "method": "stationary_exact",
+      "name": "control-n32-uniform-q0",
+      "sha256": "8a67ab815b440f345311ec0e665bee31a4607cbc57f5822fea16c073aa5a8e84",
+      "status": "excluded"
+    },
+    {
+      "method": "stationary_exact",
+      "name": "control-n32-uniform-q1/8",
+      "sha256": "1c92564fbdec0f010b27fba1e4b989249b67cb3c1273f527e2f520a3a3b281a8",
+      "status": "excluded"
+    },
+    {
+      "method": "stationary_exact",
+      "name": "control-n32-zero_sum-q-1/8",
+      "sha256": "b952599bf2301c4dfe9993fd374dd796147cf0d9857909c2bd0d872821fdd68a",
+      "status": "reachable"
+    },
+    {
+      "method": "stationary_exact",
+      "name": "control-n32-zero_sum-q0",
+      "sha256": "56dbd7725b4abee26f7924167a097cabe3e41b28fc7dec98aee13b5f19148a54",
+      "status": "excluded"
+    },
+    {
+      "method": "stationary_exact",
+      "name": "control-n32-zero_sum-q1/8",
+      "sha256": "3224929228ae4e6afcbe81af4a71e80cd5086cb20bbc7f76ddff6390aace3414",
+      "status": "excluded"
+    },
+    {
+      "method": "stationary_exact",
+      "name": "control-n64-uniform-q-1/8",
+      "sha256": "43e58c43638c5d955696cd822506ae6fa513030002e31767eb9299d78b576049",
+      "status": "reachable"
+    },
+    {
+      "method": "stationary_exact",
+      "name": "control-n64-uniform-q0",
+      "sha256": "06046ab08decfce83378026e1b8509beefd3ea868ad29f38b85e854a2cbb60a0",
+      "status": "excluded"
+    },
+    {
+      "method": "stationary_exact",
+      "name": "control-n64-uniform-q1/8",
+      "sha256": "9167a527a5f0f7063a21cc058660c7599779e9b1b453c922193312582eb19be5",
+      "status": "excluded"
+    },
+    {
+      "method": "stationary_exact",
+      "name": "control-n64-zero_sum-q-1/8",
+      "sha256": "1906a0653358009e9b3ed7e66df423a69c469986eea3a29ffb606e74e161885d",
+      "status": "reachable"
+    },
+    {
+      "method": "stationary_exact",
+      "name": "control-n64-zero_sum-q0",
+      "sha256": "91a79414ca927454caa469114a0f9021bb89fca69cdc5ec66b3670346d724de9",
+      "status": "excluded"
+    },
+    {
+      "method": "stationary_exact",
+      "name": "control-n64-zero_sum-q1/8",
+      "sha256": "abc3104237bb499bf04e7337a60aca70e1982e5c45c3f07e81e3b5db5b9c29d3",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "stress-alias",
+      "sha256": "bbc5bbd78d842fddf5b38d9a9eec4248f37fc11bac2bf7d47daac7bae8768b82",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "stress-narrow",
+      "sha256": "e37d50c5cd8399c87422299969d94769f0f42891a02df86a0353816631ac46e3",
+      "status": "reachable"
+    },
+    {
+      "method": "global_amplitude_exact",
+      "name": "stress-exact_global_equality",
+      "sha256": "abb8e0c0b85e7b6446694b3bc3e661de72f1b9fe757eb90498f30f9365d266de",
+      "status": "excluded"
+    },
+    {
+      "method": "rational_point",
+      "name": "stress-huge_phase",
+      "sha256": "375e8f38747330789192329571cd170860cf973ca197a45da125e2c8e69d9922",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "input-alias-isolation",
+      "sha256": "11801287cd5610257a786f386f438c71e40dfb7ac973a4429ee1dfa4b5a4d886",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "output-alias-isolation",
+      "sha256": "11801287cd5610257a786f386f438c71e40dfb7ac973a4429ee1dfa4b5a4d886",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "alternate-precision-ladder",
+      "sha256": "c0c86de49cf2799a3783fb8d79fdd7c607acc349bf0e9157564120216241869e",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "alternate-precision-ladder",
+      "sha256": "feb80e46ad4bf0a55bbabdb417160c15dbe57646057f7a2c5d203bfd48e70e18",
+      "status": "reachable"
+    },
+    {
+      "method": "rational_point",
+      "name": "alternate-precision-ladder",
+      "sha256": "11801287cd5610257a786f386f438c71e40dfb7ac973a4429ee1dfa4b5a4d886",
+      "status": "reachable"
+    },
+    {
+      "method": null,
+      "name": "unsupported-graph",
+      "sha256": "5ce87974297bd8a13e5f2d51cf41d965609d1c618f2a84074d9ea21dedc1ff1b",
+      "status": "out_of_scope"
+    }
+  ],
+  "implementation": {
+    "certificate_schema": "gabriel-clique-window-certificate/v1",
+    "expected_reference_source_sha256": "b344b7282c8c28262236e680d68fe58bfda67ecc45073c3b8d38f0b11214925c",
+    "max_batch_windows": 256,
+    "reference_matches": true,
+    "reference_source_sha256": "b344b7282c8c28262236e680d68fe58bfda67ecc45073c3b8d38f0b11214925c",
+    "schema": "gabriel-prepared-window-batch/v1",
+    "source_sha256": "d61b27e68437eac5e847864cd2a4bc3923b77db88e172e6cc5a7ca7e624112ea"
+  },
+  "metrics": {
+    "distinct_prepared_study_models": 25
+  },
+  "passed": true,
+  "schema": "gabriel-window-batch-checks/v1",
+  "scope": "Full-certificate equivalence and preparation isolation; no timing or independent new mathematical proof."
+}
