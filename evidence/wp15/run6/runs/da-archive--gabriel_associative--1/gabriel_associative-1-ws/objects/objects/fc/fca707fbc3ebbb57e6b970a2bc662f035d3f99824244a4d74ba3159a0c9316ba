@@ -1,0 +1,231 @@
+You are the worker role of Gabriel for a source-grounded document amendment.
+Goal (verbatim user request):
+Amend doc/summary.md so that it states the statute's retention rule and how long the records are kept. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- citations [document/citations_bound] independent=True
+- claims [document/required_claims] independent=True
+
+Editable paths (changes elsewhere are rejected; sources are never editable): doc/
+Base commit: 05394a0fecc356dc86116e75b21f0cb9a60dd823
+
+Target documents (path sha256 bytes):
+  doc/summary.md eaf7573831e7f400949eaf346e887aeb4ce1d51087d65f408972b8ea7678385f 29
+=== doc/summary.md (sha256 eaf7573831e7f400949eaf346e887aeb4ce1d51087d65f408972b8ea7678385f) ===
+# Summary
+
+(to be completed)
+
+
+
+Sources (cite them by observation id; quotes must be exact substrings of the cited source):
+=== source statute revision 1 observation obs-1c39313618ea9b634cebcfd8b7b1c085e9fea1af (123 bytes) ===
+# Archive statute
+
+## Retention
+
+Records of the society are retained for the period named in the schedule of this statute.
+
+
+=== source schedule revision 1 observation obs-ed4e25601de0bcc342236e954c75b57431241541 (66 bytes) ===
+# Schedule
+
+Ledgers: eleven calendar years, shredding afterwards.
+
+
+=== source note23 revision 1 observation obs-16a7d8365246ca4ac9b298ca4659ac7309a31ed1 (91 bytes) ===
+# Note 23
+
+The statute states that the committee meets on the fourth Tuesday of the month.
+
+
+=== source note08 revision 1 observation obs-187b5615437f0c3f8ea9c8761987856666ce5761 (89 bytes) ===
+# Note 8
+
+The statute states that the committee meets on the first Tuesday of the month.
+
+
+=== source note34 revision 1 observation obs-18ce78215e4dfc3390d387165af2b3d1191c2e48 (90 bytes) ===
+# Note 34
+
+The statute states that the committee meets on the third Tuesday of the month.
+
+
+=== source note06 revision 1 observation obs-2eed06fc88f170b155681f4bc5f61334678cb776 (89 bytes) ===
+# Note 6
+
+The statute states that the committee meets on the third Tuesday of the month.
+
+
+=== source note14 revision 1 observation obs-35fb1c82d4122ae3a922d9c02d15c1f929e77736 (90 bytes) ===
+# Note 14
+
+The statute states that the committee meets on the third Tuesday of the month.
+
+
+=== source note32 revision 1 observation obs-41b1920e91307ded77aa896fee5585b733acca3a (90 bytes) ===
+# Note 32
+
+The statute states that the committee meets on the first Tuesday of the month.
+
+
+=== source note12 revision 1 observation obs-4b8c789f55d4a1a37ae8a135172636cbcdccbf3e (90 bytes) ===
+# Note 12
+
+The statute states that the committee meets on the first Tuesday of the month.
+
+
+=== source note35 revision 1 observation obs-52c4d520f30158b027b7dc68f390adbfdfb15a1d (91 bytes) ===
+# Note 35
+
+The statute states that the committee meets on the fourth Tuesday of the month.
+
+
+=== source note03 revision 1 observation obs-584bd2aa0ff132623374970a745058caefb9fe5b (90 bytes) ===
+# Note 3
+
+The statute states that the committee meets on the fourth Tuesday of the month.
+
+
+=== source note29 revision 1 observation obs-5991ef74cb9b8b2f4b66518115cc95489b8a0b25 (91 bytes) ===
+# Note 29
+
+The statute states that the committee meets on the second Tuesday of the month.
+
+
+=== source note25 revision 1 observation obs-6060ea6f59574a9a1d57783b7c8e7ad28d32858b (91 bytes) ===
+# Note 25
+
+The statute states that the committee meets on the second Tuesday of the month.
+
+
+=== source note21 revision 1 observation obs-62d2cb2c2256bed851975426c8945d7f7fac1bd3 (91 bytes) ===
+# Note 21
+
+The statute states that the committee meets on the second Tuesday of the month.
+
+
+=== source note19 revision 1 observation obs-633ec17f56f09a899cfe0b29663bdbf58cae2a62 (91 bytes) ===
+# Note 19
+
+The statute states that the committee meets on the fourth Tuesday of the month.
+
+
+=== source note15 revision 1 observation obs-68ceb13a6059ea4d025ad9a54ba2b5b274c383e0 (91 bytes) ===
+# Note 15
+
+The statute states that the committee meets on the fourth Tuesday of the month.
+
+
+=== source note20 revision 1 observation obs-69155a6eb4ee98793b5f01da6731e7545fa791bb (90 bytes) ===
+# Note 20
+
+The statute states that the committee meets on the first Tuesday of the month.
+
+
+=== source note11 revision 1 observation obs-76b0851e184c163402bacaf7f7934162842071a4 (91 bytes) ===
+# Note 11
+
+The statute states that the committee meets on the fourth Tuesday of the month.
+
+
+=== source note24 revision 1 observation obs-7a6da9feec3ba3ca5adc89f7ead8481677bb0a56 (90 bytes) ===
+# Note 24
+
+The statute states that the committee meets on the first Tuesday of the month.
+
+
+=== source note27 revision 1 observation obs-7b9f2f24cddeb0262900be034e581b943d80268a (91 bytes) ===
+# Note 27
+
+The statute states that the committee meets on the fourth Tuesday of the month.
+
+
+=== source note05 revision 1 observation obs-8eeae01f7abf5330191539f1d77a32836b1cd6cb (90 bytes) ===
+# Note 5
+
+The statute states that the committee meets on the second Tuesday of the month.
+
+
+=== source note10 revision 1 observation obs-90ee23b352e6bf80ec8043e69fd397fb54d6054b (90 bytes) ===
+# Note 10
+
+The statute states that the committee meets on the third Tuesday of the month.
+
+
+=== source note01 revision 1 observation obs-b0dbcabcd05c6375f686b1daa39dd3f24e3ccbcd (90 bytes) ===
+# Note 1
+
+The statute states that the committee meets on the second Tuesday of the month.
+
+
+=== source note00 revision 1 observation obs-b13cd320b3b9a727e4717ec4a359d3ef1105dec3 (89 bytes) ===
+# Note 0
+
+The statute states that the committee meets on the first Tuesday of the month.
+
+
+=== source note33 revision 1 observation obs-b1b465a0b856102f5c3e665fbceb7577e7654117 (91 bytes) ===
+# Note 33
+
+The statute states that the committee meets on the second Tuesday of the month.
+
+
+=== source note30 revision 1 observation obs-b7765e43ba6f7090468888729488bdab3d395c74 (90 bytes) ===
+# Note 30
+
+The statute states that the committee meets on the third Tuesday of the month.
+
+
+=== source note04 revision 1 observation obs-c6378c5b6fb19b96f2e8616730515ab2d92eb8b6 (89 bytes) ===
+# Note 4
+
+The statute states that the committee meets on the first Tuesday of the month.
+
+
+=== source note28 revision 1 observation obs-c7a7398d44978b7f28a1a5e40864b1e92d691c60 (90 bytes) ===
+# Note 28
+
+The statute states that the committee meets on the first Tuesday of the month.
+
+
+=== source note18 revision 1 observation obs-c8028cbd1fe7c777c5def794384c389bcf0048d2 (90 bytes) ===
+# Note 18
+
+The statute states that the committee meets on the third Tuesday of the month.
+
+
+=== source note26 revision 1 observation obs-d44f1115d42dea3ce79f77191f46ae051ceb3ba6 (90 bytes) ===
+# Note 26
+
+The statute states that the committee meets on the third Tuesday of the month.
+
+
+=== source note13 revision 1 observation obs-d7f336a08c9f8280a08d4cc68efe63c76854f3e3 (91 bytes) ===
+# Note 13
+
+The statute states that the committee meets on the second Tuesday of the month.
+
+
+=== source note16 revision 1 observation obs-dc8d8f500fbfec5255eab872b11c95c10437d8ac (90 bytes) ===
+# Note 16
+
+The statute states that the committee meets on the first Tuesday of the month.
+
+
+Observation obs-a8c9a59071392c42d170e519beae1bb98ce9d284 is not available: superseded
+Observation obs-abca222bc4a08bed39b033780554de0448e7b79e is not available: superseded
+Observation obs-dd6c834498d5d9d529efc2e522e5f6e2898a2a00 is not available: budget
+Observation obs-de29a9f8326b1ea0a30f0bb8c650022982fa5a82 is not available: budget
+Observation obs-e3b16a6fff679c938c6d753b52f110dddd93c633 is not available: budget
+Observation obs-e828397ea3dab3a30fcef443aba447ee74252a6a is not available: budget
+Observation obs-f1e222417918a886266bbcb4860f2ee67cc841a7 is not available: budget
+Observation obs-f87182703483c81e54f21e66bead409c98dafe52 is not available: budget
+
+Every statement you add must be followed by a citation marker of the form
+[[cite:<observation id> "exact quote from that source"]] where the quote is copied verbatim from the cited source.
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<target path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest. For create expected_sha256 is null.
+Do not touch sources or oracle files. Do not claim completion; the independent checks decide.

@@ -1,0 +1,235 @@
+You are the worker role of Gabriel for a source-grounded document amendment.
+Goal (verbatim user request):
+Amend doc/summary.md so that it states the bylaws' lending rule for books and how long a member may keep them. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- citations [document/citations_bound] independent=True
+- claims [document/required_claims] independent=True
+
+Editable paths (changes elsewhere are rejected; sources are never editable): doc/
+Base commit: 406aa3885f6b2f5d936907ef48133de7d8717678
+
+Target documents (path sha256 bytes):
+  doc/summary.md e12bce3d19f83907756bed57414e9b6e93b88692736ac59824f0673d698f4c17 446
+=== doc/summary.md (sha256 e12bce3d19f83907756bed57414e9b6e93b88692736ac59824f0673d698f4c17) ===
+The bylaws state that members may borrow books from the library. Every member is allowed to keep a borrowed book for a period of two weeks before it must be returned to the library. [[cite:obs-eeed7200a864f1a51b40eabd8b5963634921379e "The bylaws states that a member may borrow books for a period of two weeks."]] [[cite:obs-f66672dc6efca7e1752d1b8c6dcee74f0f270494 "The bylaws states that books must be returned within two weeks of borrowing."]]
+
+
+Sources (cite them by observation id; quotes must be exact substrings of the cited source):
+=== source note27 revision 1 observation obs-083a6861c79ef95b6b87a9a11af2b46bf2481d4a (90 bytes) ===
+# Note 27
+
+The bylaws states that the committee meets on the fourth Tuesday of the month.
+
+
+=== source note06 revision 1 observation obs-0b66780956e09963f6bc87c5fc57aceab7ae63f0 (88 bytes) ===
+# Note 6
+
+The bylaws states that the committee meets on the third Tuesday of the month.
+
+
+=== source note01 revision 1 observation obs-19097eb04269b3b175371b933478d053b4254cb4 (89 bytes) ===
+# Note 1
+
+The bylaws states that the committee meets on the second Tuesday of the month.
+
+
+=== source note25 revision 1 observation obs-21e3928b739faa579c93d294535e2767d963b45c (90 bytes) ===
+# Note 25
+
+The bylaws states that the committee meets on the second Tuesday of the month.
+
+
+=== source note07 revision 1 observation obs-22d9098a494015b44f4c284dfa6208eae9a587ee (89 bytes) ===
+# Note 7
+
+The bylaws states that the committee meets on the fourth Tuesday of the month.
+
+
+=== source note10 revision 1 observation obs-37cf4e1386a741063531b50261bbb46077434c69 (89 bytes) ===
+# Note 10
+
+The bylaws states that the committee meets on the third Tuesday of the month.
+
+
+=== source note30 revision 1 observation obs-3b39e2334e0b7f98fe3f3616e13754ebb59ae4a1 (89 bytes) ===
+# Note 30
+
+The bylaws states that the committee meets on the third Tuesday of the month.
+
+
+=== source note18 revision 1 observation obs-3b6c25ce8bf4da7979e6ac154cefa2f4f47fc6b3 (89 bytes) ===
+# Note 18
+
+The bylaws states that the committee meets on the third Tuesday of the month.
+
+
+=== source note09 revision 1 observation obs-3bb46f10700460aac2c1abfd31b81758666daa4d (89 bytes) ===
+# Note 9
+
+The bylaws states that the committee meets on the second Tuesday of the month.
+
+
+=== source note17 revision 1 observation obs-4217f7aa241718a8195248ffb308905993c775fa (90 bytes) ===
+# Note 17
+
+The bylaws states that the committee meets on the second Tuesday of the month.
+
+
+=== source note15 revision 1 observation obs-423770de428b97c01bdebd82ac13d8c547e36503 (90 bytes) ===
+# Note 15
+
+The bylaws states that the committee meets on the fourth Tuesday of the month.
+
+
+=== source note13 revision 1 observation obs-4e72b810e4efa13919a3b237fd3cca134815f030 (90 bytes) ===
+# Note 13
+
+The bylaws states that the committee meets on the second Tuesday of the month.
+
+
+=== source note33 revision 1 observation obs-564f6f6978da645998eaf1d723441271b26f69e1 (90 bytes) ===
+# Note 33
+
+The bylaws states that the committee meets on the second Tuesday of the month.
+
+
+=== source note05 revision 1 observation obs-570da7564104d1a6685face0b3d01f554bb414b1 (89 bytes) ===
+# Note 5
+
+The bylaws states that the committee meets on the second Tuesday of the month.
+
+
+=== source note04 revision 1 observation obs-581359c715ab5fc12e98ed5b65ded8b289b0b34d (88 bytes) ===
+# Note 4
+
+The bylaws states that the committee meets on the first Tuesday of the month.
+
+
+=== source note24 revision 1 observation obs-59fe9b44fe9d072e38ed619a162bce3601740938 (89 bytes) ===
+# Note 24
+
+The bylaws states that the committee meets on the first Tuesday of the month.
+
+
+=== source note22 revision 1 observation obs-5a17efa40f1401140a44bb201bee287763ad7239 (89 bytes) ===
+# Note 22
+
+The bylaws states that the committee meets on the third Tuesday of the month.
+
+
+=== source note16 revision 1 observation obs-5c41fcd528d3940f7db315e0fb0c6154f80352ff (89 bytes) ===
+# Note 16
+
+The bylaws states that the committee meets on the first Tuesday of the month.
+
+
+=== source note32 revision 1 observation obs-6b1de79c7f2a4a9538f1d28e5707566e81203f11 (89 bytes) ===
+# Note 32
+
+The bylaws states that the committee meets on the first Tuesday of the month.
+
+
+=== source note34 revision 1 observation obs-7bc540b5b84e5468ec50282b089832d59680dfc5 (89 bytes) ===
+# Note 34
+
+The bylaws states that the committee meets on the third Tuesday of the month.
+
+
+=== source note28 revision 1 observation obs-83e9887498804633093c7532e928ae309a348b3d (89 bytes) ===
+# Note 28
+
+The bylaws states that the committee meets on the first Tuesday of the month.
+
+
+=== source note11 revision 1 observation obs-900e62da49acfc04a11c3659bbb6e96e6fec52b2 (90 bytes) ===
+# Note 11
+
+The bylaws states that the committee meets on the fourth Tuesday of the month.
+
+
+=== source note14 revision 1 observation obs-9012f428b9ca5365534e182f76607057000d2fe8 (89 bytes) ===
+# Note 14
+
+The bylaws states that the committee meets on the third Tuesday of the month.
+
+
+=== source note19 revision 1 observation obs-9f27561739cfa1e63aecbe6607a7b4059cc1840d (90 bytes) ===
+# Note 19
+
+The bylaws states that the committee meets on the fourth Tuesday of the month.
+
+
+=== source note29 revision 1 observation obs-9fcef570535e23d767477a3e4a2457415874c1e8 (90 bytes) ===
+# Note 29
+
+The bylaws states that the committee meets on the second Tuesday of the month.
+
+
+=== source note12 revision 1 observation obs-a40c78ebc6c5ef271d0c96979310a72bc4dea5a1 (89 bytes) ===
+# Note 12
+
+The bylaws states that the committee meets on the first Tuesday of the month.
+
+
+=== source note08 revision 1 observation obs-bbe478eacccdc43ccbb55585755b5ce1c8850806 (88 bytes) ===
+# Note 8
+
+The bylaws states that the committee meets on the first Tuesday of the month.
+
+
+=== source note23 revision 1 observation obs-c46e2a5db836c5580d69b8a7bc373a12422a2da1 (90 bytes) ===
+# Note 23
+
+The bylaws states that the committee meets on the fourth Tuesday of the month.
+
+
+=== source note26 revision 1 observation obs-ddf83dd81e7921e03c96fd5e582c51117222403f (89 bytes) ===
+# Note 26
+
+The bylaws states that the committee meets on the third Tuesday of the month.
+
+
+=== source note00 revision 1 observation obs-e3a38b48b3f08cdaf25f50f114665860a57db712 (88 bytes) ===
+# Note 0
+
+The bylaws states that the committee meets on the first Tuesday of the month.
+
+
+=== source note02 revision 1 observation obs-ecc106cdf042fb67273c405463dbd678907dc54a (88 bytes) ===
+# Note 2
+
+The bylaws states that the committee meets on the third Tuesday of the month.
+
+
+=== source note21 revision 1 observation obs-eee0ca9af5e481453a1a2e39530c9a6cc6dc02c4 (90 bytes) ===
+# Note 21
+
+The bylaws states that the committee meets on the second Tuesday of the month.
+
+
+Observation obs-9b525e2a0dbc741dee8f7ba775617ec574d065ea is not available: superseded
+Observation decision-run-da-library-gabriel_reference_plan-0-1-1 is not available: superseded
+Observation obs-c39bcdab977c36e67ef066088d700d04a8e26e5c is not available: superseded
+Observation obs-eeed7200a864f1a51b40eabd8b5963634921379e is not available: budget
+Observation obs-f66672dc6efca7e1752d1b8c6dcee74f0f270494 is not available: budget
+Observation obs-fdf20e11f23caa26ea90b610a44e2f5f9d188afb is not available: budget
+Observation obs-ffb1ebd2a23aa199a4259a5d53337fb3db494073 is not available: budget
+Observation obs-0defcc59b6a0a91c85c6ae4049437c71ee65758d is not available: budget
+Observation obs-0576a60658065684afa5637fd0f47035574aaaeb is not available: budget
+
+Previous attempt failed verification (round 3). Diagnostics:
+--- citations ---
+{"check_id": "citations", "evidence": {"frontier": {"memory_sequence": 45, "owner_sequence": 33}, "problems": ["doc/summary.md: citation of obs-9b525e2a0dbc741dee8f7ba775617ec574d065ea not bound: quote not found in the cited source", "doc/summary.md: citation of obs-c39bcdab977c36e67ef066088d700d04a8e26e5c not bound: quote not found in the cited source"], "resolved": [{"path": "doc/summary.md", "spans": []}]}, "node_id": "review", "outcome": "failed"}
+
+--- citations ---
+{"check_id": "citations", "evidence": {"frontier": {"memory_sequence": 46, "owner_sequence": 58}, "problems": ["doc/summary.md: citation of obs-eeed7200a864f1a51b40eabd8b5963634921379e not bound: quote not found in the cited source", "doc/summary.md: citation of obs-f66672dc6efca7e1752d1b8c6dcee74f0f270494 not bound: quote not found in the cited source"], "resolved": [{"path": "doc/summary.md", "spans": []}]}, "node_id": "review-r1", "outcome": "failed"}
+
+
+Every statement you add must be followed by a citation marker of the form
+[[cite:<observation id> "exact quote from that source"]] where the quote is copied verbatim from the cited source.
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<target path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest. For create expected_sha256 is null.
+Do not touch sources or oracle files. Do not claim completion; the independent checks decide.

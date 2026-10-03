@@ -1,0 +1,253 @@
+You are the worker role of Gabriel for a source-grounded document amendment.
+Goal (verbatim user request):
+Amend doc/summary.md so that it states the handbook's parking rule and which spaces are reserved and the time limit. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- citations [document/citations_bound] independent=True
+- claims [document/required_claims] independent=True
+
+Editable paths (changes elsewhere are rejected; sources are never editable): doc/
+Base commit: 3775102fa25d36a5ea80b30a058637d7be599640
+
+Target documents (path sha256 bytes):
+  doc/summary.md 6ad0f836b97bb9fdbf4a29b9477ae14387ee41b89e0b3e2d8664100db91d3ad9 2423
+=== doc/summary.md (sha256 6ad0f836b97bb9fdbf4a29b9477ae14387ee41b89e0b3e2d8664100db91d3ad9) ===
+The handbook states that parking is regulated with specific rules. Certain parking spaces are reserved, and there is a time limit for parking in these spaces. Every statement here is supported by the handbook's parking rule details as specified in the source documents.
+
+[[cite:obs-1a0f97a30c669f4bca5ec31e4ae6d14106056ff2 "The handbook states that the committee meets on the first Tuesday of the month."]]
+[[cite:obs-0cc7c0ad266b598463622d761159ef6548cbc33b "The handbook states that the committee meets on the fourth Tuesday of the month."]]
+[[cite:obs-4fbb71db0ddfc60f21e51ff54d2d0422cc4cdb72 "The handbook states that the committee meets on the third Tuesday of the month."]]
+[[cite:obs-54540cc941c1af394caf716797491ef896b2a1a8 "The handbook states that the committee meets on the second Tuesday of the month."]]
+[[cite:obs-8a9006ca0c82e1840765af6abfffd5923bf024fa "The handbook states that the committee meets on the second Tuesday of the month."]]
+[[cite:obs-3e58ebb38c265ad344de5c70776d9f034c0456a0 "The handbook states that the committee meets on the fourth Tuesday of the month."]]
+[[cite:obs-6a609de6c42f6795b0e43c61783b082be4fe9ba8 "The handbook states that the committee meets on the third Tuesday of the month."]]
+[[cite:obs-8f186ed08ec372e6f367dbf00b5e34b70e490876 "The handbook states that the committee meets on the fourth Tuesday of the month."]]
+[[cite:obs-676a872a85259b9fc4730caf5ab67bae5d2c12b0 "The handbook states that the committee meets on the fourth Tuesday of the month."]]
+[[cite:obs-7cd4e06d0ad546555c2a1e14e0735a5a212f8700 "The handbook states that the committee meets on the second Tuesday of the month."]]
+[[cite:obs-8e3187ddb4d55c27b52689546748edf5a04827b4 "The handbook states that the committee meets on the first Tuesday of the month."]]
+[[cite:obs-afe042c5e2cf628b8b9e9ec36a602b754278beb1 "The handbook states that the committee meets on the fourth Tuesday of the month."]]
+[[cite:obs-9be408561a107056c32900c0ee9c3516af26c4bb "superseded"]]
+[[cite:obs-ab2bea4f1076f063b94844442b2a68ac4e858592 "superseded"]]
+[[cite:obs-dbe04ec931483d83d7da1bc46460c5a6f0d27776 "budget"]]
+[[cite:obs-ddadfca423e118f5f48d52882bf7c99e62fd7042 "budget"]]
+[[cite:obs-e1b59d2b721168c4b197e51b9624aaea757f514d "budget"]]
+[[cite:obs-fcec47fd7efc4f464749cacc11238fcf78aeb2e3 "budget"]]
+[[cite:obs-0ae515d9d80820bac3d1d9fbbb20352583752e7a "budget"]]
+[[cite:obs-3bfc94606b42c241031202b3520c96bbd67dd7c8 "budget"]]
+
+
+
+Sources (cite them by observation id; quotes must be exact substrings of the cited source):
+=== source note16 revision 1 observation obs-0562f277c4f83a7521fa177d849b2512641fa2c8 (91 bytes) ===
+# Note 16
+
+The handbook states that the committee meets on the first Tuesday of the month.
+
+
+=== source note04 revision 1 observation obs-08fa9f6fc631d8354dcb5755737cff918bebb2aa (90 bytes) ===
+# Note 4
+
+The handbook states that the committee meets on the first Tuesday of the month.
+
+
+=== source note15 revision 1 observation obs-0cc7c0ad266b598463622d761159ef6548cbc33b (92 bytes) ===
+# Note 15
+
+The handbook states that the committee meets on the fourth Tuesday of the month.
+
+
+=== source note03 revision 1 observation obs-0f3565c5a68b1dc1d01bd0a10950b83eb7c60285 (91 bytes) ===
+# Note 3
+
+The handbook states that the committee meets on the fourth Tuesday of the month.
+
+
+=== source note00 revision 1 observation obs-1a0f97a30c669f4bca5ec31e4ae6d14106056ff2 (90 bytes) ===
+# Note 0
+
+The handbook states that the committee meets on the first Tuesday of the month.
+
+
+=== source note31 revision 1 observation obs-3e58ebb38c265ad344de5c70776d9f034c0456a0 (92 bytes) ===
+# Note 31
+
+The handbook states that the committee meets on the fourth Tuesday of the month.
+
+
+=== source note28 revision 1 observation obs-41a847775e54b39d1086b3492da3598ea66f0442 (91 bytes) ===
+# Note 28
+
+The handbook states that the committee meets on the first Tuesday of the month.
+
+
+=== source note35 revision 1 observation obs-4667640c04c6730842c4966b08a56251a8f36d67 (92 bytes) ===
+# Note 35
+
+The handbook states that the committee meets on the fourth Tuesday of the month.
+
+
+=== source note22 revision 1 observation obs-4fbb71db0ddfc60f21e51ff54d2d0422cc4cdb72 (91 bytes) ===
+# Note 22
+
+The handbook states that the committee meets on the third Tuesday of the month.
+
+
+=== source note34 revision 1 observation obs-505b623b2bdee52833c6f1b69a79c6d6e4413bce (91 bytes) ===
+# Note 34
+
+The handbook states that the committee meets on the third Tuesday of the month.
+
+
+=== source note33 revision 1 observation obs-54540cc941c1af394caf716797491ef896b2a1a8 (92 bytes) ===
+# Note 33
+
+The handbook states that the committee meets on the second Tuesday of the month.
+
+
+=== source note10 revision 1 observation obs-5833b8397517d51478707cd0ecddd8ab0078311f (91 bytes) ===
+# Note 10
+
+The handbook states that the committee meets on the third Tuesday of the month.
+
+
+=== source note24 revision 1 observation obs-6633bb6c9e8c25097bc6a0dbc39fdedc31aa7c56 (91 bytes) ===
+# Note 24
+
+The handbook states that the committee meets on the first Tuesday of the month.
+
+
+=== source note07 revision 1 observation obs-676a872a85259b9fc4730caf5ab67bae5d2c12b0 (91 bytes) ===
+# Note 7
+
+The handbook states that the committee meets on the fourth Tuesday of the month.
+
+
+=== source note06 revision 1 observation obs-6a609de6c42f6795b0e43c61783b082be4fe9ba8 (90 bytes) ===
+# Note 6
+
+The handbook states that the committee meets on the third Tuesday of the month.
+
+
+=== source note05 revision 1 observation obs-6a6b33ccfe157179aae9d1c571e7f6139ec25ca9 (91 bytes) ===
+# Note 5
+
+The handbook states that the committee meets on the second Tuesday of the month.
+
+
+=== source note29 revision 1 observation obs-7cd4e06d0ad546555c2a1e14e0735a5a212f8700 (92 bytes) ===
+# Note 29
+
+The handbook states that the committee meets on the second Tuesday of the month.
+
+
+=== source note17 revision 1 observation obs-837406b50ab2c9949efa5d36ab101431e4ac7bc4 (92 bytes) ===
+# Note 17
+
+The handbook states that the committee meets on the second Tuesday of the month.
+
+
+=== source note12 revision 1 observation obs-87d9aac3c578aff0a237785be686a8bbc7c89f43 (91 bytes) ===
+# Note 12
+
+The handbook states that the committee meets on the first Tuesday of the month.
+
+
+=== source note09 revision 1 observation obs-88b7951cd8ca5e383060c910210ab500a96587e3 (91 bytes) ===
+# Note 9
+
+The handbook states that the committee meets on the second Tuesday of the month.
+
+
+=== source note01 revision 1 observation obs-8a9006ca0c82e1840765af6abfffd5923bf024fa (91 bytes) ===
+# Note 1
+
+The handbook states that the committee meets on the second Tuesday of the month.
+
+
+=== source note20 revision 1 observation obs-8e3187ddb4d55c27b52689546748edf5a04827b4 (91 bytes) ===
+# Note 20
+
+The handbook states that the committee meets on the first Tuesday of the month.
+
+
+=== source note11 revision 1 observation obs-8f186ed08ec372e6f367dbf00b5e34b70e490876 (92 bytes) ===
+# Note 11
+
+The handbook states that the committee meets on the fourth Tuesday of the month.
+
+
+=== source note14 revision 1 observation obs-909f3a26a3f9753d91c2ea95512c3cfe89fd49fe (91 bytes) ===
+# Note 14
+
+The handbook states that the committee meets on the third Tuesday of the month.
+
+
+=== source note25 revision 1 observation obs-96e7b956c32940572c1491dbd54068d5d52bfc48 (92 bytes) ===
+# Note 25
+
+The handbook states that the committee meets on the second Tuesday of the month.
+
+
+=== source note23 revision 1 observation obs-afe042c5e2cf628b8b9e9ec36a602b754278beb1 (92 bytes) ===
+# Note 23
+
+The handbook states that the committee meets on the fourth Tuesday of the month.
+
+
+=== source note18 revision 1 observation obs-b4d4971446c76c65b4039a3d2495ff7ab999516e (91 bytes) ===
+# Note 18
+
+The handbook states that the committee meets on the third Tuesday of the month.
+
+
+=== source note02 revision 1 observation obs-bed8bd253e104c44fe4cea4801ef7d8488dc60aa (90 bytes) ===
+# Note 2
+
+The handbook states that the committee meets on the third Tuesday of the month.
+
+
+=== source note21 revision 1 observation obs-c72e63303a39c013c784b6e71ede140a1fc896d2 (92 bytes) ===
+# Note 21
+
+The handbook states that the committee meets on the second Tuesday of the month.
+
+
+=== source note32 revision 1 observation obs-c8292428d7d05039faaf9bded0d8d1e7f16237bb (91 bytes) ===
+# Note 32
+
+The handbook states that the committee meets on the first Tuesday of the month.
+
+
+=== source note08 revision 1 observation obs-d09f25c69b9a43ff3f174d7ff4dd9c4c1d29f007 (90 bytes) ===
+# Note 8
+
+The handbook states that the committee meets on the first Tuesday of the month.
+
+
+=== source note19 revision 1 observation obs-d0feaffa4fc61ab20531f4b58096c84ec97c8b1d (92 bytes) ===
+# Note 19
+
+The handbook states that the committee meets on the fourth Tuesday of the month.
+
+
+Observation obs-ab2bea4f1076f063b94844442b2a68ac4e858592 is not available: superseded
+Observation obs-9be408561a107056c32900c0ee9c3516af26c4bb is not available: superseded
+Observation obs-dbe04ec931483d83d7da1bc46460c5a6f0d27776 is not available: budget
+Observation obs-ddadfca423e118f5f48d52882bf7c99e62fd7042 is not available: budget
+Observation obs-e1b59d2b721168c4b197e51b9624aaea757f514d is not available: budget
+Observation obs-fcec47fd7efc4f464749cacc11238fcf78aeb2e3 is not available: budget
+Observation obs-0ae515d9d80820bac3d1d9fbbb20352583752e7a is not available: budget
+Observation obs-3bfc94606b42c241031202b3520c96bbd67dd7c8 is not available: budget
+
+Previous attempt failed verification (round 2). Diagnostics:
+--- citations ---
+{"check_id": "citations", "evidence": {"frontier": {"memory_sequence": 45, "owner_sequence": 33}, "problems": ["doc/summary.md: citation of obs-9be408561a107056c32900c0ee9c3516af26c4bb not bound: quote not found in the cited source", "doc/summary.md: citation of obs-ab2bea4f1076f063b94844442b2a68ac4e858592 not bound: quote not found in the cited source", "doc/summary.md: citation of obs-dbe04ec931483d83d7da1bc46460c5a6f0d27776 not bound: quote not found in the cited source", "doc/summary.md: citation of obs-ddadfca423e118f5f48d52882bf7c99e62fd7042 not bound: quote not found in the cited source", "doc/summary.md: citation of obs-e1b59d2b721168c4b197e51b9624aaea757f514d not bound: quote not found in the cited source", "doc/summary.md: citation of obs-fcec47fd7efc4f464749cacc11238fcf78aeb2e3 not bound: quote not found in the cited source", "doc/summary.md: citation of obs-0ae515d9d80820bac3d1d9fbbb20352583752e7a not bound: quote not found in the cited source", "doc/summary.md: citation of obs-3bfc94606b42c241031202b3520c96bbd67dd7c8 not bound: quote not found in the cited source"], "resolved": [{"path": "doc/summary.md", "spans": [{"observation_id": "obs-1a0f97a30c669f4bca5ec31e4ae6d14106056ff2", "source_id": "note00", "span_end": 89, "span_start": 10}, {"observation_id": "obs-0cc7c0ad266b598463622d761159ef6548cbc33b", "source_id": "note15", "span_end": 91, "span_start": 11}, {"observation_id": "obs-4fbb71db0ddfc60f21e51ff54d2d0422cc4cdb72", "source_id": "note22", "span_end": 90, "span_start": 11}, {"observation_id": "obs-54540cc941c1af394caf716797491ef896b2a1a8", "source_id": "note33", "span_end": 91, "span_start": 11}, {"observation_id": "obs-8a9006ca0c82e1840765af6abfffd5923bf024fa", "source_id": "note01", "span_end": 90, "span_start": 10}, {"observation_id": "obs-3e58ebb38c265ad344de5c70776d9f034c0456a0", "source_id": "note31", "span_end": 91, "span_start": 11}, {"observation_id": "obs-6a609de6c42f6795b0e43c61783b082be4fe9ba8", "source_id": "note06", "span_end": 89
+
+
+Every statement you add must be followed by a citation marker of the form
+[[cite:<observation id> "exact quote from that source"]] where the quote is copied verbatim from the cited source.
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<target path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest. For create expected_sha256 is null.
+Do not touch sources or oracle files. Do not claim completion; the independent checks decide.

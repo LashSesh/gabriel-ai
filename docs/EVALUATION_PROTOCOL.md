@@ -275,6 +275,70 @@ on this distribution. The sample is small (six runs per family and arm), the int
 descriptive, and the conflict family's spread between arms with identical sources is as large as
 the effects under test.
 
+## Protocol 6: the associative memory layer (ADR-20)
+A mechanism test, not an advantage protocol: does the document pack's view `associative` (the
+provenance view re-ranked by the native engine's walk over the co-citation graph of claims that
+earlier verified runs established) change verified outcomes where a required source is linked
+to the task only by verified co-citation, and what does it cost where it is not needed? The
+tier `association` (`evaluation/corpus_domains.py`, fifteen tasks in five topics) constructs
+that precondition: a hidden source sharing no token with the goal competes with 36 scored
+distractors under the pack's budget of 32 items; a history task (role `history`, never a unit)
+cites it together with the visible source; the harness runs the history first in the same
+workspace through the scripted provider with its correct deliverable, for every Gabriel arm
+alike, so the history is the system's own verified run. Families: `association-needed` (3
+topics, seen), `association-needed-held-out` (2, held out), `association-unneeded` (3, the same
+history, the hidden figure forbidden), `association-none` (2, no history, no budget pressure).
+Arms: `provider_only` and `simple_loop` on the plain view (every file, no budget; bounds, not
+comparators), `gabriel_reference_plan` (provenance view, the matched comparator) and
+`gabriel_associative`. Declared before any run (`evidence/wp15/protocol6_declaration.md`): a
+minimum relevant effect of 0.5 verified success on the needed families, the held-out family
+deciding; harm on the unneeded family bounded by one run in six; equality on `association-none`.
+
+**Run 6** (`protocol6.frozen.json`, 80 runs, gpt-4.1-mini, `linux_namespace`) was lost to a
+corpus defect and is retained unchanged with every final diff and `retrieval_analysis.json`:
+the distractors ("The statute states that the committee meets ...") tied with the visible
+source under the memory service's scorer in four of five topics; the tie-break by observation
+id, which differs per workspace, dropped the visible source itself below the budget in 25 of
+32 budgeted Gabriel runs, so neither arm had it, the walk had no seed in 13 of 16 associative
+runs, and the model cited distractors as the visible source's statements. Where the precondition
+held (da-fee, one repetition of da-archive) the walk carried the hidden source and the run
+verified (3 of 3 against 0 of 3). Not met as declared (needed +0.50, held-out +0.00). The
+amendment, recorded before any further run: distractors naming no source, and an executed
+construction invariant under the service's own scorer (visible source strictly above every
+distractor, every distractor strictly above the hidden source; `tests/test_association.py`
+executes it through the service for every topic). Sources, asks, oracles, arms and rules
+unchanged; the held-out family had been executed once under the defective corpus, where its
+visible source never reached a prompt.
+
+**Run 6b** (`protocol6b.frozen.json`, digest `74bc6bba…`, corpus digest `d3517d87…`, 80 runs):
+
+| system | runs | verified | p_success | false compl. | mean requests | mean tokens | needed (seen) | held-out | unneeded | none |
+|---|---|---|---|---|---|---|---|---|---|---|
+| provider_only | 20 | 14 | 0.70 | 6 | 1.00 | 2559 | 6/6 | 4/4 | 0/6 | 4/4 |
+| simple_loop | 20 | 19 | 0.95 | 0 | 1.70 | 4794 | 6/6 | 4/4 | 5/6 | 4/4 |
+| gabriel_reference_plan | 20 | 10 | 0.50 | 0 | 2.00 | 5572 | 0/6 | 0/4 | 6/6 | 4/4 |
+| gabriel_associative | 20 | 18 | 0.90 | 0 | 1.40 | 3671 | 6/6 | 4/4 | 4/6 | 4/4 |
+
+Against the declared rules (`evidence/wp15/run6b/report.md`, `retrieval_analysis.json`):
+
+- Primary: **met, held-out family included.** The associative view verified every needed task
+  at one request (2860 mean tokens); the provenance view none after three requests (9129
+  tokens). The paired difference is +1.00 on each of the five tasks against the declared 0.5.
+  The retained manifests show the mechanism: the visible source seeded the walk at 770 milli,
+  the hidden source entered at 230 milli on the second rank above the distractors (54 to 64
+  milli), in 10 of 10 associative prompts and 0 of 10 provenance prompts.
+- Harm: **not met.** On `association-unneeded` the associative view lost two of six runs
+  (du-archive, both repetitions) against none for the provenance view, one more than the bound,
+  at 2.33 against 1.00 requests. In all six first attempts the model stated the forbidden
+  figure from the carried source (claims check `forbidden_present`); the loop repaired four. No
+  arm of Gabriel made a false completion; the provider-only baseline stated the figure in all
+  six and declared done, the simple loop lost one after six requests.
+- `association-none`: equal, as declared (4 of 4 each, one request).
+
+What follows: the walk does what ADR-20 specifies, on this distribution and provider, and its
+cost is that a carried source gets used whether needed or not; the view stays declared per task.
+The result is scoped to the constructed precondition and does not touch the advantage gate.
+
 ## Freezing and amendments
 `gabriel eval freeze` digests the protocol body and records the harness code identity.
 `gabriel eval run` refuses a changed protocol or corpus. A harness code change after freezing is

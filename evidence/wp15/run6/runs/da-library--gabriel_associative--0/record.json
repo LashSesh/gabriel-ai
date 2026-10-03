@@ -1,0 +1,274 @@
+{
+  "task_id": "da-library",
+  "family": "association-needed-held-out",
+  "system": "gabriel_associative",
+  "rep": 0,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp15/run6/runs/da-library--gabriel_associative--0",
+  "domain": "document",
+  "outcome": {
+    "system": "gabriel_associative",
+    "task_id": "da-library",
+    "family": "association-needed-held-out",
+    "rep": 0,
+    "declared": false,
+    "declared_reason": "run state failed",
+    "model_requests": 3,
+    "model_tokens": 8891,
+    "wall_ms": 10074,
+    "provider_statuses": [
+      "completed",
+      "completed",
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp15/run6/runs/da-library--gabriel_associative--0/gabriel_associative-0-ws/worktrees/run-da-library-gabriel_associative-0-1",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "history dh-library: succeeded",
+      "assess propose-r2/output-valid -> passed: assessment passed recorded for output-valid; node propose-r2 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+      "apply-r2 -> completed (result accepted; checks pending)",
+      "assess apply-r2/output-valid -> passed: assessment passed recorded for output-valid; node apply-r2 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+      "read-back-r2 -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+      "assess read-back-r2/output-valid -> passed: assessment passed recorded for output-valid; node read-back-r2 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+      "review-r2 -> completed (result accepted; checks pending)",
+      "assess review-r2/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets",
+      "assess review-r2/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,citations,claims,no-secrets",
+      "assess review-r2/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: citations,claims,no-secrets",
+      "assess review-r2/no-secrets -> passed: assessment passed recorded for no-secrets; not complete: mandatory checks without eligible passing evidence: citations,claims",
+      "assess review-r2/citations -> passed: assessment passed recorded for citations; not complete: mandatory checks without eligible passing evidence: claims",
+      "assess review-r2/claims -> failed: assessment failed recorded for claims; mandatory check failed; repair policy exhausted"
+    ],
+    "gabriel": {
+      "run_id": "run-da-library-gabriel_associative-0-1",
+      "workspace": "/home/user/gabriel-ai/evidence/wp15/run6/runs/da-library--gabriel_associative--0/gabriel_associative-0-ws",
+      "hold": null,
+      "replay": "passed",
+      "events": 108,
+      "assessments": [
+        {
+          "check_id": "scope",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r2"
+        },
+        {
+          "check_id": "base-commit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r2"
+        },
+        {
+          "check_id": "checks-intact",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r2"
+        },
+        {
+          "check_id": "no-secrets",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r2"
+        },
+        {
+          "check_id": "citations",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r2"
+        },
+        {
+          "check_id": "claims",
+          "outcome": "failed",
+          "eligible": true,
+          "node_id": "review-r2"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "observe"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "propose"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "apply"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "read-back"
+        },
+        {
+          "check_id": "scope",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "base-commit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "checks-intact",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "no-secrets",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "citations",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "claims",
+          "outcome": "failed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "observe-r1"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "propose-r1"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "apply-r1"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "read-back-r1"
+        },
+        {
+          "check_id": "scope",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "base-commit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "checks-intact",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "no-secrets",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "citations",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "claims",
+          "outcome": "failed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "observe-r2"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "propose-r2"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "apply-r2"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "read-back-r2"
+        }
+      ]
+    },
+    "repairs_used": 2,
+    "plan_versions": 3
+  },
+  "verification": {
+    "verified": false,
+    "problems": [
+      "required statement missing: loan table",
+      "required statement not cited from bylaws with 'the terms of the loan table'",
+      "required statement missing: twenty-one days | 21 days",
+      "required statement not cited from table with 'twenty-one days'"
+    ],
+    "changed_paths": [
+      "doc/summary.md"
+    ],
+    "out_of_scope_paths": [],
+    "citations": 1,
+    "claims": [
+      {
+        "claim": "loan table",
+        "present": false,
+        "cited_from_expected_source": false
+      },
+      {
+        "claim": "twenty-one days | 21 days",
+        "present": false,
+        "cited_from_expected_source": false
+      }
+    ],
+    "targets": {
+      "doc/summary.md": "The bylaws state that members may borrow books from the library. Each member is allowed to keep a borrowed book for a period of two weeks before it must be returned to the library. [[cite:obs-22b6266a0390183fdc5255ea7e70edad44670e55 \"The bylaws states that the committee meets on the second Tuesday of the month.\"]]"
+    },
+    "patch_sha256": "f4860a2d98255acbf2298df5c0cb0ca3bae51ed03762356965fe229dc0400cc2",
+    "patch_bytes": 508,
+    "patch": "diff --git a/doc/summary.md b/doc/summary.md\nindex 0750985..1acf4b0 100644\n--- a/doc/summary.md\n+++ b/doc/summary.md\n@@ -1,3 +1 @@\n-# Summary\n-\n-(to be completed)\n+The bylaws state that members may borrow books from the library. Each member is allowed to keep a borrowed book for a period of two weeks before it must be returned to the library. [[cite:obs-22b6266a0390183fdc5255ea7e70edad44670e55 \"The bylaws states that the committee meets on the second Tuesday of the month.\"]]\n\\ No newline at end of file\n",
+    "head_is_base": true,
+    "marker": "eval-verify-da-library-gabriel_associative-0"
+  },
+  "V": 0,
+  "D": 0,
+  "false_completion": 0,
+  "unit_wall_ms": 10368
+}

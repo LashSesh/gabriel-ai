@@ -36,10 +36,18 @@ in an isolated worktree with independent acceptance checks.
   independently referenced readout over declared observation streams with schedule-admitted
   detections; the inherited crystal path stays quarantined with reasons):
   `docs/adr/ADR-19-native-pse-determinism-and-readout.md`, `evidence/pse/determinism/`
+- Associative memory layer (verified runs establish supported claims; the engine's walk over the
+  co-citation graph re-ranks a budgeted retrieval as a declared view that never adds a source;
+  corpus tier `association` with history tasks and protocol 6 as a scoped mechanism test: under
+  protocol 6b the walk carried the required source in every needed run including the held-out
+  family, 10/10 against 0/10 for the provenance view, and cost two of six unneeded runs, above
+  the declared harm bound; run 6 is retained with its corpus defect and the amendment):
+  `docs/adr/ADR-20-associative-memory-layer.md`, `docs/EVALUATION_PROTOCOL.md`, `evidence/wp15/`
 - Contract extensions: `docs/adr/ADR-10-hold-records.md`, `ADR-11`, `ADR-12`, `ADR-13` (DomainPack
   ports), `ADR-14` (memory chain), `ADR-15` (readout router), `ADR-16` (document and numerical
   advantage gate with declared memory ablations), `ADR-17` (operations), `ADR-18` (native PSE
-  graph worker), `ADR-19` (native PSE determinism and specified readout)
+  graph worker), `ADR-19` (native PSE determinism and specified readout), `ADR-20` (associative
+  memory layer)
 - Evidence (test log, environment, baseline rerun, spec validation): `evidence/`
 - The blueprint's own machine-readable contracts and validator: `contracts/`, `tools/validate_spec.py`
 

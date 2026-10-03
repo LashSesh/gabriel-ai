@@ -46,8 +46,8 @@ from ..workers import LinuxNamespaceBackend, TrustedLocalBackend, Worktree
 from . import corpus_domains as cd
 from .comparators import Budget, Outcome, gabriel_outcome
 
-DOCUMENT_ONLY = ("gabriel_plain_sources", "gabriel_all_revisions")
-SYSTEMS = ("provider_only", "simple_loop", "gabriel_reference_plan", "gabriel_plain_sources", "gabriel_all_revisions", "gabriel")
+DOCUMENT_ONLY = ("gabriel_plain_sources", "gabriel_all_revisions", "gabriel_associative")
+SYSTEMS = ("provider_only", "simple_loop", "gabriel_reference_plan", "gabriel_plain_sources", "gabriel_all_revisions", "gabriel_associative", "gabriel")
 BASELINE_VIEW = "plain"   # what a minimal agent with the same corpus sees: the declared files, unfiltered
 
 
@@ -287,11 +287,34 @@ def run_gabriel(ctx: DomainEvalContext, rep: int, *, system: str = "gabriel", ma
         if ctx.task.domain == "document":
             spec["retrieval_view"] = view
         spec["provider"] = dict(spec["provider"], max_input_tokens=ctx.budget.max_input_tokens, max_output_tokens=ctx.budget.max_output_tokens)
+        history_log = run_history(ws, ctx)
         created = ws.create_task(spec, task_id="task-%s-%s-%d" % (ctx.task.task_id, system, rep))
         summary = TaskRunner(ws, created["task_id"]).run()
-        return gabriel_outcome(ws, ws_dir, created, summary, system=system, task_id=ctx.task.task_id, family=ctx.task.family, rep=rep, started=started)
+        outcome = gabriel_outcome(ws, ws_dir, created, summary, system=system, task_id=ctx.task.task_id, family=ctx.task.family, rep=rep, started=started)
+        if history_log:
+            outcome.log[:0] = history_log
+        return outcome
     finally:
         ws.close()
+
+
+def run_history(ws, ctx: DomainEvalContext) -> list:
+    """ADR-20: the task's declared history tasks run first in the same workspace with their correct
+    deliverable through the scripted provider, so what the system established in verified runs is
+    the association history of the evaluated run. Every Gabriel arm gets the same history; a
+    history run that does not succeed is recorded and the unit continues."""
+    log = []
+    for history_id in getattr(ctx.task, "history", ()):
+        history_task = cd.task_named(history_id)
+        oracle = cd.write_oracle(history_task, ctx.run_dir)
+        provider = {"kind": "scripted", "provider_id": "scripted-history",
+                    "script": {"by_step": {"plan-request": [{"kind": "echo_reference"}]}, "by_role": {"planner": [{"kind": "echo_reference"}], "worker": cd.history_worker_steps(history_task)}}}
+        spec = cd.task_spec(history_task, ctx.repo, ctx.base_commit, oracle, provider, ctx.budget.gabriel_budget(), planner_mode="reference",
+                            max_repairs=0, max_plan_versions=1, retrieval_view="provenance")
+        created = ws.create_task(spec, task_id="history-%s" % history_id)
+        summary = TaskRunner(ws, created["task_id"]).run()
+        log.append("history %s: %s" % (history_id, summary["state"]))
+    return log
 
 
 RUNNERS = {"provider_only": run_provider_only, "simple_loop": run_simple_loop,
@@ -299,7 +322,8 @@ RUNNERS = {"provider_only": run_provider_only, "simple_loop": run_simple_loop,
            "gabriel_no_repair": lambda ctx, rep: run_gabriel(ctx, rep, system="gabriel_no_repair", max_repairs=0, max_plan_versions=1),
            "gabriel_reference_plan": lambda ctx, rep: run_gabriel(ctx, rep, system="gabriel_reference_plan", planner_mode="reference"),
            "gabriel_plain_sources": lambda ctx, rep: run_gabriel(ctx, rep, system="gabriel_plain_sources", planner_mode="reference", view="plain"),
-           "gabriel_all_revisions": lambda ctx, rep: run_gabriel(ctx, rep, system="gabriel_all_revisions", planner_mode="reference", view="all_revisions")}
+           "gabriel_all_revisions": lambda ctx, rep: run_gabriel(ctx, rep, system="gabriel_all_revisions", planner_mode="reference", view="all_revisions"),
+           "gabriel_associative": lambda ctx, rep: run_gabriel(ctx, rep, system="gabriel_associative", planner_mode="reference", view="associative")}
 
 DECLARED_SUCCESS = {
     "provider_only": "an admissible deliverable was produced (amendment applied or declared operation executed through the same adapter); no verification",
@@ -310,6 +334,8 @@ DECLARED_SUCCESS = {
                              "revision or revocation (ablation of provenance-aware retrieval; document tasks only)",
     "gabriel_all_revisions": "as gabriel_reference_plan with the declared all_revisions view: every eligible revision enters the prompt, revocation "
                              "and authorization still apply (ablation of the revision rule; document tasks only)",
+    "gabriel_associative": "as gabriel_reference_plan with the declared associative view (ADR-20): the provenance view re-ranked by the native engine's "
+                           "walk over the co-citation graph of the claims that earlier verified runs in the same workspace established; document tasks only",
     "gabriel": "as gabriel_reference_plan with the model planner (one planner request per plan version)",
     "gabriel_no_repair": "as gabriel with max_repairs=0 and max_plan_versions=1 (ablation of the repair cycle)"}
 

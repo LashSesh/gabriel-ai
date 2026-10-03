@@ -17,6 +17,144 @@
       "minItems": 0,
       "type": "array"
     },
+    "association": {
+      "additionalProperties": false,
+      "description": "ADR-20: the native engine's walk over the co-citation graph of supported claims, as computed for this retrieval",
+      "properties": {
+        "batches_sha256": {
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/$defs/sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "entities": {
+          "items": {
+            "maxLength": 512,
+            "pattern": "^[ -~]*$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "type": "array"
+        },
+        "executable_sha256": {
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/$defs/sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "masses_milli": {
+          "additionalProperties": {
+            "$ref": "common.schema.json#/$defs/safe_uint"
+          },
+          "maxProperties": 256,
+          "type": "object"
+        },
+        "profile": {
+          "additionalProperties": false,
+          "properties": {
+            "backend": {
+              "enum": [
+                "spectral_full",
+                "auto_full",
+                "auto_region"
+              ],
+              "type": "string"
+            },
+            "combination": {
+              "enum": [
+                "max"
+              ],
+              "type": "string"
+            },
+            "max_entities": {
+              "$ref": "common.schema.json#/$defs/safe_uint"
+            },
+            "max_seeds": {
+              "$ref": "common.schema.json#/$defs/safe_uint"
+            },
+            "profile_id": {
+              "$ref": "common.schema.json#/$defs/identifier"
+            },
+            "schema": {
+              "const": "gabriel.association-profile/1",
+              "type": "string"
+            },
+            "seed_min_score_milli": {
+              "$ref": "common.schema.json#/$defs/safe_uint"
+            },
+            "time_bits": {
+              "pattern": "^[0-9a-f]{16}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "schema",
+            "profile_id",
+            "time_bits",
+            "backend",
+            "max_seeds",
+            "max_entities",
+            "seed_min_score_milli",
+            "combination"
+          ],
+          "type": "object"
+        },
+        "schema": {
+          "const": "gabriel.association-record/1",
+          "type": "string"
+        },
+        "seeds": {
+          "items": {
+            "maxLength": 512,
+            "pattern": "^[ -~]*$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "type": "array"
+        },
+        "snapshot_identity": {
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/$defs/sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "status": {
+          "enum": [
+            "computed",
+            "no_history",
+            "no_seeds",
+            "no_seeds_in_history",
+            "capacity_exceeded",
+            "unavailable"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "schema",
+        "profile",
+        "status",
+        "executable_sha256",
+        "batches_sha256",
+        "entities",
+        "seeds",
+        "snapshot_identity",
+        "masses_milli"
+      ],
+      "type": "object"
+    },
     "cache_key": {
       "$ref": "common.schema.json#/$defs/sha256"
     },
@@ -97,6 +235,9 @@
             "$ref": "common.schema.json#/$defs/safe_uint"
           },
           "span_start": {
+            "$ref": "common.schema.json#/$defs/safe_uint"
+          },
+          "structural_milli": {
             "$ref": "common.schema.json#/$defs/safe_uint"
           }
         },

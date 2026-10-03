@@ -1,0 +1,64 @@
+{
+  "task_id": "du-parking",
+  "family": "association-unneeded",
+  "system": "provider_only",
+  "rep": 0,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp15/run6/runs/du-parking--provider_only--0",
+  "domain": "document",
+  "outcome": {
+    "system": "provider_only",
+    "task_id": "du-parking",
+    "family": "association-unneeded",
+    "rep": 0,
+    "declared": true,
+    "declared_reason": "deliverable produced; declared done without verification",
+    "model_requests": 1,
+    "model_tokens": 2980,
+    "wall_ms": 2479,
+    "provider_statuses": [
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp15/run6/runs/du-parking--provider_only--0/worktrees/provider_only-0",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "deliverable produced; declared done without verification"
+    ],
+    "gabriel": null,
+    "repairs_used": 0,
+    "plan_versions": 0
+  },
+  "verification": {
+    "verified": false,
+    "problems": [
+      "forbidden statement present in doc/summary.md: twelve through thirty"
+    ],
+    "changed_paths": [
+      "doc/summary.md"
+    ],
+    "out_of_scope_paths": [],
+    "citations": 3,
+    "claims": [
+      {
+        "claim": "appendix",
+        "present": true,
+        "cited_from_expected_source": true
+      }
+    ],
+    "targets": {
+      "doc/summary.md": "The handbook states that the committee meets on the first Tuesday of the month.[[cite:obs-d15470429ad66b6eb4cdf072a9f7bb1464d53a32 \"The handbook states that the committee meets on the first Tuesday of the month.\"]]\n\nVehicles of members are parked according to the plan in the appendix of this handbook.[[cite:obs-2930c8aa3ef31eee22a640641812fce853a68b21 \"Vehicles of members are parked according to the plan in the appendix of this handbook.\"]]\n\nBays twelve through thirty are blocked for supplier vans only, with a midday deadline.[[cite:obs-7561b17f36849179deb659862b6b3d1db94ba35f \"Bays twelve through thirty: blocked, supplier vans only, midday deadline.\"]]\n"
+    },
+    "patch_sha256": "9fc75bb77ebd05acbf9e1c2cae4322162b48a490bdf3067743b21a8d431196a7",
+    "patch_bytes": 830,
+    "patch": "diff --git a/doc/summary.md b/doc/summary.md\nindex 0750985..3bbab97 100644\n--- a/doc/summary.md\n+++ b/doc/summary.md\n@@ -1,3 +1,5 @@\n-# Summary\n+The handbook states that the committee meets on the first Tuesday of the month.[[cite:obs-d15470429ad66b6eb4cdf072a9f7bb1464d53a32 \"The handbook states that the committee meets on the first Tuesday of the month.\"]]\n \n-(to be completed)\n+Vehicles of members are parked according to the plan in the appendix of this handbook.[[cite:obs-2930c8aa3ef31eee22a640641812fce853a68b21 \"Vehicles of members are parked according to the plan in the appendix of this handbook.\"]]\n+\n+Bays twelve through thirty are blocked for supplier vans only, with a midday deadline.[[cite:obs-7561b17f36849179deb659862b6b3d1db94ba35f \"Bays twelve through thirty: blocked, supplier vans only, midday deadline.\"]]\n",
+    "head_is_base": true,
+    "marker": "eval-verify-du-parking-provider_only-0"
+  },
+  "V": 0,
+  "D": 1,
+  "false_completion": 1,
+  "unit_wall_ms": 2785
+}

@@ -1,6 +1,6 @@
 {
   "schema": "gabriel.evidence.work-packages/1",
-  "produced_at_utc": "2026-10-03T10:29:19.117861+00:00",
+  "produced_at_utc": "2026-10-03T13:48:00.603669+00:00",
   "rule": "A package counts as done only with actual code and recorded test output; privileged and paid runs are listed under not_executed.",
   "packages": {
     "WP01": {
@@ -1236,6 +1236,135 @@
           },
           {
             "test": "test_graph_tier_readout_and_detection_families_are_sound",
+            "result": "PASSED"
+          }
+        ]
+      }
+    },
+    "P6-association": {
+      "status": "DONE_EXECUTED_MECHANISM_SHOWN_HARM_BOUND_EXCEEDED",
+      "tests": [
+        "tests/test_association.py",
+        "tests/test_evaluation_domains.py",
+        "tests/test_evaluation.py"
+      ],
+      "acceptance": [
+        "ADR-20: the associative memory layer under a frozen protocol with a held-out family and negative controls"
+      ],
+      "evidence": [
+        "evidence/wp15/protocol6_declaration.md",
+        "evidence/wp15/protocol6.frozen.json",
+        "evidence/wp15/run6/report.md",
+        "evidence/wp15/run6/retrieval_analysis.json",
+        "evidence/wp15/protocol6b.frozen.json",
+        "evidence/wp15/run6b/report.md",
+        "evidence/wp15/run6b/retrieval_analysis.json",
+        "evidence/wp15/*/final_diffs/index.json",
+        "docs/EVALUATION_PROTOCOL.md",
+        "docs/adr/ADR-20-associative-memory-layer.md"
+      ],
+      "not_executed": [
+        "a second provider",
+        "a history produced by model-written deliverables (the history runs use the scripted correct deliverable through the real run)",
+        "a real-world document corpus",
+        "the associative view as a default (it stays a declared per-task view)"
+      ],
+      "test_results": {
+        "tests/test_association.py": [
+          {
+            "test": "test_history_brings_a_lexically_invisible_source_into_a_budgeted_retrieval_and_matches_the_reference",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_association_never_reaches_what_the_principal_cannot_retrieve",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_structural_scores_declare_their_limits",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_verified_run_history_carries_the_annex_into_the_associative_view_through_the_owner",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_every_association_topic_meets_the_protocol_precondition_under_the_pack_budget[fee]",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_every_association_topic_meets_the_protocol_precondition_under_the_pack_budget[parking]",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_every_association_topic_meets_the_protocol_precondition_under_the_pack_budget[archive]",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_every_association_topic_meets_the_protocol_precondition_under_the_pack_budget[library]",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_every_association_topic_meets_the_protocol_precondition_under_the_pack_budget[garden]",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_association_tier_runs_through_the_frozen_harness_with_history",
+            "result": "PASSED"
+          }
+        ],
+        "tests/test_evaluation_domains.py": [
+          {
+            "test": "test_domain_corpus_controls_execute_and_tiers_are_complete",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_independent_document_verification_is_content_based",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_all_revisions_policy_is_a_declared_ablation_that_keeps_authorization",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_provenance_view_hides_the_stale_revision_and_the_other_views_show_it",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_revoked_source_is_excluded_by_provenance_and_caught_by_verification_in_the_plain_view",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_document_comparators_run_through_the_frozen_harness",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_provenance_arm_solves_the_revoked_task_in_one_request_through_the_harness",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_numerical_comparators_run_through_the_frozen_harness",
+            "result": "PASSED"
+          }
+        ],
+        "tests/test_evaluation.py": [
+          {
+            "test": "test_corpus_is_sound_and_frozen_by_digest",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_worker_prompt_contains_retained_sources",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_comparators_under_scripted_provider",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_false_completion_is_measured_not_hidden",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_protocol_freeze_and_metrics",
             "result": "PASSED"
           }
         ]

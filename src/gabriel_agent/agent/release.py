@@ -93,7 +93,10 @@ def release_manifest(root: Path, *, evidence: dict | None = None, python: str = 
                         "and independent oracles (AT23, evidence/wp10/at23); memory and analytical adapters per AT14-AT16 and AT25 (tests); the native "
                         "PSE graph engine integrated as a contained analytical worker with independent references and separate measurements "
                         "(ADR-18, evidence/pse); "
-                        "advantage gate (AT17) executed on the document and numerical families under protocol 5 (evidence/wp14) and not passed",
+                        "advantage gate (AT17) executed on the document and numerical families under protocol 5 (evidence/wp14) and not passed; "
+                        "the associative memory layer (ADR-20) executed under protocol 6b (evidence/wp15): the engine's walk over verified co-citations "
+                        "carried the required source in every needed run including the held-out family (10/10 against 0/10 for the provenance view) "
+                        "and cost two of six unneeded runs (the declared harm bound of one was exceeded), so the view stays declared per task",
                   "G3": "not established: the routing feature experiment was executed under frozen protocols on the hard tier (evidence/wp13) "
                         "but no first patch failed verification, so no labeled router decision exists and no readout candidate was trained or "
                         "evaluated; the episodic-retrieval ablation failed its declared held-out criterion (equal verified success at more tokens); "
@@ -107,7 +110,10 @@ def release_manifest(root: Path, *, evidence: dict | None = None, python: str = 
                          "the native engine's arithmetic is platform-independent by construction (pure-Rust libm, ADR-19) but was executed on this "
                          "platform only; the engine's crystal and consensus paths remain quarantined and the state readout is a specified model "
                          "quantity, not a measurement",
-                         "advantage over a simple verification loop not shown; the evaluation corpus is saturated for gpt-4.1-mini"],
+                         "advantage over a simple verification loop not shown; the evaluation corpus is saturated for gpt-4.1-mini",
+                         "the associative view (ADR-20) carries sources that verified runs cited together into a budgeted prompt whether or not the task "
+                         "needs them; under protocol 6b the model then stated a figure the task forbade in every first attempt on the unneeded family, "
+                         "repaired in four of six runs; the view is opt-in per task and its lexical seeds are tie-broken by observation id"],
     }
     return manifest
 

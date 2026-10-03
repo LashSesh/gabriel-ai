@@ -35,3 +35,9 @@ evidence/wp14/**/credentials/
 
 # native PSE build tree: executables are rebuilt from the locked sources (evidence/pse/build_identity.json records the digests)
 native_pse/target/
+# protocol 6 evidence: materialized repositories, worktrees, scratch and principal secrets are not evidence
+evidence/wp15/*/runs/*/repo/
+evidence/wp15/*/runs/*/worktrees/
+evidence/wp15/*/runs/*/*-ws/worktrees/
+evidence/wp15/*/runs/*/store/tmp/
+evidence/wp15/**/credentials/

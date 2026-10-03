@@ -19,7 +19,7 @@ import re
 from ...contracts.codec import canonical, dumps_utf8, loads, sha256_hex
 from ...contracts.errors import Code, GabrielError
 from ...contracts.schemas import validate
-from ...memory import Frontier
+from ...memory import Frontier, association
 from ...models import ModelGenerateTool
 from ...tools import fs
 from ...workers.supervisor import ToolOutcome
@@ -178,9 +178,12 @@ def take_snapshot(worktree, binding: dict, store, frontier: int, *, memory, prin
                               "source_kind": "document", "label": "file " + source["path"]})
             manifest_record = {"schema": "gabriel.document-source-view/1", "view": "plain", "frontier": current.record(), "items": items, "excluded": []}
         else:
+            # associative (ADR-20): the provenance view re-ranked by the engine's walk over the co-citation
+            # graph of supported claims; the manifest retains the association record
             manifest_record = memory.retrieve(principal_id=principal_id, task_id=task_id, frontier=current, query=goal, allowed_source_kinds=["document"],
                                               version_policy="all_revisions" if view == "all_revisions" else "highest_revision",
-                                              max_bytes=PROMPT_SOURCE_BUDGET, max_items=32)
+                                              max_bytes=PROMPT_SOURCE_BUDGET, max_items=32,
+                                              association=association.PROFILE if view == "associative" else None)
         retrieval_ref = store.put(canonical(manifest_record), "application/json")
         frontier_record = current.record()
     else:
@@ -487,6 +490,36 @@ class DocumentPack(DomainPack):
                 if cite["observation_id"] not in known:
                     loss.append("citation of %s in %s names no observed source" % (cite["observation_id"], op["path"]))
         return patch, loss, None
+
+    def claims_after_success(self, projection: dict, store) -> list:
+        """The claims a succeeded run establishes (ADR-20): every target whose citations all resolved
+        at the run's frontier, as a proposition supported by the cited observations. Read from the
+        retained citation report of the last review node; never from the model's own text."""
+        reports = []
+        for node_id, state in projection["nodes"].items():
+            if state["status"] in ("completed", "verified") and "citations" in state["outputs"]:
+                reports.append((node_id, state["outputs"]["citations"]))
+        if not reports:
+            return []
+        reports.sort(key=lambda pair: (len(pair[0]), pair[0]))  # the last repair round reviews last
+        try:
+            report = loads(store.get(reports[-1][1]), ascii_only=False)
+        except (GabrielError, ValueError):
+            return []
+        claims = []
+        for target in report.get("targets", []):
+            if not target.get("present") or not target.get("all_resolved"):
+                continue
+            supporting = sorted({c["observation_id"] for c in target.get("citations", []) if c.get("resolved")})
+            if not supporting:
+                continue
+            try:
+                proposition = store.get(target["content_ref"])
+            except GabrielError:
+                continue
+            claims.append({"proposition": proposition, "supporting": supporting, "frontier": report["frontier"], "verifier_id": "document.citations_bound",
+                           "reason": "every citation of %s resolved at the run's frontier and the run's independent checks passed" % target["path"]})
+        return claims
 
     def node_args(self, capability, declared, helper):
         if capability == "document.apply_amendment":

@@ -1,0 +1,67 @@
+{
+  "task_id": "da-archive",
+  "family": "association-needed",
+  "system": "simple_loop",
+  "rep": 0,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp15/run6/runs/da-archive--simple_loop--0",
+  "domain": "document",
+  "outcome": {
+    "system": "simple_loop",
+    "task_id": "da-archive",
+    "family": "association-needed",
+    "rep": 0,
+    "declared": true,
+    "declared_reason": "own check run passed after 1 request(s)",
+    "model_requests": 1,
+    "model_tokens": 2918,
+    "wall_ms": 2028,
+    "provider_statuses": [
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp15/run6/runs/da-archive--simple_loop--0/worktrees/simple_loop-0",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "request 1: own checks passed"
+    ],
+    "gabriel": null,
+    "repairs_used": 0,
+    "plan_versions": 0
+  },
+  "verification": {
+    "verified": true,
+    "problems": [],
+    "changed_paths": [
+      "doc/summary.md"
+    ],
+    "out_of_scope_paths": [],
+    "citations": 2,
+    "claims": [
+      {
+        "claim": "schedule",
+        "present": true,
+        "cited_from_expected_source": true
+      },
+      {
+        "claim": "eleven | 11 years | eleven years",
+        "present": true,
+        "cited_from_expected_source": true
+      }
+    ],
+    "targets": {
+      "doc/summary.md": "The statute's retention rule states that records of the society are retained for the period named in the schedule of this statute [[cite:obs-e3d45946fdfec3d0ca07ccdf631938fb97b0faeb \"Records of the society are retained for the period named in the schedule of this statute.\"]]. According to the schedule, ledgers are kept for eleven calendar years and are shredded afterwards [[cite:obs-46611a66e9d66e6f0d7ae51cc3b16b73126ea454 \"Ledgers: eleven calendar years, shredding afterwards.\"]]."
+    },
+    "patch_sha256": "e9087ab6eb3aa8c90fb0e1e54f9accc1b3d601d1b8125b54f24e4a39f1db2d77",
+    "patch_bytes": 678,
+    "patch": "diff --git a/doc/summary.md b/doc/summary.md\nindex 0750985..7417cb2 100644\n--- a/doc/summary.md\n+++ b/doc/summary.md\n@@ -1,3 +1 @@\n-# Summary\n-\n-(to be completed)\n+The statute's retention rule states that records of the society are retained for the period named in the schedule of this statute [[cite:obs-e3d45946fdfec3d0ca07ccdf631938fb97b0faeb \"Records of the society are retained for the period named in the schedule of this statute.\"]]. According to the schedule, ledgers are kept for eleven calendar years and are shredded afterwards [[cite:obs-46611a66e9d66e6f0d7ae51cc3b16b73126ea454 \"Ledgers: eleven calendar years, shredding afterwards.\"]].\n\\ No newline at end of file\n",
+    "head_is_base": true,
+    "marker": "eval-verify-da-archive-simple_loop-0"
+  },
+  "V": 1,
+  "D": 1,
+  "false_completion": 0,
+  "unit_wall_ms": 2215
+}

@@ -45,7 +45,8 @@ def default_protocol(provider: dict, *, repetitions: int = 2, systems=comparator
                      budget: dict | None = None, task_ids=None, held_out_families=(), note: str = "", tiers=None,
                      policy: dict | None = None, episode_seed: list | None = None, declared_criterion: str = "") -> dict:
     budget = dict(comparators.Budget().__dict__, **(budget or {}))
-    tasks = [t for t in corpus.tasks() if (task_ids is None or t.task_id in task_ids) and (tiers is None or t.tier in tiers)]
+    tasks = [t for t in corpus.tasks() if (task_ids is None or t.task_id in task_ids) and (tiers is None or t.tier in tiers)
+             and getattr(t, "role", "evaluated") == "evaluated"]
     if any(s in comparators.G3_SYSTEMS for s in systems) and policy is None:
         raise GabrielError(Code.INVALID_SCHEMA, "the G3 systems need a frozen router policy in the protocol")
     selected_tiers = sorted({t.tier for t in tasks})
@@ -152,7 +153,7 @@ def run(protocol: dict, out_dir: Path, provider: dict, *, workers: int = 3, syst
     out_dir = Path(out_dir).resolve()
     out_dir.mkdir(parents=True, exist_ok=True)
     check = check_frozen(protocol)
-    tasks = [t for t in corpus.tasks() if any(t.task_id == row["task_id"] for row in protocol["tasks"])]
+    tasks = [t for t in corpus.tasks() if any(t.task_id == row["task_id"] for row in protocol["tasks"]) and getattr(t, "role", "evaluated") == "evaluated"]
     if task_ids:
         tasks = [t for t in tasks if t.task_id in task_ids]
     systems = list(systems or protocol["systems"])

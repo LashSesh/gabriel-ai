@@ -1,0 +1,67 @@
+{
+  "task_id": "dn-parking",
+  "family": "association-none",
+  "system": "simple_loop",
+  "rep": 0,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp15/run6/runs/dn-parking--simple_loop--0",
+  "domain": "document",
+  "outcome": {
+    "system": "simple_loop",
+    "task_id": "dn-parking",
+    "family": "association-none",
+    "rep": 0,
+    "declared": true,
+    "declared_reason": "own check run passed after 1 request(s)",
+    "model_requests": 1,
+    "model_tokens": 780,
+    "wall_ms": 2631,
+    "provider_statuses": [
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp15/run6/runs/dn-parking--simple_loop--0/worktrees/simple_loop-0",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "request 1: own checks passed"
+    ],
+    "gabriel": null,
+    "repairs_used": 0,
+    "plan_versions": 0
+  },
+  "verification": {
+    "verified": true,
+    "problems": [],
+    "changed_paths": [
+      "doc/summary.md"
+    ],
+    "out_of_scope_paths": [],
+    "citations": 2,
+    "claims": [
+      {
+        "claim": "appendix",
+        "present": true,
+        "cited_from_expected_source": true
+      },
+      {
+        "claim": "twelve through thirty | 12 through 30 | bays 12",
+        "present": true,
+        "cited_from_expected_source": true
+      }
+    ],
+    "targets": {
+      "doc/summary.md": "# Summary\n\nThe handbook states that vehicles of members are parked according to the plan in the appendix of this handbook [[cite:obs-572a3744cf47f66c131d16ce080b1fe081ee38fc \"Vehicles of members are parked according to the plan in the appendix of this handbook.\"]].\n\nBays twelve through thirty are reserved for supplier vans only and are blocked, with a midday deadline as a time limit [[cite:obs-d70388a1435e2175b09dc98ea4ae314e00e8866d \"Bays twelve through thirty: blocked, supplier vans only, midday deadline.\"]]."
+    },
+    "patch_sha256": "bb8caf1c15e14f05ca907084fe4fded2d3b3c21dcd64d7d7b2dfcbda9140f86f",
+    "patch_bytes": 702,
+    "patch": "diff --git a/doc/summary.md b/doc/summary.md\nindex 0750985..755b909 100644\n--- a/doc/summary.md\n+++ b/doc/summary.md\n@@ -1,3 +1,5 @@\n # Summary\n \n-(to be completed)\n+The handbook states that vehicles of members are parked according to the plan in the appendix of this handbook [[cite:obs-572a3744cf47f66c131d16ce080b1fe081ee38fc \"Vehicles of members are parked according to the plan in the appendix of this handbook.\"]].\n+\n+Bays twelve through thirty are reserved for supplier vans only and are blocked, with a midday deadline as a time limit [[cite:obs-d70388a1435e2175b09dc98ea4ae314e00e8866d \"Bays twelve through thirty: blocked, supplier vans only, midday deadline.\"]].\n\\ No newline at end of file\n",
+    "head_is_base": true,
+    "marker": "eval-verify-dn-parking-simple_loop-0"
+  },
+  "V": 1,
+  "D": 1,
+  "false_completion": 0,
+  "unit_wall_ms": 2822
+}

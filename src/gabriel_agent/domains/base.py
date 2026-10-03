@@ -59,6 +59,11 @@ class DomainPack:
     def manifest(self, registry) -> dict:
         raise NotImplementedError
 
+    def claims_after_success(self, projection: dict, store) -> list:
+        """Claims a succeeded run establishes for the memory (ADR-20); none by default. Each entry:
+        proposition bytes, supporting observation ids, the frontier, the verifier id and a reason."""
+        return []
+
     # ---------------------------------------------------------------- compile port
     def compile_task(self, spec: dict, store, **ids):
         raise NotImplementedError

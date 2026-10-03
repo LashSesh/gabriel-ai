@@ -1,0 +1,259 @@
+You are the worker role of Gabriel for a source-grounded document amendment.
+Goal (verbatim user request):
+Amend doc/summary.md so that it states what the charter says about the membership fee and the amount a member pays each year. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- citations [document/citations_bound] independent=True
+- claims [document/required_claims] independent=True
+
+Editable paths (changes elsewhere are rejected; sources are never editable): doc/
+Base commit: bdfb482ffe4982f70ac99f92bef9c8d7c1478e7e
+
+Target documents (path sha256 bytes):
+  doc/summary.md eaf7573831e7f400949eaf346e887aeb4ce1d51087d65f408972b8ea7678385f 29
+=== doc/summary.md (sha256 eaf7573831e7f400949eaf346e887aeb4ce1d51087d65f408972b8ea7678385f) ===
+# Summary
+
+(to be completed)
+
+
+
+Sources (cite them by observation id; quotes must be exact substrings of the cited source):
+=== file sources/charter.md observation obs-f873e2806e1e18a0b23cfb2e2c77f923e19a5ec3 (125 bytes) ===
+# Club charter
+
+## Membership fee
+
+Each member pays a yearly contribution; the amount is fixed in the annex of this charter.
+
+
+=== file sources/annex.md observation obs-afe418e50949d8d45a19b8e2ca648ce84645d131 (87 bytes) ===
+# Annex
+
+Ordinary contributions: one hundred twenty (120) EUR, payable within January.
+
+
+=== file sources/note-00.md observation obs-002a391c93c6ada8a64f831f36c9c663a1827ae3 (89 bytes) ===
+# Note 0
+
+The charter states that the committee meets on the first Tuesday of the month.
+
+
+=== file sources/note-01.md observation obs-79e1a675f4f049b0764a4b26d55f8a6833839f4d (90 bytes) ===
+# Note 1
+
+The charter states that the committee meets on the second Tuesday of the month.
+
+
+=== file sources/note-02.md observation obs-990fd1a4f02dc6cc5c90da2480da3cbc1b36f1d6 (89 bytes) ===
+# Note 2
+
+The charter states that the committee meets on the third Tuesday of the month.
+
+
+=== file sources/note-03.md observation obs-6d6396c3e1844ecba2ae299cfda613e95f22bbcc (90 bytes) ===
+# Note 3
+
+The charter states that the committee meets on the fourth Tuesday of the month.
+
+
+=== file sources/note-04.md observation obs-4bad7d1e762f394b40438c266e4d6dbb896cb8f6 (89 bytes) ===
+# Note 4
+
+The charter states that the committee meets on the first Tuesday of the month.
+
+
+=== file sources/note-05.md observation obs-bda6506961a390bfa3e4b6821eb3e1d44fea6f20 (90 bytes) ===
+# Note 5
+
+The charter states that the committee meets on the second Tuesday of the month.
+
+
+=== file sources/note-06.md observation obs-4662cb3e3eaf2f8fcb5ee5ed1b0a74454fc5cd4c (89 bytes) ===
+# Note 6
+
+The charter states that the committee meets on the third Tuesday of the month.
+
+
+=== file sources/note-07.md observation obs-6cc90a5eb1692b3ac5e35a788cca2e724cd9e761 (90 bytes) ===
+# Note 7
+
+The charter states that the committee meets on the fourth Tuesday of the month.
+
+
+=== file sources/note-08.md observation obs-1004bbb052713e6735c5199d6908709538b956e6 (89 bytes) ===
+# Note 8
+
+The charter states that the committee meets on the first Tuesday of the month.
+
+
+=== file sources/note-09.md observation obs-cb47b358950cde6d62924f5366a1ea294b2e5659 (90 bytes) ===
+# Note 9
+
+The charter states that the committee meets on the second Tuesday of the month.
+
+
+=== file sources/note-10.md observation obs-af4fd1bf14977197a9cbc4f7a8fcdc6fd4035d21 (90 bytes) ===
+# Note 10
+
+The charter states that the committee meets on the third Tuesday of the month.
+
+
+=== file sources/note-11.md observation obs-747dffd129858ece5d2eac12513cb2487a5a40e0 (91 bytes) ===
+# Note 11
+
+The charter states that the committee meets on the fourth Tuesday of the month.
+
+
+=== file sources/note-12.md observation obs-e1f2e8c981140b6c0f6bbd11ea0f33c67956a479 (90 bytes) ===
+# Note 12
+
+The charter states that the committee meets on the first Tuesday of the month.
+
+
+=== file sources/note-13.md observation obs-c132acc2b6ba69da46bbd45662500bcf0b511013 (91 bytes) ===
+# Note 13
+
+The charter states that the committee meets on the second Tuesday of the month.
+
+
+=== file sources/note-14.md observation obs-cc2ff25edbcf149d86ad6393a08c5a9a2d6c3806 (90 bytes) ===
+# Note 14
+
+The charter states that the committee meets on the third Tuesday of the month.
+
+
+=== file sources/note-15.md observation obs-43fde9238e9da88a98d94e546fd394fee6c7036e (91 bytes) ===
+# Note 15
+
+The charter states that the committee meets on the fourth Tuesday of the month.
+
+
+=== file sources/note-16.md observation obs-55d4223191b7edc4e0d3b5d06b4b0f8e150121b3 (90 bytes) ===
+# Note 16
+
+The charter states that the committee meets on the first Tuesday of the month.
+
+
+=== file sources/note-17.md observation obs-cf64c9d0c72031494a069d47c11d2cce49a4d0ec (91 bytes) ===
+# Note 17
+
+The charter states that the committee meets on the second Tuesday of the month.
+
+
+=== file sources/note-18.md observation obs-41c5772ce3ac8fa6af392f060886d4715cb87eb8 (90 bytes) ===
+# Note 18
+
+The charter states that the committee meets on the third Tuesday of the month.
+
+
+=== file sources/note-19.md observation obs-a18c71572106f73251e4282259373f2b995a5eca (91 bytes) ===
+# Note 19
+
+The charter states that the committee meets on the fourth Tuesday of the month.
+
+
+=== file sources/note-20.md observation obs-1d97fb079e185cac7a29e4cca2c229692a3fb046 (90 bytes) ===
+# Note 20
+
+The charter states that the committee meets on the first Tuesday of the month.
+
+
+=== file sources/note-21.md observation obs-2459871cb8c706208b0c69e6ca1fbf329a9bf40e (91 bytes) ===
+# Note 21
+
+The charter states that the committee meets on the second Tuesday of the month.
+
+
+=== file sources/note-22.md observation obs-f68a82723d3fef555adbd5b33e0cb6be8a7bf4c7 (90 bytes) ===
+# Note 22
+
+The charter states that the committee meets on the third Tuesday of the month.
+
+
+=== file sources/note-23.md observation obs-9f2a739b93340a167791fa9a8ede264726eb194f (91 bytes) ===
+# Note 23
+
+The charter states that the committee meets on the fourth Tuesday of the month.
+
+
+=== file sources/note-24.md observation obs-e15ced26fa950298d731a6c424f7c19a878d21f0 (90 bytes) ===
+# Note 24
+
+The charter states that the committee meets on the first Tuesday of the month.
+
+
+=== file sources/note-25.md observation obs-d06c0306a24e316cf3aa6c4e7813dd6ea064d410 (91 bytes) ===
+# Note 25
+
+The charter states that the committee meets on the second Tuesday of the month.
+
+
+=== file sources/note-26.md observation obs-e239aad7594941a8644379939bfd5a1900b135de (90 bytes) ===
+# Note 26
+
+The charter states that the committee meets on the third Tuesday of the month.
+
+
+=== file sources/note-27.md observation obs-75ac060d41dc636d6fb710f5d0f5fbf454dbffb7 (91 bytes) ===
+# Note 27
+
+The charter states that the committee meets on the fourth Tuesday of the month.
+
+
+=== file sources/note-28.md observation obs-5cc20ecc93a44c25fbeef00874c9b7cde19594b9 (90 bytes) ===
+# Note 28
+
+The charter states that the committee meets on the first Tuesday of the month.
+
+
+=== file sources/note-29.md observation obs-b9f9387c87a10ef04ca0e8a0666cc53e5a939388 (91 bytes) ===
+# Note 29
+
+The charter states that the committee meets on the second Tuesday of the month.
+
+
+=== file sources/note-30.md observation obs-5db82c545c18cc6301e282f8efd5bd0e12a7664f (90 bytes) ===
+# Note 30
+
+The charter states that the committee meets on the third Tuesday of the month.
+
+
+=== file sources/note-31.md observation obs-912b96d9fd33aa351b4f62d67ec5a91e9ba0fa00 (91 bytes) ===
+# Note 31
+
+The charter states that the committee meets on the fourth Tuesday of the month.
+
+
+=== file sources/note-32.md observation obs-2a2e701c5927e24a1d9b3e6a3cc48a679faf71ec (90 bytes) ===
+# Note 32
+
+The charter states that the committee meets on the first Tuesday of the month.
+
+
+=== file sources/note-33.md observation obs-7187520e3f7bc489ca11fee9158ee4e6f03aa03f (91 bytes) ===
+# Note 33
+
+The charter states that the committee meets on the second Tuesday of the month.
+
+
+=== file sources/note-34.md observation obs-808fcb94785a2c6504278d1a0a5073b5ded8b724 (90 bytes) ===
+# Note 34
+
+The charter states that the committee meets on the third Tuesday of the month.
+
+
+=== file sources/note-35.md observation obs-06fac9faad31384b007d8fc482dada1a75663c2d (91 bytes) ===
+# Note 35
+
+The charter states that the committee meets on the fourth Tuesday of the month.
+
+
+
+Every statement you add must be followed by a citation marker of the form
+[[cite:<observation id> "exact quote from that source"]] where the quote is copied verbatim from the cited source.
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<target path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest. For create expected_sha256 is null.
+Do not touch sources or oracle files. Do not claim completion; the independent checks decide.

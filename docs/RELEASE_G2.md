@@ -73,8 +73,10 @@ the cited source span stays fixed; the run was repeated.
   quarantined. The recurrent routing feature stays in the software pack only. The inherited
   padded graph signature is reproduced only as a collision control, and its S7 orbit index is
   cross-checked against the standard-library signature.
-- Memory retrieval is lexical; there is no trained retrieval or routing policy, so G3 is not
-  claimed. The promotion rule requires held-out evidence and is tested, not evaluated.
+- Memory retrieval is lexical by default; the declared view `associative` (ADR-20) re-ranks it
+  by the engine's walk over the co-citation graph of claims that verified runs established, and
+  never adds a source. There is no trained retrieval or routing policy, so G3 is not claimed.
+  The promotion rule requires held-out evidence and is tested, not evaluated.
 - Document extraction supports UTF-8 text only.
 
 ## Advantage gate on the document and numerical families (protocol 5, ADR-16)
@@ -94,6 +96,24 @@ fell below the minimum relevant effect. The G2 claim of this report is unchanged
 result: the three domains run through one core; whether the core's memory mechanisms buy
 anything measurable depends on the provider and the distribution, and for gpt-4.1-mini on these
 tasks it is small.
+
+## The associative memory layer (protocol 6b, ADR-20)
+Executed after protocol 5 on the frozen `association` tier (`evidence/wp15/`,
+`docs/EVALUATION_PROTOCOL.md`): 80 runs with gpt-4.1-mini in `linux_namespace`, every history
+produced by the system's own verified runs. Where a task needed a source that shared no word
+with its goal and that only an earlier verified run had cited together with the visible source,
+the associative view carried it in every run, including the two held-out topics (10 of 10
+verified against 0 of 10 for the provenance view, at one request each), and the retained
+retrieval manifests show the walk did it (seed at 770 milli, hidden source at 230 milli, second
+rank). Where the task did not need that source, carrying it cost two of six runs: the model
+stated the figure the task forbade in every first attempt, the verification loop repaired four
+and exhausted its two repairs on two; the provider-only baseline stated the figure in all six.
+The declared harm bound (at most one run in six) was exceeded, so the view remains declared per
+task and is not the default. Run 6, the first execution, was lost to a corpus defect (distractors
+tying with the visible source under the scorer) and is retained with the amendment and an
+executed construction invariant. The G2 claim is unchanged: the mechanism is specified,
+deterministic, retained and shown to do what it specifies on this distribution, with a measured
+cost where it is not needed.
 
 ## Known issues
 - A tool implementation change invalidates existing workspaces at open (no migration).

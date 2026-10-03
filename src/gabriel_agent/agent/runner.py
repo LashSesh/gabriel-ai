@@ -232,6 +232,16 @@ class TaskRunner:
                               outcome=outcome, status_kind="production",
                               detail={"domain": self.pack.namespace, "repair_count": meta["repair_count"], "plan_versions": meta["plan_versions"],
                                       "spent": projection["ledger"]["spent"]})
+        if state == "succeeded":
+            # ADR-20: what a verified run established enters the memory as supported claims (the
+            # association history of later retrievals); a failed run establishes nothing
+            for claim in self.pack.claims_after_success(projection, self.store):
+                record = memory.assert_claim(task_id=self.task_id, proposition=claim["proposition"],
+                                             scope={"principals": [self.principal_id], "source_kind": self.pack.namespace, "task_id": self.task_id, "run_id": self.run_id},
+                                             supporting=claim["supporting"], refuting=[])
+                memory.assess(record["claim_id"], verifier_id=claim["verifier_id"], verifier_digest=sha256_hex(claim["verifier_id"].encode("utf8")), status="supported",
+                              evidence={"run_id": self.run_id, "state": state, "supporting": claim["supporting"]}, frontier=memory.frontier(), reason=claim["reason"])
+                self.log.append("claim %s supported by %d cited observation(s)" % (record["claim_id"][:22], len(claim["supporting"])))
         try:
             diff = self.worktree.patch().decode("utf8", "replace")[:8000]
         except GabrielError:

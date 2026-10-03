@@ -303,13 +303,17 @@ class MemoryService:
 
     # ------------------------------------------------------------ retrieval
     def retrieve(self, *, principal_id: str, task_id: str | None, frontier, query: bytes, allowed_source_kinds: list,
-                 version_policy: str = "highest_revision", max_bytes: int = 65536, max_items: int = 16) -> dict:
+                 version_policy: str = "highest_revision", max_bytes: int = 65536, max_items: int = 16, association: dict | None = None) -> dict:
+        """Authorized, eligible observations at the frontier, scored lexically and, with a declared
+        association profile (ADR-20), re-ranked by the native engine's walk over the co-citation
+        graph of supported claims; the manifest retains what was computed."""
         f = Frontier.of(frontier)
         policy_revision = self.access_policy_revision()
         query_ref = self.store.put(query, "text/plain; charset=utf-8")
         cache_key = hashlib.sha256(canonical({"workspace": self.workspace_id, "principal": principal_id, "frontier": f.record(),
                                               "policy_revision": policy_revision, "query": query_ref["sha256"], "kinds": sorted(allowed_source_kinds),
-                                              "version_policy": version_policy, "max_bytes": max_bytes, "max_items": max_items})).hexdigest()
+                                              "version_policy": version_policy, "max_bytes": max_bytes, "max_items": max_items,
+                                              "association": association})).hexdigest()
         row = self._db.execute("SELECT manifest_sha, manifest_bytes FROM cache WHERE key = ? AND policy_revision = ?", (cache_key, policy_revision)).fetchone()
         if row is not None:
             manifest = loads(self.store.get(_ref(row[0], row[1], "application/json")))
@@ -317,7 +321,7 @@ class MemoryService:
             return manifest
         # 1. authorization and temporal filtering before any content is read for scoring
         keys = [r[0] for r in self._db.execute("SELECT DISTINCT source_key FROM observations WHERE seq <= ? ORDER BY source_key", (f.memory_sequence,)).fetchall()]
-        items, excluded = [], []
+        items, excluded, key_of = [], [], {}
         query_tokens = set(_tokens(query))
         for key in keys:
             if version_policy == "all_revisions":
@@ -348,6 +352,24 @@ class MemoryService:
                 span_start, span_end, score = self._best_span(content, query_tokens)
                 items.append({"observation_id": chosen["observation_id"], "source_id": chosen["source_id"], "source_revision": chosen["source_revision"],
                               "artifact_ref": chosen["content_ref"], "span_start": span_start, "span_end": span_end, "score_milli": score, "source_kind": kind})
+                key_of[chosen["observation_id"]] = key
+        association_record = None
+        if association is not None:
+            # 3. association (ADR-20): only over the authorized, eligible candidates above, never beyond them
+            from . import association as assoc
+            ranked = sorted(items, key=lambda i: (-i["score_milli"], i["observation_id"]))
+            seeds = []
+            for item in ranked:
+                if item["score_milli"] >= int(association["seed_min_score_milli"]) and key_of[item["observation_id"]] not in seeds:
+                    seeds.append(key_of[item["observation_id"]])
+            candidates = []
+            for item in items:
+                if key_of[item["observation_id"]] not in candidates:
+                    candidates.append(key_of[item["observation_id"]])
+            masses, association_record = assoc.structural_scores(assoc.cocitation_batches(self, f), seeds[: int(association["max_seeds"])], candidates, association)
+            for item in items:
+                item["structural_milli"] = assoc.milli(masses.get(key_of[item["observation_id"]], 0.0))
+                item["score_milli"] = max(item["score_milli"], item["structural_milli"])
         items.sort(key=lambda i: (-i["score_milli"], i["observation_id"]))
         budget, kept = max_bytes, []
         for item in items:
@@ -361,6 +383,8 @@ class MemoryService:
                     "principal_id": principal_id, "task_id": task_id, "frontier": f.record(), "access_policy_revision": policy_revision,
                     "query_ref": query_ref, "allowed_source_kinds": sorted(allowed_source_kinds), "version_policy": version_policy,
                     "max_bytes": int(max_bytes), "max_items": int(max_items), "items": kept[:256], "excluded": excluded[:1024], "cache_key": cache_key, "cached": False}
+        if association_record is not None:
+            manifest["association"] = association_record
         validate(manifest, "retrieval-manifest")
         ref = self.store.put(canonical(manifest), "application/json")
         self._db.execute("INSERT OR REPLACE INTO cache VALUES (?,?,?,?,?)", (cache_key, ref["sha256"], ref["bytes"], policy_revision, f.memory_sequence))

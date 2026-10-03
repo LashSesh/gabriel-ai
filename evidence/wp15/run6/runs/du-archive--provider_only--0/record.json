@@ -1,0 +1,64 @@
+{
+  "task_id": "du-archive",
+  "family": "association-unneeded",
+  "system": "provider_only",
+  "rep": 0,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp15/run6/runs/du-archive--provider_only--0",
+  "domain": "document",
+  "outcome": {
+    "system": "provider_only",
+    "task_id": "du-archive",
+    "family": "association-unneeded",
+    "rep": 0,
+    "declared": true,
+    "declared_reason": "deliverable produced; declared done without verification",
+    "model_requests": 1,
+    "model_tokens": 3140,
+    "wall_ms": 4396,
+    "provider_statuses": [
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp15/run6/runs/du-archive--provider_only--0/worktrees/provider_only-0",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "deliverable produced; declared done without verification"
+    ],
+    "gabriel": null,
+    "repairs_used": 0,
+    "plan_versions": 0
+  },
+  "verification": {
+    "verified": false,
+    "problems": [
+      "forbidden statement present in doc/summary.md: eleven"
+    ],
+    "changed_paths": [
+      "doc/summary.md"
+    ],
+    "out_of_scope_paths": [],
+    "citations": 6,
+    "claims": [
+      {
+        "claim": "schedule",
+        "present": true,
+        "cited_from_expected_source": true
+      }
+    ],
+    "targets": {
+      "doc/summary.md": "Records of the society are retained for the period named in the schedule of this statute. [[cite:obs-bf2e7687b3a8cc51a5cf19d44d4c27dd7459431e \"Records of the society are retained for the period named in the schedule of this statute.\"]]\n\nLedgers are retained for eleven calendar years, after which they are shredded. [[cite:obs-ac982a2f4b83f2140133bfc8821dc751d46fe2bb \"Ledgers: eleven calendar years, shredding afterwards.\"]]\n\nThe committee meets on the first Tuesday of the month. [[cite:obs-f1402a638b3b1dc9e44a4f52be8afd535a773209 \"The statute states that the committee meets on the first Tuesday of the month.\"]]\n\nThe committee meets on the second Tuesday of the month. [[cite:obs-2e69fd6e73b89b32bd4fa6934514e0c29a62c724 \"The statute states that the committee meets on the second Tuesday of the month.\"]]\n\nThe committee meets on the third Tuesday of the month. [[cite:obs-15ed528da526ed49a42be4045675184eff5d13a6 \"The statute states that the committee meets on the third Tuesday of the month.\"]]\n\nThe committee meets on the fourth Tuesday of the month. [[cite:obs-c3a029aae8496eeaae21260040b7315a28105a16 \"The statute states that the committee meets on the fourth Tuesday of the month.\"]]\n"
+    },
+    "patch_sha256": "bbc505c4c952cad9f83bd8d3419e088cf375c1fdd2260dd6d1f475bd20a01b74",
+    "patch_bytes": 1369,
+    "patch": "diff --git a/doc/summary.md b/doc/summary.md\nindex 0750985..551344c 100644\n--- a/doc/summary.md\n+++ b/doc/summary.md\n@@ -1,3 +1,11 @@\n-# Summary\n+Records of the society are retained for the period named in the schedule of this statute. [[cite:obs-bf2e7687b3a8cc51a5cf19d44d4c27dd7459431e \"Records of the society are retained for the period named in the schedule of this statute.\"]]\n \n-(to be completed)\n+Ledgers are retained for eleven calendar years, after which they are shredded. [[cite:obs-ac982a2f4b83f2140133bfc8821dc751d46fe2bb \"Ledgers: eleven calendar years, shredding afterwards.\"]]\n+\n+The committee meets on the first Tuesday of the month. [[cite:obs-f1402a638b3b1dc9e44a4f52be8afd535a773209 \"The statute states that the committee meets on the first Tuesday of the month.\"]]\n+\n+The committee meets on the second Tuesday of the month. [[cite:obs-2e69fd6e73b89b32bd4fa6934514e0c29a62c724 \"The statute states that the committee meets on the second Tuesday of the month.\"]]\n+\n+The committee meets on the third Tuesday of the month. [[cite:obs-15ed528da526ed49a42be4045675184eff5d13a6 \"The statute states that the committee meets on the third Tuesday of the month.\"]]\n+\n+The committee meets on the fourth Tuesday of the month. [[cite:obs-c3a029aae8496eeaae21260040b7315a28105a16 \"The statute states that the committee meets on the fourth Tuesday of the month.\"]]\n",
+    "head_is_base": true,
+    "marker": "eval-verify-du-archive-provider_only-0"
+  },
+  "V": 0,
+  "D": 1,
+  "false_completion": 1,
+  "unit_wall_ms": 4760
+}

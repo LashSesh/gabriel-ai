@@ -1,0 +1,79 @@
+{
+  "task_id": "du-archive",
+  "family": "association-unneeded",
+  "system": "simple_loop",
+  "rep": 1,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp15/run6b/runs/du-archive--simple_loop--1",
+  "domain": "document",
+  "outcome": {
+    "system": "simple_loop",
+    "task_id": "du-archive",
+    "family": "association-unneeded",
+    "rep": 1,
+    "declared": false,
+    "declared_reason": "budget exhausted without passing checks",
+    "model_requests": 6,
+    "model_tokens": 18953,
+    "wall_ms": 14181,
+    "provider_statuses": [
+      "completed",
+      "completed",
+      "completed",
+      "completed",
+      "completed",
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14",
+      "gpt-4.1-mini-2025-04-14",
+      "gpt-4.1-mini-2025-04-14",
+      "gpt-4.1-mini-2025-04-14",
+      "gpt-4.1-mini-2025-04-14",
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp15/run6b/runs/du-archive--simple_loop--1/worktrees/simple_loop-1",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "request 1: own checks failed: forbidden statement present in doc/summary.md: eleven",
+      "request 2: own checks failed: forbidden statement present in doc/summary.md: eleven",
+      "request 3: own checks failed: forbidden statement present in doc/summary.md: eleven",
+      "request 4: own checks failed: forbidden statement present in doc/summary.md: eleven",
+      "request 5: own checks failed: forbidden statement present in doc/summary.md: eleven",
+      "request 6: own checks failed: forbidden statement present in doc/summary.md: eleven"
+    ],
+    "gabriel": null,
+    "repairs_used": 0,
+    "plan_versions": 0
+  },
+  "verification": {
+    "verified": false,
+    "problems": [
+      "forbidden statement present in doc/summary.md: eleven"
+    ],
+    "changed_paths": [
+      "doc/summary.md"
+    ],
+    "out_of_scope_paths": [],
+    "citations": 2,
+    "claims": [
+      {
+        "claim": "schedule",
+        "present": true,
+        "cited_from_expected_source": true
+      }
+    ],
+    "targets": {
+      "doc/summary.md": "Records of the society are retained for the period named in the schedule of this statute.[[cite:obs-bf2e7687b3a8cc51a5cf19d44d4c27dd7459431e \"Records of the society are retained for the period named in the schedule of this statute.\"]]\n\nLedgers are retained for the period named in the schedule of this statute.[[cite:obs-ac982a2f4b83f2140133bfc8821dc751d46fe2bb \"Ledgers: eleven calendar years, shredding afterwards.\"]]\n"
+    },
+    "patch_sha256": "829e826a38bc7c3ff6fd0fd2064514f62394a727eaef98f413d11761295fd4ac",
+    "patch_bytes": 586,
+    "patch": "diff --git a/doc/summary.md b/doc/summary.md\nindex 0750985..98cd346 100644\n--- a/doc/summary.md\n+++ b/doc/summary.md\n@@ -1,3 +1,3 @@\n-# Summary\n+Records of the society are retained for the period named in the schedule of this statute.[[cite:obs-bf2e7687b3a8cc51a5cf19d44d4c27dd7459431e \"Records of the society are retained for the period named in the schedule of this statute.\"]]\n \n-(to be completed)\n+Ledgers are retained for the period named in the schedule of this statute.[[cite:obs-ac982a2f4b83f2140133bfc8821dc751d46fe2bb \"Ledgers: eleven calendar years, shredding afterwards.\"]]\n",
+    "head_is_base": true,
+    "marker": "eval-verify-du-archive-simple_loop-1"
+  },
+  "V": 0,
+  "D": 0,
+  "false_completion": 0,
+  "unit_wall_ms": 14353
+}

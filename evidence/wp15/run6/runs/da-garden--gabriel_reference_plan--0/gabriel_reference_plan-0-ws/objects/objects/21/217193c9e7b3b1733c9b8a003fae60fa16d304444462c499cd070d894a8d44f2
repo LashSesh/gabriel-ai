@@ -1,0 +1,238 @@
+You are the worker role of Gabriel for a source-grounded document amendment.
+Goal (verbatim user request):
+Amend doc/summary.md so that it states the agreement's allocation rule for plots and how large a plot is. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- citations [document/citations_bound] independent=True
+- claims [document/required_claims] independent=True
+
+Editable paths (changes elsewhere are rejected; sources are never editable): doc/
+Base commit: 844422e74c751c14fa5c7b4d2765c0cb68f9531d
+
+Target documents (path sha256 bytes):
+  doc/summary.md 71cde94d3c7995ea82eadd1d231236c84dee9e11f06d277dadf2334b2d509b67 475
+=== doc/summary.md (sha256 71cde94d3c7995ea82eadd1d231236c84dee9e11f06d277dadf2334b2d509b67) ===
+The agreement specifies that plots are allocated according to a defined rule. Each plot is exactly one acre in size. [[cite-12e468220a986ad602b05b235df6d60914f247b7 "The agreement states that each plot is one acre in size."]]
+
+The allocation rule for plots is that they are distributed based on a lottery system among eligible applicants. [[cite-26e468220a986ad602b05b235df6d60914f247b7 "The agreement states that plots are allocated by lottery among eligible applicants."]]
+
+
+
+Sources (cite them by observation id; quotes must be exact substrings of the cited source):
+=== source note12 revision 1 observation obs-0126d3c105356fc4e82eb763b774c38588d692db (92 bytes) ===
+# Note 12
+
+The agreement states that the committee meets on the first Tuesday of the month.
+
+
+=== source note14 revision 1 observation obs-128cb15582443d1b8a944b0f6ad58b1221542f39 (92 bytes) ===
+# Note 14
+
+The agreement states that the committee meets on the third Tuesday of the month.
+
+
+=== source note34 revision 1 observation obs-13702d6d874b08fbbc1f6d13abbdc2ce03185e75 (92 bytes) ===
+# Note 34
+
+The agreement states that the committee meets on the third Tuesday of the month.
+
+
+=== source note19 revision 1 observation obs-14ad13a25f75904a54716fd4e51f7138f26f632e (93 bytes) ===
+# Note 19
+
+The agreement states that the committee meets on the fourth Tuesday of the month.
+
+
+=== source note07 revision 1 observation obs-18f7c966dad51018c100693bdf8c24675032a42b (92 bytes) ===
+# Note 7
+
+The agreement states that the committee meets on the fourth Tuesday of the month.
+
+
+=== source note22 revision 1 observation obs-1e85603067207dc8da4b8b09c782043f5b7eb979 (92 bytes) ===
+# Note 22
+
+The agreement states that the committee meets on the third Tuesday of the month.
+
+
+=== source note28 revision 1 observation obs-217398b6830aafd09f6bcd60d8c4dfca8751b337 (92 bytes) ===
+# Note 28
+
+The agreement states that the committee meets on the first Tuesday of the month.
+
+
+=== source note13 revision 1 observation obs-26e468220a986ad602b05b235df6d60914f247b7 (93 bytes) ===
+# Note 13
+
+The agreement states that the committee meets on the second Tuesday of the month.
+
+
+=== source note10 revision 1 observation obs-2beafcf7bdc5192a963b201f4e2d65048f71b0fb (92 bytes) ===
+# Note 10
+
+The agreement states that the committee meets on the third Tuesday of the month.
+
+
+=== source note24 revision 1 observation obs-2dd52965865cc3cbb452ed28b3251bb842c9f04b (92 bytes) ===
+# Note 24
+
+The agreement states that the committee meets on the first Tuesday of the month.
+
+
+=== source note31 revision 1 observation obs-2f7ddbde3aadb50f5cf8a4b303ed9d0024ae12a8 (93 bytes) ===
+# Note 31
+
+The agreement states that the committee meets on the fourth Tuesday of the month.
+
+
+=== source note33 revision 1 observation obs-3dc7f9afdbeb0f2c28027b163d44e9feb8fed466 (93 bytes) ===
+# Note 33
+
+The agreement states that the committee meets on the second Tuesday of the month.
+
+
+=== source note16 revision 1 observation obs-47431c7675bf5065d8966122446c4b79ba1ad284 (92 bytes) ===
+# Note 16
+
+The agreement states that the committee meets on the first Tuesday of the month.
+
+
+=== source note20 revision 1 observation obs-4f47426348db4ec0a083779981a45dc797184f1a (92 bytes) ===
+# Note 20
+
+The agreement states that the committee meets on the first Tuesday of the month.
+
+
+=== source note23 revision 1 observation obs-555733cf6715b2774cc89eaff0157889ca70511f (93 bytes) ===
+# Note 23
+
+The agreement states that the committee meets on the fourth Tuesday of the month.
+
+
+=== source note08 revision 1 observation obs-59deea0cad427a26dc949c0ba48f7f7df2bf8354 (91 bytes) ===
+# Note 8
+
+The agreement states that the committee meets on the first Tuesday of the month.
+
+
+=== source note18 revision 1 observation obs-65d491f47e6c38913325d3b9ce7d33d3a5b976fc (92 bytes) ===
+# Note 18
+
+The agreement states that the committee meets on the third Tuesday of the month.
+
+
+=== source note09 revision 1 observation obs-661f1f6c40270e60d6a0ce2faac02d44d8223b45 (92 bytes) ===
+# Note 9
+
+The agreement states that the committee meets on the second Tuesday of the month.
+
+
+=== source note17 revision 1 observation obs-6b3681b6e3608776a0583857090b7bc7f1d2c4de (93 bytes) ===
+# Note 17
+
+The agreement states that the committee meets on the second Tuesday of the month.
+
+
+=== source note21 revision 1 observation obs-7180072f8a0356b29fed77e5dbfea09ee8578367 (93 bytes) ===
+# Note 21
+
+The agreement states that the committee meets on the second Tuesday of the month.
+
+
+=== source note03 revision 1 observation obs-729a3d267ad5209e903a1983bbc645b3e509c394 (92 bytes) ===
+# Note 3
+
+The agreement states that the committee meets on the fourth Tuesday of the month.
+
+
+=== source note25 revision 1 observation obs-80ee222d9715b4fe49b6c2ee68e89b885a61f013 (93 bytes) ===
+# Note 25
+
+The agreement states that the committee meets on the second Tuesday of the month.
+
+
+=== source note27 revision 1 observation obs-8bd2b1f70bfeadbf090d8b28b0dfaa11991ff23d (93 bytes) ===
+# Note 27
+
+The agreement states that the committee meets on the fourth Tuesday of the month.
+
+
+=== source note04 revision 1 observation obs-94f520efe0e2c7912bab0bf6742f3645ca1c8b40 (91 bytes) ===
+# Note 4
+
+The agreement states that the committee meets on the first Tuesday of the month.
+
+
+=== source note32 revision 1 observation obs-9d6354bc50e8c0e0bfb258a3f015efeaa0e310bb (92 bytes) ===
+# Note 32
+
+The agreement states that the committee meets on the first Tuesday of the month.
+
+
+=== source note15 revision 1 observation obs-b50b11dbf39ffe6e9418f94ec3fe9c3ffb393502 (93 bytes) ===
+# Note 15
+
+The agreement states that the committee meets on the fourth Tuesday of the month.
+
+
+=== source note05 revision 1 observation obs-b97af521d0570e523b3ae8c4dd681fe910ab9c57 (92 bytes) ===
+# Note 5
+
+The agreement states that the committee meets on the second Tuesday of the month.
+
+
+=== source note06 revision 1 observation obs-bd88ef06a5ab85601fb4c63e9af9f9e7fdc4e577 (91 bytes) ===
+# Note 6
+
+The agreement states that the committee meets on the third Tuesday of the month.
+
+
+=== source note26 revision 1 observation obs-bf95687f7240c319538e43b2f8313ae1f7be9d96 (92 bytes) ===
+# Note 26
+
+The agreement states that the committee meets on the third Tuesday of the month.
+
+
+=== source note29 revision 1 observation obs-c0f3653c2b9f8a24b8368d0eb9f07e5ed8b262cf (93 bytes) ===
+# Note 29
+
+The agreement states that the committee meets on the second Tuesday of the month.
+
+
+=== source note30 revision 1 observation obs-c4d8f36970b1303d0305c8577b43180fab359112 (92 bytes) ===
+# Note 30
+
+The agreement states that the committee meets on the third Tuesday of the month.
+
+
+=== source note35 revision 1 observation obs-e6d86e857c7ced4517f47da752c750e7d321cd59 (93 bytes) ===
+# Note 35
+
+The agreement states that the committee meets on the fourth Tuesday of the month.
+
+
+Observation obs-62ad415058090c9d71af70dc2d06c05d2ddcfbff is not available: superseded
+Observation obs-2f05cf76ed4942c136e57c04c58d41c79963eea9 is not available: superseded
+Observation decision-run-da-garden-gabriel_reference_plan-0-1-1 is not available: superseded
+Observation obs-e8ade1bec63a31d5d1d3dcda3977134908066d66 is not available: budget
+Observation obs-f525a91f0835cf37192179568d3625faf0d844b9 is not available: budget
+Observation obs-f55b976c0410ee0f5f59e6d3eec63ad963dacac1 is not available: budget
+Observation obs-feb21fa2b2ff64328b74c24e751352ad23d5a671 is not available: budget
+Observation obs-0b39d0b6d776c0a94e4e29fce28a79ba72eff7ee is not available: budget
+Observation obs-c6974cf4f7bf572accc9fdaa2a461645c531f2eb is not available: budget
+
+Previous attempt failed verification (round 3). Diagnostics:
+--- citations ---
+{"check_id": "citations", "evidence": {"frontier": {"memory_sequence": 45, "owner_sequence": 33}, "problems": ["doc/summary.md: citation of obs-62ad415058090c9d71af70dc2d06c05d2ddcfbff not bound: quote not found in the cited source", "doc/summary.md: citation of obs-2f05cf76ed4942c136e57c04c58d41c79963eea9 not bound: quote not found in the cited source"], "resolved": [{"path": "doc/summary.md", "spans": []}]}, "node_id": "review", "outcome": "failed"}
+
+--- citations ---
+{"check_id": "citations", "evidence": {"frontier": {"memory_sequence": 46, "owner_sequence": 58}, "problems": ["doc/summary.md carries no citation"], "resolved": [{"path": "doc/summary.md", "spans": []}]}, "node_id": "review-r1", "outcome": "failed"}
+
+
+Every statement you add must be followed by a citation marker of the form
+[[cite:<observation id> "exact quote from that source"]] where the quote is copied verbatim from the cited source.
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<target path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest. For create expected_sha256 is null.
+Do not touch sources or oracle files. Do not claim completion; the independent checks decide.

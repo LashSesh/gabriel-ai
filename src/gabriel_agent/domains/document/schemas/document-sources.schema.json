@@ -5,11 +5,12 @@
   "description": "Declared document sources of a task (base input identity): path, source identity and revision, event kind and interval, time basis; and the target documents. Access and retrieval view are declared per task; the production default is provenance with every source available.",
   "properties": {
     "retrieval_view": {
-      "description": "how observed sources enter the worker prompt: provenance (effective revision, authorized and available at the frontier; the production default), all_revisions (declared ablation of the revision rule) or plain (declared ablation of provenance filtering: every declared source file regardless of revision or revocation)",
+      "description": "how observed sources enter the worker prompt: provenance (effective revision, authorized and available at the frontier; the production default), all_revisions (declared ablation of the revision rule) or plain (declared ablation of provenance filtering: every declared source file regardless of revision or revocation); associative (ADR-20: the provenance view re-ranked by the native engine's walk over the co-citation graph of supported claims)",
       "enum": [
         "provenance",
         "all_revisions",
-        "plain"
+        "plain",
+        "associative"
       ],
       "type": "string"
     },

@@ -234,6 +234,32 @@ cargo build --locked --release --manifest-path native_pse/Cargo.toml --example e
 (cd native_pse && cargo test --release -- --ignored full_state_matches_original_golden_fixture)   # the historical Windows fixture, on request
 ```
 
+## Associative memory layer (ADR-20)
+A succeeded document run records what it established as supported claims (the target's
+content, supported by the observations its citations resolved to). The document pack's view
+`associative` (task field `retrieval_view`) is the provenance view re-ranked by the native
+engine's walk over the co-citation graph of those claims: authorization, revision rule,
+revocation and frontier apply first, the lexically matching sources seed the walk, every
+candidate's score is the larger of its lexical score and its walk mass, and the retrieval
+manifest retains the association record (profile, status, executable digest, batches digest,
+entities, seeds, snapshot identity, masses). Without history or executables the record says so
+and the retrieval stays lexical. The corpus tier `association` and protocol 6 test the
+mechanism (`evidence/wp15/`):
+```bash
+gabriel eval corpus-check --tier association                       # fifteen tasks, history tasks included in the digest
+gabriel eval freeze --provider provider.json --out protocol6.json --repetitions 2 --backend linux_namespace \
+  --systems provider_only,simple_loop,gabriel_reference_plan,gabriel_associative --tiers association \
+  --held-out-families association-needed-held-out
+gabriel eval run --protocol protocol6.json --out ./run6 --provider provider.json --workers 3
+gabriel eval report --run ./run6
+scripts/eval_final_diffs.py ./run6                                 # final worktree diffs as evidence
+scripts/eval_retrieval_analysis.py ./run6                          # what each Gabriel retrieval carried (ranks, seeds, prompt)
+```
+The corpus check executes the tier's precondition under the memory service's own scorer (the
+visible source outranks every distractor, every distractor outranks the hidden source); run 6
+of the protocol was lost to distractors that tied with the visible source before that invariant
+existed, and is retained with the amendment (`evidence/wp15/protocol6_declaration.md`).
+
 ## Evidence manifests
 ```bash
 GABRIEL_CONTAINMENT_TESTS=1 python -m pytest tests -vv -rs | tee evidence/test_results.txt

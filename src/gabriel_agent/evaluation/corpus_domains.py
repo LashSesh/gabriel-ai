@@ -56,6 +56,8 @@ class DomainTask:
     targets: tuple = ()         # document: target documents
     controls: tuple = ()        # ((name, expected_verified, {path: content}), ...): executed by soundness_check
     tier_name: str = ""         # a tier distinct from the domain (the graph tier runs in the numerical domain)
+    history: tuple = ()         # task ids run first in the same workspace with their correct deliverable (ADR-20 association history)
+    role: str = "evaluated"     # "evaluated": an evaluation unit; "history": run only as another task's history, never as a unit
 
     @property
     def tier(self) -> str:
@@ -68,6 +70,8 @@ class DomainTask:
         body = {"task_id": self.task_id, "family": self.family, "domain": self.domain, "goal": self.goal, "files": [list(f) for f in self.files],
                 "allowed_paths": list(self.allowed_paths), "oracle": self.oracle, "sources": [dict(s) for s in self.sources],
                 "targets": list(self.targets), "controls": [[n, v, dict(d)] for n, v, d in self.controls]}
+        if self.history or self.role != "evaluated":
+            body.update({"history": list(self.history), "role": self.role})
         # json.dumps rather than the exact codec: reference values are floats, and this digest only identifies the task
         return hashlib.sha256(json.dumps(body, sort_keys=True, separators=(",", ":"), allow_nan=False).encode("utf8")).hexdigest()
 
@@ -86,10 +90,10 @@ def _claim(path, phrasings, source_id, quote, revision=None):
     return claim
 
 
-def _doc_task(task_id, family, goal, files, sources, target, claims, forbidden, controls):
+def _doc_task(task_id, family, goal, files, sources, target, claims, forbidden, controls, *, tier_name="", history=(), role="evaluated"):
     return DomainTask(task_id=task_id, family=family, domain="document", goal=goal, files=tuple(files), allowed_paths=("doc/",),
                       oracle={"claims": claims, "forbidden": [{"path": target, "must_not_contain": list(forbidden)}] if forbidden else []},
-                      sources=tuple(sources), targets=(target,), controls=tuple(controls))
+                      sources=tuple(sources), targets=(target,), controls=tuple(controls), tier_name=tier_name, history=tuple(history), role=role)
 
 
 def _cite(source_id, quote):
@@ -526,11 +530,189 @@ def _graph_tasks():
     return tasks
 
 
+# ===================================================================== association tier (ADR-20: the associative memory layer)
+#
+# The evaluated task needs a source whose words share no token with the goal (not even a stop
+# word), so a budgeted lexical retrieval never carries it; thirty-six scored distractors fill the
+# budget. The history task, run first in the same workspace with its correct deliverable, cites
+# the visible and the hidden source together; a verified run records that as a supported claim,
+# and the associative view's walk from the visible source carries the hidden one into the prompt.
+#
+# Precondition, executed at construction under the memory service's own scorer
+# (`_assert_ranking`): for every evaluated goal the visible source scores strictly above every
+# distractor, every distractor scores above zero, and the hidden source scores zero. Protocol 6
+# (evidence/wp15/run6) was run before this invariant existed, with distractors that named the
+# visible source's subject ("The statute states that the committee meets ..."): they tied with
+# the visible source under the scorer in three of five topics, the tie-break by observation id
+# then dropped the visible source itself below the budget in most workspaces, and the walk had no
+# seed. The run is retained; the distractors were changed and the invariant added afterwards
+# (evidence/wp15/protocol6_declaration.md, amendment).
+
+ASSOCIATION_DISTRACTORS = 36
+ASSOCIATION_README = "# Documents\n\nThe main document, its annex and the committee notes.\n"
+
+
+def _association_distractor(index: int) -> str:
+    """A scored distractor: it shares the goal's function words (so it outranks the hidden source
+    and fills the budget) but names no subject of any source and never ties with a visible one."""
+    return ("# Note %d\n\nMinutes of the committee meeting held on the %s Tuesday: quorum reached, no resolutions.\n"
+            % (index, ("first", "second", "third", "fourth")[index % 4]))
+
+
+def _association_goal(target: str, ask: str) -> str:
+    return ("Amend %s so that it states %s. Every statement must be followed by a citation of the exact source span that supports it. "
+            "Do not change the sources." % (target, ask))
+
+
+ASSOCIATION_TOPICS = [
+    # name, visible source (id, subject word, text, quote, phrasings), hidden source (id, text, quote, phrasings), evaluated ask, history ask
+    ("fee", ("charter", "charter", "# Club charter\n\n## Membership fee\n\nEach member pays a yearly contribution; the amount is fixed in the annex of this charter.\n",
+             "fixed in the annex", ["annex"]),
+     ("annex", "# Annex\n\nOrdinary contributions: one hundred twenty (120) EUR, payable within January.\n", "one hundred twenty (120) EUR", ["120 EUR", "120"]),
+     "what the charter says about the membership fee and the amount a member pays each year",
+     "the yearly contribution rule of the charter and, from the annex, the ordinary contributions of one hundred twenty EUR payable within January"),
+    ("parking", ("handbook", "handbook", "# Site handbook\n\n## Parking\n\nVehicles of members are parked according to the plan in the appendix of this handbook.\n",
+                 "according to the plan in the appendix", ["appendix"]),
+     ("appendix", "# Appendix\n\nBays twelve through thirty: blocked, supplier vans only, midday deadline.\n", "Bays twelve through thirty", ["twelve through thirty", "12 through 30", "bays 12"]),
+     "the handbook's parking rule and which spaces are reserved and the time limit",
+     "the parking rule of the handbook and, from the appendix, bays twelve through thirty blocked for supplier vans with a midday deadline"),
+    ("archive", ("statute", "statute", "# Archive statute\n\n## Retention\n\nRecords of the society are retained for the period named in the schedule of this statute.\n",
+                 "the period named in the schedule", ["schedule"]),
+     ("schedule", "# Schedule\n\nLedgers: eleven calendar years, shredding afterwards.\n", "eleven calendar years", ["eleven", "11 years", "eleven years"]),
+     "the statute's retention rule and how long the records are kept",
+     "the retention rule of the statute and, from the schedule, ledgers kept eleven calendar years with shredding afterwards"),
+    ("library", ("bylaws", "bylaws", "# Library bylaws\n\n## Loans\n\nBooks are lent to members under the terms of the loan table of these bylaws.\n",
+                 "the terms of the loan table", ["loan table"]),
+     ("table", "# Loan table\n\nNovels: twenty-one days, renewable twice.\n", "twenty-one days", ["twenty-one days", "21 days"]),
+     "the bylaws' lending rule for books and how long a member may keep them",
+     "the lending rule of the bylaws and, from the loan table, novels twenty-one days renewable twice"),
+    ("garden", ("agreement", "agreement", "# Garden agreement\n\n## Plots\n\nPlots are allocated to members as listed in the register of this agreement.\n",
+                "as listed in the register", ["register"]),
+     ("register", "# Register\n\nAllotments: forty square metres each; hedge trimming before October.\n", "forty square metres", ["forty square metres", "40 square metres", "40 m"]),
+     "the agreement's allocation rule for plots and how large a plot is",
+     "the allocation rule of the agreement and, from the register, plots of forty square metres with hedges trimmed by October"),
+]
+
+
+def _association_files(topic, with_distractors=True) -> list:
+    name, (vid, subject, vtext, _, _), (hid, htext, _, _), _, _ = topic
+    files = [("sources/%s.md" % vid, vtext), ("sources/%s.md" % hid, htext), ("README.md", ASSOCIATION_README),
+             ("doc/notes.md", "# Notes\n\n(to be completed)\n"), ("doc/summary.md", "# Summary\n\n(to be completed)\n")]
+    if with_distractors:
+        files += [("sources/note-%02d.md" % i, _association_distractor(i)) for i in range(ASSOCIATION_DISTRACTORS)]
+    return files
+
+
+def _association_sources(topic, with_distractors=True) -> list:
+    name, (vid, _, _, _, _), (hid, _, _, _), _, _ = topic
+    out = [_src("sources/%s.md" % vid, vid), _src("sources/%s.md" % hid, hid)]
+    if with_distractors:
+        out += [_src("sources/note-%02d.md" % i, "note%02d" % i) for i in range(ASSOCIATION_DISTRACTORS)]
+    return out
+
+
+def _assert_hidden(goal: str, hidden_text: str, visible_text: str) -> None:
+    """The hidden source shares no token with the goal; the visible one shares several."""
+    from ..memory.service import _tokens
+    goal_tokens = set(_tokens(goal.encode("utf8")))
+    hidden_tokens = set(_tokens(hidden_text.encode("utf8")))
+    if goal_tokens & hidden_tokens:
+        raise ValueError("hidden source shares tokens with the goal: %s" % sorted(goal_tokens & hidden_tokens))
+    if len(goal_tokens & set(_tokens(visible_text.encode("utf8")))) < 4:
+        raise ValueError("visible source shares too few tokens with the goal")
+
+
+def association_scores(goal: str, texts: dict) -> dict:
+    """Lexical score in milli of every text for the goal under the memory service's own scorer."""
+    from ..memory.service import MemoryService, _tokens
+    query_tokens = set(_tokens(goal.encode("utf8")))
+    return {name: MemoryService._best_span(text.encode("utf8"), query_tokens)[2] for name, text in texts.items()}
+
+
+def _assert_ranking(goal: str, visible_text: str, hidden_text: str, distractors: list) -> None:
+    """Under the memory service's scorer the visible source outranks every distractor strictly and
+    every distractor outranks the hidden source strictly: a budgeted lexical retrieval keeps the
+    visible source (and seeds the walk with it) and drops the hidden one, whatever the tie-break.
+    (`_assert_hidden` adds, for the needed goal, that the hidden source shares no token at all.)"""
+    scores = association_scores(goal, {"visible": visible_text, "hidden": hidden_text, **{"note%02d" % i: d for i, d in enumerate(distractors)}})
+    notes = [scores["note%02d" % i] for i in range(len(distractors))]
+    if not notes or min(notes) < 1:
+        raise ValueError("a distractor scores zero for the goal: %s" % goal)
+    if scores["visible"] <= max(notes):
+        raise ValueError("visible source (%d) does not outrank the distractors (%d) for the goal: %s" % (scores["visible"], max(notes), goal))
+    if scores["hidden"] >= min(notes):
+        raise ValueError("hidden source (%d) is not below every distractor (%d) for the goal: %s" % (scores["hidden"], min(notes), goal))
+
+
+def _association_tasks():
+    tasks = []
+    for index, topic in enumerate(ASSOCIATION_TOPICS):
+        name, (vid, subject, vtext, vquote, vphr), (hid, htext, hquote, hphr), ask, history_ask = topic
+        files_full, files_small = _association_files(topic, True), _association_files(topic, False)
+        goal = _association_goal("doc/summary.md", ask)
+        distractors = [_association_distractor(i) for i in range(ASSOCIATION_DISTRACTORS)]
+        _assert_hidden(goal, htext, vtext)
+        _assert_ranking(goal, vtext, htext, distractors)
+        history_goal = _association_goal("doc/notes.md", history_ask)
+        if min(association_scores(history_goal, {"visible": vtext, "hidden": htext}).values()) < 1:
+            raise ValueError("the history goal does not reach both sources lexically: " + history_goal)
+        correct_notes = ("# Notes\n\nThe %s: %s. %s\n\nFrom the %s: %s. %s\n" % (vid, vquote, _cite(vid, vquote), hid, hquote, _cite(hid, hquote)))
+        correct_summary = ("# Summary\n\nThe %s: %s. %s\n\nThe %s: %s. %s\n" % (vid, vquote, _cite(vid, vquote), hid, hquote, _cite(hid, hquote)))
+        visible_only = "# Summary\n\nThe %s: %s. %s\n" % (vid, vquote, _cite(vid, vquote))
+        uncited = "# Summary\n\nThe %s: %s.\n\nThe %s: %s.\n" % (vid, vquote, hid, hquote)
+        claims = [_claim("doc/summary.md", vphr, vid, vquote), _claim("doc/summary.md", hphr, hid, hquote)]
+        history_claims = [_claim("doc/notes.md", vphr, vid, vquote), _claim("doc/notes.md", hphr, hid, hquote)]
+        history_id = "dh-" + name
+        # the history task (never a unit): its goal reaches both sources lexically
+        tasks.append(_doc_task(history_id, "association-history", history_goal, files_small, _association_sources(topic, False), "doc/notes.md", history_claims, [],
+                               [("correct", True, {"doc/notes.md": correct_notes}), ("uncited", False, {"doc/notes.md": "# Notes\n\nThe %s: %s.\n" % (vid, vquote)})],
+                               tier_name="association", role="history"))
+        # needed: the hidden source is required; seen families use the first three topics, the held-out family the last two
+        family = "association-needed" if index < 3 else "association-needed-held-out"
+        tasks.append(_doc_task("da-" + name, family, goal, files_full, _association_sources(topic, True), "doc/summary.md", claims, [],
+                               [("correct", True, {"doc/summary.md": correct_summary}), ("visible_only", False, {"doc/summary.md": visible_only}),
+                                ("uncited", False, {"doc/summary.md": uncited}), ("source_edited", False, {"doc/summary.md": correct_summary, "sources/%s.md" % hid: htext + "\nEdited.\n"})],
+                               tier_name="association", history=(history_id,)))
+        if index < 3:
+            # unneeded: the same history, but the evaluated goal needs the visible source only and the hidden figure is not to be stated
+            ask_visible = "the %s's rule only, as written in the %s" % (vid, vid)
+            goal_u = _association_goal("doc/summary.md", ask_visible)
+            _assert_ranking(goal_u, vtext, htext, distractors)
+            tasks.append(_doc_task("du-" + name, "association-unneeded", goal_u, files_full, _association_sources(topic, True), "doc/summary.md",
+                                   [_claim("doc/summary.md", vphr, vid, vquote)], hphr,
+                                   [("correct", True, {"doc/summary.md": visible_only}), ("hidden_stated", False, {"doc/summary.md": correct_summary}),
+                                    ("uncited", False, {"doc/summary.md": "# Summary\n\nThe %s: %s.\n" % (vid, vquote)})],
+                                   tier_name="association", history=(history_id,)))
+        if index < 2:
+            # none: no history and no budget pressure (two sources only); both views reach the hidden source
+            tasks.append(_doc_task("dn-" + name, "association-none", goal, files_small, _association_sources(topic, False), "doc/summary.md", claims, [],
+                                   [("correct", True, {"doc/summary.md": correct_summary}), ("visible_only", False, {"doc/summary.md": visible_only}),
+                                    ("uncited", False, {"doc/summary.md": uncited})], tier_name="association"))
+    return tasks
+
+
+def history_worker_steps(task: DomainTask) -> list:
+    """The scripted worker that produces a history task's correct deliverable through the real run:
+    the control's content with the control citations resolved to the prompt's observation ids."""
+    correct = next(deliverable for name, expected, deliverable in task.controls if name == "correct")
+    steps = []
+    for target in task.targets:
+        content = re.sub(r"obs-control-([A-Za-z0-9_-]+)", r"{{obs:\1}}", correct[target])
+        steps.append({"kind": "template", "value": {"operations": [{"kind": "modify", "path": target, "expected_sha256": "{{sha:%s}}" % target, "content": content}],
+                                                    "rationale": "history deliverable of " + task.task_id}})
+    return steps
+
+
+def task_named(task_id: str) -> DomainTask:
+    return next(t for t in DOMAIN_TASKS if t.task_id == task_id)
+
+
 DOCUMENT_TASKS = _revision_tasks() + _revoked_tasks() + _conflict_tasks()
 NUMERICAL_TASKS = _numerical_tasks()
 GRAPH_TASKS = _graph_tasks()
-DOMAIN_TASKS = DOCUMENT_TASKS + NUMERICAL_TASKS + GRAPH_TASKS
-DOMAIN_TIERS = ("document", "numerical", "graph")
+ASSOCIATION_TASKS = _association_tasks()
+DOMAIN_TASKS = DOCUMENT_TASKS + NUMERICAL_TASKS + GRAPH_TASKS + ASSOCIATION_TASKS
+DOMAIN_TIERS = ("document", "numerical", "graph", "association")
 
 
 def tasks(tier: str | None = None) -> list:

@@ -1,0 +1,158 @@
+{
+  "backend": "linux_namespace",
+  "bootstrap": {
+    "resamples": 2000,
+    "seed": 20261002
+  },
+  "budget_per_task": {
+    "max_input_tokens": 60000,
+    "max_output_tokens": 4000,
+    "model_requests": 6,
+    "model_tokens_total": 120000,
+    "tool_attempts": 64,
+    "wall_ms": 600000
+  },
+  "corpus_digest": "17ab990dc49dc9229512087447baacd8dd087dc86389e163df2d03b425b3bc53",
+  "declared_criterion": "",
+  "declared_success": {
+    "document_and_numerical_tiers": {
+      "gabriel": "as gabriel_reference_plan with the model planner (one planner request per plan version)",
+      "gabriel_all_revisions": "as gabriel_reference_plan with the declared all_revisions view: every eligible revision enters the prompt, revocation and authorization still apply (ablation of the revision rule; document tasks only)",
+      "gabriel_associative": "as gabriel_reference_plan with the declared associative view (ADR-20): the provenance view re-ranked by the native engine's walk over the co-citation graph of the claims that earlier verified runs in the same workspace established; document tasks only",
+      "gabriel_no_repair": "as gabriel with max_repairs=0 and max_plan_versions=1 (ablation of the repair cycle)",
+      "gabriel_plain_sources": "as gabriel_reference_plan with the declared plain view: every declared source file enters the prompt regardless of revision or revocation (ablation of provenance-aware retrieval; document tasks only)",
+      "gabriel_reference_plan": "run state succeeded with the pack's reference plan and the production retrieval view (effective revision, authorized and available sources; contained numerical worker)",
+      "provider_only": "an admissible deliverable was produced (amendment applied or declared operation executed through the same adapter); no verification",
+      "simple_loop": "the system's own run of the independent content checks passed (plain source view, no owner, memory service or policy)"
+    },
+    "gabriel": "run state succeeded (every mandatory check passed with eligible evidence, artifacts verified, effects reconciled)",
+    "gabriel_episodes": "as gabriel_reference_plan (rule-based repair) with the frozen episodes retrievable into the worker prompt (readout ablation)",
+    "gabriel_no_repair": "as gabriel, with max_repairs=0 and max_plan_versions=1 (ablation of the repair cycle)",
+    "gabriel_policy": "as gabriel_reference_plan, with the frozen readout policy pinned: at a failed verification it chooses repair or stop from the progress channels, and it may retrieve frozen episodes into the worker prompt",
+    "gabriel_reference_plan": "as gabriel, with the domain pack's deterministic reference plan admitted without a planner request (planner ablation)",
+    "provider_only": "an admissible patch was applied (no verification)",
+    "simple_loop": "the system's own runs of the visible tests and the oracle both exited 0"
+  },
+  "episode_seed": null,
+  "families": [
+    "association-needed",
+    "association-needed-held-out",
+    "association-none",
+    "association-unneeded"
+  ],
+  "frozen_at_utc": "2026-10-03T13:28:11.296872+00:00",
+  "frozen_digest": "db5d1e78cff24c999bafa3d5f0370054d4d4edb211dc2b6065f44478818e6456",
+  "harness_identity": "df730d0c2585ac2b263ce48235a8e5cd11e6f2d6d0f18f1fd274201a0d5b0e0d",
+  "held_out_families": [
+    "association-needed-held-out"
+  ],
+  "metrics": [
+    "p_success = mean(V)",
+    "p_false_completion = mean(D*(1-V))",
+    "conditional false completion = sum(D*(1-V))/sum(D)",
+    "model requests, model tokens and wall time per run",
+    "recovery: Gabriel runs that used repair cycles or extra plan versions",
+    "paired differences gabriel - baseline per task (mean over repetitions)",
+    "bootstrap percentile intervals, resampling task families with replacement (and tasks as a secondary view)"
+  ],
+  "note": "Protocol 6: the associative memory layer (ADR-20); pre-declared in evidence/wp15/protocol6_declaration.md; history tasks run first in the same workspace for every Gabriel arm",
+  "paired": [
+    [
+      "gabriel_reference_plan",
+      "provider_only"
+    ],
+    [
+      "gabriel_reference_plan",
+      "simple_loop"
+    ],
+    [
+      "gabriel_reference_plan",
+      "gabriel_associative"
+    ]
+  ],
+  "policy": null,
+  "provider": {
+    "credential_ref": "env:OPENAI_API_KEY",
+    "kind": "openai_compat",
+    "model": "gpt-4.1-mini",
+    "temperature_milli": 0,
+    "timeout_ms": 120000
+  },
+  "purpose": "Matched comparison: increase independently verified task success or reduce resources at equal success, under a fixed task distribution and matched constraints. Not a benchmark of general capability.",
+  "repetitions": 2,
+  "sample_size_statement": "10 tasks in 4 families; the minimum relevant effect is not predeclared from a pilot, so intervals are reported as descriptive uncertainty, not as a powered test",
+  "schema": "gabriel.evaluation-protocol/1",
+  "systems": [
+    "provider_only",
+    "simple_loop",
+    "gabriel_reference_plan",
+    "gabriel_associative"
+  ],
+  "tasks": [
+    {
+      "digest": "8888de1524dce5419254a9334c69f7e6750afb117359a75066defcd3545d3074",
+      "family": "association-needed",
+      "task_id": "da-fee",
+      "tier": "association"
+    },
+    {
+      "digest": "455110d3a235e641799a5e70c0487b45397b6afd704fcae93d002b287960a510",
+      "family": "association-unneeded",
+      "task_id": "du-fee",
+      "tier": "association"
+    },
+    {
+      "digest": "eba00a5086489891ef315b124851975c9ab215264e45aab796f883e6310e5df4",
+      "family": "association-none",
+      "task_id": "dn-fee",
+      "tier": "association"
+    },
+    {
+      "digest": "881a786f380a9228a8130c26a5dd4d18bd38530a483740015dd201e299681ed5",
+      "family": "association-needed",
+      "task_id": "da-parking",
+      "tier": "association"
+    },
+    {
+      "digest": "1ad3c5934dce4fa5465cc688f8ecd21b3691d9104eb33998533e052dcb47cd86",
+      "family": "association-unneeded",
+      "task_id": "du-parking",
+      "tier": "association"
+    },
+    {
+      "digest": "faa9d0ef7b552cb1bfee23506e85cb28f84b88574290200250201ad0a678f986",
+      "family": "association-none",
+      "task_id": "dn-parking",
+      "tier": "association"
+    },
+    {
+      "digest": "d893c72fe86544ba5707b8fe918888e5a25d4cdcc78c1fa86b696748a50b53b5",
+      "family": "association-needed",
+      "task_id": "da-archive",
+      "tier": "association"
+    },
+    {
+      "digest": "bedc033ad80e411383f2ea6ba8f4af27d9603d8ea72c27ac8a3678badd1bfdff",
+      "family": "association-unneeded",
+      "task_id": "du-archive",
+      "tier": "association"
+    },
+    {
+      "digest": "8526a1d4406af7bd007dadffefba353b7ae9235e085e27740cfebdeb1984a1f4",
+      "family": "association-needed-held-out",
+      "task_id": "da-library",
+      "tier": "association"
+    },
+    {
+      "digest": "75d7580d6af3bbf5b268abdbc68dd0168f989de04598fbb36cb9a2a6c246bc1d",
+      "family": "association-needed-held-out",
+      "task_id": "da-garden",
+      "tier": "association"
+    }
+  ],
+  "tiers": [
+    "association"
+  ],
+  "time_limit_is_failure": true,
+  "verification": "fresh, system-independent: changed paths within allowed_paths; visible tests exit 0; oracle installed from the corpus text and exit 0; all executed in the containment backend on the final tree"
+}

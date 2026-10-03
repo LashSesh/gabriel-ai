@@ -1,0 +1,259 @@
+You are the worker role of Gabriel for a source-grounded document amendment.
+Goal (verbatim user request):
+Amend doc/summary.md so that it states the bylaws' lending rule for books and how long a member may keep them. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- citations [document/citations_bound] independent=True
+- claims [document/required_claims] independent=True
+
+Editable paths (changes elsewhere are rejected; sources are never editable): doc/
+Base commit: 39e0b65d0538f8deb8905862577a402bdcc1b022
+
+Target documents (path sha256 bytes):
+  doc/summary.md eaf7573831e7f400949eaf346e887aeb4ce1d51087d65f408972b8ea7678385f 29
+=== doc/summary.md (sha256 eaf7573831e7f400949eaf346e887aeb4ce1d51087d65f408972b8ea7678385f) ===
+# Summary
+
+(to be completed)
+
+
+
+Sources (cite them by observation id; quotes must be exact substrings of the cited source):
+=== file sources/bylaws.md observation obs-3add8a67e0499d2b46f6a535c1456ad3b88f8e51 (105 bytes) ===
+# Library bylaws
+
+## Loans
+
+Books are lent to members under the terms of the loan table of these bylaws.
+
+
+=== file sources/table.md observation obs-89a01b2835c91eabc29c7a4c72135e8500f072f5 (56 bytes) ===
+# Loan table
+
+Novels: twenty-one days, renewable twice.
+
+
+=== file sources/note-00.md observation obs-703893a34db0e22eec40e4b8a043893e78c51cfe (88 bytes) ===
+# Note 0
+
+The bylaws states that the committee meets on the first Tuesday of the month.
+
+
+=== file sources/note-01.md observation obs-3fe8427cef7eff05348dac7ead4583b3343063c1 (89 bytes) ===
+# Note 1
+
+The bylaws states that the committee meets on the second Tuesday of the month.
+
+
+=== file sources/note-02.md observation obs-3e602a7e3d6c7f61a4d8a655a53fff855e0543ab (88 bytes) ===
+# Note 2
+
+The bylaws states that the committee meets on the third Tuesday of the month.
+
+
+=== file sources/note-03.md observation obs-8ba3d5e5adc706b00ee52909257fee48a382475a (89 bytes) ===
+# Note 3
+
+The bylaws states that the committee meets on the fourth Tuesday of the month.
+
+
+=== file sources/note-04.md observation obs-3c997f74b03e6aa807491563c549a14680cb470c (88 bytes) ===
+# Note 4
+
+The bylaws states that the committee meets on the first Tuesday of the month.
+
+
+=== file sources/note-05.md observation obs-24e071761357b544232e162d615328f30e8916d9 (89 bytes) ===
+# Note 5
+
+The bylaws states that the committee meets on the second Tuesday of the month.
+
+
+=== file sources/note-06.md observation obs-b7e183f6cc9ef56a872a6ab142cad5702859d3e2 (88 bytes) ===
+# Note 6
+
+The bylaws states that the committee meets on the third Tuesday of the month.
+
+
+=== file sources/note-07.md observation obs-fdcd7183593533059069b6eae3cddb00c36942fe (89 bytes) ===
+# Note 7
+
+The bylaws states that the committee meets on the fourth Tuesday of the month.
+
+
+=== file sources/note-08.md observation obs-4b9fca8e6562b269a1b8d73ff1cb52bff080575e (88 bytes) ===
+# Note 8
+
+The bylaws states that the committee meets on the first Tuesday of the month.
+
+
+=== file sources/note-09.md observation obs-c9f11cc3714ccb9f12b16497655962b292ee6f47 (89 bytes) ===
+# Note 9
+
+The bylaws states that the committee meets on the second Tuesday of the month.
+
+
+=== file sources/note-10.md observation obs-6e0b0636f854303fdf5d3d09b9dd3e98e53ad976 (89 bytes) ===
+# Note 10
+
+The bylaws states that the committee meets on the third Tuesday of the month.
+
+
+=== file sources/note-11.md observation obs-b32a365843eb5baa2e078ede6917e95c7ccbcd0b (90 bytes) ===
+# Note 11
+
+The bylaws states that the committee meets on the fourth Tuesday of the month.
+
+
+=== file sources/note-12.md observation obs-b586feab63d38b7ac31504ac7ee073d290634a0e (89 bytes) ===
+# Note 12
+
+The bylaws states that the committee meets on the first Tuesday of the month.
+
+
+=== file sources/note-13.md observation obs-111beab68fcd103eeb0bffef40db9acceca77b22 (90 bytes) ===
+# Note 13
+
+The bylaws states that the committee meets on the second Tuesday of the month.
+
+
+=== file sources/note-14.md observation obs-013a79b7eadbd99ec268c3cca3e9d59f853bb198 (89 bytes) ===
+# Note 14
+
+The bylaws states that the committee meets on the third Tuesday of the month.
+
+
+=== file sources/note-15.md observation obs-d919283d88b1aa878391c19626a985debe25296d (90 bytes) ===
+# Note 15
+
+The bylaws states that the committee meets on the fourth Tuesday of the month.
+
+
+=== file sources/note-16.md observation obs-15eecfb5b5d20839bb4084879a759e315a62fbf7 (89 bytes) ===
+# Note 16
+
+The bylaws states that the committee meets on the first Tuesday of the month.
+
+
+=== file sources/note-17.md observation obs-f0e4292c4404e12604ba3c83f1aec694706b9e15 (90 bytes) ===
+# Note 17
+
+The bylaws states that the committee meets on the second Tuesday of the month.
+
+
+=== file sources/note-18.md observation obs-23509e8ea1f6e824121d0668857ef6818ab410cf (89 bytes) ===
+# Note 18
+
+The bylaws states that the committee meets on the third Tuesday of the month.
+
+
+=== file sources/note-19.md observation obs-3156563ca27d103ae47f43304f69971dd0d42b8f (90 bytes) ===
+# Note 19
+
+The bylaws states that the committee meets on the fourth Tuesday of the month.
+
+
+=== file sources/note-20.md observation obs-867592f17df87012e96bb0b4a813390e2c849e28 (89 bytes) ===
+# Note 20
+
+The bylaws states that the committee meets on the first Tuesday of the month.
+
+
+=== file sources/note-21.md observation obs-ec97e056bed59666fd7ff5c9f3ebfe19c037a9aa (90 bytes) ===
+# Note 21
+
+The bylaws states that the committee meets on the second Tuesday of the month.
+
+
+=== file sources/note-22.md observation obs-023e0b69180bd3eb594a7d34966145b29de79051 (89 bytes) ===
+# Note 22
+
+The bylaws states that the committee meets on the third Tuesday of the month.
+
+
+=== file sources/note-23.md observation obs-c5f33e43f94e31fbaf42610b8d6bb3e20bd31b70 (90 bytes) ===
+# Note 23
+
+The bylaws states that the committee meets on the fourth Tuesday of the month.
+
+
+=== file sources/note-24.md observation obs-249a4692dea75f69db544706121b092b192e40cf (89 bytes) ===
+# Note 24
+
+The bylaws states that the committee meets on the first Tuesday of the month.
+
+
+=== file sources/note-25.md observation obs-0bd1816b6a93b790b95319a555ede7b23100f4cb (90 bytes) ===
+# Note 25
+
+The bylaws states that the committee meets on the second Tuesday of the month.
+
+
+=== file sources/note-26.md observation obs-85e6983a9255f39785b4fd121c742f65a3441e98 (89 bytes) ===
+# Note 26
+
+The bylaws states that the committee meets on the third Tuesday of the month.
+
+
+=== file sources/note-27.md observation obs-b27becfd4ca1818562a72dd19a1de8d450c3ef6e (90 bytes) ===
+# Note 27
+
+The bylaws states that the committee meets on the fourth Tuesday of the month.
+
+
+=== file sources/note-28.md observation obs-bb1378d1536871f4e421ca717958e2b25a4f183f (89 bytes) ===
+# Note 28
+
+The bylaws states that the committee meets on the first Tuesday of the month.
+
+
+=== file sources/note-29.md observation obs-8e66efa57542dbea7fce4f26318ac8a3cd087d3f (90 bytes) ===
+# Note 29
+
+The bylaws states that the committee meets on the second Tuesday of the month.
+
+
+=== file sources/note-30.md observation obs-e9235e1859667d6d3f281e868347a590329251a3 (89 bytes) ===
+# Note 30
+
+The bylaws states that the committee meets on the third Tuesday of the month.
+
+
+=== file sources/note-31.md observation obs-a35f7cddc24e2b8493c24c2d7ad28eff244dfd00 (90 bytes) ===
+# Note 31
+
+The bylaws states that the committee meets on the fourth Tuesday of the month.
+
+
+=== file sources/note-32.md observation obs-a9a8ddbb75ab0ec70571338124395dfc12557410 (89 bytes) ===
+# Note 32
+
+The bylaws states that the committee meets on the first Tuesday of the month.
+
+
+=== file sources/note-33.md observation obs-ee55c0b060603e19cbe2fa4addec4d71c5277815 (90 bytes) ===
+# Note 33
+
+The bylaws states that the committee meets on the second Tuesday of the month.
+
+
+=== file sources/note-34.md observation obs-8b35ca63f2ba152239b798cda6653e84994a0360 (89 bytes) ===
+# Note 34
+
+The bylaws states that the committee meets on the third Tuesday of the month.
+
+
+=== file sources/note-35.md observation obs-c58044f7751e61050164686492be71f542c66ae1 (90 bytes) ===
+# Note 35
+
+The bylaws states that the committee meets on the fourth Tuesday of the month.
+
+
+
+Every statement you add must be followed by a citation marker of the form
+[[cite:<observation id> "exact quote from that source"]] where the quote is copied verbatim from the cited source.
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<target path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest. For create expected_sha256 is null.
+Do not touch sources or oracle files. Do not claim completion; the independent checks decide.

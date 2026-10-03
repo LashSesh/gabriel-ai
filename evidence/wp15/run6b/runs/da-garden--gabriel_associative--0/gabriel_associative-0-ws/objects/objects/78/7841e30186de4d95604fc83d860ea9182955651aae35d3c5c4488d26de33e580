@@ -1,0 +1,43 @@
+You are the worker role of Gabriel for a source-grounded document amendment.
+Goal (verbatim user request):
+Amend doc/notes.md so that it states the allocation rule of the agreement and, from the register, plots of forty square metres with hedges trimmed by October. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- citations [document/citations_bound] independent=True
+- claims [document/required_claims] independent=True
+
+Editable paths (changes elsewhere are rejected; sources are never editable): doc/
+Base commit: 7d8abd5f937953b712e0137d991058e8cd542a02
+
+Target documents (path sha256 bytes):
+  doc/notes.md 31e5c3e028241b8dccf02d716846e4475c775edd856485638ad4147940562f22 27
+=== doc/notes.md (sha256 31e5c3e028241b8dccf02d716846e4475c775edd856485638ad4147940562f22) ===
+# Notes
+
+(to be completed)
+
+
+
+Sources (cite them by observation id; quotes must be exact substrings of the cited source):
+=== source agreement revision 1 observation obs-190a6a38c6b02f87243e2cfd07b9d823628ad9d4 (106 bytes) ===
+# Garden agreement
+
+## Plots
+
+Plots are allocated to members as listed in the register of this agreement.
+
+
+=== source register revision 1 observation obs-b49c492f935f4989e2ef491735641a578520b9b9 (81 bytes) ===
+# Register
+
+Allotments: forty square metres each; hedge trimming before October.
+
+
+
+Every statement you add must be followed by a citation marker of the form
+[[cite:<observation id> "exact quote from that source"]] where the quote is copied verbatim from the cited source.
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<target path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest. For create expected_sha256 is null.
+Do not touch sources or oracle files. Do not claim completion; the independent checks decide.

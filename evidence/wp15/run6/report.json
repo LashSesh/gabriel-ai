@@ -1,0 +1,2628 @@
+{
+  "schema": "gabriel.evaluation-report/1",
+  "protocol_frozen_digest": "db5d1e78cff24c999bafa3d5f0370054d4d4edb211dc2b6065f44478818e6456",
+  "tasks": 10,
+  "families": 4,
+  "runs": 80,
+  "per_system": {
+    "provider_only": {
+      "runs": 20,
+      "verified_successes": 14,
+      "p_success": 0.7,
+      "declared_successes": 19,
+      "false_completions": 5,
+      "p_false_completion": 0.25,
+      "conditional_false_completion": 0.2631578947368421,
+      "conditional_denominator": 19,
+      "harness_errors": 0,
+      "timed_out": 0,
+      "recovery_runs": 0,
+      "mean_model_requests": 1.0,
+      "total_model_requests": 20,
+      "mean_model_tokens": 2624.25,
+      "total_model_tokens": 52485,
+      "mean_wall_ms": 3486.8,
+      "p_success_ci95_by_family": {
+        "low": 0.18181818181818182,
+        "high": 1.0,
+        "clusters": 4
+      },
+      "p_success_ci95_by_task": {
+        "low": 0.4,
+        "high": 1.0,
+        "clusters": 10
+      },
+      "per_task": {
+        "da-archive": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "da-fee": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "da-garden": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "da-library": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "da-parking": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "dn-fee": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "dn-parking": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "du-archive": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "du-fee": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "du-parking": {
+          "p_success": 0.0,
+          "runs": 2
+        }
+      }
+    },
+    "simple_loop": {
+      "runs": 20,
+      "verified_successes": 18,
+      "p_success": 0.9,
+      "declared_successes": 18,
+      "false_completions": 0,
+      "p_false_completion": 0.0,
+      "conditional_false_completion": 0.0,
+      "conditional_denominator": 18,
+      "harness_errors": 0,
+      "timed_out": 0,
+      "recovery_runs": 0,
+      "mean_model_requests": 1.8,
+      "total_model_requests": 36,
+      "mean_model_tokens": 4956.9,
+      "total_model_tokens": 99138,
+      "mean_wall_ms": 4292.65,
+      "p_success_ci95_by_family": {
+        "low": 0.7272727272727273,
+        "high": 1.0,
+        "clusters": 4
+      },
+      "p_success_ci95_by_task": {
+        "low": 0.7,
+        "high": 1.0,
+        "clusters": 10
+      },
+      "per_task": {
+        "da-archive": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "da-fee": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "da-garden": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "da-library": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "da-parking": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "dn-fee": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "dn-parking": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "du-archive": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "du-fee": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "du-parking": {
+          "p_success": 1.0,
+          "runs": 2
+        }
+      }
+    },
+    "gabriel_reference_plan": {
+      "runs": 20,
+      "verified_successes": 4,
+      "p_success": 0.2,
+      "declared_successes": 4,
+      "false_completions": 0,
+      "p_false_completion": 0.0,
+      "conditional_false_completion": 0.0,
+      "conditional_denominator": 4,
+      "harness_errors": 0,
+      "timed_out": 0,
+      "recovery_runs": 16,
+      "mean_model_requests": 2.6,
+      "total_model_requests": 52,
+      "mean_model_tokens": 7602.35,
+      "total_model_tokens": 152047,
+      "mean_wall_ms": 11082.3,
+      "p_success_ci95_by_family": {
+        "low": 0.0,
+        "high": 0.6666666666666666,
+        "clusters": 4
+      },
+      "p_success_ci95_by_task": {
+        "low": 0.0,
+        "high": 0.5,
+        "clusters": 10
+      },
+      "per_task": {
+        "da-archive": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "da-fee": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "da-garden": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "da-library": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "da-parking": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "dn-fee": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "dn-parking": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "du-archive": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "du-fee": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "du-parking": {
+          "p_success": 0.0,
+          "runs": 2
+        }
+      }
+    },
+    "gabriel_associative": {
+      "runs": 20,
+      "verified_successes": 7,
+      "p_success": 0.35,
+      "declared_successes": 7,
+      "false_completions": 0,
+      "p_false_completion": 0.0,
+      "conditional_false_completion": 0.0,
+      "conditional_denominator": 7,
+      "harness_errors": 0,
+      "timed_out": 0,
+      "recovery_runs": 13,
+      "mean_model_requests": 2.35,
+      "total_model_requests": 47,
+      "mean_model_tokens": 6678.9,
+      "total_model_tokens": 133578,
+      "mean_wall_ms": 10126.3,
+      "p_success_ci95_by_family": {
+        "low": 0.0,
+        "high": 0.75,
+        "clusters": 4
+      },
+      "p_success_ci95_by_task": {
+        "low": 0.1,
+        "high": 0.65,
+        "clusters": 10
+      },
+      "per_task": {
+        "da-archive": {
+          "p_success": 0.5,
+          "runs": 2
+        },
+        "da-fee": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "da-garden": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "da-library": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "da-parking": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "dn-fee": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "dn-parking": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "du-archive": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "du-fee": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "du-parking": {
+          "p_success": 0.0,
+          "runs": 2
+        }
+      }
+    }
+  },
+  "paired_differences": {
+    "gabriel_reference_plan_minus_provider_only": {
+      "per_task": {
+        "da-archive": -1.0,
+        "da-fee": -1.0,
+        "da-garden": -1.0,
+        "da-library": -1.0,
+        "da-parking": -1.0,
+        "dn-fee": 0.0,
+        "dn-parking": 0.0,
+        "du-archive": 0.0,
+        "du-fee": 0.0,
+        "du-parking": 0.0
+      },
+      "mean": -0.5,
+      "ci95_by_family": {
+        "low": -1.0,
+        "high": 0.0,
+        "clusters": 4
+      },
+      "ci95_by_task": {
+        "low": -0.8,
+        "high": -0.2,
+        "clusters": 10
+      },
+      "tokens_per_task": {
+        "da-archive": 5977.5,
+        "da-fee": 5947.5,
+        "da-garden": 6152.5,
+        "da-library": 6223.0,
+        "da-parking": 8146.5,
+        "dn-fee": 3.5,
+        "dn-parking": 8.0,
+        "du-archive": 5488.0,
+        "du-fee": 5779.0,
+        "du-parking": 6055.5
+      },
+      "mean_tokens": 4978.1,
+      "requests_per_task": {
+        "da-archive": 2.0,
+        "da-fee": 2.0,
+        "da-garden": 2.0,
+        "da-library": 2.0,
+        "da-parking": 2.0,
+        "dn-fee": 0.0,
+        "dn-parking": 0.0,
+        "du-archive": 2.0,
+        "du-fee": 2.0,
+        "du-parking": 2.0
+      },
+      "mean_requests": 1.6
+    },
+    "gabriel_reference_plan_minus_simple_loop": {
+      "per_task": {
+        "da-archive": -1.0,
+        "da-fee": -1.0,
+        "da-garden": -1.0,
+        "da-library": -1.0,
+        "da-parking": -1.0,
+        "dn-fee": 0.0,
+        "dn-parking": 0.0,
+        "du-archive": 0.0,
+        "du-fee": -1.0,
+        "du-parking": -1.0
+      },
+      "mean": -0.7,
+      "ci95_by_family": {
+        "low": -1.0,
+        "high": -0.25,
+        "clusters": 4
+      },
+      "ci95_by_task": {
+        "low": -1.0,
+        "high": -0.4,
+        "clusters": 10
+      },
+      "tokens_per_task": {
+        "da-archive": 5978.0,
+        "da-fee": 5949.0,
+        "da-garden": 6154.0,
+        "da-library": 6224.5,
+        "da-parking": 8147.5,
+        "dn-fee": -7.0,
+        "dn-parking": 5.0,
+        "du-archive": -8761.5,
+        "du-fee": -309.0,
+        "du-parking": 3074.0
+      },
+      "mean_tokens": 2645.45,
+      "requests_per_task": {
+        "da-archive": 2.0,
+        "da-fee": 2.0,
+        "da-garden": 2.0,
+        "da-library": 2.0,
+        "da-parking": 2.0,
+        "dn-fee": 0.0,
+        "dn-parking": 0.0,
+        "du-archive": -3.0,
+        "du-fee": 0.0,
+        "du-parking": 1.0
+      },
+      "mean_requests": 0.8
+    },
+    "gabriel_reference_plan_minus_gabriel_associative": {
+      "per_task": {
+        "da-archive": -0.5,
+        "da-fee": -1.0,
+        "da-garden": 0.0,
+        "da-library": 0.0,
+        "da-parking": 0.0,
+        "dn-fee": 0.0,
+        "dn-parking": 0.0,
+        "du-archive": 0.0,
+        "du-fee": 0.0,
+        "du-parking": 0.0
+      },
+      "mean": -0.15,
+      "ci95_by_family": {
+        "low": -0.4090909090909091,
+        "high": 0.0,
+        "clusters": 4
+      },
+      "ci95_by_task": {
+        "low": -0.35,
+        "high": 0.0,
+        "clusters": 10
+      },
+      "tokens_per_task": {
+        "da-archive": 2979.0,
+        "da-fee": 6131.0,
+        "da-garden": 15.5,
+        "da-library": -1407.5,
+        "da-parking": 1758.0,
+        "dn-fee": -3.5,
+        "dn-parking": 2.0,
+        "du-archive": 30.0,
+        "du-fee": 193.5,
+        "du-parking": -463.5
+      },
+      "mean_tokens": 923.45,
+      "requests_per_task": {
+        "da-archive": 1.0,
+        "da-fee": 2.0,
+        "da-garden": 0.0,
+        "da-library": -0.5,
+        "da-parking": 0.0,
+        "dn-fee": 0.0,
+        "dn-parking": 0.0,
+        "du-archive": 0.0,
+        "du-fee": 0.0,
+        "du-parking": 0.0
+      },
+      "mean_requests": 0.25
+    }
+  },
+  "failures": [
+    {
+      "task_id": "da-archive",
+      "system": "gabriel_associative",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "doc/summary.md: quote 'The statute states that records shall be retained for eleven' is not a verbatim span of any available source",
+        "required statement missing: schedule",
+        "required statement not cited from statute with 'the period named in the schedule'",
+        "required statement not cited from schedule with 'eleven calendar years'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "da-archive",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement not cited from schedule with 'eleven calendar years'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "da-archive",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement not cited from schedule with 'eleven calendar years'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "da-fee",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: 120 EUR | 120",
+        "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "da-fee",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: 120 EUR | 120",
+        "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "da-garden",
+      "system": "gabriel_associative",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement not cited from agreement with 'as listed in the register'",
+        "required statement not cited from register with 'forty square metres'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "da-garden",
+      "system": "gabriel_associative",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement not cited from agreement with 'as listed in the register'",
+        "required statement not cited from register with 'forty square metres'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "da-garden",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "doc/summary.md carries no citation",
+        "required statement missing: register",
+        "required statement not cited from agreement with 'as listed in the register'",
+        "required statement missing: forty square metres | 40 square metres | 40 m",
+        "required statement not cited from register with 'forty square metres'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "da-garden",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "doc/summary.md: quote 'The agreement states that each plot is 40 square metres in s' is not a verbatim span of any available source",
+        "doc/summary.md: quote 'Plots are allocated according to a defined rule.' is not a verbatim span of any available source",
+        "required statement missing: register",
+        "required statement not cited from agreement with 'as listed in the register'",
+        "required statement not cited from register with 'forty square metres'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "da-library",
+      "system": "gabriel_associative",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: loan table",
+        "required statement not cited from bylaws with 'the terms of the loan table'",
+        "required statement missing: twenty-one days | 21 days",
+        "required statement not cited from table with 'twenty-one days'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "da-library",
+      "system": "gabriel_associative",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: loan table",
+        "required statement not cited from bylaws with 'the terms of the loan table'",
+        "required statement missing: twenty-one days | 21 days",
+        "required statement not cited from table with 'twenty-one days'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "da-library",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "doc/summary.md: quote 'The bylaws states that a member may borrow books for a perio' is not a verbatim span of any available source",
+        "doc/summary.md: quote 'The bylaws states that books must be returned within two wee' is not a verbatim span of any available source",
+        "required statement missing: loan table",
+        "required statement not cited from bylaws with 'the terms of the loan table'",
+        "required statement missing: twenty-one days | 21 days",
+        "required statement not cited from table with 'twenty-one days'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "da-library",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "doc/summary.md: quote 'The bylaws state that members may borrow books from the libr' is not a verbatim span of any available source",
+        "doc/summary.md: quote 'Each member may keep a borrowed book for a period of twenty-' is not a verbatim span of any available source",
+        "doc/summary.md: quote 'After this period, the book must be returned or renewed acco' is not a verbatim span of any available source",
+        "required statement missing: loan table",
+        "required statement not cited from bylaws with 'the terms of the loan table'",
+        "required statement not cited from table with 'twenty-one days'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "da-parking",
+      "system": "gabriel_associative",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "doc/summary.md: quote 'The handbook states that parking is allowed only in designat' is not a verbatim span of any available source",
+        "doc/summary.md: quote 'Certain spaces are reserved for handicapped parking and visi' is not a verbatim span of any available source",
+        "doc/summary.md: quote 'The time limit for parking in non-reserved spaces is two hou' is not a verbatim span of any available source",
+        "required statement missing: appendix",
+        "required statement not cited from handbook with 'according to the plan in the appendix'",
+        "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+        "required statement not cited from appendix with 'Bays twelve through thirty'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "da-parking",
+      "system": "gabriel_associative",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "doc/summary.md carries no citation",
+        "required statement missing: appendix",
+        "required statement not cited from handbook with 'according to the plan in the appendix'",
+        "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+        "required statement not cited from appendix with 'Bays twelve through thirty'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "da-parking",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "doc/summary.md: quote 'parking is allowed only in designated spaces' is not a verbatim span of any available source",
+        "doc/summary.md: quote 'spaces are reserved for visitors and handicapped parking' is not a verbatim span of any available source",
+        "doc/summary.md: quote 'Parking in reserved spaces without authorization is prohibit' is not a verbatim span of any available source",
+        "doc/summary.md: quote 'two-hour time limit for parking in non-reserved spaces' is not a verbatim span of any available source",
+        "required statement missing: appendix",
+        "required statement not cited from handbook with 'according to the plan in the appendix'",
+        "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+        "required statement not cited from appendix with 'Bays twelve through thirty'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "da-parking",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "doc/summary.md: quote 'Parking is allowed only in designated areas and must comply ' is not a verbatim span of any available source",
+        "doc/summary.md: quote 'Reserved parking spaces are allocated for visitors, staff, a' is not a verbatim span of any available source",
+        "doc/summary.md: quote 'Parking in reserved spaces is limited to two hours to ensure' is not a verbatim span of any available source",
+        "required statement missing: appendix",
+        "required statement not cited from handbook with 'according to the plan in the appendix'",
+        "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+        "required statement not cited from appendix with 'Bays twelve through thirty'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "du-archive",
+      "system": "gabriel_associative",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: schedule",
+        "required statement not cited from statute with 'the period named in the schedule'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "du-archive",
+      "system": "gabriel_associative",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: schedule",
+        "required statement not cited from statute with 'the period named in the schedule'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "du-archive",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: schedule",
+        "required statement not cited from statute with 'the period named in the schedule'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "du-archive",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: schedule",
+        "required statement not cited from statute with 'the period named in the schedule'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "du-archive",
+      "system": "provider_only",
+      "rep": 0,
+      "declared": true,
+      "verified": false,
+      "reason": "deliverable produced; declared done without verification",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "forbidden statement present in doc/summary.md: eleven"
+      ],
+      "provider_statuses": [
+        "completed"
+      ]
+    },
+    {
+      "task_id": "du-archive",
+      "system": "provider_only",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "provider status invalid_output",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "doc/summary.md carries no citation",
+        "required statement missing: schedule",
+        "required statement not cited from statute with 'the period named in the schedule'"
+      ],
+      "provider_statuses": [
+        "invalid_output"
+      ]
+    },
+    {
+      "task_id": "du-archive",
+      "system": "simple_loop",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "budget exhausted without passing checks",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "forbidden statement present in doc/summary.md: eleven"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed",
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "du-archive",
+      "system": "simple_loop",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "budget exhausted without passing checks",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "forbidden statement present in doc/summary.md: eleven"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed",
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "du-fee",
+      "system": "gabriel_associative",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: annex",
+        "required statement not cited from charter with 'fixed in the annex'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "du-fee",
+      "system": "gabriel_associative",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: annex",
+        "required statement not cited from charter with 'fixed in the annex'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "du-fee",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: annex",
+        "required statement not cited from charter with 'fixed in the annex'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "du-fee",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: annex",
+        "required statement not cited from charter with 'fixed in the annex'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "du-fee",
+      "system": "provider_only",
+      "rep": 0,
+      "declared": true,
+      "verified": false,
+      "reason": "deliverable produced; declared done without verification",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "forbidden statement present in doc/summary.md: 120"
+      ],
+      "provider_statuses": [
+        "completed"
+      ]
+    },
+    {
+      "task_id": "du-fee",
+      "system": "provider_only",
+      "rep": 1,
+      "declared": true,
+      "verified": false,
+      "reason": "deliverable produced; declared done without verification",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "forbidden statement present in doc/summary.md: 120"
+      ],
+      "provider_statuses": [
+        "completed"
+      ]
+    },
+    {
+      "task_id": "du-parking",
+      "system": "gabriel_associative",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: appendix",
+        "required statement not cited from handbook with 'according to the plan in the appendix'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "du-parking",
+      "system": "gabriel_associative",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: appendix",
+        "required statement not cited from handbook with 'according to the plan in the appendix'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "du-parking",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: appendix",
+        "required statement not cited from handbook with 'according to the plan in the appendix'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "du-parking",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: appendix",
+        "required statement not cited from handbook with 'according to the plan in the appendix'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "du-parking",
+      "system": "provider_only",
+      "rep": 0,
+      "declared": true,
+      "verified": false,
+      "reason": "deliverable produced; declared done without verification",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "forbidden statement present in doc/summary.md: twelve through thirty"
+      ],
+      "provider_statuses": [
+        "completed"
+      ]
+    },
+    {
+      "task_id": "du-parking",
+      "system": "provider_only",
+      "rep": 1,
+      "declared": true,
+      "verified": false,
+      "reason": "deliverable produced; declared done without verification",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "forbidden statement present in doc/summary.md: twelve through thirty"
+      ],
+      "provider_statuses": [
+        "completed"
+      ]
+    }
+  ],
+  "claim_scope": "Scoped comparison on one synthetic task distribution with one provider; a difference here is not a general superiority claim. Costs include every attempt, including failed and timed-out runs.",
+  "frozen_check": {
+    "frozen_digest": "db5d1e78cff24c999bafa3d5f0370054d4d4edb211dc2b6065f44478818e6456",
+    "harness_identity_now": "df730d0c2585ac2b263ce48235a8e5cd11e6f2d6d0f18f1fd274201a0d5b0e0d",
+    "harness_amended": false
+  },
+  "held_out": {
+    "schema": "gabriel.evaluation-report/1",
+    "protocol_frozen_digest": "db5d1e78cff24c999bafa3d5f0370054d4d4edb211dc2b6065f44478818e6456",
+    "tasks": 2,
+    "families": 1,
+    "runs": 16,
+    "per_system": {
+      "provider_only": {
+        "runs": 4,
+        "verified_successes": 4,
+        "p_success": 1.0,
+        "declared_successes": 4,
+        "false_completions": 0,
+        "p_false_completion": 0.0,
+        "conditional_false_completion": 0.0,
+        "conditional_denominator": 4,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 0,
+        "mean_model_requests": 1.0,
+        "total_model_requests": 4,
+        "mean_model_tokens": 2931.0,
+        "total_model_tokens": 11724,
+        "mean_wall_ms": 2339.5,
+        "p_success_ci95_by_family": {
+          "low": 1.0,
+          "high": 1.0,
+          "clusters": 1
+        },
+        "p_success_ci95_by_task": {
+          "low": 1.0,
+          "high": 1.0,
+          "clusters": 2
+        },
+        "per_task": {
+          "da-garden": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "da-library": {
+            "p_success": 1.0,
+            "runs": 2
+          }
+        }
+      },
+      "simple_loop": {
+        "runs": 4,
+        "verified_successes": 4,
+        "p_success": 1.0,
+        "declared_successes": 4,
+        "false_completions": 0,
+        "p_false_completion": 0.0,
+        "conditional_false_completion": 0.0,
+        "conditional_denominator": 4,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 0,
+        "mean_model_requests": 1.0,
+        "total_model_requests": 4,
+        "mean_model_tokens": 2929.5,
+        "total_model_tokens": 11718,
+        "mean_wall_ms": 1950.0,
+        "p_success_ci95_by_family": {
+          "low": 1.0,
+          "high": 1.0,
+          "clusters": 1
+        },
+        "p_success_ci95_by_task": {
+          "low": 1.0,
+          "high": 1.0,
+          "clusters": 2
+        },
+        "per_task": {
+          "da-garden": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "da-library": {
+            "p_success": 1.0,
+            "runs": 2
+          }
+        }
+      },
+      "gabriel_reference_plan": {
+        "runs": 4,
+        "verified_successes": 0,
+        "p_success": 0.0,
+        "declared_successes": 0,
+        "false_completions": 0,
+        "p_false_completion": 0.0,
+        "conditional_false_completion": null,
+        "conditional_denominator": 0,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 4,
+        "mean_model_requests": 3.0,
+        "total_model_requests": 12,
+        "mean_model_tokens": 9118.75,
+        "total_model_tokens": 36475,
+        "mean_wall_ms": 11551.5,
+        "p_success_ci95_by_family": {
+          "low": 0.0,
+          "high": 0.0,
+          "clusters": 1
+        },
+        "p_success_ci95_by_task": {
+          "low": 0.0,
+          "high": 0.0,
+          "clusters": 2
+        },
+        "per_task": {
+          "da-garden": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "da-library": {
+            "p_success": 0.0,
+            "runs": 2
+          }
+        }
+      },
+      "gabriel_associative": {
+        "runs": 4,
+        "verified_successes": 0,
+        "p_success": 0.0,
+        "declared_successes": 0,
+        "false_completions": 0,
+        "p_false_completion": 0.0,
+        "conditional_false_completion": null,
+        "conditional_denominator": 0,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 4,
+        "mean_model_requests": 3.25,
+        "total_model_requests": 13,
+        "mean_model_tokens": 9814.75,
+        "total_model_tokens": 39259,
+        "mean_wall_ms": 12357.25,
+        "p_success_ci95_by_family": {
+          "low": 0.0,
+          "high": 0.0,
+          "clusters": 1
+        },
+        "p_success_ci95_by_task": {
+          "low": 0.0,
+          "high": 0.0,
+          "clusters": 2
+        },
+        "per_task": {
+          "da-garden": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "da-library": {
+            "p_success": 0.0,
+            "runs": 2
+          }
+        }
+      }
+    },
+    "paired_differences": {
+      "gabriel_reference_plan_minus_provider_only": {
+        "per_task": {
+          "da-garden": -1.0,
+          "da-library": -1.0
+        },
+        "mean": -1.0,
+        "ci95_by_family": {
+          "low": -1.0,
+          "high": -1.0,
+          "clusters": 1
+        },
+        "ci95_by_task": {
+          "low": -1.0,
+          "high": -1.0,
+          "clusters": 2
+        },
+        "tokens_per_task": {
+          "da-garden": 6152.5,
+          "da-library": 6223.0
+        },
+        "mean_tokens": 6187.75,
+        "requests_per_task": {
+          "da-garden": 2.0,
+          "da-library": 2.0
+        },
+        "mean_requests": 2.0
+      },
+      "gabriel_reference_plan_minus_simple_loop": {
+        "per_task": {
+          "da-garden": -1.0,
+          "da-library": -1.0
+        },
+        "mean": -1.0,
+        "ci95_by_family": {
+          "low": -1.0,
+          "high": -1.0,
+          "clusters": 1
+        },
+        "ci95_by_task": {
+          "low": -1.0,
+          "high": -1.0,
+          "clusters": 2
+        },
+        "tokens_per_task": {
+          "da-garden": 6154.0,
+          "da-library": 6224.5
+        },
+        "mean_tokens": 6189.25,
+        "requests_per_task": {
+          "da-garden": 2.0,
+          "da-library": 2.0
+        },
+        "mean_requests": 2.0
+      },
+      "gabriel_reference_plan_minus_gabriel_associative": {
+        "per_task": {
+          "da-garden": 0.0,
+          "da-library": 0.0
+        },
+        "mean": 0.0,
+        "ci95_by_family": {
+          "low": 0.0,
+          "high": 0.0,
+          "clusters": 1
+        },
+        "ci95_by_task": {
+          "low": 0.0,
+          "high": 0.0,
+          "clusters": 2
+        },
+        "tokens_per_task": {
+          "da-garden": 15.5,
+          "da-library": -1407.5
+        },
+        "mean_tokens": -696.0,
+        "requests_per_task": {
+          "da-garden": 0.0,
+          "da-library": -0.5
+        },
+        "mean_requests": -0.25
+      }
+    },
+    "failures": [
+      {
+        "task_id": "da-garden",
+        "system": "gabriel_associative",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement not cited from agreement with 'as listed in the register'",
+          "required statement not cited from register with 'forty square metres'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "da-garden",
+        "system": "gabriel_associative",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement not cited from agreement with 'as listed in the register'",
+          "required statement not cited from register with 'forty square metres'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "da-garden",
+        "system": "gabriel_reference_plan",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "doc/summary.md carries no citation",
+          "required statement missing: register",
+          "required statement not cited from agreement with 'as listed in the register'",
+          "required statement missing: forty square metres | 40 square metres | 40 m",
+          "required statement not cited from register with 'forty square metres'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "da-garden",
+        "system": "gabriel_reference_plan",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "doc/summary.md: quote 'The agreement states that each plot is 40 square metres in s' is not a verbatim span of any available source",
+          "doc/summary.md: quote 'Plots are allocated according to a defined rule.' is not a verbatim span of any available source",
+          "required statement missing: register",
+          "required statement not cited from agreement with 'as listed in the register'",
+          "required statement not cited from register with 'forty square metres'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "da-library",
+        "system": "gabriel_associative",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: loan table",
+          "required statement not cited from bylaws with 'the terms of the loan table'",
+          "required statement missing: twenty-one days | 21 days",
+          "required statement not cited from table with 'twenty-one days'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "da-library",
+        "system": "gabriel_associative",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: loan table",
+          "required statement not cited from bylaws with 'the terms of the loan table'",
+          "required statement missing: twenty-one days | 21 days",
+          "required statement not cited from table with 'twenty-one days'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "da-library",
+        "system": "gabriel_reference_plan",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "doc/summary.md: quote 'The bylaws states that a member may borrow books for a perio' is not a verbatim span of any available source",
+          "doc/summary.md: quote 'The bylaws states that books must be returned within two wee' is not a verbatim span of any available source",
+          "required statement missing: loan table",
+          "required statement not cited from bylaws with 'the terms of the loan table'",
+          "required statement missing: twenty-one days | 21 days",
+          "required statement not cited from table with 'twenty-one days'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "da-library",
+        "system": "gabriel_reference_plan",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "doc/summary.md: quote 'The bylaws state that members may borrow books from the libr' is not a verbatim span of any available source",
+          "doc/summary.md: quote 'Each member may keep a borrowed book for a period of twenty-' is not a verbatim span of any available source",
+          "doc/summary.md: quote 'After this period, the book must be returned or renewed acco' is not a verbatim span of any available source",
+          "required statement missing: loan table",
+          "required statement not cited from bylaws with 'the terms of the loan table'",
+          "required statement not cited from table with 'twenty-one days'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      }
+    ],
+    "claim_scope": "Scoped comparison on one synthetic task distribution with one provider; a difference here is not a general superiority claim. Costs include every attempt, including failed and timed-out runs."
+  },
+  "previously_seen": {
+    "schema": "gabriel.evaluation-report/1",
+    "protocol_frozen_digest": "db5d1e78cff24c999bafa3d5f0370054d4d4edb211dc2b6065f44478818e6456",
+    "tasks": 8,
+    "families": 3,
+    "runs": 64,
+    "per_system": {
+      "provider_only": {
+        "runs": 16,
+        "verified_successes": 10,
+        "p_success": 0.625,
+        "declared_successes": 15,
+        "false_completions": 5,
+        "p_false_completion": 0.3125,
+        "conditional_false_completion": 0.3333333333333333,
+        "conditional_denominator": 15,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 0,
+        "mean_model_requests": 1.0,
+        "total_model_requests": 16,
+        "mean_model_tokens": 2547.5625,
+        "total_model_tokens": 40761,
+        "mean_wall_ms": 3773.625,
+        "p_success_ci95_by_family": {
+          "low": 0.0,
+          "high": 1.0,
+          "clusters": 3
+        },
+        "p_success_ci95_by_task": {
+          "low": 0.25,
+          "high": 0.875,
+          "clusters": 8
+        },
+        "per_task": {
+          "da-archive": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "da-fee": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "da-parking": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "dn-fee": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "dn-parking": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "du-archive": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "du-fee": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "du-parking": {
+            "p_success": 0.0,
+            "runs": 2
+          }
+        }
+      },
+      "simple_loop": {
+        "runs": 16,
+        "verified_successes": 14,
+        "p_success": 0.875,
+        "declared_successes": 14,
+        "false_completions": 0,
+        "p_false_completion": 0.0,
+        "conditional_false_completion": 0.0,
+        "conditional_denominator": 14,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 0,
+        "mean_model_requests": 2.0,
+        "total_model_requests": 32,
+        "mean_model_tokens": 5463.75,
+        "total_model_tokens": 87420,
+        "mean_wall_ms": 4878.3125,
+        "p_success_ci95_by_family": {
+          "low": 0.6666666666666666,
+          "high": 1.0,
+          "clusters": 3
+        },
+        "p_success_ci95_by_task": {
+          "low": 0.625,
+          "high": 1.0,
+          "clusters": 8
+        },
+        "per_task": {
+          "da-archive": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "da-fee": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "da-parking": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "dn-fee": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "dn-parking": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "du-archive": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "du-fee": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "du-parking": {
+            "p_success": 1.0,
+            "runs": 2
+          }
+        }
+      },
+      "gabriel_reference_plan": {
+        "runs": 16,
+        "verified_successes": 4,
+        "p_success": 0.25,
+        "declared_successes": 4,
+        "false_completions": 0,
+        "p_false_completion": 0.0,
+        "conditional_false_completion": 0.0,
+        "conditional_denominator": 4,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 12,
+        "mean_model_requests": 2.5,
+        "total_model_requests": 40,
+        "mean_model_tokens": 7223.25,
+        "total_model_tokens": 115572,
+        "mean_wall_ms": 10965.0,
+        "p_success_ci95_by_family": {
+          "low": 0.0,
+          "high": 1.0,
+          "clusters": 3
+        },
+        "p_success_ci95_by_task": {
+          "low": 0.0,
+          "high": 0.5,
+          "clusters": 8
+        },
+        "per_task": {
+          "da-archive": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "da-fee": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "da-parking": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "dn-fee": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "dn-parking": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "du-archive": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "du-fee": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "du-parking": {
+            "p_success": 0.0,
+            "runs": 2
+          }
+        }
+      },
+      "gabriel_associative": {
+        "runs": 16,
+        "verified_successes": 7,
+        "p_success": 0.4375,
+        "declared_successes": 7,
+        "false_completions": 0,
+        "p_false_completion": 0.0,
+        "conditional_false_completion": 0.0,
+        "conditional_denominator": 7,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 9,
+        "mean_model_requests": 2.125,
+        "total_model_requests": 34,
+        "mean_model_tokens": 5894.9375,
+        "total_model_tokens": 94319,
+        "mean_wall_ms": 9568.5625,
+        "p_success_ci95_by_family": {
+          "low": 0.0,
+          "high": 1.0,
+          "clusters": 3
+        },
+        "p_success_ci95_by_task": {
+          "low": 0.125,
+          "high": 0.75,
+          "clusters": 8
+        },
+        "per_task": {
+          "da-archive": {
+            "p_success": 0.5,
+            "runs": 2
+          },
+          "da-fee": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "da-parking": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "dn-fee": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "dn-parking": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "du-archive": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "du-fee": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "du-parking": {
+            "p_success": 0.0,
+            "runs": 2
+          }
+        }
+      }
+    },
+    "paired_differences": {
+      "gabriel_reference_plan_minus_provider_only": {
+        "per_task": {
+          "da-archive": -1.0,
+          "da-fee": -1.0,
+          "da-parking": -1.0,
+          "dn-fee": 0.0,
+          "dn-parking": 0.0,
+          "du-archive": 0.0,
+          "du-fee": 0.0,
+          "du-parking": 0.0
+        },
+        "mean": -0.375,
+        "ci95_by_family": {
+          "low": -1.0,
+          "high": 0.0,
+          "clusters": 3
+        },
+        "ci95_by_task": {
+          "low": -0.75,
+          "high": -0.125,
+          "clusters": 8
+        },
+        "tokens_per_task": {
+          "da-archive": 5977.5,
+          "da-fee": 5947.5,
+          "da-parking": 8146.5,
+          "dn-fee": 3.5,
+          "dn-parking": 8.0,
+          "du-archive": 5488.0,
+          "du-fee": 5779.0,
+          "du-parking": 6055.5
+        },
+        "mean_tokens": 4675.6875,
+        "requests_per_task": {
+          "da-archive": 2.0,
+          "da-fee": 2.0,
+          "da-parking": 2.0,
+          "dn-fee": 0.0,
+          "dn-parking": 0.0,
+          "du-archive": 2.0,
+          "du-fee": 2.0,
+          "du-parking": 2.0
+        },
+        "mean_requests": 1.5
+      },
+      "gabriel_reference_plan_minus_simple_loop": {
+        "per_task": {
+          "da-archive": -1.0,
+          "da-fee": -1.0,
+          "da-parking": -1.0,
+          "dn-fee": 0.0,
+          "dn-parking": 0.0,
+          "du-archive": 0.0,
+          "du-fee": -1.0,
+          "du-parking": -1.0
+        },
+        "mean": -0.625,
+        "ci95_by_family": {
+          "low": -1.0,
+          "high": 0.0,
+          "clusters": 3
+        },
+        "ci95_by_task": {
+          "low": -0.875,
+          "high": -0.25,
+          "clusters": 8
+        },
+        "tokens_per_task": {
+          "da-archive": 5978.0,
+          "da-fee": 5949.0,
+          "da-parking": 8147.5,
+          "dn-fee": -7.0,
+          "dn-parking": 5.0,
+          "du-archive": -8761.5,
+          "du-fee": -309.0,
+          "du-parking": 3074.0
+        },
+        "mean_tokens": 1759.5,
+        "requests_per_task": {
+          "da-archive": 2.0,
+          "da-fee": 2.0,
+          "da-parking": 2.0,
+          "dn-fee": 0.0,
+          "dn-parking": 0.0,
+          "du-archive": -3.0,
+          "du-fee": 0.0,
+          "du-parking": 1.0
+        },
+        "mean_requests": 0.5
+      },
+      "gabriel_reference_plan_minus_gabriel_associative": {
+        "per_task": {
+          "da-archive": -0.5,
+          "da-fee": -1.0,
+          "da-parking": 0.0,
+          "dn-fee": 0.0,
+          "dn-parking": 0.0,
+          "du-archive": 0.0,
+          "du-fee": 0.0,
+          "du-parking": 0.0
+        },
+        "mean": -0.1875,
+        "ci95_by_family": {
+          "low": -0.5,
+          "high": 0.0,
+          "clusters": 3
+        },
+        "ci95_by_task": {
+          "low": -0.4375,
+          "high": 0.0,
+          "clusters": 8
+        },
+        "tokens_per_task": {
+          "da-archive": 2979.0,
+          "da-fee": 6131.0,
+          "da-parking": 1758.0,
+          "dn-fee": -3.5,
+          "dn-parking": 2.0,
+          "du-archive": 30.0,
+          "du-fee": 193.5,
+          "du-parking": -463.5
+        },
+        "mean_tokens": 1328.3125,
+        "requests_per_task": {
+          "da-archive": 1.0,
+          "da-fee": 2.0,
+          "da-parking": 0.0,
+          "dn-fee": 0.0,
+          "dn-parking": 0.0,
+          "du-archive": 0.0,
+          "du-fee": 0.0,
+          "du-parking": 0.0
+        },
+        "mean_requests": 0.375
+      }
+    },
+    "failures": [
+      {
+        "task_id": "da-archive",
+        "system": "gabriel_associative",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "doc/summary.md: quote 'The statute states that records shall be retained for eleven' is not a verbatim span of any available source",
+          "required statement missing: schedule",
+          "required statement not cited from statute with 'the period named in the schedule'",
+          "required statement not cited from schedule with 'eleven calendar years'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "da-archive",
+        "system": "gabriel_reference_plan",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement not cited from schedule with 'eleven calendar years'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "da-archive",
+        "system": "gabriel_reference_plan",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement not cited from schedule with 'eleven calendar years'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "da-fee",
+        "system": "gabriel_reference_plan",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: 120 EUR | 120",
+          "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "da-fee",
+        "system": "gabriel_reference_plan",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: 120 EUR | 120",
+          "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "da-parking",
+        "system": "gabriel_associative",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "doc/summary.md: quote 'The handbook states that parking is allowed only in designat' is not a verbatim span of any available source",
+          "doc/summary.md: quote 'Certain spaces are reserved for handicapped parking and visi' is not a verbatim span of any available source",
+          "doc/summary.md: quote 'The time limit for parking in non-reserved spaces is two hou' is not a verbatim span of any available source",
+          "required statement missing: appendix",
+          "required statement not cited from handbook with 'according to the plan in the appendix'",
+          "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+          "required statement not cited from appendix with 'Bays twelve through thirty'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "da-parking",
+        "system": "gabriel_associative",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "doc/summary.md carries no citation",
+          "required statement missing: appendix",
+          "required statement not cited from handbook with 'according to the plan in the appendix'",
+          "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+          "required statement not cited from appendix with 'Bays twelve through thirty'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "da-parking",
+        "system": "gabriel_reference_plan",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "doc/summary.md: quote 'parking is allowed only in designated spaces' is not a verbatim span of any available source",
+          "doc/summary.md: quote 'spaces are reserved for visitors and handicapped parking' is not a verbatim span of any available source",
+          "doc/summary.md: quote 'Parking in reserved spaces without authorization is prohibit' is not a verbatim span of any available source",
+          "doc/summary.md: quote 'two-hour time limit for parking in non-reserved spaces' is not a verbatim span of any available source",
+          "required statement missing: appendix",
+          "required statement not cited from handbook with 'according to the plan in the appendix'",
+          "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+          "required statement not cited from appendix with 'Bays twelve through thirty'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "da-parking",
+        "system": "gabriel_reference_plan",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "doc/summary.md: quote 'Parking is allowed only in designated areas and must comply ' is not a verbatim span of any available source",
+          "doc/summary.md: quote 'Reserved parking spaces are allocated for visitors, staff, a' is not a verbatim span of any available source",
+          "doc/summary.md: quote 'Parking in reserved spaces is limited to two hours to ensure' is not a verbatim span of any available source",
+          "required statement missing: appendix",
+          "required statement not cited from handbook with 'according to the plan in the appendix'",
+          "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+          "required statement not cited from appendix with 'Bays twelve through thirty'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "du-archive",
+        "system": "gabriel_associative",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: schedule",
+          "required statement not cited from statute with 'the period named in the schedule'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "du-archive",
+        "system": "gabriel_associative",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: schedule",
+          "required statement not cited from statute with 'the period named in the schedule'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "du-archive",
+        "system": "gabriel_reference_plan",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: schedule",
+          "required statement not cited from statute with 'the period named in the schedule'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "du-archive",
+        "system": "gabriel_reference_plan",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: schedule",
+          "required statement not cited from statute with 'the period named in the schedule'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "du-archive",
+        "system": "provider_only",
+        "rep": 0,
+        "declared": true,
+        "verified": false,
+        "reason": "deliverable produced; declared done without verification",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "forbidden statement present in doc/summary.md: eleven"
+        ],
+        "provider_statuses": [
+          "completed"
+        ]
+      },
+      {
+        "task_id": "du-archive",
+        "system": "provider_only",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "provider status invalid_output",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "doc/summary.md carries no citation",
+          "required statement missing: schedule",
+          "required statement not cited from statute with 'the period named in the schedule'"
+        ],
+        "provider_statuses": [
+          "invalid_output"
+        ]
+      },
+      {
+        "task_id": "du-archive",
+        "system": "simple_loop",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "budget exhausted without passing checks",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "forbidden statement present in doc/summary.md: eleven"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed",
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "du-archive",
+        "system": "simple_loop",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "budget exhausted without passing checks",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "forbidden statement present in doc/summary.md: eleven"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed",
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "du-fee",
+        "system": "gabriel_associative",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: annex",
+          "required statement not cited from charter with 'fixed in the annex'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "du-fee",
+        "system": "gabriel_associative",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: annex",
+          "required statement not cited from charter with 'fixed in the annex'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "du-fee",
+        "system": "gabriel_reference_plan",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: annex",
+          "required statement not cited from charter with 'fixed in the annex'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "du-fee",
+        "system": "gabriel_reference_plan",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: annex",
+          "required statement not cited from charter with 'fixed in the annex'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "du-fee",
+        "system": "provider_only",
+        "rep": 0,
+        "declared": true,
+        "verified": false,
+        "reason": "deliverable produced; declared done without verification",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "forbidden statement present in doc/summary.md: 120"
+        ],
+        "provider_statuses": [
+          "completed"
+        ]
+      },
+      {
+        "task_id": "du-fee",
+        "system": "provider_only",
+        "rep": 1,
+        "declared": true,
+        "verified": false,
+        "reason": "deliverable produced; declared done without verification",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "forbidden statement present in doc/summary.md: 120"
+        ],
+        "provider_statuses": [
+          "completed"
+        ]
+      },
+      {
+        "task_id": "du-parking",
+        "system": "gabriel_associative",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: appendix",
+          "required statement not cited from handbook with 'according to the plan in the appendix'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "du-parking",
+        "system": "gabriel_associative",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: appendix",
+          "required statement not cited from handbook with 'according to the plan in the appendix'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "du-parking",
+        "system": "gabriel_reference_plan",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: appendix",
+          "required statement not cited from handbook with 'according to the plan in the appendix'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "du-parking",
+        "system": "gabriel_reference_plan",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: appendix",
+          "required statement not cited from handbook with 'according to the plan in the appendix'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "du-parking",
+        "system": "provider_only",
+        "rep": 0,
+        "declared": true,
+        "verified": false,
+        "reason": "deliverable produced; declared done without verification",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "forbidden statement present in doc/summary.md: twelve through thirty"
+        ],
+        "provider_statuses": [
+          "completed"
+        ]
+      },
+      {
+        "task_id": "du-parking",
+        "system": "provider_only",
+        "rep": 1,
+        "declared": true,
+        "verified": false,
+        "reason": "deliverable produced; declared done without verification",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "forbidden statement present in doc/summary.md: twelve through thirty"
+        ],
+        "provider_statuses": [
+          "completed"
+        ]
+      }
+    ],
+    "claim_scope": "Scoped comparison on one synthetic task distribution with one provider; a difference here is not a general superiority claim. Costs include every attempt, including failed and timed-out runs."
+  }
+}

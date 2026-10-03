@@ -1,0 +1,264 @@
+You are the worker role of Gabriel for a source-grounded document amendment.
+Goal (verbatim user request):
+Amend doc/summary.md so that it states the statute's rule only, as written in the statute. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- citations [document/citations_bound] independent=True
+- claims [document/required_claims] independent=True
+
+Editable paths (changes elsewhere are rejected; sources are never editable): doc/
+Base commit: c626a5a3e2f7ff2aaf6e7e32a3fcebb16ca37977
+
+Target documents (path sha256 bytes):
+  doc/summary.md 30dae8a65afa8056eb31cfc9a309191d150dedde56f0c47f148d5953def8bee9 420
+=== doc/summary.md (sha256 30dae8a65afa8056eb31cfc9a309191d150dedde56f0c47f148d5953def8bee9) ===
+Records of the society are retained for the period named in the schedule of this statute.[[cite:obs-bf2e7687b3a8cc51a5cf19d44d4c27dd7459431e "Records of the society are retained for the period named in the schedule of this statute."]]
+
+Ledgers are retained for the period named in the schedule of this statute.[[cite:obs-ac982a2f4b83f2140133bfc8821dc751d46fe2bb "Ledgers: eleven calendar years, shredding afterwards."]]
+
+
+
+Sources (cite them by observation id; quotes must be exact substrings of the cited source):
+=== file sources/statute.md observation obs-bf2e7687b3a8cc51a5cf19d44d4c27dd7459431e (123 bytes) ===
+# Archive statute
+
+## Retention
+
+Records of the society are retained for the period named in the schedule of this statute.
+
+
+=== file sources/schedule.md observation obs-ac982a2f4b83f2140133bfc8821dc751d46fe2bb (66 bytes) ===
+# Schedule
+
+Ledgers: eleven calendar years, shredding afterwards.
+
+
+=== file sources/note-00.md observation obs-f1402a638b3b1dc9e44a4f52be8afd535a773209 (89 bytes) ===
+# Note 0
+
+The statute states that the committee meets on the first Tuesday of the month.
+
+
+=== file sources/note-01.md observation obs-2e69fd6e73b89b32bd4fa6934514e0c29a62c724 (90 bytes) ===
+# Note 1
+
+The statute states that the committee meets on the second Tuesday of the month.
+
+
+=== file sources/note-02.md observation obs-15ed528da526ed49a42be4045675184eff5d13a6 (89 bytes) ===
+# Note 2
+
+The statute states that the committee meets on the third Tuesday of the month.
+
+
+=== file sources/note-03.md observation obs-c3a029aae8496eeaae21260040b7315a28105a16 (90 bytes) ===
+# Note 3
+
+The statute states that the committee meets on the fourth Tuesday of the month.
+
+
+=== file sources/note-04.md observation obs-80827ff46e96e81499e89754ca3cda6d77a01e05 (89 bytes) ===
+# Note 4
+
+The statute states that the committee meets on the first Tuesday of the month.
+
+
+=== file sources/note-05.md observation obs-49f16f69eadb0ce817b41f04daca1138974d1a03 (90 bytes) ===
+# Note 5
+
+The statute states that the committee meets on the second Tuesday of the month.
+
+
+=== file sources/note-06.md observation obs-492ee977482899afdb4be3b793514e6534629768 (89 bytes) ===
+# Note 6
+
+The statute states that the committee meets on the third Tuesday of the month.
+
+
+=== file sources/note-07.md observation obs-7f38b164608934e99a71c9c294600a8dff2fc4ed (90 bytes) ===
+# Note 7
+
+The statute states that the committee meets on the fourth Tuesday of the month.
+
+
+=== file sources/note-08.md observation obs-2faff7bc1b6c348a360633748a5c703ea4fd6cdd (89 bytes) ===
+# Note 8
+
+The statute states that the committee meets on the first Tuesday of the month.
+
+
+=== file sources/note-09.md observation obs-77f6cd73172fb35901c7933488f241a62d603ba0 (90 bytes) ===
+# Note 9
+
+The statute states that the committee meets on the second Tuesday of the month.
+
+
+=== file sources/note-10.md observation obs-9fcc409746eba32f2716ad51617d3154fb19ed18 (90 bytes) ===
+# Note 10
+
+The statute states that the committee meets on the third Tuesday of the month.
+
+
+=== file sources/note-11.md observation obs-b49004a0d32e8bccd70dc1321e6d048b76deda61 (91 bytes) ===
+# Note 11
+
+The statute states that the committee meets on the fourth Tuesday of the month.
+
+
+=== file sources/note-12.md observation obs-6909aac465fa33f69308314faea79e9c4c46d802 (90 bytes) ===
+# Note 12
+
+The statute states that the committee meets on the first Tuesday of the month.
+
+
+=== file sources/note-13.md observation obs-c231820ffe27e048826b25fee7378dd49f590a1a (91 bytes) ===
+# Note 13
+
+The statute states that the committee meets on the second Tuesday of the month.
+
+
+=== file sources/note-14.md observation obs-582714e7334b3404cfe4ce6234b30637f77463d0 (90 bytes) ===
+# Note 14
+
+The statute states that the committee meets on the third Tuesday of the month.
+
+
+=== file sources/note-15.md observation obs-128b6090ee2a59c595e0ae8d24b04a09d0b382d7 (91 bytes) ===
+# Note 15
+
+The statute states that the committee meets on the fourth Tuesday of the month.
+
+
+=== file sources/note-16.md observation obs-7e90f91024e1d792cf26945bc34b016ab84dcb0a (90 bytes) ===
+# Note 16
+
+The statute states that the committee meets on the first Tuesday of the month.
+
+
+=== file sources/note-17.md observation obs-f3e16a73a322f4221bd315126e2ec38f7d032f53 (91 bytes) ===
+# Note 17
+
+The statute states that the committee meets on the second Tuesday of the month.
+
+
+=== file sources/note-18.md observation obs-f4329d810dd8b66cae7364d3007bf41e230cc450 (90 bytes) ===
+# Note 18
+
+The statute states that the committee meets on the third Tuesday of the month.
+
+
+=== file sources/note-19.md observation obs-916f872203d7cd600c27dbde3dc659901dc14893 (91 bytes) ===
+# Note 19
+
+The statute states that the committee meets on the fourth Tuesday of the month.
+
+
+=== file sources/note-20.md observation obs-9dc3f0e2512dd10842c39513aa0f9b45e24572ce (90 bytes) ===
+# Note 20
+
+The statute states that the committee meets on the first Tuesday of the month.
+
+
+=== file sources/note-21.md observation obs-abb5f846a44333b19cfc7a92474084d8e3ec4afc (91 bytes) ===
+# Note 21
+
+The statute states that the committee meets on the second Tuesday of the month.
+
+
+=== file sources/note-22.md observation obs-1da353221d9da208d14cad1a1bb49b4ed10e847d (90 bytes) ===
+# Note 22
+
+The statute states that the committee meets on the third Tuesday of the month.
+
+
+=== file sources/note-23.md observation obs-1985dbae29fb0940a11f56fea79769a37adb965a (91 bytes) ===
+# Note 23
+
+The statute states that the committee meets on the fourth Tuesday of the month.
+
+
+=== file sources/note-24.md observation obs-2b11f36b11e6df99fc43b64092b456fc4085c76f (90 bytes) ===
+# Note 24
+
+The statute states that the committee meets on the first Tuesday of the month.
+
+
+=== file sources/note-25.md observation obs-74012fa4c38fba9a588463647d6dfcd8254c002e (91 bytes) ===
+# Note 25
+
+The statute states that the committee meets on the second Tuesday of the month.
+
+
+=== file sources/note-26.md observation obs-f5e9a5884a593a0391239df8f7194ce2a4e76a3a (90 bytes) ===
+# Note 26
+
+The statute states that the committee meets on the third Tuesday of the month.
+
+
+=== file sources/note-27.md observation obs-dfb824e574adf727f846a008b56dbbc464b96277 (91 bytes) ===
+# Note 27
+
+The statute states that the committee meets on the fourth Tuesday of the month.
+
+
+=== file sources/note-28.md observation obs-723268dd82d051ffd00a28aa65ce0d82c4b7585a (90 bytes) ===
+# Note 28
+
+The statute states that the committee meets on the first Tuesday of the month.
+
+
+=== file sources/note-29.md observation obs-941aac0ca5fb1ba961f8ca17ad774e678a070f2a (91 bytes) ===
+# Note 29
+
+The statute states that the committee meets on the second Tuesday of the month.
+
+
+=== file sources/note-30.md observation obs-46ae5321561f038d0d3daa81dfc52acfee52795b (90 bytes) ===
+# Note 30
+
+The statute states that the committee meets on the third Tuesday of the month.
+
+
+=== file sources/note-31.md observation obs-7db9f8d49125fc5c646ce0c7691c21945429c421 (91 bytes) ===
+# Note 31
+
+The statute states that the committee meets on the fourth Tuesday of the month.
+
+
+=== file sources/note-32.md observation obs-26d9153e8d46991b38102cfd668fc1e5aa83781e (90 bytes) ===
+# Note 32
+
+The statute states that the committee meets on the first Tuesday of the month.
+
+
+=== file sources/note-33.md observation obs-e3c288e9bc2c6fccc695610d7c479db09c808996 (91 bytes) ===
+# Note 33
+
+The statute states that the committee meets on the second Tuesday of the month.
+
+
+=== file sources/note-34.md observation obs-3c283ad92a701aa854f920a704a89f2c31b57ae5 (90 bytes) ===
+# Note 34
+
+The statute states that the committee meets on the third Tuesday of the month.
+
+
+=== file sources/note-35.md observation obs-ae0e810085ee12163d73cffb6a097176e1c34498 (91 bytes) ===
+# Note 35
+
+The statute states that the committee meets on the fourth Tuesday of the month.
+
+
+
+Previous attempt failed verification (round 3). Diagnostics:
+--- verification ---
+forbidden statement present in doc/summary.md: eleven
+
+
+Every statement you add must be followed by a citation marker of the form
+[[cite:<observation id> "exact quote from that source"]] where the quote is copied verbatim from the cited source.
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<target path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest. For create expected_sha256 is null.
+Do not touch sources or oracle files. Do not claim completion; the independent checks decide.

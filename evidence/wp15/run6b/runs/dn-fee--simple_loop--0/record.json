@@ -1,0 +1,67 @@
+{
+  "task_id": "dn-fee",
+  "family": "association-none",
+  "system": "simple_loop",
+  "rep": 0,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp15/run6b/runs/dn-fee--simple_loop--0",
+  "domain": "document",
+  "outcome": {
+    "system": "simple_loop",
+    "task_id": "dn-fee",
+    "family": "association-none",
+    "rep": 0,
+    "declared": true,
+    "declared_reason": "own check run passed after 1 request(s)",
+    "model_requests": 1,
+    "model_tokens": 789,
+    "wall_ms": 2742,
+    "provider_statuses": [
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp15/run6b/runs/dn-fee--simple_loop--0/worktrees/simple_loop-0",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "request 1: own checks passed"
+    ],
+    "gabriel": null,
+    "repairs_used": 0,
+    "plan_versions": 0
+  },
+  "verification": {
+    "verified": true,
+    "problems": [],
+    "changed_paths": [
+      "doc/summary.md"
+    ],
+    "out_of_scope_paths": [],
+    "citations": 2,
+    "claims": [
+      {
+        "claim": "annex",
+        "present": true,
+        "cited_from_expected_source": true
+      },
+      {
+        "claim": "120 EUR | 120",
+        "present": true,
+        "cited_from_expected_source": true
+      }
+    ],
+    "targets": {
+      "doc/summary.md": "The charter states that each member pays a yearly contribution; the amount is fixed in the annex of this charter [[cite:obs-4934be84eb7cb83b78fc3e494a5e1cff499bce11 \"Each member pays a yearly contribution; the amount is fixed in the annex of this charter.\"]]. According to the annex, the ordinary contribution is one hundred twenty (120) EUR, payable within January [[cite:obs-ce240d2d3c7f6c21e920987750889e045d4165e0 \"Ordinary contributions: one hundred twenty (120) EUR, payable within January.\"]]."
+    },
+    "patch_sha256": "ec2729f3159f337716aa321bf44014104b8757f406ec07a5f7ae56ac09c4d311",
+    "patch_bytes": 693,
+    "patch": "diff --git a/doc/summary.md b/doc/summary.md\nindex 0750985..9bba86a 100644\n--- a/doc/summary.md\n+++ b/doc/summary.md\n@@ -1,3 +1 @@\n-# Summary\n-\n-(to be completed)\n+The charter states that each member pays a yearly contribution; the amount is fixed in the annex of this charter [[cite:obs-4934be84eb7cb83b78fc3e494a5e1cff499bce11 \"Each member pays a yearly contribution; the amount is fixed in the annex of this charter.\"]]. According to the annex, the ordinary contribution is one hundred twenty (120) EUR, payable within January [[cite:obs-ce240d2d3c7f6c21e920987750889e045d4165e0 \"Ordinary contributions: one hundred twenty (120) EUR, payable within January.\"]].\n\\ No newline at end of file\n",
+    "head_is_base": true,
+    "marker": "eval-verify-dn-fee-simple_loop-0"
+  },
+  "V": 1,
+  "D": 1,
+  "false_completion": 0,
+  "unit_wall_ms": 2949
+}
