@@ -2,7 +2,7 @@
   "acceptance_evidence": {
     "evidence/doctor_linux_namespace_selftest.json": "5ff218e9cd2d85f7c131b78183449c2d379b55f90fb8aa7d51c1dc34cbac1bd7",
     "evidence/live/summary.json": "b90e9583a5a5e0fad701e0a378a35d741a6eae7516908492a3c2e027b60a6b4e",
-    "evidence/test_run.json": "20204b915115b716dc8da5629cc701b0800ddbc2952e2ffbba0ca7b624c34d98",
+    "evidence/test_run.json": "9fd5833c9764be71dea2f9f1968d63a15f34937473ca2fcfd2b60e3ccf797eb0",
     "evidence/wp01/baseline_manifest.json": "ef39b8ed0762a44c9ee8ff5e8ca616deef771c5ca389d6dd2841ce666233b96f",
     "evidence/wp02/spec_validation.json": "658d50d5fc0991f485240e1e6161ac5f46c171b6fc7abf953eb98db8748ac93f",
     "evidence/wp11/protocol.frozen.json": "a568a973976bbcae7aa4e0847492e973e55e826c4140ac754a96471d4697c533",
@@ -12,8 +12,8 @@
     "evidence/wp11/run2-gpt-4.1-mini/report.json": "5809dc384dc261060abf7ce2bf8aefbcacd04d3c67939a00c50565d071e05a29",
     "evidence/wp11/run3-gpt-4.1-mini/report.json": "4477efb9365669e3adb06bc57a9d1e2c6461dee9693bb4a1c3e3fe25efddcd80"
   },
-  "catalog_digest": "6124b316157ae25d382c4b40102ee2184b52ce828c1d385bfc959ffb3a013e76",
-  "created_at_utc": "2026-10-03T10:29:55.950796+00:00",
+  "catalog_digest": "5d76d2ff24f20c124ceac456d30a96c4e8af2710b8d00ab8faefaa3612d152dc",
+  "created_at_utc": "2026-10-03T13:49:25.182973+00:00",
   "dependency_lock": [
     "attrs==26.1.0",
     "gabriel-agent @ file:///home/user/gabriel-ai",
@@ -47,7 +47,7 @@
         "available": true,
         "backend": "trusted_local",
         "checks": {
-          "python": "/tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke-edc2672/venv/bin/python"
+          "python": "/tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke3/venv/bin/python"
         },
         "containment": false,
         "reasons": [
@@ -55,7 +55,7 @@
         ]
       }
     },
-    "catalog_digest": "6124b316157ae25d382c4b40102ee2184b52ce828c1d385bfc959ffb3a013e76",
+    "catalog_digest": "5d76d2ff24f20c124ceac456d30a96c4e8af2710b8d00ab8faefaa3612d152dc",
     "configured_backend": "linux_namespace",
     "effective_limits": {
       "artifact_bytes": 16777216,
@@ -72,11 +72,11 @@
     },
     "git": "git version 2.43.0",
     "journal": {
-      "head": "f5e82e52ef40a2e1d9258f17ff2b0455ab98c6c6a7f9429eefa26bd6b611f470",
-      "inputs_head": "5550c856d41376505c1537ae114c77696c0bc7f9dc4ace98d12e53024a236c71",
+      "head": "9da5791d80465517ca52d7f105bd185af3ed006c5a9ba87f5d65d721a45196dd",
+      "inputs_head": "03c5a9ed8d867c360ddb4d2f2c809d52d7268167ed614c4a69db354b415ed221",
       "schema": "gabriel.anchor/1",
       "sequence": 41,
-      "workspace_id": "ws-1977f15a7153"
+      "workspace_id": "ws-c47a86aa5877"
     },
     "object_store": {
       "faults": {},
@@ -123,30 +123,30 @@
       "software.run_check": true,
       "software.test_passed": true
     },
-    "schema_registry_digest": "756f41c75a89ad6714fa84beb5d160f3b22e8984bfac6bd2c97b854c7e8da6e5",
+    "schema_registry_digest": "6211aab3a7884d0bbfd6538c1d7ffa3f5adfdcbed7d6ff54cff938fdd0cfbc57",
     "startup": {
       "artifact_root": {
         "exists": true,
-        "path": "/tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke-edc2672/ws/objects",
+        "path": "/tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke3/ws/objects",
         "writable": true
       },
       "codec_version": "gabriel.codec/1",
       "config_schema_version": 1,
       "journal_format": "gabriel.agent-journal/1",
       "memory_chain": {
-        "head": "3445b32d0b00292c6c081d5aa1fb5158c000ea84dd69e826fc2cb321535b0acd",
+        "head": "ffb2314b63778aa41d7b8208cba097acbbf88d329179e5cb4fb4ca156e9e5024",
         "memory_sequence": 2,
         "owner_sequence": 41,
         "policy_revision": 0,
         "schema": "gabriel.memory-anchor/1",
-        "workspace_id": "ws-1977f15a7153"
+        "workspace_id": "ws-c47a86aa5877"
       },
       "migrations": [],
       "reconciliation_work": [],
       "registered_identities": {
-        "catalog_digest": "6124b316157ae25d382c4b40102ee2184b52ce828c1d385bfc959ffb3a013e76",
+        "catalog_digest": "5d76d2ff24f20c124ceac456d30a96c4e8af2710b8d00ab8faefaa3612d152dc",
         "reducer_identity": "ea45d1d2bc7959619be6b48b5bfea5e357161decaa06b9c44b0f9eb96e14e0e7",
-        "schema_registry_digest": "756f41c75a89ad6714fa84beb5d160f3b22e8984bfac6bd2c97b854c7e8da6e5"
+        "schema_registry_digest": "6211aab3a7884d0bbfd6538c1d7ffa3f5adfdcbed7d6ff54cff938fdd0cfbc57"
       },
       "storage": {
         "corrupt": [],
@@ -158,12 +158,12 @@
     },
     "untrusted_execution_supported": true,
     "version": "0.1.0",
-    "workspace_id": "ws-1977f15a7153"
+    "workspace_id": "ws-c47a86aa5877"
   },
   "gates": {
     "G0": "holds: inherited runtime checks rerun (evidence/wp01)",
     "G1": "established on the release host for one provider and fifteen synthetic repository-repair tasks in five families (evidence/live, evidence/wp11, evidence/wp12); advantage gate (AT17) executed under three frozen protocols and not passed",
-    "G2": "established on the release host for the three fixture task families: repository repair, source-grounded document amendment and numerical transformation run through one owner/scheduler/policy build with registered domain observers and independent oracles (AT23, evidence/wp10/at23); memory and analytical adapters per AT14-AT16 and AT25 (tests); the native PSE graph engine integrated as a contained analytical worker with independent references and separate measurements (ADR-18, evidence/pse); advantage gate (AT17) executed on the document and numerical families under protocol 5 (evidence/wp14) and not passed",
+    "G2": "established on the release host for the three fixture task families: repository repair, source-grounded document amendment and numerical transformation run through one owner/scheduler/policy build with registered domain observers and independent oracles (AT23, evidence/wp10/at23); memory and analytical adapters per AT14-AT16 and AT25 (tests); the native PSE graph engine integrated as a contained analytical worker with independent references and separate measurements (ADR-18, evidence/pse); advantage gate (AT17) executed on the document and numerical families under protocol 5 (evidence/wp14) and not passed; the associative memory layer (ADR-20) executed under protocol 6b (evidence/wp15): the engine's walk over verified co-citations carried the required source in every needed run including the held-out family (10/10 against 0/10 for the provenance view) and cost two of six unneeded runs (the declared harm bound of one was exceeded), so the view stays declared per task",
     "G3": "not established: the routing feature experiment was executed under frozen protocols on the hard tier (evidence/wp13) but no first patch failed verification, so no labeled router decision exists and no readout candidate was trained or evaluated; the episodic-retrieval ablation failed its declared held-out criterion (equal verified success at more tokens); the rule-based policy without episodes remains the pinned default"
   },
   "known_issues": [
@@ -171,7 +171,8 @@
     "single-host, single-user deployment only",
     "the native PSE executables are built from source per host (cargo); without them native graph operations are refused at proposal time, and without python-flint window certificates are unknown (never success)",
     "the native engine's arithmetic is platform-independent by construction (pure-Rust libm, ADR-19) but was executed on this platform only; the engine's crystal and consensus paths remain quarantined and the state readout is a specified model quantity, not a measurement",
-    "advantage over a simple verification loop not shown; the evaluation corpus is saturated for gpt-4.1-mini"
+    "advantage over a simple verification loop not shown; the evaluation corpus is saturated for gpt-4.1-mini",
+    "the associative view (ADR-20) carries sources that verified runs cited together into a budgeted prompt whether or not the task needs them; under protocol 6b the model then stated a figure the task forbade in every first attempt on the unneeded family, repaired in four of six runs; the view is opt-in per task and its lexical seeds are tie-broken by observation id"
   ],
   "license": {
     "declared": "Apache-2.0",
@@ -184,8 +185,8 @@
       "native_pse/LICENSE"
     ]
   },
-  "package_source_files": 140,
-  "package_source_identity": "c1d381a3e0e213c4292037d6f6a32f95142ea267ed879cd56086abb6c305af34",
+  "package_source_files": 142,
+  "package_source_identity": "e2384bb310940e3c949bcbb4aef401139b06039d4e2fc668c341da51bd241a80",
   "platform": {
     "machine": "x86_64",
     "release": "6.18.44-fc-v64",
@@ -194,9 +195,9 @@
   "python": "3.11.15",
   "reducer_identity": "ea45d1d2bc7959619be6b48b5bfea5e357161decaa06b9c44b0f9eb96e14e0e7",
   "schema": "gabriel.release-manifest/1",
-  "schema_registry_digest": "756f41c75a89ad6714fa84beb5d160f3b22e8984bfac6bd2c97b854c7e8da6e5",
+  "schema_registry_digest": "6211aab3a7884d0bbfd6538c1d7ffa3f5adfdcbed7d6ff54cff938fdd0cfbc57",
   "source_branch": "claude/vigilant-gauss-03dalc",
-  "source_commit": "edc267281207bbc522469292de0d8d4d03df8566",
+  "source_commit": "52b91b9a7788380b66e5de2518f548b6c5e5de2f",
   "source_dirty": true,
   "supported_backends": {
     "linux_namespace": "supported containment backend; requires Linux user namespaces, util-linux unshare and setpriv; verified by gabriel doctor --selftest on the release host",
