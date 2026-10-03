@@ -96,7 +96,9 @@ def release_manifest(root: Path, *, evidence: dict | None = None, python: str = 
                         "advantage gate (AT17) executed on the document and numerical families under protocol 5 (evidence/wp14) and not passed; "
                         "the associative memory layer (ADR-20) executed under protocol 6b (evidence/wp15): the engine's walk over verified co-citations "
                         "carried the required source in every needed run including the held-out family (10/10 against 0/10 for the provenance view) "
-                        "and cost two of six unneeded runs (the declared harm bound of one was exceeded), so the view stays declared per task",
+                        "and cost two of six unneeded runs (the declared harm bound of one was exceeded); under protocol 7 (ADR-21) carried sources "
+                        "say in the prompt why they are there, which kept every needed outcome, brought the unneeded family to the provenance view's "
+                        "level against the unlabeled control, and made the associative view the document pack's default as declared",
                   "G3": "not established: the routing feature experiment was executed under frozen protocols on the hard tier (evidence/wp13) "
                         "but no first patch failed verification, so no labeled router decision exists and no readout candidate was trained or "
                         "evaluated; the episodic-retrieval ablation failed its declared held-out criterion (equal verified success at more tokens); "
@@ -111,9 +113,10 @@ def release_manifest(root: Path, *, evidence: dict | None = None, python: str = 
                          "platform only; the engine's crystal and consensus paths remain quarantined and the state readout is a specified model "
                          "quantity, not a measurement",
                          "advantage over a simple verification loop not shown; the evaluation corpus is saturated for gpt-4.1-mini",
-                         "the associative view (ADR-20) carries sources that verified runs cited together into a budgeted prompt whether or not the task "
-                         "needs them; under protocol 6b the model then stated a figure the task forbade in every first attempt on the unneeded family, "
-                         "repaired in four of six runs; the view is opt-in per task and its lexical seeds are tie-broken by observation id"],
+                         "the associative view (ADR-20, the document pack's default since ADR-21) carries sources that verified runs cited together "
+                         "into a budgeted prompt whether or not the task needs them; the prompt says why each is there, which under protocol 7 kept "
+                         "gpt-4.1-mini from stating the forbidden figure (6/6 first attempts without the reason, 0/6 with it) but cost two repairs on "
+                         "one needed task; one provider, one presentation; the lexical seeds are tie-broken by observation id"],
     }
     return manifest
 

@@ -31,6 +31,12 @@ NAMESPACE = "document"
 PACK_ID = "document-amendment"
 PACK_VERSION = "0.1.0"
 EXTRACTION_PROFILE = "text-utf8-v1"
+# ADR-20/21: views that re-rank the provenance view by the engine's walk; `associative` tells carried
+# sources apart in the prompt, `associative_unlabeled` is the declared ablation of that presentation
+ASSOCIATIVE_VIEWS = ("associative", "associative_unlabeled")
+# ADR-21: the default view since protocol 7 met its declared rules (evidence/wp15/run7); without history
+# or executables the associative view ranks exactly like the provenance view and the manifest says so
+DEFAULT_VIEW = "associative"
 EXTRACTION_DIGEST = hashlib.sha256(b"gabriel.document.extraction/text-utf8-v1").hexdigest()
 TRANSFORM_PROFILE = "document-compile-v1"
 SUPPORTED_KINDS = {"document/citations_bound": "document.citations_bound", "document/required_claims": "document.required_claims",
@@ -65,7 +71,7 @@ def compile_task(spec: dict, store, **ids):
                    "targets": list(targets),
                    # The production default: the effective revision of every authorized, available source. The other
                    # views are declared ablations for evaluation (ADR-16); a task carries its view in its base inputs.
-                   "retrieval_view": spec.get("retrieval_view", "provenance")}
+                   "retrieval_view": spec.get("retrieval_view", DEFAULT_VIEW)}
     validate(declaration, "document-sources")
     for target in targets:
         if not fs.path_in_scope(target, spec.get("allowed_paths") or []):
@@ -161,7 +167,7 @@ def take_snapshot(worktree, binding: dict, store, frontier: int, *, memory, prin
             sources.append(dict(path=declared["path"], source_id=declared["source_id"], source_revision=declared["source_revision"], observation_id=observation_id,
                                 sha256=entry["sha256"], bytes=entry["bytes"], extraction=extraction, event_kind=declared["event_kind"],
                                 event_start_unix_ms=declared["event_start_unix_ms"], event_end_unix_ms=declared["event_end_unix_ms"], access=access))
-    view = declaration.get("retrieval_view", "provenance")
+    view = declaration.get("retrieval_view", DEFAULT_VIEW)
     retrieval_ref = None
     if memory is not None:
         current = memory.frontier()
@@ -183,7 +189,7 @@ def take_snapshot(worktree, binding: dict, store, frontier: int, *, memory, prin
             manifest_record = memory.retrieve(principal_id=principal_id, task_id=task_id, frontier=current, query=goal, allowed_source_kinds=["document"],
                                               version_policy="all_revisions" if view == "all_revisions" else "highest_revision",
                                               max_bytes=PROMPT_SOURCE_BUDGET, max_items=32,
-                                              association=association.PROFILE if view == "associative" else None)
+                                              association=association.PROFILE if view in ASSOCIATIVE_VIEWS else None)
         retrieval_ref = store.put(canonical(manifest_record), "application/json")
         frontier_record = current.record()
     else:
@@ -269,7 +275,12 @@ def build_prompt(task_goal: str, binding: dict, snapshot: dict, manifest: dict, 
                         "truncated": entry["bytes"] > PROMPT_SOURCE_BUDGET, "omitted_bytes": max(0, entry["bytes"] - PROMPT_SOURCE_BUDGET), "disclosure_scope": "provider"})
     lines += ["", "Sources (cite them by observation id; quotes must be exact substrings of the cited source):"]
     retrieval = loads(store.get(snapshot["retrieval_manifest_ref"])) if snapshot.get("retrieval_manifest_ref") else {"items": [], "excluded": []}
-    budget = PROMPT_SOURCE_BUDGET
+    # ADR-21: under the associative view a source whose rank came from the walk (structural score above
+    # its lexical score) is told apart from the lexically retrieved ones, with the reason the manifest
+    # retains: the seed it was cited together with and the verified run that cited them together
+    labeled = snapshot.get("retrieval_view") == "associative"
+    links = (retrieval.get("association") or {}).get("links") or {}
+    budget, shown_items, carried = PROMPT_SOURCE_BUDGET, [], []
     for item in retrieval["items"]:
         try:
             content = store.get(item["artifact_ref"])
@@ -277,15 +288,31 @@ def build_prompt(task_goal: str, binding: dict, snapshot: dict, manifest: dict, 
             continue
         shown = content[:max(0, min(len(content), budget))]
         budget -= len(shown)
+        # carried = the manifest links it (mass from the walk and not a seed itself); a seed keeps its lexical place
+        is_carried = labeled and any(key.startswith(item["source_id"] + "/") for key in links)
+        (carried if is_carried else shown_items).append((item, content, shown))
+        if budget <= 0:
+            break
+    if carried:
+        shown_items += [("association", None, None)] + carried
+    for item, content, shown in shown_items:
+        if item == "association":
+            lines += ["", "Sources associated by verified history (not retrieved for the goal's words: each was cited together with a source above "
+                      "in an earlier verified run; use one only where the goal needs it):"]
+            continue
         label = item.get("label") or ("source %s revision %d" % (item["source_id"], item["source_revision"]))
-        lines += ["=== %s observation %s (%d bytes%s) ===" % (label, item["observation_id"], len(content), "" if len(shown) == len(content) else ", truncated"),
+        reason = ""
+        link = next((v for k, v in links.items() if k.startswith(item["source_id"] + "/")), None) if labeled else None
+        if link is not None:
+            seeds = ", ".join(sorted({k.split("/", 1)[0] for k in link.get("seeds", [])})) or "sources above (indirectly)"
+            runs = ", ".join(link.get("task_ids", [])[:2]) or "an earlier run"
+            reason = "; associated: cited together with %s in verified run %s" % (seeds, runs)
+        lines += ["=== %s observation %s (%d bytes%s%s) ===" % (label, item["observation_id"], len(content), "" if len(shown) == len(content) else ", truncated", reason),
                   shown.decode("utf8", "replace"), ""]
         observation_ids.append(item["observation_id"])
         entries.append({"entry_id": "obs-%d" % len(entries), "kind": "observation", "artifact_ref": item["artifact_ref"], "source_id": item["source_id"],
                         "source_revision": item["source_revision"], "observation_id": item["observation_id"], "span_start": 0, "span_end": len(shown),
                         "purpose": "retrieval", "truncated": len(shown) < len(content), "omitted_bytes": len(content) - len(shown), "disclosure_scope": "provider"})
-        if budget <= 0:
-            break
     unsupported = [s["path"] for s in snapshot["sources"] if s["extraction"] == "unsupported"]
     if unsupported:
         lines += ["Sources that could not be extracted (never cite them): " + ", ".join(unsupported)]
@@ -304,6 +331,8 @@ def build_prompt(task_goal: str, binding: dict, snapshot: dict, manifest: dict, 
               ' "rationale": "<short explanation>"}',
               "Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest. For create expected_sha256 is null.",
               "Do not touch sources or oracle files. Do not claim completion; the independent checks decide."]
+    if carried:
+        lines.append("State only what the goal asks for; a source associated by history is available, not required.")
     return "\n".join(lines).encode("utf8"), entries, observation_ids
 
 

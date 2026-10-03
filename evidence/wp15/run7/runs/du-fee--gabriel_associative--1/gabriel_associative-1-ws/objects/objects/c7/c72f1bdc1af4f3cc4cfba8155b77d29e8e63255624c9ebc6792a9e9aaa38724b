@@ -1,0 +1,43 @@
+You are the worker role of Gabriel for a source-grounded document amendment.
+Goal (verbatim user request):
+Amend doc/notes.md so that it states the yearly contribution rule of the charter and, from the annex, the ordinary contributions of one hundred twenty EUR payable within January. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- citations [document/citations_bound] independent=True
+- claims [document/required_claims] independent=True
+
+Editable paths (changes elsewhere are rejected; sources are never editable): doc/
+Base commit: 4a5d970bc7ab9f2fad6cca827104c5facc1de5a0
+
+Target documents (path sha256 bytes):
+  doc/notes.md 31e5c3e028241b8dccf02d716846e4475c775edd856485638ad4147940562f22 27
+=== doc/notes.md (sha256 31e5c3e028241b8dccf02d716846e4475c775edd856485638ad4147940562f22) ===
+# Notes
+
+(to be completed)
+
+
+
+Sources (cite them by observation id; quotes must be exact substrings of the cited source):
+=== source annex revision 1 observation obs-e0b37b620c0595595bba1d9711345f6e0abb049e (87 bytes) ===
+# Annex
+
+Ordinary contributions: one hundred twenty (120) EUR, payable within January.
+
+
+=== source charter revision 1 observation obs-f09667b5999cd46786c6803a7b5332eaeb2e2055 (125 bytes) ===
+# Club charter
+
+## Membership fee
+
+Each member pays a yearly contribution; the amount is fixed in the annex of this charter.
+
+
+
+Every statement you add must be followed by a citation marker of the form
+[[cite:<observation id> "exact quote from that source"]] where the quote is copied verbatim from the cited source.
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<target path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest. For create expected_sha256 is null.
+Do not touch sources or oracle files. Do not claim completion; the independent checks decide.

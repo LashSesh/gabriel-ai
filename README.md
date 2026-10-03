@@ -43,11 +43,17 @@ in an isolated worktree with independent acceptance checks.
   family, 10/10 against 0/10 for the provenance view, and cost two of six unneeded runs, above
   the declared harm bound; run 6 is retained with its corpus defect and the amendment):
   `docs/adr/ADR-20-associative-memory-layer.md`, `docs/EVALUATION_PROTOCOL.md`, `evidence/wp15/`
+- Association provenance in the prompt (the manifest keeps why every carried source is there;
+  the prompt lists carried sources apart with the seed and the verified run that cited them
+  together; under protocol 7 that kept every needed outcome, brought the unneeded family to the
+  provenance view's level with no forbidden first attempt against 6/6 for the unlabeled control,
+  and the associative view became the document pack's default as declared):
+  `docs/adr/ADR-21-association-provenance-in-the-prompt.md`, `evidence/wp15/run7/`
 - Contract extensions: `docs/adr/ADR-10-hold-records.md`, `ADR-11`, `ADR-12`, `ADR-13` (DomainPack
   ports), `ADR-14` (memory chain), `ADR-15` (readout router), `ADR-16` (document and numerical
   advantage gate with declared memory ablations), `ADR-17` (operations), `ADR-18` (native PSE
   graph worker), `ADR-19` (native PSE determinism and specified readout), `ADR-20` (associative
-  memory layer)
+  memory layer), `ADR-21` (association provenance in the prompt)
 - Evidence (test log, environment, baseline rerun, spec validation): `evidence/`
 - The blueprint's own machine-readable contracts and validator: `contracts/`, `tools/validate_spec.py`
 

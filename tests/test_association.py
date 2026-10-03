@@ -61,10 +61,14 @@ def test_history_brings_a_lexically_invisible_source_into_a_budgeted_retrieval_a
         assert empty["association"]["status"] == "no_history" and [i["observation_id"] for i in empty["items"]] == [i["observation_id"] for i in plain["items"]]
         assert empty["cache_key"] != plain["cache_key"] and all(i["structural_milli"] == 0 for i in empty["items"])
         # a supported claim cites charter and annex together
-        support(memory, "history", [ids["charter"], ids["annex"]])
+        claim = support(memory, "history", [ids["charter"], ids["annex"]])
         linked = retrieve(memory, da.SUMMARY_GOAL, max_items=16, association=association.PROFILE)
         record = linked["association"]
         assert record["status"] == "computed" and record["seeds"] == ["charter/sources:charter"] and set(record["entities"]) == {"charter/sources:charter", "annex/sources:annex"}
+        # ADR-21: the carried annex says why it carries (the seed, the claim and the task of the verified run); the charter, a seed, has no link
+        assert record["links"] == {"annex/sources:annex": {"direct": True, "seeds": ["charter/sources:charter"], "claims": [claim["claim_id"]], "task_ids": ["history"]}}
+        assert next(i for i in linked["items"] if i["source_id"] == "annex")["lexical_milli"] == 0
+        assert next(i for i in linked["items"] if i["source_id"] == "charter")["lexical_milli"] == next(i for i in plain["items"] if i["source_id"] == "charter")["score_milli"]
         assert record["executable_sha256"] == native_graph.binaries()["engine_observer"]["sha256"] and len(record["snapshot_identity"]) == 64
         annex = next(i for i in linked["items"] if i["source_id"] == "annex")
         # the structural score is the reference walk's mass from the charter to the annex over the co-citation graph
@@ -153,6 +157,22 @@ def test_verified_run_history_carries_the_annex_into_the_associative_view_throug
         assert "120 EUR" in text and "[[cite:obs-" in text
         outcomes = {a["check_id"]: a["outcome"] for a in summary_a["assessments"] if a["eligible"]}
         assert outcomes["citations"] == "passed" and outcomes["claims"] == "passed"
+        # ADR-21: the prompt tells the carried annex apart from the lexically retrieved charter, with the reason the manifest retains
+        prompt = prompt_text(ws, created_a)
+        header = "Sources associated by verified history"
+        assert prompt.index("source charter revision") < prompt.index(header) < prompt.index("source annex revision")
+        assert ("associated: cited together with charter in verified run %s" % created_h["task_id"]) in prompt
+        assert prompt.rstrip().endswith("a source associated by history is available, not required.")
+        link = next(v for k, v in manifest["association"]["links"].items() if k.startswith("annex/"))
+        assert link["task_ids"] == [created_h["task_id"]] and link["seeds"][0].startswith("charter/") and len(link["claims"]) == 1
+        # the declared ablation keeps the ADR-20 presentation: same retrieval, no section, no reason
+        created_u, summary_u = run(ws, da.summary_spec(repo, base, da.summary_oracle(tmp_path / "summary.json"), da.provider("summary"), view="associative_unlabeled"))
+        assert summary_u["state"] == "succeeded", summary_u["log"]
+        unlabeled = prompt_text(ws, created_u)
+        assert header not in unlabeled and "associated:" not in unlabeled and "source annex revision" in unlabeled
+        items_u = [i["source_id"] for i in retrieval_manifest(ws, created_u)["items"]]
+        # same ranking rule; which tied distractors fill the budget depends on the observation-id tie-break (ADR-14)
+        assert items_u[:2] == [i["source_id"] for i in manifest["items"]][:2] == ["charter", "annex"] and len(items_u) == len(manifest["items"])
         created_p, summary_p = run(ws, da.summary_spec(repo, base, da.summary_oracle(tmp_path / "summary.json"), da.provider("summary"), view="provenance",
                                                        max_plan_versions=1, max_repairs=0))
         assert summary_p["state"] == "failed"
@@ -205,6 +225,14 @@ def retrieval_manifest(ws, created) -> dict:
     return loads(ws.store.get(snapshot["retrieval_manifest_ref"]))
 
 
+def prompt_text(ws, created) -> str:
+    """The first worker prompt of the run, as retained."""
+    nodes = ws.owner.projection(created["run_id"])["nodes"]
+    node = sorted(n for n in nodes if n.startswith("propose") and nodes[n].get("outputs", {}).get("request"))[0]
+    request = loads(ws.store.get(nodes[node]["outputs"]["request"]))
+    return ws.store.get(request["prompt_ref"]).decode("utf8")
+
+
 def test_association_tier_runs_through_the_frozen_harness_with_history(tmp_path):
     """The harness runs a task's history first; the associative arm then reaches the hidden source
     while the matched provenance arm cannot (scripted provider, same deliverable for both)."""
@@ -216,13 +244,14 @@ def test_association_tier_runs_through_the_frozen_harness_with_history(tmp_path)
     assert task.history == ("dh-fee",) and cd.task_named("dh-fee").role == "history"
     provider = {"kind": "scripted", "provider_id": "scripted-association-harness",
                 "script": {"by_step": {"plan-request": [{"kind": "echo_reference"}]}, "by_role": {"planner": [{"kind": "echo_reference"}], "worker": cd.history_worker_steps(task)}}}
-    protocol = harness.default_protocol(provider, repetitions=1, systems=["gabriel_reference_plan", "gabriel_associative"], backend="trusted_local",
-                                        task_ids=[task.task_id], tiers=["association"], note="scripted association self-test")
+    protocol = harness.default_protocol(provider, repetitions=1, systems=["gabriel_reference_plan", "gabriel_associative", "gabriel_associative_unlabeled"],
+                                        backend="trusted_local", task_ids=[task.task_id], tiers=["association"], note="scripted association self-test")
     assert [row["task_id"] for row in protocol["tasks"]] == ["da-fee"]  # history tasks are never units
     frozen = harness.freeze(protocol, tmp_path / "protocol.json")
     results = harness.run(frozen, tmp_path / "run", provider, workers=1)
     by_system = {r["system"]: r for r in results["records"]}
     assert by_system["gabriel_associative"]["V"] == 1 and by_system["gabriel_associative"]["D"] == 1
+    assert by_system["gabriel_associative_unlabeled"]["V"] == 1 and by_system["gabriel_associative_unlabeled"]["D"] == 1
     # the provenance arm never sees the hidden source: its citation cannot resolve and the run fails (D = 0). The scripted
     # worker knows the hidden text, so the content-based verification may still pass; a real model has no such knowledge.
     assert by_system["gabriel_reference_plan"]["D"] == 0

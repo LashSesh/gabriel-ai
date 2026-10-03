@@ -50,6 +50,51 @@
             }
           ]
         },
+        "links": {
+          "type": "object",
+          "maxProperties": 256,
+          "description": "ADR-21: for every carried key (mass from the walk, not a seed), the seeds it was cited together with and the claims and tasks of the verified runs that cited them together",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "direct": {
+                "type": "boolean"
+              },
+              "seeds": {
+                "type": "array",
+                "maxItems": 8,
+                "items": {
+                  "type": "string",
+                  "maxLength": 512,
+                  "pattern": "^[ -~]*$"
+                }
+              },
+              "claims": {
+                "type": "array",
+                "maxItems": 8,
+                "items": {
+                  "$ref": "common.schema.json#/$defs/identifier"
+                }
+              },
+              "task_ids": {
+                "type": "array",
+                "maxItems": 8,
+                "items": {
+                  "type": "string",
+                  "maxLength": 256,
+                  "pattern": "^[ -~]*$"
+                }
+              }
+            },
+            "required": [
+              "direct",
+              "seeds",
+              "claims",
+              "task_ids"
+            ]
+          }
+        },
         "masses_milli": {
           "additionalProperties": {
             "$ref": "common.schema.json#/$defs/safe_uint"
@@ -213,6 +258,10 @@
         "properties": {
           "artifact_ref": {
             "$ref": "common.schema.json#/$defs/artifact_ref"
+          },
+          "lexical_milli": {
+            "$ref": "common.schema.json#/$defs/safe_uint",
+            "description": "ADR-21: the lexical score before the association re-ranking, retained so a carried source can be told apart"
           },
           "observation_id": {
             "$ref": "common.schema.json#/$defs/identifier"

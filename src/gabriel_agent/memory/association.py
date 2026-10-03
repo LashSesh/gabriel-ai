@@ -30,19 +30,50 @@ def milli(mass: float) -> int:
     return int(math.floor(1000.0 * mass + 0.5))
 
 
-def cocitation_batches(service, frontier) -> list:
-    """Source keys cited together by every supported claim available at the frontier, in chain order."""
-    batches = []
-    rows = service._db.execute("SELECT seq, supporting FROM claims WHERE status = 'supported' AND seq <= ? ORDER BY seq", (int(frontier.memory_sequence),)).fetchall()
-    for _, supporting in rows:
+def cocitation_history(service, frontier) -> list:
+    """Every supported claim available at the frontier, in chain order, with the source keys its
+    supporting observations cite: the association history together with its provenance (the claim
+    and the task whose verified run established it), so a carried source can say why it is there."""
+    history = []
+    rows = service._db.execute("SELECT seq, claim_id, task_id, supporting FROM claims WHERE status = 'supported' AND seq <= ? ORDER BY seq",
+                               (int(frontier.memory_sequence),)).fetchall()
+    for _, claim_id, task_id, supporting in rows:
         keys = []
         for observation_id in loads(supporting.encode("ascii")):
             row = service._db.execute("SELECT source_key FROM observations WHERE observation_id = ?", (observation_id,)).fetchone()
             if row is not None and row[0] not in keys:
                 keys.append(row[0])
         if keys:
-            batches.append(sorted(keys))
-    return batches
+            history.append({"claim_id": claim_id, "task_id": task_id, "keys": sorted(keys)})
+    return history
+
+
+def cocitation_batches(service, frontier) -> list:
+    """Source keys cited together by every supported claim available at the frontier, in chain order."""
+    return [entry["keys"] for entry in cocitation_history(service, frontier)]
+
+
+def links(history: list, seeds: list, carried: list, limit: int = 8) -> dict:
+    """ADR-21: for every carried key (mass from the walk, not a seed itself) the seeds it was cited
+    together with, and the claims and tasks of the verified runs that cited them together. A key
+    reached only through other keys has no direct seed; its claims are those that cite it at all."""
+    out = {}
+    for key in carried:
+        citing = [entry for entry in history if key in entry["keys"]]
+        with_seed = [entry for entry in citing if any(seed in entry["keys"] for seed in seeds)]
+        direct = []
+        for entry in with_seed:
+            for seed in seeds:
+                if seed in entry["keys"] and seed not in direct:
+                    direct.append(seed)
+        claims, tasks = [], []
+        for entry in (with_seed or citing):
+            if entry["claim_id"] is not None and entry["claim_id"] not in claims:
+                claims.append(entry["claim_id"])
+            if entry["task_id"] is not None and entry["task_id"] not in tasks:
+                tasks.append(entry["task_id"])
+        out[key] = {"direct": bool(direct), "seeds": direct[:limit], "claims": claims[:limit], "task_ids": tasks[:limit]}
+    return out
 
 
 def _entities(batches: list) -> list:
@@ -54,12 +85,14 @@ def _entities(batches: list) -> list:
     return order
 
 
-def structural_scores(batches: list, seeds: list, candidates: list, profile: dict, binaries: dict | None = None) -> tuple:
+def structural_scores(batches: list, seeds: list, candidates: list, profile: dict, binaries: dict | None = None, history: list | None = None) -> tuple:
     """Masses per candidate source key and the retained association record. ``batches``: co-citation
     batches (source keys); ``seeds``: lexically matching keys in rank order; ``candidates``: the
-    keys of every retrievable item. Keys outside the history get no mass."""
+    keys of every retrievable item; ``history``: the batches with their provenance (ADR-21), from
+    which the record's ``links`` name why every carried key carries. Keys outside the history get
+    no mass."""
     record = {"schema": "gabriel.association-record/1", "profile": dict(profile), "status": "computed", "executable_sha256": None,
-              "batches_sha256": sha256_hex(canonical(batches)), "entities": [], "seeds": [], "snapshot_identity": None, "masses_milli": {}}
+              "batches_sha256": sha256_hex(canonical(batches)), "entities": [], "seeds": [], "snapshot_identity": None, "masses_milli": {}, "links": {}}
     if not batches:
         return {}, dict(record, status="no_history")
     if not seeds:
@@ -93,5 +126,7 @@ def structural_scores(batches: list, seeds: list, candidates: list, profile: dic
         for key, result in zip(candidates_in, response["query_results"]):
             masses[key] = native_graph.number(result["values"][0]["mass_bits"])
         record["snapshot_identity"] = response["snapshot"]["identity"]
-    record.update(executable_sha256=observer["sha256"], entities=entities, seeds=seeds_in, masses_milli={key: milli(mass) for key, mass in masses.items()})
+    carried = [key for key in candidates_in if key not in seeds_in and milli(masses.get(key, 0.0)) > 0]
+    record.update(executable_sha256=observer["sha256"], entities=entities, seeds=seeds_in, masses_milli={key: milli(mass) for key, mass in masses.items()},
+                  links=links(history if history is not None else [{"claim_id": None, "task_id": None, "keys": batch} for batch in batches], seeds_in, carried))
     return masses, record

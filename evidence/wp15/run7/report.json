@@ -1,0 +1,1271 @@
+{
+  "schema": "gabriel.evaluation-report/1",
+  "protocol_frozen_digest": "ce24ada60661ffd842f6d8803f2b1bd55cad7d9895ca7c8ccc400901b9d844ff",
+  "tasks": 10,
+  "families": 4,
+  "runs": 60,
+  "per_system": {
+    "gabriel_reference_plan": {
+      "runs": 20,
+      "verified_successes": 10,
+      "p_success": 0.5,
+      "declared_successes": 10,
+      "false_completions": 0,
+      "p_false_completion": 0.0,
+      "conditional_false_completion": 0.0,
+      "conditional_denominator": 10,
+      "harness_errors": 0,
+      "timed_out": 0,
+      "recovery_runs": 10,
+      "mean_model_requests": 2.0,
+      "total_model_requests": 40,
+      "mean_model_tokens": 5582.3,
+      "total_model_tokens": 111646,
+      "mean_wall_ms": 9271.0,
+      "p_success_ci95_by_family": {
+        "low": 0.0,
+        "high": 1.0,
+        "clusters": 4
+      },
+      "p_success_ci95_by_task": {
+        "low": 0.2,
+        "high": 0.8,
+        "clusters": 10
+      },
+      "per_task": {
+        "da-archive": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "da-fee": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "da-garden": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "da-library": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "da-parking": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "dn-fee": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "dn-parking": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "du-archive": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "du-fee": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "du-parking": {
+          "p_success": 1.0,
+          "runs": 2
+        }
+      }
+    },
+    "gabriel_associative": {
+      "runs": 20,
+      "verified_successes": 20,
+      "p_success": 1.0,
+      "declared_successes": 20,
+      "false_completions": 0,
+      "p_false_completion": 0.0,
+      "conditional_false_completion": 0.0,
+      "conditional_denominator": 20,
+      "harness_errors": 0,
+      "timed_out": 0,
+      "recovery_runs": 2,
+      "mean_model_requests": 1.2,
+      "total_model_requests": 24,
+      "mean_model_tokens": 3104.5,
+      "total_model_tokens": 62090,
+      "mean_wall_ms": 5672.6,
+      "p_success_ci95_by_family": {
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 4
+      },
+      "p_success_ci95_by_task": {
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 10
+      },
+      "per_task": {
+        "da-archive": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "da-fee": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "da-garden": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "da-library": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "da-parking": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "dn-fee": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "dn-parking": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "du-archive": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "du-fee": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "du-parking": {
+          "p_success": 1.0,
+          "runs": 2
+        }
+      }
+    },
+    "gabriel_associative_unlabeled": {
+      "runs": 20,
+      "verified_successes": 18,
+      "p_success": 0.9,
+      "declared_successes": 18,
+      "false_completions": 0,
+      "p_false_completion": 0.0,
+      "conditional_false_completion": 0.0,
+      "conditional_denominator": 18,
+      "harness_errors": 0,
+      "timed_out": 0,
+      "recovery_runs": 6,
+      "mean_model_requests": 1.4,
+      "total_model_requests": 28,
+      "mean_model_tokens": 3661.45,
+      "total_model_tokens": 73229,
+      "mean_wall_ms": 6845.45,
+      "p_success_ci95_by_family": {
+        "low": 0.7272727272727273,
+        "high": 1.0,
+        "clusters": 4
+      },
+      "p_success_ci95_by_task": {
+        "low": 0.7,
+        "high": 1.0,
+        "clusters": 10
+      },
+      "per_task": {
+        "da-archive": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "da-fee": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "da-garden": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "da-library": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "da-parking": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "dn-fee": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "dn-parking": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "du-archive": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "du-fee": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "du-parking": {
+          "p_success": 1.0,
+          "runs": 2
+        }
+      }
+    }
+  },
+  "paired_differences": {
+    "gabriel_reference_plan_minus_gabriel_associative": {
+      "per_task": {
+        "da-archive": -1.0,
+        "da-fee": -1.0,
+        "da-garden": -1.0,
+        "da-library": -1.0,
+        "da-parking": -1.0,
+        "dn-fee": 0.0,
+        "dn-parking": 0.0,
+        "du-archive": 0.0,
+        "du-fee": 0.0,
+        "du-parking": 0.0
+      },
+      "mean": -0.5,
+      "ci95_by_family": {
+        "low": -1.0,
+        "high": 0.0,
+        "clusters": 4
+      },
+      "ci95_by_task": {
+        "low": -0.8,
+        "high": -0.2,
+        "clusters": 10
+      },
+      "tokens_per_task": {
+        "da-archive": 6168.5,
+        "da-fee": -2.0,
+        "da-garden": 6301.0,
+        "da-library": 6171.0,
+        "da-parking": 6356.0,
+        "dn-fee": -7.0,
+        "dn-parking": -7.0,
+        "du-archive": -45.0,
+        "du-fee": -94.0,
+        "du-parking": -63.5
+      },
+      "mean_tokens": 2477.8,
+      "requests_per_task": {
+        "da-archive": 2.0,
+        "da-fee": 0.0,
+        "da-garden": 2.0,
+        "da-library": 2.0,
+        "da-parking": 2.0,
+        "dn-fee": 0.0,
+        "dn-parking": 0.0,
+        "du-archive": 0.0,
+        "du-fee": 0.0,
+        "du-parking": 0.0
+      },
+      "mean_requests": 0.8
+    },
+    "gabriel_reference_plan_minus_gabriel_associative_unlabeled": {
+      "per_task": {
+        "da-archive": -1.0,
+        "da-fee": -1.0,
+        "da-garden": -1.0,
+        "da-library": -1.0,
+        "da-parking": -1.0,
+        "dn-fee": 0.0,
+        "dn-parking": 0.0,
+        "du-archive": 1.0,
+        "du-fee": 0.0,
+        "du-parking": 0.0
+      },
+      "mean": -0.4,
+      "ci95_by_family": {
+        "low": -1.0,
+        "high": 0.2,
+        "clusters": 4
+      },
+      "ci95_by_task": {
+        "low": -0.8,
+        "high": 0.0,
+        "clusters": 10
+      },
+      "tokens_per_task": {
+        "da-archive": 6271.5,
+        "da-fee": 6323.0,
+        "da-garden": 6358.5,
+        "da-library": 6260.5,
+        "da-parking": 6441.0,
+        "dn-fee": 10.5,
+        "dn-parking": -1.5,
+        "du-archive": -6250.5,
+        "du-fee": -3128.0,
+        "du-parking": -3076.5
+      },
+      "mean_tokens": 1920.85,
+      "requests_per_task": {
+        "da-archive": 2.0,
+        "da-fee": 2.0,
+        "da-garden": 2.0,
+        "da-library": 2.0,
+        "da-parking": 2.0,
+        "dn-fee": 0.0,
+        "dn-parking": 0.0,
+        "du-archive": -2.0,
+        "du-fee": -1.0,
+        "du-parking": -1.0
+      },
+      "mean_requests": 0.6
+    }
+  },
+  "failures": [
+    {
+      "task_id": "da-archive",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: eleven | 11 years | eleven years",
+        "required statement not cited from schedule with 'eleven calendar years'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "da-archive",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: eleven | 11 years | eleven years",
+        "required statement not cited from schedule with 'eleven calendar years'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "da-fee",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: 120 EUR | 120",
+        "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "da-fee",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "da-garden",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement not cited from register with 'forty square metres'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "da-garden",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement not cited from register with 'forty square metres'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "da-library",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement not cited from table with 'twenty-one days'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "da-library",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "doc/summary.md: quote 'Members may keep books for a period of twenty-one days.' is not a verbatim span of any available source",
+        "required statement not cited from table with 'twenty-one days'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "da-parking",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+        "required statement not cited from appendix with 'Bays twelve through thirty'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "da-parking",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+        "required statement not cited from appendix with 'Bays twelve through thirty'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "du-archive",
+      "system": "gabriel_associative_unlabeled",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "forbidden statement present in doc/summary.md: eleven"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "du-archive",
+      "system": "gabriel_associative_unlabeled",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "forbidden statement present in doc/summary.md: eleven"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    }
+  ],
+  "claim_scope": "Scoped comparison on one synthetic task distribution with one provider; a difference here is not a general superiority claim. Costs include every attempt, including failed and timed-out runs.",
+  "frozen_check": {
+    "frozen_digest": "ce24ada60661ffd842f6d8803f2b1bd55cad7d9895ca7c8ccc400901b9d844ff",
+    "harness_identity_now": "df730d0c2585ac2b263ce48235a8e5cd11e6f2d6d0f18f1fd274201a0d5b0e0d",
+    "harness_amended": false
+  },
+  "held_out": {
+    "schema": "gabriel.evaluation-report/1",
+    "protocol_frozen_digest": "ce24ada60661ffd842f6d8803f2b1bd55cad7d9895ca7c8ccc400901b9d844ff",
+    "tasks": 2,
+    "families": 1,
+    "runs": 12,
+    "per_system": {
+      "gabriel_reference_plan": {
+        "runs": 4,
+        "verified_successes": 0,
+        "p_success": 0.0,
+        "declared_successes": 0,
+        "false_completions": 0,
+        "p_false_completion": 0.0,
+        "conditional_false_completion": null,
+        "conditional_denominator": 0,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 4,
+        "mean_model_requests": 3.0,
+        "total_model_requests": 12,
+        "mean_model_tokens": 9147.0,
+        "total_model_tokens": 36588,
+        "mean_wall_ms": 13134.0,
+        "p_success_ci95_by_family": {
+          "low": 0.0,
+          "high": 0.0,
+          "clusters": 1
+        },
+        "p_success_ci95_by_task": {
+          "low": 0.0,
+          "high": 0.0,
+          "clusters": 2
+        },
+        "per_task": {
+          "da-garden": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "da-library": {
+            "p_success": 0.0,
+            "runs": 2
+          }
+        }
+      },
+      "gabriel_associative": {
+        "runs": 4,
+        "verified_successes": 4,
+        "p_success": 1.0,
+        "declared_successes": 4,
+        "false_completions": 0,
+        "p_false_completion": 0.0,
+        "conditional_false_completion": 0.0,
+        "conditional_denominator": 4,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 0,
+        "mean_model_requests": 1.0,
+        "total_model_requests": 4,
+        "mean_model_tokens": 2911.0,
+        "total_model_tokens": 11644,
+        "mean_wall_ms": 5134.25,
+        "p_success_ci95_by_family": {
+          "low": 1.0,
+          "high": 1.0,
+          "clusters": 1
+        },
+        "p_success_ci95_by_task": {
+          "low": 1.0,
+          "high": 1.0,
+          "clusters": 2
+        },
+        "per_task": {
+          "da-garden": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "da-library": {
+            "p_success": 1.0,
+            "runs": 2
+          }
+        }
+      },
+      "gabriel_associative_unlabeled": {
+        "runs": 4,
+        "verified_successes": 4,
+        "p_success": 1.0,
+        "declared_successes": 4,
+        "false_completions": 0,
+        "p_false_completion": 0.0,
+        "conditional_false_completion": 0.0,
+        "conditional_denominator": 4,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 0,
+        "mean_model_requests": 1.0,
+        "total_model_requests": 4,
+        "mean_model_tokens": 2837.5,
+        "total_model_tokens": 11350,
+        "mean_wall_ms": 5462.0,
+        "p_success_ci95_by_family": {
+          "low": 1.0,
+          "high": 1.0,
+          "clusters": 1
+        },
+        "p_success_ci95_by_task": {
+          "low": 1.0,
+          "high": 1.0,
+          "clusters": 2
+        },
+        "per_task": {
+          "da-garden": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "da-library": {
+            "p_success": 1.0,
+            "runs": 2
+          }
+        }
+      }
+    },
+    "paired_differences": {
+      "gabriel_reference_plan_minus_gabriel_associative": {
+        "per_task": {
+          "da-garden": -1.0,
+          "da-library": -1.0
+        },
+        "mean": -1.0,
+        "ci95_by_family": {
+          "low": -1.0,
+          "high": -1.0,
+          "clusters": 1
+        },
+        "ci95_by_task": {
+          "low": -1.0,
+          "high": -1.0,
+          "clusters": 2
+        },
+        "tokens_per_task": {
+          "da-garden": 6301.0,
+          "da-library": 6171.0
+        },
+        "mean_tokens": 6236.0,
+        "requests_per_task": {
+          "da-garden": 2.0,
+          "da-library": 2.0
+        },
+        "mean_requests": 2.0
+      },
+      "gabriel_reference_plan_minus_gabriel_associative_unlabeled": {
+        "per_task": {
+          "da-garden": -1.0,
+          "da-library": -1.0
+        },
+        "mean": -1.0,
+        "ci95_by_family": {
+          "low": -1.0,
+          "high": -1.0,
+          "clusters": 1
+        },
+        "ci95_by_task": {
+          "low": -1.0,
+          "high": -1.0,
+          "clusters": 2
+        },
+        "tokens_per_task": {
+          "da-garden": 6358.5,
+          "da-library": 6260.5
+        },
+        "mean_tokens": 6309.5,
+        "requests_per_task": {
+          "da-garden": 2.0,
+          "da-library": 2.0
+        },
+        "mean_requests": 2.0
+      }
+    },
+    "failures": [
+      {
+        "task_id": "da-garden",
+        "system": "gabriel_reference_plan",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement not cited from register with 'forty square metres'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "da-garden",
+        "system": "gabriel_reference_plan",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement not cited from register with 'forty square metres'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "da-library",
+        "system": "gabriel_reference_plan",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement not cited from table with 'twenty-one days'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "da-library",
+        "system": "gabriel_reference_plan",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "doc/summary.md: quote 'Members may keep books for a period of twenty-one days.' is not a verbatim span of any available source",
+          "required statement not cited from table with 'twenty-one days'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      }
+    ],
+    "claim_scope": "Scoped comparison on one synthetic task distribution with one provider; a difference here is not a general superiority claim. Costs include every attempt, including failed and timed-out runs."
+  },
+  "previously_seen": {
+    "schema": "gabriel.evaluation-report/1",
+    "protocol_frozen_digest": "ce24ada60661ffd842f6d8803f2b1bd55cad7d9895ca7c8ccc400901b9d844ff",
+    "tasks": 8,
+    "families": 3,
+    "runs": 48,
+    "per_system": {
+      "gabriel_reference_plan": {
+        "runs": 16,
+        "verified_successes": 10,
+        "p_success": 0.625,
+        "declared_successes": 10,
+        "false_completions": 0,
+        "p_false_completion": 0.0,
+        "conditional_false_completion": 0.0,
+        "conditional_denominator": 10,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 6,
+        "mean_model_requests": 1.75,
+        "total_model_requests": 28,
+        "mean_model_tokens": 4691.125,
+        "total_model_tokens": 75058,
+        "mean_wall_ms": 8305.25,
+        "p_success_ci95_by_family": {
+          "low": 0.0,
+          "high": 1.0,
+          "clusters": 3
+        },
+        "p_success_ci95_by_task": {
+          "low": 0.25,
+          "high": 1.0,
+          "clusters": 8
+        },
+        "per_task": {
+          "da-archive": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "da-fee": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "da-parking": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "dn-fee": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "dn-parking": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "du-archive": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "du-fee": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "du-parking": {
+            "p_success": 1.0,
+            "runs": 2
+          }
+        }
+      },
+      "gabriel_associative": {
+        "runs": 16,
+        "verified_successes": 16,
+        "p_success": 1.0,
+        "declared_successes": 16,
+        "false_completions": 0,
+        "p_false_completion": 0.0,
+        "conditional_false_completion": 0.0,
+        "conditional_denominator": 16,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 2,
+        "mean_model_requests": 1.25,
+        "total_model_requests": 20,
+        "mean_model_tokens": 3152.875,
+        "total_model_tokens": 50446,
+        "mean_wall_ms": 5807.1875,
+        "p_success_ci95_by_family": {
+          "low": 1.0,
+          "high": 1.0,
+          "clusters": 3
+        },
+        "p_success_ci95_by_task": {
+          "low": 1.0,
+          "high": 1.0,
+          "clusters": 8
+        },
+        "per_task": {
+          "da-archive": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "da-fee": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "da-parking": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "dn-fee": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "dn-parking": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "du-archive": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "du-fee": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "du-parking": {
+            "p_success": 1.0,
+            "runs": 2
+          }
+        }
+      },
+      "gabriel_associative_unlabeled": {
+        "runs": 16,
+        "verified_successes": 14,
+        "p_success": 0.875,
+        "declared_successes": 14,
+        "false_completions": 0,
+        "p_false_completion": 0.0,
+        "conditional_false_completion": 0.0,
+        "conditional_denominator": 14,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 6,
+        "mean_model_requests": 1.5,
+        "total_model_requests": 24,
+        "mean_model_tokens": 3867.4375,
+        "total_model_tokens": 61879,
+        "mean_wall_ms": 7191.3125,
+        "p_success_ci95_by_family": {
+          "low": 0.6666666666666666,
+          "high": 1.0,
+          "clusters": 3
+        },
+        "p_success_ci95_by_task": {
+          "low": 0.625,
+          "high": 1.0,
+          "clusters": 8
+        },
+        "per_task": {
+          "da-archive": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "da-fee": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "da-parking": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "dn-fee": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "dn-parking": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "du-archive": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "du-fee": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "du-parking": {
+            "p_success": 1.0,
+            "runs": 2
+          }
+        }
+      }
+    },
+    "paired_differences": {
+      "gabriel_reference_plan_minus_gabriel_associative": {
+        "per_task": {
+          "da-archive": -1.0,
+          "da-fee": -1.0,
+          "da-parking": -1.0,
+          "dn-fee": 0.0,
+          "dn-parking": 0.0,
+          "du-archive": 0.0,
+          "du-fee": 0.0,
+          "du-parking": 0.0
+        },
+        "mean": -0.375,
+        "ci95_by_family": {
+          "low": -1.0,
+          "high": 0.0,
+          "clusters": 3
+        },
+        "ci95_by_task": {
+          "low": -0.75,
+          "high": -0.125,
+          "clusters": 8
+        },
+        "tokens_per_task": {
+          "da-archive": 6168.5,
+          "da-fee": -2.0,
+          "da-parking": 6356.0,
+          "dn-fee": -7.0,
+          "dn-parking": -7.0,
+          "du-archive": -45.0,
+          "du-fee": -94.0,
+          "du-parking": -63.5
+        },
+        "mean_tokens": 1538.25,
+        "requests_per_task": {
+          "da-archive": 2.0,
+          "da-fee": 0.0,
+          "da-parking": 2.0,
+          "dn-fee": 0.0,
+          "dn-parking": 0.0,
+          "du-archive": 0.0,
+          "du-fee": 0.0,
+          "du-parking": 0.0
+        },
+        "mean_requests": 0.5
+      },
+      "gabriel_reference_plan_minus_gabriel_associative_unlabeled": {
+        "per_task": {
+          "da-archive": -1.0,
+          "da-fee": -1.0,
+          "da-parking": -1.0,
+          "dn-fee": 0.0,
+          "dn-parking": 0.0,
+          "du-archive": 1.0,
+          "du-fee": 0.0,
+          "du-parking": 0.0
+        },
+        "mean": -0.25,
+        "ci95_by_family": {
+          "low": -1.0,
+          "high": 0.3333333333333333,
+          "clusters": 3
+        },
+        "ci95_by_task": {
+          "low": -0.75,
+          "high": 0.25,
+          "clusters": 8
+        },
+        "tokens_per_task": {
+          "da-archive": 6271.5,
+          "da-fee": 6323.0,
+          "da-parking": 6441.0,
+          "dn-fee": 10.5,
+          "dn-parking": -1.5,
+          "du-archive": -6250.5,
+          "du-fee": -3128.0,
+          "du-parking": -3076.5
+        },
+        "mean_tokens": 823.6875,
+        "requests_per_task": {
+          "da-archive": 2.0,
+          "da-fee": 2.0,
+          "da-parking": 2.0,
+          "dn-fee": 0.0,
+          "dn-parking": 0.0,
+          "du-archive": -2.0,
+          "du-fee": -1.0,
+          "du-parking": -1.0
+        },
+        "mean_requests": 0.25
+      }
+    },
+    "failures": [
+      {
+        "task_id": "da-archive",
+        "system": "gabriel_reference_plan",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: eleven | 11 years | eleven years",
+          "required statement not cited from schedule with 'eleven calendar years'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "da-archive",
+        "system": "gabriel_reference_plan",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: eleven | 11 years | eleven years",
+          "required statement not cited from schedule with 'eleven calendar years'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "da-fee",
+        "system": "gabriel_reference_plan",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: 120 EUR | 120",
+          "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "da-fee",
+        "system": "gabriel_reference_plan",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "da-parking",
+        "system": "gabriel_reference_plan",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+          "required statement not cited from appendix with 'Bays twelve through thirty'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "da-parking",
+        "system": "gabriel_reference_plan",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+          "required statement not cited from appendix with 'Bays twelve through thirty'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "du-archive",
+        "system": "gabriel_associative_unlabeled",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "forbidden statement present in doc/summary.md: eleven"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "du-archive",
+        "system": "gabriel_associative_unlabeled",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "forbidden statement present in doc/summary.md: eleven"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      }
+    ],
+    "claim_scope": "Scoped comparison on one synthetic task distribution with one provider; a difference here is not a general superiority claim. Costs include every attempt, including failed and timed-out runs."
+  }
+}

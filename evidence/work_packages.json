@@ -1,6 +1,6 @@
 {
   "schema": "gabriel.evidence.work-packages/1",
-  "produced_at_utc": "2026-10-03T13:48:00.603669+00:00",
+  "produced_at_utc": "2026-10-03T15:27:12.715995+00:00",
   "rule": "A package counts as done only with actual code and recorded test output; privileged and paid runs are listed under not_executed.",
   "packages": {
     "WP01": {
@@ -1365,6 +1365,108 @@
           },
           {
             "test": "test_protocol_freeze_and_metrics",
+            "result": "PASSED"
+          }
+        ]
+      }
+    },
+    "P7-association-provenance": {
+      "status": "DONE_EXECUTED_RULES_MET_DEFAULT_VIEW",
+      "tests": [
+        "tests/test_association.py",
+        "tests/test_evaluation_domains.py"
+      ],
+      "acceptance": [
+        "ADR-21: carried sources say why they are in the prompt; protocol 7 with the matched unlabeled control"
+      ],
+      "evidence": [
+        "evidence/wp15/protocol7_declaration.md",
+        "evidence/wp15/protocol7.frozen.json",
+        "evidence/wp15/run7/report.md",
+        "evidence/wp15/run7/retrieval_analysis.json",
+        "evidence/wp15/run7/final_diffs/index.json",
+        "docs/EVALUATION_PROTOCOL.md",
+        "docs/adr/ADR-21-association-provenance-in-the-prompt.md"
+      ],
+      "not_executed": [
+        "a second provider",
+        "a presentation study beyond the one labeled form and its unlabeled control",
+        "the default view on the protocol 5 corpora with a real provider (no history exists there, so the view ranks like provenance by construction)"
+      ],
+      "test_results": {
+        "tests/test_association.py": [
+          {
+            "test": "test_history_brings_a_lexically_invisible_source_into_a_budgeted_retrieval_and_matches_the_reference",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_association_never_reaches_what_the_principal_cannot_retrieve",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_structural_scores_declare_their_limits",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_verified_run_history_carries_the_annex_into_the_associative_view_through_the_owner",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_every_association_topic_meets_the_protocol_precondition_under_the_pack_budget[fee]",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_every_association_topic_meets_the_protocol_precondition_under_the_pack_budget[parking]",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_every_association_topic_meets_the_protocol_precondition_under_the_pack_budget[archive]",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_every_association_topic_meets_the_protocol_precondition_under_the_pack_budget[library]",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_every_association_topic_meets_the_protocol_precondition_under_the_pack_budget[garden]",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_association_tier_runs_through_the_frozen_harness_with_history",
+            "result": "PASSED"
+          }
+        ],
+        "tests/test_evaluation_domains.py": [
+          {
+            "test": "test_domain_corpus_controls_execute_and_tiers_are_complete",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_independent_document_verification_is_content_based",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_all_revisions_policy_is_a_declared_ablation_that_keeps_authorization",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_provenance_view_hides_the_stale_revision_and_the_other_views_show_it",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_revoked_source_is_excluded_by_provenance_and_caught_by_verification_in_the_plain_view",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_document_comparators_run_through_the_frozen_harness",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_provenance_arm_solves_the_revoked_task_in_one_request_through_the_harness",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_numerical_comparators_run_through_the_frozen_harness",
             "result": "PASSED"
           }
         ]

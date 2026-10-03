@@ -366,8 +366,11 @@ class MemoryService:
             for item in items:
                 if key_of[item["observation_id"]] not in candidates:
                     candidates.append(key_of[item["observation_id"]])
-            masses, association_record = assoc.structural_scores(assoc.cocitation_batches(self, f), seeds[: int(association["max_seeds"])], candidates, association)
+            history = assoc.cocitation_history(self, f)
+            masses, association_record = assoc.structural_scores([entry["keys"] for entry in history], seeds[: int(association["max_seeds"])], candidates,
+                                                                 association, history=history)
             for item in items:
+                item["lexical_milli"] = item["score_milli"]
                 item["structural_milli"] = assoc.milli(masses.get(key_of[item["observation_id"]], 0.0))
                 item["score_milli"] = max(item["score_milli"], item["structural_milli"])
         items.sort(key=lambda i: (-i["score_milli"], i["observation_id"]))

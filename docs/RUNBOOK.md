@@ -243,8 +243,15 @@ revocation and frontier apply first, the lexically matching sources seed the wal
 candidate's score is the larger of its lexical score and its walk mass, and the retrieval
 manifest retains the association record (profile, status, executable digest, batches digest,
 entities, seeds, snapshot identity, masses). Without history or executables the record says so
-and the retrieval stays lexical. The corpus tier `association` and protocol 6 test the
-mechanism (`evidence/wp15/`):
+and the retrieval stays lexical. Since ADR-21 the record also carries `links` (for every
+carried source: the seeds it was cited together with, the claims and the tasks of the verified
+runs that cited them together) and every item keeps its lexical score; the associative view
+lists carried sources under their own heading with that reason and tells the worker that an
+associated source is available, not required. The view `associative_unlabeled` is the declared
+ablation with the ADR-20 presentation. Since protocol 7 met its declared rules the associative
+view is the document pack's default (`retrieval_view` omitted); `provenance`, `plain`,
+`all_revisions` and `associative_unlabeled` remain declarable per task. The corpus tier
+`association` and protocols 6 and 7 test the mechanism and its presentation (`evidence/wp15/`):
 ```bash
 gabriel eval corpus-check --tier association                       # fifteen tasks, history tasks included in the digest
 gabriel eval freeze --provider provider.json --out protocol6.json --repetitions 2 --backend linux_namespace \
@@ -254,6 +261,9 @@ gabriel eval run --protocol protocol6.json --out ./run6 --provider provider.json
 gabriel eval report --run ./run6
 scripts/eval_final_diffs.py ./run6                                 # final worktree diffs as evidence
 scripts/eval_retrieval_analysis.py ./run6                          # what each Gabriel retrieval carried (ranks, seeds, prompt)
+gabriel eval freeze --provider provider.json --out protocol7.json --repetitions 2 --backend linux_namespace \
+  --systems gabriel_reference_plan,gabriel_associative,gabriel_associative_unlabeled --tiers association \
+  --held-out-families association-needed-held-out                  # ADR-21: the labeling against its unlabeled control
 ```
 The corpus check executes the tier's precondition under the memory service's own scorer (the
 visible source outranks every distractor, every distractor outranks the hidden source); run 6

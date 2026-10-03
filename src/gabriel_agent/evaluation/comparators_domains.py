@@ -46,8 +46,9 @@ from ..workers import LinuxNamespaceBackend, TrustedLocalBackend, Worktree
 from . import corpus_domains as cd
 from .comparators import Budget, Outcome, gabriel_outcome
 
-DOCUMENT_ONLY = ("gabriel_plain_sources", "gabriel_all_revisions", "gabriel_associative")
-SYSTEMS = ("provider_only", "simple_loop", "gabriel_reference_plan", "gabriel_plain_sources", "gabriel_all_revisions", "gabriel_associative", "gabriel")
+DOCUMENT_ONLY = ("gabriel_plain_sources", "gabriel_all_revisions", "gabriel_associative", "gabriel_associative_unlabeled")
+SYSTEMS = ("provider_only", "simple_loop", "gabriel_reference_plan", "gabriel_plain_sources", "gabriel_all_revisions", "gabriel_associative",
+           "gabriel_associative_unlabeled", "gabriel")
 BASELINE_VIEW = "plain"   # what a minimal agent with the same corpus sees: the declared files, unfiltered
 
 
@@ -323,7 +324,9 @@ RUNNERS = {"provider_only": run_provider_only, "simple_loop": run_simple_loop,
            "gabriel_reference_plan": lambda ctx, rep: run_gabriel(ctx, rep, system="gabriel_reference_plan", planner_mode="reference"),
            "gabriel_plain_sources": lambda ctx, rep: run_gabriel(ctx, rep, system="gabriel_plain_sources", planner_mode="reference", view="plain"),
            "gabriel_all_revisions": lambda ctx, rep: run_gabriel(ctx, rep, system="gabriel_all_revisions", planner_mode="reference", view="all_revisions"),
-           "gabriel_associative": lambda ctx, rep: run_gabriel(ctx, rep, system="gabriel_associative", planner_mode="reference", view="associative")}
+           "gabriel_associative": lambda ctx, rep: run_gabriel(ctx, rep, system="gabriel_associative", planner_mode="reference", view="associative"),
+           "gabriel_associative_unlabeled": lambda ctx, rep: run_gabriel(ctx, rep, system="gabriel_associative_unlabeled", planner_mode="reference",
+                                                                         view="associative_unlabeled")}
 
 DECLARED_SUCCESS = {
     "provider_only": "an admissible deliverable was produced (amendment applied or declared operation executed through the same adapter); no verification",
@@ -335,7 +338,10 @@ DECLARED_SUCCESS = {
     "gabriel_all_revisions": "as gabriel_reference_plan with the declared all_revisions view: every eligible revision enters the prompt, revocation "
                              "and authorization still apply (ablation of the revision rule; document tasks only)",
     "gabriel_associative": "as gabriel_reference_plan with the declared associative view (ADR-20): the provenance view re-ranked by the native engine's "
-                           "walk over the co-citation graph of the claims that earlier verified runs in the same workspace established; document tasks only",
+                           "walk over the co-citation graph of the claims that earlier verified runs in the same workspace established; since ADR-21 a "
+                           "carried source is told apart in the prompt with the seed and the verified run that cited them together; document tasks only",
+    "gabriel_associative_unlabeled": "as gabriel_associative with the ADR-20 presentation: carried sources enter the prompt like lexically retrieved "
+                                     "ones (ablation of the association provenance in the prompt, ADR-21; document tasks only)",
     "gabriel": "as gabriel_reference_plan with the model planner (one planner request per plan version)",
     "gabriel_no_repair": "as gabriel with max_repairs=0 and max_plan_versions=1 (ablation of the repair cycle)"}
 

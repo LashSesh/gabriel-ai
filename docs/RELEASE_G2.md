@@ -73,9 +73,10 @@ the cited source span stays fixed; the run was repeated.
   quarantined. The recurrent routing feature stays in the software pack only. The inherited
   padded graph signature is reproduced only as a collision control, and its S7 orbit index is
   cross-checked against the standard-library signature.
-- Memory retrieval is lexical by default; the declared view `associative` (ADR-20) re-ranks it
-  by the engine's walk over the co-citation graph of claims that verified runs established, and
-  never adds a source. There is no trained retrieval or routing policy, so G3 is not claimed.
+- Memory retrieval is lexical, re-ranked under the document pack's default view `associative`
+  (ADR-20, default since ADR-21) by the engine's walk over the co-citation graph of claims that
+  verified runs established; the walk never adds a source, and carried sources say in the prompt
+  why they are there. There is no trained retrieval or routing policy, so G3 is not claimed.
   The promotion rule requires held-out evidence and is tested, not evaluated.
 - Document extraction supports UTF-8 text only.
 
@@ -108,12 +109,22 @@ retrieval manifests show the walk did it (seed at 770 milli, hidden source at 23
 rank). Where the task did not need that source, carrying it cost two of six runs: the model
 stated the figure the task forbade in every first attempt, the verification loop repaired four
 and exhausted its two repairs on two; the provider-only baseline stated the figure in all six.
-The declared harm bound (at most one run in six) was exceeded, so the view remains declared per
-task and is not the default. Run 6, the first execution, was lost to a corpus defect (distractors
+The declared harm bound (at most one run in six) was exceeded, so after protocol 6 the view
+stayed declared per task. Run 6, the first execution, was lost to a corpus defect (distractors
 tying with the visible source under the scorer) and is retained with the amendment and an
-executed construction invariant. The G2 claim is unchanged: the mechanism is specified,
-deterministic, retained and shown to do what it specifies on this distribution, with a measured
-cost where it is not needed.
+executed construction invariant.
+
+Protocol 7 (ADR-21, `evidence/wp15/run7/`, 60 runs, declared before the run) then made the
+reason a source is in the prompt part of the retained record and of the prompt: carried
+sources are listed apart, each with the seed and the verified run that cited them together, and
+the worker is told such a source is available, not required. Against the matched unlabeled
+control in the same run, the labeled view kept every needed outcome (10 of 10, held-out
+included), brought the unneeded family to the provenance view's level (6 of 6 at one request;
+no first attempt stated the forbidden figure, against 6 of 6 unlabeled) and was the cheapest
+arm over all tasks; its own cost was two repairs on one needed task whose first attempt left the
+carried figure out. As declared, the associative view is now the document pack's default. The
+G2 claim is unchanged in kind: the mechanism is specified, deterministic, retained and shown to
+do what it specifies on this distribution under one provider, with its costs measured.
 
 ## Known issues
 - A tool implementation change invalidates existing workspaces at open (no migration).

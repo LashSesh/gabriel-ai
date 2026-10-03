@@ -336,8 +336,43 @@ Against the declared rules (`evidence/wp15/run6b/report.md`, `retrieval_analysis
 - `association-none`: equal, as declared (4 of 4 each, one request).
 
 What follows: the walk does what ADR-20 specifies, on this distribution and provider, and its
-cost is that a carried source gets used whether needed or not; the view stays declared per task.
-The result is scoped to the constructed precondition and does not touch the advantage gate.
+cost is that a carried source gets used whether needed or not; after protocol 6 the view stayed
+declared per task. The result is scoped to the constructed precondition and does not touch the
+advantage gate.
+
+## Protocol 7: association provenance in the prompt (ADR-21)
+Declared before any run (`evidence/wp15/protocol7_declaration.md`): the manifest keeps every
+item's lexical score and, per carried source, the seeds it was cited together with and the
+claims and tasks of the verified runs that cited them together; the associative view lists
+carried sources under their own heading with that reason and tells the worker that an associated
+source is available, not required. Arms on the tier of protocol 6b (same corpus digest):
+`gabriel_reference_plan`, `gabriel_associative` (labeled) and `gabriel_associative_unlabeled`
+(the ADR-20 presentation, the within-protocol control), two repetitions, gpt-4.1-mini,
+`linux_namespace`, 60 runs. Rules: the needed rule of protocol 6; the harm rule as the decision
+rule; equality on `association-none`; and the consequence declared in advance that the
+associative view becomes the document pack's default if the rules hold.
+
+| system | runs | verified | p_success | false compl. | mean requests | mean tokens | needed (seen) | held-out | unneeded | none |
+|---|---|---|---|---|---|---|---|---|---|---|
+| gabriel_reference_plan | 20 | 10 | 0.50 | 0 | 2.00 | 5582 | 0/6 | 0/4 | 6/6 | 4/4 |
+| gabriel_associative | 20 | 20 | 1.00 | 0 | 1.20 | 3104 | 6/6 | 4/4 | 6/6 | 4/4 |
+| gabriel_associative_unlabeled | 20 | 18 | 0.90 | 0 | 1.40 | 3661 | 6/6 | 4/4 | 4/6 | 4/4 |
+
+Against the declared rules (`evidence/wp15/run7/report.md`, `retrieval_analysis.json`):
+
+- Needed: **met**, +1.00 on every task including the held-out two; the hidden source was in every
+  associative prompt and no provenance prompt. The labeled view paid for it once: on da-fee
+  (both repetitions) the first attempt left the annex figure out, the claims check named it, and
+  the repair added it (three requests); the other needed tasks took one.
+- Harm: **met**. On `association-unneeded` the labeled view equals the provenance view (6 of 6,
+  one request, 2861 against 2794 tokens) and no first attempt stated the forbidden figure; the
+  unlabeled control reproduced run 6b (6 of 6 first attempts stated it, 4 of 6 verified at 2.33
+  requests). No false completion in any arm.
+- `association-none`: equal.
+
+Consequence, as declared: the associative view is the document pack's default retrieval view
+(ADR-21). Over all tasks it was the cheapest arm and the only one that verified every task. The
+result is one provider's response to one presentation on one constructed distribution.
 
 ## Freezing and amendments
 `gabriel eval freeze` digests the protocol body and records the harness code identity.

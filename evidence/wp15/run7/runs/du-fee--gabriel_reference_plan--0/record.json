@@ -1,0 +1,142 @@
+{
+  "task_id": "du-fee",
+  "family": "association-unneeded",
+  "system": "gabriel_reference_plan",
+  "rep": 0,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp15/run7/runs/du-fee--gabriel_reference_plan--0",
+  "domain": "document",
+  "outcome": {
+    "system": "gabriel_reference_plan",
+    "task_id": "du-fee",
+    "family": "association-unneeded",
+    "rep": 0,
+    "declared": true,
+    "declared_reason": "run state succeeded",
+    "model_requests": 1,
+    "model_tokens": 2785,
+    "wall_ms": 5063,
+    "provider_statuses": [
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp15/run7/runs/du-fee--gabriel_reference_plan--0/gabriel_reference_plan-0-ws/worktrees/run-du-fee-gabriel_reference_plan-0-1",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "history dh-fee: succeeded",
+      "apply -> completed (result accepted; checks pending)",
+      "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+      "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+      "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+      "review -> completed (result accepted; checks pending)",
+      "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets",
+      "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,citations,claims,no-secrets",
+      "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: citations,claims,no-secrets",
+      "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; not complete: mandatory checks without eligible passing evidence: citations,claims",
+      "assess review/citations -> passed: assessment passed recorded for citations; not complete: mandatory checks without eligible passing evidence: claims",
+      "assess review/claims -> passed: assessment passed recorded for claims; node review verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects",
+      "claim claim-47628a4ded9deed7 supported by 1 cited observation(s)"
+    ],
+    "gabriel": {
+      "run_id": "run-du-fee-gabriel_reference_plan-0-1",
+      "workspace": "/home/user/gabriel-ai/evidence/wp15/run7/runs/du-fee--gabriel_reference_plan--0/gabriel_reference_plan-0-ws",
+      "hold": null,
+      "replay": "passed",
+      "events": 56,
+      "assessments": [
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "observe"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "propose"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "apply"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "read-back"
+        },
+        {
+          "check_id": "scope",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "base-commit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "checks-intact",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "no-secrets",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "citations",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "claims",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        }
+      ]
+    },
+    "repairs_used": 0,
+    "plan_versions": 1
+  },
+  "verification": {
+    "verified": true,
+    "problems": [],
+    "changed_paths": [
+      "doc/summary.md"
+    ],
+    "out_of_scope_paths": [],
+    "citations": 1,
+    "claims": [
+      {
+        "claim": "annex",
+        "present": true,
+        "cited_from_expected_source": true
+      }
+    ],
+    "targets": {
+      "doc/summary.md": "Each member pays a yearly contribution; the amount is fixed in the annex of this charter.[[cite:obs-d3edeb40ecd7c34ed00e5446bed80a62a7657e9b \"Each member pays a yearly contribution; the amount is fixed in the annex of this charter.\"]]"
+    },
+    "patch_sha256": "24ca674af3745a0a1814aca8320cbfaf7713f1c294e7beb07388ceb8ce285cd1",
+    "patch_bytes": 427,
+    "patch": "diff --git a/doc/summary.md b/doc/summary.md\nindex 0750985..9df3b0a 100644\n--- a/doc/summary.md\n+++ b/doc/summary.md\n@@ -1,3 +1 @@\n-# Summary\n-\n-(to be completed)\n+Each member pays a yearly contribution; the amount is fixed in the annex of this charter.[[cite:obs-d3edeb40ecd7c34ed00e5446bed80a62a7657e9b \"Each member pays a yearly contribution; the amount is fixed in the annex of this charter.\"]]\n\\ No newline at end of file\n",
+    "head_is_base": true,
+    "marker": "eval-verify-du-fee-gabriel_reference_plan-0"
+  },
+  "V": 1,
+  "D": 1,
+  "false_completion": 0,
+  "unit_wall_ms": 5584
+}

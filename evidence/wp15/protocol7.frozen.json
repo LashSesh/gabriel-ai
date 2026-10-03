@@ -1,0 +1,154 @@
+{
+  "backend": "linux_namespace",
+  "bootstrap": {
+    "resamples": 2000,
+    "seed": 20261002
+  },
+  "budget_per_task": {
+    "max_input_tokens": 60000,
+    "max_output_tokens": 4000,
+    "model_requests": 6,
+    "model_tokens_total": 120000,
+    "tool_attempts": 64,
+    "wall_ms": 600000
+  },
+  "corpus_digest": "d3517d87144021cf317ea7f93868d0c34837ca2e4cf06829d3c1b3698913f2dd",
+  "declared_criterion": "",
+  "declared_success": {
+    "document_and_numerical_tiers": {
+      "gabriel": "as gabriel_reference_plan with the model planner (one planner request per plan version)",
+      "gabriel_all_revisions": "as gabriel_reference_plan with the declared all_revisions view: every eligible revision enters the prompt, revocation and authorization still apply (ablation of the revision rule; document tasks only)",
+      "gabriel_associative": "as gabriel_reference_plan with the declared associative view (ADR-20): the provenance view re-ranked by the native engine's walk over the co-citation graph of the claims that earlier verified runs in the same workspace established; since ADR-21 a carried source is told apart in the prompt with the seed and the verified run that cited them together; document tasks only",
+      "gabriel_associative_unlabeled": "as gabriel_associative with the ADR-20 presentation: carried sources enter the prompt like lexically retrieved ones (ablation of the association provenance in the prompt, ADR-21; document tasks only)",
+      "gabriel_no_repair": "as gabriel with max_repairs=0 and max_plan_versions=1 (ablation of the repair cycle)",
+      "gabriel_plain_sources": "as gabriel_reference_plan with the declared plain view: every declared source file enters the prompt regardless of revision or revocation (ablation of provenance-aware retrieval; document tasks only)",
+      "gabriel_reference_plan": "run state succeeded with the pack's reference plan and the production retrieval view (effective revision, authorized and available sources; contained numerical worker)",
+      "provider_only": "an admissible deliverable was produced (amendment applied or declared operation executed through the same adapter); no verification",
+      "simple_loop": "the system's own run of the independent content checks passed (plain source view, no owner, memory service or policy)"
+    },
+    "gabriel": "run state succeeded (every mandatory check passed with eligible evidence, artifacts verified, effects reconciled)",
+    "gabriel_episodes": "as gabriel_reference_plan (rule-based repair) with the frozen episodes retrievable into the worker prompt (readout ablation)",
+    "gabriel_no_repair": "as gabriel, with max_repairs=0 and max_plan_versions=1 (ablation of the repair cycle)",
+    "gabriel_policy": "as gabriel_reference_plan, with the frozen readout policy pinned: at a failed verification it chooses repair or stop from the progress channels, and it may retrieve frozen episodes into the worker prompt",
+    "gabriel_reference_plan": "as gabriel, with the domain pack's deterministic reference plan admitted without a planner request (planner ablation)",
+    "provider_only": "an admissible patch was applied (no verification)",
+    "simple_loop": "the system's own runs of the visible tests and the oracle both exited 0"
+  },
+  "episode_seed": null,
+  "families": [
+    "association-needed",
+    "association-needed-held-out",
+    "association-none",
+    "association-unneeded"
+  ],
+  "frozen_at_utc": "2026-10-03T15:19:55.338652+00:00",
+  "frozen_digest": "ce24ada60661ffd842f6d8803f2b1bd55cad7d9895ca7c8ccc400901b9d844ff",
+  "harness_identity": "df730d0c2585ac2b263ce48235a8e5cd11e6f2d6d0f18f1fd274201a0d5b0e0d",
+  "held_out_families": [
+    "association-needed-held-out"
+  ],
+  "metrics": [
+    "p_success = mean(V)",
+    "p_false_completion = mean(D*(1-V))",
+    "conditional false completion = sum(D*(1-V))/sum(D)",
+    "model requests, model tokens and wall time per run",
+    "recovery: Gabriel runs that used repair cycles or extra plan versions",
+    "paired differences gabriel - baseline per task (mean over repetitions)",
+    "bootstrap percentile intervals, resampling task families with replacement (and tasks as a secondary view)"
+  ],
+  "note": "Protocol 7: association provenance in the prompt (ADR-21); declared in evidence/wp15/protocol7_declaration.md; history tasks run first in the same workspace for every Gabriel arm",
+  "paired": [
+    [
+      "gabriel_reference_plan",
+      "gabriel_associative"
+    ],
+    [
+      "gabriel_reference_plan",
+      "gabriel_associative_unlabeled"
+    ]
+  ],
+  "policy": null,
+  "provider": {
+    "credential_ref": "env:OPENAI_API_KEY",
+    "kind": "openai_compat",
+    "model": "gpt-4.1-mini",
+    "temperature_milli": 0,
+    "timeout_ms": 120000
+  },
+  "purpose": "Matched comparison: increase independently verified task success or reduce resources at equal success, under a fixed task distribution and matched constraints. Not a benchmark of general capability.",
+  "repetitions": 2,
+  "sample_size_statement": "10 tasks in 4 families; the minimum relevant effect is not predeclared from a pilot, so intervals are reported as descriptive uncertainty, not as a powered test",
+  "schema": "gabriel.evaluation-protocol/1",
+  "systems": [
+    "gabriel_reference_plan",
+    "gabriel_associative",
+    "gabriel_associative_unlabeled"
+  ],
+  "tasks": [
+    {
+      "digest": "bfe1fb04f06c19e616c3cff733adfe69ac7e7e6c3f62112730179c12e64aa578",
+      "family": "association-needed",
+      "task_id": "da-fee",
+      "tier": "association"
+    },
+    {
+      "digest": "059db381937fc5cb9a09b99b804bda57ea54c0232e5b28ebb1dbc372181e954a",
+      "family": "association-unneeded",
+      "task_id": "du-fee",
+      "tier": "association"
+    },
+    {
+      "digest": "eba00a5086489891ef315b124851975c9ab215264e45aab796f883e6310e5df4",
+      "family": "association-none",
+      "task_id": "dn-fee",
+      "tier": "association"
+    },
+    {
+      "digest": "38e097ed4dfae195c2284e2c74eedde80e13af0e7752fd538e24dec72667bd09",
+      "family": "association-needed",
+      "task_id": "da-parking",
+      "tier": "association"
+    },
+    {
+      "digest": "a3acf34fd282a01aa6432a3c97de13e730194a523c18ac21de0b5741d88c9fbd",
+      "family": "association-unneeded",
+      "task_id": "du-parking",
+      "tier": "association"
+    },
+    {
+      "digest": "faa9d0ef7b552cb1bfee23506e85cb28f84b88574290200250201ad0a678f986",
+      "family": "association-none",
+      "task_id": "dn-parking",
+      "tier": "association"
+    },
+    {
+      "digest": "29eac5194536c420acecf8097b1e0da70993e60069865356594fb26e2d7b6345",
+      "family": "association-needed",
+      "task_id": "da-archive",
+      "tier": "association"
+    },
+    {
+      "digest": "0f4d306d1d6d762cdcffdc9bb9857802e354bcaa0a21ddd09b5746c7b716b309",
+      "family": "association-unneeded",
+      "task_id": "du-archive",
+      "tier": "association"
+    },
+    {
+      "digest": "e1cae617363c1769e39eee09837d7511e5ad930eb3f79a019fac08f31c9f4673",
+      "family": "association-needed-held-out",
+      "task_id": "da-library",
+      "tier": "association"
+    },
+    {
+      "digest": "db314ad339b369c51dc1d2015810f210e1f0632a8480d9e2bfb8194ab4df4951",
+      "family": "association-needed-held-out",
+      "task_id": "da-garden",
+      "tier": "association"
+    }
+  ],
+  "tiers": [
+    "association"
+  ],
+  "time_limit_is_failure": true,
+  "verification": "fresh, system-independent: changed paths within allowed_paths; visible tests exit 0; oracle installed from the corpus text and exit 0; all executed in the containment backend on the final tree"
+}

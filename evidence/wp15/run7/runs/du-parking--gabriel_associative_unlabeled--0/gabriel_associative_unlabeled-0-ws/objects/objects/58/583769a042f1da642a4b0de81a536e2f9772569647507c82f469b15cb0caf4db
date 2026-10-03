@@ -1,0 +1,43 @@
+You are the worker role of Gabriel for a source-grounded document amendment.
+Goal (verbatim user request):
+Amend doc/notes.md so that it states the parking rule of the handbook and, from the appendix, bays twelve through thirty blocked for supplier vans with a midday deadline. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- citations [document/citations_bound] independent=True
+- claims [document/required_claims] independent=True
+
+Editable paths (changes elsewhere are rejected; sources are never editable): doc/
+Base commit: 9f96b98e814b238ff1ec10d99d41386e8b4b72c8
+
+Target documents (path sha256 bytes):
+  doc/notes.md 31e5c3e028241b8dccf02d716846e4475c775edd856485638ad4147940562f22 27
+=== doc/notes.md (sha256 31e5c3e028241b8dccf02d716846e4475c775edd856485638ad4147940562f22) ===
+# Notes
+
+(to be completed)
+
+
+
+Sources (cite them by observation id; quotes must be exact substrings of the cited source):
+=== source appendix revision 1 observation obs-518fe6291bca8dd227c8019232b804bf04b240ac (86 bytes) ===
+# Appendix
+
+Bays twelve through thirty: blocked, supplier vans only, midday deadline.
+
+
+=== source handbook revision 1 observation obs-2820f3d4487da16536b84494bf2af5fb15426b49 (116 bytes) ===
+# Site handbook
+
+## Parking
+
+Vehicles of members are parked according to the plan in the appendix of this handbook.
+
+
+
+Every statement you add must be followed by a citation marker of the form
+[[cite:<observation id> "exact quote from that source"]] where the quote is copied verbatim from the cited source.
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<target path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest. For create expected_sha256 is null.
+Do not touch sources or oracle files. Do not claim completion; the independent checks decide.
