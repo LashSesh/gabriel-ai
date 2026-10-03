@@ -63,7 +63,10 @@ def backup(workspace, destination) -> dict:
                 "memory_sha256": hashlib.sha256((destination / "memory.sqlite").read_bytes()).hexdigest() if memory_anchor is not None else None,
                 "memory_anchor": memory_anchor,
                 "objects": copied, "object_count": len(copied), "object_bytes": sum(copied.values()),
-                "catalog_digest": owner.catalog_digest, "schema_registry_digest": registry_digest(), "reducer_identity": reducer_identity(),
+                # the identities the journal registered (equal to the running code's unless a migration is pending)
+                "catalog_digest": owner.registered["catalog_digest"], "schema_registry_digest": owner.registered["schema_registry_digest"],
+                "reducer_identity": owner.registered["reducer_identity"],
+                "running": {"catalog_digest": owner.catalog_digest, "schema_registry_digest": registry_digest(), "reducer_identity": reducer_identity()},
                 "excluded": ["credentials/ (principal secret)", "worktrees/ (disposable; patches are exported separately)", "runs/ runtime notes"]}
     (destination / "manifest.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
     return manifest

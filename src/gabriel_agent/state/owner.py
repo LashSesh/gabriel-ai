@@ -71,6 +71,7 @@ CREATE TABLE artifact_refs (sha256 TEXT PRIMARY KEY, bytes INTEGER NOT NULL, med
     first_sequence INTEGER NOT NULL);
 CREATE TABLE checkpoints (checkpoint_id TEXT PRIMARY KEY, sequence INTEGER NOT NULL, head TEXT NOT NULL,
     projection_digest TEXT NOT NULL, manifest_text TEXT NOT NULL);
+CREATE TABLE catalog_records (catalog_digest TEXT PRIMARY KEY, record_sha256 TEXT NOT NULL, record_bytes INTEGER NOT NULL);
 """
 
 
@@ -102,6 +103,9 @@ class Owner:
         self._clock = clock or (lambda: int(time.time() * 1000))
         self._hook = None  # test-only: hook(stage) with stage before_commit/after_commit
         self._closed = False
+        # identities registered in the journal (set by open; a new journal registers the running code's)
+        self.registered = {"catalog_digest": self.catalog_digest, "schema_registry_digest": registry_digest(), "reducer_identity": reducer_identity()}
+        self.pending_migration = None
 
     # ------------------------------------------------------------ lifecycle
     @staticmethod
@@ -137,6 +141,7 @@ class Owner:
                         reducer_identity(), GENESIS, GENESIS))
             for principal_id, secret_sha in principals.items():
                 db.execute("INSERT INTO principals VALUES (?,?)", (principal_id, secret_sha))
+            owner._retain_catalog()  # the catalog in force from sequence 0: replay uses it for this epoch's events
             db.commit()
         except BaseException:
             db.close()
@@ -145,7 +150,10 @@ class Owner:
         return owner
 
     @classmethod
-    def open(cls, path, store, catalog, *, clock=None, expected_anchor=None):
+    def open(cls, path, store, catalog, *, clock=None, expected_anchor=None, tolerate_mismatch=False):
+        """Open a journal. The registered catalog, schema registry and reducer identities must
+        match the running code; otherwise an explicit migration is required (``tolerate_mismatch``
+        returns the owner with ``pending_migration`` set, for the migration command only)."""
         if not Path(path).is_file():
             raise GabrielError(Code.STORAGE_FAULT, "journal does not exist: " + str(path))
         db = cls._connect(path)
@@ -154,14 +162,16 @@ class Owner:
             db.close()
             raise GabrielError(Code.UNSUPPORTED, "journal format or codec version is not supported")
         owner = cls(db, store, row[1], catalog, clock)
+        owner.registered = {"catalog_digest": row[3], "schema_registry_digest": row[4], "reducer_identity": row[5]}
         problems = []
         if row[3] != owner.catalog_digest:
             problems.append("capability catalog differs from the registered catalog; an explicit migration is required")
         if row[4] != registry_digest():
-            problems.append("schema registry differs from the journal's registry identity")
+            problems.append("schema registry differs from the journal's registry identity; an explicit migration is required")
         if row[5] != reducer_identity():
-            problems.append("reducer identity differs from the journal's reducer identity")
-        if problems:
+            problems.append("reducer identity differs from the journal's reducer identity; an explicit migration is required")
+        owner.pending_migration = {"problems": problems, "registered": owner.registered} if problems else None
+        if problems and not tolerate_mismatch:
             db.close()
             raise GabrielError(Code.UNSUPPORTED, "; ".join(problems))
         if expected_anchor is not None:
@@ -271,6 +281,15 @@ class Owner:
 
     # ------------------------------------------------------------ command admission
     def submit(self, command: dict, *, credential: Credential) -> dict:
+        """Admit one command. The journal commit is measured as a telemetry span when a tracer is
+        attached; the audit event is committed whether or not the span can be exported."""
+        tracer = getattr(self, "tracer", None)
+        if tracer is None:
+            return self._submit_inner(command, credential=credential)
+        with tracer.span("journal_commit", task_id=command.get("task_id"), run_id=command.get("run_id"), op=command.get("op")):
+            return self._submit_inner(command, credential=credential)
+
+    def _submit_inner(self, command: dict, *, credential: Credential) -> dict:
         validate(command, "command")
         command_text = canonical(command).decode("ascii")
         principal_id = self.authenticate(credential)
@@ -367,8 +386,9 @@ class Owner:
         derived = self._derived_inputs(command, payload, projection)
         return retained, derived
 
-    def _derived_inputs(self, command, payload, projection):
-        derived = {"catalog_tools": self.catalog["tools"], "catalog_verifiers": self.catalog["verifiers"]}
+    def _derived_inputs(self, command, payload, projection, catalog: dict | None = None):
+        catalog = catalog or self.catalog
+        derived = {"catalog_tools": catalog["tools"], "catalog_verifiers": catalog["verifiers"]}
         binding_ref = payload.get("binding_ref") if command["op"] == "admit_task" else (projection or {}).get("binding_ref")
         if binding_ref is not None:
             try:
@@ -472,6 +492,86 @@ class Owner:
     def referenced_artifacts(self) -> set:
         return {r[0] for r in self._db.execute("SELECT sha256 FROM artifact_refs")}
 
+    # ------------------------------------------------------------ explicit migrations (catalog, registry, reducer epochs)
+    def _has_table(self, name: str) -> bool:
+        return self._db.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name=?", (name,)).fetchone() is not None
+
+    def _retain_catalog(self) -> dict:
+        """Retain the running catalog's content under its digest (inside the caller's transaction):
+        replay reproduces the events of an epoch with the catalog that was in force then."""
+        ref = self.store.put(canonical(self.catalog), "application/json")
+        self._db.execute("CREATE TABLE IF NOT EXISTS catalog_records (catalog_digest TEXT PRIMARY KEY, record_sha256 TEXT NOT NULL, record_bytes INTEGER NOT NULL)")
+        self._db.execute("INSERT OR IGNORE INTO catalog_records VALUES (?,?,?)", (self.catalog_digest, ref["sha256"], ref["bytes"]))
+        return ref
+
+    def _catalog_for_digest(self, catalog_digest: str) -> dict | None:
+        """The retained catalog content for a digest, or None for an epoch whose catalog was never retained
+        (journals created before catalog records existed): such events replay with the running catalog."""
+        if catalog_digest == self.catalog_digest:
+            return self.catalog
+        if not self._has_table("catalog_records"):
+            return None
+        row = self._db.execute("SELECT record_sha256, record_bytes FROM catalog_records WHERE catalog_digest=?", (catalog_digest,)).fetchone()
+        if row is None:
+            return None
+        return loads(self.store.get({"sha256": row[0], "bytes": row[1], "media_type": "application/json"}))
+
+    def migrations(self) -> list:
+        """Every recorded migration in order; a journal created before the migrations table exists has none."""
+        if not self._has_table("migrations"):
+            return []
+        rows = self._db.execute("SELECT record_text FROM migrations ORDER BY sequence, migration_id").fetchall()
+        return [loads(r[0]) for r in rows]
+
+    def _catalog_epochs(self, pending_from_digest: str | None = None) -> list:
+        """Catalog digest in force up to and including each boundary sequence, oldest first; the
+        last entry (sequence None) is the digest in force now."""
+        epochs = [(m["sequence"], m["from_catalog_digest"]) for m in self.migrations()]
+        if pending_from_digest is not None:
+            epochs.append((self._meta()["event_count"], pending_from_digest))
+        epochs.append((None, self.catalog_digest))
+        return epochs
+
+    @staticmethod
+    def _catalog_digest_at(sequence: int, epochs: list) -> str:
+        for boundary, digest_ in epochs:
+            if boundary is None or sequence <= boundary:
+                return digest_
+        return epochs[-1][1]
+
+    def record_migration(self, *, reason: str, backup_manifest_sha256: str, replayed_events: int) -> dict:
+        """Record the move of this journal to the running code's identities. Only the migration
+        command calls this, after a backup and a passed equivalence replay; no event is rewritten."""
+        if self.pending_migration is None:
+            raise GabrielError(Code.POLICY_DENIED, "nothing to migrate: the journal already matches the running code")
+        meta = self._meta()
+        registered = self.pending_migration["registered"]
+        migration_id = "migration-%d-%s" % (len(self.migrations()) + 1, self.catalog_digest[:12])
+        record = {"schema": "gabriel.migration/1", "migration_id": migration_id, "workspace_id": self.workspace_id, "sequence": meta["event_count"],
+                  "from_catalog_digest": registered["catalog_digest"], "to_catalog_digest": self.catalog_digest,
+                  "from_schema_registry_digest": registered["schema_registry_digest"], "to_schema_registry_digest": registry_digest(),
+                  "from_reducer_identity": registered["reducer_identity"], "to_reducer_identity": reducer_identity(),
+                  "backup_manifest_sha256": backup_manifest_sha256, "replayed_events": int(replayed_events),
+                  "owner_time_unix_ms": self.owner_time(), "reason": reason[:1024]}
+        validate(record, "migration")
+        text = canonical(record).decode("ascii")
+        self._db.execute("BEGIN IMMEDIATE")
+        try:
+            self._db.execute("CREATE TABLE IF NOT EXISTS migrations (migration_id TEXT PRIMARY KEY, sequence INTEGER NOT NULL, "
+                             "from_catalog TEXT NOT NULL, to_catalog TEXT NOT NULL, record_text TEXT NOT NULL)")
+            self._db.execute("INSERT INTO migrations VALUES (?,?,?,?,?)", (migration_id, meta["event_count"], registered["catalog_digest"], self.catalog_digest, text))
+            self._db.execute("UPDATE meta SET catalog_digest=?, schema_registry_digest=?, reducer_identity=? WHERE singleton=1",
+                             (self.catalog_digest, registry_digest(), reducer_identity()))
+            self._retain_catalog()  # events from here on replay with this catalog; earlier epochs keep theirs
+            self._db.commit()
+        except BaseException:
+            self._db.rollback()
+            raise
+        self.registered = {"catalog_digest": self.catalog_digest, "schema_registry_digest": registry_digest(), "reducer_identity": reducer_identity()}
+        self.pending_migration = None
+        self.store.put(canonical(record), "application/json")
+        return record
+
     # ------------------------------------------------------------ anchors, replay, checkpoints
     def anchor(self) -> dict:
         meta = self._meta()
@@ -492,11 +592,15 @@ class Owner:
             raise GabrielError(Code.STORAGE_FAULT, "journal head at the anchored sequence differs from the retained anchor")
         return {"status": "passed", "anchored_sequence": anchor["sequence"], "current_sequence": meta["event_count"]}
 
-    def replay(self, *, expected_anchor=None) -> dict:
+    def replay(self, *, expected_anchor=None, pending_from_digest: str | None = None) -> dict:
         """Recorded replay: verify the chain and references, re-run the pure reducer over
-        retained payloads and inputs, compare every projection digest. No port is called."""
+        retained payloads and inputs, compare every projection digest. No port is called.
+        ``pending_from_digest`` is the equivalence check of a migration: every retained event
+        still carries the registered catalog digest while the running code's catalog differs."""
         if expected_anchor is not None:
             self.verify_anchor(expected_anchor)
+        epochs = self._catalog_epochs(pending_from_digest)
+        catalogs = {}
         head, inputs_head, count = GENESIS, GENESIS, 0
         projections, missing_refs, verified_refs = {}, [], 0
         self._db.execute("BEGIN")
@@ -520,9 +624,13 @@ class Owner:
                 payload = validate_bytes(self.store.get(command["payload_ref"]), payload_schema_for_op(command["op"]))
                 verified_refs += 1
                 retained = loads(inputs_text)
-                if retained["catalog_digest"] != self.catalog_digest:
+                epoch_digest = self._catalog_digest_at(sequence, epochs)
+                if retained["catalog_digest"] != epoch_digest:
                     raise GabrielError(Code.UNSUPPORTED, "catalog differs from the retained catalog digest at %d" % sequence)
-                derived = self._derived_inputs(command, payload, projections.get(command["run_id"]))
+                # the catalog in force at this sequence, when retained; otherwise the running catalog has to reproduce the event
+                if epoch_digest not in catalogs:
+                    catalogs[epoch_digest] = self._catalog_for_digest(epoch_digest)
+                derived = self._derived_inputs(command, payload, projections.get(command["run_id"]), catalog=catalogs[epoch_digest])
                 result = reduce(projections.get(command["run_id"]), command, payload, dict(retained, **derived))
                 pdigest = projection_digest(result.projection)
                 if pdigest != stored_pdigest:

@@ -22,6 +22,10 @@ def main(argv=None) -> int:
     init.add_argument("--backend", choices=("linux_namespace", "trusted_local"), default="linux_namespace")
     init.add_argument("--allow-trusted-local", action="store_true"); init.add_argument("--principal", default="local-user")
     doctor = sub.add_parser("doctor"); doctor.add_argument("--workspace", required=True); doctor.add_argument("--selftest", action="store_true")
+    doctor.add_argument("--deep", action="store_true", help="verify the bytes of every referenced object, not only their presence")
+    mig = sub.add_parser("migrate", help="explicit versioned migration of a journal to the running code's catalog, registry and reducer identities")
+    mig.add_argument("--workspace", required=True); mig.add_argument("--reason", required=True, help="why the identities changed (recorded)")
+    mig.add_argument("--backup", default=None, help="backup directory (default: <workspace>/migrations/backup-<sequence>-<time>)")
     task = sub.add_parser("task"); tsub = task.add_subparsers(dest="action", required=True)
     create = tsub.add_parser("create"); create.add_argument("--workspace", required=True); create.add_argument("--spec", required=True)
     for name in ("run", "status", "pause", "resume", "cancel", "inspect", "export"):
@@ -38,6 +42,12 @@ def main(argv=None) -> int:
     rs = sub.add_parser("restore", help="restore a backup elsewhere and verify anchor, objects and replay"); rs.add_argument("--from", dest="source", required=True); rs.add_argument("--workspace", required=True)
     rm = sub.add_parser("release-manifest"); rm.add_argument("--workspace", required=False); rm.add_argument("--out", required=True); rm.add_argument("--root", default=".")
     rm.add_argument("--selftest", action="store_true", help="run the containment self-test so the recorded doctor report carries its result")
+    metrics = sub.add_parser("metrics", help="operational metrics of a workspace or one run (verified success, unknown effects, retries, overruns, recovery, time to first artifact, resource use, cold/warm)")
+    metrics.add_argument("--workspace", required=True); metrics.add_argument("--run", default=None)
+    trace = sub.add_parser("trace", help="telemetry spans of a run: queue wait, provider latency, tool execution, verification, journal commit, artifact I/O")
+    trace.add_argument("run_id"); trace.add_argument("--workspace", required=True); trace.add_argument("--summary", action="store_true", help="totals per kind only")
+    gc = sub.add_parser("gc", help="artifact garbage collection: objects outside the referenced closure (journal, memory chain, checkpoints, catalog and migration records) and older than the grace period; dry run unless --apply")
+    gc.add_argument("--workspace", required=True); gc.add_argument("--apply", action="store_true"); gc.add_argument("--grace-seconds", type=int, default=3600)
     mem = sub.add_parser("memory", help="evidence index (WP09)"); msub = mem.add_subparsers(dest="action", required=True)
     for name in ("status", "verify", "compact"):
         p = msub.add_parser(name); p.add_argument("--workspace", required=True)
@@ -86,6 +96,9 @@ def main(argv=None) -> int:
                 if path.is_file():
                     evidence[name] = __import__("hashlib").sha256(path.read_bytes()).hexdigest()
             _emit(write_release_manifest(Path(args.root), Path(args.out), evidence=evidence, catalog_digest=catalog, doctor=doctor)); return 0
+        if args.command == "migrate":
+            report = Workspace.migrate(args.workspace, reason=args.reason, backup_dir=args.backup); _emit(report)
+            return 0 if report["status"] in ("migrated", "nothing_to_migrate") else 5
         if args.command == "init":
             ws = Workspace.create(args.workspace, principal_id=args.principal, backend=args.backend, allow_trusted_local=args.allow_trusted_local)
             _emit({"status": "created", "workspace": str(ws.path), "workspace_id": ws.config["workspace_id"], "backend": args.backend})
@@ -93,7 +106,7 @@ def main(argv=None) -> int:
         ws = Workspace.open(args.workspace)
         try:
             if args.command == "doctor":
-                report = ws.doctor(selftest=args.selftest); _emit(report)
+                report = ws.doctor(selftest=args.selftest, deep=args.deep); _emit(report)
                 return 0 if not report["problems"] else 3
             if args.command == "backup":
                 from ..agent.backup import backup
@@ -103,6 +116,14 @@ def main(argv=None) -> int:
                 _emit(ws.owner.replay(expected_anchor=anchor)); return 0
             if args.command == "replay":
                 _emit(dict(ws.owner.replay(), run=ws.owner.run_record(args.run_id))); return 0
+            if args.command == "gc":
+                report = ws.gc(apply=args.apply, grace_seconds=args.grace_seconds); _emit(report)
+                return 0 if report["status"] in ("dry_run", "passed") else 3
+            if args.command == "metrics":
+                _emit(ws.metrics(args.run)); return 0
+            if args.command == "trace":
+                report = ws.trace(args.run_id)
+                _emit({k: v for k, v in report.items() if k != "spans"} if args.summary else report); return 0
             if args.command == "memory":
                 if args.action == "status":
                     _emit({"anchor": ws.memory.anchor(), "entries": len(ws.memory.entries()), "work_items": ws.memory.work_items()}); return 0
@@ -119,7 +140,9 @@ def main(argv=None) -> int:
                 return 0
             if args.action == "run":
                 summary = TaskRunner(ws, args.task_id, max_iterations=args.max_iterations).run(); _emit(summary)
-                return 0 if summary["state"] == "succeeded" else 4
+                if summary["state"] == "succeeded":
+                    return 0
+                return 3 if summary.get("pause_requested") and summary["state"] not in ("succeeded", "failed", "cancelled") else 4
             if args.action == "status":
                 _emit(ws.status(args.task_id)); return 0
             if args.action == "pause":

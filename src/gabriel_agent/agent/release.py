@@ -97,7 +97,8 @@ def release_manifest(root: Path, *, evidence: dict | None = None, python: str = 
                         "evaluated; the episodic-retrieval ablation failed its declared held-out criterion (equal verified success at more tokens); "
                         "the rule-based policy without episodes remains the pinned default"},
         "known_issues": ([] if _license_status(root)["status"] == "resolved" else ["root license unresolved"]) +
-                        ["catalog fingerprint change requires a new workspace (no migration command)",
+                        ["a catalog, registry or reducer change needs an explicit migration (gabriel migrate: backup, equivalence replay, recorded epoch); "
+                         "journals created before catalog records existed migrate only when the running code reproduces them",
                          "single-host, single-user deployment only",
                          "advantage over a simple verification loop not shown; the evaluation corpus is saturated for gpt-4.1-mini"],
     }

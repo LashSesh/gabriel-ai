@@ -1,0 +1,135 @@
+{
+  "backends": {
+    "linux_namespace": {
+      "available": true,
+      "backend": "linux_namespace",
+      "checks": {
+        "jail_selftest": "not_executed",
+        "platform": "linux",
+        "setpriv": "/usr/bin/setpriv",
+        "unshare": "/usr/bin/unshare",
+        "unshare_namespaces": true
+      },
+      "containment": true,
+      "identity": "linux_namespace:6.18.44-fc-v64:x86_64:python-3.12.3",
+      "reasons": []
+    },
+    "trusted_local": {
+      "available": true,
+      "backend": "trusted_local",
+      "checks": {
+        "python": "/home/user/gabriel-ai/.venv/bin/python3"
+      },
+      "containment": false,
+      "reasons": [
+        "plain subprocess in a new session; no filesystem, network or credential boundary"
+      ]
+    }
+  },
+  "catalog_digest": "c8ee7bdd1d04776fe863fe70a35f9badfb450434f3392df79d1492a1af77dd99",
+  "configured_backend": "linux_namespace",
+  "effective_limits": {
+    "artifact_bytes": 16777216,
+    "concurrent_reads": 4,
+    "concurrent_writes_per_resource": "one",
+    "cpu_ms": 1800000,
+    "currency": "EUR",
+    "currency_micro_units": 0,
+    "elapsed_ms": 1800000,
+    "model_requests": 12,
+    "model_tokens_total": 20000,
+    "scratch_bytes": 1073741824,
+    "tool_attempts": 64
+  },
+  "git": "git version 2.43.0",
+  "journal": {
+    "head": "7ebbe6285ae3e5e412225bf0c446b044d82ed933e01398d271d195eebf1f5cd9",
+    "inputs_head": "4f9fffa22630161800ed091e85661ae7c6594ce9c0defb65dacdd1c7ad1a1ddc",
+    "schema": "gabriel.anchor/1",
+    "sequence": 41,
+    "workspace_id": "ws-2fe91163e24e"
+  },
+  "object_store": {
+    "faults": {},
+    "referenced": 0,
+    "status": "passed",
+    "stray_temporaries": []
+  },
+  "platform": "Linux-6.18.44-fc-v64-x86_64-with-glibc2.39",
+  "problems": [
+    "linux_namespace jail self-test not executed (run doctor --selftest on a Linux host that permits namespaces)"
+  ],
+  "python": "3.12.3",
+  "registry_loaded": {
+    "document.apply_amendment": true,
+    "document.base_commit_pinned": true,
+    "document.checks_intact": true,
+    "document.citations_bound": true,
+    "document.diff_in_scope": true,
+    "document.no_secrets": true,
+    "document.observe": true,
+    "document.output_valid": true,
+    "document.read_back": true,
+    "document.required_claims": true,
+    "document.review": true,
+    "model.generate": true,
+    "numerical.base_commit_pinned": true,
+    "numerical.checks_intact": true,
+    "numerical.diff_in_scope": true,
+    "numerical.no_secrets": true,
+    "numerical.observe": true,
+    "numerical.output_valid": true,
+    "numerical.read_back": true,
+    "numerical.reference_contract": true,
+    "numerical.review": true,
+    "numerical.run_job": true,
+    "numerical.verify": true,
+    "owner.output_valid": true,
+    "software.apply_patch": true,
+    "software.base_commit_pinned": true,
+    "software.checks_intact": true,
+    "software.diff_in_scope": true,
+    "software.no_secrets": true,
+    "software.observe": true,
+    "software.read_back": true,
+    "software.review": true,
+    "software.run_check": true,
+    "software.test_passed": true
+  },
+  "schema_registry_digest": "9e50429b912386b4991e081ef60b317c59c33c182a11df6381336fb4bdac02a6",
+  "startup": {
+    "artifact_root": {
+      "exists": true,
+      "path": "/tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/opsws/ws/objects",
+      "writable": true
+    },
+    "codec_version": "gabriel.codec/1",
+    "config_schema_version": 1,
+    "journal_format": "gabriel.agent-journal/1",
+    "memory_chain": {
+      "head": "11a54b57fe73b6e8172fd0e5776167a20b48ec33d13cecb5b9d5d4f668820f00",
+      "memory_sequence": 2,
+      "owner_sequence": 41,
+      "policy_revision": 0,
+      "schema": "gabriel.memory-anchor/1",
+      "workspace_id": "ws-2fe91163e24e"
+    },
+    "migrations": [],
+    "reconciliation_work": [],
+    "registered_identities": {
+      "catalog_digest": "c8ee7bdd1d04776fe863fe70a35f9badfb450434f3392df79d1492a1af77dd99",
+      "reducer_identity": "ea45d1d2bc7959619be6b48b5bfea5e357161decaa06b9c44b0f9eb96e14e0e7",
+      "schema_registry_digest": "9e50429b912386b4991e081ef60b317c59c33c182a11df6381336fb4bdac02a6"
+    },
+    "storage": {
+      "corrupt": [],
+      "deep": true,
+      "missing": [],
+      "referenced_objects": 112,
+      "stray_temporaries": []
+    }
+  },
+  "untrusted_execution_supported": false,
+  "version": "0.1.0",
+  "workspace_id": "ws-2fe91163e24e"
+}

@@ -13,6 +13,8 @@ from __future__ import annotations
 
 import hashlib
 import json
+import signal
+import threading
 import time
 
 from ..contracts.codec import canonical, dumps_utf8, loads, sha256_hex
@@ -78,7 +80,45 @@ class TaskRunner:
         return self._submit("record_hold", payload)
 
     # ------------------------------------------------------------ main loop
+    def request_stop(self, *_args) -> None:
+        """Clean shutdown contract (blueprint: operations): no new attempt is admitted after this
+        call; the loop stops at its next boundary, records the scheduling pause in the journal and
+        leaves the run resumable. An attempt in flight completes first (dispatch is synchronous);
+        a forced stop is covered by the recovery contract (AT05, AT24)."""
+        self._stop_requested = True
+
+    def _install_signal_handlers(self):
+        """SIGTERM/SIGINT request a clean stop; only the main thread may own signal handlers."""
+        if threading.current_thread() is not threading.main_thread():
+            return {}
+        previous = {}
+        for signum in (signal.SIGTERM, signal.SIGINT):
+            try:
+                previous[signum] = signal.signal(signum, self.request_stop)
+            except (ValueError, OSError):
+                pass
+        return previous
+
     def run(self) -> dict:
+        self._stop_requested = getattr(self, "_stop_requested", False)
+        previous_handlers = self._install_signal_handlers()
+        tracer = getattr(self.store, "tracer", None)
+        try:
+            if tracer is None:
+                return self._run_loop()
+            with tracer.span("run", task_id=self.task_id, run_id=self.run_id, domain=self.pack.namespace) as attributes:
+                summary = self._run_loop()
+                attributes.update({"state": summary["state"], "repair_count": summary["repair_count"], "plan_versions": summary["plan_versions"],
+                                   "model_requests": summary["spent"]["model_requests"], "model_tokens": summary["spent"]["model_tokens"]})
+                return summary
+        finally:
+            for signum, handler in previous_handlers.items():
+                try:
+                    signal.signal(signum, handler)
+                except (ValueError, OSError):
+                    pass
+
+    def _run_loop(self) -> dict:
         recovered = self.supervisor.recover(self.run_id, worktree=self.worktree, binding=self.binding)
         if recovered:
             self.log.append("recovered: " + json.dumps(recovered))
@@ -86,6 +126,11 @@ class TaskRunner:
             projection = self._projection()
             state = projection["run"]["state"]
             if state in STOP_STATES:
+                break
+            if self._stop_requested and not projection["run"]["pause_requested"]:
+                self._submit("request_pause", {"schema": "gabriel.pause-request/1",
+                                               "reason_ref": self.store.put(b"shutdown requested: clean stop, run resumable", "text/plain; charset=utf-8")})
+                self.log.append("shutdown requested: scheduling pause recorded; the run resumes from the journal")
                 break
             if projection["run"]["pause_requested"]:
                 self.log.append("paused")
@@ -202,6 +247,7 @@ class TaskRunner:
         return {"task_id": self.task_id, "run_id": self.run_id, "state": projection["run"]["state"], "run_revision": projection["run"]["run_revision"],
                 "plan_versions": projection["run_meta"]["plan_versions"], "repair_count": projection["run_meta"]["repair_count"],
                 "hold": projection["run_meta"]["hold"], "unresolved_effects": projection["run"]["unresolved_effect_ids"],
+                "pause_requested": projection["run"]["pause_requested"], "stop_requested": bool(getattr(self, "_stop_requested", False)),
                 "assessments": [{"check_id": a["check_id"], "outcome": a["outcome"], "eligible": a["eligible"], "node_id": a["node_id"]}
                                 for a in projection["assessments"].values()],
                 "spent": projection["ledger"]["spent"], "port_calls": self.supervisor.port_calls, "domain": self.pack.namespace, "log": self.log}
@@ -419,7 +465,11 @@ class TaskRunner:
                     "output_schema_digest": schema_digest(self.pack.proposal_schema), "candidate_ids": [candidate["candidate_id"]] if candidate else [],
                     "loss": (loss + ([problem] if problem else []))[:64], "status": "normalized" if candidate else "rejected"}
         validate(envelope, "proposal-envelope")
-        self.store.put(canonical(envelope), "application/json")
+        # retained and referenced from the propose node's assessment, so that the record of how a
+        # proposal was normalized survives garbage collection and travels with backups
+        if not hasattr(self, "_envelope_refs"):
+            self._envelope_refs = {}
+        self._envelope_refs[propose_node_id] = self.store.put(canonical(envelope), "application/json")
         if candidate is None:
             return None, problem
         return self.store.put(canonical(candidate), "application/json"), None
@@ -462,9 +512,16 @@ class TaskRunner:
                 spec = next(s for s in self.binding["check_specs"] if s["check_id"] == check_id)
                 record, impl = self.registry.verifier(self.pack.verifier_id(spec["predicate_kind"]))
                 ctx = _VerifierContext(self.store, self.binding, extras, memory=self.ws.memory, principal_id=self.ws.config["principal_id"])
+                verify_started = time.monotonic()
                 outcome, evidence = impl(spec, outputs, ctx)
+                tracer = getattr(self.store, "tracer", None)
+                if tracer is not None:
+                    tracer.record("verification", int((time.monotonic() - verify_started) * 1000), status="ok" if outcome == "passed" else "failed",
+                                  task_id=self.task_id, run_id=self.run_id, step_id=node_id,
+                                  attributes={"check_id": check_id, "verifier_id": record["verifier_id"], "outcome": outcome, "independent": bool(spec.get("independent"))})
                 evidence_ref = self.store.put(dumps_utf8({"check_id": check_id, "node_id": node_id, "outcome": outcome, "evidence": evidence}), "application/json; charset=utf-8")
                 input_refs = [projection["run_meta"]["observed_snapshot_ref"], state["result_ref"]] + list(state["outputs"].values())
+                input_refs.append(getattr(self, "_envelope_refs", {}).get(node_id))  # the proposal envelope of a propose node
                 assessment = {"schema": "gabriel.assessment/1", "assessment_id": self._fresh("assessment"), "task_id": self.task_id, "check_id": check_id,
                               "check_version": spec["version"], "input_refs": [r for r in input_refs if r is not None][:64], "outcome": outcome,
                               "evidence_ref": evidence_ref, "verifier_id": record["verifier_id"], "verifier_digest": record["implementation_fingerprint"],

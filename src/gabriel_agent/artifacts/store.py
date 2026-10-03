@@ -48,11 +48,21 @@ class ObjectStore:
         finally:
             os.close(fd)
 
+    def _io(self, operation: str, nbytes: int, started: float) -> None:
+        """Artifact I/O counters on the innermost open telemetry span, when a tracer is attached."""
+        tracer = getattr(self, "tracer", None)
+        if tracer is not None:
+            tracer.add(operation + "_calls", 1)
+            tracer.add(operation + "_bytes", nbytes)
+            tracer.add("io_ms", int((time.monotonic() - started) * 1000))
+
     def put(self, raw: bytes, media_type: str = "application/octet-stream") -> dict:
+        started = time.monotonic()
         ref = artifact_ref(raw, media_type)
         final = self.path_for(ref["sha256"])
         if final.exists():
             self._verify_file(final, ref)
+            self._io("put", len(raw), started)
             return ref
         final.parent.mkdir(parents=True, exist_ok=True)
         temp = self.tmp / ("install-" + secrets.token_hex(8))
@@ -74,6 +84,7 @@ class ObjectStore:
             except FileNotFoundError:
                 pass
             raise
+        self._io("put", len(raw), started)
         return ref
 
     def _verify_file(self, path: Path, ref: dict) -> bytes:
@@ -88,11 +99,14 @@ class ObjectStore:
         return raw
 
     def get(self, ref: dict) -> bytes:
+        started = time.monotonic()
         try:
             require_ref(ref)
         except CodecError as exc:
             raise GabrielError(Code.INVALID_SCHEMA, str(exc)) from exc
-        return self._verify_file(self.path_for(ref["sha256"]), ref)
+        raw = self._verify_file(self.path_for(ref["sha256"]), ref)
+        self._io("get", len(raw), started)
+        return raw
 
     def exists(self, ref: dict) -> bool:
         return self.path_for(ref["sha256"]).is_file()

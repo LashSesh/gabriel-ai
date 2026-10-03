@@ -24,6 +24,9 @@ from ..domains.document import DocumentPack
 from ..domains.numerical import NumericalPack
 from ..domains.software import SoftwarePack
 from ..memory import MemoryService
+from ..state.owner import CODEC_VERSION as JOURNAL_CODEC_VERSION, FORMAT as JOURNAL_FORMAT
+from ..state.reducer import reducer_identity
+from ..telemetry import Tracer, read_spans, summarize
 from ..models import provider_for_profile
 from ..policy.principals import Credential, new_secret, secret_digest
 from ..state import Owner
@@ -37,6 +40,13 @@ DEFAULT_BUDGET = {"model_tokens_total": 20000, "model_requests": 12, "tool_attem
 RESOURCES = ["worktree", "provider", "delivery"]
 GRANTED_EFFECTS = ["read", "local_reversible_write", "external_idempotent_effect"]
 POLICY_ID = "gabriel.local-single-user/1"
+
+
+def _write_migration_report(path: Path, report: dict) -> None:
+    directory = Path(path) / "migrations"
+    directory.mkdir(exist_ok=True)
+    name = (report.get("migration") or {}).get("migration_id") or ("refused-%d" % int(time.time() * 1000))
+    (directory / (name + ".json")).write_text(json.dumps(report, indent=2, sort_keys=True, default=str) + "\n")
 
 
 def build_packs(backend_resolver) -> dict:
@@ -56,6 +66,11 @@ def build_registry(backend_resolver) -> ToolRegistry:
 
 class Workspace:
     def __init__(self, path: Path, config: dict, owner: Owner, store: ObjectStore, registry: ToolRegistry, credential: Credential, memory=None, packs=None):
+        # operational telemetry: best-effort JSONL spans under the workspace; the owner and the store
+        # reach the tracer through their attributes, audit events never depend on it
+        self.tracer = Tracer(Path(path) / "telemetry" / "spans.jsonl", trace_id=config["workspace_id"])
+        store.tracer = self.tracer
+        owner.tracer = self.tracer
         self.path, self.config, self.owner, self.store, self.registry, self.credential = Path(path), config, owner, store, registry, credential
         self.memory = memory
         self.packs = packs or build_packs(lambda: None)
@@ -141,6 +156,65 @@ class Workspace:
         # the registry's backend resolver is bound after construction
         return ws
 
+    @classmethod
+    def migrate(cls, path, *, reason: str, backup_dir=None, clock=None) -> dict:
+        """Explicit versioned migration of a workspace whose journal registered other catalog,
+        schema registry or reducer identities than the running code (blueprint: operations).
+        Order: coherent backup first; equivalence replay of every retained event under the running
+        code; the migration is recorded only when every retained projection digest and chain hash
+        is reproduced. Otherwise it is refused and the journal is untouched: an old journal is
+        never rewritten to match new code."""
+        from .backup import backup
+        path = Path(path)
+        config_path = path / "config.json"
+        if not config_path.is_file():
+            raise GabrielError(Code.STORAGE_FAULT, "not a Gabriel workspace: " + str(path))
+        config = validate(loads(config_path.read_bytes()), "workspace-config")
+        store = ObjectStore.open(path / config["artifact_root"])
+        registry = build_registry(lambda: None)
+        owner = Owner.open(path / config["database"], store, registry.catalog(), clock=clock, tolerate_mismatch=True)
+        secret = (path / "credentials" / (config["principal_id"] + ".secret")).read_text().strip()
+        memory_path = path / "memory.sqlite"
+        memory = MemoryService.open(memory_path, store, lambda: owner.anchor()["sequence"]) if memory_path.is_file() else None
+        ws = cls(path, config, owner, store, registry, Credential(config["principal_id"], secret), memory=memory)
+        try:
+            report = {"schema": "gabriel.migration-report/1", "workspace_id": config["workspace_id"], "workspace": str(path),
+                      "registered": dict(owner.registered),
+                      "running": {"catalog_digest": owner.catalog_digest, "schema_registry_digest": registry_digest(), "reducer_identity": reducer_identity()},
+                      "problems": list((owner.pending_migration or {}).get("problems", [])), "status": None}
+            if owner.pending_migration is None:
+                report["status"] = "nothing_to_migrate"
+                return report
+            backup_dir = Path(backup_dir) if backup_dir else path / "migrations" / ("backup-%d-%d" % (owner.anchor()["sequence"], owner.owner_time()))
+            manifest = backup(ws, backup_dir)
+            manifest_sha = hashlib.sha256((backup_dir / "manifest.json").read_bytes()).hexdigest()
+            report["backup"] = {"path": str(backup_dir), "manifest_sha256": manifest_sha, "object_count": manifest["object_count"],
+                                "object_bytes": manifest["object_bytes"], "anchor": manifest["anchor"], "memory_anchor": manifest.get("memory_anchor")}
+            try:
+                replay = owner.replay(pending_from_digest=owner.registered["catalog_digest"])
+            except GabrielError as exc:
+                report.update({"status": "refused", "equivalence_replay": {"status": "failed", "error": exc.message},
+                               "note": "the running code does not reproduce the retained journal; nothing was changed, the backup is retained"})
+                _write_migration_report(path, report)
+                return report
+            if replay["status"] != "passed":
+                report.update({"status": "refused", "equivalence_replay": replay, "note": "replay reported missing referenced artifacts; nothing was changed"})
+                _write_migration_report(path, report)
+                return report
+            record = owner.record_migration(reason=reason, backup_manifest_sha256=manifest_sha, replayed_events=replay["events"])
+            report["equivalence_replay"] = replay
+            report["migration"] = record
+            report["replay_after"] = owner.replay()
+            # the workspace configuration carries the catalog identity the registry was built from
+            config = dict(config, registry_digest=registry.catalog_digest(), config_revision=int(config.get("config_revision", 0)) + 1)
+            validate(config, "workspace-config")
+            config_path.write_bytes(canonical(config) + b"\n")
+            report["status"] = "migrated"
+            _write_migration_report(path, report)
+            return report
+        finally:
+            ws.close()
+
     def close(self):
         self.owner.close()
         if self.memory is not None:
@@ -153,18 +227,155 @@ class Workspace:
         return self._backend
 
     # ------------------------------------------------------------ doctor
-    def doctor(self, selftest: bool = False) -> dict:
+    # ------------------------------------------------------------ operational metrics and traces
+    def trace(self, run_id: str | None = None) -> dict:
+        """Retained telemetry spans of a run (or of the workspace) with totals per kind."""
+        spans = read_spans(self.tracer.path, run_id)
+        return {"run_id": run_id, "path": str(self.tracer.path), "summary": summarize(spans), "spans": spans,
+                "exporter": {"written": self.tracer.written, "dropped": self.tracer.dropped}}
+
+    def _run_metrics(self, run_id: str) -> dict:
+        """Per-run operational metrics from the journal (blueprint: track verified success, false
+        completion, unknown effects, retries, budget overruns, recovery, time to first useful
+        artifact and resource use; cold and warm paths separately)."""
+        projection = self.owner.projection(run_id)
+        rows = self.owner._db.execute("SELECT e.sequence, e.kind, e.inputs_text, c.command_text, e.command_id FROM events e JOIN commands c "
+                                      "ON e.command_id = c.command_id WHERE e.run_id = ? ORDER BY e.sequence", (run_id,)).fetchall()
+        events = []
+        for sequence, kind, inputs_text, command_text, command_id in rows:
+            events.append({"sequence": sequence, "kind": kind, "op": loads(command_text)["op"], "command_id": command_id,
+                           "owner_time_unix_ms": loads(inputs_text)["owner_time_unix_ms"]})
+        first_time = events[0]["owner_time_unix_ms"] if events else None
+        last_time = events[-1]["owner_time_unix_ms"] if events else None
+        attempts = projection["attempts"]
+        # time to the first useful artifact: the first accepted, completed result of a propose step
+        first_artifact_ms = None
+        for event in events:
+            if event["op"] != "accept_result":
+                continue
+            attempt = attempts.get(event["command_id"].removeprefix("result-"))
+            if attempt and attempt["capability_id"] == "model.generate" and attempt["status"] == "completed" and attempt["step_id"] != "plan-request":
+                first_artifact_ms = event["owner_time_unix_ms"] - first_time
+                break
+        # recovery: every hold until the next event of another kind (or the end of the journal)
+        holds, recovery_ms = 0, 0
+        for index, event in enumerate(events):
+            if event["op"] != "hold":
+                continue
+            holds += 1
+            following = next((e for e in events[index + 1:] if e["op"] != "hold"), None)
+            recovery_ms += ((following or {"owner_time_unix_ms": last_time})["owner_time_unix_ms"] - event["owner_time_unix_ms"])
+        per_step = {}
+        for attempt in attempts.values():
+            per_step[attempt["step_id"]] = per_step.get(attempt["step_id"], 0) + 1
+        retries = sum(count - 1 for count in per_step.values())
+        unknown_effects = len(projection["run"]["unresolved_effect_ids"]) + sum(1 for a in attempts.values() if a["effect_state"] in ("unknown", "ambiguous"))
+        assessments = list(projection["assessments"].values())
+        specs = {}
+        try:
+            specs = {s["check_id"]: s for s in validate_bytes(self.store.get(projection["binding_ref"]), "task-binding")["check_specs"]}
+        except (GabrielError, KeyError, TypeError):
+            pass
+        independent_passed = sum(1 for a in assessments if a["eligible"] and a["outcome"] == "passed" and specs.get(a["check_id"], {}).get("independent"))
+        independent_failed = sum(1 for a in assessments if a["eligible"] and a["outcome"] == "failed" and specs.get(a["check_id"], {}).get("independent"))
+        # cold or warm path: a run that reused a cached job result or retrieval manifest took the warm path
+        warm = False
+        for attempt in attempts.values():
+            if attempt.get("result_ref"):
+                try:
+                    result = loads(self.store.get(attempt["result_ref"]))
+                except GabrielError:
+                    continue
+                for output in result.get("outputs", []):
+                    if output["output_slot"] == "job_result":
+                        try:
+                            warm = warm or bool(loads(self.store.get(output["artifact_ref"])).get("cache", {}).get("hit"))
+                        except GabrielError:
+                            pass
+        overruns = projection["ledger"].get("overruns")
+        return {"run_id": run_id, "task_id": projection["task"]["task_id"], "domain": projection["task"].get("domain"), "state": projection["run"]["state"],
+                "declared_success": projection["run"]["state"] == "succeeded",
+                "independent_checks": {"passed": independent_passed, "failed": independent_failed},
+                "unknown_effects": unknown_effects, "retries": retries, "attempts": len(attempts),
+                "budget_overruns": len(overruns) if isinstance(overruns, (list, dict)) else int(bool(overruns)),
+                "holds": holds, "recovery_ms": recovery_ms, "repair_count": projection["run_meta"]["repair_count"], "plan_versions": projection["run_meta"]["plan_versions"],
+                "time_to_first_useful_artifact_ms": first_artifact_ms, "total_ms": (last_time - first_time) if events else None,
+                "resource_use": projection["ledger"]["spent"], "path": "warm" if warm else "cold", "events": len(events),
+                "telemetry": summarize(read_spans(self.tracer.path, run_id))["per_kind"]}
+
+    def metrics(self, run_id: str | None = None) -> dict:
+        """Operational metrics of one run or of every run in the workspace, with totals."""
+        run_ids = [run_id] if run_id else [r[0] for r in self.owner._db.execute("SELECT run_id FROM runs ORDER BY run_id").fetchall()]
+        runs = [self._run_metrics(r) for r in run_ids]
+        by_state = {}
+        for run in runs:
+            by_state[run["state"]] = by_state.get(run["state"], 0) + 1
+        totals = {"runs": len(runs), "by_state": by_state, "declared_successes": sum(r["declared_success"] for r in runs),
+                  "independent_checks_passed": sum(r["independent_checks"]["passed"] for r in runs),
+                  "independent_checks_failed": sum(r["independent_checks"]["failed"] for r in runs),
+                  "unknown_effects": sum(r["unknown_effects"] for r in runs), "retries": sum(r["retries"] for r in runs),
+                  "budget_overruns": sum(r["budget_overruns"] for r in runs), "holds": sum(r["holds"] for r in runs),
+                  "recovery_ms": sum(r["recovery_ms"] for r in runs),
+                  "cold_runs": sum(1 for r in runs if r["path"] == "cold"), "warm_runs": sum(1 for r in runs if r["path"] == "warm"),
+                  "model_requests": sum(r["resource_use"].get("model_requests", 0) for r in runs),
+                  "model_tokens": sum(r["resource_use"].get("model_tokens", 0) for r in runs)}
+        return {"schema": "gabriel.metrics/1", "workspace_id": self.config["workspace_id"], "totals": totals, "runs": runs,
+                "telemetry": summarize(read_spans(self.tracer.path)), "exporter": {"written": self.tracer.written, "dropped": self.tracer.dropped}}
+
+    def gc(self, *, apply: bool = False, grace_seconds: int = 3600, now: float | None = None) -> dict:
+        """Artifact garbage collection: dry run unless ``apply``; see ``agent/gc.py``."""
+        from .gc import collect_garbage
+        return collect_garbage(self, apply=apply, grace_seconds=grace_seconds, now=now)
+
+    def startup_validation(self, deep: bool = False) -> dict:
+        """What the owner validates at start (blueprint: operations): schema and format versions,
+        storage integrity of every referenced object (presence; bytes with ``deep``), registry
+        compatibility and recorded migrations, the artifact root, and outstanding leases, which
+        are reconciliation work and never automatic repeats."""
+        referenced = set(self.owner.referenced_artifacts())
+        if self.memory is not None:
+            referenced |= self.memory.referenced_artifacts()
+        missing, corrupt = [], []
+        for sha in sorted(referenced):
+            path = self.store.path_for(sha)
+            if not path.is_file():
+                missing.append(sha)
+            elif deep and hashlib.sha256(path.read_bytes()).hexdigest() != sha:
+                corrupt.append(sha)
+        root = self.path / self.config["artifact_root"]
+        return {"journal_format": JOURNAL_FORMAT, "codec_version": JOURNAL_CODEC_VERSION, "config_schema_version": self.config.get("schema_version"),
+                "registered_identities": dict(self.owner.registered), "migrations": [{"migration_id": m["migration_id"], "sequence": m["sequence"],
+                                                                                     "from_catalog_digest": m["from_catalog_digest"], "to_catalog_digest": m["to_catalog_digest"]}
+                                                                                    for m in self.owner.migrations()],
+                "storage": {"referenced_objects": len(referenced), "missing": missing[:64], "corrupt": corrupt[:64], "deep": deep,
+                            "stray_temporaries": self.store.fsck([])["stray_temporaries"]},
+                "artifact_root": {"path": str(root), "exists": root.is_dir(), "writable": os.access(root, os.W_OK)},
+                "reconciliation_work": self.owner.expired_attempts(),
+                "memory_chain": self.memory.anchor() if self.memory is not None else None}
+
+    def doctor(self, selftest: bool = False, deep: bool = False) -> dict:
         probes = probe_backends()
         if selftest:
             probes["linux_namespace"] = LinuxNamespaceBackend().probe(selftest=True)
         configured = self.config["containment_backend"]
+        startup = self.startup_validation(deep=deep)
         report = {"workspace_id": self.config["workspace_id"], "version": __version__, "python": platform.python_version(),
                   "platform": platform.platform(), "configured_backend": configured, "backends": probes,
                   "registry_loaded": self.registry.verify_loaded(), "catalog_digest": self.owner.catalog_digest,
                   "schema_registry_digest": registry_digest(), "journal": self.owner.anchor(),
                   "object_store": self.store.fsck([]), "effective_limits": self.config["default_limits"],
+                  "startup": startup,
                   "git": subprocess.run(["git", "--version"], capture_output=True, text=True).stdout.strip() or "missing"}
         problems = []
+        if startup["storage"]["missing"]:
+            problems.append("%d referenced object(s) missing from the store" % len(startup["storage"]["missing"]))
+        if startup["storage"]["corrupt"]:
+            problems.append("%d referenced object(s) with changed bytes" % len(startup["storage"]["corrupt"]))
+        if not startup["artifact_root"]["exists"] or not startup["artifact_root"]["writable"]:
+            problems.append("artifact root missing or not writable: " + startup["artifact_root"]["path"])
+        if startup["reconciliation_work"]:
+            problems.append("%d expired attempt lease(s) await reconciliation (never repeated automatically): %s"
+                            % (len(startup["reconciliation_work"]), ", ".join(a["attempt_id"] for a in startup["reconciliation_work"][:5])))
         if configured == "linux_namespace" and not probes["linux_namespace"]["available"]:
             problems.append("configured containment backend linux_namespace is unavailable: " + "; ".join(probes["linux_namespace"]["reasons"]))
         if configured == "trusted_local":

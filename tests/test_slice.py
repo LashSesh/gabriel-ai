@@ -150,7 +150,7 @@ def test_cli_smoke(tmp_path, capsys):
     assert json.loads(capsys.readouterr().out)["state"] == "admitted"
     assert cli_main(["task", "pause", task_id, "--workspace", str(ws_dir)]) == 0
     capsys.readouterr()
-    assert cli_main(["task", "run", task_id, "--workspace", str(ws_dir)]) == 4  # paused: no dispatch
+    assert cli_main(["task", "run", task_id, "--workspace", str(ws_dir)]) == 3  # paused: no dispatch, resumable (exit 3)
     assert json.loads(capsys.readouterr().out)["state"] == "admitted"
     assert cli_main(["task", "resume", task_id, "--workspace", str(ws_dir)]) == 0
     capsys.readouterr()

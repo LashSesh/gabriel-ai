@@ -1,6 +1,6 @@
 {
   "schema": "gabriel.evidence.work-packages/1",
-  "produced_at_utc": "2026-10-02T22:31:39.484853+00:00",
+  "produced_at_utc": "2026-10-03T08:32:58.763324+00:00",
   "rule": "A package counts as done only with actual code and recorded test output; privileged and paid runs are listed under not_executed.",
   "packages": {
     "WP01": {
@@ -1128,6 +1128,81 @@
           },
           {
             "test": "test_protocol_freeze_and_metrics",
+            "result": "PASSED"
+          }
+        ]
+      }
+    },
+    "OPS": {
+      "status": "DONE",
+      "tests": [
+        "tests/test_ops.py"
+      ],
+      "acceptance": [
+        "blueprint: operations, observability and release discipline"
+      ],
+      "evidence": [
+        "evidence/ops/migration_at23.json",
+        "evidence/ops/migration_run5_dr-notice.json",
+        "evidence/ops/smoke_metrics.json",
+        "evidence/ops/smoke_trace_summary.json",
+        "evidence/ops/smoke_gc_dry_run.json",
+        "evidence/ops/smoke_doctor_deep.json",
+        "docs/adr/ADR-17-operations.md",
+        "evidence/test_results.txt"
+      ],
+      "not_executed": [
+        "cooperative cancellation of a tool run inside the containment backend (stop takes effect at the next boundary)",
+        "a successful migration of a journal created before catalog records existed (refused by rule when verifiers changed)"
+      ],
+      "test_results": {
+        "tests/test_ops.py": [
+          {
+            "test": "test_catalog_change_refuses_open_and_an_explicit_migration_moves_the_journal",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_migration_is_refused_when_the_new_code_does_not_reproduce_the_journal",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_cli_migrate_reports_and_exits_by_outcome",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_startup_validation_reports_storage_root_and_reconciliation_work",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_stop_request_records_a_pause_and_the_run_resumes_from_the_journal",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_sigterm_during_a_run_stops_cleanly_at_the_next_boundary",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_changed_verifier_migrates_a_journal_whose_epoch_catalog_was_retained",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_spans_separate_the_named_phases_and_carry_no_secret",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_exporter_failure_never_affects_the_audit_journal",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_metrics_report_the_blueprint_quantities_per_run",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_gc_removes_only_unreferenced_objects_past_the_grace_period",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_cli_gc_dry_run_and_apply",
             "result": "PASSED"
           }
         ]

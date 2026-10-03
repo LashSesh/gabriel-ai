@@ -1,0 +1,46 @@
+{
+  "backup": {
+    "anchor": {
+      "head": "b19345e0d2e749c9735fe2d4b2bddaaceaa571c0b58b1848fe123041a31f7f23",
+      "inputs_head": "2915ed5c358ec5872e0aafc4e902486d820f39770c46b89dc0b09fd9dc14b681",
+      "schema": "gabriel.anchor/1",
+      "sequence": 28,
+      "workspace_id": "ws-cd6ef2ff56a7"
+    },
+    "manifest_sha256": "f351a9095ac902904167a2eb7eb4011a03352af929480294c78cd396ce9c9d5a",
+    "memory_anchor": {
+      "head": "2173de228a6d939dea6b2396a369764fb014f6e9639f89feae776c6223d5c7b2",
+      "memory_sequence": 5,
+      "owner_sequence": 28,
+      "policy_revision": 0,
+      "schema": "gabriel.memory-anchor/1",
+      "workspace_id": "ws-cd6ef2ff56a7"
+    },
+    "object_bytes": 72850,
+    "object_count": 89,
+    "path": "/tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/run5-migration-backup"
+  },
+  "equivalence_replay": {
+    "error": "verifier digest does not match the registered implementation",
+    "status": "failed"
+  },
+  "note": "the running code does not reproduce the retained journal; nothing was changed, the backup is retained",
+  "problems": [
+    "capability catalog differs from the registered catalog; an explicit migration is required",
+    "schema registry differs from the journal's registry identity; an explicit migration is required"
+  ],
+  "registered": {
+    "catalog_digest": "ec92ac1836ac1296eb0d809fe34b15fd7c20dfc2e6597b3835eefeea4f11d0d2",
+    "reducer_identity": "ea45d1d2bc7959619be6b48b5bfea5e357161decaa06b9c44b0f9eb96e14e0e7",
+    "schema_registry_digest": "4cabaa449242f75840a4d15e7d2006b9d5cad407cb4ac46458e1dcd8f41b9dfc"
+  },
+  "running": {
+    "catalog_digest": "19d093b97c894c4bab8a4c9c507a745f072bd87270d719cc4a8eac36d6158c4c",
+    "reducer_identity": "ea45d1d2bc7959619be6b48b5bfea5e357161decaa06b9c44b0f9eb96e14e0e7",
+    "schema_registry_digest": "9e50429b912386b4991e081ef60b317c59c33c182a11df6381336fb4bdac02a6"
+  },
+  "schema": "gabriel.migration-report/1",
+  "status": "refused",
+  "workspace": "evidence/wp14/run5/runs/dr-notice--gabriel_reference_plan--0/gabriel_reference_plan-0-ws",
+  "workspace_id": "ws-cd6ef2ff56a7"
+}

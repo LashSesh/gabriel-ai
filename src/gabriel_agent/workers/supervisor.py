@@ -80,6 +80,8 @@ class Supervisor:
     # ------------------------------------------------------------ dispatch
     def dispatch(self, intent: dict, args: dict, *, worktree=None, binding=None) -> tuple:
         run_id, task_id = intent["run_id"], intent["task_id"]
+        tracer = getattr(self.store, "tracer", None)
+        entered = time.monotonic()
         descriptor, implementation = self.registry.tool(intent["capability_id"])
         projection = self.owner.projection(run_id)
         attempt = projection["attempts"].get(intent["attempt_id"])
@@ -101,6 +103,9 @@ class Supervisor:
                               backend=self.backend, worktree=worktree, binding=binding,
                               deadline_unix_ms=intent["expires_at_unix_ms"], extras=self.extras)
         started = time.monotonic()
+        if tracer is not None:  # queue time: from dispatch entry (issued attempt) to the start of external I/O
+            tracer.record("queue_wait", int((started - entered) * 1000), task_id=task_id, run_id=run_id, step_id=intent.get("step_id"),
+                          attempt_id=intent["attempt_id"], attributes={"capability_id": intent["capability_id"]})
         self.port_calls += 1
         try:
             outcome = implementation(intent, args, context)
@@ -112,6 +117,11 @@ class Supervisor:
             outcome = ToolOutcome(status="failed", exit_code=None, effect_outcome="outcome_unknown" if descriptor["effect_class"] != "read" else "not_applicable",
                                   outputs=[("error", detail, "text/plain; charset=utf-8", descriptor["output_schema_digest"])])
         elapsed = int((time.monotonic() - started) * 1000)
+        if tracer is not None:
+            tracer.record("tool_execution", elapsed, status="ok" if outcome.status == "completed" else "failed", task_id=task_id, run_id=run_id,
+                          step_id=intent.get("step_id"), attempt_id=intent["attempt_id"],
+                          attributes={"capability_id": intent["capability_id"], "outcome": outcome.status, "effect_class": descriptor["effect_class"],
+                                      "backend": getattr(self.backend, "kind", None)})
         self._hook("after_io")
         result = self._result_record(intent, descriptor, outcome, elapsed, projection["run"]["budget"]["currency"])
         self._hook("before_result_commit")

@@ -161,6 +161,36 @@ gabriel eval freeze ... --tiers hard --systems provider_only,simple_loop,gabriel
 scripts/policy_route.py promote --train-out ./policies --eval-run ./run4b --held-out stateful --out ./promotion
 ```
 
+## Operations (ADR-17)
+```bash
+gabriel doctor --workspace ./workspace [--deep]       # startup validation: format and codec versions, registered identities and
+                                                      # migrations, referenced objects present (bytes with --deep), artifact root,
+                                                      # expired leases as reconciliation work
+gabriel migrate --workspace ./workspace --reason "<why the code changed>" [--backup DIR]
+gabriel metrics --workspace ./workspace [--run RUN_ID] # verified success, independent checks, unknown effects, retries, budget
+                                                      # overruns, holds and recovery time, time to first useful artifact,
+                                                      # resource use, cold/warm path, telemetry totals
+gabriel trace RUN_ID --workspace ./workspace [--summary]   # spans: queue wait, provider, tool execution, verification,
+                                                           # journal commit, artifact I/O counters
+gabriel gc --workspace ./workspace [--apply] [--grace-seconds N]   # dry run by default
+```
+A workspace whose journal registered other catalog, schema registry or reducer identities than
+the running code refuses to open and names the migration. `migrate` takes a coherent backup
+first, replays every retained event under the running code (events of earlier epochs with the
+catalog retained for them) and records the migration only when every projection digest and
+chain hash is reproduced; otherwise it is refused, the backup stays and the journal is untouched.
+Journals created before catalog records existed can be migrated only when the running code
+still reproduces them (a changed verifier implementation refuses); they stay readable with the
+code identity recorded in their release manifest. Telemetry is written to
+`<workspace>/telemetry/spans.jsonl` as best effort: a span that cannot be written is counted as
+dropped and never affects the journal, and spans carry identifiers, kinds, durations and
+counters only. `gabriel task run` stops cleanly on SIGTERM/SIGINT: it records the scheduling
+pause at the next boundary and exits 3; `task resume` and `task run` continue from the journal.
+Garbage collection keeps the transitive closure of everything the journal (events, retained
+inputs, payloads), the memory chain, the checkpoints, the catalog and migration records name,
+including references nested inside JSON artifacts; objects outside it and older than the grace
+period are orphans. After `--apply` the replay and the memory chain are re-verified.
+
 ## Evidence manifests
 ```bash
 GABRIEL_CONTAINMENT_TESTS=1 python -m pytest tests -vv -rs | tee evidence/test_results.txt

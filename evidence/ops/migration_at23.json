@@ -1,0 +1,46 @@
+{
+  "backup": {
+    "anchor": {
+      "head": "b7bf51efd1f603de3915014d664c8f7ffa1f6c2409d96a41642e5fdcf0a76c07",
+      "inputs_head": "529bcc3dfccf9d7e6022a9053a4ee0c19864f87f90ae28b6cc320a1fb3d749ab",
+      "schema": "gabriel.anchor/1",
+      "sequence": 281,
+      "workspace_id": "ws-e38597954e44"
+    },
+    "manifest_sha256": "9d183620eff0d97e76436b58bfb6876c35b910ca0f94ef0bf2cc272d488c9297",
+    "memory_anchor": {
+      "head": "06a4fd6eda9b6ec78d23d1a8a8d9ddfe42ea510400cb84e8e9a876dc201dcf4e",
+      "memory_sequence": 8,
+      "owner_sequence": 281,
+      "policy_revision": 0,
+      "schema": "gabriel.memory-anchor/1",
+      "workspace_id": "ws-e38597954e44"
+    },
+    "object_bytes": 573642,
+    "object_count": 619,
+    "path": "/tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/at23-migration-backup"
+  },
+  "equivalence_replay": {
+    "error": "verifier digest does not match the registered implementation",
+    "status": "failed"
+  },
+  "note": "the running code does not reproduce the retained journal; nothing was changed, the backup is retained",
+  "problems": [
+    "capability catalog differs from the registered catalog; an explicit migration is required",
+    "schema registry differs from the journal's registry identity; an explicit migration is required"
+  ],
+  "registered": {
+    "catalog_digest": "ff1616bea15411efb7672e388a0b85b7d725b585d4e01af71c962b6fd9c33972",
+    "reducer_identity": "ea45d1d2bc7959619be6b48b5bfea5e357161decaa06b9c44b0f9eb96e14e0e7",
+    "schema_registry_digest": "e54c90a7ec6282956d1f419c912caf3471bdd1010d54cee3f4507c17066221e6"
+  },
+  "running": {
+    "catalog_digest": "19d093b97c894c4bab8a4c9c507a745f072bd87270d719cc4a8eac36d6158c4c",
+    "reducer_identity": "ea45d1d2bc7959619be6b48b5bfea5e357161decaa06b9c44b0f9eb96e14e0e7",
+    "schema_registry_digest": "9e50429b912386b4991e081ef60b317c59c33c182a11df6381336fb4bdac02a6"
+  },
+  "schema": "gabriel.migration-report/1",
+  "status": "refused",
+  "workspace": "evidence/wp10/at23/workspace",
+  "workspace_id": "ws-e38597954e44"
+}

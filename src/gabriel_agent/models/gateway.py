@@ -87,6 +87,13 @@ class ModelGateway:
             raise GabrielError(Code.INVALID_SCHEMA, "prompt bytes do not match the request's prompt reference")
         config = {"role": request["role"], "step_key": step_key, "max_output_tokens": request["max_output_tokens"]}
         response = self.provider.generate(prompt, config, deadline_unix_ms)
+        tracer = getattr(self.store, "tracer", None)
+        if tracer is not None:  # provider latency: identifiers, status and sizes only; never the prompt or the response
+            tracer.record("provider", int(response.elapsed_ms or 0), status="ok" if response.status == "completed" else "failed",
+                          task_id=request.get("task_id"), run_id=request.get("run_id"), step_id=step_key,
+                          attributes={"provider_status": response.status, "role": request["role"], "prompt_bytes": len(prompt),
+                                      "response_bytes": len(response.raw_bytes or b""), "input_tokens": response.input_tokens,
+                                      "output_tokens": response.output_tokens, "http_status": response.http_status})
         raw_ref = self.store.put(response.raw_bytes, "application/json")
         status = response.status
         normalized, loss, problem = None, [], None

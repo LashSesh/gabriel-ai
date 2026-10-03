@@ -67,6 +67,7 @@ _SCHEMA_CONST = {
     "gabriel.retrieval-manifest/1": "retrieval-manifest", "gabriel.claim-assessment/1": "claim-assessment",
     "gabriel.access-revocation/1": "access-revocation", "gabriel.policy-candidate/1": "policy-candidate",
     "gabriel.compaction-manifest/1": "compaction-manifest", "gabriel.memory-anchor/1": "memory-anchor",
+    "gabriel.migration/1": "migration",
 }
 
 

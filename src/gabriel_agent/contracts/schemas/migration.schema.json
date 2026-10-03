@@ -1,0 +1,70 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/migration.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "An explicit, versioned journal migration: the identities the journal moved from and to, the sequence at which they changed, the backup taken first and the equivalence replay that justified it. The journal's events are never rewritten.",
+  "properties": {
+    "backup_manifest_sha256": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "from_catalog_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "from_reducer_identity": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "from_schema_registry_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "migration_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "owner_time_unix_ms": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "reason": {
+      "maxLength": 1024,
+      "type": "string"
+    },
+    "replayed_events": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "schema": {
+      "const": "gabriel.migration/1",
+      "type": "string"
+    },
+    "sequence": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "to_catalog_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "to_reducer_identity": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "to_schema_registry_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "workspace_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    }
+  },
+  "required": [
+    "schema",
+    "migration_id",
+    "workspace_id",
+    "sequence",
+    "from_catalog_digest",
+    "to_catalog_digest",
+    "from_schema_registry_digest",
+    "to_schema_registry_digest",
+    "from_reducer_identity",
+    "to_reducer_identity",
+    "backup_manifest_sha256",
+    "replayed_events",
+    "owner_time_unix_ms",
+    "reason"
+  ],
+  "title": "migration",
+  "type": "object"
+}

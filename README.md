@@ -22,9 +22,12 @@ in an isolated worktree with independent acceptance checks.
 - Protocol 5 (advantage gate on the document and numerical families with declared ablations of
   provenance-aware retrieval and the revision rule; two pilots, held-out families):
   `docs/EVALUATION_PROTOCOL.md`, `docs/RELEASE_G2.md`, `evidence/wp14/`
+- Operations (explicit versioned migrations with catalog epochs, startup validation, clean
+  shutdown, telemetry spans, operational metrics, artifact garbage collection):
+  `docs/RUNBOOK.md` (Operations), `docs/adr/ADR-17-operations.md`, `evidence/ops/`
 - Contract extensions: `docs/adr/ADR-10-hold-records.md`, `ADR-11`, `ADR-12`, `ADR-13` (DomainPack
   ports), `ADR-14` (memory chain), `ADR-15` (readout router), `ADR-16` (document and numerical
-  advantage gate with declared memory ablations)
+  advantage gate with declared memory ablations), `ADR-17` (operations)
 - Evidence (test log, environment, baseline rerun, spec validation): `evidence/`
 - The blueprint's own machine-readable contracts and validator: `contracts/`, `tools/validate_spec.py`
 
