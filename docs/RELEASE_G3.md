@@ -8,6 +8,31 @@ rule-based router as the comparator, a conventional feature/readout baseline bes
 recurrent-feature variant, decision loss and end-to-end effect both reported. This report
 states what was executed and the verdict; it does not revise G1/G2.
 
+## Verdict after protocol 8 (ADR-22, `evidence/wp15/`)
+**G3 is established in the blueprint's scoped sense.** Protocol 4 (below, retained unchanged)
+could not train a readout because no first patch failed on the hard tier. The association
+distribution of ADR-20 and ADR-21 fails first attempts at a measurable rate with both outcomes,
+and ADR-22 let the document pack declare the channels that tell them apart (committed facts of
+the latest verification, among them whether an unmet claim's expected source was in the
+prompt). Under protocol 8, declared before any run: a logistic readout trained on 48 retained
+decisions (8 positives) of the system's own runs on three topics met the criterion of protocol
+4b on two topics it had never seen (equal verified success 8 of 12, 2836 against 5425 mean
+tokens, no false completion), its decision loss on the held-out decisions was 0.045 against the
+rule's 6.91, and the memory's promotion rule admitted it (support 8 over 4 refutations, held-out
+families disjoint from the training families). The promoted readout
+(`readout-channels-v2-f164ed8e44e7`) ships with the document pack as its default routing
+policy, pinned per task with its provenance; the rule-based policy remains the default of every
+other pack. What it established is bounded and stated: the readout learned one legible fact
+(stop when the unmet claim expects a source the retrieval did not carry), it can only stop a
+repair earlier than the rule, it stopped one recoverable repair on a seen task (paired -0.03
+verified success over all tasks at -2401 tokens), the held-out decisions were all of one class,
+and the evidence is one provider, one pack and one constructed distribution. The G1 and G2
+regression gates passed on the release host with the readout shipped (`evidence/test_results.txt`,
+`evidence/wp12/`). Details: `docs/EVALUATION_PROTOCOL.md` (protocol 8),
+`docs/adr/ADR-22-domain-declared-channels-g3.md`.
+
+## Protocol 4 (retained as executed)
+
 ## What was built (ADR-15)
 - Hard corpus tier (`evaluation/corpus_hard.py`): nine tasks in three families whose plausible
   wrong fix passes the visible tests and fails the oracle; the trap invariant is executed by
@@ -87,10 +112,10 @@ Outcome: success equal (1.00 against 1.00), no false completion, but 1395 agains
 `evidence/wp13/promotion/promotion.json`: candidate `null`, decision `rejected`, reason "no readout
 can be trained: the training run produced 0 decision samples", treatment criterion `met: false`.
 
-## Verdict
-**G3 is not established.** The blueprint admits an adaptive policy only when held-out evidence
-shows the declared criterion met with regression gates intact; neither candidate of this route
-reached that bar.
+## Verdict of protocol 4 (superseded by protocol 8 above)
+**G3 was not established by protocol 4.** The blueprint admits an adaptive policy only when
+held-out evidence shows the declared criterion met with regression gates intact; neither
+candidate of this route reached that bar.
 
 - Readout router: no candidate exists. The decision point the readout was to serve (a failed
   verification) did not occur once in 54 training runs with two providers, so the training set
@@ -111,12 +136,11 @@ reached that bar.
   request in 72 runs. The hard tier is harder for the oracle than the standard tier, not for
   the provider.
 
-Consequence for production: the rule-based policy (`rule-based-v1`, no episodes) remains the
-default pin; no readout or episodic policy is promoted; `gabriel_policy` stays an evaluation arm.
-A next protocol needs a distribution on which first patches fail at a measurable rate (a pilot
-before the freeze must show failed verifications, for example interface contracts hidden from the
-visible tests, files beyond the prompt budget, or a weaker provider at the boundary) so that
-labeled decisions exist and the decision loss can be measured on real outcomes.
+Consequence for production after protocol 4: the rule-based policy (`rule-based-v1`, no
+episodes) remained the default pin; no readout or episodic policy was promoted; `gabriel_policy`
+stayed an evaluation arm. The next protocol needed a distribution on which first patches fail at
+a measurable rate so that labeled decisions exist and the decision loss can be measured on real
+outcomes; protocol 8 (above) is that protocol.
 
 ## Regression gates
 Executed on this host after the route was integrated, with the rule-based policy as the default

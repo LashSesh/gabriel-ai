@@ -117,12 +117,19 @@ SUMMARY_CONTENT = ('# Membership summary\n\nThe charter fixes the amount of the 
                    'A member pays 120 EUR each year. [[cite:{{obs:annex}} "one hundred twenty (120) EUR"]]\n')
 
 
+VISIBLE_ONLY_CONTENT = ('# Membership summary\n\nThe charter fixes the amount of the yearly contribution in the annex. [[cite:{{obs:charter}} "fixed in the annex"]]\n\n'
+                        'A member pays 120 EUR each year.\n')
+
+
 def script(variant: str = "history") -> dict:
     planner = [{"kind": "echo_reference"}]
     if variant == "history":
         worker = [_amendment(NOTES_TARGET, HISTORY_CONTENT, "record both facts with cited spans")]
     elif variant == "summary":
         worker = [_amendment(SUMMARY_TARGET, SUMMARY_CONTENT, "state both facts with cited spans")]
+    elif variant == "visible_only":
+        # cites the charter only and states the annex figure without a citation: the citations check passes, the claims check fails
+        worker = [_amendment(SUMMARY_TARGET, VISIBLE_ONLY_CONTENT, "state the figure without its source")]
     else:
         raise ValueError("unknown variant " + variant)
     return {"by_step": {"plan-request": planner, "propose": worker}, "by_role": {"planner": planner, "worker": worker}}

@@ -149,3 +149,115 @@ def test_episodes_enter_the_prompt_and_are_recorded(tmp_path):
         assert ws.memory.effective_support("rule-based-episodes2-v1")["support"] == 1
     finally:
         ws.close()
+
+
+# ------------------------------------------------------------------ ADR-22: domain-declared channels on document runs
+
+def test_document_decisions_carry_the_packs_declared_channels_and_bind_the_readout_to_their_layout(tmp_path):
+    """A document task whose required source the budgeted retrieval cannot carry fails its first
+    verification. The retained decision carries the document pack's channels beside the generic
+    ones (expected_source_absent = 1: the unmet claim expects a source the retrieval did not
+    carry), a readout bound to the generic layout is refused rather than scored, and a readout
+    bound to the composed layout that reads expected_source_absent stops the hopeless repair."""
+    from gabriel_agent.domains.document import pack as document
+    from gabriel_agent.evaluation.fixtures import document_association as da
+    repo = tmp_path / "repo"
+    base = da.build_repo(repo)
+    ws = Workspace.create(tmp_path / "ws", backend="trusted_local", allow_trusted_local=True)
+    try:
+        # the rule-based policy pinned explicitly: since ADR-22 a document task pins the pack's promoted readout by default
+        created = ws.create_task(da.summary_spec(repo, base, da.summary_oracle(tmp_path / "s.json"), da.provider("visible_only"), view="provenance",
+                                                 max_repairs=1, max_plan_versions=2, policy=router.rule_based()))
+        summary = TaskRunner(ws, created["task_id"]).run()
+        assert summary["state"] == "failed" and summary["repair_count"] == 1, summary["log"]
+        decisions = ws.memory.eligible("router/decisions:" + created["run_id"], ws.memory.frontier())
+        record = loads(ws.memory.content(decisions[0]), ascii_only=False)
+        channels = record["channels"]
+        assert record["action"] == "repair" and channels["channel_schema_id"] == "progress-channels-v1.document-progress-v1"
+        assert channels["names"] == list(progress.CHANNELS) + list(document.PROGRESS_CHANNELS) and len(progress.as_vector(channels)) == 36
+        value = dict(zip(channels["names"], channels["values_milli"]))
+        assert value["expected_source_absent"] == 1000 and value["forbidden_present"] == 0 and value["carried_sources"] == 0
+        assert value["required_missing"] + value["required_uncited"] == 500 and value["citations_unbound"] is not None
+        rule_attempts = sum(1 for a in ws.owner.projection(created["run_id"])["attempts"].values() if a["capability_id"] == "model.generate")
+        assert ws.owner.replay()["status"] == "passed"
+    finally:
+        ws.close()
+    # a readout trained on the generic layout is refused on a document run, not scored
+    ws = Workspace.create(tmp_path / "ws2", backend="trusted_local", allow_trusted_local=True)
+    try:
+        generic = router.readout_policy("readout-generic", feature_source="channels", weights=[0.0] * 24, bias=5.0, threshold_milli=500)
+        created = ws.create_task(da.summary_spec(repo, base, da.summary_oracle(tmp_path / "s2.json"), da.provider("visible_only"), view="provenance",
+                                                 max_repairs=1, max_plan_versions=2, policy=generic))
+        with pytest.raises(GabrielError):
+            TaskRunner(ws, created["task_id"]).run()
+    finally:
+        ws.close()
+    # a readout bound to the composed layout stops where the expected source is absent and repairs otherwise
+    ws = Workspace.create(tmp_path / "ws3", backend="trusted_local", allow_trusted_local=True)
+    try:
+        weights = [0.0] * 36
+        weights[progress.vector_names(channels).index("expected_source_absent")] = -10.0
+        bound = router.readout_policy("readout-document-test", feature_source="channels", weights=weights, bias=5.0, threshold_milli=500,
+                                      channel_schema_id="progress-channels-v1.document-progress-v1")
+        assert router.decide(bound, channels, [])["action"] == "stop"
+        present = dict(channels, values_milli=[0 if n == "expected_source_absent" else v for n, v in zip(channels["names"], channels["values_milli"])])
+        assert router.decide(bound, present, [])["action"] == "repair"
+        created = ws.create_task(da.summary_spec(repo, base, da.summary_oracle(tmp_path / "s3.json"), da.provider("visible_only"), view="provenance",
+                                                 max_repairs=1, max_plan_versions=2, policy=bound))
+        summary = TaskRunner(ws, created["task_id"]).run()
+        assert summary["state"] == "failed" and summary["hold"]["reason_code"] == "router_stop" and summary["repair_count"] == 1
+        attempts = ws.owner.projection(created["run_id"])["attempts"].values()
+        assert sum(1 for a in attempts if a["capability_id"] == "model.generate") < rule_attempts  # the hopeless repair (its plan and its proposal) was never requested
+        stop = loads(ws.memory.content(ws.memory.eligible("router/decisions:" + created["run_id"], ws.memory.frontier())[0]), ascii_only=False)
+        assert stop["action"] == "stop" and stop["policy_id"] == "readout-document-test" and stop["channels"]["channel_schema_id"] == bound["channel_schema_id"]
+        assert ws.owner.replay()["status"] == "passed"
+    finally:
+        ws.close()
+
+
+def test_a_layout_bound_readout_abstains_where_the_packs_channels_are_missing(tmp_path):
+    """When another check fails before the claims check ran (here an unbound citation), the pack's
+    channels are missing; a readout bound to the document layout then abstains and the rule
+    repairs, with the reason retained in the decision record (ADR-22)."""
+    from gabriel_agent.evaluation.fixtures import document_association as da
+    repo = tmp_path / "repo"
+    base = da.build_repo(repo)
+    ws = Workspace.create(tmp_path / "ws", backend="trusted_local", allow_trusted_local=True)
+    try:
+        always_stop = router.readout_policy("readout-document-stop", feature_source="channels", weights=[0.0] * 36, bias=-5.0, threshold_milli=500,
+                                            channel_schema_id="progress-channels-v1.document-progress-v1")
+        # the scripted summary cites the annex, which the provenance view did not carry: the citations check fails first
+        created = ws.create_task(da.summary_spec(repo, base, da.summary_oracle(tmp_path / "s.json"), da.provider("summary"), view="provenance",
+                                                 max_repairs=1, max_plan_versions=2, policy=always_stop))
+        summary = TaskRunner(ws, created["task_id"]).run()
+        assert summary["state"] == "failed" and (summary["hold"] or {}).get("reason_code") != "router_stop" and summary["repair_count"] == 1
+        decisions = [loads(ws.memory.content(o), ascii_only=False) for o in ws.memory.eligible("router/decisions:" + created["run_id"], ws.memory.frontier())]
+        assert decisions and all(d["action"] == "repair" and d["reason"].startswith("readout abstains: pack channel(s)") for d in decisions)
+        assert "expected_source_absent" in decisions[0]["reason"] and decisions[0]["policy_id"] == "readout-document-stop"
+    finally:
+        ws.close()
+
+
+def test_document_tasks_pin_the_packs_promoted_readout_by_default_and_software_tasks_the_rule(tmp_path):
+    """ADR-22: a document task whose spec names no policy pins the readout promoted under protocol 8
+    (digest-bound, with its provenance shipped beside it); a software task pins nothing and runs
+    under the rule-based policy; an explicit policy in the spec still wins."""
+    from gabriel_agent.domains.document import pack as document
+    from gabriel_agent.evaluation.fixtures import document_association as da
+    repo = tmp_path / "repo"
+    base = da.build_repo(repo)
+    ws = Workspace.create(tmp_path / "ws", backend="trusted_local", allow_trusted_local=True)
+    try:
+        shipped = ws.pack_for("document").default_policy()
+        provenance = json.loads((Path(document.__file__).parent / "policies" / "readout-channels-v2.provenance.json").read_text())
+        assert shipped["policy_id"] == "readout-channels-v2" and router.policy_digest(shipped) == provenance["policy_digest"]
+        assert shipped["channel_schema_id"] == "progress-channels-v1.document-progress-v1" and provenance["promotion"]["decision"] == "promoted"
+        created = ws.create_task(da.summary_spec(repo, base, da.summary_oracle(tmp_path / "s.json"), da.provider("summary")))
+        task = ws.owner.projection(created["run_id"])["task"]
+        assert ws.policy_for(task)["policy_id"] == "readout-channels-v2" and router.policy_digest(ws.policy_for(task)) == provenance["policy_digest"]
+        explicit = ws.create_task(da.summary_spec(repo, base, da.summary_oracle(tmp_path / "s2.json"), da.provider("summary"), policy=router.rule_based()))
+        assert ws.policy_for(ws.owner.projection(explicit["run_id"])["task"])["policy_id"] == "rule-based-v1"
+        software = ws.create_task(_hard_task_spec(tmp_path, scripted(parser_bug.script("wrong_then_weaken"))))
+        assert ws.policy_for(ws.owner.projection(software["run_id"])["task"])["policy_id"] == "rule-based-v1"
+    finally:
+        ws.close()

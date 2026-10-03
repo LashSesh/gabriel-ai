@@ -16,6 +16,8 @@ from __future__ import annotations
 import hashlib
 import re
 
+from pathlib import Path
+
 from ...contracts.codec import canonical, dumps_utf8, loads, sha256_hex
 from ...contracts.errors import Code, GabrielError
 from ...contracts.schemas import validate
@@ -37,6 +39,9 @@ ASSOCIATIVE_VIEWS = ("associative", "associative_unlabeled")
 # ADR-21: the default view since protocol 7 met its declared rules (evidence/wp15/run7); without history
 # or executables the associative view ranks exactly like the provenance view and the manifest says so
 DEFAULT_VIEW = "associative"
+# ADR-22: the pack's declared progress channels for the policy route, in declared order
+PROGRESS_SCHEMA_ID = "document-progress-v1"
+PROGRESS_CHANNELS = ("required_missing", "required_uncited", "forbidden_present", "expected_source_absent", "citations_unbound", "carried_sources")
 EXTRACTION_DIGEST = hashlib.sha256(b"gabriel.document.extraction/text-utf8-v1").hexdigest()
 TRANSFORM_PROFILE = "document-compile-v1"
 SUPPORTED_KINDS = {"document/citations_bound": "document.citations_bound", "document/required_claims": "document.required_claims",
@@ -359,8 +364,17 @@ class DocumentReviewTool(ReviewTool):
                     check = {"all_resolved": False, "citations": [dict(c, resolved=False, reason="no memory service") for c in citations]}
                 targets.append({"path": path, "present": True, "content_ref": ctx.store.put(raw, "text/plain; charset=utf-8"), "citations": check["citations"],
                                 "all_resolved": bool(citations) and check["all_resolved"]})
+        # ADR-22: which sources the worker could cite at all (the retrieval manifest's items) is a committed fact
+        # of the run; the claims verifier records per claim whether its expected source was among them
+        retrieved = []
+        if snapshot.get("retrieval_manifest_ref"):
+            try:
+                retrieved = sorted({item["source_id"] for item in loads(ctx.store.get(snapshot["retrieval_manifest_ref"]))["items"]})
+            except (GabrielError, KeyError, ValueError):
+                retrieved = []
         report = {"frontier": snapshot["frontier"], "targets": targets, "sources": [{"source_id": s["source_id"], "observation_id": s["observation_id"],
-                                                                                     "extraction": s["extraction"]} for s in snapshot["sources"]]}
+                                                                                     "extraction": s["extraction"]} for s in snapshot["sources"]],
+                  "retrieved_source_ids": retrieved[:256]}
         d = ctx.registry.tool(intent["capability_id"])[0]["output_schema_digest"]
         outcome.outputs.append(("citations", dumps_utf8(report), "application/json; charset=utf-8", d))
         return outcome
@@ -403,6 +417,7 @@ class RequiredClaimsVerifier:
             if target["present"] and target["content_ref"]:
                 contents[target["path"]] = ctx.store.get(target["content_ref"]).decode("utf8", "replace")
         results = []
+        retrieved = report.get("retrieved_source_ids")  # absent in reports written before ADR-22
         for claim in oracle["claims"]:
             path = claim.get("path") or (report["targets"][0]["path"] if report["targets"] else None)
             text = contents.get(path, "")
@@ -415,7 +430,8 @@ class RequiredClaimsVerifier:
                     if cite["resolved"] and cite["source_id"] == claim["cited_source_id"] and claim.get("quote_must_include", "") in cite["quote"]:
                         cited = True
                         break
-            results.append({"claim": " | ".join(phrasings)[:200], "present": present, "cited_from_expected_source": cited, "path": path})
+            results.append({"claim": " | ".join(phrasings)[:200], "present": present, "cited_from_expected_source": cited, "path": path,
+                            "expected_source_retrieved": (claim["cited_source_id"] in retrieved) if retrieved is not None else None})
         # The oracle may also forbid statements (a stale value, a withdrawn figure): their presence fails the claim check.
         forbidden = []
         for rule in oracle.get("forbidden") or []:
@@ -519,6 +535,65 @@ class DocumentPack(DomainPack):
                 if cite["observation_id"] not in known:
                     loss.append("citation of %s in %s names no observed source" % (cite["observation_id"], op["path"]))
         return patch, loss, None
+
+    def default_policy(self) -> dict | None:
+        """ADR-22: the readout promoted under protocol 8 (`policies/readout-channels-v2.json`, with its
+        provenance beside it) is the routing policy of a document task that pins none. It decides at
+        a failed verification from the generic channels and this pack's declared channels, abstains
+        where those channels are missing, and can only stop a repair earlier than the rule."""
+        path = Path(__file__).parent / "policies" / "readout-channels-v2.json"
+        if not path.is_file():
+            return None
+        return validate(loads(path.read_bytes()), "router-policy")
+
+    def progress_channels(self, projection: dict, store) -> dict | None:
+        """ADR-22: the document pack's declared channels at a decision point, read from the retained
+        evidence of the latest review's `claims` and `citations` checks and from the retrieval
+        manifest of the observed snapshot. Every value is a committed fact of the run, never a
+        judgement: how many required claims are missing or uncited, whether a forbidden statement
+        is present, how many unmet claims expect a source the retrieval did not carry, how many
+        citations failed to bind, and how many retrieved sources came from association."""
+        values = {name: None for name in PROGRESS_CHANNELS}
+        latest = {}
+        for entry in projection["assessments"].values():
+            if entry["check_id"] in ("claims", "citations") and entry["outcome"] in ("passed", "failed"):
+                key = (len(entry["node_id"]), entry["node_id"])
+                if entry["check_id"] not in latest or key > latest[entry["check_id"]][0]:
+                    latest[entry["check_id"]] = (key, entry)
+        evidence = {}
+        for check_id, (_, entry) in latest.items():
+            try:
+                record = loads(store.get(entry["evidence_ref"]), ascii_only=False)
+            except (GabrielError, ValueError):
+                continue
+            evidence[check_id] = record["evidence"] if isinstance(record.get("evidence"), dict) else record
+        claims = evidence.get("claims")
+        if isinstance(claims, dict) and isinstance(claims.get("claims"), list) and claims["claims"]:
+            rows = claims["claims"]
+            values["required_missing"] = sum(1 for r in rows if not r.get("present")) / len(rows)
+            values["required_uncited"] = sum(1 for r in rows if r.get("present") and not r.get("cited_from_expected_source")) / len(rows)
+            values["forbidden_present"] = 1.0 if claims.get("forbidden_present") else 0.0
+            unmet = [r for r in rows if not (r.get("present") and r.get("cited_from_expected_source"))]
+            if unmet and all(r.get("expected_source_retrieved") is not None for r in unmet):
+                values["expected_source_absent"] = sum(1 for r in unmet if not r["expected_source_retrieved"]) / len(unmet)
+            elif not unmet:
+                values["expected_source_absent"] = 0.0
+        citations = evidence.get("citations")
+        if isinstance(citations, dict) and isinstance(citations.get("problems"), list):
+            unbound = sum(1 for p in citations["problems"] if "not bound" in p)
+            resolved = sum(len(r.get("spans", [])) for r in citations.get("resolved", []) if isinstance(r, dict))
+            values["citations_unbound"] = (unbound / (unbound + resolved)) if (unbound + resolved) else 0.0
+        snapshot_ref = projection["run_meta"].get("observed_snapshot_ref")
+        if snapshot_ref:
+            try:
+                snapshot = loads(store.get(snapshot_ref))
+                manifest = loads(store.get(snapshot["retrieval_manifest_ref"])) if snapshot.get("retrieval_manifest_ref") else None
+            except (GabrielError, KeyError, ValueError):
+                manifest = None
+            if manifest is not None and manifest.get("items"):
+                links = (manifest.get("association") or {}).get("links") or {}
+                values["carried_sources"] = len(links) / len(manifest["items"])
+        return {"schema_id": PROGRESS_SCHEMA_ID, "names": list(PROGRESS_CHANNELS), "values": values}
 
     def claims_after_success(self, projection: dict, store) -> list:
         """The claims a succeeded run establishes (ADR-20): every target whose citations all resolved

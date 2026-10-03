@@ -1,0 +1,77 @@
+{
+  "adr": "docs/adr/ADR-22-domain-declared-channels-g3.md",
+  "candidate": "readout-channels-v2-f164ed8e44e7",
+  "declaration": "evidence/wp15/protocol8_declaration.md",
+  "evaluated_in": {
+    "criterion": {
+      "baseline": "gabriel_associative",
+      "false_completions_treatment": 0,
+      "held_out_decision_loss": {
+        "note": "a stop ends the run unverified, so a stopped decision is labeled 0 whatever a repair would have done; the success clause of the criterion guards against that",
+        "positives": 0,
+        "readout": {
+          "accuracy": 1.0,
+          "log_loss": 0.044997365930735805,
+          "samples": 4
+        },
+        "rule": {
+          "accuracy": 0.0,
+          "log_loss": 6.907755278982136,
+          "samples": 4
+        },
+        "samples": 4
+      },
+      "held_out_families": [
+        "association-needed-cold-held-out",
+        "association-needed-held-out",
+        "association-unneeded-held-out"
+      ],
+      "met": true,
+      "requests_baseline": 1.8333333333333333,
+      "requests_treatment": 1.0,
+      "success_baseline": 0.6666666666666666,
+      "success_treatment": 0.6666666666666666,
+      "tokens_baseline": 5424.916666666667,
+      "tokens_treatment": 2836.5,
+      "treatment": "gabriel_policy"
+    },
+    "protocol": "evidence/wp15/protocol8b-eval.frozen.json",
+    "run": "evidence/wp15/run8b-eval"
+  },
+  "policy_digest": "f164ed8e44e7ce9c1bc8571fa4a287dd2b73d784bcdb23996e7f38919d5ec0d6",
+  "policy_id": "readout-channels-v2",
+  "promotion": {
+    "decided_at_sequence": 91,
+    "decision": "promoted",
+    "evaluation_ref": {
+      "bytes": 2410,
+      "media_type": "application/json",
+      "sha256": "e746127b448ada2c99b92ef153a0492a77569683d5aeec37f971e0723d78062a"
+    },
+    "reason": "held-out effective support 8 > refutations 4"
+  },
+  "schema": "gabriel.evidence.policy-provenance/1",
+  "scope": "document pack only; decides at a failed verification from the generic channels and document-progress-v1; abstains where those channels are missing; can only stop a repair earlier than the rule",
+  "trained_from": {
+    "channel_schema_id": "progress-channels-v1.document-progress-v1",
+    "decision_samples": 48,
+    "families": [
+      "association-needed",
+      "association-needed-cold",
+      "association-unneeded"
+    ],
+    "label_rule": "1 when the run's final tree passed the independent verification, else 0; one sample per retained router decision",
+    "positive_samples": 8,
+    "protocol_frozen_digest": "02a19b822b59b13ae3c9b087db5df81376d04e033db26ca0b4392ef6fc0b205e",
+    "run": "evidence/wp15/run8a-train"
+  },
+  "validation": {
+    "leave_one_family_out_mean_readout_loss": 1.4525488855851816,
+    "mean_rule_loss": 3.1404344906283796,
+    "resubstitution": {
+      "accuracy": 0.9375,
+      "log_loss": 0.18006903884579187,
+      "samples": 48
+    }
+  }
+}

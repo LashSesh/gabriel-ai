@@ -33,13 +33,16 @@ def rule_based(*, episodes: int = 0) -> dict:
 
 
 def readout_policy(policy_id: str, *, feature_source: str, weights: list, bias: float, threshold_milli: int = 500, episodes: int = 0,
-                   recurrent_config: dict | None = None, decision_point: str = "any_boundary") -> dict:
+                   recurrent_config: dict | None = None, decision_point: str = "any_boundary", channel_schema_id: str = progress.CHANNEL_SCHEMA_ID) -> dict:
+    """``channel_schema_id`` names the channel layout the readout was trained on (the generic
+    channels, or the generic channels followed by a pack's declared channels, ADR-22); a decision
+    over another layout is refused rather than scored."""
     if feature_source not in ("channels", "recurrent"):
         raise GabrielError(Code.INVALID_SCHEMA, "unknown feature source " + feature_source)
     if feature_source == "recurrent" and recurrent_config is None:
         recurrent_config = recurrent.default_config()
     return {"schema": POLICY_SCHEMA, "policy_id": policy_id, "kind": "readout", "feature_source": feature_source,
-            "channel_schema_id": progress.CHANNEL_SCHEMA_ID, "recurrent_config": recurrent_config,
+            "channel_schema_id": channel_schema_id, "recurrent_config": recurrent_config,
             "readout": {"weights_micro": [int(round(w * 1e6)) for w in weights], "bias_micro": int(round(bias * 1e6))},
             "threshold_milli": int(threshold_milli), "episodes": {"k": int(episodes), "min_score_milli": 0}, "decision_point": decision_point}
 
@@ -78,6 +81,16 @@ def decide(policy: dict, channels: dict, history: list) -> dict:
     if policy["kind"] == "rule_based":
         return {"action": "repair", "score_milli": 1000, "policy_id": policy["policy_id"], "feature_source": policy["feature_source"],
                 "channels": channels, "reason": "rule: repair within the admitted limits"}
+    if channels["channel_schema_id"] != policy["channel_schema_id"]:
+        raise GabrielError(Code.STALE_EVIDENCE, "readout %s was trained on channel layout %s, the run produced %s"
+                           % (policy["policy_id"], policy["channel_schema_id"], channels["channel_schema_id"]))
+    # ADR-22: a readout bound to a composed layout decides only where the pack's channels are present; a
+    # verification that produced none of them (another check failed first) is outside what it was trained
+    # on, so it abstains and the rule applies, with the reason retained in the decision record
+    absent = [name for name, missing in zip(channels["names"], channels["missing"]) if missing and name not in progress.CHANNELS]
+    if absent:
+        return {"action": "repair", "score_milli": 1000, "policy_id": policy["policy_id"], "feature_source": policy["feature_source"],
+                "channels": channels, "reason": "readout abstains: pack channel(s) %s missing; rule: repair within the admitted limits" % ",".join(absent)}
     vector = feature_vector(policy, channels, history)
     p = score(policy, vector)
     action = "repair" if p * 1000 >= policy["threshold_milli"] else "stop"

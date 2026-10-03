@@ -178,7 +178,9 @@ class TaskRunner:
         """At a repair boundary (failed verification, or a node that exhausted its attempts) the
         pinned policy chooses between the authorized actions: a bounded repair (the rule) or a
         documented stop. Returns True to continue with the repair."""
-        channels = progress.progress_channels(projection, self.binding, owner_time_unix_ms=self.owner.owner_time(), goal_text=self.goal_text)
+        # ADR-22: the pack's declared channels (committed facts of the latest verification) ride beside the generic ones
+        channels = progress.progress_channels(projection, self.binding, owner_time_unix_ms=self.owner.owner_time(), goal_text=self.goal_text,
+                                              pack_channels=self.pack.progress_channels(projection, self.store))
         history = self._decision_history()
         decision = router.decide(self.policy, channels, history) if router.covers(self.policy, boundary) else router.decide(router.rule_based(), channels, history)
         record = {"schema": "gabriel.router-decision/1", "decision_id": "decision-%s-%d" % (self.run_id, len(history) + 1), "run_id": self.run_id,

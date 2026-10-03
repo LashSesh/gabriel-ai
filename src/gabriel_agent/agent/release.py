@@ -99,10 +99,13 @@ def release_manifest(root: Path, *, evidence: dict | None = None, python: str = 
                         "and cost two of six unneeded runs (the declared harm bound of one was exceeded); under protocol 7 (ADR-21) carried sources "
                         "say in the prompt why they are there, which kept every needed outcome, brought the unneeded family to the provenance view's "
                         "level against the unlabeled control, and made the associative view the document pack's default as declared",
-                  "G3": "not established: the routing feature experiment was executed under frozen protocols on the hard tier (evidence/wp13) "
-                        "but no first patch failed verification, so no labeled router decision exists and no readout candidate was trained or "
-                        "evaluated; the episodic-retrieval ablation failed its declared held-out criterion (equal verified success at more tokens); "
-                        "the rule-based policy without episodes remains the pinned default"},
+                  "G3": "established in the blueprint's scoped sense (ADR-22, evidence/wp15): on the association distribution, with the document "
+                        "pack's declared progress channels, a readout trained on 48 retained decisions of the system's own runs met the declared "
+                        "held-out criterion on two unseen topics (equal verified success, 2836 against 5425 mean tokens, no false completion), its "
+                        "held-out decision loss was 0.045 against the rule's 6.91, and the memory's promotion rule admitted it; it ships pinned as "
+                        "the document pack's default routing policy with its provenance; it learned one legible fact (stop when the unmet claim's "
+                        "expected source was not retrieved), can only stop a repair earlier than the rule, and stopped one recoverable repair on a "
+                        "seen task; protocol 4 on the hard tier (evidence/wp13) had trained no readout and rejected the episodic ablation"},
         "known_issues": ([] if _license_status(root)["status"] == "resolved" else ["root license unresolved"]) +
                         ["a catalog, registry or reducer change needs an explicit migration (gabriel migrate: backup, equivalence replay, recorded epoch); "
                          "journals created before catalog records existed migrate only when the running code reproduces them",
@@ -116,7 +119,10 @@ def release_manifest(root: Path, *, evidence: dict | None = None, python: str = 
                          "the associative view (ADR-20, the document pack's default since ADR-21) carries sources that verified runs cited together "
                          "into a budgeted prompt whether or not the task needs them; the prompt says why each is there, which under protocol 7 kept "
                          "gpt-4.1-mini from stating the forbidden figure (6/6 first attempts without the reason, 0/6 with it) but cost two repairs on "
-                         "one needed task; one provider, one presentation; the lexical seeds are tie-broken by observation id"],
+                         "one needed task; one provider, one presentation; the lexical seeds are tie-broken by observation id",
+                         "the document pack's default routing policy is a readout promoted on one constructed distribution with one provider "
+                         "(ADR-22); it can only stop a repair earlier than the rule, it abstains where its declared channels are missing, and it "
+                         "stopped one recoverable repair on a seen task; a task that pins rule-based-v1 explicitly opts out"],
     }
     return manifest
 

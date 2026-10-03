@@ -1,0 +1,549 @@
+{
+  "schema": "gabriel.evaluation-report/1",
+  "protocol_frozen_digest": "02a19b822b59b13ae3c9b087db5df81376d04e033db26ca0b4392ef6fc0b205e",
+  "tasks": 9,
+  "families": 3,
+  "runs": 54,
+  "per_system": {
+    "gabriel_associative": {
+      "runs": 27,
+      "verified_successes": 18,
+      "p_success": 0.6666666666666666,
+      "declared_successes": 18,
+      "false_completions": 0,
+      "p_false_completion": 0.0,
+      "conditional_false_completion": 0.0,
+      "conditional_denominator": 18,
+      "harness_errors": 0,
+      "timed_out": 0,
+      "recovery_runs": 10,
+      "mean_model_requests": 1.7037037037037037,
+      "total_model_requests": 46,
+      "mean_model_tokens": 5056.444444444444,
+      "total_model_tokens": 136524,
+      "mean_wall_ms": 8004.074074074074,
+      "p_success_ci95_by_family": {
+        "low": 0.0,
+        "high": 1.0,
+        "clusters": 3
+      },
+      "p_success_ci95_by_task": {
+        "low": 0.3333333333333333,
+        "high": 0.8888888888888888,
+        "clusters": 9
+      },
+      "per_task": {
+        "da-archive": {
+          "p_success": 1.0,
+          "runs": 3
+        },
+        "da-fee": {
+          "p_success": 1.0,
+          "runs": 3
+        },
+        "da-parking": {
+          "p_success": 1.0,
+          "runs": 3
+        },
+        "dc-archive": {
+          "p_success": 0.0,
+          "runs": 3
+        },
+        "dc-fee": {
+          "p_success": 0.0,
+          "runs": 3
+        },
+        "dc-parking": {
+          "p_success": 0.0,
+          "runs": 3
+        },
+        "du-archive": {
+          "p_success": 1.0,
+          "runs": 3
+        },
+        "du-fee": {
+          "p_success": 1.0,
+          "runs": 3
+        },
+        "du-parking": {
+          "p_success": 1.0,
+          "runs": 3
+        }
+      }
+    },
+    "gabriel_associative_unlabeled": {
+      "runs": 27,
+      "verified_successes": 16,
+      "p_success": 0.5925925925925926,
+      "declared_successes": 16,
+      "false_completions": 0,
+      "p_false_completion": 0.0,
+      "conditional_false_completion": 0.0,
+      "conditional_denominator": 16,
+      "harness_errors": 0,
+      "timed_out": 0,
+      "recovery_runs": 18,
+      "mean_model_requests": 2.1481481481481484,
+      "total_model_requests": 58,
+      "mean_model_tokens": 6411.2962962962965,
+      "total_model_tokens": 173105,
+      "mean_wall_ms": 9692.518518518518,
+      "p_success_ci95_by_family": {
+        "low": 0.0,
+        "high": 1.0,
+        "clusters": 3
+      },
+      "p_success_ci95_by_task": {
+        "low": 0.2962962962962963,
+        "high": 0.8888888888888888,
+        "clusters": 9
+      },
+      "per_task": {
+        "da-archive": {
+          "p_success": 1.0,
+          "runs": 3
+        },
+        "da-fee": {
+          "p_success": 1.0,
+          "runs": 3
+        },
+        "da-parking": {
+          "p_success": 1.0,
+          "runs": 3
+        },
+        "dc-archive": {
+          "p_success": 0.0,
+          "runs": 3
+        },
+        "dc-fee": {
+          "p_success": 0.0,
+          "runs": 3
+        },
+        "dc-parking": {
+          "p_success": 0.0,
+          "runs": 3
+        },
+        "du-archive": {
+          "p_success": 0.3333333333333333,
+          "runs": 3
+        },
+        "du-fee": {
+          "p_success": 1.0,
+          "runs": 3
+        },
+        "du-parking": {
+          "p_success": 1.0,
+          "runs": 3
+        }
+      }
+    }
+  },
+  "paired_differences": {},
+  "failures": [
+    {
+      "task_id": "dc-archive",
+      "system": "gabriel_associative",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement not cited from schedule with 'eleven calendar years'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-archive",
+      "system": "gabriel_associative",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: eleven | 11 years | eleven years",
+        "required statement not cited from schedule with 'eleven calendar years'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-archive",
+      "system": "gabriel_associative",
+      "rep": 2,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: eleven | 11 years | eleven years",
+        "required statement not cited from schedule with 'eleven calendar years'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-archive",
+      "system": "gabriel_associative_unlabeled",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: eleven | 11 years | eleven years",
+        "required statement not cited from schedule with 'eleven calendar years'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-archive",
+      "system": "gabriel_associative_unlabeled",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: eleven | 11 years | eleven years",
+        "required statement not cited from schedule with 'eleven calendar years'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-archive",
+      "system": "gabriel_associative_unlabeled",
+      "rep": 2,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: eleven | 11 years | eleven years",
+        "required statement not cited from schedule with 'eleven calendar years'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-fee",
+      "system": "gabriel_associative",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: 120 EUR | 120",
+        "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-fee",
+      "system": "gabriel_associative",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: 120 EUR | 120",
+        "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-fee",
+      "system": "gabriel_associative",
+      "rep": 2,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: 120 EUR | 120",
+        "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-fee",
+      "system": "gabriel_associative_unlabeled",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: 120 EUR | 120",
+        "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-fee",
+      "system": "gabriel_associative_unlabeled",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: 120 EUR | 120",
+        "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-fee",
+      "system": "gabriel_associative_unlabeled",
+      "rep": 2,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: 120 EUR | 120",
+        "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "invalid_output",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-parking",
+      "system": "gabriel_associative",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+        "required statement not cited from appendix with 'Bays twelve through thirty'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-parking",
+      "system": "gabriel_associative",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+        "required statement not cited from appendix with 'Bays twelve through thirty'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-parking",
+      "system": "gabriel_associative",
+      "rep": 2,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+        "required statement not cited from appendix with 'Bays twelve through thirty'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-parking",
+      "system": "gabriel_associative_unlabeled",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+        "required statement not cited from appendix with 'Bays twelve through thirty'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-parking",
+      "system": "gabriel_associative_unlabeled",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+        "required statement not cited from appendix with 'Bays twelve through thirty'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "invalid_output",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-parking",
+      "system": "gabriel_associative_unlabeled",
+      "rep": 2,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+        "required statement not cited from appendix with 'Bays twelve through thirty'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "du-archive",
+      "system": "gabriel_associative_unlabeled",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "forbidden statement present in doc/summary.md: eleven"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "du-archive",
+      "system": "gabriel_associative_unlabeled",
+      "rep": 2,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "forbidden statement present in doc/summary.md: eleven"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    }
+  ],
+  "claim_scope": "Scoped comparison on one synthetic task distribution with one provider; a difference here is not a general superiority claim. Costs include every attempt, including failed and timed-out runs.",
+  "frozen_check": {
+    "frozen_digest": "02a19b822b59b13ae3c9b087db5df81376d04e033db26ca0b4392ef6fc0b205e",
+    "harness_identity_now": "708750148ff709cc399e45d74c70f8e7b7159b21f71942831cf4633441aaea6a",
+    "harness_amended": false
+  }
+}

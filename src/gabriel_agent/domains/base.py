@@ -64,6 +64,18 @@ class DomainPack:
         proposition bytes, supporting observation ids, the frontier, the verifier id and a reason."""
         return []
 
+    def default_policy(self) -> dict | None:
+        """The routing policy a task of this pack pins when its spec names none (ADR-22): a promoted
+        readout the pack ships with its provenance, or None for the rule-based policy."""
+        return None
+
+    def progress_channels(self, projection: dict, store) -> dict | None:
+        """Domain-declared progress channels at a decision point (ADR-22): committed facts of the
+        run's latest verification in the pack's own terms, as ``{"schema_id", "names", "values"}``
+        with values in [0, 1] or None (missing). None when the pack declares no channels. They are
+        appended to the generic channels of the policy route and retained with every decision."""
+        return None
+
     # ---------------------------------------------------------------- compile port
     def compile_task(self, spec: dict, store, **ids):
         raise NotImplementedError

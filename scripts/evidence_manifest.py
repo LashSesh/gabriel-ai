@@ -52,7 +52,7 @@ PACKAGES = {
              "evidence": ["evidence/wp10/at23/summary.json", "evidence/wp10/at23/report.md", "docs/adr/ADR-13-domain-pack-ports.md"],
              "not_executed": ["native PSE worker at the time of WP10 (built and integrated afterwards; see PSE)",
                               "recurrent routing feature experiment in the document and numerical packs (executed in the software pack only; see G3-route)"]},
-    "G3-route": {"status": "DONE_EXECUTED_NOT_ESTABLISHED", "tests": ["tests/test_policy_route.py", "tests/test_evaluation.py"], "acceptance": ["AT17(hard tier)", "AT25(promotion)"],
+    "G3-route": {"status": "DONE_EXECUTED_NOT_ESTABLISHED_BY_PROTOCOL_4_SEE_P8", "tests": ["tests/test_policy_route.py", "tests/test_evaluation.py"], "acceptance": ["AT17(hard tier)", "AT25(promotion)"],
                  "evidence": ["evidence/wp13/protocol4a-train.frozen.json", "evidence/wp13/run4a-train/report.md", "evidence/wp13/policies/metrics.json",
                               "evidence/wp13/protocol4b-eval.frozen.json", "evidence/wp13/run4b-eval/report.md", "evidence/wp13/promotion/promotion.json",
                               "evidence/wp13/*/final_diffs/index.json", "docs/RELEASE_G3.md", "docs/adr/ADR-15-readout-router.md"],
@@ -93,6 +93,17 @@ PACKAGES = {
                                                "docs/adr/ADR-21-association-provenance-in-the-prompt.md"],
                                   "not_executed": ["a second provider", "a presentation study beyond the one labeled form and its unlabeled control",
                                                    "the default view on the protocol 5 corpora with a real provider (no history exists there, so the view ranks like provenance by construction)"]},
+    "P8-g3-association": {"status": "DONE_EXECUTED_CRITERION_MET_PROMOTED", "tests": ["tests/test_policy_route.py", "tests/test_evaluation_domains.py", "tests/test_evaluation.py"],
+                          "acceptance": ["AT17(G3: declared held-out criterion met by a versioned routing policy)", "AT25(promotion on disjoint held-out evidence)"],
+                          "evidence": ["evidence/wp15/protocol8_declaration.md", "evidence/wp15/protocol8a-train.frozen.json", "evidence/wp15/run8a-train/report.md",
+                                       "evidence/wp15/policies8/training_manifest.json", "evidence/wp15/policies8/metrics.json", "evidence/wp15/policies8/policy-channels.json",
+                                       "evidence/wp15/protocol8b-eval.frozen.json", "evidence/wp15/run8b-eval/report.md", "evidence/wp15/run8b-eval/retrieval_analysis.json",
+                                       "evidence/wp15/promotion8/promotion.json", "evidence/wp15/*/final_diffs/index.json",
+                                       "src/gabriel_agent/domains/document/policies/readout-channels-v2.provenance.json", "docs/RELEASE_G3.md",
+                                       "docs/adr/ADR-22-domain-declared-channels-g3.md", "docs/EVALUATION_PROTOCOL.md"],
+                          "not_executed": ["a second provider", "a second pack with declared channels (the software and numerical packs declare none)",
+                                           "a held-out decision of the recoverable class (every held-out decision was a hopeless repair)",
+                                           "episodic retrieval in the promoted policy (episodes 0)"]},
     "OPS": {"status": "DONE", "tests": ["tests/test_ops.py"], "acceptance": ["blueprint: operations, observability and release discipline"],
             "evidence": ["evidence/ops/migration_at23.json", "evidence/ops/migration_run5_dr-notice.json", "evidence/ops/smoke_metrics.json",
                          "evidence/ops/smoke_trace_summary.json", "evidence/ops/smoke_gc_dry_run.json", "evidence/ops/smoke_doctor_deep.json",
@@ -117,13 +128,19 @@ RELEASE_SCOPE_G2 = {
 }
 
 RELEASE_SCOPE_G3 = {
-    "established_on_this_host": False,
-    "evidence": ["evidence/wp13/run4b-eval/report.md", "evidence/wp13/promotion/promotion.json", "evidence/wp13/policies/metrics.json"],
-    "scope": "not established: the routing feature experiment ran under frozen protocols on the hard tier (54 training runs with two providers, "
-             "72 evaluation runs with gpt-4.1-mini, stateful family held out) but no first patch failed verification, so no labeled router "
-             "decision exists and no readout candidate could be trained or evaluated; the episodic-retrieval ablation reached equal verified "
-             "success on the held-out family with no false completion at 68 percent more model tokens and failed its declared criterion; "
-             "the rule-based policy without episodes remains the pinned default",
+    "established_on_this_host": True,
+    "evidence": ["evidence/wp15/protocol8_declaration.md", "evidence/wp15/run8a-train/report.md", "evidence/wp15/policies8/metrics.json",
+                 "evidence/wp15/run8b-eval/report.md", "evidence/wp15/promotion8/promotion.json",
+                 "src/gabriel_agent/domains/document/policies/readout-channels-v2.provenance.json",
+                 "evidence/wp13/run4b-eval/report.md", "evidence/wp13/promotion/promotion.json"],
+    "scope": "established in the blueprint's scoped sense: one versioned routing policy (a logistic readout over the generic progress channels and "
+             "the document pack's declared channels, ADR-22) trained on 48 retained decisions of the system's own runs on three topics met the "
+             "declared held-out criterion on two unseen topics under protocol 8 (equal verified success 8/12, 2836 against 5425 mean tokens, no "
+             "false completion), with held-out decision loss 0.045 against the rule's 6.91, and was promoted by the memory service's rule on "
+             "disjoint held-out families; it ships pinned as the document pack's default routing policy with its provenance, the rule-based policy "
+             "stays the default of every other pack; the claim is bounded to one provider, one pack and one constructed distribution, the readout "
+             "learned one legible fact and can only stop a repair earlier than the rule; protocol 4 on the hard tier (evidence/wp13) trained no "
+             "readout and rejected the episodic-retrieval ablation",
 }
 
 RELEASE_SCOPE_G1 = {

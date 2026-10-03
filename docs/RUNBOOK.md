@@ -148,7 +148,9 @@ The view ablations run on document tasks only; the harness skips them elsewhere.
 A task may pin a routing policy (`"policy": {...}` in the task spec, a `gabriel.router-policy/1`
 record): at a failed verification the pinned policy chooses between a bounded repair and a
 documented stop from the versioned progress channels, and it may retrieve past episodes into
-the worker prompt. Without a pin the rule-based policy applies (always repair within the
+the worker prompt. Without a pin a task gets its pack's default policy: the document pack
+ships the readout promoted under protocol 8 (`domains/document/policies/readout-channels-v2.json`,
+provenance beside it; ADR-22), every other pack the rule-based policy (always repair within the
 admitted limits, no episodes). Every decision is retained with its channels; every terminal run
 records an outcome label and an episode in the workspace memory (ADR-15).
 ```bash
@@ -159,6 +161,25 @@ gabriel eval freeze ... --tiers hard --systems provider_only,simple_loop,gabriel
     --policy ./policies/policy-channels.json --episode-seed ./policies/episode_seed.json \
     --held-out-families stateful --criterion "<declared held-out criterion>"
 scripts/policy_route.py promote --train-out ./policies --eval-run ./run4b --held-out stateful --out ./promotion
+```
+Since ADR-22 a domain pack may declare progress channels of its own (the document pack:
+`required_missing`, `required_uncited`, `forbidden_present`, `expected_source_absent`,
+`citations_unbound`, `carried_sources`, read from the retained verification evidence and the
+retrieval manifest); they are appended to the generic channels, the record's
+`channel_schema_id` names the layout, and a readout is bound to the layout it was trained on.
+Protocol 8 ran the route on the association tier (`evidence/wp15/`):
+```bash
+gabriel eval freeze ... --tiers association --tasks da-fee,dc-fee,du-fee,... --repetitions 3 \
+    --systems gabriel_associative,gabriel_associative_unlabeled                       # 8a: training decisions (rule-based)
+scripts/policy_route.py train --run ./run8a-train --out ./policies8 --episodes 0 \
+    --systems gabriel_associative,gabriel_associative_unlabeled                       # readouts bound to the document layout
+gabriel eval freeze ... --tiers association --tasks <all da-/dc-/du- tasks> \
+    --systems gabriel_associative,gabriel_policy,gabriel_reference_plan --policy ./policies8/policy-channels.json \
+    --held-out-families association-needed-held-out,association-needed-cold-held-out,association-unneeded-held-out \
+    --criterion "<declared>"                                                          # 8b: evaluation with the frozen candidate
+scripts/policy_route.py promote --train-out ./policies8 --eval-run ./run8b-eval --baseline gabriel_associative \
+    --treatment gabriel_policy --held-out association-needed-held-out,association-needed-cold-held-out,association-unneeded-held-out \
+    --out ./promotion8
 ```
 
 ## Operations (ADR-17)

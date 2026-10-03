@@ -26,8 +26,19 @@ def _fraction(numerator, denominator):
     return _clip(float(numerator) / float(denominator))
 
 
-def progress_channels(projection: dict, binding: dict, *, owner_time_unix_ms: int, goal_text: str = "") -> dict:
-    """Channel vector at this instant of the run; missing channels carry an indicator, never a guess."""
+def channel_schema_id(pack_channels: dict | None) -> str:
+    """The layout identifier of a channel record: the generic schema alone, or the generic schema
+    followed by the pack's declared channel schema (ADR-22), so a readout trained on one layout
+    never scores another."""
+    if not pack_channels:
+        return CHANNEL_SCHEMA_ID
+    return "%s.%s" % (CHANNEL_SCHEMA_ID, pack_channels["schema_id"])
+
+
+def progress_channels(projection: dict, binding: dict, *, owner_time_unix_ms: int, goal_text: str = "", pack_channels: dict | None = None) -> dict:
+    """Channel vector at this instant of the run; missing channels carry an indicator, never a guess.
+    ``pack_channels`` (ADR-22) are the domain pack's declared channels, appended after the generic
+    ones in the pack's declared order."""
     run, meta, ledger = projection["run"], projection["run_meta"], projection["ledger"]
     budget, spent = run["budget"], ledger["spent"]
     values = {}
@@ -52,9 +63,17 @@ def progress_channels(projection: dict, binding: dict, *, owner_time_unix_ms: in
     values["provider_failure_fraction"] = _fraction(sum(1 for a in provider if a["status"] != "completed"), len(provider))
     values["unresolved_effects"] = _clip(len(run["unresolved_effect_ids"]) / 4.0)
     values["goal_length"] = _clip(len(goal_text.encode("utf8")) / 4000.0)
-    return {"schema": "gabriel.progress-channels/1", "channel_schema_id": CHANNEL_SCHEMA_ID, "names": list(CHANNELS),
-            "values_milli": [None if values[n] is None else int(round(values[n] * 1000)) for n in CHANNELS],
-            "missing": [values[n] is None for n in CHANNELS], "owner_sequence": projection["run"].get("run_revision", 0),
+    names = list(CHANNELS)
+    if pack_channels:
+        for name in pack_channels["names"]:
+            if name in values:
+                raise ValueError("pack channel name collides with a generic channel: " + name)
+            value = pack_channels["values"].get(name)
+            values[name] = None if value is None else _clip(float(value))
+            names.append(name)
+    return {"schema": "gabriel.progress-channels/1", "channel_schema_id": channel_schema_id(pack_channels), "names": names,
+            "values_milli": [None if values[n] is None else int(round(values[n] * 1000)) for n in names],
+            "missing": [values[n] is None for n in names], "owner_sequence": projection["run"].get("run_revision", 0),
             "plan_versions": latest_version, "repair_count": meta["repair_count"]}
 
 
@@ -67,5 +86,7 @@ def as_vector(channels: dict) -> list:
     return vector
 
 
-def vector_names() -> list:
-    return list(CHANNELS) + [n + "_missing" for n in CHANNELS]
+def vector_names(channels: dict | None = None) -> list:
+    """Names of the vector positions: every channel name, then one missing indicator per channel."""
+    names = list(channels["names"]) if channels else list(CHANNELS)
+    return names + [n + "_missing" for n in names]

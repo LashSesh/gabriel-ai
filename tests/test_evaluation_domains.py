@@ -66,11 +66,13 @@ def run_gabriel(tmp_path, name, task, worker_steps, *, view="provenance", max_re
 
 def test_domain_corpus_controls_execute_and_tiers_are_complete():
     report = cd.check_all()
-    assert len(report) == 43 and all(r["sound"] for r in report), [(r["task_id"], r["controls"]) for r in report if not r["sound"]]
+    assert len(report) == 50 and all(r["sound"] for r in report), [(r["task_id"], r["controls"]) for r in report if not r["sound"]]
     assert {t.family for t in cd.tasks("document")} == {"revision", "revoked", "conflict"}
     assert {t.family for t in cd.tasks("numerical")} == {"units", "resample", "graph"}
     assert {t.family for t in cd.tasks("graph")} == {"graph-snapshot", "graph-mass", "graph-window", "graph-readout", "graph-detections"} and len(cd.tasks("numerical")) == 9
-    assert {t.family for t in cd.tasks("association")} == {"association-history", "association-needed", "association-needed-held-out", "association-unneeded", "association-none"}
+    assert {t.family for t in cd.tasks("association")} == {"association-history", "association-needed", "association-needed-held-out", "association-unneeded",
+                                                            "association-unneeded-held-out", "association-needed-cold", "association-needed-cold-held-out", "association-none"}
+    assert all(t.history == () for t in cd.tasks("association") if t.family.startswith("association-needed-cold"))
     assert all(t.role == "history" for t in cd.tasks("association") if t.family == "association-history")
     assert all(t.history == ("dh-" + t.task_id[3:],) for t in cd.tasks("association") if t.family in ("association-needed", "association-needed-held-out", "association-unneeded"))
     # every task has at least one positive and one negative executed control

@@ -427,9 +427,12 @@ class Workspace:
             unresolved = [c for c in compiled.report["clauses"] if c["mandatory"] and c["status"] != "mapped"]
             raise GabrielError(Code.POLICY_DENIED, "task is not admissible: " + "; ".join("%s: %s" % (c["clause_id"], c["reason"]) for c in unresolved),
                                details={"compilation_report": compiled.report, "problems": compiled.problems})
-        if spec.get("policy") is not None:
-            # Production tasks pin one policy version; promotion affects new runs only.
-            compiled.task["base_inputs"] = list(compiled.task["base_inputs"]) + [self.pin_policy(spec["policy"])]
+        # Production tasks pin one policy version; promotion affects new runs only. A task that pins none
+        # gets the pack's default policy (ADR-22: a promoted readout the pack ships with its provenance),
+        # or no pin at all, which means the rule-based policy.
+        pinned = spec["policy"] if spec.get("policy") is not None else pack.default_policy()
+        if pinned is not None:
+            compiled.task["base_inputs"] = list(compiled.task["base_inputs"]) + [self.pin_policy(pinned)]
             validate(compiled.task, "task")
         grant = {"schema": "gabriel.grant/1", "grant_id": grant_id, "principal_id": self.config["principal_id"], "workspace_id": self.config["workspace_id"],
                  "task_id": task_id, "tool_ids": sorted(self.registry.catalog()["tools"]), "resource_ids": RESOURCES, "effect_classes": GRANTED_EFFECTS,

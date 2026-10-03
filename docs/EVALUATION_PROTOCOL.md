@@ -374,6 +374,55 @@ Consequence, as declared: the associative view is the document pack's default re
 (ADR-21). Over all tasks it was the cheapest arm and the only one that verified every task. The
 result is one provider's response to one presentation on one constructed distribution.
 
+## Protocol 8: G3 on the association distribution (ADR-22)
+Protocol 4 could not train a readout (no failed first patch in 54 runs). Protocols 6b and 7
+produced first attempts that fail with both outcomes, and ADR-22 gave the policy route what
+tells them apart: the document pack's declared channels (`required_missing`, `required_uncited`,
+`forbidden_present`, `expected_source_absent`, `citations_unbound`, `carried_sources`), committed
+facts of the latest verification appended to the generic channels, with readouts bound to the
+layout they were trained on. Declared before any run (`evidence/wp15/protocol8_declaration.md`):
+training on the retained decisions of the production configuration and the unlabeled control
+on three topics (families needed, needed-cold, unneeded; the cold family is the needed task
+without history, hopeless for every budgeted view); evaluation of the frozen candidate against
+the rule-based production configuration on all fifteen tasks with the two held-out topics in
+three held-out families; the criterion of protocol 4b on the held-out families (verified
+success not lower, fewer tokens, no false completion), decision loss below the rule's,
+promotion by the memory's rule, and the consequence that a promoted readout becomes the
+document pack's default routing policy.
+
+**8a (training, 54 runs, digest `02a19b82…`):** 48 retained decisions, 8 positives.
+Leave-one-family-out: channel readout 1.45 mean log-loss against the rule's 3.14 (recurrent
+1.77); the channel readout selected; its weights name the fact (`expected_source_absent` -2.34,
+`repair_fraction` -1.21, `forbidden_present` +1.05).
+
+**8b (evaluation, 90 runs, digest `5563390a…`):**
+
+| system | runs | verified | p_success | false compl. | mean requests | mean tokens | held-out verified | held-out requests | held-out tokens |
+|---|---|---|---|---|---|---|---|---|---|
+| gabriel_associative (rule-based) | 30 | 20 | 0.67 | 0 | 1.80 | 5346 | 8/12 | 1.83 | 5425 |
+| gabriel_policy (readout pinned) | 30 | 19 | 0.63 | 0 | 1.03 | 2946 | 8/12 | 1.00 | 2836 |
+| gabriel_reference_plan (provenance view) | 30 | 10 | 0.33 | 0 | 2.40 | 7230 | 4/12 | 2.50 | 7530 |
+
+Against the declared rules (`evidence/wp15/run8b-eval/report.md`, `promotion8/promotion.json`):
+
+- Held-out criterion **met**: equal verified success (8 of 12), 2836 against 5425 tokens, no
+  false completion. The readout stopped all four hopeless repairs on the held-out cold topics at
+  the first decision (p = 0.044, one request instead of three); on the held-out needed and
+  unneeded topics no decision point fired.
+- Decision loss on the held-out decisions: readout 0.045 against the rule's 6.91 on four
+  decisions, all of one class (stops of hopeless runs, labeled 0).
+- Promotion: **promoted** (effective support 8 against 4 refutations on the held-out families,
+  disjoint from the training families). The candidate `readout-channels-v2-f164ed8e44e7` ships
+  as the document pack's default routing policy with its provenance.
+- The cost: on the seen task da-fee (one repetition) the readout stopped a recoverable repair
+  (p = 0.309), so over all tasks the paired difference is -0.03 verified success at -2401 tokens
+  and -0.77 requests.
+
+G3 is therefore established in the blueprint's scoped sense (`docs/RELEASE_G3.md`): one
+versioned routing policy, trained on the system's retained decisions, met a declared held-out
+criterion with the regression gates intact and was promoted by the memory's rule. What it
+learned is one legible fact, its leverage is cost at equal success, and the sample is small.
+
 ## Freezing and amendments
 `gabriel eval freeze` digests the protocol body and records the harness code identity.
 `gabriel eval run` refuses a changed protocol or corpus. A harness code change after freezing is

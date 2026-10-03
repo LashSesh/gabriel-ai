@@ -62,7 +62,7 @@ def collect(run_root: Path, systems=("gabriel", "gabriel_reference_plan")) -> di
                 decision = loads(memory.content(observation), ascii_only=False)
                 samples.append({"task_id": record["task_id"], "family": record["family"], "rep": record["rep"], "run_id": decision["run_id"],
                                 "decision_id": decision["decision_id"], "channels": decision["channels"], "history": list(history),
-                                "label": int(record["V"]), "action_taken": decision["action"]})
+                                "label": int(record["V"]), "action_taken": decision["action"], "score_milli": decision["score_milli"]})
                 history.append(decision["channels"])
             for observation in memory.observations_of_kind("episode"):
                 text = memory.content(observation).decode("utf8")
@@ -73,6 +73,18 @@ def collect(run_root: Path, systems=("gabriel", "gabriel_reference_plan")) -> di
         finally:
             memory.close()
     return {"samples": samples, "episodes": episodes, "units": units, "protocol_frozen_digest": results["protocol_frozen_digest"]}
+
+
+def probability_loss(pairs: list) -> dict:
+    """Log-loss and accuracy of retained decision probabilities against the labels."""
+    import math
+    total, correct = 0.0, 0
+    for p, label in pairs:
+        p = min(max(p, 1e-6), 1 - 1e-6)
+        total += -(label * math.log(p) + (1 - label) * math.log(1 - p))
+        correct += int((p >= 0.5) == bool(label))
+    n = max(1, len(pairs))
+    return {"log_loss": total / n, "accuracy": correct / n, "samples": len(pairs)}
 
 
 def vectors(samples: list, source: str, config: dict | None) -> list:
@@ -109,7 +121,7 @@ def train(args) -> int:
     run_root = Path(args.run)
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
-    data = collect(run_root)
+    data = collect(run_root, systems=tuple(args.systems.split(",")))
     samples = data["samples"]
     labels = sorted({s["label"] for s in samples})
     manifest = {"schema": "gabriel.evidence.policy-training/1", "produced_at_utc": dt.datetime.now(dt.timezone.utc).isoformat(),
@@ -126,14 +138,22 @@ def train(args) -> int:
         (out / "metrics.json").write_text(json.dumps({"trained": False}, indent=2) + "\n")
         print(manifest["note"])
         return 0
-    config = recurrent.default_config(units=16, parents=4, channels=len(progress.vector_names()))
+    # ADR-22: the channel layout is the one the training decisions carry (generic channels, or generic plus
+    # the pack's declared channels); a readout is bound to that layout and refuses any other
+    layouts = sorted({s["channels"]["channel_schema_id"] for s in samples})
+    if len(layouts) != 1:
+        raise SystemExit("training decisions carry more than one channel layout: %s" % layouts)
+    layout, dimension = layouts[0], len(progress.as_vector(samples[0]["channels"]))
+    manifest["channel_schema_id"] = layout
+    manifest["channel_names"] = progress.vector_names(samples[0]["channels"])
+    config = recurrent.default_config(units=16, parents=4, channels=dimension)
     for source in ("channels", "recurrent"):
         cfg = config if source == "recurrent" else None
         validation = leave_one_family_out(samples, source, cfg)
         fit = router.train_logistic(vectors(samples, source, cfg))
         resub = router.log_loss((fit["weights"], fit["bias"]), vectors(samples, source, cfg))
-        policy = router.readout_policy("readout-%s-v1" % source, feature_source=source, weights=fit["weights"], bias=fit["bias"],
-                                       threshold_milli=500, episodes=args.episodes, recurrent_config=cfg)
+        policy = router.readout_policy("readout-%s-v2" % source, feature_source=source, weights=fit["weights"], bias=fit["bias"],
+                                       threshold_milli=500, episodes=args.episodes, recurrent_config=cfg, channel_schema_id=layout)
         policies[source] = policy
         metrics[source] = {"validation": validation, "resubstitution": resub, "policy_digest": router.policy_digest(policy),
                            "code_identity": hashlib.sha256((ROOT / "src/gabriel_agent/policy/router.py").read_bytes()).hexdigest()}
@@ -192,25 +212,35 @@ def promote(args) -> int:
         for record in results["records"]:
             if record.get("outcome") is None:
                 continue
+            # every held-out family counts toward one held-out source per system (ADR-22: several held-out families)
+            bucket = "held-out" if record["family"] in held_out else record["family"]
             memory.record_outcome(issue_id="%s-%s-%d" % (record["task_id"], record["system"], record["rep"]), run_id=record["system"] + "-" + record["task_id"],
-                                  source_id="%s/%s" % (record["system"], record["family"]), maturity_condition={"condition": "independent verification executed"},
+                                  source_id="%s:%s" % (record["system"], bucket), maturity_condition={"condition": "independent verification executed"},
                                   outcome="success" if record["V"] else "failure", status_kind="production",
                                   detail={"declared": record["D"], "false_completion": record["false_completion"], "requests": record["outcome"]["model_requests"],
-                                          "tokens": record["outcome"]["model_tokens"]})
+                                          "tokens": record["outcome"]["model_tokens"], "family": record["family"]})
+        # decision loss on the held-out decisions of the treatment: the readout's retained score against the rule (always repair)
+        held_samples = [s for s in collect(eval_run, systems=(args.treatment,))["samples"] if s["family"] in held_out]
+        losses = {"samples": len(held_samples), "positives": sum(s["label"] for s in held_samples)}
+        if held_samples:
+            losses["readout"] = probability_loss([(s["score_milli"] / 1000.0, s["label"]) for s in held_samples])
+            losses["rule"] = probability_loss([(0.999, s["label"]) for s in held_samples])
+            losses["note"] = "a stop ends the run unverified, so a stopped decision is labeled 0 whatever a repair would have done; the success clause of the criterion guards against that"
+        criterion["held_out_decision_loss"] = losses
         candidate = {"candidate_id": policy["policy_id"] + "-" + router.policy_digest(policy)[:12], "policy_kind": "router-readout",
-                     "training_manifest_ref": memory.store.put(canonical({"training_run": manifest["training_run"], "units": manifest["units"]}), "application/json"),
+                     "training_manifest_ref": memory.store.put(json.dumps({"training_run": manifest["training_run"], "units": manifest["units"]}, sort_keys=True).encode("utf8"), "application/json"),
                      "code_identity": metrics[args.candidate]["code_identity"], "config_ref": memory.store.put(canonical(policy), "application/json"),
-                     "metrics_ref": memory.store.put(canonical({"decision": metrics[args.candidate]}), "application/json"),
+                     "metrics_ref": memory.store.put(json.dumps({"decision": metrics[args.candidate]}, sort_keys=True).encode("utf8"), "application/json"),
                      "training_families": manifest["families"]}
         # the memory service's rule: disjoint held-out families and effective support over refutations
-        decision = memory.promote(candidate, held_out={"source_id": "%s/%s" % (args.treatment, held_out[0]), "families": held_out})
+        decision = memory.promote(candidate, held_out={"source_id": args.treatment + ":held-out", "families": held_out})
         if decision["promotion"]["decision"] == "promoted" and not criterion["met"]:
             decision = memory.promote(dict(candidate, candidate_id=candidate["candidate_id"] + "-criterion"), held_out=None)
             decision["promotion"]["reason"] = "held-out criterion not met: " + json.dumps(criterion)[:400]
         promotion = {"schema": "gabriel.evidence.policy-promotion/1", "produced_at_utc": dt.datetime.now(dt.timezone.utc).isoformat(),
                      "candidate": candidate["candidate_id"], "policy_id": policy["policy_id"], "policy_digest": router.policy_digest(policy),
-                     "criterion": criterion, "promotion": decision["promotion"], "held_out_support": memory.effective_support("%s/%s" % (args.treatment, held_out[0])),
-                     "baseline_support": memory.effective_support("%s/%s" % (args.baseline, held_out[0])), "memory_anchor": memory.anchor()}
+                     "criterion": criterion, "promotion": decision["promotion"], "held_out_support": memory.effective_support(args.treatment + ":held-out"),
+                     "baseline_support": memory.effective_support(args.baseline + ":held-out"), "memory_anchor": memory.anchor()}
         (out / "promotion.json").write_text(json.dumps(promotion, indent=2, default=str) + "\n")
         print("promotion:", decision["promotion"]["decision"], "-", decision["promotion"]["reason"])
         print("criterion met:", criterion.get("met"))
@@ -223,6 +253,7 @@ def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description="G3 route: train and promote router policies")
     sub = parser.add_subparsers(dest="command", required=True)
     t = sub.add_parser("train"); t.add_argument("--run", required=True); t.add_argument("--out", required=True); t.add_argument("--episodes", type=int, default=2)
+    t.add_argument("--systems", default="gabriel,gabriel_reference_plan", help="systems whose retained router decisions are the training samples")
     p = sub.add_parser("promote"); p.add_argument("--train-out", required=True); p.add_argument("--eval-run", required=True)
     p.add_argument("--held-out", required=True); p.add_argument("--candidate", default="channels"); p.add_argument("--out", required=True)
     p.add_argument("--baseline", default="gabriel_reference_plan"); p.add_argument("--treatment", default="gabriel_policy")

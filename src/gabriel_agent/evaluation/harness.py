@@ -50,7 +50,8 @@ def default_protocol(provider: dict, *, repetitions: int = 2, systems=comparator
     if any(s in comparators.G3_SYSTEMS for s in systems) and policy is None:
         raise GabrielError(Code.INVALID_SCHEMA, "the G3 systems need a frozen router policy in the protocol")
     selected_tiers = sorted({t.tier for t in tasks})
-    treatment = "gabriel" if "gabriel" in systems else ("gabriel_reference_plan" if "gabriel_reference_plan" in systems else None)
+    # the paired treatment: the readout arm when a protocol carries one (G3), else the production arms as before
+    treatment = next((s for s in ("gabriel_policy", "gabriel", "gabriel_reference_plan") if s in systems), None)
     return {
         "schema": PROTOCOL_SCHEMA,
         "purpose": "Matched comparison: increase independently verified task success or reduce resources at equal success, "

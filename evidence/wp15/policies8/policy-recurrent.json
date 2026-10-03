@@ -1,0 +1,56 @@
+{
+ "schema": "gabriel.router-policy/1",
+ "policy_id": "readout-recurrent-v2",
+ "kind": "readout",
+ "feature_source": "recurrent",
+ "channel_schema_id": "progress-channels-v1.document-progress-v1",
+ "recurrent_config": {
+  "schema": "gabriel.recurrent-config/1",
+  "units": 16,
+  "parents": 4,
+  "channels": 36,
+  "seed": 20261002,
+  "profile": "adaptive",
+  "alpha_milli": 300,
+  "beta_milli": 0,
+  "bias_scale_milli": 400,
+  "input_scale_milli": 800,
+  "trace": [
+   {
+    "g_milli": 100,
+    "theta_milli": 200,
+    "rho_milli": 100
+   }
+  ],
+  "float_model": "ieee754-binary64"
+ },
+ "readout": {
+  "weights_micro": [
+   -16068,
+   -73352,
+   45395,
+   -31519,
+   -62078,
+   16687,
+   -8140,
+   -91541,
+   -70674,
+   86099,
+   24761,
+   -19174,
+   131216,
+   -91703,
+   -50222,
+   31881,
+   -20,
+   -21845
+  ],
+  "bias_micro": -1603729
+ },
+ "threshold_milli": 500,
+ "episodes": {
+  "k": 0,
+  "min_score_milli": 0
+ },
+ "decision_point": "any_boundary"
+}

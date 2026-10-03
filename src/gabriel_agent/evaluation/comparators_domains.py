@@ -41,14 +41,15 @@ from ..domains.document import pack as document
 from ..domains.numerical import pack as numerical
 from ..memory import MemoryService
 from ..models import ModelGateway, build_model_request, provider_for_profile
+from ..policy import router
 from ..tools import fs
 from ..workers import LinuxNamespaceBackend, TrustedLocalBackend, Worktree
 from . import corpus_domains as cd
 from .comparators import Budget, Outcome, gabriel_outcome
 
-DOCUMENT_ONLY = ("gabriel_plain_sources", "gabriel_all_revisions", "gabriel_associative", "gabriel_associative_unlabeled")
+DOCUMENT_ONLY = ("gabriel_plain_sources", "gabriel_all_revisions", "gabriel_associative", "gabriel_associative_unlabeled", "gabriel_policy")
 SYSTEMS = ("provider_only", "simple_loop", "gabriel_reference_plan", "gabriel_plain_sources", "gabriel_all_revisions", "gabriel_associative",
-           "gabriel_associative_unlabeled", "gabriel")
+           "gabriel_associative_unlabeled", "gabriel_policy", "gabriel")
 BASELINE_VIEW = "plain"   # what a minimal agent with the same corpus sees: the declared files, unfiltered
 
 
@@ -278,7 +279,7 @@ def run_simple_loop(ctx: DomainEvalContext, rep: int) -> Outcome:
 
 
 def run_gabriel(ctx: DomainEvalContext, rep: int, *, system: str = "gabriel", max_repairs: int = 2, max_plan_versions: int = 4,
-               planner_mode: str = "model", view: str = "provenance") -> Outcome:
+               planner_mode: str = "model", view: str = "provenance", policy: dict | None = None) -> Outcome:
     started = time.monotonic()
     ws_dir = ctx.run_dir / ("%s-%d-ws" % (system, rep))
     ws = Workspace.create(ws_dir, backend=ctx.backend_name, allow_trusted_local=(ctx.backend_name == "trusted_local"))
@@ -287,6 +288,10 @@ def run_gabriel(ctx: DomainEvalContext, rep: int, *, system: str = "gabriel", ma
                             max_repairs=max_repairs, max_plan_versions=max_plan_versions, planner_mode=planner_mode)
         if ctx.task.domain == "document":
             spec["retrieval_view"] = view
+        # the frozen router policy of the protocol for the policy arm; every other Gabriel arm pins the rule-based
+        # policy explicitly, so the arms of protocols 5 to 8 keep their declared meaning after a pack ships a
+        # default readout (ADR-15, ADR-22)
+        spec["policy"] = policy if policy is not None else router.rule_based()
         spec["provider"] = dict(spec["provider"], max_input_tokens=ctx.budget.max_input_tokens, max_output_tokens=ctx.budget.max_output_tokens)
         history_log = run_history(ws, ctx)
         created = ws.create_task(spec, task_id="task-%s-%s-%d" % (ctx.task.task_id, system, rep))
@@ -326,7 +331,9 @@ RUNNERS = {"provider_only": run_provider_only, "simple_loop": run_simple_loop,
            "gabriel_all_revisions": lambda ctx, rep: run_gabriel(ctx, rep, system="gabriel_all_revisions", planner_mode="reference", view="all_revisions"),
            "gabriel_associative": lambda ctx, rep: run_gabriel(ctx, rep, system="gabriel_associative", planner_mode="reference", view="associative"),
            "gabriel_associative_unlabeled": lambda ctx, rep: run_gabriel(ctx, rep, system="gabriel_associative_unlabeled", planner_mode="reference",
-                                                                         view="associative_unlabeled")}
+                                                                         view="associative_unlabeled"),
+           # ADR-22: the production configuration (associative view, reference plan) with the protocol's frozen readout pinned
+           "gabriel_policy": lambda ctx, rep: run_gabriel(ctx, rep, system="gabriel_policy", planner_mode="reference", view="associative", policy=ctx.policy)}
 
 DECLARED_SUCCESS = {
     "provider_only": "an admissible deliverable was produced (amendment applied or declared operation executed through the same adapter); no verification",
@@ -342,6 +349,8 @@ DECLARED_SUCCESS = {
                            "carried source is told apart in the prompt with the seed and the verified run that cited them together; document tasks only",
     "gabriel_associative_unlabeled": "as gabriel_associative with the ADR-20 presentation: carried sources enter the prompt like lexically retrieved "
                                      "ones (ablation of the association provenance in the prompt, ADR-21; document tasks only)",
+    "gabriel_policy": "as gabriel_associative with the protocol's frozen readout policy pinned (ADR-22): at a failed verification it chooses "
+                      "repair or stop from the generic progress channels and the document pack's declared channels; document tasks only",
     "gabriel": "as gabriel_reference_plan with the model planner (one planner request per plan version)",
     "gabriel_no_repair": "as gabriel with max_repairs=0 and max_plan_versions=1 (ablation of the repair cycle)"}
 

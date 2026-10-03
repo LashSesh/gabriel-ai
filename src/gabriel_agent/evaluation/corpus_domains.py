@@ -673,16 +673,21 @@ def _association_tasks():
                                [("correct", True, {"doc/summary.md": correct_summary}), ("visible_only", False, {"doc/summary.md": visible_only}),
                                 ("uncited", False, {"doc/summary.md": uncited}), ("source_edited", False, {"doc/summary.md": correct_summary, "sources/%s.md" % hid: htext + "\nEdited.\n"})],
                                tier_name="association", history=(history_id,)))
-        if index < 3:
-            # unneeded: the same history, but the evaluated goal needs the visible source only and the hidden figure is not to be stated
-            ask_visible = "the %s's rule only, as written in the %s" % (vid, vid)
-            goal_u = _association_goal("doc/summary.md", ask_visible)
-            _assert_ranking(goal_u, vtext, htext, distractors)
-            tasks.append(_doc_task("du-" + name, "association-unneeded", goal_u, files_full, _association_sources(topic, True), "doc/summary.md",
-                                   [_claim("doc/summary.md", vphr, vid, vquote)], hphr,
-                                   [("correct", True, {"doc/summary.md": visible_only}), ("hidden_stated", False, {"doc/summary.md": correct_summary}),
-                                    ("uncited", False, {"doc/summary.md": "# Summary\n\nThe %s: %s.\n" % (vid, vquote)})],
-                                   tier_name="association", history=(history_id,)))
+        # cold (ADR-22): the needed task without any history, so no view can carry the hidden source under the
+        # budget and every repair is hopeless; the policy route's negative class, seen and held out alike
+        tasks.append(_doc_task("dc-" + name, "association-needed-cold" if index < 3 else "association-needed-cold-held-out", goal, files_full,
+                               _association_sources(topic, True), "doc/summary.md", claims, [],
+                               [("correct", True, {"doc/summary.md": correct_summary}), ("visible_only", False, {"doc/summary.md": visible_only}),
+                                ("uncited", False, {"doc/summary.md": uncited})], tier_name="association"))
+        # unneeded: the same history, but the evaluated goal needs the visible source only and the hidden figure is not to be stated
+        ask_visible = "the %s's rule only, as written in the %s" % (vid, vid)
+        goal_u = _association_goal("doc/summary.md", ask_visible)
+        _assert_ranking(goal_u, vtext, htext, distractors)
+        tasks.append(_doc_task("du-" + name, "association-unneeded" if index < 3 else "association-unneeded-held-out", goal_u, files_full,
+                               _association_sources(topic, True), "doc/summary.md", [_claim("doc/summary.md", vphr, vid, vquote)], hphr,
+                               [("correct", True, {"doc/summary.md": visible_only}), ("hidden_stated", False, {"doc/summary.md": correct_summary}),
+                                ("uncited", False, {"doc/summary.md": "# Summary\n\nThe %s: %s.\n" % (vid, vquote)})],
+                               tier_name="association", history=(history_id,)))
         if index < 2:
             # none: no history and no budget pressure (two sources only); both views reach the hidden source
             tasks.append(_doc_task("dn-" + name, "association-none", goal, files_small, _association_sources(topic, False), "doc/summary.md", claims, [],

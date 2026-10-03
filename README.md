@@ -49,11 +49,19 @@ in an isolated worktree with independent acceptance checks.
   provenance view's level with no forbidden first attempt against 6/6 for the unlabeled control,
   and the associative view became the document pack's default as declared):
   `docs/adr/ADR-21-association-provenance-in-the-prompt.md`, `evidence/wp15/run7/`
+- G3 on the association distribution (domain-declared progress channels: the document pack
+  states committed facts of the latest verification, among them whether an unmet claim's source
+  was in the prompt; a readout trained on 48 retained decisions met the declared held-out
+  criterion under protocol 8, equal verified success at 2836 against 5425 tokens, was promoted
+  by the memory's rule and ships pinned as the document pack's default routing policy; the
+  claim is bounded to one fact, one provider and one constructed distribution):
+  `docs/adr/ADR-22-domain-declared-channels-g3.md`, `docs/RELEASE_G3.md`, `evidence/wp15/run8b-eval/`
 - Contract extensions: `docs/adr/ADR-10-hold-records.md`, `ADR-11`, `ADR-12`, `ADR-13` (DomainPack
   ports), `ADR-14` (memory chain), `ADR-15` (readout router), `ADR-16` (document and numerical
   advantage gate with declared memory ablations), `ADR-17` (operations), `ADR-18` (native PSE
   graph worker), `ADR-19` (native PSE determinism and specified readout), `ADR-20` (associative
-  memory layer), `ADR-21` (association provenance in the prompt)
+  memory layer), `ADR-21` (association provenance in the prompt), `ADR-22` (domain-declared
+  progress channels and G3 on the association distribution)
 - Evidence (test log, environment, baseline rerun, spec validation): `evidence/`
 - The blueprint's own machine-readable contracts and validator: `contracts/`, `tools/validate_spec.py`
 
