@@ -2,7 +2,7 @@
   "acceptance_evidence": {
     "evidence/doctor_linux_namespace_selftest.json": "5ff218e9cd2d85f7c131b78183449c2d379b55f90fb8aa7d51c1dc34cbac1bd7",
     "evidence/live/summary.json": "b90e9583a5a5e0fad701e0a378a35d741a6eae7516908492a3c2e027b60a6b4e",
-    "evidence/test_run.json": "3ac74677cc0ef34d4bcf909f8222e76bd5b85abbc0338d46a19e109c1f1a90ca",
+    "evidence/test_run.json": "b0284f759c17c58ecbb937ec5b5c26d789d9848fec4089cc184bb1094120730e",
     "evidence/wp01/baseline_manifest.json": "ef39b8ed0762a44c9ee8ff5e8ca616deef771c5ca389d6dd2841ce666233b96f",
     "evidence/wp02/spec_validation.json": "658d50d5fc0991f485240e1e6161ac5f46c171b6fc7abf953eb98db8748ac93f",
     "evidence/wp11/protocol.frozen.json": "a568a973976bbcae7aa4e0847492e973e55e826c4140ac754a96471d4697c533",
@@ -13,7 +13,7 @@
     "evidence/wp11/run3-gpt-4.1-mini/report.json": "4477efb9365669e3adb06bc57a9d1e2c6461dee9693bb4a1c3e3fe25efddcd80"
   },
   "catalog_digest": "b609760388d0427c725fe4a74e8d37fecb5c3c348e6d4b8021dcd6c2d779a5d7",
-  "created_at_utc": "2026-10-03T16:07:59.330210+00:00",
+  "created_at_utc": "2026-10-03T17:23:44.739623+00:00",
   "dependency_lock": [
     "attrs==26.1.0",
     "gabriel-agent @ file:///home/user/gabriel-ai",
@@ -47,7 +47,7 @@
         "available": true,
         "backend": "trusted_local",
         "checks": {
-          "python": "/tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke5/venv/bin/python"
+          "python": "/tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke6/venv/bin/python"
         },
         "containment": false,
         "reasons": [
@@ -72,11 +72,11 @@
     },
     "git": "git version 2.43.0",
     "journal": {
-      "head": "cd603e7b2b532925937196572fb7bed2fca54e29825c30fbd4f397892d295803",
-      "inputs_head": "a9475ceb173fa3cef8bf09f37f9b06a3d88a9a5e7362fcd6f8a5bb7d4e5c51bf",
+      "head": "5a0e5458ce6806d65b34f03d9faf95cb8d01bbc8b683d7024ae082c9b24d813e",
+      "inputs_head": "22781d7b471abdfa405fa81050b342d98864c59bf663b8b40d88471d8e71ca25",
       "schema": "gabriel.anchor/1",
       "sequence": 41,
-      "workspace_id": "ws-9014c127ef44"
+      "workspace_id": "ws-7506197894c7"
     },
     "object_store": {
       "faults": {},
@@ -127,19 +127,19 @@
     "startup": {
       "artifact_root": {
         "exists": true,
-        "path": "/tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke5/ws/objects",
+        "path": "/tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke6/ws/objects",
         "writable": true
       },
       "codec_version": "gabriel.codec/1",
       "config_schema_version": 1,
       "journal_format": "gabriel.agent-journal/1",
       "memory_chain": {
-        "head": "72c656f8f3972c2447ac04e1b6126be90a690a1bbdae8196965b888f685fc2b2",
+        "head": "53933729da669db31c1cfc44fa19c78750e75dcd3e5fada19486c718394f93f0",
         "memory_sequence": 2,
         "owner_sequence": 41,
         "policy_revision": 0,
         "schema": "gabriel.memory-anchor/1",
-        "workspace_id": "ws-9014c127ef44"
+        "workspace_id": "ws-7506197894c7"
       },
       "migrations": [],
       "reconciliation_work": [],
@@ -152,13 +152,13 @@
         "corrupt": [],
         "deep": false,
         "missing": [],
-        "referenced_objects": 112,
+        "referenced_objects": 111,
         "stray_temporaries": []
       }
     },
     "untrusted_execution_supported": true,
     "version": "0.1.0",
-    "workspace_id": "ws-9014c127ef44"
+    "workspace_id": "ws-7506197894c7"
   },
   "gates": {
     "G0": "holds: inherited runtime checks rerun (evidence/wp01)",
@@ -172,8 +172,8 @@
     "the native PSE executables are built from source per host (cargo); without them native graph operations are refused at proposal time, and without python-flint window certificates are unknown (never success)",
     "the native engine's arithmetic is platform-independent by construction (pure-Rust libm, ADR-19) but was executed on this platform only; the engine's crystal and consensus paths remain quarantined and the state readout is a specified model quantity, not a measurement",
     "advantage over a simple verification loop not shown; the evaluation corpus is saturated for gpt-4.1-mini",
-    "the associative view (ADR-20, the document pack's default since ADR-21) carries sources that verified runs cited together into a budgeted prompt whether or not the task needs them; the prompt says why each is there, which under protocol 7 kept gpt-4.1-mini from stating the forbidden figure (6/6 first attempts without the reason, 0/6 with it) but cost two repairs on one needed task; one provider, one presentation; the lexical seeds are tie-broken by observation id",
-    "the document pack's default routing policy is a readout promoted on one constructed distribution with one provider (ADR-22); it can only stop a repair earlier than the rule, it abstains where its declared channels are missing, and it stopped one recoverable repair on a seen task; a task that pins rule-based-v1 explicitly opts out"
+    "the associative view (ADR-20, the document pack's default since ADR-21) carries sources that verified runs cited together into a budgeted prompt whether or not the task needs them; the prompt says why each is there, which under protocol 7 kept gpt-4.1-mini from stating the forbidden figure (6/6 first attempts without the reason, 0/6 with it) but cost two repairs on one needed task; two providers of one vendor (gpt-4.1-mini, gpt-5-mini; protocol 9), one presentation; the lexical seeds are tie-broken by observation id",
+    "the document pack's default routing policy is a readout promoted on one constructed distribution with one provider (ADR-22) and transferred with fixed weights to a second provider of the same vendor (protocol 9); it can only stop a repair earlier than the rule, it abstains where its declared channels are missing, and it stopped one recoverable repair on a seen task under gpt-4.1-mini; a task that pins rule-based-v1 explicitly opts out"
   ],
   "license": {
     "declared": "Apache-2.0",
@@ -187,7 +187,7 @@
     ]
   },
   "package_source_files": 144,
-  "package_source_identity": "e7321e72cb43bba243c6d0cfe5a4478408f26aa9c3734130a6d452d93d77a8a6",
+  "package_source_identity": "fcd4370f81c7b6cba81d066f3f3fcd4979270a766133a207fd3fa96d343e69ee",
   "platform": {
     "machine": "x86_64",
     "release": "6.18.44-fc-v64",
@@ -198,7 +198,7 @@
   "schema": "gabriel.release-manifest/1",
   "schema_registry_digest": "e9c919435c28817b0645498c6ae5ba12422c3f249f120a6fa2e9e2ae78dca533",
   "source_branch": "claude/vigilant-gauss-03dalc",
-  "source_commit": "edbb57042d0fa6cadf7aeaca8bcc9f9a81f9979e",
+  "source_commit": "eae37e2fe09002a23346d94548c9228518d59cc5",
   "source_dirty": false,
   "supported_backends": {
     "linux_namespace": "supported containment backend; requires Linux user namespaces, util-linux unshare and setpriv; verified by gabriel doctor --selftest on the release host",
