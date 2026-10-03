@@ -12,9 +12,9 @@ from gabriel_agent.evaluation.fixtures import parser_bug as fixture
 def test_corpus_is_sound_and_frozen_by_digest():
     report = corpus.check_all()
     assert report["all_sound"], [t for t in report["tasks"] if not t["sound"]]
-    assert len(report["tasks"]) == 42 and len(report["families"]) == 14
-    assert report["tiers"] == {"standard": 15, "hard": 9, "document": 9, "numerical": 9}
-    assert all(len(ids) == 3 for ids in report["families"].values())
+    assert len(report["tasks"]) == 48 and len(report["families"]) == 17
+    assert report["tiers"] == {"standard": 15, "hard": 9, "document": 9, "numerical": 9, "graph": 6}
+    assert all(len(ids) == (2 if family.startswith("graph-") else 3) for family, ids in report["families"].items())
     assert report["corpus_digest"] == corpus.corpus_digest()
     assert all(t.family in ("text_parsing", "numeric_logic", "collections", "validation", "encoding") for t in corpus.tasks("standard"))
     assert all(t.family in ("multi_file", "trap", "stateful") and t.naive for t in corpus.tasks("hard"))

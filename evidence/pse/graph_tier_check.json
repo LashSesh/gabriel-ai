@@ -1,0 +1,223 @@
+{
+  "all_sound": true,
+  "corpus_digest": "b7998a9470c864683719845c51b0358aa5bd0608203481046ae82661c75ee986",
+  "families": {
+    "graph-mass": [
+      "gm-mixed",
+      "gm-ring"
+    ],
+    "graph-snapshot": [
+      "gs-mixed",
+      "gs-ring"
+    ],
+    "graph-window": [
+      "gw-clique",
+      "gw-clique-low"
+    ]
+  },
+  "tasks": [
+    {
+      "controls": {
+        "correct": {
+          "expected_verified": true,
+          "problems": [],
+          "verified": true
+        },
+        "wrong_identity": {
+          "expected_verified": false,
+          "problems": [
+            "snapshot identity differs from the reference"
+          ],
+          "verified": false
+        },
+        "wrong_path": {
+          "expected_verified": false,
+          "problems": [
+            "output out/snapshot.json is absent"
+          ],
+          "verified": false
+        },
+        "wrong_vertices": {
+          "expected_verified": false,
+          "problems": [
+            "vertex count differs from the reference 4"
+          ],
+          "verified": false
+        }
+      },
+      "digest": "7ad59b2c780581d5e1023a842a7db2325a1fbdafbe5ecd63eeebc3e430dcbbc6",
+      "family": "graph-snapshot",
+      "sound": true,
+      "task_id": "gs-mixed",
+      "tier": "graph"
+    },
+    {
+      "controls": {
+        "correct": {
+          "expected_verified": true,
+          "problems": [],
+          "verified": true
+        },
+        "wrong_identity": {
+          "expected_verified": false,
+          "problems": [
+            "snapshot identity differs from the reference"
+          ],
+          "verified": false
+        },
+        "wrong_path": {
+          "expected_verified": false,
+          "problems": [
+            "output out/snapshot.json is absent"
+          ],
+          "verified": false
+        },
+        "wrong_vertices": {
+          "expected_verified": false,
+          "problems": [
+            "vertex count differs from the reference 5"
+          ],
+          "verified": false
+        }
+      },
+      "digest": "00cbd272bed2e5d77745d7e63c932d59296366902363d6cd2e0f122ceeeaeee4",
+      "family": "graph-snapshot",
+      "sound": true,
+      "task_id": "gs-ring",
+      "tier": "graph"
+    },
+    {
+      "controls": {
+        "correct": {
+          "expected_verified": true,
+          "problems": [],
+          "verified": true
+        },
+        "wrong_decision": {
+          "expected_verified": false,
+          "problems": [
+            "decision 'ambiguous' differs from the reference 'below' at 0000000000000000"
+          ],
+          "verified": false
+        },
+        "wrong_mass": {
+          "expected_verified": false,
+          "problems": [
+            "maximum mass deviation 0.0010000000000000009 exceeds tolerance 1e-06"
+          ],
+          "verified": false
+        },
+        "wrong_time": {
+          "expected_verified": false,
+          "problems": [
+            "time differs from the reference '0000000000000000'"
+          ],
+          "verified": false
+        }
+      },
+      "digest": "89ed323a3aa58d6f73736a0144b389d76bb247ca5e9182b6df304c614772c95f",
+      "family": "graph-mass",
+      "sound": true,
+      "task_id": "gm-mixed",
+      "tier": "graph"
+    },
+    {
+      "controls": {
+        "correct": {
+          "expected_verified": true,
+          "problems": [],
+          "verified": true
+        },
+        "wrong_decision": {
+          "expected_verified": false,
+          "problems": [
+            "decision 'ambiguous' differs from the reference 'below' at 3fe0000000000000"
+          ],
+          "verified": false
+        },
+        "wrong_mass": {
+          "expected_verified": false,
+          "problems": [
+            "maximum mass deviation 0.0010000000000000009 exceeds tolerance 1e-06"
+          ],
+          "verified": false
+        },
+        "wrong_time": {
+          "expected_verified": false,
+          "problems": [
+            "time differs from the reference '3fe0000000000000'"
+          ],
+          "verified": false
+        }
+      },
+      "digest": "71fbb9504ce8522994cbfbdb476a1aeea59137fe196bd86b8e374ca53cd34a56",
+      "family": "graph-mass",
+      "sound": true,
+      "task_id": "gm-ring",
+      "tier": "graph"
+    },
+    {
+      "controls": {
+        "correct": {
+          "expected_verified": true,
+          "problems": [],
+          "verified": true
+        },
+        "uncertified": {
+          "expected_verified": false,
+          "problems": [
+            "output is not a certified result"
+          ],
+          "verified": false
+        },
+        "wrong_status": {
+          "expected_verified": false,
+          "problems": [
+            "certificate statuses differ from the reference"
+          ],
+          "verified": false
+        }
+      },
+      "digest": "372696a880c0360c0dd0d806a5af79eeeece0f37862025ee647b17c1c45a02a6",
+      "family": "graph-window",
+      "sound": true,
+      "task_id": "gw-clique",
+      "tier": "graph"
+    },
+    {
+      "controls": {
+        "correct": {
+          "expected_verified": true,
+          "problems": [],
+          "verified": true
+        },
+        "uncertified": {
+          "expected_verified": false,
+          "problems": [
+            "output is not a certified result"
+          ],
+          "verified": false
+        },
+        "wrong_status": {
+          "expected_verified": false,
+          "problems": [
+            "certificate statuses differ from the reference"
+          ],
+          "verified": false
+        }
+      },
+      "digest": "d11d89e6b0b9021443dd06602cebb1f4b4c15075e994ba50cfd448d462ac6dbe",
+      "family": "graph-window",
+      "sound": true,
+      "task_id": "gw-clique-low",
+      "tier": "graph"
+    }
+  ],
+  "tiers": {
+    "document": 9,
+    "graph": 6,
+    "hard": 9,
+    "numerical": 9,
+    "standard": 15
+  }
+}

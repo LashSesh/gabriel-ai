@@ -23,8 +23,9 @@ dependencies = [
 provider = []
 # Legacy analytical runtime (gabriel_runtime) and its reproduction modules.
 numerical = ["numpy==2.3.5", "scipy==1.17.0"]
-# Optional native PSE worker build products are a separate artifact.
-native = []
+# Native PSE graph worker (ADR-18): the executables are built from native_pse with cargo (a separate artifact,
+# identified by digest per job); python-flint serves the exact window certificates (stage two) only.
+native = ["python-flint==0.9.0"]
 dev = ["pytest>=8.3,<9"]
 
 [project.scripts]

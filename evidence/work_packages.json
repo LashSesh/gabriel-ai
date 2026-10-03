@@ -1,6 +1,6 @@
 {
   "schema": "gabriel.evidence.work-packages/1",
-  "produced_at_utc": "2026-10-03T08:32:58.763324+00:00",
+  "produced_at_utc": "2026-10-03T09:25:04.973376+00:00",
   "rule": "A package counts as done only with actual code and recorded test output; privileged and paid runs are listed under not_executed.",
   "packages": {
     "WP01": {
@@ -946,7 +946,7 @@
         "docs/adr/ADR-13-domain-pack-ports.md"
       ],
       "not_executed": [
-        "native PSE worker (optional; the analytical adapter is the stdlib worker)",
+        "native PSE worker at the time of WP10 (built and integrated afterwards; see PSE)",
         "recurrent routing feature experiment in the document and numerical packs (executed in the software pack only; see G3-route)"
       ],
       "test_results": {
@@ -1003,7 +1003,7 @@
         "readout training on real task outcomes (no failed verification in 54 training runs, so no labeled decision of either class)",
         "evaluation of a readout policy in protocol 4b (no candidate existed)",
         "weight training (outside G1-G3 by the blueprint)",
-        "native PSE worker"
+        "native PSE worker in the routing experiment (integrated afterwards; see PSE)"
       ],
       "test_results": {
         "tests/test_policy_route.py": [
@@ -1072,7 +1072,7 @@
       "not_executed": [
         "a second provider",
         "a real-world document or numerical corpus",
-        "native analytical worker ablation (worker not built)"
+        "native analytical worker ablation (the worker was integrated after protocol 5; the graph tier is in no frozen protocol)"
       ],
       "test_results": {
         "tests/test_evaluation_domains.py": [
@@ -1128,6 +1128,86 @@
           },
           {
             "test": "test_protocol_freeze_and_metrics",
+            "result": "PASSED"
+          }
+        ]
+      }
+    },
+    "PSE": {
+      "status": "DONE",
+      "tests": [
+        "tests/test_native_pse.py"
+      ],
+      "acceptance": [
+        "blueprint: native PSE and analytical worker contracts",
+        "AT16(native worker)"
+      ],
+      "evidence": [
+        "evidence/pse/build_identity.json",
+        "evidence/pse/equivalence_fresh_vs_shipped.json",
+        "evidence/pse/functional_fresh_build/results.json",
+        "evidence/pse/measurements.json",
+        "evidence/pse/graph_tier_check.json",
+        "docs/adr/ADR-18-native-pse-graph-worker.md",
+        "evidence/test_results.txt"
+      ],
+      "not_executed": [
+        "a provider-driven run of the graph tier (deterministic computations a model cannot perform itself; no frozen protocol includes the tier)",
+        "exact certificates outside the uniform-clique profile (declared out_of_scope by the vendored certificate)",
+        "the inherited Windows golden-fixture mismatch (23 of 78 engine-state hashes) remains unresolved"
+      ],
+      "test_results": {
+        "tests/test_native_pse.py": [
+          {
+            "test": "test_reference_model_reproduces_native_snapshot_identities_and_laplacians",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_the_two_independent_references_agree",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_region_mass_matches_the_scipy_reference_on_every_backend",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_window_certificates_follow_the_closed_form_reference_and_declare_their_scope",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_direct_and_hosted_native_worker_agree_and_unsupported_inputs_abstain",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_native_identity_and_contract_violations_are_rejected",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_worker_build_and_cache_key_bind_the_native_executables",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_native_datasets_are_described_without_computation",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_native_tasks_run_through_the_core_with_honest_verdicts",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_native_worker_runs_inside_the_namespace_jail",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_small_signature_partition_agrees_with_the_native_s7_orbit_index",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_graph_tier_is_sound_and_frozen_protocols_keep_their_digests",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_a_hit_on_the_complete_job_key_reissues_the_retained_result_and_witness",
             "result": "PASSED"
           }
         ]
@@ -1266,7 +1346,7 @@
       "evidence/wp10/at23/report.md",
       "evidence/test_results.txt"
     ],
-    "scope": "one owner/scheduler/policy build served repository repair, source-grounded document amendment and numerical transformation (fixture tasks, real provider for the valid tasks, scripted invalid and out-of-scope controls) with registered domain observers, independent oracles and recorded replay; the analytical worker is the standard-library adapter, native PSE remains optional and unbuilt; the advantage gate was executed on the document and numerical families under protocol 5 (evidence/wp14) and not passed, with the declared ablations of provenance-aware retrieval and the revision rule below the declared minimum relevant effect"
+    "scope": "one owner/scheduler/policy build served repository repair, source-grounded document amendment and numerical transformation (fixture tasks, real provider for the valid tasks, scripted invalid and out-of-scope controls) with registered domain observers, independent oracles and recorded replay; the analytical workers are the standard-library adapter and, since ADR-18, the native PSE graph engine built from the locked sources and run as a contained worker with independent references (evidence/pse); the advantage gate was executed on the document and numerical families under protocol 5 (evidence/wp14) and not passed, with the declared ablations of provenance-aware retrieval and the revision rule below the declared minimum relevant effect"
   },
   "release_scope_G3": {
     "established_on_this_host": false,

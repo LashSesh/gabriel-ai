@@ -25,9 +25,16 @@ in an isolated worktree with independent acceptance checks.
 - Operations (explicit versioned migrations with catalog epochs, startup validation, clean
   shutdown, telemetry spans, operational metrics, artifact garbage collection):
   `docs/RUNBOOK.md` (Operations), `docs/adr/ADR-17-operations.md`, `evidence/ops/`
+- Native PSE graph worker (the reviewed Rust engine as a contained analytical worker of the
+  numerical pack: conditioned snapshots, regional masses and exact window certificates with
+  complete bindings, references independent of the engine, a graph corpus tier and separate
+  measurements of cold start, identity validation, query and task latency):
+  `docs/adr/ADR-18-native-pse-graph-worker.md`, `docs/RUNBOOK.md` (Native PSE graph worker),
+  `evidence/pse/`
 - Contract extensions: `docs/adr/ADR-10-hold-records.md`, `ADR-11`, `ADR-12`, `ADR-13` (DomainPack
   ports), `ADR-14` (memory chain), `ADR-15` (readout router), `ADR-16` (document and numerical
-  advantage gate with declared memory ablations), `ADR-17` (operations)
+  advantage gate with declared memory ablations), `ADR-17` (operations), `ADR-18` (native PSE
+  graph worker)
 - Evidence (test log, environment, baseline rerun, spec validation): `evidence/`
 - The blueprint's own machine-readable contracts and validator: `contracts/`, `tools/validate_spec.py`
 

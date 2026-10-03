@@ -191,6 +191,29 @@ inputs, payloads), the memory chain, the checkpoints, the catalog and migration 
 including references nested inside JSON artifacts; objects outside it and older than the grace
 period are orphans. After `--apply` the replay and the memory chain are re-verified.
 
+## Native PSE graph worker (ADR-18)
+```bash
+cargo build --locked --release --manifest-path native_pse/Cargo.toml --example engine_observer --example engine_snapshot
+                                                      # executables: native_pse/target/release/examples/{engine_observer,engine_snapshot}
+export GABRIEL_NATIVE_PSE_DIR=/elsewhere/examples      # optional: executables outside the build tree
+.venv/bin/python -m pip install python-flint           # stage two (exact window certificates); numpy and scipy only for the test references
+gabriel eval corpus-check --tier graph                 # six graph tasks with executed controls
+python scripts/pse_measure.py --output evidence/pse/measurements.json --backends trusted_local,linux_namespace
+```
+The numerical pack declares three native operations beside the standard-library ones:
+`graph.snapshot` on an `observation_batches` dataset, `graph.region_mass` on a `graph_query`
+and `graph.window_reachability` on a `graph_window_query` (binary64 values as 16-digit bit
+strings; see `src/gabriel_agent/evaluation/fixtures/graph_walk.py` for the dataset forms). A
+job installs the worker file and both executables into the worktree, runs them inside the
+backend with the executable digests checked before and after every native process, and removes
+everything but the output. Window certificates are computed afterwards in a dedicated host
+process; a job is `computed` only when every window is decided (`reachable` or `excluded`),
+`out_of_scope` when the represented graph is not a uniform clique, `unknown` when the precision
+ladder is exhausted or the arithmetic is unavailable; none of these leaves an output. Without
+the executables a native proposal is refused at normalization (no substitute worker). Evidence:
+`evidence/pse/` (build identity, equivalence with the retained functional journals,
+measurements, graph tier check) and `tests/test_native_pse.py`.
+
 ## Evidence manifests
 ```bash
 GABRIEL_CONTAINMENT_TESTS=1 python -m pytest tests -vv -rs | tee evidence/test_results.txt

@@ -50,7 +50,7 @@ PACKAGES = {
              "not_executed": ["policy adaptation beyond the promotion rule (the G3 route trained no router or retrieval policy; see G3-route)"]},
     "WP10": {"status": "DONE", "tests": ["tests/test_domains.py"], "acceptance": ["AT16", "AT23"],
              "evidence": ["evidence/wp10/at23/summary.json", "evidence/wp10/at23/report.md", "docs/adr/ADR-13-domain-pack-ports.md"],
-             "not_executed": ["native PSE worker (optional; the analytical adapter is the stdlib worker)",
+             "not_executed": ["native PSE worker at the time of WP10 (built and integrated afterwards; see PSE)",
                               "recurrent routing feature experiment in the document and numerical packs (executed in the software pack only; see G3-route)"]},
     "G3-route": {"status": "DONE_EXECUTED_NOT_ESTABLISHED", "tests": ["tests/test_policy_route.py", "tests/test_evaluation.py"], "acceptance": ["AT17(hard tier)", "AT25(promotion)"],
                  "evidence": ["evidence/wp13/protocol4a-train.frozen.json", "evidence/wp13/run4a-train/report.md", "evidence/wp13/policies/metrics.json",
@@ -58,14 +58,21 @@ PACKAGES = {
                               "evidence/wp13/*/final_diffs/index.json", "docs/RELEASE_G3.md", "docs/adr/ADR-15-readout-router.md"],
                  "not_executed": ["readout training on real task outcomes (no failed verification in 54 training runs, so no labeled decision of either class)",
                                   "evaluation of a readout policy in protocol 4b (no candidate existed)",
-                                  "weight training (outside G1-G3 by the blueprint)", "native PSE worker"]},
+                                  "weight training (outside G1-G3 by the blueprint)", "native PSE worker in the routing experiment (integrated afterwards; see PSE)"]},
     "P5-advantage": {"status": "DONE_EXECUTED_ADVANTAGE_NOT_SHOWN", "tests": ["tests/test_evaluation_domains.py", "tests/test_evaluation.py"],
                      "acceptance": ["AT17(document and numerical families)"],
                      "evidence": ["evidence/wp14/pilot_declaration.md", "evidence/wp14/pilot1.frozen.json", "evidence/wp14/pilot1-run/report.md",
                                   "evidence/wp14/pilot2.frozen.json", "evidence/wp14/pilot2-run/report.md", "evidence/wp14/protocol5.frozen.json",
                                   "evidence/wp14/run5/report.md", "evidence/wp14/*/final_diffs/index.json", "docs/EVALUATION_PROTOCOL.md",
                                   "docs/adr/ADR-16-advantage-gate-document-numerical.md"],
-                     "not_executed": ["a second provider", "a real-world document or numerical corpus", "native analytical worker ablation (worker not built)"]},
+                     "not_executed": ["a second provider", "a real-world document or numerical corpus",
+                                      "native analytical worker ablation (the worker was integrated after protocol 5; the graph tier is in no frozen protocol)"]},
+    "PSE": {"status": "DONE", "tests": ["tests/test_native_pse.py"], "acceptance": ["blueprint: native PSE and analytical worker contracts", "AT16(native worker)"],
+            "evidence": ["evidence/pse/build_identity.json", "evidence/pse/equivalence_fresh_vs_shipped.json", "evidence/pse/functional_fresh_build/results.json",
+                         "evidence/pse/measurements.json", "evidence/pse/graph_tier_check.json", "docs/adr/ADR-18-native-pse-graph-worker.md", "evidence/test_results.txt"],
+            "not_executed": ["a provider-driven run of the graph tier (deterministic computations a model cannot perform itself; no frozen protocol includes the tier)",
+                             "exact certificates outside the uniform-clique profile (declared out_of_scope by the vendored certificate)",
+                             "the inherited Windows golden-fixture mismatch (23 of 78 engine-state hashes) remains unresolved"]},
     "OPS": {"status": "DONE", "tests": ["tests/test_ops.py"], "acceptance": ["blueprint: operations, observability and release discipline"],
             "evidence": ["evidence/ops/migration_at23.json", "evidence/ops/migration_run5_dr-notice.json", "evidence/ops/smoke_metrics.json",
                          "evidence/ops/smoke_trace_summary.json", "evidence/ops/smoke_gc_dry_run.json", "evidence/ops/smoke_doctor_deep.json",
@@ -83,7 +90,8 @@ RELEASE_SCOPE_G2 = {
     "evidence": ["evidence/wp10/at23/summary.json", "evidence/wp10/at23/report.md", "evidence/test_results.txt"],
     "scope": "one owner/scheduler/policy build served repository repair, source-grounded document amendment and numerical transformation "
              "(fixture tasks, real provider for the valid tasks, scripted invalid and out-of-scope controls) with registered domain observers, "
-             "independent oracles and recorded replay; the analytical worker is the standard-library adapter, native PSE remains optional and unbuilt; "
+             "independent oracles and recorded replay; the analytical workers are the standard-library adapter and, since ADR-18, the native PSE graph "
+             "engine built from the locked sources and run as a contained worker with independent references (evidence/pse); "
              "the advantage gate was executed on the document and numerical families under protocol 5 (evidence/wp14) and not passed, with the "
              "declared ablations of provenance-aware retrieval and the revision rule below the declared minimum relevant effect",
 }

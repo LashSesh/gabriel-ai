@@ -25,12 +25,14 @@ import itertools
 import json
 import os
 import re
+import struct
 import subprocess
 import tempfile
 from dataclasses import dataclass
 from pathlib import Path
 
 from ..contracts.codec import canonical
+from .fixtures import graph_walk as gwf
 
 CITATION = re.compile(r'\[\[cite:([A-Za-z0-9][A-Za-z0-9._:-]{0,127}) "((?:[^"\\]|\\.)*)"\]\]')
 IGNORED = ("__pycache__", ".gabriel_worker", ".git")
@@ -52,10 +54,11 @@ class DomainTask:
     sources: tuple = ()         # document: declared sources (path, source_id, revision, event kind, access)
     targets: tuple = ()         # document: target documents
     controls: tuple = ()        # ((name, expected_verified, {path: content}), ...): executed by soundness_check
+    tier_name: str = ""         # a tier distinct from the domain (the graph tier runs in the numerical domain)
 
     @property
     def tier(self) -> str:
-        return self.domain
+        return self.tier_name or self.domain
 
     def files_map(self) -> dict:
         return dict(self.files)
@@ -412,10 +415,83 @@ def _numerical_tasks():
     return tasks
 
 
+# ===================================================================== graph tier (native PSE worker, ADR-18; references independent of the engine)
+
+RING = [[0, 1], [1, 2], [2, 3], [3, 4], [4, 0]]
+RING_SOURCE = [(0, 1.0, 0.0), (1, 0.0, 0.0), (2, 0.0, 0.0), (3, 0.0, 0.0), (4, 0.0, 0.0)]
+
+
+def _graph_task(task_id, family, goal, files, oracle, controls):
+    return DomainTask(task_id=task_id, family=family, domain="numerical", goal=goal, files=tuple(files), allowed_paths=("out/",), oracle=oracle,
+                      controls=tuple(controls), tier_name="graph")
+
+
+def _mass_values(rows):
+    return [{"time_bits": t, "mass_bits": gwf.bits(m), "decision": d} for t, m, d in rows]
+
+
+def _graph_tasks():
+    """Snapshot identities, regional masses and window certificates of the native graph engine; the
+    references are the reconstruction of the declared construction rule, a standard-library
+    spectral decomposition and the closed-form harmonic model of a uniform clique."""
+    tasks = []
+    readme = "# Observation batches\n\nEntities co-observed per batch; queries declare source, targets, times, thresholds and windows as binary64 bits.\n"
+    for task_id, batches, name in [("gs-mixed", gwf.BATCHES, "mixed"), ("gs-ring", RING, "ring")]:
+        data = gwf.text(gwf.batches_dataset(batches))
+        identity, order = gwf.reference_identity(batches), gwf.vertex_order(batches)
+        out = "out/snapshot.json"
+        vertices = [{"entity": e, "vertex_id": str(gwf.sensor_vertex_id(e))} for e in order]
+        correct = _dumps({"kind": "graph_snapshot", "snapshot": {"identity": identity, "vertices": vertices}})
+        wrong_identity = _dumps({"kind": "graph_snapshot", "snapshot": {"identity": gwf.reference_identity(batches[:-1]), "vertices": vertices}})
+        wrong_vertices = _dumps({"kind": "graph_snapshot", "snapshot": {"identity": identity, "vertices": vertices[:-1]}})
+        tasks.append(_graph_task(
+            task_id, "graph-snapshot",
+            "Condition the native graph engine on the observation batches in data/batches.json (%s history of %d entities) and write its conditioned "
+            "snapshot (identity, vertices, walk backend, engine statistics) to %s." % (name, len(order), out),
+            [("data/batches.json", data), ("README.md", readme)],
+            {"operation": "graph.snapshot", "output_path": out, "units": None, "identity": identity, "vertices": len(order)},
+            [("correct", True, {out: correct}), ("wrong_identity", False, {out: wrong_identity}), ("wrong_vertices", False, {out: wrong_vertices}),
+             ("wrong_path", False, {"out/other.json": correct})]))
+    for task_id, batches, source, targets, times, threshold, deadband, name in [
+            ("gm-mixed", gwf.BATCHES, gwf.SOURCE, gwf.TARGETS, gwf.TIMES, 0.2, 0.01, "mixed"),
+            ("gm-ring", RING, RING_SOURCE, [2, 3], [0.5, 1.0, 1.5, 3.0], 0.3, 0.02, "ring")]:
+        data = gwf.text(gwf.query_dataset(batches=batches, source=source, targets=targets, times=times, threshold=threshold, deadband=deadband))
+        rows = gwf.reference_mass_rows(batches, source, targets, times, threshold, deadband)
+        out = "out/mass.json"
+        correct = _dumps({"kind": "region_mass", "values": _mass_values(rows)})
+        wrong_mass = _dumps({"kind": "region_mass", "values": _mass_values([[t, m + 1e-3, d] for t, m, d in rows])})
+        wrong_decision = _dumps({"kind": "region_mass", "values": _mass_values([[t, m, "ambiguous" if d != "ambiguous" else "below"] for t, m, d in rows])})
+        wrong_time = _dumps({"kind": "region_mass", "values": _mass_values([[gwf.bits(gwf.number(t) + 1.0), m, d] for t, m, d in rows])})
+        tasks.append(_graph_task(
+            task_id, "graph-mass",
+            "Read out the regional mass of the source-conditioned walk declared in data/query.json (%s history) at its declared times with its "
+            "threshold and deadband rule and write the result to %s." % (name, out),
+            [("data/query.json", data), ("README.md", readme)],
+            {"operation": "graph.region_mass", "output_path": out, "units": None, "tolerance_micro": 1, "masses": rows},
+            [("correct", True, {out: correct}), ("wrong_mass", False, {out: wrong_mass}), ("wrong_decision", False, {out: wrong_decision}),
+             ("wrong_time", False, {out: wrong_time})]))
+    for task_id, threshold in [("gw-clique", 0.2), ("gw-clique-low", 0.1)]:
+        data = gwf.text(gwf.window_dataset(threshold=threshold))
+        statuses = gwf.reference_window_statuses(threshold=threshold)
+        out = "out/window.json"
+        correct = _dumps({"kind": "window_reachability", "stage": "certified", "statuses": statuses})
+        wrong_status = _dumps({"kind": "window_reachability", "stage": "certified", "statuses": [("excluded" if s == "reachable" else "reachable") for s in statuses]})
+        uncertified = _dumps({"kind": "window_reachability", "stage": "snapshot", "statuses": statuses})
+        tasks.append(_graph_task(
+            task_id, "graph-window",
+            "Certify, for every closed window declared in data/window.json (a four-clique history, threshold %s), whether the regional mass of the "
+            "declared walk exceeds the threshold somewhere in the window, and write the certificates to %s." % (threshold, out),
+            [("data/window.json", data), ("README.md", readme)],
+            {"operation": "graph.window_reachability", "output_path": out, "units": None, "statuses": statuses},
+            [("correct", True, {out: correct}), ("wrong_status", False, {out: wrong_status}), ("uncertified", False, {out: uncertified})]))
+    return tasks
+
+
 DOCUMENT_TASKS = _revision_tasks() + _revoked_tasks() + _conflict_tasks()
 NUMERICAL_TASKS = _numerical_tasks()
-DOMAIN_TASKS = DOCUMENT_TASKS + NUMERICAL_TASKS
-DOMAIN_TIERS = ("document", "numerical")
+GRAPH_TASKS = _graph_tasks()
+DOMAIN_TASKS = DOCUMENT_TASKS + NUMERICAL_TASKS + GRAPH_TASKS
+DOMAIN_TIERS = ("document", "numerical", "graph")
 
 
 def tasks(tier: str | None = None) -> list:
@@ -564,7 +640,42 @@ def verify_numerical(task: DomainTask, root: Path) -> dict:
         except ValueError:
             problems.append("output is not JSON")
     if isinstance(output, dict):
-        if "values" in oracle:
+        if "identity" in oracle:
+            snapshot = output.get("snapshot") if isinstance(output.get("snapshot"), dict) else {}
+            vertices = snapshot.get("vertices")
+            if snapshot.get("identity") != oracle["identity"]:
+                problems.append("snapshot identity differs from the reference")
+            if not isinstance(vertices, list) or len(vertices) != oracle.get("vertices"):
+                problems.append("vertex count differs from the reference %r" % (oracle.get("vertices"),))
+        elif "masses" in oracle:
+            got, expected = output.get("values"), oracle["masses"]
+            tolerance = float(oracle.get("tolerance_micro", 0)) / 1e6
+            if not isinstance(got, list) or len(got) != len(expected):
+                problems.append("row count %s differs from the reference %d" % (len(got) if isinstance(got, list) else None, len(expected)))
+            else:
+                worst = 0.0
+                for (t_e, m_e, d_e), item in zip(expected, got):
+                    if not isinstance(item, dict) or item.get("time_bits") != t_e:
+                        problems.append("time differs from the reference %r" % (t_e,))
+                        break
+                    try:
+                        mass = struct.unpack(">d", bytes.fromhex(item.get("mass_bits")))[0]
+                    except (TypeError, ValueError):
+                        problems.append("mass at %s is not a binary64 bit string" % t_e)
+                        break
+                    worst = max(worst, abs(mass - float(m_e)))
+                    if item.get("decision") != d_e:
+                        problems.append("decision %r differs from the reference %r at %s" % (item.get("decision"), d_e, t_e))
+                        break
+                else:
+                    if worst > tolerance:
+                        problems.append("maximum mass deviation %r exceeds tolerance %r" % (worst, tolerance))
+        elif "statuses" in oracle:
+            if output.get("statuses") != oracle["statuses"]:
+                problems.append("certificate statuses differ from the reference")
+            if output.get("stage") != "certified":
+                problems.append("output is not a certified result")
+        elif "values" in oracle:
             if output.get("units") != oracle.get("units"):
                 problems.append("output units %r differ from the reference %r" % (output.get("units"), oracle.get("units")))
             got = output.get("values")

@@ -30,7 +30,7 @@ from __future__ import annotations
 import time
 from pathlib import Path
 
-from ..adapters import analytical
+from ..adapters import analytical, native_graph
 from ..agent import TaskRunner, Workspace
 from ..agent.workspace import DEFAULT_BUDGET
 from ..artifacts import ObjectStore
@@ -180,12 +180,22 @@ class DomainEvalContext:
             raw = self.store.get(job["input_ref"])
         except GabrielError as exc:
             return False, exc.message
-        result = analytical.run_job(job["operation"], job["parameters"], raw)
+        if numerical.is_native(job["operation"]):
+            # the same native worker file in process (uncontained) with the executables bound by digest; a
+            # window certificate goes through the same dedicated host process as the owner's run
+            result = native_graph.run_job(job["operation"], job["parameters"], raw, native_graph.binaries())
+            payload = native_graph.dumps(result["output"]) if result["verdict"] == "computed" else None
+            if payload is not None and numerical.OPERATIONS[job["operation"]].get("certificate"):
+                verdict, payload, stage = numerical.certify_output(payload)
+                result = {"verdict": verdict, "diagnostics": {"reason": stage.get("reason") or ", ".join(stage.get("statuses") or [])}}
+        else:
+            result = analytical.run_job(job["operation"], job["parameters"], raw)
+            payload = analytical.dumps(result["output"]) if result["verdict"] == "computed" else None
         if result["verdict"] != "computed":
             return False, "domain verdict %s: %s" % (result["verdict"], (result.get("diagnostics") or {}).get("reason", ""))
         with fs.ContainedRoot(str(worktree.path)) as root:
             try:
-                root.write(job["output_path"], analytical.dumps(result["output"]))
+                root.write(job["output_path"], payload)
             except GabrielError as exc:
                 return False, exc.message
         return True, None

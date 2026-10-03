@@ -90,7 +90,9 @@ def release_manifest(root: Path, *, evidence: dict | None = None, python: str = 
                         "(evidence/live, evidence/wp11, evidence/wp12); advantage gate (AT17) executed under three frozen protocols and not passed",
                   "G2": "established on the release host for the three fixture task families: repository repair, source-grounded document "
                         "amendment and numerical transformation run through one owner/scheduler/policy build with registered domain observers "
-                        "and independent oracles (AT23, evidence/wp10/at23); memory and analytical adapters per AT14-AT16 and AT25 (tests); "
+                        "and independent oracles (AT23, evidence/wp10/at23); memory and analytical adapters per AT14-AT16 and AT25 (tests); the native "
+                        "PSE graph engine integrated as a contained analytical worker with independent references and separate measurements "
+                        "(ADR-18, evidence/pse); "
                         "advantage gate (AT17) executed on the document and numerical families under protocol 5 (evidence/wp14) and not passed",
                   "G3": "not established: the routing feature experiment was executed under frozen protocols on the hard tier (evidence/wp13) "
                         "but no first patch failed verification, so no labeled router decision exists and no readout candidate was trained or "
@@ -100,6 +102,8 @@ def release_manifest(root: Path, *, evidence: dict | None = None, python: str = 
                         ["a catalog, registry or reducer change needs an explicit migration (gabriel migrate: backup, equivalence replay, recorded epoch); "
                          "journals created before catalog records existed migrate only when the running code reproduces them",
                          "single-host, single-user deployment only",
+                         "the native PSE executables are built from source per host (cargo); without them native graph operations are refused at "
+                         "proposal time, and without python-flint window certificates are unknown (never success)",
                          "advantage over a simple verification loop not shown; the evaluation corpus is saturated for gpt-4.1-mini"],
     }
     return manifest

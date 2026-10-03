@@ -14,9 +14,14 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
+import struct
+import subprocess
+import sys
+import time
 from pathlib import Path
 
-from ...adapters import analytical
+from ...adapters import analytical, native_graph
 from ...contracts.codec import canonical, dumps_utf8, loads, sha256_hex
 from ...contracts.errors import Code, GabrielError
 from ...contracts.schemas import validate
@@ -47,18 +52,75 @@ RETRY_CLASS = {"numerical.observe": "read_retry", "numerical.run_job": "reconcil
                "numerical.verify": "read_retry", "numerical.review": "read_retry", "model.generate": "target_idempotent_retry"}
 
 
-def _worker_source() -> bytes:
-    return Path(analytical.__file__).read_bytes()
+WORKER_FILES = ("result.json", "job.json", "worker.py", "native_worker.py", "bin/engine_observer", "bin/engine_snapshot")
+CERTIFY_TIMEOUT_S = 120
+OPERATIONS = {**analytical.OPERATIONS, **native_graph.OPERATIONS}  # disjoint ids: stdlib worker and native graph worker
 
 
-def worker_build() -> str:
+def is_native(operation: str) -> bool:
+    return operation in native_graph.OPERATIONS
+
+
+def profile_id(operation: str) -> str:
+    return native_graph.PROFILE_ID if is_native(operation) else analytical.PROFILE_ID
+
+
+def _worker_source(operation: str = "units.convert") -> bytes:
+    return Path(native_graph.__file__ if is_native(operation) else analytical.__file__).read_bytes()
+
+
+def worker_build(operation: str = "units.convert") -> str:
+    """Identity of the worker that runs an operation: the adapter file's bytes; for native
+    operations also the digests of the bound executables (missing executables leave the build
+    distinct from any complete one, so a job can never be bound to them)."""
+    if is_native(operation):
+        return native_graph.worker_build(native_graph.binaries())
     return hashlib.sha256(_worker_source()).hexdigest()
+
+
+def numerical_environment(operation: str = "units.convert") -> dict:
+    return native_graph.numerical_environment() if is_native(operation) else analytical.numerical_environment()
 
 
 def cache_key(input_sha: str, operation: str, parameters: dict, build: str, environment: dict) -> str:
     """Binds complete input bytes, operation, parameters, profile, worker build and numerical environment."""
-    return hashlib.sha256(canonical({"input_sha256": input_sha, "operation": operation, "parameters": parameters, "profile": analytical.PROFILE_ID,
+    return hashlib.sha256(canonical({"input_sha256": input_sha, "operation": operation, "parameters": parameters, "profile": profile_id(operation),
                                      "worker_build": build, "environment": environment})).hexdigest()
+
+
+def _binary64(value) -> float:
+    if not isinstance(value, str) or len(value) != 16:
+        raise ValueError("not binary64 bits")
+    return struct.unpack(">d", bytes.fromhex(value))[0]
+
+
+def certify_output(output_raw: bytes) -> tuple:
+    """Stage two of ``graph.window_reachability``: exact certificates (python-flint/Arb) over the
+    validated native snapshot, in a dedicated host process. Returns (verdict, output bytes or
+    None, stage record). The verdict is ``computed`` only when every window is decided
+    (``reachable`` or ``excluded``); ``out_of_scope`` and ``unknown`` statuses, an unavailable
+    arithmetic or a failed process never leave an output, and the stage record keeps what was
+    established."""
+    clock = time.monotonic_ns()
+    source_root = Path(native_graph.__file__).resolve().parents[2]
+    env = dict(os.environ, PYTHONPATH=str(source_root) + (os.pathsep + os.environ["PYTHONPATH"] if os.environ.get("PYTHONPATH") else ""))
+    try:
+        output = json.loads(output_raw.decode("utf8"))
+        process = subprocess.run([sys.executable, "-m", "gabriel_agent.adapters.native_graph", "certify"], input=json.dumps({"output": output}).encode("utf8"),
+                                 capture_output=True, timeout=CERTIFY_TIMEOUT_S, check=False, env=env, cwd=str(source_root))
+        if process.returncode != 0:
+            raise ValueError("certificate process failed: " + process.stderr[-2000:].decode("utf8", errors="replace").strip())
+        certified = json.loads(process.stdout.decode("utf8"))
+        statuses = list(certified["statuses"])
+        if any(s not in ("reachable", "excluded", "unknown", "out_of_scope") for s in statuses):
+            raise ValueError("certificate process returned an undeclared status")
+    except (ValueError, OSError, subprocess.TimeoutExpired, KeyError, TypeError, UnicodeDecodeError) as exc:
+        return "unknown", None, {"status": "unavailable", "reason": str(exc)[:500], "elapsed_us": (time.monotonic_ns() - clock) // 1000}
+    verdict = "out_of_scope" if "out_of_scope" in statuses else "unknown" if "unknown" in statuses else "computed"
+    output.update({"stage": "certified", "certificates": certified["certificates"], "statuses": statuses, "arithmetic": certified["arithmetic"]})
+    stage = {"status": verdict, "statuses": statuses, "certificates": certified["certificates"], "arithmetic": certified["arithmetic"],
+             "elapsed_us": (time.monotonic_ns() - clock) // 1000}
+    return verdict, (native_graph.dumps(output) if verdict == "computed" else None), stage
 
 
 # ===================================================================== compile port
@@ -72,7 +134,7 @@ def compile_task(spec: dict, store, **ids):
                 oracle = json.loads(store.get(check_spec["oracle_files"][0]["artifact_ref"]).decode("utf8"))
             except (ValueError, UnicodeDecodeError, GabrielError):
                 return "the reference oracle is not a JSON document"
-            if oracle.get("operation") not in analytical.OPERATIONS:
+            if oracle.get("operation") not in OPERATIONS:
                 return "the reference oracle names an unknown operation"
         return None
     pin = {"schema": "gabriel.software-repository-pin/1", "repository_path": str(spec["repository"]), "base_commit": ids["base_commit"], "pinned_by": ids["principal_id"]}
@@ -123,6 +185,10 @@ def take_snapshot(worktree, binding: dict, store, frontier: int) -> tuple:
                 continue
             store.put(raw, "application/json; charset=utf-8")  # retained input identity
             description = analytical.describe(raw)
+            if description["format"] == "json" and description["kind"] == "unknown":
+                native = native_graph.describe(raw)  # native graph kinds: bounds checked, nothing computed
+                if native["kind"] != "unknown":
+                    description = native
             datasets.append({"path": path, "sha256": entry["sha256"], "bytes": entry["bytes"], "format": description["format"], "kind": description["kind"],
                              "units": description["units"], "time_basis": description["time_basis"], "rows": description["rows"],
                              "problems": [p[:256] for p in description["problems"]][:16]})
@@ -162,9 +228,10 @@ def build_prompt(task_goal: str, binding: dict, snapshot: dict, manifest: dict, 
         entries.append({"entry_id": "ds-%d" % len(entries), "kind": "source", "artifact_ref": {"sha256": d["sha256"], "bytes": d["bytes"], "media_type": "application/json; charset=utf-8"},
                         "source_id": "worktree", "source_revision": None, "observation_id": None, "span_start": 0, "span_end": d["bytes"], "purpose": "dataset",
                         "truncated": False, "omitted_bytes": 0, "disclosure_scope": "provider"})
-    lines += ["", "Declared operations (id: input kind; parameters; description):"]
-    for op_id, spec in sorted(analytical.OPERATIONS.items()):
-        lines.append("  %s: %s; %s; %s" % (op_id, spec["input_kind"], json.dumps(spec["parameters"]), spec["description"]))
+    lines += ["", "Declared operations (id: input kind; parameters; worker; description):"]
+    for op_id, spec in sorted(OPERATIONS.items()):
+        lines.append("  %s: %s; %s; %s; %s" % (op_id, spec["input_kind"], json.dumps(spec["parameters"]), "native graph engine" if is_native(op_id) else "standard library",
+                                               spec["description"]))
     if failure_context:
         lines += ["", "Previous attempt failed verification (round %d). Diagnostics:" % round_index]
         for item in failure_context:
@@ -172,7 +239,8 @@ def build_prompt(task_goal: str, binding: dict, snapshot: dict, manifest: dict, 
     lines += ["", "Respond with exactly one JSON object and nothing else:",
               '{"operation": "<operation id>", "input_path": "<observed dataset path>", "expected_sha256": "<its sha256>", "output_path": "<path inside the allowed output paths>",',
               ' "parameters": {<parameters of the operation>}, "rationale": "<short explanation>"}',
-              "Rules: the operation must be one of the declared ids; parameters must match its declared types; integers only (no floats) in parameters.",
+              "Rules: the operation must be one of the declared ids; parameters must match its declared types; integers only (no floats) in parameters;",
+              "native graph operations take no parameters (the query is the declared dataset) and need an input of their declared kind.",
               "Do not claim completion; the independent reference contract decides."]
     return "\n".join(lines).encode("utf8"), entries
 
@@ -180,9 +248,9 @@ def build_prompt(task_goal: str, binding: dict, snapshot: dict, manifest: dict, 
 def normalize_job_proposal(proposal: dict, snapshot: dict, manifest: dict, binding: dict, store, *, task_id, run_id, proposal_ref, protected: set, goal_id: str, policy_digest: str):
     loss = []
     operation = proposal["operation"]
-    if operation not in analytical.OPERATIONS:
+    if operation not in OPERATIONS:
         return None, loss, "unknown operation %r rejected (no default)" % operation
-    spec = analytical.OPERATIONS[operation]
+    spec = OPERATIONS[operation]
     params = proposal["parameters"]
     for name in spec["required"]:
         if name not in params:
@@ -214,15 +282,17 @@ def normalize_job_proposal(proposal: dict, snapshot: dict, manifest: dict, bindi
         store.get(input_ref)
     except GabrielError:
         return None, loss, "the observed input bytes are not retained; observe again"
-    build = worker_build()
-    environment = analytical.numerical_environment()
+    if is_native(operation) and not native_graph.available():
+        return None, loss, "the native executables for %s are not available on this host (no substitute worker)" % operation
+    build = worker_build(operation)
+    environment = numerical_environment(operation)
     key = cache_key(dataset["sha256"], operation, params, build, environment)
     snapshot_ref = store.put(canonical(snapshot), "application/json")
     payload = Artifact(canonical({"operation": operation, "parameters": params, "input": dataset["sha256"], "output_path": proposal["output_path"]}), "application/json")
     cand = kernel_candidate(hashlib.sha256(goal_id.encode()).hexdigest(), snapshot_ref["sha256"], "job:" + operation.replace(".", "_"),
                             {"sha256": snapshot["tree_digest"], "bytes": 0, "media_type": "application/json"}, payload.ref())
     job = {"schema": "gabriel.numerical-job/1", "job_id": "job-" + cand.id[:16], "task_id": task_id, "run_id": run_id, "operation": operation,
-           "profile_id": analytical.PROFILE_ID, "input_path": proposal["input_path"], "input_ref": input_ref, "output_path": proposal["output_path"],
+           "profile_id": profile_id(operation), "input_path": proposal["input_path"], "input_ref": input_ref, "output_path": proposal["output_path"],
            "parameters": params, "declared_units": dataset["units"], "worker_build": build, "numerical_environment": environment, "cache_key": key,
            "candidate_id": cand.id, "proposal_ref": proposal_ref, "base_tree_digest": snapshot["tree_digest"], "base_snapshot_ref": snapshot_ref}
     validate(job, "numerical-job")
@@ -232,8 +302,10 @@ def normalize_job_proposal(proposal: dict, snapshot: dict, manifest: dict, bindi
 # ===================================================================== execute port
 
 class RunJobTool:
-    """Fresh contained worker per job. The worker file and the job description are installed
-    into the worktree for the run only; the output stays, everything else is removed."""
+    """Fresh contained worker per job. The worker file (for native operations also the bound
+    executables) and the job description are installed into the worktree for the run only; the
+    output stays, everything else is removed. A window certificate is then computed in a dedicated
+    host process (stage two); its statuses decide the job verdict."""
 
     def __init__(self, backend_resolver):
         self.backend_resolver = backend_resolver
@@ -242,26 +314,29 @@ class RunJobTool:
         job = validate(loads(ctx.store.get(args["job_ref"])), "numerical-job")
         if ctx.worktree.tree_digest() != job["base_tree_digest"]:
             raise GabrielError(Code.STALE_EVIDENCE, "worktree differs from the job's base snapshot; observe and propose again")
-        if job["worker_build"] != worker_build():
-            raise GabrielError(Code.STALE_EVIDENCE, "the adapter build changed since the job was bound")
+        if job["worker_build"] != worker_build(job["operation"]):
+            raise GabrielError(Code.STALE_EVIDENCE, "the worker build (adapter source or native executables) changed since the job was bound")
         backend = ctx.backend or self.backend_resolver()
         d = ctx.registry.tool(intent["capability_id"])[0]["output_schema_digest"]
         cache = _Cache(ctx.extras.get("numerical_cache"))
         hit = cache.get(job["cache_key"])
         if hit is not None:
-            result = dict(hit, cache={"key": job["cache_key"], "hit": True})
-            self._materialize_output(ctx, job, result)
-            validate(result, "numerical-job-result")
-            return ToolOutcome(outputs=[("job_result", canonical(result), "application/json", d)], effect_outcome="acknowledged_success",
-                               notes=["cache hit on the complete job key"])
+            try:
+                # a hit re-issues the retained result together with the retained witness of the run that produced it
+                witness_record = validate(loads(ctx.store.get(hit["witness_ref"])), "run-witness")
+                self._materialize_output(ctx, job, hit)
+                result = validate(dict(hit, cache={"key": job["cache_key"], "hit": True}), "numerical-job-result")
+            except GabrielError:
+                hit = None  # an incomplete cache entry is a miss, never a partial answer
+            else:
+                return ToolOutcome(outputs=[("job_result", canonical(result), "application/json", d), ("witness", canonical(witness_record), "application/json", d)],
+                                   effect_outcome="acknowledged_success", notes=["cache hit on the complete job key"])
         started = ctx.owner.owner_time()
-        with fs.ContainedRoot(str(ctx.worktree.path)) as root:
-            root.write(WORKER_DIR + "/worker.py", _worker_source())
-            root.write(WORKER_DIR + "/job.json", json.dumps({"operation": job["operation"], "parameters": job["parameters"], "input_path": job["input_path"],
-                                                             "output_path": job["output_path"], "result_path": WORKER_DIR + "/result.json",
-                                                             "max_input_bytes": analytical.MAX_INPUT_BYTES}).encode("ascii"))
-        witness = backend.run(RunSpec(argv=["python3", WORKER_DIR + "/worker.py", WORKER_DIR + "/job.json"], worktree=str(ctx.worktree.path),
+        clock = time.monotonic_ns()
+        entry = self._install(ctx, job)
+        witness = backend.run(RunSpec(argv=["python3", entry, WORKER_DIR + "/job.json"], worktree=str(ctx.worktree.path),
                                       timeout_ms=120000, max_output_bytes=1 << 20, marker="gabriel-" + intent["attempt_id"]))
+        stage_one_us = (time.monotonic_ns() - clock) // 1000
         stdout_ref = ctx.store.put(witness.stdout.captured, "application/octet-stream")
         stderr_ref = ctx.store.put(witness.stderr.captured, "application/octet-stream")
         witness_record = validate(witness.to_record(stdout_ref, stderr_ref), "run-witness")
@@ -274,17 +349,13 @@ class RunJobTool:
                 worker_result = None
             if worker_result and worker_result.get("verdict") == "computed" and root.exists(job["output_path"]):
                 output_raw = root.read(job["output_path"])
-            for name in ("result.json", "job.json", "worker.py"):
-                try:
-                    root.delete(WORKER_DIR + "/" + name)
-                except GabrielError:
-                    pass
-        try:
-            (Path(ctx.worktree.path) / WORKER_DIR).rmdir()
-        except OSError:
-            pass
+        self._cleanup(ctx)
+        stage_two = None
+        if worker_result is not None and OPERATIONS[job["operation"]].get("certificate") and worker_result.get("verdict") == "computed" and output_raw is not None:
+            worker_result, output_raw, stage_two = self._certify(ctx, job, worker_result, output_raw)
         elapsed = max(0, ctx.owner.owner_time() - started)
-        diagnostics = {"worker": worker_result, "exit_code": witness.exit_code, "timed_out": witness.timed_out, "start_failure": witness.start_failure}
+        diagnostics = {"worker": worker_result, "exit_code": witness.exit_code, "timed_out": witness.timed_out, "start_failure": witness.start_failure,
+                       "stage_one_us": stage_one_us, "stage_two": stage_two, "worker_entry": entry}
         diagnostics_ref = ctx.store.put(dumps_utf8(diagnostics), "application/json; charset=utf-8")
         if witness.start_failure or witness.timed_out or witness.exit_code != 0 or worker_result is None:
             result = {"schema": "gabriel.numerical-job-result/1", "job_ref": args["job_ref"], "status": "failed", "verdict": "unknown", "worker_build": job["worker_build"],
@@ -310,6 +381,84 @@ class RunJobTool:
                            exit_code=witness.exit_code, effect_outcome="acknowledged_success")
 
     @staticmethod
+    def _install(ctx, job) -> str:
+        """Install the worker (and the bound native executables, re-checked against the job's build)
+        with the job description; returns the worker entry path inside the worktree."""
+        native = is_native(job["operation"])
+        description = {"operation": job["operation"], "parameters": job["parameters"], "input_path": job["input_path"], "output_path": job["output_path"],
+                       "result_path": WORKER_DIR + "/result.json", "max_input_bytes": native_graph.MAX_INPUT_BYTES if native else analytical.MAX_INPUT_BYTES}
+        entry = WORKER_DIR + ("/native_worker.py" if native else "/worker.py")
+        with fs.ContainedRoot(str(ctx.worktree.path)) as root:
+            root.write(entry, _worker_source(job["operation"]))
+            if native:
+                bound = native_graph.binaries()
+                if native_graph.worker_build(bound) != job["worker_build"]:
+                    raise GabrielError(Code.STALE_EVIDENCE, "the native executables changed since the job was bound")
+                description["binaries"] = {}
+                for name, info in sorted(bound.items()):
+                    raw = Path(info["path"]).read_bytes()
+                    if sha256_hex(raw) != info["sha256"]:
+                        raise GabrielError(Code.STALE_EVIDENCE, "native executable %s changed while being installed" % name)
+                    relative = WORKER_DIR + "/bin/" + name
+                    root.write(relative, raw)
+                    fd = os.open(str(Path(ctx.worktree.path) / relative), os.O_RDONLY | os.O_NOFOLLOW)
+                    try:
+                        os.fchmod(fd, 0o755)
+                    finally:
+                        os.close(fd)
+                    description["binaries"][name] = {"path": relative, "sha256": info["sha256"]}
+            root.write(WORKER_DIR + "/job.json", json.dumps(description, sort_keys=True).encode("ascii"))
+        return entry
+
+    @staticmethod
+    def _cleanup(ctx) -> list:
+        removed = []
+        with fs.ContainedRoot(str(ctx.worktree.path)) as root:
+            for name in WORKER_FILES:
+                if root.exists(WORKER_DIR + "/" + name):
+                    try:
+                        root.delete(WORKER_DIR + "/" + name)
+                        removed.append(name)
+                    except GabrielError:
+                        pass
+        for sub in ("bin", ""):
+            try:
+                (Path(ctx.worktree.path) / WORKER_DIR / sub).rmdir()
+            except OSError:
+                pass
+        return removed
+
+    @staticmethod
+    def _drop_output(ctx, job) -> None:
+        with fs.ContainedRoot(str(ctx.worktree.path)) as root:
+            if root.exists(job["output_path"]):
+                try:
+                    root.delete(job["output_path"])
+                except GabrielError:
+                    pass
+
+    @staticmethod
+    def _certify(ctx, job, worker_result, output_raw):
+        """Stage two of a window certificate job: exact arithmetic (python-flint/Arb) in a dedicated
+        host process over the validated native snapshot. The verdict follows the statuses: computed
+        only when every window is decided; out_of_scope and unknown retain their certificates in
+        the diagnostics but leave no output, so nothing can be mistaken for an answer."""
+        verdict, raw, stage = certify_output(output_raw)
+        if verdict == "unknown" and stage["status"] == "unavailable":
+            RunJobTool._drop_output(ctx, job)
+            diagnostics = dict(worker_result.get("diagnostics") or {}, stage="certificate_unavailable", reason=stage["reason"])
+            return dict(worker_result, verdict="unknown", output_sha256=None, diagnostics=diagnostics), None, stage
+        diagnostics = dict(worker_result.get("diagnostics") or {}, stage="certified", statuses=stage["statuses"], certificates=stage["certificates"],
+                           arithmetic=stage["arithmetic"], stage_two_us=stage["elapsed_us"])
+        result = dict(worker_result, verdict=verdict, rows=len(stage["statuses"]), diagnostics=diagnostics, output_sha256=sha256_hex(raw) if raw is not None else None)
+        if raw is not None:
+            with fs.ContainedRoot(str(ctx.worktree.path)) as root:
+                root.write(job["output_path"], raw)
+            return result, raw, stage
+        RunJobTool._drop_output(ctx, job)
+        return result, None, stage
+
+    @staticmethod
     def _materialize_output(ctx, job, result):
         """A cache hit still has to produce the output file in this worktree (same bytes)."""
         if result.get("output_ref") is None:
@@ -321,18 +470,9 @@ class RunJobTool:
     def reconcile(self, intent, attempt, ctx):
         job = validate(loads(ctx.store.get(ctx.args["job_ref"])), "numerical-job")
         tree = ctx.worktree.tree_digest()
+        leftovers = self._cleanup(ctx)
         with fs.ContainedRoot(str(ctx.worktree.path)) as root:
-            leftovers = [n for n in ("result.json", "job.json", "worker.py") if root.exists(WORKER_DIR + "/" + n)]
-            for name in leftovers:
-                try:
-                    root.delete(WORKER_DIR + "/" + name)
-                except GabrielError:
-                    pass
             output_present = root.exists(job["output_path"])
-        try:
-            (Path(ctx.worktree.path) / WORKER_DIR).rmdir()
-        except OSError:
-            pass
         if tree == job["base_tree_digest"]:
             return "confirmed_not_executed", canonical({"tree_digest": tree, "equals_base": True})
         if output_present and not leftovers:
@@ -436,6 +576,34 @@ class ReferenceContractVerifier:
         except (GabrielError, ValueError, UnicodeDecodeError, TypeError) as exc:
             return "failed", dict(evidence, reason="output bytes unavailable or not JSON: " + str(exc)[:200])
         tolerance = float(oracle.get("tolerance_micro", 0)) / 1e6
+        if "identity" in oracle:  # graph.snapshot: the independently recomputed snapshot identity and the vertex count
+            snapshot = output.get("snapshot") if isinstance(output.get("snapshot"), dict) else {}
+            vertices = snapshot.get("vertices")
+            count = len(vertices) if isinstance(vertices, list) else None
+            ok = snapshot.get("identity") == oracle["identity"] and count == oracle.get("vertices")
+            return ("passed" if ok else "failed"), dict(evidence, identity=snapshot.get("identity"), expected_identity=oracle["identity"], vertices=count,
+                                                        expected_vertices=oracle.get("vertices"))
+        if "masses" in oracle:  # graph.region_mass: masses within tolerance and identical decisions at identical times
+            got, expected = output.get("values"), oracle["masses"]
+            if not isinstance(got, list) or len(got) != len(expected):
+                return "failed", dict(evidence, reason="row count %s differs from the reference %d" % (len(got) if isinstance(got, list) else None, len(expected)))
+            worst = 0.0
+            for (t_e, m_e, d_e), item in zip(expected, got):
+                if not isinstance(item, dict) or item.get("time_bits") != t_e:
+                    return "failed", dict(evidence, reason="time %r differs from the reference %r" % (item.get("time_bits") if isinstance(item, dict) else item, t_e))
+                try:
+                    worst = max(worst, abs(_binary64(item.get("mass_bits")) - float(m_e)))
+                except (ValueError, TypeError):
+                    return "failed", dict(evidence, reason="mass at %s is not a binary64 bit string" % t_e)
+                if item.get("decision") != d_e:
+                    return "failed", dict(evidence, reason="decision %r differs from the reference %r at %s" % (item.get("decision"), d_e, t_e))
+            if worst > tolerance:
+                return "failed", dict(evidence, reason="maximum mass deviation %r exceeds tolerance %r" % (worst, tolerance), max_deviation_pico=int(worst * 1e12))
+            return "passed", dict(evidence, rows=len(got), max_deviation_pico=int(worst * 1e12), tolerance_micro=int(tolerance * 1e6))
+        if "statuses" in oracle:  # graph.window_reachability: certified statuses per window
+            got = output.get("statuses")
+            ok = got == oracle["statuses"] and output.get("stage") == "certified"
+            return ("passed" if ok else "failed"), dict(evidence, statuses=got, expected_statuses=oracle["statuses"], stage=output.get("stage"))
         if "values" in oracle:
             expected = oracle["values"]
             got = output.get("values")
@@ -520,7 +688,11 @@ class NumericalPack(DomainPack):
                                                      "does_not_observe": ["computed values"]}),
                     "evaluation_profiles": [{"profile_id": "numerical-reference-contract-v1", "spec_ref": ref({"rule": "computed verdict within declared tolerance and units"})}],
                     "transformation_profiles": [{"profile_id": TRANSFORM_PROFILE, "spec_ref": ref({"rule": "loss-preserving compile"})},
-                                                {"profile_id": analytical.PROFILE_ID, "spec_ref": ref({"worker_build": worker_build(), "operations": sorted(analytical.OPERATIONS)})}],
+                                                {"profile_id": analytical.PROFILE_ID, "spec_ref": ref({"worker_build": worker_build(), "operations": sorted(analytical.OPERATIONS)})},
+                                                {"profile_id": native_graph.PROFILE_ID,
+                                                 "spec_ref": ref({"worker_source_sha256": sha256_hex(_worker_source("graph.snapshot")), "operations": sorted(native_graph.OPERATIONS),
+                                                                  "executables": list(native_graph.BINARIES), "model": native_graph.MODEL,
+                                                                  "binding": "executable digests are bound per job and checked before and after every native process"})}],
                     "capability_requirements": ["numerical.observe", "numerical.run_job", "numerical.read_back", "numerical.verify", "numerical.review", "model.generate"],
                     "conventions_ref": ref({"missingness": "absent dataset is not an empty dataset", "time": "unix_ms declared by the dataset; owner sequence numbers for availability",
                                             "units": sorted(analytical.UNITS), "float_model": analytical.FLOAT_MODEL,
