@@ -1,9 +1,9 @@
-smoke workdir: /tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke2 (backend linux_namespace)
+smoke workdir: /tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke3 (backend linux_namespace)
 {
   "backend": "linux_namespace",
   "status": "created",
-  "workspace": "/tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke2/ws",
-  "workspace_id": "ws-90d4fc20ac93"
+  "workspace": "/tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke3/ws",
+  "workspace_id": "ws-c47a86aa5877"
 }
 {
   "backends": {
@@ -22,14 +22,14 @@ smoke workdir: /tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scr
         "unshare_namespaces": true
       },
       "containment": true,
-      "identity": "linux_namespace:6.18.44-fc-v51:x86_64:python-3.12.3",
+      "identity": "linux_namespace:6.18.44-fc-v64:x86_64:python-3.12.3",
       "reasons": []
     },
     "trusted_local": {
       "available": true,
       "backend": "trusted_local",
       "checks": {
-        "python": "/tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke2/venv/bin/python"
+        "python": "/tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke3/venv/bin/python"
       },
       "containment": false,
       "reasons": [
@@ -37,7 +37,7 @@ smoke workdir: /tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scr
       ]
     }
   },
-  "catalog_digest": "19d093b97c894c4bab8a4c9c507a745f072bd87270d719cc4a8eac36d6158c4c",
+  "catalog_digest": "c8ee7bdd1d04776fe863fe70a35f9badfb450434f3392df79d1492a1af77dd99",
   "configured_backend": "linux_namespace",
   "effective_limits": {
     "artifact_bytes": 16777216,
@@ -58,7 +58,7 @@ smoke workdir: /tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scr
     "inputs_head": "0000000000000000000000000000000000000000000000000000000000000000",
     "schema": "gabriel.anchor/1",
     "sequence": 0,
-    "workspace_id": "ws-90d4fc20ac93"
+    "workspace_id": "ws-c47a86aa5877"
   },
   "object_store": {
     "faults": {},
@@ -66,7 +66,7 @@ smoke workdir: /tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scr
     "status": "passed",
     "stray_temporaries": []
   },
-  "platform": "Linux-6.18.44-fc-v51-x86_64-with-glibc2.39",
+  "platform": "Linux-6.18.44-fc-v64-x86_64-with-glibc2.39",
   "problems": [],
   "python": "3.12.3",
   "registry_loaded": {
@@ -105,11 +105,43 @@ smoke workdir: /tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scr
     "software.run_check": true,
     "software.test_passed": true
   },
-  "schema_registry_digest": "3d2172bc706fad8bf372fc634fb0e74166f151dbee943a9f8223623f8e7987d9",
+  "schema_registry_digest": "756f41c75a89ad6714fa84beb5d160f3b22e8984bfac6bd2c97b854c7e8da6e5",
+  "startup": {
+    "artifact_root": {
+      "exists": true,
+      "path": "/tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke3/ws/objects",
+      "writable": true
+    },
+    "codec_version": "gabriel.codec/1",
+    "config_schema_version": 1,
+    "journal_format": "gabriel.agent-journal/1",
+    "memory_chain": {
+      "head": "0000000000000000000000000000000000000000000000000000000000000000",
+      "memory_sequence": 0,
+      "owner_sequence": 0,
+      "policy_revision": 0,
+      "schema": "gabriel.memory-anchor/1",
+      "workspace_id": "ws-c47a86aa5877"
+    },
+    "migrations": [],
+    "reconciliation_work": [],
+    "registered_identities": {
+      "catalog_digest": "c8ee7bdd1d04776fe863fe70a35f9badfb450434f3392df79d1492a1af77dd99",
+      "reducer_identity": "ea45d1d2bc7959619be6b48b5bfea5e357161decaa06b9c44b0f9eb96e14e0e7",
+      "schema_registry_digest": "756f41c75a89ad6714fa84beb5d160f3b22e8984bfac6bd2c97b854c7e8da6e5"
+    },
+    "storage": {
+      "corrupt": [],
+      "deep": false,
+      "missing": [],
+      "referenced_objects": 0,
+      "stray_temporaries": []
+    }
+  },
   "untrusted_execution_supported": true,
   "version": "0.1.0",
-  "workspace_id": "ws-90d4fc20ac93"
+  "workspace_id": "ws-c47a86aa5877"
 }
 run state succeeded
 restore passed events 41
-smoke passed: /tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke2
+smoke passed: /tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke3
