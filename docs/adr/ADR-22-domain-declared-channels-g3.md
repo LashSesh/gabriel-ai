@@ -114,3 +114,12 @@ not carry; it cannot raise verified success, and it stopped one recoverable repa
 task. One provider, one pack, one constructed distribution, 48 training decisions with 8
 positives; the held-out decisions were of one class. No learning claim beyond the fitted
 logistic readout follows, and the engine's quarantined paths stay quarantined.
+
+## Transfer (protocol 9, `evidence/wp15/run9/`)
+The promoted readout, weights fixed, pinned on gpt-5-mini runs it had never seen a decision of:
+on the held-out families it equalled the rule-based production configuration (8 of 12) at 4018
+against 8766 mean tokens, no false completion; it stopped all 10 cold repairs at the first
+decision (p = 0.044), abstained and was refused 0 times, and stopped no recoverable repair. The
+pack's declared channels are committed facts, so the fact the readout learned transfers with
+them; what a readout trained on gpt-5-mini's own decisions would learn was not tested. Scope:
+two providers of one vendor (`docs/EVALUATION_PROTOCOL.md`, protocol 9).

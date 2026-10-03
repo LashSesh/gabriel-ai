@@ -1,0 +1,147 @@
+{
+  "task_id": "da-archive",
+  "family": "association-needed",
+  "system": "gabriel_associative",
+  "rep": 0,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp15/run9/runs/da-archive--gabriel_associative--0",
+  "domain": "document",
+  "outcome": {
+    "system": "gabriel_associative",
+    "task_id": "da-archive",
+    "family": "association-needed",
+    "rep": 0,
+    "declared": true,
+    "declared_reason": "run state succeeded",
+    "model_requests": 1,
+    "model_tokens": 4239,
+    "wall_ms": 13918,
+    "provider_statuses": [
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-5-mini-2025-08-07"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp15/run9/runs/da-archive--gabriel_associative--0/gabriel_associative-0-ws/worktrees/run-da-archive-gabriel_associative-0-1",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "history dh-archive: succeeded",
+      "apply -> completed (result accepted; checks pending)",
+      "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+      "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+      "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+      "review -> completed (result accepted; checks pending)",
+      "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets",
+      "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,citations,claims,no-secrets",
+      "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: citations,claims,no-secrets",
+      "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; not complete: mandatory checks without eligible passing evidence: citations,claims",
+      "assess review/citations -> passed: assessment passed recorded for citations; not complete: mandatory checks without eligible passing evidence: claims",
+      "assess review/claims -> passed: assessment passed recorded for claims; node review verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects",
+      "claim claim-96bfae9674f93c65 supported by 2 cited observation(s)"
+    ],
+    "gabriel": {
+      "run_id": "run-da-archive-gabriel_associative-0-1",
+      "workspace": "/home/user/gabriel-ai/evidence/wp15/run9/runs/da-archive--gabriel_associative--0/gabriel_associative-0-ws",
+      "hold": null,
+      "replay": "passed",
+      "events": 56,
+      "assessments": [
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "observe"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "propose"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "apply"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "read-back"
+        },
+        {
+          "check_id": "scope",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "base-commit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "checks-intact",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "no-secrets",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "citations",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "claims",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        }
+      ]
+    },
+    "repairs_used": 0,
+    "plan_versions": 1
+  },
+  "verification": {
+    "verified": true,
+    "problems": [],
+    "changed_paths": [
+      "doc/summary.md"
+    ],
+    "out_of_scope_paths": [],
+    "citations": 2,
+    "claims": [
+      {
+        "claim": "schedule",
+        "present": true,
+        "cited_from_expected_source": true
+      },
+      {
+        "claim": "eleven | 11 years | eleven years",
+        "present": true,
+        "cited_from_expected_source": true
+      }
+    ],
+    "targets": {
+      "doc/summary.md": "# Summary\n\nRecords of the society are retained for the period named in the schedule of this statute.[[cite:obs-07004789d09558df9340ae5cab4fcf9e7a6b95b8 \"Records of the society are retained for the period named in the schedule of this statute.\"]]\n\nLedgers: eleven calendar years, shredding afterwards.[[cite:obs-89d1fdf5f944cb3d523ef5dd18a202045016b90b \"Ledgers: eleven calendar years, shredding afterwards.\"]]\n"
+    },
+    "patch_sha256": "91a5751940cbb172b870cd6a539f4dbee46e23602639835e31b3fc3749335c02",
+    "patch_bytes": 567,
+    "patch": "diff --git a/doc/summary.md b/doc/summary.md\nindex 0750985..194c675 100644\n--- a/doc/summary.md\n+++ b/doc/summary.md\n@@ -1,3 +1,5 @@\n # Summary\n \n-(to be completed)\n+Records of the society are retained for the period named in the schedule of this statute.[[cite:obs-07004789d09558df9340ae5cab4fcf9e7a6b95b8 \"Records of the society are retained for the period named in the schedule of this statute.\"]]\n+\n+Ledgers: eleven calendar years, shredding afterwards.[[cite:obs-89d1fdf5f944cb3d523ef5dd18a202045016b90b \"Ledgers: eleven calendar years, shredding afterwards.\"]]\n",
+    "head_is_base": true,
+    "marker": "eval-verify-da-archive-gabriel_associative-0"
+  },
+  "V": 1,
+  "D": 1,
+  "false_completion": 0,
+  "unit_wall_ms": 14119
+}

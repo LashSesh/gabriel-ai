@@ -119,10 +119,12 @@ def release_manifest(root: Path, *, evidence: dict | None = None, python: str = 
                          "the associative view (ADR-20, the document pack's default since ADR-21) carries sources that verified runs cited together "
                          "into a budgeted prompt whether or not the task needs them; the prompt says why each is there, which under protocol 7 kept "
                          "gpt-4.1-mini from stating the forbidden figure (6/6 first attempts without the reason, 0/6 with it) but cost two repairs on "
-                         "one needed task; one provider, one presentation; the lexical seeds are tie-broken by observation id",
+                         "one needed task; two providers of one vendor (gpt-4.1-mini, gpt-5-mini; protocol 9), one presentation; the lexical seeds "
+                         "are tie-broken by observation id",
                          "the document pack's default routing policy is a readout promoted on one constructed distribution with one provider "
-                         "(ADR-22); it can only stop a repair earlier than the rule, it abstains where its declared channels are missing, and it "
-                         "stopped one recoverable repair on a seen task; a task that pins rule-based-v1 explicitly opts out"],
+                         "(ADR-22) and transferred with fixed weights to a second provider of the same vendor (protocol 9); it can only stop a "
+                         "repair earlier than the rule, it abstains where its declared channels are missing, and it stopped one recoverable "
+                         "repair on a seen task under gpt-4.1-mini; a task that pins rule-based-v1 explicitly opts out"],
     }
     return manifest
 

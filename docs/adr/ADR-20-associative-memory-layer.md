@@ -126,3 +126,10 @@ protocol.
 - No learning claim follows: the association history is a declared, inspectable structure of
   what verified runs cited together, and the walk is a specified function of it. The crystal,
   consensus and morphogenic paths of the engine remain quarantined (ADR-19).
+
+## Replication (protocol 9, `evidence/wp15/run9/`)
+With gpt-5-mini (a reasoning model of another family, same endpoint, same budgets, 136 runs,
+declared before any run) the associative view verified 10 of 10 needed tasks at one request
+against 0 of 10 for the provenance view, the hidden source in every associative prompt and no
+provenance prompt, as under gpt-4.1-mini. The mechanism's claim holds for two providers of one
+vendor; the scope is otherwise unchanged (`docs/EVALUATION_PROTOCOL.md`, protocol 9).

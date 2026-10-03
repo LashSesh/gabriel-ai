@@ -26,9 +26,13 @@ other pack. What it established is bounded and stated: the readout learned one l
 (stop when the unmet claim expects a source the retrieval did not carry), it can only stop a
 repair earlier than the rule, it stopped one recoverable repair on a seen task (paired -0.03
 verified success over all tasks at -2401 tokens), the held-out decisions were all of one class,
-and the evidence is one provider, one pack and one constructed distribution. The G1 and G2
+and the evidence is one pack and one constructed distribution under two providers of one vendor:
+protocol 9 (`evidence/wp15/run9/`, declared before the run) pinned the same readout, weights
+fixed, on gpt-5-mini runs and it again met the held-out criterion (8 of 12 verified against 8
+of 12, 4018 against 8766 mean tokens, no false completion), stopped all ten hopeless repairs at
+the first decision and no recoverable one, with no abstention or refusal. The G1 and G2
 regression gates passed on the release host with the readout shipped (`evidence/test_results.txt`,
-`evidence/wp12/`). Details: `docs/EVALUATION_PROTOCOL.md` (protocol 8),
+`evidence/wp12/`). Details: `docs/EVALUATION_PROTOCOL.md` (protocols 8 and 9),
 `docs/adr/ADR-22-domain-declared-channels-g3.md`.
 
 ## Protocol 4 (retained as executed)

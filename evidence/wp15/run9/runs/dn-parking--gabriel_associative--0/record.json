@@ -1,0 +1,146 @@
+{
+  "task_id": "dn-parking",
+  "family": "association-none",
+  "system": "gabriel_associative",
+  "rep": 0,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp15/run9/runs/dn-parking--gabriel_associative--0",
+  "domain": "document",
+  "outcome": {
+    "system": "gabriel_associative",
+    "task_id": "dn-parking",
+    "family": "association-none",
+    "rep": 0,
+    "declared": true,
+    "declared_reason": "run state succeeded",
+    "model_requests": 1,
+    "model_tokens": 2455,
+    "wall_ms": 17541,
+    "provider_statuses": [
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-5-mini-2025-08-07"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp15/run9/runs/dn-parking--gabriel_associative--0/gabriel_associative-0-ws/worktrees/run-dn-parking-gabriel_associative-0-1",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "apply -> completed (result accepted; checks pending)",
+      "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+      "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+      "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+      "review -> completed (result accepted; checks pending)",
+      "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets",
+      "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,citations,claims,no-secrets",
+      "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: citations,claims,no-secrets",
+      "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; not complete: mandatory checks without eligible passing evidence: citations,claims",
+      "assess review/citations -> passed: assessment passed recorded for citations; not complete: mandatory checks without eligible passing evidence: claims",
+      "assess review/claims -> passed: assessment passed recorded for claims; node review verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects",
+      "claim claim-eeff2fc59adf4300 supported by 2 cited observation(s)"
+    ],
+    "gabriel": {
+      "run_id": "run-dn-parking-gabriel_associative-0-1",
+      "workspace": "/home/user/gabriel-ai/evidence/wp15/run9/runs/dn-parking--gabriel_associative--0/gabriel_associative-0-ws",
+      "hold": null,
+      "replay": "passed",
+      "events": 28,
+      "assessments": [
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "propose"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "apply"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "read-back"
+        },
+        {
+          "check_id": "scope",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "base-commit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "checks-intact",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "no-secrets",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "citations",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "claims",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "observe"
+        }
+      ]
+    },
+    "repairs_used": 0,
+    "plan_versions": 1
+  },
+  "verification": {
+    "verified": true,
+    "problems": [],
+    "changed_paths": [
+      "doc/summary.md"
+    ],
+    "out_of_scope_paths": [],
+    "citations": 2,
+    "claims": [
+      {
+        "claim": "appendix",
+        "present": true,
+        "cited_from_expected_source": true
+      },
+      {
+        "claim": "twelve through thirty | 12 through 30 | bays 12",
+        "present": true,
+        "cited_from_expected_source": true
+      }
+    ],
+    "targets": {
+      "doc/summary.md": "# Summary\n\nVehicles of members are parked according to the plan in the appendix of this handbook.[[cite:obs-1b695216aeb1c52bdfa27508165aa99ad1f434dd \"Vehicles of members are parked according to the plan in the appendix of this handbook.\"]]\n\nBays twelve through thirty are reserved: blocked for supplier vans only with a midday deadline.[[cite:obs-2537a7be3c78d889b3476c192e6af4b6d050bb59 \"Bays twelve through thirty: blocked, supplier vans only, midday deadline.\"]]"
+    },
+    "patch_sha256": "2a41d640ba1bd5a851e267bd093451d9680f6d71c5b15b1377727bbaf5dde90d",
+    "patch_bytes": 651,
+    "patch": "diff --git a/doc/summary.md b/doc/summary.md\nindex 0750985..922c18f 100644\n--- a/doc/summary.md\n+++ b/doc/summary.md\n@@ -1,3 +1,5 @@\n # Summary\n \n-(to be completed)\n+Vehicles of members are parked according to the plan in the appendix of this handbook.[[cite:obs-1b695216aeb1c52bdfa27508165aa99ad1f434dd \"Vehicles of members are parked according to the plan in the appendix of this handbook.\"]]\n+\n+Bays twelve through thirty are reserved: blocked for supplier vans only with a midday deadline.[[cite:obs-2537a7be3c78d889b3476c192e6af4b6d050bb59 \"Bays twelve through thirty: blocked, supplier vans only, midday deadline.\"]]\n\\ No newline at end of file\n",
+    "head_is_base": true,
+    "marker": "eval-verify-dn-parking-gabriel_associative-0"
+  },
+  "V": 1,
+  "D": 1,
+  "false_completion": 0,
+  "unit_wall_ms": 17697
+}

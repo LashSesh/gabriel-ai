@@ -1,0 +1,142 @@
+{
+  "task_id": "du-fee",
+  "family": "association-unneeded",
+  "system": "gabriel_policy",
+  "rep": 1,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp15/run9/runs/du-fee--gabriel_policy--1",
+  "domain": "document",
+  "outcome": {
+    "system": "gabriel_policy",
+    "task_id": "du-fee",
+    "family": "association-unneeded",
+    "rep": 1,
+    "declared": true,
+    "declared_reason": "run state succeeded",
+    "model_requests": 1,
+    "model_tokens": 3655,
+    "wall_ms": 11473,
+    "provider_statuses": [
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-5-mini-2025-08-07"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp15/run9/runs/du-fee--gabriel_policy--1/gabriel_policy-1-ws/worktrees/run-du-fee-gabriel_policy-1-1",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "history dh-fee: succeeded",
+      "apply -> completed (result accepted; checks pending)",
+      "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+      "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+      "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+      "review -> completed (result accepted; checks pending)",
+      "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets",
+      "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,citations,claims,no-secrets",
+      "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: citations,claims,no-secrets",
+      "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; not complete: mandatory checks without eligible passing evidence: citations,claims",
+      "assess review/citations -> passed: assessment passed recorded for citations; not complete: mandatory checks without eligible passing evidence: claims",
+      "assess review/claims -> passed: assessment passed recorded for claims; node review verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects",
+      "claim claim-644aaf91442334b6 supported by 1 cited observation(s)"
+    ],
+    "gabriel": {
+      "run_id": "run-du-fee-gabriel_policy-1-1",
+      "workspace": "/home/user/gabriel-ai/evidence/wp15/run9/runs/du-fee--gabriel_policy--1/gabriel_policy-1-ws",
+      "hold": null,
+      "replay": "passed",
+      "events": 56,
+      "assessments": [
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "observe"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "propose"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "apply"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "read-back"
+        },
+        {
+          "check_id": "scope",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "base-commit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "checks-intact",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "no-secrets",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "citations",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "claims",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        }
+      ]
+    },
+    "repairs_used": 0,
+    "plan_versions": 1
+  },
+  "verification": {
+    "verified": true,
+    "problems": [],
+    "changed_paths": [
+      "doc/summary.md"
+    ],
+    "out_of_scope_paths": [],
+    "citations": 1,
+    "claims": [
+      {
+        "claim": "annex",
+        "present": true,
+        "cited_from_expected_source": true
+      }
+    ],
+    "targets": {
+      "doc/summary.md": "Each member pays a yearly contribution; the amount is fixed in the annex of this charter.[[cite:obs-e2f03a3d70f114cedbbcf671c34ae9f4c35f2a58 \"Each member pays a yearly contribution; the amount is fixed in the annex of this charter.\"]]\n"
+    },
+    "patch_sha256": "d7186d7e88db8a9ede5f2ce28275e4bef581489e22df97cc108498908ab9a05a",
+    "patch_bytes": 399,
+    "patch": "diff --git a/doc/summary.md b/doc/summary.md\nindex 0750985..d2592ad 100644\n--- a/doc/summary.md\n+++ b/doc/summary.md\n@@ -1,3 +1 @@\n-# Summary\n-\n-(to be completed)\n+Each member pays a yearly contribution; the amount is fixed in the annex of this charter.[[cite:obs-e2f03a3d70f114cedbbcf671c34ae9f4c35f2a58 \"Each member pays a yearly contribution; the amount is fixed in the annex of this charter.\"]]\n",
+    "head_is_base": true,
+    "marker": "eval-verify-du-fee-gabriel_policy-1"
+  },
+  "V": 1,
+  "D": 1,
+  "false_completion": 0,
+  "unit_wall_ms": 11740
+}

@@ -1,0 +1,160 @@
+{
+  "task_id": "dc-archive",
+  "family": "association-needed-cold",
+  "system": "gabriel_policy",
+  "rep": 0,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp15/run9/runs/dc-archive--gabriel_policy--0",
+  "domain": "document",
+  "outcome": {
+    "system": "gabriel_policy",
+    "task_id": "dc-archive",
+    "family": "association-needed-cold",
+    "rep": 0,
+    "declared": false,
+    "declared_reason": "run state failed",
+    "model_requests": 1,
+    "model_tokens": 4082,
+    "wall_ms": 17010,
+    "provider_statuses": [
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-5-mini-2025-08-07"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp15/run9/runs/dc-archive--gabriel_policy--0/gabriel_policy-0-ws/worktrees/run-dc-archive-gabriel_policy-0-1",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "assess apply/output-valid -> passed: assessment passed recorded for output-valid; node apply verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+      "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+      "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+      "review -> completed (result accepted; checks pending)",
+      "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets",
+      "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,citations,claims,no-secrets",
+      "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: citations,claims,no-secrets",
+      "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; not complete: mandatory checks without eligible passing evidence: citations,claims",
+      "assess review/citations -> passed: assessment passed recorded for citations; not complete: mandatory checks without eligible passing evidence: claims",
+      "assess review/claims -> failed: assessment failed recorded for claims; mandatory check failed; repair cycle 1 of 2 opened",
+      "router stop: readout p(repair succeeds)=0.044 < threshold 0.500",
+      "hold router_stop -> failed: policy readout-channels-v2 stopped the repair: readout p(repair succeeds)=0.044 < threshold 0.500"
+    ],
+    "gabriel": {
+      "run_id": "run-dc-archive-gabriel_policy-0-1",
+      "workspace": "/home/user/gabriel-ai/evidence/wp15/run9/runs/dc-archive--gabriel_policy--0/gabriel_policy-0-ws",
+      "hold": {
+        "from_state": "planning",
+        "missing_prerequisite": "user-review",
+        "reason_code": "router_stop",
+        "ref": {
+          "bytes": 292,
+          "media_type": "application/json",
+          "sha256": "a3e0c9693cfdc556229343e38125f5e81c97642915bc434a8a163f3991dd6f7b"
+        },
+        "target_state": "failed",
+        "wakeup_condition": "user-review"
+      },
+      "replay": "passed",
+      "events": 29,
+      "assessments": [
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "propose"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "apply"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "read-back"
+        },
+        {
+          "check_id": "scope",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "base-commit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "checks-intact",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "no-secrets",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "citations",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "claims",
+          "outcome": "failed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "observe"
+        }
+      ]
+    },
+    "repairs_used": 1,
+    "plan_versions": 1
+  },
+  "verification": {
+    "verified": false,
+    "problems": [
+      "required statement missing: eleven | 11 years | eleven years",
+      "required statement not cited from schedule with 'eleven calendar years'"
+    ],
+    "changed_paths": [
+      "doc/summary.md"
+    ],
+    "out_of_scope_paths": [],
+    "citations": 2,
+    "claims": [
+      {
+        "claim": "schedule",
+        "present": true,
+        "cited_from_expected_source": true
+      },
+      {
+        "claim": "eleven | 11 years | eleven years",
+        "present": false,
+        "cited_from_expected_source": false
+      }
+    ],
+    "targets": {
+      "doc/summary.md": "# Summary\n\nThe statute's retention rule is: Records of the society are retained for the period named in the schedule of this statute. [[cite:obs-28b176babfd69ea5939dec7bea85a61689ecaa90 \"Records of the society are retained for the period named in the schedule of this statute.\"]]\n\nThe statute specifies how long records are kept: for the period named in the schedule of this statute. [[cite:obs-28b176babfd69ea5939dec7bea85a61689ecaa90 \"for the period named in the schedule of this statute.\"]]\n"
+    },
+    "patch_sha256": "70a59bbe36df3e3e64fb9e151d9c0f3d87b63911570a72922f9a24d03c54e6dd",
+    "patch_bytes": 651,
+    "patch": "diff --git a/doc/summary.md b/doc/summary.md\nindex 0750985..ffc1ae0 100644\n--- a/doc/summary.md\n+++ b/doc/summary.md\n@@ -1,3 +1,5 @@\n # Summary\n \n-(to be completed)\n+The statute's retention rule is: Records of the society are retained for the period named in the schedule of this statute. [[cite:obs-28b176babfd69ea5939dec7bea85a61689ecaa90 \"Records of the society are retained for the period named in the schedule of this statute.\"]]\n+\n+The statute specifies how long records are kept: for the period named in the schedule of this statute. [[cite:obs-28b176babfd69ea5939dec7bea85a61689ecaa90 \"for the period named in the schedule of this statute.\"]]\n",
+    "head_is_base": true,
+    "marker": "eval-verify-dc-archive-gabriel_policy-0"
+  },
+  "V": 0,
+  "D": 0,
+  "false_completion": 0,
+  "unit_wall_ms": 17198
+}

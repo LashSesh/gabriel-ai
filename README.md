@@ -56,6 +56,12 @@ in an isolated worktree with independent acceptance checks.
   by the memory's rule and ships pinned as the document pack's default routing policy; the
   claim is bounded to one fact, one provider and one constructed distribution):
   `docs/adr/ADR-22-domain-declared-channels-g3.md`, `docs/RELEASE_G3.md`, `evidence/wp15/run8b-eval/`
+- Second provider (protocol 9 repeated the association tier with gpt-5-mini under a declaration
+  frozen before the run: the associative view 10/10 against 0/10 on the needed families, the
+  labeled presentation with no forbidden first attempt against 4/10 unlabeled, the promoted
+  readout with fixed weights equal to the rule at less than half the tokens with every hopeless
+  repair stopped; scope: two providers of one vendor): `docs/EVALUATION_PROTOCOL.md`,
+  `evidence/wp15/run9/`
 - Contract extensions: `docs/adr/ADR-10-hold-records.md`, `ADR-11`, `ADR-12`, `ADR-13` (DomainPack
   ports), `ADR-14` (memory chain), `ADR-15` (readout router), `ADR-16` (document and numerical
   advantage gate with declared memory ablations), `ADR-17` (operations), `ADR-18` (native PSE

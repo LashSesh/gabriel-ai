@@ -1,0 +1,3434 @@
+{
+  "schema": "gabriel.evaluation-report/1",
+  "protocol_frozen_digest": "8070e3fdb9ad536c2483fb11cec903563b76072169f0e1adb1739f3e41448fef",
+  "tasks": 17,
+  "families": 7,
+  "runs": 136,
+  "per_system": {
+    "gabriel_reference_plan": {
+      "runs": 34,
+      "verified_successes": 14,
+      "p_success": 0.4117647058823529,
+      "declared_successes": 14,
+      "false_completions": 0,
+      "p_false_completion": 0.0,
+      "conditional_false_completion": 0.0,
+      "conditional_denominator": 14,
+      "harness_errors": 0,
+      "timed_out": 0,
+      "recovery_runs": 20,
+      "mean_model_requests": 2.4705882352941178,
+      "total_model_requests": 84,
+      "mean_model_tokens": 11476.882352941177,
+      "total_model_tokens": 390214,
+      "mean_wall_ms": 43324.08823529412,
+      "p_success_ci95_by_family": {
+        "low": 0.10526315789473684,
+        "high": 0.8235294117647058,
+        "clusters": 7
+      },
+      "p_success_ci95_by_task": {
+        "low": 0.17647058823529413,
+        "high": 0.6470588235294118,
+        "clusters": 17
+      },
+      "per_task": {
+        "da-archive": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "da-fee": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "da-garden": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "da-library": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "da-parking": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "dc-archive": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "dc-fee": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "dc-garden": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "dc-library": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "dc-parking": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "dn-fee": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "dn-parking": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "du-archive": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "du-fee": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "du-garden": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "du-library": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "du-parking": {
+          "p_success": 1.0,
+          "runs": 2
+        }
+      }
+    },
+    "gabriel_associative": {
+      "runs": 34,
+      "verified_successes": 24,
+      "p_success": 0.7058823529411765,
+      "declared_successes": 24,
+      "false_completions": 0,
+      "p_false_completion": 0.0,
+      "conditional_false_completion": 0.0,
+      "conditional_denominator": 24,
+      "harness_errors": 0,
+      "timed_out": 0,
+      "recovery_runs": 10,
+      "mean_model_requests": 1.6470588235294117,
+      "total_model_requests": 56,
+      "mean_model_tokens": 7218.735294117647,
+      "total_model_tokens": 245437,
+      "mean_wall_ms": 27224.441176470587,
+      "p_success_ci95_by_family": {
+        "low": 0.3333333333333333,
+        "high": 1.0,
+        "clusters": 7
+      },
+      "p_success_ci95_by_task": {
+        "low": 0.47058823529411764,
+        "high": 0.8823529411764706,
+        "clusters": 17
+      },
+      "per_task": {
+        "da-archive": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "da-fee": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "da-garden": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "da-library": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "da-parking": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "dc-archive": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "dc-fee": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "dc-garden": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "dc-library": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "dc-parking": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "dn-fee": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "dn-parking": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "du-archive": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "du-fee": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "du-garden": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "du-library": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "du-parking": {
+          "p_success": 1.0,
+          "runs": 2
+        }
+      }
+    },
+    "gabriel_associative_unlabeled": {
+      "runs": 34,
+      "verified_successes": 24,
+      "p_success": 0.7058823529411765,
+      "declared_successes": 24,
+      "false_completions": 0,
+      "p_false_completion": 0.0,
+      "conditional_false_completion": 0.0,
+      "conditional_denominator": 24,
+      "harness_errors": 0,
+      "timed_out": 0,
+      "recovery_runs": 15,
+      "mean_model_requests": 1.7647058823529411,
+      "total_model_requests": 60,
+      "mean_model_tokens": 7108.117647058823,
+      "total_model_tokens": 241676,
+      "mean_wall_ms": 25966.823529411766,
+      "p_success_ci95_by_family": {
+        "low": 0.3333333333333333,
+        "high": 1.0,
+        "clusters": 7
+      },
+      "p_success_ci95_by_task": {
+        "low": 0.47058823529411764,
+        "high": 0.8823529411764706,
+        "clusters": 17
+      },
+      "per_task": {
+        "da-archive": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "da-fee": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "da-garden": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "da-library": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "da-parking": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "dc-archive": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "dc-fee": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "dc-garden": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "dc-library": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "dc-parking": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "dn-fee": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "dn-parking": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "du-archive": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "du-fee": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "du-garden": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "du-library": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "du-parking": {
+          "p_success": 1.0,
+          "runs": 2
+        }
+      }
+    },
+    "gabriel_policy": {
+      "runs": 34,
+      "verified_successes": 24,
+      "p_success": 0.7058823529411765,
+      "declared_successes": 24,
+      "false_completions": 0,
+      "p_false_completion": 0.0,
+      "conditional_false_completion": 0.0,
+      "conditional_denominator": 24,
+      "harness_errors": 0,
+      "timed_out": 0,
+      "recovery_runs": 10,
+      "mean_model_requests": 1.0,
+      "total_model_requests": 34,
+      "mean_model_tokens": 3837.1470588235293,
+      "total_model_tokens": 130463,
+      "mean_wall_ms": 15234.735294117647,
+      "p_success_ci95_by_family": {
+        "low": 0.3333333333333333,
+        "high": 1.0,
+        "clusters": 7
+      },
+      "p_success_ci95_by_task": {
+        "low": 0.47058823529411764,
+        "high": 0.8823529411764706,
+        "clusters": 17
+      },
+      "per_task": {
+        "da-archive": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "da-fee": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "da-garden": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "da-library": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "da-parking": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "dc-archive": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "dc-fee": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "dc-garden": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "dc-library": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "dc-parking": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "dn-fee": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "dn-parking": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "du-archive": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "du-fee": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "du-garden": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "du-library": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "du-parking": {
+          "p_success": 1.0,
+          "runs": 2
+        }
+      }
+    }
+  },
+  "paired_differences": {
+    "gabriel_policy_minus_gabriel_reference_plan": {
+      "per_task": {
+        "da-archive": 1.0,
+        "da-fee": 1.0,
+        "da-garden": 1.0,
+        "da-library": 1.0,
+        "da-parking": 1.0,
+        "dc-archive": 0.0,
+        "dc-fee": 0.0,
+        "dc-garden": 0.0,
+        "dc-library": 0.0,
+        "dc-parking": 0.0,
+        "dn-fee": 0.0,
+        "dn-parking": 0.0,
+        "du-archive": 0.0,
+        "du-fee": 0.0,
+        "du-garden": 0.0,
+        "du-library": 0.0,
+        "du-parking": 0.0
+      },
+      "mean": 0.29411764705882354,
+      "ci95_by_family": {
+        "low": 0.0,
+        "high": 0.6470588235294118,
+        "clusters": 7
+      },
+      "ci95_by_task": {
+        "low": 0.11764705882352941,
+        "high": 0.5294117647058824,
+        "clusters": 17
+      },
+      "tokens_per_task": {
+        "da-archive": -19493.5,
+        "da-fee": -16336.0,
+        "da-garden": -12211.5,
+        "da-library": -9993.0,
+        "da-parking": -9288.5,
+        "dc-archive": -16292.0,
+        "dc-fee": -9337.0,
+        "dc-garden": -10337.0,
+        "dc-library": -17372.0,
+        "dc-parking": -9570.5,
+        "dn-fee": 194.0,
+        "dn-parking": -235.0,
+        "du-archive": 160.5,
+        "du-fee": -7.5,
+        "du-garden": 261.0,
+        "du-library": -249.0,
+        "du-parking": 231.5
+      },
+      "mean_tokens": -7639.735294117647,
+      "requests_per_task": {
+        "da-archive": -3.0,
+        "da-fee": -3.0,
+        "da-garden": -2.5,
+        "da-library": -2.0,
+        "da-parking": -2.0,
+        "dc-archive": -3.0,
+        "dc-fee": -2.0,
+        "dc-garden": -2.0,
+        "dc-library": -3.5,
+        "dc-parking": -2.0,
+        "dn-fee": 0.0,
+        "dn-parking": 0.0,
+        "du-archive": 0.0,
+        "du-fee": 0.0,
+        "du-garden": 0.0,
+        "du-library": 0.0,
+        "du-parking": 0.0
+      },
+      "mean_requests": -1.4705882352941178
+    },
+    "gabriel_policy_minus_gabriel_associative": {
+      "per_task": {
+        "da-archive": 0.0,
+        "da-fee": 0.0,
+        "da-garden": 0.0,
+        "da-library": 0.0,
+        "da-parking": 0.0,
+        "dc-archive": 0.0,
+        "dc-fee": 0.0,
+        "dc-garden": 0.0,
+        "dc-library": 0.0,
+        "dc-parking": 0.0,
+        "dn-fee": 0.0,
+        "dn-parking": 0.0,
+        "du-archive": 0.0,
+        "du-fee": 0.0,
+        "du-garden": 0.0,
+        "du-library": 0.0,
+        "du-parking": 0.0
+      },
+      "mean": 0.0,
+      "ci95_by_family": {
+        "low": 0.0,
+        "high": 0.0,
+        "clusters": 7
+      },
+      "ci95_by_task": {
+        "low": 0.0,
+        "high": 0.0,
+        "clusters": 17
+      },
+      "tokens_per_task": {
+        "da-archive": 52.5,
+        "da-fee": 390.5,
+        "da-garden": 203.0,
+        "da-library": 8.0,
+        "da-parking": 364.0,
+        "dc-archive": -9085.5,
+        "dc-fee": -11817.0,
+        "dc-garden": -13719.0,
+        "dc-library": -15053.0,
+        "dc-parking": -8939.0,
+        "dn-fee": 470.0,
+        "dn-parking": -382.5,
+        "du-archive": 78.0,
+        "du-fee": -197.5,
+        "du-garden": 270.5,
+        "du-library": -202.5,
+        "du-parking": 72.5
+      },
+      "mean_tokens": -3381.5882352941176,
+      "requests_per_task": {
+        "da-archive": 0.0,
+        "da-fee": 0.0,
+        "da-garden": 0.0,
+        "da-library": 0.0,
+        "da-parking": 0.0,
+        "dc-archive": -2.0,
+        "dc-fee": -2.0,
+        "dc-garden": -2.5,
+        "dc-library": -2.5,
+        "dc-parking": -2.0,
+        "dn-fee": 0.0,
+        "dn-parking": 0.0,
+        "du-archive": 0.0,
+        "du-fee": 0.0,
+        "du-garden": 0.0,
+        "du-library": 0.0,
+        "du-parking": 0.0
+      },
+      "mean_requests": -0.6470588235294118
+    },
+    "gabriel_policy_minus_gabriel_associative_unlabeled": {
+      "per_task": {
+        "da-archive": 0.0,
+        "da-fee": 0.0,
+        "da-garden": 0.0,
+        "da-library": 0.0,
+        "da-parking": 0.0,
+        "dc-archive": 0.0,
+        "dc-fee": 0.0,
+        "dc-garden": 0.0,
+        "dc-library": 0.0,
+        "dc-parking": 0.0,
+        "dn-fee": 0.0,
+        "dn-parking": 0.0,
+        "du-archive": 0.0,
+        "du-fee": 0.0,
+        "du-garden": 0.0,
+        "du-library": 0.0,
+        "du-parking": 0.0
+      },
+      "mean": 0.0,
+      "ci95_by_family": {
+        "low": 0.0,
+        "high": 0.0,
+        "clusters": 7
+      },
+      "ci95_by_task": {
+        "low": 0.0,
+        "high": 0.0,
+        "clusters": 17
+      },
+      "tokens_per_task": {
+        "da-archive": 8.5,
+        "da-fee": 400.5,
+        "da-garden": 27.5,
+        "da-library": 75.5,
+        "da-parking": 800.5,
+        "dc-archive": -8587.0,
+        "dc-fee": -8681.0,
+        "dc-garden": -9653.5,
+        "dc-library": -9209.0,
+        "dc-parking": -9367.5,
+        "dn-fee": 762.0,
+        "dn-parking": -401.5,
+        "du-archive": -3881.5,
+        "du-fee": -208.0,
+        "du-garden": 318.5,
+        "du-library": -4136.0,
+        "du-parking": -3874.5
+      },
+      "mean_tokens": -3270.970588235294,
+      "requests_per_task": {
+        "da-archive": 0.0,
+        "da-fee": 0.0,
+        "da-garden": 0.0,
+        "da-library": 0.0,
+        "da-parking": 0.0,
+        "dc-archive": -2.0,
+        "dc-fee": -2.0,
+        "dc-garden": -2.0,
+        "dc-library": -2.0,
+        "dc-parking": -2.0,
+        "dn-fee": 0.0,
+        "dn-parking": 0.0,
+        "du-archive": -1.0,
+        "du-fee": 0.0,
+        "du-garden": 0.0,
+        "du-library": -1.0,
+        "du-parking": -1.0
+      },
+      "mean_requests": -0.7647058823529411
+    }
+  },
+  "failures": [
+    {
+      "task_id": "da-archive",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: eleven | 11 years | eleven years",
+        "required statement not cited from schedule with 'eleven calendar years'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "truncated",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "da-archive",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: eleven | 11 years | eleven years",
+        "required statement not cited from schedule with 'eleven calendar years'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "truncated",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "da-fee",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: 120 EUR | 120",
+        "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "truncated",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "da-fee",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: 120 EUR | 120",
+        "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "da-garden",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: forty square metres | 40 square metres | 40 m",
+        "required statement not cited from register with 'forty square metres'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "da-garden",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "doc/summary.md: quote 'Each plot is 40 square metres.' is not a verbatim span of any available source",
+        "required statement not cited from register with 'forty square metres'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "invalid_output",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "da-library",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: twenty-one days | 21 days",
+        "required statement not cited from table with 'twenty-one days'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "da-library",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: twenty-one days | 21 days",
+        "required statement not cited from table with 'twenty-one days'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "da-parking",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+        "required statement not cited from appendix with 'Bays twelve through thirty'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "da-parking",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+        "required statement not cited from appendix with 'Bays twelve through thirty'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-archive",
+      "system": "gabriel_associative",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: eleven | 11 years | eleven years",
+        "required statement not cited from schedule with 'eleven calendar years'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-archive",
+      "system": "gabriel_associative",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: eleven | 11 years | eleven years",
+        "required statement not cited from schedule with 'eleven calendar years'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-archive",
+      "system": "gabriel_associative_unlabeled",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: eleven | 11 years | eleven years",
+        "required statement not cited from schedule with 'eleven calendar years'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-archive",
+      "system": "gabriel_associative_unlabeled",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: eleven | 11 years | eleven years",
+        "required statement not cited from schedule with 'eleven calendar years'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-archive",
+      "system": "gabriel_policy",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: eleven | 11 years | eleven years",
+        "required statement not cited from schedule with 'eleven calendar years'"
+      ],
+      "provider_statuses": [
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-archive",
+      "system": "gabriel_policy",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: eleven | 11 years | eleven years",
+        "required statement not cited from schedule with 'eleven calendar years'"
+      ],
+      "provider_statuses": [
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-archive",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: eleven | 11 years | eleven years",
+        "required statement not cited from schedule with 'eleven calendar years'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-archive",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: eleven | 11 years | eleven years",
+        "required statement not cited from schedule with 'eleven calendar years'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "truncated",
+        "truncated",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-fee",
+      "system": "gabriel_associative",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: 120 EUR | 120",
+        "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-fee",
+      "system": "gabriel_associative",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: 120 EUR | 120",
+        "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-fee",
+      "system": "gabriel_associative_unlabeled",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: 120 EUR | 120",
+        "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-fee",
+      "system": "gabriel_associative_unlabeled",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: 120 EUR | 120",
+        "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-fee",
+      "system": "gabriel_policy",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: 120 EUR | 120",
+        "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+      ],
+      "provider_statuses": [
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-fee",
+      "system": "gabriel_policy",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: 120 EUR | 120",
+        "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+      ],
+      "provider_statuses": [
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-fee",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: 120 EUR | 120",
+        "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-fee",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-garden",
+      "system": "gabriel_associative",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: forty square metres | 40 square metres | 40 m",
+        "required statement not cited from register with 'forty square metres'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-garden",
+      "system": "gabriel_associative",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: forty square metres | 40 square metres | 40 m",
+        "required statement not cited from register with 'forty square metres'"
+      ],
+      "provider_statuses": [
+        "truncated",
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-garden",
+      "system": "gabriel_associative_unlabeled",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: forty square metres | 40 square metres | 40 m",
+        "required statement not cited from register with 'forty square metres'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-garden",
+      "system": "gabriel_associative_unlabeled",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: forty square metres | 40 square metres | 40 m",
+        "required statement not cited from register with 'forty square metres'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-garden",
+      "system": "gabriel_policy",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: forty square metres | 40 square metres | 40 m",
+        "required statement not cited from register with 'forty square metres'"
+      ],
+      "provider_statuses": [
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-garden",
+      "system": "gabriel_policy",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: forty square metres | 40 square metres | 40 m",
+        "required statement not cited from register with 'forty square metres'"
+      ],
+      "provider_statuses": [
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-garden",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: forty square metres | 40 square metres | 40 m",
+        "required statement not cited from register with 'forty square metres'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-garden",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: forty square metres | 40 square metres | 40 m",
+        "required statement not cited from register with 'forty square metres'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-library",
+      "system": "gabriel_associative",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: twenty-one days | 21 days",
+        "required statement not cited from table with 'twenty-one days'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-library",
+      "system": "gabriel_associative",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "doc/summary.md: quote '# Library bylaws\\n\\n## Loans\\n\\nBooks are lent to members under ' is not a verbatim span of any available source",
+        "doc/summary.md: quote '# Library bylaws\\n\\n## Loans\\n\\nBooks are lent to members under ' is not a verbatim span of any available source",
+        "required statement not cited from bylaws with 'the terms of the loan table'",
+        "required statement missing: twenty-one days | 21 days",
+        "required statement not cited from table with 'twenty-one days'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "truncated",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-library",
+      "system": "gabriel_associative_unlabeled",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: twenty-one days | 21 days",
+        "required statement not cited from table with 'twenty-one days'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-library",
+      "system": "gabriel_associative_unlabeled",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: twenty-one days | 21 days",
+        "required statement not cited from table with 'twenty-one days'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-library",
+      "system": "gabriel_policy",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: twenty-one days | 21 days",
+        "required statement not cited from table with 'twenty-one days'"
+      ],
+      "provider_statuses": [
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-library",
+      "system": "gabriel_policy",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: twenty-one days | 21 days",
+        "required statement not cited from table with 'twenty-one days'"
+      ],
+      "provider_statuses": [
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-library",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: twenty-one days | 21 days",
+        "required statement not cited from table with 'twenty-one days'"
+      ],
+      "provider_statuses": [
+        "truncated",
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-library",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: twenty-one days | 21 days",
+        "required statement not cited from table with 'twenty-one days'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "invalid_output",
+        "invalid_output",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-parking",
+      "system": "gabriel_associative",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+        "required statement not cited from appendix with 'Bays twelve through thirty'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-parking",
+      "system": "gabriel_associative",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+        "required statement not cited from appendix with 'Bays twelve through thirty'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-parking",
+      "system": "gabriel_associative_unlabeled",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+        "required statement not cited from appendix with 'Bays twelve through thirty'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-parking",
+      "system": "gabriel_associative_unlabeled",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+        "required statement not cited from appendix with 'Bays twelve through thirty'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-parking",
+      "system": "gabriel_policy",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+        "required statement not cited from appendix with 'Bays twelve through thirty'"
+      ],
+      "provider_statuses": [
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-parking",
+      "system": "gabriel_policy",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+        "required statement not cited from appendix with 'Bays twelve through thirty'"
+      ],
+      "provider_statuses": [
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-parking",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+        "required statement not cited from appendix with 'Bays twelve through thirty'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-parking",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+        "required statement not cited from appendix with 'Bays twelve through thirty'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    }
+  ],
+  "claim_scope": "Scoped comparison on one synthetic task distribution with one provider; a difference here is not a general superiority claim. Costs include every attempt, including failed and timed-out runs.",
+  "frozen_check": {
+    "frozen_digest": "8070e3fdb9ad536c2483fb11cec903563b76072169f0e1adb1739f3e41448fef",
+    "harness_identity_now": "708750148ff709cc399e45d74c70f8e7b7159b21f71942831cf4633441aaea6a",
+    "harness_amended": false
+  },
+  "held_out": {
+    "schema": "gabriel.evaluation-report/1",
+    "protocol_frozen_digest": "8070e3fdb9ad536c2483fb11cec903563b76072169f0e1adb1739f3e41448fef",
+    "tasks": 6,
+    "families": 3,
+    "runs": 48,
+    "per_system": {
+      "gabriel_reference_plan": {
+        "runs": 12,
+        "verified_successes": 4,
+        "p_success": 0.3333333333333333,
+        "declared_successes": 4,
+        "false_completions": 0,
+        "p_false_completion": 0.0,
+        "conditional_false_completion": 0.0,
+        "conditional_denominator": 4,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 8,
+        "mean_model_requests": 2.6666666666666665,
+        "total_model_requests": 32,
+        "mean_model_tokens": 12334.416666666666,
+        "total_model_tokens": 148013,
+        "mean_wall_ms": 45411.916666666664,
+        "p_success_ci95_by_family": {
+          "low": 0.0,
+          "high": 1.0,
+          "clusters": 3
+        },
+        "p_success_ci95_by_task": {
+          "low": 0.0,
+          "high": 0.6666666666666666,
+          "clusters": 6
+        },
+        "per_task": {
+          "da-garden": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "da-library": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "dc-garden": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "dc-library": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "du-garden": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "du-library": {
+            "p_success": 1.0,
+            "runs": 2
+          }
+        }
+      },
+      "gabriel_associative": {
+        "runs": 12,
+        "verified_successes": 8,
+        "p_success": 0.6666666666666666,
+        "declared_successes": 8,
+        "false_completions": 0,
+        "p_false_completion": 0.0,
+        "conditional_false_completion": 0.0,
+        "conditional_denominator": 8,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 4,
+        "mean_model_requests": 1.8333333333333333,
+        "total_model_requests": 22,
+        "mean_model_tokens": 8766.333333333334,
+        "total_model_tokens": 105196,
+        "mean_wall_ms": 33621.583333333336,
+        "p_success_ci95_by_family": {
+          "low": 0.0,
+          "high": 1.0,
+          "clusters": 3
+        },
+        "p_success_ci95_by_task": {
+          "low": 0.3333333333333333,
+          "high": 1.0,
+          "clusters": 6
+        },
+        "per_task": {
+          "da-garden": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "da-library": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "dc-garden": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "dc-library": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "du-garden": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "du-library": {
+            "p_success": 1.0,
+            "runs": 2
+          }
+        }
+      },
+      "gabriel_associative_unlabeled": {
+        "runs": 12,
+        "verified_successes": 8,
+        "p_success": 0.6666666666666666,
+        "declared_successes": 8,
+        "false_completions": 0,
+        "p_false_completion": 0.0,
+        "conditional_false_completion": 0.0,
+        "conditional_denominator": 8,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 6,
+        "mean_model_requests": 1.8333333333333333,
+        "total_model_requests": 22,
+        "mean_model_tokens": 7780.333333333333,
+        "total_model_tokens": 93364,
+        "mean_wall_ms": 28495.333333333332,
+        "p_success_ci95_by_family": {
+          "low": 0.0,
+          "high": 1.0,
+          "clusters": 3
+        },
+        "p_success_ci95_by_task": {
+          "low": 0.3333333333333333,
+          "high": 1.0,
+          "clusters": 6
+        },
+        "per_task": {
+          "da-garden": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "da-library": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "dc-garden": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "dc-library": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "du-garden": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "du-library": {
+            "p_success": 1.0,
+            "runs": 2
+          }
+        }
+      },
+      "gabriel_policy": {
+        "runs": 12,
+        "verified_successes": 8,
+        "p_success": 0.6666666666666666,
+        "declared_successes": 8,
+        "false_completions": 0,
+        "p_false_completion": 0.0,
+        "conditional_false_completion": 0.0,
+        "conditional_denominator": 8,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 4,
+        "mean_model_requests": 1.0,
+        "total_model_requests": 12,
+        "mean_model_tokens": 4017.5,
+        "total_model_tokens": 48210,
+        "mean_wall_ms": 15465.583333333334,
+        "p_success_ci95_by_family": {
+          "low": 0.0,
+          "high": 1.0,
+          "clusters": 3
+        },
+        "p_success_ci95_by_task": {
+          "low": 0.3333333333333333,
+          "high": 1.0,
+          "clusters": 6
+        },
+        "per_task": {
+          "da-garden": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "da-library": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "dc-garden": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "dc-library": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "du-garden": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "du-library": {
+            "p_success": 1.0,
+            "runs": 2
+          }
+        }
+      }
+    },
+    "paired_differences": {
+      "gabriel_policy_minus_gabriel_reference_plan": {
+        "per_task": {
+          "da-garden": 1.0,
+          "da-library": 1.0,
+          "dc-garden": 0.0,
+          "dc-library": 0.0,
+          "du-garden": 0.0,
+          "du-library": 0.0
+        },
+        "mean": 0.3333333333333333,
+        "ci95_by_family": {
+          "low": 0.0,
+          "high": 1.0,
+          "clusters": 3
+        },
+        "ci95_by_task": {
+          "low": 0.0,
+          "high": 0.6666666666666666,
+          "clusters": 6
+        },
+        "tokens_per_task": {
+          "da-garden": -12211.5,
+          "da-library": -9993.0,
+          "dc-garden": -10337.0,
+          "dc-library": -17372.0,
+          "du-garden": 261.0,
+          "du-library": -249.0
+        },
+        "mean_tokens": -8316.916666666666,
+        "requests_per_task": {
+          "da-garden": -2.5,
+          "da-library": -2.0,
+          "dc-garden": -2.0,
+          "dc-library": -3.5,
+          "du-garden": 0.0,
+          "du-library": 0.0
+        },
+        "mean_requests": -1.6666666666666667
+      },
+      "gabriel_policy_minus_gabriel_associative": {
+        "per_task": {
+          "da-garden": 0.0,
+          "da-library": 0.0,
+          "dc-garden": 0.0,
+          "dc-library": 0.0,
+          "du-garden": 0.0,
+          "du-library": 0.0
+        },
+        "mean": 0.0,
+        "ci95_by_family": {
+          "low": 0.0,
+          "high": 0.0,
+          "clusters": 3
+        },
+        "ci95_by_task": {
+          "low": 0.0,
+          "high": 0.0,
+          "clusters": 6
+        },
+        "tokens_per_task": {
+          "da-garden": 203.0,
+          "da-library": 8.0,
+          "dc-garden": -13719.0,
+          "dc-library": -15053.0,
+          "du-garden": 270.5,
+          "du-library": -202.5
+        },
+        "mean_tokens": -4748.833333333333,
+        "requests_per_task": {
+          "da-garden": 0.0,
+          "da-library": 0.0,
+          "dc-garden": -2.5,
+          "dc-library": -2.5,
+          "du-garden": 0.0,
+          "du-library": 0.0
+        },
+        "mean_requests": -0.8333333333333334
+      },
+      "gabriel_policy_minus_gabriel_associative_unlabeled": {
+        "per_task": {
+          "da-garden": 0.0,
+          "da-library": 0.0,
+          "dc-garden": 0.0,
+          "dc-library": 0.0,
+          "du-garden": 0.0,
+          "du-library": 0.0
+        },
+        "mean": 0.0,
+        "ci95_by_family": {
+          "low": 0.0,
+          "high": 0.0,
+          "clusters": 3
+        },
+        "ci95_by_task": {
+          "low": 0.0,
+          "high": 0.0,
+          "clusters": 6
+        },
+        "tokens_per_task": {
+          "da-garden": 27.5,
+          "da-library": 75.5,
+          "dc-garden": -9653.5,
+          "dc-library": -9209.0,
+          "du-garden": 318.5,
+          "du-library": -4136.0
+        },
+        "mean_tokens": -3762.8333333333335,
+        "requests_per_task": {
+          "da-garden": 0.0,
+          "da-library": 0.0,
+          "dc-garden": -2.0,
+          "dc-library": -2.0,
+          "du-garden": 0.0,
+          "du-library": -1.0
+        },
+        "mean_requests": -0.8333333333333334
+      }
+    },
+    "failures": [
+      {
+        "task_id": "da-garden",
+        "system": "gabriel_reference_plan",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: forty square metres | 40 square metres | 40 m",
+          "required statement not cited from register with 'forty square metres'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "da-garden",
+        "system": "gabriel_reference_plan",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "doc/summary.md: quote 'Each plot is 40 square metres.' is not a verbatim span of any available source",
+          "required statement not cited from register with 'forty square metres'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "invalid_output",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "da-library",
+        "system": "gabriel_reference_plan",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: twenty-one days | 21 days",
+          "required statement not cited from table with 'twenty-one days'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "da-library",
+        "system": "gabriel_reference_plan",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: twenty-one days | 21 days",
+          "required statement not cited from table with 'twenty-one days'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-garden",
+        "system": "gabriel_associative",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: forty square metres | 40 square metres | 40 m",
+          "required statement not cited from register with 'forty square metres'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-garden",
+        "system": "gabriel_associative",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: forty square metres | 40 square metres | 40 m",
+          "required statement not cited from register with 'forty square metres'"
+        ],
+        "provider_statuses": [
+          "truncated",
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-garden",
+        "system": "gabriel_associative_unlabeled",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: forty square metres | 40 square metres | 40 m",
+          "required statement not cited from register with 'forty square metres'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-garden",
+        "system": "gabriel_associative_unlabeled",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: forty square metres | 40 square metres | 40 m",
+          "required statement not cited from register with 'forty square metres'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-garden",
+        "system": "gabriel_policy",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: forty square metres | 40 square metres | 40 m",
+          "required statement not cited from register with 'forty square metres'"
+        ],
+        "provider_statuses": [
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-garden",
+        "system": "gabriel_policy",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: forty square metres | 40 square metres | 40 m",
+          "required statement not cited from register with 'forty square metres'"
+        ],
+        "provider_statuses": [
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-garden",
+        "system": "gabriel_reference_plan",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: forty square metres | 40 square metres | 40 m",
+          "required statement not cited from register with 'forty square metres'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-garden",
+        "system": "gabriel_reference_plan",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: forty square metres | 40 square metres | 40 m",
+          "required statement not cited from register with 'forty square metres'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-library",
+        "system": "gabriel_associative",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: twenty-one days | 21 days",
+          "required statement not cited from table with 'twenty-one days'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-library",
+        "system": "gabriel_associative",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "doc/summary.md: quote '# Library bylaws\\n\\n## Loans\\n\\nBooks are lent to members under ' is not a verbatim span of any available source",
+          "doc/summary.md: quote '# Library bylaws\\n\\n## Loans\\n\\nBooks are lent to members under ' is not a verbatim span of any available source",
+          "required statement not cited from bylaws with 'the terms of the loan table'",
+          "required statement missing: twenty-one days | 21 days",
+          "required statement not cited from table with 'twenty-one days'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "truncated",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-library",
+        "system": "gabriel_associative_unlabeled",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: twenty-one days | 21 days",
+          "required statement not cited from table with 'twenty-one days'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-library",
+        "system": "gabriel_associative_unlabeled",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: twenty-one days | 21 days",
+          "required statement not cited from table with 'twenty-one days'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-library",
+        "system": "gabriel_policy",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: twenty-one days | 21 days",
+          "required statement not cited from table with 'twenty-one days'"
+        ],
+        "provider_statuses": [
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-library",
+        "system": "gabriel_policy",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: twenty-one days | 21 days",
+          "required statement not cited from table with 'twenty-one days'"
+        ],
+        "provider_statuses": [
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-library",
+        "system": "gabriel_reference_plan",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: twenty-one days | 21 days",
+          "required statement not cited from table with 'twenty-one days'"
+        ],
+        "provider_statuses": [
+          "truncated",
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-library",
+        "system": "gabriel_reference_plan",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: twenty-one days | 21 days",
+          "required statement not cited from table with 'twenty-one days'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "invalid_output",
+          "invalid_output",
+          "completed",
+          "completed"
+        ]
+      }
+    ],
+    "claim_scope": "Scoped comparison on one synthetic task distribution with one provider; a difference here is not a general superiority claim. Costs include every attempt, including failed and timed-out runs."
+  },
+  "previously_seen": {
+    "schema": "gabriel.evaluation-report/1",
+    "protocol_frozen_digest": "8070e3fdb9ad536c2483fb11cec903563b76072169f0e1adb1739f3e41448fef",
+    "tasks": 11,
+    "families": 4,
+    "runs": 88,
+    "per_system": {
+      "gabriel_reference_plan": {
+        "runs": 22,
+        "verified_successes": 10,
+        "p_success": 0.45454545454545453,
+        "declared_successes": 10,
+        "false_completions": 0,
+        "p_false_completion": 0.0,
+        "conditional_false_completion": 0.0,
+        "conditional_denominator": 10,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 12,
+        "mean_model_requests": 2.3636363636363638,
+        "total_model_requests": 52,
+        "mean_model_tokens": 11009.136363636364,
+        "total_model_tokens": 242201,
+        "mean_wall_ms": 42185.27272727273,
+        "p_success_ci95_by_family": {
+          "low": 0.0,
+          "high": 1.0,
+          "clusters": 4
+        },
+        "p_success_ci95_by_task": {
+          "low": 0.18181818181818182,
+          "high": 0.7272727272727273,
+          "clusters": 11
+        },
+        "per_task": {
+          "da-archive": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "da-fee": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "da-parking": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "dc-archive": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "dc-fee": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "dc-parking": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "dn-fee": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "dn-parking": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "du-archive": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "du-fee": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "du-parking": {
+            "p_success": 1.0,
+            "runs": 2
+          }
+        }
+      },
+      "gabriel_associative": {
+        "runs": 22,
+        "verified_successes": 16,
+        "p_success": 0.7272727272727273,
+        "declared_successes": 16,
+        "false_completions": 0,
+        "p_false_completion": 0.0,
+        "conditional_false_completion": 0.0,
+        "conditional_denominator": 16,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 6,
+        "mean_model_requests": 1.5454545454545454,
+        "total_model_requests": 34,
+        "mean_model_tokens": 6374.590909090909,
+        "total_model_tokens": 140241,
+        "mean_wall_ms": 23735.090909090908,
+        "p_success_ci95_by_family": {
+          "low": 0.25,
+          "high": 1.0,
+          "clusters": 4
+        },
+        "p_success_ci95_by_task": {
+          "low": 0.45454545454545453,
+          "high": 1.0,
+          "clusters": 11
+        },
+        "per_task": {
+          "da-archive": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "da-fee": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "da-parking": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "dc-archive": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "dc-fee": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "dc-parking": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "dn-fee": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "dn-parking": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "du-archive": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "du-fee": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "du-parking": {
+            "p_success": 1.0,
+            "runs": 2
+          }
+        }
+      },
+      "gabriel_associative_unlabeled": {
+        "runs": 22,
+        "verified_successes": 16,
+        "p_success": 0.7272727272727273,
+        "declared_successes": 16,
+        "false_completions": 0,
+        "p_false_completion": 0.0,
+        "conditional_false_completion": 0.0,
+        "conditional_denominator": 16,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 9,
+        "mean_model_requests": 1.7272727272727273,
+        "total_model_requests": 38,
+        "mean_model_tokens": 6741.454545454545,
+        "total_model_tokens": 148312,
+        "mean_wall_ms": 24587.636363636364,
+        "p_success_ci95_by_family": {
+          "low": 0.25,
+          "high": 1.0,
+          "clusters": 4
+        },
+        "p_success_ci95_by_task": {
+          "low": 0.45454545454545453,
+          "high": 1.0,
+          "clusters": 11
+        },
+        "per_task": {
+          "da-archive": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "da-fee": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "da-parking": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "dc-archive": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "dc-fee": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "dc-parking": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "dn-fee": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "dn-parking": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "du-archive": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "du-fee": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "du-parking": {
+            "p_success": 1.0,
+            "runs": 2
+          }
+        }
+      },
+      "gabriel_policy": {
+        "runs": 22,
+        "verified_successes": 16,
+        "p_success": 0.7272727272727273,
+        "declared_successes": 16,
+        "false_completions": 0,
+        "p_false_completion": 0.0,
+        "conditional_false_completion": 0.0,
+        "conditional_denominator": 16,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 6,
+        "mean_model_requests": 1.0,
+        "total_model_requests": 22,
+        "mean_model_tokens": 3738.7727272727275,
+        "total_model_tokens": 82253,
+        "mean_wall_ms": 15108.818181818182,
+        "p_success_ci95_by_family": {
+          "low": 0.25,
+          "high": 1.0,
+          "clusters": 4
+        },
+        "p_success_ci95_by_task": {
+          "low": 0.45454545454545453,
+          "high": 1.0,
+          "clusters": 11
+        },
+        "per_task": {
+          "da-archive": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "da-fee": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "da-parking": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "dc-archive": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "dc-fee": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "dc-parking": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "dn-fee": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "dn-parking": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "du-archive": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "du-fee": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "du-parking": {
+            "p_success": 1.0,
+            "runs": 2
+          }
+        }
+      }
+    },
+    "paired_differences": {
+      "gabriel_policy_minus_gabriel_reference_plan": {
+        "per_task": {
+          "da-archive": 1.0,
+          "da-fee": 1.0,
+          "da-parking": 1.0,
+          "dc-archive": 0.0,
+          "dc-fee": 0.0,
+          "dc-parking": 0.0,
+          "dn-fee": 0.0,
+          "dn-parking": 0.0,
+          "du-archive": 0.0,
+          "du-fee": 0.0,
+          "du-parking": 0.0
+        },
+        "mean": 0.2727272727272727,
+        "ci95_by_family": {
+          "low": 0.0,
+          "high": 0.75,
+          "clusters": 4
+        },
+        "ci95_by_task": {
+          "low": 0.0,
+          "high": 0.5454545454545454,
+          "clusters": 11
+        },
+        "tokens_per_task": {
+          "da-archive": -19493.5,
+          "da-fee": -16336.0,
+          "da-parking": -9288.5,
+          "dc-archive": -16292.0,
+          "dc-fee": -9337.0,
+          "dc-parking": -9570.5,
+          "dn-fee": 194.0,
+          "dn-parking": -235.0,
+          "du-archive": 160.5,
+          "du-fee": -7.5,
+          "du-parking": 231.5
+        },
+        "mean_tokens": -7270.363636363636,
+        "requests_per_task": {
+          "da-archive": -3.0,
+          "da-fee": -3.0,
+          "da-parking": -2.0,
+          "dc-archive": -3.0,
+          "dc-fee": -2.0,
+          "dc-parking": -2.0,
+          "dn-fee": 0.0,
+          "dn-parking": 0.0,
+          "du-archive": 0.0,
+          "du-fee": 0.0,
+          "du-parking": 0.0
+        },
+        "mean_requests": -1.3636363636363635
+      },
+      "gabriel_policy_minus_gabriel_associative": {
+        "per_task": {
+          "da-archive": 0.0,
+          "da-fee": 0.0,
+          "da-parking": 0.0,
+          "dc-archive": 0.0,
+          "dc-fee": 0.0,
+          "dc-parking": 0.0,
+          "dn-fee": 0.0,
+          "dn-parking": 0.0,
+          "du-archive": 0.0,
+          "du-fee": 0.0,
+          "du-parking": 0.0
+        },
+        "mean": 0.0,
+        "ci95_by_family": {
+          "low": 0.0,
+          "high": 0.0,
+          "clusters": 4
+        },
+        "ci95_by_task": {
+          "low": 0.0,
+          "high": 0.0,
+          "clusters": 11
+        },
+        "tokens_per_task": {
+          "da-archive": 52.5,
+          "da-fee": 390.5,
+          "da-parking": 364.0,
+          "dc-archive": -9085.5,
+          "dc-fee": -11817.0,
+          "dc-parking": -8939.0,
+          "dn-fee": 470.0,
+          "dn-parking": -382.5,
+          "du-archive": 78.0,
+          "du-fee": -197.5,
+          "du-parking": 72.5
+        },
+        "mean_tokens": -2635.818181818182,
+        "requests_per_task": {
+          "da-archive": 0.0,
+          "da-fee": 0.0,
+          "da-parking": 0.0,
+          "dc-archive": -2.0,
+          "dc-fee": -2.0,
+          "dc-parking": -2.0,
+          "dn-fee": 0.0,
+          "dn-parking": 0.0,
+          "du-archive": 0.0,
+          "du-fee": 0.0,
+          "du-parking": 0.0
+        },
+        "mean_requests": -0.5454545454545454
+      },
+      "gabriel_policy_minus_gabriel_associative_unlabeled": {
+        "per_task": {
+          "da-archive": 0.0,
+          "da-fee": 0.0,
+          "da-parking": 0.0,
+          "dc-archive": 0.0,
+          "dc-fee": 0.0,
+          "dc-parking": 0.0,
+          "dn-fee": 0.0,
+          "dn-parking": 0.0,
+          "du-archive": 0.0,
+          "du-fee": 0.0,
+          "du-parking": 0.0
+        },
+        "mean": 0.0,
+        "ci95_by_family": {
+          "low": 0.0,
+          "high": 0.0,
+          "clusters": 4
+        },
+        "ci95_by_task": {
+          "low": 0.0,
+          "high": 0.0,
+          "clusters": 11
+        },
+        "tokens_per_task": {
+          "da-archive": 8.5,
+          "da-fee": 400.5,
+          "da-parking": 800.5,
+          "dc-archive": -8587.0,
+          "dc-fee": -8681.0,
+          "dc-parking": -9367.5,
+          "dn-fee": 762.0,
+          "dn-parking": -401.5,
+          "du-archive": -3881.5,
+          "du-fee": -208.0,
+          "du-parking": -3874.5
+        },
+        "mean_tokens": -3002.681818181818,
+        "requests_per_task": {
+          "da-archive": 0.0,
+          "da-fee": 0.0,
+          "da-parking": 0.0,
+          "dc-archive": -2.0,
+          "dc-fee": -2.0,
+          "dc-parking": -2.0,
+          "dn-fee": 0.0,
+          "dn-parking": 0.0,
+          "du-archive": -1.0,
+          "du-fee": 0.0,
+          "du-parking": -1.0
+        },
+        "mean_requests": -0.7272727272727273
+      }
+    },
+    "failures": [
+      {
+        "task_id": "da-archive",
+        "system": "gabriel_reference_plan",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: eleven | 11 years | eleven years",
+          "required statement not cited from schedule with 'eleven calendar years'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "truncated",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "da-archive",
+        "system": "gabriel_reference_plan",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: eleven | 11 years | eleven years",
+          "required statement not cited from schedule with 'eleven calendar years'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "truncated",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "da-fee",
+        "system": "gabriel_reference_plan",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: 120 EUR | 120",
+          "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "truncated",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "da-fee",
+        "system": "gabriel_reference_plan",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: 120 EUR | 120",
+          "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "da-parking",
+        "system": "gabriel_reference_plan",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+          "required statement not cited from appendix with 'Bays twelve through thirty'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "da-parking",
+        "system": "gabriel_reference_plan",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+          "required statement not cited from appendix with 'Bays twelve through thirty'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-archive",
+        "system": "gabriel_associative",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: eleven | 11 years | eleven years",
+          "required statement not cited from schedule with 'eleven calendar years'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-archive",
+        "system": "gabriel_associative",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: eleven | 11 years | eleven years",
+          "required statement not cited from schedule with 'eleven calendar years'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-archive",
+        "system": "gabriel_associative_unlabeled",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: eleven | 11 years | eleven years",
+          "required statement not cited from schedule with 'eleven calendar years'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-archive",
+        "system": "gabriel_associative_unlabeled",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: eleven | 11 years | eleven years",
+          "required statement not cited from schedule with 'eleven calendar years'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-archive",
+        "system": "gabriel_policy",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: eleven | 11 years | eleven years",
+          "required statement not cited from schedule with 'eleven calendar years'"
+        ],
+        "provider_statuses": [
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-archive",
+        "system": "gabriel_policy",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: eleven | 11 years | eleven years",
+          "required statement not cited from schedule with 'eleven calendar years'"
+        ],
+        "provider_statuses": [
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-archive",
+        "system": "gabriel_reference_plan",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: eleven | 11 years | eleven years",
+          "required statement not cited from schedule with 'eleven calendar years'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-archive",
+        "system": "gabriel_reference_plan",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: eleven | 11 years | eleven years",
+          "required statement not cited from schedule with 'eleven calendar years'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "truncated",
+          "truncated",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-fee",
+        "system": "gabriel_associative",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: 120 EUR | 120",
+          "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-fee",
+        "system": "gabriel_associative",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: 120 EUR | 120",
+          "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-fee",
+        "system": "gabriel_associative_unlabeled",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: 120 EUR | 120",
+          "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-fee",
+        "system": "gabriel_associative_unlabeled",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: 120 EUR | 120",
+          "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-fee",
+        "system": "gabriel_policy",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: 120 EUR | 120",
+          "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+        ],
+        "provider_statuses": [
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-fee",
+        "system": "gabriel_policy",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: 120 EUR | 120",
+          "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+        ],
+        "provider_statuses": [
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-fee",
+        "system": "gabriel_reference_plan",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: 120 EUR | 120",
+          "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-fee",
+        "system": "gabriel_reference_plan",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-parking",
+        "system": "gabriel_associative",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+          "required statement not cited from appendix with 'Bays twelve through thirty'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-parking",
+        "system": "gabriel_associative",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+          "required statement not cited from appendix with 'Bays twelve through thirty'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-parking",
+        "system": "gabriel_associative_unlabeled",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+          "required statement not cited from appendix with 'Bays twelve through thirty'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-parking",
+        "system": "gabriel_associative_unlabeled",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+          "required statement not cited from appendix with 'Bays twelve through thirty'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-parking",
+        "system": "gabriel_policy",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+          "required statement not cited from appendix with 'Bays twelve through thirty'"
+        ],
+        "provider_statuses": [
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-parking",
+        "system": "gabriel_policy",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+          "required statement not cited from appendix with 'Bays twelve through thirty'"
+        ],
+        "provider_statuses": [
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-parking",
+        "system": "gabriel_reference_plan",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+          "required statement not cited from appendix with 'Bays twelve through thirty'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "dc-parking",
+        "system": "gabriel_reference_plan",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "required statement missing: twelve through thirty | 12 through 30 | bays 12",
+          "required statement not cited from appendix with 'Bays twelve through thirty'"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      }
+    ],
+    "claim_scope": "Scoped comparison on one synthetic task distribution with one provider; a difference here is not a general superiority claim. Costs include every attempt, including failed and timed-out runs."
+  }
+}

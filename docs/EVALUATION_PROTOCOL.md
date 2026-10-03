@@ -423,6 +423,53 @@ versioned routing policy, trained on the system's retained decisions, met a decl
 criterion with the regression gates intact and was promoted by the memory's rule. What it
 learned is one legible fact, its leverage is cost at equal success, and the sample is small.
 
+## Protocol 9: a second provider on the association tier
+Every claim of ADR-20 to ADR-22 rested on gpt-4.1-mini. Protocol 9
+(`evidence/wp15/protocol9_declaration.md`, declared before any run with another provider)
+repeats the association tier with gpt-5-mini, a reasoning model of a different family through
+the same OpenAI-compatible endpoint (no sampling temperature, the same budgets, 4000 completion
+tokens including reasoning): all seventeen evaluated tasks, arms `gabriel_reference_plan`,
+`gabriel_associative`, `gabriel_associative_unlabeled` and `gabriel_policy` with the promoted
+readout's weights fixed (trained on gpt-4.1-mini's decisions, not retrained), two repetitions,
+`linux_namespace`, 136 runs, after a six-run feasibility pilot (`pilot9-run/`, retained, not
+counted, no setting changed). Rules R1 (ADR-20: needed families +0.5), R2 (ADR-21: unneeded
+families not worse than the provenance view by more than one run in ten), R3 (ADR-22: the
+held-out criterion of protocol 8 and every cold repair stopped at the first decision), equality
+on the no-history family, provider statuses reported.
+
+| system | runs | verified | p_success | false compl. | mean requests | mean tokens | mean wall s | held-out verified | held-out tokens |
+|---|---|---|---|---|---|---|---|---|---|
+| gabriel_reference_plan | 34 | 14 | 0.41 | 0 | 2.47 | 11477 | 43.3 | 4/12 | 12334 |
+| gabriel_associative | 34 | 24 | 0.71 | 0 | 1.65 | 7219 | 27.2 | 8/12 | 8766 |
+| gabriel_associative_unlabeled | 34 | 24 | 0.71 | 0 | 1.76 | 7108 | 26.0 | 8/12 | 7780 |
+| gabriel_policy | 34 | 24 | 0.71 | 0 | 1.00 | 3837 | 15.2 | 8/12 | 4018 |
+
+Against the declared rules (`evidence/wp15/run9/report.md`, `retrieval_analysis.json`,
+`decision_analysis.json`):
+
+- R1 **met**: on the needed families the associative view verified 10 of 10 at one request, the
+  provenance view 0 of 10 at 3.4 requests (+1.00 on every task, held-out topics included); the
+  hidden source was in every associative prompt and no provenance prompt.
+- R2 **met**: on the unneeded families both the labeled view and the provenance view verified
+  10 of 10 at one request. The unlabeled control needed a repair in 6 of 10 runs, 4 of them
+  because the first attempt stated the forbidden figure, and gpt-5-mini repaired all of them
+  (10 of 10 at 1.6 requests) where gpt-4.1-mini had lost 2 of 6. The labeled view's first
+  attempts stated the figure 0 times.
+- R3 **met**: on the held-out families the readout arm equals the rule-based production
+  configuration (8 of 12) at 4018 against 8766 mean tokens with no false completion; the readout
+  stopped all 10 cold repairs (seen and held out) at the first decision with p = 0.044, abstained
+  0 times, was refused 0 times, and every decision carried the document layout; it stopped no
+  recoverable repair.
+- `association-none`: all four arms 4 of 4 at one request.
+- Provider statuses: 8 truncated and 3 invalid outputs, all in repair rounds of hopeless runs
+  (the provenance arm 9, the associative arm 2 on cold held-out topics), none in the readout
+  arm, whose hopeless runs stop before a repair; every unit stays in the denominator. gpt-5-mini
+  costs about three times gpt-4.1-mini's wall time per unit and roughly twice its tokens.
+
+Consequence, as declared: the claims of ADR-20, ADR-21 and ADR-22 extend to a second provider as
+replications under the same protocol discipline. The scope remains two providers of one vendor
+through one API, one pack, one constructed distribution.
+
 ## Freezing and amendments
 `gabriel eval freeze` digests the protocol body and records the harness code identity.
 `gabriel eval run` refuses a changed protocol or corpus. A harness code change after freezing is

@@ -1,6 +1,6 @@
 {
   "schema": "gabriel.evidence.work-packages/1",
-  "produced_at_utc": "2026-10-03T16:06:50.441968+00:00",
+  "produced_at_utc": "2026-10-03T17:22:50.196145+00:00",
   "rule": "A package counts as done only with actual code and recorded test output; privileged and paid runs are listed under not_executed.",
   "packages": {
     "WP01": {
@@ -1602,6 +1602,106 @@
           },
           {
             "test": "test_protocol_freeze_and_metrics",
+            "result": "PASSED"
+          }
+        ]
+      }
+    },
+    "P9-second-provider": {
+      "status": "DONE_EXECUTED_RULES_MET",
+      "tests": [
+        "tests/test_association.py",
+        "tests/test_policy_route.py"
+      ],
+      "acceptance": [
+        "replication of ADR-20 and ADR-21 and transfer of the ADR-22 readout under a second provider, declared before the run"
+      ],
+      "evidence": [
+        "evidence/wp15/protocol9_declaration.md",
+        "evidence/wp15/pilot9.frozen.json",
+        "evidence/wp15/pilot9-run/report.md",
+        "evidence/wp15/protocol9.frozen.json",
+        "evidence/wp15/run9/report.md",
+        "evidence/wp15/run9/retrieval_analysis.json",
+        "evidence/wp15/run9/decision_analysis.json",
+        "evidence/wp15/run9/final_diffs/index.json",
+        "docs/EVALUATION_PROTOCOL.md"
+      ],
+      "not_executed": [
+        "a provider of another vendor (the Anthropic provider is implemented and tested against a local fake endpoint; no credential here)",
+        "a readout trained on gpt-5-mini's own decisions",
+        "a second pack or a real-world corpus"
+      ],
+      "test_results": {
+        "tests/test_association.py": [
+          {
+            "test": "test_history_brings_a_lexically_invisible_source_into_a_budgeted_retrieval_and_matches_the_reference",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_association_never_reaches_what_the_principal_cannot_retrieve",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_structural_scores_declare_their_limits",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_verified_run_history_carries_the_annex_into_the_associative_view_through_the_owner",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_every_association_topic_meets_the_protocol_precondition_under_the_pack_budget[fee]",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_every_association_topic_meets_the_protocol_precondition_under_the_pack_budget[parking]",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_every_association_topic_meets_the_protocol_precondition_under_the_pack_budget[archive]",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_every_association_topic_meets_the_protocol_precondition_under_the_pack_budget[library]",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_every_association_topic_meets_the_protocol_precondition_under_the_pack_budget[garden]",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_association_tier_runs_through_the_frozen_harness_with_history",
+            "result": "PASSED"
+          }
+        ],
+        "tests/test_policy_route.py": [
+          {
+            "test": "test_recurrent_reference_map_is_bounded_and_rejects_bad_inputs",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_training_reduces_decision_loss_and_router_decides",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_pinned_readout_policy_stops_a_repair_and_records_its_decision",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_episodes_enter_the_prompt_and_are_recorded",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_document_decisions_carry_the_packs_declared_channels_and_bind_the_readout_to_their_layout",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_a_layout_bound_readout_abstains_where_the_packs_channels_are_missing",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_document_tasks_pin_the_packs_promoted_readout_by_default_and_software_tasks_the_rule",
             "result": "PASSED"
           }
         ]

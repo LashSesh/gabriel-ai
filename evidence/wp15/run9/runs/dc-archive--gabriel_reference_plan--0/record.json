@@ -1,0 +1,271 @@
+{
+  "task_id": "dc-archive",
+  "family": "association-needed-cold",
+  "system": "gabriel_reference_plan",
+  "rep": 0,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp15/run9/runs/dc-archive--gabriel_reference_plan--0",
+  "domain": "document",
+  "outcome": {
+    "system": "gabriel_reference_plan",
+    "task_id": "dc-archive",
+    "family": "association-needed-cold",
+    "rep": 0,
+    "declared": false,
+    "declared_reason": "run state failed",
+    "model_requests": 3,
+    "model_tokens": 12959,
+    "wall_ms": 43459,
+    "provider_statuses": [
+      "completed",
+      "completed",
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-5-mini-2025-08-07"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp15/run9/runs/dc-archive--gabriel_reference_plan--0/gabriel_reference_plan-0-ws/worktrees/run-dc-archive-gabriel_reference_plan-0-1",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "assess propose-r2/output-valid -> passed: assessment passed recorded for output-valid; node propose-r2 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+      "apply-r2 -> completed (result accepted; checks pending)",
+      "assess apply-r2/output-valid -> passed: assessment passed recorded for output-valid; node apply-r2 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+      "read-back-r2 -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+      "assess read-back-r2/output-valid -> passed: assessment passed recorded for output-valid; node read-back-r2 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets,scope",
+      "review-r2 -> completed (result accepted; checks pending)",
+      "assess review-r2/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,citations,claims,no-secrets",
+      "assess review-r2/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,citations,claims,no-secrets",
+      "assess review-r2/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: citations,claims,no-secrets",
+      "assess review-r2/no-secrets -> passed: assessment passed recorded for no-secrets; not complete: mandatory checks without eligible passing evidence: citations,claims",
+      "assess review-r2/citations -> passed: assessment passed recorded for citations; not complete: mandatory checks without eligible passing evidence: claims",
+      "assess review-r2/claims -> failed: assessment failed recorded for claims; mandatory check failed; repair policy exhausted"
+    ],
+    "gabriel": {
+      "run_id": "run-dc-archive-gabriel_reference_plan-0-1",
+      "workspace": "/home/user/gabriel-ai/evidence/wp15/run9/runs/dc-archive--gabriel_reference_plan--0/gabriel_reference_plan-0-ws",
+      "hold": null,
+      "replay": "passed",
+      "events": 80,
+      "assessments": [
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "propose"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "apply"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "read-back"
+        },
+        {
+          "check_id": "scope",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "base-commit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "checks-intact",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "no-secrets",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "citations",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "claims",
+          "outcome": "failed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "observe-r1"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "propose-r1"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "apply-r1"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "read-back-r1"
+        },
+        {
+          "check_id": "scope",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "base-commit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "checks-intact",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "no-secrets",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "citations",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "claims",
+          "outcome": "failed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "observe-r2"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "observe"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "propose-r2"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "apply-r2"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "read-back-r2"
+        },
+        {
+          "check_id": "scope",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r2"
+        },
+        {
+          "check_id": "base-commit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r2"
+        },
+        {
+          "check_id": "checks-intact",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r2"
+        },
+        {
+          "check_id": "no-secrets",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r2"
+        },
+        {
+          "check_id": "citations",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r2"
+        },
+        {
+          "check_id": "claims",
+          "outcome": "failed",
+          "eligible": true,
+          "node_id": "review-r2"
+        }
+      ]
+    },
+    "repairs_used": 2,
+    "plan_versions": 3
+  },
+  "verification": {
+    "verified": false,
+    "problems": [
+      "required statement missing: eleven | 11 years | eleven years",
+      "required statement not cited from schedule with 'eleven calendar years'"
+    ],
+    "changed_paths": [
+      "doc/summary.md"
+    ],
+    "out_of_scope_paths": [],
+    "citations": 2,
+    "claims": [
+      {
+        "claim": "schedule",
+        "present": true,
+        "cited_from_expected_source": true
+      },
+      {
+        "claim": "eleven | 11 years | eleven years",
+        "present": false,
+        "cited_from_expected_source": false
+      }
+    ],
+    "targets": {
+      "doc/summary.md": "# Summary\n\nThe statute's retention rule: Records of the society are retained for the period named in the schedule of this statute.[[cite:obs-2b31363ebfabfa5bbb03d7bf1e4b7430fec958ed \"Records of the society are retained for the period named in the schedule of this statute.\"]]\n\nHow long the records are kept: Records of the society are retained for the period named in the schedule of this statute.[[cite:obs-2b31363ebfabfa5bbb03d7bf1e4b7430fec958ed \"Records of the society are retained for the period named in the schedule of this statute.\"]]\n"
+    },
+    "patch_sha256": "b8b9b16f7582f1669bea765d2122e7d48172a2371644dcf4aac811eda6c7f097",
+    "patch_bytes": 700,
+    "patch": "diff --git a/doc/summary.md b/doc/summary.md\nindex 0750985..c563039 100644\n--- a/doc/summary.md\n+++ b/doc/summary.md\n@@ -1,3 +1,5 @@\n # Summary\n \n-(to be completed)\n+The statute's retention rule: Records of the society are retained for the period named in the schedule of this statute.[[cite:obs-2b31363ebfabfa5bbb03d7bf1e4b7430fec958ed \"Records of the society are retained for the period named in the schedule of this statute.\"]]\n+\n+How long the records are kept: Records of the society are retained for the period named in the schedule of this statute.[[cite:obs-2b31363ebfabfa5bbb03d7bf1e4b7430fec958ed \"Records of the society are retained for the period named in the schedule of this statute.\"]]\n",
+    "head_is_base": true,
+    "marker": "eval-verify-dc-archive-gabriel_reference_plan-0"
+  },
+  "V": 0,
+  "D": 0,
+  "false_completion": 0,
+  "unit_wall_ms": 43700
+}

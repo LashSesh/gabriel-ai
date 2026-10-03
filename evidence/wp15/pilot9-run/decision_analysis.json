@@ -1,0 +1,203 @@
+{
+ "note": "per Gabriel unit: the evaluated run's retained router decisions (point, action, policy, score, abstention, pack channels) beside the unit's provider statuses; summary per system and family",
+ "protocol_frozen_digest": "65f0fd0af67ddb5755543865767689c3cdd4e1605fbcc5657b5ca8817654326a",
+ "rows": [
+  {
+   "V": true,
+   "decisions": [],
+   "error": null,
+   "family": "association-needed",
+   "provider_statuses": [
+    "completed"
+   ],
+   "rep": 0,
+   "requests": 1,
+   "system": "gabriel_associative",
+   "task": "da-fee"
+  },
+  {
+   "V": true,
+   "decisions": [],
+   "error": null,
+   "family": "association-needed",
+   "provider_statuses": [
+    "completed"
+   ],
+   "rep": 0,
+   "requests": 1,
+   "system": "gabriel_policy",
+   "task": "da-fee"
+  },
+  {
+   "V": false,
+   "decisions": [
+    {
+     "abstained": false,
+     "action": "repair",
+     "decision_point": "failed_verification",
+     "layout": "progress-channels-v1.document-progress-v1",
+     "pack_channels": {
+      "carried_sources": 0,
+      "citations_unbound": 0,
+      "expected_source_absent": 1000,
+      "forbidden_present": 0,
+      "required_missing": 500,
+      "required_uncited": 0
+     },
+     "policy_id": "rule-based-v1",
+     "reason": "rule: repair within the admitted limits",
+     "score_milli": 1000
+    },
+    {
+     "abstained": false,
+     "action": "repair",
+     "decision_point": "failed_verification",
+     "layout": "progress-channels-v1.document-progress-v1",
+     "pack_channels": {
+      "carried_sources": 0,
+      "citations_unbound": 0,
+      "expected_source_absent": 1000,
+      "forbidden_present": 0,
+      "required_missing": 500,
+      "required_uncited": 0
+     },
+     "policy_id": "rule-based-v1",
+     "reason": "rule: repair within the admitted limits",
+     "score_milli": 1000
+    }
+   ],
+   "error": null,
+   "family": "association-needed-cold",
+   "provider_statuses": [
+    "completed",
+    "completed",
+    "completed"
+   ],
+   "rep": 0,
+   "requests": 3,
+   "system": "gabriel_associative",
+   "task": "dc-fee"
+  },
+  {
+   "V": false,
+   "decisions": [
+    {
+     "abstained": false,
+     "action": "stop",
+     "decision_point": "failed_verification",
+     "layout": "progress-channels-v1.document-progress-v1",
+     "pack_channels": {
+      "carried_sources": 0,
+      "citations_unbound": 0,
+      "expected_source_absent": 1000,
+      "forbidden_present": 0,
+      "required_missing": 500,
+      "required_uncited": 0
+     },
+     "policy_id": "readout-channels-v2",
+     "reason": "readout p(repair succeeds)=0.044 < threshold 0.500",
+     "score_milli": 44
+    }
+   ],
+   "error": null,
+   "family": "association-needed-cold",
+   "provider_statuses": [
+    "completed"
+   ],
+   "rep": 0,
+   "requests": 1,
+   "system": "gabriel_policy",
+   "task": "dc-fee"
+  },
+  {
+   "V": true,
+   "decisions": [],
+   "error": null,
+   "family": "association-unneeded",
+   "provider_statuses": [
+    "completed"
+   ],
+   "rep": 0,
+   "requests": 1,
+   "system": "gabriel_associative",
+   "task": "du-fee"
+  },
+  {
+   "V": true,
+   "decisions": [],
+   "error": null,
+   "family": "association-unneeded",
+   "provider_statuses": [
+    "completed"
+   ],
+   "rep": 0,
+   "requests": 1,
+   "system": "gabriel_policy",
+   "task": "du-fee"
+  }
+ ],
+ "run": "evidence/wp15/pilot9-run",
+ "schema": "gabriel.evidence.decision-analysis/1",
+ "summary": {
+  "gabriel_associative|association-needed": {
+   "abstentions": 0,
+   "decisions": 0,
+   "errors": 0,
+   "non_completed_statuses": 0,
+   "readout_repairs": 0,
+   "stops": 0,
+   "units": 1,
+   "verified": 1
+  },
+  "gabriel_associative|association-needed-cold": {
+   "abstentions": 0,
+   "decisions": 2,
+   "errors": 0,
+   "non_completed_statuses": 0,
+   "readout_repairs": 0,
+   "stops": 0,
+   "units": 1,
+   "verified": 0
+  },
+  "gabriel_associative|association-unneeded": {
+   "abstentions": 0,
+   "decisions": 0,
+   "errors": 0,
+   "non_completed_statuses": 0,
+   "readout_repairs": 0,
+   "stops": 0,
+   "units": 1,
+   "verified": 1
+  },
+  "gabriel_policy|association-needed": {
+   "abstentions": 0,
+   "decisions": 0,
+   "errors": 0,
+   "non_completed_statuses": 0,
+   "readout_repairs": 0,
+   "stops": 0,
+   "units": 1,
+   "verified": 1
+  },
+  "gabriel_policy|association-needed-cold": {
+   "abstentions": 0,
+   "decisions": 1,
+   "errors": 0,
+   "non_completed_statuses": 0,
+   "readout_repairs": 0,
+   "stops": 1,
+   "units": 1,
+   "verified": 0
+  },
+  "gabriel_policy|association-unneeded": {
+   "abstentions": 0,
+   "decisions": 0,
+   "errors": 0,
+   "non_completed_statuses": 0,
+   "readout_repairs": 0,
+   "stops": 0,
+   "units": 1,
+   "verified": 1
+  }
+ }
+}

@@ -79,3 +79,11 @@ to "where the goal asks". It is one provider's response to one presentation on o
 distribution, with the matched unlabeled control in the same run; it is not a general claim
 about labels, and the da-fee cost shows the presentation can also make the model too cautious.
 The walk, the claims and the manifest are unchanged from ADR-20; no learning claim follows.
+
+## Replication (protocol 9, `evidence/wp15/run9/`)
+Under gpt-5-mini the labeled view equalled the provenance view on the unneeded families (10 of
+10 at one request) and no first attempt stated the forbidden figure; the unlabeled control
+stated it in 4 of 10 first attempts and needed a repair in 6, which gpt-5-mini then repaired
+every time (where gpt-4.1-mini had lost 2 of 6). The presentation's effect on the first attempt
+holds for both providers; its effect on the verified outcome depends on how well the provider
+repairs. Scope: two providers of one vendor (`docs/EVALUATION_PROTOCOL.md`, protocol 9).

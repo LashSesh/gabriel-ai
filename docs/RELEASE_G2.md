@@ -124,7 +124,11 @@ no first attempt stated the forbidden figure, against 6 of 6 unlabeled) and was 
 arm over all tasks; its own cost was two repairs on one needed task whose first attempt left the
 carried figure out. As declared, the associative view is now the document pack's default. The
 G2 claim is unchanged in kind: the mechanism is specified, deterministic, retained and shown to
-do what it specifies on this distribution under one provider, with its costs measured.
+do what it specifies on this distribution, with its costs measured. Protocol 9 (`evidence/wp15/run9/`)
+repeated the tier with gpt-5-mini under the same discipline: the associative view again verified
+every needed task against none for the provenance view, and the labeled presentation again kept
+every first attempt on the unneeded family from stating the forbidden figure; the scope is two
+providers of one vendor through one API.
 
 ## Known issues
 - A tool implementation change invalidates existing workspaces at open (no migration).

@@ -1,0 +1,236 @@
+You are the worker role of Gabriel for a source-grounded document amendment.
+Goal (verbatim user request):
+Amend doc/summary.md so that it states the bylaws's rule only, as written in the bylaws. Every statement must be followed by a citation of the exact source span that supports it. Do not change the sources.
+
+Acceptance checks (independent oracles decide completion; you cannot change them):
+- citations [document/citations_bound] independent=True
+- claims [document/required_claims] independent=True
+
+Editable paths (changes elsewhere are rejected; sources are never editable): doc/
+Base commit: ca6a20d85e9a8d20dc771836e9ceaaefa8a0676f
+
+Target documents (path sha256 bytes):
+  doc/summary.md 8da3ea3ddd495af48881ae7e82526305ac7eb00e56ad46998731db04b033d95f 351
+=== doc/summary.md (sha256 8da3ea3ddd495af48881ae7e82526305ac7eb00e56ad46998731db04b033d95f) ===
+Books are lent to members under the terms of the loan table of these bylaws. [[cite:obs-3ce2e8a7488d908b8e61a7e48bb70f7d9033dc5c "Books are lent to members under the terms of the loan table of these bylaws."]]
+
+Novels: twenty-one days, renewable twice. [[cite:obs-f72599811f362292837bd18a49b30155a6058453 "Novels: twenty-one days, renewable twice."]]
+
+
+
+Sources (cite them by observation id; quotes must be exact substrings of the cited source):
+=== source bylaws revision 1 observation obs-3ce2e8a7488d908b8e61a7e48bb70f7d9033dc5c (105 bytes) ===
+# Library bylaws
+
+## Loans
+
+Books are lent to members under the terms of the loan table of these bylaws.
+
+
+=== source table revision 1 observation obs-f72599811f362292837bd18a49b30155a6058453 (56 bytes) ===
+# Loan table
+
+Novels: twenty-one days, renewable twice.
+
+
+=== source note00 revision 1 observation obs-05e5986920dfb821f10319673bb375bf529ec61b (102 bytes) ===
+# Note 0
+
+Minutes of the committee meeting held on the first Tuesday: quorum reached, no resolutions.
+
+
+=== source note15 revision 1 observation obs-0ad2da4a9894d9cc0032fdb34bc48cbc6b5f1e10 (104 bytes) ===
+# Note 15
+
+Minutes of the committee meeting held on the fourth Tuesday: quorum reached, no resolutions.
+
+
+=== source note12 revision 1 observation obs-0e1d04ada7284d1204a8402eb1de6d8a473f96d0 (103 bytes) ===
+# Note 12
+
+Minutes of the committee meeting held on the first Tuesday: quorum reached, no resolutions.
+
+
+=== source note17 revision 1 observation obs-1501e219145dcac182c2aeebf8ef3f26fd2b60b5 (104 bytes) ===
+# Note 17
+
+Minutes of the committee meeting held on the second Tuesday: quorum reached, no resolutions.
+
+
+=== source note01 revision 1 observation obs-1f3afa064727a54ba3d05599cfb678dea051e8fe (103 bytes) ===
+# Note 1
+
+Minutes of the committee meeting held on the second Tuesday: quorum reached, no resolutions.
+
+
+=== source note11 revision 1 observation obs-253dcdfa1024f0387cb3ef9146e5ce39cfe2358a (104 bytes) ===
+# Note 11
+
+Minutes of the committee meeting held on the fourth Tuesday: quorum reached, no resolutions.
+
+
+=== source note07 revision 1 observation obs-29cc7a441e8c48b312259766cc85adeca357abb8 (103 bytes) ===
+# Note 7
+
+Minutes of the committee meeting held on the fourth Tuesday: quorum reached, no resolutions.
+
+
+=== source note33 revision 1 observation obs-2c192736d9ee2b9d70b03cb3e6803edba03bc093 (104 bytes) ===
+# Note 33
+
+Minutes of the committee meeting held on the second Tuesday: quorum reached, no resolutions.
+
+
+=== source note34 revision 1 observation obs-2d39b8f08f2b3247fe57e15910dd632291c36447 (103 bytes) ===
+# Note 34
+
+Minutes of the committee meeting held on the third Tuesday: quorum reached, no resolutions.
+
+
+=== source note16 revision 1 observation obs-301a7362a6416c7114bb1080b40772aee75d9dca (103 bytes) ===
+# Note 16
+
+Minutes of the committee meeting held on the first Tuesday: quorum reached, no resolutions.
+
+
+=== source note31 revision 1 observation obs-3711f4adf02f25834b6231cd51cbf589da2e130d (104 bytes) ===
+# Note 31
+
+Minutes of the committee meeting held on the fourth Tuesday: quorum reached, no resolutions.
+
+
+=== source note29 revision 1 observation obs-3f47bcdd93f288fcc053e746cf2c54e6350fe13b (104 bytes) ===
+# Note 29
+
+Minutes of the committee meeting held on the second Tuesday: quorum reached, no resolutions.
+
+
+=== source note14 revision 1 observation obs-4328a7f559a8869440cef13168773c152ae23a2a (103 bytes) ===
+# Note 14
+
+Minutes of the committee meeting held on the third Tuesday: quorum reached, no resolutions.
+
+
+=== source note23 revision 1 observation obs-47542d8f3541321a450861bf77bfea99590f9dea (104 bytes) ===
+# Note 23
+
+Minutes of the committee meeting held on the fourth Tuesday: quorum reached, no resolutions.
+
+
+=== source note28 revision 1 observation obs-49a940583b2c8c0dbd8a0201d0874d03f8e1163e (103 bytes) ===
+# Note 28
+
+Minutes of the committee meeting held on the first Tuesday: quorum reached, no resolutions.
+
+
+=== source note32 revision 1 observation obs-53d616e00398dd830dc77762e11aa5f3d2482bea (103 bytes) ===
+# Note 32
+
+Minutes of the committee meeting held on the first Tuesday: quorum reached, no resolutions.
+
+
+=== source note27 revision 1 observation obs-540e45576af55697eee8ad0b59a3071ca39fcd0b (104 bytes) ===
+# Note 27
+
+Minutes of the committee meeting held on the fourth Tuesday: quorum reached, no resolutions.
+
+
+=== source note06 revision 1 observation obs-57fad5b30aa123d5676e6a410346b35060b351f9 (102 bytes) ===
+# Note 6
+
+Minutes of the committee meeting held on the third Tuesday: quorum reached, no resolutions.
+
+
+=== source note21 revision 1 observation obs-6614366985697ed499b9b41337677e14caa41e42 (104 bytes) ===
+# Note 21
+
+Minutes of the committee meeting held on the second Tuesday: quorum reached, no resolutions.
+
+
+=== source note19 revision 1 observation obs-70eb365d4d1c36a4b78935cbfab9a216ff820f16 (104 bytes) ===
+# Note 19
+
+Minutes of the committee meeting held on the fourth Tuesday: quorum reached, no resolutions.
+
+
+=== source note05 revision 1 observation obs-7169212b87caf97d0b2096d1ad948e033479ab8a (103 bytes) ===
+# Note 5
+
+Minutes of the committee meeting held on the second Tuesday: quorum reached, no resolutions.
+
+
+=== source note22 revision 1 observation obs-7a8dc8faf630fe07ee4f51241ae5d17257a3551c (103 bytes) ===
+# Note 22
+
+Minutes of the committee meeting held on the third Tuesday: quorum reached, no resolutions.
+
+
+=== source note09 revision 1 observation obs-809828c9f1f91bc3e91012a2ebd05361bbb3e358 (103 bytes) ===
+# Note 9
+
+Minutes of the committee meeting held on the second Tuesday: quorum reached, no resolutions.
+
+
+=== source note04 revision 1 observation obs-829d506e37fb5c229623b0440ded5f3b737d0c99 (102 bytes) ===
+# Note 4
+
+Minutes of the committee meeting held on the first Tuesday: quorum reached, no resolutions.
+
+
+=== source note13 revision 1 observation obs-974b3ce26d6624f7a58c3584eb80c056f53af776 (104 bytes) ===
+# Note 13
+
+Minutes of the committee meeting held on the second Tuesday: quorum reached, no resolutions.
+
+
+=== source note30 revision 1 observation obs-9b9fa74aaa8889930bcbb3d413ff5aa9de8e1034 (103 bytes) ===
+# Note 30
+
+Minutes of the committee meeting held on the third Tuesday: quorum reached, no resolutions.
+
+
+=== source note20 revision 1 observation obs-c6f4e05fba8f6f4d2cffce5afe1ffd14da94d85a (103 bytes) ===
+# Note 20
+
+Minutes of the committee meeting held on the first Tuesday: quorum reached, no resolutions.
+
+
+=== source note25 revision 1 observation obs-cbdba51fa29c405a9317a29d3ac8fda4e250e922 (104 bytes) ===
+# Note 25
+
+Minutes of the committee meeting held on the second Tuesday: quorum reached, no resolutions.
+
+
+=== source note35 revision 1 observation obs-d080a76c5723125ef16f8f2f4444bdaa0125cfcd (104 bytes) ===
+# Note 35
+
+Minutes of the committee meeting held on the fourth Tuesday: quorum reached, no resolutions.
+
+
+=== source note24 revision 1 observation obs-d218b781371ab73d42096d59d5695edc815eb163 (103 bytes) ===
+# Note 24
+
+Minutes of the committee meeting held on the first Tuesday: quorum reached, no resolutions.
+
+
+Observation obs-c0f4113556ec8ade96d28c0dafc6e466366511ab is not available: superseded
+Observation obs-dee65870e6b25934e341f8f37a731cce2980a5fd is not available: superseded
+Observation obs-e7d9fc4f7a6274f460716aa4a7641901c7d39c9c is not available: budget
+Observation obs-e824129c216c8a9a291115e99f8f2efa5370b85f is not available: budget
+Observation obs-eaabc6cca5581371c29595a37766a676e2720733 is not available: budget
+Observation obs-eae8137823bc87fa4633e05ed6eacbdf304922f5 is not available: budget
+Observation obs-f2adc0fd1cbe46cca5675073ec964596f5b00bd8 is not available: budget
+Observation obs-f82770fced3b86470e7b61f339703bb811bbd2fd is not available: budget
+
+Previous attempt failed verification (round 2). Diagnostics:
+--- claims ---
+{"check_id": "claims", "evidence": {"claims": [{"cited_from_expected_source": true, "claim": "loan table", "expected_source_retrieved": true, "path": "doc/summary.md", "present": true}], "forbidden_present": [{"path": "doc/summary.md", "present": ["twenty-one days"]}]}, "node_id": "review", "outcome": "failed"}
+
+
+Every statement you add must be followed by a citation marker of the form
+[[cite:<observation id> "exact quote from that source"]] where the quote is copied verbatim from the cited source.
+Respond with exactly one JSON object and nothing else:
+{"operations": [{"kind": "modify", "path": "<target path>", "expected_sha256": "<sha256 listed above>", "content": "<complete new file content>"}],
+ "rationale": "<short explanation>"}
+Rules: kind is one of create, modify, delete. For modify/delete expected_sha256 must equal the listed digest. For create expected_sha256 is null.
+Do not touch sources or oracle files. Do not claim completion; the independent checks decide.
