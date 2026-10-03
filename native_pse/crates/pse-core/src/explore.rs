@@ -29,6 +29,7 @@
 //! the best point it returns is a configuration the engine could
 //! actually adopt to maximise its current coherence with the data.
 
+use pse_fmath::Fmath;
 use pse_navigator::{Navigator, NavigatorConfig, SpectralSignature};
 use pse_types::{Config, DataHelix, TubusCoord};
 use serde::{Deserialize, Serialize};
@@ -118,8 +119,8 @@ pub fn resonance_landscape_explorer(
         // Decompose into the three E.2 factors so the navigator's
         // resonance metric (psi × rho × omega) reflects the
         // physically-meaningful structure of the landscape.
-        let phase_lock = 0.5 * (1.0 + (2.0 * (probe.phi - phi_alpha)).cos());
-        let amp_match = (-cfg.eta_r * (probe.r - alpha.r).powi(2)).exp();
+        let phase_lock = 0.5 * (1.0 + (2.0 * (probe.phi - phi_alpha)).dcos());
+        let amp_match = (-cfg.eta_r * (probe.r - alpha.r).powi(2)).dexp();
 
         SpectralSignature::new(
             m.kappa.clamp(0.0, 1.0),

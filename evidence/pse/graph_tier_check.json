@@ -1,10 +1,18 @@
 {
   "all_sound": true,
-  "corpus_digest": "b7998a9470c864683719845c51b0358aa5bd0608203481046ae82661c75ee986",
+  "corpus_digest": "e07c033d31eb49282fdb84e9187ae67bdb3a96f6e64e69adb735b10137623df6",
   "families": {
+    "graph-detections": [
+      "gd-fixture",
+      "gd-none"
+    ],
     "graph-mass": [
       "gm-mixed",
       "gm-ring"
+    ],
+    "graph-readout": [
+      "gr-fixture",
+      "gr-ring"
     ],
     "graph-snapshot": [
       "gs-mixed",
@@ -163,6 +171,139 @@
           "problems": [],
           "verified": true
         },
+        "wrong_kairos": {
+          "expected_verified": false,
+          "problems": [
+            "gate verdict differs from the reference at tick 1"
+          ],
+          "verified": false
+        },
+        "wrong_metric": {
+          "expected_verified": false,
+          "problems": [
+            "maximum metric deviation 0.0010000000000000009 exceeds tolerance 1e-06"
+          ],
+          "verified": false
+        },
+        "wrong_vertices": {
+          "expected_verified": false,
+          "problems": [
+            "step structure differs from the reference at tick 1"
+          ],
+          "verified": false
+        }
+      },
+      "digest": "122bfeb756f41fe03576a6622c6ff265a1161ccd117dfbe71577e929f32452dc",
+      "family": "graph-readout",
+      "sound": true,
+      "task_id": "gr-fixture",
+      "tier": "graph"
+    },
+    {
+      "controls": {
+        "correct": {
+          "expected_verified": true,
+          "problems": [],
+          "verified": true
+        },
+        "wrong_kairos": {
+          "expected_verified": false,
+          "problems": [
+            "gate verdict differs from the reference at tick 1"
+          ],
+          "verified": false
+        },
+        "wrong_metric": {
+          "expected_verified": false,
+          "problems": [
+            "maximum metric deviation 0.0010000000000000009 exceeds tolerance 1e-06"
+          ],
+          "verified": false
+        },
+        "wrong_vertices": {
+          "expected_verified": false,
+          "problems": [
+            "step structure differs from the reference at tick 1"
+          ],
+          "verified": false
+        }
+      },
+      "digest": "02fb280d18dcc200907a549e4179a2018372c0ea1fb2840e111909535f7a96de",
+      "family": "graph-readout",
+      "sound": true,
+      "task_id": "gr-ring",
+      "tier": "graph"
+    },
+    {
+      "controls": {
+        "correct": {
+          "expected_verified": true,
+          "problems": [],
+          "verified": true
+        },
+        "missing_detection": {
+          "expected_verified": false,
+          "problems": [
+            "detections differ from the reference"
+          ],
+          "verified": false
+        },
+        "spurious_detection": {
+          "expected_verified": false,
+          "problems": [
+            "detections differ from the reference"
+          ],
+          "verified": false
+        },
+        "wrong_path": {
+          "expected_verified": false,
+          "problems": [
+            "output out/detections.json is absent"
+          ],
+          "verified": false
+        }
+      },
+      "digest": "48073178fd6e95c8ff9959ea87de14c4d72cf7f16683e3f1277938822b724d97",
+      "family": "graph-detections",
+      "sound": true,
+      "task_id": "gd-fixture",
+      "tier": "graph"
+    },
+    {
+      "controls": {
+        "correct": {
+          "expected_verified": true,
+          "problems": [],
+          "verified": true
+        },
+        "spurious_detection": {
+          "expected_verified": false,
+          "problems": [
+            "detections differ from the reference"
+          ],
+          "verified": false
+        },
+        "wrong_path": {
+          "expected_verified": false,
+          "problems": [
+            "output out/detections.json is absent"
+          ],
+          "verified": false
+        }
+      },
+      "digest": "fcb504e10e212956115434fb3056a079905c40e8a57e3cd07ff6641cd6791ce5",
+      "family": "graph-detections",
+      "sound": true,
+      "task_id": "gd-none",
+      "tier": "graph"
+    },
+    {
+      "controls": {
+        "correct": {
+          "expected_verified": true,
+          "problems": [],
+          "verified": true
+        },
         "uncertified": {
           "expected_verified": false,
           "problems": [
@@ -215,7 +356,7 @@
   ],
   "tiers": {
     "document": 9,
-    "graph": 6,
+    "graph": 10,
     "hard": 9,
     "numerical": 9,
     "standard": 15

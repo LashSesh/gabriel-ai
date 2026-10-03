@@ -23,6 +23,7 @@ pub use topology_ops::{
     ComposeConfig, ComposeError, QueryConfig,
 };
 
+use pse_fmath::Fmath;
 use pse_cascade::{
     batch_data_helix, build_metatron_phase_ladder, build_phase_ladder, helix_pair, mandorla,
     mandorla_real, restore_neutrality,
@@ -171,6 +172,10 @@ pub struct GlobalState {
     /// Populated unconditionally — readable whether the gate passed or not.
     /// Used for diagnostics, calibration, and adaptive thresholds.
     pub last_gate: Option<GateSnapshot>,
+    /// The complete metric set of the last macro-step, set unconditionally right after the
+    /// metrics are computed (before any early return), so a readout can observe every step
+    /// (Gabriel ADR-19). Never read by the engine itself.
+    pub last_metrics: Option<MetricSet>,
     /// Optional adaptive Kairos calibrator. When `Some`, thresholds are
     /// derived from the rolling history of `GateSnapshot`s instead of
     /// `Config::thresholds`. See [`adaptive::AdaptiveCalibrator`].
@@ -248,6 +253,7 @@ impl GlobalState {
             last_constraint_count: 0,
             last_gate_passed: false,
             last_gate: None,
+            last_metrics: None,
             adaptive,
             scale_state: pse_scale::MultiScaleState::default(),
             pattern_hits: 0,
@@ -377,8 +383,8 @@ pub fn compute_all_metrics(
     // at least half the carrier's intrinsic coherence", which is the
     // physically sensible reading.
     let carrier_pair_dphi = std::f64::consts::PI; // helix-pair is antiphase by construction
-    let kappa_carrier_max = (-config.carrier.lambda * carrier_pair_dphi).exp()
-        * (-config.carrier.mu_r * mandorla.r * mandorla.r).exp();
+    let kappa_carrier_max = (-config.carrier.lambda * carrier_pair_dphi).dexp()
+        * (-config.carrier.mu_r * mandorla.r * mandorla.r).dexp();
     let q = if kappa_carrier_max > 1e-9 {
         (mandorla.kappa / kappa_carrier_max).clamp(0.0, 1.0)
     } else {
@@ -602,6 +608,7 @@ fn macro_step_impl<const SHARE_SPECTRUM: bool>(
     );
     // Save current embeddings for next tick's d-metric computation
     state.prev_embeddings = state.graph.embedding.clone();
+    state.last_metrics = Some(metrics.clone());
 
     // Check friction/shock -> migration
     if metrics.f_friction >= config.thresholds.f_friction
@@ -1241,7 +1248,7 @@ mod tests {
             context: Default::default(),
             digest: pse_types::content_address_raw(&payload),
             schema_version: "1.0.0".into(),
-            phase_hint: Some(std::f64::consts::FRAC_PI_2),
+            phase_hint: Some(std::f64::consts::FRAC_PI_2), amplitude_hint: None,
         };
         // Inline-test the carrier selector by computing what the engine
         // would pick. Adaptive selection runs in macro_step, but to

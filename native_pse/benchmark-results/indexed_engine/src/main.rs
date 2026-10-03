@@ -22,7 +22,7 @@ impl ObservationAdapter for SensorAdapter {
             source_id: format!("sensor-{}", value["entity"].as_u64().unwrap()),
             payload: raw.to_vec(), digest: content_address_raw(raw), context: ctx.clone(),
             provenance: ProvenanceEnvelope::default(), schema_version: "1".into(),
-            phase_hint: Some(value["phase"].as_f64().unwrap()),
+            phase_hint: Some(value["phase"].as_f64().unwrap()), amplitude_hint: None,
         })
     }
 }

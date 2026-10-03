@@ -6,6 +6,7 @@
 //! portable API does not guarantee trigonometric repeatability or NaN payloads.
 //! The reference function remains the default and the executable oracle.
 
+use pse_fmath::Fmath;
 use crate::{ctqw_propagate_reference, CtqwResult, SpectralDecomposition, TopologyConfig};
 
 // Sufficient bounds, deliberately broader than ordinary graph spectra and
@@ -101,8 +102,8 @@ pub fn ctqw_propagate_hoisted(spectral: &SpectralDecomposition, config: &Topolog
                 if !phases_ready {
                     for m in 0..k {
                         let phase = -spectral.eigenvalues[m] * t;
-                        cos_phase[m] = phase.cos();
-                        sin_phase[m] = phase.sin();
+                        cos_phase[m] = phase.dcos();
+                        sin_phase[m] = phase.dsin();
                     }
                     phases_ready = true;
                 }
@@ -140,8 +141,8 @@ pub fn ctqw_propagate_hoisted(spectral: &SpectralDecomposition, config: &Topolog
     // The last scan time need not have identical bits to t_max. Recompute.
     for m in 0..k {
         let phase = -spectral.eigenvalues[m] * t_max;
-        cos_phase[m] = phase.cos();
-        sin_phase[m] = phase.sin();
+        cos_phase[m] = phase.dcos();
+        sin_phase[m] = phase.dsin();
     }
     let mut transfer_probabilities = vec![vec![0.0f64; n]; n];
     for j in 0..n {

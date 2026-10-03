@@ -2,11 +2,33 @@
 #[path = "../benches/engine.rs"]
 mod harness;
 
+/// Historical fixture, generated on Windows with that platform's C libm. Its 78 engine-state
+/// digests include quantities computed through transcendental functions (data helix, phase
+/// ladder, gate metrics), whose last-bit results differ between C libraries; one unit in the
+/// last place of `sin` alone changes 73 of the 78 digests (Gabriel determinism study,
+/// evidence/pse/determinism). The fixture is retained unchanged and compared only on request:
+/// `cargo test --release -- --ignored full_state_matches_original_golden_fixture`.
 #[test]
+#[ignore = "platform-bound historical fixture (Windows C libm); see the platform-independent fixture below"]
 fn full_state_matches_original_golden_fixture() {
     let expected: serde_json::Value =
         serde_json::from_str(include_str!("fixtures/original.json")).unwrap();
     assert_eq!(harness::golden(), expected);
+}
+
+/// Platform-independent fixture: the same cases under the pure-Rust libm arithmetic of
+/// `pse-fmath` (the default build), which depends on the locked crates only and not on the
+/// host's C library. Regenerate with `cargo run --release --example golden_fixture` after an
+/// intentional model change and record the reason.
+#[test]
+#[cfg_attr(feature = "platform-libm", ignore = "the platform-libm feature reproduces the host C library, not the fixture")]
+fn full_state_matches_platform_independent_golden_fixture() {
+    let expected: serde_json::Value =
+        serde_json::from_str(include_str!("fixtures/pure_libm.json")).unwrap();
+    assert_eq!(pse_fmath::ARITHMETIC_PROFILE, "pure-rust-libm");
+    let actual = harness::golden();
+    assert_eq!(actual["engine"], expected["engine"]);
+    assert_eq!(actual["graphs"], expected["graphs"]);
 }
 
 #[test]

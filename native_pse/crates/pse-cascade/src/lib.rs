@@ -11,6 +11,7 @@
 // isls-consensus: Consensus, PoR gate, proof engine (Layer L3)
 // C5 — depends on pse-types, pse-graph
 
+use pse_fmath::Fmath;
 use pse_types::{
     ConsensusConfig, ConsensusResult, GateSnapshot, NormalizationConfig, PoRTrace, ThresholdConfig,
 };
@@ -33,7 +34,7 @@ pub fn norm_saturate(u: f64, mu: f64) -> f64 {
 
 /// Exponential normalization: N_exp(d; lambda) = exp(-lambda * d) (Def 10.2)
 pub fn norm_exp(d: f64, lambda: f64) -> f64 {
-    (-lambda * d).exp()
+    (-lambda * d).dexp()
 }
 
 // ─── Metric Set ───────────────────────────────────────────────────────────────
@@ -353,7 +354,7 @@ impl CascadeOperator for SWOperator {
     fn apply(&self, p: &CrystalPrecursor, ctx: &mut CascadeContext) -> CrystalPrecursor {
         let pi = std::f64::consts::PI;
         let test_score = match &ctx.data {
-            Some(d) => (2.0 * (d.phi - ctx.carrier.helix_a.phi)).cos().abs(),
+            Some(d) => (2.0 * (d.phi - ctx.carrier.helix_a.phi)).dcos().abs(),
             None => 0.5,
         };
 
@@ -562,7 +563,7 @@ pub fn helix_pair(tau: f64, phi: f64, r: f64) -> (TubusCoord, TubusCoord) {
 pub fn mandorla(alpha: &TubusCoord, beta: &TubusCoord, lambda: f64, mu_r: f64) -> MandorlaState {
     let raw_diff = (alpha.phi - beta.phi).abs();
     let delta_phi = raw_diff.min(2.0 * std::f64::consts::PI - raw_diff);
-    let kappa = (-lambda * delta_phi).exp() * (-mu_r * alpha.r * alpha.r).exp();
+    let kappa = (-lambda * delta_phi).dexp() * (-mu_r * alpha.r * alpha.r).dexp();
     MandorlaState {
         tau: alpha.tau,
         r: alpha.r,
@@ -604,8 +605,8 @@ pub fn mandorla_real(
     eta_r: f64,
 ) -> MandorlaState {
     let mut state = mandorla(alpha, beta, lambda, mu_r);
-    let phase_lock = 0.5 * (1.0 + (2.0 * (data.phi - alpha.phi)).cos());
-    let amp_match = (-eta_r * (data.r - alpha.r).powi(2)).exp();
+    let phase_lock = 0.5 * (1.0 + (2.0 * (data.phi - alpha.phi)).dcos());
+    let amp_match = (-eta_r * (data.r - alpha.r).powi(2)).dexp();
     state.kappa *= phase_lock * amp_match;
     state
 }
@@ -744,7 +745,7 @@ pub fn shannon_entropy_norm(bytes: &[u8]) -> f64 {
     for c in counts.iter() {
         if *c > 0 {
             let p = (*c as f64) / n;
-            h -= p * p.log2();
+            h -= p * p.dlog2();
         }
     }
     (h / 8.0).clamp(0.0, 1.0)
@@ -770,11 +771,18 @@ pub fn observation_phase(obs: &Observation) -> f64 {
 /// intrinsic engine time. `tau` is provided externally so the engine
 /// stays in control of the time scale (the carrier and data helices
 /// must share τ-units for the interference to make sense).
+pub fn observation_amplitude(obs: &Observation) -> f64 {
+    match obs.amplitude_hint {
+        Some(r) => r.clamp(0.0, 1.0),
+        None => shannon_entropy_norm(&obs.payload),
+    }
+}
+
 pub fn observation_data_helix(obs: &Observation, intrinsic_tau: f64) -> DataHelix {
     DataHelix {
         tau: intrinsic_tau,
         phi: observation_phase(obs),
-        r: shannon_entropy_norm(&obs.payload),
+        r: observation_amplitude(obs),
     }
 }
 
@@ -804,11 +812,11 @@ pub fn batch_data_helix(observations: &[Observation], intrinsic_tau: f64) -> Dat
     let mut sum_r = 0.0_f64;
     for obs in observations {
         let phi = observation_phase(obs);
-        sum_sin += phi.sin();
-        sum_cos += phi.cos();
-        sum_r += shannon_entropy_norm(&obs.payload);
+        sum_sin += phi.dsin();
+        sum_cos += phi.dcos();
+        sum_r += observation_amplitude(obs);
     }
-    let mean_phi_raw = (sum_sin / n).atan2(sum_cos / n);
+    let mean_phi_raw = (sum_sin / n).datan2(sum_cos / n);
     let mean_phi = if mean_phi_raw < 0.0 {
         mean_phi_raw + std::f64::consts::TAU
     } else {
@@ -864,7 +872,7 @@ mod tests {
         let (a, b) = helix_pair(0.0, 0.0, 0.0); // r=0 so radial part = 1
         let m = mandorla(&a, &b, 1.0, 1.0);
         // kappa = exp(-1 * pi) * exp(-1 * 0) = exp(-pi)
-        let expected = (-std::f64::consts::PI).exp();
+        let expected = (-std::f64::consts::PI).dexp();
         assert!((m.kappa - expected).abs() < 1e-10);
     }
 
@@ -955,8 +963,8 @@ mod tests {
         let mut sx = 0.0_f64;
         let mut sy = 0.0_f64;
         for c in ladder.iter().skip(1) {
-            sx += c.helix_a.phi.cos();
-            sy += c.helix_a.phi.sin();
+            sx += c.helix_a.phi.dcos();
+            sy += c.helix_a.phi.dsin();
         }
         assert!(sx.abs() < 1e-9, "Σ cos φ = {} (expected ~0)", sx);
         assert!(sy.abs() < 1e-9, "Σ sin φ = {} (expected ~0)", sy);
@@ -1003,7 +1011,7 @@ mod tests {
             context: MeasurementContext::default(),
             digest,
             schema_version: "1.0.0".into(),
-            phase_hint: None,
+            phase_hint: None, amplitude_hint: None,
         }
     }
 
@@ -1174,7 +1182,7 @@ mod tests {
         let real = mandorla_real(&a, &b, &data, 0.5, 0.5, 1.0);
         assert!(real.kappa < carrier_only.kappa);
         // exp(-1.0 · 1²) = exp(-1) ≈ 0.3679
-        let expected = carrier_only.kappa * (-1.0f64).exp();
+        let expected = carrier_only.kappa * (-1.0f64).dexp();
         assert!((real.kappa - expected).abs() < 1e-12);
     }
 
@@ -1293,7 +1301,7 @@ mod tests {
         let m_carrier_only = mandorla(&a, &b, 0.5, 0.5);
         // Aligned data: phase_lock factor = 1, so κ_real should
         // equal κ_carrier_only modulo amp_match.
-        let amp_match = (-(h.r - a.r).powi(2)).exp();
+        let amp_match = (-(h.r - a.r).powi(2)).dexp();
         let expected = m_carrier_only.kappa * amp_match;
         assert!(
             (m_real.kappa - expected).abs() < 1e-9,

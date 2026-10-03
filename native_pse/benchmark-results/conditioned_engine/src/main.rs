@@ -20,7 +20,7 @@ impl ObservationAdapter for SensorAdapter {
             timestamp: value["tick"].as_u64().unwrap() as f64,
             source_id: format!("sensor-{}", value["entity"].as_u64().unwrap()),
             payload: raw.to_vec(), digest: content_address_raw(raw), context: context.clone(),
-            provenance: ProvenanceEnvelope::default(), schema_version: "1".into(), phase_hint: Some(0.0),
+            provenance: ProvenanceEnvelope::default(), schema_version: "1".into(), phase_hint: Some(0.0), amplitude_hint: None,
         })
     }
 }

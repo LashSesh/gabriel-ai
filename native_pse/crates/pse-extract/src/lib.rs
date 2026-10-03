@@ -7,6 +7,7 @@
 // C4 — depends on pse-types, pse-graph
 // Inv I5: read-only on PersistentGraph (takes &PersistentGraph, immutable ref)
 
+use pse_fmath::Fmath;
 use pse_graph::PersistentGraph;
 use pse_types::{
     content_address, ConstraintCandidate, ConstraintProgram, ConstraintTemplate, ExtractionConfig,
@@ -175,7 +176,7 @@ impl Operator for SpectralOp {
         let target = params.get("target_freq").copied().unwrap_or(1.0);
         let bw = params.get("bandwidth").copied().unwrap_or(1.0);
         let diff = (input.omega - target).abs();
-        (-diff / bw).exp()
+        (-diff / bw).dexp()
     }
 }
 
@@ -235,7 +236,7 @@ impl Operator for ContractionOp {
     fn evaluate(&self, input: &FiveDState, params: &BTreeMap<String, f64>) -> f64 {
         let radius = params.get("radius").copied().unwrap_or(1.0);
         let norm = input.norm_sq().sqrt();
-        (-norm / radius).exp()
+        (-norm / radius).dexp()
     }
 }
 
@@ -281,7 +282,7 @@ pub fn region_entropy(region: &[(VertexId, FiveDState)]) -> f64 {
     if v < 1e-15 {
         0.0
     } else {
-        0.5 * (2.0 * std::f64::consts::PI * std::f64::consts::E * v).ln()
+        0.5 * (2.0 * std::f64::consts::PI * std::f64::consts::E * v).dln()
     }
 }
 

@@ -1,0 +1,17 @@
+[package]
+name = "pse-fmath"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Platform-independent transcendental arithmetic for the Post-Symbolic Engine (pure-Rust libm by default)"
+
+[dependencies]
+libm = { workspace = true }
+
+[features]
+# Route the transcendental functions through the platform's C libm instead (comparison experiments only).
+platform-libm = []
+# Determinism study only: sin() moved by one unit in the last place.
+study-perturb-sin = []

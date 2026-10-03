@@ -1,0 +1,340 @@
+{
+ "decision": "every transcendental call of the engine goes through pse-fmath (pure-Rust libm by default; feature platform-libm reproduces the host C library byte for byte), so results depend on the locked crates and the Rust toolchain only; tests/fixtures/pure_libm.json is the platform-independent golden fixture (its 16 seeded graph histories are identical to the Windows fixture, as they involve no transcendental function); the Windows fixture is retained unchanged and compared only on request (ignored test)",
+ "executables": {
+  "engine_observer": "7301928ba5a181fd4c47b7bfec18202e9704f2df8942a66ce0a89ff36289509f",
+  "engine_snapshot": "3c75cb17bfc88b80083b2269ee5ebd828e1fb2e1a1ce946c939e83ff7659881d",
+  "golden_fixture": "771f1f1591f9fa58c220497df7dea0db0371e8fb2420de3b05c3aa415f275d5b",
+  "golden_trace": "aeb5e48b88feacd83dc962451b68aa6f6a1e662825e0ff072f3b90f720b7110d"
+ },
+ "explanation": "the state digest covers the data helix (circular mean of phases through sin, cos and atan2), the carrier phase ladder (sin, cos), the gate metrics q, k, g (exp, cos) and, through the adaptive calibrator's rolling history and the archive, everything derived from them; C libraries round these functions differently in the last bit, and the digest is maximally sensitive to that bit (one ulp in sin changes 73 of 78 digests and 6 crystal digests), so platform arithmetic is a sufficient explanation of the historical mismatch; the fixture does not record component values, so the specific Windows library results cannot be reproduced here",
+ "gate_metric_differences_glibc_vs_pure_rust_libm": "q, k and g differ by one unit in the last place at the differing ticks (for example 0.7726257894813585 against 0.7726257894813584); every other gate metric is bit-identical",
+ "glibc_vs_pure_rust_libm": {
+  "cases": {
+   "adaptive/8": {
+    "components": [
+     "adaptive",
+     "gate",
+     "helix",
+     "phase"
+    ],
+    "differing_ticks": 18,
+    "first_tick": 7,
+    "ticks": 24
+   },
+   "cooldown/8": {
+    "components": [
+     "archive",
+     "consensus",
+     "gate",
+     "helix"
+    ],
+    "differing_ticks": 3,
+    "first_tick": 7,
+    "ticks": 9
+   },
+   "gate/1": {
+    "components": [
+     "gate",
+     "helix",
+     "phase"
+    ],
+    "differing_ticks": 4,
+    "first_tick": 2,
+    "ticks": 12
+   },
+   "gate/64": {
+    "components": [
+     "gate",
+     "helix",
+     "phase"
+    ],
+    "differing_ticks": 2,
+    "first_tick": 1,
+    "ticks": 3
+   },
+   "gate/65": {
+    "components": [
+     "helix"
+    ],
+    "differing_ticks": 1,
+    "first_tick": 2,
+    "ticks": 3
+   },
+   "gate/8": {
+    "components": [
+     "gate",
+     "helix",
+     "phase"
+    ],
+    "differing_ticks": 1,
+    "first_tick": 7,
+    "ticks": 12
+   },
+   "metatron/8": {
+    "components": [
+     "phase"
+    ],
+    "differing_ticks": 3,
+    "first_tick": 1,
+    "ticks": 3
+   }
+  },
+  "differing_crystal_digests": 1,
+  "differing_state_digests": 32,
+  "total": 78
+ },
+ "libm_crate": "libm 0.2.16 (Cargo.lock)",
+ "method": [
+  "golden trace with a digest per state component per tick (native_pse/examples/golden_trace.rs)",
+  "the same build under the host C libm (feature platform-libm) and under the pure-Rust libm crate (default)",
+  "a study build in which sin() is moved by one unit in the last place (feature study-perturb-sin)",
+  "two processes of the same build compared byte for byte; the inherited multi-thread replay test"
+ ],
+ "not_established": [
+  "identity of the pure-Rust-libm results on a Windows or macOS host (no such host here; the property holds by construction, not by an executed cross-platform check)",
+  "the Windows C library's results at the differing ticks (not recorded by the fixture)"
+ ],
+ "observer_under_pure_rust_libm": {
+  "arithmetic_profile": "pure-rust-libm",
+  "backends": {
+   "auto_full": {
+    "decisions_identical": true,
+    "engine_equal": true,
+    "masses_bit_identical": true,
+    "max_mass_deviation_abs": 0.0,
+    "max_mass_deviation_ulps": 0,
+    "region_backend": "state_readout",
+    "snapshot_identity_equal": true,
+    "values_compared": 16
+   },
+   "auto_region": {
+    "decisions_identical": true,
+    "engine_equal": true,
+    "masses_bit_identical": true,
+    "max_mass_deviation_abs": 0.0,
+    "max_mass_deviation_ulps": 0,
+    "region_backend": "complete_graph_region",
+    "snapshot_identity_equal": true,
+    "values_compared": 16
+   },
+   "spectral_full": {
+    "decisions_identical": true,
+    "engine_equal": true,
+    "masses_bit_identical": false,
+    "max_mass_deviation_abs": 1.1102230246251565e-16,
+    "max_mass_deviation_ulps": 1,
+    "region_backend": "state_readout",
+    "snapshot_identity_equal": true,
+    "values_compared": 16
+   }
+  },
+  "executable_sha256": "7301928ba5a181fd4c47b7bfec18202e9704f2df8942a66ce0a89ff36289509f",
+  "job": "demo_query(13, 16) over one batch of entities 0..12, per backend (the retained functional check's job)",
+  "schema": "gabriel.evidence.pse-observer-arithmetic/1"
+ },
+ "one_ulp_in_sin_vs_pure_rust_libm": {
+  "cases": {
+   "adaptive/8": {
+    "components": [
+     "adaptive",
+     "gate",
+     "helix",
+     "phase"
+    ],
+    "differing_ticks": 24,
+    "first_tick": 1,
+    "ticks": 24
+   },
+   "commit/3": {
+    "components": [
+     "archive",
+     "consensus",
+     "gate",
+     "helix",
+     "scale"
+    ],
+    "differing_ticks": 3,
+    "first_tick": 1,
+    "ticks": 3
+   },
+   "commit/8": {
+    "components": [
+     "archive",
+     "consensus",
+     "gate",
+     "helix",
+     "scale"
+    ],
+    "differing_ticks": 6,
+    "first_tick": 1,
+    "ticks": 6
+   },
+   "cooldown/8": {
+    "components": [
+     "archive",
+     "consensus",
+     "gate",
+     "helix"
+    ],
+    "differing_ticks": 9,
+    "first_tick": 1,
+    "ticks": 9
+   },
+   "falsify/8": {
+    "components": [
+     "archive",
+     "consensus",
+     "gate",
+     "helix"
+    ],
+    "differing_ticks": 3,
+    "first_tick": 1,
+    "ticks": 3
+   },
+   "gate/1": {
+    "components": [
+     "gate",
+     "helix",
+     "phase"
+    ],
+    "differing_ticks": 11,
+    "first_tick": 1,
+    "ticks": 12
+   },
+   "gate/64": {
+    "components": [
+     "helix"
+    ],
+    "differing_ticks": 2,
+    "first_tick": 1,
+    "ticks": 3
+   },
+   "gate/65": {
+    "components": [
+     "helix"
+    ],
+    "differing_ticks": 2,
+    "first_tick": 1,
+    "ticks": 3
+   },
+   "gate/8": {
+    "components": [
+     "gate",
+     "helix",
+     "phase"
+    ],
+    "differing_ticks": 10,
+    "first_tick": 1,
+    "ticks": 12
+   },
+   "metatron/8": {
+    "components": [
+     "archive",
+     "consensus",
+     "gate",
+     "helix"
+    ],
+    "differing_ticks": 3,
+    "first_tick": 1,
+    "ticks": 3
+   }
+  },
+  "differing_crystal_digests": 6,
+  "differing_state_digests": 73,
+  "total": 78
+ },
+ "question": "why do 23 of 78 engine-state digests of the Windows-generated golden fixture differ on Linux, and is the full engine state deterministic",
+ "rust_workspace_tests": "cargo test --workspace --release --locked: every test passed; full_state_matches_original_golden_fixture ignored by declaration",
+ "same_platform_determinism": {
+  "fused_multiply_add": "f64::mul_add only (correctly rounded by IEEE 754 on every platform)",
+  "inherited_test": "real_commits_replay_and_parallel_instances_match_full_bytes (4 threads) passed",
+  "map_iteration": "every map in the engine state is a BTreeMap; petgraph indices are insertion ordered",
+  "parallel_reductions": "rayon is used only in the pse-metatron catalog and bit-graph tables (index-ordered results), not in state arithmetic",
+  "two_processes_identical_bytes": true
+ },
+ "schema": "gabriel.evidence.pse-determinism/1",
+ "toolchain": {
+  "cargo": "cargo 1.97.0 (c980f4866 2026-06-30)",
+  "rustc": "rustc 1.97.0 (2d8144b78 2026-07-07)"
+ },
+ "windows_fixture_vs_glibc": {
+  "cases": {
+   "adaptive/8": {
+    "components": [],
+    "differing_ticks": 18,
+    "first_tick": 7,
+    "ticks": 24
+   },
+   "cooldown/8": {
+    "components": [],
+    "differing_ticks": 3,
+    "first_tick": 7,
+    "ticks": 9
+   },
+   "gate/1": {
+    "components": [],
+    "differing_ticks": 1,
+    "first_tick": 7,
+    "ticks": 12
+   },
+   "gate/8": {
+    "components": [],
+    "differing_ticks": 1,
+    "first_tick": 7,
+    "ticks": 12
+   }
+  },
+  "differing_crystal_digests": 1,
+  "differing_state_digests": 23,
+  "total": 78
+ },
+ "windows_fixture_vs_pure_rust_libm": {
+  "cases": {
+   "adaptive/8": {
+    "components": [],
+    "differing_ticks": 11,
+    "first_tick": 7,
+    "ticks": 24
+   },
+   "cooldown/8": {
+    "components": [],
+    "differing_ticks": 1,
+    "first_tick": 7,
+    "ticks": 9
+   },
+   "gate/1": {
+    "components": [],
+    "differing_ticks": 4,
+    "first_tick": 2,
+    "ticks": 12
+   },
+   "gate/64": {
+    "components": [],
+    "differing_ticks": 2,
+    "first_tick": 1,
+    "ticks": 3
+   },
+   "gate/65": {
+    "components": [],
+    "differing_ticks": 1,
+    "first_tick": 2,
+    "ticks": 3
+   },
+   "gate/8": {
+    "components": [],
+    "differing_ticks": 1,
+    "first_tick": 7,
+    "ticks": 12
+   },
+   "metatron/8": {
+    "components": [],
+    "differing_ticks": 3,
+    "first_tick": 1,
+    "ticks": 3
+   }
+  },
+  "differing_crystal_digests": 0,
+  "differing_state_digests": 23,
+  "total": 78
+ }
+}

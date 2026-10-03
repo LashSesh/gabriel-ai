@@ -219,6 +219,13 @@ pub struct Observation {
     /// loadable without modification.
     #[serde(default)]
     pub phase_hint: Option<f64>,
+    /// Optional **declared amplitude** in `[0, 1]` for the data-helix radius (Gabriel ADR-19).
+    ///
+    /// When `Some(r)`, the data helix uses it (clamped to `[0, 1]`) instead of the normalized
+    /// Shannon entropy of the payload bytes, so a declared observation stream has a declared
+    /// amplitude rather than one derived from the byte statistics of its encoding.
+    #[serde(default)]
+    pub amplitude_hint: Option<f64>,
 }
 
 // ─── Constraint Types ─────────────────────────────────────────────────────────

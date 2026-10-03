@@ -4,6 +4,7 @@
 //! backend uses its two spectral subspaces; the general backend retains all
 //! eigenpairs. Neither backend normalizes input or output states.
 
+use pse_fmath::Fmath;
 use crate::SparseLaplacian;
 use nalgebra::{DMatrix, SymmetricEigen};
 pub use nalgebra::Complex;
@@ -245,7 +246,7 @@ fn phase(eigenvalue: f64, time: f64) -> Result<Complex<f64>, WalkError> {
     if !angle.is_finite() {
         return Err(WalkError::NumericalOverflow);
     }
-    let (sin, cos) = angle.sin_cos();
+    let (sin, cos) = angle.dsin_cos();
     if !sin.is_finite() || !cos.is_finite() {
         return Err(WalkError::NumericalOverflow);
     }

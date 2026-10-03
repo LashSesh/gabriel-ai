@@ -52,7 +52,7 @@ RETRY_CLASS = {"numerical.observe": "read_retry", "numerical.run_job": "reconcil
                "numerical.verify": "read_retry", "numerical.review": "read_retry", "model.generate": "target_idempotent_retry"}
 
 
-WORKER_FILES = ("result.json", "job.json", "worker.py", "native_worker.py", "bin/engine_observer", "bin/engine_snapshot")
+WORKER_FILES = ("result.json", "job.json", "worker.py", "native_worker.py") + tuple("bin/" + name for name in native_graph.BINARIES)
 CERTIFY_TIMEOUT_S = 120
 OPERATIONS = {**analytical.OPERATIONS, **native_graph.OPERATIONS}  # disjoint ids: stdlib worker and native graph worker
 
@@ -604,6 +604,31 @@ class ReferenceContractVerifier:
             got = output.get("statuses")
             ok = got == oracle["statuses"] and output.get("stage") == "certified"
             return ("passed" if ok else "failed"), dict(evidence, statuses=got, expected_statuses=oracle["statuses"], stage=output.get("stage"))
+        if "readout" in oracle:  # graph.state_readout: structure exact, carrier admissible, metrics within tolerance
+            got, expected = output.get("ticks"), oracle["readout"]
+            if output.get("kind") != "state_readout" or not isinstance(got, list) or len(got) != len(expected):
+                return "failed", dict(evidence, reason="readout kind or step count differs from the reference")
+            worst = 0.0
+            for item, ref in zip(got, expected):
+                if not isinstance(item, dict) or item.get("tick") != ref["tick"] or item.get("vertices") != ref["vertices"] or item.get("edges") != ref["edges"]:
+                    return "failed", dict(evidence, reason="step structure differs from the reference at tick %r" % (ref["tick"],))
+                if item.get("kairos") is not ref["kairos"]:
+                    return "failed", dict(evidence, reason="gate verdict differs from the reference at tick %r" % (ref["tick"],))
+                if not isinstance(item.get("carrier"), dict) or item["carrier"].get("index") not in ref["admissible_carriers"]:
+                    return "failed", dict(evidence, reason="active carrier is not admissible at tick %r" % (ref["tick"],))
+                try:
+                    worst = max(worst, max(abs(_binary64(item.get("metrics", {}).get(name)) - float(ref["metrics"][name])) for name in ref["metrics"]))
+                except (ValueError, TypeError, AttributeError):
+                    return "failed", dict(evidence, reason="metrics at tick %r are not binary64 bit strings" % (ref["tick"],))
+            if worst > tolerance:
+                return "failed", dict(evidence, reason="maximum metric deviation %r exceeds tolerance %r" % (worst, tolerance), max_deviation_pico=int(worst * 1e12))
+            return "passed", dict(evidence, rows=len(got), max_deviation_pico=int(worst * 1e12), tolerance_micro=int(tolerance * 1e6))
+        if "detection_ticks" in oracle:  # graph.detections: the admitted gate crossings, exactly
+            found = output.get("detections")
+            ticks = [d.get("tick") for d in found] if isinstance(found, list) and all(isinstance(d, dict) for d in found) else None
+            vertices = [d.get("vertices") for d in found] if ticks is not None else None
+            ok = output.get("kind") == "detections" and ticks == oracle["detection_ticks"] and ("detection_vertices" not in oracle or vertices == oracle["detection_vertices"])
+            return ("passed" if ok else "failed"), dict(evidence, detection_ticks=ticks, expected_detection_ticks=oracle["detection_ticks"])
         if "values" in oracle:
             expected = oracle["values"]
             got = output.get("values")

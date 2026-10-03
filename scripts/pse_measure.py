@@ -34,6 +34,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from gabriel_agent.adapters import native_graph  # noqa: E402
 from gabriel_agent.agent import TaskRunner, Workspace  # noqa: E402
 from gabriel_agent.contracts.codec import loads  # noqa: E402
+from gabriel_agent.evaluation.fixtures import graph_readout as gr  # noqa: E402
 from gabriel_agent.evaluation.fixtures import graph_walk as gw  # noqa: E402
 
 
@@ -44,7 +45,7 @@ def summary(samples_us: list) -> dict:
 
 def native_process(binaries: dict, operation: str, dataset: dict, repeats: int) -> dict:
     """Stage one in-process (no worker start): identity validation and native process time separately."""
-    raw = gw.text(dataset).encode("utf8")
+    raw = json.dumps(dataset, indent=1).encode("utf8")
     identity, native, first = [], [], None
     for index in range(repeats):
         result = native_graph.run_job(operation, {}, raw, binaries)
@@ -77,7 +78,7 @@ def certificate_process(repeats: int) -> dict:
     return {"statuses": statuses, "host_process": summary(samples), "arithmetic_only": summary(in_process)}
 
 
-def through_owner(backend: str, repeats: int, operations: tuple) -> dict:
+def through_owner(backend: str, repeats: int, operations: tuple, fixture=gw) -> dict:
     """Total task latency per operation through the owner (observe, propose with the scripted
     provider, run the job in a fresh contained worker, read back, verify, review). Every repeat
     uses a fresh workspace, so every run is a fresh worker; the same task is then run once more in
@@ -86,14 +87,14 @@ def through_owner(backend: str, repeats: int, operations: tuple) -> dict:
     tmp = Path(tempfile.mkdtemp(prefix="pse-measure-"))
     try:
         repo = tmp / "repo"
-        base = gw.build_repo(repo)
+        base = fixture.build_repo(repo)
         for operation in operations:
-            oracle = gw.write_oracle(tmp / ("oracle_%s.json" % operation), operation)
+            oracle = fixture.write_oracle(tmp / ("oracle_%s.json" % operation), operation)
             task_wall, job_elapsed, worker_internal, stage_one, stage_two, verdicts, hit_wall, replays = [], [], [], [], [], [], [], []
             for index in range(repeats):
                 ws = Workspace.create(tmp / ("ws-%s-%d" % (operation, index)), backend=backend, allow_trusted_local=(backend == "trusted_local"))
                 try:
-                    spec = gw.task_spec(repo, base, oracle, {"kind": "scripted", "script": gw.script(operation), "provider_id": "scripted-domains"}, operation)
+                    spec = fixture.task_spec(repo, base, oracle, {"kind": "scripted", "script": fixture.script(operation), "provider_id": "scripted-domains"}, operation)
                     created = ws.create_task(spec)
                     clock = time.monotonic_ns()
                     result = TaskRunner(ws, created["task_id"]).run()
@@ -142,8 +143,9 @@ def main() -> int:
     record = {"schema": "gabriel.evidence.pse-measurements/1", "platform": platform.platform(), "machine": platform.machine(), "python": platform.python_version(),
               "cpu_count": os.cpu_count(), "repeats": args.repeats, "profile": native_graph.PROFILE_ID, "model": native_graph.MODEL,
               "executables": {name: {"sha256": entry["sha256"], "bytes": entry["bytes"]} for name, entry in sorted(binaries.items())},
-              "build_matches_recorded_identity": binaries["engine_observer"]["sha256"] == build_identity["engine_observer_sha256"],
+              "build_matches_recorded_identity": all(binaries[name]["sha256"] == build_identity["executables"][name]["sha256"] for name in binaries),
               "worker_build": native_graph.worker_build(binaries), "worker_source_sha256": hashlib.sha256(Path(native_graph.__file__).read_bytes()).hexdigest(),
+              "arithmetic": native_graph.ARITHMETIC,
               "notes": ["timings are wall-clock microseconds on a shared cloud container: evidence of magnitude, not a benchmark",
                         "identity validation hashes both executables (about 2.6 MiB) before and after each native process",
                         "cold start is the first native process in this measurement session; warm repeats follow in the same process",
@@ -171,11 +173,17 @@ def main() -> int:
         "region_mass_caps_128_batches": native_process(binaries, "graph.region_mass", gw.query_dataset(
             batches=[[k % 64, (k + 1) % 64, (k + 2) % 64] for k in range(128)], source=[(e, 1.0 if e == 0 else 0.0, 0.0) for e in full], targets=[63], times=[1.0]), args.repeats),
         "spectral_full_caps_64_nodes_256_times": native_process(binaries, "graph.region_mass", gw.query_dataset(
-            batches=[full], backend="spectral_full", source=[(e, 1.0 if e == 0 else 0.0, 0.0) for e in full], targets=[63], times=[0.01 * k for k in range(256)]), args.repeats)}
+            batches=[full], backend="spectral_full", source=[(e, 1.0 if e == 0 else 0.0, 0.0) for e in full], targets=[63], times=[0.01 * k for k in range(256)]), args.repeats),
+        "state_readout_fixture": native_process(binaries, "graph.state_readout", gr.stream_dataset(), args.repeats),
+        "state_readout_caps_64_entities_128_batches": native_process(binaries, "graph.state_readout", gr.stream_dataset(
+            [[(e, (0.1 * e + 0.01 * t) % 6.283185307179586, 0.5) for e in range(64)] for t in range(128)], gr.profile(carriers=64)), args.repeats),
+        "detections_caps_64_entities_128_batches": native_process(binaries, "graph.detections", gr.detection_dataset(
+            [[(e, (0.1 * e + 0.01 * t) % 6.283185307179586, 0.5) for e in range(64)] for t in range(128)], gr.profile(carriers=64), {"min_tick": 0, "cooldown": 0}), args.repeats)}
     record["certificate"] = certificate_process(args.repeats)
     record["through_owner"] = {}
     for backend in [b for b in args.backends.split(",") if b]:
         record["through_owner"][backend] = through_owner(backend, args.repeats, ("graph.snapshot", "graph.region_mass", "graph.window_reachability"))
+        record["through_owner"][backend].update(through_owner(backend, args.repeats, ("graph.state_readout", "graph.detections"), fixture=gr))
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(record, indent=1, sort_keys=True) + "\n")
     print(json.dumps({k: v for k, v in record.items() if k in ("cold_start", "build_matches_recorded_identity")}, indent=1))

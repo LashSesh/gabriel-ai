@@ -70,7 +70,7 @@ impl ObservationAdapter for SensorAdapter {
         let tick = v["tick"].as_u64().ok_or_else(|| ObserveError::Canonicalize("tick".into()))?;
         Ok(Observation { timestamp: tick as f64, source_id: format!("sensor-{i}"),
             provenance: Default::default(), payload: raw.to_vec(), context: context.clone(),
-            digest: content_address_raw(raw), schema_version: "1".into(), phase_hint: Some(0.0) })
+            digest: content_address_raw(raw), schema_version: "1".into(), phase_hint: Some(0.0), amplitude_hint: None })
     }
 }
 fn execute(job: Value) -> Result<Value> {

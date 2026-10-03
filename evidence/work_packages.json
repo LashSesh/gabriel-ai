@@ -1,6 +1,6 @@
 {
   "schema": "gabriel.evidence.work-packages/1",
-  "produced_at_utc": "2026-10-03T09:25:04.973376+00:00",
+  "produced_at_utc": "2026-10-03T10:29:19.117861+00:00",
   "rule": "A package counts as done only with actual code and recorded test output; privileged and paid runs are listed under not_executed.",
   "packages": {
     "WP01": {
@@ -1149,12 +1149,20 @@
         "evidence/pse/measurements.json",
         "evidence/pse/graph_tier_check.json",
         "docs/adr/ADR-18-native-pse-graph-worker.md",
-        "evidence/test_results.txt"
+        "evidence/test_results.txt",
+        "evidence/pse/determinism/summary.json",
+        "evidence/pse/determinism/linux_trace_platform_libm.json",
+        "evidence/pse/determinism/linux_trace_pure_libm.json",
+        "evidence/pse/determinism/linux_trace_pure_libm_sin_plus_one_ulp.json",
+        "evidence/pse/determinism/observer_pure_libm_vs_retained.json",
+        "native_pse/tests/fixtures/pure_libm.json",
+        "docs/adr/ADR-19-native-pse-determinism-and-readout.md"
       ],
       "not_executed": [
         "a provider-driven run of the graph tier (deterministic computations a model cannot perform itself; no frozen protocol includes the tier)",
         "exact certificates outside the uniform-clique profile (declared out_of_scope by the vendored certificate)",
-        "the inherited Windows golden-fixture mismatch (23 of 78 engine-state hashes) remains unresolved"
+        "an executed cross-platform identity check of the pure-Rust arithmetic (no second platform here; the property holds by construction)",
+        "the engine's crystal, consensus, cascade, falsification and morphogenic paths (quarantined with the review's reasons; the readout and detections are specified gate crossings, not crystals)"
       ],
       "test_results": {
         "tests/test_native_pse.py": [
@@ -1208,6 +1216,26 @@
           },
           {
             "test": "test_a_hit_on_the_complete_job_key_reissues_the_retained_result_and_witness",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_state_readout_matches_the_standard_library_reference",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_detections_follow_the_declared_schedule_and_carry_complete_identities",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_readout_contract_violations_and_undeclared_inputs_are_rejected",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_readout_and_detection_tasks_run_through_the_core",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_graph_tier_readout_and_detection_families_are_sound",
             "result": "PASSED"
           }
         ]

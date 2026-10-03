@@ -1,3 +1,4 @@
+use pse_fmath::Fmath;
 use super::*;
 
 fn graph(n: usize, weights: impl Fn(usize, usize) -> f64) -> SparseLaplacian {
@@ -22,7 +23,7 @@ fn clique(n: usize, weight: f64) -> SparseLaplacian {
 }
 
 fn initial(n: usize) -> Vec<Complex<f64>> {
-    (0..n).map(|i| Complex::new((i as f64 * 1.7).sin() + 0.3, (i as f64 * 0.8).cos() - 0.2)).collect()
+    (0..n).map(|i| Complex::new((i as f64 * 1.7).dsin() + 0.3, (i as f64 * 0.8).dcos() - 0.2)).collect()
 }
 
 fn close(actual: &[Complex<f64>], expected: &[Complex<f64>], tolerance: f64) {
@@ -64,7 +65,7 @@ fn both_backends_match_independent_clique_formula_with_complex_unnormalized_stat
                 let prepared = plan.prepare_state(&state).unwrap();
                 for time in [-2.0, -0.1, 0.0, 0.03, 1.0] {
                     let angle = -time * n as f64 * w;
-                    let rotating = Complex::new(angle.cos(), angle.sin());
+                    let rotating = Complex::new(angle.dcos(), angle.dsin());
                     let expected: Vec<_> = state.iter().map(|&x| mean + rotating * (x - mean)).collect();
                     close(&prepared.state_at(time).unwrap(), &expected, 2e-12);
                 }
@@ -172,7 +173,7 @@ fn clique_retains_rounded_diagonal_constant_space_phase() {
     assert_eq!(plan.backend(), WalkBackend::CompleteGraph);
     let state = vec![Complex::new(1.0, 0.0); 4];
     let time = 1.0 / residual;
-    let expected = vec![Complex::new(1.0_f64.cos(), -1.0_f64.sin()); 4];
+    let expected = vec![Complex::new(1.0_f64.dcos(), -1.0_f64.dsin()); 4];
     close(&plan.prepare_state(&state).unwrap().state_at(time).unwrap(), &expected, 1e-14);
 }
 

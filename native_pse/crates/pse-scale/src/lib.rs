@@ -3,6 +3,7 @@
 //! Provides hypercube universes, dimensional bridges, and scale ladders for
 //! micro/meso/macro observation and cross-scale coarsening.
 
+use pse_fmath::Fmath;
 use pse_graph::PersistentGraph;
 use pse_topology::{kuramoto_order_parameter, KuramotoState, SpectralDecomposition};
 use pse_types::{content_address_raw, FiveDState, Hash256, SemanticCrystal, VertexId};
@@ -689,7 +690,7 @@ pub fn apply_bridge_coupling(
     let src = &source_history[source_history.len() - 1 - delay];
     // g(Sigma, phi) = Sigma * cos(omega(Sigma) + phi)
     let phase = src.omega + bridge.phase_offset;
-    let factor = bridge.weight * phase.cos();
+    let factor = bridge.weight * phase.dcos();
     target.aggregate_state.p += factor * src.p;
     target.aggregate_state.rho += factor * src.rho;
     target.aggregate_state.omega += factor * src.omega;

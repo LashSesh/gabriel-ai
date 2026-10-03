@@ -18,6 +18,7 @@
 //! null-centre — the maximally-symmetric 13-carrier phase-ladder
 //! configuration in 3-D.
 
+use pse_fmath::Fmath;
 use crate::geometry::canonical_nodes;
 
 /// `(phase ∈ [0, 2π), radius ∈ {0, 1})` for each of the 13 nodes in
@@ -42,7 +43,7 @@ pub fn metatron_phase_layout() -> Vec<(f64, f64)> {
             let v = node.coords;
             let p1 = v[0] * e1[0] + v[1] * e1[1] + v[2] * e1[2];
             let p2 = v[0] * e2[0] + v[1] * e2[1] + v[2] * e2[2];
-            let phi = p2.atan2(p1).rem_euclid(std::f64::consts::TAU);
+            let phi = p2.datan2(p1).rem_euclid(std::f64::consts::TAU);
             out.push((phi, 1.0));
         }
     }
@@ -138,8 +139,8 @@ mod tests {
         let mut sum_x = 0.0_f64;
         let mut sum_y = 0.0_f64;
         for (phi, _) in layout.iter().skip(1) {
-            sum_x += phi.cos();
-            sum_y += phi.sin();
+            sum_x += phi.dcos();
+            sum_y += phi.dsin();
         }
         assert!(sum_x.abs() < 1e-9, "sum cos = {} (expected ~0)", sum_x);
         assert!(sum_y.abs() < 1e-9, "sum sin = {} (expected ~0)", sum_y);

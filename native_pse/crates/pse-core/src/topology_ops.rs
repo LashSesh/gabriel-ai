@@ -25,6 +25,7 @@
 //! carrier_instance_idx) so the existing audit machinery
 //! (`pse_evidence::verify_crystal`) verifies it without modification.
 
+use pse_fmath::Fmath;
 use std::collections::{BTreeMap, BTreeSet};
 
 use pse_types::{
@@ -110,9 +111,9 @@ pub fn compose(
     let n = sorted.len() as f64;
     let log_sum: f64 = sorted
         .iter()
-        .map(|c| c.stability_score.max(1e-12).ln())
+        .map(|c| c.stability_score.max(1e-12).dln())
         .sum::<f64>();
-    let stability_score = (log_sum / n).exp().clamp(0.0, 1.0);
+    let stability_score = (log_sum / n).dexp().clamp(0.0, 1.0);
 
     // Topology signature: per-axis mean (Betti numbers were verified
     // equal in the compatibility check, so they pass through unchanged).
@@ -1054,7 +1055,7 @@ mod tests {
         let c1 = make_crystal(vec![1], 0.8, 1, 0.30, 0.70, 1);
         let c2 = make_crystal(vec![2], 0.5, 1, 0.30, 0.70, 1);
         let composed = compose(&[c1, c2], &ComposeConfig::default()).unwrap();
-        let expected = ((0.8_f64.ln() + 0.5_f64.ln()) / 2.0).exp();
+        let expected = ((0.8_f64.dln() + 0.5_f64.dln()) / 2.0).dexp();
         assert!((composed.stability_score - expected).abs() < 1e-12);
     }
 

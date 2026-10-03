@@ -32,6 +32,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from ..contracts.codec import canonical
+from .fixtures import graph_readout as gro
 from .fixtures import graph_walk as gwf
 
 CITATION = re.compile(r'\[\[cite:([A-Za-z0-9][A-Za-z0-9._:-]{0,127}) "((?:[^"\\]|\\.)*)"\]\]')
@@ -470,6 +471,44 @@ def _graph_tasks():
             {"operation": "graph.region_mass", "output_path": out, "units": None, "tolerance_micro": 1, "masses": rows},
             [("correct", True, {out: correct}), ("wrong_mass", False, {out: wrong_mass}), ("wrong_decision", False, {out: wrong_decision}),
              ("wrong_time", False, {out: wrong_time})]))
+    # readout and detection families (ADR-19): the specified readout and its admitted gate crossings
+    readme_stream = "# Declared observation streams\n\nEach observation declares entity, phase in [0, 2pi) and amplitude in [0, 1] as binary64 bits; the profile declares carriers, coherence parameters, normalization and thresholds.\n"
+    ring_stream = [[(0, 0.3, 0.9), (1, 0.4, 0.9)], [(1, 0.4, 0.9), (2, 0.5, 0.9)], [(2, 0.5, 0.9), (3, 0.6, 0.9)], [(3, 0.6, 0.9), (4, 0.7, 0.9)],
+                   [(4, 0.7, 0.9), (0, 0.3, 0.9)], [(0, 0.3, 0.9), (2, 0.5, 0.9), (4, 0.7, 0.9)]]
+    for task_id, stream, prof, name in [("gr-fixture", gro.STREAM, gro.profile(), "four-entity"), ("gr-ring", ring_stream, gro.profile(carriers=2, adaptive_carrier=False), "ring")]:
+        data = gro.text(gro.stream_dataset(stream, prof))
+        oracle = gro.readout_oracle(stream, prof)
+        out = "out/readout.json"
+        def deliverable(steps, kairos_flip=False, metric_shift=0.0, drop_vertex=False):
+            ticks = []
+            for s in steps:
+                ticks.append({"tick": s["tick"], "vertices": s["vertices"][:-1] if drop_vertex else s["vertices"], "edges": s["edges"],
+                              "carrier": {"index": s["admissible_carriers"][0]}, "kairos": (not s["kairos"]) if kairos_flip else s["kairos"],
+                              "metrics": {k: gwf.bits(v + metric_shift) for k, v in s["metrics"].items()}})
+            return _dumps({"kind": "state_readout", "ticks": ticks})
+        correct = deliverable(oracle["readout"])
+        tasks.append(_graph_task(
+            task_id, "graph-readout",
+            "Run the native engine's specified state readout over the declared observation stream in data/stream.json (%s stream: embedding, data helix, "
+            "active carrier, gate metrics and gate verdict per step) and write it to %s." % (name, out),
+            [("data/stream.json", data), ("README.md", readme_stream)], oracle,
+            [("correct", True, {out: correct}), ("wrong_metric", False, {out: deliverable(oracle["readout"], metric_shift=1e-3)}),
+             ("wrong_kairos", False, {out: deliverable(oracle["readout"], kairos_flip=True)}), ("wrong_vertices", False, {out: deliverable(oracle["readout"], drop_vertex=True)})]))
+    for task_id, stream, prof, schedule, name in [("gd-fixture", gro.STREAM, gro.profile(), gro.SCHEDULE, "four-entity"),
+                                                  ("gd-none", gro.STREAM, gro.profile(), gro.no_detection_schedule(), "four-entity, nothing admitted")]:
+        data = gro.text(gro.detection_dataset(stream, prof, schedule))
+        oracle = gro.detections_oracle(stream, prof, schedule)
+        out = "out/detections.json"
+        ticks, vertices = oracle["detection_ticks"], oracle["detection_vertices"]
+        correct = _dumps({"kind": "detections", "detections": [{"tick": t, "vertices": v} for t, v in zip(ticks, vertices)]})
+        spurious = _dumps({"kind": "detections", "detections": [{"tick": t, "vertices": v} for t, v in zip(ticks, vertices)] + [{"tick": 2, "vertices": [0, 1, 2, 3]}]})
+        controls = [("correct", True, {out: correct}), ("spurious_detection", False, {out: spurious}), ("wrong_path", False, {"out/other.json": correct})]
+        if ticks:
+            controls.append(("missing_detection", False, {out: _dumps({"kind": "detections", "detections": [{"tick": t, "vertices": v} for t, v in zip(ticks[1:], vertices[1:])]})}))
+        tasks.append(_graph_task(
+            task_id, "graph-detections",
+            "Compute the detections of the declared observation stream in data/detection_query.json (%s) under its thresholds and schedule and write them to %s." % (name, out),
+            [("data/detection_query.json", data), ("README.md", readme_stream)], oracle, controls))
     for task_id, threshold in [("gw-clique", 0.2), ("gw-clique-low", 0.1)]:
         data = gwf.text(gwf.window_dataset(threshold=threshold))
         statuses = gwf.reference_window_statuses(threshold=threshold)
@@ -675,6 +714,38 @@ def verify_numerical(task: DomainTask, root: Path) -> dict:
                 problems.append("certificate statuses differ from the reference")
             if output.get("stage") != "certified":
                 problems.append("output is not a certified result")
+        elif "readout" in oracle:
+            got, expected = output.get("ticks"), oracle["readout"]
+            tolerance = float(oracle.get("tolerance_micro", 0)) / 1e6
+            if output.get("kind") != "state_readout" or not isinstance(got, list) or len(got) != len(expected):
+                problems.append("readout kind or step count differs from the reference")
+            else:
+                worst = 0.0
+                for item, ref in zip(got, expected):
+                    if not isinstance(item, dict) or item.get("tick") != ref["tick"] or item.get("vertices") != ref["vertices"] or item.get("edges") != ref["edges"]:
+                        problems.append("step structure differs from the reference at tick %r" % (ref["tick"],))
+                        break
+                    if item.get("kairos") is not ref["kairos"]:
+                        problems.append("gate verdict differs from the reference at tick %r" % (ref["tick"],))
+                        break
+                    if not isinstance(item.get("carrier"), dict) or item["carrier"].get("index") not in ref["admissible_carriers"]:
+                        problems.append("active carrier is not admissible at tick %r" % (ref["tick"],))
+                        break
+                    try:
+                        worst = max(worst, max(abs(struct.unpack(">d", bytes.fromhex(item["metrics"][name]))[0] - float(ref["metrics"][name])) for name in ref["metrics"]))
+                    except (TypeError, ValueError, KeyError):
+                        problems.append("metrics at tick %r are not binary64 bit strings" % (ref["tick"],))
+                        break
+                else:
+                    if worst > tolerance:
+                        problems.append("maximum metric deviation %r exceeds tolerance %r" % (worst, tolerance))
+        elif "detection_ticks" in oracle:
+            found = output.get("detections")
+            ticks = [d.get("tick") for d in found] if isinstance(found, list) and all(isinstance(d, dict) for d in found) else None
+            if output.get("kind") != "detections" or ticks != oracle["detection_ticks"]:
+                problems.append("detections differ from the reference")
+            elif "detection_vertices" in oracle and [d.get("vertices") for d in found] != oracle["detection_vertices"]:
+                problems.append("detection vertices differ from the reference")
         elif "values" in oracle:
             if output.get("units") != oracle.get("units"):
                 problems.append("output units %r differ from the reference %r" % (output.get("units"), oracle.get("units")))

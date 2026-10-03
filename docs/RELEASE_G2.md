@@ -67,9 +67,12 @@ the cited source span stays fixed; the run was repeated.
   since ADR-18, the native PSE graph engine with three further declared operations (conditioned
   snapshot, regional mass, exact window certificate) run as a contained worker with the
   executable digests bound per job and references independent of the engine (`evidence/pse/`);
-  the graph tier is in no frozen advantage protocol. The recurrent routing feature stays in the
-  software pack only. The inherited padded graph signature is reproduced only as a collision
-  control, and its S7 orbit index is cross-checked against the standard-library signature.
+  the graph tier is in no frozen advantage protocol. Since ADR-19 the engine's arithmetic is
+  platform-independent by construction and its continuous state is exposed as a specified,
+  independently referenced readout with schedule-admitted detections; the crystal path stays
+  quarantined. The recurrent routing feature stays in the software pack only. The inherited
+  padded graph signature is reproduced only as a collision control, and its S7 orbit index is
+  cross-checked against the standard-library signature.
 - Memory retrieval is lexical; there is no trained retrieval or routing policy, so G3 is not
   claimed. The promotion rule requires held-out evidence and is tested, not evaluated.
 - Document extraction supports UTF-8 text only.

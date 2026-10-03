@@ -429,7 +429,7 @@ mod tests {
                 context: MeasurementContext::default(),
                 digest: content_address_raw(&p),
                 schema_version: "1.0.0".into(),
-                phase_hint: None,
+                phase_hint: None, amplitude_hint: None,
             })
             .collect()
     }

@@ -15,7 +15,7 @@ impl ObservationAdapter for SensorAdapter {
         let value:Value=serde_json::from_slice(raw).map_err(|e|ObserveError::Canonicalize(e.to_string()))?;
         Ok(Observation{timestamp:value["tick"].as_f64().unwrap(),source_id:format!("sensor-{}",value["entity"].as_u64().unwrap()),
           payload:raw.to_vec(),digest:content_address_raw(raw),context:ctx.clone(),provenance:ProvenanceEnvelope::default(),
-          schema_version:"1".into(),phase_hint:Some(value["phase"].as_f64().unwrap())})
+          schema_version:"1".into(),phase_hint:Some(value["phase"].as_f64().unwrap()), amplitude_hint: None})
     }
 }
 fn configuration()->Config {

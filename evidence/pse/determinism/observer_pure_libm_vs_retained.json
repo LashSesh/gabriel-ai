@@ -1,0 +1,38 @@
+{
+ "arithmetic_profile": "pure-rust-libm",
+ "backends": {
+  "auto_full": {
+   "decisions_identical": true,
+   "engine_equal": true,
+   "masses_bit_identical": true,
+   "max_mass_deviation_abs": 0.0,
+   "max_mass_deviation_ulps": 0,
+   "region_backend": "state_readout",
+   "snapshot_identity_equal": true,
+   "values_compared": 16
+  },
+  "auto_region": {
+   "decisions_identical": true,
+   "engine_equal": true,
+   "masses_bit_identical": true,
+   "max_mass_deviation_abs": 0.0,
+   "max_mass_deviation_ulps": 0,
+   "region_backend": "complete_graph_region",
+   "snapshot_identity_equal": true,
+   "values_compared": 16
+  },
+  "spectral_full": {
+   "decisions_identical": true,
+   "engine_equal": true,
+   "masses_bit_identical": false,
+   "max_mass_deviation_abs": 1.1102230246251565e-16,
+   "max_mass_deviation_ulps": 1,
+   "region_backend": "state_readout",
+   "snapshot_identity_equal": true,
+   "values_compared": 16
+  }
+ },
+ "executable_sha256": "7301928ba5a181fd4c47b7bfec18202e9704f2df8942a66ce0a89ff36289509f",
+ "job": "demo_query(13, 16) over one batch of entities 0..12, per backend (the retained functional check's job)",
+ "schema": "gabriel.evidence.pse-observer-arithmetic/1"
+}

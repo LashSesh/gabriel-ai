@@ -85,3 +85,31 @@ cross-platform frozen-fixture success or scientific peer review is claimed.
 The detailed review with source locations and exact reading coverage is
 `../audit/pse_core_review.md`; new test metadata are in
 `../results/native_pse_refinement_checks.json`.
+
+## Addendum: determinism and the specified readout (Gabriel ADR-19)
+
+The Windows golden-fixture mismatch named above is now explained and no longer blocks the test
+suite. A per-component trace (`examples/golden_trace.rs`) shows that the 23 differing digests
+start at tick 7 and are confined to quantities computed through transcendental functions (the
+data helix, the carrier phase ladder and the gate metrics q, k and g, each by one unit in the
+last place), that a build using the host's glibc differs from a build using the pure-Rust `libm`
+crate in 32 of 78 digests, and that moving `sin` by one unit in the last place changes 73 of the
+78 digests and six crystal digests. C libraries round these functions differently in the last
+bit; the whole-state digest is maximally sensitive to it. Every transcendental call of the engine
+now goes through `crates/pse-fmath` (pure-Rust `libm` by default; the `platform-libm` feature
+reproduces the host C library byte for byte), `tests/fixtures/pure_libm.json` is the
+platform-independent golden fixture (its 16 seeded graph histories equal the Windows fixture's),
+and the Windows fixture is retained unchanged behind an ignored test. Cross-platform identity of
+the new arithmetic holds by construction and has not been executed on a second platform.
+
+Two additive engine changes serve the readout: `Observation.amplitude_hint` (a declared
+data-helix amplitude instead of the payload's byte entropy; `None` keeps the old behaviour) and
+`GlobalState.last_metrics` (the metric set of the last step, always readable). The bridge
+`examples/engine_readout.rs` runs the engine with decay and crystal commits disabled on a
+half-turn carrier grid and reports the embedding, data helix, active carrier, gate metrics and
+gate verdict per step; `src/gabriel_agent/evaluation/fixtures/graph_readout.py` states the
+specification and implements it independently. Under that profile r, p and n are constants and
+k equals lambda_c times q, so three of the eight inherited gate quantities vary (d, q, j). The
+crystal, consensus, cascade, falsification and morphogenic paths remain quarantined for the
+reasons given above; "detections" in Gabriel are schedule-admitted gate crossings of the
+specified readout, not crystals.

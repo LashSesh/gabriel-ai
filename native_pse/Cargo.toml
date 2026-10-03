@@ -29,6 +29,7 @@ nalgebra = "0.35"
 thiserror = "2"
 tracing = "0.1"
 rayon = "1.10"
+libm = "0.2.16"
 
 [dependencies]
 pse-core = { path = "crates/pse-core" }
@@ -36,11 +37,14 @@ pse-types = { path = "crates/pse-types" }
 pse-graph = { path = "crates/pse-graph" }
 pse-evidence = { path = "crates/pse-evidence" }
 pse-topology = { path = "crates/pse-topology" }
+pse-fmath = { path = "crates/pse-fmath" }
 serde_json.workspace = true
 thiserror.workspace = true
 
 
 [features]
+platform-libm = ["pse-fmath/platform-libm"]
+study-perturb-sin = ["pse-fmath/study-perturb-sin"]
 indexed-signature = ["pse-core/indexed-signature"]
 memoized-signature = ["indexed-signature", "pse-core/memoized-signature"]
 phase-hoist = ["pse-core/phase-hoist"]

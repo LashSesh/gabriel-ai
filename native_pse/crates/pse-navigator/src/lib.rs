@@ -10,6 +10,7 @@
 // metatron_triton is not yet available as a path dependency.
 // NavigatorSpiral provides the golden-angle spiral fallback.
 
+use pse_fmath::Fmath;
 use serde::{Deserialize, Serialize};
 
 // ─── SpectralSignature ────────────────────────────────────────────────────────
@@ -421,7 +422,7 @@ impl SimplexMesh {
             .iter()
             .map(|r| r / total)
             .filter(|&p| p > 1e-10)
-            .map(|p| p * p.ln())
+            .map(|p| p * p.dln())
             .sum::<f64>()
     }
 
@@ -557,17 +558,17 @@ impl NavigatorSpiral {
 
         // First two dimensions: golden-angle circle
         if self.dim >= 2 {
-            let (sin_a, cos_a) = self.angle.sin_cos();
+            let (sin_a, cos_a) = self.angle.dsin_cos();
             point[0] = (0.5 + self.radius * cos_a).clamp(0.0, 1.0);
             point[1] = (0.5 + self.radius * sin_a).clamp(0.0, 1.0);
         } else if self.dim == 1 {
-            point[0] = (0.5 + self.radius * self.angle.sin()).clamp(0.0, 1.0);
+            point[0] = (0.5 + self.radius * self.angle.dsin()).clamp(0.0, 1.0);
         }
 
         // Higher dimensions: Halton-like angular decomposition
         for d in 2..self.dim {
             let base = (d as f64 + 1.0).recip();
-            point[d] = (0.5 + self.radius * (self.angle * base).sin()).clamp(0.0, 1.0);
+            point[d] = (0.5 + self.radius * (self.angle * base).dsin()).clamp(0.0, 1.0);
         }
 
         // Apply momentum bias
@@ -1381,7 +1382,7 @@ mod tests {
 
         // Add 5 vertices incrementally
         for i in 0..5 {
-            let v = mesh.add_vertex(&[i as f64 * 0.2, (i as f64 * 0.3).sin()], &sig);
+            let v = mesh.add_vertex(&[i as f64 * 0.2, (i as f64 * 0.3).dsin()], &sig);
             let (edges, simplices) = mesh.incremental_triangulate(v, 2);
 
             // First vertex has no edges (no neighbors yet)

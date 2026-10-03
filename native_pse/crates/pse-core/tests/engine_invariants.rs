@@ -297,7 +297,7 @@ fn llm_text_config_produces_crystals() {
                 context: ctx.clone(),
                 digest,
                 schema_version: "1.0.0".to_string(),
-                phase_hint: Some(phase),
+                phase_hint: Some(phase), amplitude_hint: None,
             })
         }
     }

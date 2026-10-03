@@ -3,6 +3,7 @@
 //! Combines the observation ingestion layer (L0) with the persistent
 //! graph storage layer (L1).
 
+use pse_fmath::Fmath;
 use petgraph::graph::{DiGraph, NodeIndex};
 use petgraph::Direction;
 use pse_types::{
@@ -112,7 +113,7 @@ impl ObservationAdapter for PassthroughAdapter {
             context: context.clone(),
             digest,
             schema_version: self.schema_version.clone(),
-            phase_hint: None,
+            phase_hint: None, amplitude_hint: None,
         })
     }
 }
@@ -159,7 +160,7 @@ impl FastPassthroughAdapter {
             context: MeasurementContext::default(),
             digest,
             schema_version: self.schema_version.clone(),
-            phase_hint: None,
+            phase_hint: None, amplitude_hint: None,
         }
     }
 }
@@ -402,7 +403,7 @@ impl PersistentGraph {
         let lambda = config.lambda_decay;
         let n_obs = obs_batch.len();
         if lambda > 0.0 && n_obs > 0 {
-            let decay = (-lambda * n_obs as f64).exp();
+            let decay = (-lambda * n_obs as f64).dexp();
             for eidx in self.graph.edge_indices() {
                 if let Some(ann) = self.graph.edge_weight_mut(eidx) {
                     ann.weight *= decay;
@@ -761,7 +762,7 @@ mod tests {
             context: MeasurementContext::default(),
             digest,
             schema_version: "1.0.0".to_string(),
-            phase_hint: None,
+            phase_hint: None, amplitude_hint: None,
         }
     }
 

@@ -48,9 +48,18 @@ CAPS = {"max_nodes": 64, "max_batches": 128, "max_queries": 256, "max_windows": 
 MAX_WIRE_BYTES = 4 * 1024 * 1024
 MAX_INPUT_BYTES = 1 << 20
 TIMEOUT_SECONDS = 30
-BINARIES = ("engine_observer", "engine_snapshot")
+BINARIES = ("engine_observer", "engine_snapshot", "engine_readout")
 LAST_TIMINGS = {}  # of the most recent invoke(): diagnostics only, never part of an output or key
-KINDS = ("observation_batches", "graph_query", "graph_window_query")
+KINDS = ("observation_batches", "graph_query", "graph_window_query", "observation_stream", "detection_query")
+READOUT_SCHEMA = "gabriel-engine-readout/v1"
+READOUT_MODEL = "half-turn-carriers;no-decay;no-commit;embedding(p,rho,omega,chi,eta);helix(circular-mean,mean-amplitude);gate(d,q,r,g,j,p,n,k)"
+ARITHMETIC = "pure-rust-libm"
+MAX_CARRIERS = 64
+MAX_SCHEDULE = 128
+PROFILE_FIELDS = "carriers adaptive_carrier lambda_bits mu_r_bits eta_r_bits dt2_bits normalization thresholds"
+NORMALIZATION_FIELDS = "mu_d mu_j lambda_r lambda_p lambda_seam gamma_d gamma_q gamma_r lambda_c lambda_e"
+METRICS = "dqrgjpnk"
+TAU = 2.0 * math.pi
 
 OPERATIONS = {
     "graph.snapshot": {"input_kind": "observation_batches", "parameters": {}, "required": [],
@@ -62,6 +71,12 @@ OPERATIONS = {
     "graph.window_reachability": {"input_kind": "graph_window_query", "parameters": {}, "required": [],
                                   "description": "exact closed-window certificate of exists t in [start,end]: mass(t) > threshold over the represented Laplacian; verdicts reachable, excluded, unknown, out_of_scope",
                                   "output_units": None, "binary": "engine_snapshot", "certificate": True},
+    "graph.state_readout": {"input_kind": "observation_stream", "parameters": {}, "required": [],
+                            "description": "specified state readout of the engine over a declared observation stream (embedding, data helix, active carrier, gate metrics d,q,r,g,j,p,n,k and gate verdict per step); no decay, no commit",
+                            "output_units": None, "binary": "engine_readout", "certificate": False},
+    "graph.detections": {"input_kind": "detection_query", "parameters": {}, "required": [],
+                         "description": "gate crossings of the specified readout admitted by the declared schedule (min_tick, cooldown), each with an identity over its complete content; an empty list is a computed result",
+                         "output_units": None, "binary": "engine_readout", "certificate": False},
 }
 
 
@@ -152,6 +167,8 @@ def describe(raw: bytes) -> dict:
         return dict(base, problems=["kind is not one of " + ", ".join(KINDS)])
     kind = data["kind"]
     problems = []
+    if kind in ("observation_stream", "detection_query"):
+        return _describe_stream(data, base)
     try:
         entities = _batches(data.get("batches"))
         backend = data.get("backend", "auto_region")
@@ -197,6 +214,91 @@ def describe(raw: bytes) -> dict:
     except (ValueError, TypeError, AttributeError) as exc:
         problems.append(str(exc)[:200])
         rows = None
+    return dict(base, kind=kind, rows=rows, problems=problems[:16])
+
+
+def _stream_batches(value) -> tuple:
+    """Entities in first-observation order and the distinct co-observed pairs of a declared stream."""
+    if type(value) is not list or not 1 <= len(value) <= CAPS["max_batches"]:
+        raise ValueError("batch history outside bounds (1..%d batches)" % CAPS["max_batches"])
+    order, pairs = [], set()
+    for batch in value:
+        if type(batch) is not list or not 1 <= len(batch) <= CAPS["max_nodes"]:
+            raise ValueError("batch outside bounds (1..%d observations)" % CAPS["max_nodes"])
+        seen = []
+        for item in batch:
+            if type(item) is not dict or set(item) != {"entity", "phase_bits", "amplitude_bits"}:
+                raise ValueError("observation fields must be exactly entity, phase_bits, amplitude_bits")
+            entity = _integer(item["entity"], 0, CAPS["max_nodes"] - 1)
+            if entity in seen:
+                raise ValueError("duplicate entity in a batch")
+            seen.append(entity)
+            if not 0.0 <= number(item["phase_bits"]) < TAU:
+                raise ValueError("phase outside [0,2pi)")
+            if not 0.0 <= number(item["amplitude_bits"]) <= 1.0:
+                raise ValueError("amplitude outside [0,1]")
+            if entity not in order:
+                order.append(entity)
+        for i in range(len(seen)):
+            for j in range(i + 1, len(seen)):
+                pairs.add((min(seen[i], seen[j]), max(seen[i], seen[j])))
+    if len(order) > CAPS["max_nodes"]:
+        raise ValueError("total entity capacity exceeded")
+    return order, pairs
+
+
+def _profile(value) -> dict:
+    """The declared readout profile, decoded; raises on any deviation from the contract."""
+    if type(value) is not dict or set(value) != set(PROFILE_FIELDS.split()):
+        raise ValueError("profile fields must be exactly: " + PROFILE_FIELDS)
+    carriers = _integer(value["carriers"], 1, MAX_CARRIERS)
+    if type(value["adaptive_carrier"]) is not bool:
+        raise ValueError("adaptive_carrier must be a boolean")
+    decoded = {"carriers": carriers, "adaptive_carrier": value["adaptive_carrier"]}
+    for name in ("lambda", "mu_r", "eta_r"):
+        decoded[name] = number(value[name + "_bits"])
+        if decoded[name] < 0:
+            raise ValueError(name + " must be non-negative")
+    decoded["dt2"] = number(value["dt2_bits"])
+    if decoded["dt2"] <= 0:
+        raise ValueError("dt2 must be positive")
+    normalization = value["normalization"]
+    if type(normalization) is not dict or set(normalization) != set(NORMALIZATION_FIELDS.split()):
+        raise ValueError("normalization fields must be exactly: " + NORMALIZATION_FIELDS)
+    decoded["normalization"] = {name: number(normalization[name]) for name in NORMALIZATION_FIELDS.split()}
+    for name, x in decoded["normalization"].items():
+        if (name in ("mu_d", "mu_j") and x <= 0) or x < 0:
+            raise ValueError("normalization %s outside its domain" % name)
+    thresholds = value["thresholds"]
+    if type(thresholds) is not dict or set(thresholds) != set(METRICS):
+        raise ValueError("threshold fields must be exactly d, q, r, g, j, p, n, k")
+    decoded["thresholds"] = {name: number(thresholds[name]) for name in METRICS}
+    if any(not 0.0 <= x <= 1.0 for x in decoded["thresholds"].values()):
+        raise ValueError("thresholds outside [0,1]")
+    return decoded
+
+
+def _schedule(value) -> dict:
+    if type(value) is not dict or set(value) != {"min_tick", "cooldown"}:
+        raise ValueError("schedule fields must be exactly min_tick, cooldown")
+    return {"min_tick": _integer(value["min_tick"], 0, MAX_SCHEDULE), "cooldown": _integer(value["cooldown"], 0, MAX_SCHEDULE)}
+
+
+def _describe_stream(data: dict, base: dict) -> dict:
+    kind = data["kind"]
+    problems, rows = [], None
+    try:
+        expected = {"kind", "batches", "profile"} | ({"schedule"} if kind == "detection_query" else set())
+        extra = set(data) - expected
+        if extra:
+            problems.append("unknown fields: " + ", ".join(sorted(extra)))
+        _stream_batches(data.get("batches"))
+        _profile(data.get("profile"))
+        if kind == "detection_query":
+            _schedule(data.get("schedule"))
+        rows = len(data["batches"])
+    except (ValueError, TypeError, AttributeError) as exc:
+        problems.append(str(exc)[:200])
     return dict(base, kind=kind, rows=rows, problems=problems[:16])
 
 
@@ -304,6 +406,80 @@ def validate_observer_response(response: dict, job: dict) -> None:
             decision = "above" if mass > threshold + deadband else "below" if mass < threshold - deadband else "ambiguous"
             if item["decision"] != decision:
                 raise ValueError("native decision does not match the declared rule")
+
+
+def validate_readout_response(response: dict, job: dict) -> None:
+    """The response contract of engine_readout, re-checked independently: arithmetic profile, zero
+    commits, history counts, first-observation vertex order, co-observation edge counts, metric
+    ranges, the gate rule and the identity over the complete readout."""
+    _fields(response, "schema arithmetic engine identity ticks")
+    if response["schema"] != READOUT_SCHEMA:
+        raise ValueError("native readout schema mismatch")
+    if response["arithmetic"] != ARITHMETIC:
+        raise ValueError("native arithmetic profile %r is not the declared platform-independent one" % (response["arithmetic"],))
+    engine = response["engine"]
+    _fields(engine, "ticks commits vertices edges observations faulted")
+    if engine["faulted"] is not False or engine["commits"] != 0:
+        raise ValueError("native engine faulted or committed under the readout profile")
+    batches, profile = job["batches"], _profile(job["profile"])
+    order, pairs = _stream_batches(batches)
+    if engine["ticks"] != len(batches) or engine["observations"] != sum(map(len, batches)) or engine["vertices"] != len(order) or engine["edges"] != len(pairs):
+        raise ValueError("native history statistics mismatch")
+    ticks = response["ticks"]
+    if type(ticks) is not list or len(ticks) != len(batches):
+        raise ValueError("native tick count mismatch")
+    seen, seen_pairs = [], set()
+    for index, (item, batch) in enumerate(zip(ticks, batches), start=1):
+        _fields(item, "tick vertices edges helix carrier metrics kairos embedding")
+        entities = [o["entity"] for o in batch]
+        for entity in entities:
+            if entity not in seen:
+                seen.append(entity)
+        for i in range(len(entities)):
+            for j in range(i + 1, len(entities)):
+                seen_pairs.add((min(entities[i], entities[j]), max(entities[i], entities[j])))
+        if item["tick"] != index or item["vertices"] != seen or item["edges"] != len(seen_pairs):
+            raise ValueError("native vertex order or edge count mismatch at tick %d" % index)
+        _fields(item["helix"], "phi_bits r_bits")
+        if not 0.0 <= number(item["helix"]["phi_bits"]) < TAU or not 0.0 <= number(item["helix"]["r_bits"]) <= 1.0:
+            raise ValueError("native data helix outside its domain")
+        _fields(item["carrier"], "index phi_bits kappa_bits delta_phi_bits")
+        _integer(item["carrier"]["index"], 0, profile["carriers"] - 1)
+        for key in ("phi_bits", "kappa_bits", "delta_phi_bits"):
+            number(item["carrier"][key])
+        _fields(item["metrics"], " ".join(METRICS))
+        values = {name: number(item["metrics"][name]) for name in METRICS}
+        if any(not 0.0 <= x <= 1.0 for x in values.values()):
+            raise ValueError("native metric outside [0,1]")
+        if item["kairos"] is not all(values[name] >= profile["thresholds"][name] for name in METRICS):
+            raise ValueError("native gate verdict does not match the declared thresholds at tick %d" % index)
+        embedding = item["embedding"]
+        if type(embedding) is not list or len(embedding) != len(seen):
+            raise ValueError("native embedding count mismatch")
+        for row in embedding:
+            if type(row) is not list or len(row) != 5 or any(not 0.0 <= number(x) <= 1.0 for x in row):
+                raise ValueError("native embedding outside its domain")
+    identity = response["identity"]
+    bound = canonical({"batches": batches, "profile": job["profile"], "ticks": ticks})
+    if type(identity) is not str or identity != hashlib.sha256(bound).hexdigest():
+        raise ValueError("native readout identity does not cover the readout")
+
+
+def detections(ticks: list, thresholds_bits: dict, schedule: dict, readout_identity: str) -> list:
+    """Gate crossings admitted by the schedule: tick at least min_tick and more than cooldown ticks
+    after the previous detection. Each detection's identity covers its complete content."""
+    out, last = [], None
+    for item in ticks:
+        if not item["kairos"] or item["tick"] < schedule["min_tick"]:
+            continue
+        if last is not None and item["tick"] <= last + schedule["cooldown"]:
+            continue
+        record = {"readout_identity": readout_identity, "tick": item["tick"], "vertices": item["vertices"], "metrics": item["metrics"],
+                  "thresholds": thresholds_bits, "schedule": schedule}
+        record["identity"] = hashlib.sha256(canonical(record)).hexdigest()
+        out.append(record)
+        last = item["tick"]
+    return out
 
 
 def _sensor_vertex_id(entity: int) -> int:
@@ -420,6 +596,23 @@ def run_job(operation: str, parameters: dict, raw: bytes, binaries_bound: dict) 
         return _verdict("unknown", {"reason": "native executable %s is not bound to this worker" % spec["binary"], "unavailable": True})
     data = json.loads(raw.decode("utf8"))
     try:
+        if operation in ("graph.state_readout", "graph.detections"):
+            job = {"schema": READOUT_SCHEMA, "batches": data["batches"], "profile": data["profile"]}
+            response = invoke(binary["path"], binary["sha256"], job)
+            validate_readout_response(response, job)
+            diagnostics = {"engine": response["engine"], "arithmetic": response["arithmetic"], "executable_sha256": binary["sha256"], "timings": dict(LAST_TIMINGS),
+                           "note": "a readout is a specified function of the declared stream and profile; it is not a measurement of anything outside the model"}
+            if operation == "graph.state_readout":
+                output = {"kind": "state_readout", "identity": response["identity"], "arithmetic": response["arithmetic"], "engine": response["engine"],
+                          "profile": data["profile"], "ticks": response["ticks"], "model": READOUT_MODEL, "profile_id": PROFILE_ID}
+                return _verdict("computed", diagnostics, output, len(response["ticks"]))
+            schedule = _schedule(data["schedule"])
+            found = detections(response["ticks"], data["profile"]["thresholds"], schedule, response["identity"])
+            output = {"kind": "detections", "readout_identity": response["identity"], "arithmetic": response["arithmetic"], "engine": response["engine"],
+                      "schedule": schedule, "thresholds": data["profile"]["thresholds"], "detections": found, "ticks_evaluated": len(response["ticks"]),
+                      "model": READOUT_MODEL, "profile_id": PROFILE_ID}
+            diagnostics["detections"] = [d["tick"] for d in found]
+            return _verdict("computed", diagnostics, output, len(found))
         if operation in ("graph.snapshot", "graph.region_mass"):
             queries = []
             if operation == "graph.region_mass":

@@ -193,6 +193,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "68ab91017fe16c622486840e4c83c9a37afeff978bd239b5293d61ece587de66"
 
 [[package]]
+name = "libm"
+version = "0.2.16"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b6d2cec3eae94f9f509c767b45932f1ada8350c4bdb85af2fcab4a3c14807981"
+
+[[package]]
 name = "matrixmultiply"
 version = "0.3.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -337,6 +343,7 @@ version = "0.1.0"
 dependencies = [
  "pse-core",
  "pse-evidence",
+ "pse-fmath",
  "pse-graph",
  "pse-topology",
  "pse-types",
@@ -348,6 +355,7 @@ dependencies = [
 name = "pse-cascade"
 version = "0.1.0"
 dependencies = [
+ "pse-fmath",
  "pse-metatron",
  "pse-types",
  "serde",
@@ -371,6 +379,7 @@ dependencies = [
  "pse-constraint",
  "pse-evidence",
  "pse-extract",
+ "pse-fmath",
  "pse-graph",
  "pse-memory",
  "pse-metatron",
@@ -397,6 +406,7 @@ dependencies = [
 name = "pse-extract"
 version = "0.1.0"
 dependencies = [
+ "pse-fmath",
  "pse-graph",
  "pse-types",
  "serde",
@@ -405,10 +415,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "pse-fmath"
+version = "0.1.0"
+dependencies = [
+ "libm",
+]
+
+[[package]]
 name = "pse-graph"
 version = "0.1.0"
 dependencies = [
  "petgraph",
+ "pse-fmath",
  "pse-types",
  "thiserror",
 ]
@@ -428,6 +446,7 @@ name = "pse-metatron"
 version = "0.1.0"
 dependencies = [
  "nalgebra",
+ "pse-fmath",
  "pse-types",
  "rayon",
  "serde",
@@ -441,6 +460,7 @@ dependencies = [
 name = "pse-navigator"
 version = "0.1.0"
 dependencies = [
+ "pse-fmath",
  "pse-topology",
  "serde",
  "serde_json",
@@ -450,6 +470,7 @@ dependencies = [
 name = "pse-scale"
 version = "0.1.0"
 dependencies = [
+ "pse-fmath",
  "pse-graph",
  "pse-topology",
  "pse-types",
@@ -462,6 +483,7 @@ name = "pse-topology"
 version = "0.1.0"
 dependencies = [
  "nalgebra",
+ "pse-fmath",
  "pse-graph",
  "pse-types",
  "serde",

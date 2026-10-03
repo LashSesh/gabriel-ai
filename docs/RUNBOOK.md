@@ -214,6 +214,26 @@ the executables a native proposal is refused at normalization (no substitute wor
 `evidence/pse/` (build identity, equivalence with the retained functional journals,
 measurements, graph tier check) and `tests/test_native_pse.py`.
 
+Since ADR-19 the engine's transcendental arithmetic is platform-independent by construction
+(`pse-fmath`, pure-Rust libm; the historical Windows golden fixture is explained by last-bit
+differences between C libraries and is compared only on request), and two further operations
+expose the engine's continuous state as a specified readout over a declared observation stream
+(`observation_stream`: per observation an entity, a phase in [0, 2pi) and an amplitude in
+[0, 1]; a profile with carriers, coherence parameters, normalization and thresholds):
+`graph.state_readout` (embedding, data helix, active carrier, gate metrics d, q, r, g, j, p, n,
+k and gate verdict per step, with an identity over the complete readout) and
+`graph.detections` on a `detection_query` (the gate crossings admitted by a declared
+`{min_tick, cooldown}` schedule, each with an identity over its complete content; an empty
+list is a computed result). `src/gabriel_agent/evaluation/fixtures/graph_readout.py` states
+the specification and implements it independently in the standard library.
+```bash
+cargo build --locked --release --manifest-path native_pse/Cargo.toml --example engine_observer --example engine_snapshot --example engine_readout
+.venv/bin/python scripts/pse_build_identity.py --output evidence/pse/build_identity.json   # digests of the executables, lockfile and bound sources
+(cd native_pse && cargo test --workspace --release --locked)                               # includes the platform-independent golden fixture
+(cd native_pse && cargo run --release --example golden_fixture > /tmp/fixture.json)        # regenerate after an intentional model change only
+(cd native_pse && cargo test --release -- --ignored full_state_matches_original_golden_fixture)   # the historical Windows fixture, on request
+```
+
 ## Evidence manifests
 ```bash
 GABRIEL_CONTAINMENT_TESTS=1 python -m pytest tests -vv -rs | tee evidence/test_results.txt

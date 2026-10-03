@@ -31,10 +31,15 @@ in an isolated worktree with independent acceptance checks.
   measurements of cold start, identity validation, query and task latency):
   `docs/adr/ADR-18-native-pse-graph-worker.md`, `docs/RUNBOOK.md` (Native PSE graph worker),
   `evidence/pse/`
+- Native PSE determinism and specified readout (platform-independent arithmetic that explains
+  the historical golden-fixture mismatch; the engine's continuous state as a specified,
+  independently referenced readout over declared observation streams with schedule-admitted
+  detections; the inherited crystal path stays quarantined with reasons):
+  `docs/adr/ADR-19-native-pse-determinism-and-readout.md`, `evidence/pse/determinism/`
 - Contract extensions: `docs/adr/ADR-10-hold-records.md`, `ADR-11`, `ADR-12`, `ADR-13` (DomainPack
   ports), `ADR-14` (memory chain), `ADR-15` (readout router), `ADR-16` (document and numerical
   advantage gate with declared memory ablations), `ADR-17` (operations), `ADR-18` (native PSE
-  graph worker)
+  graph worker), `ADR-19` (native PSE determinism and specified readout)
 - Evidence (test log, environment, baseline rerun, spec validation): `evidence/`
 - The blueprint's own machine-readable contracts and validator: `contracts/`, `tools/validate_spec.py`
 

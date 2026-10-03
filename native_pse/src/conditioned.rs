@@ -4,6 +4,7 @@
 //! inactive vertices. The snapshot is an explicit model observation; its
 //! intensities are not outcome probabilities or calibrated confidence values.
 
+use pse_fmath::Fmath;
 use pse_graph::PersistentGraph;
 use pse_types::{content_address_raw, Hash256, VertexId};
 use std::collections::{BTreeMap, BTreeSet};
@@ -334,8 +335,8 @@ impl PreparedRegion<'_> {
                 if !phase.is_finite() { return Err(WalkError::NumericalOverflow.into()); }
                 // Anchor at the independently accumulated initial mass and use
                 // cos(theta)-1=-2 sin(theta/2)^2 to avoid near-zero cancellation.
-                let half_sine = (phase * 0.5).sin();
-                initial_mass - 2.0 * cosine * half_sine * half_sine + sine * phase.sin()
+                let half_sine = (phase * 0.5).dsin();
+                initial_mass - 2.0 * cosine * half_sine * half_sine + sine * phase.dsin()
             }
             RegionData::StateReadout => {
                 let readout = self.source.readout_at(time)?;

@@ -104,7 +104,7 @@ impl ObservationAdapter for CrystalAdapter {
             context: context.clone(),
             digest,
             schema_version: "crystal/1.0".into(),
-            phase_hint: None,
+            phase_hint: None, amplitude_hint: None,
         })
     }
 }

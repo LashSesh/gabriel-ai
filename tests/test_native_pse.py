@@ -309,6 +309,16 @@ def test_native_worker_runs_inside_the_namespace_jail(tmp_path):
             result = job_result(ws, created)
             assert result["containment"] is True and result["backend_kind"] == "linux_namespace" and result["verdict"] == "computed"
             assert not (Path(created["worktree"]) / ".gabriel_worker").exists()
+        # the specified readout and its detections inside the jail (ADR-19)
+        from gabriel_agent.evaluation.fixtures import graph_readout as gr
+        repo_stream = tmp_path / "repo-stream"
+        base_stream = gr.build_repo(repo_stream)
+        for operation in ("graph.state_readout", "graph.detections"):
+            oracle = gr.write_oracle(tmp_path / ("oracle_stream_%s.json" % operation), operation)
+            created, summary = run_task(ws, gr.task_spec(repo_stream, base_stream, oracle, scripted(gr.script(operation)), operation))
+            assert summary["state"] == "succeeded", (operation, summary["log"])
+            result = job_result(ws, created)
+            assert result["containment"] is True and result["verdict"] == "computed"
         assert ws.owner.replay()["status"] == "passed"
     finally:
         ws.close()
@@ -381,8 +391,8 @@ def test_small_signature_partition_agrees_with_the_native_s7_orbit_index():
 def test_graph_tier_is_sound_and_frozen_protocols_keep_their_digests():
     from gabriel_agent.evaluation import corpus, corpus_domains as cd
     report = cd.check_all("graph")
-    assert len(report) == 6 and all(item["sound"] for item in report), [(i["task_id"], i["controls"]) for i in report if not i["sound"]]
-    assert {item["family"] for item in report} == {"graph-snapshot", "graph-mass", "graph-window"}
+    assert len(report) == 10 and all(item["sound"] for item in report), [(i["task_id"], i["controls"]) for i in report if not i["sound"]]
+    assert {item["family"] for item in report} == {"graph-snapshot", "graph-mass", "graph-window", "graph-readout", "graph-detections"}
     assert all(task.domain == "numerical" and task.tier == "graph" for task in cd.GRAPH_TASKS)
     # adding the tier changes no digest a protocol was frozen with (pilot 1 predates the recorded corpus amendment, ADR-16)
     for name in ("protocol5", "pilot2"):
@@ -416,3 +426,133 @@ def test_a_hit_on_the_complete_job_key_reissues_the_retained_result_and_witness(
         assert ws.owner.replay()["status"] == "passed"
     finally:
         ws.close()
+
+
+# ------------------------------------------------------------------ ADR-19: the specified state readout and its detections
+
+from gabriel_agent.evaluation.fixtures import graph_readout as gr  # noqa: E402
+
+
+def readout_cases():
+    import random
+    rng = random.Random(19)
+    cases = [("fixture", gr.STREAM, gr.profile()), ("nonadaptive", gr.STREAM, gr.profile(adaptive_carrier=False)), ("one_carrier", gr.STREAM, gr.profile(carriers=1)),
+             ("thirteen", gr.STREAM, gr.profile(carriers=13, lam=0.25, mu_r=0.1, eta_r=2.0)), ("sixtyfour", gr.STREAM, gr.profile(carriers=64))]
+    for index in range(6):
+        stream = []
+        for _ in range(rng.randint(3, 30)):
+            entities = sorted(rng.sample(range(16), rng.randint(1, 8)))
+            stream.append([(e, rng.uniform(0, 2 * 3.141592653589793), rng.random()) for e in entities])
+        cases.append(("random_%d" % index, stream, gr.profile(carriers=rng.choice([2, 3, 4, 7, 16, 33]), adaptive_carrier=rng.random() < 0.7,
+                                                            lam=rng.choice([0.1, 0.5]), mu_r=rng.choice([0.3, 1.0]), eta_r=rng.choice([1.0, 3.0]),
+                                                            thresholds={k: rng.choice([0.3, 0.5, 0.7]) for k in "dqrgjpnk"})))
+    return cases
+
+
+@needs_native
+def test_state_readout_matches_the_standard_library_reference():
+    for name, stream, prof in readout_cases():
+        result = native_graph.run_job("graph.state_readout", {}, raw(gr.stream_dataset(stream, prof)), BIN)
+        assert result["verdict"] == "computed", (name, result)
+        output = result["output"]
+        assert output["kind"] == "state_readout" and output["arithmetic"] == "pure-rust-libm" and output["engine"]["commits"] == 0 and result["rows"] == len(stream)
+        steps = gr.decode_readout(output)
+        deviation = gr.compare_readout(steps, stream, gr.decoded_profile(prof))
+        assert deviation <= 1e-12, (name, deviation)
+        # the specification's finding: r, p and n are constants under the profile and k is lambda_c * q
+        norm = gr.decoded_profile(prof)["normalization"]
+        for step in steps:
+            assert step["metrics"]["r"] == 1.0 and step["metrics"]["p"] == 1.0
+            assert abs(step["metrics"]["n"] - gr.math.exp(-norm["lambda_seam"] * step["carrier"]["delta_phi"])) <= 1e-15
+            assert abs(step["metrics"]["k"] - norm["lambda_c"] * step["metrics"]["q"]) <= 1e-15
+        # the identity covers batches, profile and every step
+        assert output["identity"] == hashlib.sha256(native_graph.canonical({"batches": output["ticks"] and gr.stream_dataset(stream, prof)["batches"], "profile": prof, "ticks": output["ticks"]})).hexdigest()
+
+
+@needs_native
+def test_detections_follow_the_declared_schedule_and_carry_complete_identities():
+    stream, prof = gr.STREAM, gr.profile()
+    readout = native_graph.run_job("graph.state_readout", {}, raw(gr.stream_dataset(stream, prof)), BIN)
+    steps = gr.decode_readout(readout["output"])
+    for schedule in ({"min_tick": 1, "cooldown": 1}, {"min_tick": 0, "cooldown": 0}, {"min_tick": 2, "cooldown": 5}, gr.no_detection_schedule()):
+        result = native_graph.run_job("graph.detections", {}, raw(gr.detection_dataset(stream, prof, schedule)), BIN)
+        assert result["verdict"] == "computed", result
+        found = result["output"]["detections"]
+        assert [d["tick"] for d in found] == gr.reference_detection_ticks(steps, schedule), schedule
+        assert result["rows"] == len(found) and result["output"]["readout_identity"] == readout["output"]["identity"]
+        for detection in found:
+            body = {k: v for k, v in detection.items() if k != "identity"}
+            assert detection["identity"] == hashlib.sha256(native_graph.canonical(body)).hexdigest()
+            assert set(body) == {"readout_identity", "tick", "vertices", "metrics", "thresholds", "schedule"}
+    assert native_graph.run_job("graph.detections", {}, raw(gr.detection_dataset(stream, prof, gr.no_detection_schedule())), BIN)["output"]["detections"] == []
+    # a changed threshold changes the admitted set and every identity
+    lower = native_graph.run_job("graph.detections", {}, raw(gr.detection_dataset(stream, gr.profile(thresholds={k: 0.0 for k in "dqrgjpnk"}), {"min_tick": 0, "cooldown": 0})), BIN)
+    assert [d["tick"] for d in lower["output"]["detections"]] == [1, 2, 3, 4]
+    identities = {d["identity"] for d in lower["output"]["detections"]}
+    assert len(identities) == 4 and not identities & {d["identity"] for d in result["output"]["detections"]}
+
+
+@needs_native
+def test_readout_contract_violations_and_undeclared_inputs_are_rejected():
+    job = {"schema": native_graph.READOUT_SCHEMA, "batches": gr.stream_dataset()["batches"], "profile": gr.profile()}
+    binary = BIN["engine_readout"]
+    response = native_graph.invoke(binary["path"], binary["sha256"], job)
+    native_graph.validate_readout_response(response, job)
+    for mutate, message in [(lambda r: r.update(arithmetic="platform-libm"), "arithmetic"), (lambda r: r["engine"].update(commits=1), "committed"),
+                            (lambda r: r["engine"].update(faulted=True), "faulted"), (lambda r: r["ticks"][1]["metrics"].update(d=native_graph.bits(0.99)), "identity"),
+                            (lambda r: r["ticks"][0].update(kairos=not r["ticks"][0]["kairos"]), "gate verdict"), (lambda r: r["ticks"][0].update(vertices=[9]), "vertex order"),
+                            (lambda r: r["ticks"][0]["carrier"].update(index=7), "outside"), (lambda r: r.update(identity="0" * 64), "identity")]:
+        broken = json.loads(json.dumps(response))
+        mutate(broken)
+        with pytest.raises(ValueError, match=message):
+            native_graph.validate_readout_response(broken, job)
+    assert native_graph.run_job("graph.state_readout", {}, raw(gr.stream_dataset([[(0, 7.0, 0.5)]])), BIN)["verdict"] == "invalid_input"
+    assert native_graph.run_job("graph.state_readout", {}, raw(gr.stream_dataset(prof=gr.profile(carriers=0))), BIN)["verdict"] == "invalid_input"
+    assert native_graph.run_job("graph.state_readout", {}, raw(gr.stream_dataset([[(0, 0.0, 1.5)]])), BIN)["verdict"] == "invalid_input"
+    assert native_graph.run_job("graph.state_readout", {}, raw(dict(gr.stream_dataset(), schedule=gr.SCHEDULE)), BIN)["verdict"] == "invalid_input"
+    assert native_graph.run_job("graph.detections", {}, raw(gr.stream_dataset()), BIN)["verdict"] == "out_of_scope"
+    assert native_graph.run_job("graph.state_readout", {}, gw.BATCHES_TEXT.encode("utf8"), BIN)["verdict"] == "out_of_scope"
+    assert native_graph.run_job("graph.detections", {}, raw(gr.detection_dataset(schedule={"min_tick": 1000, "cooldown": 0})), BIN)["verdict"] == "invalid_input"
+    assert native_graph.run_job("graph.state_readout", {"carriers": 2}, raw(gr.stream_dataset()), BIN)["verdict"] == "invalid_input"
+    for relative, content in gr.TEXTS.items():
+        description = native_graph.describe(content.encode("utf8"))
+        assert description["kind"] in ("observation_stream", "detection_query"), relative
+        assert bool(description["problems"]) == (relative == "data/stream_bad.json"), relative
+
+
+@needs_native
+def test_readout_and_detection_tasks_run_through_the_core(tmp_path):
+    repo = tmp_path / "repo"
+    base = gr.build_repo(repo)
+    ws = Workspace.create(tmp_path / "ws", backend="trusted_local", allow_trusted_local=True)
+    try:
+        for operation, kwargs in (("graph.state_readout", {}), ("graph.detections", {})):
+            oracle = gr.write_oracle(tmp_path / ("oracle_%s.json" % operation), operation, **kwargs)
+            created, summary = run_task(ws, gr.task_spec(repo, base, oracle, scripted(gr.script(operation)), operation))
+            assert summary["state"] == "succeeded", (operation, summary["log"])
+            outcomes = {a["check_id"]: a["outcome"] for a in summary["assessments"] if a["eligible"]}
+            assert outcomes["reference"] == "passed" and outcomes["scope"] == "passed", operation
+            result = job_result(ws, created)
+            assert result["verdict"] == "computed" and result["worker_build"] == native_graph.worker_build(BIN)
+            assert not (Path(created["worktree"]) / ".gabriel_worker").exists()
+        oracle = gr.write_oracle(tmp_path / "oracle_none.json", "graph.detections", schedule=gr.no_detection_schedule())
+        created, summary = run_task(ws, gr.task_spec(repo, base, oracle, scripted(gr.script("detections_none")), "graph.detections"))
+        assert summary["state"] == "succeeded", summary["log"]
+        written = json.loads((Path(created["worktree"]) / gr.OUTPUTS["graph.detections"]).read_text())
+        assert written["detections"] == [] and job_result(ws, created)["rows"] == 0  # an empty admitted set is a computed result
+        oracle = gr.write_oracle(tmp_path / "oracle_v.json", "graph.state_readout")
+        for variant, verdict in (("bad_profile", "invalid_input"), ("wrong_input_kind", "out_of_scope")):
+            created, summary = run_task(ws, gr.task_spec(repo, base, oracle, scripted(gr.script(variant)), "graph.state_readout", max_plan_versions=1, max_repairs=0))
+            assert summary["state"] == "failed", variant
+            result = job_result(ws, created)
+            assert result["verdict"] == verdict and result["output_ref"] is None, variant
+        assert ws.owner.replay()["status"] == "passed"
+    finally:
+        ws.close()
+
+
+def test_graph_tier_readout_and_detection_families_are_sound():
+    from gabriel_agent.evaluation import corpus_domains as cd
+    report = cd.check_all("graph")
+    assert {item["family"] for item in report} == {"graph-snapshot", "graph-mass", "graph-window", "graph-readout", "graph-detections"}
+    assert len(report) == 10 and all(item["sound"] for item in report), [(i["task_id"], i["controls"]) for i in report if not i["sound"]]

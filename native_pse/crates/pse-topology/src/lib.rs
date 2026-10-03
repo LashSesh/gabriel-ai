@@ -6,6 +6,7 @@
 /// Optional full-state CTQW plans; independent of the legacy all-pairs kernel.
 pub mod conditioned_walk;
 
+use pse_fmath::Fmath;
 use pse_graph::PersistentGraph;
 use pse_types::Hash256;
 use serde::{Deserialize, Serialize};
@@ -543,8 +544,8 @@ pub fn ctqw_propagate_reference(spectral: &SpectralDecomposition, config: &Topol
                         0.0
                     };
                     let phase = -lam * t;
-                    re += phase.cos() * u_mj * u_md;
-                    im += phase.sin() * u_mj * u_md;
+                    re += phase.dcos() * u_mj * u_md;
+                    im += phase.dsin() * u_mj * u_md;
                 }
                 let prob = re * re + im * im;
                 if prob >= threshold {
@@ -576,8 +577,8 @@ pub fn ctqw_propagate_reference(spectral: &SpectralDecomposition, config: &Topol
                         0.0
                     };
                 let phase = -lam * t_max;
-                re += phase.cos() * u_mj * u_md;
-                im += phase.sin() * u_mj * u_md;
+                re += phase.dcos() * u_mj * u_md;
+                im += phase.dsin() * u_mj * u_md;
             }
             transfer_probabilities[j][dest] = re * re + im * im;
         }
@@ -632,10 +633,10 @@ pub fn kuramoto_order_parameter(phases: &[f64]) -> (f64, f64) {
     if phases.is_empty() {
         return (0.0, 0.0);
     }
-    let re: f64 = phases.iter().map(|phi| phi.cos()).sum::<f64>() / phases.len() as f64;
-    let im: f64 = phases.iter().map(|phi| phi.sin()).sum::<f64>() / phases.len() as f64;
+    let re: f64 = phases.iter().map(|phi| phi.dcos()).sum::<f64>() / phases.len() as f64;
+    let im: f64 = phases.iter().map(|phi| phi.dsin()).sum::<f64>() / phases.len() as f64;
     let r = (re * re + im * im).sqrt();
-    let psi = im.atan2(re);
+    let psi = im.datan2(re);
     (r, psi)
 }
 
@@ -691,7 +692,7 @@ pub fn kuramoto_step(state: &mut KuramotoState, graph: &PersistentGraph, config:
                 let coupling = if degree[i] > 0.0 {
                     neighbors[i]
                         .iter()
-                        .map(|&(j, w)| w * (phases[j] - phases[i]).sin())
+                        .map(|&(j, w)| w * (phases[j] - phases[i]).dsin())
                         .sum::<f64>()
                         * kappa
                         / degree[i]
@@ -1150,7 +1151,7 @@ mod tests {
                 context: MeasurementContext::default(),
                 digest,
                 schema_version: "1.0.0".to_string(),
-                phase_hint: None,
+                phase_hint: None, amplitude_hint: None,
             }
         };
 

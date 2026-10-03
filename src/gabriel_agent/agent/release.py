@@ -104,6 +104,9 @@ def release_manifest(root: Path, *, evidence: dict | None = None, python: str = 
                          "single-host, single-user deployment only",
                          "the native PSE executables are built from source per host (cargo); without them native graph operations are refused at "
                          "proposal time, and without python-flint window certificates are unknown (never success)",
+                         "the native engine's arithmetic is platform-independent by construction (pure-Rust libm, ADR-19) but was executed on this "
+                         "platform only; the engine's crystal and consensus paths remain quarantined and the state readout is a specified model "
+                         "quantity, not a measurement",
                          "advantage over a simple verification loop not shown; the evaluation corpus is saturated for gpt-4.1-mini"],
     }
     return manifest
