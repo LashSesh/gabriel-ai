@@ -1,0 +1,159 @@
+{
+  "backend": "linux_namespace",
+  "bootstrap": {
+    "resamples": 2000,
+    "seed": 20261002
+  },
+  "budget_per_task": {
+    "max_input_tokens": 60000,
+    "max_output_tokens": 4000,
+    "model_requests": 6,
+    "model_tokens_total": 120000,
+    "tool_attempts": 64,
+    "wall_ms": 600000
+  },
+  "corpus_digest": "5f761d336dcafd055c617af21e7513288297f317b7bafa3158d686edf5079f0e",
+  "declared_criterion": "",
+  "declared_success": {
+    "document_and_numerical_tiers": {
+      "gabriel": "as gabriel_reference_plan with the model planner (one planner request per plan version)",
+      "gabriel_all_revisions": "as gabriel_reference_plan with the declared all_revisions view: every eligible revision enters the prompt, revocation and authorization still apply (ablation of the revision rule; document tasks only)",
+      "gabriel_associative": "as gabriel_reference_plan with the declared associative view (ADR-20): the provenance view re-ranked by the native engine's walk over the co-citation graph of the claims that earlier verified runs in the same workspace established; since ADR-21 a carried source is told apart in the prompt with the seed and the verified run that cited them together; document tasks only",
+      "gabriel_associative_unlabeled": "as gabriel_associative with the ADR-20 presentation: carried sources enter the prompt like lexically retrieved ones (ablation of the association provenance in the prompt, ADR-21; document tasks only)",
+      "gabriel_no_repair": "as gabriel with max_repairs=0 and max_plan_versions=1 (ablation of the repair cycle)",
+      "gabriel_plain_sources": "as gabriel_reference_plan with the declared plain view: every declared source file enters the prompt regardless of revision or revocation (ablation of provenance-aware retrieval; document tasks only)",
+      "gabriel_policy": "as gabriel_associative with the protocol's frozen readout policy pinned (ADR-22): at a failed verification it chooses repair or stop from the generic progress channels and the document pack's declared channels; document tasks only",
+      "gabriel_reference_plan": "run state succeeded with the pack's reference plan and the production retrieval view (effective revision, authorized and available sources; contained numerical worker)",
+      "provider_only": "an admissible deliverable was produced (amendment applied or declared operation executed through the same adapter); no verification",
+      "simple_loop": "the system's own run of the independent content checks passed (plain source view, no owner, memory service or policy)"
+    },
+    "gabriel": "run state succeeded (every mandatory check passed with eligible evidence, artifacts verified, effects reconciled)",
+    "gabriel_episodes": "as gabriel_reference_plan (rule-based repair) with the frozen episodes retrievable into the worker prompt (readout ablation)",
+    "gabriel_no_repair": "as gabriel, with max_repairs=0 and max_plan_versions=1 (ablation of the repair cycle)",
+    "gabriel_policy": "as gabriel_reference_plan, with the frozen readout policy pinned: at a failed verification it chooses repair or stop from the progress channels, and it may retrieve frozen episodes into the worker prompt",
+    "gabriel_reference_plan": "as gabriel, with the domain pack's deterministic reference plan admitted without a planner request (planner ablation)",
+    "provider_only": "an admissible patch was applied (no verification)",
+    "simple_loop": "the system's own runs of the visible tests and the oracle both exited 0"
+  },
+  "episode_seed": null,
+  "families": [
+    "association-needed",
+    "association-needed-cold",
+    "association-unneeded"
+  ],
+  "frozen_at_utc": "2026-10-03T16:55:34.157892+00:00",
+  "frozen_digest": "65f0fd0af67ddb5755543865767689c3cdd4e1605fbcc5657b5ca8817654326a",
+  "harness_identity": "708750148ff709cc399e45d74c70f8e7b7159b21f71942831cf4633441aaea6a",
+  "held_out_families": [],
+  "metrics": [
+    "p_success = mean(V)",
+    "p_false_completion = mean(D*(1-V))",
+    "conditional false completion = sum(D*(1-V))/sum(D)",
+    "model requests, model tokens and wall time per run",
+    "recovery: Gabriel runs that used repair cycles or extra plan versions",
+    "paired differences gabriel - baseline per task (mean over repetitions)",
+    "bootstrap percentile intervals, resampling task families with replacement (and tasks as a secondary view)"
+  ],
+  "note": "Pilot 9: feasibility of the gpt-5-mini configuration on three document tasks; declared in evidence/wp15/protocol9_declaration.md; retained, not counted",
+  "paired": [
+    [
+      "gabriel_policy",
+      "gabriel_associative"
+    ]
+  ],
+  "policy": {
+    "channel_schema_id": "progress-channels-v1.document-progress-v1",
+    "decision_point": "any_boundary",
+    "episodes": {
+      "k": 0,
+      "min_score_milli": 0
+    },
+    "feature_source": "channels",
+    "kind": "readout",
+    "policy_id": "readout-channels-v2",
+    "readout": {
+      "bias_micro": -221153,
+      "weights_micro": [
+        375764,
+        31920,
+        126280,
+        -11602,
+        -2626,
+        -4385,
+        -1210828,
+        -605414,
+        0,
+        0,
+        0,
+        -7005,
+        -456448,
+        -80058,
+        1046755,
+        -2337330,
+        0,
+        71643,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "recurrent_config": null,
+    "schema": "gabriel.router-policy/1",
+    "threshold_milli": 500
+  },
+  "provider": {
+    "credential_ref": "env:OPENAI_API_KEY",
+    "kind": "openai_compat",
+    "model": "gpt-5-mini",
+    "temperature_milli": 0,
+    "timeout_ms": 180000
+  },
+  "purpose": "Matched comparison: increase independently verified task success or reduce resources at equal success, under a fixed task distribution and matched constraints. Not a benchmark of general capability.",
+  "repetitions": 1,
+  "sample_size_statement": "3 tasks in 3 families; the minimum relevant effect is not predeclared from a pilot, so intervals are reported as descriptive uncertainty, not as a powered test",
+  "schema": "gabriel.evaluation-protocol/1",
+  "systems": [
+    "gabriel_associative",
+    "gabriel_policy"
+  ],
+  "tasks": [
+    {
+      "digest": "bfe1fb04f06c19e616c3cff733adfe69ac7e7e6c3f62112730179c12e64aa578",
+      "family": "association-needed",
+      "task_id": "da-fee",
+      "tier": "association"
+    },
+    {
+      "digest": "9124e99216ebaa6720c64b5d0eceee6517c159f958ffc4444a8d982e41324fb7",
+      "family": "association-needed-cold",
+      "task_id": "dc-fee",
+      "tier": "association"
+    },
+    {
+      "digest": "059db381937fc5cb9a09b99b804bda57ea54c0232e5b28ebb1dbc372181e954a",
+      "family": "association-unneeded",
+      "task_id": "du-fee",
+      "tier": "association"
+    }
+  ],
+  "tiers": [
+    "association"
+  ],
+  "time_limit_is_failure": true,
+  "verification": "fresh, system-independent: changed paths within allowed_paths; visible tests exit 0; oracle installed from the corpus text and exit 0; all executed in the containment backend on the final tree"
+}

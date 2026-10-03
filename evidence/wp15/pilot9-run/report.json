@@ -1,0 +1,171 @@
+{
+  "schema": "gabriel.evaluation-report/1",
+  "protocol_frozen_digest": "65f0fd0af67ddb5755543865767689c3cdd4e1605fbcc5657b5ca8817654326a",
+  "tasks": 3,
+  "families": 3,
+  "runs": 6,
+  "per_system": {
+    "gabriel_associative": {
+      "runs": 3,
+      "verified_successes": 2,
+      "p_success": 0.6666666666666666,
+      "declared_successes": 2,
+      "false_completions": 0,
+      "p_false_completion": 0.0,
+      "conditional_false_completion": 0.0,
+      "conditional_denominator": 2,
+      "harness_errors": 0,
+      "timed_out": 0,
+      "recovery_runs": 1,
+      "mean_model_requests": 1.6666666666666667,
+      "total_model_requests": 5,
+      "mean_model_tokens": 6856.333333333333,
+      "total_model_tokens": 20569,
+      "mean_wall_ms": 21539.333333333332,
+      "p_success_ci95_by_family": {
+        "low": 0.0,
+        "high": 1.0,
+        "clusters": 3
+      },
+      "p_success_ci95_by_task": {
+        "low": 0.0,
+        "high": 1.0,
+        "clusters": 3
+      },
+      "per_task": {
+        "da-fee": {
+          "p_success": 1.0,
+          "runs": 1
+        },
+        "dc-fee": {
+          "p_success": 0.0,
+          "runs": 1
+        },
+        "du-fee": {
+          "p_success": 1.0,
+          "runs": 1
+        }
+      }
+    },
+    "gabriel_policy": {
+      "runs": 3,
+      "verified_successes": 2,
+      "p_success": 0.6666666666666666,
+      "declared_successes": 2,
+      "false_completions": 0,
+      "p_false_completion": 0.0,
+      "conditional_false_completion": 0.0,
+      "conditional_denominator": 2,
+      "harness_errors": 0,
+      "timed_out": 0,
+      "recovery_runs": 1,
+      "mean_model_requests": 1.0,
+      "total_model_requests": 3,
+      "mean_model_tokens": 3842.0,
+      "total_model_tokens": 11526,
+      "mean_wall_ms": 12397.0,
+      "p_success_ci95_by_family": {
+        "low": 0.0,
+        "high": 1.0,
+        "clusters": 3
+      },
+      "p_success_ci95_by_task": {
+        "low": 0.0,
+        "high": 1.0,
+        "clusters": 3
+      },
+      "per_task": {
+        "da-fee": {
+          "p_success": 1.0,
+          "runs": 1
+        },
+        "dc-fee": {
+          "p_success": 0.0,
+          "runs": 1
+        },
+        "du-fee": {
+          "p_success": 1.0,
+          "runs": 1
+        }
+      }
+    }
+  },
+  "paired_differences": {
+    "gabriel_policy_minus_gabriel_associative": {
+      "per_task": {
+        "da-fee": 0.0,
+        "dc-fee": 0.0,
+        "du-fee": 0.0
+      },
+      "mean": 0.0,
+      "ci95_by_family": {
+        "low": 0.0,
+        "high": 0.0,
+        "clusters": 3
+      },
+      "ci95_by_task": {
+        "low": 0.0,
+        "high": 0.0,
+        "clusters": 3
+      },
+      "tokens_per_task": {
+        "da-fee": -165.0,
+        "dc-fee": -8615.0,
+        "du-fee": -263.0
+      },
+      "mean_tokens": -3014.3333333333335,
+      "requests_per_task": {
+        "da-fee": 0.0,
+        "dc-fee": -2.0,
+        "du-fee": 0.0
+      },
+      "mean_requests": -0.6666666666666666
+    }
+  },
+  "failures": [
+    {
+      "task_id": "dc-fee",
+      "system": "gabriel_associative",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: 120 EUR | 120",
+        "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "dc-fee",
+      "system": "gabriel_policy",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "required statement missing: 120 EUR | 120",
+        "required statement not cited from annex with 'one hundred twenty (120) EUR'"
+      ],
+      "provider_statuses": [
+        "completed"
+      ]
+    }
+  ],
+  "claim_scope": "Scoped comparison on one synthetic task distribution with one provider; a difference here is not a general superiority claim. Costs include every attempt, including failed and timed-out runs.",
+  "frozen_check": {
+    "frozen_digest": "65f0fd0af67ddb5755543865767689c3cdd4e1605fbcc5657b5ca8817654326a",
+    "harness_identity_now": "708750148ff709cc399e45d74c70f8e7b7159b21f71942831cf4633441aaea6a",
+    "harness_amended": false
+  }
+}

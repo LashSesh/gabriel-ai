@@ -180,6 +180,7 @@ gabriel eval freeze ... --tiers association --tasks <all da-/dc-/du- tasks> \
 scripts/policy_route.py promote --train-out ./policies8 --eval-run ./run8b-eval --baseline gabriel_associative \
     --treatment gabriel_policy --held-out association-needed-held-out,association-needed-cold-held-out,association-unneeded-held-out \
     --out ./promotion8
+scripts/eval_decision_analysis.py ./run8b-eval                                       # every unit's routing decisions beside its provider statuses
 ```
 
 ## Operations (ADR-17)
