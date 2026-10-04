@@ -62,12 +62,19 @@ in an isolated worktree with independent acceptance checks.
   readout with fixed weights equal to the rule at less than half the tokens with every hopeless
   repair stopped; scope: two providers of one vendor): `docs/EVALUATION_PROTOCOL.md`,
   `evidence/wp15/run9/`
+- Erosion of the association history (the walk runs over the retrieval's own candidates and
+  nothing else: a withdrawn or unauthorized source leaves the history, the record says what
+  eroded and why, claims are read as of the frontier from the chain, and every retained
+  retrieval manifest recomputes from the chain at its own frontier and access policy revision;
+  witnessed through the owner in `linux_namespace`): `docs/adr/ADR-23-association-erosion.md`,
+  `evidence/wp16/`
 - Contract extensions: `docs/adr/ADR-10-hold-records.md`, `ADR-11`, `ADR-12`, `ADR-13` (DomainPack
   ports), `ADR-14` (memory chain), `ADR-15` (readout router), `ADR-16` (document and numerical
   advantage gate with declared memory ablations), `ADR-17` (operations), `ADR-18` (native PSE
   graph worker), `ADR-19` (native PSE determinism and specified readout), `ADR-20` (associative
   memory layer), `ADR-21` (association provenance in the prompt), `ADR-22` (domain-declared
-  progress channels and G3 on the association distribution)
+  progress channels and G3 on the association distribution), `ADR-23` (erosion of the
+  association history and reproducible retrieval manifests)
 - Evidence (test log, environment, baseline rerun, spec validation): `evidence/`
 - The blueprint's own machine-readable contracts and validator: `contracts/`, `tools/validate_spec.py`
 

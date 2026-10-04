@@ -61,11 +61,19 @@ def build_repo(path: Path) -> str:
     return subprocess.check_output(["git", "-C", str(path), "rev-parse", "HEAD"], text=True).strip()
 
 
-def sources(with_distractors: bool = True) -> list:
+REVOCATION_REASON = "annex withdrawn by the general assembly"
+
+
+def sources(with_distractors: bool = True, revoked: tuple = ()) -> list:
+    """The declared sources; a source named in ``revoked`` is declared withdrawn (ADR-23: the pack
+    ingests it for audit and revokes it before any retrieval of the task)."""
     out = [{"path": "sources/charter.md", "source_id": "charter", "revision": 1, "event_kind": "timeless_document"},
            {"path": "sources/annex.md", "source_id": "annex", "revision": 1, "event_kind": "timeless_document"}]
     if with_distractors:
         out += [{"path": "sources/note-%02d.md" % index, "source_id": "note%02d" % index, "revision": 1, "event_kind": "timeless_document"} for index in range(DISTRACTORS)]
+    for entry in out:
+        if entry["source_id"] in revoked:
+            entry.update(access="revoked", revocation_reason=REVOCATION_REASON)
     return out
 
 
@@ -101,9 +109,9 @@ def history_spec(repo, base_commit, oracle_path, provider, **over) -> dict:
     return _spec(HISTORY_GOAL, repo, base_commit, oracle_path, provider, NOTES_TARGET, sources(with_distractors=False), **over)
 
 
-def summary_spec(repo, base_commit, oracle_path, provider, view: str = "associative", **over) -> dict:
+def summary_spec(repo, base_commit, oracle_path, provider, view: str = "associative", revoked: tuple = (), **over) -> dict:
     """The evaluated task: the annex is lexically invisible to its goal and competes with 36 scored distractors."""
-    return _spec(SUMMARY_GOAL, repo, base_commit, oracle_path, provider, SUMMARY_TARGET, sources(with_distractors=True), retrieval_view=view, **over)
+    return _spec(SUMMARY_GOAL, repo, base_commit, oracle_path, provider, SUMMARY_TARGET, sources(with_distractors=True, revoked=revoked), retrieval_view=view, **over)
 
 
 def _amendment(target: str, content: str, rationale: str) -> dict:

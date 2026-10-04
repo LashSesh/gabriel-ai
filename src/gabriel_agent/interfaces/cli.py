@@ -51,6 +51,8 @@ def main(argv=None) -> int:
     mem = sub.add_parser("memory", help="evidence index (WP09)"); msub = mem.add_subparsers(dest="action", required=True)
     for name in ("status", "verify", "compact"):
         p = msub.add_parser(name); p.add_argument("--workspace", required=True)
+    rp = msub.add_parser("reproduce", help="ADR-23: recompute a retained retrieval manifest from the chain at its own frontier and access policy revision and compare")
+    rp.add_argument("--workspace", required=True); rp.add_argument("--manifest", required=True, help="sha256 of the retained retrieval manifest object")
     ev = sub.add_parser("eval", help="frozen matched evaluation (WP11)"); esub = ev.add_subparsers(dest="action", required=True)
     cc = esub.add_parser("corpus-check"); cc.add_argument("--tier", choices=("standard", "hard", "document", "numerical", "graph", "association"), default=None)
     freeze = esub.add_parser("freeze"); freeze.add_argument("--provider", required=True, help="JSON provider spec (file or inline)")
@@ -131,6 +133,10 @@ def main(argv=None) -> int:
                     report = ws.memory.verify(); _emit(report); return 0 if report["status"] == "passed" else 3
                 if args.action == "compact":
                     _emit(ws.memory.compact()); return 0
+                if args.action == "reproduce":
+                    path = ws.store.path_for(args.manifest)
+                    manifest = loads(ws.store.get({"sha256": args.manifest, "bytes": path.stat().st_size, "media_type": "application/json"}))
+                    report = ws.memory.reproduce(manifest); _emit(report); return 0 if report["status"] == "reproduced" else 3
             if args.action == "create":
                 spec = json.loads(Path(args.spec).read_text())
                 result = ws.create_task(spec)

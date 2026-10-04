@@ -98,7 +98,9 @@ def release_manifest(root: Path, *, evidence: dict | None = None, python: str = 
                         "carried the required source in every needed run including the held-out family (10/10 against 0/10 for the provenance view) "
                         "and cost two of six unneeded runs (the declared harm bound of one was exceeded); under protocol 7 (ADR-21) carried sources "
                         "say in the prompt why they are there, which kept every needed outcome, brought the unneeded family to the provenance view's "
-                        "level against the unlabeled control, and made the associative view the document pack's default as declared",
+                        "level against the unlabeled control, and made the associative view the document pack's default as declared; since ADR-23 "
+                        "the history is projected onto the retrieval's own candidates (a withdrawn or unauthorized source erodes from it, "
+                        "evidence/wp16) and every retained retrieval manifest recomputes from the chain at its own frontier and access policy revision",
                   "G3": "established in the blueprint's scoped sense (ADR-22, evidence/wp15): on the association distribution, with the document "
                         "pack's declared progress channels, a readout trained on 48 retained decisions of the system's own runs met the declared "
                         "held-out criterion on two unseen topics (equal verified success, 2836 against 5425 mean tokens, no false completion), its "
@@ -120,7 +122,8 @@ def release_manifest(root: Path, *, evidence: dict | None = None, python: str = 
                          "into a budgeted prompt whether or not the task needs them; the prompt says why each is there, which under protocol 7 kept "
                          "gpt-4.1-mini from stating the forbidden figure (6/6 first attempts without the reason, 0/6 with it) but cost two repairs on "
                          "one needed task; two providers of one vendor (gpt-4.1-mini, gpt-5-mini; protocol 9), one presentation; the lexical seeds "
-                         "are tie-broken by observation id",
+                         "are tie-broken by observation id; the history erodes by declared withdrawal and authorization only (ADR-23), never by time, "
+                         "and a withdrawal declared by one task is re-admitted by a later task that declares the source available",
                          "the document pack's default routing policy is a readout promoted on one constructed distribution with one provider "
                          "(ADR-22) and transferred with fixed weights to a second provider of the same vendor (protocol 9); it can only stop a "
                          "repair earlier than the rule, it abstains where its declared channels are missing, and it stopped one recoverable "

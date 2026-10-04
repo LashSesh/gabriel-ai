@@ -1,0 +1,371 @@
+{
+ "adr": "docs/adr/ADR-23-association-erosion.md",
+ "backend": "linux_namespace",
+ "checks": {
+  "annex_absent_from_the_prompt": true,
+  "associative_view_carried_the_annex": true,
+  "both_manifests_reproduce_from_the_chain": true,
+  "earlier_manifest_reproduces_at_its_own_revision": true,
+  "history_eroded_after_the_withdrawal": true,
+  "history_established_a_supported_claim": true,
+  "memory_chain_verified": true,
+  "no_key_outside_the_candidates_named": true,
+  "owner_replay_passed": true,
+  "withdrawal_recorded_in_the_chain_by_the_run": true
+ },
+ "doctor": {
+  "configured_backend": "linux_namespace",
+  "linux_namespace": {
+   "available": true,
+   "backend": "linux_namespace",
+   "checks": {
+    "jail_selftest": {
+     "exit_code": 0,
+     "start_failure": null,
+     "stdout": "pid 1\nnet blocked OSError\n"
+    },
+    "platform": "linux",
+    "setpriv": "/usr/bin/setpriv",
+    "unshare": "/usr/bin/unshare",
+    "unshare_namespaces": true
+   },
+   "containment": true,
+   "identity": "linux_namespace:6.18.44-fc-v64:x86_64:python-3.12.3",
+   "reasons": []
+  },
+  "problems": [],
+  "status": null
+ },
+ "engine_observer_sha256": "a8e1f6d7db2ef7ab3b822ac217f29f42db22cb8745a979ccbf8911da80b94110",
+ "memory_anchor": {
+  "head": "14c47aab387645f2a1df22a3909411872097dda11962c3320ef7c44b0d1080a9",
+  "memory_sequence": 91,
+  "owner_sequence": 92,
+  "policy_revision": 1,
+  "schema": "gabriel.memory-anchor/1",
+  "workspace_id": "ws-ea600839c3d7"
+ },
+ "memory_verify": {
+  "entries": 91,
+  "head": "14c47aab387645f2a1df22a3909411872097dda11962c3320ef7c44b0d1080a9",
+  "status": "passed"
+ },
+ "platform": "Linux-6.18.44-fc-v64-x86_64-with-glibc2.39",
+ "produced_at_utc": "2026-10-04T13:50:01.365154+00:00",
+ "provider": {
+  "kind": "scripted",
+  "note": "the mechanism under witness is the memory's; the deliverables are the fixture's scripted correct ones"
+ },
+ "replay": {
+  "events": 92,
+  "status": "passed"
+ },
+ "reproductions": {
+  "summary_annex_withdrawn": {
+   "cli": {
+    "exit_code": 0,
+    "report": {
+     "access_policy_revision": 1,
+     "association_status": {
+      "recomputed": "eroded",
+      "retained": "eroded"
+     },
+     "current_memory_sequence": 91,
+     "current_policy_revision": 1,
+     "differences": [],
+     "frontier": {
+      "memory_sequence": 89,
+      "owner_sequence": 70
+     },
+     "manifest_id": "retrieval-b6c23df7e62212a3a86f4ac6",
+     "status": "reproduced"
+    }
+   },
+   "service": {
+    "access_policy_revision": 1,
+    "association_status": {
+     "recomputed": "eroded",
+     "retained": "eroded"
+    },
+    "current_memory_sequence": 91,
+    "current_policy_revision": 1,
+    "differences": [],
+    "frontier": {
+     "memory_sequence": 89,
+     "owner_sequence": 70
+    },
+    "manifest_id": "retrieval-b6c23df7e62212a3a86f4ac6",
+    "status": "reproduced"
+   }
+  },
+  "summary_associative": {
+   "cli": {
+    "exit_code": 0,
+    "report": {
+     "access_policy_revision": 0,
+     "association_status": {
+      "recomputed": "computed",
+      "retained": "computed"
+     },
+     "current_memory_sequence": 91,
+     "current_policy_revision": 1,
+     "differences": [],
+     "frontier": {
+      "memory_sequence": 45,
+      "owner_sequence": 39
+     },
+     "manifest_id": "retrieval-a165f5a86cee14dee43df0ed",
+     "status": "reproduced"
+    }
+   },
+   "service": {
+    "access_policy_revision": 0,
+    "association_status": {
+     "recomputed": "computed",
+     "retained": "computed"
+    },
+    "current_memory_sequence": 91,
+    "current_policy_revision": 1,
+    "differences": [],
+    "frontier": {
+     "memory_sequence": 45,
+     "owner_sequence": 39
+    },
+    "manifest_id": "retrieval-a165f5a86cee14dee43df0ed",
+    "status": "reproduced"
+   }
+  }
+ },
+ "revocations": [
+  {
+   "hash": "37c0548f0b521c72310bba902681ef9811d46f717c93018e1a7706dd0ea338d5",
+   "kind": "access_revocation",
+   "owner_sequence": 70,
+   "record_sha": "cd4fdf859c65d4d356b24dc79439e6438f7018fb1f8624a2b90fc10fc7ebe877",
+   "seq": 53
+  }
+ ],
+ "schema": "gabriel.evidence.association-erosion-witness/1",
+ "status": "passed",
+ "steps": [
+  {
+   "access_policy_revision": 0,
+   "annex": {
+    "excluded_reasons": [],
+    "lexical_milli": 219,
+    "rank": 1,
+    "retrieved": true,
+    "structural_milli": 0
+   },
+   "association": {
+    "batches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "entities": [],
+    "erosion": {
+     "claims_available": 0,
+     "claims_contributing": 0,
+     "keys_removed": 0,
+     "policy_revision": 0,
+     "removed_by": {}
+    },
+    "executable_sha256": null,
+    "links": {},
+    "masses_milli": {},
+    "seeds": [],
+    "snapshot_identity": null,
+    "status": "no_history"
+   },
+   "claims_logged": [
+    "claim claim-4aa71418168b5b37 supported by 2 cited observation(s)"
+   ],
+   "declared_sources": [
+    {
+     "source_id": "charter"
+    },
+    {
+     "source_id": "annex"
+    }
+   ],
+   "frontier": {
+    "memory_sequence": 2,
+    "owner_sequence": 8
+   },
+   "item_count": 2,
+   "items": [
+    "annex",
+    "charter"
+   ],
+   "label": "history",
+   "prompt": {
+    "annex_unavailable_line": false,
+    "bytes": 2205,
+    "has_association_heading": false,
+    "names_annex": true,
+    "states_annex_figure": true
+   },
+   "retrieval_manifest_sha256": "25b9a9186f9813aca7727dbc06058a2a9187419a9b9fa7699978a2428c6c71d2",
+   "retrieval_view": "associative",
+   "run_id": "run-8554c565f345-1",
+   "state": "succeeded",
+   "task_id": "task-8554c565f345"
+  },
+  {
+   "access_policy_revision": 0,
+   "annex": {
+    "excluded_reasons": [
+     "superseded"
+    ],
+    "lexical_milli": 0,
+    "rank": 2,
+    "retrieved": true,
+    "structural_milli": 230
+   },
+   "association": {
+    "batches_sha256": "37f8bac63b3e6e452c5e89a4aaee6ee587f4b02be679931384ff452fdb87abd1",
+    "entities": [
+     "annex/sources:annex.md",
+     "charter/sources:charter.md"
+    ],
+    "erosion": {
+     "claims_available": 1,
+     "claims_contributing": 1,
+     "keys_removed": 0,
+     "policy_revision": 0,
+     "removed_by": {}
+    },
+    "executable_sha256": "a8e1f6d7db2ef7ab3b822ac217f29f42db22cb8745a979ccbf8911da80b94110",
+    "links": {
+     "annex/sources:annex.md": {
+      "claims": [
+       "claim-4aa71418168b5b37def679b8ad95cd9da0dfde24"
+      ],
+      "direct": true,
+      "seeds": [
+       "charter/sources:charter.md"
+      ],
+      "task_ids": [
+       "task-8554c565f345"
+      ]
+     }
+    },
+    "masses_milli": {
+     "annex/sources:annex.md": 230,
+     "charter/sources:charter.md": 770
+    },
+    "seeds": [
+     "charter/sources:charter.md"
+    ],
+    "snapshot_identity": "65e51dbb19404332ff3c62701635be6e51939814d28decb3b0a2601315eb7c41",
+    "status": "computed"
+   },
+   "claims_logged": [
+    "claim claim-c16b85669ae61d68 supported by 2 cited observation(s)"
+   ],
+   "declared_sources": [
+    {
+     "source_id": "charter"
+    },
+    {
+     "source_id": "annex"
+    }
+   ],
+   "frontier": {
+    "memory_sequence": 45,
+    "owner_sequence": 39
+   },
+   "item_count": 32,
+   "items": [
+    "charter",
+    "annex",
+    "note34",
+    "note16",
+    "note26",
+    "note18",
+    "note09",
+    "note14"
+   ],
+   "label": "summary_associative",
+   "prompt": {
+    "annex_unavailable_line": false,
+    "bytes": 9448,
+    "has_association_heading": true,
+    "names_annex": true,
+    "states_annex_figure": true
+   },
+   "retrieval_manifest_sha256": "0f2ca0eeed2cddf8a7d8ae7df6e5989a5b31846a851557ef2cade25dab604d65",
+   "retrieval_view": "associative",
+   "run_id": "run-0ea16935a574-1",
+   "state": "succeeded",
+   "task_id": "task-0ea16935a574"
+  },
+  {
+   "access_policy_revision": 1,
+   "annex": {
+    "excluded_reasons": [
+     "revoked",
+     "superseded"
+    ],
+    "lexical_milli": null,
+    "rank": null,
+    "retrieved": false,
+    "structural_milli": null
+   },
+   "association": {
+    "batches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "entities": [],
+    "erosion": {
+     "claims_available": 2,
+     "claims_contributing": 0,
+     "keys_removed": 2,
+     "policy_revision": 1,
+     "removed_by": {
+      "revoked": 2
+     }
+    },
+    "executable_sha256": null,
+    "links": {},
+    "masses_milli": {},
+    "seeds": [],
+    "snapshot_identity": null,
+    "status": "eroded"
+   },
+   "claims_logged": [],
+   "declared_sources": [
+    {
+     "source_id": "charter"
+    },
+    {
+     "access": "revoked",
+     "source_id": "annex"
+    }
+   ],
+   "frontier": {
+    "memory_sequence": 89,
+    "owner_sequence": 70
+   },
+   "item_count": 32,
+   "items": [
+    "charter",
+    "note05",
+    "note32",
+    "note34",
+    "note23",
+    "note16",
+    "note08",
+    "note24"
+   ],
+   "label": "summary_annex_withdrawn",
+   "prompt": {
+    "annex_unavailable_line": true,
+    "bytes": 12382,
+    "has_association_heading": false,
+    "names_annex": false,
+    "states_annex_figure": false
+   },
+   "retrieval_manifest_sha256": "42beb3b0506bce949eec6a5c8a3579211e283f73f2518ee38eabe8ff55ccc285",
+   "retrieval_view": "associative",
+   "run_id": "run-73cad2dec92f-1",
+   "state": "failed",
+   "task_id": "task-73cad2dec92f"
+  }
+ ]
+}

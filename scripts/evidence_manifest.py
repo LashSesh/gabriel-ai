@@ -111,6 +111,15 @@ PACKAGES = {
                                         "evidence/wp15/run9/decision_analysis.json", "evidence/wp15/run9/final_diffs/index.json", "docs/EVALUATION_PROTOCOL.md"],
                            "not_executed": ["a provider of another vendor (the Anthropic provider is implemented and tested against a local fake endpoint; no credential here)",
                                             "a readout trained on gpt-5-mini's own decisions", "a second pack or a real-world corpus"]},
+    "ADR23-association-erosion": {"status": "DONE_EXECUTED", "tests": ["tests/test_association.py", "tests/test_memory.py"],
+                                  "acceptance": ["ADR-23: the walk runs over the retrieval's own candidates only; a declared withdrawal erodes the history "
+                                                 "through the owner; every retained retrieval manifest reproduces from the chain at its own frontier and "
+                                                 "access policy revision"],
+                                  "evidence": ["evidence/wp16/witness.json", "evidence/wp16/report.md", "evidence/wp16/manifest-summary_associative.json",
+                                               "evidence/wp16/manifest-summary_annex_withdrawn.json", "docs/adr/ADR-23-association-erosion.md"],
+                                  "not_executed": ["a provider run after an erosion (mechanism witness with the scripted provider only)",
+                                                   "erosion by time (not designed: a claim contributes or not)",
+                                                   "a key-level withdrawal that survives a later task declaring the source available"]},
     "OPS": {"status": "DONE", "tests": ["tests/test_ops.py"], "acceptance": ["blueprint: operations, observability and release discipline"],
             "evidence": ["evidence/ops/migration_at23.json", "evidence/ops/migration_run5_dr-notice.json", "evidence/ops/smoke_metrics.json",
                          "evidence/ops/smoke_trace_summary.json", "evidence/ops/smoke_gc_dry_run.json", "evidence/ops/smoke_doctor_deep.json",

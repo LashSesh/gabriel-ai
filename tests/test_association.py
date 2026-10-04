@@ -11,7 +11,7 @@ import pytest
 from gabriel_agent.adapters import native_graph
 from gabriel_agent.agent import TaskRunner, Workspace
 from gabriel_agent.artifacts import ObjectStore
-from gabriel_agent.contracts.codec import loads
+from gabriel_agent.contracts.codec import canonical, loads
 from gabriel_agent.evaluation.fixtures import document_association as da
 from gabriel_agent.evaluation.fixtures import graph_walk as gw
 from gabriel_agent.memory import MemoryService, association
@@ -100,9 +100,17 @@ def test_association_never_reaches_what_the_principal_cannot_retrieve(tmp_path):
         assert "annex" in retrieved and "secret" not in retrieved and "foreign" not in retrieved
         reasons = {e["observation_id"]: e["reason"] for e in manifest["excluded"]}
         assert reasons[ids["secret"]] == "revoked" and reasons[other["observation_id"]] == "out_of_scope"
-        # the walk ran over the history (four entities) but mass was read out for retrievable candidates only
+        # ADR-23: the history is projected onto the retrieval's own candidates: the walk ran over charter and annex
+        # only, the record says what eroded and why, and the manifest never names a key the principal cannot retrieve
         record = manifest["association"]
-        assert len(record["entities"]) == 4 and set(record["masses_milli"]) <= {"charter/sources:charter", "annex/sources:annex"}
+        assert record["status"] == "computed" and set(record["entities"]) == {"charter/sources:charter", "annex/sources:annex"}
+        assert record["erosion"] == {"policy_revision": 1, "claims_available": 1, "claims_contributing": 1, "keys_removed": 2,
+                                     "removed_by": {"revoked": 1, "out_of_scope": 1}}
+        text = canonical(manifest).decode("ascii")
+        assert "secret/" not in text and "foreign/" not in text and "Board remuneration" not in text
+        # the mass at the annex is the reference walk over the projected two-entity graph, not over the four-entity one
+        mass = gw.reference_masses([[0, 1]], [(0, 1.0, 0.0), (1, 0.0, 0.0)], [1], [1.0])[0]
+        assert abs(record["masses_milli"]["annex/sources:annex"] - association.milli(mass)) <= 1
         # an unsupported claim is not history
         memory2_store, memory2, ids2 = memory_with(tmp_path / "two", {"charter": da.CHARTER, "annex": da.ANNEX})
         try:
@@ -114,10 +122,61 @@ def test_association_never_reaches_what_the_principal_cannot_retrieve(tmp_path):
         memory.close()
 
 
+@needs_native
+def test_history_erodes_with_a_revocation_and_every_retained_manifest_reproduces_from_the_chain(tmp_path):
+    """ADR-23: a source withdrawn after a verified run cited it leaves the association history of
+    every later retrieval (the claim that cited it contributes nothing once fewer than two of its
+    keys remain), the record says so, and a manifest retained before the withdrawal recomputes
+    from the chain at its own frontier and access policy revision, bit for bit, whatever the
+    memory recorded afterwards."""
+    sources = {"charter": da.CHARTER, "annex": da.ANNEX}
+    sources.update({"note%02d" % i: da.distractor(i) for i in range(da.DISTRACTORS)})
+    store, memory, ids = memory_with(tmp_path, sources)
+    try:
+        claim = support(memory, "history", [ids["charter"], ids["annex"]])
+        support(memory, "alone", [ids["charter"]])  # a claim citing one source says nothing about co-citation
+        before = retrieve(memory, da.SUMMARY_GOAL, max_items=16, association=association.PROFILE)
+        record = before["association"]
+        assert record["status"] == "computed" and "annex" in {i["source_id"] for i in before["items"]}
+        assert record["erosion"] == {"policy_revision": 0, "claims_available": 2, "claims_contributing": 1, "keys_removed": 0, "removed_by": {}}
+        assert set(record["entities"]) == {"charter/sources:charter", "annex/sources:annex"} and list(record["links"]) == ["annex/sources:annex"]
+        plain = retrieve(memory, da.SUMMARY_GOAL, max_items=16)
+        # the annex is withdrawn: the claim that cited it with the charter erodes, the retrieval is lexical again and says why
+        memory.revoke(ids["annex"], principal_id="local-user", reason="withdrawn")
+        after = retrieve(memory, da.SUMMARY_GOAL, max_items=16, association=association.PROFILE)
+        assert after["cached"] is False and after["access_policy_revision"] == 1
+        eroded = after["association"]
+        assert eroded["status"] == "eroded" and eroded["entities"] == [] and eroded["links"] == {} and eroded["masses_milli"] == {}
+        assert eroded["erosion"] == {"policy_revision": 1, "claims_available": 2, "claims_contributing": 0, "keys_removed": 1, "removed_by": {"revoked": 1}}
+        assert [i["observation_id"] for i in after["items"]] == [i["observation_id"] for i in plain["items"]]
+        assert {e["observation_id"]: e["reason"] for e in after["excluded"]}[ids["annex"]] == "revoked"
+        assert "annex/" not in canonical(after).decode("ascii")
+        # both retained manifests reproduce from the chain: the earlier one at its own policy revision still carries the annex
+        for manifest in (before, after):
+            report = memory.reproduce(manifest)
+            assert report["status"] == "reproduced" and report["differences"] == [], report
+            assert report["association_status"] == {"retained": manifest["association"]["status"], "recomputed": manifest["association"]["status"]}
+        assert memory.reproduce(before)["current_policy_revision"] == 1
+        # a retraction reopens the claim; the manifest retained while it was supported still reproduces, because the
+        # claims are read as of the frontier from the chain, and a new retrieval at the frontier of 'before' erodes instead
+        memory.retract(ids["charter"], principal_id="local-user", reason="charter superseded")
+        assert memory.claim(claim["claim_id"])["assessment_status"] == "unresolved"
+        assert memory.reproduce(before)["status"] == "reproduced"
+        again = retrieve(memory, da.SUMMARY_GOAL, max_items=16, association=association.PROFILE, frontier=before["frontier"])
+        assert again["association"]["status"] == "eroded" and again["association"]["erosion"]["removed_by"] == {"revoked": 3}  # two keys of 'history', one of 'alone'
+        fresh = retrieve(memory, da.SUMMARY_GOAL, max_items=16, association=association.PROFILE)
+        assert fresh["association"]["status"] == "no_history" and fresh["association"]["erosion"]["claims_available"] == 0
+        assert memory.verify()["status"] == "passed"
+    finally:
+        memory.close()
+
+
 def test_structural_scores_declare_their_limits():
     profile = dict(association.PROFILE, max_entities=4)
     masses, record = association.structural_scores([], ["a"], ["a"], profile)
-    assert masses == {} and record["status"] == "no_history"
+    assert masses == {} and record["status"] == "no_history" and "erosion" not in record
+    masses, record = association.structural_scores([], ["a"], ["a"], profile, erosion={"claims_available": 1, "claims_contributing": 0, "keys_removed": 1, "removed_by": {"revoked": 1}})
+    assert record["status"] == "eroded" and record["erosion"]["keys_removed"] == 1
     masses, record = association.structural_scores([["a", "b"]], [], ["a", "b"], profile)
     assert record["status"] == "no_seeds"
     masses, record = association.structural_scores([["a", "b"]], ["z"], ["a", "b"], profile)
@@ -177,6 +236,27 @@ def test_verified_run_history_carries_the_annex_into_the_associative_view_throug
                                                        max_plan_versions=1, max_repairs=0))
         assert summary_p["state"] == "failed"
         assert "annex" not in {i["source_id"] for i in retrieval_manifest(ws, created_p)["items"]}
+        # ADR-23: a task that declares the annex withdrawn revokes it before its retrieval; the verified history that
+        # cited the annex with the charter erodes, the prompt carries nothing and says nothing about the annex, and
+        # the manifest retained by the earlier associative run still reproduces from the chain at its own revision
+        created_r, summary_r = run(ws, da.summary_spec(repo, base, da.summary_oracle(tmp_path / "summary.json"), da.provider("summary"), revoked=("annex",),
+                                                       max_plan_versions=1, max_repairs=0))
+        assert summary_r["state"] == "failed"
+        eroded = retrieval_manifest(ws, created_r)
+        assert eroded["association"]["status"] == "eroded" and eroded["association"]["links"] == {} and eroded["association"]["entities"] == []
+        erosion = eroded["association"]["erosion"]
+        # every succeeded run so far (history, associative, unlabeled) established a claim citing the annex with the charter
+        assert erosion["claims_available"] == 3 and erosion["claims_contributing"] == 0 and erosion["removed_by"] == {"revoked": 3}
+        assert eroded["access_policy_revision"] == 1
+        assert "annex" not in {i["source_id"] for i in eroded["items"]}
+        annex_ids = {i["observation_id"] for i in manifest["items"] if i["source_id"] == "annex"}
+        assert any(e["reason"] == "revoked" for e in eroded["excluded"]) and annex_ids
+        revoked_prompt = prompt_text(ws, created_r)
+        assert header not in revoked_prompt and "associated:" not in revoked_prompt and "source annex revision" not in revoked_prompt
+        assert "one hundred twenty" not in revoked_prompt
+        for retained in (manifest, eroded):
+            report = ws.memory.reproduce(retained)
+            assert report["status"] == "reproduced", report
         assert ws.owner.replay()["status"] == "passed" and ws.memory.verify()["status"] == "passed"
     finally:
         ws.close()

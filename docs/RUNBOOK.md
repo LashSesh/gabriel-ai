@@ -292,6 +292,22 @@ visible source outranks every distractor, every distractor outranks the hidden s
 of the protocol was lost to distractors that tied with the visible source before that invariant
 existed, and is retained with the amendment (`evidence/wp15/protocol6_declaration.md`).
 
+Erosion (ADR-23): the history a retrieval walks over is projected onto that retrieval's own
+candidates. A supported claim contributes the source keys the retrieval could admit (at its
+frontier, for its principal, at its access policy revision, under its revision rule and source
+kinds) and only while two or more of them remain; the record's `erosion` says how many claims
+were available, how many contribute, how many keys were removed and why (`revoked`,
+`out_of_scope`, `kind_not_allowed`, `contested`, `unresolved_revision`), and a history whose
+every claim eroded is reported as `eroded` with the retrieval lexical. A source a task declares
+withdrawn (`"access": "revoked"`) is revoked before the task's retrieval, so the claims that
+cited it stop linking it from that task on (`evidence/wp16/`). Claims are read as of the
+frontier from the chain, so every retained retrieval manifest recomputes from the chain at its
+own frontier and revision, whatever the memory recorded afterwards:
+```bash
+gabriel memory reproduce --workspace ./ws --manifest <sha256 of the retained retrieval manifest>   # reproduced, or diverged with the fields named
+scripts/association_erosion_witness.py --out evidence/wp16 --backend linux_namespace          # the ADR-23 witness through the owner
+```
+
 ## Evidence manifests
 ```bash
 GABRIEL_CONTAINMENT_TESTS=1 python -m pytest tests -vv -rs | tee evidence/test_results.txt

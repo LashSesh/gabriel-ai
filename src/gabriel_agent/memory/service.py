@@ -290,14 +290,16 @@ class MemoryService:
         self._db.execute("UPDATE meta SET policy_revision = ? WHERE singleton = 1", (revision,))
         return record
 
-    def _authorized(self, observation: dict, principal_id: str) -> tuple:
+    def _authorized(self, observation: dict, principal_id: str, policy_revision: int | None = None) -> tuple:
+        """Scope and access at the given access policy revision (the current one when None): a
+        revocation recorded at a later revision does not apply, so a retrieval reproduces."""
         scope = self.scope(observation)
         if scope.get("workspace_id") != self.workspace_id:
             return False, "out_of_scope"
         principals = scope.get("principals") or []
         if "*" not in principals and principal_id not in principals:
             return False, "out_of_scope"
-        if self.is_revoked(observation["observation_id"]):
+        if self.is_revoked(observation["observation_id"], policy_revision):
             return False, "revoked"
         return True, None
 
@@ -319,11 +321,23 @@ class MemoryService:
             manifest = loads(self.store.get(_ref(row[0], row[1], "application/json")))
             manifest["cached"] = True
             return manifest
-        # 1. authorization and temporal filtering before any content is read for scoring
+        manifest = self._manifest(principal_id=principal_id, task_id=task_id, f=f, policy_revision=policy_revision, query=query, query_ref=query_ref,
+                                  allowed_source_kinds=allowed_source_kinds, version_policy=version_policy, max_bytes=max_bytes, max_items=max_items,
+                                  association=association, cache_key=cache_key)
+        validate(manifest, "retrieval-manifest")
+        ref = self.store.put(canonical(manifest), "application/json")
+        self._db.execute("INSERT OR REPLACE INTO cache VALUES (?,?,?,?,?)", (cache_key, ref["sha256"], ref["bytes"], policy_revision, f.memory_sequence))
+        return manifest
+
+    def _candidates(self, principal_id: str, f: Frontier, policy_revision: int, allowed_source_kinds: list, version_policy: str) -> tuple:
+        """Step 1 of a retrieval: authorization and temporal filtering before any content is read for
+        scoring. Returns the admitted observations with their source keys, the exclusions, and for
+        every source key at the frontier whether the retrieval can admit it (None) or why not
+        (ADR-23: the association history is projected onto exactly these keys)."""
         keys = [r[0] for r in self._db.execute("SELECT DISTINCT source_key FROM observations WHERE seq <= ? ORDER BY source_key", (f.memory_sequence,)).fetchall()]
-        items, excluded, key_of = [], [], {}
-        query_tokens = set(_tokens(query))
+        admitted, excluded, retrievable = [], [], {}
         for key in keys:
+            reasons, admitted_before = [], len(admitted)
             if version_policy == "all_revisions":
                 # Declared ablation of the revision rule (ADR-16): every eligible revision of the source is a
                 # candidate; authorization, revocation and kind filtering still apply before scoring.
@@ -331,31 +345,48 @@ class MemoryService:
             else:
                 choice = self.effective(key, f, version_policy)
                 if choice["status"] != "resolved":
+                    reason = choice["status"] if choice["status"] in ("contested",) else "unresolved_revision"
                     for c in choice["candidates"]:
-                        excluded.append({"observation_id": c["observation_id"], "reason": choice["status"] if choice["status"] in ("contested",) else "unresolved_revision"})
+                        excluded.append({"observation_id": c["observation_id"], "reason": reason})
+                    retrievable[key] = reason
                     continue
                 chosen_set = [choice["observation"]]
                 for c in choice["candidates"]:
                     if c["observation_id"] != choice["observation"]["observation_id"]:
                         excluded.append({"observation_id": c["observation_id"], "reason": "superseded"})
             for chosen in chosen_set:
-                ok, why = self._authorized(chosen, principal_id)
+                ok, why = self._authorized(chosen, principal_id, policy_revision)
                 if not ok:
                     excluded.append({"observation_id": chosen["observation_id"], "reason": why})
+                    reasons.append(why)
                     continue
                 kind = self.scope(chosen).get("source_kind", "unknown")
                 if allowed_source_kinds and kind not in allowed_source_kinds:
                     excluded.append({"observation_id": chosen["observation_id"], "reason": "kind_not_allowed"})
+                    reasons.append("kind_not_allowed")
                     continue
-                # 2. scoring on authorized, eligible content only
-                content = self.content(chosen)
-                span_start, span_end, score = self._best_span(content, query_tokens)
-                items.append({"observation_id": chosen["observation_id"], "source_id": chosen["source_id"], "source_revision": chosen["source_revision"],
-                              "artifact_ref": chosen["content_ref"], "span_start": span_start, "span_end": span_end, "score_milli": score, "source_kind": kind})
-                key_of[chosen["observation_id"]] = key
+                admitted.append((key, chosen, kind))
+            retrievable[key] = None if len(admitted) > admitted_before else (reasons[0] if reasons else "not_at_frontier")
+        return admitted, excluded, retrievable
+
+    def _manifest(self, *, principal_id, task_id, f: Frontier, policy_revision: int, query: bytes, query_ref: dict, allowed_source_kinds: list,
+                  version_policy: str, max_bytes: int, max_items: int, association: dict | None, cache_key: str) -> dict:
+        """The retrieval as a function of the chain at the frontier, the revocations at the access
+        policy revision, the principal and the declared parameters; nothing else is read."""
+        admitted, excluded, retrievable = self._candidates(principal_id, f, policy_revision, allowed_source_kinds, version_policy)
+        items, key_of = [], {}
+        query_tokens = set(_tokens(query))
+        for key, chosen, kind in admitted:
+            # 2. scoring on authorized, eligible content only
+            content = self.content(chosen)
+            span_start, span_end, score = self._best_span(content, query_tokens)
+            items.append({"observation_id": chosen["observation_id"], "source_id": chosen["source_id"], "source_revision": chosen["source_revision"],
+                          "artifact_ref": chosen["content_ref"], "span_start": span_start, "span_end": span_end, "score_milli": score, "source_kind": kind})
+            key_of[chosen["observation_id"]] = key
         association_record = None
         if association is not None:
-            # 3. association (ADR-20): only over the authorized, eligible candidates above, never beyond them
+            # 3. association (ADR-20): only over the authorized, eligible candidates above, never beyond them;
+            # the history itself is projected onto the retrievable keys (ADR-23)
             from . import association as assoc
             ranked = sorted(items, key=lambda i: (-i["score_milli"], i["observation_id"]))
             seeds = []
@@ -366,9 +397,9 @@ class MemoryService:
             for item in items:
                 if key_of[item["observation_id"]] not in candidates:
                     candidates.append(key_of[item["observation_id"]])
-            history = assoc.cocitation_history(self, f)
+            history, erosion = assoc.cocitation_history(self, f, retrievable)
             masses, association_record = assoc.structural_scores([entry["keys"] for entry in history], seeds[: int(association["max_seeds"])], candidates,
-                                                                 association, history=history)
+                                                                 association, history=history, erosion=dict(erosion, policy_revision=int(policy_revision)))
             for item in items:
                 item["lexical_milli"] = item["score_milli"]
                 item["structural_milli"] = assoc.milli(masses.get(key_of[item["observation_id"]], 0.0))
@@ -383,15 +414,37 @@ class MemoryService:
             kept.append(item)
             budget -= size
         manifest = {"schema": "gabriel.retrieval-manifest/1", "manifest_id": "retrieval-" + cache_key[:24], "workspace_id": self.workspace_id,
-                    "principal_id": principal_id, "task_id": task_id, "frontier": f.record(), "access_policy_revision": policy_revision,
+                    "principal_id": principal_id, "task_id": task_id, "frontier": f.record(), "access_policy_revision": int(policy_revision),
                     "query_ref": query_ref, "allowed_source_kinds": sorted(allowed_source_kinds), "version_policy": version_policy,
                     "max_bytes": int(max_bytes), "max_items": int(max_items), "items": kept[:256], "excluded": excluded[:1024], "cache_key": cache_key, "cached": False}
         if association_record is not None:
             manifest["association"] = association_record
-        validate(manifest, "retrieval-manifest")
-        ref = self.store.put(canonical(manifest), "application/json")
-        self._db.execute("INSERT OR REPLACE INTO cache VALUES (?,?,?,?,?)", (cache_key, ref["sha256"], ref["bytes"], policy_revision, f.memory_sequence))
         return manifest
+
+    REPRODUCED_FIELDS = ("items", "excluded")
+    REPRODUCED_ASSOCIATION_FIELDS = ("status", "batches_sha256", "entities", "seeds", "masses_milli", "links", "erosion", "executable_sha256", "snapshot_identity")
+
+    def reproduce(self, manifest: dict) -> dict:
+        """ADR-23: recompute a retained retrieval manifest from the chain at its own frontier and
+        access policy revision, bypassing the cache, and compare what it retained. A retrieval is a
+        function of the chain at the frontier, the revocations at the policy revision, the
+        principal and the declared parameters, so a later revocation, reassessment or ingestion
+        never changes what it was; a difference names the field and is a finding, not noise."""
+        f = Frontier.of(manifest["frontier"])
+        record = manifest.get("association") or {}
+        recomputed = self._manifest(principal_id=manifest["principal_id"], task_id=manifest["task_id"], f=f, policy_revision=int(manifest["access_policy_revision"]),
+                                    query=self.store.get(manifest["query_ref"]), query_ref=manifest["query_ref"], allowed_source_kinds=manifest["allowed_source_kinds"],
+                                    version_policy=manifest["version_policy"], max_bytes=int(manifest["max_bytes"]), max_items=int(manifest["max_items"]),
+                                    association=record.get("profile"), cache_key=manifest["cache_key"])
+        differences = [field for field in self.REPRODUCED_FIELDS if canonical(recomputed[field]) != canonical(manifest[field])]
+        recomputed_record = recomputed.get("association") or {}
+        differences += ["association." + field for field in self.REPRODUCED_ASSOCIATION_FIELDS
+                        if canonical(recomputed_record.get(field)) != canonical(record.get(field))]
+        meta = self._meta()
+        return {"manifest_id": manifest["manifest_id"], "frontier": f.record(), "access_policy_revision": int(manifest["access_policy_revision"]),
+                "current_memory_sequence": meta["count"], "current_policy_revision": meta["policy_revision"],
+                "association_status": {"retained": record.get("status"), "recomputed": recomputed_record.get("status")},
+                "status": "reproduced" if not differences else "diverged", "differences": differences}
 
     @staticmethod
     def _best_span(content: bytes, query_tokens: set) -> tuple:

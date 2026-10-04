@@ -40,6 +40,56 @@
           "maxItems": 256,
           "type": "array"
         },
+        "erosion": {
+          "additionalProperties": false,
+          "description": "ADR-23: the history was projected onto this retrieval's candidates at its access policy revision: supported claims available at the frontier, claims still contributing (two or more retrievable keys), keys removed and why",
+          "properties": {
+            "claims_available": {
+              "$ref": "common.schema.json#/$defs/safe_uint"
+            },
+            "claims_contributing": {
+              "$ref": "common.schema.json#/$defs/safe_uint"
+            },
+            "keys_removed": {
+              "$ref": "common.schema.json#/$defs/safe_uint"
+            },
+            "policy_revision": {
+              "$ref": "common.schema.json#/$defs/safe_uint"
+            },
+            "removed_by": {
+              "additionalProperties": false,
+              "properties": {
+                "contested": {
+                  "$ref": "common.schema.json#/$defs/safe_uint"
+                },
+                "kind_not_allowed": {
+                  "$ref": "common.schema.json#/$defs/safe_uint"
+                },
+                "not_at_frontier": {
+                  "$ref": "common.schema.json#/$defs/safe_uint"
+                },
+                "out_of_scope": {
+                  "$ref": "common.schema.json#/$defs/safe_uint"
+                },
+                "revoked": {
+                  "$ref": "common.schema.json#/$defs/safe_uint"
+                },
+                "unresolved_revision": {
+                  "$ref": "common.schema.json#/$defs/safe_uint"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "required": [
+            "policy_revision",
+            "claims_available",
+            "claims_contributing",
+            "keys_removed",
+            "removed_by"
+          ],
+          "type": "object"
+        },
         "executable_sha256": {
           "anyOf": [
             {
@@ -182,7 +232,8 @@
             "no_seeds",
             "no_seeds_in_history",
             "capacity_exceeded",
-            "unavailable"
+            "unavailable",
+            "eroded"
           ],
           "type": "string"
         }

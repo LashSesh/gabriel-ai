@@ -33,6 +33,11 @@ protocol.
   at that frontier form one observation batch each, in chain order. The engine's co-observation
   graph of those batches (ADR-18) is the association structure; a source cited together with
   others in several verified runs is linked to them with the engine's declared rule.
+- **Erosion (ADR-23).** Since ADR-23 the history a retrieval walks over is projected onto that
+  retrieval's own candidates (a claim contributes its retrievable keys and only while two or
+  more remain), the record retains what eroded and why, the claims are read as of the frontier
+  from the chain, and every retained manifest recomputes from the chain at its own frontier and
+  access policy revision.
 - **A declared association profile re-ranks; it never adds.** `MemoryService.retrieve` takes
   an optional profile (`co-citation-walk-v1`: walk time 1, automatic backend, at most eight
   seeds, the 64-entity cap, the combination `max`). Authorization, the revision rule, revocation,
