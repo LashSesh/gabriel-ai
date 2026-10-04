@@ -2,7 +2,7 @@
   "acceptance_evidence": {
     "evidence/doctor_linux_namespace_selftest.json": "5ff218e9cd2d85f7c131b78183449c2d379b55f90fb8aa7d51c1dc34cbac1bd7",
     "evidence/live/summary.json": "b90e9583a5a5e0fad701e0a378a35d741a6eae7516908492a3c2e027b60a6b4e",
-    "evidence/test_run.json": "43982aa3f8448d5b3e6bb4cc0dd7b89d2db6a7369ec6f946d8ae6c298c4acdf7",
+    "evidence/test_run.json": "eddd9bba1eea32d56049966729165589baaade4b031491b709e746722bfbfae1",
     "evidence/wp01/baseline_manifest.json": "ef39b8ed0762a44c9ee8ff5e8ca616deef771c5ca389d6dd2841ce666233b96f",
     "evidence/wp02/spec_validation.json": "658d50d5fc0991f485240e1e6161ac5f46c171b6fc7abf953eb98db8748ac93f",
     "evidence/wp11/protocol.frozen.json": "a568a973976bbcae7aa4e0847492e973e55e826c4140ac754a96471d4697c533",
@@ -12,15 +12,15 @@
     "evidence/wp11/run2-gpt-4.1-mini/report.json": "5809dc384dc261060abf7ce2bf8aefbcacd04d3c67939a00c50565d071e05a29",
     "evidence/wp11/run3-gpt-4.1-mini/report.json": "4477efb9365669e3adb06bc57a9d1e2c6461dee9693bb4a1c3e3fe25efddcd80"
   },
-  "catalog_digest": "b609760388d0427c725fe4a74e8d37fecb5c3c348e6d4b8021dcd6c2d779a5d7",
-  "created_at_utc": "2026-10-04T13:54:38.334909+00:00",
+  "catalog_digest": "f2ef03708709ab794991ce7742bbb64aea2ad42a3cfe7b3d3796de542dee2871",
+  "created_at_utc": "2026-10-04T18:40:49.234593+00:00",
   "dependency_lock": [
     "attrs==26.1.0",
     "gabriel-agent @ file:///home/user/gabriel-ai",
     "jsonschema-specifications==2025.9.1",
     "jsonschema==4.25.1",
     "referencing==0.37.0",
-    "rpds-py==2026.6.3",
+    "rpds-py==2026.9.1",
     "typing_extensions==4.16.0"
   ],
   "doctor": {
@@ -47,7 +47,7 @@
         "available": true,
         "backend": "trusted_local",
         "checks": {
-          "python": "/tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke7/venv/bin/python"
+          "python": "/tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke8/venv/bin/python"
         },
         "containment": false,
         "reasons": [
@@ -55,7 +55,7 @@
         ]
       }
     },
-    "catalog_digest": "b609760388d0427c725fe4a74e8d37fecb5c3c348e6d4b8021dcd6c2d779a5d7",
+    "catalog_digest": "f2ef03708709ab794991ce7742bbb64aea2ad42a3cfe7b3d3796de542dee2871",
     "configured_backend": "linux_namespace",
     "effective_limits": {
       "artifact_bytes": 16777216,
@@ -72,11 +72,11 @@
     },
     "git": "git version 2.43.0",
     "journal": {
-      "head": "cbca6b7c1af2948827921bf1c40255fc50028c1e42e1db8ada3389a300def763",
-      "inputs_head": "98ec53b408d5273688a9b8df88079dd62f6e03fa44d3207c3a78368075f56538",
+      "head": "e8f76add4a052850aae2d98cdc99beaa7dc5f203237ede7f8db8605ab8b33567",
+      "inputs_head": "b1add07e6cc38e692780b6f90a6bba7479075f46819f3564824df8f32cf8ae50",
       "schema": "gabriel.anchor/1",
       "sequence": 41,
-      "workspace_id": "ws-d0734f5f17e2"
+      "workspace_id": "ws-157674a965ec"
     },
     "object_store": {
       "faults": {},
@@ -127,24 +127,24 @@
     "startup": {
       "artifact_root": {
         "exists": true,
-        "path": "/tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke7/ws/objects",
+        "path": "/tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke8/ws/objects",
         "writable": true
       },
       "codec_version": "gabriel.codec/1",
       "config_schema_version": 1,
       "journal_format": "gabriel.agent-journal/1",
       "memory_chain": {
-        "head": "6ae5bf8dccd22cec83c8bb45f272c2076ba4089c6f9648558a5c996163f4ade1",
+        "head": "8efc5ff289fd0e8874782fa75376b55ddd990c598364715c95c128ee669e6e1c",
         "memory_sequence": 2,
         "owner_sequence": 41,
         "policy_revision": 0,
         "schema": "gabriel.memory-anchor/1",
-        "workspace_id": "ws-d0734f5f17e2"
+        "workspace_id": "ws-157674a965ec"
       },
       "migrations": [],
       "reconciliation_work": [],
       "registered_identities": {
-        "catalog_digest": "b609760388d0427c725fe4a74e8d37fecb5c3c348e6d4b8021dcd6c2d779a5d7",
+        "catalog_digest": "f2ef03708709ab794991ce7742bbb64aea2ad42a3cfe7b3d3796de542dee2871",
         "reducer_identity": "ea45d1d2bc7959619be6b48b5bfea5e357161decaa06b9c44b0f9eb96e14e0e7",
         "schema_registry_digest": "cdb03fa78271dfff96248a53d0d80a5e29805866e758177924d6b3126ad4e796"
       },
@@ -152,19 +152,19 @@
         "corrupt": [],
         "deep": false,
         "missing": [],
-        "referenced_objects": 111,
+        "referenced_objects": 112,
         "stray_temporaries": []
       }
     },
     "untrusted_execution_supported": true,
     "version": "0.1.0",
-    "workspace_id": "ws-d0734f5f17e2"
+    "workspace_id": "ws-157674a965ec"
   },
   "gates": {
     "G0": "holds: inherited runtime checks rerun (evidence/wp01)",
     "G1": "established on the release host for one provider and fifteen synthetic repository-repair tasks in five families (evidence/live, evidence/wp11, evidence/wp12); advantage gate (AT17) executed under three frozen protocols and not passed",
     "G2": "established on the release host for the three fixture task families: repository repair, source-grounded document amendment and numerical transformation run through one owner/scheduler/policy build with registered domain observers and independent oracles (AT23, evidence/wp10/at23); memory and analytical adapters per AT14-AT16 and AT25 (tests); the native PSE graph engine integrated as a contained analytical worker with independent references and separate measurements (ADR-18, evidence/pse); advantage gate (AT17) executed on the document and numerical families under protocol 5 (evidence/wp14) and not passed; the associative memory layer (ADR-20) executed under protocol 6b (evidence/wp15): the engine's walk over verified co-citations carried the required source in every needed run including the held-out family (10/10 against 0/10 for the provenance view) and cost two of six unneeded runs (the declared harm bound of one was exceeded); under protocol 7 (ADR-21) carried sources say in the prompt why they are there, which kept every needed outcome, brought the unneeded family to the provenance view's level against the unlabeled control, and made the associative view the document pack's default as declared; since ADR-23 the history is projected onto the retrieval's own candidates (a withdrawn or unauthorized source erodes from it, evidence/wp16) and every retained retrieval manifest recomputes from the chain at its own frontier and access policy revision",
-    "G3": "established in the blueprint's scoped sense (ADR-22, evidence/wp15): on the association distribution, with the document pack's declared progress channels, a readout trained on 48 retained decisions of the system's own runs met the declared held-out criterion on two unseen topics (equal verified success, 2836 against 5425 mean tokens, no false completion), its held-out decision loss was 0.045 against the rule's 6.91, and the memory's promotion rule admitted it; it ships pinned as the document pack's default routing policy with its provenance; it learned one legible fact (stop when the unmet claim's expected source was not retrieved), can only stop a repair earlier than the rule, and stopped one recoverable repair on a seen task; protocol 4 on the hard tier (evidence/wp13) had trained no readout and rejected the episodic ablation"
+    "G3": "established in the blueprint's scoped sense (ADR-22, evidence/wp15): on the association distribution, with the document pack's declared progress channels, a readout trained on 48 retained decisions of the system's own runs met the declared held-out criterion on two unseen topics (equal verified success, 2836 against 5425 mean tokens, no false completion), its held-out decision loss was 0.045 against the rule's 6.91, and the memory's promotion rule admitted it; it ships pinned as the document pack's default routing policy with its provenance; it learned one legible fact (stop when the unmet claim's expected source was not retrieved), can only stop a repair earlier than the rule, and stopped one recoverable repair on a seen task; protocol 4 on the hard tier (evidence/wp13) had trained no readout and rejected the episodic ablation; under protocol 10 (ADR-24, evidence/wp17) the same route ran on the numerical pack with its own declared channels: the readout met the held-out criterion (equal verified success, 1329 against 2357 tokens, decision loss 0.109 against 3.45 on decisions of both classes) and the memory's promotion rule declined it (held-out support 4 against 4 refutations), so the numerical pack keeps the rule-based default"
   },
   "known_issues": [
     "a catalog, registry or reducer change needs an explicit migration (gabriel migrate: backup, equivalence replay, recorded epoch); journals created before catalog records existed migrate only when the running code reproduces them",
@@ -173,7 +173,8 @@
     "the native engine's arithmetic is platform-independent by construction (pure-Rust libm, ADR-19) but was executed on this platform only; the engine's crystal and consensus paths remain quarantined and the state readout is a specified model quantity, not a measurement",
     "advantage over a simple verification loop not shown; the evaluation corpus is saturated for gpt-4.1-mini",
     "the associative view (ADR-20, the document pack's default since ADR-21) carries sources that verified runs cited together into a budgeted prompt whether or not the task needs them; the prompt says why each is there, which under protocol 7 kept gpt-4.1-mini from stating the forbidden figure (6/6 first attempts without the reason, 0/6 with it) but cost two repairs on one needed task; two providers of one vendor (gpt-4.1-mini, gpt-5-mini; protocol 9), one presentation; the lexical seeds are tie-broken by observation id; the history erodes by declared withdrawal and authorization only (ADR-23), never by time, and a withdrawal declared by one task is re-admitted by a later task that declares the source available",
-    "the document pack's default routing policy is a readout promoted on one constructed distribution with one provider (ADR-22) and transferred with fixed weights to a second provider of the same vendor (protocol 9); it can only stop a repair earlier than the rule, it abstains where its declared channels are missing, and it stopped one recoverable repair on a seen task under gpt-4.1-mini; a task that pins rule-based-v1 explicitly opts out"
+    "the document pack's default routing policy is a readout promoted on one constructed distribution with one provider (ADR-22) and transferred with fixed weights to a second provider of the same vendor (protocol 9); it can only stop a repair earlier than the rule, it abstains where its declared channels are missing, and it stopped one recoverable repair on a seen task under gpt-4.1-mini; a task that pins rule-based-v1 explicitly opts out",
+    "the numerical pack declares progress channels (ADR-24) but ships no readout: its protocol 10 candidate met the held-out criterion and the memory's promotion rule declined it on a held-out composition half of which is hopeless by construction; a numerical task runs the rule-based policy, and a readout bound to its layout abstains at a failed node before any reference verification ran"
   ],
   "license": {
     "declared": "Apache-2.0",
@@ -187,7 +188,7 @@
     ]
   },
   "package_source_files": 144,
-  "package_source_identity": "2349fa7a77b52f0d6cb23e1fe4743e76c9e0181cbe0cdf45d3bb7c2b96c0fc96",
+  "package_source_identity": "cfbff8b8fa842f2226c4a821bbdcf1200a01469e485cd8e18f7b9db8407fb860",
   "platform": {
     "machine": "x86_64",
     "release": "6.18.44-fc-v64",
@@ -198,7 +199,7 @@
   "schema": "gabriel.release-manifest/1",
   "schema_registry_digest": "cdb03fa78271dfff96248a53d0d80a5e29805866e758177924d6b3126ad4e796",
   "source_branch": "claude/vigilant-gauss-03dalc",
-  "source_commit": "05b54f26441ee3ff8a6f65e9895353ba84b14dad",
+  "source_commit": "114878e703e4beed8267aa325a88bb3683d7166e",
   "source_dirty": true,
   "supported_backends": {
     "linux_namespace": "supported containment backend; requires Linux user namespaces, util-linux unshare and setpriv; verified by gabriel doctor --selftest on the release host",
