@@ -2,9 +2,9 @@
  "schema": "gabriel.evidence.tests/1",
  "command": "GABRIEL_CONTAINMENT_TESTS=1 .venv/bin/python -m pytest tests -vv -rs",
  "log": "evidence/test_results.txt",
- "summary_line": "================== 193 passed, 1 skipped in 135.85s (0:02:15) ==================",
+ "summary_line": "================== 194 passed, 1 skipped in 188.25s (0:03:08) ==================",
  "counts": {
-  "passed": 193,
+  "passed": 194,
   "skipped": 1
  },
  "skipped": [
@@ -16,7 +16,7 @@
   "tests/fake_targets.py": "d6d811020c6a31c173ebbd1a75eff31ae26613ee12566c5c5f20358514de9aea",
   "tests/harness.py": "2997c0530ad66bda92f75436423ae4adebf28d9e7ea8885f72bde36ae7b88a88",
   "tests/test_artifacts.py": "38e1144d9be2e9be9d7988fa8f44137cf50a3762a8a110b7261e9f9c7eecdd82",
-  "tests/test_association.py": "d5d1c6e5c1322731b7e5d8cb801dac409d384bb37254cab00301d38cb58c57ba",
+  "tests/test_association.py": "4056ed5d64e9f3fc7d0ff52fbd47c7e9c76525feca8784110837ea3c15e3c93a",
   "tests/test_contracts.py": "7f4dec6fe89d809a6b936736e0ec649614469493e374405b4c7b6a86160e89de",
   "tests/test_domains.py": "d8ba3cfede25db040fb286d07c25f299c09ff978cf8e3bd8474d39fa198fd74e",
   "tests/test_evaluation.py": "82a024f14c3861959bb069db78a0a18fbf5ad650cc8628d2afb5a41de7a71485",
@@ -65,6 +65,10 @@
    },
    {
     "test": "test_association_never_reaches_what_the_principal_cannot_retrieve",
+    "result": "PASSED"
+   },
+   {
+    "test": "test_history_erodes_with_a_revocation_and_every_retained_manifest_reproduces_from_the_chain",
     "result": "PASSED"
    },
    {
@@ -861,7 +865,7 @@
   "src/gabriel_agent/agent/backup.py": "3cf73b2c13e19bd8dd297f600c27f8b1325583718739c2a5292918621c670ab4",
   "src/gabriel_agent/agent/export.py": "967e9670330d8846166968910b5ed0845ba34f6639eec6805b76cdabd06995ea",
   "src/gabriel_agent/agent/gc.py": "c1163a85e2627c4e6a3cbfc40d18f4a77b70d8fa2bf5ad20e51a95c31030bc6b",
-  "src/gabriel_agent/agent/release.py": "dc2f43052c8ba5911efd103c7bb0aef8cb2184e3b6ae6ced6b20ca0844633e71",
+  "src/gabriel_agent/agent/release.py": "44bb32c2c69d7dcfc00451a3070b0ddb923531f449c0c65e3e916da7c3fe3732",
   "src/gabriel_agent/agent/runner.py": "e61269f4661e07c4db2cefc5e78d5c2e8722c119b568c381f949bb9b24f142fa",
   "src/gabriel_agent/agent/workspace.py": "b9f259362ecdfc6578acdff46bdf65587d7859df87ca4e02fac573d1eaa2d292",
   "src/gabriel_agent/artifacts/__init__.py": "96c8ba41c0fd264134b1fa638a826b5f47dff0c3445108f5168eaf5d511842b5",
@@ -888,19 +892,19 @@
   "src/gabriel_agent/evaluation/corpus_hard.py": "1335c894737ce9f76dbf05417efee04cdc6299fe86580a0fe62cb17b60cc507b",
   "src/gabriel_agent/evaluation/fixtures/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
   "src/gabriel_agent/evaluation/fixtures/document_amendment.py": "6136a350a18bccd545b44e348bf5185b23014703cf4b832b0269b4e1c6c0fef4",
-  "src/gabriel_agent/evaluation/fixtures/document_association.py": "c409ca8e3e6ad3c29d56fdb4e6ffabc1e80da850fb7f7621caeda43278663388",
+  "src/gabriel_agent/evaluation/fixtures/document_association.py": "a2307e9e03dd872dd8a8c23f4e1e7a69902412a6c9275ebd4d8b3f335b96091d",
   "src/gabriel_agent/evaluation/fixtures/graph_readout.py": "00cd4132c4251b8504b682e3a7464ba1ffe04a39eea1963433a06a208cc6268b",
   "src/gabriel_agent/evaluation/fixtures/graph_walk.py": "35dac8a942174cd7d4f30f3840629bda3f7d8f9d1fc5f7240911d9df3711023a",
   "src/gabriel_agent/evaluation/fixtures/numerical_series.py": "a055441ba9d94c588782bd0fd122495be694efe6b6458d6fecb94a087343c98e",
   "src/gabriel_agent/evaluation/fixtures/parser_bug.py": "7b84a8a375129eae8d652d90984b93d1e4ad95933cc974e02bd4c7ed759e2361",
   "src/gabriel_agent/evaluation/harness.py": "992d8e90af6edfec19c188129f94f3f535114459e81a9611096f19324dd16b07",
   "src/gabriel_agent/interfaces/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-  "src/gabriel_agent/interfaces/cli.py": "38184b3dfe84633dc43388464554e0f45afb445452dbb4ce6b772d6d68541724",
+  "src/gabriel_agent/interfaces/cli.py": "22c24e4837e4bd3bff5e6351b5d451a3620d86ef1b5f28d881d4d42b8b1cfe06",
   "src/gabriel_agent/kernel/__init__.py": "d8dcb524a0fd13396c6e9cfe5c0098e9001daecdea89f3526a9f9a2ddefc2a1f",
   "src/gabriel_agent/kernel/kernel.py": "1384bc387f6d48f7c8551822a26daf287019542c8f861d37f79d0821b865c760",
   "src/gabriel_agent/memory/__init__.py": "33c2e1dfa88d07613f5476ee196d296052f8d69e04057cd300b0f494643e79ee",
-  "src/gabriel_agent/memory/association.py": "e7a4ed93aa49b998b75f947643a56495272f8b394168beeda36be0335cefb1a6",
-  "src/gabriel_agent/memory/service.py": "47722d928405a8211a51705560ba6ff0406789299d70da916c1a58694638938b",
+  "src/gabriel_agent/memory/association.py": "4a782565a34b073661af0ebd3e02a18033bb51314644cbe2dba60b78edb62e68",
+  "src/gabriel_agent/memory/service.py": "8b417f2ab04d4d25d9078404aeefe1e2b27686748aea30c31df3dcdde6d29859",
   "src/gabriel_agent/models/__init__.py": "f8303a60e53efd26eb08ade3756f82a4f01a208bc0ec77dc27b198fcdf2ec634",
   "src/gabriel_agent/models/gateway.py": "c907993c62be3ac1ef9206af9f98d2fbaa379668660b049df7b6107462ef8b92",
   "src/gabriel_agent/models/http_providers.py": "c4efb1dde708cf06fd7fd98e5166d31c211042c3ba1cad87959989b95d2bf124",

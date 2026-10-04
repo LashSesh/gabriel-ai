@@ -4,7 +4,7 @@ Branch `claude/vigilant-gauss-03dalc`, built from the recovered baseline
 `ed3da014e41999b4201b1654c8b2667ed907636b` with the Kosmocrates donor pinned at
 `a320ad101bbf0fdcde85d4617366ddee435d40b8` (local checkout matched). Every claim below is
 backed by a file under `evidence/` or by a test named in `evidence/test_results.txt`
-(193 passed including the privileged containment self-tests, 1 opt-in live test skipped in the
+(194 passed including the privileged containment self-tests, 1 opt-in live test skipped in the
 suite log and executed separately; Python 3.12.3, SQLite 3.45.1, Linux 6.18 x86_64, uid 0).
 `scripts/evidence_manifest.py` regenerates `evidence/test_run.json` and
 `evidence/work_packages.json` from that log.
