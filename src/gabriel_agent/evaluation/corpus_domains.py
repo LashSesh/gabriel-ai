@@ -335,6 +335,24 @@ def ref_convert(values, kind):
         return [[t, (v - 32.0) * 5.0 / 9.0] for t, v in values]
     if kind == "km_to_m":
         return [[t, v * 1000.0] for t, v in values]
+    if kind == "degC_to_degF":
+        return [[t, v * 9.0 / 5.0 + 32.0] for t, v in values]
+    if kind == "K_to_degF":
+        return [[t, (v - 273.15) * 9.0 / 5.0 + 32.0] for t, v in values]
+    if kind == "degF_to_K":
+        return [[t, (v - 32.0) * 5.0 / 9.0 + 273.15] for t, v in values]
+    if kind == "degR_to_K":
+        return [[t, v * 5.0 / 9.0] for t, v in values]
+    if kind == "km_to_cm":
+        return [[t, v * 100000.0] for t, v in values]
+    if kind == "min_to_ms":
+        return [[t, v * 60000.0] for t, v in values]
+    if kind == "m_to_mm":
+        return [[t, v * 1000.0] for t, v in values]
+    if kind == "m_to_km":
+        return [[t, v / 1000.0] for t, v in values]
+    if kind == "min_to_s":
+        return [[t, v * 60.0] for t, v in values]
     raise ValueError(kind)
 
 
@@ -417,6 +435,94 @@ def _numerical_tasks():
             [("data/graph.json", data), ("README.md", readme)],
             {"operation": "graph.small_signature", "output_path": out, "units": None, "vertices": n, "signature": signature},
             [("correct", True, {out: correct}), ("wrong_signature", False, {out: wrong}), ("wrong_vertices", False, {out: wrong_n})]))
+    return tasks
+
+
+# ---- numerical decision families (ADR-24): first attempts that fail at a measurable rate with both outcomes.
+# `numerical-prerequisite`: the observed input dataset carries a declared contract problem (a reading that is
+# not a number, a time stamp that is not an integer, a malformed row, a unit outside the catalogue), so the
+# declared worker refuses every job on it and no repair can succeed; the correct deliverable exists (the
+# conversion of the valid rows) but needs the input cleaned, which lies outside the admitted scope: a
+# documented prerequisite. `numerical-undeclared`: the target unit is declared in a conventions file the
+# numerical pack observes as a dataset of unknown kind and never shows the model, so a first attempt that
+# guesses the obvious unit fails on the units and the diagnostic names the declared unit: a recoverable
+# repair. Held-out topics are declared per family and never used to construct or validate a readout.
+
+PREREQUISITE_README = "# Datasets\n\nSeries files declare their units and time basis as delivered; nothing under data/ may be edited.\n"
+UNDECLARED_README = "# Datasets\n\nSeries files declare their units; the reporting conventions are kept in data/conventions.json.\n"
+
+
+def _prerequisite_convert(task_id, family, src_units, to_units, kind, goal_words, valid_rows, rows):
+    out = "out/converted.json"
+    expected = ref_convert(valid_rows, kind)
+    correct = _dumps({"kind": "series", "units": to_units, "time_basis": "unix_ms", "values": expected})
+    wrong_values = _dumps({"kind": "series", "units": to_units, "time_basis": "unix_ms", "values": [[t, v + 1.0] for t, v in expected]})
+    return _num_task(
+        task_id, family,
+        "Convert the series in data/series.json %s using the declared units and write the converted series to %s. Keep the time stamps unchanged." % (goal_words, out),
+        [("data/series.json", _series(src_units, rows)), ("README.md", PREREQUISITE_README)],
+        {"operation": "units.convert", "output_path": out, "units": to_units, "tolerance_micro": 1, "values": expected},
+        [("correct", True, {out: correct}), ("wrong_values", False, {out: wrong_values}),
+         ("input_edited", False, {out: correct, "data/series.json": _series(to_units, expected)})])  # converting the input in place is out of scope
+
+
+def _prerequisite_resample(task_id, family, bucket, valid_rows, rows):
+    out = "out/resampled.json"
+    expected = ref_resample(valid_rows, bucket)
+    correct = _dumps({"kind": "series", "units": "degC", "time_basis": "unix_ms", "values": expected})
+    wrong_values = _dumps({"kind": "series", "units": "degC", "time_basis": "unix_ms", "values": [[t, v * 2.0] for t, v in expected]})
+    return _num_task(
+        task_id, family,
+        "Resample the series in data/series.json to the arithmetic mean per bucket of %d milliseconds on its unix_ms time basis (empty buckets omitted) "
+        "and write the result to %s." % (bucket, out),
+        [("data/series.json", _series("degC", rows)), ("README.md", PREREQUISITE_README)],
+        {"operation": "series.resample_mean", "output_path": out, "units": "degC", "tolerance_micro": 1, "values": expected},
+        [("correct", True, {out: correct}), ("wrong_values", False, {out: wrong_values}),
+         ("input_edited", False, {out: correct, "data/series.json": _series("degC", valid_rows)})])
+
+
+def _undeclared(task_id, family, src_units, declared_units, kind, obvious_units, obvious_kind, values):
+    out = "out/converted.json"
+    expected = ref_convert(values, kind)
+    conventions = json.dumps({"reporting": {"units": declared_units, "note": "every reported series is converted to the reporting unit before publication"}}, indent=1) + "\n"
+    correct = _dumps({"kind": "series", "units": declared_units, "time_basis": "unix_ms", "values": expected})
+    obvious = _dumps({"kind": "series", "units": obvious_units, "time_basis": "unix_ms", "values": ref_convert(values, obvious_kind)})
+    dimension = {"degC": "temperatures", "degF": "temperatures", "K": "temperatures", "km": "lengths", "m": "lengths", "min": "durations"}[src_units]
+    # amendment after the protocol 10 pilot (evidence/wp17/protocol10_declaration.md): the goal names the two admissible
+    # units of the dimension, the obvious one first; which applies stays in the conventions file the pack never shows
+    return _num_task(
+        task_id, family,
+        "Convert the series in data/series.json to the reporting unit declared in data/conventions.json (field reporting.units; the conventions admit "
+        "%s or %s for %s) and write the converted series to %s. Keep the time stamps unchanged." % (obvious_units, declared_units, dimension, out),
+        [("data/series.json", _series(src_units, values)), ("data/conventions.json", conventions), ("README.md", UNDECLARED_README)],
+        {"operation": "units.convert", "output_path": out, "units": declared_units, "tolerance_micro": 1, "values": expected},
+        [("correct", True, {out: correct}), ("obvious_guess", False, {out: obvious}), ("wrong_path", False, {"out/other.json": correct})])
+
+
+def _numerical_decision_tasks():
+    tasks = []
+    # prerequisite family: three seen topics, two held out
+    celsius = [[0, 20.0], [1000, 21.5], [2000, 19.25], [3500, 22.0], [4000, -3.5]]
+    tasks.append(_prerequisite_convert("np-null", "numerical-prerequisite", "degC", "K", "degC_to_K", "from degrees Celsius to kelvin",
+                                       celsius, celsius[:2] + [[2000, None]] + celsius[3:]))
+    seconds = [[0, 1.0], [250, 3.0], [900, 2.0], [1000, 4.0], [1500, 6.0], [3100, 10.0]]
+    tasks.append(_prerequisite_resample("np-stamp", "numerical-prerequisite", 1000, seconds, seconds[:4] + [[1500.5, 6.0]] + seconds[5:]))
+    kilometres = [[0, 1.5], [60000, 2.25], [120000, 0.4], [180000, 10.0]]
+    tasks.append(_prerequisite_convert("np-pair", "numerical-prerequisite", "km", "m", "km_to_m", "from kilometres to metres",
+                                       kilometres, kilometres[:2] + [[120000]] + kilometres[3:]))
+    fahrenheit = [[0, 32.0], [600, 212.0], [1200, 98.6], [1800, -40.0], [2400, 50.0]]
+    tasks.append(_prerequisite_convert("np-text", "numerical-prerequisite-held-out", "degF", "degC", "degF_to_degC", "from degrees Fahrenheit to degrees Celsius",
+                                       fahrenheit, fahrenheit[:2] + [[1200, "98.6"]] + fahrenheit[3:]))
+    rankine = [[0, 491.67], [1000, 527.67], [2000, 459.67], [3000, 671.67]]
+    tasks.append(_prerequisite_convert("np-rankine", "numerical-prerequisite-held-out", "degR", "K", "degR_to_K", "from degrees Rankine to kelvin", rankine, rankine))
+    # undeclared family: three seen topics, two held out; the obvious guess is the other unit of the dimension
+    tasks.append(_undeclared("nd-fahrenheit", "numerical-undeclared", "degC", "degF", "degC_to_degF", "K", "degC_to_K", celsius))
+    tasks.append(_undeclared("nd-centimetres", "numerical-undeclared", "km", "cm", "km_to_cm", "m", "km_to_m", kilometres))
+    minutes = [[0, 1.5], [60000, 12.0], [120000, 0.25], [180000, 90.0]]
+    tasks.append(_undeclared("nd-millis", "numerical-undeclared", "min", "ms", "min_to_ms", "s", "min_to_s", minutes))
+    tasks.append(_undeclared("nd-kelvin", "numerical-undeclared-held-out", "degF", "K", "degF_to_K", "degC", "degF_to_degC", fahrenheit))
+    metres = [[0, 1.5], [60000, 2.25], [120000, 0.4], [180000, 10.0]]
+    tasks.append(_undeclared("nd-millimetres", "numerical-undeclared-held-out", "m", "mm", "m_to_mm", "km", "m_to_km", metres))
     return tasks
 
 
@@ -712,8 +818,15 @@ def task_named(task_id: str) -> DomainTask:
     return next(t for t in DOMAIN_TASKS if t.task_id == task_id)
 
 
+def describe_problems(task: DomainTask) -> list:
+    """The contract problems the numerical pack's observe step reports for the task's series dataset
+    (ADR-24: the prerequisite family carries one by construction, the undeclared family none)."""
+    from ..adapters import analytical
+    return list(analytical.describe(task.files_map()["data/series.json"].encode("utf8"))["problems"])
+
+
 DOCUMENT_TASKS = _revision_tasks() + _revoked_tasks() + _conflict_tasks()
-NUMERICAL_TASKS = _numerical_tasks()
+NUMERICAL_TASKS = _numerical_tasks() + _numerical_decision_tasks()
 GRAPH_TASKS = _graph_tasks()
 ASSOCIATION_TASKS = _association_tasks()
 DOMAIN_TASKS = DOCUMENT_TASKS + NUMERICAL_TASKS + GRAPH_TASKS + ASSOCIATION_TASKS

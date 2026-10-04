@@ -1,0 +1,125 @@
+{
+  "task_id": "ng-star",
+  "family": "graph",
+  "system": "gabriel_reference_plan",
+  "rep": 1,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp17/run10b-eval/runs/ng-star--gabriel_reference_plan--1",
+  "domain": "numerical",
+  "outcome": {
+    "system": "gabriel_reference_plan",
+    "task_id": "ng-star",
+    "family": "graph",
+    "rep": 1,
+    "declared": true,
+    "declared_reason": "run state succeeded",
+    "model_requests": 1,
+    "model_tokens": 787,
+    "wall_ms": 3944,
+    "provider_statuses": [
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp17/run10b-eval/runs/ng-star--gabriel_reference_plan--1/gabriel_reference_plan-1-ws/worktrees/run-ng-star-gabriel_reference_plan-1-1",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "assess propose/output-valid -> passed: assessment passed recorded for output-valid; node propose verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,reference,scope",
+      "run-job -> completed (result accepted; checks pending)",
+      "assess run-job/output-valid -> passed: assessment passed recorded for output-valid; node run-job verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,reference,scope",
+      "read-back -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+      "assess read-back/output-valid -> passed: assessment passed recorded for output-valid; node read-back verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,reference,scope",
+      "review -> completed (result accepted; checks pending)",
+      "assess review/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,reference",
+      "assess review/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,reference",
+      "assess review/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,reference",
+      "assess review/no-secrets -> passed: assessment passed recorded for no-secrets; node review verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: reference",
+      "verify-reference -> completed (result accepted; checks pending)",
+      "assess verify-reference/reference -> passed: assessment passed recorded for reference; node verify-reference verified from accepted assessment evidence; all mandatory checks passed with verified artifacts and reconciled effects"
+    ],
+    "gabriel": {
+      "run_id": "run-ng-star-gabriel_reference_plan-1-1",
+      "workspace": "/home/user/gabriel-ai/evidence/wp17/run10b-eval/runs/ng-star--gabriel_reference_plan--1/gabriel_reference_plan-1-ws",
+      "hold": null,
+      "replay": "passed",
+      "events": 30,
+      "assessments": [
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "propose"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "run-job"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "read-back"
+        },
+        {
+          "check_id": "scope",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "base-commit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "checks-intact",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "no-secrets",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "reference",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "verify-reference"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "observe"
+        }
+      ]
+    },
+    "repairs_used": 0,
+    "plan_versions": 1
+  },
+  "verification": {
+    "verified": true,
+    "problems": [],
+    "changed_paths": [
+      "out/signature.json"
+    ],
+    "out_of_scope_paths": [],
+    "output": "{\"canonical_adjacency\":\"0000100001000010000111110\",\"edges\":4,\"kind\":\"graph_signature\",\"signature\":\"0853e23eb7595205ee09c93f203315da3a7b71a109b24d1abb01039242ea12a1\",\"vertices\":5}",
+    "patch_sha256": "8400179049f141ccd18f5700fb36cbb221234086592366be80a07e5e4a17b9da",
+    "patch_bytes": 358,
+    "patch": "diff --git a/out/signature.json b/out/signature.json\nnew file mode 100644\nindex 0000000..bb08277\n--- /dev/null\n+++ b/out/signature.json\n@@ -0,0 +1 @@\n+{\"canonical_adjacency\":\"0000100001000010000111110\",\"edges\":4,\"kind\":\"graph_signature\",\"signature\":\"0853e23eb7595205ee09c93f203315da3a7b71a109b24d1abb01039242ea12a1\",\"vertices\":5}\n\\ No newline at end of file\n",
+    "head_is_base": true,
+    "marker": "eval-verify-ng-star-gabriel_reference_plan-1"
+  },
+  "V": 1,
+  "D": 1,
+  "false_completion": 0,
+  "unit_wall_ms": 4220
+}

@@ -1,0 +1,59 @@
+{
+  "schema": "gabriel.evaluation-report/1",
+  "protocol_frozen_digest": "26f80b985b8fb33613b130e81f757c0a3feb444807bc449ed6e14ddba18b4c9d",
+  "tasks": 3,
+  "families": 1,
+  "runs": 3,
+  "per_system": {
+    "gabriel_reference_plan": {
+      "runs": 3,
+      "verified_successes": 3,
+      "p_success": 1.0,
+      "declared_successes": 3,
+      "false_completions": 0,
+      "p_false_completion": 0.0,
+      "conditional_false_completion": 0.0,
+      "conditional_denominator": 3,
+      "harness_errors": 0,
+      "timed_out": 0,
+      "recovery_runs": 1,
+      "mean_model_requests": 1.3333333333333333,
+      "total_model_requests": 4,
+      "mean_model_tokens": 1193.0,
+      "total_model_tokens": 3579,
+      "mean_wall_ms": 5327.333333333333,
+      "p_success_ci95_by_family": {
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 1
+      },
+      "p_success_ci95_by_task": {
+        "low": 1.0,
+        "high": 1.0,
+        "clusters": 3
+      },
+      "per_task": {
+        "nd-centimetres": {
+          "p_success": 1.0,
+          "runs": 1
+        },
+        "nd-fahrenheit": {
+          "p_success": 1.0,
+          "runs": 1
+        },
+        "nd-millis": {
+          "p_success": 1.0,
+          "runs": 1
+        }
+      }
+    }
+  },
+  "paired_differences": {},
+  "failures": [],
+  "claim_scope": "Scoped comparison on one synthetic task distribution with one provider; a difference here is not a general superiority claim. Costs include every attempt, including failed and timed-out runs.",
+  "frozen_check": {
+    "frozen_digest": "26f80b985b8fb33613b130e81f757c0a3feb444807bc449ed6e14ddba18b4c9d",
+    "harness_identity_now": "708750148ff709cc399e45d74c70f8e7b7159b21f71942831cf4633441aaea6a",
+    "harness_amended": false
+  }
+}

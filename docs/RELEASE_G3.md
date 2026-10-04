@@ -35,6 +35,23 @@ regression gates passed on the release host with the readout shipped (`evidence/
 `evidence/wp12/`). Details: `docs/EVALUATION_PROTOCOL.md` (protocols 8 and 9),
 `docs/adr/ADR-22-domain-declared-channels-g3.md`.
 
+## Protocol 10 (ADR-24, `evidence/wp17/`): the route on a second pack
+The same route ran on the numerical pack, which declares channels of its own since ADR-24
+(committed facts of its reference-contract verification: whether the job's input carried a
+contract problem and the class of the failure). Under a declaration frozen before the run, a
+readout trained on 20 retained decisions (2 positives) of the rule-based production
+configuration on three seen topics met the criterion of protocol 8 on two held-out families
+it had never seen (equal verified success 4 of 8, 1329 against 2357 mean tokens, no false
+completion), stopping every hopeless held-out repair at the first decision and taking every
+recoverable one; its decision loss on the eight held-out decisions, of both classes this time,
+was 0.109 against the rule's 3.45. The memory's promotion rule declined it: the treatment's
+held-out support was 4 against 4 refutations, because half of the held-out evidence is a
+family hopeless by construction, a composition no routing policy could pass under that rule.
+As declared, the numerical pack keeps the rule-based policy and no readout ships with it. The
+verdict above stands unchanged; the mechanism is now executed on two packs, under one provider
+and two constructed distributions, and the document pack's readout is refused on the numerical
+layout by construction.
+
 ## Protocol 4 (retained as executed)
 
 ## What was built (ADR-15)

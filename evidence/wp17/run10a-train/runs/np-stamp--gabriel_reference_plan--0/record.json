@@ -1,0 +1,235 @@
+{
+  "task_id": "np-stamp",
+  "family": "numerical-prerequisite",
+  "system": "gabriel_reference_plan",
+  "rep": 0,
+  "run_dir": "/home/user/gabriel-ai/evidence/wp17/run10a-train/runs/np-stamp--gabriel_reference_plan--0",
+  "domain": "numerical",
+  "outcome": {
+    "system": "gabriel_reference_plan",
+    "task_id": "np-stamp",
+    "family": "numerical-prerequisite",
+    "rep": 0,
+    "declared": false,
+    "declared_reason": "run state failed",
+    "model_requests": 3,
+    "model_tokens": 2928,
+    "wall_ms": 15071,
+    "provider_statuses": [
+      "completed",
+      "completed",
+      "completed"
+    ],
+    "model_revisions": [
+      "gpt-4.1-mini-2025-04-14"
+    ],
+    "worktree": "/home/user/gabriel-ai/evidence/wp17/run10a-train/runs/np-stamp--gabriel_reference_plan--0/gabriel_reference_plan-0-ws/worktrees/run-np-stamp-gabriel_reference_plan-0-1",
+    "timed_out": false,
+    "error": null,
+    "log": [
+      "assess propose-r2/output-valid -> passed: assessment passed recorded for output-valid; node propose-r2 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,reference,scope",
+      "run-job-r2 -> completed (result accepted; checks pending)",
+      "assess run-job-r2/output-valid -> passed: assessment passed recorded for output-valid; node run-job-r2 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,reference,scope",
+      "read-back-r2 -> completed (observed snapshot advanced from read-back evidence; result accepted; checks pending)",
+      "assess read-back-r2/output-valid -> passed: assessment passed recorded for output-valid; node read-back-r2 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,reference,scope",
+      "review-r2 -> completed (result accepted; checks pending)",
+      "assess review-r2/scope -> passed: assessment passed recorded for scope; not complete: mandatory checks without eligible passing evidence: base-commit,checks-intact,no-secrets,reference",
+      "assess review-r2/base-commit -> passed: assessment passed recorded for base-commit; not complete: mandatory checks without eligible passing evidence: checks-intact,no-secrets,reference",
+      "assess review-r2/checks-intact -> passed: assessment passed recorded for checks-intact; not complete: mandatory checks without eligible passing evidence: no-secrets,reference",
+      "assess review-r2/no-secrets -> passed: assessment passed recorded for no-secrets; node review-r2 verified from accepted assessment evidence; not complete: mandatory checks without eligible passing evidence: reference",
+      "verify-reference-r2 -> completed (result accepted; checks pending)",
+      "assess verify-reference-r2/reference -> failed: assessment failed recorded for reference; mandatory check failed; repair policy exhausted"
+    ],
+    "gabriel": {
+      "run_id": "run-np-stamp-gabriel_reference_plan-0-1",
+      "workspace": "/home/user/gabriel-ai/evidence/wp17/run10a-train/runs/np-stamp--gabriel_reference_plan--0/gabriel_reference_plan-0-ws",
+      "hold": null,
+      "replay": "passed",
+      "events": 86,
+      "assessments": [
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "propose"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "run-job"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "read-back"
+        },
+        {
+          "check_id": "scope",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "base-commit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "checks-intact",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "no-secrets",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review"
+        },
+        {
+          "check_id": "reference",
+          "outcome": "failed",
+          "eligible": true,
+          "node_id": "verify-reference"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "observe-r1"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "propose-r1"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "run-job-r1"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "read-back-r1"
+        },
+        {
+          "check_id": "scope",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "base-commit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "checks-intact",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "no-secrets",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r1"
+        },
+        {
+          "check_id": "reference",
+          "outcome": "failed",
+          "eligible": true,
+          "node_id": "verify-reference-r1"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "observe"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "observe-r2"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "propose-r2"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "run-job-r2"
+        },
+        {
+          "check_id": "output-valid",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "read-back-r2"
+        },
+        {
+          "check_id": "scope",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r2"
+        },
+        {
+          "check_id": "base-commit",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r2"
+        },
+        {
+          "check_id": "checks-intact",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r2"
+        },
+        {
+          "check_id": "no-secrets",
+          "outcome": "passed",
+          "eligible": true,
+          "node_id": "review-r2"
+        },
+        {
+          "check_id": "reference",
+          "outcome": "failed",
+          "eligible": true,
+          "node_id": "verify-reference-r2"
+        }
+      ]
+    },
+    "repairs_used": 2,
+    "plan_versions": 3
+  },
+  "verification": {
+    "verified": false,
+    "problems": [
+      "output out/resampled.json is absent"
+    ],
+    "changed_paths": [],
+    "out_of_scope_paths": [],
+    "output": "",
+    "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "patch_bytes": 0,
+    "patch": "",
+    "head_is_base": true,
+    "marker": "eval-verify-np-stamp-gabriel_reference_plan-0"
+  },
+  "V": 0,
+  "D": 0,
+  "false_completion": 0,
+  "unit_wall_ms": 15353
+}

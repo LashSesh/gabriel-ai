@@ -1,0 +1,9 @@
+{
+ "goal": "Convert the series in data/series.json to the reporting unit declared in data/conventions.json (field reporting.units) and write the converted series to out/converted.json. Keep the time stamps unchanged.",
+ "domain": "numerical",
+ "state": "failed",
+ "outcome": "failure",
+ "repair_count": 2,
+ "plan_versions": 3,
+ "final_diff": "diff --git a/out/converted.json b/out/converted.json\nnew file mode 100644\nindex 0000000..2dcbc4e\n--- /dev/null\n+++ b/out/converted.json\n@@ -0,0 +1 @@\n+{\"kind\":\"series\",\"time_basis\":\"unix_ms\",\"units\":\"km\",\"values\":[[0,1.5],[60000,2.25],[120000,0.4],[180000,10.0]]}\n\\ No newline at end of file\n"
+}

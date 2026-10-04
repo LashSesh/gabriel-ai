@@ -1,0 +1,201 @@
+{
+  "schema": "gabriel.evidence.policy-promotion/1",
+  "produced_at_utc": "2026-10-04T18:33:43.678252+00:00",
+  "candidate": "readout-channels-v2-f330bfbe3a61",
+  "policy_id": "readout-channels-v2",
+  "policy_digest": "f330bfbe3a61ded2f057ed6bd9925bab4c61e616b20790642d1e045adcf814c6",
+  "criterion": {
+    "declared": "On the held-out families together (numerical-prerequisite-held-out, numerical-undeclared-held-out): gabriel_policy reaches at least the verified success of gabriel_reference_plan, with fewer mean model tokens and no false completion; the readout's log-loss on the held-out decisions is below the rule's; promotion by the memory service's rule on disjoint held-out families; the control families (units, resample, graph) equal between the arms (evidence/wp17/protocol10_declaration.md)",
+    "held_out_families": [
+      "numerical-prerequisite-held-out",
+      "numerical-undeclared-held-out"
+    ],
+    "baseline": "gabriel_reference_plan",
+    "treatment": "gabriel_policy",
+    "success_baseline": 0.5,
+    "success_treatment": 0.5,
+    "requests_baseline": 2.5,
+    "requests_treatment": 1.5,
+    "tokens_baseline": 2356.625,
+    "tokens_treatment": 1328.625,
+    "false_completions_treatment": 0,
+    "met": true,
+    "held_out_decision_loss": {
+      "samples": 8,
+      "positives": 4,
+      "readout": {
+        "log_loss": 0.10852234362619352,
+        "accuracy": 1.0,
+        "samples": 8
+      },
+      "rule": {
+        "log_loss": 3.45437788965786,
+        "accuracy": 0.5,
+        "samples": 8
+      },
+      "note": "a stop ends the run unverified, so a stopped decision is labeled 0 whatever a repair would have done; the success clause of the criterion guards against that"
+    }
+  },
+  "promotion": {
+    "decision": "rejected",
+    "reason": "held-out effective support 4 does not exceed refutations 4 (threshold 1)",
+    "evaluation_ref": {
+      "sha256": "4b2a0089d40d4ea41ff1297024d58afc63fccc67bb621b4a57bca09562f797e3",
+      "bytes": 1708,
+      "media_type": "application/json"
+    },
+    "decided_at_sequence": 77
+  },
+  "held_out_support": {
+    "source_id": "gabriel_policy:held-out",
+    "support": 4,
+    "refute": 4,
+    "inconclusive": 0,
+    "unique_outcomes": [
+      "nd-kelvin-gabriel_policy-0",
+      "nd-kelvin-gabriel_policy-1",
+      "nd-millimetres-gabriel_policy-0",
+      "nd-millimetres-gabriel_policy-1",
+      "np-rankine-gabriel_policy-0",
+      "np-rankine-gabriel_policy-1",
+      "np-text-gabriel_policy-0",
+      "np-text-gabriel_policy-1"
+    ],
+    "label_records": 8,
+    "excluded": {
+      "dry_run": 0,
+      "skipped": 0,
+      "unreconciled": 0
+    },
+    "current_labels": {
+      "nd-kelvin-gabriel_policy-0": {
+        "label_id": "label-nd-kelvin-gabriel_policy-0-r0",
+        "revision": 0,
+        "status_kind": "production",
+        "outcome": "success"
+      },
+      "nd-kelvin-gabriel_policy-1": {
+        "label_id": "label-nd-kelvin-gabriel_policy-1-r0",
+        "revision": 0,
+        "status_kind": "production",
+        "outcome": "success"
+      },
+      "nd-millimetres-gabriel_policy-0": {
+        "label_id": "label-nd-millimetres-gabriel_policy-0-r0",
+        "revision": 0,
+        "status_kind": "production",
+        "outcome": "success"
+      },
+      "nd-millimetres-gabriel_policy-1": {
+        "label_id": "label-nd-millimetres-gabriel_policy-1-r0",
+        "revision": 0,
+        "status_kind": "production",
+        "outcome": "success"
+      },
+      "np-rankine-gabriel_policy-0": {
+        "label_id": "label-np-rankine-gabriel_policy-0-r0",
+        "revision": 0,
+        "status_kind": "production",
+        "outcome": "failure"
+      },
+      "np-rankine-gabriel_policy-1": {
+        "label_id": "label-np-rankine-gabriel_policy-1-r0",
+        "revision": 0,
+        "status_kind": "production",
+        "outcome": "failure"
+      },
+      "np-text-gabriel_policy-0": {
+        "label_id": "label-np-text-gabriel_policy-0-r0",
+        "revision": 0,
+        "status_kind": "production",
+        "outcome": "failure"
+      },
+      "np-text-gabriel_policy-1": {
+        "label_id": "label-np-text-gabriel_policy-1-r0",
+        "revision": 0,
+        "status_kind": "production",
+        "outcome": "failure"
+      }
+    }
+  },
+  "baseline_support": {
+    "source_id": "gabriel_reference_plan:held-out",
+    "support": 4,
+    "refute": 4,
+    "inconclusive": 0,
+    "unique_outcomes": [
+      "nd-kelvin-gabriel_reference_plan-0",
+      "nd-kelvin-gabriel_reference_plan-1",
+      "nd-millimetres-gabriel_reference_plan-0",
+      "nd-millimetres-gabriel_reference_plan-1",
+      "np-rankine-gabriel_reference_plan-0",
+      "np-rankine-gabriel_reference_plan-1",
+      "np-text-gabriel_reference_plan-0",
+      "np-text-gabriel_reference_plan-1"
+    ],
+    "label_records": 8,
+    "excluded": {
+      "dry_run": 0,
+      "skipped": 0,
+      "unreconciled": 0
+    },
+    "current_labels": {
+      "nd-kelvin-gabriel_reference_plan-0": {
+        "label_id": "label-nd-kelvin-gabriel_reference_plan-0-r0",
+        "revision": 0,
+        "status_kind": "production",
+        "outcome": "success"
+      },
+      "nd-kelvin-gabriel_reference_plan-1": {
+        "label_id": "label-nd-kelvin-gabriel_reference_plan-1-r0",
+        "revision": 0,
+        "status_kind": "production",
+        "outcome": "success"
+      },
+      "nd-millimetres-gabriel_reference_plan-0": {
+        "label_id": "label-nd-millimetres-gabriel_reference_plan-0-r0",
+        "revision": 0,
+        "status_kind": "production",
+        "outcome": "success"
+      },
+      "nd-millimetres-gabriel_reference_plan-1": {
+        "label_id": "label-nd-millimetres-gabriel_reference_plan-1-r0",
+        "revision": 0,
+        "status_kind": "production",
+        "outcome": "success"
+      },
+      "np-rankine-gabriel_reference_plan-0": {
+        "label_id": "label-np-rankine-gabriel_reference_plan-0-r0",
+        "revision": 0,
+        "status_kind": "production",
+        "outcome": "failure"
+      },
+      "np-rankine-gabriel_reference_plan-1": {
+        "label_id": "label-np-rankine-gabriel_reference_plan-1-r0",
+        "revision": 0,
+        "status_kind": "production",
+        "outcome": "failure"
+      },
+      "np-text-gabriel_reference_plan-0": {
+        "label_id": "label-np-text-gabriel_reference_plan-0-r0",
+        "revision": 0,
+        "status_kind": "production",
+        "outcome": "failure"
+      },
+      "np-text-gabriel_reference_plan-1": {
+        "label_id": "label-np-text-gabriel_reference_plan-1-r0",
+        "revision": 0,
+        "status_kind": "production",
+        "outcome": "failure"
+      }
+    }
+  },
+  "memory_anchor": {
+    "schema": "gabriel.memory-anchor/1",
+    "workspace_id": "ws-75753e4375b0",
+    "memory_sequence": 77,
+    "head": "75357ca8a5543af3abf365a947fa875604bbef3be61bac65815e61acbd3d8cdf",
+    "owner_sequence": 0,
+    "policy_revision": 0
+  }
+}

@@ -182,6 +182,24 @@ scripts/policy_route.py promote --train-out ./policies8 --eval-run ./run8b-eval 
     --out ./promotion8
 scripts/eval_decision_analysis.py ./run8b-eval                                       # every unit's routing decisions beside its provider statuses
 ```
+Since ADR-24 the numerical pack declares channels of its own (`input_problems`,
+`verdict_refused`, `contract_mismatch`, `units_mismatch`, `rows_mismatch`, `deviation_excess`,
+`output_unbound`, read from the retained evidence of the latest reference-contract
+verification, whose `failure_class`, `input_problems` and `worker_reason` are committed facts);
+its layout is `progress-channels-v1.numerical-progress-v1`, the document pack's readout is
+refused on it, and `gabriel_policy` on a numerical task is the reference plan with the
+protocol's frozen readout. Protocol 10 ran the same route on the numerical decision families
+(`evidence/wp17/`):
+```bash
+gabriel eval corpus-check --tier numerical                                           # nineteen tasks: the protocol 5 families and the decision families
+gabriel eval freeze ... --tiers numerical --tasks np-null,np-stamp,np-pair,nd-fahrenheit,nd-centimetres,nd-millis \
+    --repetitions 3 --systems gabriel_reference_plan                                  # 10a: training decisions (rule-based)
+scripts/policy_route.py train --run ./run10a-train --out ./policies10 --episodes 0 --systems gabriel_reference_plan
+gabriel eval freeze ... --tiers numerical --systems gabriel_reference_plan,gabriel_policy --policy ./policies10/policy-channels.json \
+    --held-out-families numerical-prerequisite-held-out,numerical-undeclared-held-out --criterion "<declared>"   # 10b
+scripts/policy_route.py promote --train-out ./policies10 --eval-run ./run10b-eval --baseline gabriel_reference_plan \
+    --treatment gabriel_policy --held-out numerical-prerequisite-held-out,numerical-undeclared-held-out --out ./promotion10
+```
 
 ## Operations (ADR-17)
 ```bash

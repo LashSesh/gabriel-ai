@@ -1,6 +1,6 @@
 {
   "schema": "gabriel.evidence.work-packages/1",
-  "produced_at_utc": "2026-10-04T13:53:39.861793+00:00",
+  "produced_at_utc": "2026-10-04T18:39:22.541360+00:00",
   "rule": "A package counts as done only with actual code and recorded test output; privileged and paid runs are listed under not_executed.",
   "packages": {
     "WP01": {
@@ -1034,6 +1034,14 @@
           {
             "test": "test_document_tasks_pin_the_packs_promoted_readout_by_default_and_software_tasks_the_rule",
             "result": "PASSED"
+          },
+          {
+            "test": "test_numerical_decisions_carry_the_packs_declared_channels_and_a_bound_readout_stops_the_prerequisite_repair",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_the_policy_arm_runs_numerical_tasks_through_the_frozen_harness_and_its_decisions_train",
+            "result": "PASSED"
           }
         ],
         "tests/test_evaluation.py": [
@@ -1555,6 +1563,14 @@
           {
             "test": "test_document_tasks_pin_the_packs_promoted_readout_by_default_and_software_tasks_the_rule",
             "result": "PASSED"
+          },
+          {
+            "test": "test_numerical_decisions_carry_the_packs_declared_channels_and_a_bound_readout_stops_the_prerequisite_repair",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_the_policy_arm_runs_numerical_tasks_through_the_frozen_harness_and_its_decisions_train",
+            "result": "PASSED"
           }
         ],
         "tests/test_evaluation_domains.py": [
@@ -1715,6 +1731,14 @@
           {
             "test": "test_document_tasks_pin_the_packs_promoted_readout_by_default_and_software_tasks_the_rule",
             "result": "PASSED"
+          },
+          {
+            "test": "test_numerical_decisions_carry_the_packs_declared_channels_and_a_bound_readout_stops_the_prerequisite_repair",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_the_policy_arm_runs_numerical_tasks_through_the_frozen_harness_and_its_decisions_train",
+            "result": "PASSED"
           }
         ]
       }
@@ -1810,6 +1834,142 @@
           },
           {
             "test": "test_workspace_backup_restores_memory_and_refuses_a_missing_memory_blob",
+            "result": "PASSED"
+          }
+        ]
+      }
+    },
+    "P10-numerical-channels": {
+      "status": "DONE_EXECUTED",
+      "tests": [
+        "tests/test_policy_route.py",
+        "tests/test_evaluation_domains.py",
+        "tests/test_domains.py"
+      ],
+      "acceptance": [
+        "ADR-24: the numerical pack declares progress channels from committed facts; the channel route executed on a second pack under a declaration frozen before the run (evidence/wp17/protocol10_declaration.md)"
+      ],
+      "evidence": [
+        "evidence/wp17/protocol10_declaration.md",
+        "evidence/wp17/pilot10.frozen.json",
+        "evidence/wp17/pilot10-run/report.md",
+        "evidence/wp17/pilot10b.frozen.json",
+        "evidence/wp17/pilot10b-run/report.md",
+        "evidence/wp17/protocol10a-train.frozen.json",
+        "evidence/wp17/run10a-train/report.md",
+        "evidence/wp17/run10a-train/decision_analysis.json",
+        "evidence/wp17/policies10/training_manifest.json",
+        "evidence/wp17/policies10/metrics.json",
+        "evidence/wp17/policies10/policy-channels.json",
+        "evidence/wp17/protocol10b-eval.frozen.json",
+        "evidence/wp17/run10b-eval/report.md",
+        "evidence/wp17/run10b-eval/decision_analysis.json",
+        "evidence/wp17/promotion10/promotion.json",
+        "evidence/wp17/*/final_diffs/index.json",
+        "docs/adr/ADR-24-numerical-channels-route-transfer.md",
+        "docs/EVALUATION_PROTOCOL.md"
+      ],
+      "not_executed": [
+        "a second provider on the numerical decision families",
+        "a third pack with declared channels (the software pack declares none)",
+        "a leave-one-family-out validation of the numerical readout (two training families, one label class each)"
+      ],
+      "test_results": {
+        "tests/test_policy_route.py": [
+          {
+            "test": "test_recurrent_reference_map_is_bounded_and_rejects_bad_inputs",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_training_reduces_decision_loss_and_router_decides",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_pinned_readout_policy_stops_a_repair_and_records_its_decision",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_episodes_enter_the_prompt_and_are_recorded",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_document_decisions_carry_the_packs_declared_channels_and_bind_the_readout_to_their_layout",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_a_layout_bound_readout_abstains_where_the_packs_channels_are_missing",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_document_tasks_pin_the_packs_promoted_readout_by_default_and_software_tasks_the_rule",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_numerical_decisions_carry_the_packs_declared_channels_and_a_bound_readout_stops_the_prerequisite_repair",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_the_policy_arm_runs_numerical_tasks_through_the_frozen_harness_and_its_decisions_train",
+            "result": "PASSED"
+          }
+        ],
+        "tests/test_evaluation_domains.py": [
+          {
+            "test": "test_domain_corpus_controls_execute_and_tiers_are_complete",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_independent_document_verification_is_content_based",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_all_revisions_policy_is_a_declared_ablation_that_keeps_authorization",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_provenance_view_hides_the_stale_revision_and_the_other_views_show_it",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_revoked_source_is_excluded_by_provenance_and_caught_by_verification_in_the_plain_view",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_document_comparators_run_through_the_frozen_harness",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_provenance_arm_solves_the_revoked_task_in_one_request_through_the_harness",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_numerical_comparators_run_through_the_frozen_harness",
+            "result": "PASSED"
+          }
+        ],
+        "tests/test_domains.py": [
+          {
+            "test": "test_direct_and_hosted_worker_agree_and_unsupported_inputs_abstain",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_signature_collision_cannot_authorize_cache_reuse",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_numerical_task_runs_through_the_core_and_rejects_bad_jobs",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_document_task_binds_citations_through_memory_and_rejects_unbound_claims",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_one_core_serves_three_domains_with_identical_registry",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_numerical_worker_runs_inside_the_namespace_jail",
             "result": "PASSED"
           }
         ]

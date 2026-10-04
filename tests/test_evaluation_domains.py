@@ -66,10 +66,17 @@ def run_gabriel(tmp_path, name, task, worker_steps, *, view="provenance", max_re
 
 def test_domain_corpus_controls_execute_and_tiers_are_complete():
     report = cd.check_all()
-    assert len(report) == 50 and all(r["sound"] for r in report), [(r["task_id"], r["controls"]) for r in report if not r["sound"]]
+    assert len(report) == 60 and all(r["sound"] for r in report), [(r["task_id"], r["controls"]) for r in report if not r["sound"]]
     assert {t.family for t in cd.tasks("document")} == {"revision", "revoked", "conflict"}
-    assert {t.family for t in cd.tasks("numerical")} == {"units", "resample", "graph"}
-    assert {t.family for t in cd.tasks("graph")} == {"graph-snapshot", "graph-mass", "graph-window", "graph-readout", "graph-detections"} and len(cd.tasks("numerical")) == 9
+    assert {t.family for t in cd.tasks("numerical")} == {"units", "resample", "graph", "numerical-prerequisite", "numerical-prerequisite-held-out",
+                                                         "numerical-undeclared", "numerical-undeclared-held-out"}
+    assert {t.family for t in cd.tasks("graph")} == {"graph-snapshot", "graph-mass", "graph-window", "graph-readout", "graph-detections"} and len(cd.tasks("numerical")) == 19
+    # ADR-24: the decision families' first attempts fail with both outcomes by construction, with the facts the pack commits
+    for task in cd.tasks("numerical"):
+        if task.family.startswith("numerical-prerequisite"):
+            assert cd.describe_problems(task), task.task_id  # the observed input carries a declared contract problem
+        elif task.family.startswith("numerical-undeclared"):
+            assert not cd.describe_problems(task) and "data/conventions.json" in task.files_map()
     assert {t.family for t in cd.tasks("association")} == {"association-history", "association-needed", "association-needed-held-out", "association-unneeded",
                                                             "association-unneeded-held-out", "association-needed-cold", "association-needed-cold-held-out", "association-none"}
     assert all(t.history == () for t in cd.tasks("association") if t.family.startswith("association-needed-cold"))

@@ -1,0 +1,97 @@
+{
+  "backend": "linux_namespace",
+  "bootstrap": {
+    "resamples": 2000,
+    "seed": 20261002
+  },
+  "budget_per_task": {
+    "max_input_tokens": 60000,
+    "max_output_tokens": 4000,
+    "model_requests": 6,
+    "model_tokens_total": 120000,
+    "tool_attempts": 64,
+    "wall_ms": 600000
+  },
+  "corpus_digest": "cf5973218edce5862dab8ff1cb99368fbc87fe6b6d54ef6aa4a5d381346ab340",
+  "declared_criterion": "",
+  "declared_success": {
+    "document_and_numerical_tiers": {
+      "gabriel": "as gabriel_reference_plan with the model planner (one planner request per plan version)",
+      "gabriel_all_revisions": "as gabriel_reference_plan with the declared all_revisions view: every eligible revision enters the prompt, revocation and authorization still apply (ablation of the revision rule; document tasks only)",
+      "gabriel_associative": "as gabriel_reference_plan with the declared associative view (ADR-20): the provenance view re-ranked by the native engine's walk over the co-citation graph of the claims that earlier verified runs in the same workspace established; since ADR-21 a carried source is told apart in the prompt with the seed and the verified run that cited them together; document tasks only",
+      "gabriel_associative_unlabeled": "as gabriel_associative with the ADR-20 presentation: carried sources enter the prompt like lexically retrieved ones (ablation of the association provenance in the prompt, ADR-21; document tasks only)",
+      "gabriel_no_repair": "as gabriel with max_repairs=0 and max_plan_versions=1 (ablation of the repair cycle)",
+      "gabriel_plain_sources": "as gabriel_reference_plan with the declared plain view: every declared source file enters the prompt regardless of revision or revocation (ablation of provenance-aware retrieval; document tasks only)",
+      "gabriel_policy": "the production configuration with the protocol's frozen readout policy pinned: on a document task as gabriel_associative (ADR-22), on a numerical task as gabriel_reference_plan (ADR-24); at a failed verification it chooses repair or stop from the generic progress channels and the pack's declared channels",
+      "gabriel_reference_plan": "run state succeeded with the pack's reference plan and the production retrieval view (effective revision, authorized and available sources; contained numerical worker)",
+      "provider_only": "an admissible deliverable was produced (amendment applied or declared operation executed through the same adapter); no verification",
+      "simple_loop": "the system's own run of the independent content checks passed (plain source view, no owner, memory service or policy)"
+    },
+    "gabriel": "run state succeeded (every mandatory check passed with eligible evidence, artifacts verified, effects reconciled)",
+    "gabriel_episodes": "as gabriel_reference_plan (rule-based repair) with the frozen episodes retrievable into the worker prompt (readout ablation)",
+    "gabriel_no_repair": "as gabriel, with max_repairs=0 and max_plan_versions=1 (ablation of the repair cycle)",
+    "gabriel_policy": "as gabriel_reference_plan, with the frozen readout policy pinned: at a failed verification it chooses repair or stop from the progress channels, and it may retrieve frozen episodes into the worker prompt",
+    "gabriel_reference_plan": "as gabriel, with the domain pack's deterministic reference plan admitted without a planner request (planner ablation)",
+    "provider_only": "an admissible patch was applied (no verification)",
+    "simple_loop": "the system's own runs of the visible tests and the oracle both exited 0"
+  },
+  "episode_seed": null,
+  "families": [
+    "numerical-undeclared"
+  ],
+  "frozen_at_utc": "2026-10-04T18:28:35.341136+00:00",
+  "frozen_digest": "26f80b985b8fb33613b130e81f757c0a3feb444807bc449ed6e14ddba18b4c9d",
+  "harness_identity": "708750148ff709cc399e45d74c70f8e7b7159b21f71942831cf4633441aaea6a",
+  "held_out_families": [],
+  "metrics": [
+    "p_success = mean(V)",
+    "p_false_completion = mean(D*(1-V))",
+    "conditional false completion = sum(D*(1-V))/sum(D)",
+    "model requests, model tokens and wall time per run",
+    "recovery: Gabriel runs that used repair cycles or extra plan versions",
+    "paired differences gabriel - baseline per task (mean over repetitions)",
+    "bootstrap percentile intervals, resampling task families with replacement (and tasks as a secondary view)"
+  ],
+  "note": "protocol 10 second pilot after the recorded amendment of the undeclared family (evidence/wp17/protocol10_declaration.md); retained, not counted",
+  "paired": [],
+  "policy": null,
+  "provider": {
+    "credential_ref": "env:OPENAI_API_KEY",
+    "kind": "openai_compat",
+    "model": "gpt-4.1-mini",
+    "temperature_milli": 0,
+    "timeout_ms": 120000
+  },
+  "purpose": "Matched comparison: increase independently verified task success or reduce resources at equal success, under a fixed task distribution and matched constraints. Not a benchmark of general capability.",
+  "repetitions": 1,
+  "sample_size_statement": "3 tasks in 1 families; the minimum relevant effect is not predeclared from a pilot, so intervals are reported as descriptive uncertainty, not as a powered test",
+  "schema": "gabriel.evaluation-protocol/1",
+  "systems": [
+    "gabriel_reference_plan"
+  ],
+  "tasks": [
+    {
+      "digest": "adf76372d8914687a602ef17852b077f4161405d0e157acc4ca6b9573aa33ee8",
+      "family": "numerical-undeclared",
+      "task_id": "nd-fahrenheit",
+      "tier": "numerical"
+    },
+    {
+      "digest": "b31df15ade5f5916141918261a40820bc9a2f26a36e1b7d75e62325f2a8ed1f5",
+      "family": "numerical-undeclared",
+      "task_id": "nd-centimetres",
+      "tier": "numerical"
+    },
+    {
+      "digest": "6acdd74b68acd010343469c5e69fe35ff3e67683993f8d43d68ab8ae34c9b2bc",
+      "family": "numerical-undeclared",
+      "task_id": "nd-millis",
+      "tier": "numerical"
+    }
+  ],
+  "tiers": [
+    "numerical"
+  ],
+  "time_limit_is_failure": true,
+  "verification": "fresh, system-independent: changed paths within allowed_paths; visible tests exit 0; oracle installed from the corpus text and exit 0; all executed in the containment backend on the final tree"
+}

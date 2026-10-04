@@ -52,6 +52,11 @@ RETRY_CLASS = {"numerical.observe": "read_retry", "numerical.run_job": "reconcil
                "numerical.verify": "read_retry", "numerical.review": "read_retry", "model.generate": "target_idempotent_retry"}
 
 
+# ADR-24: the pack's declared progress channels, committed facts of the latest reference-contract verification
+PROGRESS_SCHEMA_ID = "numerical-progress-v1"
+PROGRESS_CHANNELS = ("input_problems", "verdict_refused", "contract_mismatch", "units_mismatch", "rows_mismatch", "deviation_excess", "output_unbound")
+FAILURE_CLASSES = ("none", "verdict", "output_binding", "contract", "units", "rows", "deviation", "structure")
+
 WORKER_FILES = ("result.json", "job.json", "worker.py", "native_worker.py") + tuple("bin/" + name for name in native_graph.BINARIES)
 CERTIFY_TIMEOUT_S = 120
 OPERATIONS = {**analytical.OPERATIONS, **native_graph.OPERATIONS}  # disjoint ids: stdlib worker and native graph worker
@@ -547,8 +552,38 @@ class VerifyTool:
 
 # ===================================================================== verifiers
 
+def _input_problems(store, result: dict):
+    """How many contract problems the observed input dataset of the judged job carried, read from
+    the job's bound snapshot; None when the chain of references cannot be followed."""
+    try:
+        job = loads(store.get(result["job_ref"]))
+        snapshot = loads(store.get(job["base_snapshot_ref"]))
+        dataset = next(d for d in snapshot["datasets"] if d["path"] == job["input_path"])
+        return len(dataset.get("problems") or [])
+    except (GabrielError, ValueError, KeyError, StopIteration, TypeError):
+        return None
+
+
+def _worker_reason(store, result: dict):
+    """What the worker said when it refused the job (its retained diagnostics); None for a computed result."""
+    if result.get("verdict") == "computed" or not isinstance(result.get("diagnostics_ref"), dict):
+        return None
+    try:
+        diagnostics = json.loads(store.get(result["diagnostics_ref"]).decode("utf8"))
+        reason = ((diagnostics.get("worker") or {}).get("diagnostics") or {}).get("reason")
+        return str(reason)[:256] if reason is not None else None
+    except (GabrielError, ValueError, UnicodeDecodeError, AttributeError):
+        return None
+
+
 class ReferenceContractVerifier:
-    """Independent reference: expected operation, units, values and tolerance kept outside the repository."""
+    """Independent reference: expected operation, units, values and tolerance kept outside the repository.
+
+    Beside the reason, the evidence commits the class of a failure (``failure_class``, one of
+    ``FAILURE_CLASSES``) and two facts of the job it judged: how many contract problems the
+    observed input dataset carried (``input_problems``) and what the worker said when it refused
+    (``worker_reason``). The pack's progress channels (ADR-24) read these fields, never the
+    reason text; the worker's reason also reaches the next prompt's diagnostics."""
 
     def __call__(self, spec, outputs, ctx):
         verification = _record(outputs, "verification")
@@ -562,90 +597,100 @@ class ReferenceContractVerifier:
         except (GabrielError, ValueError, UnicodeDecodeError) as exc:
             return "inconclusive", {"reason": "reference or result unavailable: " + str(exc)[:200]}
         evidence = {"operation": verification["operation"], "verdict": result["verdict"], "expected_operation": oracle.get("operation"),
-                    "output_path": verification["output_path"], "expected_output_path": oracle.get("output_path"), "containment": result["containment"]}
+                    "output_path": verification["output_path"], "expected_output_path": oracle.get("output_path"), "containment": result["containment"],
+                    "failure_class": "none", "input_problems": _input_problems(ctx.store, result), "worker_reason": _worker_reason(ctx.store, result)}
+
+        def failed(failure_class: str, reason: str, **extra):
+            return "failed", dict(evidence, failure_class=failure_class, reason=reason, **extra)
+
         if result["verdict"] != "computed":
-            return "failed", dict(evidence, reason="domain verdict %s is not a computed result" % result["verdict"])
+            reason = "domain verdict %s is not a computed result" % result["verdict"]
+            if evidence["worker_reason"]:
+                reason += " (worker: %s)" % evidence["worker_reason"]
+            return failed("verdict", reason)
         if not verification["output_present"] or not verification["matches_result"]:
-            return "failed", dict(evidence, reason="observed output does not match the retained job result")
+            return failed("output_binding", "observed output does not match the retained job result")
         if verification["operation"] != oracle.get("operation") or verification["output_path"] != oracle.get("output_path"):
-            return "failed", dict(evidence, reason="operation or output path differ from the reference contract")
+            return failed("contract", "operation or output path differ from the reference contract")
         if result.get("output_units") != oracle.get("units"):
-            return "failed", dict(evidence, reason="output units %r differ from the reference %r" % (result.get("output_units"), oracle.get("units")))
+            return failed("units", "output units %r differ from the reference %r" % (result.get("output_units"), oracle.get("units")))
         try:
             output = json.loads(ctx.store.get(result["output_ref"]).decode("utf8"))
         except (GabrielError, ValueError, UnicodeDecodeError, TypeError) as exc:
-            return "failed", dict(evidence, reason="output bytes unavailable or not JSON: " + str(exc)[:200])
+            return failed("output_binding", "output bytes unavailable or not JSON: " + str(exc)[:200])
         tolerance = float(oracle.get("tolerance_micro", 0)) / 1e6
         if "identity" in oracle:  # graph.snapshot: the independently recomputed snapshot identity and the vertex count
             snapshot = output.get("snapshot") if isinstance(output.get("snapshot"), dict) else {}
             vertices = snapshot.get("vertices")
             count = len(vertices) if isinstance(vertices, list) else None
             ok = snapshot.get("identity") == oracle["identity"] and count == oracle.get("vertices")
-            return ("passed" if ok else "failed"), dict(evidence, identity=snapshot.get("identity"), expected_identity=oracle["identity"], vertices=count,
-                                                        expected_vertices=oracle.get("vertices"))
+            return ("passed" if ok else "failed"), dict(evidence, failure_class="none" if ok else "structure", identity=snapshot.get("identity"),
+                                                        expected_identity=oracle["identity"], vertices=count, expected_vertices=oracle.get("vertices"))
         if "masses" in oracle:  # graph.region_mass: masses within tolerance and identical decisions at identical times
             got, expected = output.get("values"), oracle["masses"]
             if not isinstance(got, list) or len(got) != len(expected):
-                return "failed", dict(evidence, reason="row count %s differs from the reference %d" % (len(got) if isinstance(got, list) else None, len(expected)))
+                return failed("rows", "row count %s differs from the reference %d" % (len(got) if isinstance(got, list) else None, len(expected)))
             worst = 0.0
             for (t_e, m_e, d_e), item in zip(expected, got):
                 if not isinstance(item, dict) or item.get("time_bits") != t_e:
-                    return "failed", dict(evidence, reason="time %r differs from the reference %r" % (item.get("time_bits") if isinstance(item, dict) else item, t_e))
+                    return failed("deviation", "time %r differs from the reference %r" % (item.get("time_bits") if isinstance(item, dict) else item, t_e))
                 try:
                     worst = max(worst, abs(_binary64(item.get("mass_bits")) - float(m_e)))
                 except (ValueError, TypeError):
-                    return "failed", dict(evidence, reason="mass at %s is not a binary64 bit string" % t_e)
+                    return failed("structure", "mass at %s is not a binary64 bit string" % t_e)
                 if item.get("decision") != d_e:
-                    return "failed", dict(evidence, reason="decision %r differs from the reference %r at %s" % (item.get("decision"), d_e, t_e))
+                    return failed("structure", "decision %r differs from the reference %r at %s" % (item.get("decision"), d_e, t_e))
             if worst > tolerance:
-                return "failed", dict(evidence, reason="maximum mass deviation %r exceeds tolerance %r" % (worst, tolerance), max_deviation_pico=int(worst * 1e12))
+                return failed("deviation", "maximum mass deviation %r exceeds tolerance %r" % (worst, tolerance), max_deviation_pico=int(worst * 1e12))
             return "passed", dict(evidence, rows=len(got), max_deviation_pico=int(worst * 1e12), tolerance_micro=int(tolerance * 1e6))
         if "statuses" in oracle:  # graph.window_reachability: certified statuses per window
             got = output.get("statuses")
             ok = got == oracle["statuses"] and output.get("stage") == "certified"
-            return ("passed" if ok else "failed"), dict(evidence, statuses=got, expected_statuses=oracle["statuses"], stage=output.get("stage"))
+            return ("passed" if ok else "failed"), dict(evidence, failure_class="none" if ok else "structure", statuses=got, expected_statuses=oracle["statuses"],
+                                                        stage=output.get("stage"))
         if "readout" in oracle:  # graph.state_readout: structure exact, carrier admissible, metrics within tolerance
             got, expected = output.get("ticks"), oracle["readout"]
             if output.get("kind") != "state_readout" or not isinstance(got, list) or len(got) != len(expected):
-                return "failed", dict(evidence, reason="readout kind or step count differs from the reference")
+                return failed("rows", "readout kind or step count differs from the reference")
             worst = 0.0
             for item, ref in zip(got, expected):
                 if not isinstance(item, dict) or item.get("tick") != ref["tick"] or item.get("vertices") != ref["vertices"] or item.get("edges") != ref["edges"]:
-                    return "failed", dict(evidence, reason="step structure differs from the reference at tick %r" % (ref["tick"],))
+                    return failed("structure", "step structure differs from the reference at tick %r" % (ref["tick"],))
                 if item.get("kairos") is not ref["kairos"]:
-                    return "failed", dict(evidence, reason="gate verdict differs from the reference at tick %r" % (ref["tick"],))
+                    return failed("structure", "gate verdict differs from the reference at tick %r" % (ref["tick"],))
                 if not isinstance(item.get("carrier"), dict) or item["carrier"].get("index") not in ref["admissible_carriers"]:
-                    return "failed", dict(evidence, reason="active carrier is not admissible at tick %r" % (ref["tick"],))
+                    return failed("structure", "active carrier is not admissible at tick %r" % (ref["tick"],))
                 try:
                     worst = max(worst, max(abs(_binary64(item.get("metrics", {}).get(name)) - float(ref["metrics"][name])) for name in ref["metrics"]))
                 except (ValueError, TypeError, AttributeError):
-                    return "failed", dict(evidence, reason="metrics at tick %r are not binary64 bit strings" % (ref["tick"],))
+                    return failed("structure", "metrics at tick %r are not binary64 bit strings" % (ref["tick"],))
             if worst > tolerance:
-                return "failed", dict(evidence, reason="maximum metric deviation %r exceeds tolerance %r" % (worst, tolerance), max_deviation_pico=int(worst * 1e12))
+                return failed("deviation", "maximum metric deviation %r exceeds tolerance %r" % (worst, tolerance), max_deviation_pico=int(worst * 1e12))
             return "passed", dict(evidence, rows=len(got), max_deviation_pico=int(worst * 1e12), tolerance_micro=int(tolerance * 1e6))
         if "detection_ticks" in oracle:  # graph.detections: the admitted gate crossings, exactly
             found = output.get("detections")
             ticks = [d.get("tick") for d in found] if isinstance(found, list) and all(isinstance(d, dict) for d in found) else None
             vertices = [d.get("vertices") for d in found] if ticks is not None else None
             ok = output.get("kind") == "detections" and ticks == oracle["detection_ticks"] and ("detection_vertices" not in oracle or vertices == oracle["detection_vertices"])
-            return ("passed" if ok else "failed"), dict(evidence, detection_ticks=ticks, expected_detection_ticks=oracle["detection_ticks"])
+            return ("passed" if ok else "failed"), dict(evidence, failure_class="none" if ok else "structure", detection_ticks=ticks,
+                                                        expected_detection_ticks=oracle["detection_ticks"])
         if "values" in oracle:
             expected = oracle["values"]
             got = output.get("values")
             if not isinstance(got, list) or len(got) != len(expected):
-                return "failed", dict(evidence, reason="row count %s differs from the reference %d" % (len(got) if isinstance(got, list) else None, len(expected)))
+                return failed("rows", "row count %s differs from the reference %d" % (len(got) if isinstance(got, list) else None, len(expected)))
             worst = 0.0
             for (t_e, v_e), (t_g, v_g) in zip(expected, got):
                 if t_e != t_g:
-                    return "failed", dict(evidence, reason="time stamp %r differs from the reference %r" % (t_g, t_e))
+                    return failed("deviation", "time stamp %r differs from the reference %r" % (t_g, t_e))
                 worst = max(worst, abs(float(v_g) - float(v_e)))
             if worst > tolerance:
-                return "failed", dict(evidence, reason="maximum deviation %r exceeds tolerance %r" % (worst, tolerance), max_deviation_micro=int(worst * 1e6))
+                return failed("deviation", "maximum deviation %r exceeds tolerance %r" % (worst, tolerance), max_deviation_micro=int(worst * 1e6))
             return "passed", dict(evidence, rows=len(got), max_deviation_micro=int(worst * 1e6), tolerance_micro=int(tolerance * 1e6))
         if "signature" in oracle:
             ok = output.get("signature") == oracle["signature"] and output.get("vertices") == oracle.get("vertices")
-            return ("passed" if ok else "failed"), dict(evidence, signature=output.get("signature"), expected_signature=oracle["signature"],
-                                                        vertices=output.get("vertices"), expected_vertices=oracle.get("vertices"))
+            return ("passed" if ok else "failed"), dict(evidence, failure_class="none" if ok else "structure", signature=output.get("signature"),
+                                                        expected_signature=oracle["signature"], vertices=output.get("vertices"), expected_vertices=oracle.get("vertices"))
         return "inconclusive", dict(evidence, reason="reference contract declares neither values nor a signature")
 
 
@@ -726,6 +771,58 @@ class NumericalPack(DomainPack):
                                  {"fixture_id": "invalid", "port": "evaluate", "case_kind": "invalid", "input_ref": schema_ref, "expected_ref": schema_ref},
                                  {"fixture_id": "out_of_scope", "port": "evaluate", "case_kind": "out_of_scope", "input_ref": schema_ref, "expected_ref": schema_ref}]}
         return validate(manifest, "domain-pack")
+
+    # ---------------------------------------------------------------- routing (ADR-24)
+    def default_policy(self) -> dict | None:
+        """The readout promoted on the numerical decision families (`policies/readout-channels-v2.json`,
+        provenance beside it) is the routing policy of a numerical task that pins none; without a
+        shipped readout the rule-based policy applies."""
+        path = Path(__file__).parent / "policies" / "readout-channels-v2.json"
+        if not path.is_file():
+            return None
+        return validate(loads(path.read_bytes()), "router-policy")
+
+    def progress_channels(self, projection: dict, store) -> dict | None:
+        """ADR-24: the numerical pack's declared channels at a decision point, read from the retained
+        evidence of the latest reference-contract verification. Every value is a committed fact of
+        the run, never a judgement: whether the job's observed input dataset carried contract
+        problems, and the class of the verification's failure (the worker refused the job; the
+        operation or output path differ from the contract; the units differ; the row count differs;
+        values or structure deviate; the output could not be bound to the job result). A
+        verification that has not run leaves every channel missing, so a layout-bound readout
+        abstains and the rule applies."""
+        values = {name: None for name in PROGRESS_CHANNELS}
+        reference = set()
+        for check in projection["task"]["checks"]:
+            try:
+                if loads(store.get(check["spec_ref"]))["predicate_kind"] == "numerical/reference_contract":
+                    reference.add(check["check_id"])
+            except (GabrielError, ValueError, KeyError):
+                continue
+        latest = None
+        for entry in projection["assessments"].values():
+            if entry["check_id"] in reference and entry["outcome"] in ("passed", "failed"):
+                key = (len(entry["node_id"]), entry["node_id"])
+                if latest is None or key > latest[0]:
+                    latest = (key, entry)
+        channels = {"schema_id": PROGRESS_SCHEMA_ID, "names": list(PROGRESS_CHANNELS), "values": values}
+        if latest is None:
+            return channels
+        try:
+            record = loads(store.get(latest[1]["evidence_ref"]), ascii_only=False)
+        except (GabrielError, ValueError):
+            return channels
+        evidence = record["evidence"] if isinstance(record.get("evidence"), dict) else record
+        failure_class = evidence.get("failure_class")
+        if failure_class in FAILURE_CLASSES:
+            values.update(verdict_refused=1.0 if failure_class == "verdict" else 0.0, contract_mismatch=1.0 if failure_class == "contract" else 0.0,
+                          units_mismatch=1.0 if failure_class == "units" else 0.0, rows_mismatch=1.0 if failure_class == "rows" else 0.0,
+                          deviation_excess=1.0 if failure_class in ("deviation", "structure") else 0.0,
+                          output_unbound=1.0 if failure_class == "output_binding" else 0.0)
+        problems = evidence.get("input_problems")
+        if isinstance(problems, int) and not isinstance(problems, bool):
+            values["input_problems"] = 1.0 if problems > 0 else 0.0
+        return channels
 
     # ---------------------------------------------------------------- ports
     def compile_task(self, spec, store, **ids):

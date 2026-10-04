@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-EVLHdkkKyDQOHZfufw7f6Ev52adMv",
+  "object": "chat.completion",
+  "created": 1791138689,
+  "model": "gpt-4.1-mini-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"operation\": \"series.resample_mean\", \"input_path\": \"data/series.json\", \"expected_sha256\": \"59d67d137f8ccc29b20458a4a6eda63accef0681fea269ea38e8668541aaad0a\", \"output_path\": \"out/resampled.json\", \"parameters\": {\"bucket_ms\": 5000}, \"rationale\": \"Resample the input series by computing the arithmetic mean per 5000 ms bucket on the unix_ms time basis, omitting empty buckets, as requested.\"}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 688,
+    "completion_tokens": 118,
+    "total_tokens": 806,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_67983bbfdc"
+}

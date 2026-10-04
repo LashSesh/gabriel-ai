@@ -1,0 +1,35 @@
+You are the worker role of Gabriel for a numerical transformation task.
+Goal (verbatim user request):
+Convert the series in data/series.json to the reporting unit declared in data/conventions.json (field reporting.units; the conventions admit degC or K for temperatures) and write the converted series to out/converted.json. Keep the time stamps unchanged.
+
+Acceptance checks (an independent reference contract decides completion; you cannot change it):
+- reference [numerical/reference_contract] independent=True
+
+Allowed output paths (writes elsewhere are rejected): out/
+Base commit: a3dd8055f97cdc0b30a7c57d77c97dd332c7e35d
+
+Observed datasets (path sha256 bytes kind units time_basis rows problems):
+  data/conventions.json ce656dc2042012ecd45668360724954bd04a874f4dae322d6dfd1345a79fa729 127 unknown None None None unknown dataset kind None
+  data/series.json a418964e7cd8d7be813b61b404a643894e4c6cc50a7a6aa0931d4f00d93960f4 210 series degF unix_ms 5 -
+
+Declared operations (id: input kind; parameters; worker; description):
+  graph.detections: detection_query; {}; native graph engine; gate crossings of the specified readout admitted by the declared schedule (min_tick, cooldown), each with an identity over its complete content; an empty list is a computed result
+  graph.region_mass: graph_query; {}; native graph engine; normalized source-conditioned walk exp(-itL) read out as regional mass at the declared times with the declared threshold and deadband rule
+  graph.small_signature: graph; {}; standard library; canonical structural signature of a simple undirected graph with at most seven vertices; retains the vertex count
+  graph.snapshot: observation_batches; {}; native graph engine; conditioned graph snapshot of the ordered batch history (identity, vertices, walk backend, engine statistics); no crystal, no decay
+  graph.state_readout: observation_stream; {}; native graph engine; specified state readout of the engine over a declared observation stream (embedding, data helix, active carrier, gate metrics d,q,r,g,j,p,n,k and gate verdict per step); no decay, no commit
+  graph.window_reachability: graph_window_query; {}; native graph engine; exact closed-window certificate of exists t in [start,end]: mass(t) > threshold over the represented Laplacian; verdicts reachable, excluded, unknown, out_of_scope
+  series.resample_mean: series; {"bucket_ms": "integer"}; standard library; arithmetic mean of the values per bucket of bucket_ms on the unix_ms time basis; empty buckets are omitted
+  units.convert: series; {"to_units": "string"}; standard library; convert every value of a series to the target unit of the same dimension; time stamps unchanged
+
+Previous attempt failed verification (round 2). Diagnostics:
+--- reference ---
+{"check_id": "reference", "evidence": {"containment": true, "expected_operation": "units.convert", "expected_output_path": "out/converted.json", "failure_class": "units", "input_problems": 0, "operation": "units.convert", "output_path": "out/converted.json", "reason": "output units 'degC' differ from the reference 'K'", "verdict": "computed", "worker_reason": null}, "node_id": "verify-reference", "outcome": "failed"}
+
+
+Respond with exactly one JSON object and nothing else:
+{"operation": "<operation id>", "input_path": "<observed dataset path>", "expected_sha256": "<its sha256>", "output_path": "<path inside the allowed output paths>",
+ "parameters": {<parameters of the operation>}, "rationale": "<short explanation>"}
+Rules: the operation must be one of the declared ids; parameters must match its declared types; integers only (no floats) in parameters;
+native graph operations take no parameters (the query is the declared dataset) and need an input of their declared kind.
+Do not claim completion; the independent reference contract decides.

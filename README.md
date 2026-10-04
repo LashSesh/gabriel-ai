@@ -68,13 +68,22 @@ in an isolated worktree with independent acceptance checks.
   retrieval manifest recomputes from the chain at its own frontier and access policy revision;
   witnessed through the owner in `linux_namespace`): `docs/adr/ADR-23-association-erosion.md`,
   `evidence/wp16/`
+- The channel route on a second pack (the numerical pack declares progress channels from the
+  committed facts of its reference-contract verification; two decision families with hopeless
+  and recoverable first attempts; under protocol 10 a readout trained on twenty numerical
+  decisions met the declared held-out criterion, equal verified success at 1329 against 2357
+  tokens with every hopeless held-out repair stopped and every recoverable one taken, and the
+  memory's promotion rule declined it on a held-out composition half of which is hopeless by
+  construction, so the numerical pack keeps the rule): `docs/adr/ADR-24-numerical-channels-route-transfer.md`,
+  `evidence/wp17/`
 - Contract extensions: `docs/adr/ADR-10-hold-records.md`, `ADR-11`, `ADR-12`, `ADR-13` (DomainPack
   ports), `ADR-14` (memory chain), `ADR-15` (readout router), `ADR-16` (document and numerical
   advantage gate with declared memory ablations), `ADR-17` (operations), `ADR-18` (native PSE
   graph worker), `ADR-19` (native PSE determinism and specified readout), `ADR-20` (associative
   memory layer), `ADR-21` (association provenance in the prompt), `ADR-22` (domain-declared
   progress channels and G3 on the association distribution), `ADR-23` (erosion of the
-  association history and reproducible retrieval manifests)
+  association history and reproducible retrieval manifests), `ADR-24` (numerical channels and
+  the route across packs)
 - Evidence (test log, environment, baseline rerun, spec validation): `evidence/`
 - The blueprint's own machine-readable contracts and validator: `contracts/`, `tools/validate_spec.py`
 

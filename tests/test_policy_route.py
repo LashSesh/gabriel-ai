@@ -261,3 +261,149 @@ def test_document_tasks_pin_the_packs_promoted_readout_by_default_and_software_t
         assert ws.policy_for(ws.owner.projection(software["run_id"])["task"])["policy_id"] == "rule-based-v1"
     finally:
         ws.close()
+
+
+# ------------------------------------------------------------------ ADR-24: domain-declared channels on numerical runs
+
+def _numerical_spec(tmp_path, task, provider, **over):
+    """A numerical corpus task as a workspace task spec (reference planner, rule-based unless pinned)."""
+    from gabriel_agent.evaluation import corpus_domains as cd
+    repo = tmp_path / ("repo-" + task.task_id)
+    base = cd.materialize(task, repo)
+    oracle = cd.write_oracle(task, tmp_path)
+    spec = cd.task_spec(task, repo, base, oracle, provider, {"model_tokens_total": 400000, "model_requests": 12}, planner_mode="reference")
+    spec.update(over)
+    return spec
+
+
+def _numerical_provider(task, to_units: list, operation="units.convert", output_path="out/converted.json"):
+    """A scripted worker that binds the declared operation to the task's series with the given target units, one per round."""
+    import hashlib
+    digest = hashlib.sha256(task.files_map()["data/series.json"].encode("utf8")).hexdigest()
+    worker = [{"kind": "value", "value": {"operation": operation, "input_path": "data/series.json", "expected_sha256": digest, "output_path": output_path,
+                                          "parameters": {"to_units": unit} if operation == "units.convert" else {"bucket_ms": unit}, "rationale": "scripted round"}}
+              for unit in to_units]
+    planner = [{"kind": "echo_reference"}]
+    # the worker's responses are keyed by role only, so the cursor advances across the repair rounds
+    return scripted({"by_step": {"plan-request": planner}, "by_role": {"planner": planner, "worker": worker}})
+
+
+def _decisions(ws, run_id):
+    return [loads(ws.memory.content(o), ascii_only=False) for o in ws.memory.eligible("router/decisions:" + run_id, ws.memory.frontier())]
+
+
+def test_numerical_decisions_carry_the_packs_declared_channels_and_a_bound_readout_stops_the_prerequisite_repair(tmp_path):
+    """ADR-24: on the prerequisite family the observed input carries a contract problem and the
+    worker refuses every job, so every decision of the rule-based run carries input_problems = 1
+    and verdict_refused = 1 and the run fails after its repairs; on the undeclared family the first
+    attempt's units differ from the declared reporting unit (units_mismatch = 1) and the repair
+    that follows the diagnostic succeeds. The decisions carry the numerical layout; the document
+    pack's shipped readout is refused on it rather than scored; a readout bound to the numerical
+    layout that reads input_problems stops the hopeless repair at its first decision."""
+    from gabriel_agent.domains.numerical import pack as numerical
+    from gabriel_agent.evaluation import corpus_domains as cd
+    layout = "progress-channels-v1.numerical-progress-v1"
+    prerequisite, undeclared = cd.task_named("np-null"), cd.task_named("nd-fahrenheit")
+    ws = Workspace.create(tmp_path / "ws", backend="trusted_local", allow_trusted_local=True)
+    try:
+        created = ws.create_task(_numerical_spec(tmp_path, prerequisite, _numerical_provider(prerequisite, ["K", "K", "K"]), max_repairs=2, max_plan_versions=3,
+                                                 policy=router.rule_based()))
+        summary = TaskRunner(ws, created["task_id"]).run()
+        assert summary["state"] == "failed" and summary["repair_count"] == 2, summary["log"]
+        decisions = _decisions(ws, created["run_id"])
+        assert len(decisions) == 2 and all(d["action"] == "repair" for d in decisions)
+        channels = decisions[0]["channels"]
+        assert channels["channel_schema_id"] == layout and channels["names"] == list(progress.CHANNELS) + list(numerical.PROGRESS_CHANNELS)
+        assert len(progress.as_vector(channels)) == 38
+        value = dict(zip(channels["names"], channels["values_milli"]))
+        assert value["input_problems"] == 1000 and value["verdict_refused"] == 1000
+        assert all(value[name] == 0 for name in ("contract_mismatch", "units_mismatch", "rows_mismatch", "deviation_excess", "output_unbound"))
+        # the worker's reason reaches the verifier's evidence and the next prompt's diagnostics
+        projection = ws.owner.projection(created["run_id"])
+        evidence = [loads(ws.store.get(a["evidence_ref"]), ascii_only=False) for a in projection["assessments"].values() if a["check_id"] == "reference" and a["outcome"] == "failed"]
+        assert evidence and all((e.get("evidence") or e)["failure_class"] == "verdict" and (e.get("evidence") or e)["input_problems"] == 1 for e in evidence)
+        assert "value is not a number" in (evidence[0].get("evidence") or evidence[0])["worker_reason"]
+        prompts = [ws.store.get(loads(ws.store.get(s["outputs"]["request"]))["prompt_ref"]).decode("utf8")
+                   for n, s in projection["nodes"].items() if n.startswith("propose-r") and s.get("outputs", {}).get("request")]
+        assert prompts and all("value is not a number" in p for p in prompts)
+        rule_requests = sum(1 for a in projection["attempts"].values() if a["capability_id"] == "model.generate")
+        # the undeclared family: the first attempt converts to the obvious unit, the diagnostic names the declared one, the repair succeeds
+        created_u = ws.create_task(_numerical_spec(tmp_path, undeclared, _numerical_provider(undeclared, ["K", "degF"]), max_repairs=2, max_plan_versions=3,
+                                                   policy=router.rule_based()))
+        summary_u = TaskRunner(ws, created_u["task_id"]).run()
+        assert summary_u["state"] == "succeeded" and summary_u["repair_count"] == 1, summary_u["log"]
+        recoverable = _decisions(ws, created_u["run_id"])
+        assert len(recoverable) == 1 and recoverable[0]["channels"]["channel_schema_id"] == layout
+        value_u = dict(zip(recoverable[0]["channels"]["names"], recoverable[0]["channels"]["values_milli"]))
+        assert value_u["units_mismatch"] == 1000 and value_u["input_problems"] == 0 and value_u["verdict_refused"] == 0
+        # without a shipped readout a numerical task pins the rule by default
+        assert ws.policy_for(ws.owner.projection(created["run_id"])["task"])["policy_id"] == ("rule-based-v1" if ws.pack_for("numerical").default_policy() is None else ws.pack_for("numerical").default_policy()["policy_id"])
+        assert ws.owner.replay()["status"] == "passed"
+    finally:
+        ws.close()
+    # the document pack's readout is bound to the document layout: refused on a numerical run, never scored
+    ws = Workspace.create(tmp_path / "ws2", backend="trusted_local", allow_trusted_local=True)
+    try:
+        document_readout = ws.pack_for("document").default_policy()
+        assert document_readout["channel_schema_id"] == "progress-channels-v1.document-progress-v1"
+        created = ws.create_task(_numerical_spec(tmp_path / "two", prerequisite, _numerical_provider(prerequisite, ["K", "K"]), max_repairs=1, max_plan_versions=2,
+                                                 policy=document_readout))
+        with pytest.raises(GabrielError):
+            TaskRunner(ws, created["task_id"]).run()
+    finally:
+        ws.close()
+    # a readout bound to the numerical layout that reads input_problems stops the hopeless repair and repairs the recoverable one
+    ws = Workspace.create(tmp_path / "ws3", backend="trusted_local", allow_trusted_local=True)
+    try:
+        weights = [0.0] * 38
+        weights[progress.vector_names(channels).index("input_problems")] = -10.0
+        bound = router.readout_policy("readout-numerical-test", feature_source="channels", weights=weights, bias=5.0, threshold_milli=500, channel_schema_id=layout)
+        assert router.decide(bound, channels, [])["action"] == "stop" and router.decide(bound, recoverable[0]["channels"], [])["action"] == "repair"
+        created = ws.create_task(_numerical_spec(tmp_path / "three", prerequisite, _numerical_provider(prerequisite, ["K", "K", "K"]), max_repairs=2, max_plan_versions=3,
+                                                 policy=bound))
+        summary = TaskRunner(ws, created["task_id"]).run()
+        assert summary["state"] == "failed" and summary["hold"]["reason_code"] == "router_stop" and summary["repair_count"] == 1
+        attempts = ws.owner.projection(created["run_id"])["attempts"].values()
+        assert sum(1 for a in attempts if a["capability_id"] == "model.generate") < rule_requests
+        stop = _decisions(ws, created["run_id"])
+        assert len(stop) == 1 and stop[0]["action"] == "stop" and stop[0]["policy_id"] == "readout-numerical-test"
+        created_u = ws.create_task(_numerical_spec(tmp_path / "three", undeclared, _numerical_provider(undeclared, ["K", "degF"]), max_repairs=2, max_plan_versions=3, policy=bound))
+        assert TaskRunner(ws, created_u["task_id"]).run()["state"] == "succeeded"
+        assert ws.owner.replay()["status"] == "passed"
+    finally:
+        ws.close()
+
+
+def test_the_policy_arm_runs_numerical_tasks_through_the_frozen_harness_and_its_decisions_train(tmp_path):
+    """ADR-24: `gabriel_policy` applies to numerical tasks (the reference plan with the protocol's
+    frozen readout); through the harness the rule-based arm exhausts its repairs on a prerequisite
+    task while the bound readout stops at the first decision, and the training script collects the
+    rule-based arm's decisions with the numerical layout."""
+    import subprocess
+    import sys
+    from gabriel_agent.evaluation import comparators_domains, corpus_domains as cd, harness
+    task = cd.task_named("np-stamp")
+    assert comparators_domains.applicable("gabriel_policy", task) and not comparators_domains.applicable("gabriel_associative", task)
+    weights = [0.0] * 38
+    names = list(progress.CHANNELS) + list(__import__("gabriel_agent.domains.numerical.pack", fromlist=["pack"]).PROGRESS_CHANNELS)
+    weights[(names + [n + "_missing" for n in names]).index("input_problems")] = -10.0
+    bound = router.readout_policy("readout-numerical-test", feature_source="channels", weights=weights, bias=5.0, threshold_milli=500,
+                                  channel_schema_id="progress-channels-v1.numerical-progress-v1")
+    provider = _numerical_provider(task, [1000, 1000, 1000], operation="series.resample_mean", output_path="out/resampled.json")
+    protocol = harness.default_protocol(provider, repetitions=1, systems=("gabriel_reference_plan", "gabriel_policy"), backend="trusted_local",
+                                        task_ids=[task.task_id], tiers=["numerical"], policy=bound, note="scripted numerical self-test")
+    frozen = harness.freeze(protocol, tmp_path / "protocol.json")
+    results = harness.run(frozen, tmp_path / "run", provider, workers=1)
+    by_system = {r["system"]: r for r in results["records"]}
+    rule, readout = by_system["gabriel_reference_plan"], by_system["gabriel_policy"]
+    assert rule["V"] == 0 and rule["outcome"]["repairs_used"] == 2 and readout["V"] == 0 and readout["outcome"]["repairs_used"] == 1
+    assert readout["outcome"]["model_requests"] < rule["outcome"]["model_requests"]
+    assert any("router stop" in line for line in readout["outcome"]["log"])
+    out = tmp_path / "policies"
+    proc = subprocess.run([sys.executable, str(Path(__file__).resolve().parent.parent / "scripts" / "policy_route.py"), "train", "--run", str(tmp_path / "run"),
+                           "--out", str(out), "--systems", "gabriel_reference_plan", "--episodes", "0"], capture_output=True, text=True)
+    assert proc.returncode == 0, proc.stderr[-2000:]
+    manifest = json.loads((out / "training_manifest.json").read_text())
+    assert manifest["decision_samples"] == 2 and manifest["positive_samples"] == 0 and "note" in manifest  # one label class: no readout is trained
+    samples = json.loads((out / "samples.json").read_text())
+    assert all(s["channels"]["channel_schema_id"] == "progress-channels-v1.numerical-progress-v1" for s in samples)

@@ -107,7 +107,11 @@ def release_manifest(root: Path, *, evidence: dict | None = None, python: str = 
                         "held-out decision loss was 0.045 against the rule's 6.91, and the memory's promotion rule admitted it; it ships pinned as "
                         "the document pack's default routing policy with its provenance; it learned one legible fact (stop when the unmet claim's "
                         "expected source was not retrieved), can only stop a repair earlier than the rule, and stopped one recoverable repair on a "
-                        "seen task; protocol 4 on the hard tier (evidence/wp13) had trained no readout and rejected the episodic ablation"},
+                        "seen task; protocol 4 on the hard tier (evidence/wp13) had trained no readout and rejected the episodic ablation; under "
+                        "protocol 10 (ADR-24, evidence/wp17) the same route ran on the numerical pack with its own declared channels: the readout met "
+                        "the held-out criterion (equal verified success, 1329 against 2357 tokens, decision loss 0.109 against 3.45 on decisions of "
+                        "both classes) and the memory's promotion rule declined it (held-out support 4 against 4 refutations), so the numerical pack "
+                        "keeps the rule-based default"},
         "known_issues": ([] if _license_status(root)["status"] == "resolved" else ["root license unresolved"]) +
                         ["a catalog, registry or reducer change needs an explicit migration (gabriel migrate: backup, equivalence replay, recorded epoch); "
                          "journals created before catalog records existed migrate only when the running code reproduces them",
@@ -127,7 +131,11 @@ def release_manifest(root: Path, *, evidence: dict | None = None, python: str = 
                          "the document pack's default routing policy is a readout promoted on one constructed distribution with one provider "
                          "(ADR-22) and transferred with fixed weights to a second provider of the same vendor (protocol 9); it can only stop a "
                          "repair earlier than the rule, it abstains where its declared channels are missing, and it stopped one recoverable "
-                         "repair on a seen task under gpt-4.1-mini; a task that pins rule-based-v1 explicitly opts out"],
+                         "repair on a seen task under gpt-4.1-mini; a task that pins rule-based-v1 explicitly opts out",
+                         "the numerical pack declares progress channels (ADR-24) but ships no readout: its protocol 10 candidate met the held-out "
+                         "criterion and the memory's promotion rule declined it on a held-out composition half of which is hopeless by construction; "
+                         "a numerical task runs the rule-based policy, and a readout bound to its layout abstains at a failed node before any "
+                         "reference verification ran"],
     }
     return manifest
 

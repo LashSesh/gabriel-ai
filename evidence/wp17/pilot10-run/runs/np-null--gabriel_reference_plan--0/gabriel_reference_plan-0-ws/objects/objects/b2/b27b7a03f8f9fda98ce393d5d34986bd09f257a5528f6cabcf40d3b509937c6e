@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-EVLDAzrSO7BR2ol6Qz7wNMhh0FyIu",
+  "object": "chat.completion",
+  "created": 1791138412,
+  "model": "gpt-4.1-mini-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"operation\": \"units.convert\", \"input_path\": \"data/series.json\", \"expected_sha256\": \"f0345b69f3d51b15f8da724da53e7d7abee861e906a88ffba9b34121c0597d7b\", \"output_path\": \"out/converted.json\", \"parameters\": {\"to_units\": \"K\"}, \"rationale\": \"Convert the series from degrees Celsius to kelvin, keeping timestamps unchanged, using the declared units conversion operation.\"}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 977,
+    "completion_tokens": 110,
+    "total_tokens": 1087,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_66d61260e6"
+}

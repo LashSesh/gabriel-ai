@@ -1,0 +1,9 @@
+{
+ "goal": "Resample the series in data/series.json to the arithmetic mean per bucket of 3600000 milliseconds on its unix_ms time basis (empty buckets omitted) and write the result to out/resampled.json.",
+ "domain": "numerical",
+ "state": "succeeded",
+ "outcome": "success",
+ "repair_count": 0,
+ "plan_versions": 1,
+ "final_diff": "diff --git a/out/resampled.json b/out/resampled.json\nnew file mode 100644\nindex 0000000..e467961\n--- /dev/null\n+++ b/out/resampled.json\n@@ -0,0 +1 @@\n+{\"kind\":\"series\",\"time_basis\":\"unix_ms\",\"units\":\"degC\",\"values\":[[0,13.0],[3600000,21.0],[7200000,18.0]]}\n\\ No newline at end of file\n"
+}

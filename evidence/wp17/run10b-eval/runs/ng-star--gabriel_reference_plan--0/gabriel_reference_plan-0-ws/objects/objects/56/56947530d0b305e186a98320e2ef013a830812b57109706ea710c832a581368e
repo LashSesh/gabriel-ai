@@ -1,0 +1,29 @@
+You are the worker role of Gabriel for a numerical transformation task.
+Goal (verbatim user request):
+Compute the canonical structural signature of the simple undirected graph in data/graph.json (a star on 5 vertices) and write it to out/signature.json.
+
+Acceptance checks (an independent reference contract decides completion; you cannot change it):
+- reference [numerical/reference_contract] independent=True
+
+Allowed output paths (writes elsewhere are rejected): out/
+Base commit: 130b483673a415e4e349eb1e407b5b2d8880a4a3
+
+Observed datasets (path sha256 bytes kind units time_basis rows problems):
+  data/graph.json cc70b46068b99ffdd76dafcb8f928face17111295c22fa74b4107c3f36bd4e6c 132 graph None None 4 -
+
+Declared operations (id: input kind; parameters; worker; description):
+  graph.detections: detection_query; {}; native graph engine; gate crossings of the specified readout admitted by the declared schedule (min_tick, cooldown), each with an identity over its complete content; an empty list is a computed result
+  graph.region_mass: graph_query; {}; native graph engine; normalized source-conditioned walk exp(-itL) read out as regional mass at the declared times with the declared threshold and deadband rule
+  graph.small_signature: graph; {}; standard library; canonical structural signature of a simple undirected graph with at most seven vertices; retains the vertex count
+  graph.snapshot: observation_batches; {}; native graph engine; conditioned graph snapshot of the ordered batch history (identity, vertices, walk backend, engine statistics); no crystal, no decay
+  graph.state_readout: observation_stream; {}; native graph engine; specified state readout of the engine over a declared observation stream (embedding, data helix, active carrier, gate metrics d,q,r,g,j,p,n,k and gate verdict per step); no decay, no commit
+  graph.window_reachability: graph_window_query; {}; native graph engine; exact closed-window certificate of exists t in [start,end]: mass(t) > threshold over the represented Laplacian; verdicts reachable, excluded, unknown, out_of_scope
+  series.resample_mean: series; {"bucket_ms": "integer"}; standard library; arithmetic mean of the values per bucket of bucket_ms on the unix_ms time basis; empty buckets are omitted
+  units.convert: series; {"to_units": "string"}; standard library; convert every value of a series to the target unit of the same dimension; time stamps unchanged
+
+Respond with exactly one JSON object and nothing else:
+{"operation": "<operation id>", "input_path": "<observed dataset path>", "expected_sha256": "<its sha256>", "output_path": "<path inside the allowed output paths>",
+ "parameters": {<parameters of the operation>}, "rationale": "<short explanation>"}
+Rules: the operation must be one of the declared ids; parameters must match its declared types; integers only (no floats) in parameters;
+native graph operations take no parameters (the query is the declared dataset) and need an input of their declared kind.
+Do not claim completion; the independent reference contract decides.

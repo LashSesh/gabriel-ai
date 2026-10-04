@@ -47,7 +47,7 @@ from ..workers import LinuxNamespaceBackend, TrustedLocalBackend, Worktree
 from . import corpus_domains as cd
 from .comparators import Budget, Outcome, gabriel_outcome
 
-DOCUMENT_ONLY = ("gabriel_plain_sources", "gabriel_all_revisions", "gabriel_associative", "gabriel_associative_unlabeled", "gabriel_policy")
+DOCUMENT_ONLY = ("gabriel_plain_sources", "gabriel_all_revisions", "gabriel_associative", "gabriel_associative_unlabeled")
 SYSTEMS = ("provider_only", "simple_loop", "gabriel_reference_plan", "gabriel_plain_sources", "gabriel_all_revisions", "gabriel_associative",
            "gabriel_associative_unlabeled", "gabriel_policy", "gabriel")
 BASELINE_VIEW = "plain"   # what a minimal agent with the same corpus sees: the declared files, unfiltered
@@ -332,7 +332,8 @@ RUNNERS = {"provider_only": run_provider_only, "simple_loop": run_simple_loop,
            "gabriel_associative": lambda ctx, rep: run_gabriel(ctx, rep, system="gabriel_associative", planner_mode="reference", view="associative"),
            "gabriel_associative_unlabeled": lambda ctx, rep: run_gabriel(ctx, rep, system="gabriel_associative_unlabeled", planner_mode="reference",
                                                                          view="associative_unlabeled"),
-           # ADR-22: the production configuration (associative view, reference plan) with the protocol's frozen readout pinned
+           # ADR-22: the production configuration (associative view, reference plan) with the protocol's frozen readout pinned;
+           # ADR-24: on a numerical task the same arm is the reference plan with the frozen readout (the view does not apply)
            "gabriel_policy": lambda ctx, rep: run_gabriel(ctx, rep, system="gabriel_policy", planner_mode="reference", view="associative", policy=ctx.policy)}
 
 DECLARED_SUCCESS = {
@@ -349,8 +350,9 @@ DECLARED_SUCCESS = {
                            "carried source is told apart in the prompt with the seed and the verified run that cited them together; document tasks only",
     "gabriel_associative_unlabeled": "as gabriel_associative with the ADR-20 presentation: carried sources enter the prompt like lexically retrieved "
                                      "ones (ablation of the association provenance in the prompt, ADR-21; document tasks only)",
-    "gabriel_policy": "as gabriel_associative with the protocol's frozen readout policy pinned (ADR-22): at a failed verification it chooses "
-                      "repair or stop from the generic progress channels and the document pack's declared channels; document tasks only",
+    "gabriel_policy": "the production configuration with the protocol's frozen readout policy pinned: on a document task as gabriel_associative "
+                      "(ADR-22), on a numerical task as gabriel_reference_plan (ADR-24); at a failed verification it chooses repair or stop from the "
+                      "generic progress channels and the pack's declared channels",
     "gabriel": "as gabriel_reference_plan with the model planner (one planner request per plan version)",
     "gabriel_no_repair": "as gabriel with max_repairs=0 and max_plan_versions=1 (ablation of the repair cycle)"}
 

@@ -394,12 +394,17 @@ def test_graph_tier_is_sound_and_frozen_protocols_keep_their_digests():
     assert len(report) == 10 and all(item["sound"] for item in report), [(i["task_id"], i["controls"]) for i in report if not i["sound"]]
     assert {item["family"] for item in report} == {"graph-snapshot", "graph-mass", "graph-window", "graph-readout", "graph-detections"}
     assert all(task.domain == "numerical" and task.tier == "graph" for task in cd.GRAPH_TASKS)
-    # adding the tier changes no digest a protocol was frozen with (pilot 1 predates the recorded corpus amendment, ADR-16)
+    # adding the graph tier changed no task a protocol was frozen with (pilot 1 predates the recorded corpus amendment, ADR-16);
+    # the numerical tier itself gained the decision families of ADR-24 after protocol 5, so its tier digest moved (recorded in
+    # docs/EVALUATION_PROTOCOL.md) while every task protocol 5 ran keeps its frozen digest
     for name in ("protocol5", "pilot2"):
         path = Path(__file__).resolve().parents[1] / "evidence" / "wp14" / (name + ".frozen.json")
         if path.is_file():
             protocol = json.loads(path.read_text())
-            assert protocol["corpus_digest"] == corpus.corpus_digest(protocol["tiers"]), name
+            for entry in protocol["tasks"]:
+                assert cd.task_named(entry["task_id"]).digest() == entry["digest"], (name, entry["task_id"])
+            moved = "numerical" in protocol["tiers"]
+            assert (protocol["corpus_digest"] != corpus.corpus_digest(protocol["tiers"])) == moved, name
     assert corpus.corpus_digest(["graph"]) != corpus.corpus_digest(["numerical"])
 
 

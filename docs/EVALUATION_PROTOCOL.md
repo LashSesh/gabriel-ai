@@ -470,6 +470,55 @@ Consequence, as declared: the claims of ADR-20, ADR-21 and ADR-22 extend to a se
 replications under the same protocol discipline. The scope remains two providers of one vendor
 through one API, one pack, one constructed distribution.
 
+## Protocol 10: the channel route on a second pack (ADR-24)
+ADR-22 executed the route on one pack. Protocol 10 (`evidence/wp17/protocol10_declaration.md`,
+declared before any run) executes it on the numerical pack, which declares channels of its own
+since ADR-24 (`input_problems`, `verdict_refused`, `contract_mismatch`, `units_mismatch`,
+`rows_mismatch`, `deviation_excess`, `output_unbound`, read from the verifier's committed
+`failure_class` and `input_problems`). The numerical tier gained two decision families for it
+(`numerical-prerequisite`: the observed input carries a contract problem, every repair is
+hopeless; `numerical-undeclared`: the target unit sits in a conventions file the pack never
+shows, the first attempt fails on the units and the diagnostic names the declared unit), three
+seen and two held-out topics each; the nine tasks of protocol 5 are the no-decision control.
+The tiers' digest moved with the families (protocol 5 pinned `b0d0f48a…` for the document and
+numerical tiers together, which now digest `3b2eb811…`; the numerical tier alone `cf597321…`);
+every task protocol 5 ran keeps its frozen digest, as the association tier's tasks did under
+ADR-22. A first pilot (six runs) exposed a construction defect of the undeclared family
+(the model passes the field reference as the unit, a diagnostic that cannot name the declared
+unit); the recorded amendment names the two admissible units in the goal, a second pilot (three
+runs) confirmed it, and protocol 10a was frozen after that record.
+
+**10a (training, 18 runs, digest `e3af3894…`):** the rule-based production configuration on
+the six seen tasks, three repetitions; 20 retained decisions, 2 positives; leave-one-family-out
+could not run (one label class per family), the channel readout selected by tie order at
+resubstitution loss 0.037; weights `input_problems` -1.78, `verdict_refused` -1.78,
+`units_mismatch` +1.76.
+
+**10b (evaluation, 76 runs, digest `1e98e2ee…`):**
+
+| system | runs | verified | p_success | false compl. | mean requests | mean tokens | held-out verified | held-out requests | held-out tokens |
+|---|---|---|---|---|---|---|---|---|---|
+| gabriel_reference_plan (rule-based) | 38 | 28 | 0.74 | 0 | 1.68 | 1514 | 4/8 | 2.50 | 2357 |
+| gabriel_policy (readout pinned) | 38 | 27 | 0.71 | 0 | 1.24 | 1053 | 4/8 | 1.50 | 1329 |
+
+Against the declared rules (`evidence/wp17/run10b-eval/report.md`, `decision_analysis.json`,
+`promotion10/promotion.json`):
+
+- Held-out criterion **met**: equal verified success (4 of 8), 1329 against 2357 tokens, no
+  false completion; every hopeless held-out repair stopped at the first decision (p = 0.022),
+  every recoverable one taken (p = 0.823) and verified.
+- Decision loss on the eight held-out decisions, of both classes: readout 0.109 against the
+  rule's 3.45.
+- Promotion: **rejected** by the memory's rule (held-out support 4 against 4 refutations; half
+  of the held-out evidence is hopeless by construction). Consequence as declared: the numerical
+  pack keeps the rule-based default.
+- Control families equal (18 of 18 each, no decision point fired); the readout abstained at
+  the failed-node decisions of one seen unit whose four proposals mistyped the dataset digest
+  and that unit was lost (paired -0.026 over all units at -461 tokens); refusals 0.
+
+The route carries across packs; what ships stays what it was. One provider, two packs, two
+constructed distributions.
+
 ## Freezing and amendments
 `gabriel eval freeze` digests the protocol body and records the harness code identity.
 `gabriel eval run` refuses a changed protocol or corpus. A harness code change after freezing is

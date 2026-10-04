@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-EVLJ5l1F2rCduQ5V8oRxT9kga7n7O",
+  "object": "chat.completion",
+  "created": 1791138779,
+  "model": "gpt-4.1-mini-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"operation\": \"units.convert\", \"input_path\": \"data/series.json\", \"expected_sha256\": \"f33ed1aba98b5c7780e8d050342bc5a885eb9fcfe66a0182be4f73ba996a0a7e\", \"output_path\": \"out/converted.json\", \"parameters\": {\"to_units\": \"ms\"}, \"rationale\": \"Convert the series values to the reporting unit declared in data/conventions.json (reporting.units), which is ms for durations, keeping timestamps unchanged.\"}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 751,
+    "completion_tokens": 118,
+    "total_tokens": 869,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_47a68edfc3"
+}

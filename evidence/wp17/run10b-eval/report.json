@@ -1,0 +1,1468 @@
+{
+  "schema": "gabriel.evaluation-report/1",
+  "protocol_frozen_digest": "1e98e2ee24de833b2b1af067d3906251b04afa24b9a5420d587eec126a90a0d6",
+  "tasks": 19,
+  "families": 7,
+  "runs": 76,
+  "per_system": {
+    "gabriel_reference_plan": {
+      "runs": 38,
+      "verified_successes": 28,
+      "p_success": 0.7368421052631579,
+      "declared_successes": 28,
+      "false_completions": 0,
+      "p_false_completion": 0.0,
+      "conditional_false_completion": 0.0,
+      "conditional_denominator": 28,
+      "harness_errors": 0,
+      "timed_out": 0,
+      "recovery_runs": 16,
+      "mean_model_requests": 1.6842105263157894,
+      "total_model_requests": 64,
+      "mean_model_tokens": 1514.2631578947369,
+      "total_model_tokens": 57542,
+      "mean_wall_ms": 5970.8421052631575,
+      "p_success_ci95_by_family": {
+        "low": 0.3684210526315789,
+        "high": 1.0,
+        "clusters": 7
+      },
+      "p_success_ci95_by_task": {
+        "low": 0.5263157894736842,
+        "high": 0.8947368421052632,
+        "clusters": 19
+      },
+      "per_task": {
+        "nd-centimetres": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "nd-fahrenheit": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "nd-kelvin": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "nd-millimetres": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "nd-millis": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "ng-cycle": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "ng-path": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "ng-star": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "np-null": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "np-pair": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "np-rankine": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "np-stamp": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "np-text": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "nr-five": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "nr-hour": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "nr-second": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "nu-celsius": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "nu-kelvin": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "nu-metres": {
+          "p_success": 1.0,
+          "runs": 2
+        }
+      }
+    },
+    "gabriel_policy": {
+      "runs": 38,
+      "verified_successes": 27,
+      "p_success": 0.7105263157894737,
+      "declared_successes": 27,
+      "false_completions": 0,
+      "p_false_completion": 0.0,
+      "conditional_false_completion": 0.0,
+      "conditional_denominator": 27,
+      "harness_errors": 0,
+      "timed_out": 0,
+      "recovery_runs": 17,
+      "mean_model_requests": 1.236842105263158,
+      "total_model_requests": 47,
+      "mean_model_tokens": 1053.1842105263158,
+      "total_model_tokens": 40021,
+      "mean_wall_ms": 4041.8947368421054,
+      "p_success_ci95_by_family": {
+        "low": 0.35294117647058826,
+        "high": 0.9761904761904762,
+        "clusters": 7
+      },
+      "p_success_ci95_by_task": {
+        "low": 0.5,
+        "high": 0.8947368421052632,
+        "clusters": 19
+      },
+      "per_task": {
+        "nd-centimetres": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "nd-fahrenheit": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "nd-kelvin": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "nd-millimetres": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "nd-millis": {
+          "p_success": 0.5,
+          "runs": 2
+        },
+        "ng-cycle": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "ng-path": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "ng-star": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "np-null": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "np-pair": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "np-rankine": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "np-stamp": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "np-text": {
+          "p_success": 0.0,
+          "runs": 2
+        },
+        "nr-five": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "nr-hour": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "nr-second": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "nu-celsius": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "nu-kelvin": {
+          "p_success": 1.0,
+          "runs": 2
+        },
+        "nu-metres": {
+          "p_success": 1.0,
+          "runs": 2
+        }
+      }
+    }
+  },
+  "paired_differences": {
+    "gabriel_policy_minus_gabriel_reference_plan": {
+      "per_task": {
+        "nd-centimetres": 0.0,
+        "nd-fahrenheit": 0.0,
+        "nd-kelvin": 0.0,
+        "nd-millimetres": 0.0,
+        "nd-millis": -0.5,
+        "ng-cycle": 0.0,
+        "ng-path": 0.0,
+        "ng-star": 0.0,
+        "np-null": 0.0,
+        "np-pair": 0.0,
+        "np-rankine": 0.0,
+        "np-stamp": 0.0,
+        "np-text": 0.0,
+        "nr-five": 0.0,
+        "nr-hour": 0.0,
+        "nr-second": 0.0,
+        "nu-celsius": 0.0,
+        "nu-kelvin": 0.0,
+        "nu-metres": 0.0
+      },
+      "mean": -0.02631578947368421,
+      "ci95_by_family": {
+        "low": -0.07894736842105263,
+        "high": 0.0,
+        "clusters": 7
+      },
+      "ci95_by_task": {
+        "low": -0.07894736842105263,
+        "high": 0.0,
+        "clusters": 19
+      },
+      "tokens_per_task": {
+        "nd-centimetres": 0.5,
+        "nd-fahrenheit": 8.5,
+        "nd-kelvin": -5.0,
+        "nd-millimetres": 1.0,
+        "nd-millis": 1543.0,
+        "ng-cycle": 1.0,
+        "ng-path": 2.5,
+        "ng-star": -1.0,
+        "np-null": -2038.5,
+        "np-pair": -2055.5,
+        "np-rankine": -2065.0,
+        "np-stamp": -2108.5,
+        "np-text": -2043.0,
+        "nr-five": -1.5,
+        "nr-hour": -1.0,
+        "nr-second": -1.0,
+        "nu-celsius": -3.0,
+        "nu-kelvin": 0.0,
+        "nu-metres": 6.0
+      },
+      "mean_tokens": -461.07894736842104,
+      "requests_per_task": {
+        "nd-centimetres": 0.0,
+        "nd-fahrenheit": 0.0,
+        "nd-kelvin": 0.0,
+        "nd-millimetres": 0.0,
+        "nd-millis": 1.5,
+        "ng-cycle": 0.0,
+        "ng-path": 0.0,
+        "ng-star": 0.0,
+        "np-null": -2.0,
+        "np-pair": -2.0,
+        "np-rankine": -2.0,
+        "np-stamp": -2.0,
+        "np-text": -2.0,
+        "nr-five": 0.0,
+        "nr-hour": 0.0,
+        "nr-second": 0.0,
+        "nu-celsius": 0.0,
+        "nu-kelvin": 0.0,
+        "nu-metres": 0.0
+      },
+      "mean_requests": -0.4473684210526316
+    }
+  },
+  "failures": [
+    {
+      "task_id": "nd-millis",
+      "system": "gabriel_policy",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "output out/converted.json is absent"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "np-null",
+      "system": "gabriel_policy",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "output out/converted.json is absent"
+      ],
+      "provider_statuses": [
+        "completed"
+      ]
+    },
+    {
+      "task_id": "np-null",
+      "system": "gabriel_policy",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "output out/converted.json is absent"
+      ],
+      "provider_statuses": [
+        "completed"
+      ]
+    },
+    {
+      "task_id": "np-null",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "output out/converted.json is absent"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "np-null",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "output out/converted.json is absent"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "np-pair",
+      "system": "gabriel_policy",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "output out/converted.json is absent"
+      ],
+      "provider_statuses": [
+        "completed"
+      ]
+    },
+    {
+      "task_id": "np-pair",
+      "system": "gabriel_policy",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "output out/converted.json is absent"
+      ],
+      "provider_statuses": [
+        "completed"
+      ]
+    },
+    {
+      "task_id": "np-pair",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "output out/converted.json is absent"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "np-pair",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "output out/converted.json is absent"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "np-rankine",
+      "system": "gabriel_policy",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "output out/converted.json is absent"
+      ],
+      "provider_statuses": [
+        "completed"
+      ]
+    },
+    {
+      "task_id": "np-rankine",
+      "system": "gabriel_policy",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "output out/converted.json is absent"
+      ],
+      "provider_statuses": [
+        "completed"
+      ]
+    },
+    {
+      "task_id": "np-rankine",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "output out/converted.json is absent"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "np-rankine",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "output out/converted.json is absent"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "np-stamp",
+      "system": "gabriel_policy",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "output out/resampled.json is absent"
+      ],
+      "provider_statuses": [
+        "completed"
+      ]
+    },
+    {
+      "task_id": "np-stamp",
+      "system": "gabriel_policy",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "output out/resampled.json is absent"
+      ],
+      "provider_statuses": [
+        "completed"
+      ]
+    },
+    {
+      "task_id": "np-stamp",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "output out/resampled.json is absent"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "np-stamp",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "output out/resampled.json is absent"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "np-text",
+      "system": "gabriel_policy",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "output out/converted.json is absent"
+      ],
+      "provider_statuses": [
+        "completed"
+      ]
+    },
+    {
+      "task_id": "np-text",
+      "system": "gabriel_policy",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "output out/converted.json is absent"
+      ],
+      "provider_statuses": [
+        "completed"
+      ]
+    },
+    {
+      "task_id": "np-text",
+      "system": "gabriel_reference_plan",
+      "rep": 0,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "output out/converted.json is absent"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    },
+    {
+      "task_id": "np-text",
+      "system": "gabriel_reference_plan",
+      "rep": 1,
+      "declared": false,
+      "verified": false,
+      "reason": "run state failed",
+      "oracle_exit": null,
+      "visible_exit": null,
+      "out_of_scope": [],
+      "problems": [
+        "output out/converted.json is absent"
+      ],
+      "provider_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ]
+    }
+  ],
+  "claim_scope": "Scoped comparison on one synthetic task distribution with one provider; a difference here is not a general superiority claim. Costs include every attempt, including failed and timed-out runs.",
+  "frozen_check": {
+    "frozen_digest": "1e98e2ee24de833b2b1af067d3906251b04afa24b9a5420d587eec126a90a0d6",
+    "harness_identity_now": "708750148ff709cc399e45d74c70f8e7b7159b21f71942831cf4633441aaea6a",
+    "harness_amended": false
+  },
+  "held_out": {
+    "schema": "gabriel.evaluation-report/1",
+    "protocol_frozen_digest": "1e98e2ee24de833b2b1af067d3906251b04afa24b9a5420d587eec126a90a0d6",
+    "tasks": 4,
+    "families": 2,
+    "runs": 16,
+    "per_system": {
+      "gabriel_reference_plan": {
+        "runs": 8,
+        "verified_successes": 4,
+        "p_success": 0.5,
+        "declared_successes": 4,
+        "false_completions": 0,
+        "p_false_completion": 0.0,
+        "conditional_false_completion": 0.0,
+        "conditional_denominator": 4,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 8,
+        "mean_model_requests": 2.5,
+        "total_model_requests": 20,
+        "mean_model_tokens": 2356.625,
+        "total_model_tokens": 18853,
+        "mean_wall_ms": 8680.625,
+        "p_success_ci95_by_family": {
+          "low": 0.0,
+          "high": 1.0,
+          "clusters": 2
+        },
+        "p_success_ci95_by_task": {
+          "low": 0.0,
+          "high": 1.0,
+          "clusters": 4
+        },
+        "per_task": {
+          "nd-kelvin": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "nd-millimetres": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "np-rankine": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "np-text": {
+            "p_success": 0.0,
+            "runs": 2
+          }
+        }
+      },
+      "gabriel_policy": {
+        "runs": 8,
+        "verified_successes": 4,
+        "p_success": 0.5,
+        "declared_successes": 4,
+        "false_completions": 0,
+        "p_false_completion": 0.0,
+        "conditional_false_completion": 0.0,
+        "conditional_denominator": 4,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 8,
+        "mean_model_requests": 1.5,
+        "total_model_requests": 12,
+        "mean_model_tokens": 1328.625,
+        "total_model_tokens": 10629,
+        "mean_wall_ms": 4788.875,
+        "p_success_ci95_by_family": {
+          "low": 0.0,
+          "high": 1.0,
+          "clusters": 2
+        },
+        "p_success_ci95_by_task": {
+          "low": 0.0,
+          "high": 1.0,
+          "clusters": 4
+        },
+        "per_task": {
+          "nd-kelvin": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "nd-millimetres": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "np-rankine": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "np-text": {
+            "p_success": 0.0,
+            "runs": 2
+          }
+        }
+      }
+    },
+    "paired_differences": {
+      "gabriel_policy_minus_gabriel_reference_plan": {
+        "per_task": {
+          "nd-kelvin": 0.0,
+          "nd-millimetres": 0.0,
+          "np-rankine": 0.0,
+          "np-text": 0.0
+        },
+        "mean": 0.0,
+        "ci95_by_family": {
+          "low": 0.0,
+          "high": 0.0,
+          "clusters": 2
+        },
+        "ci95_by_task": {
+          "low": 0.0,
+          "high": 0.0,
+          "clusters": 4
+        },
+        "tokens_per_task": {
+          "nd-kelvin": -5.0,
+          "nd-millimetres": 1.0,
+          "np-rankine": -2065.0,
+          "np-text": -2043.0
+        },
+        "mean_tokens": -1028.0,
+        "requests_per_task": {
+          "nd-kelvin": 0.0,
+          "nd-millimetres": 0.0,
+          "np-rankine": -2.0,
+          "np-text": -2.0
+        },
+        "mean_requests": -1.0
+      }
+    },
+    "failures": [
+      {
+        "task_id": "np-rankine",
+        "system": "gabriel_policy",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "output out/converted.json is absent"
+        ],
+        "provider_statuses": [
+          "completed"
+        ]
+      },
+      {
+        "task_id": "np-rankine",
+        "system": "gabriel_policy",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "output out/converted.json is absent"
+        ],
+        "provider_statuses": [
+          "completed"
+        ]
+      },
+      {
+        "task_id": "np-rankine",
+        "system": "gabriel_reference_plan",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "output out/converted.json is absent"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "np-rankine",
+        "system": "gabriel_reference_plan",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "output out/converted.json is absent"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "np-text",
+        "system": "gabriel_policy",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "output out/converted.json is absent"
+        ],
+        "provider_statuses": [
+          "completed"
+        ]
+      },
+      {
+        "task_id": "np-text",
+        "system": "gabriel_policy",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "output out/converted.json is absent"
+        ],
+        "provider_statuses": [
+          "completed"
+        ]
+      },
+      {
+        "task_id": "np-text",
+        "system": "gabriel_reference_plan",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "output out/converted.json is absent"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "np-text",
+        "system": "gabriel_reference_plan",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "output out/converted.json is absent"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      }
+    ],
+    "claim_scope": "Scoped comparison on one synthetic task distribution with one provider; a difference here is not a general superiority claim. Costs include every attempt, including failed and timed-out runs."
+  },
+  "previously_seen": {
+    "schema": "gabriel.evaluation-report/1",
+    "protocol_frozen_digest": "1e98e2ee24de833b2b1af067d3906251b04afa24b9a5420d587eec126a90a0d6",
+    "tasks": 15,
+    "families": 5,
+    "runs": 60,
+    "per_system": {
+      "gabriel_reference_plan": {
+        "runs": 30,
+        "verified_successes": 24,
+        "p_success": 0.8,
+        "declared_successes": 24,
+        "false_completions": 0,
+        "p_false_completion": 0.0,
+        "conditional_false_completion": 0.0,
+        "conditional_denominator": 24,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 8,
+        "mean_model_requests": 1.4666666666666666,
+        "total_model_requests": 44,
+        "mean_model_tokens": 1289.6333333333334,
+        "total_model_tokens": 38689,
+        "mean_wall_ms": 5248.233333333334,
+        "p_success_ci95_by_family": {
+          "low": 0.4,
+          "high": 1.0,
+          "clusters": 5
+        },
+        "p_success_ci95_by_task": {
+          "low": 0.6,
+          "high": 1.0,
+          "clusters": 15
+        },
+        "per_task": {
+          "nd-centimetres": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "nd-fahrenheit": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "nd-millis": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "ng-cycle": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "ng-path": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "ng-star": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "np-null": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "np-pair": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "np-stamp": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "nr-five": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "nr-hour": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "nr-second": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "nu-celsius": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "nu-kelvin": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "nu-metres": {
+            "p_success": 1.0,
+            "runs": 2
+          }
+        }
+      },
+      "gabriel_policy": {
+        "runs": 30,
+        "verified_successes": 23,
+        "p_success": 0.7666666666666667,
+        "declared_successes": 23,
+        "false_completions": 0,
+        "p_false_completion": 0.0,
+        "conditional_false_completion": 0.0,
+        "conditional_denominator": 23,
+        "harness_errors": 0,
+        "timed_out": 0,
+        "recovery_runs": 9,
+        "mean_model_requests": 1.1666666666666667,
+        "total_model_requests": 35,
+        "mean_model_tokens": 979.7333333333333,
+        "total_model_tokens": 29392,
+        "mean_wall_ms": 3842.7,
+        "p_success_ci95_by_family": {
+          "low": 0.36666666666666664,
+          "high": 1.0,
+          "clusters": 5
+        },
+        "p_success_ci95_by_task": {
+          "low": 0.5333333333333333,
+          "high": 0.9333333333333333,
+          "clusters": 15
+        },
+        "per_task": {
+          "nd-centimetres": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "nd-fahrenheit": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "nd-millis": {
+            "p_success": 0.5,
+            "runs": 2
+          },
+          "ng-cycle": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "ng-path": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "ng-star": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "np-null": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "np-pair": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "np-stamp": {
+            "p_success": 0.0,
+            "runs": 2
+          },
+          "nr-five": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "nr-hour": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "nr-second": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "nu-celsius": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "nu-kelvin": {
+            "p_success": 1.0,
+            "runs": 2
+          },
+          "nu-metres": {
+            "p_success": 1.0,
+            "runs": 2
+          }
+        }
+      }
+    },
+    "paired_differences": {
+      "gabriel_policy_minus_gabriel_reference_plan": {
+        "per_task": {
+          "nd-centimetres": 0.0,
+          "nd-fahrenheit": 0.0,
+          "nd-millis": -0.5,
+          "ng-cycle": 0.0,
+          "ng-path": 0.0,
+          "ng-star": 0.0,
+          "np-null": 0.0,
+          "np-pair": 0.0,
+          "np-stamp": 0.0,
+          "nr-five": 0.0,
+          "nr-hour": 0.0,
+          "nr-second": 0.0,
+          "nu-celsius": 0.0,
+          "nu-kelvin": 0.0,
+          "nu-metres": 0.0
+        },
+        "mean": -0.03333333333333333,
+        "ci95_by_family": {
+          "low": -0.1,
+          "high": 0.0,
+          "clusters": 5
+        },
+        "ci95_by_task": {
+          "low": -0.1,
+          "high": 0.0,
+          "clusters": 15
+        },
+        "tokens_per_task": {
+          "nd-centimetres": 0.5,
+          "nd-fahrenheit": 8.5,
+          "nd-millis": 1543.0,
+          "ng-cycle": 1.0,
+          "ng-path": 2.5,
+          "ng-star": -1.0,
+          "np-null": -2038.5,
+          "np-pair": -2055.5,
+          "np-stamp": -2108.5,
+          "nr-five": -1.5,
+          "nr-hour": -1.0,
+          "nr-second": -1.0,
+          "nu-celsius": -3.0,
+          "nu-kelvin": 0.0,
+          "nu-metres": 6.0
+        },
+        "mean_tokens": -309.9,
+        "requests_per_task": {
+          "nd-centimetres": 0.0,
+          "nd-fahrenheit": 0.0,
+          "nd-millis": 1.5,
+          "ng-cycle": 0.0,
+          "ng-path": 0.0,
+          "ng-star": 0.0,
+          "np-null": -2.0,
+          "np-pair": -2.0,
+          "np-stamp": -2.0,
+          "nr-five": 0.0,
+          "nr-hour": 0.0,
+          "nr-second": 0.0,
+          "nu-celsius": 0.0,
+          "nu-kelvin": 0.0,
+          "nu-metres": 0.0
+        },
+        "mean_requests": -0.3
+      }
+    },
+    "failures": [
+      {
+        "task_id": "nd-millis",
+        "system": "gabriel_policy",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "output out/converted.json is absent"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "np-null",
+        "system": "gabriel_policy",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "output out/converted.json is absent"
+        ],
+        "provider_statuses": [
+          "completed"
+        ]
+      },
+      {
+        "task_id": "np-null",
+        "system": "gabriel_policy",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "output out/converted.json is absent"
+        ],
+        "provider_statuses": [
+          "completed"
+        ]
+      },
+      {
+        "task_id": "np-null",
+        "system": "gabriel_reference_plan",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "output out/converted.json is absent"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "np-null",
+        "system": "gabriel_reference_plan",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "output out/converted.json is absent"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "np-pair",
+        "system": "gabriel_policy",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "output out/converted.json is absent"
+        ],
+        "provider_statuses": [
+          "completed"
+        ]
+      },
+      {
+        "task_id": "np-pair",
+        "system": "gabriel_policy",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "output out/converted.json is absent"
+        ],
+        "provider_statuses": [
+          "completed"
+        ]
+      },
+      {
+        "task_id": "np-pair",
+        "system": "gabriel_reference_plan",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "output out/converted.json is absent"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "np-pair",
+        "system": "gabriel_reference_plan",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "output out/converted.json is absent"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "np-stamp",
+        "system": "gabriel_policy",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "output out/resampled.json is absent"
+        ],
+        "provider_statuses": [
+          "completed"
+        ]
+      },
+      {
+        "task_id": "np-stamp",
+        "system": "gabriel_policy",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "output out/resampled.json is absent"
+        ],
+        "provider_statuses": [
+          "completed"
+        ]
+      },
+      {
+        "task_id": "np-stamp",
+        "system": "gabriel_reference_plan",
+        "rep": 0,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "output out/resampled.json is absent"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      },
+      {
+        "task_id": "np-stamp",
+        "system": "gabriel_reference_plan",
+        "rep": 1,
+        "declared": false,
+        "verified": false,
+        "reason": "run state failed",
+        "oracle_exit": null,
+        "visible_exit": null,
+        "out_of_scope": [],
+        "problems": [
+          "output out/resampled.json is absent"
+        ],
+        "provider_statuses": [
+          "completed",
+          "completed",
+          "completed"
+        ]
+      }
+    ],
+    "claim_scope": "Scoped comparison on one synthetic task distribution with one provider; a difference here is not a general superiority claim. Costs include every attempt, including failed and timed-out runs."
+  }
+}
