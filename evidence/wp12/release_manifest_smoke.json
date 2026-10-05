@@ -2,7 +2,7 @@
   "acceptance_evidence": {
     "evidence/doctor_linux_namespace_selftest.json": "5ff218e9cd2d85f7c131b78183449c2d379b55f90fb8aa7d51c1dc34cbac1bd7",
     "evidence/live/summary.json": "b90e9583a5a5e0fad701e0a378a35d741a6eae7516908492a3c2e027b60a6b4e",
-    "evidence/test_run.json": "12c081f1c2f7e4808e41acc627c9ce37a1592bde02d39f0cec047d91a80d73c2",
+    "evidence/test_run.json": "db87113b7fd0be0c41b8b8259c4386e348b8444976ccecfa924048531749c670",
     "evidence/wp01/baseline_manifest.json": "ef39b8ed0762a44c9ee8ff5e8ca616deef771c5ca389d6dd2841ce666233b96f",
     "evidence/wp02/spec_validation.json": "658d50d5fc0991f485240e1e6161ac5f46c171b6fc7abf953eb98db8748ac93f",
     "evidence/wp11/protocol.frozen.json": "a568a973976bbcae7aa4e0847492e973e55e826c4140ac754a96471d4697c533",
@@ -13,7 +13,7 @@
     "evidence/wp11/run3-gpt-4.1-mini/report.json": "4477efb9365669e3adb06bc57a9d1e2c6461dee9693bb4a1c3e3fe25efddcd80"
   },
   "catalog_digest": "7bf0221ea07d7b26bd5608da9a7175695f87ef4e2ad128d683bbc756b5e758fc",
-  "created_at_utc": "2026-10-05T13:30:07.611021+00:00",
+  "created_at_utc": "2026-10-05T18:04:49.540584+00:00",
   "dependency_lock": [
     "attrs==26.1.0",
     "gabriel-agent @ file:///home/user/gabriel-ai",
@@ -47,7 +47,7 @@
         "available": true,
         "backend": "trusted_local",
         "checks": {
-          "python": "/tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke9/venv/bin/python"
+          "python": "/tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke10/venv/bin/python"
         },
         "containment": false,
         "reasons": [
@@ -72,11 +72,11 @@
     },
     "git": "git version 2.43.0",
     "journal": {
-      "head": "0e160cb6475dbd93fe57197b7ef7d6af925660b456ff83397b23315858ec859a",
-      "inputs_head": "daf014bb7827f3f55b351378920767107c525fb04b9d5229bb159d675fde4e7e",
+      "head": "d1978fb0e454b55bc3a941351fcb599e48810e0491bf19ac43d188b16d43af33",
+      "inputs_head": "7d1f295be45678c0948e434bca3bf5da70cf4cf9387250a53823fc2c9fc8b525",
       "schema": "gabriel.anchor/1",
       "sequence": 41,
-      "workspace_id": "ws-bad6a8f2a745"
+      "workspace_id": "ws-a090ecf698cf"
     },
     "object_store": {
       "faults": {},
@@ -123,30 +123,31 @@
       "software.run_check": true,
       "software.test_passed": true
     },
-    "schema_registry_digest": "538bbfeddd4868ca8b20dbfbfafe655029ca587c196c8d201846f4b737a0188f",
+    "schema_registry_digest": "5efdeaa84fa17a3030ea5795bfb7d35fd6386e9abb9a81be157bf2117c9fc25c",
     "startup": {
       "artifact_root": {
         "exists": true,
-        "path": "/tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke9/ws/objects",
+        "path": "/tmp/claude-0/-home-user/acff2680-57e3-5032-b852-3ce2043532a8/scratchpad/smoke10/ws/objects",
         "writable": true
       },
+      "checkpoints": [],
       "codec_version": "gabriel.codec/1",
       "config_schema_version": 1,
       "journal_format": "gabriel.agent-journal/1",
       "memory_chain": {
-        "head": "8451400c572d98e6551a6193bd65bce380f37dbe3cb6345bea6c981574de07fa",
+        "head": "cbe132189f2fc708f74164a5460a1fbc359aac34bda5ea5c2157624e04a2e797",
         "memory_sequence": 2,
         "owner_sequence": 41,
         "policy_revision": 0,
         "schema": "gabriel.memory-anchor/1",
-        "workspace_id": "ws-bad6a8f2a745"
+        "workspace_id": "ws-a090ecf698cf"
       },
       "migrations": [],
       "reconciliation_work": [],
       "registered_identities": {
         "catalog_digest": "7bf0221ea07d7b26bd5608da9a7175695f87ef4e2ad128d683bbc756b5e758fc",
         "reducer_identity": "ea45d1d2bc7959619be6b48b5bfea5e357161decaa06b9c44b0f9eb96e14e0e7",
-        "schema_registry_digest": "538bbfeddd4868ca8b20dbfbfafe655029ca587c196c8d201846f4b737a0188f"
+        "schema_registry_digest": "5efdeaa84fa17a3030ea5795bfb7d35fd6386e9abb9a81be157bf2117c9fc25c"
       },
       "storage": {
         "corrupt": [],
@@ -158,7 +159,7 @@
     },
     "untrusted_execution_supported": true,
     "version": "0.1.0",
-    "workspace_id": "ws-bad6a8f2a745"
+    "workspace_id": "ws-a090ecf698cf"
   },
   "gates": {
     "G0": "holds: inherited runtime checks rerun (evidence/wp01)",
@@ -173,7 +174,7 @@
     "the native engine's arithmetic is platform-independent by construction (pure-Rust libm, ADR-19) but was executed on this platform only; the engine's crystal and consensus paths remain quarantined and the state readout is a specified model quantity, not a measurement",
     "advantage over a simple verification loop not shown; the evaluation corpus is saturated for gpt-4.1-mini",
     "the associative view (ADR-20, the document pack's default since ADR-21) carries sources that verified runs cited together into a budgeted prompt whether or not the task needs them; the prompt says why each is there, which under protocol 7 kept gpt-4.1-mini from stating the forbidden figure (6/6 first attempts without the reason, 0/6 with it) but cost two repairs on one needed task; two providers of one vendor (gpt-4.1-mini, gpt-5-mini; protocol 9), one presentation; the lexical seeds are tie-broken by observation id; the history erodes by declared withdrawal and authorization only (ADR-23), never by time, and a withdrawal holds until a task declares a new revision of the source (since ADR-25 an unchanged source is one observation across tasks; a second declaration at the same revision makes the key contested); the walk sees at most the engine's 128 latest seed-touching batches within 64 entities and declares the window (ADR-25)",
-    "long-running operation is witnessed for one workspace of 600 scripted tasks (ADR-25, evidence/ops/longrun): the journal is append-only and never compacted, a full replay or migration costs time linear in the events, metrics read the whole telemetry file per run, and a restored workspace has no credential until the operator writes one",
+    "long-running operation is witnessed for one workspace of 600 scripted tasks (ADR-25, ADR-26, evidence/ops/longrun): the journal is append-only and never compacted, so the audit from genesis and a migration cost time linear in the events; restore, the re-verification after a collection and a routine audit replay from the latest verified checkpoint, which every collection records (checkpoints are never pruned); a restored workspace has no credential until the operator writes one",
     "the document pack's default routing policy is a readout promoted on one constructed distribution with one provider (ADR-22) and transferred with fixed weights to a second provider of the same vendor (protocol 9); it can only stop a repair earlier than the rule, it abstains where its declared channels are missing, and it stopped one recoverable repair on a seen task under gpt-4.1-mini; a task that pins rule-based-v1 explicitly opts out",
     "the numerical pack declares progress channels (ADR-24) but ships no readout: its protocol 10 candidate met the held-out criterion and the memory's promotion rule declined it on a held-out composition half of which is hopeless by construction; a numerical task runs the rule-based policy, and a readout bound to its layout abstains at a failed node before any reference verification ran"
   ],
@@ -188,8 +189,8 @@
       "native_pse/LICENSE"
     ]
   },
-  "package_source_files": 144,
-  "package_source_identity": "ae244f04d78af3beae0a0399af35d95ea13e8b73865d9c0dbf71a0aee55790aa",
+  "package_source_files": 145,
+  "package_source_identity": "9814d9adcd30610289cf01a4dad39ed5dfa6b824b2dfdb3d94decd632fbbc3ee",
   "platform": {
     "machine": "x86_64",
     "release": "6.18.44-fc-v70",
@@ -198,9 +199,9 @@
   "python": "3.11.15",
   "reducer_identity": "ea45d1d2bc7959619be6b48b5bfea5e357161decaa06b9c44b0f9eb96e14e0e7",
   "schema": "gabriel.release-manifest/1",
-  "schema_registry_digest": "538bbfeddd4868ca8b20dbfbfafe655029ca587c196c8d201846f4b737a0188f",
+  "schema_registry_digest": "5efdeaa84fa17a3030ea5795bfb7d35fd6386e9abb9a81be157bf2117c9fc25c",
   "source_branch": "claude/vigilant-gauss-03dalc",
-  "source_commit": "a1ea5cefc1ea3510ec45d2c99a0e2fcafdaab9a9",
+  "source_commit": "0ee61a49fc0e49219452b14404df18d2a2ac06ed",
   "source_dirty": true,
   "supported_backends": {
     "linux_namespace": "supported containment backend; requires Linux user namespaces, util-linux unshare and setpriv; verified by gabriel doctor --selftest on the release host",
