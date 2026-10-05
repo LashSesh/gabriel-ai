@@ -412,3 +412,73 @@ def test_cli_gc_dry_run_and_apply(tmp_path, capsys):
     assert cli.main(["gc", "--workspace", str(path), "--apply"]) == 0
     applied = json.loads(capsys.readouterr().out)
     assert applied["status"] == "passed" and applied["removed"] == 1
+
+
+# ------------------------------------------------------------------ ADR-25: backup closure, worktree retirement
+
+def test_backup_carries_the_referenced_closure_so_a_restore_after_a_migration_replays_every_epoch(tmp_path, monkeypatch):
+    """ADR-25: the backup copies the same closure the garbage collector keeps (the retained catalog
+    of every epoch, the task specs named by the events' inputs, the artifacts nested in JSON
+    artifacts), so a backup taken after a recorded migration restores and replays across the
+    epoch boundary; before ADR-25 the restore failed with a missing old-epoch catalog object."""
+    from gabriel_agent.agent.backup import backup, restore
+    from gabriel_agent.agent.gc import referenced_closure, roots_of
+    ws, created, spec = finished_workspace(tmp_path)
+    path = ws.path
+    ws.close()
+    monkeypatch.setattr(workspace_module, "build_registry", _registry_with_probe)
+    assert Workspace.migrate(path, reason="ops.probe tool added")["status"] == "migrated"
+    ws2 = Workspace.open(path)
+    try:
+        created2 = ws2.create_task(spec)
+        assert TaskRunner(ws2, created2["task_id"]).run()["state"] == "succeeded"
+        closure = referenced_closure(ws2.store, roots_of(ws2))
+        top_level = set(ws2.owner.referenced_artifacts()) | ws2.memory.referenced_artifacts()
+        assert len(closure) > len(top_level)  # the catalog records, task specs and nested artifacts are closure, not top-level references
+        manifest = backup(ws2, tmp_path / "backup-after-migration")
+        assert set(manifest["objects"]) == closure and manifest["object_count"] == len(closure)
+        anchor = ws2.owner.anchor()
+    finally:
+        ws2.close()
+    catalog = workspace_module.build_registry(lambda: None).catalog()
+    report = restore(tmp_path / "backup-after-migration", tmp_path / "restored", catalog=catalog)
+    assert report["status"] == "passed" and report["replay"]["events"] == anchor["sequence"] and report["replay"]["runs"] == 2
+    assert report["memory"]["status"] == "passed" and report["memory"]["anchor_match"]
+    from gabriel_agent.artifacts import ObjectStore
+    owner = owner_module.Owner.open(tmp_path / "restored" / "journal.sqlite", ObjectStore.open(tmp_path / "restored" / "objects"), catalog)
+    try:
+        assert [m["reason"] for m in owner.migrations()] == ["ops.probe tool added"]
+        assert owner.run_record(created["run_id"])["state"] == "succeeded" and owner.run_record(created2["run_id"])["state"] == "succeeded"
+    finally:
+        owner.close()
+
+
+def test_retiring_worktrees_frees_disk_keeps_the_journal_and_refuses_a_later_export(tmp_path, capsys):
+    """ADR-25: terminal runs' worktrees are removed and their registrations pruned; the journal,
+    the retained artifacts and an export taken before stay what they are, a later export refuses
+    with the retirement named, a run that is not terminal is skipped, and the CLI reports it."""
+    from gabriel_agent.agent import export_task
+    from gabriel_agent.workers.worktree import git
+    ws, created, spec = finished_workspace(tmp_path)
+    delivered = export_task(ws, created["task_id"], tmp_path / "delivery")
+    pending = ws.create_task(spec)  # admitted, never run: not terminal
+    worktree = Path(created["worktree"])
+    assert worktree.is_dir() and created["run_id"] in git(["worktree", "list"], tmp_path / "ws" / "repo").stdout
+    report = ws.retire_worktrees()
+    assert report["retired"] == [created["run_id"]] and report["bytes_freed"] > 0 and report["repositories_pruned"]
+    assert [s["run_id"] for s in report["skipped"]] == [pending["run_id"]] and "not terminal" in report["skipped"][0]["reason"]
+    assert not worktree.exists() and created["run_id"] not in git(["worktree", "list"], tmp_path / "ws" / "repo").stdout
+    assert ws.run_notes(created["run_id"])["worktree_retired"] is True
+    with pytest.raises(GabrielError) as excinfo:
+        export_task(ws, created["task_id"], tmp_path / "delivery2")
+    assert "retired" in excinfo.value.message
+    assert ws.store.get(delivered["patch_ref"]) == (tmp_path / "delivery" / "patch.diff").read_bytes()
+    assert ws.owner.replay()["status"] == "passed" and ws.gc()["status"] == "dry_run"
+    assert ws.retire_worktrees()["retired"] == []  # idempotent
+    # the pending run keeps its worktree and still runs to success afterwards
+    assert TaskRunner(ws, pending["task_id"]).run()["state"] == "succeeded"
+    path = ws.path
+    ws.close()
+    assert cli.main(["retire", "--workspace", str(path)]) == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["schema"] == "gabriel.worktree-retirement/1" and out["retired"] == [pending["run_id"]]

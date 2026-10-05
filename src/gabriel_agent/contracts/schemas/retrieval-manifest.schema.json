@@ -236,6 +236,33 @@
             "eroded"
           ],
           "type": "string"
+        },
+        "window": {
+          "additionalProperties": false,
+          "description": "ADR-25: the engine's batch cap applied to the history: batches available at the frontier after erosion, batches the walk saw, and the declared rule",
+          "properties": {
+            "available": {
+              "$ref": "common.schema.json#/$defs/safe_uint"
+            },
+            "max_batches": {
+              "$ref": "common.schema.json#/$defs/safe_uint"
+            },
+            "rule": {
+              "maxLength": 128,
+              "pattern": "^[ -~]*$",
+              "type": "string"
+            },
+            "used": {
+              "$ref": "common.schema.json#/$defs/safe_uint"
+            }
+          },
+          "required": [
+            "max_batches",
+            "available",
+            "used",
+            "rule"
+          ],
+          "type": "object"
         }
       },
       "required": [

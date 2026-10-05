@@ -33,6 +33,7 @@ from __future__ import annotations
 import hashlib
 import re
 import sqlite3
+from collections import OrderedDict
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -67,6 +68,19 @@ CREATE TABLE IF NOT EXISTS cache(key TEXT PRIMARY KEY, manifest_sha TEXT NOT NUL
 CREATE TABLE IF NOT EXISTS summaries(task_id TEXT PRIMARY KEY, summary_sha TEXT NOT NULL, summary_bytes INTEGER NOT NULL, memory_sequence INTEGER NOT NULL);
 CREATE TABLE IF NOT EXISTS compactions(compaction_id TEXT PRIMARY KEY, seq INTEGER NOT NULL, record_sha TEXT NOT NULL);
 """
+# ADR-25: indexes that keep the per-record lookups of a retrieval, a verification and a compaction bounded as the
+# index grows; created with a new index only, so a retained index file is never rewritten by merely opening it
+_INDEXES = """
+CREATE INDEX IF NOT EXISTS entries_record_sha ON entries(record_sha);
+CREATE INDEX IF NOT EXISTS entries_kind_seq ON entries(kind, seq);
+CREATE INDEX IF NOT EXISTS observations_key_seq ON observations(source_key, seq);
+CREATE INDEX IF NOT EXISTS observations_seq ON observations(seq);
+CREATE INDEX IF NOT EXISTS observations_kind ON observations(source_kind);
+CREATE INDEX IF NOT EXISTS revocations_observation ON revocations(observation_id);
+CREATE INDEX IF NOT EXISTS labels_source ON labels(source_id);
+CREATE INDEX IF NOT EXISTS claims_status_seq ON claims(status, seq);
+"""
+RECORD_CACHE_LIMIT = 8192
 
 
 @dataclass(frozen=True)
@@ -107,10 +121,14 @@ class MemoryService:
         self._db.execute("PRAGMA journal_mode=WAL")
         self._db.execute("PRAGMA synchronous=FULL")
         self._db.executescript(_SCHEMA)
+        # ADR-25: chain records and scope records are content-addressed and immutable, so a bounded in-process cache of
+        # decoded records is always valid; it bounds the per-retrieval cost of re-reading the same records from the store
+        self._records = OrderedDict()
         row = self._db.execute("SELECT workspace_id FROM meta WHERE singleton = 1").fetchone()
         if row is None:
             if workspace_id is None:
                 raise GabrielError(Code.STORAGE_FAULT, "memory index is not initialized: " + str(self.path))
+            self._db.executescript(_INDEXES)
             self._db.execute("INSERT INTO meta(singleton, workspace_id, head, count, policy_revision) VALUES (1, ?, ?, 0, 0)", (workspace_id, GENESIS))
             self.workspace_id = workspace_id
         else:
@@ -222,8 +240,20 @@ class MemoryService:
             return None
         return self._load(row[0])
 
+    def _cached(self, key: str, read):
+        """A decoded, immutable record by its content digest; a shallow copy, so a caller's edit never reaches the cache."""
+        record = self._records.get(key)
+        if record is None:
+            record = read()
+            self._records[key] = record
+            if len(self._records) > RECORD_CACHE_LIMIT:
+                self._records.popitem(last=False)
+        else:
+            self._records.move_to_end(key)
+        return dict(record)
+
     def _load(self, sha: str) -> dict:
-        return loads(self.store.get(_ref(sha, self._size(sha), "application/json")))
+        return self._cached("record:" + sha, lambda: loads(self.store.get(_ref(sha, self._size(sha), "application/json"))))
 
     def _size(self, sha: str) -> int:
         row = self._db.execute("SELECT record_bytes FROM entries WHERE record_sha = ?", (sha,)).fetchone()
@@ -235,7 +265,7 @@ class MemoryService:
         return self.store.get(observation["content_ref"])
 
     def scope(self, observation: dict) -> dict:
-        return loads(self.store.get(observation["scope_ref"]))
+        return self._cached("scope:" + observation["scope_ref"]["sha256"], lambda: loads(self.store.get(observation["scope_ref"])))
 
     def is_revoked(self, observation_id: str, policy_revision: int | None = None) -> bool:
         if policy_revision is None:
@@ -697,11 +727,13 @@ class MemoryService:
         anchors = [{"memory_sequence": p["memory_sequence"], "head": p["memory_head"]} for p in previous]
         meta = self._meta()
         anchors.append({"memory_sequence": meta["count"], "head": meta["head"]})
+        present = [sha for sha in retained if self.store.path_for(sha).is_file()]
         record = {"schema": "gabriel.compaction-manifest/1", "compaction_id": "compaction-%d" % (meta["count"] + 1), "workspace_id": self.workspace_id,
                   "memory_sequence": meta["count"], "memory_head": meta["head"], "owner_sequence": int(self._owner_sequence()),
-                  "retained_artifacts": [{"sha256": sha, "bytes": self.store.path_for(sha).stat().st_size} for sha in retained if self.store.path_for(sha).is_file()][:4096],
+                  "retained_artifacts": [{"sha256": sha, "bytes": self.store.path_for(sha).stat().st_size} for sha in present[:4096]],
+                  "retained_artifact_count": len(present), "anchor_count": len(anchors),
                   "removed_derived": {"cache_entries": int(cache_rows), "summaries": int(summary_rows)},
-                  "required_bytes_verified": check["status"] == "passed", "faults": check["faults"][:64], "anchors": anchors[:1024],
+                  "required_bytes_verified": check["status"] == "passed", "faults": check["faults"][:64], "anchors": anchors[-1024:],
                   "status": "compacted" if check["status"] == "passed" else "storage_fault"}
         seq, ref = self._append("compaction", record, "compaction-manifest")
         self._db.execute("INSERT INTO compactions VALUES (?,?,?)", (record["compaction_id"], seq, ref["sha256"]))

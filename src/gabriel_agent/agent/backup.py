@@ -1,7 +1,8 @@
 """Coherent backup and restore of a workspace (WP12, AT18).
 
 A backup captures a coherent database snapshot through SQLite's online
-backup API, every artifact referenced by the journal (byte-verified), the
+backup API, every artifact in the referenced closure of the journal and the
+memory chain (the set the garbage collector keeps, byte-verified; ADR-25), the
 workspace configuration, the independent anchor and a manifest. Restore
 rebuilds the layout elsewhere, re-verifies every referenced object, checks
 the restored journal against the independently retained anchor and replays
@@ -30,15 +31,18 @@ def backup(workspace, destination) -> dict:
     if destination.exists() and any(destination.iterdir()):
         raise GabrielError(Code.STORAGE_FAULT, "backup destination is not empty: " + str(destination))
     destination.mkdir(parents=True, exist_ok=True)
+    from .gc import referenced_closure, roots_of
     owner, store = workspace.owner, workspace.store
     db = owner.backup(destination / "journal.sqlite")
     anchor = db["anchor"]
-    referenced = set(owner.referenced_artifacts())
     memory_anchor = None
     if getattr(workspace, "memory", None) is not None:
         memory_anchor = workspace.memory.backup(destination / "memory.sqlite")
-        referenced |= workspace.memory.referenced_artifacts()
-    referenced = sorted(referenced)
+    # ADR-25: the backup carries the same closure the garbage collector keeps (the retained catalog and migration
+    # records, the task specs and grants named by every event's retained inputs, the artifacts nested inside JSON
+    # artifacts such as a request's prompt), not only the top-level references, so a restore after a recorded
+    # migration can replay every epoch with its retained catalog
+    referenced = sorted(referenced_closure(store, roots_of(workspace)))
     objects = destination / "objects"
     objects.mkdir()
     copied = {}

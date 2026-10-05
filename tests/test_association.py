@@ -339,3 +339,53 @@ def test_association_tier_runs_through_the_frozen_harness_with_history(tmp_path)
         assert any(line.startswith("history dh-fee: succeeded") for line in record["outcome"]["log"]), record["outcome"]["log"][:3]
     report = harness.report(results, frozen)
     assert report["per_system"]["gabriel_associative"]["declared_successes"] == 1 and report["per_system"]["gabriel_reference_plan"]["declared_successes"] == 0
+
+
+# ------------------------------------------------------------------ ADR-25: bounds under growth
+
+def test_the_walk_is_bounded_to_the_engines_batch_cap_with_a_declared_window():
+    """ADR-25: the engine admits at most 128 batches; a longer history is reduced to the batches
+    that touch a seed and, beyond the cap, to the latest of those in chain order, and the record
+    says what was available and what the walk saw. Before ADR-25 the 129th contributing claim
+    made the engine refuse the job and the retrieval raise."""
+    pytest.importorskip("flint")
+    if not NATIVE:
+        pytest.skip("native PSE executables not built")
+    profile = association.PROFILE
+    history = [{"claim_id": "c%d" % i, "task_id": "t%d" % i, "keys": ["a", "b"]} for i in range(129)]
+    masses, record = association.structural_scores([h["keys"] for h in history], ["a"], ["a", "b"], profile, history=history)
+    assert record["status"] == "computed" and record["window"] == {"max_batches": 128, "available": 129, "used": 128, "rule": association.WINDOW_RULE}
+    assert record["masses_milli"]["b"] > 0 and len(record["links"]["b"]["claims"]) <= 8
+    exact, exact_record = association.structural_scores([["a", "b"]] * 128, ["a"], ["a", "b"], profile)
+    assert exact_record["window"]["used"] == exact_record["window"]["available"] == 128 and exact_record["batches_sha256"] == record["batches_sha256"]
+    # batches that touch no seed are dropped before the window applies, so the walk keeps the whole seeded history
+    mixed = [["x", "y"]] * 100 + [["a", "b"]] * 100
+    masses2, record2 = association.structural_scores(mixed, ["a"], ["a", "b"], profile)
+    assert record2["status"] == "computed" and record2["window"] == {"max_batches": 128, "available": 200, "used": 100, "rule": association.WINDOW_RULE}
+    assert set(record2["entities"]) == {"a", "b"}
+
+
+def test_a_source_declared_by_several_tasks_is_one_observation(tmp_path):
+    """ADR-25: the document pack identifies an observation by what was observed, not by which task
+    observed it, so N tasks declaring the same bytes under the same key share one observation
+    and their claims cite the same observation ids; the index and every retrieval stay bounded
+    by the distinct sources instead of growing with the tasks."""
+    repo = tmp_path / "repo"
+    base = da.build_repo(repo)
+    ws = Workspace.create(tmp_path / "ws", backend="trusted_local", allow_trusted_local=True)
+    try:
+        ids = []
+        for index in range(3):
+            created, summary = run(ws, da.history_spec(repo, base, da.history_oracle(tmp_path / ("h%d.json" % index)), da.provider("history")))
+            assert summary["state"] == "succeeded", summary["log"]
+            snapshot = loads(ws.store.get(ws.owner.projection(created["run_id"])["run_meta"]["observed_snapshot_ref"]))
+            ids.append(sorted(s["observation_id"] for s in snapshot["sources"]))
+        assert ids[0] == ids[1] == ids[2] and len(ids[0]) == 2
+        assert ws.memory._db.execute("SELECT COUNT(*) FROM observations WHERE source_kind = 'document'").fetchone()[0] == 2
+        claims = [loads(ws.memory.content(c)) if False else row for row in ws.memory._db.execute("SELECT supporting FROM claims").fetchall()]
+        assert len(claims) == 3 and len({row[0] for row in claims}) == 1
+        manifest = retrieval_manifest(ws, created)
+        assert not any(e["reason"] == "superseded" for e in manifest["excluded"])
+        assert ws.memory.verify()["status"] == "passed" and ws.owner.replay()["status"] == "passed"
+    finally:
+        ws.close()

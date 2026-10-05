@@ -78,6 +78,14 @@
       ],
       "type": "object"
     },
+    "retained_artifact_count": {
+      "$ref": "common.schema.json#/$defs/safe_uint",
+      "description": "ADR-25: the number of referenced artifacts verified, of which retained_artifacts lists at most its first 4096"
+    },
+    "anchor_count": {
+      "$ref": "common.schema.json#/$defs/safe_uint",
+      "description": "ADR-25: the number of compaction anchors, of which anchors lists at most 1024"
+    },
     "required_bytes_verified": {
       "type": "boolean"
     },

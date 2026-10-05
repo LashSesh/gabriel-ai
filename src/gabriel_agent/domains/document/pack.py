@@ -158,12 +158,16 @@ def take_snapshot(worktree, binding: dict, store, frontier: int, *, memory, prin
             if extraction == "text_utf8" and memory is not None:
                 # Revisions of the same document share the declared object identity (default: the path), so the
                 # memory's revision rule applies across files that hold different revisions of one document.
+                # ADR-25: the observation is identified by what was observed (key, revision, bytes, extraction, principal scope),
+                # not by which task observed it: a later task that declares the same bytes under the same key gets the
+                # retained observation back instead of a new one per task, so the index and every retrieval stay bounded
+                # by the distinct sources, and a revocation of the observation holds for every later task
                 record = memory.ingest(source_id=declared["source_id"], source_object_id=declared.get("object_id") or declared["path"].replace("/", ":"),
                                        source_revision=declared["source_revision"],
                                        content=raw, event_kind=declared["event_kind"], event_start_unix_ms=declared["event_start_unix_ms"],
                                        event_end_unix_ms=declared["event_end_unix_ms"], received_at_unix_ms=received_at_unix_ms,
                                        source_time_basis=declared["source_time_basis"], extraction_digest=EXTRACTION_DIGEST,
-                                       scope={"principals": [principal_id], "source_kind": "document", "task_id": task_id})
+                                       scope={"principals": [principal_id], "source_kind": "document"})
                 observation_id = record["observation_id"]
                 if access == "revoked" and not memory.is_revoked(observation_id):
                     # Declared revoked: the bytes stay retained for audit (AT15) and the access policy

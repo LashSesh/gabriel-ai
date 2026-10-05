@@ -45,6 +45,7 @@ CREATE TABLE events (sequence INTEGER PRIMARY KEY, task_id TEXT NOT NULL, run_id
     run_revision INTEGER NOT NULL, kind TEXT NOT NULL, command_id TEXT NOT NULL UNIQUE REFERENCES commands(command_id),
     payload_sha256 TEXT NOT NULL, event_text TEXT NOT NULL, hash TEXT NOT NULL UNIQUE,
     inputs_text TEXT NOT NULL, inputs_hash TEXT NOT NULL, projection_digest TEXT NOT NULL);
+CREATE INDEX events_run_sequence ON events(run_id, sequence);
 CREATE TABLE tasks (task_id TEXT PRIMARY KEY, workspace_id TEXT NOT NULL, principal_id TEXT NOT NULL,
     grant_id TEXT NOT NULL REFERENCES grants(grant_id), task_spec_sha256 TEXT NOT NULL, task_spec_revision INTEGER NOT NULL,
     active_run_id TEXT NOT NULL, created_sequence INTEGER NOT NULL);

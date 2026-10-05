@@ -14,6 +14,12 @@ revision rule, revocation and the frontier are applied before any association is
 the walk can only re-rank sources the principal could retrieve anyway; it never adds one. Mass
 is a model readout of the conditioned walk, not a relevance probability.
 
+Bounds (ADR-25): the engine walks at most ``CAPS["max_batches"]`` batches over at most
+``max_entities`` entities. A longer history is reduced to the batches that touch a seed and,
+beyond the batch cap, to the latest of those in chain order; the record's ``window`` retains how
+many batches were available and how many the walk saw, and ``batches_sha256`` covers the walked
+batches, so a reproduction recomputes the same window.
+
 Erosion (ADR-23): the history a retrieval walks over is projected onto that retrieval's own
 candidates. A supported claim contributes the source keys of its supporting observations that
 the retrieval could admit (at its frontier, for its principal, under its access policy revision,
@@ -35,6 +41,9 @@ PROFILE = {"schema": "gabriel.association-profile/1", "profile_id": "co-citation
 STATUSES = ("computed", "no_history", "no_seeds", "no_seeds_in_history", "capacity_exceeded", "unavailable", "eroded")
 EROSION_REASONS = ("revoked", "out_of_scope", "kind_not_allowed", "contested", "unresolved_revision", "not_at_frontier")
 MIN_BATCH_KEYS = 2
+# ADR-25: the engine admits at most CAPS["max_batches"] observation batches per job; the walk over a longer history sees
+# the batches that touch a seed, and of those the latest in chain order; the record retains what was available and used
+WINDOW_RULE = "batches touching a seed, the latest in chain order"
 
 
 def milli(mass: float) -> int:
@@ -147,13 +156,28 @@ def structural_scores(batches: list, seeds: list, candidates: list, profile: dic
     seeds_in = [key for key in seeds if key in entities][: int(profile["max_seeds"])]
     if not seeds_in:
         return {}, dict(record, status="no_seeds_in_history", entities=entities[: int(profile["max_entities"])])
-    if len(entities) > int(profile["max_entities"]):
-        # the walk is bounded: keep the batches that touch a seed (one hop); beyond the cap the association is declared unavailable
-        batches = [batch for batch in batches if any(key in batch for key in seeds_in)]
+    max_batches = int(native_graph.CAPS["max_batches"])
+    available = len(batches)
+    keep = list(range(len(batches)))
+    if len(entities) > int(profile["max_entities"]) or len(batches) > max_batches:
+        # the walk is bounded: keep the batches that touch a seed (one hop); beyond the entity cap the association is
+        # declared unavailable; beyond the engine's batch cap (ADR-25) the latest admissible batches in chain order are walked
+        keep = [position for position in keep if any(key in batches[position] for key in seeds_in)]
+        if len(keep) > max_batches:
+            keep = keep[-max_batches:]
+        batches = [batches[position] for position in keep]
+        if history is not None:
+            history = [history[position] for position in keep]
         entities = _entities(batches)
         record["batches_sha256"] = sha256_hex(canonical(batches))
         if len(entities) > int(profile["max_entities"]):
-            return {}, dict(record, status="capacity_exceeded", seeds=seeds_in)
+            return {}, dict(record, status="capacity_exceeded", seeds=seeds_in,
+                            window={"max_batches": max_batches, "available": available, "used": len(batches), "rule": WINDOW_RULE})
+        seeds_in = [key for key in seeds_in if key in entities]
+        if not seeds_in:
+            return {}, dict(record, status="no_seeds_in_history", entities=entities,
+                            window={"max_batches": max_batches, "available": available, "used": len(batches), "rule": WINDOW_RULE})
+    record["window"] = {"max_batches": max_batches, "available": available, "used": len(batches), "rule": WINDOW_RULE}
     binaries = binaries if binaries is not None else native_graph.binaries()
     observer = binaries.get("engine_observer")
     if observer is None:

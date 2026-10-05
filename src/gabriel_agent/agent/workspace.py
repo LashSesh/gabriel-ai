@@ -10,6 +10,7 @@ import hashlib
 import json
 import os
 import platform
+import shutil
 import subprocess
 import sys
 import time
@@ -465,7 +466,49 @@ class Workspace:
 
     def worktree_for(self, run_id: str, binding: dict) -> Worktree:
         notes = self.run_notes(run_id)
+        if notes.get("worktree_retired"):
+            raise GabrielError(Code.STORAGE_FAULT, "the worktree of %s was retired at owner time %s; the run's candidate artifacts stay retained in the journal"
+                               % (run_id, notes.get("retired_owner_time_unix_ms")))
         return Worktree.open(notes["worktree"], binding["base_commit"], notes["repository"])
+
+    def retire_worktrees(self, run_ids=None) -> dict:
+        """ADR-25: remove the disposable worktrees of terminal runs and prune their registrations in the
+        source repositories. The journal, the retained candidate artifacts and exports already taken are
+        untouched; the run's notes keep the retirement, and `task export` for a retired run refuses.
+        Runs that are not terminal are skipped and named."""
+        from ..state import TERMINAL_STATES
+        report = {"schema": "gabriel.worktree-retirement/1", "workspace_id": self.config["workspace_id"], "retired": [], "skipped": [],
+                  "bytes_freed": 0, "repositories_pruned": []}
+        repositories = set()
+        for run_id, state in self.owner._db.execute("SELECT run_id, state FROM runs ORDER BY run_id").fetchall():
+            if run_ids is not None and run_id not in run_ids:
+                continue
+            if state not in TERMINAL_STATES:
+                report["skipped"].append({"run_id": run_id, "reason": "run state %s is not terminal" % state})
+                continue
+            notes_path = self.path / "runs" / (run_id + ".json")
+            if not notes_path.is_file():
+                report["skipped"].append({"run_id": run_id, "reason": "runtime notes missing"})
+                continue
+            notes = json.loads(notes_path.read_text())
+            if notes.get("worktree_retired"):
+                continue
+            path = Path(notes["worktree"])
+            size = sum(p.stat().st_size for p in path.rglob("*") if p.is_file()) if path.is_dir() else 0
+            if path.is_dir():
+                Worktree(path, notes["base_commit"], notes["repository"]).remove()
+                if path.exists():
+                    shutil.rmtree(path, ignore_errors=True)
+            notes.update(worktree_retired=True, retired_owner_time_unix_ms=self.owner.owner_time())
+            notes_path.write_text(json.dumps(notes, indent=2))
+            repositories.add(notes["repository"])
+            report["retired"].append(run_id)
+            report["bytes_freed"] += size
+        for repository in sorted(repositories):
+            if Path(repository).is_dir():
+                git(["worktree", "prune"], repository, check=False)
+                report["repositories_pruned"].append(repository)
+        return report
 
     def resolve_task(self, task_id: str) -> tuple:
         info = self.owner.task(task_id)

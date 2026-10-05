@@ -48,6 +48,8 @@ def main(argv=None) -> int:
     trace.add_argument("run_id"); trace.add_argument("--workspace", required=True); trace.add_argument("--summary", action="store_true", help="totals per kind only")
     gc = sub.add_parser("gc", help="artifact garbage collection: objects outside the referenced closure (journal, memory chain, checkpoints, catalog and migration records) and older than the grace period; dry run unless --apply")
     gc.add_argument("--workspace", required=True); gc.add_argument("--apply", action="store_true"); gc.add_argument("--grace-seconds", type=int, default=3600)
+    retire = sub.add_parser("retire", help="ADR-25: remove the disposable worktrees of terminal runs and prune their registrations; the journal and retained artifacts are untouched, task export for a retired run refuses")
+    retire.add_argument("--workspace", required=True); retire.add_argument("--run", default=None, help="one run id (default: every terminal run)")
     mem = sub.add_parser("memory", help="evidence index (WP09)"); msub = mem.add_subparsers(dest="action", required=True)
     for name in ("status", "verify", "compact"):
         p = msub.add_parser(name); p.add_argument("--workspace", required=True)
@@ -123,6 +125,8 @@ def main(argv=None) -> int:
                 return 0 if report["status"] in ("dry_run", "passed") else 3
             if args.command == "metrics":
                 _emit(ws.metrics(args.run)); return 0
+            if args.command == "retire":
+                _emit(ws.retire_worktrees(run_ids=[args.run] if args.run else None)); return 0
             if args.command == "trace":
                 report = ws.trace(args.run_id)
                 _emit({k: v for k, v in report.items() if k != "spans"} if args.summary else report); return 0
@@ -135,6 +139,8 @@ def main(argv=None) -> int:
                     _emit(ws.memory.compact()); return 0
                 if args.action == "reproduce":
                     path = ws.store.path_for(args.manifest)
+                    if not path.is_file():
+                        raise GabrielError(Code.UNKNOWN_OBJECT, "no retained retrieval manifest with digest " + args.manifest)
                     manifest = loads(ws.store.get({"sha256": args.manifest, "bytes": path.stat().st_size, "media_type": "application/json"}))
                     report = ws.memory.reproduce(manifest); _emit(report); return 0 if report["status"] == "reproduced" else 3
             if args.action == "create":
