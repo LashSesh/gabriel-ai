@@ -351,7 +351,8 @@ class Witness:
             if done == len(plan) // 2 and not migrated:
                 # backup, restore elsewhere, then migrate to a changed catalog and continue under the new epoch
                 backup_dir = self.work / ("backup-%d" % done)
-                self.operation("backup", lambda: {k: v for k, v in backup(self.ws, backup_dir).items() if k != "objects"}, path=self.relative(backup_dir))
+                self.operation("backup", lambda: {k: v for k, v in backup(self.ws, backup_dir).items() if k != "objects"}, path=self.relative(backup_dir),
+                               checkpoints=len(self.ws.owner.checkpoints()))
                 backup_dirs.append(backup_dir)
                 self.ws.close()
                 self.operation("restore.from_checkpoint", lambda: _restore_facts(restore(backup_dir, self.work / ("restored-%d" % done),
@@ -374,7 +375,8 @@ class Witness:
         # the end: a second backup and restore under the new epoch (from the checkpoint the backup carries, and the audit from
         # genesis), the full replay as the audit that verifies every checkpoint, chain, reproduction, diagnostics, metrics, retirement
         final_backup = self.work / "backup-final"
-        self.operation("backup", lambda: {k: v for k, v in backup(self.ws, final_backup).items() if k != "objects"}, path=self.relative(final_backup))
+        self.operation("backup", lambda: {k: v for k, v in backup(self.ws, final_backup).items() if k != "objects"}, path=self.relative(final_backup),
+                       checkpoints=len(self.ws.owner.checkpoints()))
         self.operation("restore.from_checkpoint", lambda: _restore_facts(restore(final_backup, self.work / "restored-final",
                                                                                  catalog=workspace_module.build_registry(lambda: None).catalog())),
                        source=self.relative(final_backup))
@@ -424,6 +426,23 @@ class Witness:
         return value
 
 
+def _ok(entry: dict) -> bool:
+    return entry.get("status") == "ok" and isinstance(entry.get("result"), dict)
+
+
+def _checkpoints_before(witness: "Witness", name: str) -> int:
+    """How many checkpoints existed when the named operation ran: the collections and the migration before it recorded them."""
+    count = 0
+    for entry in witness.operations:
+        if entry["name"] == name:
+            return count
+        if entry["name"] in ("gc.apply", "gc.after_retirement") and _ok(entry) and entry["result"].get("checkpoint_recorded"):
+            count += 1
+        if entry["name"] == "migrate" and _ok(entry) and entry["result"].get("status") == "migrated":
+            count += 1
+    return count
+
+
 def checks(summary: dict, witness: Witness) -> dict:
     ops = {}
     for entry in witness.operations:
@@ -463,18 +482,25 @@ def checks(summary: dict, witness: Witness) -> dict:
         "final_replay_passed": ops.get("owner.replay", [{}])[-1].get("result", {}).get("status") == "passed",
         # ADR-26: every collection re-verified from the previous checkpoint and recorded the next; the bounded replays at the
         # boundaries reduced only the events since the previous checkpoint; the audit verified every checkpoint; both restores agree
-        "every_collection_recorded_a_checkpoint": bool(ops.get("gc.apply")) and all(e["result"].get("checkpoint_recorded") for e in ops.get("gc.apply", []) + ops.get("gc.after_retirement", [])),
-        "recovery_from_checkpoint_bounded": all(e["result"]["checkpoint"] is not None and 0 < e["result"]["events_reduced"] < e["result"]["events"]
-                                                for e in ops.get("replay.from_checkpoint", [])[1:]),
-        "audit_verified_every_checkpoint": ops.get("owner.replay", [{}])[-1].get("result", {}).get("checkpoints_verified") == len(ops.get("checkpoints", [{"result": []}])[-1]["result"]) - 1
-                                            and ops.get("owner.replay", [{}])[-1].get("result", {}).get("checkpoint") is None,
+        "every_collection_recorded_a_checkpoint": bool(ops.get("gc.apply")) and all(_ok(e) and e["result"].get("checkpoint_recorded")
+                                                                                   for e in ops.get("gc.apply", []) + ops.get("gc.after_retirement", [])),
+        # every boundary replay that found a checkpoint reduced a proper suffix (the first boundary has none yet and reduces everything)
+        "recovery_from_checkpoint_bounded": all(_ok(e) for e in ops.get("replay.from_checkpoint", []))
+                                             and any(e["result"]["checkpoint"] is not None for e in ops.get("replay.from_checkpoint", []))
+                                             and all(0 < e["result"]["events_reduced"] < e["result"]["events"]
+                                                     for e in ops.get("replay.from_checkpoint", []) if e["result"]["checkpoint"] is not None),
+        # the audit at the end verified every checkpoint that existed then (the collection after the retirement records one more)
+        "audit_verified_every_checkpoint": _ok(ops.get("owner.replay", [{}])[-1]) and ops["owner.replay"][-1]["result"]["checkpoint"] is None
+                                            and ops["owner.replay"][-1]["result"]["checkpoints_verified"] == _checkpoints_before(witness, "owner.replay"),
         "restores_from_checkpoint_and_genesis_agree": bool(ops.get("restore.full")) and all(
-            a["result"]["replay"]["head"] == b["result"]["replay"]["head"] and a["result"]["replay"]["events"] == b["result"]["replay"]["events"]
+            _ok(a) and _ok(b) and a["result"]["replay"]["head"] == b["result"]["replay"]["head"] and a["result"]["replay"]["events"] == b["result"]["replay"]["events"]
             and b["result"]["replay"]["checkpoint"] is None for a, b in zip(ops.get("restore.from_checkpoint", []), ops.get("restore.full", []))),
-        # the backups taken after a collection carry its checkpoint, so the default restore replays from it and the audit verifies it
+        # a backup taken while checkpoints exist carries the latest one, so the default restore replays from it and reduces nothing when
+        # it sits at the head; a backup taken before any checkpoint replays from genesis and says so
         "restores_used_the_backups_checkpoint": bool(ops.get("restore.from_checkpoint")) and all(
-            a["result"]["replay"]["checkpoint"] is not None and a["result"]["replay"]["events_reduced"] == 0 and b["result"]["replay"]["checkpoints_verified"] >= 1
-            for a, b in zip(ops.get("restore.from_checkpoint", []), ops.get("restore.full", []))),
+            _ok(a) and _ok(b) and ((a["result"]["replay"]["checkpoint"] is not None and b["result"]["replay"]["checkpoints_verified"] >= 1)
+                                   if bk.get("checkpoints") else (a["result"]["replay"]["checkpoint"] is None and a["result"]["replay_mode"] == "genesis_no_usable_checkpoint"))
+            for a, b, bk in zip(ops.get("restore.from_checkpoint", []), ops.get("restore.full", []), ops.get("backup", []))),
         "telemetry_rotated": summary["snapshots"][-1]["telemetry_parts"] >= 2,
         "memory_chain_verified": ops.get("memory.verify", [{}])[-1].get("result", {}).get("status") == "passed",
         "first_and_last_probe_reproduce": all(e["status"] == "ok" and e["result"]["status"] == "reproduced" for e in ops.get("memory.reproduce", [])),
