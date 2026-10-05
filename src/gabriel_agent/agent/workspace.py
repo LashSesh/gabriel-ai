@@ -333,9 +333,10 @@ class Workspace:
         storage integrity of every referenced object (presence; bytes with ``deep``), registry
         compatibility and recorded migrations, the artifact root, and outstanding leases, which
         are reconciliation work and never automatic repeats."""
-        referenced = set(self.owner.referenced_artifacts())
-        if self.memory is not None:
-            referenced |= self.memory.referenced_artifacts()
+        # ADR-25: the same roots the backup and the collector keep (the retained catalog of every epoch, the migration
+        # records, the artifacts named by the events' retained inputs, the memory manifests), not the top-level table alone
+        from .gc import roots_of
+        referenced = set(roots_of(self))
         missing, corrupt = [], []
         for sha in sorted(referenced):
             path = self.store.path_for(sha)
@@ -491,10 +492,11 @@ class Workspace:
             if state not in TERMINAL_STATES:
                 report["skipped"].append({"run_id": run_id, "reason": "run state %s is not terminal" % state})
                 continue
-            in_flight = self.owner._db.execute("SELECT COUNT(*) FROM attempts WHERE run_id = ? AND status IN ('issued', 'marked')", (run_id,)).fetchone()[0]
-            if in_flight:
-                # a cancelled run can still have a dispatched tool attempt until it is reconciled; its tree stays until then
-                report["skipped"].append({"run_id": run_id, "reason": "%d attempt(s) still dispatched" % in_flight})
+            # a cancelled run relabels its dispatched attempts as effects of unknown outcome; they are reconciled against the
+            # tree by the next runner start, so the tree stays until no effect is unresolved
+            unresolved = self.owner.projection(run_id)["run"].get("unresolved_effect_ids") or []
+            if unresolved:
+                report["skipped"].append({"run_id": run_id, "reason": "%d unresolved effect(s) await reconciliation" % len(unresolved)})
                 continue
             notes_path = self.path / "runs" / (run_id + ".json")
             if not notes_path.is_file():

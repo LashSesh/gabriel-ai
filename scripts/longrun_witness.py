@@ -194,7 +194,7 @@ class Witness:
         except GabrielError as exc:
             result, status = {"error": exc.message, "code": str(exc.code)}, "error"
         entry = {"name": name, "task_index": self.task_index, "epoch": self.epoch, "duration_ms": int((time.monotonic() - clock) * 1000), "status": status,
-                 "result": result}
+                 "result": self.relativized(result)}
         entry.update(extra)
         self.operations.append(entry)
         return entry
@@ -365,6 +365,19 @@ class Witness:
             return str(Path(path).resolve().relative_to(self.out.resolve()))
         except ValueError:
             return str(Path(path).name)
+
+    def relativized(self, value):
+        """Every string inside a result that names a path under the output directory, made relative to it."""
+        if isinstance(value, dict):
+            return {k: self.relativized(v) for k, v in value.items()}
+        if isinstance(value, list):
+            return [self.relativized(v) for v in value]
+        if isinstance(value, str) and (value.startswith("/") or value.startswith(str(self.out))):
+            try:
+                return str(Path(value).resolve().relative_to(self.out.resolve()))
+            except (ValueError, OSError):
+                return value
+        return value
 
 
 def checks(summary: dict, witness: Witness) -> dict:

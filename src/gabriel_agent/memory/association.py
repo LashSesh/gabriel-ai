@@ -37,6 +37,7 @@ import math
 
 from ..adapters import native_graph
 from ..contracts.codec import canonical, sha256_hex
+from ..contracts.errors import Code, GabrielError
 
 PROFILE = {"schema": "gabriel.association-profile/1", "profile_id": "co-citation-walk-v1", "time_bits": native_graph.bits(1.0), "backend": "auto_region",
            "max_seeds": 8, "max_entities": native_graph.CAPS["max_nodes"], "seed_min_score_milli": 1, "combination": "max"}
@@ -179,8 +180,8 @@ def structural_scores(batches: list, seeds: list, candidates: list, profile: dic
         record["batches_sha256"] = sha256_hex(canonical(batches))
         window = dict(window, used=len(batches), rule=WINDOW_RULE)
         if not batches:
-            # the seeds are the ones the history held; no batch was walked
-            return {}, dict(record, status="capacity_exceeded", seeds=seeds_in, window=window)
+            # no batch was walked: the record names no seed and no entity, and its batches digest covers nothing
+            return {}, dict(record, status="capacity_exceeded", seeds=[], window=window)
         seeds_in = [key for key in seeds_in if key in entities]  # every kept batch touches a seed, so at least one remains
     record["window"] = window
     binaries = binaries if binaries is not None else native_graph.binaries()
@@ -196,8 +197,13 @@ def structural_scores(batches: list, seeds: list, candidates: list, profile: dic
     job = {"schema": native_graph.OBSERVER_SCHEMA, "backend": profile["backend"], "batches": [[index[key] for key in batch] for batch in batches], "queries": queries}
     masses = {}
     if candidates_in:
-        response = native_graph.invoke(observer["path"], observer["sha256"], job)
-        native_graph.validate_observer_response(response, job)
+        try:
+            response = native_graph.invoke(observer["path"], observer["sha256"], job)
+            native_graph.validate_observer_response(response, job)
+        except ValueError as exc:
+            # ADR-25: the caps are honoured by construction above; what remains is a fault of the engine itself (a timeout,
+            # an executable whose identity changed, a malformed or non-finite answer), which is the worker's unavailability
+            raise GabrielError(Code.WORKER_UNAVAILABLE, "engine_observer could not answer the association query: %s" % exc) from exc
         for key, result in zip(candidates_in, response["query_results"]):
             masses[key] = native_graph.number(result["values"][0]["mass_bits"])
         record["snapshot_identity"] = response["snapshot"]["identity"]

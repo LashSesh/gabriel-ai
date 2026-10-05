@@ -462,6 +462,33 @@ def test_backup_carries_the_referenced_closure_so_a_restore_after_a_migration_re
         owner.close()
 
 
+def test_startup_validation_checks_the_roots_the_backup_and_the_collector_keep(tmp_path, monkeypatch):
+    """ADR-25: a retained catalog of an earlier epoch is named by the journal's migration rows, not by
+    its artifact table; losing it breaks replay and backup, so the deep doctor must see it missing."""
+    from gabriel_agent.agent.backup import backup
+    ws, created, spec = finished_workspace(tmp_path)
+    path = ws.path
+    ws.close()
+    monkeypatch.setattr(workspace_module, "build_registry", _registry_with_probe)
+    report = Workspace.migrate(path, reason="ops.probe tool added")
+    assert report["status"] == "migrated"
+    ws2 = Workspace.open(path)
+    try:
+        before = ws2.startup_validation(deep=True)
+        assert before["storage"]["missing"] == [] and before["storage"]["corrupt"] == []
+        old_catalog = [sha for (sha,) in ws2.owner._db.execute("SELECT record_sha256 FROM catalog_records").fetchall()
+                       if sha not in set(ws2.owner.referenced_artifacts())]
+        assert old_catalog, "the retained catalogs are not top-level references"
+        Path(ws2.store.path_for(old_catalog[0])).unlink()
+        after = ws2.startup_validation(deep=True)
+        assert old_catalog[0] in after["storage"]["missing"]
+        with pytest.raises(GabrielError) as excinfo:
+            backup(ws2, tmp_path / "backup-missing-catalog")
+        assert excinfo.value.code == Code.STORAGE_FAULT and old_catalog[0] in excinfo.value.message
+    finally:
+        ws2.close()
+
+
 def test_retiring_worktrees_frees_disk_keeps_the_journal_and_refuses_a_later_export(tmp_path, capsys):
     """ADR-25: terminal runs' worktrees are removed and their registrations pruned; the journal,
     the retained artifacts and an export taken before stay what they are, a later export refuses

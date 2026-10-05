@@ -380,6 +380,7 @@ def test_the_walk_is_bounded_to_the_entity_cap_by_the_latest_seeded_batches():
     wide = [["hub"] + ["w%d" % i for i in range(64)]]
     masses, exceeded = association.structural_scores(wide, ["hub"], ["hub"], profile, binaries={})
     assert exceeded["status"] == "capacity_exceeded" and exceeded["window"]["used"] == 0 and exceeded["window"]["available"] == 1
+    assert exceeded["seeds"] == [] and exceeded["entities"] == []  # nothing was walked, so the record names nothing the digest does not cover
     # the window is a function of the seeded history alone: a later batch that touches no seed changes nothing the walk sees
     masses, later = association.structural_scores(history + [["other", "x"]], ["hub"], ["hub"], profile, binaries={})
     assert later["window"] == dict(windowed["window"], available=101) and later["batches_sha256"] == windowed["batches_sha256"]

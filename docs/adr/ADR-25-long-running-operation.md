@@ -52,7 +52,9 @@ not a defect to fix here but a cost to measure and state.
   engine admits, or more entities than the profile allows, the walk runs over the batches that
   touch a seed, of those the latest in chain order up to the batch cap, and of those the latest
   whose entities fit the entity cap. Only a single batch wider than the entity cap is
-  `capacity_exceeded`. The record retains `window: {max_batches, max_entities, available, used,
+  `capacity_exceeded`, and such a record names no seed and no entity, since nothing was walked.
+  A fault of the engine itself (a timeout, a changed executable, a non-finite mass) surfaces as
+  `WORKER_UNAVAILABLE` through the memory service, never as a bare Python error. The record retains `window: {max_batches, max_entities, available, used,
   rule}` on every record that reached the walk's bounds (`computed`, `unavailable` and
   `capacity_exceeded`; `rule` is `whole history` when nothing was cut), `batches_sha256` covers
   the walked batches and `memory reproduce` compares the window, so an ADR-23 reproduction
@@ -78,12 +80,16 @@ not a defect to fix here but a cost to measure and state.
   of every epoch, the migration records, the memory manifests and everything nested in JSON
   artifacts. A root that is missing is a storage fault as before; a reference nested inside a
   JSON artifact (user-supplied content included) that names no stored object is recorded in the
-  manifest (`unresolved_nested_references`) and never fails the backup. A restore of a migrated
+  manifest (`unresolved_nested_references`) and never fails the backup. The deep doctor checks
+  the same roots, so a lost catalog of an earlier epoch is reported before a backup or a replay
+  fails on it. A restore of a migrated
   workspace replays every epoch under the retained catalogs. The migration record's object is
   stored before the row that names it, so a crash between the two leaves an orphan, never a
   recorded migration the closure cannot find.
 - **Worktrees are retired explicitly.** `Workspace.retire_worktrees` (CLI `gabriel retire`)
-  removes the worktrees of terminal runs that have no tool attempt still dispatched, prunes the
+  removes the worktrees of terminal runs that have no unresolved effect awaiting reconciliation
+  (a cancelled run's dispatched attempts become effects of unknown outcome, which the next
+  runner start reconciles against the tree), prunes the
   source repositories' registrations, records the retirement in the run's notes and retains a
   report under `<workspace>/retirements/`; an unknown run id is refused. `task export` of a
   retired run refuses with `STORAGE_FAULT` instead of exporting an empty tree, and `task run`
