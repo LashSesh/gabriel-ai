@@ -270,7 +270,7 @@ no longer read the same, or whose binding no longer matches the journal, is skip
 reason in the replay report; a changed state object or a forged binding is a storage fault.
 Within one replay a validated artifact (the task binding, the compilation report) is validated
 once per digest, which is what made the audit itself cheaper. The telemetry file is rotated
-beyond 8 MiB into parts beside it (`spans.<ms>-<n>.jsonl`), every reader sees the parts in order,
+beyond 8 MiB into parts beside it (`spans.<ms>-<pid>-<n>.jsonl`), every reader sees the parts in order,
 and `metrics` reads them once for every run.
 
 ## Native PSE graph worker (ADR-18)

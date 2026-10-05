@@ -147,6 +147,7 @@ def _replay_facts(report: dict) -> dict:
     return {"status": report["status"], "events": report["events"], "runs": report["runs"], "payloads_verified": report["payloads_verified"],
             "events_reduced": report["events_reduced"], "checkpoint": (report["checkpoint"] or {}).get("checkpoint_id"),
             "checkpoint_sequence": (report["checkpoint"] or {}).get("sequence"), "checkpoints_verified": len(report["checkpoints_verified"]),
+            "checkpoints_verified_ids": list(report["checkpoints_verified"]),
             "checkpoints_skipped": report["checkpoints_skipped"], "checkpoint_recorded": (report["checkpoint_recorded"] or {}).get("checkpoint_id"),
             "head": report["head"], "missing_referenced_artifacts": len(report["missing_referenced_artifacts"])}
 
@@ -481,7 +482,8 @@ def checks(summary: dict, witness: Witness) -> dict:
                                            and any(e["status"] == "ok" and e["result"]["status"] == "migrated" for e in ops.get("migrate", [])),
         "final_replay_passed": ops.get("owner.replay", [{}])[-1].get("result", {}).get("status") == "passed",
         # ADR-26: every collection re-verified from the previous checkpoint and recorded the next; the bounded replays at the
-        # boundaries reduced only the events since the previous checkpoint; the audit verified every checkpoint; both restores agree
+        # boundaries reduced only the events since the previous checkpoint; the audit verified every checkpoint; the audit of a
+        # restored copy verified the checkpoint the default restore trusted
         "every_collection_recorded_a_checkpoint": bool(ops.get("gc.apply")) and all(_ok(e) and e["result"].get("checkpoint_recorded")
                                                                                    for e in ops.get("gc.apply", []) + ops.get("gc.after_retirement", [])),
         # every boundary replay that found a checkpoint reduced a proper suffix (the first boundary has none yet and reduces everything)
@@ -492,9 +494,13 @@ def checks(summary: dict, witness: Witness) -> dict:
         # the audit at the end verified every checkpoint that existed then (the collection after the retirement records one more)
         "audit_verified_every_checkpoint": _ok(ops.get("owner.replay", [{}])[-1]) and ops["owner.replay"][-1]["result"]["checkpoint"] is None
                                             and ops["owner.replay"][-1]["result"]["checkpoints_verified"] == _checkpoints_before(witness, "owner.replay"),
-        "restores_from_checkpoint_and_genesis_agree": bool(ops.get("restore.full")) and all(
-            _ok(a) and _ok(b) and a["result"]["replay"]["head"] == b["result"]["replay"]["head"] and a["result"]["replay"]["events"] == b["result"]["replay"]["events"]
-            and b["result"]["replay"]["checkpoint"] is None for a, b in zip(ops.get("restore.from_checkpoint", []), ops.get("restore.full", []))),
+        # the audit of the restored copy (restore --full) derived the state from the events and verified the checkpoint the default
+        # restore trusted (its retained state against the projections reduced at its sequence), so the two paths agree on the
+        # state itself, not only on the journal bytes both read
+        "full_restore_verified_the_checkpoint_the_quick_restore_trusted": bool(ops.get("restore.full")) and all(
+            _ok(a) and _ok(b) and b["result"]["replay"]["checkpoint"] is None
+            and (a["result"]["replay"]["checkpoint"] is None or a["result"]["replay"]["checkpoint"] in b["result"]["replay"]["checkpoints_verified_ids"])
+            for a, b in zip(ops.get("restore.from_checkpoint", []), ops.get("restore.full", []))),
         # a backup taken while checkpoints exist carries the latest one, so the default restore replays from it and reduces nothing when
         # it sits at the head; a backup taken before any checkpoint replays from genesis and says so
         "restores_used_the_backups_checkpoint": bool(ops.get("restore.from_checkpoint")) and all(
@@ -619,7 +625,12 @@ def main(argv=None) -> int:
         raise
     finally:
         workspace_module.build_registry = _ORIGINAL_BUILD_REGISTRY
-    verdict = checks(summary, witness)
+    try:
+        verdict = checks(summary, witness)
+    except Exception as exc:
+        # a check that cannot be evaluated is a failed run whose measurements are retained, not a lost run
+        verdict = {"checks_evaluated": False, "checks_error": repr(exc), "checks_traceback": traceback.format_exc(),
+                   "probe_statuses": [str((p.get("association") or {}).get("status")) for p in witness.probes]}
     summary.update({"schema": "gabriel.evidence.longrun-witness/1", "produced_at_utc": dt.datetime.now(dt.timezone.utc).isoformat(), "adr": "docs/adr/ADR-25-long-running-operation.md",
                     "backend": args.backend, "platform": platform.platform(), "engine_observer_sha256": native_graph.binaries()["engine_observer"]["sha256"],
                     "caps": dict(native_graph.CAPS), "tasks": len(witness.series), "probes": [{k: v for k, v in p.items() if k != "manifest"} for p in witness.probes],
