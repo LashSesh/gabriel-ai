@@ -114,23 +114,66 @@ not a defect to fix here but a cost to measure and state.
   workspace at every snapshot and derives its verdict from retained facts.
 
 ## Results (`evidence/ops/longrun/`)
-The witness run of 600 tasks is in progress at the time of this commit; the commit that
-records `evidence/ops/longrun/` replaces this paragraph with its growth table, probe statuses,
-operation durations and checks.
+The witness ran 600 scheduled tasks and 12 probes (612 runs) in 24.8 minutes in
+`linux_namespace` with every check passed (`summary.json`, `series.json`, `report.md`).
+Read back from the workspace at the end:
+
+| quantity | value |
+|---|---|
+| journal | 19 836 events, 612 runs, 151.0 MB |
+| memory chain | 2 337 entries; 171 document observations for 171 distinct document keys; 312 supported claims; 0 cache rows after each compaction |
+| object store | 41 875 objects, 46.1 MB |
+| worktrees | 612 (4.9 MB) before retirement, 0 after |
+| telemetry | 14.2 MB, 35 400 spans |
+| independent checks | 5 820 passed, 0 failed; every run `succeeded` |
+
+The probes (one every 25 document tasks, seeded by the goal's lexical matches with the hub
+among them): probes 1 to 5 walked the whole history (25 to 125 claims, 21 entities, 13 keys
+carried); probe 6 reached the batch cap (150 claims available, 128 walked, still 21 entities,
+13 carried); probe 7 walked 128 of 175 batches over 46 entities and carried 38; probes 8 to 12
+(200 to 300 claims, 71 to 171 entities in the history) walked the latest 63 seeded batches
+over 64 entities, `computed` with the window declared, and carried nothing. The first and the
+last probe's manifests reproduced from the chain after five compactions, six collections, a
+migration and a reopen. Retrieval time stayed between 23 and 154 ms; the engine answered in
+3 to 15 ms.
+
+The operations, with their durations as the workspace grew: `memory.compact` 117 ms at 753
+retained artifacts to 590 ms at 4 116; `gc --apply` 16.0 s over 6 948 objects to 104.2 s over
+41 875 (each pass removed the manifests of the compaction before it, 69 or 70 objects, then 35,
+then 0, and re-verified replay and chain); backup 3.0 s for 20 594 objects (22.2 MB) and 6.5 s
+for 41 875 (46.1 MB); restore 64.0 s at 9 524 replayed events and 138.9 s at 19 836, the second
+one across the recorded migration; the migration itself 94.2 s (backup, equivalence replay and
+replay after, 9 524 events each); the final replay 92.7 s for 19 836 events, 4.7 ms per event;
+`memory.verify` 135 ms; the two reproductions 26 and 49 ms; the deep doctor 1.7 s; `metrics`
+91.7 s (it reads the telemetry file once per run); retirement 14.0 s for 612 worktrees, 4.9 MB
+freed; the collection after it 99.1 s with 0 orphans. Task wall time did not grow: the mean of
+the first and last ten tasks was 694 and 644 ms for document tasks, 719 and 657 ms for
+numerical tasks, 1 528 and 1 538 ms for software repairs.
+
+What the carried keys show: carrying is the engine's readout, not the window's doing. On a
+star neighbourhood (one hub co-cited once with each ward) every non-seed ward carries one to
+three milli up to 46 entities and nothing at 64, whatever the co-citation density (measured
+directly against the engine: 20 wards cited seven times each, 45 cited once, 63 cited once or
+twice, 30 cited four times, 40 cited three times). A hub co-cited with more than about 45
+distinct sources therefore carries none of them at the profile's time; the walk runs, says what
+it saw, and ranks nothing above the lexical score. That is ADR-20's readout, unchanged here.
 
 ## What this establishes and what it does not
-Established: under 600 tasks in one workspace every operation of ADR-17 and the release
+Established: under 612 runs in one workspace every operation of ADR-17 and the release
 discipline ran and verified; the batch and entity caps are declared windows in the retained
-record, not failures; the observation table grows with distinct sources; a backup taken after a
-migration restores and replays every epoch; worktrees are reclaimed on request and the retired
-run's export refuses; the first and last associative manifests recompute from the chain after
-compactions, collections, a migration and a reopen. Not established: operation with a real
-provider (the witness uses the scripted providers so that growth, not the model, is measured);
-operation over months or across hosts; any bound on the journal (append-only by contract: a
-replay, a migration and a restore cost time linear in the events, measured here, not bounded);
-a bound on the telemetry file (`metrics` without `--run` reads it once per run); a restored
-workspace's credential (never backed up; the operator writes it). Retirement is an operator's
-decision: a retired run cannot be exported again, which is why nothing retires automatically.
+record, not failures, and per-task time did not grow; the observation table grows with distinct
+sources; a backup taken after a migration restores and replays every epoch; worktrees are
+reclaimed on request and the retired run's export refuses; the first and last associative
+manifests recompute from the chain after compactions, collections, a migration and a reopen.
+Not established: operation with a real provider (the witness uses the scripted providers so
+that growth, not the model, is measured); operation over months or across hosts; any bound on
+the journal (append-only by contract: a replay, a migration and a restore cost time linear in
+the events, 4.7 ms per event here, measured, not bounded); a bound on the telemetry file
+(`metrics` without `--run` reads it once per run, 92 s at 612 runs); a restored workspace's
+credential (never backed up; the operator writes it); that a windowed walk carries anything (a
+hub with more than about 45 distinct co-cited sources carries none at the profile's time, which
+is the engine's readout and not this ADR's to change). Retirement is an operator's decision: a
+retired run cannot be exported again, which is why nothing retires automatically.
 
 ## Consequences
 A workspace can be operated through hundreds of tasks with the costs that grow stated and

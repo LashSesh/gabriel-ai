@@ -1,0 +1,1907 @@
+{
+ "adr": "docs/adr/ADR-25-long-running-operation.md",
+ "anchor": {
+  "head": "9d806911aeb1d1e1b633192b1303892d425a4a5edfc109f65f6f4aeae5c811ca",
+  "inputs_head": "bbfc3d422c1972f1594c921f990ced1aba9f27fb7124b8e3151796e151700fdd",
+  "schema": "gabriel.anchor/1",
+  "sequence": 19836,
+  "workspace_id": "ws-5750f3f5baa9"
+ },
+ "backend": "linux_namespace",
+ "backups": [
+  "work/backup-300",
+  "work/backup-final"
+ ],
+ "caps": {
+  "max_batches": 128,
+  "max_nodes": 64,
+  "max_queries": 256,
+  "max_windows": 32
+ },
+ "checks": {
+  "backups_restored_and_replayed": true,
+  "batch_cap_reached_and_declared": true,
+  "diagnostics_clean": true,
+  "document_observations_bounded_by_distinct_sources": true,
+  "document_tasks_all_succeeded": true,
+  "entity_cap_reached_and_declared": true,
+  "every_compaction_verified": true,
+  "every_gc_passed": true,
+  "every_task_terminal": true,
+  "final_replay_passed": true,
+  "first_and_last_probe_reproduce": true,
+  "first_probe": "computed",
+  "last_probe": "computed",
+  "memory_chain_verified": true,
+  "no_retrieval_raised": true,
+  "numerical_tasks_all_succeeded": true,
+  "probe_statuses": [
+   "computed",
+   "computed",
+   "computed",
+   "computed",
+   "computed",
+   "computed",
+   "computed",
+   "computed",
+   "computed",
+   "computed",
+   "computed",
+   "computed"
+  ],
+  "probes_all_succeeded": true,
+  "restore_after_migration_passed": true,
+  "software_tasks_all_succeeded": true,
+  "worktrees_retired": true
+ },
+ "doctor": {
+  "configured_backend": "linux_namespace",
+  "linux_namespace": {
+   "available": true,
+   "backend": "linux_namespace",
+   "checks": {
+    "jail_selftest": {
+     "exit_code": 0,
+     "start_failure": null,
+     "stdout": "pid 1\nnet blocked OSError\n"
+    },
+    "platform": "linux",
+    "setpriv": "/usr/bin/setpriv",
+    "unshare": "/usr/bin/unshare",
+    "unshare_namespaces": true
+   },
+   "containment": true,
+   "identity": "linux_namespace:6.18.44-fc-v70:x86_64:python-3.12.3",
+   "reasons": []
+  },
+  "problems": []
+ },
+ "elapsed_s": 1487.0,
+ "engine_observer_sha256": "a8e1f6d7db2ef7ab3b822ac217f29f42db22cb8745a979ccbf8911da80b94110",
+ "memory_anchor": {
+  "head": "00829589d34c00e8f83239c28070daa0931b8e280a33452c001a6f47d3bb3074",
+  "memory_sequence": 2337,
+  "owner_sequence": 19836,
+  "policy_revision": 0,
+  "schema": "gabriel.memory-anchor/1",
+  "workspace_id": "ws-5750f3f5baa9"
+ },
+ "operations": [
+  {
+   "duration_ms": 0,
+   "epoch": 0,
+   "name": "plan",
+   "result": {
+    "documents": 300,
+    "fixed_wards": 20,
+    "numerical": 150,
+    "probe_every": 25,
+    "software": 150,
+    "tasks": 600,
+    "wards": 170
+   },
+   "status": "ok",
+   "task_index": 0
+  },
+  {
+   "duration_ms": 117,
+   "epoch": 0,
+   "name": "memory.compact",
+   "result": {
+    "anchor_count": 1,
+    "compaction_id": "compaction-433",
+    "faults": [],
+    "memory_head": "52326c4167fe0878ef6f3c28837baad8ade513d6d43fe322dc291a20a2845628",
+    "memory_sequence": 432,
+    "owner_sequence": 3157,
+    "removed_derived": {
+     "cache_entries": 4,
+     "summaries": 0
+    },
+    "required_bytes_verified": true,
+    "retained_artifact_count": 753,
+    "schema": "gabriel.compaction-manifest/1",
+    "status": "compacted",
+    "workspace_id": "ws-5750f3f5baa9"
+   },
+   "status": "ok",
+   "task_index": 102
+  },
+  {
+   "duration_ms": 15959,
+   "epoch": 0,
+   "grace_seconds": 0,
+   "name": "gc.apply",
+   "result": {
+    "apply": true,
+    "elapsed_ms": 15958,
+    "grace_seconds": 0,
+    "in_flight_attempts": [],
+    "memory": "passed",
+    "objects": 6948,
+    "orphan_bytes": 94513,
+    "orphans": 69,
+    "referenced": 6879,
+    "removed": 69,
+    "removed_bytes": 94513,
+    "replay": "passed",
+    "roots": 6469,
+    "schema": "gabriel.gc-report/1",
+    "started_at_utc": "2026-10-05T13:02:15.575667+00:00",
+    "status": "passed",
+    "workspace_id": "ws-5750f3f5baa9"
+   },
+   "status": "ok",
+   "task_index": 102
+  },
+  {
+   "duration_ms": 238,
+   "epoch": 0,
+   "name": "memory.compact",
+   "result": {
+    "anchor_count": 2,
+    "compaction_id": "compaction-850",
+    "faults": [],
+    "memory_head": "f804703c607c16c6acddbc87f0e451ce8102dd7480971204c4b065fb69b1e3db",
+    "memory_sequence": 849,
+    "owner_sequence": 6334,
+    "removed_derived": {
+     "cache_entries": 6,
+     "summaries": 0
+    },
+    "required_bytes_verified": true,
+    "retained_artifact_count": 1413,
+    "schema": "gabriel.compaction-manifest/1",
+    "status": "compacted",
+    "workspace_id": "ws-5750f3f5baa9"
+   },
+   "status": "ok",
+   "task_index": 205
+  },
+  {
+   "duration_ms": 31400,
+   "epoch": 0,
+   "grace_seconds": 0,
+   "name": "gc.apply",
+   "result": {
+    "apply": true,
+    "elapsed_ms": 31398,
+    "grace_seconds": 0,
+    "in_flight_attempts": [],
+    "memory": "passed",
+    "objects": 13328,
+    "orphan_bytes": 148840,
+    "orphans": 70,
+    "referenced": 13258,
+    "removed": 70,
+    "removed_bytes": 148840,
+    "replay": "passed",
+    "roots": 12571,
+    "schema": "gabriel.gc-report/1",
+    "started_at_utc": "2026-10-05T13:03:53.621242+00:00",
+    "status": "passed",
+    "workspace_id": "ws-5750f3f5baa9"
+   },
+   "status": "ok",
+   "task_index": 205
+  },
+  {
+   "duration_ms": 352,
+   "epoch": 0,
+   "name": "memory.compact",
+   "result": {
+    "anchor_count": 3,
+    "compaction_id": "compaction-1314",
+    "faults": [],
+    "memory_head": "af1c163cf9db5ae0f0bdb5e64ab093bbe84321430cabab427b347b583f0874a4",
+    "memory_sequence": 1313,
+    "owner_sequence": 9524,
+    "removed_derived": {
+     "cache_entries": 6,
+     "summaries": 0
+    },
+    "required_bytes_verified": true,
+    "retained_artifact_count": 2271,
+    "schema": "gabriel.compaction-manifest/1",
+    "status": "compacted",
+    "workspace_id": "ws-5750f3f5baa9"
+   },
+   "status": "ok",
+   "task_index": 308
+  },
+  {
+   "duration_ms": 46374,
+   "epoch": 0,
+   "grace_seconds": 0,
+   "name": "gc.apply",
+   "result": {
+    "apply": true,
+    "elapsed_ms": 46371,
+    "grace_seconds": 0,
+    "in_flight_attempts": [],
+    "memory": "passed",
+    "objects": 20663,
+    "orphan_bytes": 198933,
+    "orphans": 69,
+    "referenced": 20594,
+    "removed": 69,
+    "removed_bytes": 198933,
+    "replay": "passed",
+    "roots": 19379,
+    "schema": "gabriel.gc-report/1",
+    "started_at_utc": "2026-10-05T13:05:46.337779+00:00",
+    "status": "passed",
+    "workspace_id": "ws-5750f3f5baa9"
+   },
+   "status": "ok",
+   "task_index": 308
+  },
+  {
+   "duration_ms": 3016,
+   "epoch": 0,
+   "name": "backup",
+   "path": "work/backup-300",
+   "result": {
+    "anchor": {
+     "head": "e98ec35267185a3f497825f12edd8171590974ea734f470ee0da993e97b92b82",
+     "inputs_head": "ce7464de94c694f78892112a1c4b09bd5962173bd778870f419823cd1872a3a0",
+     "schema": "gabriel.anchor/1",
+     "sequence": 9524,
+     "workspace_id": "ws-5750f3f5baa9"
+    },
+    "catalog_digest": "7bf0221ea07d7b26bd5608da9a7175695f87ef4e2ad128d683bbc756b5e758fc",
+    "created_at_utc": "2026-10-05T13:06:34.829939+00:00",
+    "database_sha256": "3fb2c408f24c886b42c95d3cd969ad5f902874c6f5f79e7f0ef8031fc7965a18",
+    "excluded": [
+     "credentials/ (principal secret)",
+     "worktrees/ (disposable; patches are exported separately)",
+     "runs/ runtime notes"
+    ],
+    "memory_anchor": {
+     "head": "299c822b7ff849e79f863732840199957297ab2654ca7aa37d44fe5db3580564",
+     "memory_sequence": 1314,
+     "owner_sequence": 9524,
+     "policy_revision": 0,
+     "schema": "gabriel.memory-anchor/1",
+     "workspace_id": "ws-5750f3f5baa9"
+    },
+    "memory_sha256": "9146e64819ce6bfa01ffe1b2cfba4fa2257954edf853cdec08c65dc51b8b9ce8",
+    "object_bytes": 22243613,
+    "object_count": 20594,
+    "reducer_identity": "ea45d1d2bc7959619be6b48b5bfea5e357161decaa06b9c44b0f9eb96e14e0e7",
+    "running": {
+     "catalog_digest": "7bf0221ea07d7b26bd5608da9a7175695f87ef4e2ad128d683bbc756b5e758fc",
+     "reducer_identity": "ea45d1d2bc7959619be6b48b5bfea5e357161decaa06b9c44b0f9eb96e14e0e7",
+     "schema_registry_digest": "538bbfeddd4868ca8b20dbfbfafe655029ca587c196c8d201846f4b737a0188f"
+    },
+    "schema": "gabriel.backup-manifest/1",
+    "schema_registry_digest": "538bbfeddd4868ca8b20dbfbfafe655029ca587c196c8d201846f4b737a0188f",
+    "unresolved_nested_reference_count": 0,
+    "unresolved_nested_references": [],
+    "version": "0.1.0",
+    "workspace_id": "ws-5750f3f5baa9"
+   },
+   "status": "ok",
+   "task_index": 308
+  },
+  {
+   "duration_ms": 64016,
+   "epoch": 0,
+   "name": "restore",
+   "result": {
+    "anchor": {
+     "head": "e98ec35267185a3f497825f12edd8171590974ea734f470ee0da993e97b92b82",
+     "inputs_head": "ce7464de94c694f78892112a1c4b09bd5962173bd778870f419823cd1872a3a0",
+     "schema": "gabriel.anchor/1",
+     "sequence": 9524,
+     "workspace_id": "ws-5750f3f5baa9"
+    },
+    "anchor_check": {
+     "anchored_sequence": 9524,
+     "current_sequence": 9524,
+     "status": "passed"
+    },
+    "destination": "work/restored-300",
+    "memory": {
+     "anchor_match": true,
+     "entries": 1314,
+     "faults": [],
+     "head": "299c822b7ff849e79f863732840199957297ab2654ca7aa37d44fe5db3580564",
+     "status": "passed"
+    },
+    "note": "the principal secret is not restored; create a new credential before submitting commands",
+    "object_faults": [],
+    "objects_verified": 20594,
+    "replay": {
+     "anchor_checked": true,
+     "events": 9524,
+     "external_calls": 0,
+     "head": "e98ec35267185a3f497825f12edd8171590974ea734f470ee0da993e97b92b82",
+     "inputs_head": "ce7464de94c694f78892112a1c4b09bd5962173bd778870f419823cd1872a3a0",
+     "missing_referenced_artifacts": [],
+     "payloads_verified": 9524,
+     "runs": 308,
+     "status": "passed"
+    },
+    "schema": "gabriel.restore-report/1",
+    "status": "passed"
+   },
+   "source": "work/backup-300",
+   "status": "ok",
+   "task_index": 308
+  },
+  {
+   "duration_ms": 94190,
+   "epoch": 0,
+   "name": "migrate",
+   "result": {
+    "backup": {
+     "anchor": {
+      "head": "e98ec35267185a3f497825f12edd8171590974ea734f470ee0da993e97b92b82",
+      "inputs_head": "ce7464de94c694f78892112a1c4b09bd5962173bd778870f419823cd1872a3a0",
+      "schema": "gabriel.anchor/1",
+      "sequence": 9524,
+      "workspace_id": "ws-5750f3f5baa9"
+     },
+     "manifest_sha256": "79afc938ab04112a063d8d9da21467b7292a59a1b9f33ab3cc035d340b147abf",
+     "memory_anchor": {
+      "head": "299c822b7ff849e79f863732840199957297ab2654ca7aa37d44fe5db3580564",
+      "memory_sequence": 1314,
+      "owner_sequence": 9524,
+      "policy_revision": 0,
+      "schema": "gabriel.memory-anchor/1",
+      "workspace_id": "ws-5750f3f5baa9"
+     },
+     "object_bytes": 22243613,
+     "object_count": 20594,
+     "path": "work/workspace/migrations/backup-9524-1791205659030"
+    },
+    "equivalence_replay": {
+     "anchor_checked": false,
+     "events": 9524,
+     "external_calls": 0,
+     "head": "e98ec35267185a3f497825f12edd8171590974ea734f470ee0da993e97b92b82",
+     "inputs_head": "ce7464de94c694f78892112a1c4b09bd5962173bd778870f419823cd1872a3a0",
+     "missing_referenced_artifacts": [],
+     "payloads_verified": 9524,
+     "runs": 308,
+     "status": "passed"
+    },
+    "migration": {
+     "backup_manifest_sha256": "79afc938ab04112a063d8d9da21467b7292a59a1b9f33ab3cc035d340b147abf",
+     "from_catalog_digest": "7bf0221ea07d7b26bd5608da9a7175695f87ef4e2ad128d683bbc756b5e758fc",
+     "from_reducer_identity": "ea45d1d2bc7959619be6b48b5bfea5e357161decaa06b9c44b0f9eb96e14e0e7",
+     "from_schema_registry_digest": "538bbfeddd4868ca8b20dbfbfafe655029ca587c196c8d201846f4b737a0188f",
+     "migration_id": "migration-1-eacea73b0f72",
+     "owner_time_unix_ms": 1791205708916,
+     "reason": "longrun witness: ops.probe tool added to the catalog",
+     "replayed_events": 9524,
+     "schema": "gabriel.migration/1",
+     "sequence": 9524,
+     "to_catalog_digest": "eacea73b0f7207049f8a9830146e00af1739afe98877474f19305b9e5d16d29b",
+     "to_reducer_identity": "ea45d1d2bc7959619be6b48b5bfea5e357161decaa06b9c44b0f9eb96e14e0e7",
+     "to_schema_registry_digest": "538bbfeddd4868ca8b20dbfbfafe655029ca587c196c8d201846f4b737a0188f",
+     "workspace_id": "ws-5750f3f5baa9"
+    },
+    "problems": [
+     "capability catalog differs from the registered catalog; an explicit migration is required"
+    ],
+    "replay_after": {
+     "anchor_checked": false,
+     "events": 9524,
+     "external_calls": 0,
+     "head": "e98ec35267185a3f497825f12edd8171590974ea734f470ee0da993e97b92b82",
+     "inputs_head": "ce7464de94c694f78892112a1c4b09bd5962173bd778870f419823cd1872a3a0",
+     "missing_referenced_artifacts": [],
+     "payloads_verified": 9524,
+     "runs": 308,
+     "status": "passed"
+    },
+    "status": "migrated"
+   },
+   "status": "ok",
+   "task_index": 308
+  },
+  {
+   "duration_ms": 600,
+   "epoch": 1,
+   "name": "memory.compact",
+   "result": {
+    "anchor_count": 4,
+    "compaction_id": "compaction-1793",
+    "faults": [],
+    "memory_head": "795571516ef71b367a15e5955bf8534789916abd7e2185a09f4ca5d2fa02b077",
+    "memory_sequence": 1792,
+    "owner_sequence": 12681,
+    "removed_derived": {
+     "cache_entries": 4,
+     "summaries": 0
+    },
+    "required_bytes_verified": true,
+    "retained_artifact_count": 3199,
+    "schema": "gabriel.compaction-manifest/1",
+    "status": "compacted",
+    "workspace_id": "ws-5750f3f5baa9"
+   },
+   "status": "ok",
+   "task_index": 410
+  },
+  {
+   "duration_ms": 62458,
+   "epoch": 1,
+   "grace_seconds": 0,
+   "name": "gc.apply",
+   "result": {
+    "apply": true,
+    "elapsed_ms": 62455,
+    "grace_seconds": 0,
+    "in_flight_attempts": [],
+    "memory": "passed",
+    "objects": 28258,
+    "orphan_bytes": 172477,
+    "orphans": 69,
+    "referenced": 28189,
+    "removed": 69,
+    "removed_bytes": 172477,
+    "replay": "passed",
+    "roots": 26362,
+    "schema": "gabriel.gc-report/1",
+    "started_at_utc": "2026-10-05T13:10:39.993259+00:00",
+    "status": "passed",
+    "workspace_id": "ws-5750f3f5baa9"
+   },
+   "status": "ok",
+   "task_index": 410
+  },
+  {
+   "duration_ms": 503,
+   "epoch": 1,
+   "name": "memory.compact",
+   "result": {
+    "anchor_count": 5,
+    "compaction_id": "compaction-2136",
+    "faults": [],
+    "memory_head": "f10bd9e9928cdb5e2dfaaecdf58ff8afae179ebd187aabde6a7cee4e683b3759",
+    "memory_sequence": 2135,
+    "owner_sequence": 16136,
+    "removed_derived": {
+     "cache_entries": 4,
+     "summaries": 0
+    },
+    "required_bytes_verified": true,
+    "retained_artifact_count": 3815,
+    "schema": "gabriel.compaction-manifest/1",
+    "status": "compacted",
+    "workspace_id": "ws-5750f3f5baa9"
+   },
+   "status": "ok",
+   "task_index": 512
+  },
+  {
+   "duration_ms": 79512,
+   "epoch": 1,
+   "grace_seconds": 0,
+   "name": "gc.apply",
+   "result": {
+    "apply": true,
+    "elapsed_ms": 79508,
+    "grace_seconds": 0,
+    "in_flight_attempts": [],
+    "memory": "passed",
+    "objects": 35348,
+    "orphan_bytes": 166395,
+    "orphans": 35,
+    "referenced": 35313,
+    "removed": 35,
+    "removed_bytes": 166395,
+    "replay": "passed",
+    "roots": 33080,
+    "schema": "gabriel.gc-report/1",
+    "started_at_utc": "2026-10-05T13:13:16.917562+00:00",
+    "status": "passed",
+    "workspace_id": "ws-5750f3f5baa9"
+   },
+   "status": "ok",
+   "task_index": 512
+  },
+  {
+   "duration_ms": 590,
+   "epoch": 1,
+   "name": "memory.compact",
+   "result": {
+    "anchor_count": 6,
+    "compaction_id": "compaction-2337",
+    "faults": [],
+    "memory_head": "2deb177a7bdf863ce72d91f7212277e4c351b559b457261a6df77ad1f02f9055",
+    "memory_sequence": 2336,
+    "owner_sequence": 19836,
+    "removed_derived": {
+     "cache_entries": 0,
+     "summaries": 0
+    },
+    "required_bytes_verified": true,
+    "retained_artifact_count": 4116,
+    "schema": "gabriel.compaction-manifest/1",
+    "status": "compacted",
+    "workspace_id": "ws-5750f3f5baa9"
+   },
+   "status": "ok",
+   "task_index": 612
+  },
+  {
+   "duration_ms": 104170,
+   "epoch": 1,
+   "grace_seconds": 0,
+   "name": "gc.apply",
+   "result": {
+    "apply": true,
+    "elapsed_ms": 104166,
+    "grace_seconds": 0,
+    "in_flight_attempts": [],
+    "memory": "passed",
+    "objects": 41875,
+    "orphan_bytes": 0,
+    "orphans": 0,
+    "referenced": 41875,
+    "removed": 0,
+    "removed_bytes": 0,
+    "replay": "passed",
+    "roots": 39442,
+    "schema": "gabriel.gc-report/1",
+    "started_at_utc": "2026-10-05T13:16:29.785240+00:00",
+    "status": "passed",
+    "workspace_id": "ws-5750f3f5baa9"
+   },
+   "status": "ok",
+   "task_index": 612
+  },
+  {
+   "duration_ms": 6468,
+   "epoch": 1,
+   "name": "backup",
+   "path": "work/backup-final",
+   "result": {
+    "anchor": {
+     "head": "9d806911aeb1d1e1b633192b1303892d425a4a5edfc109f65f6f4aeae5c811ca",
+     "inputs_head": "bbfc3d422c1972f1594c921f990ced1aba9f27fb7124b8e3151796e151700fdd",
+     "schema": "gabriel.anchor/1",
+     "sequence": 19836,
+     "workspace_id": "ws-5750f3f5baa9"
+    },
+    "catalog_digest": "eacea73b0f7207049f8a9830146e00af1739afe98877474f19305b9e5d16d29b",
+    "created_at_utc": "2026-10-05T13:18:17.799041+00:00",
+    "database_sha256": "aa404bbf34c25457c22a8b95803e4a04bb5b3451f7771755e4a46f1ee9ff43b0",
+    "excluded": [
+     "credentials/ (principal secret)",
+     "worktrees/ (disposable; patches are exported separately)",
+     "runs/ runtime notes"
+    ],
+    "memory_anchor": {
+     "head": "00829589d34c00e8f83239c28070daa0931b8e280a33452c001a6f47d3bb3074",
+     "memory_sequence": 2337,
+     "owner_sequence": 19836,
+     "policy_revision": 0,
+     "schema": "gabriel.memory-anchor/1",
+     "workspace_id": "ws-5750f3f5baa9"
+    },
+    "memory_sha256": "95456dcea57911bb2e1cc1db8113c6cb6f04c03255c33ff6c4f27d48d192efa0",
+    "object_bytes": 46117428,
+    "object_count": 41875,
+    "reducer_identity": "ea45d1d2bc7959619be6b48b5bfea5e357161decaa06b9c44b0f9eb96e14e0e7",
+    "running": {
+     "catalog_digest": "eacea73b0f7207049f8a9830146e00af1739afe98877474f19305b9e5d16d29b",
+     "reducer_identity": "ea45d1d2bc7959619be6b48b5bfea5e357161decaa06b9c44b0f9eb96e14e0e7",
+     "schema_registry_digest": "538bbfeddd4868ca8b20dbfbfafe655029ca587c196c8d201846f4b737a0188f"
+    },
+    "schema": "gabriel.backup-manifest/1",
+    "schema_registry_digest": "538bbfeddd4868ca8b20dbfbfafe655029ca587c196c8d201846f4b737a0188f",
+    "unresolved_nested_reference_count": 0,
+    "unresolved_nested_references": [],
+    "version": "0.1.0",
+    "workspace_id": "ws-5750f3f5baa9"
+   },
+   "status": "ok",
+   "task_index": 612
+  },
+  {
+   "duration_ms": 138898,
+   "epoch": 1,
+   "name": "restore",
+   "result": {
+    "anchor": {
+     "head": "9d806911aeb1d1e1b633192b1303892d425a4a5edfc109f65f6f4aeae5c811ca",
+     "inputs_head": "bbfc3d422c1972f1594c921f990ced1aba9f27fb7124b8e3151796e151700fdd",
+     "schema": "gabriel.anchor/1",
+     "sequence": 19836,
+     "workspace_id": "ws-5750f3f5baa9"
+    },
+    "anchor_check": {
+     "anchored_sequence": 19836,
+     "current_sequence": 19836,
+     "status": "passed"
+    },
+    "destination": "work/restored-final",
+    "memory": {
+     "anchor_match": true,
+     "entries": 2337,
+     "faults": [],
+     "head": "00829589d34c00e8f83239c28070daa0931b8e280a33452c001a6f47d3bb3074",
+     "status": "passed"
+    },
+    "note": "the principal secret is not restored; create a new credential before submitting commands",
+    "object_faults": [],
+    "objects_verified": 41875,
+    "replay": {
+     "anchor_checked": true,
+     "events": 19836,
+     "external_calls": 0,
+     "head": "9d806911aeb1d1e1b633192b1303892d425a4a5edfc109f65f6f4aeae5c811ca",
+     "inputs_head": "bbfc3d422c1972f1594c921f990ced1aba9f27fb7124b8e3151796e151700fdd",
+     "missing_referenced_artifacts": [],
+     "payloads_verified": 19836,
+     "runs": 612,
+     "status": "passed"
+    },
+    "schema": "gabriel.restore-report/1",
+    "status": "passed"
+   },
+   "source": "work/backup-final",
+   "status": "ok",
+   "task_index": 612
+  },
+  {
+   "duration_ms": 92668,
+   "epoch": 1,
+   "name": "owner.replay",
+   "result": {
+    "anchor_checked": false,
+    "events": 19836,
+    "external_calls": 0,
+    "head": "9d806911aeb1d1e1b633192b1303892d425a4a5edfc109f65f6f4aeae5c811ca",
+    "inputs_head": "bbfc3d422c1972f1594c921f990ced1aba9f27fb7124b8e3151796e151700fdd",
+    "missing_referenced_artifacts": [],
+    "payloads_verified": 19836,
+    "runs": 612,
+    "status": "passed"
+   },
+   "status": "ok",
+   "task_index": 612
+  },
+  {
+   "duration_ms": 135,
+   "epoch": 1,
+   "name": "memory.verify",
+   "result": {
+    "entries": 2337,
+    "faults": [],
+    "head": "00829589d34c00e8f83239c28070daa0931b8e280a33452c001a6f47d3bb3074",
+    "status": "passed"
+   },
+   "status": "ok",
+   "task_index": 612
+  },
+  {
+   "duration_ms": 26,
+   "epoch": 1,
+   "name": "memory.reproduce",
+   "probe": 1,
+   "result": {
+    "access_policy_revision": 0,
+    "association_status": {
+     "recomputed": "computed",
+     "retained": "computed"
+    },
+    "current_memory_sequence": 2337,
+    "current_policy_revision": 0,
+    "differences": [],
+    "frontier": {
+     "memory_sequence": 170,
+     "owner_sequence": 1149
+    },
+    "manifest_id": "retrieval-4ae2525086dd6bf86c1bed7f",
+    "status": "reproduced"
+   },
+   "status": "ok",
+   "task_index": 612,
+   "which": "first"
+  },
+  {
+   "duration_ms": 49,
+   "epoch": 1,
+   "name": "memory.reproduce",
+   "probe": 12,
+   "result": {
+    "access_policy_revision": 0,
+    "association_status": {
+     "recomputed": "computed",
+     "retained": "computed"
+    },
+    "current_memory_sequence": 2337,
+    "current_policy_revision": 0,
+    "differences": [],
+    "frontier": {
+     "memory_sequence": 2028,
+     "owner_sequence": 14230
+    },
+    "manifest_id": "retrieval-1663664d5dc4972ed97aa7d3",
+    "status": "reproduced"
+   },
+   "status": "ok",
+   "task_index": 612,
+   "which": "last"
+  },
+  {
+   "duration_ms": 1688,
+   "epoch": 1,
+   "name": "doctor.deep",
+   "result": {
+    "problems": [
+     "linux_namespace jail self-test not executed (run doctor --selftest on a Linux host that permits namespaces)"
+    ],
+    "startup": {
+     "artifact_root": {
+      "exists": true,
+      "path": "work/workspace/objects",
+      "writable": true
+     },
+     "codec_version": "gabriel.codec/1",
+     "config_schema_version": 1,
+     "journal_format": "gabriel.agent-journal/1",
+     "memory_chain": {
+      "head": "00829589d34c00e8f83239c28070daa0931b8e280a33452c001a6f47d3bb3074",
+      "memory_sequence": 2337,
+      "owner_sequence": 19836,
+      "policy_revision": 0,
+      "schema": "gabriel.memory-anchor/1",
+      "workspace_id": "ws-5750f3f5baa9"
+     },
+     "migrations": [
+      {
+       "from_catalog_digest": "7bf0221ea07d7b26bd5608da9a7175695f87ef4e2ad128d683bbc756b5e758fc",
+       "migration_id": "migration-1-eacea73b0f72",
+       "sequence": 9524,
+       "to_catalog_digest": "eacea73b0f7207049f8a9830146e00af1739afe98877474f19305b9e5d16d29b"
+      }
+     ],
+     "reconciliation_work": [],
+     "registered_identities": {
+      "catalog_digest": "eacea73b0f7207049f8a9830146e00af1739afe98877474f19305b9e5d16d29b",
+      "reducer_identity": "ea45d1d2bc7959619be6b48b5bfea5e357161decaa06b9c44b0f9eb96e14e0e7",
+      "schema_registry_digest": "538bbfeddd4868ca8b20dbfbfafe655029ca587c196c8d201846f4b737a0188f"
+     },
+     "storage": {
+      "corrupt": [],
+      "deep": true,
+      "missing": [],
+      "referenced_objects": 39442,
+      "stray_temporaries": []
+     }
+    }
+   },
+   "status": "ok",
+   "task_index": 612
+  },
+  {
+   "duration_ms": 91680,
+   "epoch": 1,
+   "name": "metrics",
+   "result": {
+    "totals": {
+     "budget_overruns": 0,
+     "by_state": {
+      "succeeded": 612
+     },
+     "cold_runs": 463,
+     "declared_successes": 612,
+     "holds": 0,
+     "independent_checks_failed": 0,
+     "independent_checks_passed": 5820,
+     "model_requests": 912,
+     "model_tokens": 747767,
+     "recovery_ms": 0,
+     "retries": 0,
+     "runs": 612,
+     "unknown_effects": 0,
+     "warm_runs": 149
+    }
+   },
+   "status": "ok",
+   "task_index": 612
+  },
+  {
+   "duration_ms": 313,
+   "epoch": 1,
+   "name": "trace.summary",
+   "result": {
+    "artifact_io": {
+     "get_bytes": 326718243,
+     "get_calls": 355927,
+     "io_ms": 28362,
+     "put_bytes": 65609998,
+     "put_calls": 71222
+    },
+    "per_kind": {
+     "journal_commit": {
+      "count": 19836,
+      "failed": 0,
+      "max_ms": 83,
+      "total_ms": 213514
+     },
+     "provider": {
+      "count": 912,
+      "failed": 0,
+      "max_ms": 0,
+      "total_ms": 0
+     },
+     "queue_wait": {
+      "count": 3960,
+      "failed": 0,
+      "max_ms": 90,
+      "total_ms": 58302
+     },
+     "run": {
+      "count": 612,
+      "failed": 0,
+      "max_ms": 1759,
+      "total_ms": 485285
+     },
+     "tool_execution": {
+      "count": 3960,
+      "failed": 0,
+      "max_ms": 325,
+      "total_ms": 134349
+     },
+     "verification": {
+      "count": 6120,
+      "failed": 0,
+      "max_ms": 5,
+      "total_ms": 1674
+     }
+    },
+    "spans": 35400
+   },
+   "status": "ok",
+   "task_index": 612
+  },
+  {
+   "duration_ms": 13987,
+   "epoch": 1,
+   "name": "retire_worktrees",
+   "result": {
+    "bytes_freed": 4941246,
+    "owner_time_unix_ms": 1791206624662,
+    "repositories_pruned": [
+     "work/repo-documents",
+     "work/repo-numerical",
+     "work/repo-software"
+    ],
+    "retired": 612,
+    "schema": "gabriel.worktree-retirement/1",
+    "skipped": [],
+    "workspace_id": "ws-5750f3f5baa9"
+   },
+   "status": "ok",
+   "task_index": 612
+  },
+  {
+   "duration_ms": 99110,
+   "epoch": 1,
+   "name": "gc.after_retirement",
+   "result": {
+    "apply": true,
+    "elapsed_ms": 99104,
+    "grace_seconds": 0,
+    "in_flight_attempts": [],
+    "memory": "passed",
+    "objects": 41875,
+    "orphan_bytes": 0,
+    "orphans": 0,
+    "referenced": 41875,
+    "removed": 0,
+    "removed_bytes": 0,
+    "replay": "passed",
+    "roots": 39442,
+    "schema": "gabriel.gc-report/1",
+    "started_at_utc": "2026-10-05T13:24:01.699235+00:00",
+    "status": "passed",
+    "workspace_id": "ws-5750f3f5baa9"
+   },
+   "status": "ok",
+   "task_index": 612
+  }
+ ],
+ "platform": "Linux-6.18.44-fc-v70-x86_64-with-glibc2.39",
+ "probes": [
+  {
+   "association": {
+    "erosion": {
+     "claims_available": 25,
+     "claims_contributing": 25,
+     "keys_removed": 0,
+     "policy_revision": 0,
+     "removed_by": {}
+    },
+    "status": "computed",
+    "window": {
+     "available": 25,
+     "max_batches": 128,
+     "max_entities": 64,
+     "rule": "whole history",
+     "used": 25
+    }
+   },
+   "carried": 13,
+   "engine": {
+    "identity_validation_us": 2278,
+    "native_process_us": 3040,
+    "wire_bytes": 34573
+   },
+   "entities": 21,
+   "excluded": 37,
+   "history_claims": 25,
+   "history_entities": 21,
+   "hub_mass_milli": {
+    "hub/sources:hub.md": 38
+   },
+   "index": 1,
+   "items": 21,
+   "retrieval_manifest_sha256": "cfc121a4f1e203bd54d61e0eee87678bb672730e8b48f392dc20b99b028da09d",
+   "retrievals": [
+    35,
+    23
+   ],
+   "seeds": [
+    "hub/sources:hub.md",
+    "ward004/sources:ward004.md",
+    "ward014/sources:ward014.md",
+    "ward013/sources:ward013.md",
+    "ward010/sources:ward010.md",
+    "ward011/sources:ward011.md",
+    "ward007/sources:ward007.md",
+    "ward009/sources:ward009.md"
+   ],
+   "state": "succeeded",
+   "task_index": 38
+  },
+  {
+   "association": {
+    "erosion": {
+     "claims_available": 51,
+     "claims_contributing": 50,
+     "keys_removed": 0,
+     "policy_revision": 0,
+     "removed_by": {}
+    },
+    "status": "computed",
+    "window": {
+     "available": 50,
+     "max_batches": 128,
+     "max_entities": 64,
+     "rule": "whole history",
+     "used": 50
+    }
+   },
+   "carried": 13,
+   "engine": {
+    "identity_validation_us": 2439,
+    "native_process_us": 4308,
+    "wire_bytes": 34735
+   },
+   "entities": 21,
+   "excluded": 75,
+   "history_claims": 50,
+   "history_entities": 21,
+   "hub_mass_milli": {
+    "hub/sources:hub.md": 38
+   },
+   "index": 2,
+   "items": 21,
+   "retrieval_manifest_sha256": "54ef7f9d59d6ecf65493ba5ea784d8aa0c02211128e7b41ed058897d79394b14",
+   "retrievals": [
+    33,
+    32
+   ],
+   "seeds": [
+    "hub/sources:hub.md",
+    "ward004/sources:ward004.md",
+    "ward014/sources:ward014.md",
+    "ward013/sources:ward013.md",
+    "ward010/sources:ward010.md",
+    "ward011/sources:ward011.md",
+    "ward007/sources:ward007.md",
+    "ward009/sources:ward009.md"
+   ],
+   "state": "succeeded",
+   "task_index": 76
+  },
+  {
+   "association": {
+    "erosion": {
+     "claims_available": 77,
+     "claims_contributing": 75,
+     "keys_removed": 0,
+     "policy_revision": 0,
+     "removed_by": {}
+    },
+    "status": "computed",
+    "window": {
+     "available": 75,
+     "max_batches": 128,
+     "max_entities": 64,
+     "rule": "whole history",
+     "used": 75
+    }
+   },
+   "carried": 13,
+   "engine": {
+    "identity_validation_us": 2968,
+    "native_process_us": 4293,
+    "wire_bytes": 34901
+   },
+   "entities": 21,
+   "excluded": 114,
+   "history_claims": 75,
+   "history_entities": 21,
+   "hub_mass_milli": {
+    "hub/sources:hub.md": 38
+   },
+   "index": 3,
+   "items": 21,
+   "retrieval_manifest_sha256": "e4090e9f55de5d91cc27aadc2d60b6a9bb456a1c6c1a70cbb4d692b940e76ece",
+   "retrievals": [
+    42,
+    37
+   ],
+   "seeds": [
+    "hub/sources:hub.md",
+    "ward004/sources:ward004.md",
+    "ward014/sources:ward014.md",
+    "ward013/sources:ward013.md",
+    "ward010/sources:ward010.md",
+    "ward011/sources:ward011.md",
+    "ward007/sources:ward007.md",
+    "ward009/sources:ward009.md"
+   ],
+   "state": "succeeded",
+   "task_index": 115
+  },
+  {
+   "association": {
+    "erosion": {
+     "claims_available": 103,
+     "claims_contributing": 100,
+     "keys_removed": 0,
+     "policy_revision": 0,
+     "removed_by": {}
+    },
+    "status": "computed",
+    "window": {
+     "available": 100,
+     "max_batches": 128,
+     "max_entities": 64,
+     "rule": "whole history",
+     "used": 100
+    }
+   },
+   "carried": 13,
+   "engine": {
+    "identity_validation_us": 2630,
+    "native_process_us": 3333,
+    "wire_bytes": 35067
+   },
+   "entities": 21,
+   "excluded": 152,
+   "history_claims": 100,
+   "history_entities": 21,
+   "hub_mass_milli": {
+    "hub/sources:hub.md": 38
+   },
+   "index": 4,
+   "items": 21,
+   "retrieval_manifest_sha256": "be41326a5e79d0ca62e95f45c2667b2f12f34a0fc7dc4b2638ed75cefafc53d6",
+   "retrievals": [
+    45,
+    46
+   ],
+   "seeds": [
+    "hub/sources:hub.md",
+    "ward004/sources:ward004.md",
+    "ward014/sources:ward014.md",
+    "ward013/sources:ward013.md",
+    "ward010/sources:ward010.md",
+    "ward011/sources:ward011.md",
+    "ward007/sources:ward007.md",
+    "ward009/sources:ward009.md"
+   ],
+   "state": "succeeded",
+   "task_index": 153
+  },
+  {
+   "association": {
+    "erosion": {
+     "claims_available": 129,
+     "claims_contributing": 125,
+     "keys_removed": 0,
+     "policy_revision": 0,
+     "removed_by": {}
+    },
+    "status": "computed",
+    "window": {
+     "available": 125,
+     "max_batches": 128,
+     "max_entities": 64,
+     "rule": "whole history",
+     "used": 125
+    }
+   },
+   "carried": 13,
+   "engine": {
+    "identity_validation_us": 2105,
+    "native_process_us": 4814,
+    "wire_bytes": 35228
+   },
+   "entities": 21,
+   "excluded": 191,
+   "history_claims": 125,
+   "history_entities": 21,
+   "hub_mass_milli": {
+    "hub/sources:hub.md": 38
+   },
+   "index": 5,
+   "items": 21,
+   "retrieval_manifest_sha256": "38ffa3e53d0b52829f40be037fe709be344d3080f88a34d204d3be11c059541f",
+   "retrievals": [
+    51,
+    44
+   ],
+   "seeds": [
+    "hub/sources:hub.md",
+    "ward004/sources:ward004.md",
+    "ward014/sources:ward014.md",
+    "ward013/sources:ward013.md",
+    "ward010/sources:ward010.md",
+    "ward011/sources:ward011.md",
+    "ward007/sources:ward007.md",
+    "ward009/sources:ward009.md"
+   ],
+   "state": "succeeded",
+   "task_index": 192
+  },
+  {
+   "association": {
+    "erosion": {
+     "claims_available": 155,
+     "claims_contributing": 150,
+     "keys_removed": 0,
+     "policy_revision": 0,
+     "removed_by": {}
+    },
+    "status": "computed",
+    "window": {
+     "available": 150,
+     "max_batches": 128,
+     "max_entities": 64,
+     "rule": "batches touching a seed, the latest in chain order, within the engine's caps",
+     "used": 128
+    }
+   },
+   "carried": 13,
+   "engine": {
+    "identity_validation_us": 2562,
+    "native_process_us": 4202,
+    "wire_bytes": 35246
+   },
+   "entities": 21,
+   "excluded": 229,
+   "history_claims": 150,
+   "history_entities": 21,
+   "hub_mass_milli": {
+    "hub/sources:hub.md": 38
+   },
+   "index": 6,
+   "items": 21,
+   "retrieval_manifest_sha256": "83c2e243b1909b950148577e55913c77ccf07a8383c0c7e15bdb8d3cada5c0ae",
+   "retrievals": [
+    46,
+    46
+   ],
+   "seeds": [
+    "hub/sources:hub.md",
+    "ward004/sources:ward004.md",
+    "ward014/sources:ward014.md",
+    "ward013/sources:ward013.md",
+    "ward010/sources:ward010.md",
+    "ward011/sources:ward011.md",
+    "ward007/sources:ward007.md",
+    "ward009/sources:ward009.md"
+   ],
+   "state": "succeeded",
+   "task_index": 230
+  },
+  {
+   "association": {
+    "erosion": {
+     "claims_available": 181,
+     "claims_contributing": 175,
+     "keys_removed": 0,
+     "policy_revision": 0,
+     "removed_by": {}
+    },
+    "status": "computed",
+    "window": {
+     "available": 175,
+     "max_batches": 128,
+     "max_entities": 64,
+     "rule": "batches touching a seed, the latest in chain order, within the engine's caps",
+     "used": 128
+    }
+   },
+   "carried": 38,
+   "engine": {
+    "identity_validation_us": 2576,
+    "native_process_us": 9203,
+    "wire_bytes": 158935
+   },
+   "entities": 46,
+   "excluded": 282,
+   "history_claims": 175,
+   "history_entities": 46,
+   "hub_mass_milli": {
+    "hub/sources:hub.md": 70
+   },
+   "index": 7,
+   "items": 32,
+   "retrieval_manifest_sha256": "38aef13b22fabc6fe6c8ff6c69a24c2acb1323292a551be3d5a7cc68261d2bc3",
+   "retrievals": [
+    64,
+    78
+   ],
+   "seeds": [
+    "hub/sources:hub.md",
+    "ward004/sources:ward004.md",
+    "ward026/sources:ward026.md",
+    "ward031/sources:ward031.md",
+    "ward042/sources:ward042.md",
+    "ward025/sources:ward025.md",
+    "ward024/sources:ward024.md",
+    "ward044/sources:ward044.md"
+   ],
+   "state": "succeeded",
+   "task_index": 269
+  },
+  {
+   "association": {
+    "erosion": {
+     "claims_available": 207,
+     "claims_contributing": 200,
+     "keys_removed": 0,
+     "policy_revision": 0,
+     "removed_by": {}
+    },
+    "status": "computed",
+    "window": {
+     "available": 200,
+     "max_batches": 128,
+     "max_entities": 64,
+     "rule": "batches touching a seed, the latest in chain order, within the engine's caps",
+     "used": 63
+    }
+   },
+   "carried": 0,
+   "engine": {
+    "identity_validation_us": 1963,
+    "native_process_us": 11268,
+    "wire_bytes": 303293
+   },
+   "entities": 64,
+   "excluded": 345,
+   "history_claims": 200,
+   "history_entities": 71,
+   "hub_mass_milli": {
+    "hub/sources:hub.md": 120
+   },
+   "index": 8,
+   "items": 32,
+   "retrieval_manifest_sha256": "2229fa49055636ed52e063287381f94fc83f6d3d85eb0f1fe92bb95a18ff3eb5",
+   "retrievals": [
+    95,
+    55
+   ],
+   "seeds": [
+    "hub/sources:hub.md",
+    "ward004/sources:ward004.md",
+    "ward055/sources:ward055.md",
+    "ward068/sources:ward068.md",
+    "ward026/sources:ward026.md",
+    "ward031/sources:ward031.md",
+    "ward042/sources:ward042.md",
+    "ward056/sources:ward056.md"
+   ],
+   "state": "succeeded",
+   "task_index": 307
+  },
+  {
+   "association": {
+    "erosion": {
+     "claims_available": 233,
+     "claims_contributing": 225,
+     "keys_removed": 0,
+     "policy_revision": 0,
+     "removed_by": {}
+    },
+    "status": "computed",
+    "window": {
+     "available": 225,
+     "max_batches": 128,
+     "max_entities": 64,
+     "rule": "batches touching a seed, the latest in chain order, within the engine's caps",
+     "used": 63
+    }
+   },
+   "carried": 0,
+   "engine": {
+    "identity_validation_us": 2634,
+    "native_process_us": 11208,
+    "wire_bytes": 303293
+   },
+   "entities": 64,
+   "excluded": 409,
+   "history_claims": 225,
+   "history_entities": 96,
+   "hub_mass_milli": {
+    "hub/sources:hub.md": 195
+   },
+   "index": 9,
+   "items": 32,
+   "retrieval_manifest_sha256": "cf19044faa33f558ce3621eab607ec0a570f548f5ae93c061100fb4095076a54",
+   "retrievals": [
+    154,
+    76
+   ],
+   "seeds": [
+    "hub/sources:hub.md",
+    "ward084/sources:ward084.md",
+    "ward055/sources:ward055.md",
+    "ward068/sources:ward068.md",
+    "ward042/sources:ward042.md"
+   ],
+   "state": "succeeded",
+   "task_index": 346
+  },
+  {
+   "association": {
+    "erosion": {
+     "claims_available": 259,
+     "claims_contributing": 250,
+     "keys_removed": 0,
+     "policy_revision": 0,
+     "removed_by": {}
+    },
+    "status": "computed",
+    "window": {
+     "available": 250,
+     "max_batches": 128,
+     "max_entities": 64,
+     "rule": "batches touching a seed, the latest in chain order, within the engine's caps",
+     "used": 63
+    }
+   },
+   "carried": 0,
+   "engine": {
+    "identity_validation_us": 2623,
+    "native_process_us": 11947,
+    "wire_bytes": 303293
+   },
+   "entities": 64,
+   "excluded": 472,
+   "history_claims": 250,
+   "history_entities": 121,
+   "hub_mass_milli": {
+    "hub/sources:hub.md": 245
+   },
+   "index": 10,
+   "items": 32,
+   "retrieval_manifest_sha256": "fdefafa8d616b463eae8c2480d1548b9d94350d479725c33e5ba1b65f91223af",
+   "retrievals": [
+    108,
+    115
+   ],
+   "seeds": [
+    "hub/sources:hub.md",
+    "ward084/sources:ward084.md",
+    "ward119/sources:ward119.md",
+    "ward068/sources:ward068.md"
+   ],
+   "state": "succeeded",
+   "task_index": 384
+  },
+  {
+   "association": {
+    "erosion": {
+     "claims_available": 285,
+     "claims_contributing": 275,
+     "keys_removed": 0,
+     "policy_revision": 0,
+     "removed_by": {}
+    },
+    "status": "computed",
+    "window": {
+     "available": 275,
+     "max_batches": 128,
+     "max_entities": 64,
+     "rule": "batches touching a seed, the latest in chain order, within the engine's caps",
+     "used": 63
+    }
+   },
+   "carried": 0,
+   "engine": {
+    "identity_validation_us": 2674,
+    "native_process_us": 14827,
+    "wire_bytes": 303293
+   },
+   "entities": 64,
+   "excluded": 536,
+   "history_claims": 275,
+   "history_entities": 146,
+   "hub_mass_milli": {
+    "hub/sources:hub.md": 328
+   },
+   "index": 11,
+   "items": 32,
+   "retrieval_manifest_sha256": "4bf61ae734c80866ea72ecd2875e4ba38d7a68890da2cb41ae9713ba95085831",
+   "retrievals": [
+    97,
+    92
+   ],
+   "seeds": [
+    "hub/sources:hub.md",
+    "ward084/sources:ward084.md",
+    "ward119/sources:ward119.md"
+   ],
+   "state": "succeeded",
+   "task_index": 423
+  },
+  {
+   "association": {
+    "erosion": {
+     "claims_available": 311,
+     "claims_contributing": 300,
+     "keys_removed": 0,
+     "policy_revision": 0,
+     "removed_by": {}
+    },
+    "status": "computed",
+    "window": {
+     "available": 300,
+     "max_batches": 128,
+     "max_entities": 64,
+     "rule": "batches touching a seed, the latest in chain order, within the engine's caps",
+     "used": 63
+    }
+   },
+   "carried": 0,
+   "engine": {
+    "identity_validation_us": 2810,
+    "native_process_us": 11009,
+    "wire_bytes": 303293
+   },
+   "entities": 64,
+   "excluded": 599,
+   "history_claims": 300,
+   "history_entities": 171,
+   "hub_mass_milli": {
+    "hub/sources:hub.md": 328
+   },
+   "index": 12,
+   "items": 32,
+   "retrieval_manifest_sha256": "c56bbf2feea4c4ab181b56d9e903e18097fbd95fd8c8aec770d81328b75aaea0",
+   "retrievals": [
+    105,
+    115
+   ],
+   "seeds": [
+    "hub/sources:hub.md",
+    "ward119/sources:ward119.md",
+    "ward151/sources:ward151.md"
+   ],
+   "state": "succeeded",
+   "task_index": 461
+  }
+ ],
+ "produced_at_utc": "2026-10-05T13:25:38.620863+00:00",
+ "schema": "gabriel.evidence.longrun-witness/1",
+ "snapshots": [
+  {
+   "elapsed_s": 1.1,
+   "epoch": 0,
+   "journal": {
+    "artifact_refs": 0,
+    "attempts": 0,
+    "bytes": 184320,
+    "events": 0,
+    "runs": 0
+   },
+   "label": "start",
+   "memory": {
+    "bytes": 4096,
+    "cache_rows": 0,
+    "claims": 0,
+    "compactions": 0,
+    "distinct_document_keys": 0,
+    "distinct_keys": 0,
+    "document_observations": 0,
+    "entries": 0,
+    "labels": 0,
+    "observations": 0,
+    "supported_claims": 0,
+    "wal_bytes": 206032,
+    "work_items": 0
+   },
+   "migrations_bytes": 0,
+   "numerical_cache_bytes": 0,
+   "store": {
+    "bytes": 16986,
+    "objects": 1
+   },
+   "task_index": 0,
+   "telemetry_bytes": 0,
+   "worktree_bytes": 0,
+   "worktrees": 0
+  },
+  {
+   "elapsed_s": 99.4,
+   "epoch": 0,
+   "journal": {
+    "artifact_refs": 5612,
+    "attempts": 610,
+    "bytes": 24268800,
+    "events": 3157,
+    "runs": 102
+   },
+   "label": "after-task-100",
+   "memory": {
+    "bytes": 356352,
+    "cache_rows": 0,
+    "claims": 69,
+    "compactions": 1,
+    "distinct_document_keys": 21,
+    "distinct_keys": 123,
+    "document_observations": 21,
+    "entries": 433,
+    "labels": 102,
+    "observations": 123,
+    "supported_claims": 69,
+    "wal_bytes": 4128272,
+    "work_items": 0
+   },
+   "migrations_bytes": 0,
+   "numerical_cache_bytes": 1250,
+   "store": {
+    "bytes": 7229136,
+    "objects": 6879
+   },
+   "task_index": 102,
+   "telemetry_bytes": 2261823,
+   "worktree_bytes": 1063967,
+   "worktrees": 102
+  },
+  {
+   "elapsed_s": 212.2,
+   "epoch": 0,
+   "journal": {
+    "artifact_refs": 10951,
+    "attempts": 1223,
+    "bytes": 48435200,
+    "events": 6334,
+    "runs": 205
+   },
+   "label": "after-task-200",
+   "memory": {
+    "bytes": 610304,
+    "cache_rows": 0,
+    "claims": 139,
+    "compactions": 2,
+    "distinct_document_keys": 21,
+    "distinct_keys": 226,
+    "document_observations": 21,
+    "entries": 850,
+    "labels": 205,
+    "observations": 226,
+    "supported_claims": 139,
+    "wal_bytes": 4132392,
+    "work_items": 0
+   },
+   "migrations_bytes": 0,
+   "numerical_cache_bytes": 1250,
+   "store": {
+    "bytes": 13781167,
+    "objects": 13258
+   },
+   "task_index": 205,
+   "telemetry_bytes": 4538434,
+   "worktree_bytes": 2142334,
+   "worktrees": 205
+  },
+  {
+   "elapsed_s": 339.7,
+   "epoch": 0,
+   "journal": {
+    "artifact_refs": 16798,
+    "attempts": 1840,
+    "bytes": 72790016,
+    "events": 9524,
+    "runs": 308
+   },
+   "label": "after-task-300",
+   "memory": {
+    "bytes": 925696,
+    "cache_rows": 0,
+    "claims": 208,
+    "compactions": 3,
+    "distinct_document_keys": 71,
+    "distinct_keys": 379,
+    "document_observations": 71,
+    "entries": 1314,
+    "labels": 308,
+    "observations": 379,
+    "supported_claims": 208,
+    "wal_bytes": 4136512,
+    "work_items": 0
+   },
+   "migrations_bytes": 0,
+   "numerical_cache_bytes": 1250,
+   "store": {
+    "bytes": 22243613,
+    "objects": 20594
+   },
+   "task_index": 308,
+   "telemetry_bytes": 6824096,
+   "worktree_bytes": 3206814,
+   "worktrees": 308
+  },
+  {
+   "elapsed_s": 501.6,
+   "epoch": 1,
+   "journal": {
+    "artifact_refs": 16798,
+    "attempts": 1840,
+    "bytes": 72790016,
+    "events": 9524,
+    "runs": 308
+   },
+   "label": "after-migration",
+   "memory": {
+    "bytes": 983040,
+    "cache_rows": 0,
+    "claims": 208,
+    "compactions": 3,
+    "distinct_document_keys": 71,
+    "distinct_keys": 379,
+    "document_observations": 71,
+    "entries": 1314,
+    "labels": 308,
+    "observations": 379,
+    "supported_claims": 208,
+    "wal_bytes": 0,
+    "work_items": 0
+   },
+   "migrations_bytes": 97615510,
+   "numerical_cache_bytes": 1250,
+   "store": {
+    "bytes": 22262085,
+    "objects": 20596
+   },
+   "task_index": 308,
+   "telemetry_bytes": 6824096,
+   "worktree_bytes": 3206814,
+   "worktrees": 308
+  },
+  {
+   "elapsed_s": 648.6,
+   "epoch": 1,
+   "journal": {
+    "artifact_refs": 22749,
+    "attempts": 2450,
+    "bytes": 96972800,
+    "events": 12681,
+    "runs": 410
+   },
+   "label": "after-task-400",
+   "memory": {
+    "bytes": 1290240,
+    "cache_rows": 0,
+    "claims": 277,
+    "compactions": 4,
+    "distinct_document_keys": 138,
+    "distinct_keys": 548,
+    "document_observations": 138,
+    "entries": 1793,
+    "labels": 410,
+    "observations": 548,
+    "supported_claims": 277,
+    "wal_bytes": 4152992,
+    "work_items": 0
+   },
+   "migrations_bytes": 97615510,
+   "numerical_cache_bytes": 1250,
+   "store": {
+    "bytes": 31308311,
+    "objects": 28189
+   },
+   "task_index": 410,
+   "telemetry_bytes": 9087332,
+   "worktree_bytes": 4270781,
+   "worktrees": 410
+  },
+  {
+   "elapsed_s": 822.3,
+   "epoch": 1,
+   "journal": {
+    "artifact_refs": 28749,
+    "attempts": 3160,
+    "bytes": 123101184,
+    "events": 16136,
+    "runs": 512
+   },
+   "label": "after-task-500",
+   "memory": {
+    "bytes": 1523712,
+    "cache_rows": 0,
+    "claims": 312,
+    "compactions": 5,
+    "distinct_document_keys": 171,
+    "distinct_keys": 683,
+    "document_observations": 171,
+    "entries": 2136,
+    "labels": 512,
+    "observations": 683,
+    "supported_claims": 312,
+    "wal_bytes": 4152992,
+    "work_items": 0
+   },
+   "migrations_bytes": 97615510,
+   "numerical_cache_bytes": 1250,
+   "store": {
+    "bytes": 39373564,
+    "objects": 35313
+   },
+   "task_index": 512,
+   "telemetry_bytes": 11566233,
+   "worktree_bytes": 4853896,
+   "worktrees": 512
+  },
+  {
+   "elapsed_s": 1038.8,
+   "epoch": 1,
+   "journal": {
+    "artifact_refs": 34710,
+    "attempts": 3960,
+    "bytes": 151023616,
+    "events": 19836,
+    "runs": 612
+   },
+   "label": "after-task-600",
+   "memory": {
+    "bytes": 1679360,
+    "cache_rows": 0,
+    "claims": 312,
+    "compactions": 6,
+    "distinct_document_keys": 171,
+    "distinct_keys": 783,
+    "document_observations": 171,
+    "entries": 2337,
+    "labels": 612,
+    "observations": 783,
+    "supported_claims": 312,
+    "wal_bytes": 4152992,
+    "work_items": 0
+   },
+   "migrations_bytes": 97615510,
+   "numerical_cache_bytes": 1250,
+   "store": {
+    "bytes": 46117428,
+    "objects": 41875
+   },
+   "task_index": 612,
+   "telemetry_bytes": 14222888,
+   "worktree_bytes": 4941246,
+   "worktrees": 612
+  },
+  {
+   "elapsed_s": 1371.9,
+   "epoch": 1,
+   "journal": {
+    "artifact_refs": 34710,
+    "attempts": 3960,
+    "bytes": 151023616,
+    "events": 19836,
+    "runs": 612
+   },
+   "label": "end",
+   "memory": {
+    "bytes": 1679360,
+    "cache_rows": 0,
+    "claims": 312,
+    "compactions": 6,
+    "distinct_document_keys": 171,
+    "distinct_keys": 783,
+    "document_observations": 171,
+    "entries": 2337,
+    "labels": 612,
+    "observations": 783,
+    "supported_claims": 312,
+    "wal_bytes": 4152992,
+    "work_items": 0
+   },
+   "migrations_bytes": 97615510,
+   "numerical_cache_bytes": 1250,
+   "store": {
+    "bytes": 46117428,
+    "objects": 41875
+   },
+   "task_index": 612,
+   "telemetry_bytes": 14222888,
+   "worktree_bytes": 4941246,
+   "worktrees": 612
+  },
+  {
+   "elapsed_s": 1486.1,
+   "epoch": 1,
+   "journal": {
+    "artifact_refs": 34710,
+    "attempts": 3960,
+    "bytes": 151023616,
+    "events": 19836,
+    "runs": 612
+   },
+   "label": "after-retirement",
+   "memory": {
+    "bytes": 1679360,
+    "cache_rows": 0,
+    "claims": 312,
+    "compactions": 6,
+    "distinct_document_keys": 171,
+    "distinct_keys": 783,
+    "document_observations": 171,
+    "entries": 2337,
+    "labels": 612,
+    "observations": 783,
+    "supported_claims": 312,
+    "wal_bytes": 4152992,
+    "work_items": 0
+   },
+   "migrations_bytes": 97615510,
+   "numerical_cache_bytes": 1250,
+   "store": {
+    "bytes": 46117428,
+    "objects": 41875
+   },
+   "task_index": 612,
+   "telemetry_bytes": 14222888,
+   "worktree_bytes": 0,
+   "worktrees": 0
+  }
+ ],
+ "status": "passed",
+ "tasks": 612
+}

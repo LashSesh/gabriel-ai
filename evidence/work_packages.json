@@ -1,6 +1,6 @@
 {
   "schema": "gabriel.evidence.work-packages/1",
-  "produced_at_utc": "2026-10-04T18:39:22.541360+00:00",
+  "produced_at_utc": "2026-10-05T13:29:16.290607+00:00",
   "rule": "A package counts as done only with actual code and recorded test output; privileged and paid runs are listed under not_executed.",
   "packages": {
     "WP01": {
@@ -925,6 +925,10 @@
             "result": "PASSED"
           },
           {
+            "test": "test_verification_reports_a_missing_chain_record_whether_or_not_it_was_loaded_before",
+            "result": "PASSED"
+          },
+          {
             "test": "test_workspace_backup_restores_memory_and_refuses_a_missing_memory_blob",
             "result": "PASSED"
           }
@@ -1334,6 +1338,18 @@
           {
             "test": "test_association_tier_runs_through_the_frozen_harness_with_history",
             "result": "PASSED"
+          },
+          {
+            "test": "test_the_walk_is_bounded_to_the_engines_batch_cap_with_a_declared_window",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_the_walk_is_bounded_to_the_entity_cap_by_the_latest_seeded_batches",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_a_source_declared_by_several_tasks_is_one_observation",
+            "result": "PASSED"
           }
         ],
         "tests/test_evaluation_domains.py": [
@@ -1461,6 +1477,18 @@
           },
           {
             "test": "test_association_tier_runs_through_the_frozen_harness_with_history",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_the_walk_is_bounded_to_the_engines_batch_cap_with_a_declared_window",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_the_walk_is_bounded_to_the_entity_cap_by_the_latest_seeded_batches",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_a_source_declared_by_several_tasks_is_one_observation",
             "result": "PASSED"
           }
         ],
@@ -1701,6 +1729,18 @@
           {
             "test": "test_association_tier_runs_through_the_frozen_harness_with_history",
             "result": "PASSED"
+          },
+          {
+            "test": "test_the_walk_is_bounded_to_the_engines_batch_cap_with_a_declared_window",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_the_walk_is_bounded_to_the_entity_cap_by_the_latest_seeded_batches",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_a_source_declared_by_several_tasks_is_one_observation",
+            "result": "PASSED"
           }
         ],
         "tests/test_policy_route.py": [
@@ -1809,6 +1849,18 @@
           {
             "test": "test_association_tier_runs_through_the_frozen_harness_with_history",
             "result": "PASSED"
+          },
+          {
+            "test": "test_the_walk_is_bounded_to_the_engines_batch_cap_with_a_declared_window",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_the_walk_is_bounded_to_the_entity_cap_by_the_latest_seeded_batches",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_a_source_declared_by_several_tasks_is_one_observation",
+            "result": "PASSED"
           }
         ],
         "tests/test_memory.py": [
@@ -1830,6 +1882,10 @@
           },
           {
             "test": "test_compaction_keeps_required_bytes_and_missing_blob_is_a_storage_fault",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_verification_reports_a_missing_chain_record_whether_or_not_it_was_loaded_before",
             "result": "PASSED"
           },
           {
@@ -1976,12 +2032,14 @@
       }
     },
     "OPS": {
-      "status": "DONE",
+      "status": "DONE_EXECUTED",
       "tests": [
-        "tests/test_ops.py"
+        "tests/test_ops.py",
+        "tests/test_association.py"
       ],
       "acceptance": [
-        "blueprint: operations, observability and release discipline"
+        "blueprint: operations, observability and release discipline",
+        "ADR-25: a long run of many tasks in one workspace with compaction, garbage collection, backup, restore and migration under a growing memory, with the batch window, the one-observation-per-source rule, the closure-complete backup and worktree retirement witnessed (evidence/ops/longrun)"
       ],
       "evidence": [
         "evidence/ops/migration_at23.json",
@@ -1990,12 +2048,19 @@
         "evidence/ops/smoke_trace_summary.json",
         "evidence/ops/smoke_gc_dry_run.json",
         "evidence/ops/smoke_doctor_deep.json",
+        "evidence/ops/longrun/summary.json",
+        "evidence/ops/longrun/series.json",
+        "evidence/ops/longrun/report.md",
+        "evidence/ops/longrun/README.md",
         "docs/adr/ADR-17-operations.md",
+        "docs/adr/ADR-25-long-running-operation.md",
         "evidence/test_results.txt"
       ],
       "not_executed": [
         "cooperative cancellation of a tool run inside the containment backend (stop takes effect at the next boundary)",
-        "a successful migration of a journal created before catalog records existed (refused by rule when verifiers changed)"
+        "a successful migration of a journal created before catalog records existed (refused by rule when verifiers changed)",
+        "a long run with a real provider (the witness uses the scripted providers so that growth, not the model, is measured)",
+        "journal compaction (the journal is append-only by contract; replay and migration cost time linear in the events)"
       ],
       "test_results": {
         "tests/test_ops.py": [
@@ -2045,6 +2110,76 @@
           },
           {
             "test": "test_cli_gc_dry_run_and_apply",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_backup_carries_the_referenced_closure_so_a_restore_after_a_migration_replays_every_epoch",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_startup_validation_checks_the_roots_the_backup_and_the_collector_keep",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_retiring_worktrees_frees_disk_keeps_the_journal_and_refuses_a_later_export",
+            "result": "PASSED"
+          }
+        ],
+        "tests/test_association.py": [
+          {
+            "test": "test_history_brings_a_lexically_invisible_source_into_a_budgeted_retrieval_and_matches_the_reference",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_association_never_reaches_what_the_principal_cannot_retrieve",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_history_erodes_with_a_revocation_and_every_retained_manifest_reproduces_from_the_chain",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_structural_scores_declare_their_limits",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_verified_run_history_carries_the_annex_into_the_associative_view_through_the_owner",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_every_association_topic_meets_the_protocol_precondition_under_the_pack_budget[fee]",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_every_association_topic_meets_the_protocol_precondition_under_the_pack_budget[parking]",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_every_association_topic_meets_the_protocol_precondition_under_the_pack_budget[archive]",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_every_association_topic_meets_the_protocol_precondition_under_the_pack_budget[library]",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_every_association_topic_meets_the_protocol_precondition_under_the_pack_budget[garden]",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_association_tier_runs_through_the_frozen_harness_with_history",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_the_walk_is_bounded_to_the_engines_batch_cap_with_a_declared_window",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_the_walk_is_bounded_to_the_entity_cap_by_the_latest_seeded_batches",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_a_source_declared_by_several_tasks_is_one_observation",
             "result": "PASSED"
           }
         ]
