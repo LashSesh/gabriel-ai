@@ -494,6 +494,7 @@ def test_collection_records_a_verified_checkpoint_and_restore_and_audit_recover_
     catalog = build_registry(lambda: None).catalog()
     quick = restore(tmp_path / "bk", tmp_path / "restored-quick", catalog=catalog)
     assert quick["status"] == "passed" and quick["replay_mode"] == "from_checkpoint"
+    assert quick["replay"]["checkpoints_skipped"] == []
     assert quick["replay"]["checkpoint"]["checkpoint_id"] == listed[1]["checkpoint_id"] and quick["replay"]["events_reduced"] == 0
     assert quick["replay"]["events"] == anchor["sequence"] and quick["replay"]["runs"] == 2
     full = restore(tmp_path / "bk", tmp_path / "restored-full", catalog=catalog, full=True)
@@ -510,6 +511,19 @@ def test_collection_records_a_verified_checkpoint_and_restore_and_audit_recover_
     assert len(json.loads(capsys.readouterr().out)["checkpoints_verified"]) == 3
     assert cli.main(["restore", "--from", str(tmp_path / "bk"), "--workspace", str(tmp_path / "restored-cli"), "--full"]) == 0
     assert json.loads(capsys.readouterr().out)["replay_mode"] == "full"
+
+
+def test_a_restore_of_a_backup_without_a_checkpoint_says_it_replayed_from_genesis(tmp_path):
+    """ADR-26: the restore report records what happened, not what was asked: a backup that carries
+    no usable checkpoint replays from genesis and says so."""
+    from gabriel_agent.agent.backup import backup, restore
+    from gabriel_agent.agent.workspace import build_registry
+    ws, created, spec = finished_workspace(tmp_path)
+    backup(ws, tmp_path / "bk")
+    ws.close()
+    report = restore(tmp_path / "bk", tmp_path / "restored", catalog=build_registry(lambda: None).catalog())
+    assert report["status"] == "passed" and report["replay_mode"] == "genesis_no_usable_checkpoint"
+    assert report["replay"]["checkpoint"] is None and report["replay"]["events_reduced"] == report["replay"]["events"]
 
 
 def test_a_migration_records_the_first_checkpoint_of_its_epoch_and_earlier_ones_stay_usable(tmp_path, monkeypatch):
@@ -553,7 +567,10 @@ def test_telemetry_rotates_the_live_file_and_metrics_read_every_part_once(tmp_pa
     created2 = ws.create_task(spec)
     assert TaskRunner(ws, created2["task_id"]).run()["state"] == "succeeded"
     parts = span_files(ws.tracer.path)
-    assert len(parts) >= 3 and ws.tracer.rotated == len(parts) - 1 and parts[-1] == ws.tracer.path
+    assert len(parts) >= 3 and ws.tracer.rotated == len(parts) - 1 and parts[-1] == ws.tracer.path and ws.tracer.rotation_failures == 0
+    # another file beside the live one is not a part, and the parts carry the writer's pid so two processes never collide
+    (ws.tracer.path.parent / "spans.backup.jsonl").write_text("{}\n")
+    assert span_files(ws.tracer.path) == parts and all("-%d-" % os.getpid() in p.name for p in parts[:-1])
     spans = read_spans(ws.tracer.path)
     assert len(spans) == ws.tracer.written > written_before and ws.tracer.dropped == 0
     second = read_spans(ws.tracer.path, created2["run_id"])

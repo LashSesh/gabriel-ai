@@ -397,6 +397,7 @@ second spends provider credit. Both were executed on the development host; resul
 
 ## Catalog identity
 A workspace journal pins the capability catalog (tool descriptors with implementation
-fingerprints). After changing any tool implementation, `Workspace.open` refuses the old journal
-with `UNSUPPORTED: capability catalog differs`; create a new workspace. An explicit, replayed
-migration is future work.
+fingerprints), the schema registry and the reducer identity. After changing any of them,
+`Workspace.open` refuses the old journal with `UNSUPPORTED: ... an explicit migration is
+required`; `gabriel migrate` (ADR-17, Operations above) takes a backup, replays the journal
+under the running code and records the epoch when every projection is reproduced.

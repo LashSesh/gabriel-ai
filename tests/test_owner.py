@@ -516,6 +516,26 @@ def test_replay_from_a_verified_checkpoint_reduces_the_suffix_and_still_checks_e
         owner.replay()
     assert info.value.code is Code.STORAGE_FAULT
     owner.close()
+    # a projection object of a run untouched since the checkpoint is read when the checkpoint is used and when the audit
+    # passes it, so a lost one is a fault on both paths, not a state carried forward
+    w3 = World(tmp_path / "third")
+    w3.admit(); w3.start(); w3.accept_plan()
+    recorded = w3.owner.replay(record_checkpoint="cp-1", reason="test")["checkpoint_recorded"]
+    state = loads(w3.store.get(recorded["state_ref"]))
+    (w3.store.path_for(state["runs"]["run-01"]["sha256"])).unlink()
+    with pytest.raises(GabrielError) as info:
+        w3.owner.replay(from_checkpoint=True)
+    assert info.value.code is Code.STORAGE_FAULT and "missing or changed" in info.value.message
+    with pytest.raises(GabrielError) as info:
+        w3.owner.replay()
+    assert info.value.code is Code.STORAGE_FAULT
+    # a checkpoint of the empty journal is verified by the audit like any other
+    w4 = World(tmp_path / "fourth")
+    empty = w4.owner.replay(record_checkpoint="cp-0", reason="empty")
+    assert empty["events"] == 0 and empty["checkpoint_recorded"]["run_count"] == 0
+    w4.admit()
+    assert w4.owner.replay()["checkpoints_verified"] == ["cp-0"]
+    assert w4.owner.replay(from_checkpoint=True)["checkpoint"]["checkpoint_id"] == "cp-0"
     # a tampered event before the checkpoint is found by the chain pass although nothing before it is reduced
     w2 = World(tmp_path / "second")
     w2.admit(); w2.start(); w2.owner.replay(record_checkpoint="cp-1", reason="test"); w2.accept_plan()

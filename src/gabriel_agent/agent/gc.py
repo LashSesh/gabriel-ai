@@ -17,6 +17,7 @@ import time
 from pathlib import Path
 
 from ..contracts.codec import canonical, loads, sha256_hex
+from ..contracts.errors import GabrielError
 from ..state.owner import _walk_refs
 
 
@@ -102,8 +103,14 @@ def collect_garbage(workspace, *, apply: bool = False, grace_seconds: int = 3600
         report["removed_bytes"] = sum(sizes.values())
         # ADR-26: the re-verification replays from the latest verified checkpoint and retains the state it reached as the
         # next one, so every collection also bounds the next recovery; the full replay stays the audit (`gabriel audit`)
-        checkpoint_id = "gc-%d" % int(time.time() * 1000)
-        replay = owner.replay(from_checkpoint=True, record_checkpoint=checkpoint_id, reason="gc --apply re-verification")
+        checkpoint_id = "gc-%d-%d" % (int(time.time() * 1000), len(owner.checkpoints()) + 1)
+        try:
+            replay = owner.replay(from_checkpoint=True, record_checkpoint=checkpoint_id, reason="gc --apply re-verification")
+        except GabrielError as exc:
+            # the removal happened; the report says so and names the fault before it is raised
+            report.update(replay="failed", error=exc.to_record(), status="storage_fault", elapsed_ms=int((time.monotonic() - started) * 1000))
+            _write_report(workspace, report)
+            raise
         report["replay"] = replay["status"]
         report["checkpoint"] = {"started_from": replay["checkpoint"], "events_reduced": replay["events_reduced"],
                                 "recorded": None if replay["checkpoint_recorded"] is None else
@@ -114,7 +121,11 @@ def collect_garbage(workspace, *, apply: bool = False, grace_seconds: int = 3600
     else:
         report["status"] = "dry_run"
     report["elapsed_ms"] = int((time.monotonic() - started) * 1000)
+    _write_report(workspace, report)
+    return report
+
+
+def _write_report(workspace, report: dict) -> None:
     directory = Path(workspace.path) / "gc"
     directory.mkdir(exist_ok=True)
-    (directory / ("gc-%d.json" % int(time.time() * 1000))).write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
-    return report
+    (directory / ("gc-%d.json" % int(time.time() * 1000))).write_text(json.dumps(report, indent=2, sort_keys=True, default=str) + "\n")

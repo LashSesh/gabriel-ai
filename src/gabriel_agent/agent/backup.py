@@ -132,7 +132,8 @@ def restore(source, destination, *, catalog, clock=None, full: bool = False) -> 
     try:
         report["anchor_check"] = owner.verify_anchor(anchor)
         report["replay"] = owner.replay(expected_anchor=anchor, from_checkpoint=not full)
-        report["replay_mode"] = "full" if full else "from_checkpoint"
+        # what happened, not what was asked: a backup without a usable checkpoint replays from genesis
+        report["replay_mode"] = "full" if full else ("from_checkpoint" if report["replay"]["checkpoint"] is not None else "genesis_no_usable_checkpoint")
         report["memory"] = None
         if manifest.get("memory_sha256"):
             memory = MemoryService.open(destination / "memory.sqlite", store, lambda: owner.anchor()["sequence"])

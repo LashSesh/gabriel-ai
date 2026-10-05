@@ -10,6 +10,8 @@ from __future__ import annotations
 
 import contextlib
 import json
+import os
+import re
 import secrets
 import threading
 import time
@@ -18,19 +20,21 @@ from pathlib import Path
 KINDS = ("run", "queue_wait", "provider", "tool_execution", "verification", "journal_commit", "artifact_io")
 
 
-ROTATE_BYTES = 8 * 1024 * 1024  # ADR-26: the live spans file is rotated once it exceeds this size
+ROTATE_BYTES = 8 * 1024 * 1024  # ADR-26: the live spans file is rotated once it reaches this size
 
 
 class Tracer:
     """JSONL span exporter with a per-thread span stack for parent identities. The live file
-    is rotated at ``rotate_bytes`` (ADR-26) into ``<stem>.<unix_ms>.jsonl`` beside it; readers
-    see every part in order."""
+    is rotated once it reaches ``rotate_bytes`` (ADR-26) into ``<stem>.<unix_ms>-<pid>-<n>.jsonl``
+    beside it (the name cannot collide across processes writing the same workspace); readers
+    see every part in order of their rotation time."""
 
     def __init__(self, path, *, trace_id: str, rotate_bytes: int = ROTATE_BYTES):
         self.path = Path(path) if path is not None else None
         self.trace_id = trace_id
         self.rotate_bytes = int(rotate_bytes)
         self.rotated = 0
+        self.rotation_failures = 0
         self.dropped = 0
         self.written = 0
         self._local = threading.local()
@@ -105,34 +109,53 @@ class Tracer:
                 with open(self.path, "a", encoding="utf8") as stream:
                     stream.write(line)
                     size = stream.tell()
+                self.written += 1
                 if size >= self.rotate_bytes:
-                    # the full part keeps its lines under a name that sorts after every earlier part; a failed rename
-                    # leaves the live file as it is and is counted like a dropped span
-                    self.path.rename(rotated_part_path(self.path, int(time.time() * 1000), self.rotated))
-                    self.rotated += 1
-            self.written += 1
+                    # the full part keeps its lines under a name that sorts after every earlier part; a failed rename leaves
+                    # the live file as it is (the span is on disk, so it is not dropped) and is counted as a rotation failure
+                    try:
+                        self.path.rename(rotated_part_path(self.path, int(time.time() * 1000), os.getpid(), self.rotated))
+                        self.rotated += 1
+                    except OSError:
+                        self.rotation_failures += 1
         except (OSError, TypeError, ValueError):
             self.dropped += 1
 
 
-def rotated_part_path(path, unix_ms: int, index: int) -> Path:
+_PART = re.compile(r"^(?P<stem>.+)\.(?P<ms>\d{13})-(?P<pid>\d+)-(?P<index>\d+)$")
+
+
+def rotated_part_path(path, unix_ms: int, pid: int, index: int) -> Path:
     path = Path(path)
-    return path.with_name("%s.%013d-%06d%s" % (path.stem, int(unix_ms), int(index), path.suffix))
+    return path.with_name("%s.%013d-%d-%06d%s" % (path.stem, int(unix_ms), int(pid), int(index), path.suffix))
 
 
 def span_files(path) -> list:
-    """Every retained part of the spans file in writing order: the rotated parts, then the live file."""
+    """Every retained part of the spans file in writing order: the rotated parts by their rotation time, then the live file.
+    Only parts the tracer named are parts; another file beside the live one is not read."""
     path = Path(path)
-    parts = sorted(p for p in path.parent.glob(path.stem + ".*" + path.suffix) if p.is_file()) if path.parent.is_dir() else []
+    parts = []
+    if path.parent.is_dir():
+        for candidate in path.parent.iterdir():
+            if candidate.suffix != path.suffix or not candidate.is_file():
+                continue
+            match = _PART.match(candidate.stem)
+            if match and match.group("stem") == path.stem:
+                parts.append((int(match.group("ms")), int(match.group("pid")), int(match.group("index")), candidate))
+    ordered = [candidate for _, _, _, candidate in sorted(parts)]
     if path.is_file():
-        parts.append(path)
-    return parts
+        ordered.append(path)
+    return ordered
 
 
 def read_spans(path, run_id: str | None = None) -> list:
     spans = []
     for part in span_files(path):
-        for line in part.read_text(encoding="utf8").splitlines():
+        try:
+            text = part.read_text(encoding="utf8")
+        except OSError:
+            continue  # the live file was rotated between the listing and the read; its lines are in the part just listed
+        for line in text.splitlines():
             try:
                 record = json.loads(line)
             except ValueError:

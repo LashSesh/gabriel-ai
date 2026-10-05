@@ -127,7 +127,9 @@ def main(argv=None) -> int:
                                          reason="audit" if args.checkpoint else None)
                 _emit(report); return 0 if report["status"] == "passed" else 3
             if args.command == "checkpoint":
-                report = ws.owner.replay(from_checkpoint=not args.full, record_checkpoint="checkpoint-%d" % ws.owner.owner_time(), reason=args.reason)
+                # the id carries the owner time and the ordinal, so two checkpoints under a stalled clock still differ
+                checkpoint_id = "checkpoint-%d-%d" % (ws.owner.owner_time(), len(ws.owner.checkpoints()) + 1)
+                report = ws.owner.replay(from_checkpoint=not args.full, record_checkpoint=checkpoint_id, reason=args.reason)
                 _emit(report); return 0 if report["status"] == "passed" else 3
             if args.command == "replay":
                 _emit(dict(ws.owner.replay(), run=ws.owner.run_record(args.run_id))); return 0
