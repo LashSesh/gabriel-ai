@@ -71,9 +71,10 @@ defined on keys as the retrieval sees them, not on observation ids.
   the source (the key's effective observation stays the revoked one). At the time of this ADR a
   task that declared the source available again overrode the withdrawal, because every task
   ingested its own observation of the source; since ADR-25 an unchanged source is one observation
-  across tasks, so the withdrawal holds until the source changes (a new revision or new bytes
-  make a new observation). This is the pack's rule, recorded here, not a memory rule; see the
-  limits below.
+  across tasks, so the withdrawal holds until a task declares a new revision of the source (a new
+  observation that the revision rule selects; new bytes or a new declaration at the same revision
+  are a second observation of that revision, which makes the key contested and keeps it out).
+  This is the pack's rule, recorded here, not a memory rule; see the limits below.
 - **Protocols 6 to 9 are unaffected by construction.** The association tier declares no
   withdrawn source, one principal and document sources only, and every history claim cites two
   sources that stay retrievable, so the projection is the identity on those runs; the harness
@@ -107,8 +108,8 @@ is not shown a withdrawn source cannot cite it, which the pack's citation bindin
 regardless of this ADR); erosion by time (a claim contributes or not, there is no decay); a
 key-level access rule (at the time of this ADR the pack re-admitted a withdrawn source as soon as
 a later task declared it available, because each task ingested its own observation; since
-ADR-25 an unchanged source is one observation across tasks and the withdrawal holds until the
-source's revision or bytes change, which the memory cannot tell from a new declaration; a
+ADR-25 an unchanged source is one observation across tasks and the withdrawal holds until a
+task declares a new revision of the source, which the memory cannot tell from a restored one; a
 key-level access rule would still be a new contract). Cost: an uncached retrieval with the
 profile loads every claim record at or before its frontier from the store; claims are few per
 workspace here and the manifest is cached per frontier and revision.

@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 
 from ..contracts.codec import loads
-from ..contracts.errors import GabrielError
+from ..contracts.errors import Code, GabrielError
 
 
 def _emit(value):

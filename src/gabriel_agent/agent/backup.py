@@ -42,14 +42,20 @@ def backup(workspace, destination) -> dict:
     # records, the task specs and grants named by every event's retained inputs, the artifacts nested inside JSON
     # artifacts such as a request's prompt), not only the top-level references, so a restore after a recorded
     # migration can replay every epoch with its retained catalog
-    referenced = sorted(referenced_closure(store, roots_of(workspace)))
+    roots = roots_of(workspace)
+    referenced = sorted(referenced_closure(store, roots))
     objects = destination / "objects"
     objects.mkdir()
-    copied = {}
+    copied, unresolved = {}, []
     for sha in referenced:
         src = store.path_for(sha)
         if not src.is_file():
-            raise GabrielError(Code.STORAGE_FAULT, "referenced artifact missing from the store: " + sha, obj=sha)
+            if sha in roots:
+                raise GabrielError(Code.STORAGE_FAULT, "referenced artifact missing from the store: " + sha, obj=sha)
+            # a reference nested inside a JSON artifact (user-supplied content included) that names no stored object
+            # is recorded, not fatal: the journal, the chain and every root are complete without it
+            unresolved.append(sha)
+            continue
         raw = src.read_bytes()
         if hashlib.sha256(raw).hexdigest() != sha:
             raise GabrielError(Code.STORAGE_FAULT, "referenced artifact bytes changed: " + sha, obj=sha)
@@ -67,6 +73,7 @@ def backup(workspace, destination) -> dict:
                 "memory_sha256": hashlib.sha256((destination / "memory.sqlite").read_bytes()).hexdigest() if memory_anchor is not None else None,
                 "memory_anchor": memory_anchor,
                 "objects": copied, "object_count": len(copied), "object_bytes": sum(copied.values()),
+                "unresolved_nested_references": unresolved[:1024], "unresolved_nested_reference_count": len(unresolved),
                 # the identities the journal registered (equal to the running code's unless a migration is pending)
                 "catalog_digest": owner.registered["catalog_digest"], "schema_registry_digest": owner.registered["schema_registry_digest"],
                 "reducer_identity": owner.registered["reducer_identity"],

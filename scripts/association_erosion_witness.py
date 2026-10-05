@@ -112,7 +112,7 @@ def main(argv=None) -> int:
         "history_eroded_after_the_withdrawal": after["association"]["status"] == "eroded" and after["association"]["entities"] == []
                                                and after["association"]["links"] == {} and after["association"]["erosion"]["claims_contributing"] == 0
                                                and after["association"]["erosion"]["removed_by"] == {"revoked": after["association"]["erosion"]["claims_available"]},
-        # the key's effective observation is the revoked one; the earlier observations of the same revision are labeled superseded
+        # the key's effective observation is the revoked one (since ADR-25 the unchanged annex is one observation across the tasks)
         "annex_absent_from_the_prompt": not after["annex"]["retrieved"] and "revoked" in after["annex"]["excluded_reasons"] and not after["prompt"]["names_annex"]
                                         and not after["prompt"]["has_association_heading"] and not after["prompt"]["states_annex_figure"],
         "no_key_outside_the_candidates_named": "annex/" not in json.dumps(after["manifest"]),

@@ -200,8 +200,13 @@ class MemoryService:
         scope = dict(scope, workspace_id=self.workspace_id)
         scope_ref = self.store.put(canonical(scope), "application/json")
         if observation_id is None:
+            # the identity of an observation is everything it declares about the source except when it was received (ADR-25:
+            # a source several tasks declare unchanged is one observation; a changed declaration is a new one)
             observation_id = "obs-" + hashlib.sha256(canonical({"key": key, "revision": int(source_revision), "content": content_ref["sha256"],
-                                                                 "extraction": extraction_digest, "scope": scope_ref["sha256"]})).hexdigest()[:40]
+                                                                 "extraction": extraction_digest, "scope": scope_ref["sha256"], "event_kind": event_kind,
+                                                                 "event_start_unix_ms": event_start_unix_ms, "event_end_unix_ms": event_end_unix_ms,
+                                                                 "published_at_unix_ms": published_at_unix_ms, "source_time_basis": source_time_basis,
+                                                                 "authentication": authentication})).hexdigest()[:40]
         existing = self.observation(observation_id)
         if existing is not None:
             return existing
@@ -241,7 +246,8 @@ class MemoryService:
         return self._load(row[0])
 
     def _cached(self, key: str, read):
-        """A decoded, immutable record by its content digest; a shallow copy, so a caller's edit never reaches the cache."""
+        """A decoded record by its content digest. The caller gets a shallow copy: replacing a top-level key never
+        reaches the cache; nested values are shared and are treated as read-only by every caller in this package."""
         record = self._records.get(key)
         if record is None:
             record = read()
@@ -254,6 +260,18 @@ class MemoryService:
 
     def _load(self, sha: str) -> dict:
         return self._cached("record:" + sha, lambda: loads(self.store.get(_ref(sha, self._size(sha), "application/json"))))
+
+    def _load_if_present(self, sha: str):
+        """The record, or None when its bytes are missing or changed in the store (the cache is never consulted for that
+        question, so verification reports the same fault whether or not the record was loaded before)."""
+        path = self.store.path_for(sha)
+        try:
+            raw = path.read_bytes()
+        except OSError:
+            return None
+        if hashlib.sha256(raw).hexdigest() != sha:
+            return None
+        return self._load(sha)
 
     def _size(self, sha: str) -> int:
         row = self._db.execute("SELECT record_bytes FROM entries WHERE record_sha = ?", (sha,)).fetchone()
@@ -452,7 +470,7 @@ class MemoryService:
         return manifest
 
     REPRODUCED_FIELDS = ("items", "excluded")
-    REPRODUCED_ASSOCIATION_FIELDS = ("status", "batches_sha256", "entities", "seeds", "masses_milli", "links", "erosion", "executable_sha256", "snapshot_identity")
+    REPRODUCED_ASSOCIATION_FIELDS = ("status", "batches_sha256", "entities", "seeds", "masses_milli", "links", "erosion", "window", "executable_sha256", "snapshot_identity")
 
     def reproduce(self, manifest: dict) -> dict:
         """ADR-23: recompute a retained retrieval manifest from the chain at its own frontier and
@@ -679,7 +697,10 @@ class MemoryService:
             refs.add(sha)
             refs.add(scope)
         for row in self._db.execute("SELECT record_sha FROM entries WHERE kind IN ('claim', 'claim_assessment', 'outcome_label', 'policy_candidate', 'access_revocation', 'compaction')").fetchall():
-            record = self._load(row[0])
+            # a record whose bytes are gone is itself in refs and is reported by verify(); its nested references cannot be read
+            record = self._load_if_present(row[0])
+            if record is None:
+                continue
             for key in ("proposition_ref", "scope_ref", "evidence_ref", "maturity_condition_ref", "label_ref", "reason_ref",
                         "training_manifest_ref", "config_ref", "metrics_ref"):
                 if isinstance(record.get(key), dict):
@@ -723,8 +744,8 @@ class MemoryService:
         summary_rows = self._db.execute("SELECT COUNT(*) FROM summaries").fetchone()[0]
         self._db.execute("DELETE FROM cache")
         self._db.execute("DELETE FROM summaries")
-        previous = [self._load(r[0]) for r in self._db.execute("SELECT record_sha FROM compactions ORDER BY seq").fetchall()]
-        anchors = [{"memory_sequence": p["memory_sequence"], "head": p["memory_head"]} for p in previous]
+        previous = [self._load_if_present(r[0]) for r in self._db.execute("SELECT record_sha FROM compactions ORDER BY seq").fetchall()]
+        anchors = [{"memory_sequence": p["memory_sequence"], "head": p["memory_head"]} for p in previous if p is not None]
         meta = self._meta()
         anchors.append({"memory_sequence": meta["count"], "head": meta["head"]})
         present = [sha for sha in retained if self.store.path_for(sha).is_file()]

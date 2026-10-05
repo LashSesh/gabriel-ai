@@ -556,6 +556,9 @@ class Owner:
                   "owner_time_unix_ms": self.owner_time(), "reason": reason[:1024]}
         validate(record, "migration")
         text = canonical(record).decode("ascii")
+        # the record's object is stored before the row that names it: a crash in between leaves an unreferenced object,
+        # never a recorded migration whose record the backup closure (ADR-25) cannot find
+        self.store.put(canonical(record), "application/json")
         self._db.execute("BEGIN IMMEDIATE")
         try:
             self._db.execute("CREATE TABLE IF NOT EXISTS migrations (migration_id TEXT PRIMARY KEY, sequence INTEGER NOT NULL, "
@@ -570,7 +573,6 @@ class Owner:
             raise
         self.registered = {"catalog_digest": self.catalog_digest, "schema_registry_digest": registry_digest(), "reducer_identity": reducer_identity()}
         self.pending_migration = None
-        self.store.put(canonical(record), "application/json")
         return record
 
     # ------------------------------------------------------------ anchors, replay, checkpoints

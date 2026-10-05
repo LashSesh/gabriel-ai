@@ -127,8 +127,9 @@ def release_manifest(root: Path, *, evidence: dict | None = None, python: str = 
                          "gpt-4.1-mini from stating the forbidden figure (6/6 first attempts without the reason, 0/6 with it) but cost two repairs on "
                          "one needed task; two providers of one vendor (gpt-4.1-mini, gpt-5-mini; protocol 9), one presentation; the lexical seeds "
                          "are tie-broken by observation id; the history erodes by declared withdrawal and authorization only (ADR-23), never by time, "
-                         "and a withdrawal holds until the source's revision or bytes change (since ADR-25 an unchanged source is one observation "
-                         "across tasks); the walk sees at most the engine's 128 latest seed-touching batches and declares the window (ADR-25)",
+                         "and a withdrawal holds until a task declares a new revision of the source (since ADR-25 an unchanged source is one "
+                         "observation across tasks; a second declaration at the same revision makes the key contested); the walk sees at most the "
+                         "engine's 128 latest seed-touching batches within 64 entities and declares the window (ADR-25)",
                          "long-running operation is witnessed for one workspace of 600 scripted tasks (ADR-25, evidence/ops/longrun): the journal "
                          "is append-only and never compacted, a full replay or migration costs time linear in the events, metrics read the "
                          "whole telemetry file per run, and a restored workspace has no credential until the operator writes one",

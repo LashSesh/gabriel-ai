@@ -52,9 +52,10 @@ protocol.
   batches, entities, seeds, snapshot identity and masses. The cache key covers the profile.
   Beyond the entity cap the walk is restricted to the batches that touch a seed, and beyond that
   it is declared unavailable in the record; the retrieval then stays lexical, and says so.
-  (Since ADR-25 the same rule applies at the engine's batch cap: the walk runs over the batches
-  that touch a seed, the latest in chain order up to the cap, and the record's `window` says how
-  many batches were available and how many were used.)
+  (Since ADR-25 both caps are a declared window: the walk runs over the batches that touch a
+  seed, of those the latest in chain order up to the batch cap, and of those the latest whose
+  entities fit the entity cap; only a single batch wider than the entity cap is unavailable, and
+  the record's `window` says how many batches were available and how many were used.)
 - **The document pack's view `associative`** is the provenance view with the profile; the
   default view is unchanged. The baseline views of ADR-16 are unchanged.
 - **The reference.** The structural score equals the standard-library spectral walk of

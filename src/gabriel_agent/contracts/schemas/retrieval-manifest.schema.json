@@ -239,7 +239,7 @@
         },
         "window": {
           "additionalProperties": false,
-          "description": "ADR-25: the engine's batch cap applied to the history: batches available at the frontier after erosion, batches the walk saw, and the declared rule",
+          "description": "ADR-25: the engine's caps applied to the history: batches available at the frontier after erosion, batches the walk saw, and the declared rule (whole history when nothing was cut)",
           "properties": {
             "available": {
               "$ref": "common.schema.json#/$defs/safe_uint"
@@ -247,9 +247,14 @@
             "max_batches": {
               "$ref": "common.schema.json#/$defs/safe_uint"
             },
+            "max_entities": {
+              "$ref": "common.schema.json#/$defs/safe_uint"
+            },
             "rule": {
-              "maxLength": 128,
-              "pattern": "^[ -~]*$",
+              "enum": [
+                "whole history",
+                "batches touching a seed, the latest in chain order, within the engine's caps"
+              ],
               "type": "string"
             },
             "used": {
@@ -258,6 +263,7 @@
           },
           "required": [
             "max_batches",
+            "max_entities",
             "available",
             "used",
             "rule"

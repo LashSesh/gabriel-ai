@@ -12,6 +12,7 @@ import pytest
 from gabriel_agent.agent import TaskRunner, Workspace
 from gabriel_agent.agent import workspace as workspace_module
 from gabriel_agent.contracts import GabrielError
+from gabriel_agent.contracts.errors import Code
 from gabriel_agent.contracts.codec import loads
 from gabriel_agent.domains.base import descriptor
 from gabriel_agent.evaluation.fixtures import parser_bug
@@ -435,8 +436,16 @@ def test_backup_carries_the_referenced_closure_so_a_restore_after_a_migration_re
         closure = referenced_closure(ws2.store, roots_of(ws2))
         top_level = set(ws2.owner.referenced_artifacts()) | ws2.memory.referenced_artifacts()
         assert len(closure) > len(top_level)  # the catalog records, task specs and nested artifacts are closure, not top-level references
+        # a JSON observation (user-supplied content) that names a digest no object has: recorded, never fatal
+        dangling = {"sha256": "f" * 64, "bytes": 3, "media_type": "application/json"}
+        ws2.memory.ingest(source_id="user", source_object_id="json-doc", source_revision=1, content=json.dumps({"ref": dangling}).encode("utf8"),
+                          media_type="application/json", received_at_unix_ms=1, extraction_digest="0" * 64,
+                          scope={"principals": [ws2.config["principal_id"]], "source_kind": "document"})
+        closure = referenced_closure(ws2.store, roots_of(ws2))
+        assert "f" * 64 in closure
         manifest = backup(ws2, tmp_path / "backup-after-migration")
-        assert set(manifest["objects"]) == closure and manifest["object_count"] == len(closure)
+        assert set(manifest["objects"]) == closure - {"f" * 64} and manifest["object_count"] == len(closure) - 1
+        assert manifest["unresolved_nested_references"] == ["f" * 64] and manifest["unresolved_nested_reference_count"] == 1
         anchor = ws2.owner.anchor()
     finally:
         ws2.close()
@@ -475,6 +484,14 @@ def test_retiring_worktrees_frees_disk_keeps_the_journal_and_refuses_a_later_exp
     assert ws.store.get(delivered["patch_ref"]) == (tmp_path / "delivery" / "patch.diff").read_bytes()
     assert ws.owner.replay()["status"] == "passed" and ws.gc()["status"] == "dry_run"
     assert ws.retire_worktrees()["retired"] == []  # idempotent
+    # the report is retained in the workspace; an unknown run is refused, not silently skipped
+    reports = sorted((ws.path / "retirements").glob("retire-*.json"))
+    assert len(reports) == 2 and json.loads(reports[0].read_text())["retired"] == [created["run_id"]]
+    with pytest.raises(GabrielError) as excinfo:
+        ws.retire_worktrees(run_ids=["run-does-not-exist"])
+    assert excinfo.value.code == Code.UNKNOWN_OBJECT
+    # the retired terminal run still reports its state through the runner instead of failing on its worktree
+    assert TaskRunner(ws, created["task_id"]).run()["state"] == "succeeded"
     # the pending run keeps its worktree and still runs to success afterwards
     assert TaskRunner(ws, pending["task_id"]).run()["state"] == "succeeded"
     path = ws.path

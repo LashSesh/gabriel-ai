@@ -48,29 +48,47 @@ so a replay, a migration (two replays) and a restore cost time linear in the eve
 not a defect to fix here but a cost to measure and state.
 
 ## Decision
-- **The batch cap is a declared window.** When the history has more batches than the engine
-  admits, or more entities than the profile allows, the walk runs over the batches that touch a
-  seed and, of those, the latest in chain order up to the cap. The record retains
-  `window: {max_batches, available, used, rule}` on every computed, `capacity_exceeded` and
-  `no_seeds_in_history` record, and `batches_sha256` covers the walked batches, so an ADR-23
-  reproduction recomputes the same window and the manifest says what the walk did not see.
-  The engine's caps are unchanged; the memory stops asking it for more than it admits.
+- **The engine's caps are a declared window.** When the history has more batches than the
+  engine admits, or more entities than the profile allows, the walk runs over the batches that
+  touch a seed, of those the latest in chain order up to the batch cap, and of those the latest
+  whose entities fit the entity cap. Only a single batch wider than the entity cap is
+  `capacity_exceeded`. The record retains `window: {max_batches, max_entities, available, used,
+  rule}` on every record that reached the walk's bounds (`computed`, `unavailable` and
+  `capacity_exceeded`; `rule` is `whole history` when nothing was cut), `batches_sha256` covers
+  the walked batches and `memory reproduce` compares the window, so an ADR-23 reproduction
+  recomputes the same window and the manifest says what the walk did not see. The engine's caps are unchanged; the memory stops asking it for more than it admits. The
+  first witness run (retained in the history of this branch, not as evidence) showed why the
+  entity cap needs the same treatment as the batch cap: with the window on batches alone, every
+  probe after the hub's neighbourhood passed 64 entities was `capacity_exceeded`, so the
+  associative view had switched off for the rest of the workspace's life.
 - **An unchanged source is one observation across tasks.** The document pack's observation
-  scope carries the principal and the source kind; the task is retained in the run's own
-  retrieval manifest and citation report, where it belongs. A source with the same key,
-  revision, bytes and extraction is ingested once; a new revision or new bytes is a new
-  observation as before. Consequence for ADR-23: a withdrawal declared by one task now holds
-  for later tasks until the source changes, because a later declaration of the unchanged source
-  adds no observation (ADR-23's limits are amended accordingly).
+  scope carries the principal and the source kind; which task used which observation is
+  retained per run (the run's retrieval manifest names the task, the citation report the
+  observations). The identity of an observation is everything it declares about the source
+  except when it was received: key, revision, bytes, extraction, scope, event kind and interval,
+  publication time, time basis and authentication. A task that declares the same source the
+  same way adds no observation; one that declares it differently adds one, and two
+  observations of one revision make the key contested as before. Consequence for ADR-23: a
+  withdrawal declared by one task now holds for later tasks until a task declares a new revision
+  (ADR-23's limits are amended accordingly), and it holds for every task's next citation
+  verification, a task in flight included (tasks run one at a time in this single-user
+  deployment, so no such task exists here).
 - **The backup carries the referenced closure.** `backup` copies the transitive closure of the
   workspace's roots (the collector's `roots_of` and `referenced_closure`): the retained catalogs
   of every epoch, the migration records, the memory manifests and everything nested in JSON
-  artifacts. A restore of a migrated workspace replays every epoch under the retained catalogs.
+  artifacts. A root that is missing is a storage fault as before; a reference nested inside a
+  JSON artifact (user-supplied content included) that names no stored object is recorded in the
+  manifest (`unresolved_nested_references`) and never fails the backup. A restore of a migrated
+  workspace replays every epoch under the retained catalogs. The migration record's object is
+  stored before the row that names it, so a crash between the two leaves an orphan, never a
+  recorded migration the closure cannot find.
 - **Worktrees are retired explicitly.** `Workspace.retire_worktrees` (CLI `gabriel retire`)
-  removes the worktrees of terminal runs, prunes the source repositories' registrations, and
-  records the retirement in the run's notes; `task export` of a retired run refuses with
-  `STORAGE_FAULT` instead of exporting an empty tree. The journal, the retained patch and every
-  object are untouched; retirement is an operator's step, never automatic.
+  removes the worktrees of terminal runs that have no tool attempt still dispatched, prunes the
+  source repositories' registrations, records the retirement in the run's notes and retains a
+  report under `<workspace>/retirements/`; an unknown run id is refused. `task export` of a
+  retired run refuses with `STORAGE_FAULT` instead of exporting an empty tree, and `task run`
+  on it reports the terminal state. The journal, the retained patch and every object are
+  untouched; retirement is an operator's step, never automatic.
 - **Indexes at creation, a bounded record cache, and counts instead of silent truncation.**
   A new memory index and a new journal are created with the secondary indexes their queries use
   (observations by key and sequence, kind, revocations by observation, labels by source, claims

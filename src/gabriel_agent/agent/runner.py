@@ -48,7 +48,9 @@ class TaskRunner:
         self.profile = validate_bytes(self.store.get(self.binding["provider_profile_ref"]), "provider-profile")
         self.goal_text = self.store.get(projection["task"]["goal_ref"]).decode("utf8")
         self.notes = workspace.run_notes(self.run_id)
-        self.worktree = workspace.worktree_for(self.run_id, self.binding)
+        # ADR-25: a terminal run whose worktree was retired has nothing left to execute; it reports its state
+        self.worktree = None if (self.notes.get("worktree_retired") and projection["run"]["state"] in TERMINAL_STATES) \
+            else workspace.worktree_for(self.run_id, self.binding)
         self.extras = dict({"protected_paths": self.notes.get("protected_paths", [])}, **(extras or {}))
         backend = workspace.backend
         self.supervisor = Supervisor(self.owner, self.store, self.registry, workspace.credential, backend=backend, hooks=hooks,
@@ -119,9 +121,12 @@ class TaskRunner:
                     pass
 
     def _run_loop(self) -> dict:
-        recovered = self.supervisor.recover(self.run_id, worktree=self.worktree, binding=self.binding)
+        recovered = self.supervisor.recover(self.run_id, worktree=self.worktree, binding=self.binding) if self.worktree is not None else None
         if recovered:
             self.log.append("recovered: " + json.dumps(recovered))
+        # a run that was terminal before this loop started has its outcome, claims and episode recorded by the loop that
+        # ended it; a later `task run` on it reports the state and records nothing twice (ADR-25)
+        entered_terminal = self._projection()["run"]["state"] in TERMINAL_STATES
         for _ in range(self.max_iterations):
             projection = self._projection()
             state = projection["run"]["state"]
@@ -157,7 +162,8 @@ class TaskRunner:
                            prerequisite="restart", wakeup="runner-restart")
                 continue
             self._handle_stall(projection)
-        self._record_episode()
+        if not entered_terminal:
+            self._record_episode()
         return self.summary()
 
     # ------------------------------------------------------------ policy: decisions, episodes, outcomes
@@ -245,7 +251,7 @@ class TaskRunner:
                               evidence={"run_id": self.run_id, "state": state, "supporting": claim["supporting"]}, frontier=memory.frontier(), reason=claim["reason"])
                 self.log.append("claim %s supported by %d cited observation(s)" % (record["claim_id"][:22], len(claim["supporting"])))
         try:
-            diff = self.worktree.patch().decode("utf8", "replace")[:8000]
+            diff = self.worktree.patch().decode("utf8", "replace")[:8000] if self.worktree is not None else ""
         except GabrielError:
             diff = ""
         text = json.dumps({"goal": self.goal_text, "domain": self.pack.namespace, "state": state, "outcome": outcome, "repair_count": meta["repair_count"],

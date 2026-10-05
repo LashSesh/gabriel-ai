@@ -173,6 +173,32 @@ def test_compaction_keeps_required_bytes_and_missing_blob_is_a_storage_fault(tmp
     assert excinfo.value.details["status"] == "storage_fault" and not excinfo.value.details["required_bytes_verified"]
 
 
+def test_verification_reports_a_missing_chain_record_whether_or_not_it_was_loaded_before(tmp_path):
+    """ADR-25: the service caches decoded records in process, and the cache never answers whether
+    a record's bytes are present. A chain record whose object is gone is reported as `missing` by
+    verify() and recorded as a storage fault by compact(), by the service that loaded it before
+    and by a fresh service alike."""
+    memory, store, clock = fresh(tmp_path)
+    ingest(memory, "policy", 1, "Compaction keeps me.")
+    first = memory.compact()
+    assert first["status"] == "compacted"
+    memory.compact()  # loads the first compaction record (now cached) to carry its anchor
+    entry = memory.entries()[1]
+    assert entry["kind"] == "compaction"
+    sha = entry["record_sha"]
+    Path(store.path_for(sha)).unlink()
+    cached = memory.verify()
+    assert cached["status"] == "storage_fault" and {"sha256": sha, "fault": "missing"} in cached["faults"]
+    with pytest.raises(GabrielError) as excinfo:
+        memory.compact()
+    assert excinfo.value.details["status"] == "storage_fault" and {"sha256": sha, "fault": "missing"} in excinfo.value.details["faults"]
+    memory.close()
+    reopened = MemoryService.open(tmp_path / "mem.sqlite", store, lambda: clock["owner"])
+    fresh_check = reopened.verify()
+    assert fresh_check["status"] == "storage_fault" and fresh_check["faults"] == cached["faults"]
+    reopened.close()
+
+
 def test_workspace_backup_restores_memory_and_refuses_a_missing_memory_blob(tmp_path):
     ws = Workspace.create(tmp_path / "ws", backend="trusted_local", allow_trusted_local=True)
     obs = ws.memory.ingest(source_id="policy", source_object_id="doc", source_revision=1, content=b"restore me", received_at_unix_ms=1,

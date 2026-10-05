@@ -236,10 +236,12 @@ period are orphans. After `--apply` the replay and the memory chain are re-verif
 Long-running operation (ADR-25): a workspace grows with every task (journal events, memory
 chain, objects, one git worktree per run, the telemetry file) and nothing in the production path
 removes a worktree. `gabriel retire` removes the worktrees of terminal runs (all of them, or
-`--run`), prunes the source repositories' worktree registrations and marks the run's notes so
-that a later `task export` of that run is refused with `STORAGE_FAULT` instead of exporting an
-empty tree; the journal, the retained patch and every object stay, and `gc` afterwards reclaims
-nothing (worktrees are outside the store). `backup` carries the transitive closure of the
+`--run`; a run with a tool attempt still dispatched is skipped and named, an unknown run id is
+refused), prunes the source repositories' worktree registrations, retains a report under
+`<workspace>/retirements/` and marks the run's notes so that a later `task export` of that run
+is refused with `STORAGE_FAULT` instead of exporting an empty tree; the journal, the retained
+patch and every object stay, and `gc` afterwards reclaims nothing (worktrees are outside the
+store). `backup` carries the transitive closure of the
 referenced objects (the retained catalogs and migration records included), so a restore of a
 workspace that was migrated replays every epoch; a restored workspace still has no credential
 (`credentials/<principal>.secret` is never backed up) until the operator writes one. The
@@ -331,10 +333,11 @@ of the protocol was lost to distractors that tied with the visible source before
 existed, and is retained with the amendment (`evidence/wp15/protocol6_declaration.md`).
 
 Capacity (ADR-20, ADR-25): the engine's walk takes at most 64 entities and 128 batches. Beyond
-either cap the history is windowed to the batches that touch a seed, the latest in chain order
-up to the cap, and the record's `window` says how many batches were available and how many were
-used; a window whose entities still exceed the cap is `capacity_exceeded` and the retrieval
-stays lexical. A source that several tasks declare unchanged is one observation (the scope
+either cap the history is windowed to the batches that touch a seed, of those the latest in
+chain order up to the batch cap, and of those the latest whose entities fit the entity cap; the
+record's `window` says the caps, how many batches were available, how many were used and the
+rule (`whole history` when nothing was cut). Only a single batch wider than the entity cap is
+`capacity_exceeded`, and the retrieval then stays lexical. A source that several tasks declare unchanged is one observation (the scope
 carries the principal and the source kind, not the task), so the observation table grows with
 distinct sources, not with tasks.
 

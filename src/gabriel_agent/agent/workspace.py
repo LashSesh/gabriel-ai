@@ -477,14 +477,24 @@ class Workspace:
         untouched; the run's notes keep the retirement, and `task export` for a retired run refuses.
         Runs that are not terminal are skipped and named."""
         from ..state import TERMINAL_STATES
-        report = {"schema": "gabriel.worktree-retirement/1", "workspace_id": self.config["workspace_id"], "retired": [], "skipped": [],
-                  "bytes_freed": 0, "repositories_pruned": []}
+        report = {"schema": "gabriel.worktree-retirement/1", "workspace_id": self.config["workspace_id"], "owner_time_unix_ms": self.owner.owner_time(),
+                  "retired": [], "skipped": [], "bytes_freed": 0, "repositories_pruned": []}
         repositories = set()
-        for run_id, state in self.owner._db.execute("SELECT run_id, state FROM runs ORDER BY run_id").fetchall():
+        rows = self.owner._db.execute("SELECT run_id, state FROM runs ORDER BY run_id").fetchall()
+        if run_ids is not None:
+            unknown = sorted(set(run_ids) - {run_id for run_id, _ in rows})
+            if unknown:
+                raise GabrielError(Code.UNKNOWN_OBJECT, "no such run: " + ", ".join(unknown))
+        for run_id, state in rows:
             if run_ids is not None and run_id not in run_ids:
                 continue
             if state not in TERMINAL_STATES:
                 report["skipped"].append({"run_id": run_id, "reason": "run state %s is not terminal" % state})
+                continue
+            in_flight = self.owner._db.execute("SELECT COUNT(*) FROM attempts WHERE run_id = ? AND status IN ('issued', 'marked')", (run_id,)).fetchone()[0]
+            if in_flight:
+                # a cancelled run can still have a dispatched tool attempt until it is reconciled; its tree stays until then
+                report["skipped"].append({"run_id": run_id, "reason": "%d attempt(s) still dispatched" % in_flight})
                 continue
             notes_path = self.path / "runs" / (run_id + ".json")
             if not notes_path.is_file():
@@ -508,6 +518,10 @@ class Workspace:
             if Path(repository).is_dir():
                 git(["worktree", "prune"], repository, check=False)
                 report["repositories_pruned"].append(repository)
+        # the report is retained beside the gc reports; the per-run fact lives in the run's notes, which backups exclude
+        reports = self.path / "retirements"
+        reports.mkdir(exist_ok=True)
+        (reports / ("retire-%d.json" % report["owner_time_unix_ms"])).write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
         return report
 
     def resolve_task(self, task_id: str) -> tuple:

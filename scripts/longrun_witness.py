@@ -25,6 +25,7 @@ import platform
 import shutil
 import sys
 import time
+import traceback
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -98,7 +99,8 @@ def hub_spec(repo: Path, base: str, oracle_dir: Path, ward: int) -> dict:
 
 
 def probe_spec(repo: Path, base: str, oracle_dir: Path, index: int) -> dict:
-    """An associative-view task seeded on the hub only: its retrieval manifest retains what the walk saw."""
+    """An associative-view task whose goal names the hub (the goal's lexical matches seed the walk, the hub among them):
+    its retrieval manifest retains what the walk saw."""
     content = "# Notes\n\nThe reporting threshold is fixed in the ward registers. [[cite:{{obs:hub}} \"fixed in the ward registers\"]]\n"
     oracle = oracle_dir / ("probe-%03d.json" % index)
     oracle.write_text(json.dumps({"claims": [{"path": "doc/notes.md", "must_contain": ["fixed in the ward registers"], "cited_source_id": "hub",
@@ -157,7 +159,7 @@ class Witness:
         self.work = out / "work"
         self.ws_path = self.work / "workspace"
         self.ws = None
-        self.series, self.probes, self.operations, self.retrievals = [], [], [], []
+        self.series, self.probes, self.operations, self.retrievals, self.retrieval_errors = [], [], [], [], []
         self.epoch = 0
         self.task_index = 0
         self.started = time.monotonic()
@@ -222,7 +224,11 @@ class Witness:
 
         def timed(**kwargs):
             clock = time.monotonic()
-            manifest = original(**kwargs)
+            try:
+                manifest = original(**kwargs)
+            except BaseException as exc:  # a retrieval that raises is the cliff ADR-25 removes; it is retained, then re-raised
+                witness.retrieval_errors.append({"task_index": witness.task_index, "error": repr(exc)})
+                raise
             witness.retrievals.append({"duration_ms": int((time.monotonic() - clock) * 1000), "cached": manifest.get("cached"), "items": len(manifest["items"]),
                                        "excluded": len(manifest["excluded"]), "association": (manifest.get("association") or {}).get("status")})
             return manifest
@@ -314,11 +320,11 @@ class Witness:
             if done == len(plan) // 2 and not migrated:
                 # backup, restore elsewhere, then migrate to a changed catalog and continue under the new epoch
                 backup_dir = self.work / ("backup-%d" % done)
-                self.operation("backup", lambda: {k: v for k, v in backup(self.ws, backup_dir).items() if k != "objects"}, path=str(backup_dir))
+                self.operation("backup", lambda: {k: v for k, v in backup(self.ws, backup_dir).items() if k != "objects"}, path=self.relative(backup_dir))
                 backup_dirs.append(backup_dir)
                 self.ws.close()
                 self.operation("restore", lambda: restore(backup_dir, self.work / ("restored-%d" % done), catalog=workspace_module.build_registry(lambda: None).catalog()),
-                               source=str(backup_dir))
+                               source=self.relative(backup_dir))
                 workspace_module.build_registry = _registry_with_probe
                 migration = self.operation("migrate", lambda: Workspace.migrate(self.ws_path, reason="longrun witness: ops.probe tool added to the catalog"))
                 if migration["status"] == "ok":
@@ -331,9 +337,9 @@ class Witness:
                 snapshots.append(self.snapshot("after-migration", True))
         # the end: a second backup and restore under the new epoch, replay, chain, reproduction, diagnostics, metrics, retirement
         final_backup = self.work / "backup-final"
-        self.operation("backup", lambda: {k: v for k, v in backup(self.ws, final_backup).items() if k != "objects"}, path=str(final_backup))
+        self.operation("backup", lambda: {k: v for k, v in backup(self.ws, final_backup).items() if k != "objects"}, path=self.relative(final_backup))
         self.operation("restore", lambda: restore(final_backup, self.work / "restored-final", catalog=workspace_module.build_registry(lambda: None).catalog()),
-                       source=str(final_backup))
+                       source=self.relative(final_backup))
         self.operation("owner.replay", lambda: self.ws.owner.replay())
         self.operation("memory.verify", lambda: self.ws.memory.verify())
         for which in ("first", "last"):
@@ -351,7 +357,14 @@ class Witness:
         workspace_module.build_registry = _ORIGINAL_BUILD_REGISTRY
         return {"doctor": {"configured_backend": doctor.get("configured_backend"), "problems": doctor.get("problems"),
                            "linux_namespace": (doctor.get("backends") or {}).get("linux_namespace")}, "snapshots": snapshots, "anchor": anchor, "memory_anchor": memory_anchor,
-                "backups": [str(p) for p in backup_dirs] + [str(final_backup)]}
+                "backups": [self.relative(p) for p in backup_dirs] + [self.relative(final_backup)]}
+
+    def relative(self, path: Path) -> str:
+        """Paths in the evidence are relative to the output directory, whatever --out the host was given."""
+        try:
+            return str(Path(path).resolve().relative_to(self.out.resolve()))
+        except ValueError:
+            return str(Path(path).name)
 
 
 def checks(summary: dict, witness: Witness) -> dict:
@@ -371,11 +384,17 @@ def checks(summary: dict, witness: Witness) -> dict:
         "software_tasks_all_succeeded": all(r["state"] == "succeeded" for r in by_kind.get("software", [])),
         "numerical_tasks_all_succeeded": all(r["state"] == "succeeded" for r in by_kind.get("numerical", [])),
         "probes_all_succeeded": all(p["state"] == "succeeded" for p in witness.probes),
-        "batch_cap_reached_and_declared": any(p["history_claims"] > native_graph.CAPS["max_batches"] for p in witness.probes) and bool(windowed)
-                                           and all((p["association"]["window"] or {}).get("used") == native_graph.CAPS["max_batches"] for p in windowed),
+        # beyond the batch cap with the entities within the entity cap, the walk sees exactly max_batches batches
+        "batch_cap_reached_and_declared": any(p["history_claims"] > native_graph.CAPS["max_batches"] and p["history_entities"] <= native_graph.CAPS["max_nodes"] for p in witness.probes)
+                                           and bool(windowed)
+                                           and all((p["association"]["window"] or {}).get("used") == native_graph.CAPS["max_batches"]
+                                                   for p in windowed if p["history_entities"] <= native_graph.CAPS["max_nodes"]),
+        # beyond the entity cap the walk sees the latest seeded batches whose entities fit, computed and declared, never off
         "entity_cap_reached_and_declared": any(p["history_entities"] > native_graph.CAPS["max_nodes"] for p in witness.probes)
-                                            and all(p["association"]["status"] == "capacity_exceeded" for p in witness.probes if p["history_entities"] > native_graph.CAPS["max_nodes"]),
-        "no_retrieval_raised": all(p["state"] == "succeeded" for p in witness.probes),
+                                            and all(p["association"]["status"] == "computed" and 0 < p["entities"] <= native_graph.CAPS["max_nodes"]
+                                                    and (p["association"].get("window") or {}).get("used", 0) < (p["association"].get("window") or {}).get("available", 0)
+                                                    for p in witness.probes if p["history_entities"] > native_graph.CAPS["max_nodes"]),
+        "no_retrieval_raised": witness.retrieval_errors == [],
         # every source has one revision and one extraction here, so one observation per distinct document key is the ADR-25 bound
         "document_observations_bounded_by_distinct_sources": summary["snapshots"][-1]["memory"]["document_observations"] == summary["snapshots"][-1]["memory"]["distinct_document_keys"],
         "every_compaction_verified": all(e["status"] == "ok" and e["result"]["status"] == "compacted" and e["result"]["required_bytes_verified"] for e in ops.get("memory.compact", [])),
@@ -385,8 +404,14 @@ def checks(summary: dict, witness: Witness) -> dict:
         "final_replay_passed": ops.get("owner.replay", [{}])[-1].get("result", {}).get("status") == "passed",
         "memory_chain_verified": ops.get("memory.verify", [{}])[-1].get("result", {}).get("status") == "passed",
         "first_and_last_probe_reproduce": all(e["status"] == "ok" and e["result"]["status"] == "reproduced" for e in ops.get("memory.reproduce", [])),
-        "diagnostics_clean": not (ops.get("doctor.deep", [{}])[-1].get("result", {}).get("startup", {}).get("storage", {}).get("missing")
-                                  or ops.get("doctor.deep", [{}])[-1].get("result", {}).get("startup", {}).get("storage", {}).get("corrupt")),
+        # the deep doctor ran, found no missing or changed bytes and no reconciliation work, and its only problem is the
+        # jail self-test it does not execute itself (the witness runs that self-test at the start)
+        "diagnostics_clean": bool(ops.get("doctor.deep")) and ops["doctor.deep"][-1]["status"] == "ok"
+                             and ops["doctor.deep"][-1]["result"]["startup"]["storage"]["missing"] == []
+                             and ops["doctor.deep"][-1]["result"]["startup"]["storage"]["corrupt"] == []
+                             and ops["doctor.deep"][-1]["result"]["startup"]["reconciliation_work"] == []
+                             and all("self-test" in problem for problem in ops["doctor.deep"][-1]["result"]["problems"])
+                             and summary["doctor"]["linux_namespace"] is not None,
         "worktrees_retired": ops.get("retire_worktrees", [{}])[-1].get("result", {}).get("retired") == len(tasks) and summary["snapshots"][-1]["worktrees"] == 0,
         "probe_statuses": statuses, "first_probe": first["association"]["status"], "last_probe": last["association"]["status"],
     }
@@ -406,7 +431,7 @@ def report_lines(summary: dict, witness: Witness, verdict: dict, args) -> list:
             s["memory"]["distinct_document_keys"], s["memory"]["supported_claims"], s["memory"]["cache_rows"], store.get("objects", "-"),
             ("%.1f" % (store["bytes"] / 1e6)) if store else "-", s["worktrees"], ("%.1f" % (s["worktree_bytes"] / 1e6)) if s["worktree_bytes"] is not None else "-",
             s["telemetry_bytes"] / 1e6))
-    lines += ["", "## Associative probes (every %d document tasks, seeded on the hub)" % PROBE_EVERY, "",
+    lines += ["", "## Associative probes (every %d document tasks; the goal's lexical matches seed the walk, the hub among them)" % PROBE_EVERY, "",
               "| probe | after task | state | status | claims in history | entities in history | batches available / used | entities walked | carried | retrieval ms | engine ms |", "|---|---|---|---|---|---|---|---|---|---|---|"]
     for p in witness.probes:
         window = p["association"].get("window") or {}
@@ -452,6 +477,10 @@ def main(argv=None) -> int:
     parser.add_argument("--backend", choices=("linux_namespace", "trusted_local"), default="linux_namespace")
     parser.add_argument("--tasks", type=int, default=600)
     args = parser.parse_args(argv)
+    if args.tasks < 4 * PROBE_EVERY:
+        raise SystemExit("--tasks must be at least %d so that the schedule holds probes, a compaction and a migration" % (4 * PROBE_EVERY))
+    if native_graph.binaries().get("engine_observer") is None:
+        raise SystemExit("the native engine_observer is not built; the associative probes need it")
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
     witness = Witness(out, args.backend)
@@ -459,6 +488,15 @@ def main(argv=None) -> int:
         raise SystemExit("refusing to overwrite " + str(witness.work))
     try:
         summary = witness.run(args.tasks)
+    except BaseException as exc:
+        # an aborted run still retains what it measured: the series, probes and operations so far, and the failure
+        aborted = {"schema": "gabriel.evidence.longrun-witness/1", "status": "aborted", "error": repr(exc), "traceback": traceback.format_exc(),
+                   "tasks": len(witness.series), "probes": [{k: v for k, v in p.items() if k != "manifest"} for p in witness.probes],
+                   "operations": witness.operations, "elapsed_s": round(time.monotonic() - witness.started, 1), "backend": args.backend}
+        (out / "summary.json").write_text(json.dumps(aborted, indent=1, sort_keys=True, default=str) + "\n")
+        (out / "series.json").write_text(json.dumps(witness.series, indent=1, default=str) + "\n")
+        (out / "report.md").write_text("# ADR-25 witness: aborted after %d tasks\n\n```\n%s```\n" % (len(witness.series), traceback.format_exc()))
+        raise
     finally:
         workspace_module.build_registry = _ORIGINAL_BUILD_REGISTRY
     verdict = checks(summary, witness)
