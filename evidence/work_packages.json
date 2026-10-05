@@ -1,6 +1,6 @@
 {
   "schema": "gabriel.evidence.work-packages/1",
-  "produced_at_utc": "2026-10-05T13:29:16.290607+00:00",
+  "produced_at_utc": "2026-10-05T18:03:51.188523+00:00",
   "rule": "A package counts as done only with actual code and recorded test output; privileged and paid runs are listed under not_executed.",
   "packages": {
     "WP01": {
@@ -185,6 +185,10 @@
             "result": "PASSED"
           },
           {
+            "test": "test_replay_from_a_verified_checkpoint_reduces_the_suffix_and_still_checks_every_chain",
+            "result": "PASSED"
+          },
+          {
             "test": "test_replay_rejects_tampered_event",
             "result": "PASSED"
           },
@@ -304,6 +308,10 @@
           },
           {
             "test": "test_anchor_detects_truncated_suffix_and_checkpoint_binding",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_replay_from_a_verified_checkpoint_reduces_the_suffix_and_still_checks_every_chain",
             "result": "PASSED"
           },
           {
@@ -727,6 +735,10 @@
           },
           {
             "test": "test_anchor_detects_truncated_suffix_and_checkpoint_binding",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_replay_from_a_verified_checkpoint_reduces_the_suffix_and_still_checks_every_chain",
             "result": "PASSED"
           },
           {
@@ -2039,7 +2051,8 @@
       ],
       "acceptance": [
         "blueprint: operations, observability and release discipline",
-        "ADR-25: a long run of many tasks in one workspace with compaction, garbage collection, backup, restore and migration under a growing memory, with the batch window, the one-observation-per-source rule, the closure-complete backup and worktree retirement witnessed (evidence/ops/longrun)"
+        "ADR-25: a long run of many tasks in one workspace with compaction, garbage collection, backup, restore and migration under a growing memory, with the batch window, the one-observation-per-source rule, the closure-complete backup and worktree retirement witnessed (evidence/ops/longrun)",
+        "ADR-26: verified state checkpoints recorded by the replays that reproduced them; restore, the re-verification after a collection and a routine audit replay from the latest verified checkpoint while both chains are verified over every event; the audit from genesis verifies every checkpoint (evidence/ops/longrun, recovery table)"
       ],
       "evidence": [
         "evidence/ops/migration_at23.json",
@@ -2054,13 +2067,15 @@
         "evidence/ops/longrun/README.md",
         "docs/adr/ADR-17-operations.md",
         "docs/adr/ADR-25-long-running-operation.md",
+        "docs/adr/ADR-26-bounded-recovery.md",
         "evidence/test_results.txt"
       ],
       "not_executed": [
         "cooperative cancellation of a tool run inside the containment backend (stop takes effect at the next boundary)",
         "a successful migration of a journal created before catalog records existed (refused by rule when verifiers changed)",
         "a long run with a real provider (the witness uses the scripted providers so that growth, not the model, is measured)",
-        "journal compaction (the journal is append-only by contract; replay and migration cost time linear in the events)"
+        "journal compaction (the journal is append-only by contract; the audit from genesis and a migration cost time linear in the events; since ADR-26 restore, the collection's re-verification and a routine audit replay from the latest verified checkpoint)",
+        "pruning of checkpoints (every one is retained)"
       ],
       "test_results": {
         "tests/test_ops.py": [
@@ -2114,6 +2129,22 @@
           },
           {
             "test": "test_backup_carries_the_referenced_closure_so_a_restore_after_a_migration_replays_every_epoch",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_collection_records_a_verified_checkpoint_and_restore_and_audit_recover_from_it",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_a_restore_of_a_backup_without_a_checkpoint_says_it_replayed_from_genesis",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_a_migration_records_the_first_checkpoint_of_its_epoch_and_earlier_ones_stay_usable",
+            "result": "PASSED"
+          },
+          {
+            "test": "test_telemetry_rotates_the_live_file_and_metrics_read_every_part_once",
             "result": "PASSED"
           },
           {

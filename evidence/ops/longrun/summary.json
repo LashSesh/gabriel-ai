@@ -1,8 +1,8 @@
 {
  "adr": "docs/adr/ADR-25-long-running-operation.md",
  "anchor": {
-  "head": "9d806911aeb1d1e1b633192b1303892d425a4a5edfc109f65f6f4aeae5c811ca",
-  "inputs_head": "bbfc3d422c1972f1594c921f990ced1aba9f27fb7124b8e3151796e151700fdd",
+  "head": "88db1940630af652c54ec4530cc880197c1bae4f47bf94668a40b82be876b7e2",
+  "inputs_head": "772f4bbe50213500242dbed023767608c8f8a0cd4d94b9acf885ce405fb00475",
   "schema": "gabriel.anchor/1",
   "sequence": 19836,
   "workspace_id": "ws-5750f3f5baa9"
@@ -19,18 +19,21 @@
   "max_windows": 32
  },
  "checks": {
+  "audit_verified_every_checkpoint": true,
   "backups_restored_and_replayed": true,
   "batch_cap_reached_and_declared": true,
   "diagnostics_clean": true,
   "document_observations_bounded_by_distinct_sources": true,
   "document_tasks_all_succeeded": true,
   "entity_cap_reached_and_declared": true,
+  "every_collection_recorded_a_checkpoint": true,
   "every_compaction_verified": true,
   "every_gc_passed": true,
   "every_task_terminal": true,
   "final_replay_passed": true,
   "first_and_last_probe_reproduce": true,
   "first_probe": "computed",
+  "full_restore_verified_the_checkpoint_the_quick_restore_trusted": true,
   "last_probe": "computed",
   "memory_chain_verified": true,
   "no_retrieval_raised": true,
@@ -50,8 +53,11 @@
    "computed"
   ],
   "probes_all_succeeded": true,
+  "recovery_from_checkpoint_bounded": true,
   "restore_after_migration_passed": true,
+  "restores_used_the_backups_checkpoint": true,
   "software_tasks_all_succeeded": true,
+  "telemetry_rotated": true,
   "worktrees_retired": true
  },
  "doctor": {
@@ -76,10 +82,10 @@
   },
   "problems": []
  },
- "elapsed_s": 1487.0,
+ "elapsed_s": 1065.1,
  "engine_observer_sha256": "a8e1f6d7db2ef7ab3b822ac217f29f42db22cb8745a979ccbf8911da80b94110",
  "memory_anchor": {
-  "head": "00829589d34c00e8f83239c28070daa0931b8e280a33452c001a6f47d3bb3074",
+  "head": "89998f22877406a8c4c507b3990d977b1f768706902feb7db434d45fa93196f3",
   "memory_sequence": 2337,
   "owner_sequence": 19836,
   "policy_revision": 0,
@@ -104,14 +110,36 @@
    "task_index": 0
   },
   {
-   "duration_ms": 117,
+   "duration_ms": 9585,
+   "epoch": 0,
+   "name": "replay.from_checkpoint",
+   "result": {
+    "checkpoint": null,
+    "checkpoint_recorded": null,
+    "checkpoint_sequence": null,
+    "checkpoints_skipped": [],
+    "checkpoints_verified": 0,
+    "checkpoints_verified_ids": [],
+    "events": 3157,
+    "events_reduced": 3157,
+    "head": "1ff6f5265a5bde9c9b9d164ece18ff26352fc718c09c2844506f5d3defc7efeb",
+    "missing_referenced_artifacts": 0,
+    "payloads_verified": 3157,
+    "runs": 102,
+    "status": "passed"
+   },
+   "status": "ok",
+   "task_index": 102
+  },
+  {
+   "duration_ms": 126,
    "epoch": 0,
    "name": "memory.compact",
    "result": {
     "anchor_count": 1,
     "compaction_id": "compaction-433",
     "faults": [],
-    "memory_head": "52326c4167fe0878ef6f3c28837baad8ade513d6d43fe322dc291a20a2845628",
+    "memory_head": "0310df636bc2de663fec2495b4d3d185be2b64aec60b09f604893e1bd9c38dec",
     "memory_sequence": 432,
     "owner_sequence": 3157,
     "removed_derived": {
@@ -128,26 +156,29 @@
    "task_index": 102
   },
   {
-   "duration_ms": 15959,
+   "duration_ms": 9840,
    "epoch": 0,
    "grace_seconds": 0,
    "name": "gc.apply",
    "result": {
     "apply": true,
-    "elapsed_ms": 15958,
+    "checkpoint_events_reduced": 3157,
+    "checkpoint_recorded": "gc-1791222246381-1",
+    "checkpoint_started_from": null,
+    "elapsed_ms": 9839,
     "grace_seconds": 0,
     "in_flight_attempts": [],
     "memory": "passed",
-    "objects": 6948,
+    "objects": 6940,
     "orphan_bytes": 94513,
     "orphans": 69,
-    "referenced": 6879,
+    "referenced": 6871,
     "removed": 69,
     "removed_bytes": 94513,
     "replay": "passed",
-    "roots": 6469,
+    "roots": 6461,
     "schema": "gabriel.gc-report/1",
-    "started_at_utc": "2026-10-05T13:02:15.575667+00:00",
+    "started_at_utc": "2026-10-05T17:44:06.366030+00:00",
     "status": "passed",
     "workspace_id": "ws-5750f3f5baa9"
    },
@@ -155,14 +186,36 @@
    "task_index": 102
   },
   {
-   "duration_ms": 238,
+   "duration_ms": 11063,
+   "epoch": 0,
+   "name": "replay.from_checkpoint",
+   "result": {
+    "checkpoint": "gc-1791222246381-1",
+    "checkpoint_recorded": null,
+    "checkpoint_sequence": 3157,
+    "checkpoints_skipped": [],
+    "checkpoints_verified": 0,
+    "checkpoints_verified_ids": [],
+    "events": 6334,
+    "events_reduced": 3177,
+    "head": "0ffc3be83007218e8d51a27afae1c33737c626552927d7a0e20c7a96d0f6759d",
+    "missing_referenced_artifacts": 0,
+    "payloads_verified": 3177,
+    "runs": 205,
+    "status": "passed"
+   },
+   "status": "ok",
+   "task_index": 205
+  },
+  {
+   "duration_ms": 245,
    "epoch": 0,
    "name": "memory.compact",
    "result": {
     "anchor_count": 2,
     "compaction_id": "compaction-850",
     "faults": [],
-    "memory_head": "f804703c607c16c6acddbc87f0e451ce8102dd7480971204c4b065fb69b1e3db",
+    "memory_head": "11c55f05e6a439b23312841c89148985c6ff8d45a320f2e5c060312425f789e0",
     "memory_sequence": 849,
     "owner_sequence": 6334,
     "removed_derived": {
@@ -179,26 +232,29 @@
    "task_index": 205
   },
   {
-   "duration_ms": 31400,
+   "duration_ms": 12056,
    "epoch": 0,
    "grace_seconds": 0,
    "name": "gc.apply",
    "result": {
     "apply": true,
-    "elapsed_ms": 31398,
+    "checkpoint_events_reduced": 3177,
+    "checkpoint_recorded": "gc-1791222348113-2",
+    "checkpoint_started_from": "gc-1791222246381-1",
+    "elapsed_ms": 12054,
     "grace_seconds": 0,
     "in_flight_attempts": [],
     "memory": "passed",
-    "objects": 13328,
+    "objects": 13416,
     "orphan_bytes": 148840,
     "orphans": 70,
-    "referenced": 13258,
+    "referenced": 13346,
     "removed": 70,
     "removed_bytes": 148840,
     "replay": "passed",
-    "roots": 12571,
+    "roots": 12558,
     "schema": "gabriel.gc-report/1",
-    "started_at_utc": "2026-10-05T13:03:53.621242+00:00",
+    "started_at_utc": "2026-10-05T17:45:48.097896+00:00",
     "status": "passed",
     "workspace_id": "ws-5750f3f5baa9"
    },
@@ -206,14 +262,36 @@
    "task_index": 205
   },
   {
-   "duration_ms": 352,
+   "duration_ms": 10548,
+   "epoch": 0,
+   "name": "replay.from_checkpoint",
+   "result": {
+    "checkpoint": "gc-1791222348113-2",
+    "checkpoint_recorded": null,
+    "checkpoint_sequence": 6334,
+    "checkpoints_skipped": [],
+    "checkpoints_verified": 0,
+    "checkpoints_verified_ids": [],
+    "events": 9524,
+    "events_reduced": 3190,
+    "head": "29cdf14a9d49001d3e868de3ce77556a2a094e8a34c0933597078f9242dbfe57",
+    "missing_referenced_artifacts": 0,
+    "payloads_verified": 3190,
+    "runs": 308,
+    "status": "passed"
+   },
+   "status": "ok",
+   "task_index": 308
+  },
+  {
+   "duration_ms": 346,
    "epoch": 0,
    "name": "memory.compact",
    "result": {
     "anchor_count": 3,
     "compaction_id": "compaction-1314",
     "faults": [],
-    "memory_head": "af1c163cf9db5ae0f0bdb5e64ab093bbe84321430cabab427b347b583f0874a4",
+    "memory_head": "fc0e154edfc9a555e8f60b912a6fcad8edf7e0b77a3e9c362e575a8df558e4cb",
     "memory_sequence": 1313,
     "owner_sequence": 9524,
     "removed_derived": {
@@ -230,26 +308,29 @@
    "task_index": 308
   },
   {
-   "duration_ms": 46374,
+   "duration_ms": 13001,
    "epoch": 0,
    "grace_seconds": 0,
    "name": "gc.apply",
    "result": {
     "apply": true,
-    "elapsed_ms": 46371,
+    "checkpoint_events_reduced": 3190,
+    "checkpoint_recorded": "gc-1791222454764-3",
+    "checkpoint_started_from": "gc-1791222348113-2",
+    "elapsed_ms": 12998,
     "grace_seconds": 0,
     "in_flight_attempts": [],
     "memory": "passed",
-    "objects": 20663,
+    "objects": 20854,
     "orphan_bytes": 198933,
     "orphans": 69,
-    "referenced": 20594,
+    "referenced": 20785,
     "removed": 69,
     "removed_bytes": 198933,
     "replay": "passed",
-    "roots": 19379,
+    "roots": 19366,
     "schema": "gabriel.gc-report/1",
-    "started_at_utc": "2026-10-05T13:05:46.337779+00:00",
+    "started_at_utc": "2026-10-05T17:47:34.753290+00:00",
     "status": "passed",
     "workspace_id": "ws-5750f3f5baa9"
    },
@@ -257,45 +338,46 @@
    "task_index": 308
   },
   {
-   "duration_ms": 3016,
+   "checkpoints": 3,
+   "duration_ms": 3281,
    "epoch": 0,
    "name": "backup",
    "path": "work/backup-300",
    "result": {
     "anchor": {
-     "head": "e98ec35267185a3f497825f12edd8171590974ea734f470ee0da993e97b92b82",
-     "inputs_head": "ce7464de94c694f78892112a1c4b09bd5962173bd778870f419823cd1872a3a0",
+     "head": "29cdf14a9d49001d3e868de3ce77556a2a094e8a34c0933597078f9242dbfe57",
+     "inputs_head": "09c30563eb3e046dcd6ab9ed5dd1c0c0af8f7537931bff6707d8ff218b67ce6a",
      "schema": "gabriel.anchor/1",
      "sequence": 9524,
      "workspace_id": "ws-5750f3f5baa9"
     },
     "catalog_digest": "7bf0221ea07d7b26bd5608da9a7175695f87ef4e2ad128d683bbc756b5e758fc",
-    "created_at_utc": "2026-10-05T13:06:34.829939+00:00",
-    "database_sha256": "3fb2c408f24c886b42c95d3cd969ad5f902874c6f5f79e7f0ef8031fc7965a18",
+    "created_at_utc": "2026-10-05T17:47:49.891732+00:00",
+    "database_sha256": "8e6da1458aa71dfa9abdbbc4658cb30bcf91bc243e23d703c5e1648e42a5f089",
     "excluded": [
      "credentials/ (principal secret)",
      "worktrees/ (disposable; patches are exported separately)",
      "runs/ runtime notes"
     ],
     "memory_anchor": {
-     "head": "299c822b7ff849e79f863732840199957297ab2654ca7aa37d44fe5db3580564",
+     "head": "bc384fc2655281079a44155cd79ad337b99337a2f1667a6266babeaa5ed6a3b4",
      "memory_sequence": 1314,
      "owner_sequence": 9524,
      "policy_revision": 0,
      "schema": "gabriel.memory-anchor/1",
      "workspace_id": "ws-5750f3f5baa9"
     },
-    "memory_sha256": "9146e64819ce6bfa01ffe1b2cfba4fa2257954edf853cdec08c65dc51b8b9ce8",
-    "object_bytes": 22243613,
-    "object_count": 20594,
+    "memory_sha256": "0e6fe773ad48f5e5118b9786f3dabd5028f46ada43584e4cf8b1dcfdf4284c2e",
+    "object_bytes": 32260196,
+    "object_count": 20889,
     "reducer_identity": "ea45d1d2bc7959619be6b48b5bfea5e357161decaa06b9c44b0f9eb96e14e0e7",
     "running": {
      "catalog_digest": "7bf0221ea07d7b26bd5608da9a7175695f87ef4e2ad128d683bbc756b5e758fc",
      "reducer_identity": "ea45d1d2bc7959619be6b48b5bfea5e357161decaa06b9c44b0f9eb96e14e0e7",
-     "schema_registry_digest": "538bbfeddd4868ca8b20dbfbfafe655029ca587c196c8d201846f4b737a0188f"
+     "schema_registry_digest": "5efdeaa84fa17a3030ea5795bfb7d35fd6386e9abb9a81be157bf2117c9fc25c"
     },
     "schema": "gabriel.backup-manifest/1",
-    "schema_registry_digest": "538bbfeddd4868ca8b20dbfbfafe655029ca587c196c8d201846f4b737a0188f",
+    "schema_registry_digest": "5efdeaa84fa17a3030ea5795bfb7d35fd6386e9abb9a81be157bf2117c9fc25c",
     "unresolved_nested_reference_count": 0,
     "unresolved_nested_references": [],
     "version": "0.1.0",
@@ -305,13 +387,13 @@
    "task_index": 308
   },
   {
-   "duration_ms": 64016,
+   "duration_ms": 19457,
    "epoch": 0,
-   "name": "restore",
+   "name": "restore.from_checkpoint",
    "result": {
     "anchor": {
-     "head": "e98ec35267185a3f497825f12edd8171590974ea734f470ee0da993e97b92b82",
-     "inputs_head": "ce7464de94c694f78892112a1c4b09bd5962173bd778870f419823cd1872a3a0",
+     "head": "29cdf14a9d49001d3e868de3ce77556a2a094e8a34c0933597078f9242dbfe57",
+     "inputs_head": "09c30563eb3e046dcd6ab9ed5dd1c0c0af8f7537931bff6707d8ff218b67ce6a",
      "schema": "gabriel.anchor/1",
      "sequence": 9524,
      "workspace_id": "ws-5750f3f5baa9"
@@ -326,23 +408,28 @@
      "anchor_match": true,
      "entries": 1314,
      "faults": [],
-     "head": "299c822b7ff849e79f863732840199957297ab2654ca7aa37d44fe5db3580564",
+     "head": "bc384fc2655281079a44155cd79ad337b99337a2f1667a6266babeaa5ed6a3b4",
      "status": "passed"
     },
     "note": "the principal secret is not restored; create a new credential before submitting commands",
     "object_faults": [],
-    "objects_verified": 20594,
+    "objects_verified": 20889,
     "replay": {
-     "anchor_checked": true,
+     "checkpoint": "gc-1791222454764-3",
+     "checkpoint_recorded": null,
+     "checkpoint_sequence": 9524,
+     "checkpoints_skipped": [],
+     "checkpoints_verified": 0,
+     "checkpoints_verified_ids": [],
      "events": 9524,
-     "external_calls": 0,
-     "head": "e98ec35267185a3f497825f12edd8171590974ea734f470ee0da993e97b92b82",
-     "inputs_head": "ce7464de94c694f78892112a1c4b09bd5962173bd778870f419823cd1872a3a0",
-     "missing_referenced_artifacts": [],
-     "payloads_verified": 9524,
+     "events_reduced": 0,
+     "head": "29cdf14a9d49001d3e868de3ce77556a2a094e8a34c0933597078f9242dbfe57",
+     "missing_referenced_artifacts": 0,
+     "payloads_verified": 0,
      "runs": 308,
      "status": "passed"
     },
+    "replay_mode": "from_checkpoint",
     "schema": "gabriel.restore-report/1",
     "status": "passed"
    },
@@ -351,56 +438,120 @@
    "task_index": 308
   },
   {
-   "duration_ms": 94190,
+   "duration_ms": 45397,
+   "epoch": 0,
+   "name": "restore.full",
+   "result": {
+    "anchor": {
+     "head": "29cdf14a9d49001d3e868de3ce77556a2a094e8a34c0933597078f9242dbfe57",
+     "inputs_head": "09c30563eb3e046dcd6ab9ed5dd1c0c0af8f7537931bff6707d8ff218b67ce6a",
+     "schema": "gabriel.anchor/1",
+     "sequence": 9524,
+     "workspace_id": "ws-5750f3f5baa9"
+    },
+    "anchor_check": {
+     "anchored_sequence": 9524,
+     "current_sequence": 9524,
+     "status": "passed"
+    },
+    "destination": "work/restored-300-full",
+    "memory": {
+     "anchor_match": true,
+     "entries": 1314,
+     "faults": [],
+     "head": "bc384fc2655281079a44155cd79ad337b99337a2f1667a6266babeaa5ed6a3b4",
+     "status": "passed"
+    },
+    "note": "the principal secret is not restored; create a new credential before submitting commands",
+    "object_faults": [],
+    "objects_verified": 20889,
+    "replay": {
+     "checkpoint": null,
+     "checkpoint_recorded": null,
+     "checkpoint_sequence": null,
+     "checkpoints_skipped": [],
+     "checkpoints_verified": 3,
+     "checkpoints_verified_ids": [
+      "gc-1791222246381-1",
+      "gc-1791222348113-2",
+      "gc-1791222454764-3"
+     ],
+     "events": 9524,
+     "events_reduced": 9524,
+     "head": "29cdf14a9d49001d3e868de3ce77556a2a094e8a34c0933597078f9242dbfe57",
+     "missing_referenced_artifacts": 0,
+     "payloads_verified": 9524,
+     "runs": 308,
+     "status": "passed"
+    },
+    "replay_mode": "full",
+    "schema": "gabriel.restore-report/1",
+    "status": "passed"
+   },
+   "source": "work/backup-300",
+   "status": "ok",
+   "task_index": 308
+  },
+  {
+   "duration_ms": 62369,
    "epoch": 0,
    "name": "migrate",
    "result": {
     "backup": {
      "anchor": {
-      "head": "e98ec35267185a3f497825f12edd8171590974ea734f470ee0da993e97b92b82",
-      "inputs_head": "ce7464de94c694f78892112a1c4b09bd5962173bd778870f419823cd1872a3a0",
+      "head": "29cdf14a9d49001d3e868de3ce77556a2a094e8a34c0933597078f9242dbfe57",
+      "inputs_head": "09c30563eb3e046dcd6ab9ed5dd1c0c0af8f7537931bff6707d8ff218b67ce6a",
       "schema": "gabriel.anchor/1",
       "sequence": 9524,
       "workspace_id": "ws-5750f3f5baa9"
      },
-     "manifest_sha256": "79afc938ab04112a063d8d9da21467b7292a59a1b9f33ab3cc035d340b147abf",
+     "manifest_sha256": "264653b85d8affb5725ce65a765c0b8306e3565a83c2abd97477a5c03e66ffea",
      "memory_anchor": {
-      "head": "299c822b7ff849e79f863732840199957297ab2654ca7aa37d44fe5db3580564",
+      "head": "bc384fc2655281079a44155cd79ad337b99337a2f1667a6266babeaa5ed6a3b4",
       "memory_sequence": 1314,
       "owner_sequence": 9524,
       "policy_revision": 0,
       "schema": "gabriel.memory-anchor/1",
       "workspace_id": "ws-5750f3f5baa9"
      },
-     "object_bytes": 22243613,
-     "object_count": 20594,
-     "path": "work/workspace/migrations/backup-9524-1791205659030"
+     "object_bytes": 32260196,
+     "object_count": 20889,
+     "path": "work/workspace/migrations/backup-9524-1791222537310"
     },
     "equivalence_replay": {
      "anchor_checked": false,
+     "checkpoint": null,
+     "checkpoint_recorded": null,
+     "checkpoints_skipped": [],
+     "checkpoints_verified": [
+      "gc-1791222246381-1",
+      "gc-1791222348113-2",
+      "gc-1791222454764-3"
+     ],
      "events": 9524,
+     "events_reduced": 9524,
      "external_calls": 0,
-     "head": "e98ec35267185a3f497825f12edd8171590974ea734f470ee0da993e97b92b82",
-     "inputs_head": "ce7464de94c694f78892112a1c4b09bd5962173bd778870f419823cd1872a3a0",
+     "head": "29cdf14a9d49001d3e868de3ce77556a2a094e8a34c0933597078f9242dbfe57",
+     "inputs_head": "09c30563eb3e046dcd6ab9ed5dd1c0c0af8f7537931bff6707d8ff218b67ce6a",
      "missing_referenced_artifacts": [],
      "payloads_verified": 9524,
      "runs": 308,
      "status": "passed"
     },
     "migration": {
-     "backup_manifest_sha256": "79afc938ab04112a063d8d9da21467b7292a59a1b9f33ab3cc035d340b147abf",
+     "backup_manifest_sha256": "264653b85d8affb5725ce65a765c0b8306e3565a83c2abd97477a5c03e66ffea",
      "from_catalog_digest": "7bf0221ea07d7b26bd5608da9a7175695f87ef4e2ad128d683bbc756b5e758fc",
      "from_reducer_identity": "ea45d1d2bc7959619be6b48b5bfea5e357161decaa06b9c44b0f9eb96e14e0e7",
-     "from_schema_registry_digest": "538bbfeddd4868ca8b20dbfbfafe655029ca587c196c8d201846f4b737a0188f",
+     "from_schema_registry_digest": "5efdeaa84fa17a3030ea5795bfb7d35fd6386e9abb9a81be157bf2117c9fc25c",
      "migration_id": "migration-1-eacea73b0f72",
-     "owner_time_unix_ms": 1791205708916,
+     "owner_time_unix_ms": 1791222571109,
      "reason": "longrun witness: ops.probe tool added to the catalog",
      "replayed_events": 9524,
      "schema": "gabriel.migration/1",
      "sequence": 9524,
      "to_catalog_digest": "eacea73b0f7207049f8a9830146e00af1739afe98877474f19305b9e5d16d29b",
      "to_reducer_identity": "ea45d1d2bc7959619be6b48b5bfea5e357161decaa06b9c44b0f9eb96e14e0e7",
-     "to_schema_registry_digest": "538bbfeddd4868ca8b20dbfbfafe655029ca587c196c8d201846f4b737a0188f",
+     "to_schema_registry_digest": "5efdeaa84fa17a3030ea5795bfb7d35fd6386e9abb9a81be157bf2117c9fc25c",
      "workspace_id": "ws-5750f3f5baa9"
     },
     "problems": [
@@ -408,10 +559,41 @@
     ],
     "replay_after": {
      "anchor_checked": false,
+     "checkpoint": null,
+     "checkpoint_recorded": {
+      "catalog_digest": "7bf0221ea07d7b26bd5608da9a7175695f87ef4e2ad128d683bbc756b5e758fc",
+      "checkpoint_id": "migration-1-eacea73b0f72",
+      "codec_version": "gabriel.codec/1",
+      "created_owner_time_unix_ms": 1791222599613,
+      "events_reduced": 9524,
+      "head": "29cdf14a9d49001d3e868de3ce77556a2a094e8a34c0933597078f9242dbfe57",
+      "inputs_head": "09c30563eb3e046dcd6ab9ed5dd1c0c0af8f7537931bff6707d8ff218b67ce6a",
+      "projection_digest": "185e525f3f42b694b5aa2fdd71f56621a290e69fb54a0461d607037a4daa946b",
+      "reason": "replay after migration migration-1-eacea73b0f72",
+      "reducer_identity": "ea45d1d2bc7959619be6b48b5bfea5e357161decaa06b9c44b0f9eb96e14e0e7",
+      "run_count": 308,
+      "schema": "gabriel.checkpoint/2",
+      "schema_registry_digest": "5efdeaa84fa17a3030ea5795bfb7d35fd6386e9abb9a81be157bf2117c9fc25c",
+      "sequence": 9524,
+      "state_ref": {
+       "bytes": 44800,
+       "media_type": "application/json",
+       "sha256": "47a5aea066bf0618a0f61b234919aaa6cbb05cfc206e79337cbe32524f2fe571"
+      },
+      "verified_from": "genesis",
+      "workspace_id": "ws-5750f3f5baa9"
+     },
+     "checkpoints_skipped": [],
+     "checkpoints_verified": [
+      "gc-1791222246381-1",
+      "gc-1791222348113-2",
+      "gc-1791222454764-3"
+     ],
      "events": 9524,
+     "events_reduced": 9524,
      "external_calls": 0,
-     "head": "e98ec35267185a3f497825f12edd8171590974ea734f470ee0da993e97b92b82",
-     "inputs_head": "ce7464de94c694f78892112a1c4b09bd5962173bd778870f419823cd1872a3a0",
+     "head": "29cdf14a9d49001d3e868de3ce77556a2a094e8a34c0933597078f9242dbfe57",
+     "inputs_head": "09c30563eb3e046dcd6ab9ed5dd1c0c0af8f7537931bff6707d8ff218b67ce6a",
      "missing_referenced_artifacts": [],
      "payloads_verified": 9524,
      "runs": 308,
@@ -423,14 +605,36 @@
    "task_index": 308
   },
   {
-   "duration_ms": 600,
+   "duration_ms": 10701,
+   "epoch": 1,
+   "name": "replay.from_checkpoint",
+   "result": {
+    "checkpoint": "migration-1-eacea73b0f72",
+    "checkpoint_recorded": null,
+    "checkpoint_sequence": 9524,
+    "checkpoints_skipped": [],
+    "checkpoints_verified": 0,
+    "checkpoints_verified_ids": [],
+    "events": 12681,
+    "events_reduced": 3157,
+    "head": "e6f3f39714859007e805541cb609e66ed4abee2f61604c7ab8889fdca4353553",
+    "missing_referenced_artifacts": 0,
+    "payloads_verified": 3157,
+    "runs": 410,
+    "status": "passed"
+   },
+   "status": "ok",
+   "task_index": 410
+  },
+  {
+   "duration_ms": 511,
    "epoch": 1,
    "name": "memory.compact",
    "result": {
     "anchor_count": 4,
     "compaction_id": "compaction-1793",
     "faults": [],
-    "memory_head": "795571516ef71b367a15e5955bf8534789916abd7e2185a09f4ca5d2fa02b077",
+    "memory_head": "2ead3be9e32635bcb377e48d7755edaf42c7994961fdc45850867810098bedc2",
     "memory_sequence": 1792,
     "owner_sequence": 12681,
     "removed_derived": {
@@ -447,26 +651,29 @@
    "task_index": 410
   },
   {
-   "duration_ms": 62458,
+   "duration_ms": 12909,
    "epoch": 1,
    "grace_seconds": 0,
    "name": "gc.apply",
    "result": {
     "apply": true,
-    "elapsed_ms": 62455,
+    "checkpoint_events_reduced": 3157,
+    "checkpoint_recorded": "gc-1791222700030-5",
+    "checkpoint_started_from": "migration-1-eacea73b0f72",
+    "elapsed_ms": 12904,
     "grace_seconds": 0,
     "in_flight_attempts": [],
     "memory": "passed",
-    "objects": 28258,
+    "objects": 28563,
     "orphan_bytes": 172477,
     "orphans": 69,
-    "referenced": 28189,
+    "referenced": 28494,
     "removed": 69,
     "removed_bytes": 172477,
     "replay": "passed",
-    "roots": 26362,
+    "roots": 26360,
     "schema": "gabriel.gc-report/1",
-    "started_at_utc": "2026-10-05T13:10:39.993259+00:00",
+    "started_at_utc": "2026-10-05T17:51:40.015203+00:00",
     "status": "passed",
     "workspace_id": "ws-5750f3f5baa9"
    },
@@ -474,14 +681,36 @@
    "task_index": 410
   },
   {
-   "duration_ms": 503,
+   "duration_ms": 12506,
+   "epoch": 1,
+   "name": "replay.from_checkpoint",
+   "result": {
+    "checkpoint": "gc-1791222700030-5",
+    "checkpoint_recorded": null,
+    "checkpoint_sequence": 12681,
+    "checkpoints_skipped": [],
+    "checkpoints_verified": 0,
+    "checkpoints_verified_ids": [],
+    "events": 16136,
+    "events_reduced": 3455,
+    "head": "bce4b1d28cf7dacd02e881848bfc852dfcdcecc11a836d19a5a89ac098a068ba",
+    "missing_referenced_artifacts": 0,
+    "payloads_verified": 3455,
+    "runs": 512,
+    "status": "passed"
+   },
+   "status": "ok",
+   "task_index": 512
+  },
+  {
+   "duration_ms": 673,
    "epoch": 1,
    "name": "memory.compact",
    "result": {
     "anchor_count": 5,
     "compaction_id": "compaction-2136",
     "faults": [],
-    "memory_head": "f10bd9e9928cdb5e2dfaaecdf58ff8afae179ebd187aabde6a7cee4e683b3759",
+    "memory_head": "88f107bc108bbf36e692773154ddfc1a7a8930b369ac6765a406d04edc6854ba",
     "memory_sequence": 2135,
     "owner_sequence": 16136,
     "removed_derived": {
@@ -498,26 +727,29 @@
    "task_index": 512
   },
   {
-   "duration_ms": 79512,
+   "duration_ms": 15301,
    "epoch": 1,
    "grace_seconds": 0,
    "name": "gc.apply",
    "result": {
     "apply": true,
-    "elapsed_ms": 79508,
+    "checkpoint_events_reduced": 3455,
+    "checkpoint_recorded": "gc-1791222827938-6",
+    "checkpoint_started_from": "gc-1791222700030-5",
+    "elapsed_ms": 15295,
     "grace_seconds": 0,
     "in_flight_attempts": [],
     "memory": "passed",
-    "objects": 35348,
+    "objects": 35759,
     "orphan_bytes": 166395,
     "orphans": 35,
-    "referenced": 35313,
+    "referenced": 35724,
     "removed": 35,
     "removed_bytes": 166395,
     "replay": "passed",
-    "roots": 33080,
+    "roots": 33082,
     "schema": "gabriel.gc-report/1",
-    "started_at_utc": "2026-10-05T13:13:16.917562+00:00",
+    "started_at_utc": "2026-10-05T17:53:47.931458+00:00",
     "status": "passed",
     "workspace_id": "ws-5750f3f5baa9"
    },
@@ -525,14 +757,36 @@
    "task_index": 512
   },
   {
-   "duration_ms": 590,
+   "duration_ms": 13428,
+   "epoch": 1,
+   "name": "replay.from_checkpoint",
+   "result": {
+    "checkpoint": "gc-1791222827938-6",
+    "checkpoint_recorded": null,
+    "checkpoint_sequence": 16136,
+    "checkpoints_skipped": [],
+    "checkpoints_verified": 0,
+    "checkpoints_verified_ids": [],
+    "events": 19836,
+    "events_reduced": 3700,
+    "head": "88db1940630af652c54ec4530cc880197c1bae4f47bf94668a40b82be876b7e2",
+    "missing_referenced_artifacts": 0,
+    "payloads_verified": 3700,
+    "runs": 612,
+    "status": "passed"
+   },
+   "status": "ok",
+   "task_index": 612
+  },
+  {
+   "duration_ms": 663,
    "epoch": 1,
    "name": "memory.compact",
    "result": {
     "anchor_count": 6,
     "compaction_id": "compaction-2337",
     "faults": [],
-    "memory_head": "2deb177a7bdf863ce72d91f7212277e4c351b559b457261a6df77ad1f02f9055",
+    "memory_head": "1120c9a3d753e5c4ab4d5bc439e2999c5959294fe4c1727c20713bfa93a1d4a8",
     "memory_sequence": 2336,
     "owner_sequence": 19836,
     "removed_derived": {
@@ -549,26 +803,29 @@
    "task_index": 612
   },
   {
-   "duration_ms": 104170,
+   "duration_ms": 16622,
    "epoch": 1,
    "grace_seconds": 0,
    "name": "gc.apply",
    "result": {
     "apply": true,
-    "elapsed_ms": 104166,
+    "checkpoint_events_reduced": 3700,
+    "checkpoint_recorded": "gc-1791222972231-7",
+    "checkpoint_started_from": "gc-1791222827938-6",
+    "elapsed_ms": 16618,
     "grace_seconds": 0,
     "in_flight_attempts": [],
     "memory": "passed",
-    "objects": 41875,
+    "objects": 42408,
     "orphan_bytes": 0,
     "orphans": 0,
-    "referenced": 41875,
+    "referenced": 42408,
     "removed": 0,
     "removed_bytes": 0,
     "replay": "passed",
-    "roots": 39442,
+    "roots": 39463,
     "schema": "gabriel.gc-report/1",
-    "started_at_utc": "2026-10-05T13:16:29.785240+00:00",
+    "started_at_utc": "2026-10-05T17:56:12.231862+00:00",
     "status": "passed",
     "workspace_id": "ws-5750f3f5baa9"
    },
@@ -576,45 +833,46 @@
    "task_index": 612
   },
   {
-   "duration_ms": 6468,
+   "checkpoints": 7,
+   "duration_ms": 6927,
    "epoch": 1,
    "name": "backup",
    "path": "work/backup-final",
    "result": {
     "anchor": {
-     "head": "9d806911aeb1d1e1b633192b1303892d425a4a5edfc109f65f6f4aeae5c811ca",
-     "inputs_head": "bbfc3d422c1972f1594c921f990ced1aba9f27fb7124b8e3151796e151700fdd",
+     "head": "88db1940630af652c54ec4530cc880197c1bae4f47bf94668a40b82be876b7e2",
+     "inputs_head": "772f4bbe50213500242dbed023767608c8f8a0cd4d94b9acf885ce405fb00475",
      "schema": "gabriel.anchor/1",
      "sequence": 19836,
      "workspace_id": "ws-5750f3f5baa9"
     },
     "catalog_digest": "eacea73b0f7207049f8a9830146e00af1739afe98877474f19305b9e5d16d29b",
-    "created_at_utc": "2026-10-05T13:18:17.799041+00:00",
-    "database_sha256": "aa404bbf34c25457c22a8b95803e4a04bb5b3451f7771755e4a46f1ee9ff43b0",
+    "created_at_utc": "2026-10-05T17:56:33.563567+00:00",
+    "database_sha256": "289294a625868b57d85a12c7d099463115ea551d5c1aa2782dfdb3093ea568d6",
     "excluded": [
      "credentials/ (principal secret)",
      "worktrees/ (disposable; patches are exported separately)",
      "runs/ runtime notes"
     ],
     "memory_anchor": {
-     "head": "00829589d34c00e8f83239c28070daa0931b8e280a33452c001a6f47d3bb3074",
+     "head": "89998f22877406a8c4c507b3990d977b1f768706902feb7db434d45fa93196f3",
      "memory_sequence": 2337,
      "owner_sequence": 19836,
      "policy_revision": 0,
      "schema": "gabriel.memory-anchor/1",
      "workspace_id": "ws-5750f3f5baa9"
     },
-    "memory_sha256": "95456dcea57911bb2e1cc1db8113c6cb6f04c03255c33ff6c4f27d48d192efa0",
-    "object_bytes": 46117428,
-    "object_count": 41875,
+    "memory_sha256": "da71b4ca114e47e91969693fb1a97b063aa69571d2a4d92d82fa93ef0f06c04a",
+    "object_bytes": 66772621,
+    "object_count": 42509,
     "reducer_identity": "ea45d1d2bc7959619be6b48b5bfea5e357161decaa06b9c44b0f9eb96e14e0e7",
     "running": {
      "catalog_digest": "eacea73b0f7207049f8a9830146e00af1739afe98877474f19305b9e5d16d29b",
      "reducer_identity": "ea45d1d2bc7959619be6b48b5bfea5e357161decaa06b9c44b0f9eb96e14e0e7",
-     "schema_registry_digest": "538bbfeddd4868ca8b20dbfbfafe655029ca587c196c8d201846f4b737a0188f"
+     "schema_registry_digest": "5efdeaa84fa17a3030ea5795bfb7d35fd6386e9abb9a81be157bf2117c9fc25c"
     },
     "schema": "gabriel.backup-manifest/1",
-    "schema_registry_digest": "538bbfeddd4868ca8b20dbfbfafe655029ca587c196c8d201846f4b737a0188f",
+    "schema_registry_digest": "5efdeaa84fa17a3030ea5795bfb7d35fd6386e9abb9a81be157bf2117c9fc25c",
     "unresolved_nested_reference_count": 0,
     "unresolved_nested_references": [],
     "version": "0.1.0",
@@ -624,13 +882,13 @@
    "task_index": 612
   },
   {
-   "duration_ms": 138898,
+   "duration_ms": 38109,
    "epoch": 1,
-   "name": "restore",
+   "name": "restore.from_checkpoint",
    "result": {
     "anchor": {
-     "head": "9d806911aeb1d1e1b633192b1303892d425a4a5edfc109f65f6f4aeae5c811ca",
-     "inputs_head": "bbfc3d422c1972f1594c921f990ced1aba9f27fb7124b8e3151796e151700fdd",
+     "head": "88db1940630af652c54ec4530cc880197c1bae4f47bf94668a40b82be876b7e2",
+     "inputs_head": "772f4bbe50213500242dbed023767608c8f8a0cd4d94b9acf885ce405fb00475",
      "schema": "gabriel.anchor/1",
      "sequence": 19836,
      "workspace_id": "ws-5750f3f5baa9"
@@ -645,23 +903,28 @@
      "anchor_match": true,
      "entries": 2337,
      "faults": [],
-     "head": "00829589d34c00e8f83239c28070daa0931b8e280a33452c001a6f47d3bb3074",
+     "head": "89998f22877406a8c4c507b3990d977b1f768706902feb7db434d45fa93196f3",
      "status": "passed"
     },
     "note": "the principal secret is not restored; create a new credential before submitting commands",
     "object_faults": [],
-    "objects_verified": 41875,
+    "objects_verified": 42509,
     "replay": {
-     "anchor_checked": true,
+     "checkpoint": "gc-1791222972231-7",
+     "checkpoint_recorded": null,
+     "checkpoint_sequence": 19836,
+     "checkpoints_skipped": [],
+     "checkpoints_verified": 0,
+     "checkpoints_verified_ids": [],
      "events": 19836,
-     "external_calls": 0,
-     "head": "9d806911aeb1d1e1b633192b1303892d425a4a5edfc109f65f6f4aeae5c811ca",
-     "inputs_head": "bbfc3d422c1972f1594c921f990ced1aba9f27fb7124b8e3151796e151700fdd",
-     "missing_referenced_artifacts": [],
-     "payloads_verified": 19836,
+     "events_reduced": 0,
+     "head": "88db1940630af652c54ec4530cc880197c1bae4f47bf94668a40b82be876b7e2",
+     "missing_referenced_artifacts": 0,
+     "payloads_verified": 0,
      "runs": 612,
      "status": "passed"
     },
+    "replay_mode": "from_checkpoint",
     "schema": "gabriel.restore-report/1",
     "status": "passed"
    },
@@ -670,16 +933,87 @@
    "task_index": 612
   },
   {
-   "duration_ms": 92668,
+   "duration_ms": 99300,
+   "epoch": 1,
+   "name": "restore.full",
+   "result": {
+    "anchor": {
+     "head": "88db1940630af652c54ec4530cc880197c1bae4f47bf94668a40b82be876b7e2",
+     "inputs_head": "772f4bbe50213500242dbed023767608c8f8a0cd4d94b9acf885ce405fb00475",
+     "schema": "gabriel.anchor/1",
+     "sequence": 19836,
+     "workspace_id": "ws-5750f3f5baa9"
+    },
+    "anchor_check": {
+     "anchored_sequence": 19836,
+     "current_sequence": 19836,
+     "status": "passed"
+    },
+    "destination": "work/restored-final-full",
+    "memory": {
+     "anchor_match": true,
+     "entries": 2337,
+     "faults": [],
+     "head": "89998f22877406a8c4c507b3990d977b1f768706902feb7db434d45fa93196f3",
+     "status": "passed"
+    },
+    "note": "the principal secret is not restored; create a new credential before submitting commands",
+    "object_faults": [],
+    "objects_verified": 42509,
+    "replay": {
+     "checkpoint": null,
+     "checkpoint_recorded": null,
+     "checkpoint_sequence": null,
+     "checkpoints_skipped": [],
+     "checkpoints_verified": 7,
+     "checkpoints_verified_ids": [
+      "gc-1791222246381-1",
+      "gc-1791222348113-2",
+      "gc-1791222454764-3",
+      "migration-1-eacea73b0f72",
+      "gc-1791222700030-5",
+      "gc-1791222827938-6",
+      "gc-1791222972231-7"
+     ],
+     "events": 19836,
+     "events_reduced": 19836,
+     "head": "88db1940630af652c54ec4530cc880197c1bae4f47bf94668a40b82be876b7e2",
+     "missing_referenced_artifacts": 0,
+     "payloads_verified": 19836,
+     "runs": 612,
+     "status": "passed"
+    },
+    "replay_mode": "full",
+    "schema": "gabriel.restore-report/1",
+    "status": "passed"
+   },
+   "source": "work/backup-final",
+   "status": "ok",
+   "task_index": 612
+  },
+  {
+   "duration_ms": 58612,
    "epoch": 1,
    "name": "owner.replay",
    "result": {
-    "anchor_checked": false,
+    "checkpoint": null,
+    "checkpoint_recorded": null,
+    "checkpoint_sequence": null,
+    "checkpoints_skipped": [],
+    "checkpoints_verified": 7,
+    "checkpoints_verified_ids": [
+     "gc-1791222246381-1",
+     "gc-1791222348113-2",
+     "gc-1791222454764-3",
+     "migration-1-eacea73b0f72",
+     "gc-1791222700030-5",
+     "gc-1791222827938-6",
+     "gc-1791222972231-7"
+    ],
     "events": 19836,
-    "external_calls": 0,
-    "head": "9d806911aeb1d1e1b633192b1303892d425a4a5edfc109f65f6f4aeae5c811ca",
-    "inputs_head": "bbfc3d422c1972f1594c921f990ced1aba9f27fb7124b8e3151796e151700fdd",
-    "missing_referenced_artifacts": [],
+    "events_reduced": 19836,
+    "head": "88db1940630af652c54ec4530cc880197c1bae4f47bf94668a40b82be876b7e2",
+    "missing_referenced_artifacts": 0,
     "payloads_verified": 19836,
     "runs": 612,
     "status": "passed"
@@ -688,20 +1022,20 @@
    "task_index": 612
   },
   {
-   "duration_ms": 135,
+   "duration_ms": 131,
    "epoch": 1,
    "name": "memory.verify",
    "result": {
     "entries": 2337,
     "faults": [],
-    "head": "00829589d34c00e8f83239c28070daa0931b8e280a33452c001a6f47d3bb3074",
+    "head": "89998f22877406a8c4c507b3990d977b1f768706902feb7db434d45fa93196f3",
     "status": "passed"
    },
    "status": "ok",
    "task_index": 612
   },
   {
-   "duration_ms": 26,
+   "duration_ms": 14,
    "epoch": 1,
    "name": "memory.reproduce",
    "probe": 1,
@@ -726,7 +1060,7 @@
    "which": "first"
   },
   {
-   "duration_ms": 49,
+   "duration_ms": 47,
    "epoch": 1,
    "name": "memory.reproduce",
    "probe": 12,
@@ -751,7 +1085,7 @@
    "which": "last"
   },
   {
-   "duration_ms": 1688,
+   "duration_ms": 1683,
    "epoch": 1,
    "name": "doctor.deep",
    "result": {
@@ -764,11 +1098,62 @@
       "path": "work/workspace/objects",
       "writable": true
      },
+     "checkpoints": [
+      {
+       "catalog_digest": "7bf0221ea07d7b26bd5608da9a7175695f87ef4e2ad128d683bbc756b5e758fc",
+       "checkpoint_id": "gc-1791222246381-1",
+       "schema": "gabriel.checkpoint/2",
+       "sequence": 3157,
+       "verified_from": "genesis"
+      },
+      {
+       "catalog_digest": "7bf0221ea07d7b26bd5608da9a7175695f87ef4e2ad128d683bbc756b5e758fc",
+       "checkpoint_id": "gc-1791222348113-2",
+       "schema": "gabriel.checkpoint/2",
+       "sequence": 6334,
+       "verified_from": "gc-1791222246381-1"
+      },
+      {
+       "catalog_digest": "7bf0221ea07d7b26bd5608da9a7175695f87ef4e2ad128d683bbc756b5e758fc",
+       "checkpoint_id": "gc-1791222454764-3",
+       "schema": "gabriel.checkpoint/2",
+       "sequence": 9524,
+       "verified_from": "gc-1791222348113-2"
+      },
+      {
+       "catalog_digest": "7bf0221ea07d7b26bd5608da9a7175695f87ef4e2ad128d683bbc756b5e758fc",
+       "checkpoint_id": "migration-1-eacea73b0f72",
+       "schema": "gabriel.checkpoint/2",
+       "sequence": 9524,
+       "verified_from": "genesis"
+      },
+      {
+       "catalog_digest": "eacea73b0f7207049f8a9830146e00af1739afe98877474f19305b9e5d16d29b",
+       "checkpoint_id": "gc-1791222700030-5",
+       "schema": "gabriel.checkpoint/2",
+       "sequence": 12681,
+       "verified_from": "migration-1-eacea73b0f72"
+      },
+      {
+       "catalog_digest": "eacea73b0f7207049f8a9830146e00af1739afe98877474f19305b9e5d16d29b",
+       "checkpoint_id": "gc-1791222827938-6",
+       "schema": "gabriel.checkpoint/2",
+       "sequence": 16136,
+       "verified_from": "gc-1791222700030-5"
+      },
+      {
+       "catalog_digest": "eacea73b0f7207049f8a9830146e00af1739afe98877474f19305b9e5d16d29b",
+       "checkpoint_id": "gc-1791222972231-7",
+       "schema": "gabriel.checkpoint/2",
+       "sequence": 19836,
+       "verified_from": "gc-1791222827938-6"
+      }
+     ],
      "codec_version": "gabriel.codec/1",
      "config_schema_version": 1,
      "journal_format": "gabriel.agent-journal/1",
      "memory_chain": {
-      "head": "00829589d34c00e8f83239c28070daa0931b8e280a33452c001a6f47d3bb3074",
+      "head": "89998f22877406a8c4c507b3990d977b1f768706902feb7db434d45fa93196f3",
       "memory_sequence": 2337,
       "owner_sequence": 19836,
       "policy_revision": 0,
@@ -787,13 +1172,13 @@
      "registered_identities": {
       "catalog_digest": "eacea73b0f7207049f8a9830146e00af1739afe98877474f19305b9e5d16d29b",
       "reducer_identity": "ea45d1d2bc7959619be6b48b5bfea5e357161decaa06b9c44b0f9eb96e14e0e7",
-      "schema_registry_digest": "538bbfeddd4868ca8b20dbfbfafe655029ca587c196c8d201846f4b737a0188f"
+      "schema_registry_digest": "5efdeaa84fa17a3030ea5795bfb7d35fd6386e9abb9a81be157bf2117c9fc25c"
      },
      "storage": {
       "corrupt": [],
       "deep": true,
       "missing": [],
-      "referenced_objects": 39442,
+      "referenced_objects": 39464,
       "stray_temporaries": []
      }
     }
@@ -802,7 +1187,7 @@
    "task_index": 612
   },
   {
-   "duration_ms": 91680,
+   "duration_ms": 3155,
    "epoch": 1,
    "name": "metrics",
    "result": {
@@ -829,53 +1214,53 @@
    "task_index": 612
   },
   {
-   "duration_ms": 313,
+   "duration_ms": 304,
    "epoch": 1,
    "name": "trace.summary",
    "result": {
     "artifact_io": {
-     "get_bytes": 326718243,
-     "get_calls": 355927,
-     "io_ms": 28362,
-     "put_bytes": 65609998,
+     "get_bytes": 326710824,
+     "get_calls": 355919,
+     "io_ms": 31861,
+     "put_bytes": 65610031,
      "put_calls": 71222
     },
     "per_kind": {
      "journal_commit": {
       "count": 19836,
       "failed": 0,
-      "max_ms": 83,
-      "total_ms": 213514
+      "max_ms": 256,
+      "total_ms": 220709
      },
      "provider": {
       "count": 912,
       "failed": 0,
-      "max_ms": 0,
-      "total_ms": 0
+      "max_ms": 1,
+      "total_ms": 1
      },
      "queue_wait": {
       "count": 3960,
       "failed": 0,
-      "max_ms": 90,
-      "total_ms": 58302
+      "max_ms": 67,
+      "total_ms": 60007
      },
      "run": {
       "count": 612,
       "failed": 0,
-      "max_ms": 1759,
-      "total_ms": 485285
+      "max_ms": 1791,
+      "total_ms": 499854
      },
      "tool_execution": {
       "count": 3960,
       "failed": 0,
-      "max_ms": 325,
-      "total_ms": 134349
+      "max_ms": 379,
+      "total_ms": 137376
      },
      "verification": {
       "count": 6120,
       "failed": 0,
-      "max_ms": 5,
-      "total_ms": 1674
+      "max_ms": 7,
+      "total_ms": 1719
      }
     },
     "spans": 35400
@@ -884,12 +1269,12 @@
    "task_index": 612
   },
   {
-   "duration_ms": 13987,
+   "duration_ms": 14279,
    "epoch": 1,
    "name": "retire_worktrees",
    "result": {
     "bytes_freed": 4941246,
-    "owner_time_unix_ms": 1791206624662,
+    "owner_time_unix_ms": 1791223196521,
     "repositories_pruned": [
      "work/repo-documents",
      "work/repo-numerical",
@@ -904,28 +1289,104 @@
    "task_index": 612
   },
   {
-   "duration_ms": 99110,
+   "duration_ms": 5557,
    "epoch": 1,
    "name": "gc.after_retirement",
    "result": {
     "apply": true,
-    "elapsed_ms": 99104,
+    "checkpoint_events_reduced": 0,
+    "checkpoint_recorded": "gc-1791223214268-8",
+    "checkpoint_started_from": "gc-1791222972231-7",
+    "elapsed_ms": 5551,
     "grace_seconds": 0,
     "in_flight_attempts": [],
     "memory": "passed",
-    "objects": 41875,
+    "objects": 42509,
     "orphan_bytes": 0,
     "orphans": 0,
-    "referenced": 41875,
+    "referenced": 42509,
     "removed": 0,
     "removed_bytes": 0,
     "replay": "passed",
-    "roots": 39442,
+    "roots": 39464,
     "schema": "gabriel.gc-report/1",
-    "started_at_utc": "2026-10-05T13:24:01.699235+00:00",
+    "started_at_utc": "2026-10-05T18:00:14.268148+00:00",
     "status": "passed",
     "workspace_id": "ws-5750f3f5baa9"
    },
+   "status": "ok",
+   "task_index": 612
+  },
+  {
+   "duration_ms": 0,
+   "epoch": 1,
+   "name": "checkpoints",
+   "result": [
+    {
+     "checkpoint_id": "gc-1791222246381-1",
+     "events_reduced": 3157,
+     "reason": "gc --apply re-verification",
+     "run_count": 102,
+     "sequence": 3157,
+     "verified_from": "genesis"
+    },
+    {
+     "checkpoint_id": "gc-1791222348113-2",
+     "events_reduced": 3177,
+     "reason": "gc --apply re-verification",
+     "run_count": 205,
+     "sequence": 6334,
+     "verified_from": "gc-1791222246381-1"
+    },
+    {
+     "checkpoint_id": "gc-1791222454764-3",
+     "events_reduced": 3190,
+     "reason": "gc --apply re-verification",
+     "run_count": 308,
+     "sequence": 9524,
+     "verified_from": "gc-1791222348113-2"
+    },
+    {
+     "checkpoint_id": "migration-1-eacea73b0f72",
+     "events_reduced": 9524,
+     "reason": "replay after migration migration-1-eacea73b0f72",
+     "run_count": 308,
+     "sequence": 9524,
+     "verified_from": "genesis"
+    },
+    {
+     "checkpoint_id": "gc-1791222700030-5",
+     "events_reduced": 3157,
+     "reason": "gc --apply re-verification",
+     "run_count": 410,
+     "sequence": 12681,
+     "verified_from": "migration-1-eacea73b0f72"
+    },
+    {
+     "checkpoint_id": "gc-1791222827938-6",
+     "events_reduced": 3455,
+     "reason": "gc --apply re-verification",
+     "run_count": 512,
+     "sequence": 16136,
+     "verified_from": "gc-1791222700030-5"
+    },
+    {
+     "checkpoint_id": "gc-1791222972231-7",
+     "events_reduced": 3700,
+     "reason": "gc --apply re-verification",
+     "run_count": 612,
+     "sequence": 19836,
+     "verified_from": "gc-1791222827938-6"
+    },
+    {
+     "checkpoint_id": "gc-1791223214268-8",
+     "events_reduced": 0,
+     "reason": "gc --apply re-verification",
+     "run_count": 612,
+     "sequence": 19836,
+     "verified_from": "gc-1791222972231-7"
+    }
+   ],
    "status": "ok",
    "task_index": 612
   }
@@ -952,8 +1413,8 @@
    },
    "carried": 13,
    "engine": {
-    "identity_validation_us": 2278,
-    "native_process_us": 3040,
+    "identity_validation_us": 2363,
+    "native_process_us": 2932,
     "wire_bytes": 34573
    },
    "entities": 21,
@@ -965,10 +1426,10 @@
    },
    "index": 1,
    "items": 21,
-   "retrieval_manifest_sha256": "cfc121a4f1e203bd54d61e0eee87678bb672730e8b48f392dc20b99b028da09d",
+   "retrieval_manifest_sha256": "5d186017ef2344b1c8219a8078c17f57c4f006b4b8e9337d59b22724bff85ea1",
    "retrievals": [
-    35,
-    23
+    31,
+    34
    ],
    "seeds": [
     "hub/sources:hub.md",
@@ -1003,8 +1464,8 @@
    },
    "carried": 13,
    "engine": {
-    "identity_validation_us": 2439,
-    "native_process_us": 4308,
+    "identity_validation_us": 2368,
+    "native_process_us": 3240,
     "wire_bytes": 34735
    },
    "entities": 21,
@@ -1016,10 +1477,10 @@
    },
    "index": 2,
    "items": 21,
-   "retrieval_manifest_sha256": "54ef7f9d59d6ecf65493ba5ea784d8aa0c02211128e7b41ed058897d79394b14",
+   "retrieval_manifest_sha256": "59c4241e02442e8c82b189ed5fbab2aeadfcefe8c5134e9161bd167931ea9665",
    "retrievals": [
-    33,
-    32
+    40,
+    30
    ],
    "seeds": [
     "hub/sources:hub.md",
@@ -1054,8 +1515,8 @@
    },
    "carried": 13,
    "engine": {
-    "identity_validation_us": 2968,
-    "native_process_us": 4293,
+    "identity_validation_us": 3355,
+    "native_process_us": 3901,
     "wire_bytes": 34901
    },
    "entities": 21,
@@ -1067,10 +1528,10 @@
    },
    "index": 3,
    "items": 21,
-   "retrieval_manifest_sha256": "e4090e9f55de5d91cc27aadc2d60b6a9bb456a1c6c1a70cbb4d692b940e76ece",
+   "retrieval_manifest_sha256": "0654dc9dca5e05163ee150d6acfc6ea1943a4f1ea57580820940e00327a32d4a",
    "retrievals": [
-    42,
-    37
+    41,
+    38
    ],
    "seeds": [
     "hub/sources:hub.md",
@@ -1105,8 +1566,8 @@
    },
    "carried": 13,
    "engine": {
-    "identity_validation_us": 2630,
-    "native_process_us": 3333,
+    "identity_validation_us": 2398,
+    "native_process_us": 4332,
     "wire_bytes": 35067
    },
    "entities": 21,
@@ -1118,10 +1579,10 @@
    },
    "index": 4,
    "items": 21,
-   "retrieval_manifest_sha256": "be41326a5e79d0ca62e95f45c2667b2f12f34a0fc7dc4b2638ed75cefafc53d6",
+   "retrieval_manifest_sha256": "8cd3b12cffa1a3777bd4c8042e83e85dd48f66a51854062c55bdf257a0038ff3",
    "retrievals": [
-    45,
-    46
+    52,
+    38
    ],
    "seeds": [
     "hub/sources:hub.md",
@@ -1156,8 +1617,8 @@
    },
    "carried": 13,
    "engine": {
-    "identity_validation_us": 2105,
-    "native_process_us": 4814,
+    "identity_validation_us": 2705,
+    "native_process_us": 3539,
     "wire_bytes": 35228
    },
    "entities": 21,
@@ -1169,10 +1630,10 @@
    },
    "index": 5,
    "items": 21,
-   "retrieval_manifest_sha256": "38ffa3e53d0b52829f40be037fe709be344d3080f88a34d204d3be11c059541f",
+   "retrieval_manifest_sha256": "23909dfe4cf74a3965b47efae9ad4ac22409716b5c9c33c3331c7ab507f57e28",
    "retrievals": [
-    51,
-    44
+    48,
+    43
    ],
    "seeds": [
     "hub/sources:hub.md",
@@ -1207,8 +1668,8 @@
    },
    "carried": 13,
    "engine": {
-    "identity_validation_us": 2562,
-    "native_process_us": 4202,
+    "identity_validation_us": 2700,
+    "native_process_us": 4244,
     "wire_bytes": 35246
    },
    "entities": 21,
@@ -1220,10 +1681,10 @@
    },
    "index": 6,
    "items": 21,
-   "retrieval_manifest_sha256": "83c2e243b1909b950148577e55913c77ccf07a8383c0c7e15bdb8d3cada5c0ae",
+   "retrieval_manifest_sha256": "c129e426e68b36a76191f4e7ee3f45d22b3e89c287d9fa518397f1c6dace5cf5",
    "retrievals": [
-    46,
-    46
+    49,
+    45
    ],
    "seeds": [
     "hub/sources:hub.md",
@@ -1258,8 +1719,8 @@
    },
    "carried": 38,
    "engine": {
-    "identity_validation_us": 2576,
-    "native_process_us": 9203,
+    "identity_validation_us": 2764,
+    "native_process_us": 6892,
     "wire_bytes": 158935
    },
    "entities": 46,
@@ -1271,10 +1732,10 @@
    },
    "index": 7,
    "items": 32,
-   "retrieval_manifest_sha256": "38aef13b22fabc6fe6c8ff6c69a24c2acb1323292a551be3d5a7cc68261d2bc3",
+   "retrieval_manifest_sha256": "46a1780c6a9b61ced8fba67fc594e55e546bd4c58d3f3e55347c80e603200542",
    "retrievals": [
-    64,
-    78
+    70,
+    71
    ],
    "seeds": [
     "hub/sources:hub.md",
@@ -1309,8 +1770,8 @@
    },
    "carried": 0,
    "engine": {
-    "identity_validation_us": 1963,
-    "native_process_us": 11268,
+    "identity_validation_us": 2467,
+    "native_process_us": 14628,
     "wire_bytes": 303293
    },
    "entities": 64,
@@ -1322,10 +1783,10 @@
    },
    "index": 8,
    "items": 32,
-   "retrieval_manifest_sha256": "2229fa49055636ed52e063287381f94fc83f6d3d85eb0f1fe92bb95a18ff3eb5",
+   "retrieval_manifest_sha256": "aaa07e905cac4eb41fa5f176e51fb2ecf5f8b32b73ac66dbcf137248d5712b19",
    "retrievals": [
-    95,
-    55
+    64,
+    68
    ],
    "seeds": [
     "hub/sources:hub.md",
@@ -1360,8 +1821,8 @@
    },
    "carried": 0,
    "engine": {
-    "identity_validation_us": 2634,
-    "native_process_us": 11208,
+    "identity_validation_us": 2512,
+    "native_process_us": 10885,
     "wire_bytes": 303293
    },
    "entities": 64,
@@ -1373,10 +1834,10 @@
    },
    "index": 9,
    "items": 32,
-   "retrieval_manifest_sha256": "cf19044faa33f558ce3621eab607ec0a570f548f5ae93c061100fb4095076a54",
+   "retrieval_manifest_sha256": "1de1db2351c88aed5dea8fc5711e467f6f97ff09440032d9b33315faaac8717d",
    "retrievals": [
-    154,
-    76
+    200,
+    66
    ],
    "seeds": [
     "hub/sources:hub.md",
@@ -1408,8 +1869,8 @@
    },
    "carried": 0,
    "engine": {
-    "identity_validation_us": 2623,
-    "native_process_us": 11947,
+    "identity_validation_us": 2800,
+    "native_process_us": 14985,
     "wire_bytes": 303293
    },
    "entities": 64,
@@ -1421,10 +1882,10 @@
    },
    "index": 10,
    "items": 32,
-   "retrieval_manifest_sha256": "fdefafa8d616b463eae8c2480d1548b9d94350d479725c33e5ba1b65f91223af",
+   "retrieval_manifest_sha256": "0f7b39e4779d6753a68a9045b4d5ee8fc61d1468d0a4a2ddf783470fdbf3588d",
    "retrievals": [
-    108,
-    115
+    91,
+    86
    ],
    "seeds": [
     "hub/sources:hub.md",
@@ -1455,8 +1916,8 @@
    },
    "carried": 0,
    "engine": {
-    "identity_validation_us": 2674,
-    "native_process_us": 14827,
+    "identity_validation_us": 2351,
+    "native_process_us": 12093,
     "wire_bytes": 303293
    },
    "entities": 64,
@@ -1468,10 +1929,10 @@
    },
    "index": 11,
    "items": 32,
-   "retrieval_manifest_sha256": "4bf61ae734c80866ea72ecd2875e4ba38d7a68890da2cb41ae9713ba95085831",
+   "retrieval_manifest_sha256": "5c34644474321ad59c38e035e1e2ffc18af7e3b276b7cfb7597eefab7b177d8e",
    "retrievals": [
-    97,
-    92
+    96,
+    94
    ],
    "seeds": [
     "hub/sources:hub.md",
@@ -1501,8 +1962,8 @@
    },
    "carried": 0,
    "engine": {
-    "identity_validation_us": 2810,
-    "native_process_us": 11009,
+    "identity_validation_us": 2965,
+    "native_process_us": 12557,
     "wire_bytes": 303293
    },
    "entities": 64,
@@ -1514,10 +1975,10 @@
    },
    "index": 12,
    "items": 32,
-   "retrieval_manifest_sha256": "c56bbf2feea4c4ab181b56d9e903e18097fbd95fd8c8aec770d81328b75aaea0",
+   "retrieval_manifest_sha256": "24e326382fbd84061b2faaff6e1f5c5a47579c53c2b661124e22f84623ca051b",
    "retrievals": [
-    105,
-    115
+    107,
+    122
    ],
    "seeds": [
     "hub/sources:hub.md",
@@ -1528,10 +1989,11 @@
    "task_index": 461
   }
  ],
- "produced_at_utc": "2026-10-05T13:25:38.620863+00:00",
+ "produced_at_utc": "2026-10-05T18:00:17.145851+00:00",
  "schema": "gabriel.evidence.longrun-witness/1",
  "snapshots": [
   {
+   "checkpoints": 0,
    "elapsed_s": 1.1,
    "epoch": 0,
    "journal": {
@@ -1565,22 +2027,24 @@
    },
    "task_index": 0,
    "telemetry_bytes": 0,
+   "telemetry_parts": 0,
    "worktree_bytes": 0,
    "worktrees": 0
   },
   {
-   "elapsed_s": 99.4,
+   "checkpoints": 1,
+   "elapsed_s": 103.8,
    "epoch": 0,
    "journal": {
-    "artifact_refs": 5612,
+    "artifact_refs": 5604,
     "attempts": 610,
-    "bytes": 24268800,
+    "bytes": 24276992,
     "events": 3157,
     "runs": 102
    },
    "label": "after-task-100",
    "memory": {
-    "bytes": 356352,
+    "bytes": 352256,
     "cache_rows": 0,
     "claims": 69,
     "compactions": 1,
@@ -1591,27 +2055,29 @@
     "labels": 102,
     "observations": 123,
     "supported_claims": 69,
-    "wal_bytes": 4128272,
+    "wal_bytes": 4136512,
     "work_items": 0
    },
    "migrations_bytes": 0,
    "numerical_cache_bytes": 1250,
    "store": {
-    "bytes": 7229136,
-    "objects": 6879
+    "bytes": 10530752,
+    "objects": 6974
    },
    "task_index": 102,
-   "telemetry_bytes": 2261823,
+   "telemetry_bytes": 2261768,
+   "telemetry_parts": 1,
    "worktree_bytes": 1063967,
    "worktrees": 102
   },
   {
-   "elapsed_s": 212.2,
+   "checkpoints": 2,
+   "elapsed_s": 207.2,
    "epoch": 0,
    "journal": {
-    "artifact_refs": 10951,
+    "artifact_refs": 10937,
     "attempts": 1223,
-    "bytes": 48435200,
+    "bytes": 48439296,
     "events": 6334,
     "runs": 205
    },
@@ -1628,33 +2094,35 @@
     "labels": 205,
     "observations": 226,
     "supported_claims": 139,
-    "wal_bytes": 4132392,
+    "wal_bytes": 4136512,
     "work_items": 0
    },
    "migrations_bytes": 0,
    "numerical_cache_bytes": 1250,
    "store": {
-    "bytes": 13781167,
-    "objects": 13258
+    "bytes": 20427391,
+    "objects": 13450
    },
    "task_index": 205,
-   "telemetry_bytes": 4538434,
+   "telemetry_bytes": 4538262,
+   "telemetry_parts": 1,
    "worktree_bytes": 2142334,
    "worktrees": 205
   },
   {
-   "elapsed_s": 339.7,
+   "checkpoints": 3,
+   "elapsed_s": 314.2,
    "epoch": 0,
    "journal": {
-    "artifact_refs": 16798,
+    "artifact_refs": 16783,
     "attempts": 1840,
-    "bytes": 72790016,
+    "bytes": 72802304,
     "events": 9524,
     "runs": 308
    },
    "label": "after-task-300",
    "memory": {
-    "bytes": 925696,
+    "bytes": 937984,
     "cache_rows": 0,
     "claims": 208,
     "compactions": 3,
@@ -1671,27 +2139,29 @@
    "migrations_bytes": 0,
    "numerical_cache_bytes": 1250,
    "store": {
-    "bytes": 22243613,
-    "objects": 20594
+    "bytes": 32260196,
+    "objects": 20889
    },
    "task_index": 308,
-   "telemetry_bytes": 6824096,
+   "telemetry_bytes": 6824190,
+   "telemetry_parts": 1,
    "worktree_bytes": 3206814,
    "worktrees": 308
   },
   {
-   "elapsed_s": 501.6,
+   "checkpoints": 4,
+   "elapsed_s": 447.7,
    "epoch": 1,
    "journal": {
-    "artifact_refs": 16798,
+    "artifact_refs": 16783,
     "attempts": 1840,
-    "bytes": 72790016,
+    "bytes": 72802304,
     "events": 9524,
     "runs": 308
    },
    "label": "after-migration",
    "memory": {
-    "bytes": 983040,
+    "bytes": 978944,
     "cache_rows": 0,
     "claims": 208,
     "compactions": 3,
@@ -1705,30 +2175,32 @@
     "wal_bytes": 0,
     "work_items": 0
    },
-   "migrations_bytes": 97615510,
+   "migrations_bytes": 107665228,
    "numerical_cache_bytes": 1250,
    "store": {
-    "bytes": 22262085,
-    "objects": 20596
+    "bytes": 32323468,
+    "objects": 20892
    },
    "task_index": 308,
-   "telemetry_bytes": 6824096,
+   "telemetry_bytes": 6824190,
+   "telemetry_parts": 1,
    "worktree_bytes": 3206814,
    "worktrees": 308
   },
   {
-   "elapsed_s": 648.6,
+   "checkpoints": 5,
+   "elapsed_s": 558.7,
    "epoch": 1,
    "journal": {
-    "artifact_refs": 22749,
+    "artifact_refs": 22743,
     "attempts": 2450,
-    "bytes": 96972800,
+    "bytes": 96976896,
     "events": 12681,
     "runs": 410
    },
    "label": "after-task-400",
    "memory": {
-    "bytes": 1290240,
+    "bytes": 1310720,
     "cache_rows": 0,
     "claims": 277,
     "compactions": 4,
@@ -1739,33 +2211,35 @@
     "labels": 410,
     "observations": 548,
     "supported_claims": 277,
-    "wal_bytes": 4152992,
+    "wal_bytes": 4157112,
     "work_items": 0
    },
-   "migrations_bytes": 97615510,
+   "migrations_bytes": 107665228,
    "numerical_cache_bytes": 1250,
    "store": {
-    "bytes": 31308311,
-    "objects": 28189
+    "bytes": 44733640,
+    "objects": 28597
    },
    "task_index": 410,
-   "telemetry_bytes": 9087332,
+   "telemetry_bytes": 9087601,
+   "telemetry_parts": 2,
    "worktree_bytes": 4270781,
    "worktrees": 410
   },
   {
-   "elapsed_s": 822.3,
+   "checkpoints": 6,
+   "elapsed_s": 688.4,
    "epoch": 1,
    "journal": {
-    "artifact_refs": 28749,
+    "artifact_refs": 28746,
     "attempts": 3160,
-    "bytes": 123101184,
+    "bytes": 123174912,
     "events": 16136,
     "runs": 512
    },
    "label": "after-task-500",
    "memory": {
-    "bytes": 1523712,
+    "bytes": 1527808,
     "cache_rows": 0,
     "claims": 312,
     "compactions": 5,
@@ -1776,33 +2250,35 @@
     "labels": 512,
     "observations": 683,
     "supported_claims": 312,
-    "wal_bytes": 4152992,
+    "wal_bytes": 4157112,
     "work_items": 0
    },
-   "migrations_bytes": 97615510,
+   "migrations_bytes": 107665228,
    "numerical_cache_bytes": 1250,
    "store": {
-    "bytes": 39373564,
-    "objects": 35313
+    "bytes": 56344491,
+    "objects": 35827
    },
    "task_index": 512,
-   "telemetry_bytes": 11566233,
+   "telemetry_bytes": 11566913,
+   "telemetry_parts": 2,
    "worktree_bytes": 4853896,
    "worktrees": 512
   },
   {
-   "elapsed_s": 1038.8,
+   "checkpoints": 7,
+   "elapsed_s": 833.5,
    "epoch": 1,
    "journal": {
-    "artifact_refs": 34710,
+    "artifact_refs": 34725,
     "attempts": 3960,
-    "bytes": 151023616,
+    "bytes": 150999040,
     "events": 19836,
     "runs": 612
    },
    "label": "after-task-600",
    "memory": {
-    "bytes": 1679360,
+    "bytes": 1675264,
     "cache_rows": 0,
     "claims": 312,
     "compactions": 6,
@@ -1813,33 +2289,35 @@
     "labels": 612,
     "observations": 783,
     "supported_claims": 312,
-    "wal_bytes": 4152992,
+    "wal_bytes": 4157112,
     "work_items": 0
    },
-   "migrations_bytes": 97615510,
+   "migrations_bytes": 107665228,
    "numerical_cache_bytes": 1250,
    "store": {
-    "bytes": 46117428,
-    "objects": 41875
+    "bytes": 66772621,
+    "objects": 42509
    },
    "task_index": 612,
-   "telemetry_bytes": 14222888,
+   "telemetry_bytes": 14223701,
+   "telemetry_parts": 2,
    "worktree_bytes": 4941246,
    "worktrees": 612
   },
   {
-   "elapsed_s": 1371.9,
+   "checkpoints": 7,
+   "elapsed_s": 1043.2,
    "epoch": 1,
    "journal": {
-    "artifact_refs": 34710,
+    "artifact_refs": 34725,
     "attempts": 3960,
-    "bytes": 151023616,
+    "bytes": 150999040,
     "events": 19836,
     "runs": 612
    },
    "label": "end",
    "memory": {
-    "bytes": 1679360,
+    "bytes": 1675264,
     "cache_rows": 0,
     "claims": 312,
     "compactions": 6,
@@ -1850,33 +2328,35 @@
     "labels": 612,
     "observations": 783,
     "supported_claims": 312,
-    "wal_bytes": 4152992,
+    "wal_bytes": 4157112,
     "work_items": 0
    },
-   "migrations_bytes": 97615510,
+   "migrations_bytes": 107665228,
    "numerical_cache_bytes": 1250,
    "store": {
-    "bytes": 46117428,
-    "objects": 41875
+    "bytes": 66772621,
+    "objects": 42509
    },
    "task_index": 612,
-   "telemetry_bytes": 14222888,
+   "telemetry_bytes": 14223701,
+   "telemetry_parts": 2,
    "worktree_bytes": 4941246,
    "worktrees": 612
   },
   {
-   "elapsed_s": 1486.1,
+   "checkpoints": 8,
+   "elapsed_s": 1064.3,
    "epoch": 1,
    "journal": {
-    "artifact_refs": 34710,
+    "artifact_refs": 34725,
     "attempts": 3960,
-    "bytes": 151023616,
+    "bytes": 150999040,
     "events": 19836,
     "runs": 612
    },
    "label": "after-retirement",
    "memory": {
-    "bytes": 1679360,
+    "bytes": 1675264,
     "cache_rows": 0,
     "claims": 312,
     "compactions": 6,
@@ -1887,17 +2367,18 @@
     "labels": 612,
     "observations": 783,
     "supported_claims": 312,
-    "wal_bytes": 4152992,
+    "wal_bytes": 4157112,
     "work_items": 0
    },
-   "migrations_bytes": 97615510,
+   "migrations_bytes": 107665228,
    "numerical_cache_bytes": 1250,
    "store": {
-    "bytes": 46117428,
-    "objects": 41875
+    "bytes": 66861496,
+    "objects": 42510
    },
    "task_index": 612,
-   "telemetry_bytes": 14222888,
+   "telemetry_bytes": 14223701,
+   "telemetry_parts": 2,
    "worktree_bytes": 0,
    "worktrees": 0
   }

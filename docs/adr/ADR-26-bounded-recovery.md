@@ -96,36 +96,42 @@ witness workspace, gave three facts:
 
 ## Results (`evidence/ops/longrun/`)
 The same witness as ADR-25 (600 scheduled tasks and 12 probes, 612 runs, 19 836 events at the
-end) ran on this code in 17.5 minutes with every check passed, the ADR-25 checks included. The
-recovery table, read back from the retained operations:
+end) ran on this code (commit `e600ca7`) in 17.8 minutes with every check passed, the ADR-25
+checks included. The recovery table, read back from the retained operations:
 
 | after task | journal events | replay from the latest checkpoint | audit from genesis |
 |---|---|---|---|
-| 102 | 3 157 | no checkpoint yet: 3 157 reduced, 9.0 s | |
-| 205 | 6 334 | 3 177 reduced, 10.0 s | |
-| 308 | 9 524 | 3 190 reduced, 9.9 s; restore 22.2 s (0 reduced) | restore 47.3 s |
-| 410 | 12 681 | 3 157 reduced, 9.3 s (from the migration's checkpoint) | |
-| 512 | 16 136 | 3 455 reduced, 12.3 s | |
-| 612 | 19 836 | 3 700 reduced, 14.2 s; restore 42.4 s (0 reduced) | restore 97.8 s; replay 60.6 s, 7 checkpoints verified |
+| 102 | 3 157 | no checkpoint yet: 3 157 reduced, 9.6 s | |
+| 205 | 6 334 | 3 177 reduced, 11.1 s | |
+| 308 | 9 524 | 3 190 reduced, 10.5 s; restore 19.5 s (0 reduced) | restore 45.4 s, 3 checkpoints verified |
+| 410 | 12 681 | 3 157 reduced, 10.7 s (from the migration's checkpoint) | |
+| 512 | 16 136 | 3 455 reduced, 12.5 s | |
+| 612 | 19 836 | 3 700 reduced, 13.4 s; restore 38.1 s (0 reduced) | restore 99.3 s, 7 checkpoints verified; replay 58.6 s, 7 checkpoints verified |
 
-The replay from the latest checkpoint stayed between 9 and 14 s while the journal grew sixfold,
-because each one reduced the roughly 3 200 to 3 700 events since the previous collection (2.9
-to 3.8 ms per reduced event, the chains over every event and the final check over every run on
-top); the audit from genesis took 60.6 s for 19 836 events, 3.1 ms per event against 4.7 ms
-before this ADR, the difference being the artifact validated once per digest, with nothing
-removed from what it checks. `gc --apply` took 9.9 to 15.4 s (16 to 104 s before) and 4.6 s
-after the retirement, `metrics` 3.2 s (91.7 s before), the migration 60 s (94 s before; still
-two full replays and a backup). A restore from the backup's checkpoint reduced nothing and took
-22.2 s at 9 524 events and 42.4 s at 19 836, against 47.3 s and 97.8 s from genesis; what
-remains in it is the copy of every object into the restored store (42 520 objects, each
-written and synced), which is linear in the objects, not in the events. Eight checkpoints were
-retained (six by collections, one by the migration on its boundary, one by the collection after
-the retirement); the audit at the end verified the seven that existed then. Per-task time did
-not grow (document 698 and 697 ms, numerical 682 and 661 ms, software 1 533 and 1 514 ms for
-the first and last ten). The telemetry file rotated into two parts. The store holds 42 520
-objects and 66.8 MB against 41 875 and 46.1 MB in the ADR-25 run: the retained projections of
-the checkpoints are the difference, about 20 MB for 612 runs, since a run's final projection is
-stored once and every later checkpoint names the same object.
+The replay from the latest checkpoint stayed between 9.6 and 13.4 s while the journal grew
+sixfold, because each one reduced the roughly 3 200 to 3 700 events since the previous
+collection (3.0 to 3.6 ms per reduced event, the chains over every event and the final check
+over every run on top); the audit from genesis took 58.6 s for 19 836 events, 3.0 ms per event
+against 4.7 ms before this ADR, the difference being the artifact validated once per digest,
+with nothing removed from what it checks. `gc --apply` took 9.8 to 16.6 s (16 to 104 s before)
+and 5.6 s after the retirement, `metrics` 3.2 s (91.7 s before), the migration 62 s (94 s
+before; still two full replays and a backup). A restore from the backup's checkpoint reduced
+nothing and took 19.5 s at 9 524 events and 38.1 s at 19 836, against 45.4 s and 99.3 s from
+genesis, and the audit of each restored copy verified the checkpoint its default restore had
+trusted, which the audit derives from the events alone (the witness's check
+`full_restore_verified_the_checkpoint_the_quick_restore_trusted`); what remains in the restore
+is the copy of every object into the restored store (42 510 objects, each written and synced),
+which is linear in the objects, not in the events. Eight checkpoints were retained (six by
+collections, one by the migration on its boundary, one by the collection after the retirement);
+the audit at the end verified the seven that existed then. Per-task time did not grow (document
+721 and 696 ms, numerical 686 and 654 ms, software 1 607 and 1 531 ms for the first and last
+ten). The telemetry file rotated into two parts. The store holds 42 510 objects and 66.9 MB
+against 41 875 and 46.1 MB in the ADR-25 run: the retained projections of the checkpoints are
+the difference, about 21 MB for 612 runs, since a run's final projection is stored once and
+every later checkpoint names the same object. Two earlier runs of the same witness on this
+code's predecessors (commits `d10b41d` and `f9eebdf`, not retained) gave the same picture:
+1 052 s and 1 049 s in all, bounded replays of 9.0 to 14.2 s and 9.8 to 12.1 s, audits of 60.6 s
+and 59.3 s, restores from the checkpoint of 22.2 and 42.4 s and 18.5 and 43.1 s.
 
 ## What this establishes and what it does not
 Established: the recovery of a workspace (restore, the re-verification after a collection, a

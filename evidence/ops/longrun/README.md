@@ -1,10 +1,13 @@
-# ADR-25 long-run witness (evidence/ops/longrun)
+# ADR-25 / ADR-26 long-run witness (evidence/ops/longrun)
 
 One workspace driven through 600 scheduled tasks plus 12 associative probe tasks (612 runs) in
 `linux_namespace` with the scripted providers, so that growth and the operations under it are
-measured, not the model. Produced by `scripts/longrun_witness.py` at commit `5e8c889` of this
-branch (`summary.json` records `produced_at_utc`, the platform and the `engine_observer`
-digest). Status: **passed** (every check in `summary.json["checks"]`).
+measured, not the model. The files here are the ADR-26 run, produced by
+`scripts/longrun_witness.py` at commit `e600ca7` of this branch (`summary.json` records
+`produced_at_utc`, the platform and the `engine_observer` digest); it repeats every ADR-25
+measurement and adds the recovery table. The ADR-25 run at commit `5e8c889` is retained in the
+history of this directory (commit `a1ea5ce`) and its figures stand in ADR-25 and below. Status:
+**passed** (every check in `summary.json["checks"]`).
 
 ```bash
 scripts/longrun_witness.py --out evidence/ops/longrun --backend linux_namespace --tasks 600
@@ -21,13 +24,17 @@ scripts/longrun_witness.py --out evidence/ops/longrun --backend linux_namespace 
 - An associative probe after every 25 document tasks: a task on the hub under the associative
   view; its retained retrieval manifest records the association status, the window, the seeds,
   the entities and what was carried.
-- After every 100 scheduled tasks: `memory.compact()` then `gc(apply=True, grace_seconds=0)`,
-  each followed by replay and chain verification, and a snapshot of the workspace.
-- At task 300: backup, restore elsewhere (verified, replayed), then an explicit migration to a
-  changed catalog (an extra read-only tool) and a reopen under the new epoch.
-- At the end: backup and restore under the new epoch, full replay, chain verification, the
-  reproduction of the first and the last probe's retrieval manifest from the chain, deep
-  diagnostics, metrics, the trace summary, retirement of every worktree and a final collection.
+- After every 100 scheduled tasks: a replay from the latest verified checkpoint (ADR-26), then
+  `memory.compact()` and `gc(apply=True, grace_seconds=0)`, which re-verifies from that
+  checkpoint and records the next one, then a snapshot of the workspace.
+- At task 300: backup, restore elsewhere from the backup's checkpoint and once more from
+  genesis (both verified and replayed), then an explicit migration to a changed catalog (an
+  extra read-only tool), whose replay records a checkpoint on the boundary, and a reopen under
+  the new epoch.
+- At the end: backup, restore from its checkpoint and from genesis, the audit from genesis
+  (which verifies every checkpoint it passes), chain verification, the reproduction of the
+  first and the last probe's retrieval manifest from the chain, deep diagnostics, metrics, the
+  trace summary, retirement of every worktree, a final collection and the list of checkpoints.
 
 Two counts appear in the evidence: snapshot labels (`after-task-100`) count scheduled tasks,
 while `task_index` and the operations' `after task` column count runs including the probes
@@ -45,7 +52,32 @@ while `task_index` and the operations' `after task` column count runs including 
 - `work/` (not committed, `.gitignore`): the workspace, the repositories, the backups and the
   restored copies.
 
-## Figures of the final run
+## Figures of the ADR-26 run (the files here)
+612 runs in 1 065 s. Journal 19 836 events (151.0 MB); memory chain 2 337 entries, 171
+document observations for 171 distinct document keys, 312 supported claims; store 42 510
+objects (66.9 MB, of which about 21 MB are the retained projections of the checkpoints); 612
+worktrees retired to 0; telemetry 14.2 MB in 2 rotated parts (35 400 spans); 5 820 independent
+checks passed, 0 failed. Recovery: the replay from the latest checkpoint at the six boundaries
+9.6 s (no checkpoint yet, 3 157 events from genesis), 11.1, 10.5, 10.7, 12.5 and 13.4 s (3 177 to
+3 700 events reduced each time) while the journal grew to 19 836 events; the audit from genesis
+at the end 58.6 s (3.0 ms per event) verifying the 7 checkpoints that existed then; restore from
+the backup's checkpoint 19.5 s and 38.1 s (0 events reduced) against 45.4 s and 99.3 s from
+genesis, whose audit verified 3 and 7 checkpoints, the one the default restore had trusted among
+them; `gc --apply` 9.8 to 16.6 s, 5.6 s after the retirement; backup 3.3 s and 6.9 s; migration
+62.4 s; `metrics` 3.2 s; retirement 14.3 s; 8 checkpoints retained. Probes as in the ADR-25 run
+(1 to 5 whole history, 6 and 7 at the batch cap, 8 to 12 at the entity cap, every one
+`computed`). Task wall time, first and last ten: document 721 and 696 ms, numerical 686 and
+654 ms, software 1 607 and 1 531 ms.
+
+Three earlier runs of the ADR-26 witness are not retained: on commits `d10b41d` and `f9eebdf`
+(1 052 s and 1 049 s, every check passed, bounded replays of 9.0 to 14.2 s and 9.8 to 12.1 s,
+audits of 60.6 s and 59.3 s) and on `0c7aa39` under concurrent load from the review's test runs
+(1 105 s, every check passed, task wall times distorted, not counted). The files here are the
+run on the committed witness, whose check
+`full_restore_verified_the_checkpoint_the_quick_restore_trusted` replaced an earlier one that
+compared only what both restores read from the same journal bytes.
+
+## Figures of the ADR-25 run (commit `5e8c889`, retained in the history)
 612 runs in 1 487 s. Journal 19 836 events (151.0 MB); memory chain 2 337 entries, 171
 document observations for 171 distinct document keys, 312 supported claims; store 41 875
 objects (46.1 MB); 612 worktrees (4.9 MB) retired to 0; telemetry 14.2 MB (35 400 spans);
@@ -72,6 +104,13 @@ software 1 528 and 1 538 ms.
   verified; both restores passed with every event replayed, the second one across the recorded
   migration; the final replay, the chain, the reproductions of the first and last probe, the
   deep diagnostics and the retirement all passed.
+- ADR-26: every collection re-verified the workspace from the previous checkpoint and recorded
+  the next one; every boundary replay that found a checkpoint reduced a proper suffix of the
+  journal (the first boundary had none and reduced everything); the audit from genesis at the
+  end verified every checkpoint that existed then; both backups carried the latest checkpoint,
+  so the default restore started from it and reduced nothing, and the audit of the restored
+  copy (`restore --full`), which derives the state from the events alone, verified that very
+  checkpoint; the telemetry rotated into parts and `metrics` read them once.
 
 ## Limits read off the evidence
 - What the walk carries is the engine's readout, not the window's doing: on a star
@@ -80,10 +119,12 @@ software 1 528 and 1 538 ms.
   probes after the entity cap are computed, windowed and carry no key. A hub co-cited with
   more than about 45 distinct sources carries none of them at the profile's time (ADR-20's
   readout, unchanged by ADR-25).
-- The journal is append-only and never compacted: the full replay, the migration (two replays
-  plus a backup) and the restore cost time linear in the events, and `metrics` without `--run`
-  reads the whole telemetry file once per run; the operations table shows these durations
-  growing with the workspace.
+- The journal is append-only and never compacted: the audit from genesis and the migration
+  (two replays plus a backup) cost time linear in the events. Since ADR-26 the restore, the
+  collection's re-verification and the routine audit replay from the latest verified
+  checkpoint, so their reduction is bounded by the checkpoint cadence; the restore's copy of
+  every object into the restored store stays linear in the objects, and `metrics` reads the
+  telemetry parts once.
 - A restored workspace has no credential until the operator writes one; the witness inspects
   the restored copies through the restore report and the owner directly.
 - Scripted providers only; no provider was called.
