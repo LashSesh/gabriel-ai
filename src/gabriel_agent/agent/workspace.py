@@ -27,7 +27,7 @@ from ..domains.software import SoftwarePack
 from ..memory import MemoryService
 from ..state.owner import CODEC_VERSION as JOURNAL_CODEC_VERSION, FORMAT as JOURNAL_FORMAT
 from ..state.reducer import reducer_identity
-from ..telemetry import Tracer, read_spans, summarize
+from ..telemetry import Tracer, read_spans, span_files, spans_by_run, summarize
 from ..models import provider_for_profile
 from ..policy.principals import Credential, new_secret, secret_digest
 from ..state import Owner
@@ -205,7 +205,10 @@ class Workspace:
             record = owner.record_migration(reason=reason, backup_manifest_sha256=manifest_sha, replayed_events=replay["events"])
             report["equivalence_replay"] = replay
             report["migration"] = record
-            report["replay_after"] = owner.replay()
+            # ADR-26: the replay after the migration is the audit from genesis under the new code; the state it reached is
+            # retained as a checkpoint on the epoch boundary (earlier checkpoints stay usable: each binds the catalog of its own epoch)
+            report["replay_after"] = owner.replay(record_checkpoint=report["migration"]["migration_id"],
+                                                  reason="replay after migration " + report["migration"]["migration_id"])
             # the workspace configuration carries the catalog identity the registry was built from
             config = dict(config, registry_digest=registry.catalog_digest(), config_revision=int(config.get("config_revision", 0)) + 1)
             validate(config, "workspace-config")
@@ -235,10 +238,11 @@ class Workspace:
         return {"run_id": run_id, "path": str(self.tracer.path), "summary": summarize(spans), "spans": spans,
                 "exporter": {"written": self.tracer.written, "dropped": self.tracer.dropped}}
 
-    def _run_metrics(self, run_id: str) -> dict:
+    def _run_metrics(self, run_id: str, spans: list | None = None) -> dict:
         """Per-run operational metrics from the journal (blueprint: track verified success, false
         completion, unknown effects, retries, budget overruns, recovery, time to first useful
-        artifact and resource use; cold and warm paths separately)."""
+        artifact and resource use; cold and warm paths separately). ``spans`` are the run's
+        telemetry spans when the caller already read the file (ADR-26: one pass for every run)."""
         projection = self.owner.projection(run_id)
         rows = self.owner._db.execute("SELECT e.sequence, e.kind, e.inputs_text, c.command_text, e.command_id FROM events e JOIN commands c "
                                       "ON e.command_id = c.command_id WHERE e.run_id = ? ORDER BY e.sequence", (run_id,)).fetchall()
@@ -302,12 +306,15 @@ class Workspace:
                 "holds": holds, "recovery_ms": recovery_ms, "repair_count": projection["run_meta"]["repair_count"], "plan_versions": projection["run_meta"]["plan_versions"],
                 "time_to_first_useful_artifact_ms": first_artifact_ms, "total_ms": (last_time - first_time) if events else None,
                 "resource_use": projection["ledger"]["spent"], "path": "warm" if warm else "cold", "events": len(events),
-                "telemetry": summarize(read_spans(self.tracer.path, run_id))["per_kind"]}
+                "telemetry": summarize(read_spans(self.tracer.path, run_id) if spans is None else spans)["per_kind"]}
 
     def metrics(self, run_id: str | None = None) -> dict:
-        """Operational metrics of one run or of every run in the workspace, with totals."""
+        """Operational metrics of one run or of every run in the workspace, with totals. The
+        telemetry parts are read once (ADR-26), whatever the number of runs."""
         run_ids = [run_id] if run_id else [r[0] for r in self.owner._db.execute("SELECT run_id FROM runs ORDER BY run_id").fetchall()]
-        runs = [self._run_metrics(r) for r in run_ids]
+        grouped = spans_by_run(self.tracer.path)
+        runs = [self._run_metrics(r, spans=grouped.get(r, [])) for r in run_ids]
+        all_spans = [span for spans in grouped.values() for span in spans]
         by_state = {}
         for run in runs:
             by_state[run["state"]] = by_state.get(run["state"], 0) + 1
@@ -321,7 +328,8 @@ class Workspace:
                   "model_requests": sum(r["resource_use"].get("model_requests", 0) for r in runs),
                   "model_tokens": sum(r["resource_use"].get("model_tokens", 0) for r in runs)}
         return {"schema": "gabriel.metrics/1", "workspace_id": self.config["workspace_id"], "totals": totals, "runs": runs,
-                "telemetry": summarize(read_spans(self.tracer.path)), "exporter": {"written": self.tracer.written, "dropped": self.tracer.dropped}}
+                "telemetry": dict(summarize(all_spans), parts=len(span_files(self.tracer.path))),
+                "exporter": {"written": self.tracer.written, "dropped": self.tracer.dropped, "rotated": self.tracer.rotated}}
 
     def gc(self, *, apply: bool = False, grace_seconds: int = 3600, now: float | None = None) -> dict:
         """Artifact garbage collection: dry run unless ``apply``; see ``agent/gc.py``."""
@@ -353,6 +361,8 @@ class Workspace:
                             "stray_temporaries": self.store.fsck([])["stray_temporaries"]},
                 "artifact_root": {"path": str(root), "exists": root.is_dir(), "writable": os.access(root, os.W_OK)},
                 "reconciliation_work": self.owner.expired_attempts(),
+                "checkpoints": [{"checkpoint_id": c["checkpoint_id"], "sequence": c["sequence"], "schema": c["schema"],
+                                 "verified_from": c.get("verified_from"), "catalog_digest": c.get("catalog_digest")} for c in self.owner.checkpoints()],
                 "memory_chain": self.memory.anchor() if self.memory is not None else None}
 
     def doctor(self, selftest: bool = False, deep: bool = False) -> dict:

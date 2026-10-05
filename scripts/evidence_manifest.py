@@ -138,16 +138,21 @@ PACKAGES = {
             "acceptance": ["blueprint: operations, observability and release discipline",
                            "ADR-25: a long run of many tasks in one workspace with compaction, garbage collection, backup, restore and migration "
                            "under a growing memory, with the batch window, the one-observation-per-source rule, the closure-complete backup and "
-                           "worktree retirement witnessed (evidence/ops/longrun)"],
+                           "worktree retirement witnessed (evidence/ops/longrun)",
+                           "ADR-26: verified state checkpoints recorded by the replays that reproduced them; restore, the re-verification after a "
+                           "collection and a routine audit replay from the latest verified checkpoint while both chains are verified over every "
+                           "event; the audit from genesis verifies every checkpoint (evidence/ops/longrun, recovery table)"],
             "evidence": ["evidence/ops/migration_at23.json", "evidence/ops/migration_run5_dr-notice.json", "evidence/ops/smoke_metrics.json",
                          "evidence/ops/smoke_trace_summary.json", "evidence/ops/smoke_gc_dry_run.json", "evidence/ops/smoke_doctor_deep.json",
                          "evidence/ops/longrun/summary.json", "evidence/ops/longrun/series.json", "evidence/ops/longrun/report.md",
                          "evidence/ops/longrun/README.md", "docs/adr/ADR-17-operations.md", "docs/adr/ADR-25-long-running-operation.md",
-                         "evidence/test_results.txt"],
+                         "docs/adr/ADR-26-bounded-recovery.md", "evidence/test_results.txt"],
             "not_executed": ["cooperative cancellation of a tool run inside the containment backend (stop takes effect at the next boundary)",
                              "a successful migration of a journal created before catalog records existed (refused by rule when verifiers changed)",
                              "a long run with a real provider (the witness uses the scripted providers so that growth, not the model, is measured)",
-                             "journal compaction (the journal is append-only by contract; replay and migration cost time linear in the events)"]},
+                             "journal compaction (the journal is append-only by contract; the audit from genesis and a migration cost time linear in "
+                             "the events; since ADR-26 restore, the collection's re-verification and a routine audit replay from the latest verified "
+                             "checkpoint)", "pruning of checkpoints (every one is retained)"]},
     "WP12": {"status": "DONE", "tests": ["tests/test_release.py"], "acceptance": ["AT18"],
              "evidence": ["evidence/wp12/smoke_linux_namespace.log", "evidence/wp12/release_manifest_smoke.json",
                           "evidence/wp12/smoke_restore_report.json", "LICENSE", "docs/RELEASE_G1.md"],

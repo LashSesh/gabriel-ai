@@ -2,8 +2,12 @@
   "$id": "https://gabriel.invalid/spec/1/checkpoint.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
-  "description": "Closed gabriel_agent contract; representation only, cross-record rules are enforced by the owner.",
+  "description": "Closed gabriel_agent contract (ADR-26): a verified state checkpoint of the journal. It binds a journal sequence (head and inputs head of the chains at that sequence), the identities the state was produced with (reducer, schema registry, codec, the catalog in force at the sequence) and a retained state: one content-addressed object per run projection as of the sequence, listed by a checkpoint-state object (state_ref). A checkpoint is recorded only at the end of a recorded replay that reached its sequence from genesis or from an earlier verified checkpoint (verified_from), so the retained state is the state that replay reproduced. Cross-record rules are enforced by the owner.",
   "properties": {
+    "catalog_digest": {
+      "$ref": "common.schema.json#/$defs/sha256",
+      "description": "the catalog digest in force at the sequence (the epoch's), so a checkpoint is usable only while the epoch it was taken in reads the same"
+    },
     "checkpoint_id": {
       "$ref": "common.schema.json#/$defs/identifier"
     },
@@ -15,7 +19,12 @@
       "$ref": "common.schema.json#/$defs/safe_uint"
     },
     "dependency_manifest_ref": {
-      "$ref": "common.schema.json#/$defs/artifact_ref"
+      "$ref": "common.schema.json#/$defs/artifact_ref",
+      "description": "optional: a manifest of what the checkpoint depends on, retained by the operator"
+    },
+    "events_reduced": {
+      "$ref": "common.schema.json#/$defs/safe_uint",
+      "description": "events the recording replay re-reduced (all of them from genesis, or those after verified_from)"
     },
     "head": {
       "$ref": "common.schema.json#/$defs/sha256"
@@ -24,13 +33,22 @@
       "$ref": "common.schema.json#/$defs/sha256"
     },
     "projection_digest": {
-      "$ref": "common.schema.json#/$defs/sha256"
+      "$ref": "common.schema.json#/$defs/sha256",
+      "description": "digest of {run_id: projection digest} over every run at the sequence; each projection digest is the sha256 of its retained projection object"
+    },
+    "reason": {
+      "maxLength": 1024,
+      "pattern": "^[ -~]*$",
+      "type": "string"
     },
     "reducer_identity": {
       "$ref": "common.schema.json#/$defs/sha256"
     },
+    "run_count": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
     "schema": {
-      "const": "gabriel.checkpoint/1",
+      "const": "gabriel.checkpoint/2",
       "type": "string"
     },
     "schema_registry_digest": {
@@ -38,6 +56,16 @@
     },
     "sequence": {
       "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "state_ref": {
+      "$ref": "common.schema.json#/$defs/artifact_ref",
+      "description": "the gabriel.checkpoint-state/1 object listing every run's retained projection object"
+    },
+    "verified_from": {
+      "maxLength": 128,
+      "pattern": "^[ -~]+$",
+      "type": "string",
+      "description": "'genesis' when the recording replay started from the first event, else the checkpoint_id it started from"
     },
     "workspace_id": {
       "$ref": "common.schema.json#/$defs/identifier"
@@ -51,11 +79,16 @@
     "head",
     "inputs_head",
     "projection_digest",
+    "state_ref",
+    "run_count",
+    "catalog_digest",
     "reducer_identity",
     "schema_registry_digest",
     "codec_version",
     "created_owner_time_unix_ms",
-    "dependency_manifest_ref"
+    "verified_from",
+    "events_reduced",
+    "reason"
   ],
   "title": "checkpoint",
   "type": "object"

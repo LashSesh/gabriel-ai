@@ -168,8 +168,10 @@ manifests recompute from the chain after compactions, collections, a migration a
 Not established: operation with a real provider (the witness uses the scripted providers so
 that growth, not the model, is measured); operation over months or across hosts; any bound on
 the journal (append-only by contract: a replay, a migration and a restore cost time linear in
-the events, 4.7 ms per event here, measured, not bounded); a bound on the telemetry file
-(`metrics` without `--run` reads it once per run, 92 s at 612 runs); a restored workspace's
+the events, 4.7 ms per event here, measured, not bounded; ADR-26 bounds restore, the
+collection's re-verification and the routine audit by verified checkpoints and leaves the audit
+from genesis and the migration linear); a bound on the telemetry file (`metrics` without
+`--run` reads it once per run, 92 s at 612 runs; ADR-26 reads it once); a restored workspace's
 credential (never backed up; the operator writes it); that a windowed walk carries anything (a
 hub with more than about 45 distinct co-cited sources carries none at the profile's time, which
 is the engine's readout and not this ADR's to change). Retirement is an operator's decision: a

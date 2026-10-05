@@ -25,6 +25,8 @@ from .reducer import TERMINAL_STATES, projection_digest, reduce, reducer_identit
 
 FORMAT = "gabriel.agent-journal/1"
 GENESIS = "0" * 64
+CHECKPOINT_SCHEMA = "gabriel.checkpoint/2"
+CHECKPOINT_STATE_SCHEMA = "gabriel.checkpoint-state/1"
 
 _DDL = """
 CREATE TABLE meta (
@@ -387,22 +389,33 @@ class Owner:
         derived = self._derived_inputs(command, payload, projection)
         return retained, derived
 
-    def _derived_inputs(self, command, payload, projection, catalog: dict | None = None):
+    def _derived_inputs(self, command, payload, projection, catalog: dict | None = None, cache: dict | None = None):
+        """Inputs recomputed from the store and the catalog. ``cache`` (ADR-26) memoizes a validated
+        artifact by its digest for the duration of one replay: the bytes behind a digest never
+        change, so validating them once is the same work as validating them per event."""
         catalog = catalog or self.catalog
         derived = {"catalog_tools": catalog["tools"], "catalog_verifiers": catalog["verifiers"]}
         binding_ref = payload.get("binding_ref") if command["op"] == "admit_task" else (projection or {}).get("binding_ref")
         if binding_ref is not None:
-            try:
-                derived["binding"] = validate_bytes(self.store.get(binding_ref), "task-binding")
-            except GabrielError:
-                derived["binding"] = None
+            derived["binding"] = self._validated_artifact(binding_ref, "task-binding", cache)
         report_ref = payload.get("compilation_report_ref") if command["op"] in ("admit_task", "amend_task") else None
         if report_ref is not None:
-            try:
-                derived["compilation_report"] = validate_bytes(self.store.get(report_ref), "compilation-report")
-            except GabrielError:
-                derived["compilation_report"] = None
+            derived["compilation_report"] = self._validated_artifact(report_ref, "compilation-report", cache)
         return derived
+
+    def _validated_artifact(self, ref: dict, schema: str, cache: dict | None):
+        """The artifact behind ``ref`` parsed and validated against ``schema``, or None when it is
+        missing, changed or invalid; memoized by digest in ``cache`` when one is given."""
+        key = (ref["sha256"], schema)
+        if cache is not None and key in cache:
+            return cache[key]
+        try:
+            value = validate_bytes(self.store.get(ref), schema)
+        except GabrielError:
+            value = None
+        if cache is not None:
+            cache[key] = value
+        return value
 
     def _persist_projection(self, projection, command, sequence, task_spec_ref):
         run, task = projection["run"], projection["task"]
@@ -595,22 +608,59 @@ class Owner:
             raise GabrielError(Code.STORAGE_FAULT, "journal head at the anchored sequence differs from the retained anchor")
         return {"status": "passed", "anchored_sequence": anchor["sequence"], "current_sequence": meta["event_count"]}
 
-    def replay(self, *, expected_anchor=None, pending_from_digest: str | None = None) -> dict:
+    def replay(self, *, expected_anchor=None, pending_from_digest: str | None = None, from_checkpoint: bool = False,
+               record_checkpoint: str | None = None, reason: str | None = None) -> dict:
         """Recorded replay: verify the chain and references, re-run the pure reducer over
         retained payloads and inputs, compare every projection digest. No port is called.
         ``pending_from_digest`` is the equivalence check of a migration: every retained event
-        still carries the registered catalog digest while the running code's catalog differs."""
+        still carries the registered catalog digest while the running code's catalog differs.
+
+        ADR-26: with ``from_checkpoint`` the replay starts from the latest usable verified
+        checkpoint (its identities and epoch current, its binding intact): both hash chains are
+        still verified over every event, but only the events after the checkpoint are reduced,
+        from the checkpoint's retained state. Without it the replay starts from genesis and
+        verifies every checkpoint it passes against the state it reproduced. With
+        ``record_checkpoint`` the state the replay reached is retained as a new checkpoint
+        named by that id, verified from genesis or from the checkpoint it started at."""
         if expected_anchor is not None:
             self.verify_anchor(expected_anchor)
         epochs = self._catalog_epochs(pending_from_digest)
-        catalogs = {}
+        catalogs, artifacts = {}, {}
         head, inputs_head, count = GENESIS, GENESIS, 0
-        projections, missing_refs, verified_refs = {}, [], 0
-        self._db.execute("BEGIN")
+        projections, digests, missing_refs, verified_refs = {}, {}, [], 0
+        start, skipped, state = None, [], {}
+        if from_checkpoint:
+            start, skipped = self._usable_checkpoint(epochs)
+        if start is not None:
+            state = self._checkpoint_state(start)
+            digests = {run_id: ref["sha256"] for run_id, ref in state.items()}
+        boundary = start["sequence"] if start is not None else 0
+        pending = {}  # sequence -> the checkpoints recorded there (several replays may record at the same head)
+        for manifest in self.checkpoints():
+            if manifest["schema"] == CHECKPOINT_SCHEMA and manifest["sequence"] > boundary:
+                pending.setdefault(manifest["sequence"], []).append(manifest)
+        verified_checkpoints = []
+        prefix_head, prefix_inputs_head, prefix_count = GENESIS, GENESIS, 0
+        recorded = None
+        self._db.execute("BEGIN IMMEDIATE" if record_checkpoint else "BEGIN")
         try:
             rows = self._db.execute("SELECT sequence, event_text, hash, inputs_text, inputs_hash, projection_digest, command_id FROM events ORDER BY sequence").fetchall()
             for sequence, event_text, stored_hash, inputs_text, stored_inputs_hash, stored_pdigest, command_id in rows:
                 envelope = loads(event_text)
+                if sequence <= boundary:
+                    # the prefix the checkpoint already verified: both chains are checked, nothing is reduced
+                    if sequence != prefix_count + 1 or envelope["sequence"] != sequence or envelope["previous_hash"] != prefix_head:
+                        raise GabrielError(Code.STORAGE_FAULT, "event chain order mismatch at %d" % sequence)
+                    if event_hash(envelope) != stored_hash:
+                        raise GabrielError(Code.STORAGE_FAULT, "event hash mismatch at %d" % sequence)
+                    if sha256_hex((prefix_inputs_head + inputs_text).encode("ascii")) != stored_inputs_hash:
+                        raise GabrielError(Code.STORAGE_FAULT, "inputs chain mismatch at %d" % sequence)
+                    prefix_head, prefix_inputs_head, prefix_count = stored_hash, stored_inputs_hash, sequence
+                    if sequence == boundary:
+                        if (prefix_head, prefix_inputs_head) != (start["head"], start["inputs_head"]):
+                            raise GabrielError(Code.STORAGE_FAULT, "journal chains at the checkpoint differ from the checkpoint binding")
+                        head, inputs_head, count = prefix_head, prefix_inputs_head, prefix_count
+                    continue
                 validate(envelope, "event")
                 if sequence != count + 1 or envelope["sequence"] != sequence or envelope["previous_hash"] != head:
                     raise GabrielError(Code.STORAGE_FAULT, "event chain order mismatch at %d" % sequence)
@@ -620,6 +670,8 @@ class Owner:
                 if computed_inputs_hash != stored_inputs_hash:
                     raise GabrielError(Code.STORAGE_FAULT, "inputs chain mismatch at %d" % sequence)
                 crow = self._db.execute("SELECT command_text FROM commands WHERE command_id=?", (command_id,)).fetchone()
+                if crow is None:
+                    raise GabrielError(Code.STORAGE_FAULT, "command of event %d is missing" % sequence)
                 command = loads(crow[0])
                 validate(command, "command")
                 if OP_TO_EVENT[command["op"]] != envelope["kind"] or canonical(command["payload_ref"]) != canonical(envelope["payload_ref"]):
@@ -633,61 +685,137 @@ class Owner:
                 # the catalog in force at this sequence, when retained; otherwise the running catalog has to reproduce the event
                 if epoch_digest not in catalogs:
                     catalogs[epoch_digest] = self._catalog_for_digest(epoch_digest)
-                derived = self._derived_inputs(command, payload, projections.get(command["run_id"]), catalog=catalogs[epoch_digest])
-                result = reduce(projections.get(command["run_id"]), command, payload, dict(retained, **derived))
+                run_id = command["run_id"]
+                if run_id not in projections and run_id in state:
+                    # the run's projection as of the checkpoint, from its retained object (bytes verified by the store)
+                    projections[run_id] = loads(self.store.get(state[run_id]))
+                derived = self._derived_inputs(command, payload, projections.get(run_id), catalog=catalogs[epoch_digest], cache=artifacts)
+                result = reduce(projections.get(run_id), command, payload, dict(retained, **derived))
                 pdigest = projection_digest(result.projection)
                 if pdigest != stored_pdigest:
                     raise GabrielError(Code.STORAGE_FAULT, "replayed projection differs at %d" % sequence)
-                projections[command["run_id"]] = result.projection
+                projections[run_id] = result.projection
+                digests[run_id] = pdigest
                 head, inputs_head, count = stored_hash, stored_inputs_hash, sequence
+                for manifest in pending.get(sequence, ()):
+                    # a checkpoint recorded at this sequence must bind exactly the state the replay reached here
+                    self._verify_checkpoint_state(manifest, digests)
+                    verified_checkpoints.append(manifest["checkpoint_id"])
+            if start is not None and prefix_count != boundary:
+                raise GabrielError(Code.STORAGE_FAULT, "journal is shorter than the checkpoint it names")
             meta = self._meta()
             if (meta["head"], meta["inputs_head"], meta["event_count"]) != (head, inputs_head, count):
                 raise GabrielError(Code.STORAGE_FAULT, "journal metadata disagrees with replay")
-            for run_id, projection in projections.items():
+            for run_id, expected in digests.items():
                 row = self._db.execute("SELECT projection_text FROM runs WHERE run_id=?", (run_id,)).fetchone()
-                if row is None or projection_digest(loads(row[0])) != projection_digest(projection):
+                if row is None or projection_digest(loads(row[0])) != expected:
                     raise GabrielError(Code.STORAGE_FAULT, "stored projection for %s disagrees with replay" % run_id)
             for sha in self.referenced_artifacts():
                 if not self.store.path_for(sha).is_file():
                     missing_refs.append(sha)
+            if record_checkpoint is not None and not missing_refs:
+                recorded = self._record_checkpoint(record_checkpoint, projections, state, head, inputs_head, count, epochs,
+                                                   verified_from=start["checkpoint_id"] if start is not None else "genesis",
+                                                   events_reduced=count - boundary, reason=reason or "")
             self._db.commit()
         except BaseException:
             self._db.rollback()
             raise
         return {"status": "passed" if not missing_refs else "storage_fault", "events": count, "head": head,
-                "inputs_head": inputs_head, "runs": len(projections), "payloads_verified": verified_refs,
+                "inputs_head": inputs_head, "runs": len(digests), "payloads_verified": verified_refs,
                 "missing_referenced_artifacts": missing_refs, "external_calls": 0,
-                "anchor_checked": expected_anchor is not None}
+                "anchor_checked": expected_anchor is not None,
+                "checkpoint": None if start is None else {"checkpoint_id": start["checkpoint_id"], "sequence": start["sequence"],
+                                                           "verified_from": start["verified_from"]},
+                "checkpoints_skipped": skipped, "events_reduced": count - boundary, "checkpoints_verified": verified_checkpoints,
+                "checkpoint_recorded": recorded}
 
-    def all_projections_digest(self) -> str:
-        rows = self._db.execute("SELECT run_id, projection_text FROM runs ORDER BY run_id").fetchall()
-        return digest({r[0]: loads(r[1]) for r in rows})
+    # ------------------------------------------------------------ verified state checkpoints (ADR-26)
+    def checkpoints(self) -> list:
+        """Every retained checkpoint manifest, oldest first."""
+        rows = self._db.execute("SELECT manifest_text FROM checkpoints ORDER BY sequence, checkpoint_id").fetchall()
+        manifests = [loads(r[0]) for r in rows]
+        # the latest at a sequence is the one recorded last (several replays may record at the same head)
+        return sorted(manifests, key=lambda m: (m["sequence"], m.get("created_owner_time_unix_ms", 0), m["checkpoint_id"]))
 
-    def checkpoint(self, checkpoint_id: str, dependency_manifest_ref: dict) -> dict:
+    def _usable_checkpoint(self, epochs: list):
+        """The latest checkpoint a replay may start from, and why the later ones cannot be used: a
+        checkpoint is usable while the reducer, the schema registry, the codec and the catalog of its
+        epoch read the same as the running code's, the journal still carries its sequence and the
+        chains at that sequence still carry its binding."""
         meta = self._meta()
-        manifest = {"schema": "gabriel.checkpoint/1", "checkpoint_id": checkpoint_id, "workspace_id": self.workspace_id,
-                    "sequence": meta["event_count"], "head": meta["head"], "inputs_head": meta["inputs_head"],
-                    "projection_digest": self.all_projections_digest(), "reducer_identity": reducer_identity(),
-                    "schema_registry_digest": registry_digest(), "codec_version": CODEC_VERSION,
-                    "created_owner_time_unix_ms": self.owner_time(), "dependency_manifest_ref": dependency_manifest_ref}
+        skipped = []
+        for manifest in reversed(self.checkpoints()):
+            reason = None
+            if manifest.get("schema") != CHECKPOINT_SCHEMA:
+                reason = "a checkpoint of an earlier contract without a retained state"
+            elif manifest["reducer_identity"] != reducer_identity() or manifest["schema_registry_digest"] != registry_digest() \
+                    or manifest["codec_version"] != CODEC_VERSION:
+                reason = "produced by a different reducer, schema registry or codec"
+            elif manifest["sequence"] > meta["event_count"]:
+                reason = "the journal is shorter than its sequence"
+            elif manifest["catalog_digest"] != self._catalog_digest_at(manifest["sequence"], epochs):
+                reason = "the catalog of its epoch reads differently now"
+            else:
+                try:
+                    self.verify_anchor({"schema": "gabriel.anchor/1", "workspace_id": self.workspace_id, "sequence": manifest["sequence"],
+                                        "head": manifest["head"], "inputs_head": manifest["inputs_head"]})
+                except GabrielError as exc:
+                    reason = "its binding no longer matches the journal: " + exc.message
+            if reason is None:
+                return manifest, skipped
+            skipped.append({"checkpoint_id": manifest["checkpoint_id"], "sequence": manifest["sequence"], "reason": reason})
+        return None, skipped
+
+    def _checkpoint_state(self, manifest: dict) -> dict:
+        """The retained state of a checkpoint: run id to the reference of its projection object."""
+        state = validate(loads(self.store.get(manifest["state_ref"])), "checkpoint-state")
+        if state["checkpoint_id"] != manifest["checkpoint_id"] or state["workspace_id"] != self.workspace_id or state["sequence"] != manifest["sequence"]:
+            raise GabrielError(Code.STORAGE_FAULT, "checkpoint state does not belong to the checkpoint that names it")
+        if digest({run_id: ref["sha256"] for run_id, ref in state["runs"].items()}) != manifest["projection_digest"]:
+            raise GabrielError(Code.STORAGE_FAULT, "checkpoint state does not match the checkpoint's projection digest")
+        return state["runs"]
+
+    def _verify_checkpoint_state(self, manifest: dict, digests: dict) -> None:
+        state = self._checkpoint_state(manifest)
+        expected = {run_id: ref["sha256"] for run_id, ref in state.items()}
+        if expected != digests:
+            raise GabrielError(Code.STORAGE_FAULT, "checkpoint %s does not bind the state the replay reached at %d"
+                               % (manifest["checkpoint_id"], manifest["sequence"]))
+
+    def _record_checkpoint(self, checkpoint_id: str, projections: dict, state: dict, head: str, inputs_head: str, count: int,
+                           epochs: list, *, verified_from: str, events_reduced: int, reason: str) -> dict:
+        """Retain the state a verifying replay reached (inside the replay's transaction): one object per
+        run projection (its sha256 is the run's projection digest; an unchanged run's object is the one
+        the previous checkpoint named), a state object listing them, and the manifest row."""
+        runs = {}
+        for run_id in sorted(set(projections) | set(state)):
+            if run_id in projections:
+                runs[run_id] = self.store.put(canonical(projections[run_id]), "application/json")
+            else:
+                runs[run_id] = state[run_id]
+        state_record = {"schema": CHECKPOINT_STATE_SCHEMA, "checkpoint_id": checkpoint_id, "workspace_id": self.workspace_id,
+                        "sequence": count, "runs": runs}
+        validate(state_record, "checkpoint-state")
+        state_ref = self.store.put(canonical(state_record), "application/json")
+        manifest = {"schema": CHECKPOINT_SCHEMA, "checkpoint_id": checkpoint_id, "workspace_id": self.workspace_id,
+                    "sequence": count, "head": head, "inputs_head": inputs_head,
+                    "projection_digest": digest({run_id: ref["sha256"] for run_id, ref in runs.items()}), "state_ref": state_ref,
+                    "run_count": len(runs), "catalog_digest": self._catalog_digest_at(count, epochs), "reducer_identity": reducer_identity(),
+                    "schema_registry_digest": registry_digest(), "codec_version": CODEC_VERSION, "created_owner_time_unix_ms": self.owner_time(),
+                    "verified_from": verified_from, "events_reduced": int(events_reduced), "reason": reason[:1024]}
         validate(manifest, "checkpoint")
-        self._db.execute("BEGIN IMMEDIATE")
         try:
             self._db.execute("INSERT INTO checkpoints VALUES (?,?,?,?,?)",
-                             (checkpoint_id, manifest["sequence"], manifest["head"], manifest["projection_digest"],
-                              canonical(manifest).decode("ascii")))
-            self._db.commit()
+                             (checkpoint_id, count, head, manifest["projection_digest"], canonical(manifest).decode("ascii")))
         except sqlite3.IntegrityError as exc:
-            self._db.rollback()
             raise GabrielError(Code.ID_REUSE, "checkpoint id already used", obj=checkpoint_id) from exc
-        except BaseException:
-            self._db.rollback()
-            raise
         return manifest
 
-    def verify_checkpoint(self, manifest: dict, projections: dict) -> dict:
-        """A supplied projection is trusted only when the manifest binds its digest, its
-        frontier matches the retained journal and the reducer identity is current."""
+    def verify_checkpoint(self, manifest: dict, projections: dict | None = None) -> dict:
+        """A checkpoint is trusted only when its identities are current, its binding matches the
+        retained journal and its state object is intact; a supplied projection is trusted only
+        when the state binds its digest."""
         validate(manifest, "checkpoint")
         if manifest["workspace_id"] != self.workspace_id:
             raise GabrielError(Code.STORAGE_FAULT, "checkpoint belongs to another workspace")
@@ -695,10 +823,11 @@ class Owner:
             raise GabrielError(Code.UNSUPPORTED, "checkpoint was produced by a different reducer or schema registry")
         self.verify_anchor({"schema": "gabriel.anchor/1", "workspace_id": self.workspace_id, "sequence": manifest["sequence"],
                             "head": manifest["head"], "inputs_head": manifest["inputs_head"]})
-        supplied = digest({k: projections[k] for k in sorted(projections)})
-        if supplied != manifest["projection_digest"]:
-            raise GabrielError(Code.STORAGE_FAULT, "supplied projection does not match the checkpoint binding; replay from genesis instead")
-        return {"status": "passed", "sequence": manifest["sequence"]}
+        state = self._checkpoint_state(manifest)
+        for run_id, projection in (projections or {}).items():
+            if run_id not in state or projection_digest(projection) != state[run_id]["sha256"]:
+                raise GabrielError(Code.STORAGE_FAULT, "supplied projection does not match the checkpoint binding; replay from genesis instead")
+        return {"status": "passed", "sequence": manifest["sequence"], "runs": len(state)}
 
     def backup(self, destination) -> dict:
         """Coherent snapshot through SQLite's online backup API, never a raw file copy."""

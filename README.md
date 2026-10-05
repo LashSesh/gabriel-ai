@@ -31,6 +31,12 @@ in an isolated worktree with independent acceptance checks.
   tasks, the backup carries the referenced closure so a restore after a migration replays every
   epoch, worktrees are retired explicitly, indexes bound the per-task cost):
   `docs/adr/ADR-25-long-running-operation.md`, `evidence/ops/longrun/`
+- Bounded recovery (verified state checkpoints recorded only by a replay that reproduced the
+  state they retain; restore, the re-verification after a collection and a routine audit replay
+  from the latest verified checkpoint while both hash chains are still verified over every
+  event; the audit from genesis verifies every checkpoint it passes; a replay validates an
+  artifact once per digest; telemetry rotates and metrics read it once):
+  `docs/adr/ADR-26-bounded-recovery.md`, `evidence/ops/longrun/`
 - Native PSE graph worker (the reviewed Rust engine as a contained analytical worker of the
   numerical pack: conditioned snapshots, regional masses and exact window certificates with
   complete bindings, references independent of the engine, a graph corpus tier and separate
@@ -89,7 +95,7 @@ in an isolated worktree with independent acceptance checks.
   memory layer), `ADR-21` (association provenance in the prompt), `ADR-22` (domain-declared
   progress channels and G3 on the association distribution), `ADR-23` (erosion of the
   association history and reproducible retrieval manifests), `ADR-24` (numerical channels and
-  the route across packs), `ADR-25` (long-running operation)
+  the route across packs), `ADR-25` (long-running operation), `ADR-26` (bounded recovery)
 - Evidence (test log, environment, baseline rerun, spec validation): `evidence/`
 - The blueprint's own machine-readable contracts and validator: `contracts/`, `tools/validate_spec.py`
 

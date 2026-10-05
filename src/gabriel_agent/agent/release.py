@@ -130,9 +130,11 @@ def release_manifest(root: Path, *, evidence: dict | None = None, python: str = 
                          "and a withdrawal holds until a task declares a new revision of the source (since ADR-25 an unchanged source is one "
                          "observation across tasks; a second declaration at the same revision makes the key contested); the walk sees at most the "
                          "engine's 128 latest seed-touching batches within 64 entities and declares the window (ADR-25)",
-                         "long-running operation is witnessed for one workspace of 600 scripted tasks (ADR-25, evidence/ops/longrun): the journal "
-                         "is append-only and never compacted, a full replay or migration costs time linear in the events, metrics read the "
-                         "whole telemetry file per run, and a restored workspace has no credential until the operator writes one",
+                         "long-running operation is witnessed for one workspace of 600 scripted tasks (ADR-25, ADR-26, evidence/ops/longrun): the "
+                         "journal is append-only and never compacted, so the audit from genesis and a migration cost time linear in the events; "
+                         "restore, the re-verification after a collection and a routine audit replay from the latest verified checkpoint, which "
+                         "every collection records (checkpoints are never pruned); a restored workspace has no credential until the operator "
+                         "writes one",
                          "the document pack's default routing policy is a readout promoted on one constructed distribution with one provider "
                          "(ADR-22) and transferred with fixed weights to a second provider of the same vendor (protocol 9); it can only stop a "
                          "repair earlier than the rule, it abstains where its declared channels are missing, and it stopped one recoverable "

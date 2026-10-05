@@ -83,8 +83,10 @@ def backup(workspace, destination) -> dict:
     return manifest
 
 
-def restore(source, destination, *, catalog, clock=None) -> dict:
-    """Rebuild a workspace from a backup and verify it against the retained anchor."""
+def restore(source, destination, *, catalog, clock=None, full: bool = False) -> dict:
+    """Rebuild a workspace from a backup and verify it against the retained anchor. The replay
+    starts from the latest verified checkpoint the backup carries (ADR-26) unless ``full``
+    asks for the audit from genesis; the report says which."""
     source, destination = Path(source), Path(destination)
     manifest = json.loads((source / "manifest.json").read_text())
     if manifest.get("schema") != "gabriel.backup-manifest/1":
@@ -129,7 +131,8 @@ def restore(source, destination, *, catalog, clock=None) -> dict:
     owner = Owner.open(destination / "journal.sqlite", store, catalog, clock=clock)
     try:
         report["anchor_check"] = owner.verify_anchor(anchor)
-        report["replay"] = owner.replay(expected_anchor=anchor)
+        report["replay"] = owner.replay(expected_anchor=anchor, from_checkpoint=not full)
+        report["replay_mode"] = "full" if full else "from_checkpoint"
         report["memory"] = None
         if manifest.get("memory_sha256"):
             memory = MemoryService.open(destination / "memory.sqlite", store, lambda: owner.anchor()["sequence"])

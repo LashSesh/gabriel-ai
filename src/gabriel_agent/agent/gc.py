@@ -100,7 +100,15 @@ def collect_garbage(workspace, *, apply: bool = False, grace_seconds: int = 3600
         removed = store.collect(orphans)
         report["removed"] = removed
         report["removed_bytes"] = sum(sizes.values())
-        report["replay"] = owner.replay()["status"]
+        # ADR-26: the re-verification replays from the latest verified checkpoint and retains the state it reached as the
+        # next one, so every collection also bounds the next recovery; the full replay stays the audit (`gabriel audit`)
+        checkpoint_id = "gc-%d" % int(time.time() * 1000)
+        replay = owner.replay(from_checkpoint=True, record_checkpoint=checkpoint_id, reason="gc --apply re-verification")
+        report["replay"] = replay["status"]
+        report["checkpoint"] = {"started_from": replay["checkpoint"], "events_reduced": replay["events_reduced"],
+                                "recorded": None if replay["checkpoint_recorded"] is None else
+                                {"checkpoint_id": checkpoint_id, "sequence": replay["events"], "run_count": replay["checkpoint_recorded"]["run_count"]},
+                                "skipped": replay["checkpoints_skipped"]}
         report["memory"] = memory.verify()["status"] if memory is not None else None
         report["status"] = "passed" if report["replay"] == "passed" and report["memory"] in (None, "passed") else "storage_fault"
     else:

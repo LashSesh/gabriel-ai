@@ -12,7 +12,7 @@ import pytest
 from gabriel_agent.contracts import GabrielError, Code, canonical, loads
 from gabriel_agent.contracts.rules import approval_digest
 from gabriel_agent.state import Owner
-from gabriel_agent.state.reducer import reducer_identity
+from gabriel_agent.state.reducer import projection_digest, reducer_identity
 
 from .harness import World, FAR, budget, usage
 
@@ -455,17 +455,79 @@ def test_anchor_detects_truncated_suffix_and_checkpoint_binding(tmp_path):
     assert info.value.code is Code.STORAGE_FAULT
     restored.verify_anchor(backup["anchor"])
     restored.close()
-    manifest = w.owner.checkpoint("cp-1", w.put("dependency manifest"))
+    # ADR-26: a checkpoint is recorded only by a replay that verified the state it retains
+    replayed = w.owner.replay(record_checkpoint="cp-1", reason="test")
+    manifest = replayed["checkpoint_recorded"]
+    assert manifest["schema"] == "gabriel.checkpoint/2" and manifest["verified_from"] == "genesis" and manifest["events_reduced"] == replayed["events"]
+    assert w.owner.checkpoints() == [manifest]
     projections = {"run-01": w.owner.projection("run-01")}
-    assert w.owner.verify_checkpoint(manifest, projections)["status"] == "passed"
+    assert w.owner.verify_checkpoint(manifest, projections) == {"status": "passed", "sequence": manifest["sequence"], "runs": 1}
     corrupted = copy.deepcopy(projections)
     corrupted["run-01"]["run"]["state"] = "succeeded"  # same frontier, changed projection
     with pytest.raises(GabrielError) as info:
         w.owner.verify_checkpoint(manifest, corrupted)
     assert info.value.code is Code.STORAGE_FAULT
-    forged = dict(manifest, projection_digest=w.owner.all_projections_digest(), reducer_identity="0" * 64)
+    forged = dict(manifest, reducer_identity="0" * 64)
     with pytest.raises(GabrielError):
         w.owner.verify_checkpoint(forged, projections)
+    with pytest.raises(GabrielError) as info:
+        w.owner.replay(record_checkpoint="cp-1")  # an id names one checkpoint
+    assert info.value.code is Code.ID_REUSE
+
+
+def test_replay_from_a_verified_checkpoint_reduces_the_suffix_and_still_checks_every_chain(tmp_path):
+    """ADR-26: a replay that starts from the latest verified checkpoint reduces only the events after
+    it, from the checkpoint's retained state, while both hash chains are verified over every event;
+    the replay from genesis stays the audit and verifies every checkpoint it passes; a checkpoint
+    recorded by a replay from a checkpoint is verified by induction; a tampered prefix event, a
+    changed state object and a forged checkpoint binding are all storage faults, never silently
+    worked around."""
+    w = World(tmp_path)
+    w.admit(); w.start()
+    first = w.owner.replay(record_checkpoint="cp-1", reason="after start")
+    assert first["checkpoint"] is None and first["events_reduced"] == first["events"] == 2 and first["checkpoints_verified"] == []
+    assert first["checkpoint_recorded"]["run_count"] == 1 and first["checkpoint_recorded"]["verified_from"] == "genesis"
+    w.accept_plan()
+    partial = w.owner.replay(from_checkpoint=True)
+    assert partial["status"] == "passed" and partial["checkpoint"]["checkpoint_id"] == "cp-1" and partial["events"] == 3
+    assert partial["events_reduced"] == 1 and partial["payloads_verified"] == 1 and partial["runs"] == 1 and partial["checkpoints_skipped"] == []
+    assert partial["head"] == w.owner.anchor()["head"]
+    full = w.owner.replay()
+    assert full["checkpoints_verified"] == ["cp-1"] and full["events_reduced"] == 3 and full["checkpoint"] is None
+    second = w.owner.replay(from_checkpoint=True, record_checkpoint="cp-2", reason="by induction")["checkpoint_recorded"]
+    assert second["verified_from"] == "cp-1" and second["events_reduced"] == 1 and second["sequence"] == 3
+    assert w.owner.replay(from_checkpoint=True)["events_reduced"] == 0
+    assert w.owner.replay()["checkpoints_verified"] == ["cp-1", "cp-2"]
+    # the retained state objects are the projections the replay reproduced, bound by their digests
+    state = loads(w.store.get(second["state_ref"]))
+    assert set(state["runs"]) == {"run-01"} and state["runs"]["run-01"]["sha256"] == projection_digest(w.owner.projection("run-01"))
+    assert loads(w.store.get(state["runs"]["run-01"])) == w.owner.projection("run-01")
+    # a forged binding is found when the checkpoint is used and when the audit passes it
+    w.owner.close()
+    db = sqlite3.connect(str(w.tmp / "journal.sqlite"))
+    forged = dict(loads(db.execute("SELECT manifest_text FROM checkpoints WHERE checkpoint_id='cp-2'").fetchone()[0]), projection_digest="0" * 64)
+    db.execute("UPDATE checkpoints SET manifest_text=?, projection_digest=? WHERE checkpoint_id='cp-2'", (canonical(forged).decode("ascii"), "0" * 64))
+    db.commit(); db.close()
+    owner = Owner.open(w.tmp / "journal.sqlite", w.store, w.catalog, clock=w.clock)
+    with pytest.raises(GabrielError) as info:
+        owner.replay(from_checkpoint=True)
+    assert info.value.code is Code.STORAGE_FAULT and "projection digest" in info.value.message
+    with pytest.raises(GabrielError) as info:
+        owner.replay()
+    assert info.value.code is Code.STORAGE_FAULT
+    owner.close()
+    # a tampered event before the checkpoint is found by the chain pass although nothing before it is reduced
+    w2 = World(tmp_path / "second")
+    w2.admit(); w2.start(); w2.owner.replay(record_checkpoint="cp-1", reason="test"); w2.accept_plan()
+    w2.owner.close()
+    db = sqlite3.connect(str(w2.tmp / "journal.sqlite"))
+    db.execute("UPDATE events SET event_text=replace(event_text, 'RunStarted', 'TaskCancelled') WHERE sequence=2")
+    db.commit(); db.close()
+    owner = Owner.open(w2.tmp / "journal.sqlite", w2.store, w2.catalog, clock=w2.clock)
+    with pytest.raises(GabrielError) as info:
+        owner.replay(from_checkpoint=True)
+    assert info.value.code is Code.STORAGE_FAULT and "hash mismatch at 2" in info.value.message
+    owner.close()
 
 
 def test_replay_rejects_tampered_event(tmp_path):

@@ -39,6 +39,7 @@ from gabriel_agent.contracts.codec import loads  # noqa: E402
 from gabriel_agent.contracts.errors import GabrielError  # noqa: E402
 from gabriel_agent.domains.base import descriptor  # noqa: E402
 from gabriel_agent.evaluation.corpus_domains import materialize  # noqa: E402
+from gabriel_agent.telemetry import span_files  # noqa: E402
 from gabriel_agent.evaluation.fixtures import numerical_series, parser_bug  # noqa: E402
 from gabriel_agent.memory import association  # noqa: E402
 from gabriel_agent.policy import router  # noqa: E402
@@ -141,6 +142,30 @@ def _registry_with_probe(backend_resolver):
     return registry
 
 
+def _replay_facts(report: dict) -> dict:
+    """What a replay report says, without the lists that grow with the workspace."""
+    return {"status": report["status"], "events": report["events"], "runs": report["runs"], "payloads_verified": report["payloads_verified"],
+            "events_reduced": report["events_reduced"], "checkpoint": (report["checkpoint"] or {}).get("checkpoint_id"),
+            "checkpoint_sequence": (report["checkpoint"] or {}).get("sequence"), "checkpoints_verified": len(report["checkpoints_verified"]),
+            "checkpoints_skipped": report["checkpoints_skipped"], "checkpoint_recorded": (report["checkpoint_recorded"] or {}).get("checkpoint_id"),
+            "head": report["head"], "missing_referenced_artifacts": len(report["missing_referenced_artifacts"])}
+
+
+def _gc_facts(report: dict) -> dict:
+    facts = {k: v for k, v in report.items() if k not in ("orphan_sample", "checkpoint")}
+    checkpoint = report.get("checkpoint") or {}
+    facts["checkpoint_started_from"] = (checkpoint.get("started_from") or {}).get("checkpoint_id")
+    facts["checkpoint_events_reduced"] = checkpoint.get("events_reduced")
+    facts["checkpoint_recorded"] = (checkpoint.get("recorded") or {}).get("checkpoint_id")
+    return facts
+
+
+def _restore_facts(report: dict) -> dict:
+    facts = {k: v for k, v in report.items() if k != "replay"}
+    facts["replay"] = _replay_facts(report["replay"]) if isinstance(report.get("replay"), dict) else report.get("replay")
+    return facts
+
+
 def _size(path: Path) -> int:
     if path.is_file():
         return path.stat().st_size
@@ -177,7 +202,9 @@ class Witness:
                              "claims": _count(m, "claims"), "supported_claims": _count(m, "claims", "WHERE status = 'supported'"), "labels": _count(m, "labels"),
                              "cache_rows": _count(m, "cache"), "compactions": _count(m, "compactions"), "work_items": _count(m, "work_items"),
                              "bytes": _size(self.ws_path / "memory.sqlite"), "wal_bytes": _size(self.ws_path / "memory.sqlite-wal")},
-                  "telemetry_bytes": _size(ws.tracer.path), "worktrees": len([p for p in (self.ws_path / "worktrees").iterdir() if p.is_dir()]) if (self.ws_path / "worktrees").is_dir() else 0,
+                  "telemetry_bytes": sum(_size(p) for p in span_files(ws.tracer.path)), "telemetry_parts": len(span_files(ws.tracer.path)),
+                  "checkpoints": _count(o, "checkpoints"),
+                  "worktrees": len([p for p in (self.ws_path / "worktrees").iterdir() if p.is_dir()]) if (self.ws_path / "worktrees").is_dir() else 0,
                   "worktree_bytes": None, "numerical_cache_bytes": _size(self.ws_path / "numerical_cache.json"), "migrations_bytes": _size(self.ws_path / "migrations"),
                   "store": None}
         if store_walk:
@@ -314,8 +341,12 @@ class Witness:
                 self.run_task(numerical_series.task_spec(num_repo, num_base, num_oracle, num_provider), "numerical", "series-%03d" % index)
             done = position + 1
             if done % 100 == 0 or done == len(plan):
+                # ADR-26: the bounded recovery at this point (the latest verified checkpoint is the one the previous collection
+                # recorded, about a hundred tasks ago), then compaction and a collection, which re-verifies from that same
+                # checkpoint and records the next one
+                self.operation("replay.from_checkpoint", lambda: _replay_facts(self.ws.owner.replay(from_checkpoint=True)))
                 self.operation("memory.compact", lambda: {k: v for k, v in self.ws.memory.compact().items() if k not in ("retained_artifacts", "anchors")})
-                self.operation("gc.apply", lambda: {k: v for k, v in self.ws.gc(apply=True, grace_seconds=0).items() if k != "orphan_sample"}, grace_seconds=0)
+                self.operation("gc.apply", lambda: _gc_facts(self.ws.gc(apply=True, grace_seconds=0)), grace_seconds=0)
                 snapshots.append(self.snapshot("after-task-%d" % done, True))
             if done == len(plan) // 2 and not migrated:
                 # backup, restore elsewhere, then migrate to a changed catalog and continue under the new epoch
@@ -323,8 +354,13 @@ class Witness:
                 self.operation("backup", lambda: {k: v for k, v in backup(self.ws, backup_dir).items() if k != "objects"}, path=self.relative(backup_dir))
                 backup_dirs.append(backup_dir)
                 self.ws.close()
-                self.operation("restore", lambda: restore(backup_dir, self.work / ("restored-%d" % done), catalog=workspace_module.build_registry(lambda: None).catalog()),
+                self.operation("restore.from_checkpoint", lambda: _restore_facts(restore(backup_dir, self.work / ("restored-%d" % done),
+                                                                                         catalog=workspace_module.build_registry(lambda: None).catalog())),
                                source=self.relative(backup_dir))
+                self.operation("restore.full", lambda: _restore_facts(restore(backup_dir, self.work / ("restored-%d-full" % done),
+                                                                              catalog=workspace_module.build_registry(lambda: None).catalog(), full=True)),
+                               source=self.relative(backup_dir))
+                shutil.rmtree(self.work / ("restored-%d-full" % done), ignore_errors=True)
                 workspace_module.build_registry = _registry_with_probe
                 migration = self.operation("migrate", lambda: Workspace.migrate(self.ws_path, reason="longrun witness: ops.probe tool added to the catalog"))
                 if migration["status"] == "ok":
@@ -335,12 +371,17 @@ class Witness:
                 migrated = True
                 self.open_workspace(create=False)
                 snapshots.append(self.snapshot("after-migration", True))
-        # the end: a second backup and restore under the new epoch, replay, chain, reproduction, diagnostics, metrics, retirement
+        # the end: a second backup and restore under the new epoch (from the checkpoint the backup carries, and the audit from
+        # genesis), the full replay as the audit that verifies every checkpoint, chain, reproduction, diagnostics, metrics, retirement
         final_backup = self.work / "backup-final"
         self.operation("backup", lambda: {k: v for k, v in backup(self.ws, final_backup).items() if k != "objects"}, path=self.relative(final_backup))
-        self.operation("restore", lambda: restore(final_backup, self.work / "restored-final", catalog=workspace_module.build_registry(lambda: None).catalog()),
+        self.operation("restore.from_checkpoint", lambda: _restore_facts(restore(final_backup, self.work / "restored-final",
+                                                                                 catalog=workspace_module.build_registry(lambda: None).catalog())),
                        source=self.relative(final_backup))
-        self.operation("owner.replay", lambda: self.ws.owner.replay())
+        self.operation("restore.full", lambda: _restore_facts(restore(final_backup, self.work / "restored-final-full",
+                                                                      catalog=workspace_module.build_registry(lambda: None).catalog(), full=True)),
+                       source=self.relative(final_backup))
+        self.operation("owner.replay", lambda: _replay_facts(self.ws.owner.replay()))
         self.operation("memory.verify", lambda: self.ws.memory.verify())
         for which in ("first", "last"):
             probe = self.probes[0] if which == "first" else self.probes[-1]
@@ -350,8 +391,11 @@ class Witness:
         self.operation("trace.summary", lambda: self.ws.trace()["summary"])
         snapshots.append(self.snapshot("end", True))
         self.operation("retire_worktrees", lambda: {k: (v if k != "retired" else len(v)) for k, v in self.ws.retire_worktrees().items()})
-        self.operation("gc.after_retirement", lambda: {k: v for k, v in self.ws.gc(apply=True, grace_seconds=0).items() if k != "orphan_sample"})
+        self.operation("gc.after_retirement", lambda: _gc_facts(self.ws.gc(apply=True, grace_seconds=0)))
         snapshots.append(self.snapshot("after-retirement", True))
+        checkpoints = self.ws.owner.checkpoints()
+        self.operations.append({"name": "checkpoints", "task_index": self.task_index, "epoch": self.epoch, "duration_ms": 0, "status": "ok",
+                                "result": [{k: c[k] for k in ("checkpoint_id", "sequence", "run_count", "verified_from", "events_reduced", "reason")} for c in checkpoints]})
         anchor, memory_anchor = self.ws.owner.anchor(), self.ws.memory.anchor()
         self.ws.close()
         workspace_module.build_registry = _ORIGINAL_BUILD_REGISTRY
@@ -412,9 +456,26 @@ def checks(summary: dict, witness: Witness) -> dict:
         "document_observations_bounded_by_distinct_sources": summary["snapshots"][-1]["memory"]["document_observations"] == summary["snapshots"][-1]["memory"]["distinct_document_keys"],
         "every_compaction_verified": all(e["status"] == "ok" and e["result"]["status"] == "compacted" and e["result"]["required_bytes_verified"] for e in ops.get("memory.compact", [])),
         "every_gc_passed": all(e["status"] == "ok" and e["result"]["status"] == "passed" for e in ops.get("gc.apply", []) + ops.get("gc.after_retirement", [])),
-        "backups_restored_and_replayed": len(ops.get("restore", [])) == 2 and all(e["status"] == "ok" and e["result"]["status"] == "passed" for e in ops["restore"]),
-        "restore_after_migration_passed": ops.get("restore", [{}])[-1].get("result", {}).get("replay", {}).get("status") == "passed" and any(e["status"] == "ok" and e["result"]["status"] == "migrated" for e in ops.get("migrate", [])),
+        "backups_restored_and_replayed": len(ops.get("restore.from_checkpoint", [])) == 2 and len(ops.get("restore.full", [])) == 2
+                                         and all(e["status"] == "ok" and e["result"]["status"] == "passed" for e in ops["restore.from_checkpoint"] + ops["restore.full"]),
+        "restore_after_migration_passed": ops.get("restore.full", [{}])[-1].get("result", {}).get("replay", {}).get("status") == "passed"
+                                           and any(e["status"] == "ok" and e["result"]["status"] == "migrated" for e in ops.get("migrate", [])),
         "final_replay_passed": ops.get("owner.replay", [{}])[-1].get("result", {}).get("status") == "passed",
+        # ADR-26: every collection re-verified from the previous checkpoint and recorded the next; the bounded replays at the
+        # boundaries reduced only the events since the previous checkpoint; the audit verified every checkpoint; both restores agree
+        "every_collection_recorded_a_checkpoint": bool(ops.get("gc.apply")) and all(e["result"].get("checkpoint_recorded") for e in ops.get("gc.apply", []) + ops.get("gc.after_retirement", [])),
+        "recovery_from_checkpoint_bounded": all(e["result"]["checkpoint"] is not None and 0 < e["result"]["events_reduced"] < e["result"]["events"]
+                                                for e in ops.get("replay.from_checkpoint", [])[1:]),
+        "audit_verified_every_checkpoint": ops.get("owner.replay", [{}])[-1].get("result", {}).get("checkpoints_verified") == len(ops.get("checkpoints", [{"result": []}])[-1]["result"]) - 1
+                                            and ops.get("owner.replay", [{}])[-1].get("result", {}).get("checkpoint") is None,
+        "restores_from_checkpoint_and_genesis_agree": bool(ops.get("restore.full")) and all(
+            a["result"]["replay"]["head"] == b["result"]["replay"]["head"] and a["result"]["replay"]["events"] == b["result"]["replay"]["events"]
+            and b["result"]["replay"]["checkpoint"] is None for a, b in zip(ops.get("restore.from_checkpoint", []), ops.get("restore.full", []))),
+        # the backups taken after a collection carry its checkpoint, so the default restore replays from it and the audit verifies it
+        "restores_used_the_backups_checkpoint": bool(ops.get("restore.from_checkpoint")) and all(
+            a["result"]["replay"]["checkpoint"] is not None and a["result"]["replay"]["events_reduced"] == 0 and b["result"]["replay"]["checkpoints_verified"] >= 1
+            for a, b in zip(ops.get("restore.from_checkpoint", []), ops.get("restore.full", []))),
+        "telemetry_rotated": summary["snapshots"][-1]["telemetry_parts"] >= 2,
         "memory_chain_verified": ops.get("memory.verify", [{}])[-1].get("result", {}).get("status") == "passed",
         "first_and_last_probe_reproduce": all(e["status"] == "ok" and e["result"]["status"] == "reproduced" for e in ops.get("memory.reproduce", [])),
         # the deep doctor ran, found no missing or changed bytes and no reconciliation work, and its only problem is the
@@ -457,19 +518,39 @@ def report_lines(summary: dict, witness: Witness, verdict: dict, args) -> list:
         if e["name"] == "plan":
             continue
         facts = e["result"] if isinstance(e["result"], dict) else {}
-        keys = {"memory.compact": ("status", "removed_derived", "retained_artifact_count"), "gc.apply": ("status", "objects", "orphans", "removed", "replay", "memory"),
-                "gc.after_retirement": ("status", "objects", "orphans", "removed"), "backup": ("object_count", "object_bytes"), "restore": ("status", "objects_verified"),
-                "migrate": ("status",), "owner.replay": ("status", "events", "runs"), "memory.verify": ("status", "entries"), "memory.reproduce": ("status", "differences"),
+        keys = {"memory.compact": ("status", "removed_derived", "retained_artifact_count"),
+                "gc.apply": ("status", "objects", "orphans", "removed", "replay", "memory", "checkpoint_events_reduced", "checkpoint_recorded"),
+                "gc.after_retirement": ("status", "objects", "orphans", "removed", "checkpoint_events_reduced", "checkpoint_recorded"),
+                "backup": ("object_count", "object_bytes"), "restore.from_checkpoint": ("status", "objects_verified"), "restore.full": ("status", "objects_verified"),
+                "replay.from_checkpoint": ("status", "events", "events_reduced", "checkpoint"),
+                "migrate": ("status",), "owner.replay": ("status", "events", "runs", "checkpoints_verified"), "memory.verify": ("status", "entries"),
+                "memory.reproduce": ("status", "differences"),
                 "doctor.deep": ("problems",), "metrics": ("totals",), "trace.summary": ("spans",), "retire_worktrees": ("retired", "bytes_freed")}.get(e["name"], ())
         shown = {k: facts.get(k) for k in keys if k in facts}
-        if e["name"] == "restore" and isinstance(facts.get("replay"), dict):
+        if e["name"] in ("restore.from_checkpoint", "restore.full") and isinstance(facts.get("replay"), dict):
             shown["replay_events"] = facts["replay"].get("events")
+            shown["events_reduced"] = facts["replay"].get("events_reduced")
         if e["name"] == "metrics" and isinstance(facts.get("totals"), dict):
             shown = {k: facts["totals"].get(k) for k in ("runs", "declared_successes", "independent_checks_passed", "independent_checks_failed")}
         lines.append("| %s | %d | %d | %d | %s | %s |" % (e["name"], e["task_index"], e["epoch"], e["duration_ms"], e["status"], json.dumps(shown, default=str)[:160]))
     by_kind = {}
     for r in witness.series:
         by_kind.setdefault(r["kind"], []).append(r["wall_ms"])
+    lines += ["", "## Recovery (ADR-26: replay from the latest verified checkpoint against the audit from genesis)", "",
+              "| operation | after task | journal events | checkpoint started from | events reduced | duration ms |", "|---|---|---|---|---|---|"]
+    for e in witness.operations:
+        if e["name"] in ("replay.from_checkpoint", "owner.replay"):
+            facts = e["result"] if isinstance(e["result"], dict) else {}
+            lines.append("| %s | %d | %s | %s | %s | %d |" % (e["name"], e["task_index"], facts.get("events"), facts.get("checkpoint") or "genesis",
+                                                            facts.get("events_reduced"), e["duration_ms"]))
+        elif e["name"] in ("restore.from_checkpoint", "restore.full"):
+            facts = (e["result"] if isinstance(e["result"], dict) else {}).get("replay") or {}
+            lines.append("| %s | %d | %s | %s | %s | %d |" % (e["name"], e["task_index"], facts.get("events"), facts.get("checkpoint") or "genesis",
+                                                            facts.get("events_reduced"), e["duration_ms"]))
+    checkpoints = next((e["result"] for e in witness.operations if e["name"] == "checkpoints"), [])
+    lines += ["", "Checkpoints retained: %d (%s); telemetry parts at the end: %d." % (
+        len(checkpoints), ", ".join("%s at %d from %s" % (c["checkpoint_id"], c["sequence"], c["verified_from"]) for c in checkpoints),
+        snaps[-1].get("telemetry_parts", 0))]
     lines += ["", "## Task wall time (ms)", "", "| kind | tasks | first 10 mean | last 10 mean | overall mean | max |", "|---|---|---|---|---|---|"]
     for kind, values in sorted(by_kind.items()):
         lines.append("| %s | %d | %.0f | %.0f | %.0f | %d |" % (kind, len(values), sum(values[:10]) / len(values[:10]), sum(values[-10:]) / len(values[-10:]), sum(values) / len(values), max(values)))

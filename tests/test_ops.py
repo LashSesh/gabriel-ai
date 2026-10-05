@@ -387,7 +387,13 @@ def test_gc_removes_only_unreferenced_objects_past_the_grace_period(tmp_path):
         before = {name for name, _ in store.list_objects()}
         applied2 = ws.gc(apply=True, grace_seconds=0)
         assert applied2["removed"] == 1 and not store.path_for(fresh).is_file()
-        assert {name for name, _ in store.list_objects()} == before - {fresh}
+        # ADR-26: the collection's re-verification retained the state it reached as a checkpoint; those objects are the
+        # only ones added, and nothing else changed
+        checkpoint = ws.owner.checkpoints()[-1]
+        checkpoint_objects = {checkpoint["state_ref"]["sha256"]} | {ref["sha256"] for ref in loads(store.get(checkpoint["state_ref"]))["runs"].values()}
+        after = {name for name, _ in store.list_objects()}
+        assert (before - {fresh}) <= after and after - (before - {fresh}) <= checkpoint_objects
+        assert applied2["checkpoint"]["started_from"]["checkpoint_id"] == applied["checkpoint"]["recorded"]["checkpoint_id"]
         assert ws.owner.replay()["status"] == "passed" and ws.memory.verify()["status"] == "passed"
         assert ws.doctor()["startup"]["storage"]["missing"] == []
         assert list((ws.path / "gc").glob("gc-*.json"))
@@ -460,6 +466,104 @@ def test_backup_carries_the_referenced_closure_so_a_restore_after_a_migration_re
         assert owner.run_record(created["run_id"])["state"] == "succeeded" and owner.run_record(created2["run_id"])["state"] == "succeeded"
     finally:
         owner.close()
+
+
+def test_collection_records_a_verified_checkpoint_and_restore_and_audit_recover_from_it(tmp_path, capsys):
+    """ADR-26: gc --apply re-verifies from the latest verified checkpoint and retains the state it
+    reached as the next one; a restore replays from the checkpoint the backup carries unless the
+    audit from genesis is asked for, and both agree; the CLI records checkpoints and audits from
+    them; the doctor lists them."""
+    from gabriel_agent.agent.backup import backup, restore
+    from gabriel_agent.agent.workspace import build_registry
+    ws, created, spec = finished_workspace(tmp_path)
+    first = ws.gc(apply=True, grace_seconds=0)
+    assert first["status"] == "passed" and first["checkpoint"]["started_from"] is None
+    assert first["checkpoint"]["events_reduced"] == ws.owner.anchor()["sequence"] and first["checkpoint"]["recorded"]["run_count"] == 1
+    second_task = ws.create_task(spec)
+    assert TaskRunner(ws, second_task["task_id"]).run()["state"] == "succeeded"
+    second = ws.gc(apply=True, grace_seconds=0)
+    assert second["checkpoint"]["started_from"]["checkpoint_id"] == first["checkpoint"]["recorded"]["checkpoint_id"]
+    assert 0 < second["checkpoint"]["events_reduced"] < ws.owner.anchor()["sequence"] and second["checkpoint"]["recorded"]["run_count"] == 2
+    listed = ws.startup_validation()["checkpoints"]
+    assert [c["checkpoint_id"] for c in listed] == [first["checkpoint"]["recorded"]["checkpoint_id"], second["checkpoint"]["recorded"]["checkpoint_id"]]
+    assert listed[1]["verified_from"] == listed[0]["checkpoint_id"] and listed[0]["verified_from"] == "genesis"
+    backup(ws, tmp_path / "bk")
+    anchor = ws.owner.anchor()
+    path = ws.path
+    ws.close()
+    catalog = build_registry(lambda: None).catalog()
+    quick = restore(tmp_path / "bk", tmp_path / "restored-quick", catalog=catalog)
+    assert quick["status"] == "passed" and quick["replay_mode"] == "from_checkpoint"
+    assert quick["replay"]["checkpoint"]["checkpoint_id"] == listed[1]["checkpoint_id"] and quick["replay"]["events_reduced"] == 0
+    assert quick["replay"]["events"] == anchor["sequence"] and quick["replay"]["runs"] == 2
+    full = restore(tmp_path / "bk", tmp_path / "restored-full", catalog=catalog, full=True)
+    assert full["replay_mode"] == "full" and full["replay"]["checkpoint"] is None and full["replay"]["events_reduced"] == anchor["sequence"]
+    assert full["replay"]["checkpoints_verified"] == [c["checkpoint_id"] for c in listed] and full["replay"]["head"] == quick["replay"]["head"]
+    # the CLI: a checkpoint on request, an audit from the latest checkpoint and the audit from genesis
+    assert cli.main(["checkpoint", "--workspace", str(path), "--reason", "operator"]) == 0
+    recorded = json.loads(capsys.readouterr().out)
+    assert recorded["checkpoint_recorded"]["verified_from"] == listed[1]["checkpoint_id"] and recorded["events_reduced"] == 0
+    assert cli.main(["audit", "--workspace", str(path), "--from-checkpoint"]) == 0
+    audited = json.loads(capsys.readouterr().out)
+    assert audited["checkpoint"]["checkpoint_id"] == recorded["checkpoint_recorded"]["checkpoint_id"] and audited["events_reduced"] == 0
+    assert cli.main(["audit", "--workspace", str(path)]) == 0
+    assert len(json.loads(capsys.readouterr().out)["checkpoints_verified"]) == 3
+    assert cli.main(["restore", "--from", str(tmp_path / "bk"), "--workspace", str(tmp_path / "restored-cli"), "--full"]) == 0
+    assert json.loads(capsys.readouterr().out)["replay_mode"] == "full"
+
+
+def test_a_migration_records_the_first_checkpoint_of_its_epoch_and_earlier_ones_stay_usable(tmp_path, monkeypatch):
+    """ADR-26: the replay after a migration is the audit of the new epoch and retains its state as a
+    checkpoint; a checkpoint taken before the migration still binds the catalog of its own epoch,
+    so it stays usable, and the latest one wins."""
+    ws, created, spec = finished_workspace(tmp_path)
+    before = ws.gc(apply=True, grace_seconds=0)["checkpoint"]["recorded"]["checkpoint_id"]
+    path = ws.path
+    ws.close()
+    monkeypatch.setattr(workspace_module, "build_registry", _registry_with_probe)
+    report = Workspace.migrate(path, reason="ops.probe tool added")
+    assert report["status"] == "migrated" and report["replay_after"]["checkpoints_verified"] == [before]
+    assert report["replay_after"]["checkpoint_recorded"]["checkpoint_id"] == report["migration"]["migration_id"]
+    # the checkpoint sits on the epoch boundary: the events it covers were reduced under the catalog of the old epoch,
+    # and the events after it belong to the new one (the epoch rule attributes a boundary sequence to the epoch it closes)
+    assert report["replay_after"]["checkpoint_recorded"]["catalog_digest"] == report["migration"]["from_catalog_digest"]
+    assert report["replay_after"]["checkpoint_recorded"]["sequence"] == report["migration"]["sequence"]
+    ws2 = Workspace.open(path)
+    try:
+        ids = [c["checkpoint_id"] for c in ws2.owner.checkpoints()]
+        assert ids == [before, report["migration"]["migration_id"]]
+        resumed = ws2.owner.replay(from_checkpoint=True)
+        assert resumed["checkpoint"]["checkpoint_id"] == report["migration"]["migration_id"] and resumed["events_reduced"] == 0
+        created2 = ws2.create_task(spec)
+        assert TaskRunner(ws2, created2["task_id"]).run()["state"] == "succeeded"
+        resumed = ws2.owner.replay(from_checkpoint=True)
+        assert resumed["checkpoint"]["checkpoint_id"] == report["migration"]["migration_id"] and 0 < resumed["events_reduced"] < resumed["events"]
+        assert ws2.owner.replay()["checkpoints_verified"] == ids
+    finally:
+        ws2.close()
+
+
+def test_telemetry_rotates_the_live_file_and_metrics_read_every_part_once(tmp_path):
+    """ADR-26: the spans file is rotated beyond a size, readers see every part in order, and
+    metrics read the parts once for every run instead of once per run."""
+    from gabriel_agent.telemetry import read_spans, span_files
+    ws, created, spec = finished_workspace(tmp_path)
+    written_before = ws.tracer.written
+    ws.tracer.rotate_bytes = 2048
+    created2 = ws.create_task(spec)
+    assert TaskRunner(ws, created2["task_id"]).run()["state"] == "succeeded"
+    parts = span_files(ws.tracer.path)
+    assert len(parts) >= 3 and ws.tracer.rotated == len(parts) - 1 and parts[-1] == ws.tracer.path
+    spans = read_spans(ws.tracer.path)
+    assert len(spans) == ws.tracer.written > written_before and ws.tracer.dropped == 0
+    second = read_spans(ws.tracer.path, created2["run_id"])
+    assert second and all(s["run_id"] == created2["run_id"] for s in second) and {s["kind"] for s in second} >= {"run", "journal_commit", "tool_execution"}
+    report = ws.metrics()
+    assert report["telemetry"]["parts"] == len(parts) and report["telemetry"]["spans"] == len(spans) and report["exporter"]["rotated"] == ws.tracer.rotated
+    per_run = {r["run_id"]: r["telemetry"] for r in report["runs"]}
+    assert per_run[created2["run_id"]]["tool_execution"]["count"] == sum(1 for s in second if s["kind"] == "tool_execution")
+    assert ws.metrics(created2["run_id"])["runs"][0]["telemetry"] == per_run[created2["run_id"]]
+    ws.close()
 
 
 def test_startup_validation_checks_the_roots_the_backup_and_the_collector_keep(tmp_path, monkeypatch):

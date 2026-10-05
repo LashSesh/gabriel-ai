@@ -112,7 +112,7 @@ gabriel replay RUN_ID --workspace ./workspace --recorded
 ## Backup, restore and release metadata
 ```bash
 gabriel backup --workspace ./workspace --out ./backup            # SQLite online backup + referenced closure of objects + anchor
-gabriel restore --from ./backup --workspace ./restored             # verifies objects, anchor and replay; no secret restored
+gabriel restore --from ./backup --workspace ./restored [--full]    # verifies objects, anchor and replay (from the backup's checkpoint, or genesis); no secret restored
 gabriel release-manifest --workspace ./workspace --out release.json --root . --selftest   # doctor report includes the jail self-test
 scripts/smoke.sh                                                  # clean venv install, doctor --selftest, task, export, audit, backup, restore
 ```
@@ -214,7 +214,10 @@ gabriel trace RUN_ID --workspace ./workspace [--summary]   # spans: queue wait, 
                                                            # journal commit, artifact I/O counters
 gabriel gc --workspace ./workspace [--apply] [--grace-seconds N]   # dry run by default
 gabriel retire --workspace ./workspace [--run RUN_ID]              # remove the worktrees of terminal runs (ADR-25); the journal keeps everything
-scripts/longrun_witness.py --out evidence/ops/longrun --backend linux_namespace --tasks 600   # the ADR-25 long-run witness
+gabriel checkpoint --workspace ./workspace [--full] [--reason "..."]   # ADR-26: replay from the latest verified checkpoint (or genesis) and retain the state reached
+gabriel audit --workspace ./workspace [--anchor anchor.json] [--from-checkpoint] [--checkpoint ID]   # the audit from genesis verifies every checkpoint it passes
+gabriel restore --from ./backup --workspace ./restored [--full]    # replays from the checkpoint the backup carries unless --full
+scripts/longrun_witness.py --out evidence/ops/longrun --backend linux_namespace --tasks 600   # the ADR-25/ADR-26 long-run witness
 ```
 A workspace whose journal registered other catalog, schema registry or reducer identities than
 the running code refuses to open and names the migration. `migrate` takes a coherent backup
@@ -250,8 +253,25 @@ every 100 tasks, a backup, restore and migration at the half, a backup and resto
 replay, chain verification, the reproduction of the first and last associative probe, deep
 diagnostics, metrics and retirement; its growth table, probes, operations and checks are under
 `evidence/ops/longrun/`. The journal is append-only by contract and is never compacted: a full
-replay, a migration (two replays) and a restore cost time linear in the events, which the
-witness measures.
+replay and a migration (two replays) cost time linear in the events, which the witness measures.
+
+Bounded recovery (ADR-26): a verified state checkpoint retains, at a journal sequence, one
+content-addressed object per run projection (its sha256 is the run's projection digest), a state
+object listing them and a manifest binding the sequence, both chain heads, the identities and the
+catalog of its epoch. A checkpoint is recorded only at the end of a recorded replay that reached
+its sequence with every check passed: `gc --apply` re-verifies from the latest usable checkpoint
+and records the next one, the replay after a migration records one on the epoch boundary, and
+`gabriel checkpoint` records one on request. A replay from a checkpoint still verifies both hash
+chains over every event from genesis, then reduces only the events after the checkpoint from its
+retained state; `restore` uses it by default (`--full` asks for the audit), and `gabriel audit`
+is the audit from genesis, which verifies every checkpoint it passes (`checkpoints_verified`)
+unless `--from-checkpoint`. A checkpoint whose reducer, schema registry, codec or epoch catalog
+no longer read the same, or whose binding no longer matches the journal, is skipped with its
+reason in the replay report; a changed state object or a forged binding is a storage fault.
+Within one replay a validated artifact (the task binding, the compilation report) is validated
+once per digest, which is what made the audit itself cheaper. The telemetry file is rotated
+beyond 8 MiB into parts beside it (`spans.<ms>-<n>.jsonl`), every reader sees the parts in order,
+and `metrics` reads them once for every run.
 
 ## Native PSE graph worker (ADR-18)
 ```bash

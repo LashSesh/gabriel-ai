@@ -36,10 +36,16 @@ def main(argv=None) -> int:
             p.add_argument("--evidence", action="store_true")
         if name == "export":
             p.add_argument("--out", required=True)
-    audit = sub.add_parser("audit"); audit.add_argument("--workspace", required=True); audit.add_argument("--anchor")
+    audit = sub.add_parser("audit", help="recorded replay of the whole journal from genesis (the audit; it verifies every checkpoint it passes)")
+    audit.add_argument("--workspace", required=True); audit.add_argument("--anchor")
+    audit.add_argument("--from-checkpoint", action="store_true", help="ADR-26: verify both chains over every event but reduce only the events after the latest verified checkpoint")
+    audit.add_argument("--checkpoint", default=None, help="ADR-26: retain the state the replay reached as a checkpoint with this id")
+    cp = sub.add_parser("checkpoint", help="ADR-26: replay from the latest verified checkpoint (or from genesis with --full) and retain the state reached as a new verified checkpoint")
+    cp.add_argument("--workspace", required=True); cp.add_argument("--full", action="store_true"); cp.add_argument("--reason", default="operator checkpoint")
     replay = sub.add_parser("replay"); replay.add_argument("run_id"); replay.add_argument("--workspace", required=True); replay.add_argument("--recorded", action="store_true", default=True)
     bk = sub.add_parser("backup", help="coherent backup: database snapshot, referenced objects, anchor"); bk.add_argument("--workspace", required=True); bk.add_argument("--out", required=True)
-    rs = sub.add_parser("restore", help="restore a backup elsewhere and verify anchor, objects and replay"); rs.add_argument("--from", dest="source", required=True); rs.add_argument("--workspace", required=True)
+    rs = sub.add_parser("restore", help="restore a backup elsewhere and verify anchor, objects and replay (from the latest verified checkpoint the backup carries, or from genesis with --full)")
+    rs.add_argument("--from", dest="source", required=True); rs.add_argument("--workspace", required=True); rs.add_argument("--full", action="store_true")
     rm = sub.add_parser("release-manifest"); rm.add_argument("--workspace", required=False); rm.add_argument("--out", required=True); rm.add_argument("--root", default=".")
     rm.add_argument("--selftest", action="store_true", help="run the containment self-test so the recorded doctor report carries its result")
     metrics = sub.add_parser("metrics", help="operational metrics of a workspace or one run (verified success, unknown effects, retries, overruns, recovery, time to first artifact, resource use, cold/warm)")
@@ -80,7 +86,7 @@ def main(argv=None) -> int:
         if args.command == "restore":
             from ..agent.backup import restore
             from ..agent.workspace import build_registry
-            _emit(restore(args.source, args.workspace, catalog=build_registry(lambda: None).catalog())); return 0
+            _emit(restore(args.source, args.workspace, catalog=build_registry(lambda: None).catalog(), full=args.full)); return 0
         if args.command == "release-manifest":
             from ..agent.release import write_release_manifest
             doctor = catalog = None
@@ -117,7 +123,12 @@ def main(argv=None) -> int:
                 _emit(backup(ws, args.out)); return 0
             if args.command == "audit":
                 anchor = loads(Path(args.anchor).read_bytes()) if args.anchor else None
-                _emit(ws.owner.replay(expected_anchor=anchor)); return 0
+                report = ws.owner.replay(expected_anchor=anchor, from_checkpoint=args.from_checkpoint, record_checkpoint=args.checkpoint,
+                                         reason="audit" if args.checkpoint else None)
+                _emit(report); return 0 if report["status"] == "passed" else 3
+            if args.command == "checkpoint":
+                report = ws.owner.replay(from_checkpoint=not args.full, record_checkpoint="checkpoint-%d" % ws.owner.owner_time(), reason=args.reason)
+                _emit(report); return 0 if report["status"] == "passed" else 3
             if args.command == "replay":
                 _emit(dict(ws.owner.replay(), run=ws.owner.run_record(args.run_id))); return 0
             if args.command == "gc":

@@ -1,0 +1,39 @@
+{
+  "$id": "https://gabriel.invalid/spec/1/checkpoint-state.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Closed gabriel_agent contract (ADR-26): the retained state of a checkpoint: for every run that had an event at or before the checkpoint's sequence, the content-addressed object holding its projection as of that sequence. The object's sha256 is the run's projection digest, so the state is verified by the store's own byte check when it is loaded. Cross-record rules are enforced by the owner.",
+  "properties": {
+    "checkpoint_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "runs": {
+      "additionalProperties": {
+        "$ref": "common.schema.json#/$defs/artifact_ref"
+      },
+      "propertyNames": {
+        "$ref": "common.schema.json#/$defs/identifier"
+      },
+      "type": "object"
+    },
+    "schema": {
+      "const": "gabriel.checkpoint-state/1",
+      "type": "string"
+    },
+    "sequence": {
+      "$ref": "common.schema.json#/$defs/safe_uint"
+    },
+    "workspace_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    }
+  },
+  "required": [
+    "schema",
+    "checkpoint_id",
+    "workspace_id",
+    "sequence",
+    "runs"
+  ],
+  "title": "checkpoint-state",
+  "type": "object"
+}
