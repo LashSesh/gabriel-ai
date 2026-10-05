@@ -25,6 +25,12 @@ in an isolated worktree with independent acceptance checks.
 - Operations (explicit versioned migrations with catalog epochs, startup validation, clean
   shutdown, telemetry spans, operational metrics, artifact garbage collection):
   `docs/RUNBOOK.md` (Operations), `docs/adr/ADR-17-operations.md`, `evidence/ops/`
+- Long-running operation (one workspace through hundreds of scripted tasks with compaction,
+  garbage collection, backup, restore and a migration under a growing memory: the engine's batch
+  cap is a declared window instead of a failure, an unchanged source is one observation across
+  tasks, the backup carries the referenced closure so a restore after a migration replays every
+  epoch, worktrees are retired explicitly, indexes bound the per-task cost):
+  `docs/adr/ADR-25-long-running-operation.md`, `evidence/ops/longrun/`
 - Native PSE graph worker (the reviewed Rust engine as a contained analytical worker of the
   numerical pack: conditioned snapshots, regional masses and exact window certificates with
   complete bindings, references independent of the engine, a graph corpus tier and separate
@@ -83,7 +89,7 @@ in an isolated worktree with independent acceptance checks.
   memory layer), `ADR-21` (association provenance in the prompt), `ADR-22` (domain-declared
   progress channels and G3 on the association distribution), `ADR-23` (erosion of the
   association history and reproducible retrieval manifests), `ADR-24` (numerical channels and
-  the route across packs)
+  the route across packs), `ADR-25` (long-running operation)
 - Evidence (test log, environment, baseline rerun, spec validation): `evidence/`
 - The blueprint's own machine-readable contracts and validator: `contracts/`, `tools/validate_spec.py`
 

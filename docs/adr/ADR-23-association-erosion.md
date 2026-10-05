@@ -29,10 +29,12 @@ the code and the tests as they stood before this ADR:
    restricted to `seq <= frontier`; after a reassessment the same frontier yielded another
    history, so a retained manifest could not be recomputed from the chain.
 
-One more fact shapes the rule: the document pack ingests every declared source per task (the
-observation's scope carries the task id), so a withdrawal names one observation of a source key,
-and the key leaves retrieval because the revision rule selects that latest observation. Erosion
-therefore has to be defined on keys as the retrieval sees them, not on observation ids.
+One more fact shapes the rule: the document pack ingests every declared source per task (at the
+time of this ADR the observation's scope carried the task id; since ADR-25 the scope carries the
+principal and the source kind only, so a source that several tasks declare unchanged is one
+observation), so a withdrawal names one observation of a source key, and the key leaves
+retrieval because the revision rule selects that latest observation. Erosion therefore has to be
+defined on keys as the retrieval sees them, not on observation ids.
 
 ## Decision
 - **The walk runs over this retrieval's candidates and nothing else.** Step 1 of a retrieval
@@ -66,9 +68,12 @@ therefore has to be defined on keys as the retrieval sees them, not on observati
   Both are erosion; neither is silent.
 - **The document pack's declaration semantics are unchanged.** Each task declares the access of
   its sources. A withdrawal declared in one task persists for later tasks that do not re-declare
-  the source (the key's effective observation stays the revoked one) and is overridden by a task
-  that declares the source available again (a new observation). This is the pack's rule, recorded
-  here, not a memory rule; see the limits below.
+  the source (the key's effective observation stays the revoked one). At the time of this ADR a
+  task that declared the source available again overrode the withdrawal, because every task
+  ingested its own observation of the source; since ADR-25 an unchanged source is one observation
+  across tasks, so the withdrawal holds until the source changes (a new revision or new bytes
+  make a new observation). This is the pack's rule, recorded here, not a memory rule; see the
+  limits below.
 - **Protocols 6 to 9 are unaffected by construction.** The association tier declares no
   withdrawn source, one principal and document sources only, and every history claim cites two
   sources that stay retrievable, so the projection is the identity on those runs; the harness
@@ -100,8 +105,10 @@ of the chain at its frontier and revision and recomputes bit for bit across a la
 and a later retraction. Not established: any effect on a model (no provider run; a model that
 is not shown a withdrawn source cannot cite it, which the pack's citation binding enforces
 regardless of this ADR); erosion by time (a claim contributes or not, there is no decay); a
-durable withdrawal of a key across tasks (the pack re-admits a source a later task declares
-available, and the memory cannot tell a restored source from a new declaration; a key-level
-access rule would be a new contract). Cost: an uncached retrieval with the profile loads every
-claim record at or before its frontier from the store; claims are few per workspace here and the
-manifest is cached per frontier and revision.
+key-level access rule (at the time of this ADR the pack re-admitted a withdrawn source as soon as
+a later task declared it available, because each task ingested its own observation; since
+ADR-25 an unchanged source is one observation across tasks and the withdrawal holds until the
+source's revision or bytes change, which the memory cannot tell from a new declaration; a
+key-level access rule would still be a new contract). Cost: an uncached retrieval with the
+profile loads every claim record at or before its frontier from the store; claims are few per
+workspace here and the manifest is cached per frontier and revision.

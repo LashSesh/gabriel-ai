@@ -111,7 +111,7 @@ gabriel replay RUN_ID --workspace ./workspace --recorded
 
 ## Backup, restore and release metadata
 ```bash
-gabriel backup --workspace ./workspace --out ./backup            # SQLite online backup + referenced objects + anchor
+gabriel backup --workspace ./workspace --out ./backup            # SQLite online backup + referenced closure of objects + anchor
 gabriel restore --from ./backup --workspace ./restored             # verifies objects, anchor and replay; no secret restored
 gabriel release-manifest --workspace ./workspace --out release.json --root . --selftest   # doctor report includes the jail self-test
 scripts/smoke.sh                                                  # clean venv install, doctor --selftest, task, export, audit, backup, restore
@@ -213,6 +213,8 @@ gabriel metrics --workspace ./workspace [--run RUN_ID] # verified success, indep
 gabriel trace RUN_ID --workspace ./workspace [--summary]   # spans: queue wait, provider, tool execution, verification,
                                                            # journal commit, artifact I/O counters
 gabriel gc --workspace ./workspace [--apply] [--grace-seconds N]   # dry run by default
+gabriel retire --workspace ./workspace [--run RUN_ID]              # remove the worktrees of terminal runs (ADR-25); the journal keeps everything
+scripts/longrun_witness.py --out evidence/ops/longrun --backend linux_namespace --tasks 600   # the ADR-25 long-run witness
 ```
 A workspace whose journal registered other catalog, schema registry or reducer identities than
 the running code refuses to open and names the migration. `migrate` takes a coherent backup
@@ -230,6 +232,24 @@ Garbage collection keeps the transitive closure of everything the journal (event
 inputs, payloads), the memory chain, the checkpoints, the catalog and migration records name,
 including references nested inside JSON artifacts; objects outside it and older than the grace
 period are orphans. After `--apply` the replay and the memory chain are re-verified.
+
+Long-running operation (ADR-25): a workspace grows with every task (journal events, memory
+chain, objects, one git worktree per run, the telemetry file) and nothing in the production path
+removes a worktree. `gabriel retire` removes the worktrees of terminal runs (all of them, or
+`--run`), prunes the source repositories' worktree registrations and marks the run's notes so
+that a later `task export` of that run is refused with `STORAGE_FAULT` instead of exporting an
+empty tree; the journal, the retained patch and every object stay, and `gc` afterwards reclaims
+nothing (worktrees are outside the store). `backup` carries the transitive closure of the
+referenced objects (the retained catalogs and migration records included), so a restore of a
+workspace that was migrated replays every epoch; a restored workspace still has no credential
+(`credentials/<principal>.secret` is never backed up) until the operator writes one. The
+witness drives hundreds of scripted tasks through one workspace with compaction and `gc --apply`
+every 100 tasks, a backup, restore and migration at the half, a backup and restore at the end,
+replay, chain verification, the reproduction of the first and last associative probe, deep
+diagnostics, metrics and retirement; its growth table, probes, operations and checks are under
+`evidence/ops/longrun/`. The journal is append-only by contract and is never compacted: a full
+replay, a migration (two replays) and a restore cost time linear in the events, which the
+witness measures.
 
 ## Native PSE graph worker (ADR-18)
 ```bash
@@ -309,6 +329,14 @@ The corpus check executes the tier's precondition under the memory service's own
 visible source outranks every distractor, every distractor outranks the hidden source); run 6
 of the protocol was lost to distractors that tied with the visible source before that invariant
 existed, and is retained with the amendment (`evidence/wp15/protocol6_declaration.md`).
+
+Capacity (ADR-20, ADR-25): the engine's walk takes at most 64 entities and 128 batches. Beyond
+either cap the history is windowed to the batches that touch a seed, the latest in chain order
+up to the cap, and the record's `window` says how many batches were available and how many were
+used; a window whose entities still exceed the cap is `capacity_exceeded` and the retrieval
+stays lexical. A source that several tasks declare unchanged is one observation (the scope
+carries the principal and the source kind, not the task), so the observation table grows with
+distinct sources, not with tasks.
 
 Erosion (ADR-23): the history a retrieval walks over is projected onto that retrieval's own
 candidates. A supported claim contributes the source keys the retrieval could admit (at its

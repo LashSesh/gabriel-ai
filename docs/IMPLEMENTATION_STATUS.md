@@ -148,3 +148,11 @@ held-out criterion and stopped every hopeless repair at the first decision).
   `unavailable` and stays lexical.
 - Document extraction supports UTF-8 text only; other formats are observed as `unsupported`
   and can never be cited.
+- Long-running operation is witnessed for one workspace of 600 scripted tasks (ADR-25,
+  `evidence/ops/longrun/`), not for a real provider or for months of use. The journal is
+  append-only by contract and is never compacted, so a full replay, a migration (two replays)
+  and a restore cost time linear in the events; `metrics` without `--run` reads the whole
+  telemetry file once per run; a restored workspace has no credential until the operator writes
+  one; worktrees are retired by an explicit command (`gabriel retire`), never automatically; the
+  engine's walk sees at most the 128 latest seed-touching batches of the history and says so in
+  the record.
